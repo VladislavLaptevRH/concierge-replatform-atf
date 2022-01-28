@@ -41,7 +41,7 @@ public class Hooks {
             webDriver = new ChromeDriver();
             webDriver.manage().window().maximize();
             webDriver.get("https://stg2-concierge.restorationhardware.com?platform=new");
-            webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
 
         } catch (Exception e) {

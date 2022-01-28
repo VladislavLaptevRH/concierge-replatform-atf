@@ -22,6 +22,9 @@ public class ConciergeCartPageScreen extends AbstractPage {
     @FindBy(xpath = "//select[@id='quantity_701bfc45-0262-4a2c-bf01-92887d788333_1']")
     private WebElement quantityButton;
 
+    @FindBy(xpath = "//select[@id='element-orderclassification']")
+    private WebElement orderClassificationSelect;
+
 
     /**
      * Constructor for initialize page object

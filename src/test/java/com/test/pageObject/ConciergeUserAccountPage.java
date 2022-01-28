@@ -10,6 +10,9 @@ import java.util.List;
 @Getter
 public class ConciergeUserAccountPage extends AbstractPage{
 
+    @FindBy(xpath = "//h1[@class='MuiTypography-root MuiTypography-h1']")
+    private WebElement dashboardTitle;
+
     @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-item'][3]/a")
     private WebElement projectsButton;
 
@@ -82,7 +85,7 @@ public class ConciergeUserAccountPage extends AbstractPage{
     @FindBy(xpath = "//a[1]/button[contains(@class,'MuiButton-root')]")
     private WebElement orderHistoryButton;
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-item']/h6[@class='MuiTypography-root MuiTypography-subtitle1']")
+    @FindBy(xpath = "//div[@class='sc-jRQBWg idOKcy']//div[@class='MuiGrid-root MuiGrid-item']")
     private List<WebElement> menuItems;
 
     @FindBy(xpath = "//div[2]//ul[@class='MuiList-root']/li[@class='MuiListItem-root']")

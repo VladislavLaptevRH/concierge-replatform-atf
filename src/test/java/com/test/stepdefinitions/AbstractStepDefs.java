@@ -45,12 +45,13 @@ public class AbstractStepDefs {
     ConciergeOrderHistoryForm conciergeOrderHistoryForm = new ConciergeOrderHistoryForm(webDriver);
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage(webDriver);
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen(webDriver);
-    WebDriverWait wait = new WebDriverWait(webDriver, 15);
+    WebDriverWait wait = new WebDriverWait(webDriver, 20);
     Actions actions = new Actions(webDriver);
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen(webDriver);
     PaymentScreen paymentScreen = new PaymentScreen(webDriver);
     ReviewOrderScreen reviewOrderScreen = new ReviewOrderScreen(webDriver);
     ConfirmationOrderScreen confirmationOrderScreen = new ConfirmationOrderScreen(webDriver);
+    ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen(webDriver);
 
 
     /**
@@ -71,16 +72,23 @@ public class AbstractStepDefs {
 
 
     @When("I clicks on a random menu item")
-    public void iClicksOnARandomMenuItem() throws InterruptedException {
+    public void iClicksOnARandomMenuItem() {
+        wait.until(ExpectedConditions.elementToBeClickable(conciergeUserAccountPage.getDashboardTitle()));
+        wait.until(ExpectedConditions.elementToBeClickable(conciergeUserAccountPage.getOrderHistoryButton()));
+
+        wait.until(ExpectedConditions.elementToBeClickable(conciergeUserAccountPage.getMenuItems().get(0)));
+        actions.moveToElement(conciergeUserAccountPage.getMenuItems().get(0));
         conciergeUserAccountPage.getMenuItems().get(0).click();
-        wait.until(ExpectedConditions.visibilityOf(conciergeUserAccountPage.getItemSubCategory().get(0)));
+
+        wait.until(ExpectedConditions.elementToBeClickable(conciergeUserAccountPage.getItemSubCategory().get(0)));
+        actions.moveToElement(conciergeUserAccountPage.getItemSubCategory().get(0));
         conciergeUserAccountPage.getItemSubCategory().get(0).click();
     }
 
 
     @When("I clicks on o random item")
     public void iClicksOnORandomItem() {
-        wait.until(ExpectedConditions.visibilityOf(conciergeItemsScreen.getItems().get(0)));
+        wait.until(ExpectedConditions.visibilityOf(conciergeItemsScreen.getItems().get(1)));
         conciergeItemsScreen.getItems().get(0).click();
     }
 
@@ -101,21 +109,21 @@ public class AbstractStepDefs {
     }
 
     @When("I click on checkout button")
-    public void iClickOnCheckoutButton() throws InterruptedException {
+    public void iClickOnCheckoutButton() {
+        Select select = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
+        select.selectByIndex(1);
         wait.until(ExpectedConditions.elementToBeClickable(conciergeItemsScreen.getCheckoutButton()));
-        WebElement webElement1 = webDriver.findElement(By.xpath("//select[@id='element-orderclassification']//option[2]"));
-        webElement1.click();
         conciergeItemsScreen.getCheckoutButton().click();
-        wait.until(ExpectedConditions.elementToBeClickable(conciergeItemsScreen.getClosePopUpButton()));
+
+        wait.until(ExpectedConditions.visibilityOf(conciergeItemsScreen.getClosePopUpButton()));
         conciergeItemsScreen.getClosePopUpButton().click();
     }
 
     @When("I fill all fields from address screen")
-    public void iFillAllFieldsFromAddressScreen() {
-        wait.until(ExpectedConditions.elementToBeClickable(checkoutAddressScreen.getBillingAddressAsShippingCheckBox()));
-        checkoutAddressScreen.getFirstNameField().click();
-        checkoutAddressScreen.getFirstNameField().clear();
-        checkoutAddressScreen.getFirstNameField().sendKeys("QA1");
+    public void iFillAllFieldsFromAddressScreen() throws InterruptedException {
+        wait.until(ExpectedConditions.elementToBeClickable(checkoutAddressScreen.getFirstNameInpt()));
+//        checkoutAddressScreen.getFirstNameInpt().clear();
+//        checkoutAddressScreen.getFirstNameInpt().sendKeys("QA1");
 //        checkoutAddressScreen.getLastNameField().clear();
 //        checkoutAddressScreen.getLastNameField().sendKeys("Automation");
 //        checkoutAddressScreen.getCompanyNameField().clear();
@@ -132,6 +140,8 @@ public class AbstractStepDefs {
 //        checkoutAddressScreen.getPhoneField().clear();
 //        checkoutAddressScreen.getPhoneField().sendKeys("+12413123124354");
 
+
+        wait.until(ExpectedConditions.visibilityOf(checkoutAddressScreen.getFirstNameInpt()));
         checkoutAddressScreen.getBillingAddressAsShippingCheckBox().click();
         Select selectState = new Select(checkoutAddressScreen.getStateField());
         selectState.selectByIndex(ThreadLocalRandom.current().nextInt(1, 15));
@@ -190,8 +200,7 @@ public class AbstractStepDefs {
 
     @When("I choose client from header")
     public void iChooseClientFromHeader() {
-        String test = conciergeUserAccountPage.getClientButton().getText();
-        System.out.println();
+        wait.until(ExpectedConditions.visibilityOf(conciergeUserAccountPage.getClientButton()));
         if (conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
 
             conciergeUserAccountPage.getClientButton().click();

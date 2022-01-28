@@ -7,8 +7,11 @@ import org.openqa.selenium.support.FindBy;
 
 @Getter
 public class CheckoutAddressScreen extends AbstractPage{
+//    @FindBy(xpath = "//input[@id='shippingAddress.firstName']")
+//    private WebElement firstNameField;
+
     @FindBy(xpath = "//input[@id='shippingAddress.firstName']")
-    private WebElement firstNameField;
+    private WebElement firstNameInpt;
 
     @FindBy(xpath = "//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[2]/div/input")
     private WebElement lastNameField;
@@ -40,7 +43,7 @@ public class CheckoutAddressScreen extends AbstractPage{
     @FindBy(xpath = "/input[@id='37']")
     private WebElement eveningPhone;
 
-    @FindBy(xpath = "//div[@id='billingAddresslbl']/div[@class='MuiGrid-root MuiGrid-item']//span[@class='MuiTypography-root MuiFormControlLabel-label MuiTypography-body1']")
+    @FindBy(xpath = "//div[@id='billingAddresslbl']//span[@class='MuiIconButton-label']/input[@type='checkbox']")
     private WebElement billingAddressAsShippingCheckBox;
 
     @FindBy(xpath = "//button[contains(@class,'MuiButton-contained')]")
