@@ -13,6 +13,9 @@ public class ConciergeUserAccountPage extends AbstractPage{
     @FindBy(xpath = "//h1[@class='MuiTypography-root MuiTypography-h1']")
     private WebElement dashboardTitle;
 
+    @FindBy(xpath = "//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li")
+    private List<WebElement> listOfBrands;
+
     @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-item'][3]/a")
     private WebElement projectsButton;
 
@@ -85,7 +88,7 @@ public class ConciergeUserAccountPage extends AbstractPage{
     @FindBy(xpath = "//a[1]/button[contains(@class,'MuiButton-root')]")
     private WebElement orderHistoryButton;
 
-    @FindBy(xpath = "//div[@class='sc-jRQBWg idOKcy']//div[@class='MuiGrid-root MuiGrid-item']")
+    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//div")
     private List<WebElement> menuItems;
 
     @FindBy(xpath = "//div[2]//ul[@class='MuiList-root']/li[@class='MuiListItem-root']")
@@ -93,6 +96,9 @@ public class ConciergeUserAccountPage extends AbstractPage{
 
     @FindBy(xpath = "//h6[normalize-space()='Client']")
     private WebElement clientButton;
+
+    @FindBy(xpath = "//div[2]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6")
+    private WebElement brandButton;
 
     @FindBy(xpath = "//span[normalize-space()='Client Lookup']")
     private WebElement clientLookupHeaderBtn;
