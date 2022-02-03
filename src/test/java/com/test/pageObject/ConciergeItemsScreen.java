@@ -43,7 +43,10 @@ public class ConciergeItemsScreen extends AbstractPage {
     @FindBy(xpath = "//div[2]/button[contains(@class,'MuiButtonBase-root MuiButton-root')]")
     private WebElement continueShoppingButton;
 
-    @FindBy(xpath = "//a[contains(@class,'MuiTypography-colorPrimary')]//button")
+    @FindBy(xpath = "//button[@id='spo-auth-addToCart']")
+    private WebElement aggreeeAndAddToCardButton;
+
+    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4'][1]/button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth']")
     private WebElement goToProjectButton;
 
     @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']//h3[@class='MuiTypography-root MuiTypography-h3']")

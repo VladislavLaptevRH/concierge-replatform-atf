@@ -7,17 +7,12 @@ import org.openqa.selenium.support.FindBy;
 
 @Getter
 public class CheckoutAddressScreen extends AbstractPage{
-//    @FindBy(xpath = "//input[@id='shippingAddress.firstName']")
-//    private WebElement firstNameField;
 
     @FindBy(xpath = "//input[@id='shippingAddress.firstName']")
     private WebElement firstNameInpt;
 
     @FindBy(xpath = "//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[2]/div/input")
     private WebElement lastNameField;
-
-//    @FindBy(xpath = "//div[@class='MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal MuiFormControl-fullWidth'][2]/div[@class='MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-fullWidth MuiInputBase-formControl']/input")
-//    private WebElement lastNameField;
 
     @FindBy(xpath = "//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")
     private WebElement companyNameField;
@@ -33,6 +28,9 @@ public class CheckoutAddressScreen extends AbstractPage{
 
     @FindBy(xpath = "(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]")
     private WebElement stateField;
+
+    @FindBy(xpath = "(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[1]")
+    private WebElement countryField;
 
     @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-direction-xs-column MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-5 MuiGrid-grid-xl-6'][1]/div[1]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4']/div/div/input")
     private WebElement zipPostalCodeField;

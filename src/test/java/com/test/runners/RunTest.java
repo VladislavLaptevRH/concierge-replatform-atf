@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
         monochrome = true,
-        features = {"src/test/resources/features/accessibility"}
+        features = {"src/test/resources/features"}
         ,glue = {"com.test"}
         ,plugin = {"usage", "json:target/cucumber-reports/Cucumber.json","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
 )

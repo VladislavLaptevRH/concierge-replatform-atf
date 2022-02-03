@@ -64,9 +64,7 @@ public class ConciergeOrderHistoryStepDefs {
 
     @Then("I see results for order history by customer search")
     public void iSeeResultsForOrderHistoryByCustomerSearch() {
-        System.out.println(customerFirstName);
-        System.out.println();
-        if (customerFirstName.equals("Qa")) {
+        if (customerFirstName.equals("notexist")) {
             wait.until(ExpectedConditions.visibilityOf(conciergeOrderHistoryForm.getSearchNoResultsMsg()));
             assertTrue(conciergeOrderHistoryForm.getSearchNoResultsMsg().getText().equals("Your search yielded no results"));
             assertTrue(conciergeOrderHistoryForm.getCreateNewAccountButton().getText().equals("CREATE NEW ACCOUNT"));

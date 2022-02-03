@@ -15,14 +15,13 @@ import static org.junit.Assert.assertTrue;
 
 
 public class ConciergeAccessibilityStepDefs {
-//    Logger logger = Logger.getLogger(ConciergeAccessibilityStepDefs.class);
     private org.slf4j.Logger logger = LoggerFactory.getLogger(ConciergeAccessibilityStepDefs.class);
 
     WebDriver webDriver = Hooks.getWebDriver();
-    WebDriverWait wait = new WebDriverWait(webDriver, 10);
-
+    WebDriverWait wait = new WebDriverWait(webDriver, 20);
     ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage(webDriver);
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage(webDriver);
+    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
     @Given("^user opens the concierge site$")
     public void User_Ppens_The_Concierge_Site() {
@@ -37,14 +36,14 @@ public class ConciergeAccessibilityStepDefs {
 
     @Then("user expects that no accessibility errors")
     public void userExpectsThatNoAccessibilityErrors() {
-        assertTrue(conciergeUserAccountPage.getUserNameButton().isDisplayed());
+        generalStepDefs.waitForPageLoad(webDriver);
+        wait.until(ExpectedConditions.elementToBeClickable(conciergeUserAccountPage.getBathButtonMenu()));
         assertTrue(conciergeUserAccountPage.getArtButtonMenu().isDisplayed());
         assertTrue(conciergeUserAccountPage.getBathButtonMenu().isDisplayed());
         assertTrue(conciergeUserAccountPage.getBedButtonMenu().isDisplayed());
         assertTrue(conciergeUserAccountPage.getArtButtonMenu().isDisplayed());
         assertTrue(conciergeUserAccountPage.getProjectsButton().isDisplayed());
         assertTrue(conciergeUserAccountPage.getLocationButton().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getUserNameButton().isDisplayed());
         assertTrue(conciergeUserAccountPage.getInStockButtonMenu().isDisplayed());
         assertTrue(conciergeUserAccountPage.getLivingButtonMenu().isDisplayed());
         assertTrue(conciergeUserAccountPage.getDiningButtonMenu().isDisplayed());

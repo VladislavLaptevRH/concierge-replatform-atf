@@ -9,9 +9,17 @@ import java.util.List;
 
 @Getter
 public class ConciergeUserAccountPage extends AbstractPage{
-
     @FindBy(xpath = "//h1[@class='MuiTypography-root MuiTypography-h1']")
     private WebElement dashboardTitle;
+
+    @FindBy(xpath = "//span[@class='MuiButton-label']")
+    private WebElement seeResultsButton;
+
+    @FindBy(xpath = "//input[contains(@class,'MuiInputBase-inputAdornedStart')]")
+    private WebElement searchItemField;
+
+    @FindBy(xpath = "//button[contains(@class,'MuiButton-containedPrimary')]")
+    private WebElement searchButton;
 
     @FindBy(xpath = "//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li")
     private List<WebElement> listOfBrands;

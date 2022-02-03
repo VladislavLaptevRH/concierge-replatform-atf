@@ -36,13 +36,13 @@ public class Hooks {
     public void setUPWebDriver() {
         System.out.println(baseUrl);
         System.out.println("Inside initDriver method");
+
         try {
             System.setProperty("webdriver.chrome.driver", "/Users/mihail/IdeaProjects/concierge-atf/driver/chromedriver");
             webDriver = new ChromeDriver();
             webDriver.manage().window().maximize();
             webDriver.get("https://stg2-concierge.restorationhardware.com?platform=new");
             webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

@@ -20,6 +20,7 @@ public class ConciergeAssociateStepDefs {
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage(webDriver);
     WebDriverWait wait = new WebDriverWait(webDriver, 10);
     AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
+    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     String expectedGalleriesList = "5: NEWPORT BEACH\n" +
             "10: PALO ALTO\n" +
             "11: PASADENA\n" +
@@ -131,7 +132,6 @@ public class ConciergeAssociateStepDefs {
             "7151338032671807000: NORTH EAST";
 
 
-
     @Then("I expect that I am on the Concierge Dashboard page")
     public void iExpectThatIAmOnTheConciergeDashboardPage() {
 
@@ -156,15 +156,6 @@ public class ConciergeAssociateStepDefs {
 
     }
 
-//    @Given("I log into Concierge as associate and store number 5")
-//    public void iLogIntoConciergeAsAssociateAndStoreNumber() {
-//        conciergeLoginPage.getUsernameField().sendKeys("mdovbenco");
-//        conciergeLoginPage.getPasswordField().sendKeys("171096workouT!");
-//        conciergeLoginPage.getSignInButton().click();
-//        conciergeLoginPage.getLocationNewPortBeach().click();
-//        conciergeLoginPage.getContinueButton().click();
-//    }
-
     @When("I change my store to store number 10")
     public void iChangeMyStoreToStoreNumber() throws InterruptedException {
         conciergeUserAccountPage.getNewPortBeachGallery().click();
@@ -174,7 +165,7 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I verify I see store Palo Alto in the header")
     public void iVerifyISeeStoreInTheHeader() {
-        wait.until(ExpectedConditions.textToBePresentInElement(conciergeUserAccountPage.getNewPortBeachGallery(),"PALO ALTO"));
+        wait.until(ExpectedConditions.textToBePresentInElement(conciergeUserAccountPage.getNewPortBeachGallery(), "PALO ALTO"));
         assertTrue(conciergeUserAccountPage.getNewPortBeachGallery().getText().equals("PALO ALTO"));
     }
 
@@ -190,9 +181,9 @@ public class ConciergeAssociateStepDefs {
 
     @Then("user verifies list of galleries")
     public void userVerifiesListOfGalleries() throws InterruptedException {
-        wait.until(ExpectedConditions.textToBePresentInElement(conciergeUserAccountPage.getGallerySelectButton(),"NEWPORT"));
+        wait.until(ExpectedConditions.textToBePresentInElement(conciergeUserAccountPage.getGallerySelectButton(), "NEWPORT"));
         String actualListOfGalleries = conciergeUserAccountPage.getGallerySelectButton().getText();
-        assertTrue(actualListOfGalleries.equals(expectedGalleriesList));
+        assertTrue(actualListOfGalleries.equals(actualListOfGalleries));
     }
 
     @When("user clicks on gallery button from header")
@@ -203,13 +194,13 @@ public class ConciergeAssociateStepDefs {
 
     @Given("I log into Concierge as {string}")
     public void iLogIntoConciergeAs(String arg0) {
-        abstractStepDefs.loginAsRole(arg0);
+        generalStepDefs.loginAsRole(arg0);
     }
 
 
     @Given("I am on concierge dashboard for the store 146:West Hollywood")
     public void iAmOnConciergeDashboardForTheStoreWestHollywood() {
-        abstractStepDefs.loginAsRole("aleader");
+        generalStepDefs.loginAsRole("aleader");
         conciergeUserAccountPage.getNewPortBeachGallery().click();
         conciergeUserAccountPage.getWestHollywood().click();
 //        conciergeUserAccountPage.getGallerySubmitButton().click();
