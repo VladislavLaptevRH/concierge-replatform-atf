@@ -12,7 +12,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.NoSuchElementException;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static org.awaitility.Awaitility.await;
 
 public class GeneralStepDefs {
     WebDriver webDriver = Hooks.getWebDriver();
@@ -22,6 +25,7 @@ public class GeneralStepDefs {
 
     /**
      * This method login in system with selected role
+     *
      * @param accountRole
      */
     public void loginAsRole(String accountRole) {
@@ -36,7 +40,6 @@ public class GeneralStepDefs {
         conciergeLoginPage.getLocationNewPortBeach().click();
         conciergeLoginPage.getContinueButton().click();
     }
-
 
     /**
      * This method is clear required field
@@ -53,8 +56,8 @@ public class GeneralStepDefs {
 
 
     /**
-     *
      * This method wait for page load
+     *
      * @param webDriver
      */
     public void waitForPageLoad(WebDriver webDriver) {
@@ -71,42 +74,90 @@ public class GeneralStepDefs {
 
     /**
      * This method fill all fields from checkout address screen
-     *
-     * @param zipCode
-     * @param state
      */
-    public void fillAddressFields(String zipCode, String state) {
+    public void fillAddressFields() {
         waitForPageLoad(webDriver);
+        await().forever().until(() -> checkoutAddressScreen.getFirstNameInpt().isDisplayed());
+
+        isElementVisible("//input[contains(@id,'firstName')and contains(@id,'shipping')]");
         clearField(checkoutAddressScreen.getFirstNameInpt());
         checkoutAddressScreen.getFirstNameInpt().sendKeys("QA1");
+
         clearField(checkoutAddressScreen.getLastNameField());
         checkoutAddressScreen.getLastNameField().sendKeys("Automation");
+
         clearField(checkoutAddressScreen.getCompanyNameField());
         checkoutAddressScreen.getCompanyNameField().sendKeys("AutomationCompany");
+
         clearField(checkoutAddressScreen.getStreetAddressField());
         checkoutAddressScreen.getStreetAddressField().sendKeys("QaStreet");
+
         clearField(checkoutAddressScreen.getAptFloorSuiteField());
         checkoutAddressScreen.getAptFloorSuiteField().sendKeys("QaApartment");
+
         clearField(checkoutAddressScreen.getCityField());
         checkoutAddressScreen.getCityField().sendKeys("qaCity");
-        clearField(checkoutAddressScreen.getZipPostalCodeField());
-        checkoutAddressScreen.getZipPostalCodeField().sendKeys(zipCode);
+
         checkoutAddressScreen.getPhoneField().sendKeys("+124131231");
 
-        wait.until(ExpectedConditions.elementToBeClickable(checkoutAddressScreen.getFirstNameInpt()));
-        wait.until(ExpectedConditions.visibilityOf(checkoutAddressScreen.getFirstNameInpt()));
+        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
+        isElementVisible("//div[@id='billingAddresslbl']//span[@class='MuiIconButton-label']/input[@type='checkbox']");
         checkoutAddressScreen.getBillingAddressAsShippingCheckBox().click();
-        Select selectState = new Select(checkoutAddressScreen.getStateField());
+    }
+
+    /**
+     *
+     * Fill zip code, state, country for address checkout
+     * @param zipCode
+     * @param country
+     * @param state
+     */
+    public void fillZipCodeStateCountry(String zipCode, String country, String state) {
+        waitForPageLoad(webDriver);
+
+        Select countrySelect = new Select(checkoutAddressScreen.getCountryField());
+        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", countrySelect);
+        countrySelect.selectByValue(country);
+
         if (state.equals("")) {
-            selectState.selectByIndex(ThreadLocalRandom.current().nextInt(1, 10));
+            Select selectState = new Select(checkoutAddressScreen.getStateField());
+            selectState.selectByIndex(ThreadLocalRandom.current().nextInt(1, 4));
         }
+
+        clearField(checkoutAddressScreen.getZipPostalCodeField());
+        checkoutAddressScreen.getZipPostalCodeField().sendKeys(zipCode);
         if (state.equals("NY")) {
             WebElement stateButton = webDriver.findElement(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='" + state + "']"));
             stateButton.click();
         }
+
+    }
+
+    /**
+     * Click on continue to payment buttons
+     */
+    public void continueToPaymentAfterAddressCheckout() {
+        await().forever().until(() -> checkoutAddressScreen.getContinuePaymentButton().isDisplayed());
+        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
         checkoutAddressScreen.getContinuePaymentButton().click();
-        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinueButton());
-        wait.until(ExpectedConditions.elementToBeClickable(checkoutAddressScreen.getContinueButton()));
-        checkoutAddressScreen.getContinueButton().click();
+
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(checkoutAddressScreen.getContinueButton()));
+            JavascriptExecutor executor = (JavascriptExecutor)webDriver;
+            executor.executeScript("arguments[0].click();", checkoutAddressScreen.getContinueButton());
+        } catch (Exception e) {
+            System.out.println("Continue from popup is not displayed");
+        }
+
+    }
+
+    public boolean isElementVisible(String xPath) {
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xPath)));
+            return true;
+        } catch (NoSuchElementException e) {
+            System.out.println("Test");
+            return false;
+        }
     }
 }

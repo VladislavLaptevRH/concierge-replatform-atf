@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 @Getter
 public class CheckoutAddressScreen extends AbstractPage{
 
-    @FindBy(xpath = "//input[@id='shippingAddress.firstName']")
+    @FindBy(xpath = "//input[contains(@id,'firstName')and contains(@id,'shipping')]\n")
     private WebElement firstNameInpt;
 
     @FindBy(xpath = "//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[2]/div/input")

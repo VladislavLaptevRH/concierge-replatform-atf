@@ -1,12 +1,8 @@
 package com.test.utility;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class Log {
-
 // Initialize Log4j logs
 
     private static Logger Log = Logger.getLogger(Log.class.getName());//

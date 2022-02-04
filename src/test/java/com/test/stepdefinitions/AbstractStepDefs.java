@@ -17,10 +17,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import java.util.concurrent.TimeUnit;
-
 import static org.awaitility.Awaitility.await;
-import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 @Getter
 @Configuration
@@ -58,7 +56,7 @@ public class AbstractStepDefs {
 
     @When("I clicks on a random menu item")
     public void iClicksOnARandomMenuItem() {
-
+        generalStepDefs.isElementVisible("//h1[@class='MuiTypography-root MuiTypography-h1']");
         wait.until(ExpectedConditions.textToBePresentInElement(conciergeUserAccountPage.getDashboardTitle(), "DASHBOARD"));
         wait.until(ExpectedConditions.elementToBeClickable(conciergeUserAccountPage.getOrderHistoryButton()));
 
@@ -73,6 +71,7 @@ public class AbstractStepDefs {
 
     @When("I clicks on o random item")
     public void iClicksOnORandomItem() throws InterruptedException {
+        generalStepDefs.isElementVisible("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul//li[@class='MuiGridListTile-root']");
         wait.until(ExpectedConditions.visibilityOf(conciergeItemsScreen.getItems().get(0)));
         conciergeItemsScreen.getItems().get(0).click();
 
@@ -81,12 +80,12 @@ public class AbstractStepDefs {
 
     @When("I fill all options for item")
     public void iFillAllOptionsForItem() {
-        WebElement webElement = webDriver.findElement(By.xpath("//h2[@class='MuiTypography-root MuiTypography-h2']"));
-        await().forever().until(() -> webElement.isDisplayed());
-
+        generalStepDefs.isElementVisible("//h2[@class='MuiTypography-root MuiTypography-h2']");
         String currentUrl = webDriver.getCurrentUrl();
         String currentProduct = currentUrl.substring(currentUrl.indexOf("="), currentUrl.indexOf("&")).replace("=", "");
+        generalStepDefs.isElementVisible("//select[@id='" + currentProduct + "-qty-input']//option[3]");
         WebElement quantity = webDriver.findElement(By.xpath("//select[@id='" + currentProduct + "-qty-input']//option[3]"));
+        await().forever().until(() -> quantity.isDisplayed());
         wait.until(ExpectedConditions.elementToBeClickable(quantity));
         JavascriptExecutor js = (JavascriptExecutor) webDriver;
         ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", quantity);
@@ -104,8 +103,8 @@ public class AbstractStepDefs {
         conciergeItemsScreen.getClosePopUpButton().click();
     }
 
-    @When("I click on continue to payment button")
-    public void iClickOnContinueToPaymentButton() {
+    @When("I introduces payment details")
+    public void iClickOnContinueToPaymentButton() throws InterruptedException {
         wait.until(ExpectedConditions.textToBePresentInElement(paymentScreen.getChoosePaymentMethodBtn(), "Choose a payment method"));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByIndex(3);
@@ -154,7 +153,7 @@ public class AbstractStepDefs {
     public void iChooseClientFromHeader() {
         generalStepDefs.waitForPageLoad(webDriver);
         try {
-            if (conciergeUserAccountPage.getClientButton().isDisplayed()) {
+            if (!conciergeUserAccountPage.getClientButton().getText().contains(":")) {
                 conciergeUserAccountPage.getClientButton().click();
                 conciergeUserAccountPage.getClientLookupHeaderBtn().click();
                 wait.until(ExpectedConditions.elementToBeClickable(conciergeUserAccountPage.getClientLookupFirstName()));
@@ -174,10 +173,12 @@ public class AbstractStepDefs {
     @When("I fill all fields from address screen")
     public void iFillAllFieldsFromAddressScreenForBrands() {
         try {
-            generalStepDefs.fillAddressFields("12345", "");
+            generalStepDefs.fillAddressFields();
+            generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
         } catch (Exception e) {
-            System.out.println("Step passed");
+            System.out.println("");
         }
+
     }
 
     @When("I clicks on a random menu item for brands")

@@ -47,10 +47,7 @@ public class Hooks {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
         System.out.println("Driver is initdriver" + webDriver);
-        webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-
     }
 
     /**

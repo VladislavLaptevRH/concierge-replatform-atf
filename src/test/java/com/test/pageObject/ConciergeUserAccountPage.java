@@ -102,7 +102,7 @@ public class ConciergeUserAccountPage extends AbstractPage{
     @FindBy(xpath = "//div[2]//ul[@class='MuiList-root']/li[@class='MuiListItem-root']")
     private List<WebElement> itemSubCategory;
 
-    @FindBy(xpath = "//h6[normalize-space()='Client']")
+    @FindBy(xpath = "//div[1]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6")
     private WebElement clientButton;
 
     @FindBy(xpath = "//div[2]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6")

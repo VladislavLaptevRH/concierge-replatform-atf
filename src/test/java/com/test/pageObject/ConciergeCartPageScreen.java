@@ -10,6 +10,12 @@ public class ConciergeCartPageScreen extends AbstractPage {
     @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']/div/div/div[1]//p[@id='listColumn2-Item#']")
     private WebElement arlesRectangularDinigTableId;
 
+    @FindBy(xpath = "//h1[@class='MuiTypography-root MuiTypography-h1']")
+    private WebElement shoppingCartEmpty;
+
+    @FindBy(xpath = "//div[@id='spa-root']/div/main//a")
+    private WebElement pleaseContinueBrowsingButton;
+
     @FindBy(xpath = "//h3[normalize-space()='Arles Rectangular Dining Table']")
     private WebElement arlesRectangularDinigTableTitle;
 

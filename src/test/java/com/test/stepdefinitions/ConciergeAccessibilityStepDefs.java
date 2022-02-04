@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.LoggerFactory;
 
-import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 
 public class ConciergeAccessibilityStepDefs {
@@ -59,7 +59,6 @@ public class ConciergeAccessibilityStepDefs {
         assertTrue(conciergeUserAccountPage.getGiftsButtonMenu().isDisplayed());
         assertTrue(conciergeUserAccountPage.getSaleButtonMenu().isDisplayed());
         logger.info("Accessibility errors are not present on the user account page");
-
 
     }
 

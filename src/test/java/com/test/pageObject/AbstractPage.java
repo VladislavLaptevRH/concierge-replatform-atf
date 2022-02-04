@@ -15,6 +15,6 @@ public class AbstractPage {
      */
     public AbstractPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
+        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 20), this);
     }
 }
