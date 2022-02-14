@@ -1,0 +1,334 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2022-02-14T21:44:58.490Z",
+        "before": [
+          {
+            "result": {
+              "duration": 7476107000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "com.test.utility.Hooks.initWebDriver()"
+            }
+          }
+        ],
+        "line": 2,
+        "name": "Login as associate and see dashboard",
+        "description": "",
+        "id": "verify-login;login-as-associate-and-see-dashboard",
+        "after": [
+          {
+            "result": {
+              "duration": 124882000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "com.test.utility.Hooks.tearDownWebDriver()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 3180881000,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "I log into Concierge as \"associate\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"associate\"",
+                  "offset": 24
+                }
+              ],
+              "location": "com.test.stepdefinitions.ConciergeAssociateStepDefs.iLogIntoConciergeAs(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 865183000,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "I expect that I am on the Concierge Dashboard page",
+            "match": {
+              "location": "com.test.stepdefinitions.ConciergeAssociateStepDefs.iExpectThatIAmOnTheConciergeDashboardPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2022-02-14T21:45:10.223Z",
+        "before": [
+          {
+            "result": {
+              "duration": 3638102000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "com.test.utility.Hooks.initWebDriver()"
+            }
+          }
+        ],
+        "line": 6,
+        "name": "Login as leader and see dashboard",
+        "description": "",
+        "id": "verify-login;login-as-leader-and-see-dashboard",
+        "after": [
+          {
+            "result": {
+              "duration": 108284000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "com.test.utility.Hooks.tearDownWebDriver()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1969496000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I log into Concierge as \"leader\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"leader\"",
+                  "offset": 24
+                }
+              ],
+              "location": "com.test.stepdefinitions.ConciergeAssociateStepDefs.iLogIntoConciergeAs(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 2764663000,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "I expect that I am on the Concierge Dashboard page",
+            "match": {
+              "location": "com.test.stepdefinitions.ConciergeAssociateStepDefs.iExpectThatIAmOnTheConciergeDashboardPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Verify login",
+    "description": "",
+    "id": "verify-login",
+    "keyword": "Feature",
+    "uri": "file:src/main/resources/features/associate/ConciergeLoginTest.feature",
+    "tags": []
+  },
+  {
+    "line": 2,
+    "elements": [
+      {
+        "start_timestamp": "2022-02-14T21:45:18.748Z",
+        "line": 18,
+        "name": "Projects: add product to project with add all button",
+        "description": "",
+        "id": ";projects:-add-product-to-project-with-add-all-button;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [],
+        "tags": [
+          {
+            "name": "@projects"
+          },
+          {
+            "name": "@smoke"
+          },
+          {
+            "name": "@deleteProjectAfter"
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2022-02-14T21:45:18.768Z",
+        "line": 19,
+        "name": "Projects: add product to project with add all button",
+        "description": "",
+        "id": ";projects:-add-product-to-project-with-add-all-button;;3",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [],
+        "tags": [
+          {
+            "name": "@projects"
+          },
+          {
+            "name": "@smoke"
+          },
+          {
+            "name": "@deleteProjectAfter"
+          }
+        ]
+      }
+    ],
+    "name": "",
+    "description": "    As a concierge user\n    I want to be able to add products to my project with the Add All To Project button",
+    "id": "",
+    "keyword": "Feature",
+    "uri": "file:src/main/resources/features/projects/AddAllToProject.feature",
+    "tags": [
+      {
+        "name": "@projects",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      },
+      {
+        "name": "@smoke",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 11
+        }
+      }
+    ]
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 3,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": []
+      },
+      {
+        "start_timestamp": "2022-02-14T21:45:18.786Z",
+        "before": [
+          {
+            "result": {
+              "duration": 3401760000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "com.test.utility.Hooks.initWebDriver()"
+            }
+          }
+        ],
+        "line": 5,
+        "name": "Login into Concierge for the store 146: West Hollywood",
+        "description": "",
+        "id": "verify-concierge-payment-by-signed-user;login-into-concierge-for-the-store-146:-west-hollywood",
+        "after": [
+          {
+            "result": {
+              "duration": 138118000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "com.test.utility.Hooks.tearDownWebDriver()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1978908000,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I login into Concierge with valid credentials for the store 146: West Hollywood",
+            "match": {
+              "location": "com.test.stepdefinitions.ConciergeAssociateStepDefs.iLoginIntoConciergeWithValidCredentialsForTheStoreWestHollywood()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1559541000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I expect that I am on the Concierge Dashboard page",
+            "match": {
+              "location": "com.test.stepdefinitions.ConciergeAssociateStepDefs.iExpectThatIAmOnTheConciergeDashboardPage()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Verify concierge payment by signed user",
+    "description": "",
+    "id": "verify-concierge-payment-by-signed-user",
+    "keyword": "Feature",
+    "uri": "file:src/main/resources/features/projects/checkout/ConciergePaymentBySignedInUser.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2022-02-14T21:45:25.871Z",
+        "line": 2,
+        "name": "Could not execute Cucumber",
+        "description": "",
+        "id": "failure;could-not-execute-cucumber",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 0,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "Cucumber could not execute",
+            "match": {
+              "arguments": [],
+              "location": "io.cucumber.core.Failure.cucumber_could_not_execute()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 0,
+              "error_message": "There were 2 exceptions:\n  java.lang.IllegalArgumentException(Test name must not be null or empty)\n  java.lang.IllegalArgumentException(Test name must not be null or empty)",
+              "status": "failed"
+            },
+            "line": 4,
+            "name": "Cucumber will report this error:",
+            "match": {
+              "arguments": [],
+              "location": "io.cucumber.core.Failure.cucumber_reports_this_error()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Test run failed",
+    "description": "There were errors during the execution",
+    "id": "failure",
+    "keyword": "Feature",
+    "uri": "classpath:io/cucumber/core/failure.feature",
+    "tags": []
+  }
+]
