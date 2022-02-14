@@ -15,7 +15,7 @@ pipeline.standardTemplate { label ->
             pipeline.checkoutCode()
         }
         stage('Public Maven') {
-            pipeline.buildMvn("clean test");
+            pipeline.buildMvn("test");
         } // end stage
     } // end Node
 } // pipelineTemplate
