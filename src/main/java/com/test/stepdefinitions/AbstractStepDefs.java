@@ -41,6 +41,7 @@ public class AbstractStepDefs {
         actions.moveToElement(conciergeUserAccountPage.getMenuItems().get(0));
         conciergeUserAccountPage.getMenuItems().get(0).click();
         conciergeUserAccountPage.getMenuItems().get(0).click();
+wait.until(ExpectedConditions.elementToBeClickable(conciergeUserAccountPage.getArtButtonMenu()));
 
         wait.until(ExpectedConditions.elementToBeClickable(conciergeUserAccountPage.getItemSubCategory().get(2)));
         generalStepDefs.isElementVisible("//div[2]//ul[@class='MuiList-root']/li[@class='MuiListItem-root'][2]");
@@ -83,14 +84,14 @@ public class AbstractStepDefs {
 
         generalStepDefs.isElementVisible("//select[@id='" + currentProduct + "-qty-input']//option[3]");
         WebElement quantity = webDriver.findElement(By.xpath("//select[@id='" + currentProduct + "-qty-input']//option[3]"));
-        await().forever().until(() -> quantity.isDisplayed());
+        await().forever().until(quantity::isDisplayed);
         wait.until(ExpectedConditions.elementToBeClickable(quantity));
         ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", quantity);
         quantity.click();
     }
 
     @When("I click on checkout button")
-    public void iClickOnCheckoutButton() throws InterruptedException {
+    public void iClickOnCheckoutButton() {
         generalStepDefs.isElementVisible("//select[@id='element-orderclassification']");
         Select select = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
         select.selectByIndex(1);
@@ -103,7 +104,7 @@ public class AbstractStepDefs {
     }
 
     @When("I introduces payment details")
-    public void iClickOnContinueToPaymentButton() throws InterruptedException {
+    public void iClickOnContinueToPaymentButton() {
         wait.until(ExpectedConditions.textToBePresentInElement(paymentScreen.getChoosePaymentMethodBtn(), "Choose a payment method"));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByIndex(3);
@@ -178,7 +179,7 @@ public class AbstractStepDefs {
             generalStepDefs.fillAddressFields();
             generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
         } catch (Exception e) {
-            System.out.println("");
+            System.out.println("Address fields are not available");
         }
 
     }

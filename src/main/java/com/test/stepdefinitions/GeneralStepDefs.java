@@ -52,6 +52,7 @@ public class GeneralStepDefs {
         conciergeLoginPage.getContinueButton().click();
     }
 
+
     /**
      * This method is clear required field
      *
@@ -117,6 +118,7 @@ public class GeneralStepDefs {
         checkoutAddressScreen.getBillingAddressAsShippingCheckBox().click();
     }
 
+
     /**
      * Fill zip code, state, country for address checkout
      *
@@ -144,6 +146,7 @@ public class GeneralStepDefs {
         }
 
     }
+
 
     /**
      * Click on continue to payment buttons
@@ -179,6 +182,7 @@ public class GeneralStepDefs {
         }
     }
 
+
     /**
      * @param paymentType
      * @param number
@@ -205,6 +209,7 @@ public class GeneralStepDefs {
         webDriver.switchTo().defaultContent();
     }
 
+
     /**
      * @param ls1
      * @param ls2 This method compare two lists
@@ -214,7 +219,8 @@ public class GeneralStepDefs {
         return ls1.toString().contentEquals(ls2.toString()) ? true : false;
     }
 
-    public void verifyCategories(List<String> categoryInStockExpected, int indexItem) throws InterruptedException {
+
+    public void verifyCategories(List<String> categoryInStockExpected, int indexItem) {
         List<String> categoryInStockActual = new ArrayList<>();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//div")));
         actions.moveToElement(conciergeUserAccountPage.getMenuItems().get(indexItem));
@@ -244,19 +250,6 @@ public class GeneralStepDefs {
         return r.nextInt((max - min) + 1) + min;
     }
 
-
-    public void waitForElement(WebDriver driver, final String webElementId){
-        int timeOut = 90;
-        WebDriverWait wait = new WebDriverWait(driver, timeOut);
-        wait.until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver driver) {
-                if (driver.findElement(By.xpath(webElementId)) != null){
-                    return Boolean.TRUE;
-                }
-                return null;
-            }
-        });
-    }
 }
 
 

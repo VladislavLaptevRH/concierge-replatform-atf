@@ -1,4 +1,5 @@
 #Feature: Verify e2e flow
+#
 #  Scenario: Verify that user is able to buy item
 #    Given I log into Concierge as "associate"
 #    When I remove all items from cart
@@ -101,6 +102,31 @@
 #    When I introduces payment details for several payment methods
 #    When I click on a place order button
 #    Then I verify that confirmation order screen is displayed
+#
+#  Scenario: Verify that if client is a member then redirected to carts screen
+#    Given I log into Concierge as "associate"
+#    When I remove all items from cart
+#    And I choose client as member from header
+#    When I go to item "112848 MULT" from search field
+#    And I fill all options for item
+#    When I click on add to cart button
+#    And I click on checkout button
+#    Then I verify that member price is displayed
+#    And I verify that carts screen is displayed
+#
+#  Scenario: Verify if client is a non member then redirected to address screen
+#    Given I log into Concierge as "associate"
+#    When I remove all items from cart
+#    And I choose client as member from header
+#    When I go to item "112848 MULT" from search field
+#    And I fill all options for item
+#    When I click on add to cart button
+#    And I click on checkout button
+#    Then I verify that member price is displayed
+#    And I verify that address screen is displayed
+#
+#
+#
 #
 #  #nonmember-> address screen
 #  #member->carts

@@ -21,7 +21,7 @@ import static org.testng.Assert.assertTrue;
 
 
 public class ConciergeAccessibilityStepDefs {
-    private org.slf4j.Logger logger = LoggerFactory.getLogger(ConciergeAccessibilityStepDefs.class);
+    private final org.slf4j.Logger logger = LoggerFactory.getLogger(ConciergeAccessibilityStepDefs.class);
 
     WebDriver webDriver = Hooks.getWebDriver();
     WebDriverWait wait = new WebDriverWait(webDriver, 20);
@@ -69,7 +69,7 @@ public class ConciergeAccessibilityStepDefs {
     }
 
     @When("user sign in concierge portal")
-    public void userSignInConciergePortal() throws InterruptedException {
+    public void userSignInConciergePortal() {
         conciergeLoginPage.getUsernameField().sendKeys("mdovbenco");
         conciergeLoginPage.getPasswordField().sendKeys("171096workouT!");
         conciergeLoginPage.getSignInButton().click();
@@ -85,7 +85,7 @@ public class ConciergeAccessibilityStepDefs {
         for (int i = 0; i < conciergeUserAccountPage.getMenuItems().size(); i++) {
             items = new ArrayList(Arrays.asList(conciergeUserAccountPage.getMenuItems().get(i).getText()));
         }
-        generalStepDefs.compareList(expectedItems, items);
+        GeneralStepDefs.compareList(expectedItems, items);
     }
 
     @And("I verify that category items are displayed")

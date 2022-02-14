@@ -2,6 +2,7 @@ package com.test.stepdefinitions;
 
 import com.test.pageObject.*;
 import com.test.utility.Hooks;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
@@ -116,7 +117,7 @@ public class ConciergeE2EStepDefs {
     }
 
     @When("I fill all fields from address with {string} zip code")
-    public void iFillAllFieldsFromAddressWithZipCode(String state) throws InterruptedException {
+    public void iFillAllFieldsFromAddressWithZipCode(String state) {
         generalStepDefs.waitForPageLoad(webDriver);
         generalStepDefs.fillAddressFields();
 
@@ -149,7 +150,7 @@ public class ConciergeE2EStepDefs {
                         closePopUp.click();
                     }
                 } catch (Exception e) {
-                    System.out.println("");
+                    System.out.println("Pop up is not appeared");
                 }
                 try {
                     waitRemoveButton.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[7]//div[1]/div/div/div/div[2]//div[2]/div[4]/div[1]/a/span")));
@@ -276,18 +277,18 @@ public class ConciergeE2EStepDefs {
             WebElement quantity = webDriver.findElement(By.xpath("//select[@id='" + currentProduct + "-qty-input']"));
             ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", quantity);
             WebElement sizeOption = webDriver.findElement(By.xpath("//select[@id='optionSelect-" + currentProduct + "-Size']"));
-            await().forever().until(() -> quantity.isDisplayed());
+            await().forever().until(quantity::isDisplayed);
             wait.until(ExpectedConditions.elementToBeClickable(quantity));
 
             Select selectSize = new Select(sizeOption);
-            selectSize.selectByIndex(generalStepDefs.getRandomNumberInRange(1, 3));
+            selectSize.selectByIndex(GeneralStepDefs.getRandomNumberInRange(1, 3));
             sizeOption.click();
 
             WebElement finishOption = webDriver.findElement(By.xpath("//select[@id='optionSelect-" + currentProduct + "-Finish']"));
             wait.until(ExpectedConditions.elementToBeClickable(finishOption));
 
             Select select = new Select(finishOption);
-            select.selectByIndex(generalStepDefs.getRandomNumberInRange(1, 9));
+            select.selectByIndex(GeneralStepDefs.getRandomNumberInRange(1, 9));
 
             wait.until(ExpectedConditions.elementToBeClickable((quantity)));
             Select quantityButton = new Select(quantity);
@@ -358,6 +359,11 @@ public class ConciergeE2EStepDefs {
             conciergeUserAccountPage.getListOfBrands().get(7).click();
             generalStepDefs.isElementVisible("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li[7]");
         }
+    }
+
+    @And("I choose client as member from header")
+    public void iChooseClientAsMemberFromHeader() {
+        
     }
 }
 

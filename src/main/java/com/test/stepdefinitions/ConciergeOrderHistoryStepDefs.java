@@ -106,10 +106,10 @@ public class ConciergeOrderHistoryStepDefs {
     }
 
     @Then("I verify that I redirected to wismo")
-    public void iVerifyThatIRedirectedToWismo() throws InterruptedException {
+    public void iVerifyThatIRedirectedToWismo() {
         ArrayList<String> tabs = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(tabs.get(1));
-        Boolean redirect = false;
+        boolean redirect = false;
         if (tabs.size() == 2) {
             redirect = true;
         }

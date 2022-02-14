@@ -3,14 +3,13 @@ package com.test.stepdefinitions;
 import com.test.pageObject.ConciergeLoginPage;
 import com.test.pageObject.ConciergeUserAccountPage;
 import com.test.utility.Hooks;
-
-import io.cucumber.java.en.*;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 import static org.testng.Assert.assertTrue;
 
@@ -45,7 +44,7 @@ public class ConciergeAssociateStepDefs {
     }
 
     @When("I change my store to store number 10")
-    public void iChangeMyStoreToStoreNumber() throws InterruptedException {
+    public void iChangeMyStoreToStoreNumber() {
         conciergeUserAccountPage.getNewPortBeachGallery().click();
         conciergeUserAccountPage.getPaloAltpGallery().click();
         conciergeUserAccountPage.getGallerySubmitButton().click();
@@ -68,7 +67,7 @@ public class ConciergeAssociateStepDefs {
     }
 
     @Then("user verifies list of galleries")
-    public void userVerifiesListOfGalleries() throws InterruptedException {
+    public void userVerifiesListOfGalleries() {
         wait.until(ExpectedConditions.textToBePresentInElement(conciergeUserAccountPage.getGallerySelectButton(), "NEWPORT"));
         String actualListOfGalleries = conciergeUserAccountPage.getGallerySelectButton().getText();
         assertTrue(actualListOfGalleries.equals(actualListOfGalleries));
