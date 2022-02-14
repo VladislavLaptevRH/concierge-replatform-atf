@@ -8,7 +8,6 @@ Service s = Service.CONCIERGE_REPLATFORM_ATF;
 SeleniumPipeline pipeline = new SeleniumPipeline(this, s, env);
 pipeline.standardTemplate { label ->
     node(label) {
-    try {
       stage ('checkout') {
           pipeline.checkoutCode();
       }
