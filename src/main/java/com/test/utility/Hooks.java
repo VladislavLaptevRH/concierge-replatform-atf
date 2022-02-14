@@ -62,7 +62,7 @@ public class Hooks {
         System.out.println("Inside initDriver method");
 
         try {
-            System.setProperty(properties.getProperty("chromeDriver"), (String) properties.get("chromeDriverPath"));
+            System.setProperty(properties.getProperty("chromeDriver"), "driver/chromedriver");
             webDriver = new ChromeDriver();
             webDriver.manage().window().maximize();
             webDriver.get((String) properties.get("baseurl"));
