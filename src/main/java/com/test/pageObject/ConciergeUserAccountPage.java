@@ -18,8 +18,11 @@ public class ConciergeUserAccountPage extends AbstractPage{
     @FindBy(xpath = "//input[contains(@class,'MuiInputBase-inputAdornedStart')]")
     private WebElement searchItemField;
 
-    @FindBy(xpath = "//button[contains(@class,'MuiButton-containedPrimary')]")
+    @FindBy(xpath = "//*[text()='Search']")
     private WebElement searchButton;
+
+    @FindBy(xpath = "//*[contains(text(),'Client : Automation')]")
+    private WebElement automationClientButton;
 
     @FindBy(xpath = "//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li")
     private List<WebElement> listOfBrands;
@@ -104,6 +107,9 @@ public class ConciergeUserAccountPage extends AbstractPage{
 
     @FindBy(xpath = "//div[1]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6")
     private WebElement clientButton;
+
+    @FindBy(xpath = "//li[@id='1']/button")
+    private WebElement removeClientButton;
 
     @FindBy(xpath = "//div[2]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6")
     private WebElement brandButton;

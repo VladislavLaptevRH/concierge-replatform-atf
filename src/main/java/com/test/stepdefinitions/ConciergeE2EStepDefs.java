@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -17,6 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.Random;
 
 import static org.awaitility.Awaitility.await;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class ConciergeE2EStepDefs {
@@ -29,6 +31,7 @@ public class ConciergeE2EStepDefs {
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen(webDriver);
     Actions actions = new Actions(webDriver);
+    ConciergeOrderHistoryForm conciergeOrderHistoryForm = new ConciergeOrderHistoryForm(webDriver);
     PaymentScreen paymentScreen = new PaymentScreen(webDriver);
     String usState = "";
 
@@ -312,6 +315,7 @@ public class ConciergeE2EStepDefs {
     public void iGoToItemFromSearchField(String arg0) {
         generalStepDefs.isElementVisible("//input[contains(@class,'MuiOutlinedInput-inputAdornedStart')]");
         conciergeUserAccountPage.getSearchItemField().sendKeys(arg0);
+        generalStepDefs.isElementVisible("//*[text()='Search']");
         conciergeUserAccountPage.getSearchButton().click();
         generalStepDefs.isElementVisible("//span[@class='MuiButton-label']");
         conciergeUserAccountPage.getSeeResultsButton().click();
@@ -361,10 +365,80 @@ public class ConciergeE2EStepDefs {
         }
     }
 
-    @And("I choose client as member from header")
-    public void iChooseClientAsMemberFromHeader() {
-        
+
+    @When("I click on no thanks button")
+    public void iClickOnNoThanksButton() {
+        generalStepDefs.isElementVisible("//select[@id='element-orderclassification']");
+        Select select = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
+        select.selectByIndex(1);
+        wait.until(ExpectedConditions.elementToBeClickable(conciergeItemsScreen.getCheckoutButton()));
+        generalStepDefs.isElementVisible("//div[contains(@class,'MuiGrid-root MuiGrid-container MuiGrid-item')][2]//button");
+        conciergeItemsScreen.getCheckoutButton().click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(conciergeCartPageScreen.getNoThanksButton()));
+        conciergeCartPageScreen.getNoThanksButton().click();
     }
+
+
+    @When("I choose client who is a non member")
+    public void iChooseClientWhoIsANonMember() {
+        generalStepDefs.waitForPageLoad(webDriver);
+        try {
+            if (conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
+                conciergeUserAccountPage.getClientButton().click();
+                generalStepDefs.isElementVisible("//span[normalize-space()='Client Lookup']");
+                conciergeUserAccountPage.getClientLookupHeaderBtn().click();
+                wait.until(ExpectedConditions.elementToBeClickable(conciergeUserAccountPage.getClientLookupFirstName()));
+                conciergeUserAccountPage.getClientLookupFirstName().sendKeys("Automation");
+                conciergeUserAccountPage.getClientLookupLastName().sendKeys("Nonmember");
+                conciergeUserAccountPage.getClientLookupSearchButton().click();
+                wait.until(ExpectedConditions.textToBePresentInElement(conciergeOrderHistoryForm.getCustomerFirstName(), "NAME"));
+                conciergeUserAccountPage.getFirstResultOfClientLookup().click();
+                wait.until(ExpectedConditions.textToBePresentInElement(conciergeUserAccountPage.getClientButton(), "Mihail"));
+            }
+        } catch (Exception e) {
+            System.out.println("Client is selected");
+        }
+        System.out.println();
+    }
+
+    @When("I remove client from header")
+    public void iRemoveClientFromHeader() {
+        try {
+            if (conciergeUserAccountPage.getAutomationClientButton().isDisplayed()) {
+                generalStepDefs.isElementVisible("//div[1]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6");
+                conciergeUserAccountPage.getAutomationClientButton().click();
+                Thread.sleep(2000);
+                conciergeUserAccountPage.getRemoveClientButton().click();
+            }
+        } catch (Exception e) {
+            System.out.println("Client is not selected");
+        }
+    }
+
+    @When("I choose client who is a {string}")
+    public void iChooseClientWhoIsAMember(String arg0) {
+        wait.until(ExpectedConditions.elementToBeClickable(conciergeUserAccountPage.getClientLookupFirstName()));
+        if (arg0.equals("member")) {
+            conciergeUserAccountPage.getClientLookupFirstName().sendKeys("Automation");
+            conciergeUserAccountPage.getClientLookupLastName().sendKeys("Member");
+        } else {
+            conciergeUserAccountPage.getClientLookupFirstName().sendKeys("Automation");
+            conciergeUserAccountPage.getClientLookupLastName().sendKeys("NonMember");
+        }
+
+        conciergeUserAccountPage.getClientLookupSearchButton().click();
+        wait.until(ExpectedConditions.textToBePresentInElement(conciergeOrderHistoryForm.getCustomerFirstName(), "NAME"));
+        conciergeUserAccountPage.getFirstResultOfClientLookup().click();
+    }
+
+    @Then("I verify that member price is displayed as final price")
+    public void iVerifyThatMemberPriceIsDisplayedAsFinalPrice() {
+        wait.until(ExpectedConditions.textToBePresentInElement(conciergeCartPageScreen.getTotalMemberPrice(), "$314.00"));
+        assertTrue(conciergeCartPageScreen.getTotalMemberPrice().getText().equals("$314.00"));
+    }
+
+
 }
 
 

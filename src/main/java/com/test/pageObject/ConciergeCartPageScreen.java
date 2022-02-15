@@ -37,6 +37,12 @@ public class ConciergeCartPageScreen extends AbstractPage {
     @FindBy(xpath = "//button[@data-testid='form-dialog-close-button']")
     private WebElement closePopUp;
 
+    @FindBy(xpath = "//*[text()='NO, THANKS']")
+    private WebElement noThanksButton;
+
+    @FindBy(xpath = "//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-alignRight']")
+    private WebElement totalMemberPrice;
+
 
     /**
      * Constructor for initialize page object

@@ -56,7 +56,6 @@ wait.until(ExpectedConditions.elementToBeClickable(conciergeUserAccountPage.getA
         generalStepDefs.waitForPageLoad(webDriver);
         wait.until(ExpectedConditions.elementToBeClickable(conciergeItemsScreen.getItems().get(0)));
         generalStepDefs.isElementVisible("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul//li[@class='MuiGridListTile-root']");
-//        generalStepDefs.waitForElement(conciergeItemsScreen.getItems().get(0));
         conciergeItemsScreen.getItems().get(0).click();
     }
 
