@@ -11,9 +11,9 @@ pipeline.standardTemplate { label ->
       stage ('checkout') {
           pipeline.checkoutCode();
       }
-      
-      stage('test') {
-          pipeline.runTest();
-      }
+
+        stage('Run Tests') {
+            pipeline.buildMvn("clean test");
+        } // end stage
     } // end Node
 } // pipelineTemplate
