@@ -4,12 +4,18 @@ import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import lombok.Getter;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -56,6 +62,25 @@ public class Hooks {
     @Before()
     public void initWebDriver() {
         ConfigFileReader();
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+
+        DesiredCapabilities dr = new DesiredCapabilities();
+        dr.setBrowserName("chrome");
+        dr.setCapability(ChromeOptions.CAPABILITY, options);
+
+//        dr.setPlatform(Platform.WINDOWS);
+
+        String urlToRemoteWD = "http://10.28.18.192:4444/wd/hub";
+        RemoteWebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        WebDriverRunner.setWebDriver(driver);
+
         setUPWebDriver();
     }
 
