@@ -1,27 +1,23 @@
 package com.test.pageObject;
 
+import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import static com.codeborne.selenide.Selenide.$;
 
 @Getter
-public class ReviewOrderScreen extends AbstractPage{
-    @FindBy(xpath = "//button[contains(@class,'MuiButton-contained MuiButton-containedPrimary')]")
-    private WebElement placeOrderButton;
+public class ReviewOrderScreen{
+    
+    private SelenideElement placeOrderButton = $(By.xpath("//button[contains(@class,'MuiButton-contained MuiButton-containedPrimary')]"));
 
-    @FindBy(xpath = "(//h3[contains(@class,'MuiTypography-root MuiTypography-h3')])[3]")
-    private WebElement shippingAddress;
+    
+    private SelenideElement shippingAddress = $(By.xpath("(//h3[contains(@class,'MuiTypography-root MuiTypography-h3')])[3]"));
 
-    @FindBy(xpath = "(//h3[contains(@class,'MuiTypography-root MuiTypography-h3')])[4]")
-    private WebElement billingAddress;
+    
+    private SelenideElement billingAddress = $(By.xpath("(//h3[contains(@class,'MuiTypography-root MuiTypography-h3')])[4]"));
 
-    /**
-     * Constructor for initialize page object
-     *
-     * @param driver Web driver
-     */
-    public ReviewOrderScreen(WebDriver driver) {
-        super(driver);
-    }
 }

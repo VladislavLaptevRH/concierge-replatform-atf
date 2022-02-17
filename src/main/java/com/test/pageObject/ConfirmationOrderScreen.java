@@ -1,27 +1,22 @@
 package com.test.pageObject;
 
+import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import static com.codeborne.selenide.Selenide.$;
 
 @Getter
-public class ConfirmationOrderScreen extends AbstractPage{
-    @FindBy(xpath = "//button[contains(@class,'MuiButtonBase-root MuiButton-root')]")
-    private WebElement orderDetailsButton;
+public class ConfirmationOrderScreen {
+    
+    private SelenideElement orderDetailsButton = $(By.xpath("//button[contains(@class,'MuiButtonBase-root MuiButton-root')]"));
 
-    @FindBy(xpath = "//h1[@class='MuiTypography-root MuiTypography-h1 MuiTypography-alignCenter']")
-    private WebElement thankYouTitle;
+    
+    private SelenideElement thankYouTitle = $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1 MuiTypography-alignCenter']"));
 
-    @FindBy(xpath = "//div[contains(@class,'MuiGrid-direction-xs-column MuiGrid-align-items-xs-center')]/h3")
-    private WebElement yourOrderHasBeenPlaced;
-
-    /**
-     * Constructor for initialize page object
-     *
-     * @param driver Web driver
-     */
-    public ConfirmationOrderScreen(WebDriver driver) {
-        super(driver);
-    }
+    
+    private SelenideElement yourOrderHasBeenPlaced = $(By.xpath("//div[contains(@class,'MuiGrid-direction-xs-column MuiGrid-align-items-xs-center')]/h3"));
 }

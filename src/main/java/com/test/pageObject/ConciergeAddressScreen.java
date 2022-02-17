@@ -1,38 +1,26 @@
 package com.test.pageObject;
 
+import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 
-public class ConciergeAddressScreen extends AbstractPage{
-    @FindBy(xpath = "//h3[@class='MuiTypography-root MuiTypography-h3 MuiTypography-alignCenter']")
-    private WebElement checkOutTitle;
+import static com.codeborne.selenide.Selenide.$;
 
-    @FindBy(xpath = "//li[@class='MuiBreadcrumbs-li'][1]/a[1]")
-    private WebElement addressText;
+public class ConciergeAddressScreen{
+    private SelenideElement checkOutTitle = $(By.xpath("//h3[@class='MuiTypography-root MuiTypography-h3 MuiTypography-alignCenter']"));
 
-    @FindBy(xpath = "//li[@class='MuiBreadcrumbs-li'][2]/p")
-    private WebElement paymentText;
+    private SelenideElement addressText = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][1]/a[1]"));
 
-    @FindBy(xpath = "//li[@class='MuiBreadcrumbs-li'][3]/p")
-    private WebElement reviewText;
+    private SelenideElement paymentText = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][2]/p"));
 
-    @FindBy(xpath = "//li[@class='MuiBreadcrumbs-li'][4]/p")
-    private WebElement confirmationText;
+    private SelenideElement reviewText = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][3]/p"));
 
-    @FindBy(xpath = "//div[1]/h3[@class='MuiTypography-root MuiTypography-h3']")
-    private WebElement shippingAddressText;
+    private SelenideElement confirmationText = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][4]/p"));
 
-    @FindBy(xpath = "//div[@id='billingAddresslbl']/h3")
-    private WebElement billingAddressText;
+    private SelenideElement shippingAddressText = $(By.xpath("//div[1]/h3[@class='MuiTypography-root MuiTypography-h3']"));
 
+    private SelenideElement billingAddressText = $(By.xpath("//div[@id='billingAddresslbl']/h3"));
 
-    /**
-     * Constructor for initialize page object
-     *
-     * @param driver Web driver
-     */
-    public ConciergeAddressScreen(WebDriver driver) {
-        super(driver);
-    }
 }

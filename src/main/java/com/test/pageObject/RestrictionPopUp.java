@@ -1,30 +1,27 @@
 package com.test.pageObject;
 
+import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import static com.codeborne.selenide.Selenide.$;
+
 @Getter
-public class RestrictionPopUp extends AbstractPage{
+public class RestrictionPopUp{
 
-    @FindBy(xpath = "//h2[@class='MuiTypography-root MuiTypography-h2']")
-    private WebElement shippingRestricitonsTitle;
+    
+    private SelenideElement shippingRestricitonsTitle = $(By.xpath("//h2[@class='MuiTypography-root MuiTypography-h2']"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12'][2]")
-    private WebElement restrictionsMessage;
+    
+    private SelenideElement restrictionsMessage = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12'][2]"));
 
-    @FindBy(xpath = "//div[contains(@class,'MuiGrid-root MuiGrid-item')][1]/button")
-    private WebElement viewCartButton;
+    
+    private SelenideElement viewCartButton = $(By.xpath("//div[contains(@class,'MuiGrid-root MuiGrid-item')][1]/button"));
 
-    @FindBy(xpath = "//div[contains(@class,'MuiGrid-root MuiGrid-item')][2]/button")
-    private WebElement editCartButton;
+    
+    private SelenideElement editCartButton = $(By.xpath("//div[contains(@class,'MuiGrid-root MuiGrid-item')][2]/button"));
 
-    /**
-     * Constructor for initialize page object
-     *
-     * @param driver Web driver
-     */
-    public RestrictionPopUp(WebDriver driver) {
-        super(driver);
-    }
 }

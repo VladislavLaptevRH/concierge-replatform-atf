@@ -1,57 +1,52 @@
 package com.test.pageObject;
 
+import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import static com.codeborne.selenide.Selenide.$;
 
 @Getter
-public class PaymentScreen extends AbstractPage{
-    @FindBy(xpath = "//div[contains(@class,'Mui')]//select[contains(@class,'MuiInputBase-input')]")
-    private WebElement choosePaymentMethodBtn;
+public class PaymentScreen{
+    
+    private SelenideElement choosePaymentMethodBtn = $(By.xpath("//div[contains(@class,'Mui')]//select[contains(@class,'MuiInputBase-input')]"));
 
-    @FindBy(xpath = "//div[contains(@class,'MuiInputBase-fullWidth')]/select")
-    private WebElement selectPaymentPlan;
+    
+    private SelenideElement selectPaymentPlan = $(By.xpath("//div[contains(@class,'MuiInputBase-fullWidth')]/select"));
 
-    @FindBy(xpath = "//div[contains(@class,'MuiInputBase-fullWidth MuiInputBase-formControl')]/input")
-    private WebElement rhCardNumberField;
+    
+    private SelenideElement rhCardNumberField = $(By.xpath("//div[contains(@class,'MuiInputBase-fullWidth MuiInputBase-formControl')]/input"));
 
-    @FindBy(xpath = "//input[@type='password']")
-    private WebElement rhCardPin;
+    
+    private SelenideElement rhCardPin = $(By.xpath("//input[@type='password']"));
 
-    @FindBy(xpath = "//div[contains(@class,'Mui-error Mui-error')]/select")
-    private WebElement creditCardPaymentPlan;
+    
+    private SelenideElement creditCardPaymentPlan = $(By.xpath("//div[contains(@class,'Mui-error Mui-error')]/select"));
 
-    @FindBy(xpath = "//input[@id='encryptedCardNumber']")
-    private WebElement cardNumberField;
+    
+    private SelenideElement cardNumberField = $(By.xpath("//input[@id='encryptedCardNumber']"));;
 
-    @FindBy(xpath = "//div[contains(@class,'MuiOutlinedInput-adornedStart')]/input")
-    private WebElement fieldAmount;
+    
+    private SelenideElement fieldAmount = $(By.xpath("//div[contains(@class,'MuiOutlinedInput-adornedStart')]/input"));;
 
-    @FindBy(xpath = "//input[@id='encryptedExpiryDate']")
-    private WebElement expiryDateField;
+    
+    private SelenideElement expiryDateField = $(By.xpath("//input[@id='encryptedExpiryDate']"));;
 
-    @FindBy(xpath = "//input[@id='encryptedSecurityCode']")
-    private WebElement cvcField;
+    
+    private SelenideElement cvcField = $(By.xpath("//input[@id='encryptedSecurityCode']"));;
 
-    @FindBy(xpath = "//button[contains(@class, 'MuiButton-containedPrimary')]")
-    private WebElement continueToReview;
+    
+    private SelenideElement continueToReview = $(By.xpath("//*[text()='CONTINUE TO REVIEW']"));;
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-container'][2]/button")
-    private WebElement rhccContinueToReview;
+    
+    private SelenideElement rhccContinueToReview = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container'][2]/button"));;
 
-    @FindBy(xpath = "//div[contains(@class,'MuiGrid-container MuiGrid-item')]/h3[@class='MuiTypography-root MuiTypography-h3']")
-    private WebElement paymentMethodTitle;
+    
+    private SelenideElement paymentMethodTitle = $(By.xpath("//div[contains(@class,'MuiGrid-container MuiGrid-item')]/h3[@class='MuiTypography-root MuiTypography-h3']"));;
 
-    @FindBy(xpath = "//label[2]/span[@class='MuiTypography-root MuiFormControlLabel-label MuiTypography-body1']")
-    private WebElement splitPaymentCheckBox;
-
-    /**
-     * Constructor for initialize page object
-     *
-     * @param driver Web driver
-     */
-    public PaymentScreen(WebDriver driver) {
-        super(driver);
-    }
+    
+    private SelenideElement splitPaymentCheckBox = $(By.xpath("//label[2]/span[@class='MuiTypography-root MuiFormControlLabel-label MuiTypography-body1']"));;
 }

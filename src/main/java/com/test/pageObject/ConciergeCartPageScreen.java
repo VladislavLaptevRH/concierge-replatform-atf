@@ -1,55 +1,49 @@
 package com.test.pageObject;
 
+import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import static com.codeborne.selenide.Selenide.$;
 
 @Getter
-public class ConciergeCartPageScreen extends AbstractPage {
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']/div/div/div[1]//p[@id='listColumn2-Item#']")
-    private WebElement arlesRectangularDinigTableId;
+public class ConciergeCartPageScreen{
+    
+    private SelenideElement arlesRectangularDinigTableId = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']/div/div/div[1]//p[@id='listColumn2-Item#']"));
 
-    @FindBy(xpath = "//h1[@class='MuiTypography-root MuiTypography-h1']")
-    private WebElement shoppingCartEmpty;
+    
+    private SelenideElement shoppingCartEmpty = $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']"));
 
-    @FindBy(xpath = "//div[@id='spa-root']/div/main//a")
-    private WebElement pleaseContinueBrowsingButton;
+    
+    private SelenideElement pleaseContinueBrowsingButton = $(By.xpath("//div[@id='spa-root']/div/main//a"));
 
-    @FindBy(xpath = "//h3[normalize-space()='Arles Rectangular Dining Table']")
-    private WebElement arlesRectangularDinigTableTitle;
+    
+    private SelenideElement arlesRectangularDinigTableTitle = $(By.xpath("//h3[normalize-space()='Arles Rectangular Dining Table']"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']/div/div/div[2]//p[@id='listColumn2-Item#']")
-    private WebElement gramTurkishTowel;
+    
+    private SelenideElement gramTurkishTowel = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']/div/div/div[2]//p[@id='listColumn2-Item#']"));
 
-    @FindBy(xpath = "//h3[normalize-space()='802-Gram Turkish Towel Collection']")
-    private WebElement gramTurkishTitle;
+    
+    private SelenideElement gramTurkishTitle = $(By.xpath("//h3[normalize-space()='802-Gram Turkish Towel Collection']"));
 
-    @FindBy(xpath = "//select[@id='quantity_701bfc45-0262-4a2c-bf01-92887d788333_1']")
-    private WebElement quantityButton;
+    
+    private SelenideElement quantityButton = $(By.xpath("//select[@id='quantity_701bfc45-0262-4a2c-bf01-92887d788333_1']"));
 
-    @FindBy(xpath = "//select[@id='element-orderclassification']")
-    private WebElement orderClassificationSelect;
+    
+    private SelenideElement orderClassificationSelect = $(By.xpath("//select[@id='element-orderclassification']"));
 
-    @FindBy(xpath = "//h2[@class='MuiTypography-root MuiTypography-h2 MuiTypography-noWrap']")
-    private WebElement membersProgramTitle;
+    
+    private SelenideElement membersProgramTitle = $(By.xpath("//h2[@class='MuiTypography-root MuiTypography-h2 MuiTypography-noWrap']"));
 
-    @FindBy(xpath = "//button[@data-testid='form-dialog-close-button']")
-    private WebElement closePopUp;
+    
+    private SelenideElement closePopUp = $(By.xpath("//button[@data-testid='form-dialog-close-button']"));
 
-    @FindBy(xpath = "//*[text()='NO, THANKS']")
-    private WebElement noThanksButton;
+    
+    private SelenideElement noThanksButton = $(By.xpath("//*[text()='NO, THANKS']"));
 
-    @FindBy(xpath = "//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-alignRight']")
-    private WebElement totalMemberPrice;
-
-
-    /**
-     * Constructor for initialize page object
-     *
-     * @param driver Web driver
-     */
-    public ConciergeCartPageScreen(WebDriver driver) {
-        super(driver);
-    }
+    
+    private SelenideElement totalMemberPrice = $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-alignRight']"));
 }

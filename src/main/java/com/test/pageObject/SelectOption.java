@@ -1,27 +1,19 @@
 package com.test.pageObject;
 
+import com.codeborne.selenide.SelenideElement;
 import com.test.utility.Hooks;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import static com.codeborne.selenide.Selenide.$;
 
 @Getter
-public class SelectOption extends AbstractPage {
+public class SelectOption {
     static WebDriver webDriver = Hooks.getWebDriver();
-
-    WebElement sizeOption = webDriver.findElement(By.xpath("//select[@id='optionSelect--Size']"));
-    private WebElement quantity = webDriver.findElement(By.xpath("//select[@id='" + getProductId() + "-qty-input']"));
-    private WebElement finishOption = webDriver.findElement(By.xpath("//select[@id='optionSelect-" + getProductId() + "-Finish']"));
-
-    /**
-     * Constructor for initialize page object
-     *
-     * @param driver Web driver
-     */
-    public SelectOption(WebDriver driver) {
-        super(driver);
-    }
+    SelenideElement sizeOption = $(By.xpath("//select[@id='optionSelect--Size']"));
+    SelenideElement quantity = $(By.xpath("//select[@id='" + getProductId() + "-qty-input']"));
+    SelenideElement finishOption = $(By.xpath("//select[@id='optionSelect-" + getProductId() + "-Finish']"));
 
 
     public static final String getProductId() {

@@ -1,16 +1,19 @@
 package com.test.utility;
 
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
+
+import static com.codeborne.selenide.Selenide.*;
 
 @Getter
 public class Hooks {
@@ -21,6 +24,7 @@ public class Hooks {
     public static String associateLogin;
     public static String leaderPassword;
     public static String leaderLogin;
+    public static String currentUrl;
 
     /**
      * This method get properties from application.properties file
@@ -60,18 +64,23 @@ public class Hooks {
      */
     public void setUPWebDriver() {
         System.out.println("Inside initDriver method");
-
         try {
+            open((String) properties.get("baseurl"));
+            currentUrl = WebDriverRunner.url();
             System.setProperty(properties.getProperty("chromeDriver"), "driver/chromedriver");
-            webDriver = new ChromeDriver();
-            webDriver.manage().window().maximize();
-            webDriver.get((String) properties.get("baseurl"));
-            webDriver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("Driver is initdriver" + webDriver);
+    }
+
+    public static String getCurrentUrl() {
+        currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
+        return currentUrl;
+    }
+
+    public static ArrayList<String> getWindowsHandles() {
+        ArrayList<String> tabs = new ArrayList<>(WebDriverRunner.getWebDriver().getWindowHandles());
+        return tabs;
     }
 
     /**
@@ -79,7 +88,8 @@ public class Hooks {
      */
     @After()
     public void tearDownWebDriver() {
-        webDriver.quit();
+        closeWindow();
+        closeWebDriver();
         System.out.println("Driver was closed");
     }
 

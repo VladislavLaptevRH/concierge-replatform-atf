@@ -1,61 +1,56 @@
 package com.test.pageObject;
 
+import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import static com.codeborne.selenide.Selenide.$;
+
 
 @Getter
-public class CheckoutAddressScreen extends AbstractPage{
+public class CheckoutAddressScreen {
 
-    @FindBy(xpath = "//input[contains(@id,'firstName')and contains(@id,'shipping')]")
-    private WebElement firstNameInpt;
 
-    @FindBy(xpath = "//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[2]/div/input")
-    private WebElement lastNameField;
+    private SelenideElement firstNameInpt =$(By.xpath("//input[contains(@id,'firstName')and contains(@id,'shipping')]"));
 
-    @FindBy(xpath = "//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")
-    private WebElement companyNameField;
 
-    @FindBy(xpath = "//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[5]/div/input")
-    private WebElement streetAddressField;
+    private SelenideElement lastNameField =$(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[2]/div/input"));
 
-    @FindBy(xpath ="//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[6]/div/input")
-    private WebElement aptFloorSuiteField;
 
-    @FindBy(xpath = "//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[7]/div/input")
-    private WebElement cityField;
+    private SelenideElement companyNameField =$(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input"));
 
-    @FindBy(xpath = "(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]")
-    private WebElement stateField;
 
-    @FindBy(xpath = "(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[1]")
-    private WebElement countryField;
+    private SelenideElement streetAddressField =$(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[5]/div/input"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-direction-xs-column MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-5 MuiGrid-grid-xl-6'][1]/div[1]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4']/div/div/input")
-    private WebElement zipPostalCodeField;
 
-    @FindBy(xpath = "//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-direction-xs-column MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-5 MuiGrid-grid-xl-6'][1]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-flex-start'][1]/div[@class='MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal MuiFormControl-fullWidth'][8]/div[@class='MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl']/input")
-    private WebElement phoneField;
+    private SelenideElement aptFloorSuiteField =$(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[6]/div/input"));
 
-    @FindBy(xpath = "/input[@id='37']")
-    private WebElement eveningPhone;
 
-    @FindBy(xpath = "//div[@id='billingAddresslbl']//span[@class='MuiIconButton-label']/input[@type='checkbox']")
-    private WebElement billingAddressAsShippingCheckBox;
+    private SelenideElement cityField =$(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[7]/div/input"));
 
-    @FindBy(xpath = "//button[contains(@class,'MuiButton-contained')]")
-    private WebElement continuePaymentButton;
+    private SelenideElement stateField =$(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]"));
 
-    @FindBy(xpath = "(//button[contains(@class,'MuiButton-containedPrimary')])[2]")
-    private WebElement continueButton;
 
-    /**
-     * Constructor for initialize page object
-     *
-     * @param driver Web driver
-     */
-    public CheckoutAddressScreen(WebDriver driver) {
-        super(driver);
-    }
+    private SelenideElement countryField =$(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[1]"));
+
+
+    private SelenideElement zipPostalCodeField =$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-direction-xs-column MuiGrid-grid-xs-12 MuiGrid-grid-sm-7 MuiGrid-grid-md-5 MuiGrid-grid-xl-6'][1]/div[1]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4']/div/div/input"));
+
+    @FindBy(css = "")
+    private SelenideElement phoneField =$(By.cssSelector("div:nth-child(2) > div:nth-child(9) > div:nth-child(2) > input:nth-child(1)"));
+
+
+    private SelenideElement eveningPhone =$(By.xpath("/input[@id='37']"));
+
+
+    private SelenideElement billingAddressAsShippingCheckBox =$(By.xpath("//div[@id='billingAddresslbl']//span[@class='MuiIconButton-label']/input[@type='checkbox']"));
+
+
+    private SelenideElement continuePaymentButton =$(By.xpath("//button[contains(@class,'MuiButton-contained')]"));
+
+
+    private SelenideElement continueButton =$(By.xpath("(//button[contains(@class,'MuiButton-containedPrimary')])[2]"));
+    
 }

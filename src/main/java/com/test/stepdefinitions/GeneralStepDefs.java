@@ -1,37 +1,32 @@
 package com.test.stepdefinitions;
 
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import com.test.pageObject.CheckoutAddressScreen;
 import com.test.pageObject.ConciergeLoginPage;
 import com.test.pageObject.ConciergeUserAccountPage;
 import com.test.pageObject.PaymentScreen;
 import com.test.utility.Hooks;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
 
 public class GeneralStepDefs {
-    WebDriver webDriver = Hooks.getWebDriver();
-    ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage(webDriver);
-    CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen(webDriver);
-    WebDriverWait wait = new WebDriverWait(webDriver, 15);
-    PaymentScreen paymentScreen = new PaymentScreen(webDriver);
-    ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage(webDriver);
-    Actions actions = new Actions(webDriver);
+    ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
+    CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
+    PaymentScreen paymentScreen = new PaymentScreen();
+    ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
 
 
     /**
@@ -40,15 +35,20 @@ public class GeneralStepDefs {
      * @param accountRole
      */
     public void loginAsRole(String accountRole) {
+        conciergeLoginPage.getPasswordField().shouldBe(visible, Duration.ofMinutes(5));
         if (accountRole.equals("associate")) {
-            conciergeLoginPage.getUsernameField().sendKeys(Hooks.associateLogin);
-            conciergeLoginPage.getPasswordField().sendKeys(Hooks.associatePassword);
+            conciergeLoginPage.getUsernameField().setValue(Hooks.associateLogin);
+            conciergeLoginPage.getPasswordField().setValue(Hooks.associatePassword);
         } else {
-            conciergeLoginPage.getUsernameField().sendKeys(Hooks.leaderLogin);
-            conciergeLoginPage.getPasswordField().sendKeys(Hooks.leaderPassword);
+            conciergeLoginPage.getUsernameField().setValue(Hooks.leaderLogin);
+            conciergeLoginPage.getPasswordField().setValue(Hooks.leaderPassword);
         }
+
+        conciergeLoginPage.getSignInButton().shouldBe(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getSignInButton().click();
+        conciergeLoginPage.getLocationNewPortBeach().shouldBe(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getLocationNewPortBeach().click();
+        conciergeLoginPage.getContinueButton().shouldBe(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getContinueButton().click();
     }
 
@@ -58,11 +58,10 @@ public class GeneralStepDefs {
      *
      * @param field
      */
-    public void clearField(WebElement field) {
+    public void clearField(SelenideElement field) {
         field.click();
-        JavascriptExecutor js = (JavascriptExecutor) webDriver;
         if (!field.getAttribute("value").isEmpty()) {
-            js.executeScript("arguments[0].value='';", field);
+            executeJavaScript("arguments[0].value='';", field);
         }
     }
 
@@ -72,49 +71,47 @@ public class GeneralStepDefs {
      *
      * @param webDriver
      */
-    public void waitForPageLoad(WebDriver webDriver) {
-        ExpectedCondition<Boolean> pageLoadCondition = new
-                ExpectedCondition<Boolean>() {
-                    public Boolean apply(WebDriver driver) {
-                        return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
-                    }
-                };
-        WebDriverWait wait = new WebDriverWait(webDriver, 30);
-        wait.until(pageLoadCondition);
-    }
+//    public void waitForPageLoad() {
+//        ExpectedCondition<Boolean> pageLoadCondition = new
+//                ExpectedCondition<Boolean>() {
+//                    public Boolean apply(WebDriver driver) {
+//                        return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+//                    }
+//                };
+//        WebDriverWait wait = new WebDriverWait(webDriver, 30);
+//        wait.until(pageLoadCondition);
+//    }
 
 
     /**
      * This method fill all fields from checkout address screen
      */
     public void fillAddressFields() {
-        waitForPageLoad(webDriver);
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")));
+        $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")).shouldBe(visible, Duration.ofSeconds(20));
         clearField(checkoutAddressScreen.getFirstNameInpt());
-        checkoutAddressScreen.getFirstNameInpt().sendKeys("QA1");
+        checkoutAddressScreen.getFirstNameInpt().setValue("QA1");
 
         clearField(checkoutAddressScreen.getLastNameField());
-        checkoutAddressScreen.getLastNameField().sendKeys("Automation");
+        checkoutAddressScreen.getLastNameField().setValue("Automation");
 
         clearField(checkoutAddressScreen.getCompanyNameField());
-        checkoutAddressScreen.getCompanyNameField().sendKeys("AutomationCompany");
+        checkoutAddressScreen.getCompanyNameField().setValue("AutomationCompany");
 
         clearField(checkoutAddressScreen.getStreetAddressField());
-        checkoutAddressScreen.getStreetAddressField().sendKeys("QaStreet");
+        checkoutAddressScreen.getStreetAddressField().setValue("QaStreet");
 
         clearField(checkoutAddressScreen.getAptFloorSuiteField());
-        checkoutAddressScreen.getAptFloorSuiteField().sendKeys("QaApartment");
+        checkoutAddressScreen.getAptFloorSuiteField().setValue("QaApartment");
 
         clearField(checkoutAddressScreen.getCityField());
-        checkoutAddressScreen.getCityField().sendKeys("qaCity");
+        checkoutAddressScreen.getCityField().setValue("qaCity");
 
-        checkoutAddressScreen.getPhoneField().sendKeys("+124131231");
+        clearField(checkoutAddressScreen.getPhoneField());
+        checkoutAddressScreen.getPhoneField().setValue("+124131231");
 
-        isElementVisible("//div[@id='billingAddresslbl']/h3");
-        isElementVisible("//div[@id='billingAddresslbl']//span[@class='MuiIconButton-label']/input[@type='checkbox']");
-        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
-        isElementVisible("//div[@id='billingAddresslbl']/h3");
-        isElementVisible("//div[@id='billingAddresslbl']//span[@class='MuiIconButton-label']/input[@type='checkbox']");
+        $(By.xpath("//div[@id='billingAddresslbl']/h3")).shouldBe(visible, Duration.ofSeconds(12));
+
+        executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
         checkoutAddressScreen.getBillingAddressAsShippingCheckBox().click();
     }
 
@@ -127,21 +124,21 @@ public class GeneralStepDefs {
      * @param state
      */
     public void fillZipCodeStateCountry(String zipCode, String country, String state) {
-        waitForPageLoad(webDriver);
-
+        checkoutAddressScreen.getCountryField().shouldBe(visible, Duration.ofSeconds(15));
         Select countrySelect = new Select(checkoutAddressScreen.getCountryField());
-        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", countrySelect);
+        executeJavaScript("arguments[0].scrollIntoView(true);", countrySelect);
         countrySelect.selectByValue(country);
 
         if (state.equals("")) {
+            checkoutAddressScreen.getStateField().shouldBe(visible, Duration.ofSeconds(15));
             Select selectState = new Select(checkoutAddressScreen.getStateField());
             selectState.selectByIndex(ThreadLocalRandom.current().nextInt(1, 4));
         }
 
         clearField(checkoutAddressScreen.getZipPostalCodeField());
-        checkoutAddressScreen.getZipPostalCodeField().sendKeys(zipCode);
+        checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);
         if (state.equals("NY")) {
-            WebElement stateButton = webDriver.findElement(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='" + state + "']"));
+            SelenideElement stateButton = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='" + state + "']"));
             stateButton.click();
         }
 
@@ -152,14 +149,13 @@ public class GeneralStepDefs {
      * Click on continue to payment buttons
      */
     public void continueToPaymentAfterAddressCheckout() {
-        await().forever().until(() -> checkoutAddressScreen.getContinuePaymentButton().isDisplayed());
-        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
+        checkoutAddressScreen.getContinuePaymentButton().shouldBe(visible, Duration.ofSeconds(15));
+        executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
         checkoutAddressScreen.getContinuePaymentButton().click();
 
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(checkoutAddressScreen.getContinueButton()));
-            JavascriptExecutor executor = (JavascriptExecutor) webDriver;
-            executor.executeScript("arguments[0].click();", checkoutAddressScreen.getContinueButton());
+            checkoutAddressScreen.getContinueButton().shouldBe(visible, Duration.ofSeconds(15));
+            executeJavaScript("arguments[0].click();", checkoutAddressScreen.getContinueButton());
         } catch (Exception e) {
             System.out.println("Continue from popup is not displayed");
         }
@@ -174,7 +170,7 @@ public class GeneralStepDefs {
      */
     public boolean isElementVisible(String xPath) {
         try {
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xPath)));
+            $(By.xpath(xPath)).shouldBe(visible, Duration.ofSeconds(20));
             return true;
         } catch (NoSuchElementException e) {
             System.out.println("Test");
@@ -190,23 +186,28 @@ public class GeneralStepDefs {
      * @param expirationDate This method execute payment with provided method
      */
     public void payWith(String paymentType, String number, String cvc, String expirationDate) {
-        wait.until(ExpectedConditions.textToBePresentInElement(paymentScreen.getChoosePaymentMethodBtn(), "RH"));
+        sleep(3);
+        paymentScreen.getChoosePaymentMethodBtn().shouldBe(visible, Duration.ofMinutes(1));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue(paymentType);
 
-        WebElement webElement = webDriver.findElement(By.cssSelector("iframe[title='Iframe for secured card data input field']"));
-        wait.until(ExpectedConditions.visibilityOf(webElement));
-        webDriver.switchTo().frame(webElement);
-        paymentScreen.getCardNumberField().sendKeys(number);
-        webDriver.switchTo().defaultContent();
+        $(By.cssSelector("iframe[title='Iframe for secured card data input field']")).shouldBe(visible, Duration.ofMinutes(2));
+        SelenideElement selenideElement = $(By.cssSelector("iframe[title='Iframe for secured card data input field']"));
+        switchTo().frame(selenideElement);
+        paymentScreen.getCardNumberField().setValue(number);
+        switchTo().defaultContent();
 
-        webDriver.switchTo().frame(webDriver.findElement(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")));
-        paymentScreen.getCvcField().sendKeys(cvc);
-        webDriver.switchTo().defaultContent();
+        $(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")).shouldBe(visible, Duration.ofMinutes(2));
+        switchTo().frame($(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")));
 
-        webDriver.switchTo().frame(webDriver.findElement(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card data input field']")));
-        paymentScreen.getExpiryDateField().sendKeys(expirationDate);
-        webDriver.switchTo().defaultContent();
+        paymentScreen.getCvcField().setValue(cvc);
+        switchTo().defaultContent();
+
+        $(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card data input field']")).shouldBe(visible, Duration.ofMinutes(2));
+        switchTo().frame($(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card data input field']")));
+
+        paymentScreen.getExpiryDateField().setValue(expirationDate);
+        switchTo().defaultContent();
     }
 
 
@@ -222,16 +223,22 @@ public class GeneralStepDefs {
 
     public void verifyCategories(List<String> categoryInStockExpected, int indexItem) {
         List<String> categoryInStockActual = new ArrayList<>();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//div")));
-        actions.moveToElement(conciergeUserAccountPage.getMenuItems().get(indexItem));
+        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//div")).shouldBe(visible, Duration.ofSeconds(10));
+       conciergeUserAccountPage.getMenuItems().get(indexItem).scrollIntoView(true);
+
         conciergeUserAccountPage.getMenuItems().get(indexItem).click();
         conciergeUserAccountPage.getMenuItems().get(indexItem).click();
-        System.out.println();
+
+
         for (int i = 0; i < conciergeUserAccountPage.getItemSubCategory().size(); i++) {
             isElementVisible("//div[2]//ul[@class='MuiList-root']/li[@class='MuiListItem-root']");
             categoryInStockActual.add(conciergeUserAccountPage.getItemSubCategory().get(i).getText());
         }
         assertThat(categoryInStockActual).hasSameElementsAs(categoryInStockExpected);
+    }
+
+    public static void sleep(int seconds) {
+        Selenide.sleep(TimeUnit.MILLISECONDS.convert(seconds, TimeUnit.SECONDS));
     }
 
 

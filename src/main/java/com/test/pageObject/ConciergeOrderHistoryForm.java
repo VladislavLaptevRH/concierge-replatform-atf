@@ -1,106 +1,101 @@
 package com.test.pageObject;
 
+import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import static com.codeborne.selenide.Selenide.$;
+
 @Getter
 
-public class ConciergeOrderHistoryForm extends AbstractPage {
+public class ConciergeOrderHistoryForm {
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12'][2]/a")
-    private WebElement backToSearchResultsButton;
+    
+    private SelenideElement backToSearchResultsButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12'][2]/a"));
 
-    @FindBy(xpath = "//h1[@class='MuiTypography-root MuiTypography-h1']")
-    private WebElement orderHistoryTitle;
+    
+    private SelenideElement orderHistoryTitle = $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6'][1]//h6")
-    private WebElement customerLookUp;
+    
+    private SelenideElement customerLookUp = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6'][1]//h6"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[1]//input")
-    private WebElement phoneNumberField;
+    
+    private SelenideElement phoneNumberField = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[1]//input"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[2]//input")
-    private WebElement firstNameField;
+    
+    private SelenideElement firstNameField = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[2]//input"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[3]//input")
-    private WebElement lastNameField;
+    
+    private SelenideElement lastNameField = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[3]//input"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[4]//input")
-    private WebElement emailAddressField;
+    
+    private SelenideElement emailAddressField = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[4]//input"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[5]//input")
-    private WebElement postalCodeField;
+    
+    private SelenideElement postalCodeField = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[5]//input"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[6]//input")
-    private WebElement memberIdField;
+    
+    private SelenideElement memberIdField = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[6]//input"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[7]//input")
-    private WebElement businessAccountNumberField;
+    
+    private SelenideElement businessAccountNumberField = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[7]//input"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[8]//input")
-    private WebElement companyNameField;
+    
+    private SelenideElement companyNameField = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[8]//input"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-sm-12']//div[contains(@class,'MuiGrid-root MuiGrid-item')]")
-    private WebElement inactiveContinueButton;
+    
+    private SelenideElement inactiveContinueButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-sm-12']//div[contains(@class,'MuiGrid-root MuiGrid-item')]"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-center']//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth']")
-    private WebElement activeContinueButton;
+    
+    private SelenideElement activeContinueButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-center']//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth']"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6'][2]//div[1]/h6")
-    private WebElement orderLookUpTitle;
+    
+    private SelenideElement orderLookUpTitle = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6'][2]//div[1]/h6"));
 
-    @FindBy(xpath = "//div[2]/form//input")
-    private WebElement orderNumberField;
+    
+    private SelenideElement orderNumberField = $(By.xpath("//div[2]/form//input"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12'][2]/button")
-    private WebElement continueOrderLookUpButton;
+    
+    private SelenideElement continueOrderLookUpButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12'][2]/button"));
 
-    @FindBy(xpath = "//div[contains(@class,'MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4')]/div[1]/h6")
-    private WebElement customerAccountResultsTitle;
+    
+    private SelenideElement customerAccountResultsTitle = $(By.xpath("//div[contains(@class,'MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4')]/div[1]/h6"));
 
-    @FindBy(xpath = "//*[@id=\"spa-root\"]//th[1]")
-    private WebElement customerFirstName;
+    
+    private SelenideElement customerFirstName = $(By.xpath("//*[@id=\"spa-root\"]//th[1]"));
 
-    @FindBy(xpath = "//*[@id=\"spa-root\"]//th[2]")
-    private WebElement customerAddress;
+    
+    private SelenideElement customerAddress = $(By.xpath("//*[@id=\"spa-root\"]//th[2]"));
 
-    @FindBy(xpath = "//*[@id=\"spa-root\"]//th[3]")
-    private WebElement customerPhone;
+    
+    private SelenideElement customerPhone = $(By.xpath("//*[@id=\"spa-root\"]//th[3]"));
 
-    @FindBy(xpath = "//*[@id=\"spa-root\"]//th[4]")
-    private WebElement customerEmail;
+    
+    private SelenideElement customerEmail = $(By.xpath("//*[@id=\"spa-root\"]//th[4]"));
 
-    @FindBy(xpath = "//*[@id=\"spa-root\"]//th[5]")
-    private WebElement customerCompany;
+    
+    private SelenideElement customerCompany = $(By.xpath("//*[@id=\"spa-root\"]//th[5]"));
 
-    @FindBy(xpath = "//*[@id=\"spa-root\"]//th[6]")
-    private WebElement customerTradeIdTaxExempt;
+    
+    private SelenideElement customerTradeIdTaxExempt = $(By.xpath("//*[@id=\"spa-root\"]//th[6]"));
 
-    @FindBy(xpath = "//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeLarge MuiButton-sizeLarge']")
-    private WebElement createNewAccountButton;
+    
+    private SelenideElement createNewAccountButton = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-outlinedSizeLarge MuiButton-sizeLarge']"));
 
-    @FindBy(xpath = "//p[@class='MuiTypography-root MuiTypography-body1']")
-    private WebElement searchNoResultsMsg;
+    
+    private SelenideElement searchNoResultsMsg = $(By.xpath("//p[@class='MuiTypography-root MuiTypography-body1']"));
 
-    @FindBy(xpath = "//*[@id=\"spa-root\"]//div[2]//div[2]//tbody/tr[1]/td[1]")
-    private WebElement firstResult;
+    
+    private SelenideElement firstResult = $(By.xpath("//*[@id=\"spa-root\"]//div[2]//div[2]//tbody/tr[1]/td[1]"));
 
-    @FindBy(xpath = "//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12'][1]/h6")
-    private WebElement orderForTestTitle;
+    
+    private SelenideElement orderForTestTitle = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12'][1]/h6"));
 
-    @FindBy(xpath = "//*[@id=\"spa-root\"]//th[7]")
-    private WebElement orderNotes;
+    
+    private SelenideElement orderNotes = $(By.xpath("//*[@id=\"spa-root\"]//th[7]"));
 
-    @FindBy(xpath = "//table[@class='MuiTable-root']/tbody[@class='MuiTableBody-root']/tr[@class='MuiTableRow-root jss22215']/td[@class='MuiTableCell-root MuiTableCell-body'][1]")
-    private WebElement clientButton;
-
-    /**
-     * Constructor for initialize page object
-     *
-     * @param driver Web driver
-     */
-    public ConciergeOrderHistoryForm(WebDriver driver) {
-        super(driver);
-    }
+    
+    private SelenideElement clientButton = $(By.xpath("//table[@class='MuiTable-root']/tbody[@class='MuiTableBody-root']/tr[@class='MuiTableRow-root jss22215']/td[@class='MuiTableCell-root MuiTableCell-body'][1]"));
 }

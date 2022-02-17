@@ -1,5 +1,7 @@
 package com.test.stepdefinitions;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import com.test.pageObject.ConciergeLoginPage;
 import com.test.pageObject.ConciergeUserAccountPage;
 import com.test.utility.Categories;
@@ -8,70 +10,68 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static org.testng.Assert.assertTrue;
 
 
 public class ConciergeAccessibilityStepDefs {
     private final org.slf4j.Logger logger = LoggerFactory.getLogger(ConciergeAccessibilityStepDefs.class);
 
-    WebDriver webDriver = Hooks.getWebDriver();
-    WebDriverWait wait = new WebDriverWait(webDriver, 20);
-    ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage(webDriver);
-    ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage(webDriver);
+    ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
+    ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
     @Given("^user opens the concierge site$")
     public void User_Ppens_The_Concierge_Site() {
-        wait.until(ExpectedConditions.visibilityOf(conciergeLoginPage.getUsernameField()));
-        assertTrue(conciergeLoginPage.getUsernameField().isDisplayed());
-        assertTrue(conciergeLoginPage.getUsernameField().isDisplayed());
-        assertTrue(conciergeLoginPage.getSignInButton().isDisplayed());
+        conciergeLoginPage.getUsernameField().shouldBe(visible, Duration.ofMinutes(5));
+        conciergeLoginPage.getSignInButton().shouldBe(visible, Duration.ofMinutes(5));
         logger.info("Concierge portal opened with success");
-
     }
 
 
     @Then("user expects that no accessibility errors")
     public void userExpectsThatNoAccessibilityErrors() {
-        generalStepDefs.waitForPageLoad(webDriver);
-        wait.until(ExpectedConditions.elementToBeClickable(conciergeUserAccountPage.getBathButtonMenu()));
-        assertTrue(conciergeUserAccountPage.getArtButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getBathButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getBedButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getArtButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getProjectsButton().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getLocationButton().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getInStockButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getLivingButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getDiningButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getBedButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getBathButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getLightingButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getTextilesButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getRugsButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getWindowsButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getDecorButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getArtButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getOutdoorButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getGiftsButtonMenu().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getSaleButtonMenu().isDisplayed());
+        conciergeUserAccountPage.getArtButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getBathButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getBedButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getArtButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getProjectsButton().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getLocationButton().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getInStockButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getLivingButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getDiningButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getBedButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getBathButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getLightingButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getTextilesButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getRugsButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getWindowsButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getDecorButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getArtButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getOutdoorButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getGiftsButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getSaleButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
         logger.info("Accessibility errors are not present on the user account page");
 
     }
 
     @When("user sign in concierge portal")
     public void userSignInConciergePortal() {
-        conciergeLoginPage.getUsernameField().sendKeys("mdovbenco");
-        conciergeLoginPage.getPasswordField().sendKeys("171096workouT!");
+
+        conciergeLoginPage.getUsernameField().setValue("mdovbenco");
+        conciergeLoginPage.getPasswordField().setValue("171096workouT!");
         conciergeLoginPage.getSignInButton().click();
         conciergeLoginPage.getLocationNewPortBeach().click();
         conciergeLoginPage.getContinueButton().click();
@@ -93,15 +93,15 @@ public class ConciergeAccessibilityStepDefs {
         generalStepDefs.verifyCategories(Categories.categoryInStockExpected, 0);
         generalStepDefs.verifyCategories(Categories.categoryLivingExpected, 1);
         generalStepDefs.verifyCategories(Categories.categoryDiningExpected, 2);
-        generalStepDefs.verifyCategories(Categories.categoryBadExpected, 3);
-        generalStepDefs.verifyCategories(Categories.categoryBathExpected, 4);
-        generalStepDefs.verifyCategories(Categories.categoryLightingExpected, 5);
-        generalStepDefs.verifyCategories(Categories.categoryTextilesExpected, 6);
-        generalStepDefs.verifyCategories(Categories.rugsCategoryExpected, 7);
-        generalStepDefs.verifyCategories(Categories.windowsCategoryExpected, 8);
-        generalStepDefs.verifyCategories(Categories.decorCategoryExpected, 9);
-        generalStepDefs.verifyCategories(Categories.artCategoryExpected, 10);
-        generalStepDefs.verifyCategories(Categories.furnitureCategoryExpected, 11);
-        generalStepDefs.verifyCategories(Categories.giftsCategoryExpected, 12);
+//        generalStepDefs.verifyCategories(Categories.categoryBadExpected, 3);
+//        generalStepDefs.verifyCategories(Categories.categoryBathExpected, 4);
+//        generalStepDefs.verifyCategories(Categories.categoryLightingExpected, 5);
+//        generalStepDefs.verifyCategories(Categories.categoryTextilesExpected, 6);
+//        generalStepDefs.verifyCategories(Categories.rugsCategoryExpected, 7);
+//        generalStepDefs.verifyCategories(Categories.windowsCategoryExpected, 8);
+//        generalStepDefs.verifyCategories(Categories.decorCategoryExpected, 9);
+//        generalStepDefs.verifyCategories(Categories.artCategoryExpected, 10);
+//        generalStepDefs.verifyCategories(Categories.furnitureCategoryExpected, 11);
+//        generalStepDefs.verifyCategories(Categories.giftsCategoryExpected, 12);
     }
 }

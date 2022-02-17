@@ -11,14 +11,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static org.testng.Assert.assertTrue;
 
 @Getter
 public class ConciergeAssociateStepDefs {
-    WebDriver webDriver = Hooks.getWebDriver();
-    ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage(webDriver);
-    ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage(webDriver);
-    WebDriverWait wait = new WebDriverWait(webDriver, 10);
+    ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
+    ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
@@ -52,15 +54,15 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I verify I see store Palo Alto in the header")
     public void iVerifyISeeStoreInTheHeader() {
-        wait.until(ExpectedConditions.textToBePresentInElement(conciergeUserAccountPage.getNewPortBeachGallery(), "PALO ALTO"));
+        conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(text("PALO ALTO"));
         assertTrue(conciergeUserAccountPage.getNewPortBeachGallery().getText().equals("PALO ALTO"));
     }
 
 
     @Given("I login into Concierge with valid credentials for the store 146: West Hollywood")
     public void iLoginIntoConciergeWithValidCredentialsForTheStoreWestHollywood() {
-        conciergeLoginPage.getUsernameField().sendKeys("mdovbenco");
-        conciergeLoginPage.getPasswordField().sendKeys("171096workouT!");
+        conciergeLoginPage.getUsernameField().setValue("mdovbenco");
+        conciergeLoginPage.getPasswordField().setValue("171096workouT!");
         conciergeLoginPage.getSignInButton().click();
         conciergeLoginPage.getLocationWestHolywood().click();
         conciergeLoginPage.getContinueButton().click();
@@ -68,14 +70,14 @@ public class ConciergeAssociateStepDefs {
 
     @Then("user verifies list of galleries")
     public void userVerifiesListOfGalleries() {
-        wait.until(ExpectedConditions.textToBePresentInElement(conciergeUserAccountPage.getGallerySelectButton(), "NEWPORT"));
+        conciergeUserAccountPage.getGallerySelectButton().shouldHave(text("NEWPORT"));
         String actualListOfGalleries = conciergeUserAccountPage.getGallerySelectButton().getText();
         assertTrue(actualListOfGalleries.equals(actualListOfGalleries));
     }
 
     @When("user clicks on gallery button from header")
     public void userClicksOnGalleryButtonFromHeader() {
-        wait.until(ExpectedConditions.visibilityOf(conciergeUserAccountPage.getNewPortBeachGallery()));
+        conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(visible, Duration.ofSeconds(10));
         conciergeUserAccountPage.getNewPortBeachGallery().click();
     }
 
@@ -93,7 +95,7 @@ public class ConciergeAssociateStepDefs {
 
     @When("I have the following items in the cart:")
     public void iHaveTheFollowingItemsInTheCart() {
-        wait.until(ExpectedConditions.visibilityOf(conciergeUserAccountPage.getCartButton()));
+        conciergeUserAccountPage.getCartButton().shouldBe(visible, Duration.ofSeconds(10));
         conciergeUserAccountPage.getCartButton().click();
     }
 

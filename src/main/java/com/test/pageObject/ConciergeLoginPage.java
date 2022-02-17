@@ -1,43 +1,31 @@
 package com.test.pageObject;
 
+import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+
+import static com.codeborne.selenide.Selenide.$;
 
 @Getter
-public class ConciergeLoginPage extends AbstractPage {
+public class ConciergeLoginPage {
+    //    private SelenideElement usernameField = $(By.xpath("//input[@id='username']"));
+    private SelenideElement usernameField = $(By.xpath("//input[@id='username']"));
 
-    @FindBy(id = "username")
-    private WebElement usernameField;
+    private SelenideElement passwordField = $(By.xpath("//input[@id='password']"));
 
-    @FindBy(id = "password")
-    private WebElement passwordField;
+    private SelenideElement sumbitButton = $(By.xpath("//button[@class='login-form__submit']"));
 
-    @FindBy(xpath = "//button[@class='login-form__submit']")
-    private WebElement sumbitButton;
+    private SelenideElement location = $(By.xpath("//select[@id='location']"));
 
-    @FindBy(xpath = "//select[@id='location']")
-    private WebElement location;
+    private SelenideElement continueButton = $(By.xpath("//button[contains(@class,'MuiButtonBase-root MuiButton-root')]"));
 
-    @FindBy(xpath = "//button[contains(@class,'MuiButtonBase-root MuiButton-root')]")
-    private WebElement continueButton;
+    private SelenideElement locationNewPortBeach = $(By.xpath("//*[@id='location']/option[2]"));
 
-    @FindBy(xpath = "//*[@id='location']/option[2]")
-    private WebElement locationNewPortBeach;
+    private SelenideElement locationWestHolywood = $(By.xpath("//*[@id='location']/option[36]"));
 
-    @FindBy(xpath = "//*[@id='location']/option[36]")
-    private WebElement locationWestHolywood;
+    private SelenideElement signInButton = $(By.xpath("//button[@class='login-form__submit']"));
 
-    @FindBy(xpath = "//button[@class='login-form__submit']")
-    private WebElement signInButton;
 
-    /**
-     * Constructor for initialize page object
-     *
-     * @param driver Web driver
-     */
-    public ConciergeLoginPage(WebDriver driver) {
-        super(driver);
-    }
 }
