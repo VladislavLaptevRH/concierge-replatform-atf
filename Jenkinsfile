@@ -5,7 +5,6 @@ rhapsodyUtils.standardPipelineProperties();
 
 Service s = Service.CONCIERGE_REPLATFORM_ATF;
 
-"Deployment Approval (${service.id}:${environment.id}?"
 def resultspath = "${s.id}/${env.JOB_NAME}/${env.BUILD_NUMBER}"
 println("resultspath=${resultspath}")
 
