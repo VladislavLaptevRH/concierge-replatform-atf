@@ -72,7 +72,7 @@ public class Hooks {
 
 //        dr.setPlatform(Platform.WINDOWS);
 
-        String urlToRemoteWD = "http://10.28.18.192:4444/wd/hub";
+        String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
         RemoteWebDriver driver = null;
         try {
             driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
