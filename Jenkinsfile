@@ -18,10 +18,11 @@ pipeline.standardTemplate { label ->
 
         container("awscli") {
             withAWS(region: "us-east-1", role: "devops-documentation", roleAccount:"487531406788") {
-                dir(service.rootDirectory) {
+                dir(s.rootDirectory) {
                     sh """
-                    cd target/cucumber-html-report
-                    aws s3 sync . s3://docs.rhapsody.rh.com/public/${service.id}
+                    pwd 
+                    cd /home/jenkins/workspace/eCommerce/concierge-replatform-atf/target/cucumber-html-report
+                    aws s3 sync . s3://docs.rhapsody.rh.com/public/${s.id}
                     """
                 } // pipeline dir
             }
