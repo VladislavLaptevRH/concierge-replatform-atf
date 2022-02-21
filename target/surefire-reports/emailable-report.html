@@ -1,0 +1,1302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "https://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>TestNG Report</title>
+<style type="text/css">table {margin-bottom:10px;border-collapse:collapse;empty-cells:show}th,td {border:1px solid #009;padding:.25em .5em}th {vertical-align:bottom}td {vertical-align:top}table a {font-weight:bold}.stripe td {background-color: #E6EBF9}.num {text-align:right}.passedodd td {background-color: #3F3}.passedeven td {background-color: #0A0}.skippedodd td {background-color: #DDD}.skippedeven td {background-color: #CCC}.failedodd td,.attn {background-color: #F33}.failedeven td,.stripe .attn {background-color: #D00}.stacktrace {white-space:pre;font-family:monospace}.totop {font-size:85%;text-align:center;border-bottom:2px solid #000}.invisible {display:none}</style>
+</head>
+<body>
+<table>
+<tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
+<tr><th colspan="8">Regression</th></tr>
+<tr><td><a href="#t0">Window</a></td><td class="num">9</td><td class="num">0</td><td class="num">0</td><td class="num attn">23</td><td class="num">1,160,244</td><td></td><td></td></tr>
+</table>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Regression</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Window &#8212; failed</th></tr><tr class="failedeven"><td rowspan="23">com.test.runners.RunTest</td><td><a href="#m0">runScenario</a></td><td rowspan="23">1645139109137</td><td rowspan="23">40136</td></tr><tr class="failedeven"><td><a href="#m1">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m2">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m3">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m4">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m5">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m6">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m7">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m8">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m9">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m10">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m11">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m12">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m13">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m14">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m15">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m16">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m17">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m18">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m19">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m20">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m21">runScenario</a></td></tr><tr class="failedeven"><td><a href="#m22">runScenario</a></td></tr><tr><th colspan="4">Window &#8212; passed</th></tr><tr class="passedeven"><td rowspan="9">com.test.runners.RunTest</td><td><a href="#m23">runScenario</a></td><td rowspan="9">1645139724800</td><td rowspan="9">31419</td></tr><tr class="passedeven"><td><a href="#m24">runScenario</a></td></tr><tr class="passedeven"><td><a href="#m25">runScenario</a></td></tr><tr class="passedeven"><td><a href="#m26">runScenario</a></td></tr><tr class="passedeven"><td><a href="#m27">runScenario</a></td></tr><tr class="passedeven"><td><a href="#m28">runScenario</a></td></tr><tr class="passedeven"><td><a href="#m29">runScenario</a></td></tr><tr class="passedeven"><td><a href="#m30">runScenario</a></td></tr><tr class="passedeven"><td><a href="#m31">runScenario</a></td></tr></tbody>
+</table>
+<h2>Window</h2><h3 id="m0">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that user is able to buy item from brands menu&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139142990.8.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139142990.8.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:53)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [a2efdc67d8bcf79282b56216ff95308e, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.8rlQOp}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: a2efdc67d8bcf79282b56216ff95308e
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that user is able to add item to project and pay&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139062949.6.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139062949.6.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:39)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [6663b91b27a36af718e03beba5d2726b, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.ceMi8i}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 6663b91b27a36af718e03beba5d2726b
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that if client is a member then redirected to carts screen&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139510463.17.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139510463.17.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:108)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [dab1046c6842240fb4eb73ca83f885c7, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.uqu26f}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: dab1046c6842240fb4eb73ca83f885c7
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that user is able to buy item from brands menu&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139263012.11.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139263012.11.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:53)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [a2f7837f4329d641cf0459be33fdeeaa, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.KIpBWw}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: a2f7837f4329d641cf0459be33fdeeaa
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that user is able to buy item from brands menu&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139183081.9.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139183081.9.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:53)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [2a57202ccdfb67e9a9283311a910aaed, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.9R1FCs}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 2a57202ccdfb67e9a9283311a910aaed
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that user is able to buy item&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645138983039.4.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645138983039.4.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:5)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [f357d862ddcf5430c15e2253736e5c24, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.uanKBn}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: f357d862ddcf5430c15e2253736e5c24
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m6">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that user is able to buy item from brands menu&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139102841.7.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139102841.7.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:53)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [8b21d3b44f9a624f72907b7773af701b, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.HgUFhm}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 8b21d3b44f9a624f72907b7773af701b
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m7">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Login as leader and see dashboard&quot;</td><td>&quot;Optional[Verify login]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">java.lang.AssertionError: expected [true] but found [false]
+	at com.test.stepdefinitions.ConciergeAssociateStepDefs.iExpectThatIAmOnTheConciergeDashboardPage(ConciergeAssociateStepDefs.java:29)
+	at ✽.I expect that I am on the Concierge Dashboard page(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/associate/ConciergeLoginTest.feature:8)
+... Removed 4 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m8">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that home page is accessible&quot;</td><td>&quot;Optional[User expects the home page to be accessible]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[11]/h6[@class=&apos;MuiTypography-root MuiTypography-subtitle1&apos;]}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645138783540.0.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645138783540.0.html
+Timeout: 10 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[11]/h6[@class=&apos;MuiTypography-root MuiTypography-subtitle1&apos;]&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeAccessibilityStepDefs.userExpectsThatNoAccessibilityErrors(ConciergeAccessibilityStepDefs.java:46)
+	at ✽.user expects that no accessibility errors(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/accessibility/HomePage.feature:6)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[11]/h6[@class=&apos;MuiTypography-root MuiTypography-subtitle1&apos;]&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [757b7966bfd4af948815143717f85c76, findElement {using=xpath, value=//div[11]/h6[@class=&apos;MuiTypography-root MuiTypography-subtitle1&apos;]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.us3Jom}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 757b7966bfd4af948815143717f85c76
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeAccessibilityStepDefs.userExpectsThatNoAccessibilityErrors(ConciergeAccessibilityStepDefs.java:46)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m9">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Login as associate and see dashboard&quot;</td><td>&quot;Optional[Verify login]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">java.lang.AssertionError: expected [true] but found [false]
+	at com.test.stepdefinitions.ConciergeAssociateStepDefs.iExpectThatIAmOnTheConciergeDashboardPage(ConciergeAssociateStepDefs.java:29)
+	at ✽.I expect that I am on the Concierge Dashboard page(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/associate/ConciergeLoginTest.feature:4)
+... Removed 4 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m10">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that all galeries are present in list&quot;</td><td>&quot;Optional[Verify change to another store]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[@class=&apos;MuiGrid-root MuiGrid-item&apos;]/h6[contains(@class,&apos;MuiTypography-subtitle1 MuiTypography&apos;)]}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645138889265.3.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645138889265.3.html
+Timeout: 10 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[@class=&apos;MuiGrid-root MuiGrid-item&apos;]/h6[contains(@class,&apos;MuiTypography-subtitle1 MuiTypography&apos;)]&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeAssociateStepDefs.userClicksOnGalleryButtonFromHeader(ConciergeAssociateStepDefs.java:80)
+	at ✽.user clicks on gallery button from header(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/associate/ConciergeChangeStore.feature:9)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[@class=&apos;MuiGrid-root MuiGrid-item&apos;]/h6[contains(@class,&apos;MuiTypography-subtitle1 MuiTypography&apos;)]&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [6ddd26325d7e7b8dfe6fc508a005ab53, findElement {using=xpath, value=//div[@class=&apos;MuiGrid-root MuiGrid-item&apos;]/h6[contains(@class,&apos;MuiTypography-subtitle1 MuiTypography&apos;)]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.lwnQJm}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 6ddd26325d7e7b8dfe6fc508a005ab53
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeAssociateStepDefs.userClicksOnGalleryButtonFromHeader(ConciergeAssociateStepDefs.java:80)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m11">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that user is able to buy item from brands menu&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139343673.13.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139343673.13.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:53)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [b405a7e73963d23f24fdd45397856b5f, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.0T5cXj}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: b405a7e73963d23f24fdd45397856b5f
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m12">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify New York &amp; California shipping restriction&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139422538.15.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139422538.15.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:79)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [9a828fa81e75786c07c9e7891cc81697, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.yUErXj}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 9a828fa81e75786c07c9e7891cc81697
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m13">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that user is able to buy item from brands menu&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139223184.10.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139223184.10.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:53)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [4e7123bf52af04d8b587a0b002ddb012, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.duptxr}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 4e7123bf52af04d8b587a0b002ddb012
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m14">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify order history search returns a list of users&quot;</td><td>&quot;Optional[Verify order history]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">java.lang.AssertionError: expected [true] but found [false]
+	at com.test.stepdefinitions.ConciergeOrderHistoryStepDefs.iSeeResultsForOrderHistoryByCustomerSearch(ConciergeOrderHistoryStepDefs.java:69)
+	at ✽.I see results for order history by customer search(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/orderHistory/ConciergeOrderHistory.feature:12)
+... Removed 4 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m15">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Change store number in concierge from dashboard&quot;</td><td>&quot;Optional[Verify change to another store]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[@class=&apos;MuiGrid-root MuiGrid-item&apos;]/h6[contains(@class,&apos;MuiTypography-subtitle1 MuiTypography&apos;)]}
+Expected: visible or transparent: visible or have css value opacity=0
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645138852689.2.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645138852689.2.html
+Timeout: 4 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[@class=&apos;MuiGrid-root MuiGrid-item&apos;]/h6[contains(@class,&apos;MuiTypography-subtitle1 MuiTypography&apos;)]&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.impl.WebElementSource.findAndAssertElementIsInteractable(WebElementSource.java:148)
+	at com.codeborne.selenide.commands.Click.findElement(Click.java:44)
+	at com.codeborne.selenide.commands.Click.execute(Click.java:26)
+	at com.codeborne.selenide.commands.Click.execute(Click.java:19)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.click(Unknown Source)
+	at com.test.stepdefinitions.ConciergeAssociateStepDefs.iChangeMyStoreToStoreNumber(ConciergeAssociateStepDefs.java:50)
+	at ✽.I change my store to store number 10(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/associate/ConciergeChangeStore.feature:4)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[@class=&apos;MuiGrid-root MuiGrid-item&apos;]/h6[contains(@class,&apos;MuiTypography-subtitle1 MuiTypography&apos;)]&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [acb49f67c680711c031a1d3fba9094a6, findElement {using=xpath, value=//div[@class=&apos;MuiGrid-root MuiGrid-item&apos;]/h6[contains(@class,&apos;MuiTypography-subtitle1 MuiTypography&apos;)]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.51i0cn}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: acb49f67c680711c031a1d3fba9094a6
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.impl.WebElementSource.findAndAssertElementIsInteractable(WebElementSource.java:148)
+	at com.codeborne.selenide.commands.Click.findElement(Click.java:44)
+	at com.codeborne.selenide.commands.Click.execute(Click.java:26)
+	at com.codeborne.selenide.commands.Click.execute(Click.java:19)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.click(Unknown Source)
+	at com.test.stepdefinitions.ConciergeAssociateStepDefs.iChangeMyStoreToStoreNumber(ConciergeAssociateStepDefs.java:50)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m16">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify New York &amp; California shipping restriction&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139382497.14.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139382497.14.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:79)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [b199f2b3a0d2521a493ac252c89fcf83, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.f4Oqwg}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: b199f2b3a0d2521a493ac252c89fcf83
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m17">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that user is able to execute split payment using all payment methods&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139466301.16.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139466301.16.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:94)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [6439cce67c194f21d0219ba3f2850db7, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.piKK3h}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 6439cce67c194f21d0219ba3f2850db7
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m18">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that user is able to buy item from brands menu&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139303193.12.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139303193.12.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:53)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [d7502d3544c17b09cf07d9a00c2ba2b4, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.YdBgKm}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: d7502d3544c17b09cf07d9a00c2ba2b4
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m19">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that user is able to but item through search item by SKU id&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139023196.5.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139023196.5.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:21)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [76c01321fb7e5b886b0a93a2ba1de79f, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.TfWDzj}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 76c01321fb7e5b886b0a93a2ba1de79f
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m20">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify menu of items&quot;</td><td>&quot;Optional[User expects the home page to be accessible]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[@class=&apos;MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between&apos;]//div}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645138818742.1.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645138818742.1.html
+Timeout: 10 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[@class=&apos;MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between&apos;]//div&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.GeneralStepDefs.verifyCategories(GeneralStepDefs.java:226)
+	at com.test.stepdefinitions.ConciergeAccessibilityStepDefs.iVerifyThatCategoryItemsAreDisplayed(ConciergeAccessibilityStepDefs.java:93)
+	at ✽.I verify that category items are displayed(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/accessibility/HomePage.feature:10)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[@class=&apos;MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between&apos;]//div&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [5e8c9ee3d284993f4b4fb1d63352b0d9, findElement {using=xpath, value=//div[@class=&apos;MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between&apos;]//div}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.UWuCKk}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 5e8c9ee3d284993f4b4fb1d63352b0d9
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.GeneralStepDefs.verifyCategories(GeneralStepDefs.java:226)
+	at com.test.stepdefinitions.ConciergeAccessibilityStepDefs.iVerifyThatCategoryItemsAreDisplayed(ConciergeAccessibilityStepDefs.java:93)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 37 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m21">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Login into Concierge for the store 146: West Hollywood&quot;</td><td>&quot;Optional[Verify concierge payment by signed user]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">java.lang.AssertionError: expected [true] but found [false]
+	at com.test.stepdefinitions.ConciergeAssociateStepDefs.iExpectThatIAmOnTheConciergeDashboardPage(ConciergeAssociateStepDefs.java:29)
+	at ✽.I expect that I am on the Concierge Dashboard page(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/projects/checkout/ConciergePaymentBySignedInUser.feature:7)
+... Removed 4 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m22">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that if client is a non member then redirected to address screen&quot;</td><td>&quot;Optional[Verify e2e flow]&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">Element not found {By.xpath: //div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}
+Expected: visible
+Screenshot: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139553054.18.png
+Page source: file:/Users/wbauernschmidt/development/projects/concierge-replatform-atf/build/reports/tests/1645139553054.18.html
+Timeout: 15 s.
+Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:89)
+	at com.codeborne.selenide.impl.ElementFinder.createElementNotFoundError(ElementFinder.java:122)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:125)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at ✽.I remove all items from cart(file:///Users/wbauernschmidt/development/projects/concierge-replatform-atf/src/main/resources/features/e2e/E2EFlow.feature:119)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6&quot;}
+  (Session info: headless chrome=96.0.4664.93)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: &apos;4.1.2&apos;, revision: &apos;9a5a329c5a&apos;
+System info: host: &apos;MacBook-Pro-3.local&apos;, ip: &apos;fe80:0:0:0:8d0:9a11:c095:fc7e%en0&apos;, os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.15.7&apos;, java.version: &apos;11.0.2&apos;
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Command: [0b26cdf6270a40e0c3208db9ae9ab069, findElement {using=xpath, value=//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.93, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: /tmp/.com.google.Chrome.ksA9Bn}, goog:chromeOptions: {args: [--headless], extensions: []}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), se:cdp: ws://192.168.1.3:4444/sessi..., se:cdpVersion: 96.0.4664.93, se:vnc: ws://192.168.1.3:4444/sessi..., se:vncEnabled: true, se:vncLocalAddress: ws://192.168.1.4:7900, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 0b26cdf6270a40e0c3208db9ae9ab069
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
+	at org.openqa.selenium.remote.TracedCommandExecutor.execute(TracedCommandExecutor.java:51)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:558)
+	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
+	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:382)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:70)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:44)
+	at com.codeborne.selenide.impl.WebElementSelector.findElement(WebElementSelector.java:33)
+	at com.codeborne.selenide.impl.ElementFinder.getWebElement(ElementFinder.java:102)
+	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:106)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:30)
+	at com.codeborne.selenide.commands.Should.execute(Should.java:14)
+	at com.codeborne.selenide.commands.Commands.execute(Commands.java:154)
+	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:131)
+	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:83)
+	at com.sun.proxy.$Proxy24.shouldBe(Unknown Source)
+	at com.test.stepdefinitions.ConciergeE2EStepDefs.iRemoveAllItemsFromCart(ConciergeE2EStepDefs.java:146)
+	at io.cucumber.java.Invoker.doInvoke(Invoker.java:66)
+	at io.cucumber.java.Invoker.invoke(Invoker.java:24)
+	at io.cucumber.java.AbstractGlueDefinition.invokeMethod(AbstractGlueDefinition.java:47)
+	at io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:29)
+	at io.cucumber.core.runner.CoreStepDefinition.execute(CoreStepDefinition.java:66)
+	at io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)
+	at io.cucumber.core.runner.ExecutionMode$1.execute(ExecutionMode.java:10)
+	at io.cucumber.core.runner.TestStep.executeStep(TestStep.java:92)
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:64)
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:104)
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:71)
+	at io.cucumber.testng.TestNGCucumberRunner.lambda$runScenario$0(TestNGCucumberRunner.java:116)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:117)
+	at io.cucumber.testng.TestNGCucumberRunner.runScenario(TestNGCucumberRunner.java:113)
+	at io.cucumber.testng.AbstractTestNGCucumberTests.runScenario(AbstractTestNGCucumberTests.java:31)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+... Removed 36 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m23">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that if I click on order item I&apos;ll redirected to wismo&quot;</td><td>&quot;Optional[Verify order history]&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m24">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify order lookup search for inProgress,Open,Not Existing orders&quot;</td><td>&quot;Optional[Verify order history]&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m25">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Order history search is accessible from the dashboard&quot;</td><td>&quot;Optional[Verify order history]&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m26">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that customer lookup is displayed after that I click on back to search results button&quot;</td><td>&quot;Optional[Verify order history]&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m27">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify that if I click on order item I&apos;m able to check order details&quot;</td><td>&quot;Optional[Verify order history]&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m28">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify order history search returns a list of users&quot;</td><td>&quot;Optional[Verify order history]&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m29">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify UI elements from order history page&quot;</td><td>&quot;Optional[Verify order history]&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m30">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify order lookup search for inProgress,Open,Not Existing orders&quot;</td><td>&quot;Optional[Verify order history]&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m31">com.test.runners.RunTest#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Verify order lookup search for inProgress,Open,Not Existing orders&quot;</td><td>&quot;Optional[Verify order history]&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+</body>
+</html>

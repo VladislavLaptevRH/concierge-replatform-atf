@@ -17,7 +17,7 @@ pipeline.standardTemplate { label ->
             }
 
             stage('Run Tests') {
-                pipeline.buildMvn("clean test");
+                pipeline.buildMvn("clean test",true);
             } // end stage
 
             container("awscli") {
