@@ -63,23 +63,23 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
 
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless");
-//
-//        DesiredCapabilities dr = new DesiredCapabilities();
-//        dr.setBrowserName("chrome");
-//        dr.setCapability(ChromeOptions.CAPABILITY, options);
-//
-////        dr.setPlatform(Platform.WINDOWS);
-//
-//        String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
-//        RemoteWebDriver driver = null;
-//        try {
-//            driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
-//        WebDriverRunner.setWebDriver(driver);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+
+        DesiredCapabilities dr = new DesiredCapabilities();
+        dr.setBrowserName("chrome");
+        dr.setCapability(ChromeOptions.CAPABILITY, options);
+
+//        dr.setPlatform(Platform.WINDOWS);
+
+        String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
+        RemoteWebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        WebDriverRunner.setWebDriver(driver);
 
         setUPWebDriver();
     }
