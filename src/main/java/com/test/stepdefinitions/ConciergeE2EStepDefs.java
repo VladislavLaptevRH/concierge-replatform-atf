@@ -1,29 +1,21 @@
 package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.test.pageObject.*;
 import com.test.utility.Hooks;
-import gherkin.lexer.Th;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
-//import static com.codeborne.selenide.WebDriverRunner.url;
 import static com.test.stepdefinitions.GeneralStepDefs.sleep;
 import static org.awaitility.Awaitility.await;
 import static org.testng.Assert.assertTrue;

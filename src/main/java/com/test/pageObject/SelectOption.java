@@ -11,11 +11,18 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class SelectOption {
     static WebDriver webDriver = Hooks.getWebDriver();
-    SelenideElement sizeOption = $(By.xpath("//select[@id='optionSelect--Size']"));
-    SelenideElement quantity = $(By.xpath("//select[@id='" + getProductId() + "-qty-input']"));
-    SelenideElement finishOption = $(By.xpath("//select[@id='optionSelect-" + getProductId() + "-Finish']"));
+
+    private SelenideElement sizeOption = $(By.xpath("//select[@id='optionSelect--Size']"));
+
+    private SelenideElement quantity = $(By.xpath("//select[@id='" + getProductId() + "-qty-input']"));
+
+    private SelenideElement finishOption = $(By.xpath("//select[@id='optionSelect-" + getProductId() + "-Finish']"));
 
 
+    /**
+     * @return product id from url
+     * This method returns product id
+     */
     public static final String getProductId() {
         String currentUrl = webDriver.getCurrentUrl();
         String productId = currentUrl.substring(currentUrl.indexOf("="), currentUrl.indexOf("&")).replace("=", "");

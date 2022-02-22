@@ -3,8 +3,6 @@ package com.test.pageObject;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 
 import java.util.List;
 
@@ -13,6 +11,16 @@ import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class ConciergeUserAccountPage {
+
+    private SelenideElement newClientHeaderBtn = $(By.xpath("//*[text()='Client : New Client']"));
+
+    private SelenideElement newClientButton = $(By.xpath("//*[text()='NEW']"));
+
+    private SelenideElement memberIdField = $(By.xpath("//input[@name='memberID']"));
+
+    private SelenideElement businessAcNumber = $(By.xpath("//input[@name='tradeID']"));
+
+    private SelenideElement clientLookupEmail = $(By.xpath("//input[@name='email']"));
 
     private SelenideElement dashboardTitle = $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']"));
 

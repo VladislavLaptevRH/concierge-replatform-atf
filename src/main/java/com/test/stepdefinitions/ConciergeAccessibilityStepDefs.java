@@ -1,19 +1,12 @@
 package com.test.stepdefinitions;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import com.test.pageObject.ConciergeLoginPage;
 import com.test.pageObject.ConciergeUserAccountPage;
 import com.test.utility.Categories;
-import com.test.utility.Hooks;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
@@ -22,8 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static org.testng.Assert.assertTrue;
+import static com.test.stepdefinitions.GeneralStepDefs.sleep;
 
 
 public class ConciergeAccessibilityStepDefs {
@@ -89,19 +81,18 @@ public class ConciergeAccessibilityStepDefs {
     }
 
     @And("I verify that category items are displayed")
-    public void iVerifyThatCategoryItemsAreDisplayed() throws InterruptedException {
+    public void iVerifyThatCategoryItemsAreDisplayed() {
         generalStepDefs.verifyCategories(Categories.categoryInStockExpected, 0);
         generalStepDefs.verifyCategories(Categories.categoryLivingExpected, 1);
-        generalStepDefs.verifyCategories(Categories.categoryDiningExpected, 2);
-//        generalStepDefs.verifyCategories(Categories.categoryBadExpected, 3);
-//        generalStepDefs.verifyCategories(Categories.categoryBathExpected, 4);
-//        generalStepDefs.verifyCategories(Categories.categoryLightingExpected, 5);
-//        generalStepDefs.verifyCategories(Categories.categoryTextilesExpected, 6);
-//        generalStepDefs.verifyCategories(Categories.rugsCategoryExpected, 7);
-//        generalStepDefs.verifyCategories(Categories.windowsCategoryExpected, 8);
-//        generalStepDefs.verifyCategories(Categories.decorCategoryExpected, 9);
-//        generalStepDefs.verifyCategories(Categories.artCategoryExpected, 10);
-//        generalStepDefs.verifyCategories(Categories.furnitureCategoryExpected, 11);
-//        generalStepDefs.verifyCategories(Categories.giftsCategoryExpected, 12);
+        generalStepDefs.verifyCategories(Categories.categoryBathExpected, 4);
+        sleep(1);
+        generalStepDefs.verifyCategories(Categories.categoryTextilesExpected, 6);
+        sleep(1);
+        generalStepDefs.verifyCategories(Categories.rugsCategoryExpected, 7);
+        generalStepDefs.verifyCategories(Categories.windowsCategoryExpected, 8);
+        generalStepDefs.verifyCategories(Categories.decorCategoryExpected, 9);
+        generalStepDefs.verifyCategories(Categories.artCategoryExpected, 10);
+        generalStepDefs.verifyCategories(Categories.furnitureCategoryExpected, 11);
+        generalStepDefs.verifyCategories(Categories.giftsCategoryExpected, 12);
     }
 }

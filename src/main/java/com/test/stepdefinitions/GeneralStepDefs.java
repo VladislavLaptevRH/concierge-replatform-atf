@@ -2,14 +2,18 @@ package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import com.test.pageObject.CheckoutAddressScreen;
 import com.test.pageObject.ConciergeLoginPage;
 import com.test.pageObject.ConciergeUserAccountPage;
 import com.test.pageObject.PaymentScreen;
 import com.test.utility.Hooks;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import javax.swing.*;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -180,6 +184,41 @@ public class GeneralStepDefs {
 
 
     /**
+     * @param field - find by provided field
+     */
+    public void searchClientBy(String field) {
+        try {
+            if (conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
+                conciergeUserAccountPage.getClientButton().click();
+                conciergeUserAccountPage.getClientLookupHeaderBtn().shouldBe(visible, Duration.ofSeconds(80));
+                conciergeUserAccountPage.getClientLookupHeaderBtn().click();
+                conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofSeconds(80));
+
+                if (field.equals("email")) {
+                    conciergeUserAccountPage.getClientLookupEmail().setValue("test@mailinator.com");
+                }
+                if (field.equals("lastName")) {
+                    conciergeUserAccountPage.getClientLookupLastName().setValue("NonMember");
+                }
+                if (field.equals("memberID")) {
+                    conciergeUserAccountPage.getMemberIdField().setValue("101318450");
+                }
+                if (field.equals("businessAccountNumber")) {
+                    conciergeUserAccountPage.getBusinessAcNumber().setValue("20211221164476");
+                }
+                if (field.equals("phone number,postal code,company")) {
+
+                }
+                conciergeUserAccountPage.getClientLookupSearchButton().click();
+            }
+        } catch (
+                Exception e) {
+            System.out.println("Client is selected");
+        }
+    }
+
+
+    /**
      * @param paymentType
      * @param number
      * @param cvc
@@ -223,12 +262,13 @@ public class GeneralStepDefs {
 
     public void verifyCategories(List<String> categoryInStockExpected, int indexItem) {
         List<String> categoryInStockActual = new ArrayList<>();
+
         $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//div")).shouldBe(visible, Duration.ofSeconds(10));
-       conciergeUserAccountPage.getMenuItems().get(indexItem).scrollIntoView(true);
+        conciergeUserAccountPage.getMenuItems().get(indexItem).scrollIntoView(true);
 
         conciergeUserAccountPage.getMenuItems().get(indexItem).click();
+        sleep(1);
         conciergeUserAccountPage.getMenuItems().get(indexItem).click();
-
 
         for (int i = 0; i < conciergeUserAccountPage.getItemSubCategory().size(); i++) {
             isElementVisible("//div[2]//ul[@class='MuiList-root']/li[@class='MuiListItem-root']");

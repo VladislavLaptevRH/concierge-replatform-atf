@@ -1,11 +1,8 @@
 package com.test.stepdefinitions;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
 import com.test.pageObject.*;
 import com.test.utility.Hooks;
-import gherkin.lexer.Th;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;

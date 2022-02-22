@@ -10,7 +10,6 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class ConciergeLoginPage {
-    //    private SelenideElement usernameField = $(By.xpath("//input[@id='username']"));
     private SelenideElement usernameField = $(By.xpath("//input[@id='username']"));
 
     private SelenideElement passwordField = $(By.xpath("//input[@id='password']"));
@@ -26,6 +25,4 @@ public class ConciergeLoginPage {
     private SelenideElement locationWestHolywood = $(By.xpath("//*[@id='location']/option[36]"));
 
     private SelenideElement signInButton = $(By.xpath("//button[@class='login-form__submit']"));
-
-
 }
