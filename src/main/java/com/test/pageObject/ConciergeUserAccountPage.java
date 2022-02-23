@@ -34,7 +34,7 @@ public class ConciergeUserAccountPage {
 
     private List<SelenideElement> listOfBrands = $$(By.xpath("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li"));
 
-    private SelenideElement projectsButton = $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']"));
+    private SelenideElement projectsButton = $(By.xpath("//*[text()='Projects']"));
 
     private SelenideElement locationButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item']/h6[contains(@class,'MuiTypography-displayInline')]"));
    
@@ -103,4 +103,5 @@ public class ConciergeUserAccountPage {
     private SelenideElement clientLookupSearchButton = $(By.xpath("//button[@type='submit']"));
 
     private SelenideElement firstResultOfClientLookup = $(By.xpath("//td[@class='MuiTableCell-root MuiTableCell-body'][1]/div"));
+
 }

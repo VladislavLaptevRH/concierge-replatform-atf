@@ -45,4 +45,6 @@ public class ClientSearchStepDefs {
     public void iVerifyThatNewClientHasBeenCreated() {
         conciergeUserAccountPage.getNewClientHeaderBtn().shouldBe(visible, Duration.ofSeconds(30));
     }
+
+
 }

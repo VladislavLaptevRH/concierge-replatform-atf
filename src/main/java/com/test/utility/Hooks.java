@@ -65,12 +65,13 @@ public class Hooks {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
+        options.addArguments("--window-size=1366,768");
 
         DesiredCapabilities dr = new DesiredCapabilities();
         dr.setBrowserName("chrome");
         dr.setCapability(ChromeOptions.CAPABILITY, options);
 
-//        dr.setPlatform(Platform.WINDOWS);
+        dr.setPlatform(Platform.WINDOWS);
 
         String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
         RemoteWebDriver driver = null;
@@ -93,7 +94,6 @@ public class Hooks {
         System.setProperty("selenide.browser", "chrome");
         open((String) properties.get("baseurl"));
         currentUrl = WebDriverRunner.url();
-        System.setProperty(properties.getProperty("chromeDriver"), "driver/chromedriver");
     }
 
     public static String getCurrentUrl() {

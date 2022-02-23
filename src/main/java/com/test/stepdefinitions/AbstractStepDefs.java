@@ -139,7 +139,7 @@ public class AbstractStepDefs {
 
 
     @When("I choose client from header")
-    public void iChooseClientFromHeader() throws InterruptedException {
+    public void iChooseClientFromHeader() {
         try {
             if (conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
                 conciergeUserAccountPage.getClientButton().click();
@@ -183,6 +183,5 @@ public class AbstractStepDefs {
         conciergeUserAccountPage.getItemSubCategory().get(0).scrollIntoView(true);
         conciergeUserAccountPage.getItemSubCategory().get(0).click();
     }
-
 }
 
