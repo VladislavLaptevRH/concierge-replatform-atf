@@ -190,9 +190,9 @@ public class GeneralStepDefs {
         try {
             if (conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
                 conciergeUserAccountPage.getClientButton().click();
-                conciergeUserAccountPage.getClientLookupHeaderBtn().shouldBe(visible, Duration.ofSeconds(80));
+                conciergeUserAccountPage.getClientLookupHeaderBtn().shouldBe(visible, Duration.ofSeconds(20));
                 conciergeUserAccountPage.getClientLookupHeaderBtn().click();
-                conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofSeconds(80));
+                conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofSeconds(20));
 
                 if (field.equals("email")) {
                     conciergeUserAccountPage.getClientLookupEmail().setValue("test@mailinator.com");

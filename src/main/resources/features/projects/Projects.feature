@@ -1,4 +1,4 @@
-Feature: Verify project search
+Feature: Verify projects
 
   Scenario Outline: Verify that user is able to find project by projectName, projectID, createdBy, editedBy
     Given I log into Concierge as "associate"

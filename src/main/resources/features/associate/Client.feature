@@ -11,7 +11,7 @@ Feature:Verify client search
       | lastName |
       | memberID                         |
       | businessAccountNumber            |
-      | phone number,postal code,company |
+#      | phone number,postal code,company |
 
   Scenario: Verify that user is able to create new client
     Given I log into Concierge as "associate"

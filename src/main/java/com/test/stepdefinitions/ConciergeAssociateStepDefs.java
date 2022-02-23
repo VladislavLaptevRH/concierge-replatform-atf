@@ -22,6 +22,7 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I expect that I am on the Concierge Dashboard page")
     public void iExpectThatIAmOnTheConciergeDashboardPage() {
+        conciergeUserAccountPage.getUserNameButton().shouldBe(visible, Duration.ofSeconds(15));
         assertTrue(conciergeUserAccountPage.getUserNameButton().isDisplayed());
         assertTrue(conciergeUserAccountPage.getArtButtonMenu().getText().equals("ART"));
         assertTrue(conciergeUserAccountPage.getBathButtonMenu().getText().equals("BATH"));
@@ -43,6 +44,7 @@ public class ConciergeAssociateStepDefs {
 
     @When("I change my store to store number 10")
     public void iChangeMyStoreToStoreNumber() {
+        conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getNewPortBeachGallery().click();
         conciergeUserAccountPage.getPaloAltpGallery().click();
         conciergeUserAccountPage.getGallerySubmitButton().click();
@@ -50,6 +52,7 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I verify I see store Palo Alto in the header")
     public void iVerifyISeeStoreInTheHeader() {
+        conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(visible,Duration.ofSeconds(15));
         conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(text("PALO ALTO"));
         assertTrue(conciergeUserAccountPage.getNewPortBeachGallery().getText().equals("PALO ALTO"));
     }
@@ -73,7 +76,7 @@ public class ConciergeAssociateStepDefs {
 
     @When("user clicks on gallery button from header")
     public void userClicksOnGalleryButtonFromHeader() {
-        conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getNewPortBeachGallery().click();
     }
 

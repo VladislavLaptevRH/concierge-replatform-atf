@@ -71,7 +71,7 @@ public class Hooks {
         dr.setBrowserName("chrome");
         dr.setCapability(ChromeOptions.CAPABILITY, options);
 
-        dr.setPlatform(Platform.WINDOWS);
+//        dr.setPlatform(Platform.WINDOWS);
 
         String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
         RemoteWebDriver driver = null;
@@ -94,13 +94,21 @@ public class Hooks {
         System.setProperty("selenide.browser", "chrome");
         open((String) properties.get("baseurl"));
         currentUrl = WebDriverRunner.url();
+        System.setProperty(properties.getProperty("chromeDriver"), "driver/chromedriver");
+
     }
 
+    /**
+     * @return current url from browser
+     */
     public static String getCurrentUrl() {
         currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
         return currentUrl;
     }
 
+    /**
+     * @return tabs from browser
+     */
     public static ArrayList<String> getWindowsHandles() {
         ArrayList<String> tabs = new ArrayList<>(WebDriverRunner.getWebDriver().getWindowHandles());
         return tabs;

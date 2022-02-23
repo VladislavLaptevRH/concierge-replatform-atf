@@ -65,7 +65,7 @@ public class AbstractStepDefs {
             selectSize.selectByIndex((1));
             Thread.sleep(2000);
             SelenideElement colorOption = $(By.xpath("//select[@id='optionSelect-" + currentProduct + "-Color']"));
-            colorOption.shouldBe(visible,Duration.ofSeconds(12));
+            colorOption.shouldBe(visible, Duration.ofSeconds(12));
             Select selectColorOption = new Select(colorOption);
             selectColorOption.selectByIndex((1));
         }
@@ -141,16 +141,17 @@ public class AbstractStepDefs {
     @When("I choose client from header")
     public void iChooseClientFromHeader() {
         try {
+            conciergeUserAccountPage.getClientButton().shouldBe(visible,Duration.ofSeconds(15));
             if (conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
                 conciergeUserAccountPage.getClientButton().click();
-                conciergeUserAccountPage.getClientLookupHeaderBtn().shouldBe(visible,Duration.ofSeconds(80));
+                conciergeUserAccountPage.getClientLookupHeaderBtn().shouldBe(visible, Duration.ofSeconds(15));
                 conciergeUserAccountPage.getClientLookupHeaderBtn().click();
-                conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofSeconds(80));
+                conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofSeconds(25));
                 conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
                 conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
                 conciergeUserAccountPage.getClientLookupSearchButton().click();
-                conciergeOrderHistoryForm.getCustomerFirstName().shouldBe(visible,Duration.ofSeconds(80));
-                conciergeUserAccountPage.getFirstResultOfClientLookup().shouldBe(visible, Duration.ofSeconds(80));
+                conciergeOrderHistoryForm.getCustomerFirstName().shouldBe(visible, Duration.ofSeconds(25));
+                conciergeUserAccountPage.getFirstResultOfClientLookup().shouldBe(visible, Duration.ofSeconds(25));
                 conciergeUserAccountPage.getFirstResultOfClientLookup().click();
                 conciergeUserAccountPage.getClientButton().shouldHave().shouldHave(text("Automation"), Duration.ofSeconds(20));
             }

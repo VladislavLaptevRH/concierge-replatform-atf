@@ -186,7 +186,7 @@ public class ConciergeE2EStepDefs {
         paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
 
-        sleep(3);
+        sleep(4);
         $(By.xpath("//div[contains(@class,'Mui')]//select[contains(@class,'MuiInputBase-input')]")).shouldBe(visible, Duration.ofMinutes(1));
         generalStepDefs.payWith("AX", "3411 3411 3411 347", "6765", "0225");
         paymentScreen.getSplitPaymentCheckBox().click();
@@ -195,11 +195,11 @@ public class ConciergeE2EStepDefs {
         paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
 
-        sleep(3);
+        sleep(4);
         $(By.xpath("//button[contains(@class, 'MuiButton-containedPrimary')]")).shouldBe(visible, Duration.ofMinutes(1));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue("RH");
-//        paymentScreen.getSplitPaymentCheckBox().shouldBe(visible, Duration.ofSeconds(20));
+        paymentScreen.getSplitPaymentCheckBox().shouldBe(visible, Duration.ofSeconds(20));
         paymentScreen.getSplitPaymentCheckBox().click();
         paymentScreen.getRhCardNumberField().setValue("5856373200177801");
         Select paymentPlan = new Select(paymentScreen.getSelectPaymentPlan());
@@ -208,8 +208,8 @@ public class ConciergeE2EStepDefs {
         paymentScreen.getFieldAmount().setValue("50");
         paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-//
-        sleep(3);
+
+        sleep(4);
         $(By.xpath("//button[contains(@class, 'MuiButton-containedPrimary')]")).shouldBe(visible, Duration.ofMinutes(1));
         generalStepDefs.isElementVisible("//label[2]/span[@class='MuiTypography-root MuiFormControlLabel-label MuiTypography-body1']");
         Select selectPayment1 = new Select(paymentScreen.getChoosePaymentMethodBtn());
@@ -224,7 +224,7 @@ public class ConciergeE2EStepDefs {
 
 
 //
-        sleep(3);
+        sleep(4);
         $(By.xpath("//button[contains(@class, 'MuiButton-containedPrimary')]")).shouldBe(visible, Duration.ofMinutes(1));
 //        generalStepDefs.isElementVisible("//div[contains(@class,'Mui')]//select[contains(@class,'MuiInputBase-input')]");
         $(By.xpath("//div[contains(@class,'Mui')]//select[contains(@class,'MuiInputBase-input')]")).shouldBe(visible, Duration.ofMinutes(1));
@@ -234,8 +234,8 @@ public class ConciergeE2EStepDefs {
         paymentScreen.getFieldAmount().setValue("50");
         paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-//
-        sleep(3);
+
+        sleep(4);
         $(By.xpath("//button[contains(@class, 'MuiButton-containedPrimary')]")).shouldBe(visible, Duration.ofMinutes(1));
         $(By.xpath("//div[contains(@class,'Mui')]//select[contains(@class,'MuiInputBase-input')]")).shouldBe(visible, Duration.ofSeconds(12));
         generalStepDefs.payWith("MC", "2222 4000 1000 0008", "737", "0330");
@@ -406,6 +406,7 @@ public class ConciergeE2EStepDefs {
     @When("I remove client from header")
     public void iRemoveClientFromHeader() {
         try {
+            sleep(2);
             if (conciergeUserAccountPage.getAutomationClientButton().isDisplayed()) {
                 generalStepDefs.isElementVisible("//div[1]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6");
                 conciergeUserAccountPage.getAutomationClientButton().click();
@@ -435,6 +436,7 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify that member price is displayed as final price")
     public void iVerifyThatMemberPriceIsDisplayedAsFinalPrice() {
+        conciergeCartPageScreen.getTotalMemberPrice().shouldBe(visible,Duration.ofSeconds(15));
         conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$314.00"));
         assertTrue(conciergeCartPageScreen.getTotalMemberPrice().getText().equals("$314.00"));
     }
