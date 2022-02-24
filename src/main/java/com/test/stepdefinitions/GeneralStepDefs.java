@@ -2,18 +2,13 @@ package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
 import com.test.pageObject.CheckoutAddressScreen;
 import com.test.pageObject.ConciergeLoginPage;
 import com.test.pageObject.ConciergeUserAccountPage;
 import com.test.pageObject.PaymentScreen;
 import com.test.utility.Hooks;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-
-import javax.swing.*;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +31,7 @@ public class GeneralStepDefs {
     /**
      * This method login in system with selected role
      *
-     * @param accountRole
+     * @param accountRole - account role
      */
     public void loginAsRole(String accountRole) {
         conciergeLoginPage.getPasswordField().shouldBe(visible, Duration.ofMinutes(5));
@@ -60,31 +55,19 @@ public class GeneralStepDefs {
     /**
      * This method is clear required field
      *
-     * @param field
+     * @param field - field
      */
     public void clearField(SelenideElement field) {
         field.click();
-        if (!field.getAttribute("value").isEmpty()) {
-            executeJavaScript("arguments[0].value='';", field);
+        try {
+            if (!field.getAttribute("value").isEmpty()) {
+                executeJavaScript("arguments[0].value='';", field);
+            }
+        }catch (Exception exception){
+            System.out.println("Attribute value is null");
         }
+
     }
-
-
-    /**
-     * This method wait for page load
-     *
-     * @param webDriver
-     */
-//    public void waitForPageLoad() {
-//        ExpectedCondition<Boolean> pageLoadCondition = new
-//                ExpectedCondition<Boolean>() {
-//                    public Boolean apply(WebDriver driver) {
-//                        return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
-//                    }
-//                };
-//        WebDriverWait wait = new WebDriverWait(webDriver, 30);
-//        wait.until(pageLoadCondition);
-//    }
 
 
     /**
@@ -123,9 +106,9 @@ public class GeneralStepDefs {
     /**
      * Fill zip code, state, country for address checkout
      *
-     * @param zipCode
-     * @param country
-     * @param state
+     * @param zipCode - zipcode
+     * @param country - country
+     * @param state - state
      */
     public void fillZipCodeStateCountry(String zipCode, String country, String state) {
         checkoutAddressScreen.getCountryField().shouldBe(visible, Duration.ofSeconds(15));
@@ -141,9 +124,12 @@ public class GeneralStepDefs {
 
         clearField(checkoutAddressScreen.getZipPostalCodeField());
         checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);
+        SelenideElement stateButton = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='AK']"));
+        stateButton.click();
+
         if (state.equals("NY")) {
-            SelenideElement stateButton = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='" + state + "']"));
-            stateButton.click();
+            SelenideElement stateNyButton = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='" + state + "']"));
+            stateNyButton.click();
         }
 
     }
@@ -169,12 +155,12 @@ public class GeneralStepDefs {
     /**
      * This method verify if element is visible
      *
-     * @param xPath
+     * @param xPath - xpath for selenide element
      * @return
      */
     public boolean isElementVisible(String xPath) {
         try {
-            $(By.xpath(xPath)).shouldBe(visible, Duration.ofSeconds(20));
+            $(By.xpath(xPath)).shouldBe(visible, Duration.ofSeconds(40));
             return true;
         } catch (NoSuchElementException e) {
             System.out.println("Test");

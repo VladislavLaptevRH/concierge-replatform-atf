@@ -9,10 +9,10 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class ReviewOrderScreen{
     
-    private SelenideElement placeOrderButton = $(By.xpath("//button[contains(@class,'MuiButton-contained MuiButton-containedPrimary')]"));
+    private final SelenideElement placeOrderButton = $(By.xpath("//button[contains(@class,'MuiButton-contained MuiButton-containedPrimary')]"));
 
-    private SelenideElement shippingAddress = $(By.xpath("(//h3[contains(@class,'MuiTypography-root MuiTypography-h3')])[3]"));
+    private final SelenideElement shippingAddress = $(By.xpath("(//h3[contains(@class,'MuiTypography-root MuiTypography-h3')])[3]"));
     
-    private SelenideElement billingAddress = $(By.xpath("(//h3[contains(@class,'MuiTypography-root MuiTypography-h3')])[4]"));
+    private final SelenideElement billingAddress = $(By.xpath("(//h3[contains(@class,'MuiTypography-root MuiTypography-h3')])[4]"));
 
 }

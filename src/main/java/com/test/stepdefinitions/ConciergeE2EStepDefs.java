@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.test.pageObject.*;
 import com.test.utility.Hooks;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
@@ -18,6 +19,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.test.stepdefinitions.GeneralStepDefs.sleep;
 import static org.awaitility.Awaitility.await;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class ConciergeE2EStepDefs {
@@ -128,7 +130,7 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify that restrictions pop up is displayed")
     public void iVerifyThatRestrictionsPopUpIsDisplayed() {
-        restrictionPopUp.getShippingRestricitonsTitle().shouldBe(visible, Duration.ofSeconds(15));
+        restrictionPopUp.getShippingRestricitonsTitle().shouldBe(visible, Duration.ofSeconds(40));
         assertTrue(restrictionPopUp.getShippingRestricitonsTitle().getText().contains("SHIPPING ERROR"));
         assertTrue(restrictionPopUp.getRestrictionsMessage().getText().contains("One or more items in your cart"));
     }
@@ -176,27 +178,25 @@ public class ConciergeE2EStepDefs {
     }
 
     @When("I introduces payment details for several payment methods")
-    public void iIntroducesPaymentDetailsForSeveralPaymentMethods() throws InterruptedException {
+    public void iIntroducesPaymentDetailsForSeveralPaymentMethods() {
         $(paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1)));
-        $(By.xpath("//div[contains(@class,'Mui')]//select[contains(@class,'MuiInputBase-input')]")).shouldBe(visible, Duration.ofMinutes(1));
+        sleep(2);
         generalStepDefs.payWith("VI", "4678 4753 3015 7543", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
-        paymentScreen.getFieldAmount().setValue("50");
+        paymentScreen.getFieldAmount().setValue("30");
         paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
 
         sleep(4);
-        $(By.xpath("//div[contains(@class,'Mui')]//select[contains(@class,'MuiInputBase-input')]")).shouldBe(visible, Duration.ofMinutes(1));
         generalStepDefs.payWith("AX", "3411 3411 3411 347", "6765", "0225");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
-        paymentScreen.getFieldAmount().setValue("100");
+        paymentScreen.getFieldAmount().setValue("30");
         paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
 
         sleep(4);
-        $(By.xpath("//button[contains(@class, 'MuiButton-containedPrimary')]")).shouldBe(visible, Duration.ofMinutes(1));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue("RH");
         paymentScreen.getSplitPaymentCheckBox().shouldBe(visible, Duration.ofSeconds(20));
@@ -205,13 +205,11 @@ public class ConciergeE2EStepDefs {
         Select paymentPlan = new Select(paymentScreen.getSelectPaymentPlan());
         paymentPlan.selectByValue("001");
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
-        paymentScreen.getFieldAmount().setValue("50");
+        paymentScreen.getFieldAmount().setValue("10");
         paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
 
         sleep(4);
-        $(By.xpath("//button[contains(@class, 'MuiButton-containedPrimary')]")).shouldBe(visible, Duration.ofMinutes(1));
-        generalStepDefs.isElementVisible("//label[2]/span[@class='MuiTypography-root MuiFormControlLabel-label MuiTypography-body1']");
         Select selectPayment1 = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment1.selectByValue("GiftCard");
         paymentScreen.getRhCardNumberField().setValue("6006493887999902500");
@@ -223,23 +221,19 @@ public class ConciergeE2EStepDefs {
         paymentScreen.getContinueToReview().click();
 
 
-//
+
         sleep(4);
-        $(By.xpath("//button[contains(@class, 'MuiButton-containedPrimary')]")).shouldBe(visible, Duration.ofMinutes(1));
-//        generalStepDefs.isElementVisible("//div[contains(@class,'Mui')]//select[contains(@class,'MuiInputBase-input')]");
-        $(By.xpath("//div[contains(@class,'Mui')]//select[contains(@class,'MuiInputBase-input')]")).shouldBe(visible, Duration.ofMinutes(1));
         generalStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
-        paymentScreen.getFieldAmount().setValue("50");
+        paymentScreen.getFieldAmount().setValue("10");
         paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
 
         sleep(4);
-        $(By.xpath("//button[contains(@class, 'MuiButton-containedPrimary')]")).shouldBe(visible, Duration.ofMinutes(1));
-        $(By.xpath("//div[contains(@class,'Mui')]//select[contains(@class,'MuiInputBase-input')]")).shouldBe(visible, Duration.ofSeconds(12));
         generalStepDefs.payWith("MC", "2222 4000 1000 0008", "737", "0330");
         paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
+
         paymentScreen.getContinueToReview().click();
 
     }
@@ -436,12 +430,17 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify that member price is displayed as final price")
     public void iVerifyThatMemberPriceIsDisplayedAsFinalPrice() {
-        conciergeCartPageScreen.getTotalMemberPrice().shouldBe(visible,Duration.ofSeconds(15));
+        conciergeCartPageScreen.getTotalMemberPrice().shouldBe(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$314.00"));
-        assertTrue(conciergeCartPageScreen.getTotalMemberPrice().getText().equals("$314.00"));
+        assertEquals(conciergeCartPageScreen.getTotalMemberPrice().getText(), "$314.00");
     }
 
 
+    @And("I select count of product")
+    public void iSelectCountOfProduct() {
+        $(By.xpath("//select[contains(@id,'prod') and contains(@id,'qty')]")).shouldBe(visible, Duration.ofSeconds(12));
+        $(By.xpath("//select[contains(@id,'prod') and contains(@id,'qty')]")).click();
+    }
 }
 
 

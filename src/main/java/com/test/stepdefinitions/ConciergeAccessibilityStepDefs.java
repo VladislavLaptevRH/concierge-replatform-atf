@@ -61,7 +61,6 @@ public class ConciergeAccessibilityStepDefs {
 
     @When("user sign in concierge portal")
     public void userSignInConciergePortal() {
-
         conciergeLoginPage.getUsernameField().setValue("mdovbenco");
         conciergeLoginPage.getPasswordField().setValue("171096workouT!");
         conciergeLoginPage.getSignInButton().click();

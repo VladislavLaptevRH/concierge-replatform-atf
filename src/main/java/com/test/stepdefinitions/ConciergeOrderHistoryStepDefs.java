@@ -14,6 +14,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static com.test.stepdefinitions.GeneralStepDefs.sleep;
 import static com.test.utility.Hooks.getWindowsHandles;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class ConciergeOrderHistoryStepDefs {
@@ -31,14 +32,14 @@ public class ConciergeOrderHistoryStepDefs {
     public void iVerifyTheCustomerLookupFormAppears() {
         conciergeOrderHistoryForm.getCustomerLookUp().shouldBe(visible, Duration.ofMinutes(1));
         assertTrue(conciergeOrderHistoryForm.getCustomerLookUp().isDisplayed());
-        assertTrue(conciergeOrderHistoryForm.getFirstNameField().getAttribute("name").equals("firstName"));
-        assertTrue(conciergeOrderHistoryForm.getLastNameField().getAttribute("name").equals("lastName"));
-        assertTrue(conciergeOrderHistoryForm.getEmailAddressField().getAttribute("name").equals("email"));
-        assertTrue(conciergeOrderHistoryForm.getPostalCodeField().getAttribute("name").equals("postalCode"));
-        assertTrue(conciergeOrderHistoryForm.getMemberIdField().getAttribute("name").equals("memberID"));
-        assertTrue(conciergeOrderHistoryForm.getBusinessAccountNumberField().getAttribute("name").equals("tradeID"));
-        assertTrue(conciergeOrderHistoryForm.getCompanyNameField().getAttribute("name").equals("company"));
-        assertTrue(conciergeOrderHistoryForm.getPhoneNumberField().getAttribute("name").equals("phoneNumber"));
+        assertEquals(conciergeOrderHistoryForm.getFirstNameField().getAttribute("name"), "firstName");
+        assertEquals(conciergeOrderHistoryForm.getLastNameField().getAttribute("name"), "lastName");
+        assertEquals(conciergeOrderHistoryForm.getEmailAddressField().getAttribute("name"), "email");
+        assertEquals(conciergeOrderHistoryForm.getPostalCodeField().getAttribute("name"), "postalCode");
+        assertEquals(conciergeOrderHistoryForm.getMemberIdField().getAttribute("name"), "memberID");
+        assertEquals(conciergeOrderHistoryForm.getBusinessAccountNumberField().getAttribute("name"), "tradeID");
+        assertEquals(conciergeOrderHistoryForm.getCompanyNameField().getAttribute("name"), "company");
+        assertEquals(conciergeOrderHistoryForm.getPhoneNumberField().getAttribute("name"), "phoneNumber");
         assertTrue(conciergeOrderHistoryForm.getContinueOrderLookUpButton().isDisplayed());
     }
 
@@ -63,24 +64,23 @@ public class ConciergeOrderHistoryStepDefs {
     public void iSeeResultsForOrderHistoryByCustomerSearch() {
         if (customerFirstName.equals("notexist")) {
             conciergeOrderHistoryForm.getSearchNoResultsMsg().shouldBe(visible, Duration.ofMinutes(1));
-            assertTrue(conciergeOrderHistoryForm.getSearchNoResultsMsg().getText().equals("Your search yielded no results"));
-            assertTrue(conciergeOrderHistoryForm.getCreateNewAccountButton().getText().equals("CREATE NEW ACCOUNT"));
+            assertEquals(conciergeOrderHistoryForm.getSearchNoResultsMsg().getText(), "Your search yielded no results");
+            assertEquals(conciergeOrderHistoryForm.getCreateNewAccountButton().getText(), "CREATE NEW ACCOUNT");
         } else {
             conciergeOrderHistoryForm.getCustomerAccountResultsTitle().shouldBe(visible, Duration.ofMinutes(1));
             assertTrue(conciergeOrderHistoryForm.getCustomerAccountResultsTitle().getText().contains("CUSTOMER ACCOUNT RESULTS"));
-            assertTrue(conciergeOrderHistoryForm.getCustomerAddress().getText().equals("ADDRESS"));
-            assertTrue(conciergeOrderHistoryForm.getCustomerFirstName().getText().equals("FIRST NAME"));
-            assertTrue(conciergeOrderHistoryForm.getCustomerPhone().getText().equals("PHONE"));
-            assertTrue(conciergeOrderHistoryForm.getCustomerEmail().getText().equals("EMAIL"));
-            assertTrue(conciergeOrderHistoryForm.getCustomerCompany().getText().equals("COMPANY"));
-            assertTrue(conciergeOrderHistoryForm.getCustomerTradeIdTaxExempt().getText().equals("TRADE ID / TAX EXEMPT"));
+            assertEquals(conciergeOrderHistoryForm.getCustomerAddress().getText(), "ADDRESS");
+            assertEquals(conciergeOrderHistoryForm.getCustomerFirstName().getText(), "FIRST NAME");
+            assertEquals(conciergeOrderHistoryForm.getCustomerPhone().getText(), "PHONE");
+            assertEquals(conciergeOrderHistoryForm.getCustomerEmail().getText(), "EMAIL");
+            assertEquals(conciergeOrderHistoryForm.getCustomerCompany().getText(), "COMPANY");
+            assertEquals(conciergeOrderHistoryForm.getCustomerTradeIdTaxExempt().getText(), "TRADE ID / TAX EXEMPT");
 
         }
     }
 
     @When("I click on the random result")
     public void iClickOnTheRandomResult() {
-//        wait.until(ExpectedConditions.visibilityOf(conciergeOrderHistoryForm.getFirstResult()));
         conciergeOrderHistoryForm.getFirstResult().shouldBe(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getFirstResult().click();
     }
@@ -101,9 +101,7 @@ public class ConciergeOrderHistoryStepDefs {
     }
 
     @When("I click on random order")
-    public void iClickOnRandomOrder() throws InterruptedException {
-//        wait.until(ExpectedConditions.textToBePresentInElement(conciergeOrderHistoryForm.getOrderNotes(), "Notes"));
-
+    public void iClickOnRandomOrder() {
         sleep(2);
         conciergeOrderHistoryForm.getFirstResult().shouldBe(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getFirstResult().click();
@@ -113,16 +111,12 @@ public class ConciergeOrderHistoryStepDefs {
     public void iVerifyThatIRedirectedToWismo() {
         ArrayList<String> tabs = new ArrayList<>(getWindowsHandles());
         switchTo().window(tabs.get(1));
-        boolean redirect = false;
-        if (tabs.size() == 2) {
-            redirect = true;
-        }
+        boolean redirect = tabs.size() == 2;
         assertTrue(redirect);
     }
 
     @Then("I verifiy that Order Lookup title is displayed")
     public void iVerifiyThatOrderLookupTitleIsDisplayed() {
-//        wait.until(ExpectedConditions.visibilityOf(conciergeOrderHistoryForm.getOrderHistoryTitle()));
         conciergeOrderHistoryForm.getOrderLookUpTitle().shouldBe(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getOrderLookUpTitle().getText().equals("ORDER LOOKUP");
     }
@@ -145,10 +139,10 @@ public class ConciergeOrderHistoryStepDefs {
 
     @When("I click on back to search results button")
     public void iClickOnBackToSearchResultsButton() {
-//        wait.until(ExpectedConditions.visibilityOf(conciergeOrderHistoryForm.getBackToSearchResultsButton()));
         conciergeOrderHistoryForm.getBackToSearchResultsButton().shouldBe(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getBackToSearchResultsButton().click();
     }
+
 
 }
 

@@ -3,6 +3,7 @@ package com.test.utility;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import lombok.Getter;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
@@ -70,9 +71,7 @@ public class Hooks {
         DesiredCapabilities dr = new DesiredCapabilities();
         dr.setBrowserName("chrome");
         dr.setCapability(ChromeOptions.CAPABILITY, options);
-
-//        dr.setPlatform(Platform.WINDOWS);
-
+        
         String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
         RemoteWebDriver driver = null;
         try {
@@ -93,6 +92,8 @@ public class Hooks {
         System.setProperty(properties.getProperty("chromeDriver"), "driver/chromedriver");
         System.setProperty("selenide.browser", "chrome");
         open((String) properties.get("baseurl"));
+
+
         currentUrl = WebDriverRunner.url();
         System.setProperty(properties.getProperty("chromeDriver"), "driver/chromedriver");
 
@@ -118,7 +119,8 @@ public class Hooks {
      * Quit web driver.
      */
     @After()
-    public void tearDownWebDriver() {
+    public void tearDownWebDriver(Scenario scenario) {
+        System.out.println(scenario.getName() + " : " + scenario.getStatus());
         closeWindow();
         closeWebDriver();
         System.out.println("Driver was closed");

@@ -15,12 +15,10 @@ public class ClientSearchStepDefs {
     ConciergeOrderHistoryForm conciergeOrderHistoryForm = new ConciergeOrderHistoryForm();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
-
     @When("I search client by {string}")
     public void iSearchClientByEmail(String searchBy) {
         generalStepDefs.searchClientBy(searchBy);
     }
-
 
     @Then("I verify that client results is displayed")
     public void iVerifyThatClientResultsIsDisplayed() {
@@ -45,6 +43,5 @@ public class ClientSearchStepDefs {
     public void iVerifyThatNewClientHasBeenCreated() {
         conciergeUserAccountPage.getNewClientHeaderBtn().shouldBe(visible, Duration.ofSeconds(30));
     }
-
 
 }

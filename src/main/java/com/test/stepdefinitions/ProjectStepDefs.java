@@ -5,9 +5,11 @@ import com.test.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static org.testng.Assert.assertEquals;
@@ -114,10 +116,9 @@ public class ProjectStepDefs {
             conciergeUserAccountPage.getClientLookupLastName().setValue("unclassifiedBusiness");
         }
 
-
         conciergeProjectScreen.getContinueCreateAProjectButton().click();
-        $(By.xpath("//tr[contains(@class,'MuiTableRow-root')]/td[1]")).shouldBe(visible, Duration.ofSeconds(12));
-        $(By.xpath("//tr[contains(@class,'MuiTableRow-root')]/td[1]")).click();
+        conciergeProjectScreen.getProjectResultsFirstRow().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeProjectScreen.getProjectResultsFirstRow().click();
     }
 
     @When("I click on new project button")
@@ -128,10 +129,10 @@ public class ProjectStepDefs {
 
     @When("I introduces details for new project")
     public void iIntroducesDetailsForNewProject() {
-        conciergeProjectScreen.getPrefferedContactMethodSelect().shouldBe(visible, Duration.ofSeconds(40));
-        conciergeProjectScreen.getPrefferedContactMethodSelect().click();
-        conciergeProjectScreen.getPrefferedEmailContactMethod().shouldBe(visible, Duration.ofSeconds(30));
-        conciergeProjectScreen.getPrefferedEmailContactMethod().click();
+        conciergeProjectScreen.getPreferredContactMethodSelect().shouldBe(visible, Duration.ofSeconds(40));
+        conciergeProjectScreen.getPreferredContactMethodSelect().click();
+        conciergeProjectScreen.getPreferredEmailContactMethod().shouldBe(visible, Duration.ofSeconds(30));
+        conciergeProjectScreen.getPreferredEmailContactMethod().click();
         conciergeProjectScreen.getCreateProjectDetailsDescriptionField().shouldBe(visible, Duration.ofSeconds(30));
         conciergeProjectScreen.getCreateProjectDetailsDescriptionField().setValue("testDescription");
         conciergeProjectScreen.getCreateProjectButton().click();
@@ -153,4 +154,35 @@ public class ProjectStepDefs {
             assertEquals($(By.xpath("//*[text()='A. Member']")).getText(), "TestCompany");
         }
     }
+
+    @When("I click on move to project button")
+    public void iClickOnMoveToProjectButton() {
+        conciergeProjectScreen.getMoveToProjectButton().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getMoveToProjectButton().click();
+    }
+
+    @When("I click on save button")
+    public void iClickOnSaveButton() {
+        conciergeProjectScreen.getSaveMoveToProject().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getSaveMoveToProject().click();
+    }
+
+    @Then("I verify that projects screen is displayed")
+    public void iVerifyThatProjectsScreenIsDisplayed() {
+        conciergeProjectScreen.getForecastSetButton().shouldBe(visible, Duration.ofSeconds(25));
+        assertTrue(conciergeProjectScreen.getSettingsButton().isDisplayed(), "Settings button is displayed");
+        assertTrue(conciergeProjectScreen.getAvailabilityDeliveryButtons().isDisplayed(), "Availability& Delivery, add item note buttons are displayed");
+        assertTrue(conciergeProjectScreen.getPrintButton().isDisplayed(), "Print button ia displayed");
+        assertTrue(conciergeProjectScreen.getItems().isDisplayed(), "Items span is displayed");
+        assertTrue(conciergeProjectScreen.getQty().isDisplayed(), "QTY span is displayed");
+        assertTrue(conciergeProjectScreen.getSubtotal().isDisplayed(), "Subtotal span is displayed");
+    }
+
+    @When("I choose project from move to project pop up")
+    public void iChooseProjectFromMoveToProjectPopUp() {
+        conciergeProjectScreen.getSpaceName().shouldHave(text("General"), Duration.ofSeconds(15));
+        Select projectNameSelect = new Select(conciergeProjectScreen.getProjectName());
+        projectNameSelect.selectByIndex(1);
+    }
+
 }

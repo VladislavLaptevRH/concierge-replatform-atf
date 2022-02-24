@@ -11,6 +11,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Getter
@@ -24,22 +25,22 @@ public class ConciergeAssociateStepDefs {
     public void iExpectThatIAmOnTheConciergeDashboardPage() {
         conciergeUserAccountPage.getUserNameButton().shouldBe(visible, Duration.ofSeconds(15));
         assertTrue(conciergeUserAccountPage.getUserNameButton().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getArtButtonMenu().getText().equals("ART"));
-        assertTrue(conciergeUserAccountPage.getBathButtonMenu().getText().equals("BATH"));
-        assertTrue(conciergeUserAccountPage.getBedButtonMenu().getText().equals("BED"));
-        assertTrue(conciergeUserAccountPage.getProjectsButton().getText().equals("PROJECTS"));
+        assertEquals(conciergeUserAccountPage.getArtButtonMenu().getText(), "ART");
+        assertEquals(conciergeUserAccountPage.getBathButtonMenu().getText(), "BATH");
+        assertEquals(conciergeUserAccountPage.getBedButtonMenu().getText(), "BED");
+        assertEquals(conciergeUserAccountPage.getProjectsButton().getText(), "PROJECTS");
         assertTrue(conciergeUserAccountPage.getLocationButton().isDisplayed());
-        assertTrue(conciergeUserAccountPage.getInStockButtonMenu().getText().equals("IN STOCK"));
-        assertTrue(conciergeUserAccountPage.getLivingButtonMenu().getText().equals("LIVING"));
-        assertTrue(conciergeUserAccountPage.getDiningButtonMenu().getText().equals("DINING"));
-        assertTrue(conciergeUserAccountPage.getLightingButtonMenu().getText().equals("LIGHTING"));
-        assertTrue(conciergeUserAccountPage.getTextilesButtonMenu().getText().equals("TEXTILES"));
-        assertTrue(conciergeUserAccountPage.getRugsButtonMenu().getText().equals("RUGS"));
-        assertTrue(conciergeUserAccountPage.getWindowsButtonMenu().getText().equals("WINDOWS"));
-        assertTrue(conciergeUserAccountPage.getDecorButtonMenu().getText().equals("DÉCOR"));
-        assertTrue(conciergeUserAccountPage.getOutdoorButtonMenu().getText().equals("OUTDOOR"));
-        assertTrue(conciergeUserAccountPage.getGiftsButtonMenu().getText().equals("GIFTS"));
-        assertTrue(conciergeUserAccountPage.getSaleButtonMenu().getText().equals("SALE"));
+        assertEquals(conciergeUserAccountPage.getInStockButtonMenu().getText(), "IN STOCK");
+        assertEquals(conciergeUserAccountPage.getLivingButtonMenu().getText(), "LIVING");
+        assertEquals(conciergeUserAccountPage.getDiningButtonMenu().getText(), "DINING");
+        assertEquals(conciergeUserAccountPage.getLightingButtonMenu().getText(), "LIGHTING");
+        assertEquals(conciergeUserAccountPage.getTextilesButtonMenu().getText(), "TEXTILES");
+        assertEquals(conciergeUserAccountPage.getRugsButtonMenu().getText(), "RUGS");
+        assertEquals(conciergeUserAccountPage.getWindowsButtonMenu().getText(), "WINDOWS");
+        assertEquals(conciergeUserAccountPage.getDecorButtonMenu().getText(), "DÉCOR");
+        assertEquals(conciergeUserAccountPage.getOutdoorButtonMenu().getText(), "OUTDOOR");
+        assertEquals(conciergeUserAccountPage.getGiftsButtonMenu().getText(), "GIFTS");
+        assertEquals(conciergeUserAccountPage.getSaleButtonMenu().getText(), "SALE");
     }
 
     @When("I change my store to store number 10")
@@ -54,7 +55,7 @@ public class ConciergeAssociateStepDefs {
     public void iVerifyISeeStoreInTheHeader() {
         conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(visible,Duration.ofSeconds(15));
         conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(text("PALO ALTO"));
-        assertTrue(conciergeUserAccountPage.getNewPortBeachGallery().getText().equals("PALO ALTO"));
+        assertEquals(conciergeUserAccountPage.getNewPortBeachGallery().getText(), "PALO ALTO");
     }
 
 
@@ -71,7 +72,7 @@ public class ConciergeAssociateStepDefs {
     public void userVerifiesListOfGalleries() {
         conciergeUserAccountPage.getGallerySelectButton().shouldHave(text("NEWPORT"));
         String actualListOfGalleries = conciergeUserAccountPage.getGallerySelectButton().getText();
-        assertTrue(actualListOfGalleries.equals(actualListOfGalleries));
+        assertEquals(actualListOfGalleries, actualListOfGalleries);
     }
 
     @When("user clicks on gallery button from header")
