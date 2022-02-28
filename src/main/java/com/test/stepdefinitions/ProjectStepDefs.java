@@ -2,6 +2,7 @@ package com.test.stepdefinitions;
 
 import com.test.pageObject.ConciergeProjectScreen;
 import com.test.pageObject.ConciergeUserAccountPage;
+import com.test.pageObject.ProjectSettingsScreen;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
@@ -18,6 +19,9 @@ import static org.testng.Assert.assertTrue;
 public class ProjectStepDefs {
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeProjectScreen conciergeProjectScreen = new ConciergeProjectScreen();
+    ProjectSettingsScreen projectSettingsScreen = new ProjectSettingsScreen();
+    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+    String spaceName;
 
     @When("I click on projects button")
     public void iClickOnProjectsButton() {
@@ -185,4 +189,67 @@ public class ProjectStepDefs {
         projectNameSelect.selectByIndex(1);
     }
 
+    @When("I click on the first project search result")
+    public void iClickOnTheFirstProjectSearchResult() {
+        conciergeProjectScreen.getFirstSearchResultOfProjects().shouldBe(visible, Duration.ofMinutes(2));
+        conciergeProjectScreen.getFirstSearchResultOfProjects().click();
+    }
+
+    @When("I click on settings button")
+    public void iClickOnSettingsButton() {
+        conciergeProjectScreen.getSettingsButton().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeProjectScreen.getSettingsButton().click();
+    }
+
+    @Then("I verify that project setting screen is displayed")
+    public void iVerifyThatProjectSettingScreenIsDisplayed() {
+        projectSettingsScreen.getUpdateProjectSettingsTitle().shouldBe(visible, Duration.ofSeconds(20));
+        projectSettingsScreen.getAccountDetails().shouldBe(visible, Duration.ofSeconds(15));
+        projectSettingsScreen.getSameShippingCheckBox().shouldBe(visible, Duration.ofSeconds(15));
+        projectSettingsScreen.getUsdCurrency().shouldBe(visible, Duration.ofSeconds(15));
+        projectSettingsScreen.getUsdCurrency().click();
+        projectSettingsScreen.getCadCurrency().shouldBe(visible, Duration.ofSeconds(15));
+        projectSettingsScreen.getGalleryButton().shouldBe(visible, Duration.ofSeconds(15));
+        projectSettingsScreen.getDesignButton().shouldBe(visible, Duration.ofSeconds(15));
+        projectSettingsScreen.getTradeButton().shouldBe(visible, Duration.ofSeconds(15));
+        projectSettingsScreen.getProjectNameFieldSpan().shouldBe(visible, Duration.ofSeconds(15));
+        projectSettingsScreen.getOpportunityNameFieldSpan().shouldBe(visible, Duration.ofMinutes(1));
+        projectSettingsScreen.getDesiredDeliveryDate().shouldBe(visible, Duration.ofMinutes(1));
+        projectSettingsScreen.getPurchasingDeadlineSpan().shouldBe(visible, Duration.ofMinutes(1));
+        projectSettingsScreen.getPreferredContactMethodSpan().shouldBe(visible, Duration.ofMinutes(1));
+        projectSettingsScreen.getDescriptionSpan().shouldBe(visible, Duration.ofSeconds(15));
+        projectSettingsScreen.getSpaceNameSpan().shouldBe(visible, Duration.ofSeconds(15));
+        projectSettingsScreen.getAddSpaceButton().shouldBe(visible, Duration.ofSeconds(15));
+        projectSettingsScreen.getUpdateProjectSettingsBtn().shouldBe(visible, Duration.ofSeconds(15));
+    }
+
+    @When("I click on the moodboard button")
+    public void iClickOnTheMoodboardButton() {
+        projectSettingsScreen.getMoodBoardButton().shouldBe(visible, Duration.ofSeconds(15));
+        projectSettingsScreen.getMoodBoardButton().click();
+    }
+
+    @Then("moodboard screen is displayed")
+    public void moodboardScreenIsDisplayed() {
+        projectSettingsScreen.getMoodboardDeactiveButton().shouldBe(visible, Duration.ofSeconds(15));
+    }
+
+    @When("I introduces space name")
+    public void iIntroducesSpaceName() {
+        spaceName = generalStepDefs.getAlphaNumericString(4);
+        projectSettingsScreen.getSpaceNameSpan().shouldBe(visible, Duration.ofSeconds(12));
+        projectSettingsScreen.getSpaceNameSpan().setValue(spaceName);
+    }
+
+    @When("I click on add space button")
+    public void iClickOnAddSpaceButton() {
+        projectSettingsScreen.getAddSpaceButton().shouldBe(visible, Duration.ofSeconds(20));
+        projectSettingsScreen.getAddSpaceButton().click();
+    }
+
+    @Then("I verify that new space was created")
+    public void iVerifyThatNewSpaceWasCreated() {
+        assertTrue($(By.xpath("//*[text()='" + spaceName + "']")).isDisplayed(), "New space has been created");
+        $(By.xpath("//*[text()='" + spaceName + "']")).shouldBe(visible, Duration.ofSeconds(12));
+    }
 }

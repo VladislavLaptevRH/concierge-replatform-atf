@@ -50,6 +50,44 @@ Feature: Verify projects
     When I click on save button
     Then I verify that projects screen is displayed
 
+  Scenario: Verify project settings are available
+    Given I log into Concierge as "associate"
+    When I click on projects button
+    When I search project by provided "projectName"
+    When I click on the first project search result
+    When I click on settings button
+    Then I verify that project setting screen is displayed
+
+  Scenario: Verify project list moodboard
+    Given I log into Concierge as "associate"
+    When I click on projects button
+    When I search project by provided "projectName"
+    When I click on the first project search result
+    When I click on the moodboard button
+    Then moodboard screen is displayed
+
+  Scenario: Verify that user is able to add new space and edit
+    Given I log into Concierge as "associate"
+    When I click on projects button
+    When I search project by provided "projectName"
+    When I click on the first project search result
+    When I click on settings button
+    When I introduces space name
+    When I click on add space button
+    Then I verify that new space was created
+    When I click on add space button
+
+  Scenario: Verify that user is able to create new opportunity and add items
+    Given I log into Concierge as "associate"
+    When I click on projects button
+    When I search project by provided "projectName"
+    When I click on the first project search result
+#    When I click on add new opportunity button
+
+
+
+
+
 
 
 

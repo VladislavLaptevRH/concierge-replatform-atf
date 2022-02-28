@@ -283,6 +283,23 @@ public class GeneralStepDefs {
         return r.nextInt((max - min) + 1) + min;
     }
 
+
+    /**
+     * @param n - length of required string
+     * @return - random string
+     */
+    public String getAlphaNumericString(int n) {
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz";
+        StringBuilder stringBuilder = new StringBuilder(n);
+        for (int i = 0; i < n; i++) {
+            int index = (int)(AlphaNumericString.length()
+                    * Math.random());
+            stringBuilder.append(AlphaNumericString
+                    .charAt(index));
+        }
+        return stringBuilder.toString();
+    }
+
 }
 
 
