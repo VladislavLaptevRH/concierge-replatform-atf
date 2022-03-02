@@ -3,10 +3,6 @@ package com.test.pageObject;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
-
 import static com.codeborne.selenide.Selenide.$;
 
 @Getter

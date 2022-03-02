@@ -1,10 +1,9 @@
 package com.test.stepdefinitions;
 
-import com.test.pageObject.ConciergeProjectScreen;
-import com.test.pageObject.ConciergeUserAccountPage;
-import com.test.pageObject.ProjectSettingsScreen;
+import com.test.pageObject.*;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
@@ -12,7 +11,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -21,7 +20,13 @@ public class ProjectStepDefs {
     ConciergeProjectScreen conciergeProjectScreen = new ConciergeProjectScreen();
     ProjectSettingsScreen projectSettingsScreen = new ProjectSettingsScreen();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+    Mailinator mailinator = new Mailinator();
+    ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
+
     String spaceName;
+    String opportunityName;
+    String clientEmail;
+    String aditionalEmail;
 
     @When("I click on projects button")
     public void iClickOnProjectsButton() {
@@ -72,21 +77,22 @@ public class ProjectStepDefs {
 
     @When("I search project by {string}")
     public void iSearchProjectBy(String pricingType) {
-        conciergeProjectScreen.getSearchBySelect().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeProjectScreen.getSearchBySelect().shouldBe(visible, Duration.ofSeconds(20));
         conciergeProjectScreen.getSearchBySelect().click();
-        conciergeProjectScreen.getPricingType().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeProjectScreen.getPricingType().shouldBe(visible, Duration.ofSeconds(20));
         conciergeProjectScreen.getPricingType().click();
+        conciergeProjectScreen.getPricingTypeSelect().shouldBe(visible, Duration.ofSeconds(20));
         conciergeProjectScreen.getPricingTypeSelect().click();
 
         if (pricingType.equals("regular")) {
             conciergeProjectScreen.getRegularPricingType().click();
         }
         if (pricingType.equals("member")) {
-            conciergeProjectScreen.getMemberPricingType().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getMemberPricingType().shouldBe(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getMemberPricingType().click();
         }
         if (pricingType.equals("trade")) {
-            conciergeProjectScreen.getTradePricingType().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getTradePricingType().shouldBe(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getTradePricingType().click();
         }
     }
@@ -146,7 +152,7 @@ public class ProjectStepDefs {
     @Then("I verify that new project for <{string}> was created")
     public void iVerifyThatNewProjectForWasCreated(String businessClient) {
         if (businessClient.equals("member")) {
-            assertEquals($(By.xpath("//*[text()='A. Member']")).getText(), "A. Member");
+            assertEquals(conciergeProjectScreen.getAMemberValue().getText(), "A. Member");
         }
         if (businessClient.equals("nonmember")) {
             assertEquals($(By.xpath("//*[text()='A. Nonmember']")).getText(), "A. Nonmember");
@@ -191,7 +197,7 @@ public class ProjectStepDefs {
 
     @When("I click on the first project search result")
     public void iClickOnTheFirstProjectSearchResult() {
-        conciergeProjectScreen.getFirstSearchResultOfProjects().shouldBe(visible, Duration.ofMinutes(2));
+        conciergeProjectScreen.getFirstSearchResultOfProjects().shouldBe(visible, Duration.ofMinutes(5));
         conciergeProjectScreen.getFirstSearchResultOfProjects().click();
     }
 
@@ -252,4 +258,127 @@ public class ProjectStepDefs {
         assertTrue($(By.xpath("//*[text()='" + spaceName + "']")).isDisplayed(), "New space has been created");
         $(By.xpath("//*[text()='" + spaceName + "']")).shouldBe(visible, Duration.ofSeconds(12));
     }
+
+    @When("I click on add new opportunity button")
+    public void iClickOnAddNewOpportunityButton() {
+        conciergeProjectScreen.getAddOpportunityButton().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getAddOpportunityButton().click();
+    }
+
+    @When("I introduce opportunity name")
+    public void iIntroduceOpportunityName() {
+        opportunityName = generalStepDefs.getAlphaNumericString(4);
+        conciergeProjectScreen.getOpportunityNameField().clear();
+        conciergeProjectScreen.getOpportunityNameField().setValue(opportunityName);
+    }
+
+    @When("I choose preferred contact method")
+    public void iChoosePreferredContactMethod() {
+        conciergeProjectScreen.getSelectPreferredContactMethod().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getSelectPreferredContactMethod().click();
+        conciergeProjectScreen.getPreferredEmailContactMethod().click();
+    }
+
+    @When("I provide description for opportunity")
+    public void iProvideDescriptionForOpportunity() {
+        conciergeProjectScreen.getOpportunityDescription().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getOpportunityDescription().setValue("opportunity description");
+    }
+
+    @When("I click on create opportunity button")
+    public void iClickOnCreateOpportunityButton() {
+        conciergeProjectScreen.getCreateOpportunityButton().shouldBe(visible, Duration.ofSeconds(30));
+        conciergeProjectScreen.getCreateOpportunityButton().click();
+    }
+
+    @When("I add item to created opportunity")
+    public void iAddItemToCreatedOpportunity() {
+        conciergeItemsScreen.getAddToProjectButton().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeItemsScreen.getAddToProjectButton().click();
+        conciergeProjectScreen.getSelectOpportunityName().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getSelectOpportunityName().click();
+    }
+
+    @Then("I verify that item was added")
+    public void iVerifyThatItemWasAdded() {
+        conciergeProjectScreen.getSaveMoveToProject().shouldBe(visible, Duration.ofSeconds(25));
+        conciergeProjectScreen.getSaveMoveToProject().click();
+        conciergeProjectScreen.getGoToProjectButton().click();
+    }
+
+    @When("I click on email estimate button")
+    public void iClickOnEmailEstimateButton() {
+        conciergeProjectScreen.getEmailEstimateButton().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getEmailEstimateButton().scrollIntoView(true);
+        conciergeProjectScreen.getEmailEstimateButton().click();
+    }
+
+    @When("I introduces client email from email estimate pop up")
+    public void iIntroducesClientEmailFromEmailEstimatePopUp() {
+        clientEmail = generalStepDefs.getAlphaNumericString(4) + "@mailinator.com";
+        conciergeProjectScreen.getEmailEstimateEmailField().setValue(clientEmail);
+        conciergeProjectScreen.getEmailEstimateMessageToClient().clear();
+        conciergeProjectScreen.getEmailEstimateMessageToClient().setValue("this is test description");
+    }
+
+    @When("I introduces email in send copies of this project to additional emails")
+    public void iIntroducesEmailInSendCopiesOfThisProjectToAdditionalEmails() {
+        aditionalEmail = generalStepDefs.getAlphaNumericString(4) + "@mailinator.com";
+        conciergeProjectScreen.getEmailEstimateAdditionEmailField().setValue(aditionalEmail);
+    }
+
+    @When("I click on email estimate button from project screen")
+    public void iClickOnEmailEstimateButtonFromProjectScreen() {
+        conciergeProjectScreen.getEmailEstimateProjectScreen().scrollIntoView(true);
+        conciergeProjectScreen.getEmailEstimateProjectScreen().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeProjectScreen.getEmailEstimateProjectScreen().click();
+    }
+
+    @Then("I verify that the client received the letter on the {string}")
+    public void iVerifyThatTheClientReceivedTheLetterOnThe(String email) {
+        open("https://www.mailinator.com/");
+        mailinator.getSearchEmailField().shouldBe(visible, Duration.ofSeconds(20));
+        if (email.equals("client")) {
+            mailinator.getSearchEmailField().setValue(clientEmail);
+        }
+        if (email.equals("additional")) {
+            mailinator.getSearchEmailField().setValue(aditionalEmail);
+        }
+        mailinator.getGoButton().click();
+        mailinator.getFirstLetter().shouldBe(visible, Duration.ofSeconds(25));
+        mailinator.getFirstLetter().click();
+        switchTo().frame(mailinator.getMessageBodyIframe());
+        mailinator.getBodyEmailText().shouldBe(visible, Duration.ofSeconds(15));
+        mailinator.getAssociateName().shouldBe(visible, Duration.ofSeconds(15));
+    }
+
+    @When("I click on bcc associate checkbox")
+    public void iClickOnBCCAssociateCheckbox() {
+        conciergeProjectScreen.getBccAssociateCheckBox().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getBccAssociateCheckBox().click();
+    }
+
+    @Then("I verify that project list is displayed")
+    public void iVerifyThatProjectListIsDisplayed() {
+        conciergeProjectScreen.getProjectName().shouldBe(visible, Duration.ofSeconds(15));
+        Select selectProjectName = new Select(conciergeProjectScreen.getProjectName());
+        sleep(2000);
+        selectProjectName.selectByVisibleText("A. Member");
+        sleep(2000);
+        assertTrue(conciergeProjectScreen.getAMemberValue().isDisplayed(), "A. Member project is displayed");
+        selectProjectName.selectByVisibleText("TestCompany");
+        sleep(2000);
+        assertTrue(conciergeProjectScreen.getTestCompanyValue().isDisplayed(), "TestCompany project is displayed");
+    }
+
+    @Then("I verify that opportunity list is displayed")
+    public void iVerifyThatOpportunityListIsDisplayed() {
+        conciergeProjectScreen.getSelectOpportunityName().shouldBe(visible, Duration.ofSeconds(20));
+        Select selectOpportunity = new Select(conciergeProjectScreen.getSelectOpportunityName());
+        sleep(2000);
+        selectOpportunity.selectByVisibleText("A. Member - Phase 4");
+        sleep(2000);
+        assertTrue(conciergeProjectScreen.getOpportunityPhase4Value().isDisplayed(), "Phase 4 opportunity is displayed");
+    }
+
 }

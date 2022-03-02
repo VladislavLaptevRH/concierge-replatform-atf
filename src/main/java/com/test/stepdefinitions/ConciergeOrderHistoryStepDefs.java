@@ -5,10 +5,8 @@ import com.test.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
 import java.time.Duration;
 import java.util.ArrayList;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.switchTo;
@@ -142,7 +140,5 @@ public class ConciergeOrderHistoryStepDefs {
         conciergeOrderHistoryForm.getBackToSearchResultsButton().shouldBe(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getBackToSearchResultsButton().click();
     }
-
-
 }
 

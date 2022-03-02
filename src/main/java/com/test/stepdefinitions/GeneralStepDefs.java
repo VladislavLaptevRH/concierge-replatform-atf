@@ -63,7 +63,7 @@ public class GeneralStepDefs {
             if (!field.getAttribute("value").isEmpty()) {
                 executeJavaScript("arguments[0].value='';", field);
             }
-        }catch (Exception exception){
+        } catch (Exception exception) {
             System.out.println("Attribute value is null");
         }
 
@@ -108,7 +108,7 @@ public class GeneralStepDefs {
      *
      * @param zipCode - zipcode
      * @param country - country
-     * @param state - state
+     * @param state   - state
      */
     public void fillZipCodeStateCountry(String zipCode, String country, String state) {
         checkoutAddressScreen.getCountryField().shouldBe(visible, Duration.ofSeconds(15));
@@ -174,29 +174,27 @@ public class GeneralStepDefs {
      */
     public void searchClientBy(String field) {
         try {
-            if (conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
-                conciergeUserAccountPage.getClientButton().click();
-                conciergeUserAccountPage.getClientLookupHeaderBtn().shouldBe(visible, Duration.ofSeconds(20));
-                conciergeUserAccountPage.getClientLookupHeaderBtn().click();
-                conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofSeconds(20));
+            conciergeUserAccountPage.getClientButton().click();
+            conciergeUserAccountPage.getClientLookupHeaderBtn().shouldBe(visible, Duration.ofSeconds(20));
+            conciergeUserAccountPage.getClientLookupHeaderBtn().click();
+            conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofSeconds(20));
 
-                if (field.equals("email")) {
-                    conciergeUserAccountPage.getClientLookupEmail().setValue("test@mailinator.com");
-                }
-                if (field.equals("lastName")) {
-                    conciergeUserAccountPage.getClientLookupLastName().setValue("NonMember");
-                }
-                if (field.equals("memberID")) {
-                    conciergeUserAccountPage.getMemberIdField().setValue("101318450");
-                }
-                if (field.equals("businessAccountNumber")) {
-                    conciergeUserAccountPage.getBusinessAcNumber().setValue("20211221164476");
-                }
-                if (field.equals("phone number,postal code,company")) {
-
-                }
-                conciergeUserAccountPage.getClientLookupSearchButton().click();
+            if (field.equals("email")) {
+                conciergeUserAccountPage.getClientLookupEmail().setValue("test@mailinator.com");
             }
+            if (field.equals("lastName")) {
+                conciergeUserAccountPage.getClientLookupLastName().setValue("NonMember");
+            }
+            if (field.equals("memberID")) {
+                conciergeUserAccountPage.getMemberIdField().setValue("101318450");
+            }
+            if (field.equals("businessAccountNumber")) {
+                conciergeUserAccountPage.getBusinessAcNumber().setValue("20211221164476");
+            }
+            if (field.equals("phone number,postal code,company")) {
+
+            }
+            conciergeUserAccountPage.getClientLookupSearchButton().click();
         } catch (
                 Exception e) {
             System.out.println("Client is selected");
@@ -269,9 +267,9 @@ public class GeneralStepDefs {
 
 
     /**
-     * @param min
+     * @param min - min border of value
      * @param max Generate random number in range
-     * @return
+     * @return - random number in range
      */
     public static int getRandomNumberInRange(int min, int max) {
 
@@ -292,7 +290,7 @@ public class GeneralStepDefs {
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz";
         StringBuilder stringBuilder = new StringBuilder(n);
         for (int i = 0; i < n; i++) {
-            int index = (int)(AlphaNumericString.length()
+            int index = (int) (AlphaNumericString.length()
                     * Math.random());
             stringBuilder.append(AlphaNumericString
                     .charAt(index));

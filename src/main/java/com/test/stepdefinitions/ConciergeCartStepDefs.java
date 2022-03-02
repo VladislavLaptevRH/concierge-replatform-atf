@@ -12,6 +12,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class ConciergeCartStepDefs {
     WebDriver webDriver = Hooks.getWebDriver();
@@ -40,7 +41,7 @@ public class ConciergeCartStepDefs {
             assertEquals(conciergeCartPageScreen.getGramTurkishTowel().getText(), "17050042 NGRH");
             assertEquals(conciergeCartPageScreen.getGramTurkishTitle().getText(), "802-GRAM TURKISH TOWEL COLLECTION");
         }
-        conciergeCartPageScreen.getQuantityButton().isDisplayed();
+        assertTrue(conciergeCartPageScreen.getQuantityButton().isDisplayed(), "Quantity button is displayed");
     }
 
 }

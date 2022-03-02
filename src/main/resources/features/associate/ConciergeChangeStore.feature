@@ -1,4 +1,5 @@
 Feature: Verify change to another store
+
   Scenario: Change store number in concierge from dashboard
     Given I log into Concierge as "associate"
     When I change my store to store number 10

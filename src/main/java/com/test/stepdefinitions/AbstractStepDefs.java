@@ -28,14 +28,10 @@ public class AbstractStepDefs {
 
     @When("I clicks on a random menu item")
     public void iClicksOnARandomMenuItem() {
-//        generalStepDefs.isElementVisible("//h1[@class='MuiTypography-root MuiTypography-h1']");
-//        wait.until(ExpectedConditions.textToBePresentInElement(conciergeUserAccountPage.getDashboardTitle(), "DASHBOARD"));
-//        wait.until(ExpectedConditions.elementToBeClickable(conciergeUserAccountPage.getOrderHistoryButton()));
-
-        $(conciergeUserAccountPage.getMenuItems().get(0)).shouldBe(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getMenuItems().get(0).shouldBe(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getMenuItems().get(0).click();
 
-        $(conciergeUserAccountPage.getItemSubCategory().get(2)).shouldBe(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getItemSubCategory().get(2).shouldBe(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getItemSubCategory().get(2).click();
     }
 
@@ -177,10 +173,15 @@ public class AbstractStepDefs {
         conciergeUserAccountPage.getMenuItems().get(0).shouldBe(visible);
         conciergeUserAccountPage.getMenuItems().get(0).scrollIntoView(true);
         conciergeUserAccountPage.getMenuItems().get(0).click();
-
         conciergeUserAccountPage.getItemSubCategory().get(0).shouldBe(visible);
         conciergeUserAccountPage.getItemSubCategory().get(0).scrollIntoView(true);
         conciergeUserAccountPage.getItemSubCategory().get(0).click();
+    }
+
+    @When("I click on rh concierge logo")
+    public void iClickOnRhConciergeLogo() {
+        conciergeUserAccountPage.getRhConciergeLogo().shouldBe(visible, Duration.ofSeconds(60));
+        conciergeUserAccountPage.getRhConciergeLogo().click();
     }
 }
 

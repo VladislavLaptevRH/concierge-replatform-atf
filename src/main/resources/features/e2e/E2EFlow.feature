@@ -42,7 +42,6 @@ Feature: Verify e2e flow
     When I choose client from header
     When I clicks on a random menu item
     When I clicks on o random item
-#    When I fill all options for item
     And I select count of product
     When I click on add to cart button
     When I click on checkout button
@@ -92,7 +91,6 @@ Feature: Verify e2e flow
     When I choose "<brands>" from brand menu
     When I clicks on a random menu item
     When I clicks on o random item
-#    When I fill all options for item
     And I select count of product
     When I click on add to cart button
     When I click on checkout button
@@ -118,7 +116,6 @@ Feature: Verify e2e flow
     When I choose client from header
     When I go to item which has "<state>" restriction
     When I fill all options for item
-#    And I select count of product
     When I click on add to cart button
     When I click on checkout button
     When I fill all fields from address with "<state>" zip code
@@ -127,13 +124,3 @@ Feature: Verify e2e flow
       | state |
       | NY    |
       | CA    |
-
-
-  #Automation memeber
-  #Automation nonmember
-#  #nonmember-> address screen
-#  #member->carts
-#  #Split payment
-#  #check member from client
-#  #from cart
-

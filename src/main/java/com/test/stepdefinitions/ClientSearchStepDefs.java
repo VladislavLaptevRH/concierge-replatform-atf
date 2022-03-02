@@ -2,9 +2,7 @@ package com.test.stepdefinitions;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
 import java.time.Duration;
-
 import com.test.pageObject.ConciergeOrderHistoryForm;
 import com.test.pageObject.ConciergeUserAccountPage;
 import static com.codeborne.selenide.Condition.visible;

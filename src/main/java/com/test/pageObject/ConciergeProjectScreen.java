@@ -9,9 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class ConciergeProjectScreen {
 
-    private final  SelenideElement addToCartButton = $(By.xpath("/html/body/div[3]/div/main/div/div[3]/div/div/div/div/div/div/div[2]/div/div/div[4]/div/div/div[2]/button[1]"));
-
-    private final SelenideElement emailEstimateButton = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-fullWidth']"));
+    private final SelenideElement addToCartButton = $(By.xpath("/html/body/div[3]/div/main/div/div[3]/div/div/div/div/div/div/div[2]/div/div/div[4]/div/div/div[2]/button[1]"));
 
     private final SelenideElement nonMemberButton = $(By.id("pricingTypeDropdown"));
 
@@ -102,4 +100,38 @@ public class ConciergeProjectScreen {
     private final SelenideElement projectResultsFirstRow = $(By.xpath("//tr[contains(@class,'MuiTableRow-root')]/td[1]"));
 
     private final SelenideElement firstSearchResultOfProjects = $(By.xpath("//div[contains(@class,'MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-flex-start')][1]/div[contains(@class,'MuiGrid-root MuiGrid-item')]/div[1]"));
+
+    private final SelenideElement emailEstimateProjectScreen = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-fullWidth']"));
+
+    private final SelenideElement emailEstimateButton = $(By.cssSelector("button[type='submit'] span[class='MuiButton-label']"));
+
+    private final SelenideElement emailEstimateEmailField = $(By.xpath("//input[@name='email']"));
+
+    private final SelenideElement emailEstimateMessageToClient = $(By.xpath("//textarea[@name='message']"));
+
+    private final SelenideElement emailEstimateAdditionEmailField = $(By.xpath("//input[@name='cc']"));
+
+    private final SelenideElement goToProjectButton = $(By.xpath("//*[text()='GO TO PROJECT']"));
+
+    private final SelenideElement opportunityNameField = $(By.xpath("//div[3]/div/div/div[1]//input"));
+
+    private final SelenideElement selectPreferredContactMethod = $(By.cssSelector(".MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu.MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input"));
+
+    private final SelenideElement opportunityDescription = $(By.cssSelector(".MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputMultiline.MuiOutlinedInput-inputMultiline[aria-invalid='true']"));
+
+    private final SelenideElement selectOpportunityName = $(By.xpath("//select[@name='opportunityName']"));
+
+    private final SelenideElement opportunityPhase4Value = $(By.xpath("//*[text()='A. Member - Phase 4']"));
+
+    private final SelenideElement createOpportunityButton = $(By.xpath("//*[text()='CREATE OPPORTUNITY']"));
+
+    private final SelenideElement addOpportunityButton = $(By.xpath("//span[@aria-label='Add Opportunity']"));
+
+    private final SelenideElement bccAssociateCheckBox = $(By.xpath("//*[text()='BCC Associate']"));
+
+    private final SelenideElement aMemberValue = $(By.xpath("//*[text()='A. Member']"));
+
+    private final SelenideElement testCompanyValue = $(By.xpath("//*[text()='TestCompany']"));
+
+    private final SelenideElement emailEstimateSendButton = $(By.cssSelector("button[type='submit'] span[class='MuiButton-label']"));
 }

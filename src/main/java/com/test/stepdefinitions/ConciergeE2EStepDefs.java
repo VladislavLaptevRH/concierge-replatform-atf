@@ -31,6 +31,7 @@ public class ConciergeE2EStepDefs {
     ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
     ConciergeOrderHistoryForm conciergeOrderHistoryForm = new ConciergeOrderHistoryForm();
     PaymentScreen paymentScreen = new PaymentScreen();
+    SelectOption selectOption = new SelectOption();
     String usState = "";
 
     @When("I click on add to project button")
@@ -221,7 +222,6 @@ public class ConciergeE2EStepDefs {
         paymentScreen.getContinueToReview().click();
 
 
-
         sleep(4);
         generalStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
@@ -312,17 +312,8 @@ public class ConciergeE2EStepDefs {
         conciergeUserAccountPage.getSeeResultsButton().click();
     }
 
-    @When("I agree to the terms of sale")
-    public void iAgreeToTheTermsOfSale() {
-        SelenideElement agreeCheckBox = $(By.xpath("//span[@class='MuiTypography-root MuiFormControlLabel-label MuiTypography-body1']/span"));
-        executeJavaScript("arguments[0].click();", agreeCheckBox);
-        SelenideElement updateButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-2 MuiGrid-grid-md-2']/button"));
-        updateButton.click();
-    }
-
     @When("I choose {string} from brand menu")
-    public void iChooseFromBrandMenu(String brand) throws InterruptedException {
-//        conciergeUserAccountPage.getOrderHistoryButton()));
+    public void iChooseFromBrandMenu(String brand) {
         conciergeUserAccountPage.getBrandButton().shouldBe(visible, Duration.ofSeconds(12));
         conciergeUserAccountPage.getBrandButton().click();
         System.out.println();
@@ -402,9 +393,9 @@ public class ConciergeE2EStepDefs {
         try {
             sleep(2);
             if (conciergeUserAccountPage.getAutomationClientButton().isDisplayed()) {
-                generalStepDefs.isElementVisible("//div[1]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6");
+                sleep(2000);
                 conciergeUserAccountPage.getAutomationClientButton().click();
-                Thread.sleep(2000);
+                sleep(2000);
                 conciergeUserAccountPage.getRemoveClientButton().click();
             }
         } catch (Exception e) {
@@ -438,8 +429,8 @@ public class ConciergeE2EStepDefs {
 
     @And("I select count of product")
     public void iSelectCountOfProduct() {
-        $(By.xpath("//select[contains(@id,'prod') and contains(@id,'qty')]")).shouldBe(visible, Duration.ofSeconds(12));
-        $(By.xpath("//select[contains(@id,'prod') and contains(@id,'qty')]")).click();
+        selectOption.getQuantityElement().shouldBe(visible, Duration.ofSeconds(30));
+        selectOption.getQuantityElement().click();
     }
 }
 

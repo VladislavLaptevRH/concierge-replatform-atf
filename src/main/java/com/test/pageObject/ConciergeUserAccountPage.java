@@ -104,4 +104,5 @@ public class ConciergeUserAccountPage {
 
     private SelenideElement firstResultOfClientLookup = $(By.xpath("//td[@class='MuiTableCell-root MuiTableCell-body'][1]/div"));
 
+    private SelenideElement rhConciergeLogo = $(By.xpath("//a[@id='nav-logo-img']"));
 }

@@ -47,4 +47,10 @@ public class ProjectSettingsScreen {
 
     private final SelenideElement moodBoardButton = $(By.xpath("//*[text()='MOODBOARD']"));
 
+    private final SelenideElement firstNameField = $(By.cssSelector("div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)"));
+
+    private final SelenideElement lastNameField = $(By.xpath("//div[2]/div[contains(@class,'MuiTextField-root MuiFormControl-fullWidth')]//input[@class='MuiInputBase-input MuiOutlinedInput-input']"));
+
+    private final SelenideElement postalCode = $(By.xpath("//div[3]/div[contains(@class,'MuiTextField-root MuiFormControl-fullWidth')]//input[@class='MuiInputBase-input MuiOutlinedInput-input']"));
+
 }
