@@ -1,7 +1,7 @@
 @Library('jenkins-rhapsody-libraries@master') _ //Importing shared Libraries
 import com.rh.rhapsody.*;
 
-rhapsodyUtils.standardPipelineProperties();
+#rhapsodyUtils.standardPipelineProperties();
 
 Service s = Service.CONCIERGE_REPLATFORM_ATF;
 
