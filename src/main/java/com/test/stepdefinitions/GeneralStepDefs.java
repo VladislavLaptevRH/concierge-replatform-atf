@@ -16,7 +16,6 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
-
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -296,6 +295,16 @@ public class GeneralStepDefs {
                     .charAt(index));
         }
         return stringBuilder.toString();
+    }
+
+
+    /**
+     * @param min - min border of value
+     * @param max - max border of value
+     * @return
+     */
+    public int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
     }
 
 }

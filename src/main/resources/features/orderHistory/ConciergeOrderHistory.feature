@@ -5,7 +5,7 @@ Feature:Verify order history
     Then I verify the customer lookup form appears
     And I verify the order lookup form appears
 
-  Scenario Outline: Verify order history search returns a list of users
+  Scenario Outline: Verify order history search returns a list of users - <firstName>
     Given I log into Concierge as "associate"
     When I navigate to the order history page from the concierge dashboard
     And I search order history for customer "<firstName>" "<lastName>"
@@ -49,7 +49,7 @@ Feature:Verify order history
 #    Then I verify order details
 
 
-  Scenario Outline: Verify order lookup search for inProgress,Open,Not Existing orders
+  Scenario Outline: Verify order lookup search for <status> order
     Given I log into Concierge as "associate"
     When I navigate to the order history page from the concierge dashboard
     Then I verifiy that Order Lookup title is displayed

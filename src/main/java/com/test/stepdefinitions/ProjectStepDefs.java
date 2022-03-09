@@ -1,9 +1,9 @@
 package com.test.stepdefinitions;
 
 import com.test.pageObject.*;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
@@ -22,6 +22,7 @@ public class ProjectStepDefs {
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     Mailinator mailinator = new Mailinator();
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
+    ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
 
     String spaceName;
     String opportunityName;
@@ -268,6 +269,8 @@ public class ProjectStepDefs {
     @When("I introduce opportunity name")
     public void iIntroduceOpportunityName() {
         opportunityName = generalStepDefs.getAlphaNumericString(4);
+        conciergeProjectScreen.getOpportunityNameField().click();
+        executeJavaScript("arguments[0].value = '';", conciergeProjectScreen.getOpportunityNameField());
         conciergeProjectScreen.getOpportunityNameField().clear();
         conciergeProjectScreen.getOpportunityNameField().setValue(opportunityName);
     }
@@ -308,7 +311,7 @@ public class ProjectStepDefs {
 
     @When("I click on email estimate button")
     public void iClickOnEmailEstimateButton() {
-        conciergeProjectScreen.getEmailEstimateButton().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getEmailEstimateButton().shouldBe(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getEmailEstimateButton().scrollIntoView(true);
         conciergeProjectScreen.getEmailEstimateButton().click();
     }
@@ -329,8 +332,8 @@ public class ProjectStepDefs {
 
     @When("I click on email estimate button from project screen")
     public void iClickOnEmailEstimateButtonFromProjectScreen() {
-        conciergeProjectScreen.getEmailEstimateProjectScreen().scrollIntoView(true);
         conciergeProjectScreen.getEmailEstimateProjectScreen().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeProjectScreen.getEmailEstimateProjectScreen().scrollIntoView(true);
         conciergeProjectScreen.getEmailEstimateProjectScreen().click();
     }
 
@@ -374,11 +377,41 @@ public class ProjectStepDefs {
     @Then("I verify that opportunity list is displayed")
     public void iVerifyThatOpportunityListIsDisplayed() {
         conciergeProjectScreen.getSelectOpportunityName().shouldBe(visible, Duration.ofSeconds(20));
-        Select selectOpportunity = new Select(conciergeProjectScreen.getSelectOpportunityName());
-        sleep(2000);
-        selectOpportunity.selectByVisibleText("A. Member - Phase 4");
-        sleep(2000);
-        assertTrue(conciergeProjectScreen.getOpportunityPhase4Value().isDisplayed(), "Phase 4 opportunity is displayed");
+        assertTrue(conciergeProjectScreen.getSelectOpportunityName().isDisplayed(), "Phase 4 opportunity is displayed");
     }
 
+    @Given("I log into Concierge as nbohr@nomail.com")
+    public void iLogIntoConciergeAsNbohrNomailCom() {
+        conciergeLoginPage.getPasswordField().shouldBe(visible, Duration.ofMinutes(5));
+        conciergeLoginPage.getUsernameField().setValue("zorro@pom.com");
+        conciergeLoginPage.getPasswordField().setValue("Resto123");
+        conciergeLoginPage.getSignInButton().shouldBe(visible, Duration.ofSeconds(30));
+        conciergeLoginPage.getSignInButton().click();
+        conciergeLoginPage.getLocationNewPortBeach().shouldBe(visible, Duration.ofSeconds(30));
+        conciergeLoginPage.getLocationNewPortBeach().click();
+        conciergeLoginPage.getContinueButton().shouldBe(visible, Duration.ofSeconds(30));
+        conciergeLoginPage.getContinueButton().click();
+    }
+
+    @Then("I verify that spaces list is displayed")
+    public void iVerifyThatSpacesListIsDisplayed() {
+        conciergeProjectScreen.getSelectSpaceName().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getSelectSpaceName().click();
+        assertTrue(conciergeProjectScreen.getSelectSpaceName().isDisplayed(), "test2 space is displayed");
+        conciergeProjectScreen.getSelectSpaceName().click();
+        assertTrue(conciergeProjectScreen.getSelectSpaceName().isDisplayed(), "test1 and test1 space is displayed");
+    }
+
+    @When("I go to category")
+    public void iGoToCategory() {
+        conciergeUserAccountPage.getInStockButtonMenu().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeUserAccountPage.getInStockButtonMenu().click();
+
+        conciergeUserAccountPage.getInStockBedding().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeUserAccountPage.getInStockBedding().click();
+
+        conciergeUserAccountPage.getToddlerBedding().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeUserAccountPage.getToddlerBedding().click();
+
+    }
 }

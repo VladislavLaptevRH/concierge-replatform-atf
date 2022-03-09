@@ -12,7 +12,7 @@ Feature: Verify projects
       | createdBy   |
       | editedBy    |
 
-  Scenario Outline: Verify that user is able to find project by pricing type
+  Scenario Outline: Verify that user is able to find project by <pricingType>
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project by "<pricingType>"
@@ -23,7 +23,7 @@ Feature: Verify projects
       | member      |
       | trade       |
 
-  Scenario Outline: Verify that user is able to create project for clients
+  Scenario Outline: Verify that user is able to create project for client - <businessClient>
     Given I log into Concierge as "associate"
     When I click on projects button
     When I click on new project button
@@ -139,6 +139,16 @@ Feature: Verify projects
     When I click on add to cart button
     When I click on move to project button
     Then I verify that opportunity list is displayed
+
+  Scenario: Verify the Spaces list and switching between the Spaces -CART/PDP
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I choose client from header
+    When I go to item "112848 MULT" from search field
+    And I select count of product
+    When I click on add to cart button
+    When I click on move to project button
+    Then I verify that spaces list is displayed
 
 
 

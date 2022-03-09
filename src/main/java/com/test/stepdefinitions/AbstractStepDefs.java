@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
+import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -28,18 +29,16 @@ public class AbstractStepDefs {
 
     @When("I clicks on a random menu item")
     public void iClicksOnARandomMenuItem() {
-        conciergeUserAccountPage.getMenuItems().get(0).shouldBe(visible, Duration.ofSeconds(15));
-        conciergeUserAccountPage.getMenuItems().get(0).click();
-
-        conciergeUserAccountPage.getItemSubCategory().get(2).shouldBe(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getInStockButtonMenu().shouldBe(visible, Duration.ofSeconds(30));
+        conciergeUserAccountPage.getInStockButtonMenu().click();
+        conciergeUserAccountPage.getItemSubCategory().get(2).shouldBe(visible, Duration.ofSeconds(30));
         conciergeUserAccountPage.getItemSubCategory().get(2).click();
     }
 
 
     @When("I clicks on o random item")
     public void iClicksOnORandomItem() {
-        $(conciergeItemsScreen.getItems().get(0)).shouldBe(visible, Duration.ofSeconds(12));
-        generalStepDefs.isElementVisible("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul//li[@class='MuiGridListTile-root']");
+        conciergeItemsScreen.getItems().get(0).shouldBe(visible, Duration.ofSeconds(40));
         conciergeItemsScreen.getItems().get(0).click();
     }
 
@@ -130,16 +129,15 @@ public class AbstractStepDefs {
 
     }
 
-
     @When("I choose client from header")
     public void iChooseClientFromHeader() {
         SelenideElement noClientButton = $(By.xpath("//*[text()='Client']"));
         try {
-            noClientButton.shouldBe(visible, Duration.ofSeconds(15));
+            noClientButton.shouldBe(visible, Duration.ofSeconds(5));
             if (noClientButton.isDisplayed()) {
                 conciergeUserAccountPage.getClientButton().click();
-                conciergeUserAccountPage.getClientLookupHeaderBtn().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(15));
-                conciergeUserAccountPage.getClientLookupHeaderBtn().click();
+                conciergeUserAccountPage.getClientLookupBtnId().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(15));
+                conciergeUserAccountPage.getClientLookupBtnId().click();
                 conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofSeconds(25));
                 conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
                 conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
@@ -155,7 +153,6 @@ public class AbstractStepDefs {
 
     }
 
-
     @When("I fill all fields from address screen")
     public void iFillAllFieldsFromAddressScreenForBrands() {
         try {
@@ -164,7 +161,6 @@ public class AbstractStepDefs {
         } catch (Exception e) {
             System.out.println("Address fields are not available");
         }
-
     }
 
     @When("I clicks on a random menu item for brands")
@@ -182,6 +178,61 @@ public class AbstractStepDefs {
     public void iClickOnRhConciergeLogo() {
         conciergeUserAccountPage.getRhConciergeLogo().shouldBe(visible, Duration.ofSeconds(60));
         conciergeUserAccountPage.getRhConciergeLogo().click();
+    }
+
+    @When("I add item to cart")
+    public void iAddItemToCart() {
+        for (int i = 0; i < 150; i++) {
+            sleep(2000);
+            open("https://rhbabyandchild.stg2.rhnonprod.com/search/results.jsp?Ntt=toddler+bedding&N=%7B%21tag%3Dsku_stocked%7Dsku_stocked%3A%28%22In-Stock%22%29+AND+%7B%21tag%3DBC_category_L0%7DBC_category_L0%3A%28%22Bedding%22%29&Ns=product.sale%7C1&topCatId=cat23860004&parentCatId=cat23540105&fromNav=true");
+
+            for (int j = 0; j < 5; j++) {
+                executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+                sleep(1000);
+            }
+
+
+            List<SelenideElement> toddlerBedding = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul[@class='MuiGridList-root']/li[@class='MuiGridListTile-root']"));
+            int element = generalStepDefs.getRandomNumber(0, toddlerBedding.size());
+            toddlerBedding.get(element).click();
+
+            conciergeItemsScreen.getAddToCartButton().shouldBe(visible, Duration.ofSeconds(20));
+            conciergeItemsScreen.getAddToCartButton().click();
+
+            $(By.xpath("//button[@data-testid='dialog-title-close-button']")).shouldBe(visible, Duration.ofSeconds(25));
+            $(By.xpath("//button[@data-testid='dialog-title-close-button']")).click();
+        }
+    }
+
+
+    @When("I add items in cart")
+    public void iAddItemsInCart() {
+        for (int i = 0; i < 10; i++) {
+
+            conciergeUserAccountPage.getInStockMenuItem().shouldBe(visible, Duration.ofSeconds(20));
+            conciergeUserAccountPage.getInStockMenuItem().click();
+            conciergeUserAccountPage.getInStockBedding().shouldBe(visible, Duration.ofSeconds(20));
+            conciergeUserAccountPage.getInStockBedding().click();
+            conciergeUserAccountPage.getBeds().shouldBe(visible, Duration.ofSeconds(20));
+            conciergeUserAccountPage.getBeds().click();
+
+            for (int j = 0; j < 5; j++) {
+                executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+                sleep(1000);
+            }
+            $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul[@class='MuiGridList-root']/li[@class='MuiGridListTile-root']")).shouldBe(visible, Duration.ofSeconds(20));
+            List<SelenideElement> toddlerBedding = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul[@class='MuiGridList-root']/li[@class='MuiGridListTile-root']"));
+            int element = generalStepDefs.getRandomNumber(0, toddlerBedding.size());
+            toddlerBedding.get(element).click();
+            conciergeItemsScreen.getAddToCartButton().shouldBe(visible, Duration.ofSeconds(20));
+            conciergeItemsScreen.getAddToCartButton().scrollIntoView(true);
+            conciergeItemsScreen.getAddToCartButton().click();
+
+            $(By.xpath("//div[@class='MuiDialogTitle-root']/button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit']")).shouldBe(visible, Duration.ofSeconds(20));
+            SelenideElement closeButton = $(By.xpath("//div[@class='MuiDialogTitle-root']/button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit']"));
+            closeButton.click();
+        }
+
     }
 }
 

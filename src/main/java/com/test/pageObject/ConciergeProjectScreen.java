@@ -3,7 +3,6 @@ package com.test.pageObject;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
-
 import static com.codeborne.selenide.Selenide.$;
 
 @Getter
@@ -132,6 +131,12 @@ public class ConciergeProjectScreen {
     private final SelenideElement aMemberValue = $(By.xpath("//*[text()='A. Member']"));
 
     private final SelenideElement testCompanyValue = $(By.xpath("//*[text()='TestCompany']"));
+
+    private final SelenideElement selectSpaceName = $(By.xpath("//select[@name='spaceName']"));
+
+    private final SelenideElement test1Space = $(By.xpath("//option[text()='test1']"));
+
+    private final SelenideElement test2Space = $(By.xpath("//option[text()='test2']"));
 
     private final SelenideElement emailEstimateSendButton = $(By.cssSelector("button[type='submit'] span[class='MuiButton-label']"));
 }

@@ -84,7 +84,7 @@ Feature: Verify e2e flow
     When I introduces payment details
     And I verify that review screen is displayed
 
-  Scenario Outline: Verify that user is able to buy item from brands menu
+  Scenario Outline: Verify that user is able to buy item from brand menu - <brands>
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I choose client from header
@@ -110,7 +110,7 @@ Feature: Verify e2e flow
       | RH Beach House |
       | RH Interiors   |
 
-  Scenario Outline: Verify New York & California shipping restriction
+  Scenario Outline: Verify <state> shipping restriction
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I choose client from header
@@ -124,3 +124,4 @@ Feature: Verify e2e flow
       | state |
       | NY    |
       | CA    |
+

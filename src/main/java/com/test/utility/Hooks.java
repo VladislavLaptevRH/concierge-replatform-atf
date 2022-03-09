@@ -5,7 +5,6 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import lombok.Getter;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -92,8 +91,6 @@ public class Hooks {
         System.setProperty(properties.getProperty("chromeDriver"), "driver/chromedriver");
         System.setProperty("selenide.browser", "chrome");
         open((String) properties.get("baseurl"));
-
-
         currentUrl = WebDriverRunner.url();
         System.setProperty(properties.getProperty("chromeDriver"), "driver/chromedriver");
 
@@ -134,6 +131,5 @@ public class Hooks {
     public static WebDriver getWebDriver() {
         return webDriver;
     }
-
 
 }

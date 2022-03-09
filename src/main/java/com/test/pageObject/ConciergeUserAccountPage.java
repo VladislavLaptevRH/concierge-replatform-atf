@@ -3,9 +3,7 @@ package com.test.pageObject;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
-
 import java.util.List;
-
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -94,6 +92,8 @@ public class ConciergeUserAccountPage {
 
     private SelenideElement clientLookupHeaderBtn = $(By.xpath("//*[text()='Client Lookup']"));
 
+    private SelenideElement clientLookupBtnId = $(By.xpath("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li[@id='1']"));
+
     private SelenideElement clientLookupFirstName = $(By.xpath("//input[@name='firstName']"));
 
     private SelenideElement clientLookupLastName = $(By.xpath("//input[@name='lastName']"));
@@ -105,4 +105,33 @@ public class ConciergeUserAccountPage {
     private SelenideElement firstResultOfClientLookup = $(By.xpath("//td[@class='MuiTableCell-root MuiTableCell-body'][1]/div"));
 
     private SelenideElement rhConciergeLogo = $(By.xpath("//a[@id='nav-logo-img']"));
+
+    private SelenideElement inStockMenuItem = $(By.xpath("//*[text()='In Stock']"));
+
+    private SelenideElement inStockBedding = $(By.xpath("//*[text()='In-Stock Bed']"));
+
+    private SelenideElement beds = $(By.xpath("//*[text()='Beds']"));
+
+    private SelenideElement dressers = $(By.xpath("//*[text()='Dressers']"));
+
+    private SelenideElement armoires = $(By.xpath("//*[text()='Armoires']"));
+
+    private SelenideElement sofas = $(By.xpath("//*[text()='Sofas']"));
+
+    private SelenideElement benches = $(By.xpath("//*[text()='Benches']"));
+
+    private SelenideElement bedding = $(By.xpath("//*[text()='Bedding']"));
+
+    private SelenideElement inStockBath = $(By.xpath("//*[text()='In-Stock Bath']"));
+
+    private SelenideElement inStockLighting = $(By.xpath("//*[text()='In-Stock Lighting']"));
+
+    private SelenideElement inStockTextiles = $(By.xpath("//*[text()='In-Stock Textiles']"));
+
+    private SelenideElement inStockRugs = $(By.xpath("//*[text()='In-Stock Rugs']"));
+
+    private SelenideElement inStockWindows = $(By.xpath("//*[text()='In-Stock Windows']"));
+
+    private SelenideElement toddlerBedding = $(By.xpath("//*[text()='Toddler Bedding']"));
+
 }

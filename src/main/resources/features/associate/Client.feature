@@ -1,6 +1,6 @@
 Feature:Verify client search
 
-  Scenario Outline: Verify client search by provided parameter
+  Scenario Outline: Verify client search by <searchBy>
     Given I log into Concierge as "associate"
     When I remove client from header
     When I search client by "<searchBy>"

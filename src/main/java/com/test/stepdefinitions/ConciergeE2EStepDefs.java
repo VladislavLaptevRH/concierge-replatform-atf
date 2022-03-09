@@ -99,7 +99,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
-        generalStepDefs.isElementVisible("//div[1]/div[@class='MuiFormControl-root MuiFormControl-fullWidth']/button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary']");
+        conciergeItemsScreen.getAddToCartButton().shouldBe(visible, Duration.ofSeconds(30));
         executeJavaScript("arguments[0].click();", conciergeItemsScreen.getAddToCartButton());
         if (usState.equals("CA")) {
             try {
@@ -109,10 +109,8 @@ public class ConciergeE2EStepDefs {
                 System.out.println("Agree&add to card button is not displayed");
             }
         }
-
-        generalStepDefs.isElementVisible("//button[@id='ajax-proceed-to-cart']");
+        conciergeItemsScreen.getViewCartButton().shouldBe(visible, Duration.ofSeconds(25));
         conciergeItemsScreen.getViewCartButton().click();
-
     }
 
     @When("I fill all fields from address with {string} zip code")
@@ -316,7 +314,6 @@ public class ConciergeE2EStepDefs {
     public void iChooseFromBrandMenu(String brand) {
         conciergeUserAccountPage.getBrandButton().shouldBe(visible, Duration.ofSeconds(12));
         conciergeUserAccountPage.getBrandButton().click();
-        System.out.println();
 
         if (brand.equals("RH Modern")) {
             conciergeUserAccountPage.getListOfBrands().get(1).shouldBe(visible, Duration.ofSeconds(12));
@@ -393,9 +390,9 @@ public class ConciergeE2EStepDefs {
         try {
             sleep(2);
             if (conciergeUserAccountPage.getAutomationClientButton().isDisplayed()) {
-                sleep(2000);
+                sleep(2);
                 conciergeUserAccountPage.getAutomationClientButton().click();
-                sleep(2000);
+                sleep(2);
                 conciergeUserAccountPage.getRemoveClientButton().click();
             }
         } catch (Exception e) {
@@ -426,12 +423,12 @@ public class ConciergeE2EStepDefs {
         assertEquals(conciergeCartPageScreen.getTotalMemberPrice().getText(), "$314.00");
     }
 
-
     @And("I select count of product")
     public void iSelectCountOfProduct() {
         selectOption.getQuantityElement().shouldBe(visible, Duration.ofSeconds(30));
         selectOption.getQuantityElement().click();
     }
+
 }
 
 
