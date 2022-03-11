@@ -27,7 +27,7 @@ public class ClientSearchStepDefs {
     public void iClickOnClientButton() {
         conciergeUserAccountPage.getClientButton().shouldBe(visible, Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientButton().click();
-        conciergeUserAccountPage.getClientLookupHeaderBtn().shouldBe(visible, Duration.ofSeconds(80));
+        conciergeUserAccountPage.getClientLookupHeaderBtn().shouldBe(visible, Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientLookupHeaderBtn().click();
     }
 

@@ -1,9 +1,8 @@
 package com.test.stepdefinitions;
 
+import com.codeborne.selenide.SelenideElement;
 import com.test.pageObject.*;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.en.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
@@ -12,8 +11,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class ProjectStepDefs {
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
@@ -23,11 +21,16 @@ public class ProjectStepDefs {
     Mailinator mailinator = new Mailinator();
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
     ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
+    SelectOption selectOption = new SelectOption();
+    Colors colors = new Colors();
 
     String spaceName;
     String opportunityName;
     String clientEmail;
     String aditionalEmail;
+    int randomColor;
+    int randomQuantity;
+    String itemPrice;
 
     @When("I click on projects button")
     public void iClickOnProjectsButton() {
@@ -37,35 +40,7 @@ public class ProjectStepDefs {
 
     @When("I search project by provided {string}")
     public void iSearchProjectByProvided(String searchBy) {
-        conciergeProjectScreen.getSearchBySelect().shouldBe(visible, Duration.ofMinutes(1));
-        conciergeProjectScreen.getSearchBySelect().click();
-        if (searchBy.equals("projectName")) {
-            conciergeProjectScreen.getProjectNameButton().shouldBe(visible, Duration.ofSeconds(12));
-            conciergeProjectScreen.getProjectNameButton().click();
-            conciergeProjectScreen.getProjectNameField().shouldBe(visible, Duration.ofSeconds(12));
-            conciergeProjectScreen.getProjectNameField().setValue("test");
-        }
-        if (searchBy.equals("projectID")) {
-            conciergeProjectScreen.getProjectIdButton().shouldBe(visible, Duration.ofSeconds(12));
-            conciergeProjectScreen.getProjectIdButton().click();
-            conciergeProjectScreen.getProjectIdField().shouldBe(visible, Duration.ofSeconds(12));
-            conciergeProjectScreen.getProjectIdField().setValue("P54909938");
-        }
-        if (searchBy.equals("createdBy")) {
-            conciergeProjectScreen.getCreatedByButton().shouldBe(visible, Duration.ofSeconds(12));
-            conciergeProjectScreen.getCreatedByButton().click();
-            conciergeProjectScreen.getClientFirstNameField().shouldBe(visible, Duration.ofSeconds(12));
-            conciergeProjectScreen.getClientFirstNameField().setValue("Renuka");
-            conciergeProjectScreen.getClientLastNameField().setValue("Boorla");
-        }
-        if (searchBy.equals("editedBy")) {
-            conciergeProjectScreen.getEditedBy().shouldBe(visible, Duration.ofSeconds(12));
-            conciergeProjectScreen.getEditedBy().click();
-            conciergeProjectScreen.getClientFirstNameField().shouldBe(visible, Duration.ofSeconds(12));
-            conciergeProjectScreen.getClientFirstNameField().setValue("Renuka");
-            conciergeProjectScreen.getClientLastNameField().setValue("Boorla");
-        }
-        conciergeProjectScreen.getSearchByButton().click();
+
     }
 
     @Then("I verify that search result is displayed")
@@ -84,7 +59,6 @@ public class ProjectStepDefs {
         conciergeProjectScreen.getPricingType().click();
         conciergeProjectScreen.getPricingTypeSelect().shouldBe(visible, Duration.ofSeconds(20));
         conciergeProjectScreen.getPricingTypeSelect().click();
-
         if (pricingType.equals("regular")) {
             conciergeProjectScreen.getRegularPricingType().click();
         }
@@ -334,7 +308,7 @@ public class ProjectStepDefs {
     public void iClickOnEmailEstimateButtonFromProjectScreen() {
         conciergeProjectScreen.getEmailEstimateProjectScreen().shouldBe(visible, Duration.ofSeconds(12));
         conciergeProjectScreen.getEmailEstimateProjectScreen().scrollIntoView(true);
-        conciergeProjectScreen.getEmailEstimateProjectScreen().click();
+        executeJavaScript("arguments[0].click();", conciergeProjectScreen.getEmailEstimateProjectScreen());
     }
 
     @Then("I verify that the client received the letter on the {string}")
@@ -413,5 +387,240 @@ public class ProjectStepDefs {
         conciergeUserAccountPage.getToddlerBedding().shouldBe(visible, Duration.ofSeconds(20));
         conciergeUserAccountPage.getToddlerBedding().click();
 
+    }
+
+
+    @When("I search project {string} by provided {string}")
+    public void iSearchProjectByProvided(String projectName, String searchBy) {
+        conciergeProjectScreen.getSearchBySelect().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeProjectScreen.getSearchBySelect().click();
+        if (searchBy.equals("projectName")) {
+            conciergeProjectScreen.getProjectNameButton().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getProjectNameButton().click();
+            conciergeProjectScreen.getProjectNameField().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getProjectNameField().setValue(projectName);
+        }
+        if (searchBy.equals("projectID")) {
+            conciergeProjectScreen.getProjectIdButton().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getProjectIdButton().click();
+            conciergeProjectScreen.getProjectIdField().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getProjectIdField().setValue("P54909938");
+        }
+        if (searchBy.equals("createdBy")) {
+            conciergeProjectScreen.getCreatedByButton().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getCreatedByButton().click();
+            conciergeProjectScreen.getClientFirstNameField().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getClientFirstNameField().setValue("Renuka");
+            conciergeProjectScreen.getClientLastNameField().setValue("Boorla");
+        }
+        if (searchBy.equals("editedBy")) {
+            conciergeProjectScreen.getEditedBy().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getEditedBy().click();
+            conciergeProjectScreen.getClientFirstNameField().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getClientFirstNameField().setValue("Renuka");
+            conciergeProjectScreen.getClientLastNameField().setValue("Boorla");
+        }
+        conciergeProjectScreen.getSearchByButton().click();
+
+    }
+
+    @When("I choose color from option")
+    public void iChooseColorFromOption() {
+        selectOption.getLancasterColor().shouldBe(visible, Duration.ofSeconds(15));
+        randomColor = generalStepDefs.getRandomNumber(0, 3);
+        Select selectColor = new Select(selectOption.getLancasterColor());
+        selectColor.selectByIndex(randomColor);
+    }
+
+    @When("I click on edit options button")
+    public void iClickOnEditOptionsButton() {
+        conciergeProjectScreen.getEditItemOptions().shouldBe(visible, Duration.ofSeconds(35));
+        executeJavaScript("window.scrollBy(0,150)", "");
+        conciergeProjectScreen.getEditItemOptions().click();
+    }
+
+    @Then("verify that color was changed")
+    public void verifyThatColorWasChanged() {
+        if (randomColor == 0) {
+            assertTrue(colors.getChestnut().isDisplayed());
+        }
+        if (randomColor == 1) {
+            assertTrue(colors.getCocoa().isDisplayed());
+        }
+        if (randomColor == 2) {
+            assertTrue(colors.getEbony().isDisplayed());
+        }
+        if (randomColor == 3) {
+            assertTrue(colors.getEspressoColor().isDisplayed());
+        }
+
+    }
+
+    @When("I choose quantity for item from project")
+    public void iChooseQuantityForItemFromProject() {
+        randomQuantity = generalStepDefs.getRandomNumber(0, 40);
+        Select quantityForLoncaster = new Select(selectOption.getQuantityOfLancasterOption());
+        quantityForLoncaster.selectByIndex(randomQuantity);
+    }
+
+    @Then("verify that quantity for item was changed")
+    public void verifyThatQuantityForItemWasChanged() {
+        assertTrue(Integer.parseInt(selectOption.getQuantityOfLancasterOption().getText()) == randomQuantity + 1);
+    }
+
+    @And("I choose project by project name {string}")
+    public void iChooseProjectByProjectName(String projectName) {
+        conciergeProjectScreen.getProjectName().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getProjectName().click();
+        $(By.xpath("//*[text()='" + projectName + "']")).click();
+    }
+
+    @When("I click on remove button from project for added item")
+    public void iClickOnRemoveButtonFromProjectForAddedItem() {
+        conciergeProjectScreen.getREMOVEbutton().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getREMOVEbutton().click();
+    }
+
+    @Then("I verify that item was removed")
+    public void iVerifyThatItemWasRemoved() {
+        conciergeProjectScreen.getItemIdSpan().shouldNotBe(visible, Duration.ofSeconds(20));
+        assertFalse(conciergeProjectScreen.getItemIdSpan().isDisplayed(), "Item# is not displayed");
+    }
+
+    @And("I click on regular price for item projects")
+    public void iClickOnRegularPriceForItemProjects() {
+        conciergeProjectScreen.getAmount7295().shouldBe(visible, Duration.ofSeconds(15));
+        executeJavaScript("window.scrollBy(0,150)", "Scroll to regular price");
+        conciergeProjectScreen.getAmount7295().click();
+
+    }
+
+    @But("I choose {string} method for price override")
+    public void iChooseMethodForPriceOverride(String methodValue) {
+        conciergeProjectScreen.getPercentOffSelect().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getPercentOffSelect().click();
+        $(By.xpath("//li[@data-value='" + methodValue + "']")).click();
+
+    }
+
+    @And("I introduce {string} percent discount")
+    public void iIntroducePercentDiscount(String arg0) {
+        conciergeProjectScreen.getPercentDiscount().clear();
+        conciergeProjectScreen.getPercentDiscount().setValue(arg0);
+    }
+
+    @When("I introduce {string} for reason code")
+    public void iIntroduceForReasonCode(String reasonCode) {
+        conciergeProjectScreen.getReasonCode().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeProjectScreen.getReasonCode().click();
+        $(By.xpath("//li[@data-value='" + reasonCode + "']")).click();
+    }
+
+    @And("I click on apply button")
+    public void iClickOnApplyButton() {
+        conciergeProjectScreen.getApplyButton().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeProjectScreen.getApplyButton().click();
+    }
+
+    @Then("I verify that overriden price displayed")
+    public void iVerifyThatOverridenPriceDisplayed() {
+        conciergeProjectScreen.getAmount4923().shouldBe(visible, Duration.ofSeconds(20));
+        assertTrue(conciergeProjectScreen.getAmount4923().isDisplayed(), "Overriden price is displayed");
+    }
+
+    @And("I click on unlimited furniture delivery price")
+    public void iClickOnUnlimitedFurnitureDeliveryPrice() {
+        conciergeProjectScreen.getAmount549().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getAmount549().click();
+    }
+
+    @When("I introduces {string} in dollar amount field")
+    public void iIntroducesInDollarAmountField(String dollarAmount) {
+        conciergeProjectScreen.getDollarAmountField().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getDollarAmountField().clear();
+        conciergeProjectScreen.getDollarAmountField().setValue(dollarAmount);
+    }
+
+    @And("I choose {string} reason")
+    public void iChooseReason(String reason) {
+        Select selectReason = new Select(conciergeProjectScreen.getShippingOverridePriceReason());
+        selectReason.selectByValue(reason);
+    }
+
+    @Then("I verified that override price for shipping displayed")
+    public void iVerifiedThatOverridePriceForShippingDisplayed() {
+        conciergeProjectScreen.getAmount50().shouldBe(visible, Duration.ofSeconds(20));
+        assertTrue(conciergeProjectScreen.getAmount50().isDisplayed(), "Override price is displayed");
+    }
+
+    @And("I set the random quantity of goods")
+    public void iSetTheRandomQuantityOfGoods() {
+        conciergeProjectScreen.getLancasterSofaQty().shouldBe(visible, Duration.ofSeconds(12));
+        Select frameQtySelect = new Select(conciergeProjectScreen.getLancasterSofaQty());
+        randomQuantity = generalStepDefs.getRandomNumber(0, 30);
+        frameQtySelect.selectByIndex(randomQuantity - 1);
+    }
+
+    @Then("I verify that subtotal amount updated according by quantity of items")
+    public void iVerifyThatSubtotalAmountUpdatedAccordingByQuantityOfItems() {
+        double totalItemPrice = randomQuantity * 5.47100;
+        String finalPrice = Double.toString(totalItemPrice).replace(".", ",") + ".00";
+        SelenideElement finalPriceValueUi = $(By.xpath("//*[text()='" + "$" + finalPrice + "']"));
+        finalPriceValueUi.shouldBe(visible, Duration.ofSeconds(12));
+        assertTrue(finalPriceValueUi.isDisplayed(), "Final price calculated correctly");
+    }
+
+    @And("I verify item price")
+    public void iVerifyItemPrice() {
+        conciergeProjectScreen.getRegularPriceValue().shouldBe(visible, Duration.ofSeconds(14));
+        itemPrice = conciergeProjectScreen.getRegularPriceValue().getText();
+    }
+
+    @When("I change size {string} for project item")
+    public void iChangeSizeForProjectItem(String size) {
+        Select selectMirrorSize = new Select(conciergeProjectScreen.getMirrorSize());
+        selectMirrorSize.selectByValue(size);
+    }
+
+    @When("I change finish {string} option for project item")
+    public void iChangeFinishOptionForProjectItem(String finishValue) {
+        Select selectFinish = new Select(conciergeProjectScreen.getFinishOption());
+        selectFinish.selectByVisibleText(finishValue);
+    }
+
+    @Then("I verify that price was not changes")
+    public void iVerifyThatPriceWasNotChanges() {
+        conciergeProjectScreen.getRegularPriceValue().shouldBe(visible, Duration.ofSeconds(12));
+        assertEquals(conciergeProjectScreen.getRegularPriceValue().getText(), itemPrice, "Price was not changed");
+    }
+
+    @Then("I verify that forecast value is updated after hiding the item")
+    public void iVerifyThatForecastValueIsUpdatedAfterHidingTheItem() {
+        conciergeProjectScreen.getForeCastAmount().shouldBe(visible, Duration.ofSeconds(15));
+        executeJavaScript("window.scrollBy(0,200)", "");
+        conciergeProjectScreen.getCheckMarkItemButton().click();
+        String priceBeforeHide = conciergeProjectScreen.getForeCastAmount().getText();
+        conciergeProjectScreen.getCheckMarkItemButton().click();
+        String priceAfterHide = conciergeProjectScreen.getForecastSetButton().getText();
+        assertFalse(priceBeforeHide.equals(priceAfterHide), "Forecast value is updated after ");
+    }
+
+    @When("I click on print button")
+    public void iClickOnPrintButton() {
+        conciergeProjectScreen.getPrintButton().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeProjectScreen.getPrintButton().click();
+    }
+
+    @When("I click on {string} button")
+    public void iClickOnButton(String buttonName) {
+        $(By.xpath("//*[text()='" + buttonName + "']")).shouldBe(visible, Duration.ofSeconds(12));
+        $(By.xpath("//*[text()='" + buttonName + "']")).click();
+    }
+
+    @Then("I verify print popup is displayd")
+    public void iVerifyPrintPopupIsDisplayd() {
+        switchTo().frame($(By.id("pdf-viewer")));
+        conciergeProjectScreen.getPrintPopUp().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeProjectScreen.getPrintPopUp().isDisplayed();
     }
 }

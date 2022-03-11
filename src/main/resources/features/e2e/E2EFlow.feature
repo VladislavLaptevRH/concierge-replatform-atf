@@ -73,6 +73,7 @@ Feature: Verify e2e flow
   Scenario: Verify that user is able to add item to project and pay
     Given I log into Concierge as "associate"
     When I remove all items from cart
+    When I remove client from header
     When I choose client from header
     When I go to item "112848 MULT" from search field
     And I select count of product

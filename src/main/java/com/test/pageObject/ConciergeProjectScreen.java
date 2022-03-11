@@ -3,6 +3,7 @@ package com.test.pageObject;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
+
 import static com.codeborne.selenide.Selenide.$;
 
 @Getter
@@ -137,6 +138,46 @@ public class ConciergeProjectScreen {
     private final SelenideElement test1Space = $(By.xpath("//option[text()='test1']"));
 
     private final SelenideElement test2Space = $(By.xpath("//option[text()='test2']"));
+
+    private final SelenideElement itemIdSpan = $(By.xpath("//*[text()='Item#']"));
+
+    private final SelenideElement REMOVEbutton = $(By.xpath("//*[text()='REMOVE']"));
+
+    private final SelenideElement amount7295 = $(By.xpath("//*[text()='$7,295.00']"));
+
+    private final SelenideElement amount50 = $(By.xpath("//*[text()='$50.00']"));
+
+    private final SelenideElement amount549 = $(By.xpath("//*[text()='$549.00']"));
+
+    private final SelenideElement amount4923 = $(By.xpath("//*[text()='$4,923.90']"));
+
+    private final SelenideElement percentDiscount = $(By.id("outlined-helperText"));
+
+    private SelenideElement dollarAmountField = $(By.id("dollar-amount"));
+
+    private SelenideElement shippingOverridePriceReason = $(By.id("override-reason"));
+
+    private SelenideElement reasonCode = $(By.id("reasoncode-select-outlined"));
+
+    private SelenideElement applyButton = $(By.xpath("//*[text()='Apply']"));
+
+    private SelenideElement percentOffSelect = $(By.id("method-select-outlined"));
+
+    private SelenideElement lancasterSofaQty = $(By.id("quantity_I51173680"));
+
+    private SelenideElement mirrorSize = $(By.id("optionSelect-0"));
+
+    private SelenideElement finishOption = $(By.id("optionSelect-1"));
+
+    private SelenideElement printPopUp = $(By.id("documentInfo"));
+
+    private final SelenideElement checkMarkItemButton = $(By.xpath("//div/div/div[2]/div/div/div/div/div/div[1]//div[1]//button[2]"));
+
+    private final SelenideElement foreCastAmount = $(By.xpath("//div[2]//div[3]//div[1]//div[5]/div[1]"));
+
+    private final SelenideElement editItemOptions = $(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div/div/div[1]/div/button[1]"));
+
+    private SelenideElement regularPriceValue = $(By.cssSelector(".MuiTypography-root.MuiTypography-body1.MuiTypography-alignCenter"));
 
     private final SelenideElement emailEstimateSendButton = $(By.cssSelector("button[type='submit'] span[class='MuiButton-label']"));
 }

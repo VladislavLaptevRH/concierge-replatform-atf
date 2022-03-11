@@ -131,8 +131,10 @@ public class AbstractStepDefs {
 
     @When("I choose client from header")
     public void iChooseClientFromHeader() {
-        SelenideElement noClientButton = $(By.xpath("//*[text()='Client']"));
+        sleep(2000);
         try {
+            conciergeUserAccountPage.getSearchButton().shouldBe(visible, Duration.ofSeconds(10));
+            SelenideElement noClientButton = $(By.xpath("//*[text()='Client']"));
             noClientButton.shouldBe(visible, Duration.ofSeconds(5));
             if (noClientButton.isDisplayed()) {
                 conciergeUserAccountPage.getClientButton().click();
@@ -176,7 +178,7 @@ public class AbstractStepDefs {
 
     @When("I click on rh concierge logo")
     public void iClickOnRhConciergeLogo() {
-        conciergeUserAccountPage.getRhConciergeLogo().shouldBe(visible, Duration.ofSeconds(60));
+        conciergeUserAccountPage.getRhConciergeLogo().shouldBe(visible, Duration.ofMinutes(2));
         conciergeUserAccountPage.getRhConciergeLogo().click();
     }
 

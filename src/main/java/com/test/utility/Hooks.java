@@ -70,7 +70,7 @@ public class Hooks {
         DesiredCapabilities dr = new DesiredCapabilities();
         dr.setBrowserName("chrome");
         dr.setCapability(ChromeOptions.CAPABILITY, options);
-        
+
         String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
         RemoteWebDriver driver = null;
         try {

@@ -4,10 +4,19 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class SelectOption {
+
+    private final SelenideElement lancasterColor = $(By.xpath("//select[@id='optionSelect-4']"));
+
+    private final List<SelenideElement> lancastColorsList = $$(By.xpath("//select[@id='optionSelect-4']//option"));
+
+    private final SelenideElement quantityOfLancasterOption = $(By.id("quantity_I04937570"));
 
     private final SelenideElement sizeOption = $(By.xpath("//select[@id='optionSelect--Size']"));
 

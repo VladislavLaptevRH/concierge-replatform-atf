@@ -302,11 +302,12 @@ public class ConciergeE2EStepDefs {
 
     @When("I go to item {string} from search field")
     public void iGoToItemFromSearchField(String arg0) {
+        sleep(3);
         generalStepDefs.isElementVisible("//input[contains(@class,'MuiOutlinedInput-inputAdornedStart')]");
         conciergeUserAccountPage.getSearchItemField().setValue(arg0);
-        generalStepDefs.isElementVisible("//*[text()='Search']");
+        conciergeUserAccountPage.getSearchButton().shouldBe(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getSearchButton().click();
-        generalStepDefs.isElementVisible("//span[@class='MuiButton-label']");
+        conciergeUserAccountPage.getSeeResultsButton().shouldBe(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getSeeResultsButton().click();
     }
 

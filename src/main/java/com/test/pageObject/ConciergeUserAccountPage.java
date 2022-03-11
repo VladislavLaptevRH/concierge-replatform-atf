@@ -90,7 +90,7 @@ public class ConciergeUserAccountPage {
 
     private SelenideElement brandButton = $(By.xpath("//div[2]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6"));
 
-    private SelenideElement clientLookupHeaderBtn = $(By.xpath("//*[text()='Client Lookup']"));
+    private SelenideElement clientLookupHeaderBtn = $(By.xpath("//li[@id='1']"));
 
     private SelenideElement clientLookupBtnId = $(By.xpath("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li[@id='1']"));
 

@@ -1,4 +1,4 @@
-Feature:Verify client search
+Feature: Verify client search
 
   Scenario Outline: Verify client search by <searchBy>
     Given I log into Concierge as "associate"
@@ -6,12 +6,11 @@ Feature:Verify client search
     When I search client by "<searchBy>"
     Then I verify that client results is displayed
     Examples:
-      | searchBy |
-      | email    |
-      | lastName |
-      | memberID                         |
-      | businessAccountNumber            |
-#      | phone number,postal code,company |
+      | searchBy              |
+      | email                 |
+      | lastName              |
+      | memberID              |
+      | businessAccountNumber |
 
   Scenario: Verify that user is able to create new client
     Given I log into Concierge as "associate"

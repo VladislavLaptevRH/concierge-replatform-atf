@@ -3,7 +3,8 @@ Feature: Verify projects
   Scenario Outline: Verify that user is able to find project by <searchBy>
     Given I log into Concierge as "associate"
     When I click on projects button
-    When I search project by provided "<searchBy>"
+    When I search project "test" by provided "<searchBy>"
+#    When I search project by provided "<searchBy>"
     Then I verify that search result is displayed
     Examples:
       | searchBy    |
@@ -53,7 +54,7 @@ Feature: Verify projects
   Scenario: Verify project settings are available
     Given I log into Concierge as "associate"
     When I click on projects button
-    When I search project by provided "projectName"
+    When I search project "test" by provided "projectName"
     When I click on the first project search result
     When I click on settings button
     Then I verify that project setting screen is displayed
@@ -61,7 +62,7 @@ Feature: Verify projects
   Scenario: Verify project list moodboard
     Given I log into Concierge as "associate"
     When I click on projects button
-    When I search project by provided "projectName"
+    When I search project "test" by provided "projectName"
     When I click on the first project search result
     When I click on the moodboard button
     Then moodboard screen is displayed
@@ -69,7 +70,7 @@ Feature: Verify projects
   Scenario: Verify that user is able to add new space and edit
     Given I log into Concierge as "associate"
     When I click on projects button
-    When I search project by provided "projectName"
+    When I search project "test" by provided "projectName"
     When I click on the first project search result
     When I click on settings button
     When I introduces space name
@@ -80,7 +81,7 @@ Feature: Verify projects
   Scenario: Verify that user is able to create new opportunity and add items
     Given I log into Concierge as "associate"
     When I click on projects button
-    When I search project by provided "projectName"
+    When I search project "test" by provided "projectName"
     When I click on the first project search result
     When I click on add new opportunity button
     When I introduce opportunity name
@@ -93,10 +94,10 @@ Feature: Verify projects
     When I add item to created opportunity
     Then I verify that item was added
 
-  Scenario Outline: Verify email estimation - send to client verify the email address received and sent
+  Scenario Outline: Verify email estimation - send to client verify the email address received and sent for <email>
     Given I log into Concierge as "associate"
     When I click on projects button
-    When I search project by provided "projectName"
+    When I search project "modifyitemsoptions" by provided "projectName"
     When I click on the first project search result
     When I click on email estimate button from project screen
     When I introduces client email from email estimate pop up
@@ -111,7 +112,7 @@ Feature: Verify projects
   Scenario: Verify email estimation - send to bcc verify the email address received and sent
     Given I log into Concierge as "associate"
     When I click on projects button
-    When I search project by provided "projectName"
+    When I search project "modifyitemsoptions" by provided "projectName"
     When I click on the first project search result
     When I click on email estimate button from project screen
     When I click on bcc associate checkbox
@@ -149,6 +150,102 @@ Feature: Verify projects
     When I click on add to cart button
     When I click on move to project button
     Then I verify that spaces list is displayed
+
+  Scenario: Verify that user is able to update item option
+    Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "modifyitemsoptions" by provided "projectName"
+    When I click on the first project search result
+    When I click on edit options button
+    When I choose color from option
+    Then verify that color was changed
+
+  Scenario: Verify that user is able to update item quantity
+    Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "modifyitemsoptions" by provided "projectName"
+    When I click on the first project search result
+    When I click on edit options button
+    When I choose quantity for item from project
+    Then verify that quantity for item was changed
+
+  Scenario: Verify that user is able to remove items from project
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I choose client from header
+    When I go to item "112848 MULT" from search field
+    And I select count of product
+    When I click on add to project button
+    When I click on add to cart button from project screen
+    When I click on move to project button
+    And I choose project by project name "removeitemsfromproject"
+    When I click on save button
+    When I click on remove button from project for added item
+    Then I verify that item was removed
+
+  Scenario: Verify price override for item from project
+    Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "overrideprice" by provided "projectName"
+    When I click on the first project search result
+    And I click on regular price for item projects
+    But I choose "percentOff" method for price override
+    And I introduce "10" percent discount
+    When I introduce "G" for reason code
+    Then I verify that overriden price displayed
+
+  Scenario: Verify shipping overrides in projects
+    Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "overrideshipping" by provided "projectName"
+    When I click on the first project search result
+    And I click on unlimited furniture delivery price
+    When I introduces "50" in dollar amount field
+    And I choose "CustomerDelight" reason
+    Then I verified that override price for shipping displayed
+
+  Scenario: Verify subtotal/forecast by updating qty for items
+    Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "subototalforecastupdatingqty" by provided "projectName"
+    When I click on the first project search result
+    And I set the random quantity of goods
+    Then I verify that subtotal amount updated according by quantity of items
+
+  Scenario: Verify subtotal/forecast by updating edit configuration of skus - ex - change rug size and notice the price update for line, space, sub total and forecast
+    Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "checkpricesafteroptionupdate" by provided "projectName"
+    When I click on the first project search result
+    When I click on edit options button
+    And I verify item price
+    When I change size "112800000" for project item
+    When I change finish "Brass " option for project item
+    Then I verify that price was not changes
+
+  Scenario: Verify subtotal/forecast by updating by hide/unhide items
+    Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "hideunhideitems" by provided "projectName"
+    When I click on the first project search result
+    Then I verify that forecast value is updated after hiding the item
+
+  Scenario: Verify subtotal/forecast by updating qty hide/unhide spaces
+    Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "hideunhidespace" by provided "projectName"
+    When I click on the first project search result
+
+  Scenario: Verify test project list and moodboard print - moodboard CMD+P or Browser print only
+    Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "overrideshipping" by provided "projectName"
+    When I click on the first project search result
+    When I click on "Print" button
+    When I click on "YES" button
+
+
+
 
 
 
