@@ -28,6 +28,8 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement closePopUp = $(By.xpath("//button[@data-testid='form-dialog-close-button']"));
 
+    private final SelenideElement colorCloseButton = $(By.xpath("//div[@class='MuiDialogTitle-root']/button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit']"));
+
     private final SelenideElement noThanksButton = $(By.xpath("//*[text()='NO, THANKS']"));
 
     private final SelenideElement totalMemberPrice = $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-alignRight']"));

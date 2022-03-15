@@ -32,6 +32,7 @@ public class ConciergeE2EStepDefs {
     ConciergeOrderHistoryForm conciergeOrderHistoryForm = new ConciergeOrderHistoryForm();
     PaymentScreen paymentScreen = new PaymentScreen();
     SelectOption selectOption = new SelectOption();
+    ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
     String usState = "";
 
     @When("I click on add to project button")
@@ -39,11 +40,6 @@ public class ConciergeE2EStepDefs {
         conciergeItemsScreen.getAddToProjectButton().shouldBe(visible, Duration.ofSeconds(12));
         conciergeItemsScreen.getAddToProjectButton().click();
 
-        conciergeItemsScreen.getSaveProjectPopUpButton().shouldBe(visible, Duration.ofSeconds(12));
-        conciergeItemsScreen.getSaveProjectPopUpButton().click();
-
-        generalStepDefs.isElementVisible("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4'][1]//button[contains(@class,'MuiButtonBase-root MuiButton-root MuiButton-contained')]");
-        conciergeItemsScreen.getGoToProjectButton().click();
     }
 
     @When("I click on go to project button")
@@ -59,6 +55,8 @@ public class ConciergeE2EStepDefs {
         generalStepDefs.isElementVisible("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth']/span[@class='MuiButton-label']");
         SelenideElement element = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth']/span[@class='MuiButton-label']"));
         executeJavaScript("arguments[0].click();", element);
+
+
     }
 
     @When("I choose random brand from menu")
@@ -73,37 +71,30 @@ public class ConciergeE2EStepDefs {
     @When("I go to item which has {string} restriction")
     public void iGoToItemWhichHasRestriction(String state) {
         usState = state;
+        sleep(3);
         if (state.equals("NY")) {
             conciergeUserAccountPage.getSearchItemField().shouldBe(visible, Duration.ofSeconds(15));
             conciergeUserAccountPage.getSearchItemField().setValue("112411 BLSH BUMP");
             conciergeUserAccountPage.getSearchButton().click();
+            conciergeUserAccountPage.getSeeResultsButton().shouldBe(visible, Duration.ofSeconds(15));
+            conciergeUserAccountPage.getSeeResultsButton().click();
+
         }
         if (state.equals("CA")) {
             conciergeUserAccountPage.getSearchItemField().shouldBe(visible, Duration.ofSeconds(15));
-            conciergeUserAccountPage.getSearchItemField().setValue("102980 IVOR");
+            conciergeUserAccountPage.getSearchItemField().setValue("prod20240042");
             conciergeUserAccountPage.getSearchButton().click();
-//            generalStepDefs.isElementVisible("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul//li[@class='MuiGridListTile-root']");
-            conciergeItemsScreen.getItems().get(0).shouldBe(visible, Duration.ofSeconds(12));
-            conciergeItemsScreen.getItems().get(0).click();
         }
-        try {
-            conciergeUserAccountPage.getSeeResultsButton().shouldBe(visible, Duration.ofSeconds(15));
-            if (conciergeUserAccountPage.getSeeResultsButton().isDisplayed()) {
-                conciergeUserAccountPage.getSeeResultsButton().click();
-            }
-        } catch (com.codeborne.selenide.ex.InvalidStateException e) {
-            System.out.println("See results button is not displayed");
-        }
-
     }
 
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
         conciergeItemsScreen.getAddToCartButton().shouldBe(visible, Duration.ofSeconds(30));
+        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         executeJavaScript("arguments[0].click();", conciergeItemsScreen.getAddToCartButton());
         if (usState.equals("CA")) {
             try {
-                $(By.xpath("//button[@id='spo-auth-addToCart']")).shouldBe(visible, Duration.ofSeconds(5));
+                conciergeItemsScreen.getAggreeeAndAddToCardButton().shouldBe(visible, Duration.ofSeconds(20));
                 conciergeItemsScreen.getAggreeeAndAddToCardButton().click();
             } catch (com.codeborne.selenide.ex.ElementNotFound e) {
                 System.out.println("Agree&add to card button is not displayed");
@@ -163,13 +154,14 @@ public class ConciergeE2EStepDefs {
 
     @When("I continue to payment")
     public void continueToPaymentAfterAddressCheckout() {
-        checkoutAddressScreen.getContinuePaymentButton().shouldBe(visible, Duration.ofSeconds(40));
+        checkoutAddressScreen.getContinuePaymentButton().shouldBe(visible, Duration.ofMinutes(1));
         executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
         checkoutAddressScreen.getContinuePaymentButton().click();
-
         try {
-            checkoutAddressScreen.getContinueButton().shouldBe(visible, Duration.ofSeconds(30));
+            checkoutAddressScreen.getContinueButton().shouldBe(visible, Duration.ofSeconds(40));
             executeJavaScript("arguments[0].click();", checkoutAddressScreen.getContinueButton());
+            conciergeAddressScreen.getOkButton().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeAddressScreen.getOkButton().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Continue from popup is not displayed");
         }
@@ -291,8 +283,8 @@ public class ConciergeE2EStepDefs {
             conciergeItemsScreen.getAddToCartButton().click();
 
             $(By.xpath("//div[@class='MuiDialogTitle-root']/button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit']")).shouldBe(visible, Duration.ofSeconds(12));
-            SelenideElement closeButton = $(By.xpath("//div[@class='MuiDialogTitle-root']/button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit']"));
-            closeButton.click();
+            conciergeCartPageScreen.getClosePopUp().shouldBe(visible, Duration.ofSeconds(15));
+            conciergeCartPageScreen.getClosePopUp().click();
 
             $(By.xpath("//a[@id='nav-logo-img']")).shouldBe(visible, Duration.ofSeconds(12));
             SelenideElement logoButton = $(By.xpath("//a[@id='nav-logo-img']"));
@@ -318,31 +310,32 @@ public class ConciergeE2EStepDefs {
 
         if (brand.equals("RH Modern")) {
             conciergeUserAccountPage.getListOfBrands().get(1).shouldBe(visible, Duration.ofSeconds(12));
-            conciergeUserAccountPage.getListOfBrands().get(1).click();
+            executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getListOfBrands().get(1));
         }
         if (brand.equals("RH Baby&Child")) {
             conciergeUserAccountPage.getListOfBrands().get(2).shouldBe(visible, Duration.ofSeconds(12));
-            conciergeUserAccountPage.getListOfBrands().get(2).click();
+            executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getListOfBrands().get(2));
+
         }
         if (brand.equals("RH Teen")) {
             conciergeUserAccountPage.getListOfBrands().get(3).shouldBe(visible, Duration.ofSeconds(12));
-            conciergeUserAccountPage.getListOfBrands().get(3).click();
+            executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getListOfBrands().get(3));
         }
         if (brand.equals("RH Outdoor")) {
             conciergeUserAccountPage.getListOfBrands().get(4).shouldBe(visible, Duration.ofSeconds(12));
-            conciergeUserAccountPage.getListOfBrands().get(4).click();
+            executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getListOfBrands().get(4));
         }
         if (brand.equals("RH SKI House")) {
             conciergeUserAccountPage.getListOfBrands().get(5).shouldBe(visible, Duration.ofSeconds(12));
-            conciergeUserAccountPage.getListOfBrands().get(5).click();
+            executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getListOfBrands().get(5));
         }
         if (brand.equals("RH Beach House")) {
             conciergeUserAccountPage.getListOfBrands().get(6).shouldBe(visible, Duration.ofSeconds(12));
-            conciergeUserAccountPage.getListOfBrands().get(6).click();
+            executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getListOfBrands().get(6));
         }
         if (brand.equals("RH Interiors")) {
             conciergeUserAccountPage.getListOfBrands().get(7).shouldBe(visible, Duration.ofSeconds(12));
-            conciergeUserAccountPage.getListOfBrands().get(7).click();
+            executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getListOfBrands().get(7));
         }
     }
 
@@ -390,13 +383,15 @@ public class ConciergeE2EStepDefs {
     public void iRemoveClientFromHeader() {
         try {
             sleep(2);
-            if (conciergeUserAccountPage.getAutomationClientButton().isDisplayed()) {
+            if (!$(By.xpath("//*[text()='Client']")).isDisplayed()) {
+                conciergeUserAccountPage.getClientButton().shouldBe(visible, Duration.ofMinutes(2));
+                conciergeUserAccountPage.getClientButton().click();
                 sleep(2);
-                conciergeUserAccountPage.getAutomationClientButton().click();
-                sleep(2);
-                conciergeUserAccountPage.getRemoveClientButton().click();
+                SelenideElement selenideElement = $(By.xpath("//*[text()='Remove Client']"));
+                selenideElement.click();
+//            conciergeUserAccountPage.getRemoveClientButton().click();
             }
-        } catch (Exception e) {
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Client is not selected");
         }
     }

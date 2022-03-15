@@ -13,7 +13,7 @@ Feature: Verify projects
       | createdBy   |
       | editedBy    |
 
-  Scenario Outline: Verify that user is able to find project by <pricingType>
+  Scenario Outline: Verify that user is able to find project by pricing type - <pricingType>
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project by "<pricingType>"
@@ -41,7 +41,7 @@ Feature: Verify projects
   Scenario: Verify that user is able to move cart to project
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I choose client from header
+#    When I choose client from header
     When I clicks on a random menu item
     When I clicks on o random item
     When I fill all options for item
@@ -124,7 +124,6 @@ Feature: Verify projects
   Scenario: Verify the Project list and switching between the projects -CART/PDP
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I choose client from header
     When I go to item "112848 MULT" from search field
     And I select count of product
     When I click on add to cart button
@@ -134,7 +133,6 @@ Feature: Verify projects
   Scenario: Verify the Opportunities list and switching between the opportunities -CART/PDP
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I choose client from header
     When I go to item "112848 MULT" from search field
     And I select count of product
     When I click on add to cart button
@@ -144,7 +142,6 @@ Feature: Verify projects
   Scenario: Verify the Spaces list and switching between the Spaces -CART/PDP
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I choose client from header
     When I go to item "112848 MULT" from search field
     And I select count of product
     When I click on add to cart button
@@ -172,14 +169,12 @@ Feature: Verify projects
   Scenario: Verify that user is able to remove items from project
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I choose client from header
     When I go to item "112848 MULT" from search field
     And I select count of product
     When I click on add to project button
-    When I click on add to cart button from project screen
-    When I click on move to project button
     And I choose project by project name "removeitemsfromproject"
     When I click on save button
+    When I click on go to project button
     When I click on remove button from project for added item
     Then I verify that item was removed
 

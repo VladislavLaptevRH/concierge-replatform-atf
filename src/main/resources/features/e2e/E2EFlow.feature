@@ -3,7 +3,7 @@ Feature: Verify e2e flow
   Scenario: Verify that user is able to execute split payment using all payment methods
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    And I choose client from header
+    When I remove client from header
     When I go to item "112848 MULT" from search field
     And I select count of product
     When I click on add to cart button
@@ -39,7 +39,6 @@ Feature: Verify e2e flow
   Scenario: Verify that user is able to buy item
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I choose client from header
     When I clicks on a random menu item
     When I clicks on o random item
     And I select count of product
@@ -55,7 +54,6 @@ Feature: Verify e2e flow
   Scenario Outline: Verify that user is able to but item through search item by SKU id
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I choose client from header
     When I go to item "<skuID>" from search field
     And I select count of product
     When I click on add to cart button
@@ -74,10 +72,10 @@ Feature: Verify e2e flow
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I choose client from header
     When I go to item "112848 MULT" from search field
     And I select count of product
     When I click on add to project button
+    When I choose project from addToProject popup
     When I click on add to cart button from project screen
     When I click on checkout button
     When I fill all fields from address screen
@@ -88,7 +86,7 @@ Feature: Verify e2e flow
   Scenario Outline: Verify that user is able to buy item from brand menu - <brands>
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I choose client from header
+    When I remove client from header
     When I choose "<brands>" from brand menu
     When I clicks on a random menu item
     When I clicks on o random item
@@ -114,7 +112,7 @@ Feature: Verify e2e flow
   Scenario Outline: Verify <state> shipping restriction
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I choose client from header
+    When I remove client from header
     When I go to item which has "<state>" restriction
     When I fill all options for item
     When I click on add to cart button

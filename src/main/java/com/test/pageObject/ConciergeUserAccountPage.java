@@ -3,7 +3,9 @@ package com.test.pageObject;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
+
 import java.util.List;
+
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -133,5 +135,8 @@ public class ConciergeUserAccountPage {
     private SelenideElement inStockWindows = $(By.xpath("//*[text()='In-Stock Windows']"));
 
     private SelenideElement toddlerBedding = $(By.xpath("//*[text()='Toddler Bedding']"));
+
+    private List<SelenideElement> toddlerBeddingList = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul[@class='MuiGridList-root']/li[@class='MuiGridListTile-root']"));
+
 
 }

@@ -1,5 +1,6 @@
 package com.test.stepdefinitions;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.test.pageObject.*;
 import io.cucumber.java.en.*;
@@ -8,8 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.testng.Assert.*;
 
@@ -53,22 +53,26 @@ public class ProjectStepDefs {
 
     @When("I search project by {string}")
     public void iSearchProjectBy(String pricingType) {
-        conciergeProjectScreen.getSearchBySelect().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getSearchBySelect().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
         conciergeProjectScreen.getSearchBySelect().click();
-        conciergeProjectScreen.getPricingType().shouldBe(visible, Duration.ofSeconds(20));
+
+        conciergeProjectScreen.getPricingType().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
         conciergeProjectScreen.getPricingType().click();
-        conciergeProjectScreen.getPricingTypeSelect().shouldBe(visible, Duration.ofSeconds(20));
+        sleep(3000);
         conciergeProjectScreen.getPricingTypeSelect().click();
+
+        sleep(2000);
         if (pricingType.equals("regular")) {
-            conciergeProjectScreen.getRegularPricingType().click();
+            conciergeProjectScreen.getRegularPricingType().shouldBe(visible, Duration.ofSeconds(20));
+            executeJavaScript("arguments[0].click();", conciergeProjectScreen.getRegularPricingType());
         }
         if (pricingType.equals("member")) {
             conciergeProjectScreen.getMemberPricingType().shouldBe(visible, Duration.ofSeconds(20));
-            conciergeProjectScreen.getMemberPricingType().click();
+            executeJavaScript("arguments[0].click();", conciergeProjectScreen.getMemberPricingType());
         }
         if (pricingType.equals("trade")) {
             conciergeProjectScreen.getTradePricingType().shouldBe(visible, Duration.ofSeconds(20));
-            conciergeProjectScreen.getTradePricingType().click();
+            executeJavaScript("arguments[0].click();", conciergeProjectScreen.getTradePricingType());
         }
     }
 
@@ -84,6 +88,7 @@ public class ProjectStepDefs {
     @When("I introduces {string} first and last name")
     public void iIntroducesFirstAndLastName(String businessClient) {
         conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofSeconds(25));
+        sleep(2000);
         if (businessClient.equals("member")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
@@ -102,6 +107,7 @@ public class ProjectStepDefs {
         }
 
         conciergeProjectScreen.getContinueCreateAProjectButton().click();
+
         conciergeProjectScreen.getProjectResultsFirstRow().shouldBe(visible, Duration.ofSeconds(12));
         conciergeProjectScreen.getProjectResultsFirstRow().click();
     }
@@ -115,13 +121,16 @@ public class ProjectStepDefs {
     @When("I introduces details for new project")
     public void iIntroducesDetailsForNewProject() {
         conciergeProjectScreen.getPreferredContactMethodSelect().shouldBe(visible, Duration.ofSeconds(40));
-        conciergeProjectScreen.getPreferredContactMethodSelect().click();
+        $(By.cssSelector("div[class='MuiInputBase-root MuiOutlinedInput-root Mui-error Mui-error MuiInputBase-fullWidth MuiInputBase-formControl'] div[role='button']")).click();
+//        executeJavaScript("arguments[0].click();", conciergeProjectScreen.getPreferredContactMethodSelect());
+
         conciergeProjectScreen.getPreferredEmailContactMethod().shouldBe(visible, Duration.ofSeconds(30));
-        conciergeProjectScreen.getPreferredEmailContactMethod().click();
+        executeJavaScript("arguments[0].click();", conciergeProjectScreen.getPreferredEmailContactMethod());
+
         conciergeProjectScreen.getCreateProjectDetailsDescriptionField().shouldBe(visible, Duration.ofSeconds(30));
         conciergeProjectScreen.getCreateProjectDetailsDescriptionField().setValue("testDescription");
-        conciergeProjectScreen.getCreateProjectButton().click();
 
+        executeJavaScript("arguments[0].click();", conciergeProjectScreen.getCreateProjectButton());
     }
 
     @Then("I verify that new project for <{string}> was created")
@@ -270,24 +279,28 @@ public class ProjectStepDefs {
 
     @When("I add item to created opportunity")
     public void iAddItemToCreatedOpportunity() {
-        conciergeItemsScreen.getAddToProjectButton().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeItemsScreen.getAddToProjectButton().shouldBe(visible, Duration.ofSeconds(20));
         conciergeItemsScreen.getAddToProjectButton().click();
-        conciergeProjectScreen.getSelectOpportunityName().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getSelectOpportunityName().shouldBe(visible, Duration.ofSeconds(20));
+        sleep(3000);
         conciergeProjectScreen.getSelectOpportunityName().click();
     }
 
     @Then("I verify that item was added")
     public void iVerifyThatItemWasAdded() {
-        conciergeProjectScreen.getSaveMoveToProject().shouldBe(visible, Duration.ofSeconds(25));
-        conciergeProjectScreen.getSaveMoveToProject().click();
-        conciergeProjectScreen.getGoToProjectButton().click();
+        conciergeProjectScreen.getSaveMoveToProject().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+        ;
+        executeJavaScript("arguments[0].click();", conciergeProjectScreen.getSaveMoveToProject());
+        conciergeProjectScreen.getGoToProjectButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+        ;
+        executeJavaScript("arguments[0].click();", conciergeProjectScreen.getGoToProjectButton());
     }
 
     @When("I click on email estimate button")
     public void iClickOnEmailEstimateButton() {
-        conciergeProjectScreen.getEmailEstimateButton().shouldBe(visible, Duration.ofSeconds(40));
+        conciergeProjectScreen.getEmailEstimateButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
         conciergeProjectScreen.getEmailEstimateButton().scrollIntoView(true);
-        conciergeProjectScreen.getEmailEstimateButton().click();
+        executeJavaScript("arguments[0].click();", conciergeProjectScreen.getEmailEstimateButton());
     }
 
     @When("I introduces client email from email estimate pop up")
@@ -301,13 +314,16 @@ public class ProjectStepDefs {
     @When("I introduces email in send copies of this project to additional emails")
     public void iIntroducesEmailInSendCopiesOfThisProjectToAdditionalEmails() {
         aditionalEmail = generalStepDefs.getAlphaNumericString(4) + "@mailinator.com";
+        conciergeProjectScreen.getEmailEstimateAdditionEmailField().shouldBe(visible, Duration.ofSeconds(20));
         conciergeProjectScreen.getEmailEstimateAdditionEmailField().setValue(aditionalEmail);
     }
 
     @When("I click on email estimate button from project screen")
     public void iClickOnEmailEstimateButtonFromProjectScreen() {
-        conciergeProjectScreen.getEmailEstimateProjectScreen().shouldBe(visible, Duration.ofSeconds(12));
-        conciergeProjectScreen.getEmailEstimateProjectScreen().scrollIntoView(true);
+        sleep(3000);
+        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+        sleep(2000);
+        conciergeProjectScreen.getEmailEstimateProjectScreen().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getEmailEstimateProjectScreen());
     }
 
@@ -380,43 +396,41 @@ public class ProjectStepDefs {
     public void iGoToCategory() {
         conciergeUserAccountPage.getInStockButtonMenu().shouldBe(visible, Duration.ofSeconds(20));
         conciergeUserAccountPage.getInStockButtonMenu().click();
-
         conciergeUserAccountPage.getInStockBedding().shouldBe(visible, Duration.ofSeconds(20));
         conciergeUserAccountPage.getInStockBedding().click();
-
         conciergeUserAccountPage.getToddlerBedding().shouldBe(visible, Duration.ofSeconds(20));
         conciergeUserAccountPage.getToddlerBedding().click();
-
     }
 
 
     @When("I search project {string} by provided {string}")
     public void iSearchProjectByProvided(String projectName, String searchBy) {
-        conciergeProjectScreen.getSearchBySelect().shouldBe(visible, Duration.ofMinutes(1));
-        conciergeProjectScreen.getSearchBySelect().click();
+        $(By.cssSelector("#demo-simple-select-outlined")).shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
+        $(By.cssSelector("#demo-simple-select-outlined")).click();
         if (searchBy.equals("projectName")) {
-            conciergeProjectScreen.getProjectNameButton().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getProjectNameButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+            ;
             conciergeProjectScreen.getProjectNameButton().click();
-            conciergeProjectScreen.getProjectNameField().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getProjectNameField().shouldBe(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getProjectNameField().setValue(projectName);
         }
         if (searchBy.equals("projectID")) {
-            conciergeProjectScreen.getProjectIdButton().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getProjectIdButton().shouldBe(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getProjectIdButton().click();
-            conciergeProjectScreen.getProjectIdField().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getProjectIdField().shouldBe(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getProjectIdField().setValue("P54909938");
         }
         if (searchBy.equals("createdBy")) {
-            conciergeProjectScreen.getCreatedByButton().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getCreatedByButton().shouldBe(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getCreatedByButton().click();
-            conciergeProjectScreen.getClientFirstNameField().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getClientFirstNameField().shouldBe(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getClientFirstNameField().setValue("Renuka");
             conciergeProjectScreen.getClientLastNameField().setValue("Boorla");
         }
         if (searchBy.equals("editedBy")) {
-            conciergeProjectScreen.getEditedBy().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getEditedBy().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
             conciergeProjectScreen.getEditedBy().click();
-            conciergeProjectScreen.getClientFirstNameField().shouldBe(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getClientFirstNameField().shouldBe(visible, Duration.ofSeconds(40));
             conciergeProjectScreen.getClientFirstNameField().setValue("Renuka");
             conciergeProjectScreen.getClientLastNameField().setValue("Boorla");
         }
@@ -426,7 +440,7 @@ public class ProjectStepDefs {
 
     @When("I choose color from option")
     public void iChooseColorFromOption() {
-        selectOption.getLancasterColor().shouldBe(visible, Duration.ofSeconds(15));
+        selectOption.getLancasterColor().shouldBe(visible, Duration.ofSeconds(20));
         randomColor = generalStepDefs.getRandomNumber(0, 3);
         Select selectColor = new Select(selectOption.getLancasterColor());
         selectColor.selectByIndex(randomColor);
@@ -530,7 +544,9 @@ public class ProjectStepDefs {
 
     @And("I click on unlimited furniture delivery price")
     public void iClickOnUnlimitedFurnitureDeliveryPrice() {
-        conciergeProjectScreen.getAmount549().shouldBe(visible, Duration.ofSeconds(20));
+        sleep(2000);
+        executeJavaScript("window.scrollBy(0,550)", "Scroll to regular price");
+        conciergeProjectScreen.getAmount549().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
         conciergeProjectScreen.getAmount549().click();
     }
 
@@ -622,5 +638,17 @@ public class ProjectStepDefs {
         switchTo().frame($(By.id("pdf-viewer")));
         conciergeProjectScreen.getPrintPopUp().shouldBe(visible, Duration.ofSeconds(12));
         conciergeProjectScreen.getPrintPopUp().isDisplayed();
+    }
+
+    @When("I choose project from addToProject popup")
+    public void iChooseProjectFromAddToProjectPopup() {
+        conciergeProjectScreen.getAddToProjectProjectName().shouldBe(visible, Duration.ofMinutes(1));
+        Select selectProject = new Select(conciergeProjectScreen.getAddToProjectProjectName());
+        sleep(2000);
+        selectProject.selectByVisibleText("addToProject");
+        conciergeItemsScreen.getSaveProjectPopUpButton().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeItemsScreen.getSaveProjectPopUpButton().click();
+        generalStepDefs.isElementVisible("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4'][1]//button[contains(@class,'MuiButtonBase-root MuiButton-root MuiButton-contained')]");
+        conciergeItemsScreen.getGoToProjectButton().click();
     }
 }

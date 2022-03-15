@@ -1,5 +1,6 @@
 package com.test.stepdefinitions;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.test.pageObject.CheckoutAddressScreen;
@@ -9,6 +10,7 @@ import com.test.pageObject.PaymentScreen;
 import com.test.utility.Hooks;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
+
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -73,7 +77,7 @@ public class GeneralStepDefs {
      * This method fill all fields from checkout address screen
      */
     public void fillAddressFields() {
-        $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")).shouldBe(visible, Duration.ofSeconds(60));
         clearField(checkoutAddressScreen.getFirstNameInpt());
         checkoutAddressScreen.getFirstNameInpt().setValue("QA1");
 
@@ -110,7 +114,7 @@ public class GeneralStepDefs {
      * @param state   - state
      */
     public void fillZipCodeStateCountry(String zipCode, String country, String state) {
-        checkoutAddressScreen.getCountryField().shouldBe(visible, Duration.ofSeconds(15));
+        checkoutAddressScreen.getCountryField().shouldBe(visible, Duration.ofSeconds(50));
         Select countrySelect = new Select(checkoutAddressScreen.getCountryField());
         executeJavaScript("arguments[0].scrollIntoView(true);", countrySelect);
         countrySelect.selectByValue(country);
@@ -123,8 +127,8 @@ public class GeneralStepDefs {
 
         clearField(checkoutAddressScreen.getZipPostalCodeField());
         checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);
-        SelenideElement stateButton = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='AK']"));
-        stateButton.click();
+//        SelenideElement stateButton = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='AK']"));
+//        stateButton.click();
 
         if (state.equals("NY")) {
             SelenideElement stateNyButton = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='" + state + "']"));
@@ -173,26 +177,31 @@ public class GeneralStepDefs {
      */
     public void searchClientBy(String field) {
         try {
+            conciergeUserAccountPage.getClientButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
             conciergeUserAccountPage.getClientButton().click();
             conciergeUserAccountPage.getClientLookupHeaderBtn().shouldBe(visible, Duration.ofSeconds(20));
             conciergeUserAccountPage.getClientLookupHeaderBtn().click();
             conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofSeconds(20));
-
             if (field.equals("email")) {
+                conciergeUserAccountPage.getClientLookupEmail().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
                 conciergeUserAccountPage.getClientLookupEmail().setValue("test@mailinator.com");
             }
             if (field.equals("lastName")) {
+                conciergeUserAccountPage.getClientLookupLastName().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
                 conciergeUserAccountPage.getClientLookupLastName().setValue("NonMember");
             }
             if (field.equals("memberID")) {
+                conciergeUserAccountPage.getMemberIdField().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
                 conciergeUserAccountPage.getMemberIdField().setValue("101318450");
             }
             if (field.equals("businessAccountNumber")) {
+                conciergeUserAccountPage.getBusinessAcNumber().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
                 conciergeUserAccountPage.getBusinessAcNumber().setValue("20211221164476");
             }
             if (field.equals("phone number,postal code,company")) {
 
             }
+            conciergeUserAccountPage.getClientLookupSearchButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
             conciergeUserAccountPage.getClientLookupSearchButton().click();
         } catch (
                 Exception e) {
