@@ -320,9 +320,9 @@ public class ProjectStepDefs {
 
     @When("I click on email estimate button from project screen")
     public void iClickOnEmailEstimateButtonFromProjectScreen() {
-        sleep(3000);
+        sleep(5000);
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-        sleep(2000);
+        sleep(3000);
         conciergeProjectScreen.getEmailEstimateProjectScreen().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getEmailEstimateProjectScreen());
     }
@@ -434,6 +434,7 @@ public class ProjectStepDefs {
             conciergeProjectScreen.getClientFirstNameField().setValue("Renuka");
             conciergeProjectScreen.getClientLastNameField().setValue("Boorla");
         }
+        conciergeProjectScreen.getSearchByButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(5));
         conciergeProjectScreen.getSearchByButton().click();
 
     }
@@ -472,9 +473,13 @@ public class ProjectStepDefs {
 
     @When("I choose quantity for item from project")
     public void iChooseQuantityForItemFromProject() {
-        randomQuantity = generalStepDefs.getRandomNumber(0, 40);
-        Select quantityForLoncaster = new Select(selectOption.getQuantityOfLancasterOption());
-        quantityForLoncaster.selectByIndex(randomQuantity);
+        randomQuantity = generalStepDefs.getRandomNumber(1, 20);
+        selectOption.getQuantityBtn().shouldBe(visible, Duration.ofSeconds(20));
+        selectOption.getQuantityBtn().click();
+        sleep(3000);
+        $(By.xpath("//*[text()='" + randomQuantity + "']")).click();
+        sleep(3000);
+        selectOption.getQuantityBtn().click();
     }
 
     @Then("verify that quantity for item was changed")
@@ -579,10 +584,13 @@ public class ProjectStepDefs {
 
     @Then("I verify that subtotal amount updated according by quantity of items")
     public void iVerifyThatSubtotalAmountUpdatedAccordingByQuantityOfItems() {
+        sleep(3000);
         double totalItemPrice = randomQuantity * 5.47100;
         String finalPrice = Double.toString(totalItemPrice).replace(".", ",") + ".00";
+
         SelenideElement finalPriceValueUi = $(By.xpath("//*[text()='" + "$" + finalPrice + "']"));
         finalPriceValueUi.shouldBe(visible, Duration.ofSeconds(12));
+
         assertTrue(finalPriceValueUi.isDisplayed(), "Final price calculated correctly");
     }
 
@@ -650,5 +658,55 @@ public class ProjectStepDefs {
         conciergeItemsScreen.getSaveProjectPopUpButton().click();
         generalStepDefs.isElementVisible("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4'][1]//button[contains(@class,'MuiButtonBase-root MuiButton-root MuiButton-contained')]");
         conciergeItemsScreen.getGoToProjectButton().click();
+    }
+
+    @Then("I verify that forecast value is update according to quantity of item")
+    public void iVerifyThatForecastValueIsUpdateAccordingToQuantityOfItem() {
+        conciergeProjectScreen.getItemProjectPrice().shouldBe(visible, Duration.ofSeconds(20));
+        int forecastExpected = randomQuantity * Integer.parseInt(conciergeProjectScreen.getItemProjectPrice().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
+        int forecastActual = Integer.parseInt(conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
+
+        assertEquals(forecastActual, forecastExpected, "Forecast value has been updated");
+
+    }
+
+    @And("I set the random quantity {string} of goods")
+    public void iSetTheRandomQuantityOfGoods(String arg0) {
+        randomQuantity = generalStepDefs.getRandomNumber(1, 20);
+        $(By.id(arg0)).shouldBe(visible, Duration.ofSeconds(20));
+        Select selectQuantity = new Select($(By.id(arg0)));
+        selectQuantity.selectByValue(String.valueOf(randomQuantity));
+        sleep(2000);
+    }
+
+    @When("I choose pricing type {string}")
+    public void iChoosePricingType(String arg0) {
+        conciergeProjectScreen.getForecastamountValue().shouldBe(visible, Duration.ofSeconds(12));
+        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+        sleep(10000);
+        conciergeProjectScreen.getPricingTypeDropdown().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getPricingTypeDropdown().click();
+        if (arg0.equals("NON-MEMBER")) {
+            conciergeProjectScreen.getRegularPricingType().shouldBe(visible, Duration.ofSeconds(20));
+            conciergeProjectScreen.getRegularPricingType().click();
+        } else {
+            conciergeProjectScreen.getMemberPricingType().shouldBe(visible, Duration.ofSeconds(20));
+            conciergeProjectScreen.getMemberPricingType().click();
+        }
+    }
+
+    @Then("I verify forecast for {string}")
+    public void iVerifyForecastFor(String pricingType) {
+        conciergeProjectScreen.getForeCastAmount().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getForeCastAmount().scrollIntoView(true);
+        sleep(3000);
+        String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
+        sleep(2000);
+        if (pricingType.equals("MEMBER")) {
+            assertEquals(prType, "$4,121.00", "Forecast amount for member client is displayed");
+        }
+        if (pricingType.equals("NON-MEMBER")) {
+            assertEquals(prType, "$5,495.00", "Forecast amount for non-member client is displayed");
+        }
     }
 }

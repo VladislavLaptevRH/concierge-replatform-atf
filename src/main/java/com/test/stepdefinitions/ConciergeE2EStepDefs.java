@@ -415,12 +415,18 @@ public class ConciergeE2EStepDefs {
     @Then("I verify that member price is displayed as final price")
     public void iVerifyThatMemberPriceIsDisplayedAsFinalPrice() {
         conciergeCartPageScreen.getTotalMemberPrice().shouldBe(visible, Duration.ofSeconds(15));
-        conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$314.00"));
-        assertEquals(conciergeCartPageScreen.getTotalMemberPrice().getText(), "$314.00");
+        assertEquals(conciergeCartPageScreen.getTotalMemberPrice().getText(), "C$468.00");
     }
 
     @And("I select count of product")
     public void iSelectCountOfProduct() {
+        try {
+            conciergeCartPageScreen.getColorCloseButton().shouldBe(visible, Duration.ofSeconds(15));
+            conciergeCartPageScreen.getColorCloseButton().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Close button is not displayed");
+        }
+
         selectOption.getQuantityElement().shouldBe(visible, Duration.ofSeconds(30));
         selectOption.getQuantityElement().click();
     }

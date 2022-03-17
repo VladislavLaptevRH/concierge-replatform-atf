@@ -65,7 +65,7 @@ public class Hooks {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
-        options.addArguments("--window-size=1366,768");
+        options.addArguments("--window-size=1920,1080");
 
         DesiredCapabilities dr = new DesiredCapabilities();
         dr.setBrowserName("chrome");
@@ -121,6 +121,7 @@ public class Hooks {
         closeWindow();
         closeWebDriver();
         System.out.println("Driver was closed");
+        sleep(2000);
     }
 
     /**

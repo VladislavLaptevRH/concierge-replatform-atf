@@ -4,7 +4,6 @@ Feature: Verify projects
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "test" by provided "<searchBy>"
-#    When I search project by provided "<searchBy>"
     Then I verify that search result is displayed
     Examples:
       | searchBy    |
@@ -41,7 +40,6 @@ Feature: Verify projects
   Scenario: Verify that user is able to move cart to project
     Given I log into Concierge as "associate"
     When I remove all items from cart
-#    When I choose client from header
     When I clicks on a random menu item
     When I clicks on o random item
     When I fill all options for item
@@ -204,7 +202,7 @@ Feature: Verify projects
     When I click on projects button
     When I search project "subototalforecastupdatingqty" by provided "projectName"
     When I click on the first project search result
-    And I set the random quantity of goods
+    And I set the random quantity "quantity_I51173680" of goods
     Then I verify that subtotal amount updated according by quantity of items
 
   Scenario: Verify subtotal/forecast by updating edit configuration of skus - ex - change rug size and notice the price update for line, space, sub total and forecast
@@ -238,6 +236,29 @@ Feature: Verify projects
     When I click on the first project search result
     When I click on "Print" button
     When I click on "YES" button
+
+  Scenario: Verify subtotal/forecast by updating qty overriding line items (all types/ one or more items - apply all functionality)
+    Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "overridinglineitems" by provided "projectName"
+    When I click on the first project search result
+    When I click on edit options button
+    And I set the random quantity "quantity_I24388989" of goods
+    Then I verify that forecast value is update according to quantity of item
+
+  Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - <clientType>
+    Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "verifyforecastbypricingtype" by provided "projectName"
+    When I click on the first project search result
+    When I click on edit options button
+    When I choose pricing type "<pricingType>"
+    Then I verify forecast for "<pricingType>"
+    Examples:
+      | pricingType |
+      | NON-MEMBER  |
+      | MEMBER      |
+
 
 
 

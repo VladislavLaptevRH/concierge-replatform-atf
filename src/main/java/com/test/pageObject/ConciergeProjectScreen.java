@@ -11,7 +11,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement addToCartButton = $(By.xpath("/html/body/div[3]/div/main/div/div[3]/div/div/div/div/div/div/div[2]/div/div/div[4]/div/div/div[2]/button[1]"));
 
-    private final SelenideElement nonMemberButton = $(By.id("pricingTypeDropdown"));
+    private final SelenideElement pricingTypeDropdown = $(By.cssSelector("#pricingTypeDropdown"));
 
     private final SelenideElement continueCreateAProjectButton = $(By.xpath("//*[text()='CONTINUE']"));
 
@@ -86,6 +86,8 @@ public class ConciergeProjectScreen {
     private final SelenideElement qty = $(By.xpath("//*[contains(text(),'QTY')]"));
 
     private final SelenideElement subtotal = $(By.xpath("//*[contains(text(),'SUBTOTAL')]"));
+
+    private final SelenideElement totalPrice = $(By.xpath("//p[@class='MuiTypography-root MuiTypography-body1 MuiTypography-alignCenter']"));
 
     private final SelenideElement availabilityDeliveryButtons = $(By.xpath("//div[@id='panel1a-header']"));
 
@@ -167,6 +169,10 @@ public class ConciergeProjectScreen {
 
     private SelenideElement finishOption = $(By.id("optionSelect-1"));
 
+    private SelenideElement forecastamountValue = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-2'][3]/div"));
+
+    private SelenideElement itemProjectPrice = $(By.xpath("//div[1]/p[@class='MuiTypography-root MuiTypography-body1']"));
+
     private SelenideElement printPopUp = $(By.id("documentInfo"));
 
     private final SelenideElement checkMarkItemButton = $(By.xpath("//div/div/div[2]/div/div/div/div/div/div[1]//div[1]//button[2]"));
@@ -178,6 +184,8 @@ public class ConciergeProjectScreen {
     private SelenideElement regularPriceValue = $(By.cssSelector(".MuiTypography-root.MuiTypography-body1.MuiTypography-alignCenter"));
 
     private SelenideElement addToProjectProjectName = $(By.id("project-name-select"));
+
+    private SelenideElement prieItemFromProject = $(By.xpath("//div[2]/div[@class='MuiGrid-root MuiGrid-item'][1]/p"));
 
     private final SelenideElement emailEstimateSendButton = $(By.cssSelector("button[type='submit'] span[class='MuiButton-label']"));
 }

@@ -183,7 +183,7 @@ public class GeneralStepDefs {
             conciergeUserAccountPage.getClientLookupHeaderBtn().click();
             conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofSeconds(20));
             if (field.equals("email")) {
-                conciergeUserAccountPage.getClientLookupEmail().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getClientLookupEmail().shouldBe(Condition.be(visible), Duration.ofSeconds(25));
                 conciergeUserAccountPage.getClientLookupEmail().setValue("test@mailinator.com");
             }
             if (field.equals("lastName")) {
@@ -202,6 +202,7 @@ public class GeneralStepDefs {
 
             }
             conciergeUserAccountPage.getClientLookupSearchButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
+
             conciergeUserAccountPage.getClientLookupSearchButton().click();
         } catch (
                 Exception e) {
