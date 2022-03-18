@@ -3,6 +3,7 @@ package com.test.pageObject;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
+
 import static com.codeborne.selenide.Selenide.$;
 
 @Getter
@@ -22,11 +23,15 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement quantityButton = $(By.xpath("//select[@id='quantity_701bfc45-0262-4a2c-bf01-92887d788333_1']"));
 
-    private final SelenideElement orderClassificationSelect = $(By.xpath("//select[@id='element-orderclassification']"));
+    private final SelenideElement orderClassificationSelect = $(By.cssSelector("#element-orderclassification"));
 
     private final SelenideElement membersProgramTitle = $(By.xpath("//h2[@class='MuiTypography-root MuiTypography-h2 MuiTypography-noWrap']"));
 
     private final SelenideElement closePopUp = $(By.xpath("//button[@data-testid='form-dialog-close-button']"));
+
+    private final SelenideElement updateButton = $(By.xpath("//*[text()='UPDATE']"));
+
+    private final SelenideElement agreeTermsForSaleCheckbox = $(By.xpath("//*[text()='I agree to the Terms of Sale for Special Orders.']"));
 
     private final SelenideElement colorCloseButton = $(By.xpath("//div[@class='MuiDialogTitle-root']/button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit']"));
 

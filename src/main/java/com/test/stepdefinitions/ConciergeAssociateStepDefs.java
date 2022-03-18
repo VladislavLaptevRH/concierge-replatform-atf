@@ -6,7 +6,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.Getter;
+
 import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static org.testng.Assert.assertEquals;
@@ -46,16 +48,16 @@ public class ConciergeAssociateStepDefs {
         conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getNewPortBeachGallery().click();
         conciergeUserAccountPage.getPaloAltpGallery().click();
+        conciergeUserAccountPage.getGallerySubmitButton().shouldBe(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getGallerySubmitButton().click();
     }
 
     @Then("I verify I see store Palo Alto in the header")
     public void iVerifyISeeStoreInTheHeader() {
-        conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(text("PALO ALTO"));
         assertEquals(conciergeUserAccountPage.getNewPortBeachGallery().getText(), "PALO ALTO");
     }
-
 
     @Given("I login into Concierge with valid credentials for the store 146: West Hollywood")
     public void iLoginIntoConciergeWithValidCredentialsForTheStoreWestHollywood() {

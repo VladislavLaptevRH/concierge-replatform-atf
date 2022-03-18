@@ -20,7 +20,7 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement addToCartButton = $(By.xpath("//div[1]/div[@class='MuiFormControl-root MuiFormControl-fullWidth']/button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary']"));
 
-    private final SelenideElement viewCartButton = $(By.xpath("//button[@id='ajax-proceed-to-cart']"));
+    private final SelenideElement viewCartButton = $(By.cssSelector("#ajax-proceed-to-cart"));
 
     private final SelenideElement checkoutButton = $(By.xpath("//div[contains(@class,'MuiGrid-root MuiGrid-container MuiGrid-item')][2]//button"));
 
@@ -34,13 +34,13 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement continueShoppingButton = $(By.xpath("//div[2]/button[contains(@class,'MuiButtonBase-root MuiButton-root')]"));
 
-    private final SelenideElement aggreeeAndAddToCardButton = $(By.xpath("//button[@id='spo-auth-addToCart']"));
+    private final SelenideElement aggreeeAndAddToCardButton = $(By.cssSelector("#spo-auth-addToCart"));
 
     private final SelenideElement goToProjectButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4'][1]//button[contains(@class,'MuiButtonBase-root MuiButton-root MuiButton-contained')]"));
-    
+
     private final SelenideElement addToProjectTitleSelect = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']//h3[@class='MuiTypography-root MuiTypography-h3']"));
-    
+
     private final SelenideElement opportunityNameSelect = $(By.xpath("//select[@id='opportunityName']"));
-    
+
     private final SelenideElement spaceNameSelect = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12'][3]//select"));
 }

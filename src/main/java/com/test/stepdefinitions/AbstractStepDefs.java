@@ -37,8 +37,8 @@ public class AbstractStepDefs {
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
         actions.moveToElement(conciergeUserAccountPage.getInStockMenuItem());
         executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getInStockButtonMenu());
-        conciergeUserAccountPage.getItemSubCategory().get(2).shouldBe(visible, Duration.ofSeconds(30));
-        executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getItemSubCategory().get(2));
+        conciergeUserAccountPage.getItemSubCategory().get(0).shouldBe(visible, Duration.ofSeconds(30));
+        executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getItemSubCategory().get(0));
     }
 
     @When("I clicks on o random item")
@@ -50,7 +50,8 @@ public class AbstractStepDefs {
 
     @When("I fill all options for item")
     public void iFillAllOptionsForItem() {
-        selectOption.getQuantityElement().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+        selectOption.getQuantityElement().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(40));
+        selectOption.getQuantityElement().scrollIntoView(true);
 
         try {
             conciergeCartPageScreen.getClosePopUp().shouldBe(visible, Duration.ofSeconds(15));
@@ -77,12 +78,28 @@ public class AbstractStepDefs {
 
     @When("I click on checkout button")
     public void iClickOnCheckoutButton() {
-        generalStepDefs.isElementVisible("//select[@id='element-orderclassification']");
+        conciergeCartPageScreen.getOrderClassificationSelect().shouldBe(Condition.be(visible), Duration.ofMinutes(1));
         Select select = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
         select.selectByIndex(1);
         conciergeItemsScreen.getCheckoutButton().shouldBe(visible, Duration.ofSeconds(12));
-        generalStepDefs.isElementVisible("//div[contains(@class,'MuiGrid-root MuiGrid-container MuiGrid-item')][2]//button");
         conciergeItemsScreen.getCheckoutButton().click();
+
+        try {
+            conciergeCartPageScreen.getAgreeTermsForSaleCheckbox().shouldBe(Condition.be(visible), Duration.ofSeconds(4));
+            conciergeCartPageScreen.getAgreeTermsForSaleCheckbox().click();
+
+            conciergeCartPageScreen.getUpdateButton().shouldBe(Condition.be(visible), Duration.ofSeconds(4));
+            conciergeCartPageScreen.getUpdateButton().click();
+
+            sleep(3000);
+            conciergeItemsScreen.getCheckoutButton().scrollIntoView(true);
+            sleep(2000);
+            conciergeItemsScreen.getCheckoutButton().click();
+
+
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("I agree to the Terms of Sale for Special Orders is not displayed");
+        }
 
         try {
             conciergeCartPageScreen.getNoThanksButton().shouldBe(visible, Duration.ofSeconds(12));
@@ -111,10 +128,9 @@ public class AbstractStepDefs {
 
     @When("I introduces payment details")
     public void iClickOnContinueToPaymentButton() {
-        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(2));
+        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByIndex(3);
-
 
         switchTo().frame($(By.cssSelector("iframe[title='Iframe for secured card data input field']")).shouldBe(visible, Duration.ofMinutes(1)));
         paymentScreen.getCardNumberField().setValue("4678475330157543");
@@ -143,6 +159,17 @@ public class AbstractStepDefs {
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         reviewOrderScreen.getPlaceOrderButton().shouldBe(enabled, Duration.ofMinutes(1));
         reviewOrderScreen.getPlaceOrderButton().click();
+
+        try {
+            confirmationOrderScreen.getAcceptPlaceOrderBtn().shouldBe(Condition.be(visible), Duration.ofSeconds(5));
+            executeJavaScript("arguments[0].click();", confirmationOrderScreen.getSpoTermsCheckBox());
+            confirmationOrderScreen.getSignatureArea().click();
+            confirmationOrderScreen.getAcceptPlaceOrderBtn().scrollIntoView(true);
+            confirmationOrderScreen.getAcceptPlaceOrderBtn().shouldBe(Condition.be(visible), Duration.ofSeconds(5));
+            executeJavaScript("arguments[0].click();", confirmationOrderScreen.getAcceptPlaceOrderBtn());
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Order terms popup is not displayed");
+        }
     }
 
     @Then("I verify that confirmation order screen is displayed")
@@ -161,6 +188,9 @@ public class AbstractStepDefs {
                 generalStepDefs.fillAddressFields();
                 generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
             }
+            sleep(2000);
+            executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
+            sleep(2000);
             checkoutAddressScreen.getBillingAddressAsShippingCheckBox().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Address fields are not available");
@@ -180,7 +210,7 @@ public class AbstractStepDefs {
 
     @When("I click on rh concierge logo")
     public void iClickOnRhConciergeLogo() {
-        conciergeUserAccountPage.getRhConciergeLogo().shouldBe(visible, Duration.ofMinutes(3));
+        conciergeUserAccountPage.getRhConciergeLogo().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
         conciergeUserAccountPage.getRhConciergeLogo().click();
     }
 

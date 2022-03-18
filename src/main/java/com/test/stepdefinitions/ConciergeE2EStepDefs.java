@@ -92,6 +92,7 @@ public class ConciergeE2EStepDefs {
         conciergeItemsScreen.getAddToCartButton().shouldBe(visible, Duration.ofSeconds(30));
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         executeJavaScript("arguments[0].click();", conciergeItemsScreen.getAddToCartButton());
+
         if (usState.equals("CA")) {
             try {
                 conciergeItemsScreen.getAggreeeAndAddToCardButton().shouldBe(visible, Duration.ofSeconds(20));
@@ -100,7 +101,8 @@ public class ConciergeE2EStepDefs {
                 System.out.println("Agree&add to card button is not displayed");
             }
         }
-        conciergeItemsScreen.getViewCartButton().shouldBe(visible, Duration.ofSeconds(25));
+
+        conciergeItemsScreen.getViewCartButton().shouldBe(Condition.be(visible), Duration.ofSeconds(25));
         conciergeItemsScreen.getViewCartButton().click();
     }
 
@@ -156,6 +158,7 @@ public class ConciergeE2EStepDefs {
     public void continueToPaymentAfterAddressCheckout() {
         checkoutAddressScreen.getContinuePaymentButton().shouldBe(visible, Duration.ofMinutes(1));
         executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
+        checkoutAddressScreen.getContinuePaymentButton().shouldBe(visible, Duration.ofMinutes(1));
         checkoutAddressScreen.getContinuePaymentButton().click();
         try {
             checkoutAddressScreen.getContinueButton().shouldBe(visible, Duration.ofSeconds(40));
@@ -170,7 +173,8 @@ public class ConciergeE2EStepDefs {
 
     @When("I introduces payment details for several payment methods")
     public void iIntroducesPaymentDetailsForSeveralPaymentMethods() {
-        $(paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1)));
+        paymentScreen.getChoosePaymentMethodBtn().shouldBe(Condition.be(visible), Duration.ofSeconds(25));
+        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(2));
         sleep(2);
         generalStepDefs.payWith("VI", "4678 4753 3015 7543", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
@@ -246,11 +250,7 @@ public class ConciergeE2EStepDefs {
             conciergeUserAccountPage.getItemSubCategory().get(0).scrollIntoView(true);
             conciergeUserAccountPage.getItemSubCategory().get(0).click();
 
-
-            SelenideElement SelenideElement = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12'][1]//li"));
-            SelenideElement.click();
-
-            $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']")).shouldBe(visible, Duration.ofMinutes(1));
+            conciergeCartPageScreen.getShoppingCartEmpty().shouldBe(visible, Duration.ofMinutes(1));
             await().forever().until(() -> conciergeItemsScreen.getCollectionsItems().get(0).isDisplayed());
             conciergeItemsScreen.getCollectionsItems().get(1 + rand.nextInt((1 - 0) + 1)).click();
 
@@ -279,10 +279,9 @@ public class ConciergeE2EStepDefs {
             quantityButton.selectByIndex(2);
 
 
-            $(By.xpath("//div[1]/div[@class='MuiFormControl-root MuiFormControl-fullWidth']/button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary']")).shouldBe(visible, Duration.ofSeconds(12));
+            conciergeItemsScreen.getAddToCartButton().shouldBe(visible, Duration.ofSeconds(12));
             conciergeItemsScreen.getAddToCartButton().click();
 
-            $(By.xpath("//div[@class='MuiDialogTitle-root']/button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit']")).shouldBe(visible, Duration.ofSeconds(12));
             conciergeCartPageScreen.getClosePopUp().shouldBe(visible, Duration.ofSeconds(15));
             conciergeCartPageScreen.getClosePopUp().click();
 
@@ -342,11 +341,10 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on no thanks button")
     public void iClickOnNoThanksButton() {
-        generalStepDefs.isElementVisible("//select[@id='element-orderclassification']");
+        conciergeCartPageScreen.getOrderClassificationSelect().shouldBe(Condition.be(visible), Duration.ofSeconds(25));
         Select select = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
         select.selectByIndex(1);
         conciergeItemsScreen.getCheckoutButton().shouldBe(visible, Duration.ofSeconds(12));
-        generalStepDefs.isElementVisible("//div[contains(@class,'MuiGrid-root MuiGrid-container MuiGrid-item')][2]//button");
         conciergeItemsScreen.getCheckoutButton().click();
 
         try {
@@ -387,9 +385,7 @@ public class ConciergeE2EStepDefs {
                 conciergeUserAccountPage.getClientButton().shouldBe(visible, Duration.ofMinutes(2));
                 conciergeUserAccountPage.getClientButton().click();
                 sleep(2);
-                SelenideElement selenideElement = $(By.xpath("//*[text()='Remove Client']"));
-                selenideElement.click();
-//            conciergeUserAccountPage.getRemoveClientButton().click();
+                conciergeUserAccountPage.getRemoveClientByText().click();
             }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Client is not selected");
@@ -412,25 +408,34 @@ public class ConciergeE2EStepDefs {
         conciergeUserAccountPage.getFirstResultOfClientLookup().click();
     }
 
-    @Then("I verify that member price is displayed as final price")
-    public void iVerifyThatMemberPriceIsDisplayedAsFinalPrice() {
-        conciergeCartPageScreen.getTotalMemberPrice().shouldBe(visible, Duration.ofSeconds(15));
-        assertEquals(conciergeCartPageScreen.getTotalMemberPrice().getText(), "C$468.00");
-    }
 
     @And("I select count of product")
     public void iSelectCountOfProduct() {
         try {
-            conciergeCartPageScreen.getColorCloseButton().shouldBe(visible, Duration.ofSeconds(15));
-            conciergeCartPageScreen.getColorCloseButton().click();
+            conciergeCartPageScreen.getColorCloseButton().shouldBe(Condition.be(visible), Duration.ofSeconds(15));
+            executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getColorCloseButton());
+
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");
         }
 
-        selectOption.getQuantityElement().shouldBe(visible, Duration.ofSeconds(30));
+        selectOption.getQuantityElement().shouldBe(Condition.be(visible), Duration.ofSeconds(30));
         selectOption.getQuantityElement().click();
     }
 
+    @Then("I verify that address screen is displayed")
+    public void iVerifyThatAddressScreenIsDisplayed() {
+        checkoutAddressScreen.getFirstNameInpt().shouldBe(Condition.be(visible), Duration.ofSeconds(20));
+        checkoutAddressScreen.getLastNameField().shouldBe(Condition.be(visible), Duration.ofSeconds(20));
+        checkoutAddressScreen.getCompanyNameField().shouldBe(Condition.be(visible), Duration.ofSeconds(20));
+        assertTrue(checkoutAddressScreen.getFirstNameInpt().isDisplayed());
+        assertTrue(checkoutAddressScreen.getLastNameField().isDisplayed());
+        assertTrue(checkoutAddressScreen.getCompanyNameField().isDisplayed());
+        assertTrue(checkoutAddressScreen.getStreetAddressField().isDisplayed());
+        assertTrue(checkoutAddressScreen.getAptFloorSuiteField().isDisplayed());
+        assertTrue(checkoutAddressScreen.getCityField().isDisplayed());
+        assertTrue(checkoutAddressScreen.getPhoneField().isDisplayed());
+    }
 }
 
 

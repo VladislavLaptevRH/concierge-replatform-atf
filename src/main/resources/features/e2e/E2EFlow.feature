@@ -23,7 +23,7 @@ Feature: Verify e2e flow
     When I click on add to cart button
     When I click on no thanks button
     When I choose client who is a "member"
-    Then I verify that member price is displayed as final price
+    Then I verify that cart is displayed
 
   Scenario: Verify that if client is a non member then redirected to address screen
     Given I log into Concierge as "associate"
@@ -34,7 +34,7 @@ Feature: Verify e2e flow
     When I click on add to cart button
     When I click on no thanks button
     When I choose client who is a "nonmember"
-    Then I fill all fields from address screen
+    Then I verify that address screen is displayed
 
   Scenario: Verify that user is able to buy item
     Given I log into Concierge as "associate"

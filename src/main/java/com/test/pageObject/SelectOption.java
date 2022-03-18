@@ -16,7 +16,7 @@ public class SelectOption {
 
     private final List<SelenideElement> lancastColorsList = $$(By.xpath("//select[@id='optionSelect-4']//option"));
 
-    private final SelenideElement quantityOfLancasterOption = $(By.id("quantity_I04937570"));
+    private final SelenideElement quantityOfLancasterOption = $(By.cssSelector("#quantity_I51173680"));
 
     private final SelenideElement quantityOfLancasterSofa = $(By.id("quantity_I24388989"));
 

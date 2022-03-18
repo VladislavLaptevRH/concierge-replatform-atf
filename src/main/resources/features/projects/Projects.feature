@@ -158,7 +158,7 @@ Feature: Verify projects
   Scenario: Verify that user is able to update item quantity
     Given I log into Concierge as "leader"
     When I click on projects button
-    When I search project "modifyitemsoptions" by provided "projectName"
+    When I search project "subototalforecastupdatingqty" by provided "projectName"
     When I click on the first project search result
     When I click on edit options button
     When I choose quantity for item from project

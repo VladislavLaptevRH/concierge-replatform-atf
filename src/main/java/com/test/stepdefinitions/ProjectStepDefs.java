@@ -475,6 +475,8 @@ public class ProjectStepDefs {
     public void iChooseQuantityForItemFromProject() {
         randomQuantity = generalStepDefs.getRandomNumber(1, 20);
         selectOption.getQuantityBtn().shouldBe(visible, Duration.ofSeconds(20));
+        sleep(4000);
+        executeJavaScript("window.scrollBy(0,150)", "Scroll to quantity");
         selectOption.getQuantityBtn().click();
         sleep(3000);
         $(By.xpath("//*[text()='" + randomQuantity + "']")).click();
@@ -484,7 +486,7 @@ public class ProjectStepDefs {
 
     @Then("verify that quantity for item was changed")
     public void verifyThatQuantityForItemWasChanged() {
-        assertTrue(Integer.parseInt(selectOption.getQuantityOfLancasterOption().getText()) == randomQuantity + 1);
+        assertTrue(Integer.parseInt(selectOption.getQuantityOfLancasterOption().getText()) == randomQuantity);
     }
 
     @And("I choose project by project name {string}")
@@ -549,8 +551,9 @@ public class ProjectStepDefs {
 
     @And("I click on unlimited furniture delivery price")
     public void iClickOnUnlimitedFurnitureDeliveryPrice() {
-        sleep(2000);
-        executeJavaScript("window.scrollBy(0,550)", "Scroll to regular price");
+        sleep(5000);
+        executeJavaScript("window.scrollBy(0,800)", "Scroll to regular price");
+        sleep(4000);
         conciergeProjectScreen.getAmount549().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
         conciergeProjectScreen.getAmount549().click();
     }

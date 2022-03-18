@@ -38,6 +38,7 @@ public class GeneralStepDefs {
      */
     public void loginAsRole(String accountRole) {
         conciergeLoginPage.getPasswordField().shouldBe(visible, Duration.ofMinutes(5));
+        conciergeLoginPage.getUsernameField().shouldBe(visible, Duration.ofSeconds(20));
         if (accountRole.equals("associate")) {
             conciergeLoginPage.getUsernameField().setValue(Hooks.associateLogin);
             conciergeLoginPage.getPasswordField().setValue(Hooks.associatePassword);
@@ -48,9 +49,11 @@ public class GeneralStepDefs {
 
         conciergeLoginPage.getSignInButton().shouldBe(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getSignInButton().click();
+
         conciergeLoginPage.getLocationNewPortBeach().shouldBe(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getLocationNewPortBeach().click();
         conciergeLoginPage.getContinueButton().shouldBe(visible, Duration.ofSeconds(30));
+        sleep(3);
         conciergeLoginPage.getContinueButton().click();
     }
 
@@ -77,7 +80,7 @@ public class GeneralStepDefs {
      * This method fill all fields from checkout address screen
      */
     public void fillAddressFields() {
-        $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")).shouldBe(visible, Duration.ofSeconds(60));
+        $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")).shouldBe(visible, Duration.ofSeconds(30));
         clearField(checkoutAddressScreen.getFirstNameInpt());
         checkoutAddressScreen.getFirstNameInpt().setValue("QA1");
 
@@ -102,6 +105,7 @@ public class GeneralStepDefs {
         $(By.xpath("//div[@id='billingAddresslbl']/h3")).shouldBe(visible, Duration.ofSeconds(12));
 
         executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
+        sleep(3);
         checkoutAddressScreen.getBillingAddressAsShippingCheckBox().click();
     }
 
@@ -187,15 +191,15 @@ public class GeneralStepDefs {
                 conciergeUserAccountPage.getClientLookupEmail().setValue("test@mailinator.com");
             }
             if (field.equals("lastName")) {
-                conciergeUserAccountPage.getClientLookupLastName().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getClientLookupLastName().shouldBe(Condition.be(visible), Duration.ofSeconds(25));
                 conciergeUserAccountPage.getClientLookupLastName().setValue("NonMember");
             }
             if (field.equals("memberID")) {
-                conciergeUserAccountPage.getMemberIdField().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getMemberIdField().shouldBe(Condition.be(visible), Duration.ofSeconds(25));
                 conciergeUserAccountPage.getMemberIdField().setValue("101318450");
             }
             if (field.equals("businessAccountNumber")) {
-                conciergeUserAccountPage.getBusinessAcNumber().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getBusinessAcNumber().shouldBe(Condition.be(visible), Duration.ofSeconds(25));
                 conciergeUserAccountPage.getBusinessAcNumber().setValue("20211221164476");
             }
             if (field.equals("phone number,postal code,company")) {
@@ -219,23 +223,23 @@ public class GeneralStepDefs {
      */
     public void payWith(String paymentType, String number, String cvc, String expirationDate) {
         sleep(3);
-        paymentScreen.getChoosePaymentMethodBtn().shouldBe(visible, Duration.ofMinutes(1));
+        paymentScreen.getChoosePaymentMethodBtn().shouldBe(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue(paymentType);
 
-        $(By.cssSelector("iframe[title='Iframe for secured card data input field']")).shouldBe(visible, Duration.ofMinutes(2));
+        $(By.cssSelector("iframe[title='Iframe for secured card data input field']")).shouldBe(Condition.be(visible), Duration.ofMinutes(2));
         SelenideElement selenideElement = $(By.cssSelector("iframe[title='Iframe for secured card data input field']"));
         switchTo().frame(selenideElement);
         paymentScreen.getCardNumberField().setValue(number);
         switchTo().defaultContent();
 
-        $(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")).shouldBe(visible, Duration.ofMinutes(2));
+        $(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")).shouldBe(Condition.be(visible), Duration.ofMinutes(2));
         switchTo().frame($(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")));
 
         paymentScreen.getCvcField().setValue(cvc);
         switchTo().defaultContent();
 
-        $(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card data input field']")).shouldBe(visible, Duration.ofMinutes(2));
+        $(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card data input field']")).shouldBe(Condition.be(visible), Duration.ofMinutes(2));
         switchTo().frame($(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card data input field']")));
 
         paymentScreen.getExpiryDateField().setValue(expirationDate);

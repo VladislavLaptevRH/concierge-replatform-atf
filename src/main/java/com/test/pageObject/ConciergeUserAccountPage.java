@@ -74,7 +74,7 @@ public class ConciergeUserAccountPage {
 
     private SelenideElement paloAltpGallery = $(By.xpath("//select[@id='gallery-select']/option[2]"));
 
-    private SelenideElement gallerySubmitButton = $(By.xpath("/html/body/div[4]/div/div[2]/button"));
+    private SelenideElement gallerySubmitButton = $(By.xpath("//*[text()='Submit']"));
 
     private SelenideElement westHollywood = $(By.xpath("//*[@id=\"146\"]"));
 
@@ -89,6 +89,8 @@ public class ConciergeUserAccountPage {
     private SelenideElement clientButton = $(By.xpath("//div[1]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6"));
 
     private SelenideElement removeClientButton = $(By.xpath("//li[@id='1']/button"));
+
+    private SelenideElement removeClientByText = $(By.xpath("//*[text()='Remove Client']"));
 
     private SelenideElement brandButton = $(By.xpath("//div[2]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6"));
 

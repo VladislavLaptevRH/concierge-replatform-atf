@@ -2,10 +2,14 @@ package com.test.stepdefinitions;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
 import java.time.Duration;
+
 import com.test.pageObject.ConciergeOrderHistoryForm;
 import com.test.pageObject.ConciergeUserAccountPage;
+
 import static com.codeborne.selenide.Condition.visible;
+import static com.test.stepdefinitions.GeneralStepDefs.sleep;
 
 
 public class ClientSearchStepDefs {
@@ -15,6 +19,7 @@ public class ClientSearchStepDefs {
 
     @When("I search client by {string}")
     public void iSearchClientByEmail(String searchBy) {
+        sleep(2);
         generalStepDefs.searchClientBy(searchBy);
     }
 
@@ -42,4 +47,7 @@ public class ClientSearchStepDefs {
         conciergeUserAccountPage.getNewClientHeaderBtn().shouldBe(visible, Duration.ofSeconds(30));
     }
 
+    @Then("I verify")
+    public void iVerify() {
+    }
 }

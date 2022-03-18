@@ -1,6 +1,7 @@
 package com.test.stepdefinitions;
 
 import com.test.pageObject.ConciergeCartPageScreen;
+import com.test.pageObject.ConciergeItemsScreen;
 import com.test.pageObject.ConciergeUserAccountPage;
 import com.test.utility.Hooks;
 import io.cucumber.java.en.Then;
@@ -18,7 +19,7 @@ public class ConciergeCartStepDefs {
     WebDriver webDriver = Hooks.getWebDriver();
     ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
-
+    ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
 
     @When("I navigate to the cart page")
     public void iNavigateToTheCartPage() {
@@ -44,4 +45,11 @@ public class ConciergeCartStepDefs {
         assertTrue(conciergeCartPageScreen.getQuantityButton().isDisplayed(), "Quantity button is displayed");
     }
 
+    @Then("I verify that cart is displayed")
+    public void iVerifyThatCartIsDisplayed() {
+        conciergeCartPageScreen.getOrderClassificationSelect().shouldBe(visible, Duration.ofSeconds(15));
+        assertTrue(conciergeCartPageScreen.getOrderClassificationSelect().isDisplayed(), "Order classification is displayed");
+        assertTrue(conciergeItemsScreen.getCheckoutButton().isDisplayed(), "Checkout button is displayed");
+
+    }
 }
