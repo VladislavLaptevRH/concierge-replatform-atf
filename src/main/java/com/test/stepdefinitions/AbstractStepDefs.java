@@ -78,7 +78,7 @@ public class AbstractStepDefs {
 
     @When("I click on checkout button")
     public void iClickOnCheckoutButton() {
-        conciergeCartPageScreen.getOrderClassificationSelect().shouldBe(Condition.be(visible), Duration.ofMinutes(1));
+        conciergeCartPageScreen.getOrderClassificationSelect().shouldBe(Condition.be(visible), Duration.ofSeconds(15));
         Select select = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
         select.selectByIndex(1);
         conciergeItemsScreen.getCheckoutButton().shouldBe(visible, Duration.ofSeconds(12));
@@ -115,8 +115,8 @@ public class AbstractStepDefs {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
             conciergeUserAccountPage.getClientLookupSearchButton().click();
-            conciergeOrderHistoryForm.getCustomerFirstName().shouldBe(visible, Duration.ofSeconds(25));
-            conciergeUserAccountPage.getFirstResultOfClientLookup().shouldBe(visible, Duration.ofSeconds(25));
+            conciergeOrderHistoryForm.getCustomerFirstName().shouldBe(visible, Duration.ofSeconds(15));
+            conciergeUserAccountPage.getFirstResultOfClientLookup().shouldBe(visible, Duration.ofSeconds(15));
             conciergeUserAccountPage.getFirstResultOfClientLookup().click();
             conciergeItemsScreen.getCheckoutButton().shouldBe(visible, Duration.ofSeconds(12));
             conciergeItemsScreen.getCheckoutButton().click();
@@ -188,10 +188,10 @@ public class AbstractStepDefs {
                 generalStepDefs.fillAddressFields();
                 generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
             }
-            sleep(2000);
-            executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
-            sleep(2000);
-            checkoutAddressScreen.getBillingAddressAsShippingCheckBox().click();
+//            sleep(2000);
+//            executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
+//            sleep(2000);
+//            executeJavaScript("arguments[0].click();", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Address fields are not available");
         }

@@ -32,7 +32,7 @@ public class CheckoutAddressScreen {
 
     private final SelenideElement eveningPhone = $(By.xpath("/input[@id='37']"));
 
-    private final SelenideElement billingAddressAsShippingCheckBox = $(By.xpath("//div[@id='billingAddresslbl']//span[@class='MuiIconButton-label']/input[@type='checkbox']"));
+    private final SelenideElement billingAddressAsShippingCheckBox = $(By.cssSelector("div[class='MuiGrid-root MuiGrid-item'] input[type='checkbox']"));
 
     private final SelenideElement continuePaymentButton = $(By.xpath("//button[contains(@class,'MuiButton-contained')]"));
 

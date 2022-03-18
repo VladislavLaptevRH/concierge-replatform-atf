@@ -81,6 +81,7 @@ public class GeneralStepDefs {
      */
     public void fillAddressFields() {
         $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")).shouldBe(visible, Duration.ofSeconds(30));
+        executeJavaScript("arguments[0].click();", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
         clearField(checkoutAddressScreen.getFirstNameInpt());
         checkoutAddressScreen.getFirstNameInpt().setValue("QA1");
 
@@ -103,10 +104,9 @@ public class GeneralStepDefs {
         checkoutAddressScreen.getPhoneField().setValue("+124131231");
 
         $(By.xpath("//div[@id='billingAddresslbl']/h3")).shouldBe(visible, Duration.ofSeconds(12));
-
-        executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
-        sleep(3);
-        checkoutAddressScreen.getBillingAddressAsShippingCheckBox().click();
+//
+//        executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
+//        sleep(3);
     }
 
 

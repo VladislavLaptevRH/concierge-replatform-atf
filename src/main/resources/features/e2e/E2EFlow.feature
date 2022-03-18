@@ -4,7 +4,7 @@ Feature: Verify e2e flow
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "112848 MULT" from search field
+    When I go to item "59590086" from search field
     And I select count of product
     When I click on add to cart button
     And I click on checkout button
@@ -18,7 +18,7 @@ Feature: Verify e2e flow
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "112848 MULT" from search field
+    When I go to item "59590086" from search field
     And I select count of product
     When I click on add to cart button
     When I click on no thanks button
@@ -29,7 +29,7 @@ Feature: Verify e2e flow
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "112848 MULT" from search field
+    When I go to item "59140061" from search field
     And I select count of product
     When I click on add to cart button
     When I click on no thanks button
@@ -65,14 +65,14 @@ Feature: Verify e2e flow
     When I click on a place order button
     Then I verify that confirmation order screen is displayed
     Examples:
-      | skuID       |
-      | 112848 MULT |
+      | skuID    |
+      | 10010969 |
 
   Scenario: Verify that user is able to add item to project and pay
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "112848 MULT" from search field
+    When I go to item "10010966" from search field
     And I select count of product
     When I click on add to project button
     When I choose project from addToProject popup

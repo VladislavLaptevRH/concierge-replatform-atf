@@ -102,8 +102,27 @@ public class ConciergeE2EStepDefs {
             }
         }
 
-        conciergeItemsScreen.getViewCartButton().shouldBe(Condition.be(visible), Duration.ofSeconds(25));
-        conciergeItemsScreen.getViewCartButton().click();
+        try {
+            conciergeItemsScreen.getViewCartButton().shouldBe(Condition.be(visible), Duration.ofSeconds(5));
+            conciergeItemsScreen.getViewCartButton().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("View cart button is not displayed");
+        }
+
+        try {
+            conciergeItemsScreen.getAggreeeAndAddToCardButton().shouldBe(Condition.be(visible), Duration.ofSeconds(4));
+            conciergeItemsScreen.getAggreeeAndAddToCardButton().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Agree&add to cart button is not displayed");
+        }
+
+        try {
+            conciergeItemsScreen.getViewCartButton().shouldBe(Condition.be(visible), Duration.ofSeconds(5));
+            conciergeItemsScreen.getViewCartButton().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("View cart button is not displayed");
+        }
+
     }
 
     @When("I fill all fields from address with {string} zip code")
@@ -173,8 +192,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I introduces payment details for several payment methods")
     public void iIntroducesPaymentDetailsForSeveralPaymentMethods() {
-        paymentScreen.getChoosePaymentMethodBtn().shouldBe(Condition.be(visible), Duration.ofSeconds(25));
-        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(2));
+        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         sleep(2);
         generalStepDefs.payWith("VI", "4678 4753 3015 7543", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();

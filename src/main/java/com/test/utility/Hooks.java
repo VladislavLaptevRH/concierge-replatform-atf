@@ -74,23 +74,19 @@ public class Hooks {
 
 
         ChromeOptions options = new ChromeOptions();
-        System.setProperty("webdriver.chrome.driver", "driver/chromedriver");
         options.addArguments("--headless");
-        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--window-size=1366,768");
         DesiredCapabilities dr = new DesiredCapabilities();
         dr.setBrowserName("chrome");
         dr.setCapability(ChromeOptions.CAPABILITY, options);
-
         String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
         RemoteWebDriver driver = null;
         try {
             driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
         } catch (MalformedURLException e) {
             e.printStackTrace();
-
-            WebDriverRunner.setWebDriver(driver);
         }
-
+        WebDriverRunner.setWebDriver(driver);
 
         setUPWebDriver();
     }
@@ -133,7 +129,6 @@ public class Hooks {
         closeWindow();
         closeWebDriver();
         System.out.println("Driver was closed");
-        sleep(2000);
     }
 
     /**
