@@ -42,6 +42,9 @@ Feature: Verify e2e flow
     When I clicks on a random menu item
     When I clicks on o random item
     And I select count of product
+    When I select debth option
+    When I select fabric option
+    When I select color option
     When I click on add to cart button
     When I click on checkout button
     When I fill all fields from address screen
@@ -91,6 +94,9 @@ Feature: Verify e2e flow
     When I clicks on a random menu item
     When I clicks on o random item
     And I select count of product
+    When I select debth option
+    When I select fabric option
+    When I select color option
     When I click on add to cart button
     When I click on checkout button
     When I fill all fields from address screen

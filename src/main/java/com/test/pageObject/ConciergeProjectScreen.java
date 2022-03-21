@@ -143,13 +143,13 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement REMOVEbutton = $(By.xpath("//*[text()='REMOVE']"));
 
-    private final SelenideElement amount7295 = $(By.xpath("//*[text()='$7,295.00']"));
+    private final SelenideElement regularPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'][1]/p)[2]"));
 
     private final SelenideElement amount50 = $(By.xpath("//*[text()='$50.00']"));
 
     private final SelenideElement amount549 = $(By.xpath("//*[text()='$549.00']"));
 
-    private final SelenideElement amount4923 = $(By.xpath("//*[text()='$4,923.90']"));
+    private final SelenideElement amount4923 = $(By.xpath("//*[text()='$2,223.90']"));
 
     private final SelenideElement percentDiscount = $(By.id("outlined-helperText"));
 
@@ -175,15 +175,21 @@ public class ConciergeProjectScreen {
 
     private SelenideElement printPopUp = $(By.id("documentInfo"));
 
-    private final SelenideElement checkMarkItemButton = $(By.xpath("//div/div/div[2]/div/div/div/div/div/div[1]//div[1]//button[2]"));
+    private final SelenideElement checkMarkItemButton = $(By.xpath("(//span[@class='MuiIconButton-label'])[7]"));
 
     private final SelenideElement foreCastAmount = $(By.xpath("//div[2]//div[3]//div[1]//div[5]/div[1]"));
+
+    private final SelenideElement memberItemPrice = $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[2]"));
+
+    private final SelenideElement foreCastTotalValue = $(By.xpath("(//div[contains(@class,'MuiBox-root')])[18]"));
 
     private final SelenideElement editItemOptions = $(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div/div/div[1]/div/button[1]"));
 
     private SelenideElement regularPriceValue = $(By.cssSelector(".MuiTypography-root.MuiTypography-body1.MuiTypography-alignCenter"));
 
     private SelenideElement addToProjectProjectName = $(By.id("project-name-select"));
+
+    private SelenideElement taxExemptCheckBox = $(By.cssSelector("input[type='checkbox']"));
 
     private SelenideElement prieItemFromProject = $(By.xpath("//div[2]/div[@class='MuiGrid-root MuiGrid-item'][1]/p"));
 

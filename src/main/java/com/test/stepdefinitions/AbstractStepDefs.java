@@ -43,29 +43,50 @@ public class AbstractStepDefs {
 
     @When("I clicks on o random item")
     public void iClicksOnORandomItem() {
-        conciergeItemsScreen.getItems().get(0).shouldBe(visible, Duration.ofSeconds(40));
-        conciergeItemsScreen.getItems().get(0).click();
+
+        try {
+            $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12'][1]/li")).shouldBe(Condition.be(visible), Duration.ofSeconds(15));
+            $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12'][1]/li")).click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Collection section is not displayed");
+        }
+
+        try {
+            conciergeItemsScreen.getItems().get(0).shouldBe(visible, Duration.ofSeconds(10));
+            conciergeItemsScreen.getItems().get(0).click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Items section are not displayed");
+        }
+
+        try {
+            conciergeItemsScreen.getTwoItemsInRow().get(0).shouldBe(visible, Duration.ofSeconds(10));
+            conciergeItemsScreen.getTwoItemsInRow().get(0).click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Items section are not displayed");
+        }
     }
 
 
     @When("I fill all options for item")
     public void iFillAllOptionsForItem() {
-        selectOption.getQuantityElement().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(40));
-        selectOption.getQuantityElement().scrollIntoView(true);
-
         try {
-            conciergeCartPageScreen.getClosePopUp().shouldBe(visible, Duration.ofSeconds(15));
-            conciergeCartPageScreen.getClosePopUp().click();
+            conciergeCartPageScreen.getColorCloseButton().shouldBe(visible, Duration.ofSeconds(15));
+            conciergeCartPageScreen.getColorCloseButton().click();
             selectOption.getSelectSizeElement().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(5));
             if (selectOption.getSelectSizeElement().isDisplayed()) {
                 Select size = new Select(selectOption.getSelectSizeElement());
                 size.selectByIndex(2);
             }
+
+            selectOption.getQuantityElement().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(40));
+            selectOption.getQuantityElement().scrollIntoView(true);
+
             selectOption.getSelectColorElement().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(5));
             if (selectOption.getSelectColorElement().isDisplayed()) {
                 Select color = new Select(selectOption.getSelectColorElement());
                 color.selectByIndex(2);
             }
+
             if (selectOption.getQuantityElement().isDisplayed()) {
                 Select quantity = new Select(selectOption.getQuantityElement());
                 quantity.selectByIndex(2);

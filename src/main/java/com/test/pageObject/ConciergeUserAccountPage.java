@@ -16,11 +16,11 @@ public class ConciergeUserAccountPage {
 
     private SelenideElement newClientButton = $(By.xpath("//*[text()='NEW']"));
 
-    private SelenideElement memberIdField = $(By.xpath("//input[@name='memberID']"));
+    private SelenideElement memberIdField = $(By.cssSelector("input[name='memberID']"));
 
-    private SelenideElement businessAcNumber = $(By.xpath("//input[@name='tradeID']"));
+    private SelenideElement businessAcNumber = $(By.cssSelector("input[name='tradeID']"));
 
-    private SelenideElement clientLookupEmail = $(By.xpath("//input[@name='email']"));
+    private SelenideElement clientLookupEmail = $(By.cssSelector("input[name='email']"));
 
     private SelenideElement dashboardTitle = $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']"));
 
@@ -98,9 +98,9 @@ public class ConciergeUserAccountPage {
 
     private SelenideElement clientLookupBtnId = $(By.xpath("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li[@id='1']"));
 
-    private SelenideElement clientLookupFirstName = $(By.xpath("//input[@name='firstName']"));
+    private SelenideElement clientLookupFirstName = $(By.cssSelector("input[name='firstName']"));
 
-    private SelenideElement clientLookupLastName = $(By.xpath("//input[@name='lastName']"));
+    private SelenideElement clientLookupLastName = $(By.cssSelector("input[name='lastName']"));
 
     private SelenideElement clientLookupPhoneNumber = $(By.xpath("//input[@name='phoneNumber']"));
 
@@ -137,6 +137,8 @@ public class ConciergeUserAccountPage {
     private SelenideElement inStockWindows = $(By.xpath("//*[text()='In-Stock Windows']"));
 
     private SelenideElement toddlerBedding = $(By.xpath("//*[text()='Toddler Bedding']"));
+
+    private SelenideElement mainMenuHeader = $(By.cssSelector("#rh-header"));
 
     private List<SelenideElement> toddlerBeddingList = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul[@class='MuiGridList-root']/li[@class='MuiGridListTile-root']"));
 

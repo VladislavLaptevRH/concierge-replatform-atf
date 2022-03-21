@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Categories {
 
-    public static List<String> categoryInStockExpected = new ArrayList(Arrays.asList("Sofas", "Sectionals", "Chairs", "Cabinets", "Sideboards", "Media", "Coffee Tables", "Console & Entry Tables", "Side Tables", "Office", "Mirrors", "Pillows", "Throws"));
+//    public static List<String> categoryInStockExpected = new ArrayList(Arrays.asList("Sofas", "Sectionals", "Chairs", "Cabinets", "Sideboards", "Media", "Coffee Tables", "Console & Entry Tables", "Side Tables", "Office", "Mirrors", "Pillows", "Throws"));
     public static List<String> categoryLivingExpected = new ArrayList(Arrays.asList("Sofa Collections", "Sectional Collections", "The Cloud® Collection", "Chairs", "Swivels", "Recliners", "Sleeper Sofas", "Chaises, Daybeds & Settees", "Benches", "Ottomans & Stools", "Fabric by the Yard", "Fabric Care", "Upholstery Swatches"));
     public static List<String> categoryDiningExpected = new ArrayList(Arrays.asList("Rectangular Table Collections", "Round & Oval Table Collections", "Rectangular Tables", "Round & Oval Tables", "Extension Tables", "Marble & Concrete Tables"));
     public static List<String> categoryBadExpected = new ArrayList<>(Arrays.asList("Bedroom Collections", "Fabric Beds", "Leather Beds", "Wood Beds", "Metal Beds", "Storage Beds", "Canopy Beds", "Upholstery Swatches"));

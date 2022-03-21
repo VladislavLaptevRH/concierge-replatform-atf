@@ -69,28 +69,14 @@ public class ConciergeAccessibilityStepDefs {
 
     @Then("user verifies that all items from menu are displayed")
     public void userVerifiesThatAllItemsFromMenuAreDisplayed() {
-        List<String> expectedItems = new ArrayList(Arrays.asList("In Stock", "Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Art", "Outdoor", "SALE"));
+        List<String> expectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Art", "Outdoor", "SALE"));
         List<String> items = new ArrayList<>();
 
         for (int i = 0; i < conciergeUserAccountPage.getMenuItems().size(); i++) {
             items = new ArrayList(Arrays.asList(conciergeUserAccountPage.getMenuItems().get(i).getText()));
         }
+        System.out.println(items);
         GeneralStepDefs.compareList(expectedItems, items);
     }
 
-    @And("I verify that category items are displayed")
-    public void iVerifyThatCategoryItemsAreDisplayed() {
-        generalStepDefs.verifyCategories(Categories.categoryInStockExpected, 0);
-        generalStepDefs.verifyCategories(Categories.categoryLivingExpected, 1);
-        generalStepDefs.verifyCategories(Categories.categoryBathExpected, 4);
-        sleep(1);
-        generalStepDefs.verifyCategories(Categories.categoryTextilesExpected, 6);
-        sleep(1);
-        generalStepDefs.verifyCategories(Categories.rugsCategoryExpected, 7);
-        generalStepDefs.verifyCategories(Categories.windowsCategoryExpected, 8);
-        generalStepDefs.verifyCategories(Categories.decorCategoryExpected, 9);
-        generalStepDefs.verifyCategories(Categories.artCategoryExpected, 10);
-        generalStepDefs.verifyCategories(Categories.furnitureCategoryExpected, 11);
-        generalStepDefs.verifyCategories(Categories.giftsCategoryExpected, 12);
-    }
 }

@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.test.pageObject.*;
 import io.cucumber.java.en.*;
+import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
@@ -473,7 +474,9 @@ public class ProjectStepDefs {
 
     @When("I choose quantity for item from project")
     public void iChooseQuantityForItemFromProject() {
-        randomQuantity = generalStepDefs.getRandomNumber(1, 20);
+        randomQuantity = generalStepDefs.getRandomNumber(1, 10);
+        Select select = new Select($(By.xpath("//select[contains(@id,'quantity')]")));
+        select.selectByIndex(1);
         selectOption.getQuantityBtn().shouldBe(visible, Duration.ofSeconds(20));
         sleep(4000);
         executeJavaScript("window.scrollBy(0,150)", "Scroll to quantity");
@@ -510,9 +513,9 @@ public class ProjectStepDefs {
 
     @And("I click on regular price for item projects")
     public void iClickOnRegularPriceForItemProjects() {
-        conciergeProjectScreen.getAmount7295().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getRegularPrice().shouldBe(visible, Duration.ofSeconds(15));
         executeJavaScript("window.scrollBy(0,150)", "Scroll to regular price");
-        conciergeProjectScreen.getAmount7295().click();
+        conciergeProjectScreen.getRegularPrice().click();
 
     }
 
@@ -588,13 +591,13 @@ public class ProjectStepDefs {
     @Then("I verify that subtotal amount updated according by quantity of items")
     public void iVerifyThatSubtotalAmountUpdatedAccordingByQuantityOfItems() {
         sleep(3000);
-        double totalItemPrice = randomQuantity * 5.47100;
-        String finalPrice = Double.toString(totalItemPrice).replace(".", ",") + ".00";
+        String memberPriceText = conciergeProjectScreen.getMemberItemPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "");
+        int memberPrice = Integer.parseInt(memberPriceText);
+        int totalItemPrice = randomQuantity * memberPrice;
+        String finalPrice = Double.toString(totalItemPrice).replace(".", ",").replaceAll("\\,0", "");
+        String forecast = conciergeProjectScreen.getForeCastTotalValue().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "");
 
-        SelenideElement finalPriceValueUi = $(By.xpath("//*[text()='" + "$" + finalPrice + "']"));
-        finalPriceValueUi.shouldBe(visible, Duration.ofSeconds(12));
-
-        assertTrue(finalPriceValueUi.isDisplayed(), "Final price calculated correctly");
+        assertEquals(finalPrice, forecast, "Final price calculated correctly");
     }
 
     @And("I verify item price")
@@ -624,7 +627,7 @@ public class ProjectStepDefs {
     @Then("I verify that forecast value is updated after hiding the item")
     public void iVerifyThatForecastValueIsUpdatedAfterHidingTheItem() {
         conciergeProjectScreen.getForeCastAmount().shouldBe(visible, Duration.ofSeconds(15));
-        executeJavaScript("window.scrollBy(0,200)", "");
+        executeJavaScript("window.scrollBy(0,500)", "");
         conciergeProjectScreen.getCheckMarkItemButton().click();
         String priceBeforeHide = conciergeProjectScreen.getForeCastAmount().getText();
         conciergeProjectScreen.getCheckMarkItemButton().click();
@@ -677,6 +680,7 @@ public class ProjectStepDefs {
     public void iSetTheRandomQuantityOfGoods(String arg0) {
         randomQuantity = generalStepDefs.getRandomNumber(1, 20);
         $(By.id(arg0)).shouldBe(visible, Duration.ofSeconds(20));
+        executeJavaScript("window.scrollTo(0, 200)");
         Select selectQuantity = new Select($(By.id(arg0)));
         selectQuantity.selectByValue(String.valueOf(randomQuantity));
         sleep(2000);
@@ -706,10 +710,42 @@ public class ProjectStepDefs {
         String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
         sleep(2000);
         if (pricingType.equals("MEMBER")) {
-            assertEquals(prType, "$4,121.00", "Forecast amount for member client is displayed");
+            assertEquals(prType, "$4,496.00", "Forecast amount for member client is displayed");
         }
         if (pricingType.equals("NON-MEMBER")) {
-            assertEquals(prType, "$5,495.00", "Forecast amount for non-member client is displayed");
+            assertEquals(prType, "$5,995.00", "Forecast amount for non-member client is displayed");
         }
+    }
+
+    @When("user go to the next page {string} of projects")
+    public void userGoToTheNextPageOfProjects(String arg0) {
+        $(By.xpath("//button[@aria-label='Go to page " + arg0 + "']")).shouldBe(Condition.be(visible), Duration.ofSeconds(12));
+        $(By.xpath("//button[@aria-label='Go to page " + arg0 + "']")).click();
+    }
+
+    @Then("user verifies that project page is displayed")
+    public void userVerifiesThatProjectPageIsDisplayed() {
+        $(By.xpath("//*[text()='MY PROJECTS']")).shouldBe(Condition.be(visible), Duration.ofSeconds(12));
+        assertTrue($(By.xpath("//*[text()='MY PROJECTS']")).isDisplayed());
+        assertTrue($(By.xpath("//h4[@class='MuiTypography-root MuiTypography-h4']")).isDisplayed());
+    }
+
+    @When("I verify that tax is not displayed")
+    public void iVerifyThatTaxIsNotDisplayed() {
+        conciergeProjectScreen.getTaxExemptCheckBox().shouldBe(Condition.be(visible), Duration.ofSeconds(40));
+        conciergeProjectScreen.getTaxExemptCheckBox().scrollIntoView(true);
+        assertFalse($(By.xpath("//*[text()='Tax']")).isDisplayed());
+    }
+
+    @When("I click on tax exempt checkbox")
+    public void iClickOnTaxExemptCheckbox() {
+        conciergeProjectScreen.getTaxExemptCheckBox().shouldBe(Condition.be(visible), Duration.ofSeconds(20));
+        conciergeProjectScreen.getTaxExemptCheckBox().click();
+
+    }
+
+    @Then("I verify that tax exempt is displayed")
+    public void iVerifyThatTaxExemptIsDisplayed() {
+        assertTrue($(By.xpath("//*[text()='Tax']")).isDisplayed());
     }
 }

@@ -183,8 +183,10 @@ public class GeneralStepDefs {
         try {
             conciergeUserAccountPage.getClientButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
             conciergeUserAccountPage.getClientButton().click();
+
             conciergeUserAccountPage.getClientLookupHeaderBtn().shouldBe(visible, Duration.ofSeconds(20));
             conciergeUserAccountPage.getClientLookupHeaderBtn().click();
+
             conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofSeconds(20));
             if (field.equals("email")) {
                 conciergeUserAccountPage.getClientLookupEmail().shouldBe(Condition.be(visible), Duration.ofSeconds(25));

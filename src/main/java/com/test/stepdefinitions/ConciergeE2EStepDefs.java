@@ -90,8 +90,8 @@ public class ConciergeE2EStepDefs {
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
         conciergeItemsScreen.getAddToCartButton().shouldBe(visible, Duration.ofSeconds(30));
-        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-        executeJavaScript("arguments[0].click();", conciergeItemsScreen.getAddToCartButton());
+//        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+        conciergeItemsScreen.getAddToCartButton().click();
 
         if (usState.equals("CA")) {
             try {
@@ -316,8 +316,9 @@ public class ConciergeE2EStepDefs {
         conciergeUserAccountPage.getSearchItemField().setValue(arg0);
         conciergeUserAccountPage.getSearchButton().shouldBe(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getSearchButton().click();
+
         conciergeUserAccountPage.getSeeResultsButton().shouldBe(visible, Duration.ofSeconds(15));
-        conciergeUserAccountPage.getSeeResultsButton().click();
+        executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getSeeResultsButton());
     }
 
     @When("I choose {string} from brand menu")
@@ -430,15 +431,23 @@ public class ConciergeE2EStepDefs {
     @And("I select count of product")
     public void iSelectCountOfProduct() {
         try {
-            conciergeCartPageScreen.getColorCloseButton().shouldBe(Condition.be(visible), Duration.ofSeconds(15));
+            conciergeCartPageScreen.getColorCloseButton().shouldBe(Condition.be(visible), Duration.ofSeconds(10));
             executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getColorCloseButton());
 
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");
         }
 
-        selectOption.getQuantityElement().shouldBe(Condition.be(visible), Duration.ofSeconds(30));
-        selectOption.getQuantityElement().click();
+        try {
+            executeJavaScript("window.scrollTo(0, 900)");
+            selectOption.getQuantityElement().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
+//            selectOption.getQuantityElement().shouldBe(Condition.and(visible,enabled), Duration.ofSeconds(30));
+            Select selectQty = new Select(selectOption.getQuantityElement());
+            selectQty.selectByIndex(2);
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Close button is not displayed");
+        }
+
     }
 
     @Then("I verify that address screen is displayed")

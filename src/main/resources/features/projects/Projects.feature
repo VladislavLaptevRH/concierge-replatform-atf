@@ -42,7 +42,10 @@ Feature: Verify projects
     When I remove all items from cart
     When I clicks on a random menu item
     When I clicks on o random item
-    When I fill all options for item
+    And I select count of product
+    When I select debth option
+    When I select fabric option
+    When I select color option
     When I click on add to cart button
     When I click on move to project button
     When I choose project from move to project pop up
@@ -202,7 +205,7 @@ Feature: Verify projects
     When I click on projects button
     When I search project "subototalforecastupdatingqty" by provided "projectName"
     When I click on the first project search result
-    And I set the random quantity "quantity_I51173680" of goods
+    And I set the random quantity "quantity_I31828690" of goods
     Then I verify that subtotal amount updated according by quantity of items
 
   Scenario: Verify subtotal/forecast by updating edit configuration of skus - ex - change rug size and notice the price update for line, space, sub total and forecast
@@ -258,6 +261,28 @@ Feature: Verify projects
       | pricingType |
       | NON-MEMBER  |
       | MEMBER      |
+
+  Scenario: Verify switch between pages in Myprojects List
+    Given I log into Concierge as "associate"
+    When I click on projects button
+    Then user verifies that project page is displayed
+    When user go to the next page "2" of projects
+    Then user verifies that project page is displayed
+    When user go to the next page "4" of projects
+    Then user verifies that project page is displayed
+
+  Scenario: Verify Tax exempt in projects for Trade proejcts
+    Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "TEST_TRADE_3MAR_1PM" by provided "projectName"
+    When I click on the first project search result
+#    When I verify that tax is not displayed
+#    When I click on tax exempt checkbox
+#    Then I verify that tax exempt is displayed
+
+
+
+
 
 
 

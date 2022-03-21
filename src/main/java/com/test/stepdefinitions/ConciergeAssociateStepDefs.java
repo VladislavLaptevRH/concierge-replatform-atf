@@ -1,5 +1,6 @@
 package com.test.stepdefinitions;
 
+import com.codeborne.selenide.Condition;
 import com.test.pageObject.ConciergeLoginPage;
 import com.test.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.Given;
@@ -23,24 +24,8 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I expect that I am on the Concierge Dashboard page")
     public void iExpectThatIAmOnTheConciergeDashboardPage() {
-        conciergeUserAccountPage.getUserNameButton().shouldBe(visible, Duration.ofSeconds(15));
-        assertTrue(conciergeUserAccountPage.getUserNameButton().isDisplayed());
-        assertEquals(conciergeUserAccountPage.getArtButtonMenu().getText(), "ART");
-        assertEquals(conciergeUserAccountPage.getBathButtonMenu().getText(), "BATH");
-        assertEquals(conciergeUserAccountPage.getBedButtonMenu().getText(), "BED");
-        assertEquals(conciergeUserAccountPage.getProjectsButton().getText(), "PROJECTS");
-        assertTrue(conciergeUserAccountPage.getLocationButton().isDisplayed());
-        assertEquals(conciergeUserAccountPage.getInStockButtonMenu().getText(), "IN STOCK");
-        assertEquals(conciergeUserAccountPage.getLivingButtonMenu().getText(), "LIVING");
-        assertEquals(conciergeUserAccountPage.getDiningButtonMenu().getText(), "DINING");
-        assertEquals(conciergeUserAccountPage.getLightingButtonMenu().getText(), "LIGHTING");
-        assertEquals(conciergeUserAccountPage.getTextilesButtonMenu().getText(), "TEXTILES");
-        assertEquals(conciergeUserAccountPage.getRugsButtonMenu().getText(), "RUGS");
-        assertEquals(conciergeUserAccountPage.getWindowsButtonMenu().getText(), "WINDOWS");
-        assertEquals(conciergeUserAccountPage.getDecorButtonMenu().getText(), "DÉCOR");
-        assertEquals(conciergeUserAccountPage.getOutdoorButtonMenu().getText(), "OUTDOOR");
-        assertEquals(conciergeUserAccountPage.getGiftsButtonMenu().getText(), "GIFTS");
-        assertEquals(conciergeUserAccountPage.getSaleButtonMenu().getText(), "SALE");
+        conciergeUserAccountPage.getMainMenuHeader().shouldBe(Condition.be(visible), Duration.ofSeconds(10));
+        assertTrue(conciergeUserAccountPage.getMainMenuHeader().isDisplayed(),"");
     }
 
     @When("I change my store to store number 10")
