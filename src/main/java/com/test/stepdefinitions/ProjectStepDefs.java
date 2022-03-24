@@ -436,8 +436,9 @@ public class ProjectStepDefs {
     @When("I click on edit options button")
     public void iClickOnEditOptionsButton() {
         conciergeProjectScreen.getEditItemOptions().shouldBe(visible, Duration.ofSeconds(35));
-        executeJavaScript("window.scrollBy(0,150)", "");
-        conciergeProjectScreen.getEditItemOptions().click();
+        executeJavaScript("window.scrollBy(0,350)", "");
+        projectSettingsScreen.getMoodBoardButton().shouldHave(text("MOODBOARD"), Duration.ofSeconds(15));
+        executeJavaScript("arguments[0].click();", conciergeProjectScreen.getEditItemOptions());
     }
 
     @Then("verify that color was changed")
@@ -459,22 +460,17 @@ public class ProjectStepDefs {
 
     @When("I choose quantity for item from project")
     public void iChooseQuantityForItemFromProject() {
-        randomQuantity = generalStepDefs.getRandomNumber(1, 10);
-        Select select = new Select($(By.xpath("//select[contains(@id,'quantity')]")));
-        select.selectByIndex(1);
-        selectOption.getQuantityBtn().shouldBe(visible, Duration.ofSeconds(20));
-        sleep(4000);
-        executeJavaScript("window.scrollBy(0,150)", "Scroll to quantity");
-        selectOption.getQuantityBtn().click();
-        sleep(3000);
+        randomQuantity = generalStepDefs.getRandomNumber(2, 8);
+        $(By.xpath("//div[@aria-haspopup='listbox']")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//div[@aria-haspopup='listbox']")).click();
+        $(By.xpath("//*[text()='" + randomQuantity + "']")).shouldHave(text(Integer.toString(randomQuantity)), Duration.ofSeconds(10));
+        $(By.xpath("//*[text()='" + randomQuantity + "']")).scrollIntoView(true);
         $(By.xpath("//*[text()='" + randomQuantity + "']")).click();
-        sleep(3000);
-        selectOption.getQuantityBtn().click();
     }
 
     @Then("verify that quantity for item was changed")
     public void verifyThatQuantityForItemWasChanged() {
-        assertTrue(Integer.parseInt(selectOption.getQuantityOfLancasterOption().getText()) == randomQuantity);
+        assertTrue(Integer.parseInt($(By.xpath("//div[@aria-haspopup='listbox']")).getText()) == randomQuantity);
     }
 
     @And("I choose project by project name {string}")

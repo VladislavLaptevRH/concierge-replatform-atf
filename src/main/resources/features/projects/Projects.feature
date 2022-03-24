@@ -129,6 +129,7 @@ Feature: Verify projects
     When I go to item "112848 MULT" from search field
     And I select count of product
     When I click on add to cart button
+    When I click on view cart button
     When I click on move to project button
     Then I verify that project list is displayed
 
@@ -138,6 +139,7 @@ Feature: Verify projects
     When I go to item "112848 MULT" from search field
     And I select count of product
     When I click on add to cart button
+    When I click on view cart button
     When I click on move to project button
     Then I verify that opportunity list is displayed
 
@@ -147,6 +149,7 @@ Feature: Verify projects
     When I go to item "112848 MULT" from search field
     And I select count of product
     When I click on add to cart button
+    When I click on view cart button
     When I click on move to project button
     Then I verify that spaces list is displayed
 

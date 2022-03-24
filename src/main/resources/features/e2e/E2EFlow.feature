@@ -64,23 +64,26 @@ Feature: Verify e2e flow
     When I choose client who is a "nonmember"
     Then I verify that address screen is displayed
 
-#
-#  Scenario Outline: Verify that user is able to but item through search item by SKU id
-#    Given I log into Concierge as "associate"
-#    When I remove all items from cart
-#    When I go to item "<skuID>" from search field
-#    And I select count of product
-#    When I click on add to cart button
-#    When I click on checkout button
-#    When I fill all fields from address screen
-#    When I continue to payment
-#    When I introduces payment details
-#    And I verify that review screen is displayed
-#    When I click on a place order button
-#    Then I verify that confirmation order screen is displayed
-#    Examples:
-#      | skuID    |
-#      | 10010969 |
+
+  Scenario Outline: Verify that user is able to but item through search item by SKU id
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I go to item "<skuID>" from search field
+    And I select count of product
+    When I click on add to cart button
+    When I click on view cart button
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "nonmember"
+    When I fill all fields from address screen
+    When I continue to payment
+    When I introduces payment details
+    And I verify that review screen is displayed
+    When I click on a place order button
+    Then I verify that confirmation order screen is displayed
+    Examples:
+      | skuID    |
+      | 10010969 |
 #
 #  Scenario: Verify that user is able to add item to project and pay
 #    Given I log into Concierge as "associate"

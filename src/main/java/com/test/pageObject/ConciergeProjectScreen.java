@@ -187,7 +187,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement foreCastTotalValue = $(By.xpath("(//div[contains(@class,'MuiBox-root')])[18]"));
 
-    private final SelenideElement editItemOptions = $(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div/div/div[1]/div/button[1]"));
+    private final SelenideElement editItemOptions = $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[14]"));
 
     private SelenideElement regularPriceValue = $(By.cssSelector(".MuiTypography-root.MuiTypography-body1.MuiTypography-alignCenter"));
 
