@@ -2,6 +2,7 @@ package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import com.test.pageObject.*;
 import com.test.utility.Hooks;
 import io.cucumber.java.en.And;
@@ -9,6 +10,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
@@ -89,39 +91,18 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
-        conciergeItemsScreen.getAddToCartButton().shouldBe(visible, Duration.ofSeconds(30));
-//        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+//        sleep(5);
+        conciergeItemsScreen.getAddToCartButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(30));
+        conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(30));
         conciergeItemsScreen.getAddToCartButton().click();
 
-        if (usState.equals("CA")) {
-            try {
-                conciergeItemsScreen.getAggreeeAndAddToCardButton().shouldBe(visible, Duration.ofSeconds(20));
-                conciergeItemsScreen.getAggreeeAndAddToCardButton().click();
-            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                System.out.println("Agree&add to card button is not displayed");
-            }
-        }
-
-        try {
-            conciergeItemsScreen.getViewCartButton().shouldBe(Condition.be(visible), Duration.ofSeconds(5));
-            conciergeItemsScreen.getViewCartButton().click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("View cart button is not displayed");
-        }
-
-        try {
-            conciergeItemsScreen.getAggreeeAndAddToCardButton().shouldBe(Condition.be(visible), Duration.ofSeconds(4));
-            conciergeItemsScreen.getAggreeeAndAddToCardButton().click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Agree&add to cart button is not displayed");
-        }
-
-        try {
-            conciergeItemsScreen.getViewCartButton().shouldBe(Condition.be(visible), Duration.ofSeconds(5));
-            conciergeItemsScreen.getViewCartButton().click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("View cart button is not displayed");
-        }
+//
+//        try {
+//            conciergeItemsScreen.getAggreeeAndAddToCardButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(5));
+//            conciergeItemsScreen.getAggreeeAndAddToCardButton().click();
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Agree&add to cart button is not displayed");
+//        }
 
     }
 
@@ -164,7 +145,7 @@ public class ConciergeE2EStepDefs {
                     SelenideElement selenideElement = $(By.xpath("//*[text()='Remove']"));
                     selenideElement.click();
                 } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                    conciergeCartPageScreen.getPleaseContinueBrowsingButton().shouldBe(visible, Duration.ofSeconds(12));
+                    conciergeCartPageScreen.getPleaseContinueBrowsingButton().shouldHave(text(conciergeCartPageScreen.getPleaseContinueBrowsingButton().getText()), Duration.ofMinutes(1));
                     conciergeCartPageScreen.getPleaseContinueBrowsingButton().click();
                     break;
                 }
@@ -175,9 +156,9 @@ public class ConciergeE2EStepDefs {
 
     @When("I continue to payment")
     public void continueToPaymentAfterAddressCheckout() {
-        checkoutAddressScreen.getContinuePaymentButton().shouldBe(visible, Duration.ofMinutes(1));
+        checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
         executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
-        checkoutAddressScreen.getContinuePaymentButton().shouldBe(visible, Duration.ofMinutes(1));
+        checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
         checkoutAddressScreen.getContinuePaymentButton().click();
         try {
             checkoutAddressScreen.getContinueButton().shouldBe(visible, Duration.ofSeconds(40));
@@ -245,7 +226,7 @@ public class ConciergeE2EStepDefs {
         sleep(4);
         generalStepDefs.payWith("MC", "2222 4000 1000 0008", "737", "0330");
         paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
-
+        sleep(4);
         paymentScreen.getContinueToReview().click();
 
     }
@@ -254,7 +235,7 @@ public class ConciergeE2EStepDefs {
     @When("I add {int} times an item in the cart")
     public void iAddTimesAnItemInTheCart(int arg0) throws InterruptedException {
         for (int i = 0; i < 70; i++) {
-            $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']")).shouldBe(visible, Duration.ofMinutes(1));
+            $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']")).shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(30));
             conciergeUserAccountPage.getDashboardTitle().shouldHave(text("DASHBOARD"));
             conciergeUserAccountPage.getOrderHistoryButton().shouldBe(visible, Duration.ofSeconds(12));
 
@@ -311,14 +292,31 @@ public class ConciergeE2EStepDefs {
 
     @When("I go to item {string} from search field")
     public void iGoToItemFromSearchField(String arg0) {
-        sleep(3);
-        generalStepDefs.isElementVisible("//input[contains(@class,'MuiOutlinedInput-inputAdornedStart')]");
-        conciergeUserAccountPage.getSearchItemField().setValue(arg0);
-        conciergeUserAccountPage.getSearchButton().shouldBe(visible, Duration.ofSeconds(15));
-        conciergeUserAccountPage.getSearchButton().click();
+//        sleep(15);
+        conciergeCartPageScreen.getShoppingCartEmpty().shouldHave(text("Dashboard"), Duration.ofSeconds(15));
+//        conciergeUserAccountPage.getMainMenuHeader().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Order history']")).shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(15));
+        conciergeUserAccountPage.getSearchItemField().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(15));
 
-        conciergeUserAccountPage.getSeeResultsButton().shouldBe(visible, Duration.ofSeconds(15));
-        executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getSeeResultsButton());
+//        executeJavaScript("arguments[0].setAttribute('value', '" + arg0 +"')", conciergeUserAccountPage.getSearchItemField());
+        conciergeUserAccountPage.getSearchItemField().setValue(arg0);
+        $(By.xpath("//*[text()='Search']")).shouldHave(text("Search"), Duration.ofSeconds(15));
+        conciergeUserAccountPage.getSearchButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(30));
+        sleep(3);
+//
+        executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getSearchButton());
+
+        try {
+            conciergeUserAccountPage.getSearchButton().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("No thanks button is not displayed");
+        }
+
+//        sleep(10);
+
+
+//        conciergeUserAccountPage.getSeeResultsButton().shouldBe(Condition.and("", visible, enabled, exist, appear), Duration.ofSeconds(30));
+//        executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getSeeResultsButton());
     }
 
     @When("I choose {string} from brand menu")
@@ -360,14 +358,8 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on no thanks button")
     public void iClickOnNoThanksButton() {
-        conciergeCartPageScreen.getOrderClassificationSelect().shouldBe(Condition.be(visible), Duration.ofSeconds(25));
-        Select select = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
-        select.selectByIndex(1);
-        conciergeItemsScreen.getCheckoutButton().shouldBe(visible, Duration.ofSeconds(12));
-        conciergeItemsScreen.getCheckoutButton().click();
-
         try {
-            conciergeCartPageScreen.getNoThanksButton().shouldBe(visible, Duration.ofSeconds(5));
+            conciergeCartPageScreen.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(15));
             conciergeCartPageScreen.getNoThanksButton().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("No thanks button is not displayed");
@@ -399,11 +391,15 @@ public class ConciergeE2EStepDefs {
     @When("I remove client from header")
     public void iRemoveClientFromHeader() {
         try {
-            sleep(2);
+            sleep(5);
             if (!$(By.xpath("//*[text()='Client']")).isDisplayed()) {
-                conciergeUserAccountPage.getClientButton().shouldBe(visible, Duration.ofMinutes(2));
+                conciergeUserAccountPage.getClientButton().shouldHave(text(conciergeUserAccountPage.getClientButton().getText()), Duration.ofSeconds(15));
+
+                conciergeUserAccountPage.getClientButton().shouldBe(Condition.and("", visible, enabled, exist, appear), Duration.ofSeconds(30));
                 conciergeUserAccountPage.getClientButton().click();
                 sleep(2);
+                conciergeUserAccountPage.getRemoveClientByText().shouldBe(Condition.and("", visible, enabled, exist, appear), Duration.ofSeconds(30));
+                conciergeUserAccountPage.getRemoveClientByText().shouldHave(text(conciergeUserAccountPage.getRemoveClientByText().getText()), Duration.ofSeconds(15));
                 conciergeUserAccountPage.getRemoveClientByText().click();
             }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
@@ -422,6 +418,8 @@ public class ConciergeE2EStepDefs {
             conciergeUserAccountPage.getClientLookupLastName().setValue("NonMember");
         }
 
+        conciergeUserAccountPage.getClientLookupSearchButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(15));
+        conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofSeconds(15));
         conciergeUserAccountPage.getClientLookupSearchButton().click();
         conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME"));
         conciergeUserAccountPage.getFirstResultOfClientLookup().click();
@@ -430,23 +428,26 @@ public class ConciergeE2EStepDefs {
 
     @And("I select count of product")
     public void iSelectCountOfProduct() {
-        try {
-            conciergeCartPageScreen.getColorCloseButton().shouldBe(Condition.be(visible), Duration.ofSeconds(10));
-            executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getColorCloseButton());
 
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Close button is not displayed");
-        }
-
-        try {
-            executeJavaScript("window.scrollTo(0, 900)");
-            selectOption.getQuantityElement().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
-//            selectOption.getQuantityElement().shouldBe(Condition.and(visible,enabled), Duration.ofSeconds(30));
-            Select selectQty = new Select(selectOption.getQuantityElement());
-            selectQty.selectByIndex(2);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Close button is not displayed");
-        }
+//        try {
+//            conciergeCartPageScreen.getColorCloseButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(10));
+//            conciergeCartPageScreen.getColorCloseButton().click();
+//
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Close button is not displayed");
+//        }
+//
+//        try {
+        sleep(10);
+        executeJavaScript("window.scrollTo(0, 1200)");
+        conciergeItemsScreen.getDetailsSpan().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofSeconds(50));
+        selectOption.getQuantityElement().shouldBe(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        Select selectQty = new Select(selectOption.getQuantityElement());
+        selectQty.selectByIndex(2);
+//        }
+//        catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Close button is not displayed");
+//        }
 
     }
 
@@ -462,6 +463,36 @@ public class ConciergeE2EStepDefs {
         assertTrue(checkoutAddressScreen.getAptFloorSuiteField().isDisplayed());
         assertTrue(checkoutAddressScreen.getCityField().isDisplayed());
         assertTrue(checkoutAddressScreen.getPhoneField().isDisplayed());
+    }
+
+    @When("I click on sale point of menu")
+    public void iClickOnSalePointOfMenu() {
+        conciergeUserAccountPage.getOutdoorMenu().shouldHave(text("Outdoor"), Duration.ofMinutes(1));
+        Actions actions = new Actions(WebDriverRunner.getWebDriver());
+        actions.moveToElement(conciergeUserAccountPage.getOutdoorMenu());
+        sleep(3);
+        conciergeUserAccountPage.getOutdoorMenu().shouldBe(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        conciergeUserAccountPage.getOutdoorMenu().click();
+
+    }
+
+    @When("I click on chairs submenu")
+    public void iClickOnChairsSubmenu() {
+        sleep(3);
+        conciergeUserAccountPage.getChairsSubMenu().shouldHave(text("Chairs"), Duration.ofMinutes(1));
+        Actions actions = new Actions(WebDriverRunner.getWebDriver());
+        actions.moveToElement(conciergeUserAccountPage.getChairsSubMenu());
+        conciergeUserAccountPage.getChairsSubMenu().shouldBe(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        conciergeUserAccountPage.getChairsSubMenu().click();
+    }
+
+    @When("I select finish option")
+    public void iSelectFinishOption() {
+        selectOption.getFinishOption().shouldBe(visible, Duration.ofMinutes(1));
+        selectOption.getFinishOption().scrollIntoView(true);
+        sleep(2);
+        Select selectFinish = new Select(selectOption.getFinishOption());
+        selectFinish.selectByIndex(1);
     }
 }
 

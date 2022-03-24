@@ -16,13 +16,15 @@ public class ConciergeItemsScreen {
 
     private final List<SelenideElement> twoItemsSection = $$(By.xpath("//ul[contains(@class,'MuiGridList-root')]/li[@class='MuiGridListTile-root']"));
 
-    private final List<SelenideElement> twoItemsInRow = $$(By.xpath("//li[@class='MuiGridListTile-root']"));
+    private final List<SelenideElement> twoItemsInRow = $$(By.xpath("(//li[@class='MuiGridListTile-root'][1])[1]"));
 
     private final List<SelenideElement> collectionsItems = $$(By.xpath("//div[contains(@class,'MuiGrid-item MuiGrid-grid-xs-12')]/div/ul[contains(@class,'MuiGridList-root')]/li[@class='MuiGridListTile-root']"));
 
     private final SelenideElement addToCartButton = $(By.xpath("(//button[@data-testid='add-to-cart-dialog-opener'])[1]"));
 
     private final SelenideElement viewCartButton = $(By.cssSelector("#ajax-proceed-to-cart"));
+
+    private final SelenideElement detailsSpan = $(By.xpath("//*[text()='DETAILS']"));
 
     private final SelenideElement checkoutButton = $(By.xpath("//div[contains(@class,'MuiGrid-root MuiGrid-container MuiGrid-item')][2]//button"));
 

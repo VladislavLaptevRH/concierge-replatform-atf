@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class ProjectSettingsScreen {
 
-    private final SelenideElement updateProjectSettingsTitle = $(By.xpath("//div/h6[@class='MuiTypography-root MuiTypography-subtitle2']"));
+    private final SelenideElement updateProjectSettingsTitle = $(By.xpath("//h6[@class='MuiTypography-root MuiTypography-subtitle2']"));
 
     private final SelenideElement accountDetails = $(By.xpath("//*[text()='Account Details']"));
 

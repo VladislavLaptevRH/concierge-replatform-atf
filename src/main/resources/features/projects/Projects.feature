@@ -40,13 +40,14 @@ Feature: Verify projects
   Scenario: Verify that user is able to move cart to project
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I clicks on a random menu item
-    When I clicks on o random item
+    When I remove client from header
+    When I click on sale point of menu
+    When I click on chairs submenu
+    When I clicks on item from two items in row
+    When I select finish option
     And I select count of product
-    When I select debth option
-    When I select fabric option
-    When I select color option
     When I click on add to cart button
+    When I click on view cart button
     When I click on move to project button
     When I choose project from move to project pop up
     When I click on save button

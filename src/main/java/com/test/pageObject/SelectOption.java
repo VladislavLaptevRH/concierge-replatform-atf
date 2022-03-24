@@ -1,6 +1,7 @@
 package com.test.pageObject;
 
 import com.codeborne.selenide.SelenideElement;
+import io.cucumber.java.eo.Se;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
@@ -29,6 +30,8 @@ public class SelectOption {
     private final SelenideElement fabricProperty = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Fabric')])[1]"));
 
     private final SelenideElement depthProperty = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Depth')])[1]"));
+
+    private final SelenideElement finishOption = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Finish')])[1]"));
 
     private final SelenideElement quantityElement = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'qty')])[1]"));
 

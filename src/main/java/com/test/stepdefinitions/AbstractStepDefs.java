@@ -15,6 +15,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static com.test.stepdefinitions.GeneralStepDefs.sleep;
 import static org.awaitility.Awaitility.await;
 import static org.testng.Assert.assertTrue;
 
@@ -32,11 +33,11 @@ public class AbstractStepDefs {
 
     @When("I clicks on a random menu item")
     public void iClicksOnARandomMenuItem() {
-        sleep(3000);
-        conciergeUserAccountPage.getInStockButtonMenu().shouldBe(visible, Duration.ofSeconds(15));
+        sleep(3);
+        conciergeUserAccountPage.getFirstItemMainMenu().shouldBe(visible, Duration.ofSeconds(15));
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
-        actions.moveToElement(conciergeUserAccountPage.getInStockMenuItem());
-        executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getInStockButtonMenu());
+        actions.moveToElement(conciergeUserAccountPage.getFirstItemMainMenu());
+        executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getFirstItemMainMenu());
         conciergeUserAccountPage.getItemSubCategory().get(0).shouldBe(visible, Duration.ofSeconds(30));
         executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getItemSubCategory().get(0));
     }
@@ -44,26 +45,16 @@ public class AbstractStepDefs {
     @When("I clicks on o random item")
     public void iClicksOnORandomItem() {
 
-        try {
-            $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12'][1]/li")).shouldBe(Condition.be(visible), Duration.ofSeconds(15));
-            $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12'][1]/li")).click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Collection section is not displayed");
-        }
 
-        try {
-            conciergeItemsScreen.getItems().get(0).shouldBe(visible, Duration.ofSeconds(10));
-            conciergeItemsScreen.getItems().get(0).click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Items section are not displayed");
-        }
-
-        try {
-            conciergeItemsScreen.getTwoItemsInRow().get(0).shouldBe(visible, Duration.ofSeconds(10));
-            conciergeItemsScreen.getTwoItemsInRow().get(0).click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Items section are not displayed");
-        }
+//
+//        try {
+        conciergeItemsScreen.getItems().get(0).shouldBe(visible, Duration.ofMinutes(1));
+        conciergeItemsScreen.getItems().get(0).click();
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Items section are not displayed");
+//        }
+//
+////
     }
 
 
@@ -99,51 +90,44 @@ public class AbstractStepDefs {
 
     @When("I click on checkout button")
     public void iClickOnCheckoutButton() {
-        conciergeCartPageScreen.getOrderClassificationSelect().shouldBe(Condition.be(visible), Duration.ofSeconds(15));
+        conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(text(conciergeCartPageScreen.getOrderClassificationSelect().getText()), Duration.ofSeconds(30));
         Select select = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
         select.selectByIndex(1);
-        conciergeItemsScreen.getCheckoutButton().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeItemsScreen.getCheckoutButton().shouldHave(text(conciergeItemsScreen.getCheckoutButton().getText()), Duration.ofMinutes(1));
         conciergeItemsScreen.getCheckoutButton().click();
 
-        try {
-            conciergeCartPageScreen.getAgreeTermsForSaleCheckbox().shouldBe(Condition.be(visible), Duration.ofSeconds(4));
-            conciergeCartPageScreen.getAgreeTermsForSaleCheckbox().click();
-
-            conciergeCartPageScreen.getUpdateButton().shouldBe(Condition.be(visible), Duration.ofSeconds(4));
-            conciergeCartPageScreen.getUpdateButton().click();
-
-            sleep(3000);
-            conciergeItemsScreen.getCheckoutButton().scrollIntoView(true);
-            sleep(2000);
-            conciergeItemsScreen.getCheckoutButton().click();
-
-
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("I agree to the Terms of Sale for Special Orders is not displayed");
-        }
-
-        try {
-            conciergeCartPageScreen.getNoThanksButton().shouldBe(visible, Duration.ofSeconds(12));
-            if (conciergeCartPageScreen.getNoThanksButton().isDisplayed()) {
-                conciergeCartPageScreen.getNoThanksButton().click();
-            }
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("No thanks button is not displayed");
-        }
-        try {
-            conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofMinutes(1));
-            Selenide.sleep(3000);
-            conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
-            conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
-            conciergeUserAccountPage.getClientLookupSearchButton().click();
-            conciergeOrderHistoryForm.getCustomerFirstName().shouldBe(visible, Duration.ofSeconds(15));
-            conciergeUserAccountPage.getFirstResultOfClientLookup().shouldBe(visible, Duration.ofSeconds(15));
-            conciergeUserAccountPage.getFirstResultOfClientLookup().click();
-            conciergeItemsScreen.getCheckoutButton().shouldBe(visible, Duration.ofSeconds(12));
-            conciergeItemsScreen.getCheckoutButton().click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Client is selected");
-        }
+//        try {
+//            conciergeCartPageScreen.getAgreeTermsForSaleCheckbox().shouldBe(Condition.be(visible), Duration.ofSeconds(4));
+//            conciergeCartPageScreen.getAgreeTermsForSaleCheckbox().click();
+//
+//            conciergeCartPageScreen.getUpdateButton().shouldBe(Condition.be(visible), Duration.ofSeconds(4));
+//            conciergeCartPageScreen.getUpdateButton().click();
+//
+//            sleep(3);
+//            conciergeItemsScreen.getCheckoutButton().scrollIntoView(true);
+//            sleep(2);
+//            conciergeItemsScreen.getCheckoutButton().click();
+//
+//
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("I agree to the Terms of Sale for Special Orders is not displayed");
+//        }
+//
+//
+//        try {
+//            conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofMinutes(1));
+//            sleep(3);
+//            conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
+//            conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
+//            conciergeUserAccountPage.getClientLookupSearchButton().click();
+//            conciergeOrderHistoryForm.getCustomerFirstName().shouldBe(visible, Duration.ofSeconds(15));
+//            conciergeUserAccountPage.getFirstResultOfClientLookup().shouldBe(visible, Duration.ofSeconds(15));
+//            conciergeUserAccountPage.getFirstResultOfClientLookup().click();
+//            conciergeItemsScreen.getCheckoutButton().shouldBe(visible, Duration.ofSeconds(12));
+//            conciergeItemsScreen.getCheckoutButton().click();
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Client is selected");
+//        }
 
     }
 
@@ -203,8 +187,9 @@ public class AbstractStepDefs {
 
     @When("I fill all fields from address screen")
     public void iFillAllFieldsFromAddressScreenForBrands() {
+        sleep(4);
         try {
-            checkoutAddressScreen.getFirstNameInpt().shouldBe(visible, Duration.ofMinutes(1));
+            checkoutAddressScreen.getFirstNameInpt().shouldBe(Condition.and("", enabled, visible), Duration.ofMinutes(1));
             if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
                 generalStepDefs.fillAddressFields();
                 generalStepDefs.fillZipCodeStateCountry("12345", "US", "");

@@ -152,7 +152,7 @@ public class ProjectStepDefs {
 
     @When("I click on move to project button")
     public void iClickOnMoveToProjectButton() {
-        conciergeProjectScreen.getMoveToProjectButton().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getMoveToProjectButton().shouldHave(text("Move to Project"), Duration.ofSeconds(25));
         conciergeProjectScreen.getMoveToProjectButton().click();
     }
 
@@ -175,9 +175,9 @@ public class ProjectStepDefs {
 
     @When("I choose project from move to project pop up")
     public void iChooseProjectFromMoveToProjectPopUp() {
-        conciergeProjectScreen.getSpaceName().shouldHave(text("General"), Duration.ofSeconds(15));
+        conciergeProjectScreen.getMoveToProjectSpan().shouldHave(text("Move To Project"), Duration.ofSeconds(30));
         Select projectNameSelect = new Select(conciergeProjectScreen.getProjectName());
-        projectNameSelect.selectByIndex(1);
+        projectNameSelect.selectByVisibleText("moveToProject");
     }
 
     @When("I click on the first project search result")
@@ -188,29 +188,15 @@ public class ProjectStepDefs {
 
     @When("I click on settings button")
     public void iClickOnSettingsButton() {
-        conciergeProjectScreen.getSettingsButton().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeProjectScreen.getSettingsButton().shouldHave(text("SETTINGS"), Duration.ofMinutes(1));
         conciergeProjectScreen.getSettingsButton().click();
     }
 
     @Then("I verify that project setting screen is displayed")
     public void iVerifyThatProjectSettingScreenIsDisplayed() {
-        projectSettingsScreen.getUpdateProjectSettingsTitle().shouldBe(visible, Duration.ofSeconds(20));
+        projectSettingsScreen.getUpdateProjectSettingsTitle().shouldBe(visible, Duration.ofSeconds(25));
         projectSettingsScreen.getAccountDetails().shouldBe(visible, Duration.ofSeconds(15));
         projectSettingsScreen.getSameShippingCheckBox().shouldBe(visible, Duration.ofSeconds(15));
-        projectSettingsScreen.getUsdCurrency().shouldBe(visible, Duration.ofSeconds(15));
-        projectSettingsScreen.getUsdCurrency().click();
-        projectSettingsScreen.getCadCurrency().shouldBe(visible, Duration.ofSeconds(15));
-        projectSettingsScreen.getGalleryButton().shouldBe(visible, Duration.ofSeconds(15));
-        projectSettingsScreen.getDesignButton().shouldBe(visible, Duration.ofSeconds(15));
-        projectSettingsScreen.getTradeButton().shouldBe(visible, Duration.ofSeconds(15));
-        projectSettingsScreen.getProjectNameFieldSpan().shouldBe(visible, Duration.ofSeconds(15));
-        projectSettingsScreen.getOpportunityNameFieldSpan().shouldBe(visible, Duration.ofMinutes(1));
-        projectSettingsScreen.getDesiredDeliveryDate().shouldBe(visible, Duration.ofMinutes(1));
-        projectSettingsScreen.getPurchasingDeadlineSpan().shouldBe(visible, Duration.ofMinutes(1));
-        projectSettingsScreen.getPreferredContactMethodSpan().shouldBe(visible, Duration.ofMinutes(1));
-        projectSettingsScreen.getDescriptionSpan().shouldBe(visible, Duration.ofSeconds(15));
-        projectSettingsScreen.getSpaceNameSpan().shouldBe(visible, Duration.ofSeconds(15));
-        projectSettingsScreen.getAddSpaceButton().shouldBe(visible, Duration.ofSeconds(15));
         projectSettingsScreen.getUpdateProjectSettingsBtn().shouldBe(visible, Duration.ofSeconds(15));
     }
 
@@ -323,8 +309,7 @@ public class ProjectStepDefs {
     public void iClickOnEmailEstimateButtonFromProjectScreen() {
         sleep(5000);
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-        sleep(3000);
-        conciergeProjectScreen.getEmailEstimateProjectScreen().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+        conciergeProjectScreen.getEmailEstimateProjectScreen().shouldHave(text("EMAIL ESTIMATE"), Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getEmailEstimateProjectScreen());
     }
 
@@ -409,10 +394,10 @@ public class ProjectStepDefs {
         $(By.cssSelector("#demo-simple-select-outlined")).shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
         $(By.cssSelector("#demo-simple-select-outlined")).click();
         if (searchBy.equals("projectName")) {
-            conciergeProjectScreen.getProjectNameButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
-            ;
+            conciergeProjectScreen.getProjectNameButton().shouldHave(text("Project Name"), Duration.ofSeconds(20));
             conciergeProjectScreen.getProjectNameButton().click();
-            conciergeProjectScreen.getProjectNameField().shouldBe(visible, Duration.ofSeconds(20));
+
+            conciergeProjectScreen.getProjectNameField().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
             conciergeProjectScreen.getProjectNameField().setValue(projectName);
         }
         if (searchBy.equals("projectID")) {
@@ -494,8 +479,8 @@ public class ProjectStepDefs {
 
     @And("I choose project by project name {string}")
     public void iChooseProjectByProjectName(String projectName) {
-        conciergeProjectScreen.getProjectName().shouldBe(visible, Duration.ofSeconds(20));
-        conciergeProjectScreen.getProjectName().click();
+        conciergeProjectScreen.getProjectNameMoveToProject().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getProjectNameMoveToProject().click();
         $(By.xpath("//*[text()='" + projectName + "']")).click();
     }
 
@@ -591,7 +576,7 @@ public class ProjectStepDefs {
     @Then("I verify that subtotal amount updated according by quantity of items")
     public void iVerifyThatSubtotalAmountUpdatedAccordingByQuantityOfItems() {
         sleep(3000);
-        String memberPriceText = conciergeProjectScreen.getMemberItemPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "");
+        String memberPriceText = conciergeProjectScreen.getRegularPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "");
         int memberPrice = Integer.parseInt(memberPriceText);
         int totalItemPrice = randomQuantity * memberPrice;
         String finalPrice = Double.toString(totalItemPrice).replace(".", ",").replaceAll("\\,0", "");
@@ -614,6 +599,7 @@ public class ProjectStepDefs {
 
     @When("I change finish {string} option for project item")
     public void iChangeFinishOptionForProjectItem(String finishValue) {
+        sleep(2000);
         Select selectFinish = new Select(conciergeProjectScreen.getFinishOption());
         selectFinish.selectByVisibleText(finishValue);
     }
@@ -678,9 +664,10 @@ public class ProjectStepDefs {
 
     @And("I set the random quantity {string} of goods")
     public void iSetTheRandomQuantityOfGoods(String arg0) {
-        randomQuantity = generalStepDefs.getRandomNumber(1, 20);
+        randomQuantity = generalStepDefs.getRandomNumber(1, 10);
         $(By.id(arg0)).shouldBe(visible, Duration.ofSeconds(20));
         executeJavaScript("window.scrollTo(0, 200)");
+        sleep(2000);
         Select selectQuantity = new Select($(By.id(arg0)));
         selectQuantity.selectByValue(String.valueOf(randomQuantity));
         sleep(2000);
@@ -747,5 +734,18 @@ public class ProjectStepDefs {
     @Then("I verify that tax exempt is displayed")
     public void iVerifyThatTaxExemptIsDisplayed() {
         assertTrue($(By.xpath("//*[text()='Tax']")).isDisplayed());
+    }
+
+    @When("I clicks on item from two items in row")
+    public void iClicksOnItemsFromTwoItemsInRow() {
+//        try {
+//        $(By.xpath("//*[text()='Chairs']")).shouldHave(text("Chairs"), Duration.ofMinutes(1));
+        sleep(3000);
+        conciergeItemsScreen.getTwoItemsInRow().get(0).shouldBe(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        sleep(3000);
+        conciergeItemsScreen.getTwoItemsInRow().get(0).click();
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Items section are not displayed");
+//        }
     }
 }

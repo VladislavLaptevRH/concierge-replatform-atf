@@ -11,6 +11,11 @@ import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class ConciergeUserAccountPage {
+    private SelenideElement outdoorMenu = $(By.xpath("//*[text()='Outdoor']"));
+
+    private SelenideElement chairsSubMenu = $(By.xpath("//*[text()='Chairs']"));
+
+    private SelenideElement firstItemMainMenu = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][1]/h6[@class='MuiTypography-root MuiTypography-subtitle1']"));
 
     private SelenideElement newClientHeaderBtn = $(By.xpath("//*[text()='Client : New Client']"));
 
@@ -26,7 +31,7 @@ public class ConciergeUserAccountPage {
 
     private SelenideElement seeResultsButton = $(By.xpath("//span[@class='MuiButton-label']"));
 
-    private SelenideElement searchItemField = $(By.xpath("//input[contains(@class,'MuiInputBase-inputAdornedStart')]"));
+    private SelenideElement searchItemField = $(By.cssSelector("input[placeholder='Please enter search term']"));
 
     private SelenideElement searchButton = $(By.xpath("//*[text()='Search']"));
 
