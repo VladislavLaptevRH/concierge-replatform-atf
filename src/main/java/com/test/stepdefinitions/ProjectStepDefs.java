@@ -2,6 +2,8 @@ package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.commands.IsDisplayed;
 import com.test.pageObject.*;
 import io.cucumber.java.en.*;
 import io.cucumber.java.eo.Se;
@@ -9,9 +11,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static org.awaitility.Awaitility.await;
 import static org.testng.Assert.*;
 
 public class ProjectStepDefs {
@@ -46,7 +50,7 @@ public class ProjectStepDefs {
 
     @Then("I verify that search result is displayed")
     public void iVerifyThatSearchResultIsDisplayed() {
-        conciergeProjectScreen.getResultsListForProjects().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getResultsListForProjects().shouldBe(visible, Duration.ofMinutes(3));
         assertTrue(conciergeProjectScreen.getResultsListForProjects().isDisplayed());
         assertTrue(conciergeProjectScreen.getSearchResultsTitle().isDisplayed());
         assertTrue(conciergeProjectScreen.getMyProjectsButton().isDisplayed());
@@ -152,7 +156,7 @@ public class ProjectStepDefs {
 
     @When("I click on move to project button")
     public void iClickOnMoveToProjectButton() {
-        conciergeProjectScreen.getMoveToProjectButton().shouldHave(text("Move to Project"), Duration.ofSeconds(25));
+        conciergeProjectScreen.getMoveToProjectButton().shouldHave(text("Move to Project"), Duration.ofMinutes(1));
         conciergeProjectScreen.getMoveToProjectButton().click();
     }
 
@@ -164,9 +168,9 @@ public class ProjectStepDefs {
 
     @Then("I verify that projects screen is displayed")
     public void iVerifyThatProjectsScreenIsDisplayed() {
-        conciergeProjectScreen.getForecastSetButton().shouldBe(visible, Duration.ofSeconds(25));
+        conciergeProjectScreen.getForecastSetButton().shouldBe(visible, Duration.ofSeconds(40));
         assertTrue(conciergeProjectScreen.getSettingsButton().isDisplayed(), "Settings button is displayed");
-        assertTrue(conciergeProjectScreen.getAvailabilityDeliveryButtons().isDisplayed(), "Availability& Delivery, add item note buttons are displayed");
+        conciergeProjectScreen.getPrintButton().shouldBe(visible, Duration.ofSeconds(40));
         assertTrue(conciergeProjectScreen.getPrintButton().isDisplayed(), "Print button ia displayed");
         assertTrue(conciergeProjectScreen.getItems().isDisplayed(), "Items span is displayed");
         assertTrue(conciergeProjectScreen.getQty().isDisplayed(), "QTY span is displayed");
@@ -175,7 +179,7 @@ public class ProjectStepDefs {
 
     @When("I choose project from move to project pop up")
     public void iChooseProjectFromMoveToProjectPopUp() {
-        conciergeProjectScreen.getMoveToProjectSpan().shouldHave(text("Move To Project"), Duration.ofSeconds(30));
+        sleep(3000);
         Select projectNameSelect = new Select(conciergeProjectScreen.getProjectName());
         projectNameSelect.selectByVisibleText("moveToProject");
     }
@@ -247,15 +251,11 @@ public class ProjectStepDefs {
 
     @When("I choose preferred contact method")
     public void iChoosePreferredContactMethod() {
-        conciergeProjectScreen.getSelectPreferredContactMethod().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getSelectPreferredContactMethod().shouldHave(text("Preferred Contact Method"), Duration.ofSeconds(20));
+        sleep(2000);
         conciergeProjectScreen.getSelectPreferredContactMethod().click();
+        conciergeProjectScreen.getPreferredEmailContactMethod().shouldHave(text("Email"), Duration.ofSeconds(15));
         conciergeProjectScreen.getPreferredEmailContactMethod().click();
-    }
-
-    @When("I provide description for opportunity")
-    public void iProvideDescriptionForOpportunity() {
-        conciergeProjectScreen.getOpportunityDescription().shouldBe(visible, Duration.ofSeconds(20));
-        conciergeProjectScreen.getOpportunityDescription().setValue("opportunity description");
     }
 
     @When("I click on create opportunity button")
@@ -392,45 +392,56 @@ public class ProjectStepDefs {
     @When("I search project {string} by provided {string}")
     public void iSearchProjectByProvided(String projectName, String searchBy) {
         $(By.cssSelector("#demo-simple-select-outlined")).shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
+        sleep(2000);
         $(By.cssSelector("#demo-simple-select-outlined")).click();
         if (searchBy.equals("projectName")) {
             conciergeProjectScreen.getProjectNameButton().shouldHave(text("Project Name"), Duration.ofSeconds(20));
+            sleep(2000);
             conciergeProjectScreen.getProjectNameButton().click();
 
             conciergeProjectScreen.getProjectNameField().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+            sleep(2000);
             conciergeProjectScreen.getProjectNameField().setValue(projectName);
         }
         if (searchBy.equals("projectID")) {
             conciergeProjectScreen.getProjectIdButton().shouldBe(visible, Duration.ofSeconds(20));
+            sleep(2000);
             conciergeProjectScreen.getProjectIdButton().click();
             conciergeProjectScreen.getProjectIdField().shouldBe(visible, Duration.ofSeconds(20));
+            sleep(2000);
             conciergeProjectScreen.getProjectIdField().setValue("P54909938");
         }
         if (searchBy.equals("createdBy")) {
             conciergeProjectScreen.getCreatedByButton().shouldBe(visible, Duration.ofSeconds(20));
+            sleep(2000);
             conciergeProjectScreen.getCreatedByButton().click();
             conciergeProjectScreen.getClientFirstNameField().shouldBe(visible, Duration.ofSeconds(20));
+            sleep(2000);
             conciergeProjectScreen.getClientFirstNameField().setValue("Renuka");
             conciergeProjectScreen.getClientLastNameField().setValue("Boorla");
         }
         if (searchBy.equals("editedBy")) {
             conciergeProjectScreen.getEditedBy().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+            sleep(2000);
             conciergeProjectScreen.getEditedBy().click();
             conciergeProjectScreen.getClientFirstNameField().shouldBe(visible, Duration.ofSeconds(40));
             conciergeProjectScreen.getClientFirstNameField().setValue("Renuka");
             conciergeProjectScreen.getClientLastNameField().setValue("Boorla");
         }
         conciergeProjectScreen.getSearchByButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(5));
+        sleep(2000);
         conciergeProjectScreen.getSearchByButton().click();
+        System.out.println();
 
     }
 
     @When("I choose color from option")
     public void iChooseColorFromOption() {
-        selectOption.getLancasterColor().shouldBe(visible, Duration.ofSeconds(20));
+        sleep(2000);
         randomColor = generalStepDefs.getRandomNumber(0, 3);
         Select selectColor = new Select(selectOption.getLancasterColor());
         selectColor.selectByIndex(randomColor);
+        System.out.println();
     }
 
     @When("I click on edit options button")
@@ -460,12 +471,13 @@ public class ProjectStepDefs {
 
     @When("I choose quantity for item from project")
     public void iChooseQuantityForItemFromProject() {
-        randomQuantity = generalStepDefs.getRandomNumber(2, 8);
+        randomQuantity = generalStepDefs.getRandomNumber(2, 5);
         $(By.xpath("//div[@aria-haspopup='listbox']")).shouldBe(visible, Duration.ofSeconds(15));
         $(By.xpath("//div[@aria-haspopup='listbox']")).click();
-        $(By.xpath("//*[text()='" + randomQuantity + "']")).shouldHave(text(Integer.toString(randomQuantity)), Duration.ofSeconds(10));
-        $(By.xpath("//*[text()='" + randomQuantity + "']")).scrollIntoView(true);
-        $(By.xpath("//*[text()='" + randomQuantity + "']")).click();
+        $(By.xpath("//li[@data-value='" + randomQuantity + "']")).shouldHave(text(Integer.toString(randomQuantity)), Duration.ofSeconds(10));
+        $(By.xpath("//li[@data-value='" + randomQuantity + "']")).scrollIntoView(true);
+        sleep(2000);
+        $(By.xpath("//li[@data-value='" + randomQuantity + "']")).click();
     }
 
     @Then("verify that quantity for item was changed")
@@ -494,9 +506,11 @@ public class ProjectStepDefs {
 
     @And("I click on regular price for item projects")
     public void iClickOnRegularPriceForItemProjects() {
-        conciergeProjectScreen.getRegularPrice().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getOverridePriceregularPrice().shouldBe(visible, Duration.ofMinutes(1));
         executeJavaScript("window.scrollBy(0,150)", "Scroll to regular price");
-        conciergeProjectScreen.getRegularPrice().click();
+        sleep(2000);
+        conciergeProjectScreen.getOverridePriceregularPrice().click();
+        System.out.println();
 
     }
 
@@ -608,11 +622,14 @@ public class ProjectStepDefs {
 
     @Then("I verify that forecast value is updated after hiding the item")
     public void iVerifyThatForecastValueIsUpdatedAfterHidingTheItem() {
-        conciergeProjectScreen.getForeCastAmount().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getForeCastAmount().shouldBe(visible, Duration.ofSeconds(30));
         executeJavaScript("window.scrollBy(0,500)", "");
+        sleep(2000);
         conciergeProjectScreen.getCheckMarkItemButton().click();
         String priceBeforeHide = conciergeProjectScreen.getForeCastAmount().getText();
+        sleep(2000);
         conciergeProjectScreen.getCheckMarkItemButton().click();
+        sleep(2000);
         String priceAfterHide = conciergeProjectScreen.getForecastSetButton().getText();
         assertFalse(priceBeforeHide.equals(priceAfterHide), "Forecast value is updated after ");
     }
@@ -625,7 +642,7 @@ public class ProjectStepDefs {
 
     @When("I click on {string} button")
     public void iClickOnButton(String buttonName) {
-        $(By.xpath("//*[text()='" + buttonName + "']")).shouldBe(visible, Duration.ofSeconds(12));
+        $(By.xpath("//*[text()='" + buttonName + "']")).shouldHave(text(buttonName), Duration.ofSeconds(15));
         $(By.xpath("//*[text()='" + buttonName + "']")).click();
     }
 
@@ -650,7 +667,9 @@ public class ProjectStepDefs {
 
     @Then("I verify that forecast value is update according to quantity of item")
     public void iVerifyThatForecastValueIsUpdateAccordingToQuantityOfItem() {
-        conciergeProjectScreen.getItemProjectPrice().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getItemProjectPrice().shouldBe(visible, Duration.ofSeconds(40));
+        System.out.println(randomQuantity);
+        sleep(3000);
         int forecastExpected = randomQuantity * Integer.parseInt(conciergeProjectScreen.getItemProjectPrice().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
         int forecastActual = Integer.parseInt(conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
 
@@ -679,6 +698,7 @@ public class ProjectStepDefs {
         if (arg0.equals("NON-MEMBER")) {
             conciergeProjectScreen.getRegularPricingType().shouldBe(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getRegularPricingType().click();
+            System.out.println();
         } else {
             conciergeProjectScreen.getMemberPricingType().shouldBe(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getMemberPricingType().click();
@@ -693,10 +713,11 @@ public class ProjectStepDefs {
         String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
         sleep(2000);
         if (pricingType.equals("MEMBER")) {
-            assertEquals(prType, "$4,496.00", "Forecast amount for member client is displayed");
+            assertEquals(prType, "$4,496.00\n", "Forecast amount for member client is displayed");
         }
         if (pricingType.equals("NON-MEMBER")) {
-            assertEquals(prType, "$5,995.00", "Forecast amount for non-member client is displayed");
+            assertEquals(prType, "$5,995.00\n", "Forecast amount for non-member client is displayed");
+            System.out.println();
         }
     }
 

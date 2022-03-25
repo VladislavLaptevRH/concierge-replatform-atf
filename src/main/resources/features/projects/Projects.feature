@@ -88,7 +88,6 @@ Feature: Verify projects
     When I click on add new opportunity button
     When I introduce opportunity name
     When I choose preferred contact method
-    When I provide description for opportunity
     When I click on create opportunity button
     When I click on rh concierge logo
     When I go to item "112848 MULT" from search field
@@ -176,12 +175,12 @@ Feature: Verify projects
     When I remove all items from cart
     When I go to item "112848 MULT" from search field
     And I select count of product
-    When I click on add to project button
-    And I choose project by project name "removeitemsfromproject"
-    When I click on save button
-    When I click on go to project button
-    When I click on remove button from project for added item
-    Then I verify that item was removed
+#    When I click on add to project button
+#    And I choose project by project name "removeitemsfromproject"
+#    When I click on save button
+#    When I click on go to project button
+#    When I click on remove button from project for added item
+#    Then I verify that item was removed
 
   Scenario: Verify price override for item from project
     Given I log into Concierge as "leader"
@@ -209,7 +208,7 @@ Feature: Verify projects
     When I click on projects button
     When I search project "subototalforecastupdatingqty" by provided "projectName"
     When I click on the first project search result
-    And I set the random quantity "quantity_I31828690" of goods
+    When I choose quantity for item from project
     Then I verify that subtotal amount updated according by quantity of items
 
   Scenario: Verify subtotal/forecast by updating edit configuration of skus - ex - change rug size and notice the price update for line, space, sub total and forecast
@@ -219,8 +218,7 @@ Feature: Verify projects
     When I click on the first project search result
     When I click on edit options button
     And I verify item price
-    When I change size "112800000" for project item
-    When I change finish "Brass " option for project item
+    When I change finish "Crema " option for project item
     Then I verify that price was not changes
 
   Scenario: Verify subtotal/forecast by updating by hide/unhide items
@@ -241,7 +239,7 @@ Feature: Verify projects
     When I click on projects button
     When I search project "overrideshipping" by provided "projectName"
     When I click on the first project search result
-    When I click on "Print" button
+    When I click on "PRINT" button
     When I click on "YES" button
 
   Scenario: Verify subtotal/forecast by updating qty overriding line items (all types/ one or more items - apply all functionality)
@@ -250,7 +248,8 @@ Feature: Verify projects
     When I search project "overridinglineitems" by provided "projectName"
     When I click on the first project search result
     When I click on edit options button
-    And I set the random quantity "quantity_I24388989" of goods
+    When I choose quantity for item from project
+#    And I set the random quantity "quantity_I24388989" of goods
     Then I verify that forecast value is update according to quantity of item
 
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - <clientType>
