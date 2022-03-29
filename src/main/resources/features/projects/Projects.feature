@@ -175,12 +175,12 @@ Feature: Verify projects
     When I remove all items from cart
     When I go to item "112848 MULT" from search field
     And I select count of product
-#    When I click on add to project button
-#    And I choose project by project name "removeitemsfromproject"
-#    When I click on save button
-#    When I click on go to project button
-#    When I click on remove button from project for added item
-#    Then I verify that item was removed
+    When I click on add to project button
+    And I choose project by project name "removeitemsfromproject"
+    When I click on save button
+    When I click on go to project button
+    When I click on remove button from project for added item
+    Then I verify that item was removed
 
   Scenario: Verify price override for item from project
     Given I log into Concierge as "leader"
@@ -249,7 +249,6 @@ Feature: Verify projects
     When I click on the first project search result
     When I click on edit options button
     When I choose quantity for item from project
-#    And I set the random quantity "quantity_I24388989" of goods
     Then I verify that forecast value is update according to quantity of item
 
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - <clientType>
@@ -274,14 +273,46 @@ Feature: Verify projects
     When user go to the next page "4" of projects
     Then user verifies that project page is displayed
 
-  Scenario: Verify Tax exempt in projects for Trade proejcts
+  Scenario: Verify Tax exempt in projects for Trade projects
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "TEST_TRADE_3MAR_1PM" by provided "projectName"
     When I click on the first project search result
-#    When I verify that tax is not displayed
-#    When I click on tax exempt checkbox
-#    Then I verify that tax exempt is displayed
+    Then I verify that tax is not displayed
+
+  Scenario Outline: Verify Member/non Member /Trade/ Non Trade toggle pricing for unclassified business client project
+    Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "pricingunclassifiedbusiness" by provided "projectName"
+    When I click on the first project search result
+    When I choose "<pricing>" for unclassified business client project
+    Then I verify "<pricing>" for unclassified business client project
+    Examples:
+      | pricing    |
+      | NON_MEMBER |
+      | MEMBER     |
+      | NON_TRADE  |
+      | TRADE      |
+
+  Scenario Outline: Verify transition between spaces spaces
+    Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "transitionbetweenspaces" by provided "projectName"
+    When I click on the first project search result
+    When user choose space "<space>"
+    Then user verify that items for "<space>" are displayed
+    Examples:
+      | space  |
+      | space1 |
+      | space2 |
+
+  Scenario: Verify rapid selection/deselction of project Moodboard items
+    Given I log into Concierge as "associate"
+    When I click on projects button
+    When I search project "selectdeselectmoodboarditems" by provided "projectName"
+    When I click on the first project search result
+    When I click on the moodboard button
+    When I verify selections and deselection of project moodboard items
 
 
 

@@ -431,7 +431,6 @@ public class ProjectStepDefs {
         conciergeProjectScreen.getSearchByButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(5));
         sleep(2000);
         conciergeProjectScreen.getSearchByButton().click();
-        System.out.println();
 
     }
 
@@ -736,20 +735,23 @@ public class ProjectStepDefs {
 
     @When("I verify that tax is not displayed")
     public void iVerifyThatTaxIsNotDisplayed() {
-        conciergeProjectScreen.getTaxExemptCheckBox().shouldBe(Condition.be(visible), Duration.ofSeconds(40));
-        conciergeProjectScreen.getTaxExemptCheckBox().scrollIntoView(true);
-        assertFalse($(By.xpath("//*[text()='Tax']")).isDisplayed());
-    }
-
-    @When("I click on tax exempt checkbox")
-    public void iClickOnTaxExemptCheckbox() {
-        conciergeProjectScreen.getTaxExemptCheckBox().shouldBe(Condition.be(visible), Duration.ofSeconds(20));
+        conciergeProjectScreen.getSettingsButton().shouldHave(text("SETTINGS"), Duration.ofSeconds(20));
+        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         conciergeProjectScreen.getTaxExemptCheckBox().click();
+        sleep(8000);
+        assertFalse($(By.xpath("//*[text()='Tax']")).isDisplayed());
+        conciergeProjectScreen.getTaxExemptCheckBox().click();
+        sleep(4000);
+        System.out.println();
+
+//        }
+
 
     }
 
     @Then("I verify that tax exempt is displayed")
     public void iVerifyThatTaxExemptIsDisplayed() {
+        $(By.xpath("//*[text()='Tax']")).shouldBe(visible, Duration.ofSeconds(15));
         assertTrue($(By.xpath("//*[text()='Tax']")).isDisplayed());
     }
 
@@ -764,5 +766,56 @@ public class ProjectStepDefs {
 //        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
 //            System.out.println("Items section are not displayed");
 //        }
+    }
+
+    @When("I choose {string} for unclassified business client project")
+    public void iChooseForUnclassifiedBusinessClientProject(String arg0) {
+        conciergeProjectScreen.getSettingsButton().shouldHave(text("SETTINGS"), Duration.ofSeconds(15));
+        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+        conciergeProjectScreen.getPricingTypeDropdown().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getPricingTypeDropdown().click();
+        $(By.xpath("//li[@data-value='" + arg0 + "']")).shouldBe(visible, Duration.ofSeconds(10));
+        $(By.xpath("//li[@data-value='" + arg0 + "']")).click();
+
+
+    }
+
+    @Then("I verify {string} for unclassified business client project")
+    public void iVerifyForUnclassifiedBusinessClientProject(String pricingType) {
+        sleep(3000);
+        String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
+        if (pricingType.equals("NON_MEMBER") || (pricingType.equals("NON_TRADE"))) {
+            assertEquals(forecastActual, "1,516", "Pricing for non member is displayed correctly");
+        }
+        if (pricingType.equals("MEMBER") || (pricingType.equals("TRADE"))) {
+            assertEquals(forecastActual, "1,212", "Pricing for " + pricingType + " is displayed correctly");
+        }
+    }
+
+    @When("user choose space {string}")
+    public void userChooseSpace(String spaceName) {
+        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")).scrollIntoView(true);
+        sleep(2000);
+//        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")).click();
+        executeJavaScript("arguments[0].click();", $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")));
+
+        System.out.println();
+        $(By.xpath("//*[text()='" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='" + spaceName + "']")).click();
+    }
+
+    @Then("user verify that items for {string} are displayed")
+    public void userVerifyThatItemsForAreDisplayed(String spaceName) {
+        if (spaceName.equals("space2")) {
+            $(By.xpath("(//*[text()='Metal Floating Mirror'])[2]")).shouldBe(visible, Duration.ofSeconds(15));
+        } else {
+            $(By.xpath("(//*[text()='La Paz Sofa'])[2]")).shouldBe(visible, Duration.ofSeconds(15));
+        }
+    }
+
+    @When("I verify selections and deselection of project moodboard items")
+    public void iVerifySelectionaAndDeselectionOfProjectMoodboardItems() {
+
     }
 }

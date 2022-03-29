@@ -71,7 +71,6 @@ public class Hooks {
 //        ChromeDriver driver = new ChromeDriver(options);
 //        WebDriverRunner.setWebDriver(driver);
 //        System.setProperty("selenide.browser", "chrome");
-////
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");

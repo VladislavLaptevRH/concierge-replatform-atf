@@ -39,6 +39,8 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement pricingType = $(By.xpath("//li[@data-value='pricingType']"));
 
+    private final SelenideElement pricingTypeById = $(By.xpath("//li[@data-value='pricingType']"));
+
     private final SelenideElement rhLocationButton = $(By.xpath("//li[@data-value='gallery']"));
 
     private final SelenideElement createdByButton = $(By.xpath("//li[@data-value='createdBy']"));
@@ -193,7 +195,7 @@ public class ConciergeProjectScreen {
 
     private SelenideElement addToProjectProjectName = $(By.id("project-name-select"));
 
-    private SelenideElement taxExemptCheckBox = $(By.cssSelector("input[type='checkbox']"));
+    private SelenideElement taxExemptCheckBox = $(By.xpath("//input[@type='checkbox']"));
 
     private SelenideElement prieItemFromProject = $(By.xpath("//div[2]/div[@class='MuiGrid-root MuiGrid-item'][1]/p"));
 

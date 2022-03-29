@@ -411,13 +411,15 @@ public class ConciergeE2EStepDefs {
     public void iChooseClientWhoIsAMember(String arg0) {
         conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofSeconds(12));
         if (arg0.equals("member")) {
+            sleep(3);
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
         } else {
+            sleep(3);
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("NonMember");
         }
-
+        sleep(3);
         conciergeUserAccountPage.getClientLookupSearchButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(15));
         conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofSeconds(15));
         conciergeUserAccountPage.getClientLookupSearchButton().click();
