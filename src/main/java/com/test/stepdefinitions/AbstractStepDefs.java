@@ -1,7 +1,6 @@
 package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import com.test.pageObject.*;
 import io.cucumber.java.en.And;
@@ -44,22 +43,19 @@ public class AbstractStepDefs {
 
     @When("I clicks on o random item")
     public void iClicksOnORandomItem() {
-
-
-//
-//        try {
-        conciergeItemsScreen.getItems().get(0).shouldBe(visible, Duration.ofMinutes(1));
-        conciergeItemsScreen.getItems().get(0).click();
-//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-//            System.out.println("Items section are not displayed");
-//        }
-//
-////
+        try {
+            conciergeItemsScreen.getItems().get(0).shouldBe(visible, Duration.ofMinutes(1));
+            conciergeItemsScreen.getItems().get(0).click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            conciergeItemsScreen.getTwoItemsInRow().get(0).shouldBe(visible, Duration.ofMinutes(1));
+            conciergeItemsScreen.getTwoItemsInRow().get(0).click();
+            System.out.println("Items section are not displayed");
+        }
     }
-
 
     @When("I fill all options for item")
     public void iFillAllOptionsForItem() {
+        sleep(3);
         try {
             conciergeCartPageScreen.getColorCloseButton().shouldBe(visible, Duration.ofSeconds(15));
             conciergeCartPageScreen.getColorCloseButton().click();
@@ -90,7 +86,7 @@ public class AbstractStepDefs {
 
     @When("I click on checkout button")
     public void iClickOnCheckoutButton() {
-        conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(text(conciergeCartPageScreen.getOrderClassificationSelect().getText()), Duration.ofSeconds(30));
+        conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(text(conciergeCartPageScreen.getOrderClassificationSelect().getText()), Duration.ofSeconds(50));
         Select select = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
         select.selectByIndex(1);
         conciergeItemsScreen.getCheckoutButton().shouldHave(text(conciergeItemsScreen.getCheckoutButton().getText()), Duration.ofMinutes(1));
@@ -133,7 +129,7 @@ public class AbstractStepDefs {
 
     @When("I introduces payment details")
     public void iClickOnContinueToPaymentButton() {
-        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
+        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(5));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByIndex(3);
 

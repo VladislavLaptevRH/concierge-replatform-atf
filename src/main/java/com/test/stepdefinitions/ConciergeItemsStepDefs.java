@@ -9,8 +9,8 @@ import org.openqa.selenium.support.ui.Select;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
 
 public class ConciergeItemsStepDefs {
@@ -61,6 +61,7 @@ public class ConciergeItemsStepDefs {
     public void iClickOnCollectionsItem() {
         try {
             $(By.xpath("//*[text()='collections']")).shouldHave(text("collections"), Duration.ofMinutes(1));
+            sleep(3000);
             $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12'][1]/li")).click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Collection section is not displayed");

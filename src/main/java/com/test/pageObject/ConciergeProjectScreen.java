@@ -193,7 +193,7 @@ public class ConciergeProjectScreen {
 
     private SelenideElement regularPriceValue = $(By.xpath("(//*[contains(text(),'$')])[4]"));
 
-    private SelenideElement addToProjectProjectName = $(By.id("project-name-select"));
+    private SelenideElement addToProjectProjectName = $(By.id("project-name"));
 
     private SelenideElement taxExemptCheckBox = $(By.xpath("//input[@type='checkbox']"));
 

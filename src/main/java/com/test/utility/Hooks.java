@@ -1,22 +1,18 @@
 package com.test.utility;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -63,29 +59,20 @@ public class Hooks {
     @Before()
     public void initWebDriver() {
         ConfigFileReader();
-
 //        ChromeOptions options = new ChromeOptions();
-//        System.setProperty("webdriver.chrome.driver", "driver/chromedriver");
 //        options.addArguments("--headless");
 //        options.addArguments("--window-size=1366,768");
-//        ChromeDriver driver = new ChromeDriver(options);
+//        DesiredCapabilities dr = new DesiredCapabilities();
+//        dr.setBrowserName("chrome");
+//        dr.setCapability(ChromeOptions.CAPABILITY, options);
+//        String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
+//        RemoteWebDriver driver = null;
+//        try {
+//            driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
 //        WebDriverRunner.setWebDriver(driver);
-//        System.setProperty("selenide.browser", "chrome");
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--window-size=1366,768");
-        DesiredCapabilities dr = new DesiredCapabilities();
-        dr.setBrowserName("chrome");
-        dr.setCapability(ChromeOptions.CAPABILITY, options);
-        String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
-        RemoteWebDriver driver = null;
-        try {
-            driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        WebDriverRunner.setWebDriver(driver);
 
         setUPWebDriver();
     }
@@ -95,8 +82,12 @@ public class Hooks {
      */
     public void setUPWebDriver() {
         System.out.println("Inside initDriver method");
-        System.setProperty(properties.getProperty("chromeDriver"), "driver/chromedriver");
-        System.setProperty("selenide.browser", "chrome");
+
+        WebDriverManager.chromedriver().setup();
+        Configuration.driverManagerEnabled = true;
+        Configuration.browser = "chrome";
+        Configuration.browserSize = "1366x768";
+        Configuration.headless = true;
         open((String) properties.get("baseurl"));
         currentUrl = WebDriverRunner.url();
     }

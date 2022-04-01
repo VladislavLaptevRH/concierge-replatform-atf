@@ -655,9 +655,12 @@ public class ProjectStepDefs {
     @When("I choose project from addToProject popup")
     public void iChooseProjectFromAddToProjectPopup() {
         conciergeProjectScreen.getAddToProjectProjectName().shouldBe(visible, Duration.ofMinutes(1));
-        Select selectProject = new Select(conciergeProjectScreen.getAddToProjectProjectName());
+        conciergeProjectScreen.getAddToProjectProjectName().click();
+//        Select selectProject = new Select(conciergeProjectScreen.getAddToProjectProjectName());
         sleep(2000);
-        selectProject.selectByVisibleText("addToProject");
+//        selectProject.selectByVisibleText("addToProject");
+        $(By.xpath("//*[text()='addToProject']")).scrollIntoView(true);
+        $(By.xpath("//*[text()='addToProject']")).click();
         conciergeItemsScreen.getSaveProjectPopUpButton().shouldBe(visible, Duration.ofMinutes(1));
         conciergeItemsScreen.getSaveProjectPopUpButton().click();
         generalStepDefs.isElementVisible("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4'][1]//button[contains(@class,'MuiButtonBase-root MuiButton-root MuiButton-contained')]");
@@ -817,5 +820,15 @@ public class ProjectStepDefs {
     @When("I verify selections and deselection of project moodboard items")
     public void iVerifySelectionaAndDeselectionOfProjectMoodboardItems() {
 
+    }
+
+    @When("I click on aggree&add button")
+    public void iClickOnAggreeAddButton() {
+        try {
+            conciergeItemsScreen.getAggreeeAndAddToCardButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(5));
+            conciergeItemsScreen.getAggreeeAndAddToCardButton().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Agree&add to cart button is not displayed");
+        }
     }
 }

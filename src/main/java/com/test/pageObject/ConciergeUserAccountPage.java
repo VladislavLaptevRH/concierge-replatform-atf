@@ -31,7 +31,7 @@ public class ConciergeUserAccountPage {
 
     private SelenideElement seeResultsButton = $(By.xpath("//span[@class='MuiButton-label']"));
 
-    private SelenideElement searchItemField = $(By.cssSelector("input[placeholder='Please enter search term']"));
+    private SelenideElement searchItemField = $(By.xpath("//input[contains(@class,'MuiOutlinedInput-inputAdornedStart')]"));
 
     private SelenideElement searchButton = $(By.xpath("//*[text()='Search']"));
 
