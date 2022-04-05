@@ -4,6 +4,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -62,7 +63,9 @@ public class Hooks {
     @Before()
     public void initWebDriver() {
         ConfigFileReader();
+        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
+//        System.setProperty("webdriver.chrome.driver", "driver/chromedriver");
         options.addArguments("--headless");
         options.addArguments("--window-size=1366,768");
         DesiredCapabilities dr = new DesiredCapabilities();
