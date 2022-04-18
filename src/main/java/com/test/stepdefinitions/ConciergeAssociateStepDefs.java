@@ -7,6 +7,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.Getter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 
@@ -21,11 +23,12 @@ public class ConciergeAssociateStepDefs {
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+    private static final Logger Log = LoggerFactory.getLogger(ConciergeAssociateStepDefs.class);
 
     @Then("I expect that I am on the Concierge Dashboard page")
     public void iExpectThatIAmOnTheConciergeDashboardPage() {
         conciergeUserAccountPage.getMainMenuHeader().shouldBe(Condition.be(visible), Duration.ofSeconds(10));
-        assertTrue(conciergeUserAccountPage.getMainMenuHeader().isDisplayed(),"");
+        assertTrue(conciergeUserAccountPage.getMainMenuHeader().isDisplayed(), "");
     }
 
     @When("I change my store to store number 10")
@@ -68,6 +71,7 @@ public class ConciergeAssociateStepDefs {
 
     @Given("I log into Concierge as {string}")
     public void iLogIntoConciergeAs(String arg0) {
+        Log.debug("I log into Concierge as " + arg0);
         generalStepDefs.loginAsRole(arg0);
     }
 

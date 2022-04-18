@@ -36,11 +36,6 @@ public class ProjectStepDefs {
         conciergeUserAccountPage.getProjectsButton().click();
     }
 
-    @When("I search project by provided {string}")
-    public void iSearchProjectByProvided(String searchBy) {
-
-    }
-
     @Then("I verify that search result is displayed")
     public void iVerifyThatSearchResultIsDisplayed() {
         conciergeProjectScreen.getResultsListForProjects().shouldBe(visible, Duration.ofMinutes(3));
@@ -262,7 +257,6 @@ public class ProjectStepDefs {
         conciergeProjectScreen.getSaveMoveToProject().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getSaveMoveToProject());
         conciergeProjectScreen.getGoToProjectButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
-        ;
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getGoToProjectButton());
     }
 
@@ -467,7 +461,7 @@ public class ProjectStepDefs {
 
     @Then("verify that quantity for item was changed")
     public void verifyThatQuantityForItemWasChanged() {
-        assertTrue(Integer.parseInt($(By.xpath("//div[@aria-haspopup='listbox']")).getText()) == randomQuantity);
+        assertEquals(randomQuantity, Integer.parseInt($(By.xpath("//div[@aria-haspopup='listbox']")).getText()));
     }
 
     @And("I choose project by project name {string}")
@@ -571,7 +565,7 @@ public class ProjectStepDefs {
         String memberPriceText = conciergeProjectScreen.getRegularPriceValue().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "");
         int memberPrice = Integer.parseInt(memberPriceText);
         int totalItemPrice = randomQuantity * memberPrice;
-        String finalPrice = Double.toString(totalItemPrice).replace(".", ",").replaceAll("\\,0", "");
+        String finalPrice = Double.toString(totalItemPrice).replace(".", ",").replaceAll(",0", "");
         String forecast = conciergeProjectScreen.getForeCastTotalValue().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "");
         System.out.println();
         assertEquals(finalPrice, forecast, "Final price calculated correctly");
@@ -613,7 +607,7 @@ public class ProjectStepDefs {
         conciergeProjectScreen.getCheckMarkItemButton().click();
         sleep(2000);
         String priceAfterHide = conciergeProjectScreen.getForecastSetButton().getText();
-        assertFalse(priceBeforeHide.equals(priceAfterHide), "Forecast value is updated after ");
+        assertNotEquals(priceAfterHide, priceBeforeHide, "Forecast value is updated after ");
     }
 
     @When("I click on print button")
@@ -632,7 +626,6 @@ public class ProjectStepDefs {
     public void iVerifyPrintPopupIsDisplayd() {
         switchTo().frame($(By.id("pdf-viewer")));
         conciergeProjectScreen.getPrintPopUp().shouldBe(visible, Duration.ofSeconds(12));
-        conciergeProjectScreen.getPrintPopUp().isDisplayed();
     }
 
     @When("I choose project from addToProject popup")
@@ -773,9 +766,9 @@ public class ProjectStepDefs {
     @Then("user verify that items for {string} are displayed")
     public void userVerifyThatItemsForAreDisplayed(String spaceName) {
         if (spaceName.equals("space2")) {
-            $(By.xpath("(//*[text()='Metal Floating Mirror'])[2]")).shouldBe(visible, Duration.ofSeconds(15));
+            conciergeItemsScreen.getMetalFloatingMirror().shouldBe(visible, Duration.ofSeconds(15));
         } else {
-            $(By.xpath("(//*[text()='La Paz Sofa'])[2]")).shouldBe(visible, Duration.ofSeconds(15));
+            conciergeItemsScreen.getLapazSofaItem().shouldBe(visible, Duration.ofSeconds(15));
         }
     }
 

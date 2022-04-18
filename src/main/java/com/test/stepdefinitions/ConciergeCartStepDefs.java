@@ -7,12 +7,12 @@ import com.test.pageObject.ConciergeUserAccountPage;
 import com.test.utility.Hooks;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+
 import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -57,7 +57,7 @@ public class ConciergeCartStepDefs {
     @When("I click on view cart button")
     public void iClickOnViewCartButton() {
         try {
-            $(By.xpath("//p[contains(@class,'MuiTypography-h4')]")).shouldHave(text("1 Item  Added To Your Cart"), Duration.ofSeconds(60));
+            conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("1 Item  Added To Your Cart"), Duration.ofSeconds(60));
             conciergeItemsScreen.getViewCartButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(60));
             conciergeItemsScreen.getViewCartButton().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {

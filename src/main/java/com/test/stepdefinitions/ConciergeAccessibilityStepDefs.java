@@ -5,6 +5,7 @@ import com.test.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
@@ -14,20 +15,17 @@ import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
 
-
 public class ConciergeAccessibilityStepDefs {
-    private final org.slf4j.Logger logger = LoggerFactory.getLogger(ConciergeAccessibilityStepDefs.class);
-
+    private static final Logger Log = LoggerFactory.getLogger(ConciergeAccessibilityStepDefs .class);
     ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
 
     @Given("^user opens the concierge site$")
     public void User_Ppens_The_Concierge_Site() {
+        Log.debug("User opens the concierge product");
         conciergeLoginPage.getUsernameField().shouldBe(visible, Duration.ofMinutes(5));
         conciergeLoginPage.getSignInButton().shouldBe(visible, Duration.ofMinutes(5));
-        logger.info("Concierge portal opened with success");
     }
-
 
     @Then("user expects that no accessibility errors")
     public void userExpectsThatNoAccessibilityErrors() {
@@ -51,8 +49,6 @@ public class ConciergeAccessibilityStepDefs {
         conciergeUserAccountPage.getOutdoorButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
         conciergeUserAccountPage.getGiftsButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
         conciergeUserAccountPage.getSaleButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        logger.info("Accessibility errors are not present on the user account page");
-
     }
 
     @When("user sign in concierge portal")

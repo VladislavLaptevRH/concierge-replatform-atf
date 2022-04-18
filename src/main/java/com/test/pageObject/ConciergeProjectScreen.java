@@ -159,27 +159,27 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement percentDiscount = $(By.id("outlined-helperText"));
 
-    private SelenideElement dollarAmountField = $(By.id("dollar-amount"));
+    private final  SelenideElement dollarAmountField = $(By.id("dollar-amount"));
 
-    private SelenideElement shippingOverridePriceReason = $(By.id("override-reason"));
+    private final  SelenideElement shippingOverridePriceReason = $(By.id("override-reason"));
 
-    private SelenideElement reasonCode = $(By.id("reasoncode-select-outlined"));
+    private final  SelenideElement reasonCode = $(By.id("reasoncode-select-outlined"));
 
-    private SelenideElement applyButton = $(By.xpath("//*[text()='Apply']"));
+    private final  SelenideElement applyButton = $(By.xpath("//*[text()='Apply']"));
 
-    private SelenideElement percentOffSelect = $(By.id("method-select-outlined"));
+    private final  SelenideElement percentOffSelect = $(By.id("method-select-outlined"));
 
-    private SelenideElement lancasterSofaQty = $(By.id("quantity_I51173680"));
+    private final  SelenideElement lancasterSofaQty = $(By.id("quantity_I51173680"));
 
-    private SelenideElement mirrorSize = $(By.id("optionSelect-0"));
+    private final  SelenideElement mirrorSize = $(By.id("optionSelect-0"));
 
-    private SelenideElement finishOption = $(By.id("optionSelect-0"));
+    private final  SelenideElement finishOption = $(By.id("optionSelect-0"));
 
-    private SelenideElement forecastamountValue = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-2'][3]/div"));
+    private final  SelenideElement forecastamountValue = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-2'][3]/div"));
 
-    private SelenideElement itemProjectPrice = $(By.xpath("(//div[1]/p[@class='MuiTypography-root MuiTypography-body1'])[4]"));
+    private final  SelenideElement itemProjectPrice = $(By.xpath("(//div[1]/p[@class='MuiTypography-root MuiTypography-body1'])[4]"));
 
-    private SelenideElement printPopUp = $(By.id("documentInfo"));
+    private final  SelenideElement printPopUp = $(By.id("documentInfo"));
 
     private final SelenideElement checkMarkItemButton = $(By.xpath("//button[contains(@class,'MuiButtonBase-root')][3]"));
 
@@ -191,13 +191,13 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement editItemOptions = $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[14]"));
 
-    private SelenideElement regularPriceValue = $(By.xpath("(//*[contains(text(),'$')])[4]"));
+    private final  SelenideElement regularPriceValue = $(By.xpath("(//*[contains(text(),'$')])[4]"));
 
-    private SelenideElement addToProjectProjectName = $(By.id("project-name"));
+    private final SelenideElement addToProjectProjectName = $(By.id("project-name"));
 
-    private SelenideElement taxExemptCheckBox = $(By.xpath("//input[@type='checkbox']"));
+    private final  SelenideElement taxExemptCheckBox = $(By.xpath("//input[@type='checkbox']"));
 
-    private SelenideElement prieItemFromProject = $(By.xpath("//div[2]/div[@class='MuiGrid-root MuiGrid-item'][1]/p"));
+    private final  SelenideElement prieItemFromProject = $(By.xpath("//div[2]/div[@class='MuiGrid-root MuiGrid-item'][1]/p"));
 
     private final SelenideElement emailEstimateSendButton = $(By.cssSelector("button[type='submit'] span[class='MuiButton-label']"));
 }

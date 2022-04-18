@@ -1,6 +1,7 @@
 package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import com.test.pageObject.*;
@@ -9,17 +10,16 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
-import java.util.List;
 import java.util.Random;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.test.stepdefinitions.GeneralStepDefs.sleep;
 import static org.awaitility.Awaitility.await;
 import static org.testng.Assert.assertTrue;
@@ -495,19 +495,6 @@ public class ConciergeE2EStepDefs {
 
     }
 
-    @When("I search {string} in search field from header")
-    public void iSearchInSearchFieldFromHeader(String searchTerm) {
-        $(By.xpath("//input[@id='site-search-input']")).shouldBe(visible, Duration.ofMinutes(3));
-        $(By.xpath("//input[@id='site-search-input']")).setValue(searchTerm);
-        $(By.xpath("//input[@id='site-search-input']")).sendKeys(Keys.ENTER);
-    }
-
-    @Then("I verify that brands are displayed")
-    public void iVerifyThatCountOfProductsFromMenuIsEqualToCountOfPrductsFromPDPPage() {
-        $(By.xpath("//ul[contains(@class,'MuiList-root')]/li[contains(@class,'MuiListItem-root')]")).shouldBe(visible, Duration.ofSeconds(15));
-        List<SelenideElement> listOfBrands = $$(By.xpath("//ul[contains(@class,'MuiList-root')]/li[contains(@class,'MuiListItem-root')]"));
-        assertTrue(listOfBrands.size() > 0, "Brands are displayed");
-    }
 
     @When("I click on {string}")
     public void iClickOn(String arg0) {
@@ -517,63 +504,93 @@ public class ConciergeE2EStepDefs {
         $(By.xpath("//*[contains(text(),'" + arg0 + "')]")).click();
     }
 
-    @When("I click on color")
-    public void iClickOnColors() {
-        $(By.xpath("//*[text()='Color']")).shouldHave(text("Color"), Duration.ofSeconds(5));
-        $(By.xpath("//*[text()='Color']")).click();
-
-    }
-
-    @Then("I verify that all colors are displayed")
-    public void iVerifyThatIsDisplayed() {
-        $(By.xpath("(//input[@type='checkbox'])[1]")).click();
-    }
-
-    @When("I click on sort button")
-    public void iClickOnSortButton() {
-        $(By.xpath("//*[text()='Sort']")).shouldHave(text("Sort"), Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='Sort']")).click();
-    }
-
     @Then("I verify that {string} are displayed")
     public void iVerifyThatAreDisplayed(String arg0) {
         $(By.xpath("//*[text()='" + arg0 + "']")).shouldHave(text(arg0), Duration.ofSeconds(20));
         $(By.xpath("//*[text()='" + arg0 + "']")).click();
     }
 
-    @When("I click on brands")
-    public void iClickOnBrands() {
-        $(By.xpath("//*[contains(text(),'brands')]")).shouldBe(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[contains(text(),'brands')]")).click();
-    }
-
-    @Then("I verify that sort options are displayed")
-    public void iVerifyThatSortOptionsAreDisplayed() {
-        $(By.xpath("//*[text()='Featured']")).shouldHave(text("Featured"), Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='New Products']")).shouldHave(text("New Products"), Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Price Low to High']")).shouldHave(text("Price Low to High"), Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Price High to Low']")).shouldHave(text("Price High to Low"), Duration.ofSeconds(20));
-        sleep(1);
-
+    @When("I fiils all options for item")
+    public void iFiilsAllOptionsForItem() {
+        //depth option
+        Selenide.sleep(9000);
+        executeJavaScript("window.scrollTo(0, 970)");
         try {
-            $(By.xpath("(//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary'])[2]")).shouldBe(visible, Duration.ofSeconds(15));
-            $(By.xpath("(//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary'])[2]")).click();
+            Selenide.sleep(8000);
+            selectOption.getDepthProperty().shouldBe(Condition.be(Condition.visible), Duration.ofSeconds(5));
+            Select selectDepth = new Select(selectOption.getDepthProperty());
+            Selenide.sleep(3000);
+            selectDepth.selectByIndex(2);
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Close button is not displayed");
+        }
+        Selenide.sleep(2000);
+
+        //seatheight
+        try {
+            Selenide.sleep(9000);
+            selectOption.getSeatHeight().shouldBe(Condition.be(Condition.visible), Duration.ofSeconds(5));
+            Select seatHeight = new Select(selectOption.getSeatHeight());
+            Selenide.sleep(3000);
+            seatHeight.selectByIndex(2);
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Close button is not displayed");
+        }
+        Selenide.sleep(2000);
+
+        //finish
+        try {
+            Selenide.sleep(9000);
+            selectOption.getFinishOption().shouldBe(Condition.be(Condition.visible), Duration.ofSeconds(5));
+            Select finalOption = new Select(selectOption.getFinishOption());
+            Selenide.sleep(3000);
+            finalOption.selectByIndex(2);
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Close button is not displayed");
+        }
+        Selenide.sleep(2000);
+
+        //select color option
+        try {
+            Selenide.sleep(4000);
+            selectOption.getColorOption().shouldBe(Condition.be(Condition.visible), Duration.ofSeconds(5));
+            Select selectFabric = new Select(selectOption.getColorOption());
+            selectFabric.selectByIndex(2);
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");
         }
 
-    }
+        //select length option
+        try {
+            Selenide.sleep(9000);
+            selectOption.getLengthOption().shouldBe(Condition.be(Condition.visible), Duration.ofSeconds(5));
+            Select selectLength = new Select(selectOption.getLengthOption());
+            selectLength.selectByIndex(2);
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Close button is not displayed");
+        }
 
-    @When("I click on in stock")
-    public void iClickOnInStock() {
-        $(By.xpath("//*[text()='In Stock']")).shouldBe(visible, Duration.ofSeconds(5));
-        $(By.xpath("//*[text()='In Stock']")).click();
+        //select fill option
+        try {
+            Selenide.sleep(16000);
+            selectOption.getLengthOption().shouldBe(Condition.be(Condition.visible), Duration.ofSeconds(5));
+            Select selectFillOption = new Select(selectOption.getFillOption());
+            selectFillOption.selectByIndex(2);
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Close button is not displayed");
+        }
 
-    }
+        //fabric option
+        try {
+            Selenide.sleep(18000);
+            selectOption.getFabricProperty().shouldBe(Condition.be(Condition.visible), Duration.ofSeconds(5));
+            Select selectFabric = new Select(selectOption.getFabricProperty());
+            selectFabric.selectByIndex(2);
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Close button is not displayed");
+        }
+        Selenide.sleep(2000);
 
-    @Then("I verify that in stock is displayed")
-    public void iVerifyThatInStockIsDisplayed() {
-        $(By.xpath("(//input[@type='checkbox'])[1]")).click();
     }
 }
 

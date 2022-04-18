@@ -20,7 +20,6 @@ import static org.testng.Assert.assertTrue;
 
 public class AbstractStepDefs {
     SelectOption selectOption = new SelectOption();
-    ConciergeOrderHistoryForm conciergeOrderHistoryForm = new ConciergeOrderHistoryForm();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
     PaymentScreen paymentScreen = new PaymentScreen();
@@ -32,8 +31,8 @@ public class AbstractStepDefs {
 
     @When("I clicks on a random menu item")
     public void iClicksOnARandomMenuItem() {
-        sleep(3);
-        conciergeUserAccountPage.getFirstItemMainMenu().shouldBe(visible, Duration.ofSeconds(15));
+        sleep(7);
+        conciergeUserAccountPage.getFirstItemMainMenu().shouldBe(visible, Duration.ofSeconds(60));
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
         actions.moveToElement(conciergeUserAccountPage.getFirstItemMainMenu());
         conciergeUserAccountPage.getFirstItemMainMenu().click();
@@ -45,11 +44,11 @@ public class AbstractStepDefs {
     public void iClicksOnORandomItem() {
         try {
             sleep(4);
-            conciergeItemsScreen.getItems().get(0).shouldBe(visible, Duration.ofMinutes(1));
-            conciergeItemsScreen.getItems().get(0).click();
+            conciergeItemsScreen.getItems().get(1).shouldBe(visible, Duration.ofMinutes(1));
+            conciergeItemsScreen.getItems().get(1).click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            conciergeItemsScreen.getTwoItemsInRow().get(0).shouldBe(visible, Duration.ofMinutes(1));
-            conciergeItemsScreen.getTwoItemsInRow().get(0).click();
+            conciergeItemsScreen.getTwoItemsInRow().get(1).shouldBe(visible, Duration.ofMinutes(1));
+            conciergeItemsScreen.getTwoItemsInRow().get(1).click();
             System.out.println("Items section are not displayed");
         }
     }

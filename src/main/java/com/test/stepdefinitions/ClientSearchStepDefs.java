@@ -1,12 +1,11 @@
 package com.test.stepdefinitions;
 
+import com.test.pageObject.ConciergeOrderHistoryForm;
+import com.test.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import java.time.Duration;
-
-import com.test.pageObject.ConciergeOrderHistoryForm;
-import com.test.pageObject.ConciergeUserAccountPage;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.test.stepdefinitions.GeneralStepDefs.sleep;
@@ -45,9 +44,5 @@ public class ClientSearchStepDefs {
     @Then("I verify that new client has been created")
     public void iVerifyThatNewClientHasBeenCreated() {
         conciergeUserAccountPage.getNewClientHeaderBtn().shouldBe(visible, Duration.ofSeconds(30));
-    }
-
-    @Then("I verify")
-    public void iVerify() {
     }
 }

@@ -114,7 +114,7 @@ public class ConciergeOrderHistoryStepDefs {
     @Then("I verifiy that Order Lookup title is displayed")
     public void iVerifiyThatOrderLookupTitleIsDisplayed() {
         conciergeOrderHistoryForm.getOrderLookUpTitle().shouldBe(visible, Duration.ofMinutes(1));
-        conciergeOrderHistoryForm.getOrderLookUpTitle().getText().equals("ORDER LOOKUP");
+        conciergeOrderHistoryForm.getOrderLookUpTitle().shouldHave(text("ORDER LOOKUP"),Duration.ofSeconds(30));
     }
 
     @When("I introduced {string} with status {string} order number in order number field")

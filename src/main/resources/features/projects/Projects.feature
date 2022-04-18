@@ -1,6 +1,11 @@
 @regression
 Feature: Verify projects
 
+  Scenario: Verify the Projects load for a logged in associate
+    Given I log into Concierge as "associate"
+    When I click on projects button
+    Then I verify that search result is displayed
+
   Scenario Outline: Verify that user is able to find project by <searchBy>
     Given I log into Concierge as "associate"
     When I click on projects button

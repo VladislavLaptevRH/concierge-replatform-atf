@@ -12,9 +12,9 @@ Feature: Verify filter
     When I click on sort button
     Then I verify that sort options are displayed
     Examples:
-      | searchterm      |
-      |All media consoles|
-      |Glass Media|
-      |Closed Media|
-      |Open Media|
-      |Media Systems|
+      | searchterm         |
+      | All media consoles |
+      | Glass Media        |
+      | Closed Media       |
+      | Open Media         |
+      | Media Systems      |

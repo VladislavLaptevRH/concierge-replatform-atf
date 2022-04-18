@@ -3,10 +3,7 @@ package com.test.stepdefinitions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.test.pageObject.CheckoutAddressScreen;
-import com.test.pageObject.ConciergeLoginPage;
-import com.test.pageObject.ConciergeUserAccountPage;
-import com.test.pageObject.PaymentScreen;
+import com.test.pageObject.*;
 import com.test.utility.Hooks;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
@@ -28,6 +25,7 @@ public class GeneralStepDefs {
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
     PaymentScreen paymentScreen = new PaymentScreen();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
+    ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
 
 
     /**
@@ -80,8 +78,8 @@ public class GeneralStepDefs {
      */
     public void fillAddressFields() {
 //        $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")).shouldBe(visible, Duration.ofSeconds(30));
-        $(By.xpath("(//h3[@class='MuiTypography-root MuiTypography-h3'])[1]")).shouldHave(text("Shipping Address"), Duration.ofSeconds(40));
-        $(By.xpath("(//h3[@class='MuiTypography-root MuiTypography-h3'])[3]")).shouldHave(text("Billing Address"), Duration.ofSeconds(40));
+        conciergeAddressScreen.getShippingAddressText().shouldHave(text("Shipping Address"), Duration.ofSeconds(40));
+        conciergeAddressScreen.getBillingAddressText().shouldHave(text("Billing Address"), Duration.ofSeconds(40));
         executeJavaScript("arguments[0].click();", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
         clearField(checkoutAddressScreen.getFirstNameInpt());
         checkoutAddressScreen.getFirstNameInpt().setValue("QA1");
@@ -104,10 +102,7 @@ public class GeneralStepDefs {
         clearField(checkoutAddressScreen.getPhoneField());
         checkoutAddressScreen.getPhoneField().setValue("+124131231");
 
-        $(By.xpath("//div[@id='billingAddresslbl']/h3")).shouldBe(visible, Duration.ofSeconds(12));
-//
-//        executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
-//        sleep(3);
+        conciergeAddressScreen.getBillingAddressText().shouldBe(visible, Duration.ofSeconds(12));
     }
 
 
@@ -132,8 +127,6 @@ public class GeneralStepDefs {
 
         clearField(checkoutAddressScreen.getZipPostalCodeField());
         checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);
-//        SelenideElement stateButton = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='AK']"));
-//        stateButton.click();
 
         if (state.equals("NY")) {
             SelenideElement stateNyButton = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='" + state + "']"));
@@ -262,7 +255,7 @@ public class GeneralStepDefs {
 
     public void verifyCategories(List<String> categoryInStockExpected, int indexItem) {
         List<String> categoryInStockActual = new ArrayList<>();
-        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//div")).shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getMenuItems().get(0).shouldBe(visible, Duration.ofSeconds(10));
         conciergeUserAccountPage.getMenuItems().get(indexItem).scrollIntoView(true);
         conciergeUserAccountPage.getMenuItems().get(indexItem).click();
         sleep(1);

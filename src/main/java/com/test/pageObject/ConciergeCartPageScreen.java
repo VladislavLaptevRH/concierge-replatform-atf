@@ -37,5 +37,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement noThanksButton = $(By.xpath("//*[text()='NO, THANKS']"));
 
+    private final SelenideElement itemAddedToYourCart = $(By.xpath("//p[contains(@class,'MuiTypography-h4')]"));
+
     private final SelenideElement totalMemberPrice = $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-alignRight']"));
 }

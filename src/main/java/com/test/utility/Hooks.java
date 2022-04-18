@@ -2,6 +2,7 @@ package com.test.utility;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
+import com.test.stepdefinitions.FilterStepDefs;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -11,6 +12,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -35,6 +38,7 @@ public class Hooks {
     public static String currentUrl;
 
     private static boolean setUpIsDone = false;
+    private static final Logger Log = LoggerFactory.getLogger(FilterStepDefs.class);
 
 
     /**
@@ -124,7 +128,8 @@ public class Hooks {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
         Configuration.headless = false;
-
+        Configuration.pageLoadStrategy = "normal";
+        Configuration.timeout = 30000;
         open((String) properties.get("baseurl"));
         currentUrl = WebDriverRunner.url();
     }
@@ -144,7 +149,7 @@ public class Hooks {
         Configuration.headless = false;
 
         open("https://intd.rhnonprod.com/");
-
+        Log.debug("Open https://intd.rhnonprod.com/ product");
         setUpIsDone = true;
     }
 
