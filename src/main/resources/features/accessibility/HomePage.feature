@@ -1,3 +1,4 @@
+@regression
 Feature:User expects the home page to be accessible
 
   Scenario: Verify that home page is accessible

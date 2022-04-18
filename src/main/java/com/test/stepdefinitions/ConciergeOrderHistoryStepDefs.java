@@ -47,7 +47,6 @@ public class ConciergeOrderHistoryStepDefs {
         assertTrue(conciergeOrderHistoryForm.getOrderNumberField().isDisplayed());
     }
 
-
     @And("I search order history for customer {string} {string}")
     public String iSearchOrderHistoryForCustomer(String firstName, String lastName) {
         conciergeOrderHistoryForm.getFirstNameField().shouldBe(visible, Duration.ofMinutes(1));
@@ -73,7 +72,6 @@ public class ConciergeOrderHistoryStepDefs {
             assertEquals(conciergeOrderHistoryForm.getCustomerEmail().getText(), "EMAIL");
             assertEquals(conciergeOrderHistoryForm.getCustomerCompany().getText(), "COMPANY");
             assertEquals(conciergeOrderHistoryForm.getCustomerTradeIdTaxExempt().getText(), "TRADE ID / TAX EXEMPT");
-
         }
     }
 
@@ -118,7 +116,6 @@ public class ConciergeOrderHistoryStepDefs {
         conciergeOrderHistoryForm.getOrderLookUpTitle().shouldBe(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getOrderLookUpTitle().getText().equals("ORDER LOOKUP");
     }
-
 
     @When("I introduced {string} with status {string} order number in order number field")
     public void iIntroducedWithStatusOrderNumberInOrderNumberField(String orderId, String status) {

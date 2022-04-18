@@ -262,10 +262,8 @@ public class GeneralStepDefs {
 
     public void verifyCategories(List<String> categoryInStockExpected, int indexItem) {
         List<String> categoryInStockActual = new ArrayList<>();
-
         $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//div")).shouldBe(visible, Duration.ofSeconds(10));
         conciergeUserAccountPage.getMenuItems().get(indexItem).scrollIntoView(true);
-
         conciergeUserAccountPage.getMenuItems().get(indexItem).click();
         sleep(1);
         conciergeUserAccountPage.getMenuItems().get(indexItem).click();
@@ -313,7 +311,6 @@ public class GeneralStepDefs {
         }
         return stringBuilder.toString();
     }
-
 
     /**
      * @param min - min border of value

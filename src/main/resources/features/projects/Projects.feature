@@ -1,3 +1,4 @@
+@regression
 Feature: Verify projects
 
   Scenario Outline: Verify that user is able to find project by <searchBy>
@@ -41,10 +42,7 @@ Feature: Verify projects
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I click on sale point of menu
-    When I click on chairs submenu
-    When I clicks on item from two items in row
-    When I select finish option
+    When I go to item "10010966" from search field
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -91,8 +89,10 @@ Feature: Verify projects
     When I click on create opportunity button
     When I click on rh concierge logo
     When I go to item "112848 MULT" from search field
+    When I click on see results button
     And I select count of product
     When I add item to created opportunity
+    When I click on save button
     Then I verify that item was added
 
   Scenario Outline: Verify email estimation - send to client verify the email address received and sent for <email>
@@ -122,20 +122,25 @@ Feature: Verify projects
     When I click on email estimate button
     Then I verify that the client received the letter on the "client"
 
-  Scenario: Verify the Project list and switching between the projects -CART/PDP
+  Scenario Outline: Verify the Project list and switching between the projects -CART/PDP
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "112848 MULT" from search field
+    When I go to item "<skuid>" from search field
+    When I click on see results button
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
     When I click on move to project button
     Then I verify that project list is displayed
+    Examples:
+      | skuid       |
+      | 112848 MULT |
 
   Scenario: Verify the Opportunities list and switching between the opportunities -CART/PDP
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "112848 MULT" from search field
+    When I click on see results button
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -146,6 +151,7 @@ Feature: Verify projects
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "112848 MULT" from search field
+    When I click on see results button
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -174,6 +180,7 @@ Feature: Verify projects
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "112848 MULT" from search field
+    When I click on see results button
     And I select count of product
     When I click on add to project button
     And I choose project by project name "removeitemsfromproject"

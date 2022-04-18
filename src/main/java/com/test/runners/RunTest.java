@@ -7,7 +7,8 @@ import io.cucumber.testng.CucumberOptions;
         monochrome = true,
         features = {"src/main/resources/features/"}
         , glue = {"com.test"}
-        , plugin = {"usage", "json:target/cucumber-reports/Cucumber.json", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
+        , plugin = {"usage", "json:target/cucumber-reports/Cucumber.json", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
+        tags = "@regression and @filter"
 )
 
 public class RunTest extends AbstractTestNGCucumberTests {

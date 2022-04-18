@@ -9,16 +9,17 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Random;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.*;
 import static com.test.stepdefinitions.GeneralStepDefs.sleep;
 import static org.awaitility.Awaitility.await;
 import static org.testng.Assert.assertTrue;
@@ -35,6 +36,7 @@ public class ConciergeE2EStepDefs {
     SelectOption selectOption = new SelectOption();
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
     String usState = "";
+    String countOfItems = null;
 
     @When("I click on add to project button")
     public void userClickOnAddToProjectButton() {
@@ -56,8 +58,6 @@ public class ConciergeE2EStepDefs {
         generalStepDefs.isElementVisible("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth']/span[@class='MuiButton-label']");
         SelenideElement element = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth']/span[@class='MuiButton-label']"));
         executeJavaScript("arguments[0].click();", element);
-
-
     }
 
     @When("I choose random brand from menu")
@@ -91,7 +91,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
-//        sleep(5);
+        sleep(5);
         conciergeItemsScreen.getAddToCartButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(30));
         conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(30));
         conciergeItemsScreen.getAddToCartButton().scrollIntoView(true);
@@ -150,6 +150,15 @@ public class ConciergeE2EStepDefs {
 
     @When("I continue to payment")
     public void continueToPaymentAfterAddressCheckout() {
+        try {
+            sleep(10);
+            conciergeCartPageScreen.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(15));
+            sleep(3);
+            conciergeCartPageScreen.getNoThanksButton().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("No thanks button is not displayed");
+        }
+
         checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
         executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
         checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
@@ -293,8 +302,6 @@ public class ConciergeE2EStepDefs {
         sleep(3);
         $(By.xpath("//button[contains(@class,'MuiButton-containedSizeLarge')]")).click();
 
-//        conciergeUserAccountPage.getSeeResultsButton().shouldBe(Condition.and("", visible, enabled, exist, appear), Duration.ofSeconds(30));
-//        executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getSeeResultsButton());
     }
 
     @When("I choose {string} from brand menu")
@@ -337,9 +344,11 @@ public class ConciergeE2EStepDefs {
     @When("I click on no thanks button")
     public void iClickOnNoThanksButton() {
         try {
-            sleep(3);
-            conciergeCartPageScreen.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(15));
+            sleep(10);
+            executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getNoThanksButton());
+            sleep(4);
             conciergeCartPageScreen.getNoThanksButton().click();
+            sleep(3);
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("No thanks button is not displayed");
         }
@@ -386,7 +395,8 @@ public class ConciergeE2EStepDefs {
 
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String arg0) {
-        try{
+        try {
+            sleep(4);
             conciergeUserAccountPage.getClientLookupFirstName().shouldBe(visible, Duration.ofSeconds(12));
             if (arg0.equals("member")) {
                 sleep(3);
@@ -401,9 +411,9 @@ public class ConciergeE2EStepDefs {
             conciergeUserAccountPage.getClientLookupSearchButton().shouldBe(Condition.and("", visible, enabled), Duration.ofMinutes(3));
             conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofMinutes(3));
             conciergeUserAccountPage.getClientLookupSearchButton().click();
-            conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME"));
-            conciergeUserAccountPage.getFirstResultOfClientLookup().click();
-        }catch (com.codeborne.selenide.ex.ElementNotFound e){
+            conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME"), Duration.ofMinutes(1));
+            executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getFirstResultOfClientLookup());
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
 
         }
 
@@ -412,28 +422,13 @@ public class ConciergeE2EStepDefs {
 
     @And("I select count of product")
     public void iSelectCountOfProduct() {
-
-//        try {
-//            conciergeCartPageScreen.getColorCloseButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(10));
-//            conciergeCartPageScreen.getColorCloseButton().click();
-//
-//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-//            System.out.println("Close button is not displayed");
-//        }
-//
-//        try {
         sleep(10);
         executeJavaScript("window.scrollTo(0, 1200)");
-        conciergeItemsScreen.getDetailsSpan().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofSeconds(50));
+        conciergeItemsScreen.getDetailsSpan().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofMinutes(3));
         selectOption.getQuantityElement().shouldBe(visible, Duration.ofMinutes(1));
         sleep(3);
         Select selectQty = new Select(selectOption.getQuantityElement());
         selectQty.selectByIndex(2);
-//        }
-//        catch (com.codeborne.selenide.ex.ElementNotFound e) {
-//            System.out.println("Close button is not displayed");
-//        }
-
     }
 
     @Then("I verify that address screen is displayed")
@@ -478,6 +473,107 @@ public class ConciergeE2EStepDefs {
         sleep(2);
         Select selectFinish = new Select(selectOption.getFinishOption());
         selectFinish.selectByIndex(1);
+    }
+
+    @When("I clicks on sofa collections")
+    public void iClicksOnSofaCollections() {
+        $(By.xpath("//*[text()='Sofa Collections']")).shouldHave(text("Sofa Collections"), Duration.ofSeconds(12));
+        $(By.xpath("//*[text()='Sofa Collections']")).click();
+
+    }
+
+    @When("I click on see results button")
+    public void iClickOnSeeResultsButton() {
+        try {
+            sleep(2);
+            $(By.xpath("//*[contains(text(),'See Results on')]")).shouldBe(visible, Duration.ofMinutes(1));
+            $(By.xpath("//*[contains(text(),'See Results on')]")).click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("See Results on button is not displayed");
+        }
+
+
+    }
+
+    @When("I search {string} in search field from header")
+    public void iSearchInSearchFieldFromHeader(String searchTerm) {
+        $(By.xpath("//input[@id='site-search-input']")).shouldBe(visible, Duration.ofMinutes(3));
+        $(By.xpath("//input[@id='site-search-input']")).setValue(searchTerm);
+        $(By.xpath("//input[@id='site-search-input']")).sendKeys(Keys.ENTER);
+    }
+
+    @Then("I verify that brands are displayed")
+    public void iVerifyThatCountOfProductsFromMenuIsEqualToCountOfPrductsFromPDPPage() {
+        $(By.xpath("//ul[contains(@class,'MuiList-root')]/li[contains(@class,'MuiListItem-root')]")).shouldBe(visible, Duration.ofSeconds(15));
+        List<SelenideElement> listOfBrands = $$(By.xpath("//ul[contains(@class,'MuiList-root')]/li[contains(@class,'MuiListItem-root')]"));
+        assertTrue(listOfBrands.size() > 0, "Brands are displayed");
+    }
+
+    @When("I click on {string}")
+    public void iClickOn(String arg0) {
+        SelenideElement brand = $(By.xpath("//*[contains(text(),'" + arg0 + "')]")).shouldBe(visible, Duration.ofSeconds(12));
+        String brandValue = brand.getText();
+        countOfItems = brandValue.substring(brandValue.indexOf("("), brandValue.indexOf(")")).replaceAll("\\(", "");
+        $(By.xpath("//*[contains(text(),'" + arg0 + "')]")).click();
+    }
+
+    @When("I click on color")
+    public void iClickOnColors() {
+        $(By.xpath("//*[text()='Color']")).shouldHave(text("Color"), Duration.ofSeconds(5));
+        $(By.xpath("//*[text()='Color']")).click();
+
+    }
+
+    @Then("I verify that all colors are displayed")
+    public void iVerifyThatIsDisplayed() {
+        $(By.xpath("(//input[@type='checkbox'])[1]")).click();
+    }
+
+    @When("I click on sort button")
+    public void iClickOnSortButton() {
+        $(By.xpath("//*[text()='Sort']")).shouldHave(text("Sort"), Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Sort']")).click();
+    }
+
+    @Then("I verify that {string} are displayed")
+    public void iVerifyThatAreDisplayed(String arg0) {
+        $(By.xpath("//*[text()='" + arg0 + "']")).shouldHave(text(arg0), Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='" + arg0 + "']")).click();
+    }
+
+    @When("I click on brands")
+    public void iClickOnBrands() {
+        $(By.xpath("//*[contains(text(),'brands')]")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[contains(text(),'brands')]")).click();
+    }
+
+    @Then("I verify that sort options are displayed")
+    public void iVerifyThatSortOptionsAreDisplayed() {
+        $(By.xpath("//*[text()='Featured']")).shouldHave(text("Featured"), Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='New Products']")).shouldHave(text("New Products"), Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Price Low to High']")).shouldHave(text("Price Low to High"), Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Price High to Low']")).shouldHave(text("Price High to Low"), Duration.ofSeconds(20));
+        sleep(1);
+
+        try {
+            $(By.xpath("(//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary'])[2]")).shouldBe(visible, Duration.ofSeconds(15));
+            $(By.xpath("(//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary'])[2]")).click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Close button is not displayed");
+        }
+
+    }
+
+    @When("I click on in stock")
+    public void iClickOnInStock() {
+        $(By.xpath("//*[text()='In Stock']")).shouldBe(visible, Duration.ofSeconds(5));
+        $(By.xpath("//*[text()='In Stock']")).click();
+
+    }
+
+    @Then("I verify that in stock is displayed")
+    public void iVerifyThatInStockIsDisplayed() {
+        $(By.xpath("(//input[@type='checkbox'])[1]")).click();
     }
 }
 

@@ -1,3 +1,4 @@
+@regression
 Feature:Verify login
 
   Scenario: Login as associate and see dashboard

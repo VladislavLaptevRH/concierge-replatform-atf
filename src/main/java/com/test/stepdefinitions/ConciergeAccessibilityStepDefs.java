@@ -2,19 +2,17 @@ package com.test.stepdefinitions;
 
 import com.test.pageObject.ConciergeLoginPage;
 import com.test.pageObject.ConciergeUserAccountPage;
-import com.test.utility.Categories;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.slf4j.LoggerFactory;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.test.stepdefinitions.GeneralStepDefs.sleep;
 
 
 public class ConciergeAccessibilityStepDefs {
@@ -22,7 +20,6 @@ public class ConciergeAccessibilityStepDefs {
 
     ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
-    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
     @Given("^user opens the concierge site$")
     public void User_Ppens_The_Concierge_Site() {
@@ -60,8 +57,9 @@ public class ConciergeAccessibilityStepDefs {
 
     @When("user sign in concierge portal")
     public void userSignInConciergePortal() {
-        conciergeLoginPage.getUsernameField().setValue("mdovbenco");
-        conciergeLoginPage.getPasswordField().setValue("171096workouT!");
+        conciergeLoginPage.getUsernameField().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeLoginPage.getUsernameField().setValue("automationassociate");
+        conciergeLoginPage.getPasswordField().setValue("S3pUgx4W");
         conciergeLoginPage.getSignInButton().click();
         conciergeLoginPage.getLocationNewPortBeach().click();
         conciergeLoginPage.getContinueButton().click();
@@ -71,11 +69,9 @@ public class ConciergeAccessibilityStepDefs {
     public void userVerifiesThatAllItemsFromMenuAreDisplayed() {
         List<String> expectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Art", "Outdoor", "SALE"));
         List<String> items = new ArrayList<>();
-
         for (int i = 0; i < conciergeUserAccountPage.getMenuItems().size(); i++) {
             items = new ArrayList(Arrays.asList(conciergeUserAccountPage.getMenuItems().get(i).getText()));
         }
-        System.out.println(items);
         GeneralStepDefs.compareList(expectedItems, items);
     }
 

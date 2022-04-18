@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 
 public class ConciergeItemsScreen {
-    private final List<SelenideElement> items = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul//li[@class='MuiGridListTile-root']"));
+    private final List<SelenideElement> items = $$(By.xpath("//ul[contains(@class,'MuiGridList-root')]/li[1]"));
 
     private final List<SelenideElement> twoItemsSection = $$(By.xpath("//ul[contains(@class,'MuiGridList-root')]/li[@class='MuiGridListTile-root']"));
 

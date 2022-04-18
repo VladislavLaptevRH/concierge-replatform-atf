@@ -1,5 +1,6 @@
 package com.test.utility;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -33,6 +34,9 @@ public class Hooks {
     public static String leaderLogin;
     public static String currentUrl;
 
+    private static boolean setUpIsDone = false;
+
+
     /**
      * This method get properties from application.properties file
      */
@@ -60,12 +64,35 @@ public class Hooks {
     /**
      * Init web driver
      */
-    @Before()
+    @Before("@regression")
     public void initWebDriver() {
         ConfigFileReader();
+//        WebDriverManager.chromedriver().setup();
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--headless");
+//        options.addArguments("--window-size=1366,768");
+//        DesiredCapabilities dr = new DesiredCapabilities();
+//        dr.setBrowserName("chrome");
+//        dr.setCapability(ChromeOptions.CAPABILITY, options);
+//        String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
+//        RemoteWebDriver driver = null;
+//        try {
+//            driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+//        WebDriverRunner.setWebDriver(driver);
+
+        setUPWebDriverConcierge();
+    }
+
+    @Before("@filter")
+    public void initWebDriverIntdNonProd() {
+        if (setUpIsDone) {
+            return;
+        }
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-//        System.setProperty("webdriver.chrome.driver", "driver/chromedriver");
         options.addArguments("--headless");
         options.addArguments("--window-size=1366,768");
         DesiredCapabilities dr = new DesiredCapabilities();
@@ -80,24 +107,47 @@ public class Hooks {
         }
         WebDriverRunner.setWebDriver(driver);
 
-        setUPWebDriver();
+        setUpIsDone = true;
+
+        setUPWebDriverIntNonProd();
+    }
+
+
+    /**
+     * Initialize Web driver
+     */
+    public void setUPWebDriverConcierge() {
+        System.out.println("Inside initDriver method");
+
+        WebDriverManager.chromedriver().setup();
+        Configuration.driverManagerEnabled = true;
+        Configuration.browser = "chrome";
+        Configuration.browserSize = "1366x768";
+        Configuration.headless = false;
+
+        open((String) properties.get("baseurl"));
+        currentUrl = WebDriverRunner.url();
     }
 
     /**
      * Initialize Web driver
      */
-    public void setUPWebDriver() {
+    public void setUPWebDriverIntNonProd() {
         System.out.println("Inside initDriver method");
+        if (setUpIsDone) {
+            return;
+        }
+        WebDriverManager.chromedriver().setup();
+        Configuration.driverManagerEnabled = true;
+        Configuration.browser = "chrome";
+        Configuration.browserSize = "1366x768";
+        Configuration.headless = false;
 
-//        WebDriverManager.chromedriver().setup();
-//        Configuration.driverManagerEnabled = true;
-//        Configuration.browser = "chrome";
-//        Configuration.browserSize = "1366x768";
-//        Configuration.headless = true;
+        open("https://intd.rhnonprod.com/");
 
-        open((String) properties.get("baseurl"));
-        currentUrl = WebDriverRunner.url();
+        setUpIsDone = true;
     }
+
 
     /**
      * @return current url from browser
@@ -105,6 +155,10 @@ public class Hooks {
     public static String getCurrentUrl() {
         currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
         return currentUrl;
+    }
+
+    public void setUp() {
+
     }
 
     /**
@@ -118,7 +172,7 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After()
+    @After("@regression")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
         closeWindow();

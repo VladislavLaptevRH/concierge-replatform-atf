@@ -9,5 +9,4 @@ import org.openqa.selenium.WebDriver;
 public class ConciergeLeaderStepDefs {
     WebDriver webDriver = Hooks.getWebDriver();
     ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
-
 }

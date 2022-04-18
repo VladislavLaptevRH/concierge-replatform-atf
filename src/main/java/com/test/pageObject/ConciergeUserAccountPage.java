@@ -85,6 +85,8 @@ public class ConciergeUserAccountPage {
 
     private SelenideElement cartButton = $(By.xpath("//div[3]//div[2]//div[1]//div[2]//div[3]/a/h6"));
 
+    private SelenideElement cartButtonCss = $(By.cssSelector("div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > a:nth-child(1) > h6:nth-child(1)"));
+
     private SelenideElement orderHistoryButton = $(By.xpath("//a[1]/button[contains(@class,'MuiButton-root')]"));
 
     private List<SelenideElement> menuItems = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//div"));

@@ -1,3 +1,4 @@
+@regression
 Feature:Verify order history
   Scenario: Order history search is accessible from the dashboard
     Given I log into Concierge as "associate"

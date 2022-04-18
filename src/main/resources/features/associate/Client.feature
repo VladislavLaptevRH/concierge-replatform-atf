@@ -1,3 +1,4 @@
+@regression
 Feature: Verify client search
 
   Scenario Outline: Verify client search by <searchBy>

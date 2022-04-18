@@ -1,3 +1,4 @@
+@regression
 Feature: Verify change to another store
 
   Scenario: Change store number in concierge from dashboard

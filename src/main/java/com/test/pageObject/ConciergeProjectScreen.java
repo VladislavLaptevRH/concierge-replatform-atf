@@ -29,7 +29,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement selectLocationProject = $(By.xpath("//div[@id='mui-component-select-location']"));
 
-    private final SelenideElement projectNameButton = $(By.xpath("//li[@data-value='projectName']"));
+    private final SelenideElement projectNameButton = $(By.xpath("//ul//li[@data-value='projectName']"));
 
     private final SelenideElement clientNameButton = $(By.xpath("//li[@data-value='clientName']"));
 
@@ -119,7 +119,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement opportunityNameField = $(By.xpath("//input[@class='MuiInputBase-input MuiOutlinedInput-input']"));
 
-    private final SelenideElement selectPreferredContactMethod = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//label)[3]"));
+    private final SelenideElement selectPreferredContactMethod = $(By.xpath("//*[text()='Please select a preferred contact method.']"));
 
     private final SelenideElement opportunityDescription = $(By.cssSelector(".MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputMultiline.MuiOutlinedInput-inputMultiline[aria-invalid='true']"));
 
@@ -187,7 +187,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement memberItemPrice = $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[2]"));
 
-    private final SelenideElement foreCastTotalValue = $(By.xpath("(//div[contains(@class,'MuiBox-root')])[18]"));
+    private final SelenideElement foreCastTotalValue = $(By.xpath("(//div[contains(@class,'MuiBox-root')])[10]"));
 
     private final SelenideElement editItemOptions = $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[14]"));
 
