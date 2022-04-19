@@ -15,7 +15,7 @@ pipeline.standardTemplate { label ->
             }
 
             stage('Run Tests') {
-                pipeline.buildMvn("clean test",true);
+                pipeline.buildMvn("clean test -Dcucumber.filter.tags='@regression'",true);
             } // end stage
 
             container("awscli") {

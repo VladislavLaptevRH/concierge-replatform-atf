@@ -786,4 +786,78 @@ public class ProjectStepDefs {
         }
     }
 
+    @Then("I verify that availability, Delivery and Returns messaging for {string} is displayed")
+    public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingForIsDisplayed(String arg0) {
+        if (arg0.equals("SPO")) {
+            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[1]")).shouldHave(text("AVAILABILITY & DELIVERY"), Duration.ofSeconds(20)).scrollIntoView(true);
+            executeJavaScript("window.scrollTo(0, 250)");
+            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[1]")).click();
+            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[1]")).shouldHave(text("This item is special order and will be ready for delivery between 07/15/22 and 07/24/22"), Duration.ofSeconds(20));
+        }
+
+        if (arg0.equals("In stock")) {
+            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).shouldHave(text("AVAILABILITY & DELIVERY"));
+            executeJavaScript("window.scrollTo(0, 400)");
+            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).click();
+            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[2]")).shouldHave(text("This item is in stock and will be ready for delivery between 05/09/22 and 05/16/22"), Duration.ofSeconds(20));
+        }
+
+        if (arg0.equals("SPO In stock Items")) {
+            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[3]")).shouldHave(text("AVAILABILITY & DELIVERY"), Duration.ofSeconds(20)).scrollIntoView(true);
+            executeJavaScript("window.scrollTo(0, 800)");
+            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[3]")).click();
+            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[3]")).shouldHave(text("This item is in stock and will be ready for delivery between 05/10/22 and 05/17/22"), Duration.ofSeconds(20));
+        }
+
+    }
+
+    @When("I choose {string}")
+    public void iChoose(String arg0) {
+        if (arg0.equals("DESIGN")) {
+            conciergeProjectScreen.getDesignButton().shouldBe(visible, Duration.ofSeconds(15));
+            conciergeProjectScreen.getDesignButton().click();
+        }
+
+        if (arg0.equals("TRADE")) {
+            conciergeProjectScreen.getTradeButton().shouldBe(visible, Duration.ofSeconds(15));
+            conciergeProjectScreen.getTradeButton().click();
+        }
+    }
+
+    @When("I introduces project name for new project for {string}")
+    public void iIntroducesProjectNameForNewProjectFor(String arg0) {
+        conciergeProjectScreen.getAMemberValue().shouldBe(visible, Duration.ofSeconds(16));
+        conciergeProjectScreen.getAMemberValue().setValue(arg0);
+    }
+
+    @Then("I verify that project for {string} was created")
+    public void iVerifyThatProjectForWasCreated(String arg0) {
+        $(By.xpath("//*[text()='A. Member" + arg0 + "']")).shouldBe(visible, Duration.ofSeconds(120));
+    }
+
+    @When("I choose currency for create a project pop up")
+    public void iChooseCurrencyForCreateAProjectPopUp() {
+        $(By.xpath("(//div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input'])[2]")).click();
+        conciergeProjectScreen.getUsdCurrencyValue().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getUsdCurrencyValue().click();
+    }
+
+    @When("I click on create project button")
+    public void iClickOnCreateProjectButton() {
+        conciergeProjectScreen.getCreateProjectButton().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getCreateProjectButton().click();
+    }
+
+    @When("I choose preferred contact method for projectType")
+    public void iChoosePreferredContactMethodForProjectType() {
+        $(By.xpath("(//div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input'])[3]")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input'])[3]")).click();
+        conciergeProjectScreen.getPreferredEmailContactMethod().shouldHave(text("Email"), Duration.ofSeconds(15));
+        conciergeProjectScreen.getPreferredEmailContactMethod().click();
+    }
+
+    @Then("I verify that project list is displayed from add to project modal")
+    public void iVerifyThatProjectListIsDisplayedFromAddToProjectModal() {
+        $(By.xpath("//div[@class='MuiInputBase-root MuiOutlinedInput-root MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd']")).shouldBe(visible,Duration.ofSeconds(15)).click();
+    }
 }

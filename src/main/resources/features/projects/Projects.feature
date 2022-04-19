@@ -1,6 +1,19 @@
 @regression
 Feature: Verify projects
 
+  Scenario Outline: Availability, Delivery and Returns messaging for Instock, BO, SPO, SPO Instock Items
+    Given I log into Concierge as "associate"
+    When I click on projects button
+    When I search project "availabilitydeliveryreturnsmessaging" by provided "projectName"
+    When I click on the first project search result
+    Then I verify that availability, Delivery and Returns messaging for "<items>" is displayed
+    Examples:
+      | items              |
+      | SPO                |
+      | In stock           |
+      | SPO In stock Items |
+    #      | BO                |
+
   Scenario: Verify the Projects load for a logged in associate
     Given I log into Concierge as "associate"
     When I click on projects button
@@ -325,6 +338,35 @@ Feature: Verify projects
     When I click on the first project search result
     When I click on the moodboard button
     When I verify selections and deselection of project moodboard items
+
+  Scenario Outline: Create New project - Gallery, Design, Trade project types
+    Given I log into Concierge as "associate"
+    When I click on projects button
+    When I click on new project button
+    When I introduces "member" first and last name
+    When I choose "<project type>"
+    When I choose preferred contact method for projectType
+    When I introduces project name for new project for "<project type>"
+    When I choose currency for create a project pop up
+    When I click on create project button
+    Then I verify that project for "<project type>" was created
+    Examples:
+      | project type |
+      | GALLERY      |
+      | DESIGN       |
+      | TRADE        |
+
+  Scenario: Verify the Add to Project Modal in CART/PDP - Projects list in dropdown
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I go to item "10010966" from search field
+    And I select count of product
+    When I click on add to project button
+    Then I verify that project list is displayed from add to project modal
+
+
+
+
 
 
 

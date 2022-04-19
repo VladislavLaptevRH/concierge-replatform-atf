@@ -155,5 +155,3 @@ Feature: Verify e2e flow
       | state |
       | NY    |
       | CA    |
-
-

@@ -73,6 +73,12 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement createProjectDetailsDescriptionField = $(By.xpath("//textarea"));
 
+    private final SelenideElement usdCurrencyValue = $(By.xpath("//li[@data-value='USD']"));
+
+    private final SelenideElement designButton = $(By.xpath("//*[text()='DESIGN']"));
+
+    private final SelenideElement tradeButton = $(By.xpath("//*[text()='TRADE']"));
+
     private final SelenideElement createProjectButton = $(By.xpath("//*[text()='CREATE PROJECT']"));
 
     private final SelenideElement saveMoveToProject = $(By.xpath("//*[text()='Save']"));
