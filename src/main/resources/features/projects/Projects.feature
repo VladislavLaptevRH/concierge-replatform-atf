@@ -364,7 +364,46 @@ Feature: Verify projects
     When I click on add to project button
     Then I verify that project list is displayed from add to project modal
 
+  Scenario: Verify the Add to Project Modal in CART/PDP - Opportunities list in dropdown
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I go to item "10010966" from search field
+    And I select count of product
+    When I click on add to project button
+    Then I verify that opportunities list in dropdown is displayed from add to project modal
 
+  Scenario: Verify the Add to Project Modal in CART/PDP - Spaces list in dropdown
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I go to item "10010966" from search field
+    And I select count of product
+    When I click on add to project button
+    Then I verify that space list in dropdown is displayed from add to project modal
+
+  Scenario: Verify add new Space in the modal and add items to the selected space -CART/PDP
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I go to item "10010966" from search field
+    When I click on add to project button
+    When I click on add space button
+    When I introduces space name
+    When I click on save button uppercase
+    When I click on save button
+    When I click on go to project button
+    Then I verify that item was added to the selected space
+
+  Scenario: Verify the address page, pre filled address details and Email address once the project added to cart
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I go to item "10010966" from search field
+    And I select count of product
+    When I click on add to project button
+    When I click on add to cart button from project screen
+    When I click on view cart button
+    When I click on checkout button
+    Then I click on no thanks button
+    When I choose client who is a "nonmember"
+    Then I verify the address page, prefilled address and email address must be filled
 
 
 

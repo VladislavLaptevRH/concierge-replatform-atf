@@ -20,6 +20,7 @@ public class ProjectStepDefs {
     Mailinator mailinator = new Mailinator();
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
     ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
+    CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
     SelectOption selectOption = new SelectOption();
     Colors colors = new Colors();
     String spaceName;
@@ -143,7 +144,7 @@ public class ProjectStepDefs {
 
     @When("I click on save button")
     public void iClickOnSaveButton() {
-        conciergeProjectScreen.getSaveMoveToProject().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getSaveMoveToProject().shouldBe(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getSaveMoveToProject().click();
     }
 
@@ -206,6 +207,7 @@ public class ProjectStepDefs {
 
     @When("I click on add space button")
     public void iClickOnAddSpaceButton() {
+        sleep(10000);
         projectSettingsScreen.getAddSpaceButton().shouldBe(visible, Duration.ofSeconds(20));
         projectSettingsScreen.getAddSpaceButton().click();
     }
@@ -858,6 +860,43 @@ public class ProjectStepDefs {
 
     @Then("I verify that project list is displayed from add to project modal")
     public void iVerifyThatProjectListIsDisplayedFromAddToProjectModal() {
-        $(By.xpath("//div[@class='MuiInputBase-root MuiOutlinedInput-root MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd']")).shouldBe(visible,Duration.ofSeconds(15)).click();
+        $(By.xpath("//div[@class='MuiInputBase-root MuiOutlinedInput-root MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd']")).shouldBe(visible, Duration.ofSeconds(15)).click();
+    }
+
+    @Then("I verify that opportunities list in dropdown is displayed from add to project modal")
+    public void iVerifyThatOpportunitiesListInDropdownIsDisplayedFromAddToProjectModal() {
+        $(By.xpath("(//select[@class='MuiSelect-root MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input'])[1]")).shouldBe(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify that space list in dropdown is displayed from add to project modal")
+    public void iVerifyThatSpaceListInDropdownIsDisplayedFromAddToProjectModal() {
+        $(By.xpath("(//select[@class='MuiSelect-root MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input'])[2]")).shouldBe(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify that item was added to the selected space")
+    public void iVerifyThatItemWasAddedToTheSelectedSpace() {
+        $(By.xpath("(//button[contains(@class, 'MuiButtonBase-root')])[6]")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//button[contains(@class, 'MuiButtonBase-root')])[6]")).click();
+        $(By.xpath("//*[text()='" + spaceName + "']")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='" + spaceName + "']")).scrollIntoView(true);
+        $(By.xpath("//*[text()='" + spaceName + "']")).click();
+        $(By.xpath("//img[@alt='French Contemporary Panel 4-Door Media Console']")).shouldBe(visible, Duration.ofSeconds(25));
+    }
+
+    @When("I click on save button uppercase")
+    public void iClickOnSaveButtonUppercase() {
+        sleep(2500);
+        conciergeProjectScreen.getSaveBtnUppercase().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getSaveBtnUppercase().click();
+    }
+
+    @Then("I verify the address page, prefilled address and email address must be filled")
+    public void iVerifyTheAddressPagePrefilledAddressAndEmailAddressMustBeFilled() {
+        sleep(3000);
+        checkoutAddressScreen.getBillingAddressAsShippingCheckBox().click();
+        checkoutAddressScreen.getContinuePaymentButton().scrollIntoView(true);
+        checkoutAddressScreen.getContinuePaymentButton().shouldBe(visible, Duration.ofSeconds(15));
+        checkoutAddressScreen.getContinuePaymentButton().click();
+        $(By.xpath("//*[text()='We are unable to verify your Shipping Address']")).shouldBe(visible, Duration.ofSeconds(20));
     }
 }

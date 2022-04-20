@@ -39,7 +39,7 @@ public class ProjectSettingsScreen {
 
     private final SelenideElement spaceNameSpan = $(By.xpath("//input[@id='spaceName']"));
 
-    private final SelenideElement addSpaceButton = $(By.xpath("//*[text()='ADD SPACE']"));
+    private final SelenideElement addSpaceButton = $(By.xpath("//*[text()='ADD NEW SPACE']"));
 
     private final SelenideElement updateProjectSettingsBtn = $(By.xpath("//*[text()='UPDATE PROJECT SETTINGS']"));
 

@@ -83,6 +83,8 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement saveMoveToProject = $(By.xpath("//*[text()='Save']"));
 
+    private final SelenideElement saveBtnUppercase = $(By.xpath("//*[text()='SAVE']"));
+
     private final SelenideElement forecastSetButton = $(By.xpath("//*[text()='FORECAST SET']"));
 
     private final SelenideElement settingsButton = $(By.xpath("//*[text()='SETTINGS']"));
