@@ -828,8 +828,8 @@ public class ProjectStepDefs {
 
     @When("I introduces project name for new project for {string}")
     public void iIntroducesProjectNameForNewProjectFor(String arg0) {
-        conciergeProjectScreen.getAMemberValue().shouldBe(visible, Duration.ofSeconds(16));
-        conciergeProjectScreen.getAMemberValue().setValue(arg0);
+        $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[2]")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[2]")).setValue(arg0);
     }
 
     @Then("I verify that project for {string} was created")

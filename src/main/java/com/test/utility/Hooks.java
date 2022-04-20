@@ -71,21 +71,21 @@ public class Hooks {
     @Before("@regression")
     public void initWebDriver() {
         ConfigFileReader();
-//        WebDriverManager.chromedriver().setup();
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless");
-//        options.addArguments("--window-size=1366,768");
-//        DesiredCapabilities dr = new DesiredCapabilities();
-//        dr.setBrowserName("chrome");
-//        dr.setCapability(ChromeOptions.CAPABILITY, options);
-//        String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
-//        RemoteWebDriver driver = null;
-//        try {
-//            driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
-//        WebDriverRunner.setWebDriver(driver);
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--window-size=1366,768");
+        DesiredCapabilities dr = new DesiredCapabilities();
+        dr.setBrowserName("chrome");
+        dr.setCapability(ChromeOptions.CAPABILITY, options);
+        String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
+        RemoteWebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        WebDriverRunner.setWebDriver(driver);
 
         setUPWebDriverConcierge();
     }
@@ -123,13 +123,13 @@ public class Hooks {
     public void setUPWebDriverConcierge() {
         System.out.println("Inside initDriver method");
 
-        WebDriverManager.chromedriver().setup();
-        Configuration.driverManagerEnabled = true;
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
-        Configuration.pageLoadStrategy = "normal";
-        Configuration.timeout = 30000;
+//        WebDriverManager.chromedriver().setup();
+//        Configuration.driverManagerEnabled = true;
+//        Configuration.browser = "chrome";
+//        Configuration.browserSize = "1366x768";
+//        Configuration.headless = true;
+//        Configuration.pageLoadStrategy = "normal";
+//        Configuration.timeout = 30000;
         open((String) properties.get("baseurl"));
         currentUrl = WebDriverRunner.url();
     }
