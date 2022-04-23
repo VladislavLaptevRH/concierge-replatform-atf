@@ -1,4 +1,4 @@
-@regression
+@conciergeRegression
 Feature:HomePage
 
   Scenario: Verify that home page is accessible

@@ -1,4 +1,4 @@
-@regression
+@conciergeRegression
 Feature: Verify projects
 
   Scenario Outline: Availability, Delivery and Returns messaging for Instock, BO, SPO, SPO Instock Items
@@ -404,6 +404,54 @@ Feature: Verify projects
     Then I click on no thanks button
     When I choose client who is a "nonmember"
     Then I verify the address page, prefilled address and email address must be filled
+#-----------
+  Scenario: Verify item added and project load in correct space/oppty
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I go to item "25140016 FCAR" from search field
+    And I select count of product
+    When I click on add to cart button
+    When I click on view cart button
+    When I click on move to project button
+    When I choose "<project>" project
+    When I choose "<opportunity>" opportunity
+    Then I verify that item added and project load in correct space and oppty
+
+  Scenario: Space Dropdown in projects - multiple spaces in projects
+    Given I log into Concierge as "associate"
+    When I click on projects button
+    When I search project "selectdeselectmoodboarditems" by provided "projectName"
+    When I click on the first project search result
+    Then I verify that spaces are displayed in space dropdown
+
+  Scenario: Verify Forecast Set in SF for a project - Selected spaces and entire oppty
+    Given I log into Concierge as "associate"
+    When I click on projects button
+    When I search project "selectdeselectmoodboarditems" by provided "projectName"
+    When I click on the first project search result
+    When I click on forecast set button
+    When I click on save button uppercase
+    Then I verify forecast amount for selected items & spaces
+    When I click on forecast set button
+    When I click on entire opportunity radio button
+    Then I verify forecast amount for opportunity radio button
+
+  Scenario: Verify that SKU id has been updated after making edits for line item in the project
+    Given I log into Concierge as "associate"
+    When I click on projects button
+    When I search project "selectdeselectmoodboarditems" by provided "projectName"
+    When I click on the first project search result
+    When I making edits for line item in the project
+    Then I verify that sku id has been updated
+
+  Scenario: Verify the VIew all functionality for spaces in project
+    Given I log into Concierge as "associate"
+    When I click on projects button
+    When I search project "selectdeselectmoodboarditems" by provided "projectName"
+    When I click on the first project search result
+    When I click on spaces dropdown
+    When I click on view all
+    Then I verify that items from all spaces are displayed
 
 
 
@@ -411,17 +459,4 @@ Feature: Verify projects
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#  correctadditemtoproject

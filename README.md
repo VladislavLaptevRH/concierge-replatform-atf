@@ -62,7 +62,6 @@ text for defining your tag.
 By using generic steps you can automate your test cases more quickly,
 more efficiently and without much coding.
 
-
 **Run a tests**
 *************
 There is a runner class named like RunCukeTests.java it's for run all tests.
@@ -70,12 +69,22 @@ You can run only one test too. Also it is possible to run all automation tests u
 
 -to run all automation tests in command mode, please introduce the following command:
 mvn clean test
-
+--------------------------------------------------------------------
 -to run automation tests for filter, please type the following command:
-mvn test -Dcucumber.filter.tags='@filter'
+mvn test -Dcucumber.filter.tags='@rhnonprodFilter'
 
--to run automation tests for regression, please type the following command:
-mvn test -Dcucumber.filter.tags='@regression'
+-to run automation tests for concierge regression, please type the following command:
+mvn test -Dcucumber.filter.tags='@conciergeRegression'
+
+-to run automation tests for concierge smoke testing, please type the following command:
+mvn test -Dcucumber.filter.tags='@conciergeSmoke'
+
+-to run automation tests for eStore regression, please type the following command:
+mvn test -Dcucumber.filter.tags='@eStoreRegression'
+
+-to run automation tests for eStore smoke testing, please type the following command:
+mvn test -Dcucumber.filter.tags='@eStoreSmoke'
+--------------------------------------------------------------------
 
 Structure of automation testing framework:
 
@@ -95,10 +104,10 @@ Structure of automation testing framework:
 application.properties - main properties for automation testing framework (credentials data, base url)
 extent.properties - responsible for generating the report
 
-
 **Reporting**
 The report will be created only after you run the tests from RunCuke.class 
-or if run tests with: mvn clean tests command. Report will be generated in the following location:
+or if run tests with maven command or run from RunTests.class.
+Report will be generated in the following location:
 target/cucumber-html-report/Index.html
 
 

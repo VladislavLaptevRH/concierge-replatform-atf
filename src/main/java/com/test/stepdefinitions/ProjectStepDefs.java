@@ -899,4 +899,27 @@ public class ProjectStepDefs {
         checkoutAddressScreen.getContinuePaymentButton().click();
         $(By.xpath("//*[text()='We are unable to verify your Shipping Address']")).shouldBe(visible, Duration.ofSeconds(20));
     }
+
+    @Then("I verify that item {string} was added to project")
+    public void iVerifyThatItemWasAddedToProject(String itemName) {
+        $(By.xpath("(//*[text()='" + itemName + "'])[2]")).shouldBe(visible, Duration.ofMinutes(1));
+    }
+
+    @When("I choose {string} project")
+    public void iChooseProject(String arg0) {
+        System.out.println();
+
+    }
+
+    @When("I choose {string} opportunity")
+    public void iChooseOpportunity(String arg0) {
+    }
+
+    @Then("I verify that item added and project load in correct space\\/oppty")
+    public void iVerifyThatItemAddedAndProjectLoadInCorrectSpaceOppty() {
+    }
+
+    @Then("I verify that item added and project load in correct space and oppty")
+    public void iVerifyThatItemAddedAndProjectLoadInCorrectSpaceAndOppty() {
+    }
 }

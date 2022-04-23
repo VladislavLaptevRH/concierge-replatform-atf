@@ -1,4 +1,4 @@
-@regression
+@conciergeRegression
 Feature: Verify e2e flow
 
   Scenario: Verify that user is able to buy item

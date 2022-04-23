@@ -66,93 +66,77 @@ public class Hooks {
     }
 
     /**
-     * Init web driver
+     * Init web driver for regression and smoke  for concierge
      */
-    @Before("@regression")
+    @Before("@conciergeRegression or @conciergeSmoke")
     public void initWebDriver() {
-        ConfigFileReader();
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--window-size=1366,768");
-        DesiredCapabilities dr = new DesiredCapabilities();
-        dr.setBrowserName("chrome");
-        dr.setCapability(ChromeOptions.CAPABILITY, options);
-        String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
-        RemoteWebDriver driver = null;
-        try {
-            driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        WebDriverRunner.setWebDriver(driver);
-
-        setUPWebDriverConcierge();
+        setupChromeArguments();
+        setUPWebDriver((String) properties.get("conciergestg2url"));
     }
 
-    @Before("@filter")
+    /**
+     * Init web driver for regression and smoke  for concierge
+     */
+    @Before("@eStoreRegression or @eStoreSmoke")
+    public void initWebDrivereStore() {
+        setupChromeArguments();
+        setUPWebDriver((String) properties.get("eStoreUrl"));
+    }
+
+    /**
+     * Init web driver for rhnonprod for filter automation tests
+     */
+    @Before("@rhnonprodFilter")
     public void initWebDriverIntdNonProd() {
-        if (setUpIsDone) {
-            return;
-        }
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--window-size=1366,768");
-        DesiredCapabilities dr = new DesiredCapabilities();
-        dr.setBrowserName("chrome");
-        dr.setCapability(ChromeOptions.CAPABILITY, options);
-        String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
-        RemoteWebDriver driver = null;
-        try {
-            driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        WebDriverRunner.setWebDriver(driver);
-
-        setUpIsDone = true;
-
-        setUPWebDriverIntNonProd();
-    }
-
-
-    /**
-     * Initialize Web driver
-     */
-    public void setUPWebDriverConcierge() {
-        System.out.println("Inside initDriver method");
-
-//        WebDriverManager.chromedriver().setup();
-//        Configuration.driverManagerEnabled = true;
-//        Configuration.browser = "chrome";
-//        Configuration.browserSize = "1366x768";
-//        Configuration.headless = true;
-//        Configuration.pageLoadStrategy = "normal";
-//        Configuration.timeout = 30000;
-        open((String) properties.get("baseurl"));
-        currentUrl = WebDriverRunner.url();
+        setupChromeArguments();
+        setUPWebDriver((String) properties.get("intdnonprod"));
+        setUPWebDriver("https://intd.rhnonprod.com/");
     }
 
     /**
      * Initialize Web driver
      */
-    public void setUPWebDriverIntNonProd() {
+    public void setUPWebDriver(String url) {
         System.out.println("Inside initDriver method");
-        if (setUpIsDone) {
-            return;
-        }
+
         WebDriverManager.chromedriver().setup();
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
         Configuration.headless = false;
-
-        open("https://intd.rhnonprod.com/");
-        Log.debug("Open https://intd.rhnonprod.com/ product");
-        setUpIsDone = true;
+        Configuration.pageLoadStrategy = "normal";
+        Configuration.timeout = 30000;
+        open(url);
+        currentUrl = WebDriverRunner.url();
     }
 
+    /**
+     * Set up chrome arguments for Jenkins run
+     */
+    public void setupChromeArguments() {
+        ConfigFileReader();
+
+        if (setUpIsDone) {
+            return;
+        }
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--window-size=1366,768");
+        DesiredCapabilities dr = new DesiredCapabilities();
+        dr.setBrowserName("chrome");
+        dr.setCapability(ChromeOptions.CAPABILITY, options);
+        String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
+        RemoteWebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        WebDriverRunner.setWebDriver(driver);
+
+        setUpIsDone = true;
+    }
 
     /**
      * @return current url from browser
@@ -160,10 +144,6 @@ public class Hooks {
     public static String getCurrentUrl() {
         currentUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
         return currentUrl;
-    }
-
-    public void setUp() {
-
     }
 
     /**
@@ -177,7 +157,7 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After("@regression")
+    @After("@conciergeRegression or @conciergeSmoke or @eStoreRegression or @eStoreSmoke")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
         closeWindow();

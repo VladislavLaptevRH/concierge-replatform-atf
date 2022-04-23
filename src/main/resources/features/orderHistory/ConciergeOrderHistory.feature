@@ -1,4 +1,4 @@
-@regression
+@conciergeRegression
 Feature:Verify order history
 
   Scenario: Order history search is accessible from the dashboard

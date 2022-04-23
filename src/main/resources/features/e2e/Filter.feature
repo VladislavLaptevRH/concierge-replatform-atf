@@ -1,4 +1,4 @@
-@filter
+@rhnonprodFilter
 Feature: Verify filter
 
   Scenario Outline: Verify filter for provided search term - <searchterm>
