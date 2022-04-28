@@ -68,15 +68,6 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for concierge
      */
-    @Before("@conciergeRegression or @conciergeSmoke")
-    public void initWebDriver() {
-        setupChromeArguments();
-        setUPWebDriver((String) properties.get("conciergestg2url"));
-    }
-
-    /**
-     * Init web driver for regression and smoke  for concierge
-     */
     @Before("@eStoreRegression or @eStoreSmoke")
     public void initWebDrivereStore() {
         setupChromeArguments();
@@ -88,9 +79,36 @@ public class Hooks {
      */
     @Before("@rhnonprodFilter")
     public void initWebDriverIntdNonProd() {
+//        setupChromeArguments();
+        setUPWebDriverIntNonProd();
+    }
+
+    /**
+     * Init web driver for regression and smoke  for concierge
+     */
+    @Before("@conciergeRegression or @conciergeSmoke")
+    public void initWebDriver() {
         setupChromeArguments();
-        setUPWebDriver((String) properties.get("intdnonprod"));
-        setUPWebDriver("https://intd.rhnonprod.com/");
+        setUPWebDriver((String) properties.get("conciergestg2url"));
+    }
+
+    /**
+     * Initialize Web driver
+     */
+    public void setUPWebDriverIntNonProd() {
+        System.out.println("Inside initDriver method");
+        if (setUpIsDone) {
+            return;
+        }
+        WebDriverManager.chromedriver().setup();
+        Configuration.driverManagerEnabled = true;
+        Configuration.browser = "chrome";
+        Configuration.browserSize = "1366x768";
+        Configuration.headless = false;
+
+        open((String) properties.get("intdnonprod"));
+        Log.debug("Open https://intd.rhnonprod.com/ product");
+        setUpIsDone = true;
     }
 
     /**
@@ -98,14 +116,13 @@ public class Hooks {
      */
     public void setUPWebDriver(String url) {
         System.out.println("Inside initDriver method");
-
-        WebDriverManager.chromedriver().setup();
-        Configuration.driverManagerEnabled = true;
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
-        Configuration.pageLoadStrategy = "normal";
-        Configuration.timeout = 30000;
+//        WebDriverManager.chromedriver().setup();
+//        Configuration.driverManagerEnabled = true;
+//        Configuration.browser = "chrome";
+//        Configuration.browserSize = "1366x768";
+//        Configuration.headless = true;
+//        Configuration.pageLoadStrategy = "normal";
+//        Configuration.timeout = 30000;
         open(url);
         currentUrl = WebDriverRunner.url();
     }
@@ -116,9 +133,6 @@ public class Hooks {
     public void setupChromeArguments() {
         ConfigFileReader();
 
-        if (setUpIsDone) {
-            return;
-        }
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
@@ -134,8 +148,6 @@ public class Hooks {
             e.printStackTrace();
         }
         WebDriverRunner.setWebDriver(driver);
-
-        setUpIsDone = true;
     }
 
     /**
