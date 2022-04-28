@@ -122,7 +122,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I remove all items from cart")
     public void iRemoveAllItemsFromCart() {
-        conciergeUserAccountPage.getCartButton().shouldBe(visible, Duration.ofMinutes(5));
+        conciergeUserAccountPage.getCartButton().shouldBe(visible, Duration.ofMinutes(1));
         if (!conciergeUserAccountPage.getCartButton().getText().equals("CART 0")) {
             conciergeUserAccountPage.getCartButton().click();
             while (true) {

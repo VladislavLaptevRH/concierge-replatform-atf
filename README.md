@@ -17,6 +17,9 @@ their results are deterministic and that they cannot affect the running
 system. The runtime engine is also responsible for gathering the results
 of all tests and composing reports.
 
+**Install**
+Maven 3.8.4
+Java Version 1.8.0_91
 
 **Framework overview**
 ************
