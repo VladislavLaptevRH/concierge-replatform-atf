@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.test.pageObject.ConciergeCartPageScreen;
 import com.test.pageObject.ConciergeItemsScreen;
 import com.test.pageObject.ConciergeUserAccountPage;
+import com.test.pageObject.PaymentScreen;
 import com.test.utility.Hooks;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,6 +18,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static com.test.stepdefinitions.GeneralStepDefs.sleep;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -30,7 +32,9 @@ public class ConciergeCartStepDefs {
     int priceFirstLineItem;
     int priceSecondLineItem;
     String lineItemPriceValueBeforeOverride;
+    String totalPriceCart;
     DecimalFormat digitFormatDoubleZero = new DecimalFormat("0.00");
+    PaymentScreen paymentScreen = new PaymentScreen();
 
 
     @When("I navigate to the cart page")
@@ -243,13 +247,64 @@ public class ConciergeCartStepDefs {
     public void iClickOnApplyPromocodeButton() {
         conciergeCartPageScreen.getApplyPromocodeButton().shouldBe(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getApplyPromocodeButton().click();
+
+        try {
+            sleep(3);
+            $(By.xpath("//*[text()='Accept']")).shouldBe(visible, Duration.ofMinutes(1));
+            $(By.xpath("//*[text()='Accept']")).click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Close button is not displayed");
+        }
     }
 
     @When("I introduces promo code for promo codes field")
     public void iIntroducesPromoCodeForPromoCodesField() {
         conciergeCartPageScreen.getPromotionCodeField().shouldBe(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getPromotionCodeField().scrollIntoView(true);
-        conciergeCartPageScreen.getPromotionCodeField().setValue("HM4TS96");
+        conciergeCartPageScreen.getPromotionCodeField().setValue("FEMAD");
+
+        totalPriceCart = conciergeCartPageScreen.getTotalMemberPrice().getText();
+    }
+
+    @Then("I verify that promocode was approved for cart items")
+    public void iVerifyThatPromocodeWasApprovedForCartItems() {
+        assertEquals(conciergeCartPageScreen.getTotalMemberPrice().getText(), "$1,617.00");
+    }
+
+    @Then("I verify that total price from cart and from payment page is the same")
+    public void iVerifyThatTotalPriceFromCartAndFromPaymentPageIsTheSame() {
+        $(By.xpath("//*[text()='" + totalPriceCart + "']")).shouldBe(visible, Duration.ofMinutes(1));
+    }
+
+    @When("I choose POP for payment method")
+    public void iChoosePOPForPaymentMethod() {
+        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
+        sleep(2);
+        paymentScreen.getChoosePaymentMethodBtn().shouldBe(Condition.be(visible), Duration.ofSeconds(35));
+        Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
+        selectPayment.selectByValue("POS");
+        conciergeCartPageScreen.getPosRegisterField().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeCartPageScreen.getPosRegisterField().setValue("1234");
+        conciergeCartPageScreen.getPosTransactionField().setValue("1234");
+        paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
+        sleep(4);
+        paymentScreen.getContinueToReview().click();
+
+    }
+
+    @Then("I verify that Total Additional Product Discount message is {string} on review page")
+    public void iVerifyThatTotalAdditionalProductDiscountMessageIsOnReviewPage(String arg0) {
+        if (arg0.equals("displayed")) {
+            $(By.xpath("//*[text()='Total Additional Product Discount']")).shouldBe(visible, Duration.ofMinutes(1));
+            $(By.xpath("//*[text()='$539.00']")).shouldBe(visible, Duration.ofMinutes(1));
+        } else {
+            $(By.xpath("//*[text()='Total Additional Product Discount']")).shouldNotBe(visible, Duration.ofMinutes(1));
+        }
+    }
+
+    @Then("I verify that promo code was removed")
+    public void iVerifyThatPromoCodeWasRemoved() {
+        $(By.xpath("//*[text()='Members have the privilege of receiving 25% off full priced items or 20% off sale items, whichever is the best price. Tax, shipping and surcharges are not included in calculating discount. Not valid for gift cards, personalization and gift boxes.']")).shouldNotBe(visible, Duration.ofMinutes(1));
 
     }
 }

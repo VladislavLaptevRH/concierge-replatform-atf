@@ -88,6 +88,7 @@ public class Hooks {
      */
     @Before("@conciergeRegression or @conciergeSmoke")
     public void initWebDriver() {
+        ConfigFileReader();
         setupChromeArguments();
         setUPWebDriver((String) properties.get("conciergestg2url"));
     }
@@ -120,7 +121,7 @@ public class Hooks {
 //        Configuration.driverManagerEnabled = true;
 //        Configuration.browser = "chrome";
 //        Configuration.browserSize = "1366x768";
-//        Configuration.headless = true;
+//        Configuration.headless = false;
 //        Configuration.pageLoadStrategy = "normal";
 //        Configuration.timeout = 30000;
         open(url);
@@ -131,8 +132,6 @@ public class Hooks {
      * Set up chrome arguments for Jenkins run
      */
     public void setupChromeArguments() {
-        ConfigFileReader();
-
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
