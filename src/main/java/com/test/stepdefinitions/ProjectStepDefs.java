@@ -39,10 +39,7 @@ public class ProjectStepDefs {
 
     @Then("I verify that search result is displayed")
     public void iVerifyThatSearchResultIsDisplayed() {
-        conciergeProjectScreen.getResultsListForProjects().shouldBe(visible, Duration.ofMinutes(3));
-        assertTrue(conciergeProjectScreen.getResultsListForProjects().isDisplayed());
-        assertTrue(conciergeProjectScreen.getSearchResultsTitle().isDisplayed());
-        assertTrue(conciergeProjectScreen.getMyProjectsButton().isDisplayed());
+        conciergeProjectScreen.getResultsListForProjects().shouldBe(visible, Duration.ofMinutes(1));
     }
 
     @When("I search project by {string}")
@@ -73,9 +70,6 @@ public class ProjectStepDefs {
     @Then("I verify that search result for pricing type is displayed")
     public void iVerifyThatSearchResultForPricingTypeIsDisplayed() {
         conciergeProjectScreen.getResultsListForProjects().shouldBe(visible, Duration.ofSeconds(20));
-        assertTrue(conciergeProjectScreen.getResultsListForProjects().isDisplayed());
-        assertTrue(conciergeProjectScreen.getMyProjectsButton().isDisplayed());
-        assertTrue(conciergeProjectScreen.getResultsListForProjects().isDisplayed());
     }
 
     @When("I introduces {string} first and last name")
@@ -161,9 +155,9 @@ public class ProjectStepDefs {
 
     @When("I choose project from move to project pop up")
     public void iChooseProjectFromMoveToProjectPopUp() {
-        sleep(3000);
+        conciergeProjectScreen.getProjectName().shouldHave(text("moveToProject"), Duration.ofSeconds(15));
         Select projectNameSelect = new Select(conciergeProjectScreen.getProjectName());
-        projectNameSelect.selectByVisibleText("moveToProject");
+        projectNameSelect.selectByValue("P44181381");
     }
 
     @When("I click on the first project search result")
@@ -235,6 +229,7 @@ public class ProjectStepDefs {
 
     @When("I choose preferred contact method")
     public void iChoosePreferredContactMethod() {
+        sleep(3000);
         $(By.cssSelector(".MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input")).shouldBe(visible, Duration.ofSeconds(20));
         sleep(2000);
         $(By.cssSelector(".MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input")).click();
@@ -372,7 +367,6 @@ public class ProjectStepDefs {
     @When("I search project {string} by provided {string}")
     public void iSearchProjectByProvided(String projectName, String searchBy) {
         $(By.cssSelector("#demo-simple-select-outlined")).shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(25));
-        sleep(3000);
         if (searchBy.equals("projectName")) {
             conciergeProjectScreen.getProjectNameField().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(20));
             sleep(2000);
@@ -418,7 +412,6 @@ public class ProjectStepDefs {
         randomColor = generalStepDefs.getRandomNumber(0, 3);
         Select selectColor = new Select(selectOption.getLancasterColor());
         selectColor.selectByIndex(randomColor);
-        System.out.println();
     }
 
     @When("I click on edit options button")
@@ -489,7 +482,7 @@ public class ProjectStepDefs {
     public void iClickOnRegularPriceForItemProjects() {
         conciergeProjectScreen.getOverridePriceregularPrice().shouldBe(visible, Duration.ofMinutes(1));
         executeJavaScript("window.scrollBy(0,150)", "Scroll to regular price");
-        sleep(2000);
+        conciergeProjectScreen.getOverridePriceregularPrice().shouldBe(visible, Duration.ofMinutes(1));
         conciergeProjectScreen.getOverridePriceregularPrice().click();
     }
 
@@ -569,7 +562,6 @@ public class ProjectStepDefs {
         int totalItemPrice = randomQuantity * memberPrice;
         String finalPrice = Double.toString(totalItemPrice).replace(".", ",").replaceAll(",0", "");
         String forecast = conciergeProjectScreen.getForeCastTotalValue().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "");
-        System.out.println();
         assertEquals(finalPrice, forecast, "Final price calculated correctly");
     }
 
@@ -673,7 +665,6 @@ public class ProjectStepDefs {
         if (arg0.equals("NON-MEMBER")) {
             conciergeProjectScreen.getRegularPricingType().shouldBe(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getRegularPricingType().click();
-            System.out.println();
         } else {
             conciergeProjectScreen.getMemberPricingType().shouldBe(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getMemberPricingType().click();
@@ -757,10 +748,10 @@ public class ProjectStepDefs {
 
     @When("user choose space {string}")
     public void userChooseSpace(String spaceName) {
-        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")).shouldBe(visible, Duration.ofSeconds(15));
-        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")).scrollIntoView(true);
+        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[5]")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[5]")).scrollIntoView(true);
         sleep(2000);
-        executeJavaScript("arguments[0].click();", $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")));
+        executeJavaScript("arguments[0].click();", $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[5]")));
         $(By.xpath("//*[text()='" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
         $(By.xpath("//*[text()='" + spaceName + "']")).click();
     }
@@ -772,10 +763,6 @@ public class ProjectStepDefs {
         } else {
             conciergeItemsScreen.getLapazSofaItem().shouldBe(visible, Duration.ofSeconds(15));
         }
-    }
-
-    @When("I verify selections and deselection of project moodboard items")
-    public void iVerifySelectionaAndDeselectionOfProjectMoodboardItems() {
     }
 
     @When("I click on aggree&add button")
@@ -794,21 +781,21 @@ public class ProjectStepDefs {
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[1]")).shouldHave(text("AVAILABILITY & DELIVERY"), Duration.ofSeconds(20)).scrollIntoView(true);
             executeJavaScript("window.scrollTo(0, 250)");
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[1]")).click();
-            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[1]")).shouldHave(text("This item is special order and will be ready for delivery between 07/15/22 and 07/24/22"), Duration.ofSeconds(20));
+            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[1]")).shouldHave(text("This item is special order and will be ready for delivery between"), Duration.ofSeconds(20));
         }
 
         if (arg0.equals("In stock")) {
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).shouldHave(text("AVAILABILITY & DELIVERY"));
             executeJavaScript("window.scrollTo(0, 400)");
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).click();
-            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[2]")).shouldHave(text("This item is in stock and will be ready for delivery between 05/09/22 and 05/16/22"), Duration.ofSeconds(20));
+            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[2]")).shouldHave(text("This item is in stock and will be delivered"), Duration.ofSeconds(20));
         }
 
         if (arg0.equals("SPO In stock Items")) {
-            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[3]")).shouldHave(text("AVAILABILITY & DELIVERY"), Duration.ofSeconds(20)).scrollIntoView(true);
+            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).shouldHave(text("AVAILABILITY & DELIVERY"), Duration.ofSeconds(20)).scrollIntoView(true);
             executeJavaScript("window.scrollTo(0, 800)");
-            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[3]")).click();
-            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[3]")).shouldHave(text("This item is in stock and will be ready for delivery between 05/10/22 and 05/17/22"), Duration.ofSeconds(20));
+            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).click();
+            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[3]")).shouldHave(text("This item is in stock and will be delivered"), Duration.ofSeconds(20));
         }
 
     }
@@ -875,8 +862,8 @@ public class ProjectStepDefs {
 
     @Then("I verify that item was added to the selected space")
     public void iVerifyThatItemWasAddedToTheSelectedSpace() {
-        $(By.xpath("(//button[contains(@class, 'MuiButtonBase-root')])[6]")).shouldBe(visible, Duration.ofSeconds(20));
-        $(By.xpath("(//button[contains(@class, 'MuiButtonBase-root')])[6]")).click();
+        $(By.xpath("(//button[contains(@class, 'MuiButtonBase-root')])[5]")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//button[contains(@class, 'MuiButtonBase-root')])[5]")).click();
         $(By.xpath("//*[text()='" + spaceName + "']")).shouldBe(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='" + spaceName + "']")).scrollIntoView(true);
         $(By.xpath("//*[text()='" + spaceName + "']")).click();
@@ -885,9 +872,10 @@ public class ProjectStepDefs {
 
     @When("I click on save button uppercase")
     public void iClickOnSaveButtonUppercase() {
-        sleep(2500);
+        sleep(2000);
         conciergeProjectScreen.getSaveBtnUppercase().shouldBe(visible, Duration.ofSeconds(15));
         conciergeProjectScreen.getSaveBtnUppercase().click();
+        sleep(5000);
     }
 
     @Then("I verify the address page, prefilled address and email address must be filled")
@@ -905,21 +893,26 @@ public class ProjectStepDefs {
         $(By.xpath("(//*[text()='" + itemName + "'])[2]")).shouldBe(visible, Duration.ofMinutes(1));
     }
 
-    @When("I choose {string} project")
-    public void iChooseProject(String arg0) {
-        System.out.println();
-
-    }
-
-    @When("I choose {string} opportunity")
-    public void iChooseOpportunity(String arg0) {
-    }
-
-    @Then("I verify that item added and project load in correct space\\/oppty")
-    public void iVerifyThatItemAddedAndProjectLoadInCorrectSpaceOppty() {
-    }
-
     @Then("I verify that item added and project load in correct space and oppty")
     public void iVerifyThatItemAddedAndProjectLoadInCorrectSpaceAndOppty() {
+        $(By.xpath("//div[1]/button//div[contains(@class,'MuiGrid-root MuiGrid-container')]")).shouldHave(text("correctspace"), Duration.ofMinutes(1));
+        $(By.xpath("//h6[contains(@class,'MuiTypography-h6 MuiTypography-gutterBottom MuiTypography-displayInline')]")).shouldHave(text("French Contemporary Panel 4-Door Media Console"), Duration.ofMinutes(1));
+    }
+
+    @When("I click on adjusted price")
+    public void iClickOnAdjustedPrice() {
+        conciergeProjectScreen.getAdjustedPrice().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeProjectScreen.getAdjustedPrice().click();
+    }
+
+    @When("I removed adjustment price")
+    public void iRemovedAdjustemPrice() {
+        $(By.xpath("//*[text()='Remove']")).shouldBe(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='Remove']")).click();
+    }
+
+    @When("I verify selections and deselection of project moodboard items")
+    public void iVerifySelectionsAndDeselectionOfProjectMoodboardItems() {
+
     }
 }

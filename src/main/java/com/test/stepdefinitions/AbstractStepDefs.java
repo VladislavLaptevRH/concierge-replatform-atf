@@ -14,7 +14,6 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
-import static com.test.stepdefinitions.GeneralStepDefs.sleep;
 import static org.awaitility.Awaitility.await;
 import static org.testng.Assert.assertTrue;
 
@@ -31,7 +30,7 @@ public class AbstractStepDefs {
 
     @When("I clicks on a random menu item")
     public void iClicksOnARandomMenuItem() {
-        sleep(7);
+        sleep(7000);
         conciergeUserAccountPage.getFirstItemMainMenu().shouldBe(visible, Duration.ofSeconds(60));
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
         actions.moveToElement(conciergeUserAccountPage.getFirstItemMainMenu());
@@ -43,7 +42,7 @@ public class AbstractStepDefs {
     @When("I clicks on o random item")
     public void iClicksOnORandomItem() {
         try {
-            sleep(4);
+            sleep(4000);
             conciergeItemsScreen.getItems().get(1).shouldBe(visible, Duration.ofMinutes(1));
             conciergeItemsScreen.getItems().get(1).click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
@@ -55,7 +54,7 @@ public class AbstractStepDefs {
 
     @When("I fill all options for item")
     public void iFillAllOptionsForItem() {
-        sleep(3);
+        sleep(3000);
         try {
             conciergeCartPageScreen.getColorCloseButton().shouldBe(visible, Duration.ofSeconds(15));
             conciergeCartPageScreen.getColorCloseButton().click();
@@ -64,10 +63,13 @@ public class AbstractStepDefs {
                 Select size = new Select(selectOption.getSelectSizeElement());
                 size.selectByIndex(2);
             }
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Element is not displayed");
+        }
 
+        try {
             selectOption.getQuantityElement().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(40));
             selectOption.getQuantityElement().scrollIntoView(true);
-
             selectOption.getSelectColorElement().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(5));
             if (selectOption.getSelectColorElement().isDisplayed()) {
                 Select color = new Select(selectOption.getSelectColorElement());
@@ -79,21 +81,25 @@ public class AbstractStepDefs {
                 quantity.selectByIndex(2);
             }
 
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+        } catch (
+                com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Element is not displayed");
         }
+
     }
 
     @When("I click on checkout button")
     public void iClickOnCheckoutButton() {
         try {
 //            conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(text(conciergeCartPageScreen.getOrderClassificationSelect().getText()), Duration.ofMinutes(1));
-            sleep(4);
+            sleep(4000);
             Select select = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
+            sleep(2000);
             select.selectByIndex(2);
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Order classification is selected");
         }
+        sleep(2000);
         conciergeItemsScreen.getCheckoutButton().shouldHave(text(conciergeItemsScreen.getCheckoutButton().getText()), Duration.ofMinutes(2));
         conciergeItemsScreen.getCheckoutButton().click();
     }
@@ -154,7 +160,7 @@ public class AbstractStepDefs {
 
     @When("I fill all fields from address screen")
     public void iFillAllFieldsFromAddressScreenForBrands() {
-        sleep(4);
+        sleep(4000);
         try {
             checkoutAddressScreen.getFirstNameInpt().shouldBe(Condition.and("", enabled, visible), Duration.ofMinutes(1));
             if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
@@ -180,7 +186,7 @@ public class AbstractStepDefs {
     @When("I click on rh concierge logo")
     public void iClickOnRhConciergeLogo() {
         conciergeUserAccountPage.getRhConciergeLogo().shouldBe(Condition.and("", visible, enabled), Duration.ofMinutes(5));
-        sleep(5);
+        sleep(5000);
         conciergeUserAccountPage.getRhConciergeLogo().click();
     }
 

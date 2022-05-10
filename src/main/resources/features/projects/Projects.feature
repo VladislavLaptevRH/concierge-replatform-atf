@@ -1,5 +1,5 @@
 @conciergeRegression
-Feature: Verify projects
+Feature:Projects
 
   Scenario Outline: Availability, Delivery and Returns messaging for Instock, BO, SPO, SPO Instock Items
     Given I log into Concierge as "associate"
@@ -11,7 +11,7 @@ Feature: Verify projects
       | items              |
       | SPO                |
       | In stock           |
-      | SPO In stock Items |
+#      | SPO In stock Items |
     #      | BO                |
 
   Scenario: Verify the Projects load for a logged in associate
@@ -62,11 +62,10 @@ Feature: Verify projects
     When I remove all items from cart
     When I remove client from header
     When I go to item "10010966" from search field
-    And I select count of product
     When I click on add to cart button
     When I click on view cart button
     When I click on move to project button
-    When I choose project from move to project pop up
+#    When I choose project from move to project pop up
     When I click on save button
     Then I verify that projects screen is displayed
 
@@ -108,7 +107,6 @@ Feature: Verify projects
     When I click on create opportunity button
     When I click on rh concierge logo
     When I go to item "112848 MULT" from search field
-    When I click on see results button
     And I select count of product
     When I add item to created opportunity
     When I click on save button
@@ -145,7 +143,6 @@ Feature: Verify projects
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "<skuid>" from search field
-    When I click on see results button
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -159,7 +156,6 @@ Feature: Verify projects
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "112848 MULT" from search field
-    When I click on see results button
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -170,7 +166,6 @@ Feature: Verify projects
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "112848 MULT" from search field
-    When I click on see results button
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -178,7 +173,7 @@ Feature: Verify projects
     Then I verify that spaces list is displayed
 
   Scenario: Verify that user is able to update item option
-    Given I log into Concierge as "leader"
+    Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "modifyitemsoptions" by provided "projectName"
     When I click on the first project search result
@@ -187,7 +182,7 @@ Feature: Verify projects
     Then verify that color was changed
 
   Scenario: Verify that user is able to update item quantity
-    Given I log into Concierge as "leader"
+    Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "subototalforecastupdatingqty" by provided "projectName"
     When I click on the first project search result
@@ -199,7 +194,6 @@ Feature: Verify projects
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "112848 MULT" from search field
-    When I click on see results button
     And I select count of product
     When I click on add to project button
     And I choose project by project name "removeitemsfromproject"
@@ -217,7 +211,11 @@ Feature: Verify projects
     But I choose "percentOff" method for price override
     And I introduce "10" percent discount
     When I introduce "G" for reason code
+    When I click on apply button
     Then I verify that overriden price displayed
+    When I click on adjusted price
+    When I removed adjustment price
+    When I click on remove button from price override
 
   Scenario: Verify shipping overrides in projects
     Given I log into Concierge as "leader"
@@ -236,16 +234,6 @@ Feature: Verify projects
     When I click on the first project search result
     When I choose quantity for item from project
     Then I verify that subtotal amount updated according by quantity of items
-
-  Scenario: Verify subtotal/forecast by updating edit configuration of skus - ex - change rug size and notice the price update for line, space, sub total and forecast
-    Given I log into Concierge as "leader"
-    When I click on projects button
-    When I search project "checkpricesafteroptionupdate" by provided "projectName"
-    When I click on the first project search result
-    When I click on edit options button
-    And I verify item price
-    When I change finish "Crema " option for project item
-    Then I verify that price was not changes
 
   Scenario: Verify subtotal/forecast by updating by hide/unhide items
     Given I log into Concierge as "leader"
@@ -269,7 +257,7 @@ Feature: Verify projects
     When I click on "YES" button
 
   Scenario: Verify subtotal/forecast by updating qty overriding line items (all types/ one or more items - apply all functionality)
-    Given I log into Concierge as "leader"
+    Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "overridinglineitems" by provided "projectName"
     When I click on the first project search result
@@ -277,7 +265,7 @@ Feature: Verify projects
     When I choose quantity for item from project
     Then I verify that forecast value is update according to quantity of item
 
-  Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - <clientType>
+  Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - <pricingType>
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "verifyforecastbypricingtype" by provided "projectName"
@@ -296,8 +284,6 @@ Feature: Verify projects
     Then user verifies that project page is displayed
     When user go to the next page "2" of projects
     Then user verifies that project page is displayed
-    When user go to the next page "4" of projects
-    Then user verifies that project page is displayed
 
   Scenario: Verify Tax exempt in projects for Trade projects
     Given I log into Concierge as "leader"
@@ -307,7 +293,7 @@ Feature: Verify projects
     Then I verify that tax is not displayed
 
   Scenario Outline: Verify Member/non Member /Trade/ Non Trade toggle pricing for unclassified business client project
-    Given I log into Concierge as "leader"
+    Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "pricingunclassifiedbusiness" by provided "projectName"
     When I click on the first project search result
@@ -386,7 +372,7 @@ Feature: Verify projects
     When I remove all items from cart
     When I go to item "10010966" from search field
     When I click on add to project button
-    When I click on add space button
+    When I click on add new space button
     When I introduces space name
     When I click on save button uppercase
     When I click on save button
@@ -405,26 +391,27 @@ Feature: Verify projects
     Then I click on no thanks button
     When I choose client who is a "nonmember"
     Then I verify the address page, prefilled address and email address must be filled
-#-----------
+
   Scenario: Add Item to Project from Cart - Verify item added and project load in correct space/oppty
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "25140016 FCAR" from search field
+    When I go to item "10010966 BRN" from search field
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
     When I click on move to project button
-    When I choose "<project>" project
-    When I choose "<opportunity>" opportunity
+    When I choose "ADDITEMTOCORRECTSPACE" project from move to project pop up
+    When I choose "correctspace" space from move to project pop up
+    When I click on save button
     Then I verify that item added and project load in correct space and oppty
 
   Scenario: Space Dropdown in projects - multiple spaces in projects
     Given I log into Concierge as "associate"
     When I click on projects button
-    When I search project "selectdeselectmoodboarditems" by provided "projectName"
+    When I search project "ADDITEMTOCORRECTSPACE" by provided "projectName"
     When I click on the first project search result
     Then I verify that spaces are displayed in space dropdown
-
+#-----------
   Scenario: Verify Forecast Set in SF for a project - Selected spaces and entire oppty
     Given I log into Concierge as "associate"
     When I click on projects button
@@ -463,11 +450,4 @@ Feature: Verify projects
     When I introduces "20" in percent amount field
     And I choose "CustomerDelight" reason
     Then I verified that override price for shipping displayed
-
-
-
-
-
-
-
 #  correctadditemtoproject

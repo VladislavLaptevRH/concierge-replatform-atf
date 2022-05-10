@@ -9,8 +9,8 @@ import java.time.Duration;
 import java.util.ArrayList;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.sleep;
 import static com.codeborne.selenide.Selenide.switchTo;
-import static com.test.stepdefinitions.GeneralStepDefs.sleep;
 import static com.test.utility.Hooks.getWindowsHandles;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -98,7 +98,7 @@ public class ConciergeOrderHistoryStepDefs {
 
     @When("I click on random order")
     public void iClickOnRandomOrder() {
-        sleep(2);
+        sleep(2000);
         conciergeOrderHistoryForm.getFirstResult().shouldBe(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getFirstResult().click();
     }

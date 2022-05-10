@@ -1,7 +1,6 @@
 package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.test.pageObject.*;
 import com.test.utility.Hooks;
@@ -14,7 +13,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -39,7 +37,12 @@ public class GeneralStepDefs {
         if (accountRole.equals("associate")) {
             conciergeLoginPage.getUsernameField().setValue(Hooks.associateLogin);
             conciergeLoginPage.getPasswordField().setValue(Hooks.associatePassword);
-        } else {
+        }
+        if (accountRole.equals("employee")) {
+            conciergeLoginPage.getUsernameField().setValue("ediscount");
+            conciergeLoginPage.getPasswordField().setValue("p6K6K6Mx");
+        }
+        if(accountRole.equals("leader")) {
             conciergeLoginPage.getUsernameField().setValue(Hooks.leaderLogin);
             conciergeLoginPage.getPasswordField().setValue(Hooks.leaderPassword);
         }
@@ -50,7 +53,7 @@ public class GeneralStepDefs {
         conciergeLoginPage.getLocationNewPortBeach().shouldBe(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getLocationNewPortBeach().click();
         conciergeLoginPage.getContinueButton().shouldBe(visible, Duration.ofSeconds(30));
-        sleep(3);
+        sleep(3000);
         conciergeLoginPage.getContinueButton().click();
     }
 
@@ -218,7 +221,7 @@ public class GeneralStepDefs {
      * @param expirationDate This method execute payment with provided method
      */
     public void payWith(String paymentType, String number, String cvc, String expirationDate) {
-        sleep(3);
+        sleep(3000);
         paymentScreen.getChoosePaymentMethodBtn().shouldBe(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue(paymentType);
@@ -266,10 +269,6 @@ public class GeneralStepDefs {
             categoryInStockActual.add(conciergeUserAccountPage.getItemSubCategory().get(i).getText());
         }
         assertThat(categoryInStockActual).hasSameElementsAs(categoryInStockExpected);
-    }
-
-    public static void sleep(int seconds) {
-        Selenide.sleep(TimeUnit.MILLISECONDS.convert(seconds, TimeUnit.SECONDS));
     }
 
 

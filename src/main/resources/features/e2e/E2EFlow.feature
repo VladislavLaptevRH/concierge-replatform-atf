@@ -1,5 +1,5 @@
 @conciergeRegression
-Feature: Verify e2e flow
+Feature: E2E flow
 
   Scenario: Verify that user is able to buy item
     Given I log into Concierge as "associate"
@@ -104,7 +104,7 @@ Feature: Verify e2e flow
     When I continue to payment
     When I introduces payment details
     And I verify that review screen is displayed
-#
+
   Scenario Outline: Verify that user is able to buy item from brand menu - <brands>
     Given I log into Concierge as "associate"
     When I remove all items from cart
@@ -142,7 +142,9 @@ Feature: Verify e2e flow
     When I remove all items from cart
     When I remove client from header
     When I go to item which has "<state>" restriction
-    When I fill all options for item
+    When I clicks on o random item
+    When I select size option 1 for item
+    When I select color option
     When I click on add to cart button
     When I click on aggree&add button
     When I click on view cart button

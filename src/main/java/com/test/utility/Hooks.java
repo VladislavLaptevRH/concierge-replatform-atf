@@ -123,7 +123,7 @@ public class Hooks {
 //        Configuration.browserSize = "1366x768";
 //        Configuration.headless = false;
 //        Configuration.pageLoadStrategy = "normal";
-//        Configuration.timeout = 30000;
+        Configuration.timeout = 30000;
         open(url);
         currentUrl = WebDriverRunner.url();
     }

@@ -163,31 +163,33 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement amount549 = $(By.xpath("//*[text()='$549.00']"));
 
-    private final SelenideElement amount4923 = $(By.xpath("//*[text()='$2,223.90']"));
+    private final SelenideElement amount4923 = $(By.xpath("//*[text()='$5,396.40']"));
+
+    private final SelenideElement adjustedPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'][1]/p)[3]"));
 
     private final SelenideElement percentDiscount = $(By.id("outlined-helperText"));
 
-    private final  SelenideElement dollarAmountField = $(By.id("dollar-amount"));
+    private final SelenideElement dollarAmountField = $(By.id("dollar-amount"));
 
-    private final  SelenideElement shippingOverridePriceReason = $(By.id("override-reason"));
+    private final SelenideElement shippingOverridePriceReason = $(By.id("override-reason"));
 
-    private final  SelenideElement reasonCode = $(By.id("reasoncode-select-outlined"));
+    private final SelenideElement reasonCode = $(By.id("reasoncode-select-outlined"));
 
-    private final  SelenideElement applyButton = $(By.xpath("//*[text()='Apply']"));
+    private final SelenideElement applyButton = $(By.xpath("//*[text()='Apply']"));
 
-    private final  SelenideElement percentOffSelect = $(By.id("method-select-outlined"));
+    private final SelenideElement percentOffSelect = $(By.id("method-select-outlined"));
 
-    private final  SelenideElement lancasterSofaQty = $(By.id("quantity_I51173680"));
+    private final SelenideElement lancasterSofaQty = $(By.id("quantity_I51173680"));
 
-    private final  SelenideElement mirrorSize = $(By.id("optionSelect-0"));
+    private final SelenideElement mirrorSize = $(By.id("optionSelect-0"));
 
-    private final  SelenideElement finishOption = $(By.id("optionSelect-0"));
+    private final SelenideElement finishOption = $(By.id("optionSelect-0"));
 
-    private final  SelenideElement forecastamountValue = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-2'][3]/div"));
+    private final SelenideElement forecastamountValue = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-2'][3]/div"));
 
-    private final  SelenideElement itemProjectPrice = $(By.xpath("(//div[1]/p[@class='MuiTypography-root MuiTypography-body1'])[4]"));
+    private final SelenideElement itemProjectPrice = $(By.xpath("(//div[1]/p[@class='MuiTypography-root MuiTypography-body1'])[4]"));
 
-    private final  SelenideElement printPopUp = $(By.id("documentInfo"));
+    private final SelenideElement printPopUp = $(By.id("documentInfo"));
 
     private final SelenideElement checkMarkItemButton = $(By.xpath("//button[contains(@class,'MuiButtonBase-root')][3]"));
 
@@ -197,15 +199,15 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement foreCastTotalValue = $(By.xpath("(//div[contains(@class,'MuiBox-root')])[10]"));
 
-    private final SelenideElement editItemOptions = $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[14]"));
+    private final SelenideElement editItemOptions = $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[13]"));
 
-    private final  SelenideElement regularPriceValue = $(By.xpath("(//*[contains(text(),'$')])[4]"));
+    private final SelenideElement regularPriceValue = $(By.xpath("(//*[contains(text(),'$')])[4]"));
 
     private final SelenideElement addToProjectProjectName = $(By.id("project-name"));
 
-    private final  SelenideElement taxExemptCheckBox = $(By.xpath("//input[@type='checkbox']"));
+    private final SelenideElement taxExemptCheckBox = $(By.xpath("//input[@type='checkbox']"));
 
-    private final  SelenideElement prieItemFromProject = $(By.xpath("//div[2]/div[@class='MuiGrid-root MuiGrid-item'][1]/p"));
+    private final SelenideElement prieItemFromProject = $(By.xpath("//div[2]/div[@class='MuiGrid-root MuiGrid-item'][1]/p"));
 
     private final SelenideElement emailEstimateSendButton = $(By.cssSelector("button[type='submit'] span[class='MuiButton-label']"));
 }

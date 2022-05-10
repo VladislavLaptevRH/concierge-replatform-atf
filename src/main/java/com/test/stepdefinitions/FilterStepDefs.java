@@ -13,9 +13,7 @@ import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.test.stepdefinitions.GeneralStepDefs.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static org.testng.Assert.assertTrue;
 
 public class FilterStepDefs {
@@ -78,7 +76,7 @@ public class FilterStepDefs {
         $(By.xpath("//*[text()='New Products']")).shouldHave(text("New Products"), Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Price Low to High']")).shouldHave(text("Price Low to High"), Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Price High to Low']")).shouldHave(text("Price High to Low"), Duration.ofSeconds(20));
-        sleep(1);
+        sleep(1000);
 
         try {
             $(By.xpath("(//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary'])[2]")).shouldBe(visible, Duration.ofSeconds(15));

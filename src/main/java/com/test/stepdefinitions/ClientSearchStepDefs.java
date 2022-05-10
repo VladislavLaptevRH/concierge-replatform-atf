@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.test.stepdefinitions.GeneralStepDefs.sleep;
+import static com.codeborne.selenide.Selenide.sleep;
 
 
 public class ClientSearchStepDefs {
@@ -18,7 +18,7 @@ public class ClientSearchStepDefs {
 
     @When("I search client by {string}")
     public void iSearchClientByEmail(String searchBy) {
-        sleep(2);
+        sleep(2000);
         generalStepDefs.searchClientBy(searchBy);
     }
 

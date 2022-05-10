@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 
 public class ConciergeItemsScreen {
-    private final List<SelenideElement> items = $$(By.xpath("//ul[contains(@class,'MuiGridList-root')]/li[1]"));
+    private final List<SelenideElement> items = $$(By.xpath("//ul[contains(@class,'MuiGridList-root')]/li"));
 
     private final List<SelenideElement> twoItemsSection = $$(By.xpath("//ul[contains(@class,'MuiGridList-root')]/li[@class='MuiGridListTile-root']"));
 
@@ -53,6 +53,10 @@ public class ConciergeItemsScreen {
     private final SelenideElement addToProjectTitleSelect = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']//h3[@class='MuiTypography-root MuiTypography-h3']"));
 
     private final SelenideElement opportunityNameSelect = $(By.xpath("//select[@id='opportunityName']"));
+
+    private final SelenideElement addMonogramCheckBox = $(By.xpath("(//span[@class='MuiIconButton-label']/input)[2]"));
+
+    private final SelenideElement addGiftCheckBox = $(By.xpath("(//span[@class='MuiIconButton-label']/input)[3]"));
 
     private final SelenideElement spaceNameSelect = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12'][3]//select"));
 }

@@ -55,9 +55,32 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement ufdCartButton = $(By.xpath("//*[text()='Unlimited Furniture Delivery']"));
 
+    private final SelenideElement rhMembershipProgramTitle = $(By.xpath("//*[text()='Rh Members Program']"));
+
     private final SelenideElement posTransactionField = $(By.xpath("(//div[contains(@class,'MuiInputBase-root MuiOutlinedInput-root')]/input)[1]"));
 
     private final SelenideElement posRegisterField = $(By.xpath("(//div[contains(@class,'MuiInputBase-root MuiOutlinedInput-root')]/input)[2]"));
 
     private final SelenideElement totalMemberPrice = $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-alignRight']"));
+
+    private final SelenideElement postponeShipment = $(By.xpath("//p[@id='postpone-shipment']"));
+
+    private final SelenideElement postponeSelectReasonCode = $(By.xpath("//select[@id='data_reason_code']"));
+
+    private final SelenideElement postponeShipOnOrAfterDate = $(By.xpath("//p[@id='ship-on-or-after-date']"));
+
+    private final SelenideElement soldToAddressTitle = $(By.xpath("//*[text()='Sold To Address']"));
+
+    private final SelenideElement billingAddressTitle = $(By.xpath("//*[text()='Billing Address']"));
+
+    private final SelenideElement shippingAddressTitle = $(By.xpath("//*[text()='Shipping Address']"));
+
+    private final SelenideElement joinNow = $(By.xpath("//*[text()='JOIN NOW']"));
+
+    private final SelenideElement addressButton = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][1]/a"));
+
+    private final SelenideElement rhMembershipImmediatlyPay = $(By.xpath("//*[text()='Your RH Membership immediately pays for itself.']"));
+
+    private final SelenideElement joinRhMemberProgramTitle = $(By.xpath("(//*[contains(text(),'Join the RH Members Program for ')])[2]"));
+
 }

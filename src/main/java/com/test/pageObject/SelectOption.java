@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 public class SelectOption {
 
-    private final SelenideElement lancasterColor = $(By.xpath("//select[@id='optionSelect-4']"));
+    private final SelenideElement lancasterColor = $(By.xpath("//select[@id='optionSelect-2']"));
 
     private final List<SelenideElement> lancastColorsList = $$(By.xpath("//select[@id='optionSelect-4']//option"));
 
@@ -42,7 +42,6 @@ public class SelectOption {
 
     private final SelenideElement selectColorElement = $(By.xpath("//select[contains(@id,'prod') and contains(@id,'Color')]"));
 
-    private final SelenideElement selectSizeElement = $(By.xpath("//select[contains(@id,'prod') and contains(@id,'Size')]"));
-
+    private final SelenideElement selectSizeElement = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Size')])[1]"));
 
 }

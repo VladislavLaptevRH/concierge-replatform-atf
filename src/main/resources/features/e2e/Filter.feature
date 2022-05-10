@@ -1,5 +1,5 @@
 @rhnonprodFilter
-Feature: Verify filter
+Feature: Filter
 
   Scenario Outline: Verify filter for provided search term - <searchterm>
     Given I search "<searchterm>" in search field from header
