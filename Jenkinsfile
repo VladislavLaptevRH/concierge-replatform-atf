@@ -22,6 +22,7 @@ pipeline.standardTemplate { label ->
                 withAWS(region: "us-east-1", role: "devops-documentation", roleAccount:"487531406788") {
                     dir(s.rootDirectory) {
                         sh """
+                        apk --no-cache add tree
                         pwd 
                         cd /home/jenkins/workspace/eCommerce/concierge-replatform-atf/target
                         tree -H '.' -L 3 --noreport --charset utf-8  -o index.html
