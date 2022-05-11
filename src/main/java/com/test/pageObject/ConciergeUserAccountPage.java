@@ -83,7 +83,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement westHollywood = $(By.xpath("//*[@id=\"146\"]"));
 
-    private final SelenideElement cartButton = $(By.xpath("(//h6[@class='MuiTypography-root MuiTypography-subtitle1'])[2]"));
+    private final SelenideElement cartButton = $(By.xpath("(//a[@class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary']/h6[@class='MuiTypography-root MuiTypography-subtitle1'])[2]"));
 
     private final SelenideElement orderHistoryButton = $(By.xpath("//a[1]/button[contains(@class,'MuiButton-root')]"));
 

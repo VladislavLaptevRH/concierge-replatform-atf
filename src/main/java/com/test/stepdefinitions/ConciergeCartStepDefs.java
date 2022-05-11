@@ -73,7 +73,7 @@ public class ConciergeCartStepDefs {
     @When("I click on view cart button")
     public void iClickOnViewCartButton() {
         try {
-            conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("1 Item  Added To Your Cart"), Duration.ofSeconds(60));
+            conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
             conciergeItemsScreen.getViewCartButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(60));
             conciergeItemsScreen.getViewCartButton().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
@@ -533,5 +533,14 @@ public class ConciergeCartStepDefs {
     @Then("I verify alternate addresses for client with multipel addresses")
     public void iVerifyAlternateAddressesForClientWithMultipelAddresses() {
         $(By.xpath("//td[@class='MuiTableCell-root MuiTableCell-body'][2]")).shouldBe(visible, Duration.ofMinutes(1));
+    }
+
+    @Then("I verify membership popup for guest user")
+    public void iVerifyMembershipPopupForGuestUser() {
+        $(By.xpath("//*[text()='Join the RH Members Program for $175.00, and save ']")).shouldBe(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='Your RH Membership immediately pays for itself.']")).shouldBe(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='BECOME A MEMBER NOW']")).shouldBe(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='NO, THANKS']")).shouldBe(visible, Duration.ofMinutes(1));
+
     }
 }

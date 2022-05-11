@@ -117,6 +117,7 @@ public class ConciergeE2EStepDefs {
         conciergeUserAccountPage.getCartButton().shouldBe(visible, Duration.ofMinutes(1));
         if (!conciergeUserAccountPage.getCartButton().getText().equals("CART 0")) {
             conciergeUserAccountPage.getCartButton().click();
+            System.out.println();
             while (true) {
                 try {
                     WebElement closePopUp = $((By.xpath("//button[@data-testid='form-dialog-close-button']")));

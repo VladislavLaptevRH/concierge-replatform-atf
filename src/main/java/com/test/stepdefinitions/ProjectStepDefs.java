@@ -915,4 +915,77 @@ public class ProjectStepDefs {
     public void iVerifySelectionsAndDeselectionOfProjectMoodboardItems() {
 
     }
+
+
+    @Then("I verify that sku id has been updated after changes")
+    public void iVerifyThatSkuIdHasBeenUpdatedAfterChanges() {
+        randomQuantity = generalStepDefs.getRandomNumber(0, 4);
+        $(By.xpath("//div[1]/div/div[1]/button[2]")).shouldBe(visible, Duration.ofMinutes(1));
+        $(By.xpath("//div[1]/div/div[1]/button[2]")).click();
+        sleep(3000);
+        Select selectSize = new Select($(By.cssSelector("#optionSelect-0")));
+        selectSize.selectByIndex(randomQuantity);
+        sleep(3000);
+        $(By.xpath("//div[1]/div/div[1]/button[2]")).click();
+
+        if (randomQuantity == 0) {
+            $(By.xpath("//*[text()='10070143 PEWT']")).shouldBe(visible, Duration.ofMinutes(1));
+        }
+        if (randomQuantity == 1) {
+            $(By.xpath("//*[text()='40200454 PEWT']")).shouldBe(visible, Duration.ofMinutes(1));
+        }
+        if (randomQuantity == 2) {
+            $(By.xpath("//*[text()='41450559 PEWT']")).shouldBe(visible, Duration.ofMinutes(1));
+        }
+        if (randomQuantity == 3) {
+            $(By.xpath("//*[text()='40200388 PEWT']")).shouldBe(visible, Duration.ofMinutes(1));
+        }
+        if (randomQuantity == 4) {
+            $(By.xpath("//*[text()='41120018 PEWT']")).shouldBe(visible, Duration.ofMinutes(1));
+        }
+    }
+
+    @When("I click on view all button from space dropdown")
+    public void iClickOnViewAllButtonFromSpaceDropdown() {
+        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[5]")).shouldBe(visible, Duration.ofMinutes(1));
+        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[5]")).click();
+        $(By.xpath("//*[text()='VIEW ALL']")).shouldBe(visible, Duration.ofSeconds(1));
+        $(By.xpath("//*[text()='VIEW ALL']")).click();
+    }
+
+    @Then("I verify that items from all spaces are displayed")
+    public void iVerifyThatItemsFromAllSpacesAreDisplayed() {
+        $(By.xpath("//*[text()='Space is empty, add products.']")).shouldBe(visible, Duration.ofSeconds(35));
+    }
+
+    @When("I introduces {string} in percent amount field")
+    public void iIntroducesInPercentAmountField(String arg0) {
+        System.out.println();
+    }
+
+    @When("I click on forecast set button")
+    public void iClickOnForecastSetButton() {
+        conciergeProjectScreen.getForecastSetButton().shouldBe(visible, Duration.ofSeconds(40));
+        conciergeProjectScreen.getForecastSetButton().click();
+    }
+
+    @Then("I verify forecast amount for selected items & spaces")
+    public void iVerifyForecastAmountForSelectedItemsSpaces() {
+    }
+
+    @When("I click on entire opportunity radio button")
+    public void iClickOnEntireOpportunityRadioButton() {
+        $(By.xpath("//*[text()='Entire Opportunity']")).shouldBe(visible, Duration.ofSeconds(1));
+        $(By.xpath("//*[text()='Entire Opportunity']")).click();
+    }
+
+    @Then("I verify forecast amount for opportunity radio button")
+    public void iVerifyForecastAmountForOpportunityRadioButton() {
+    }
+
+    @When("I click on Selected items & spaces radio button")
+    public void iClickOnSelectedItemsSpacesRadioButton() {
+        $(By.xpath("//*[text()='Selected items & spaces']")).shouldBe(visible, Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Selected items & spaces']")).click();
+    }
 }

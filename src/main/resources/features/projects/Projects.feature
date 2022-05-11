@@ -164,7 +164,6 @@ Feature:Projects
 
   Scenario: Verify the Spaces list and switching between the Spaces -CART/PDP
     Given I log into Concierge as "associate"
-    When I remove all items from cart
     When I go to item "112848 MULT" from search field
     And I select count of product
     When I click on add to cart button
@@ -345,7 +344,6 @@ Feature:Projects
 
   Scenario: Verify the Add to Project Modal in CART/PDP - Projects list in dropdown
     Given I log into Concierge as "associate"
-    When I remove all items from cart
     When I go to item "10010966" from search field
     And I select count of product
     When I click on add to project button
@@ -353,7 +351,6 @@ Feature:Projects
 
   Scenario: Verify the Add to Project Modal in CART/PDP - Opportunities list in dropdown
     Given I log into Concierge as "associate"
-    When I remove all items from cart
     When I go to item "10010966" from search field
     And I select count of product
     When I click on add to project button
@@ -361,7 +358,6 @@ Feature:Projects
 
   Scenario: Verify the Add to Project Modal in CART/PDP - Spaces list in dropdown
     Given I log into Concierge as "associate"
-    When I remove all items from cart
     When I go to item "10010966" from search field
     And I select count of product
     When I click on add to project button
@@ -369,7 +365,6 @@ Feature:Projects
 
   Scenario: Verify add new Space in the modal and add items to the selected space -CART/PDP
     Given I log into Concierge as "associate"
-    When I remove all items from cart
     When I go to item "10010966" from search field
     When I click on add to project button
     When I click on add new space button
@@ -381,7 +376,6 @@ Feature:Projects
 
   Scenario: Verify the address page, pre filled address details and Email address once the project added to cart
     Given I log into Concierge as "associate"
-    When I remove all items from cart
     When I go to item "10010966" from search field
     And I select count of product
     When I click on add to project button
@@ -411,43 +405,31 @@ Feature:Projects
     When I search project "ADDITEMTOCORRECTSPACE" by provided "projectName"
     When I click on the first project search result
     Then I verify that spaces are displayed in space dropdown
-#-----------
+
   Scenario: Verify Forecast Set in SF for a project - Selected spaces and entire oppty
     Given I log into Concierge as "associate"
     When I click on projects button
-    When I search project "selectdeselectmoodboarditems" by provided "projectName"
+    When I search project "OVERRIDESHIPPING" by provided "projectName"
     When I click on the first project search result
     When I click on forecast set button
-    When I click on save button uppercase
-    Then I verify forecast amount for selected items & spaces
-    When I click on forecast set button
     When I click on entire opportunity radio button
+    When I click on save button uppercase
     Then I verify forecast amount for opportunity radio button
+    When I click on forecast set button
+    When I click on Selected items & spaces radio button
+    Then I verify forecast amount for selected items & spaces
 
   Scenario: Verify that SKU id has been updated after making edits for line item in the project
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "selectdeselectmoodboarditems" by provided "projectName"
     When I click on the first project search result
-    When I making edits for line item in the project
-    Then I verify that sku id has been updated
+    Then I verify that sku id has been updated after changes
 
-  Scenario: Verify the VIew all functionality for spaces in project
+  Scenario: Verify the view all functionality for spaces in project
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "selectdeselectmoodboarditems" by provided "projectName"
     When I click on the first project search result
-    When I click on spaces dropdown
-    When I click on view all
+    When I click on view all button from space dropdown
     Then I verify that items from all spaces are displayed
-
-  Scenario: Verify shipping overrides in percentage in projects
-    Given I log into Concierge as "leader"
-    When I click on projects button
-    When I search project "overrideshipping" by provided "projectName"
-    When I click on the first project search result
-    And I click on unlimited furniture delivery price
-    When I introduces "20" in percent amount field
-    And I choose "CustomerDelight" reason
-    Then I verified that override price for shipping displayed
-#  correctadditemtoproject
