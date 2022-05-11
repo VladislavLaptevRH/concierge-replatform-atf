@@ -23,14 +23,15 @@ pipeline.standardTemplate { label ->
                     dir(s.rootDirectory) {
                         sh """
                         pwd 
-                        cd /home/jenkins/workspace/eCommerce/concierge-replatform-atf/target/cucumber-html-report
+                        cd /home/jenkins/workspace/eCommerce/concierge-replatform-atf/target
+                        tree -H '.' -L 3 --noreport --charset utf-8  -o index.html
                         aws s3 sync . s3://docs.rhapsody.rh.com/public/${resultspath}
                         """
                     } // pipeline dir
                 }
             }  // pipeline/container
 
-            slackSend (color: '#00FF00',message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) : Test Results: http://docs.rhapsody.rh.com/public/${resultspath}/Index.html", channel: "#test-results")
+            slackSend (color: '#00FF00',message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) : Test Results: http://docs.rhapsody.rh.com/public/${resultspath}/cucumber-html-report/Index.html", channel: "#test-results")
         } catch (Exception exception) {
             notifyFailed()
             throw exception;
