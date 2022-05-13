@@ -41,7 +41,6 @@ public class Hooks {
     private static final Logger Log = LoggerFactory.getLogger(FilterStepDefs.class);
 
 
-
     /**
      * This method get properties from application.properties file
      */
@@ -122,9 +121,9 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
-        Configuration.timeout = 30000;
+        Configuration.timeout = 60000;
         Configuration.reportsFolder = "target/screenshots";
         open(url);
         currentUrl = WebDriverRunner.url();

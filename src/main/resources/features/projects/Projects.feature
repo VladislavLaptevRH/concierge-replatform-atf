@@ -264,7 +264,7 @@ Feature:Projects
     When I choose quantity for item from project
     Then I verify that forecast value is update according to quantity of item
 
-  Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - <pricingType>
+  Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "verifyforecastbypricingtype" by provided "projectName"
@@ -289,6 +289,7 @@ Feature:Projects
     When I click on projects button
     When I search project "TEST_TRADE_3MAR_1PM" by provided "projectName"
     When I click on the first project search result
+    When I choose pricing type "TRADE"
     Then I verify that tax is not displayed
 
   Scenario Outline: Verify Member/non Member /Trade/ Non Trade toggle pricing for unclassified business client project

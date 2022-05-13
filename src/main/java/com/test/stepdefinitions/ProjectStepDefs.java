@@ -138,6 +138,7 @@ public class ProjectStepDefs {
 
     @When("I click on save button")
     public void iClickOnSaveButton() {
+        conciergeProjectScreen.getSaveMoveToProject().should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
         conciergeProjectScreen.getSaveMoveToProject().shouldBe(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getSaveMoveToProject().click();
     }
@@ -195,6 +196,7 @@ public class ProjectStepDefs {
     @When("I introduces space name")
     public void iIntroducesSpaceName() {
         spaceName = generalStepDefs.getAlphaNumericString(4);
+        projectSettingsScreen.getSpaceNameSpan().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         projectSettingsScreen.getSpaceNameSpan().shouldBe(visible, Duration.ofSeconds(12));
         projectSettingsScreen.getSpaceNameSpan().setValue(spaceName);
     }
@@ -657,15 +659,21 @@ public class ProjectStepDefs {
 
     @When("I choose pricing type {string}")
     public void iChoosePricingType(String arg0) {
+        conciergeProjectScreen.getForecastamountValue().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeProjectScreen.getForecastamountValue().shouldBe(visible, Duration.ofSeconds(12));
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-        sleep(10000);
-        conciergeProjectScreen.getPricingTypeDropdown().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getPricingTypeDropdown().should(visible, Duration.ofMinutes(1));
         conciergeProjectScreen.getPricingTypeDropdown().click();
+        if (arg0.equals("TRADE")) {
+            conciergeProjectScreen.getTradePricingType().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+            conciergeProjectScreen.getTradePricingType().shouldBe(visible, Duration.ofSeconds(20));
+            conciergeProjectScreen.getTradePricingType().click();
+        }
         if (arg0.equals("NON-MEMBER")) {
             conciergeProjectScreen.getRegularPricingType().shouldBe(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getRegularPricingType().click();
-        } else {
+        }
+        if (arg0.equals("MEMBER")) {
             conciergeProjectScreen.getMemberPricingType().shouldBe(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getMemberPricingType().click();
         }
@@ -673,16 +681,16 @@ public class ProjectStepDefs {
 
     @Then("I verify forecast for {string}")
     public void iVerifyForecastFor(String pricingType) {
-        conciergeProjectScreen.getForeCastAmount().shouldBe(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getForeCastAmount().should(visible, Duration.ofSeconds(20));
         conciergeProjectScreen.getForeCastAmount().scrollIntoView(true);
         sleep(3000);
         String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
         sleep(2000);
         if (pricingType.equals("MEMBER")) {
-            assertEquals(prType, "$4,496.00\n", "Forecast amount for member client is displayed");
+            assertEquals(prType, "$1,276.00\n", "Forecast amount for member client is displayed");
         }
         if (pricingType.equals("NON-MEMBER")) {
-            assertEquals(prType, "$5,995.00\n", "Forecast amount for non-member client is displayed");
+            assertEquals(prType, "$1,596.00\n", "Forecast amount for non-member client is displayed");
         }
     }
 
@@ -701,13 +709,10 @@ public class ProjectStepDefs {
 
     @When("I verify that tax is not displayed")
     public void iVerifyThatTaxIsNotDisplayed() {
-        conciergeProjectScreen.getSettingsButton().shouldHave(text("SETTINGS"), Duration.ofSeconds(20));
-        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-        conciergeProjectScreen.getTaxExemptCheckBox().click();
-        sleep(8000);
-        assertFalse($(By.xpath("//*[text()='Tax']")).isDisplayed());
-        conciergeProjectScreen.getTaxExemptCheckBox().click();
-        sleep(4000);
+        $(By.xpath("//*[text()='Tax']")).shouldBe(visible, Duration.ofMinutes(1));
+        executeJavaScript("arguments[0].click();", conciergeProjectScreen.getTaxExemptCheckBox());
+        $(By.xpath("//*[text()='Tax']")).shouldNot(visible, Duration.ofMinutes(1));
+        executeJavaScript("arguments[0].click();", conciergeProjectScreen.getTaxExemptCheckBox());
     }
 
     @Then("I verify that tax exempt is displayed")
@@ -873,6 +878,7 @@ public class ProjectStepDefs {
     @When("I click on save button uppercase")
     public void iClickOnSaveButtonUppercase() {
         sleep(2000);
+        conciergeProjectScreen.getSaveBtnUppercase().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
         conciergeProjectScreen.getSaveBtnUppercase().shouldBe(visible, Duration.ofSeconds(15));
         conciergeProjectScreen.getSaveBtnUppercase().click();
         sleep(5000);
@@ -895,12 +901,14 @@ public class ProjectStepDefs {
 
     @Then("I verify that item added and project load in correct space and oppty")
     public void iVerifyThatItemAddedAndProjectLoadInCorrectSpaceAndOppty() {
+        $(By.xpath("//div[1]/button//div[contains(@class,'MuiGrid-root MuiGrid-container')]")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         $(By.xpath("//div[1]/button//div[contains(@class,'MuiGrid-root MuiGrid-container')]")).shouldHave(text("correctspace"), Duration.ofMinutes(1));
         $(By.xpath("//h6[contains(@class,'MuiTypography-h6 MuiTypography-gutterBottom MuiTypography-displayInline')]")).shouldHave(text("French Contemporary Panel 4-Door Media Console"), Duration.ofMinutes(1));
     }
 
     @When("I click on adjusted price")
     public void iClickOnAdjustedPrice() {
+        conciergeProjectScreen.getAdjustedPrice().should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
         conciergeProjectScreen.getAdjustedPrice().shouldBe(visible, Duration.ofMinutes(1));
         conciergeProjectScreen.getAdjustedPrice().click();
     }

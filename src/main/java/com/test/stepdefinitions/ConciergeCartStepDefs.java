@@ -74,6 +74,7 @@ public class ConciergeCartStepDefs {
     public void iClickOnViewCartButton() {
         try {
             sleep(2000);
+            conciergeCartPageScreen.getItemAddedToYourCart().should(Condition.and("Displayed", visible, enabled), Duration.ofMinutes(1));
             conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
             conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
             sleep(2000);
@@ -104,13 +105,16 @@ public class ConciergeCartStepDefs {
 
     @When("I click on quantity line item button")
     public void iClickOnQuantityLineItemButton() {
+        $(By.xpath("//select[contains(@id,'quantity')]")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         $(By.xpath("//select[contains(@id,'quantity')]")).shouldBe(visible, Duration.ofMinutes(1));
         $(By.xpath("//select[contains(@id,'quantity')]")).click();
         randomQuantity = generalStepDefs.getRandomNumber(2, 5);
         sleep(3000);
+        $(By.xpath("//option[@value='" + randomQuantity + "']")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         $(By.xpath("//option[@value='" + randomQuantity + "']")).shouldHave(text(Integer.toString(randomQuantity)), Duration.ofSeconds(10));
         $(By.xpath("//option[@value='" + randomQuantity + "']")).scrollIntoView(true);
         sleep(2000);
+        $(By.xpath("//option[@value='" + randomQuantity + "']")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         $(By.xpath("//option[@value='" + randomQuantity + "']")).click();
 
     }
@@ -260,6 +264,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that promocode was approved for cart items")
     public void iVerifyThatPromocodeWasApprovedForCartItems() {
+        conciergeCartPageScreen.getTotalMemberPrice().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$1,617.00"), Duration.ofSeconds(10));
     }
 
@@ -351,7 +356,8 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that mini cart value is equal to {int}")
     public void iVerifyThatMiniCartValueIsEqualTo(int arg0) {
-        conciergeUserAccountPage.getCartButton().shouldHave(text("CART " + arg0), Duration.ofSeconds(15));
+        conciergeUserAccountPage.getCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        conciergeUserAccountPage.getCartButton().shouldHave(text("CART " + arg0), Duration.ofMinutes(1));
     }
 
     @Then("I verify member banner for {string} client")
@@ -415,9 +421,11 @@ public class ConciergeCartStepDefs {
 
     @When("I choose postpone shipment")
     public void iChoosePostponeShipment() {
+        conciergeCartPageScreen.getPostponeShipment().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeCartPageScreen.getPostponeShipment().scrollIntoView(true);
         conciergeCartPageScreen.getPostponeShipment().shouldHave(text("Postpone Shipment"), Duration.ofSeconds(15));
         conciergeCartPageScreen.getPostponeShipment().click();
+        conciergeCartPageScreen.getPostponeSelectReasonCode().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeCartPageScreen.getPostponeSelectReasonCode().shouldBe(visible, Duration.ofSeconds(15));
         Select postponeReasonCode = new Select(conciergeCartPageScreen.getPostponeSelectReasonCode());
         conciergeCartPageScreen.getPostponeSelectReasonCode().scrollIntoView(true);
@@ -466,13 +474,16 @@ public class ConciergeCartStepDefs {
     public void iVerifyThatSavingsForAUser(String arg0, String arg1) {
         sleep(3000);
         if (arg1.equals("nonmember") || (arg1.equals("contract"))) {
+            conciergeCartPageScreen.getTotalMemberPrice().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
             conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
         }
         if (arg1.equals("trade")) {
+            $(By.xpath("//*[text()='Trade savings']")).should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
             $(By.xpath("//*[text()='Trade savings']")).shouldHave(text("Trade savings"), Duration.ofMinutes(1));
             $(By.xpath("//*[text()='$432.00']")).shouldBe(visible, Duration.ofMinutes(1));
         }
         if (arg1.equals("member")) {
+            $(By.xpath("//*[text()='Member Savings']")).should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
             $(By.xpath("//*[text()='Member Savings']")).shouldHave(text("Member Savings"), Duration.ofMinutes(1));
             $(By.xpath("//*[text()='$432.00']")).shouldBe(visible, Duration.ofMinutes(1));
         }
@@ -552,29 +563,36 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that employee discount is present")
     public void iVerifyThatEmployeeDiscountIsPresent() {
-        $(By.xpath("//*[text()='Total Additional Product Discount']")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Total Additional Product Discount']")).shouldHave(text("Total Additional Product Discount"), Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Total Additional Product Discount']")).shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$646.80']")).shouldBe(visible, Duration.ofSeconds(15));
 
     }
 
     @When("I apply employee discount")
     public void iApplyEmployeeDiscount() {
+        $(By.xpath("//input[@autocomplete='new-username']")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         $(By.xpath("//input[@autocomplete='new-username']")).shouldBe(visible, Duration.ofSeconds(15));
         $(By.xpath("//input[@autocomplete='new-username']")).scrollIntoView(true);
         $(By.xpath("//input[@autocomplete='new-username']")).setValue("ediscount");
+        $(By.xpath("//input[@type='password']")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         $(By.xpath("//input[@type='password']")).setValue("p6K6K6Mx");
 
         try {
+            $(By.xpath("(//*[text()='Apply'])[2]")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
             $(By.xpath("(//*[text()='Apply'])[2]")).click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            $(By.xpath("//*[text()='Apply']")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
             $(By.xpath("//*[text()='Apply']")).click();
         }
+        $(By.xpath("//*[text()='Accept']")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Accept']")).shouldBe(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Accept']")).click();
     }
 
     @Then("I verify that mini cart value is equal to quantity of product")
     public void iVerifyThatMiniCartValueIsEqualToQuantityOfProduct() {
+        conciergeUserAccountPage.getCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeUserAccountPage.getCartButton().shouldHave(text("CART " + randomQuantity), Duration.ofSeconds(15));
 
     }

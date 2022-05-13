@@ -338,7 +338,7 @@ Feature: Cart Page
     When I click on no thanks button
     When I choose client who is a "nonmember"
     When I click on cart button from header
-    Then I verify "member" savings for a "nonmember" user
+    Then I verify "nonmember" savings for a "nonmember" user
 
   Scenario: Verify Trade savings for a Trade user in cart - From PDP and Project
     Given I log into Concierge as "associate"

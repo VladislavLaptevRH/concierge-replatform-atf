@@ -91,12 +91,15 @@ public class AbstractStepDefs {
     @When("I click on checkout button")
     public void iClickOnCheckoutButton() {
         try {
+            conciergeCartPageScreen.getOrderClassificationSelect().should(Condition.and("Displayed", visible, enabled), Duration.ofMinutes(1));
             conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(text(conciergeCartPageScreen.getOrderClassificationSelect().getText()), Duration.ofMinutes(1));
+            sleep(3000);
             Select select = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
             select.selectByIndex(2);
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Order classification is selected");
         }
+        conciergeItemsScreen.getCheckoutButton().should(Condition.and("Displayed", visible, enabled), Duration.ofMinutes(1));
         conciergeItemsScreen.getCheckoutButton().shouldHave(text(conciergeItemsScreen.getCheckoutButton().getText()), Duration.ofMinutes(2));
         conciergeItemsScreen.getCheckoutButton().click();
     }

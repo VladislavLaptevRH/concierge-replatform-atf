@@ -173,7 +173,7 @@ public class ConciergeE2EStepDefs {
         generalStepDefs.payWith("VI", "4678 4753 3015 7543", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
-        paymentScreen.getFieldAmount().setValue("30");
+        paymentScreen.getFieldAmount().setValue("3");
         paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
 
@@ -181,7 +181,7 @@ public class ConciergeE2EStepDefs {
         generalStepDefs.payWith("AX", "3411 3411 3411 347", "6765", "0225");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
-        paymentScreen.getFieldAmount().setValue("30");
+        paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
 
@@ -194,7 +194,7 @@ public class ConciergeE2EStepDefs {
         Select paymentPlan = new Select(paymentScreen.getSelectPaymentPlan());
         paymentPlan.selectByValue("001");
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
-        paymentScreen.getFieldAmount().setValue("10");
+        paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
 
@@ -213,7 +213,7 @@ public class ConciergeE2EStepDefs {
         generalStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
-        paymentScreen.getFieldAmount().setValue("10");
+        paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().shouldBe(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
 
@@ -334,8 +334,8 @@ public class ConciergeE2EStepDefs {
     @When("I click on no thanks button")
     public void iClickOnNoThanksButton() {
         try {
-//            executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getNoThanksButton());
-            conciergeCartPageScreen.getNoThanksButton().shouldBe(visible, Duration.ofMinutes(1));
+            conciergeCartPageScreen.getNoThanksButton().should(Condition.and("Displayed", visible, enabled), Duration.ofSeconds(30));
+            conciergeCartPageScreen.getNoThanksButton().shouldBe(visible, Duration.ofSeconds(30));
             conciergeCartPageScreen.getNoThanksButton().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("No thanks button is not displayed");
@@ -616,6 +616,7 @@ public class ConciergeE2EStepDefs {
 
         try {
             if (searchParam.equals("accountnumber")) {
+                conciergeUserAccountPage.getBusinessAcNumber().should(Condition.and("",enabled,visible),Duration.ofMinutes(1));
                 conciergeUserAccountPage.getBusinessAcNumber().setValue(businessClient);
             }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
