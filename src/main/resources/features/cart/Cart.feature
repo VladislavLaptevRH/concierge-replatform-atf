@@ -14,7 +14,7 @@ Feature: Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "prod17860061" from search field
+    When I go to item "10011389 BRS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on checkout button
@@ -132,7 +132,7 @@ Feature: Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "10011389" from search field
+    When I go to item "10011389 SS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I introduces promo code for promo codes field
@@ -190,12 +190,12 @@ Feature: Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "10011389" from search field
+    When I go to item "10011389 SS" from search field
     When I click on add to cart button
     When I click on view cart button
     Then I verify that mini cart value is equal to 1
     When I click on quantity line item button
-    Then I verify that mini cart value is equal to 1
+    Then I verify that mini cart value is equal to quantity of product
 
   Scenario Outline: Verify Membership banner for Trade and contract - should not be present
     Given I log into Concierge as "associate"
@@ -213,7 +213,7 @@ Feature: Cart Page
       | trade                |
       | unclassifiedBusiness |
 
-  Scenario Outline: Verify Membership Pop up while checkout for Trade and contract - should not be present
+  Scenario: Verify Membership Pop up while checkout for Trade - should not be present
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
@@ -222,14 +222,25 @@ Feature: Cart Page
     When I click on view cart button
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "<businessClient>"
+    When I choose client who is a "trade"
+    Then I verify member banner for "trade" client not displayed
     When I click on checkout button
-    Then I verify that membership popup for "<businessClient>" is displayed
-    Then I verify member banner for "<businessClient>" client not displayed
-    Examples:
-      | businessClient       |
-      | trade                |
-      | unclassifiedBusiness |
+    Then I verify that membership popup for "trade" is not displayed
+
+  Scenario: Verify Membership Pop up while checkout for contract - should not be present
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I remove client from header
+    When I go to item "10011389" from search field
+    When I click on add to cart button
+    When I click on view cart button
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "unclassifiedBusiness"
+    Then I verify member banner for "unclassifiedBusiness" client not displayed
+    When I click on cart button from header
+    When I click on checkout button
+    Then I verify that membership popup for "unclassifiedBusiness" is not displayed
 
   Scenario Outline: Verify Trade,Contract client address page - ship to Bill to, Sold to addresses - edit addresses
     Given I log into Concierge as "associate"
@@ -247,7 +258,7 @@ Feature: Cart Page
     When I continue to payment
     Examples:
       | businessClient |
-      | 20211221164476 |
+#      | 20211221164476 |
       | 20211221164474 |
 
   Scenario: Verify membership prices for Membership client
@@ -263,21 +274,22 @@ Feature: Cart Page
     Then I verify that membership price displayed as total price
 
   Scenario: Verify Employee discount checkout
-    Given I log into Concierge as "employee"
+    Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
     When I go to item "10011389" from search field
     When I click on add to cart button
     When I click on view cart button
+    When I apply employee discount
     Then I verify that employee discount is present
 
   Scenario: Postpone shipment
-    Given I log into Concierge as "employee"
+    Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
     When I go to item "10011394 BRZ" from search field
     When I click on add to cart button
-    When I click on postpone shipment
+    When I click on view cart button
     When I choose postpone shipment
     When I click on apply uppercase button for "postpone shipment"
     Then I verify that postpone shipment was applied
@@ -353,10 +365,10 @@ Feature: Cart Page
     Then I verify "member" savings for a "member" user
 
   Scenario: Verify Contract savings for a contract user in cart - From PDP and Project
-    Given I log into Concierge as "employee"
+    Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "10011389" from search field
+    When I go to item "10011389 SS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on checkout button
@@ -405,7 +417,7 @@ Feature: Cart Page
     When I click on view cart button
     Then I verify that availability, Delivery and Returns messaging in cart
 
-  Scenario:Verify alternate addresses for client with multipel addresses
+  Scenario:Verify alternate addresses for client with multiple addresses
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header

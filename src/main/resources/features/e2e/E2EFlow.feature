@@ -17,7 +17,7 @@ Feature: E2E flow
     When I click on view cart button
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "non member"
+    When I choose client who is a "nonmember"
     When I fill all fields from address screen
     When I continue to payment
     When I introduces payment details
@@ -35,7 +35,7 @@ Feature: E2E flow
     When I click on view cart button
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "non member"
+    When I choose client who is a "nonmember"
     When I fill all fields from address screen
     And I continue to payment
     When I introduces payment details for several payment methods
@@ -92,9 +92,10 @@ Feature: E2E flow
   Scenario: Verify that user is able to add item to project and pay
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10010966" from search field
+    When I go to item "10035329 GRY" from search field
     And I select count of product
     When I click on add to project button
+    When I choose project from addToProject popup
     When I click on add to cart button from project screen
     When I click on view cart button
     When I click on checkout button
@@ -105,55 +106,64 @@ Feature: E2E flow
     When I introduces payment details
     And I verify that review screen is displayed
 
-  Scenario Outline: Verify that user is able to buy item from brand menu - <brands>
+#  Scenario Outline: Verify that user is able to buy item from brand menu - <brands>
+#    Given I log into Concierge as "associate"
+#    When I remove all items from cart
+#    When I remove client from header
+#    When I choose "<brands>" from brand menu
+#    When I clicks on a random menu item
+#    When I click on collections item
+#    When I clicks on o random item
+#    When I fiils all options for item
+#    And I select count of product
+#    When I click on add to cart button
+#    When I click on aggree&add button
+#    When I click on view cart button
+#    When I click on checkout button
+#    When I click on no thanks button
+#    When I choose client who is a "nonmember"
+#    When I fill all fields from address screen
+#    When I continue to payment
+#    When I introduces payment details
+#    And I verify that review screen is displayed
+#    When I click on a place order button
+#    Then I verify that confirmation order screen is displayed
+#    Examples:
+#      | brands         |
+#      | RH Modern      |
+#      | RH Baby&Child  |
+#      | RH Teen        |
+#      | RH Outdoor     |
+#      | RH SKI House   |
+#      | RH Beach House |
+#      | RH Interiors   |
+
+  Scenario: Verify NY shipping restriction
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I choose "<brands>" from brand menu
-    When I clicks on a random menu item
-    When I click on collections item
-    When I clicks on o random item
-    When I fiils all options for item
-    And I select count of product
+    When I go to item which has "NY" restriction
     When I click on add to cart button
     When I click on aggree&add button
     When I click on view cart button
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "nonmember"
-    When I fill all fields from address screen
-    When I continue to payment
-    When I introduces payment details
-    And I verify that review screen is displayed
-    When I click on a place order button
-    Then I verify that confirmation order screen is displayed
-    Examples:
-      | brands         |
-      | RH Modern      |
-      | RH Baby&Child  |
-      | RH Teen        |
-      | RH Outdoor     |
-      | RH SKI House   |
-      | RH Beach House |
-      | RH Interiors   |
+    When I fill all fields from address with "NY" zip code
+    Then I verify that restrictions pop up is displayed
 
-  Scenario Outline: Verify <state> shipping restriction
+  Scenario: Verify CA shipping restriction
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item which has "<state>" restriction
+    When I go to item which has "CA" restriction
     When I clicks on o random item
-    When I select size option 1 for item
-    When I select color option
+    When I select size option 2 for item
     When I click on add to cart button
     When I click on aggree&add button
     When I click on view cart button
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "non member"
-    When I fill all fields from address with "<state>" zip code
+    When I choose client who is a "nonmember"
+    When I fill all fields from address with "CA" zip code
     Then I verify that restrictions pop up is displayed
-    Examples:
-      | state |
-      | NY    |
-      | CA    |

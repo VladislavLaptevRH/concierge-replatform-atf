@@ -64,7 +64,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that cart is displayed")
     public void iVerifyThatCartIsDisplayed() {
-        conciergeCartPageScreen.getOrderClassificationSelect().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getOrderClassificationSelect().shouldBe(visible, Duration.ofSeconds(40));
         assertTrue(conciergeCartPageScreen.getOrderClassificationSelect().isDisplayed(), "Order classification is displayed");
         assertTrue(conciergeItemsScreen.getCheckoutButton().isDisplayed(), "Checkout button is displayed");
 
@@ -73,8 +73,10 @@ public class ConciergeCartStepDefs {
     @When("I click on view cart button")
     public void iClickOnViewCartButton() {
         try {
+            sleep(2000);
             conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
-            conciergeItemsScreen.getViewCartButton().shouldBe(Condition.and("", visible, enabled), Duration.ofSeconds(60));
+            conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
+            sleep(2000);
             conciergeItemsScreen.getViewCartButton().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Agree&add to cart button is not displayed");
@@ -165,8 +167,8 @@ public class ConciergeCartStepDefs {
 
     @When("I click on apply uppercase button for {string}")
     public void iClickOnApplyUppercaseButton(String method) {
-        $(By.xpath("//*[text()='APPLY']")).shouldBe(visible, Duration.ofMinutes(1));
-        sleep(3000);
+        sleep(2000);
+        $(By.xpath("//*[text()='APPLY']")).shouldHave(text("APPLY"), Duration.ofMinutes(1));
         $(By.xpath("//*[text()='APPLY']")).click();
     }
 
@@ -196,6 +198,7 @@ public class ConciergeCartStepDefs {
     @When("I click on apply all checkbox")
     public void iClickOnApplyAllCheckbox() {
         sleep(3000);
+        $(By.xpath("//input[@name='applyToCart']")).scrollIntoView(true);
         $(By.xpath("//input[@name='applyToCart']")).click();
     }
 
@@ -248,7 +251,7 @@ public class ConciergeCartStepDefs {
 
     @When("I introduces promo code for promo codes field")
     public void iIntroducesPromoCodeForPromoCodesField() {
-        conciergeCartPageScreen.getPromotionCodeField().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeCartPageScreen.getPromotionCodeField().shouldBe(empty, Duration.ofMinutes(1));
         conciergeCartPageScreen.getPromotionCodeField().scrollIntoView(true);
         conciergeCartPageScreen.getPromotionCodeField().setValue("FEMAD");
 
@@ -257,7 +260,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that promocode was approved for cart items")
     public void iVerifyThatPromocodeWasApprovedForCartItems() {
-        assertEquals(conciergeCartPageScreen.getTotalMemberPrice().getText(), "$1,617.00");
+        conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$1,617.00"), Duration.ofSeconds(10));
     }
 
     @Then("I verify that total price from cart and from payment page is the same")
@@ -348,7 +351,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that mini cart value is equal to {int}")
     public void iVerifyThatMiniCartValueIsEqualTo(int arg0) {
-        conciergeUserAccountPage.getCartButton().shouldHave(text("CART " + randomQuantity));
+        conciergeUserAccountPage.getCartButton().shouldHave(text("CART " + arg0), Duration.ofSeconds(15));
     }
 
     @Then("I verify member banner for {string} client")
@@ -365,13 +368,13 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getJoinNow().shouldNotBe(visible, Duration.ofMinutes(1));
     }
 
-    @Then("I verify that membership popup for {string} is displayed")
+    @Then("I verify that membership popup for {string} is not displayed")
     public void iVerifyThatMembershipPopupForIsDisplayed(String arg0) {
-        conciergeCartPageScreen.getNoThanksButton().shouldBe(visible, Duration.ofMinutes(1));
-        conciergeCartPageScreen.getBecomeAmemberNow().shouldBe(visible, Duration.ofMinutes(1));
-        conciergeCartPageScreen.getMembersProgramTitle().shouldBe(visible, Duration.ofMinutes(1));
-        conciergeCartPageScreen.getJoinRhMemberProgramTitle().shouldBe(visible, Duration.ofMinutes(1));
-        conciergeCartPageScreen.getRhMembershipImmediatlyPay().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeCartPageScreen.getNoThanksButton().shouldNotBe(visible, Duration.ofSeconds(10));
+        conciergeCartPageScreen.getBecomeAmemberNow().shouldNotBe(visible, Duration.ofSeconds(10));
+        conciergeCartPageScreen.getMembersProgramTitle().shouldNotBe(visible, Duration.ofSeconds(10));
+        conciergeCartPageScreen.getJoinRhMemberProgramTitle().shouldNotBe(visible, Duration.ofSeconds(10));
+        conciergeCartPageScreen.getRhMembershipImmediatlyPay().shouldNotBe(visible, Duration.ofSeconds(10));
     }
 
     @Then("I verify that ship to, bill to, sold to addresses are displayed")
@@ -407,15 +410,17 @@ public class ConciergeCartStepDefs {
 
     @When("I click on postpone shipment")
     public void iClickOnPostponeShipment() {
-        conciergeCartPageScreen.getPostponeShipment().shouldBe(visible, Duration.ofMinutes(1));
-        conciergeCartPageScreen.getPostponeShipment().click();
+
     }
 
     @When("I choose postpone shipment")
     public void iChoosePostponeShipment() {
         conciergeCartPageScreen.getPostponeShipment().scrollIntoView(true);
+        conciergeCartPageScreen.getPostponeShipment().shouldHave(text("Postpone Shipment"), Duration.ofSeconds(15));
         conciergeCartPageScreen.getPostponeShipment().click();
+        conciergeCartPageScreen.getPostponeSelectReasonCode().shouldBe(visible, Duration.ofSeconds(15));
         Select postponeReasonCode = new Select(conciergeCartPageScreen.getPostponeSelectReasonCode());
+        conciergeCartPageScreen.getPostponeSelectReasonCode().scrollIntoView(true);
         postponeReasonCode.selectByValue("Construction/Remodel");
     }
 
@@ -459,15 +464,16 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify {string} savings for a {string} user")
     public void iVerifyThatSavingsForAUser(String arg0, String arg1) {
+        sleep(3000);
         if (arg1.equals("nonmember") || (arg1.equals("contract"))) {
             conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
         }
         if (arg1.equals("trade")) {
-            $(By.xpath("//*[text()='Trade savings']")).shouldBe(visible, Duration.ofMinutes(1));
+            $(By.xpath("//*[text()='Trade savings']")).shouldHave(text("Trade savings"), Duration.ofMinutes(1));
             $(By.xpath("//*[text()='$432.00']")).shouldBe(visible, Duration.ofMinutes(1));
         }
         if (arg1.equals("member")) {
-            $(By.xpath("//*[text()='Member Savings']")).shouldBe(visible, Duration.ofMinutes(1));
+            $(By.xpath("//*[text()='Member Savings']")).shouldHave(text("Member Savings"), Duration.ofMinutes(1));
             $(By.xpath("//*[text()='$432.00']")).shouldBe(visible, Duration.ofMinutes(1));
         }
 
@@ -526,7 +532,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that availability, Delivery and Returns messaging in cart")
     public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingInCart() {
-        $(By.xpath("//*[contains(text(),'This item is in stock and will be ready for delivery between 05/11/22 and 05/15/22')]")).shouldBe(visible, Duration.ofSeconds(10));
+        $(By.xpath("//*[contains(text(),'This item is in stock and will be ready for delivery between ')]")).shouldBe(visible, Duration.ofSeconds(10));
         $(By.xpath("//*[contains(text(),'This item is final sale and cannot be returned.')]")).shouldBe(visible, Duration.ofMinutes(1));
     }
 
@@ -541,6 +547,35 @@ public class ConciergeCartStepDefs {
         $(By.xpath("//*[text()='Your RH Membership immediately pays for itself.']")).shouldBe(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='BECOME A MEMBER NOW']")).shouldBe(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='NO, THANKS']")).shouldBe(visible, Duration.ofMinutes(1));
+
+    }
+
+    @Then("I verify that employee discount is present")
+    public void iVerifyThatEmployeeDiscountIsPresent() {
+        $(By.xpath("//*[text()='Total Additional Product Discount']")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$646.80']")).shouldBe(visible, Duration.ofSeconds(15));
+
+    }
+
+    @When("I apply employee discount")
+    public void iApplyEmployeeDiscount() {
+        $(By.xpath("//input[@autocomplete='new-username']")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//input[@autocomplete='new-username']")).scrollIntoView(true);
+        $(By.xpath("//input[@autocomplete='new-username']")).setValue("ediscount");
+        $(By.xpath("//input[@type='password']")).setValue("p6K6K6Mx");
+
+        try {
+            $(By.xpath("(//*[text()='Apply'])[2]")).click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            $(By.xpath("//*[text()='Apply']")).click();
+        }
+        $(By.xpath("//*[text()='Accept']")).shouldBe(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='Accept']")).click();
+    }
+
+    @Then("I verify that mini cart value is equal to quantity of product")
+    public void iVerifyThatMiniCartValueIsEqualToQuantityOfProduct() {
+        conciergeUserAccountPage.getCartButton().shouldHave(text("CART " + randomQuantity), Duration.ofSeconds(15));
 
     }
 }

@@ -91,7 +91,7 @@ public class ConciergeUserAccountPage {
 
     private final List<SelenideElement> itemSubCategory = $$(By.xpath("//div[2]//ul[@class='MuiList-root']/li[@class='MuiListItem-root']"));
 
-    private final SelenideElement clientButton = $(By.xpath("(//h6[@class='MuiTypography-root MuiTypography-subtitle1 MuiTypography-displayInline'])[3]"));
+    private final SelenideElement clientButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][1]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6"));
 
     private final SelenideElement removeClientButton = $(By.xpath("//li[@id='1']/button"));
 

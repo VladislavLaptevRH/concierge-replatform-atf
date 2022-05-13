@@ -1,5 +1,5 @@
 @conciergeRegression
-Feature: Client search
+Feature: Client
 
   Scenario Outline: Verify client search by <searchBy>
     Given I log into Concierge as "associate"

@@ -9,8 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 
@@ -24,6 +23,7 @@ public class ConciergeItemsStepDefs {
             sleep(3000);
             executeJavaScript("window.scrollTo(0, 970)");
             sleep(5000);
+            selectOption.getDepthProperty().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
             selectOption.getDepthProperty().shouldBe(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select selectDepth = new Select(selectOption.getDepthProperty());
             sleep(3000);
@@ -39,6 +39,7 @@ public class ConciergeItemsStepDefs {
     public void iSelectFabricProperty() {
         try {
             sleep(4000);
+            selectOption.getFabricProperty().should(appear, Duration.ofSeconds(15));
             selectOption.getFabricProperty().shouldBe(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select selectFabric = new Select(selectOption.getFabricProperty());
             selectFabric.selectByIndex(2);
@@ -53,6 +54,7 @@ public class ConciergeItemsStepDefs {
     public void iSelectColorOption() {
         sleep(8000);
         try {
+            selectOption.getColorOption().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
             selectOption.getColorOption().shouldBe(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select selectFabric = new Select(selectOption.getColorOption());
             selectFabric.selectByIndex(2);

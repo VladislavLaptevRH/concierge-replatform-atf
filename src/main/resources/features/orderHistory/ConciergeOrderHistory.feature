@@ -20,14 +20,14 @@ Feature:Order history
   Scenario: Verify UI elements from order history page
     Given I log into Concierge as "associate"
     When I navigate to the order history page from the concierge dashboard
-    And I search order history for customer "test" "test"
+    And I search order history for customer "Automation" "Nonmember"
     When I click on the random result
     Then I verify that order history page is displayed
 
   Scenario:Verify that customer lookup is displayed after that I click on back to search results button
     Given I log into Concierge as "associate"
     When I navigate to the order history page from the concierge dashboard
-    And I search order history for customer "test" "test"
+    And I search order history for customer "Automation" "Nonmember"
     When I click on the random result
     When I click on back to search results button
     Then I verify the customer lookup form appears
@@ -35,21 +35,19 @@ Feature:Order history
   Scenario: Verify that if I click on order item I'll redirected to wismo
     Given I log into Concierge as "associate"
     When I navigate to the order history page from the concierge dashboard
-    And I search order history for customer "test" "test"
+    And I search order history for customer "Automation" "Nonmember"
     When I click on the random result
     When I click on random order
     Then I verify that I redirected to wismo
 
-
   Scenario: Verify that if I click on order item I'm able to check order details
     Given I log into Concierge as "associate"
     When I navigate to the order history page from the concierge dashboard
-    And I search order history for customer "test" "test"
+    And I search order history for customer "Automation" "Nonmember"
     When I click on the random result
     When I click on random order
     And I verify that I redirected to wismo
 #    Then I verify order details
-
 
   Scenario Outline: Verify order lookup search for <status> order
     Given I log into Concierge as "associate"

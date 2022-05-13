@@ -41,6 +41,7 @@ public class Hooks {
     private static final Logger Log = LoggerFactory.getLogger(FilterStepDefs.class);
 
 
+
     /**
      * This method get properties from application.properties file
      */
@@ -117,13 +118,14 @@ public class Hooks {
      */
     public void setUPWebDriver(String url) {
         System.out.println("Inside initDriver method");
-//        WebDriverManager.chromedriver().setup();
-//        Configuration.driverManagerEnabled = true;
-//        Configuration.browser = "chrome";
-//        Configuration.browserSize = "1366x768";
-//        Configuration.headless = false;
-//        Configuration.pageLoadStrategy = "normal";
+        WebDriverManager.chromedriver().setup();
+        Configuration.driverManagerEnabled = true;
+        Configuration.browser = "chrome";
+        Configuration.browserSize = "1366x768";
+        Configuration.headless = false;
+        Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 30000;
+        Configuration.reportsFolder = "target/screenshots";
         open(url);
         currentUrl = WebDriverRunner.url();
     }
@@ -174,6 +176,7 @@ public class Hooks {
         closeWindow();
         closeWebDriver();
         System.out.println("Driver was closed");
+        sleep(2000);
     }
 
     /**

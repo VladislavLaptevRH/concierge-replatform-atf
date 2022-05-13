@@ -1,5 +1,6 @@
 package com.test.stepdefinitions;
 
+import com.codeborne.selenide.Condition;
 import com.test.pageObject.ConciergeOrderHistoryForm;
 import com.test.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.Then;
@@ -7,7 +8,7 @@ import io.cucumber.java.en.When;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.sleep;
 
 
@@ -29,9 +30,9 @@ public class ClientSearchStepDefs {
 
     @When("I click on client button")
     public void iClickOnClientButton() {
-        conciergeUserAccountPage.getClientButton().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeUserAccountPage.getClientButton().should(Condition.and("Displayed", appear, exist), Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientButton().click();
-        conciergeUserAccountPage.getClientLookupHeaderBtn().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeUserAccountPage.getClientLookupHeaderBtn().shouldHave(text("Client Lookup"), Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientLookupHeaderBtn().click();
     }
 
