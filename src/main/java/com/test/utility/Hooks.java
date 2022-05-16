@@ -89,7 +89,7 @@ public class Hooks {
     @Before("@conciergeRegression or @conciergeSmoke")
     public void initWebDriver() {
         ConfigFileReader();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver((String) properties.get("conciergestg2url"));
     }
 
