@@ -84,16 +84,6 @@ public class Hooks {
     }
 
     /**
-     * Init web driver for regression and smoke  for concierge
-     */
-    @Before("@conciergeRegression or @conciergeSmoke")
-    public void initWebDriver() {
-        ConfigFileReader();
-        setupChromeArguments();
-        setUPWebDriver((String) properties.get("conciergestg2url"));
-    }
-
-    /**
      * Initialize Web driver
      */
     public void setUPWebDriverIntNonProd() {
@@ -113,14 +103,24 @@ public class Hooks {
     }
 
     /**
+     * Init web driver for regression and smoke  for concierge
+     */
+    @Before("@conciergeRegression or @conciergeSmoke")
+    public void initWebDriver() {
+        ConfigFileReader();
+//        setupChromeArguments();
+        setUPWebDriver((String) properties.get("conciergestg2url"));
+    }
+
+    /**
      * Initialize Web driver
      */
     public void setUPWebDriver(String url) {
-//        System.out.println("Inside initDriver method");
-//        WebDriverManager.chromedriver().setup();
-//        Configuration.driverManagerEnabled = true;
-//        Configuration.browser = "chrome";
-//        Configuration.browserSize = "1366x768";
+        System.out.println("Inside initDriver method");
+        WebDriverManager.chromedriver().setup();
+        Configuration.driverManagerEnabled = true;
+        Configuration.browser = "chrome";
+        Configuration.browserSize = "1366x768";
         Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 60000;
