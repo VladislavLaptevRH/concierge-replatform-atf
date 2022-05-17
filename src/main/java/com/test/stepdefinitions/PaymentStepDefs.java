@@ -112,4 +112,8 @@ public class PaymentStepDefs {
                 "automationnonmember@mailinator.com\n" +
                 "Edit");
     }
+
+    @Then("I verify subtotal, shipping fee, taxes based on postal code")
+    public void iVerifySubtotalShippingFeeTaxesBasedOnPostalCode() {
+    }
 }
