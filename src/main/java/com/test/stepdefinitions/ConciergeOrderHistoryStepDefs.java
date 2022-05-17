@@ -5,11 +5,12 @@ import com.test.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
 import java.time.Duration;
 import java.util.ArrayList;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.sleep;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static com.test.utility.Hooks.getWindowsHandles;
 import static org.testng.Assert.assertEquals;
@@ -22,13 +23,13 @@ public class ConciergeOrderHistoryStepDefs {
 
     @When("I navigate to the order history page from the concierge dashboard")
     public void iNavigateToTheOrderHistoryPageFromTheConciergeDashboard() {
-        conciergeUserAccountPage.getOrderHistoryButton().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeUserAccountPage.getOrderHistoryButton().should(visible, Duration.ofMinutes(1));
         conciergeUserAccountPage.getOrderHistoryButton().click();
     }
 
     @Then("I verify the customer lookup form appears")
     public void iVerifyTheCustomerLookupFormAppears() {
-        conciergeOrderHistoryForm.getCustomerLookUp().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeOrderHistoryForm.getCustomerLookUp().should(visible, Duration.ofMinutes(1));
         assertTrue(conciergeOrderHistoryForm.getCustomerLookUp().isDisplayed());
         assertEquals(conciergeOrderHistoryForm.getFirstNameField().getAttribute("name"), "firstName");
         assertEquals(conciergeOrderHistoryForm.getLastNameField().getAttribute("name"), "lastName");
@@ -49,7 +50,7 @@ public class ConciergeOrderHistoryStepDefs {
 
     @And("I search order history for customer {string} {string}")
     public String iSearchOrderHistoryForCustomer(String firstName, String lastName) {
-        conciergeOrderHistoryForm.getFirstNameField().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeOrderHistoryForm.getFirstNameField().should(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getFirstNameField().setValue(firstName);
         conciergeOrderHistoryForm.getLastNameField().setValue(lastName);
         conciergeOrderHistoryForm.getActiveContinueButton().click();
@@ -60,11 +61,11 @@ public class ConciergeOrderHistoryStepDefs {
     @Then("I see results for order history by customer search")
     public void iSeeResultsForOrderHistoryByCustomerSearch() {
         if (customerFirstName.equals("notexist")) {
-            conciergeOrderHistoryForm.getSearchNoResultsMsg().shouldBe(visible, Duration.ofMinutes(1));
+            conciergeOrderHistoryForm.getSearchNoResultsMsg().should(visible, Duration.ofMinutes(1));
             assertEquals(conciergeOrderHistoryForm.getSearchNoResultsMsg().getText(), "Your search yielded no results");
             assertEquals(conciergeOrderHistoryForm.getCreateNewAccountButton().getText(), "CREATE NEW ACCOUNT");
         } else {
-            conciergeOrderHistoryForm.getCustomerAccountResultsTitle().shouldBe(visible, Duration.ofMinutes(1));
+            conciergeOrderHistoryForm.getCustomerAccountResultsTitle().should(visible, Duration.ofMinutes(1));
             assertTrue(conciergeOrderHistoryForm.getCustomerAccountResultsTitle().getText().contains("CUSTOMER ACCOUNT RESULTS"));
             assertEquals(conciergeOrderHistoryForm.getCustomerAddress().getText(), "ADDRESS");
             assertEquals(conciergeOrderHistoryForm.getCustomerFirstName().getText(), "FIRST NAME");
@@ -77,14 +78,14 @@ public class ConciergeOrderHistoryStepDefs {
 
     @When("I click on the random result")
     public void iClickOnTheRandomResult() {
-        conciergeOrderHistoryForm.getFirstResult().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeOrderHistoryForm.getFirstResult().should(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getFirstResult().click();
     }
 
     @Then("I verify that order history page is displayed")
     public void iVerifyThatOrderHistoryPageIsDisplayed() {
-        conciergeOrderHistoryForm.getOrderHistoryTitle().shouldBe(visible, Duration.ofMinutes(1));
-        conciergeOrderHistoryForm.getCustomerFirstName().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeOrderHistoryForm.getOrderHistoryTitle().should(visible, Duration.ofMinutes(1));
+        conciergeOrderHistoryForm.getCustomerFirstName().should(visible, Duration.ofMinutes(1));
         assertTrue(conciergeOrderHistoryForm.getOrderHistoryTitle().isDisplayed());
         conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("Order Date"));
         conciergeOrderHistoryForm.getCustomerAddress().shouldHave(text("Order Number"));
@@ -98,8 +99,7 @@ public class ConciergeOrderHistoryStepDefs {
 
     @When("I click on random order")
     public void iClickOnRandomOrder() {
-        sleep(2000);
-        conciergeOrderHistoryForm.getFirstResult().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeOrderHistoryForm.getFirstResult().should(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getFirstResult().click();
     }
 
@@ -113,13 +113,13 @@ public class ConciergeOrderHistoryStepDefs {
 
     @Then("I verifiy that Order Lookup title is displayed")
     public void iVerifiyThatOrderLookupTitleIsDisplayed() {
-        conciergeOrderHistoryForm.getOrderLookUpTitle().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeOrderHistoryForm.getOrderLookUpTitle().should(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getOrderLookUpTitle().shouldHave(text("ORDER LOOKUP"),Duration.ofSeconds(30));
     }
 
     @When("I introduced {string} with status {string} order number in order number field")
     public void iIntroducedWithStatusOrderNumberInOrderNumberField(String orderId, String status) {
-        conciergeOrderHistoryForm.getOrderNumberField().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeOrderHistoryForm.getOrderNumberField().should(visible, Duration.ofMinutes(1));
         if (status.equals("inProcess")) {
             conciergeOrderHistoryForm.getOrderNumberField().setValue(orderId);
         }
@@ -134,7 +134,7 @@ public class ConciergeOrderHistoryStepDefs {
 
     @When("I click on back to search results button")
     public void iClickOnBackToSearchResultsButton() {
-        conciergeOrderHistoryForm.getBackToSearchResultsButton().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeOrderHistoryForm.getBackToSearchResultsButton().should(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getBackToSearchResultsButton().click();
     }
 }

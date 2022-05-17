@@ -4,7 +4,10 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class ConciergeCartPageScreen {
@@ -47,7 +50,31 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement becomeAmemberNow = $(By.xpath("//*[text()='BECOME A MEMBER NOW']"));
 
-    private final SelenideElement applyPromocodeButton = $(By.xpath("(//*[text()='Apply'])[1]"));
+    private final SelenideElement removeButton = $(By.xpath("//*[text()='Remove']"));
+
+    private final SelenideElement addMonogramButton = $(By.xpath("//*[text()='add monogram']"));
+
+    private final SelenideElement monogramText = $(By.xpath("//input[@data-testid='monogram-input0']"));
+
+    private final SelenideElement checkBalanceButton = $(By.xpath("//*[text()='Check balance']"));
+
+    private final SelenideElement tradeSavingsText = $(By.xpath("//*[text()='Trade savings']"));
+
+    private final SelenideElement memberSavingsText = $(By.xpath("//*[text()='Member Savings']"));
+
+    private final List<SelenideElement> monogramFonts = $$(By.xpath("(//ul[@class='MuiGridList-root'])[1]//li[@class='MuiGridListTile-root']"));
+
+    private final List<SelenideElement> monogramColors = $$(By.xpath("(//ul[@class='MuiGridList-root'])[2]//li[@class='MuiGridListTile-root']"));
+
+    private final SelenideElement removeMonogramBtn = $(By.xpath("//p[contains(@class,'MuiTypography-root MuiLink-root')][2]"));
+
+    private final SelenideElement userNamePromocode = $(By.xpath("//input[@autocomplete='new-username']"));
+
+    private final SelenideElement passwordPromocde = $(By.xpath("//input[@type='password']"));
+
+    private final SelenideElement acceptButton = $(By.xpath("//*[text()='Accept']"));
+
+    private final SelenideElement applyPromocodeBtn = $(By.xpath("//div[@class='MuiGrid-root']//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4']/button"));
 
     private final SelenideElement itemAddedToYourCart = $(By.xpath("//p[contains(@class,'MuiTypography-h4')]"));
 
@@ -56,6 +83,10 @@ public class ConciergeCartPageScreen {
     private final SelenideElement ufdCartButton = $(By.xpath("//*[text()='Unlimited Furniture Delivery']"));
 
     private final SelenideElement rhMembershipProgramTitle = $(By.xpath("//*[text()='Rh Members Program']"));
+
+    private final SelenideElement personalizationText = $(By.xpath("//*[text()='PERSONALIZATION']"));
+
+    private final SelenideElement editMonogramButton = $(By.cssSelector("div:nth-child(2) > p:nth-child(3)"));
 
     private final SelenideElement posTransactionField = $(By.xpath("(//div[contains(@class,'MuiInputBase-root MuiOutlinedInput-root')]/input)[1]"));
 

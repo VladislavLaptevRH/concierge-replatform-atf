@@ -23,6 +23,8 @@ public class PaymentScreen{
     private final SelenideElement fieldAmount = $(By.xpath("//div[contains(@class,'MuiOutlinedInput-adornedStart')]/input"));
     
     private final SelenideElement expiryDateField = $(By.xpath("//input[@id='encryptedExpiryDate']"));
+
+    private final SelenideElement billingAddress = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-flex-start']"));
     
     private final SelenideElement cvcField = $(By.xpath("//input[@id='encryptedSecurityCode']"));
     

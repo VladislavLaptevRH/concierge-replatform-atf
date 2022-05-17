@@ -1,6 +1,7 @@
 package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import com.test.pageObject.ConciergeLoginPage;
 import com.test.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.Given;
@@ -27,23 +28,23 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I expect that I am on the Concierge Dashboard page")
     public void iExpectThatIAmOnTheConciergeDashboardPage() {
-        conciergeUserAccountPage.getMainMenuHeader().shouldBe(Condition.be(visible), Duration.ofSeconds(10));
+        conciergeUserAccountPage.getMainMenuHeader().should(Condition.be(visible), Duration.ofSeconds(10));
         assertTrue(conciergeUserAccountPage.getMainMenuHeader().isDisplayed(), "");
     }
 
     @When("I change my store to store number 10")
     public void iChangeMyStoreToStoreNumber() {
-        conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getNewPortBeachGallery().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getNewPortBeachGallery().click();
         conciergeUserAccountPage.getPaloAltpGallery().click();
-        conciergeUserAccountPage.getGallerySubmitButton().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getGallerySubmitButton().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getGallerySubmitButton().click();
     }
 
     @Then("I verify I see store Palo Alto in the header")
     public void iVerifyISeeStoreInTheHeader() {
-        conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(visible, Duration.ofSeconds(15));
-        conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(text("PALO ALTO"));
+        conciergeUserAccountPage.getNewPortBeachGallery().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getNewPortBeachGallery().should(text("PALO ALTO"));
         assertEquals(conciergeUserAccountPage.getNewPortBeachGallery().getText(), "PALO ALTO");
     }
 
@@ -65,7 +66,7 @@ public class ConciergeAssociateStepDefs {
 
     @When("user clicks on gallery button from header")
     public void userClicksOnGalleryButtonFromHeader() {
-        conciergeUserAccountPage.getNewPortBeachGallery().shouldBe(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getNewPortBeachGallery().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getNewPortBeachGallery().click();
     }
 
@@ -73,6 +74,7 @@ public class ConciergeAssociateStepDefs {
     public void iLogIntoConciergeAs(String arg0) {
         Log.debug("I log into Concierge as " + arg0);
         generalStepDefs.loginAsRole(arg0);
+        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
     }
 
     @Given("I am on concierge dashboard for the store 146:West Hollywood")
@@ -84,7 +86,7 @@ public class ConciergeAssociateStepDefs {
 
     @When("I have the following items in the cart:")
     public void iHaveTheFollowingItemsInTheCart() {
-        conciergeUserAccountPage.getCartButton().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getCartButton().should(visible, Duration.ofSeconds(10));
         conciergeUserAccountPage.getCartButton().click();
     }
 

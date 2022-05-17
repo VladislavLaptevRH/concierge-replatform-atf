@@ -25,7 +25,7 @@ public class ClientSearchStepDefs {
 
     @Then("I verify that client results is displayed")
     public void iVerifyThatClientResultsIsDisplayed() {
-        conciergeOrderHistoryForm.getCustomerFirstName().shouldBe(visible, Duration.ofSeconds(50));
+        conciergeOrderHistoryForm.getCustomerFirstName().should(visible, Duration.ofSeconds(50));
     }
 
     @When("I click on client button")
@@ -38,12 +38,12 @@ public class ClientSearchStepDefs {
 
     @When("I create new client")
     public void iCreateNewClient() {
-        conciergeUserAccountPage.getNewClientButton().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeUserAccountPage.getNewClientButton().should(visible, Duration.ofMinutes(1));
         conciergeUserAccountPage.getNewClientButton().click();
     }
 
     @Then("I verify that new client has been created")
     public void iVerifyThatNewClientHasBeenCreated() {
-        conciergeUserAccountPage.getNewClientHeaderBtn().shouldBe(visible, Duration.ofSeconds(30));
+        conciergeUserAccountPage.getNewClientHeaderBtn().should(visible, Duration.ofSeconds(30));
     }
 }

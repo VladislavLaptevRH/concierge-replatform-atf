@@ -23,28 +23,28 @@ public class FilterStepDefs {
     @When("I search {string} in search field from header")
     public void iSearchInSearchFieldFromHeader(String searchTerm) {
         Log.debug("I search " + searchTerm + " in search field from header");
-        $(By.xpath("//input[@id='site-search-input']")).shouldBe(visible, Duration.ofMinutes(3));
+        $(By.xpath("//input[@id='site-search-input']")).should(visible, Duration.ofMinutes(3));
         $(By.xpath("//input[@id='site-search-input']")).setValue(searchTerm);
         $(By.xpath("//input[@id='site-search-input']")).sendKeys(Keys.ENTER);
     }
 
     @When("I click on brands")
     public void iClickOnBrands() {
-        $(By.xpath("//*[contains(text(),'brands')]")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[contains(text(),'brands')]")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),'brands')]")).click();
     }
 
 
     @Then("I verify that brands are displayed")
     public void iVerifyThatCountOfProductsFromMenuIsEqualToCountOfPrductsFromPDPPage() {
-        $(By.xpath("//ul[contains(@class,'MuiList-root')]/li[contains(@class,'MuiListItem-root')]")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//ul[contains(@class,'MuiList-root')]/li[contains(@class,'MuiListItem-root')]")).should(visible, Duration.ofSeconds(15));
         List<SelenideElement> listOfBrands = $$(By.xpath("//ul[contains(@class,'MuiList-root')]/li[contains(@class,'MuiListItem-root')]"));
         assertTrue(listOfBrands.size() > 0, "Brands are displayed");
     }
 
     @When("I click on in stock")
     public void iClickOnInStock() {
-        $(By.xpath("//*[text()='In Stock']")).shouldBe(visible, Duration.ofSeconds(5));
+        $(By.xpath("//*[text()='In Stock']")).should(visible, Duration.ofSeconds(5));
         $(By.xpath("//*[text()='In Stock']")).click();
     }
 
@@ -76,10 +76,8 @@ public class FilterStepDefs {
         $(By.xpath("//*[text()='New Products']")).shouldHave(text("New Products"), Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Price Low to High']")).shouldHave(text("Price Low to High"), Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Price High to Low']")).shouldHave(text("Price High to Low"), Duration.ofSeconds(20));
-        sleep(1000);
-
         try {
-            $(By.xpath("(//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary'])[2]")).shouldBe(visible, Duration.ofSeconds(15));
+            $(By.xpath("(//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary'])[2]")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("(//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorPrimary'])[2]")).click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");

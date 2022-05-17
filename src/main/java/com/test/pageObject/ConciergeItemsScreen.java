@@ -12,6 +12,8 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 
 public class ConciergeItemsScreen {
+    private final SelenideElement firstItem = $(By.xpath("(//ul[contains(@class,'MuiGridList-root')]/li)[1]"));
+
     private final List<SelenideElement> items = $$(By.xpath("//ul[contains(@class,'MuiGridList-root')]/li"));
 
     private final List<SelenideElement> twoItemsSection = $$(By.xpath("//ul[contains(@class,'MuiGridList-root')]/li[@class='MuiGridListTile-root']"));

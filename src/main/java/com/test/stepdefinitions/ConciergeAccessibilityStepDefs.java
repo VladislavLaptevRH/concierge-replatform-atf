@@ -23,37 +23,37 @@ public class ConciergeAccessibilityStepDefs {
     @Given("^user opens the concierge site$")
     public void User_Ppens_The_Concierge_Site() {
         Log.debug("User opens the concierge product");
-        conciergeLoginPage.getUsernameField().shouldBe(visible, Duration.ofMinutes(5));
-        conciergeLoginPage.getSignInButton().shouldBe(visible, Duration.ofMinutes(5));
+        conciergeLoginPage.getUsernameField().should(visible, Duration.ofMinutes(5));
+        conciergeLoginPage.getSignInButton().should(visible, Duration.ofMinutes(5));
     }
 
     @Then("user expects that no accessibility errors")
     public void userExpectsThatNoAccessibilityErrors() {
-        conciergeUserAccountPage.getArtButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getBathButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getBedButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getArtButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getProjectsButton().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getLocationButton().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getInStockButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getLivingButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getDiningButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getBedButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getBathButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getLightingButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getTextilesButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getRugsButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getWindowsButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getDecorButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getArtButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getOutdoorButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getGiftsButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getSaleButtonMenu().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getArtButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getBathButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getBedButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getArtButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getProjectsButton().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getLocationButton().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getInStockButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getLivingButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getDiningButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getBedButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getBathButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getLightingButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getTextilesButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getRugsButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getWindowsButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getDecorButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getArtButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getOutdoorButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getGiftsButtonMenu().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getSaleButtonMenu().should(visible, Duration.ofSeconds(10));
     }
 
     @When("user sign in concierge portal")
     public void userSignInConciergePortal() {
-        conciergeLoginPage.getUsernameField().shouldBe(visible, Duration.ofMinutes(1));
+        conciergeLoginPage.getUsernameField().should(visible, Duration.ofMinutes(1));
         conciergeLoginPage.getUsernameField().setValue("automationassociate");
         conciergeLoginPage.getPasswordField().setValue("S3pUgx4W");
         conciergeLoginPage.getSignInButton().click();
@@ -70,5 +70,4 @@ public class ConciergeAccessibilityStepDefs {
         }
         GeneralStepDefs.compareList(expectedItems, items);
     }
-
 }
