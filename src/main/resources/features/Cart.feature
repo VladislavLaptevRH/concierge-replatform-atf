@@ -3,7 +3,7 @@ Feature: Cart Page
 
   Scenario: Order Classification
     Given I log into Concierge as "associate"
-    When I go to item "prod17860061" from search field
+    When I go to item "10011389 BRS" from search field
     When I click on add to cart button
     When I click on view cart button
     Then I verify order classification
@@ -14,12 +14,13 @@ Feature: Cart Page
     When I go to item "10011389 BRS" from search field
     When I click on add to cart button
     When I click on view cart button
+    When I choose order classification
     When I click on checkout button
     Then I verify membership popup for guest user
 
   Scenario: Clear Order
     Given I log into Concierge as "associate"
-    When I go to item "prod17860061" from search field
+    When I go to item "10011389 BRS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on clear order button from cart
@@ -28,7 +29,7 @@ Feature: Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "prod17860061" from search field
+    When I go to item "10011389 BRS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on quantity line item button
@@ -37,19 +38,20 @@ Feature: Cart Page
   Scenario:Remove line item - click on remove button and verify that line item is removed and subtotal and minicart value is updated
     Given I log into Concierge as "associate"
     When I remove client from header
-    When I go to item "prod17860061" from search field
+    When I go to item "10011389 BRS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I remove all items from cart
     Then I verify that line item was removed
 
-  Scenario Outline: Override Line item Prices - with percent off, dollar off, override price methods
+  Scenario Outline: Override Line item Prices - with <method> override price methods
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "prod17860061" from search field
+    When I go to item "10011389 BRS" from search field
     When I click on add to cart button
     When I click on view cart button
+    When I click on cart button from header
     When I click on total item line price
     When I select price override "<method>"
     When I introduces value for override price
@@ -66,7 +68,7 @@ Feature: Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "prod17860061" from search field
+    When I go to item "10011389 BRS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on total item line price
@@ -81,7 +83,7 @@ Feature: Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "prod17860061" from search field
+    When I go to item "10011389 BRS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on total item line price
@@ -100,7 +102,7 @@ Feature: Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "prod17860061" from search field
+    When I go to item "10011389 BRS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on total item line price
@@ -117,29 +119,63 @@ Feature: Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "prod17860061" from search field
+    When I go to item "10011389 BRS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on UFD button from cart
 
-  Scenario: Promo codes - promo code for guest user
+  Scenario: FEMA Promotion Code Description  - FEMAD
     Given I log into Concierge as "associate"
+    And I remove all items from cart
     When I remove client from header
     When I go to item "10011389 SS" from search field
     When I click on add to cart button
     When I click on view cart button
-    When I introduces promo code for promo codes field
+    When I introduces promo code "FEMAD" for promo codes field
     When I click on apply promocode button
-    Then I verify that promocode was approved for cart items
+    Then I verify that "FEMAD" promocode was approved for cart items
+    And I remove promotion from cart
+
+  Scenario: Move to Project
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I remove client from header
+    When I go to item "10010966" from search field
+    When I click on add to cart button
+    When I click on view cart button
+    When I click on move to project button
+    When I click on save button
+    Then I verify that projects screen is displayed
+
+  Scenario: Promo codes - promo code for guest user
+    Given I log into Concierge as "associate"
+    And I remove all items from cart
+    When I remove client from header
+    When I go to item "10011389 SS" from search field
+    When I click on add to cart button
+    When I click on view cart button
+    When I introduces promo code "HM4TS97" for promo codes field
+    When I click on apply promocode button
+    Then I verify that "HM4TS97" promocode was approved for cart items
+    And I remove promotion from cart
+
+  Scenario: Designed/ Sold By
+    Given I log into Concierge as "associate"
+    When I go to item "10011389 SS" from search field
+    When I click on add to cart button
+    When I click on view cart button
+    Then I verify that designed sold by
 
   Scenario: Promo codes - verify that total price from cart and from payment page is the same after applying promocode
     Given I log into Concierge as "associate"
+    And I remove all items from cart
     When I remove client from header
     When I go to item "10011389" from search field
     When I click on add to cart button
     When I click on view cart button
-    When I introduces promo code for promo codes field
+    When I introduces promo code "FEMAD" for promo codes field
     When I click on apply promocode button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "nonmember"
@@ -154,8 +190,9 @@ Feature: Cart Page
     When I go to item "10011389" from search field
     When I click on add to cart button
     When I click on view cart button
-    When I introduces promo code for promo codes field
+    When I introduces promo code "FEMAD" for promo codes field
     When I click on apply promocode button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "nonmember"
@@ -171,7 +208,7 @@ Feature: Cart Page
     When I go to item "10011389" from search field
     When I click on add to cart button
     When I click on view cart button
-    When I introduces promo code for promo codes field
+    When I introduces promo code "FEMAD" for promo codes field
     When I click on apply promocode button
     When I click on checkout button
     When I click on no thanks button
@@ -189,13 +226,14 @@ Feature: Cart Page
     When I click on quantity line item button
     Then I verify that mini cart value is equal to quantity of product
 
-  Scenario Outline: Verify Membership banner for Trade and contract - should not be present
+  Scenario Outline: Verify Membership banner for <businessClient> - should not be present
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
     When I go to item "10011389" from search field
     When I click on add to cart button
     When I click on view cart button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "<businessClient>"
@@ -211,6 +249,7 @@ Feature: Cart Page
     When I go to item "10011389" from search field
     When I click on add to cart button
     When I click on view cart button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "trade"
@@ -224,6 +263,7 @@ Feature: Cart Page
     When I remove client from header
     When I go to item "10011389" from search field
     When I click on add to cart button
+    When I choose order classification
     When I click on view cart button
     When I click on checkout button
     When I click on no thanks button
@@ -240,6 +280,7 @@ Feature: Cart Page
     When I go to item "10011389" from search field
     When I click on add to cart button
     When I click on view cart button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
     When I look on client by "accountnumber" with "<businessClient>"
@@ -258,6 +299,7 @@ Feature: Cart Page
     When I remove client from header
     When I go to item "10011389" from search field
     When I click on add to cart button
+    When I choose order classification
     When I click on view cart button
     When I click on checkout button
     When I click on no thanks button
@@ -325,6 +367,7 @@ Feature: Cart Page
     When I go to item "10011389" from search field
     When I click on add to cart button
     When I click on view cart button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "nonmember"
@@ -338,10 +381,42 @@ Feature: Cart Page
     When I go to item "10011389" from search field
     When I click on add to cart button
     When I click on view cart button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "trade"
     Then I verify "trade" savings for a "trade" user
+
+  Scenario: Verify CAN shipping restriction
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I remove client from header
+    When I go to item which has "CA" restriction
+    When I select size option 2 for item
+    When I click on add to cart button
+    When I click on aggree&add button
+    When I click on view cart button
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "nonmember"
+    When I fill all fields from address with "CA" zip code
+    Then I verify that restrictions pop up is displayed
+
+  Scenario: Verify NY shipping restriction
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I remove client from header
+    When I go to item which has "NY" restriction
+    When I click on add to cart button
+    When I click on aggree&add button
+    When I click on view cart button
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "nonmember"
+    When I fill all fields from address with "NY" zip code
+    Then I verify that restrictions pop up is displayed
 
   Scenario: Verify Member savings for a member user in cart - From PDP and Project
     Given I log into Concierge as "associate"
@@ -350,6 +425,7 @@ Feature: Cart Page
     When I go to item "10011389" from search field
     When I click on add to cart button
     When I click on view cart button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "member"
@@ -362,6 +438,7 @@ Feature: Cart Page
     When I go to item "10011389 SS" from search field
     When I click on add to cart button
     When I click on view cart button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "unclassifiedBusiness"
@@ -376,6 +453,7 @@ Feature: Cart Page
     When I click on add to cart button
     When I click on aggree&add button
     When I click on view cart button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "nonmember"
@@ -394,6 +472,7 @@ Feature: Cart Page
     When I click on add to cart button
     When I click on aggree&add button
     When I click on view cart button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "nonmember"

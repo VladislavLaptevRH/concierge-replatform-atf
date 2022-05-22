@@ -25,6 +25,7 @@ public class ClientSearchStepDefs {
 
     @Then("I verify that client results is displayed")
     public void iVerifyThatClientResultsIsDisplayed() {
+        generalStepDefs.waitForJSandJQueryToLoad();
         conciergeOrderHistoryForm.getCustomerFirstName().should(visible, Duration.ofSeconds(50));
     }
 

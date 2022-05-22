@@ -1,5 +1,5 @@
 @conciergeRegression
-Feature:Projects
+Feature:Project
 
   Scenario Outline: Availability, Delivery and Returns messaging for Instock, BO, SPO, SPO Instock Items
     Given I log into Concierge as "associate"
@@ -8,9 +8,9 @@ Feature:Projects
     When I click on the first project search result
     Then I verify that availability, Delivery and Returns messaging for "<items>" is displayed
     Examples:
-      | items              |
-      | SPO                |
-      | In stock           |
+      | items    |
+      | SPO      |
+      | In stock |
 #      | SPO In stock Items |
     #      | BO                |
 
@@ -25,10 +25,10 @@ Feature:Projects
     When I search project "test" by provided "<searchBy>"
     Then I verify that search result is displayed
     Examples:
-      | searchBy    |
+      | searchBy  |
       | projectName |
       | projectID   |
-      | createdBy   |
+      | createdBy |
       | editedBy    |
 
   Scenario Outline: Verify that user is able to find project by pricing type - <pricingType>
@@ -42,7 +42,6 @@ Feature:Projects
       | member      |
       | trade       |
 
-    #
   Scenario Outline: Verify that user is able to create project for client - <businessClient>
     Given I log into Concierge as "associate"
     When I click on projects button
@@ -56,18 +55,6 @@ Feature:Projects
       | nonmember            |
       | trade                |
       | unclassifiedBusiness |
-
-  Scenario: Verify that user is able to move cart to project
-    Given I log into Concierge as "associate"
-    When I remove all items from cart
-    When I remove client from header
-    When I go to item "10010966" from search field
-    When I click on add to cart button
-    When I click on view cart button
-    When I click on move to project button
-#    When I choose project from move to project pop up
-    When I click on save button
-    Then I verify that projects screen is displayed
 
   Scenario: Verify project settings are available
     Given I log into Concierge as "associate"
@@ -106,7 +93,7 @@ Feature:Projects
     When I choose preferred contact method
     When I click on create opportunity button
     When I click on rh concierge logo
-    When I go to item "112848 MULT" from search field
+    When I go to item "10011389" from search field
     And I select count of product
     When I add item to created opportunity
     When I click on save button
@@ -149,13 +136,13 @@ Feature:Projects
     When I click on move to project button
     Then I verify that project list is displayed
     Examples:
-      | skuid       |
-      | 112848 MULT |
+      | skuid    |
+      | 10011389 |
 
   Scenario: Verify the Opportunities list and switching between the opportunities -CART/PDP
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "112848 MULT" from search field
+    When I go to item "10011389" from search field
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -164,7 +151,7 @@ Feature:Projects
 
   Scenario: Verify the Spaces list and switching between the Spaces -CART/PDP
     Given I log into Concierge as "associate"
-    When I go to item "112848 MULT" from search field
+    When I go to item "10011389" from search field
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -192,7 +179,7 @@ Feature:Projects
   Scenario: Verify that user is able to remove items from project
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "112848 MULT" from search field
+    When I go to item "10011389" from search field
     And I select count of product
     When I click on add to project button
     And I choose project by project name "removeitemsfromproject"
@@ -203,6 +190,7 @@ Feature:Projects
 
   Scenario: Verify price override for item from project
     Given I log into Concierge as "leader"
+    And I remove client from header
     When I click on projects button
     When I search project "overrideprice" by provided "projectName"
     When I click on the first project search result
@@ -382,6 +370,7 @@ Feature:Projects
     When I click on add to project button
     When I click on add to cart button from project screen
     When I click on view cart button
+    When I choose order classification
     When I click on checkout button
     Then I click on no thanks button
     When I choose client who is a "nonmember"

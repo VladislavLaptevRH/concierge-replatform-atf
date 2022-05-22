@@ -1,7 +1,6 @@
 package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.WebDriverRunner;
 import com.test.pageObject.*;
 import com.test.utility.Hooks;
 import io.cucumber.java.en.And;
@@ -72,7 +71,7 @@ public class ConciergeCartStepDefs {
     @When("I click on view cart button")
     public void iClickOnViewCartButton() {
         sleep(3000);
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getItemAddedToYourCart().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
         conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
@@ -166,12 +165,11 @@ public class ConciergeCartStepDefs {
 
     @When("I click on apply uppercase button for {string}")
     public void iClickOnApplyUppercaseButton(String method) {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
-        $(By.xpath("//*[text()='APPLY']")).shouldHave(text("APPLY"), Duration.ofMinutes(1));
-        $(By.xpath("//*[text()='APPLY']")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        conciergeCartPageScreen.getPostponeSelectReasonCode().shouldHave(value("Construction/Remodel"), Duration.ofSeconds(25));
-        sleep(4000);
-        $(By.xpath("//*[text()='APPLY']")).click();
+        generalStepDefs.waitForJSandJQueryToLoad();
+        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-item'][1]/button")).shouldHave(text("APPLY"), Duration.ofMinutes(1));
+        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-item'][1]/button")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        sleep(5000);
+        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-item'][1]/button")).click();
     }
 
     @Then("I verify line items prices for {string}")
@@ -235,36 +233,38 @@ public class ConciergeCartStepDefs {
 
     @When("I click on apply promocode button")
     public void iClickOnApplyPromocodeButton() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
+        sleep(3000);
         conciergeCartPageScreen.getApplyPromocodeBtn().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getApplyPromocodeBtn().click();
-        try {
-            conciergeCartPageScreen.getAcceptButton().should(visible, Duration.ofMinutes(1));
-            conciergeCartPageScreen.getAcceptButton().click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Close button is not displayed");
-        }
     }
 
-    @When("I introduces promo code for promo codes field")
-    public void iIntroducesPromoCodeForPromoCodesField() {
+    @When("I introduces promo code {string} for promo codes field")
+    public void iIntroducesPromoCodeForPromoCodesField(String promo) {
         conciergeCartPageScreen.getPromotionCodeField().should(empty, Duration.ofMinutes(1));
         conciergeCartPageScreen.getPromotionCodeField().scrollIntoView(true);
-        conciergeCartPageScreen.getPromotionCodeField().setValue("FEMAD");
+        conciergeCartPageScreen.getPromotionCodeField().click();
+        conciergeCartPageScreen.getPromotionCodeField().setValue(promo);
         totalPriceCart = conciergeCartPageScreen.getTotalMemberPrice().getText();
     }
 
-    @Then("I verify that promocode was approved for cart items")
-    public void iVerifyThatPromocodeWasApprovedForCartItems() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
-        conciergeCartPageScreen.getTotalMemberPrice().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$1,617.00"), Duration.ofSeconds(10));
+    @Then("I verify that {string} promocode was approved for cart items")
+    public void iVerifyThatPromocodeWasApprovedForCartItems(String promoType) {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        if (promoType.equals("FEMAD")) {
+            $(By.xpath("//*[text()='Total Additional Product Discount']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$1,896.00']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$539.00']")).should(visible, Duration.ofSeconds(15));
+        }
+        if (promoType.equals("HM4TS97")) {
+            $(By.xpath("//*[text()='New Mover 25% Off Full-Price and 10% Off Sale HM4TS97 Successfully Added']")).should(visible, Duration.ofSeconds(20));
+        }
     }
 
     @Then("I verify that total price from cart and from payment page is the same")
     public void iVerifyThatTotalPriceFromCartAndFromPaymentPageIsTheSame() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
-        $(By.xpath("//*[text()='" + totalPriceCart + "']")).should(visible, Duration.ofMinutes(1));
+        generalStepDefs.waitForJSandJQueryToLoad();
+        $(By.xpath("//*[text()='" + totalPriceCart + "']")).should(visible, Duration.ofSeconds(15));
     }
 
     @When("I choose POP for payment method")
@@ -299,9 +299,10 @@ public class ConciergeCartStepDefs {
 
     @When("I select size option {int} for item")
     public void iSelectSizeOptionForItem(int sizeValue) {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
         try {
-            selectOption.getSelectSizeElement().should(Condition.and("", visible, enabled), Duration.ofSeconds(5));
+            selectOption.getSelectSizeElement().should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
+            selectOption.getSelectSizeElement().scrollIntoView(true);
             Select size = new Select(selectOption.getSelectSizeElement());
             size.selectByIndex(sizeValue);
         } catch (
@@ -318,6 +319,7 @@ public class ConciergeCartStepDefs {
 
     @When("I choose {string} project from move to project pop up")
     public void iChooseProjectFromMoveToProjectPopUp(String arg0) {
+        sleep(4000);
         conciergeProjectScreen.getProjectName().should(visible, Duration.ofSeconds(15));
         Select selectProjectName = new Select(conciergeProjectScreen.getProjectName());
         selectProjectName.selectByVisibleText("additemtocorrectspace");
@@ -325,6 +327,7 @@ public class ConciergeCartStepDefs {
 
     @When("I choose {string} space from move to project pop up")
     public void iChooseSpaceFromMoveToProjectPopUp(String arg0) {
+        sleep(4000);
         conciergeProjectScreen.getProjectName().should(visible, Duration.ofSeconds(15));
         Select selectProjectName = new Select(conciergeProjectScreen.getSelectSpaceName());
         selectProjectName.selectByVisibleText(arg0);
@@ -359,7 +362,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify member banner for {string} client not displayed")
     public void iVerifyMemberBannerForClientNotDisplayed(String arg0) {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getMembersProgramTitle().shouldNotBe(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getJoinRhMemberProgramTitle().shouldNotBe(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getJoinNow().shouldNotBe(visible, Duration.ofMinutes(1));
@@ -367,7 +370,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that membership popup for {string} is not displayed")
     public void iVerifyThatMembershipPopupForIsDisplayed(String arg0) {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getNoThanksButton().shouldNotBe(visible, Duration.ofSeconds(10));
         conciergeCartPageScreen.getBecomeAmemberNow().shouldNotBe(visible, Duration.ofSeconds(10));
         conciergeCartPageScreen.getMembersProgramTitle().shouldNotBe(visible, Duration.ofSeconds(10));
@@ -408,7 +411,7 @@ public class ConciergeCartStepDefs {
 
     @When("I choose postpone shipment")
     public void iChoosePostponeShipment() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getPostponeShipment().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeCartPageScreen.getPostponeShipment().scrollIntoView(true);
         conciergeCartPageScreen.getPostponeShipment().shouldHave(text("Postpone Shipment"), Duration.ofSeconds(15));
@@ -422,7 +425,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that postpone shipment was applied")
     public void iVerifyThatPostponeShipmentWasApplied() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getPostponeShipOnOrAfterDate().shouldHave(text("Ship on or after: "), Duration.ofMinutes(1));
     }
 
@@ -433,7 +436,8 @@ public class ConciergeCartStepDefs {
 
     @When("I click on gift box button")
     public void iClickOnRemoveGiftBoxButton() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
+        sleep(5000);
         conciergeItemsScreen.getAddGiftCheckBox().click();
     }
 
@@ -495,14 +499,14 @@ public class ConciergeCartStepDefs {
 
     @When("I click on add monogram checkbox")
     public void iClickOnAddMonogramCheckbox() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
         conciergeItemsScreen.getAddMonogramCheckBox().scrollIntoView(true);
         conciergeItemsScreen.getAddMonogramCheckBox().click();
     }
 
     @When("I choose monogram properties")
     public void iChooseMonogramProperties() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
         sleep(2000);
         conciergeCartPageScreen.getMonogramFonts().get(2).scrollIntoView(true);
         conciergeCartPageScreen.getMonogramFonts().get(2).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
@@ -517,7 +521,7 @@ public class ConciergeCartStepDefs {
 
     @When("I edit monogram")
     public void iEditMonogram() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
         sleep(2000);
         conciergeCartPageScreen.getEditMonogramButton().click();
         sleep(2000);
@@ -534,7 +538,7 @@ public class ConciergeCartStepDefs {
 
     @When("I remove monogram")
     public void iRemoveMonogram() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getRemoveMonogramBtn().shouldHave(text("Remove"), Duration.ofMinutes(1));
         sleep(6000);
         conciergeCartPageScreen.getRemoveMonogramBtn().click();
@@ -576,7 +580,7 @@ public class ConciergeCartStepDefs {
 
     @When("I apply employee discount")
     public void iApplyEmployeeDiscount() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getUserNamePromocode().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeCartPageScreen.getUserNamePromocode().scrollIntoView(true);
         sleep(2000);
@@ -610,8 +614,36 @@ public class ConciergeCartStepDefs {
     @When("I click on first item from grid")
     public void iClickOnMonogramItem() {
         $(By.xpath("//*[text()='Availability']")).shouldHave(text("Availability"), Duration.ofSeconds(20));
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
         conciergeItemsScreen.getFirstItem().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
         conciergeItemsScreen.getFirstItem().click();
+    }
+
+    @And("I remove promotion from cart")
+    public void iRemovePromotionFromCart() {
+        $(By.xpath("//*[text()='Remove Promotion']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Remove Promotion']")).click();
+    }
+
+    @Then("I verify that designed sold by")
+    public void iVerifyThatDesignedSoldBy() {
+        $(By.xpath("//*[text()='Designed/Sold By:']")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Automation Associate']")).shouldBe(visible, Duration.ofSeconds(15));
+    }
+
+    @When("I choose order classification")
+    public void iChooseOrderClassification() {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        Select selectOrder = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
+        conciergeCartPageScreen.getOrderClassificationSelect().selectOptionContainingText("Select an Option");
+        conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(text("Select an Option"), Duration.ofSeconds(5));
+//        generalStepDefs.waitForJSandJQueryToLoad();
+        conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(text("Select an Option"), Duration.ofSeconds(5));
+        sleep(5000);
+        for (int i = 0; i < 5; i++) {
+            selectOrder.selectByValue("RH Gallery Order");
+            conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
+        }
+        generalStepDefs.waitForJSandJQueryToLoad();
     }
 }

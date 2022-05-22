@@ -1,7 +1,6 @@
 package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.WebDriverRunner;
 import com.test.pageObject.ConciergeLoginPage;
 import com.test.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.Given;
@@ -74,7 +73,7 @@ public class ConciergeAssociateStepDefs {
     public void iLogIntoConciergeAs(String arg0) {
         Log.debug("I log into Concierge as " + arg0);
         generalStepDefs.loginAsRole(arg0);
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
     }
 
     @Given("I am on concierge dashboard for the store 146:West Hollywood")

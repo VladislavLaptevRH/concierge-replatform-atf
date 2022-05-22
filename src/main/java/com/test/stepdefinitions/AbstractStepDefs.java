@@ -28,9 +28,11 @@ public class AbstractStepDefs {
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
 
+
     @When("I clicks on a random menu item")
     public void iClicksOnARandomMenuItem() {
         sleep(7000);
+        generalStepDefs.waitForJSandJQueryToLoad();
         conciergeUserAccountPage.getFirstItemMainMenu().should(visible, Duration.ofSeconds(60));
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
         actions.moveToElement(conciergeUserAccountPage.getFirstItemMainMenu());
@@ -39,11 +41,14 @@ public class AbstractStepDefs {
         conciergeUserAccountPage.getItemSubCategory().get(0).click();
     }
 
+
     @When("I clicks on o random item")
     public void iClicksOnORandomItem() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        sleep(5000);
+        generalStepDefs.waitForJSandJQueryToLoad();
+        generalStepDefs.waitForJSandJQueryToLoad();
         try {
-            conciergeItemsScreen.getItems().get(1).should(visible, Duration.ofMinutes(1));
+            conciergeItemsScreen.getItems().get(1).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
             conciergeItemsScreen.getItems().get(1).click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             conciergeItemsScreen.getTwoItemsInRow().get(1).should(visible, Duration.ofMinutes(1));
@@ -54,7 +59,6 @@ public class AbstractStepDefs {
 
     @When("I fill all options for item")
     public void iFillAllOptionsForItem() {
-
         try {
             conciergeCartPageScreen.getColorCloseButton().should(visible, Duration.ofSeconds(15));
             conciergeCartPageScreen.getColorCloseButton().click();
@@ -90,17 +94,7 @@ public class AbstractStepDefs {
 
     @When("I click on checkout button")
     public void iClickOnCheckoutButton() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
-        try {
-            conciergeCartPageScreen.getOrderClassificationSelect().should(Condition.and("Displayed", visible, enabled), Duration.ofMinutes(1));
-            conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(text(conciergeCartPageScreen.getOrderClassificationSelect().getText()), Duration.ofMinutes(1));
-
-            Select select = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
-            select.selectByIndex(2);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Order classification is selected");
-        }
-        conciergeItemsScreen.getCheckoutButton().should(Condition.and("Displayed", visible, enabled), Duration.ofMinutes(1));
+        generalStepDefs.waitForJSandJQueryToLoad();
         conciergeItemsScreen.getCheckoutButton().shouldHave(text(conciergeItemsScreen.getCheckoutButton().getText()), Duration.ofMinutes(2));
         conciergeItemsScreen.getCheckoutButton().click();
     }
@@ -153,6 +147,7 @@ public class AbstractStepDefs {
 
     @Then("I verify that confirmation order screen is displayed")
     public void iVerifyThatOrderDetailsScreenIsDisplayed() {
+        generalStepDefs.waitForJSandJQueryToLoad();
         confirmationOrderScreen.getThankYouTitle().should(visible, Duration.ofSeconds(25));
         assertTrue(confirmationOrderScreen.getYourOrderHasBeenPlaced().isDisplayed());
         assertTrue(confirmationOrderScreen.getThankYouTitle().isDisplayed());
@@ -161,7 +156,7 @@ public class AbstractStepDefs {
 
     @When("I fill all fields from address screen")
     public void iFillAllFieldsFromAddressScreenForBrands() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
         try {
             checkoutAddressScreen.getFirstNameInpt().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
             if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {

@@ -4,11 +4,13 @@ import com.codeborne.selenide.Condition;
 import com.test.pageObject.PaymentScreen;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -19,21 +21,21 @@ public class PaymentStepDefs {
     @When("I introduces payment details for several payment methods")
     public void iIntroducesPaymentDetailsForSeveralPaymentMethods() {
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
-        sleep(2000);
+        sleep(3000);
         generalStepDefs.payWith("VI", "4678 4753 3015 7543", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
         paymentScreen.getFieldAmount().setValue("3");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-        sleep(2000);
+        sleep(3000);
         generalStepDefs.payWith("AX", "3411 3411 3411 347", "6765", "0225");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
         paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-        sleep(2000);
+        sleep(3000);
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue("RH");
         paymentScreen.getSplitPaymentCheckBox().should(visible, Duration.ofSeconds(20));
@@ -45,7 +47,7 @@ public class PaymentStepDefs {
         paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-        sleep(2000);
+        sleep(3000);
         Select selectPayment1 = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment1.selectByValue("GiftCard");
         paymentScreen.getRhCardNumberField().setValue("6006493887999901635");
@@ -55,15 +57,14 @@ public class PaymentStepDefs {
         paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-        sleep(2000);
+        sleep(3000);
         generalStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
         paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-        sleep(2000);
-
+        sleep(3000);
         generalStepDefs.payWith("MC", "2222 4000 1000 0008", "737", "0330");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
@@ -101,19 +102,36 @@ public class PaymentStepDefs {
 
     @Then("I verify the complete billing address")
     public void iVerifyTheCompleteBillingAddress() {
-        assertEquals(paymentScreen.getBillingAddress().getText(), "BILLING ADDRESS\n" +
-                "QA1 Automation\n" +
-                "AutomationCompany\n" +
-                "Qastreet\n" +
-                "QaApartment\n" +
-                "Schenectady, NY 12345\n" +
-                "US\n" +
-                "124131231\n" +
-                "automationnonmember@mailinator.com\n" +
-                "Edit");
+        assertEquals(paymentScreen.getBillingAddress().getText(),
+                "BILLING ADDRESS\n" +
+                        "QA1 Automation\n" +
+                        "AutomationCompany\n" +
+                        "Qastreet\n" +
+                        "QaApartment\n" +
+                        "Schenectady, NY 12345\n" +
+                        "US\n" +
+                        "124131231\n" +
+                        "automationnonmember@mailinator.com\n" +
+                        "Edit");
     }
 
     @Then("I verify subtotal, shipping fee, taxes based on postal code")
     public void iVerifySubtotalShippingFeeTaxesBasedOnPostalCode() {
+        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Standard Delivery Shipping']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Estimated Sales Tax for 12345']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$20.00']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$9.00']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='US$2.32']")).should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify that member savings in payment page")
+    public void iVerifyThatMemberSavingsInPaymentPage() {
+        $(By.xpath("//*[text()='Member Savings']")).should(visible, Duration.ofSeconds(25));
+    }
+
+    @Then("I verify that trade savings in payment page")
+    public void iVerifyThatTradeSavingsInPaymentPage() {
+        $(By.xpath("//*[text()='Trade savings']")).should(visible, Duration.ofSeconds(25));
     }
 }

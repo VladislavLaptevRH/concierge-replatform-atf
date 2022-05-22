@@ -23,13 +23,12 @@ Feature: E2E flow
     When I introduces payment details
     And I verify that review screen is displayed
     When I click on a place order button
-    Then I verify that confirmation order screen is displayed
 
   Scenario: Verify that user is able to execute split payment using all payment methods
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "prod19250012" from search field
+    When I go to item "10011389 BRS" from search field
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -46,7 +45,7 @@ Feature: E2E flow
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "prod17860058" from search field
+    When I go to item "10011395 BRS" from search field
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -59,7 +58,7 @@ Feature: E2E flow
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "prod17860061" from search field
+    When I go to item "10011395 BRS" from search field
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -92,12 +91,12 @@ Feature: E2E flow
   Scenario: Verify that user is able to add item to project and pay
     Given I log into Concierge as "associate"
     When I remove all items from cart
+    When I remove client from header
     When I go to item "10035329 GRY" from search field
     And I select count of product
     When I click on add to project button
     When I choose project from addToProject popup
     When I click on add to cart button from project screen
-    When I click on view cart button
     When I click on checkout button
     Then I click on no thanks button
     When I choose client who is a "nonmember"
@@ -138,32 +137,5 @@ Feature: E2E flow
 #      | RH Beach House |
 #      | RH Interiors   |
 
-  Scenario: Verify NY shipping restriction
-    Given I log into Concierge as "associate"
-    When I remove all items from cart
-    When I remove client from header
-    When I go to item which has "NY" restriction
-    When I click on add to cart button
-    When I click on aggree&add button
-    When I click on view cart button
-    When I click on checkout button
-    When I click on no thanks button
-    When I choose client who is a "nonmember"
-    When I fill all fields from address with "NY" zip code
-    Then I verify that restrictions pop up is displayed
 
-  Scenario: Verify CA shipping restriction
-    Given I log into Concierge as "associate"
-    When I remove all items from cart
-    When I remove client from header
-    When I go to item which has "CA" restriction
-    When I clicks on o random item
-    When I select size option 2 for item
-    When I click on add to cart button
-    When I click on aggree&add button
-    When I click on view cart button
-    When I click on checkout button
-    When I click on no thanks button
-    When I choose client who is a "nonmember"
-    When I fill all fields from address with "CA" zip code
-    Then I verify that restrictions pop up is displayed
+

@@ -39,6 +39,7 @@ public class ProjectStepDefs {
 
     @Then("I verify that search result is displayed")
     public void iVerifyThatSearchResultIsDisplayed() {
+        generalStepDefs.waitForJSandJQueryToLoad();
         conciergeProjectScreen.getResultsListForProjects().should(visible, Duration.ofMinutes(1));
     }
 
@@ -49,7 +50,7 @@ public class ProjectStepDefs {
 
         conciergeProjectScreen.getPricingType().should(Condition.and("", visible, enabled), Duration.ofSeconds(25));
         conciergeProjectScreen.getPricingType().click();
-        
+
         conciergeProjectScreen.getPricingTypeSelect().click();
 
         sleep(2000);
@@ -138,9 +139,13 @@ public class ProjectStepDefs {
 
     @When("I click on save button")
     public void iClickOnSaveButton() {
-        conciergeProjectScreen.getSaveMoveToProject().should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
-        conciergeProjectScreen.getSaveMoveToProject().should(visible, Duration.ofSeconds(40));
-        conciergeProjectScreen.getSaveMoveToProject().click();
+        try {
+            conciergeProjectScreen.getSaveMoveToProject().should(Condition.and("", visible, enabled), Duration.ofSeconds(10));
+            conciergeProjectScreen.getSaveMoveToProject().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            conciergeProjectScreen.getSaveMoveToProjectUppercase().should(Condition.and("", visible, enabled), Duration.ofSeconds(10));
+            conciergeProjectScreen.getSaveMoveToProjectUppercase().click();
+        }
     }
 
     @Then("I verify that projects screen is displayed")
@@ -183,7 +188,7 @@ public class ProjectStepDefs {
 
     @When("I click on the moodboard button")
     public void iClickOnTheMoodboardButton() {
-        
+
         projectSettingsScreen.getMoodBoardButton().should(visible, Duration.ofSeconds(15));
         projectSettingsScreen.getMoodBoardButton().click();
     }
@@ -203,7 +208,7 @@ public class ProjectStepDefs {
 
     @When("I click on add space button")
     public void iClickOnAddSpaceButton() {
-        
+
         projectSettingsScreen.getAddSpaceButton().should(visible, Duration.ofSeconds(20));
         projectSettingsScreen.getAddSpaceButton().click();
     }
@@ -231,7 +236,7 @@ public class ProjectStepDefs {
 
     @When("I choose preferred contact method")
     public void iChoosePreferredContactMethod() {
-        
+        generalStepDefs.waitForJSandJQueryToLoad();
         $(By.cssSelector(".MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input")).should(visible, Duration.ofSeconds(20));
         sleep(2000);
         $(By.cssSelector(".MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input")).click();
@@ -284,8 +289,10 @@ public class ProjectStepDefs {
 
     @When("I click on email estimate button from project screen")
     public void iClickOnEmailEstimateButtonFromProjectScreen() {
-        
-        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+        generalStepDefs.waitForJSandJQueryToLoad();
+        $(By.xpath("//span[normalize-space()='ADD TO CART']")).shouldHave(text("ADD TO CART"), Duration.ofSeconds(15));
+        sleep(4000);
+        $(By.id("footer")).scrollIntoView(true);
         conciergeProjectScreen.getEmailEstimateProjectScreen().shouldHave(text("EMAIL ESTIMATE"), Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getEmailEstimateProjectScreen());
     }
@@ -368,29 +375,34 @@ public class ProjectStepDefs {
 
     @When("I search project {string} by provided {string}")
     public void iSearchProjectByProvided(String projectName, String searchBy) {
+        generalStepDefs.waitForJSandJQueryToLoad();
         $(By.cssSelector("#demo-simple-select-outlined")).should(Condition.and("", visible, enabled), Duration.ofSeconds(25));
+        $(By.cssSelector("#demo-simple-select-outlined")).shouldHave(text("Project Name"), Duration.ofSeconds(20));
         if (searchBy.equals("projectName")) {
             conciergeProjectScreen.getProjectNameField().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
             conciergeProjectScreen.getProjectNameField().setValue(projectName);
         }
         if (searchBy.equals("projectID")) {
             $(By.cssSelector("#demo-simple-select-outlined")).click();
-            conciergeProjectScreen.getProjectIdButton().should(visible, Duration.ofSeconds(20));
+            generalStepDefs.waitForJSandJQueryToLoad();
+            conciergeProjectScreen.getProjectIdButton().shouldHave(text("Project ID"), Duration.ofSeconds(20));
             conciergeProjectScreen.getProjectIdButton().click();
             conciergeProjectScreen.getProjectIdField().should(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getProjectIdField().setValue("P54909938");
         }
         if (searchBy.equals("createdBy")) {
             $(By.cssSelector("#demo-simple-select-outlined")).click();
-            conciergeProjectScreen.getCreatedByButton().should(visible, Duration.ofSeconds(20));
-            conciergeProjectScreen.getCreatedByButton().click();
+            generalStepDefs.waitForJSandJQueryToLoad();
+            conciergeProjectScreen.getCreatedByButton().shouldHave(text("Created By"), Duration.ofSeconds(20));
+            executeJavaScript("arguments[0].click();", conciergeProjectScreen.getCreatedByButton());
             conciergeProjectScreen.getClientFirstNameField().should(visible, Duration.ofSeconds(20));
             conciergeProjectScreen.getClientFirstNameField().setValue("Renuka");
             conciergeProjectScreen.getClientLastNameField().setValue("Boorla");
         }
         if (searchBy.equals("editedBy")) {
             $(By.cssSelector("#demo-simple-select-outlined")).click();
-            conciergeProjectScreen.getEditedBy().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+            generalStepDefs.waitForJSandJQueryToLoad();
+            conciergeProjectScreen.getEditedBy().shouldHave(text("Edited By"), Duration.ofSeconds(20));
             conciergeProjectScreen.getEditedBy().click();
             conciergeProjectScreen.getClientFirstNameField().should(visible, Duration.ofSeconds(40));
             conciergeProjectScreen.getClientFirstNameField().setValue("Renuka");
@@ -404,7 +416,7 @@ public class ProjectStepDefs {
 
     @When("I choose color from option")
     public void iChooseColorFromOption() {
-        
+
         randomColor = generalStepDefs.getRandomNumber(0, 3);
         Select selectColor = new Select(selectOption.getLancasterColor());
         selectColor.selectByIndex(randomColor);
@@ -412,9 +424,9 @@ public class ProjectStepDefs {
 
     @When("I click on edit options button")
     public void iClickOnEditOptionsButton() {
-                conciergeProjectScreen.getEditItemOptions().should(visible, Duration.ofSeconds(35));
+        conciergeProjectScreen.getEditItemOptions().should(visible, Duration.ofSeconds(35));
         executeJavaScript("window.scrollBy(0,350)", "");
-                projectSettingsScreen.getMoodBoardButton().shouldHave(text("MOODBOARD"), Duration.ofSeconds(15));
+        projectSettingsScreen.getMoodBoardButton().shouldHave(text("MOODBOARD"), Duration.ofSeconds(15));
         conciergeProjectScreen.getEditItemOptions().click();
     }
 
@@ -436,11 +448,11 @@ public class ProjectStepDefs {
 
     @When("I choose quantity for item from project")
     public void iChooseQuantityForItemFromProject() {
-                executeJavaScript("window.scrollTo(0, 200)");
+        executeJavaScript("window.scrollTo(0, 200)");
         randomQuantity = generalStepDefs.getRandomNumber(2, 5);
         $(By.xpath("//div[@aria-haspopup='listbox']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//div[@aria-haspopup='listbox']")).click();
-        
+
         $(By.xpath("//li[@data-value='" + randomQuantity + "']")).shouldHave(text(Integer.toString(randomQuantity)), Duration.ofSeconds(10));
         $(By.xpath("//li[@data-value='" + randomQuantity + "']")).scrollIntoView(true);
         sleep(2000);
@@ -507,16 +519,19 @@ public class ProjectStepDefs {
 
     @Then("I verify that overriden price displayed")
     public void iVerifyThatOverridenPriceDisplayed() {
-        conciergeProjectScreen.getAmount4923().should(visible, Duration.ofSeconds(20));
-        assertTrue(conciergeProjectScreen.getAmount4923().isDisplayed(), "Overriden price is displayed");
+        conciergeProjectScreen.getAdjustedPrice().should(visible, Duration.ofSeconds(20));
     }
 
     @And("I click on unlimited furniture delivery price")
     public void iClickOnUnlimitedFurnitureDeliveryPrice() {
-        
-        executeJavaScript("window.scrollBy(0,800)", "Scroll to regular price");
-                conciergeProjectScreen.getAmount549().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
-        conciergeProjectScreen.getAmount549().click();
+        generalStepDefs.waitForJSandJQueryToLoad();
+        $(By.id("footer")).shouldHave(text("RH.COM\n" +
+                "DASHBOARD\n" +
+                "PROJECTS\n" +
+                "REGISTRY\n"), Duration.ofSeconds(20));
+        $(By.id("footer")).scrollIntoView(true);
+        conciergeProjectScreen.getUfdPrice().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+        conciergeProjectScreen.getUfdPrice().click();
     }
 
     @When("I introduces {string} in dollar amount field")
@@ -548,8 +563,7 @@ public class ProjectStepDefs {
 
     @Then("I verify that subtotal amount updated according by quantity of items")
     public void iVerifyThatSubtotalAmountUpdatedAccordingByQuantityOfItems() {
-        
-        String memberPriceText = conciergeProjectScreen.getRegularPriceValue().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "");
+        String memberPriceText = conciergeProjectScreen.getRegularPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "");
         int memberPrice = Integer.parseInt(memberPriceText);
         int totalItemPrice = randomQuantity * memberPrice;
         String finalPrice = Double.toString(totalItemPrice).replace(".", ",").replaceAll(",0", "");
@@ -584,7 +598,7 @@ public class ProjectStepDefs {
 
     @Then("I verify that forecast value is updated after hiding the item")
     public void iVerifyThatForecastValueIsUpdatedAfterHidingTheItem() {
-        conciergeProjectScreen.getForeCastAmount().should(visible, Duration.ofSeconds(30));
+        conciergeProjectScreen.getForeCastAmount().shouldHave(text("Forecast Amount"), Duration.ofSeconds(30));
         executeJavaScript("window.scrollBy(0,500)", "");
         sleep(2000);
         conciergeProjectScreen.getCheckMarkItemButton().click();
@@ -629,9 +643,8 @@ public class ProjectStepDefs {
 
     @Then("I verify that forecast value is update according to quantity of item")
     public void iVerifyThatForecastValueIsUpdateAccordingToQuantityOfItem() {
-        conciergeProjectScreen.getItemProjectPrice().should(visible, Duration.ofSeconds(40));
-        
-        int forecastExpected = randomQuantity * Integer.parseInt(conciergeProjectScreen.getItemProjectPrice().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
+        conciergeProjectScreen.getRegularPrice().should(visible, Duration.ofSeconds(40));
+        int forecastExpected = randomQuantity * 84;
         int forecastActual = Integer.parseInt(conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
         assertEquals(forecastActual, forecastExpected, "Forecast value has been updated");
     }
@@ -651,7 +664,13 @@ public class ProjectStepDefs {
     public void iChoosePricingType(String arg0) {
         conciergeProjectScreen.getForecastamountValue().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeProjectScreen.getForecastamountValue().should(visible, Duration.ofSeconds(12));
-        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+//        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+        $(By.id("footer")).shouldHave(text("RH.COM\n" +
+                "DASHBOARD\n" +
+                "PROJECTS\n" +
+                "REGISTRY\n"), Duration.ofSeconds(20));
+        $(By.id("footer")).scrollIntoView(true);
+
         conciergeProjectScreen.getPricingTypeDropdown().should(visible, Duration.ofMinutes(1));
         conciergeProjectScreen.getPricingTypeDropdown().click();
         if (arg0.equals("TRADE")) {
@@ -673,13 +692,16 @@ public class ProjectStepDefs {
     public void iVerifyForecastFor(String pricingType) {
         conciergeProjectScreen.getForeCastAmount().should(visible, Duration.ofSeconds(20));
         conciergeProjectScreen.getForeCastAmount().scrollIntoView(true);
-        
-        String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
-        sleep(2000);
+        conciergeProjectScreen.getForeCastAmount().shouldHave(text("Forecast Amount"), Duration.ofSeconds(15));
+        sleep(3000);
         if (pricingType.equals("MEMBER")) {
+            conciergeProjectScreen.getForeCastAmount().shouldHave(text("$1,276.00"), Duration.ofSeconds(25));
+            String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
             assertEquals(prType, "$1,276.00\n", "Forecast amount for member client is displayed");
         }
         if (pricingType.equals("NON-MEMBER")) {
+            conciergeProjectScreen.getForeCastAmount().shouldHave(text("$1,596.00"), Duration.ofSeconds(25));
+            String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
             assertEquals(prType, "$1,596.00\n", "Forecast amount for non-member client is displayed");
         }
     }
@@ -868,12 +890,12 @@ public class ProjectStepDefs {
         conciergeProjectScreen.getSaveBtnUppercase().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
         conciergeProjectScreen.getSaveBtnUppercase().should(visible, Duration.ofSeconds(15));
         conciergeProjectScreen.getSaveBtnUppercase().click();
-        
+
     }
 
     @Then("I verify the address page, prefilled address and email address must be filled")
     public void iVerifyTheAddressPagePrefilledAddressAndEmailAddressMustBeFilled() {
-        
+
         checkoutAddressScreen.getBillingAddressAsShippingCheckBox().click();
         checkoutAddressScreen.getContinuePaymentButton().scrollIntoView(true);
         checkoutAddressScreen.getContinuePaymentButton().should(visible, Duration.ofSeconds(15));
@@ -917,10 +939,10 @@ public class ProjectStepDefs {
         randomQuantity = generalStepDefs.getRandomNumber(0, 4);
         $(By.xpath("//div[1]/div/div[1]/button[2]")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//div[1]/div/div[1]/button[2]")).click();
-        
+
         Select selectSize = new Select($(By.cssSelector("#optionSelect-0")));
         selectSize.selectByIndex(randomQuantity);
-        
+
         $(By.xpath("//div[1]/div/div[1]/button[2]")).click();
 
         if (randomQuantity == 0) {

@@ -70,4 +70,36 @@ Feature:Payment
     And I continue to payment
     Then I verify subtotal, shipping fee, taxes based on postal code
 
+  Scenario : Verify member savings in payment page
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I remove client from header
+    When I go to item "10035093 LBB" from search field
+    And I select count of product
+    When I click on add to cart button
+    When I click on view cart button
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "member"
+    When I fill all fields from address screen
+    And I continue to payment
+    Then I verify that member savings in payment page
+
+  Scenario : Verify trade savings in payment page
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I remove client from header
+    When I go to item "10035093 LBB" from search field
+    And I select count of product
+    When I click on add to cart button
+    When I click on view cart button
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "trade"
+    When I fill all fields from address screen
+    And I continue to payment
+    Then I verify that trade savings in payment page
+
+
+
 

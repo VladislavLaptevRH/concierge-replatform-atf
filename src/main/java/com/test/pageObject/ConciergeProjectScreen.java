@@ -9,8 +9,6 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class ConciergeProjectScreen {
 
-    private final SelenideElement addToCartButton = $(By.xpath("/html/body/div[3]/div/main/div/div[3]/div/div/div/div/div/div/div[2]/div/div/div[4]/div/div/div[2]/button[1]"));
-
     private final SelenideElement pricingTypeDropdown = $(By.cssSelector("#pricingTypeDropdown"));
 
     private final SelenideElement continueCreateAProjectButton = $(By.xpath("//*[text()='CONTINUE']"));
@@ -81,7 +79,9 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement createProjectButton = $(By.xpath("//*[text()='CREATE PROJECT']"));
 
-    private final SelenideElement saveMoveToProject = $(By.xpath("//*[text()='Save']"));
+    private final SelenideElement saveMoveToProject = $(By.xpath("//span[normalize-space()='SAVE']"));
+
+    private final SelenideElement SaveMoveToProjectUppercase = $(By.xpath("//span[normalize-space()='Save']"));
 
     private final SelenideElement saveBtnUppercase = $(By.xpath("//*[text()='SAVE']"));
 
@@ -90,6 +90,8 @@ public class ConciergeProjectScreen {
     private final SelenideElement settingsButton = $(By.xpath("//*[text()='SETTINGS']"));
 
     private final SelenideElement printButton = $(By.xpath("//*[text()='PRINT']"));
+
+    private final SelenideElement addToCartButton = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth']/span[@class='MuiButton-label']"));
 
     private final SelenideElement items = $(By.xpath("//*[contains(text(),'ITEMS')]"));
 
@@ -155,7 +157,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement REMOVEbutton = $(By.xpath("//*[text()='REMOVE']"));
 
-    private final SelenideElement regularPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'][1]/p)[2]"));
+    private final SelenideElement regularPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'][1]/p)[1]"));
 
     private final SelenideElement overridePriceregularPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'][1]/p)[1]"));
 
@@ -163,9 +165,11 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement amount549 = $(By.xpath("//*[text()='$549.00']"));
 
-    private final SelenideElement amount4923 = $(By.xpath("//*[text()='$5,396.40']"));
+    private final SelenideElement amount4923 = $(By.xpath("//*[text()='$2,223.90']"));
 
     private final SelenideElement adjustedPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'][1]/p)[3]"));
+
+    private final SelenideElement ufdPrice = $(By.xpath("//div[@id='sticky-project-footer-content']//span[normalize-space()='$549.00']"));
 
     private final SelenideElement percentDiscount = $(By.id("outlined-helperText"));
 

@@ -1,5 +1,5 @@
 @conciergeRegression
-Feature:HomePage
+Feature:Homepage
 
   Scenario: Verify that home page is accessible
     Given user opens the concierge site

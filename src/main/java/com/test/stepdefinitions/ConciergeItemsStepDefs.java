@@ -1,7 +1,6 @@
 package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.WebDriverRunner;
 import com.test.pageObject.ConciergeItemsScreen;
 import com.test.pageObject.SelectOption;
 import io.cucumber.java.en.When;
@@ -11,6 +10,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static com.codeborne.selenide.Selenide.sleep;
 
 
 public class ConciergeItemsStepDefs {
@@ -20,7 +20,8 @@ public class ConciergeItemsStepDefs {
 
     @When("I select debth option")
     public void iSelectDebthProperty() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        sleep(5000);
+        generalStepDefs.waitForJSandJQueryToLoad();
         try {
             executeJavaScript("window.scrollTo(0, 970)");
             selectOption.getDepthProperty().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
@@ -35,7 +36,9 @@ public class ConciergeItemsStepDefs {
 
     @When("I select fabric option")
     public void iSelectFabricProperty() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        sleep(3000);
+        generalStepDefs.waitForJSandJQueryToLoad();
+        generalStepDefs.waitForJSandJQueryToLoad();
         try {
             selectOption.getFabricProperty().should(appear, Duration.ofSeconds(15));
             selectOption.getFabricProperty().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
@@ -48,7 +51,9 @@ public class ConciergeItemsStepDefs {
 
     @When("I select color option")
     public void iSelectColorOption() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
+        generalStepDefs.waitForJSandJQueryToLoad();
+        sleep(5000);
         try {
             selectOption.getColorOption().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
             selectOption.getColorOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
@@ -61,7 +66,7 @@ public class ConciergeItemsStepDefs {
 
     @When("I click on collections item")
     public void iClickOnCollectionsItem() {
-        generalStepDefs.waitForLoad(WebDriverRunner.getWebDriver());
+        generalStepDefs.waitForJSandJQueryToLoad();
         try {
             conciergeItemsScreen.getCollectionsText().shouldHave(text("collections"), Duration.ofMinutes(1));
             conciergeItemsScreen.getCollectionItem().click();

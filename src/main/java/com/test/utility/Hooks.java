@@ -95,7 +95,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
 
         open((String) properties.get("intdnonprod"));
         Log.debug("Open https://intd.rhnonprod.com/ product");
@@ -121,10 +121,10 @@ public class Hooks {
 //        Configuration.driverManagerEnabled = true;
 //        Configuration.browser = "chrome";
 //        Configuration.browserSize = "1366x768";
-//        Configuration.headless = false;
-//        Configuration.pageLoadStrategy = "normal";
-//        Configuration.timeout = 60000;
-//        Configuration.reportsFolder = "target/screenshots";
+//        Configuration.headless = true;
+        Configuration.pageLoadStrategy = "normal";
+        Configuration.timeout = 60000;
+        Configuration.reportsFolder = "target/screenshots";
         open(url);
         currentUrl = WebDriverRunner.url();
     }
@@ -175,7 +175,6 @@ public class Hooks {
         closeWindow();
         closeWebDriver();
         System.out.println("Driver was closed");
-        sleep(2000);
     }
 
     /**
