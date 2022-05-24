@@ -46,7 +46,6 @@ public class AbstractStepDefs {
     public void iClicksOnORandomItem() {
         sleep(5000);
         generalStepDefs.waitForJSandJQueryToLoad();
-        generalStepDefs.waitForJSandJQueryToLoad();
         try {
             conciergeItemsScreen.getItems().get(1).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
             conciergeItemsScreen.getItems().get(1).click();
@@ -186,51 +185,5 @@ public class AbstractStepDefs {
         conciergeUserAccountPage.getRhConciergeLogo().click();
     }
 
-    @When("I add item to cart")
-    public void iAddItemToCart() {
-        for (int i = 0; i < 150; i++) {
-            open("https://rhbabyandchild.stg2.rhnonprod.com/search/results.jsp?Ntt=toddler+bedding&N=%7B%21tag%3Dsku_stocked%7Dsku_stocked%3A%28%22In-Stock%22%29+AND+%7B%21tag%3DBC_category_L0%7DBC_category_L0%3A%28%22Bedding%22%29&Ns=product.sale%7C1&topCatId=cat23860004&parentCatId=cat23540105&fromNav=true");
-
-            for (int j = 0; j < 5; j++) {
-                executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-                sleep(1000);
-            }
-            int element = generalStepDefs.getRandomNumber(0, conciergeUserAccountPage.getToddlerBeddingList().size());
-            conciergeUserAccountPage.getToddlerBeddingList().get(element).click();
-
-            conciergeItemsScreen.getAddToCartButton().should(visible, Duration.ofSeconds(20));
-            conciergeItemsScreen.getAddToCartButton().click();
-
-            conciergeCartPageScreen.getClosePopUp().should(visible, Duration.ofSeconds(15));
-            conciergeCartPageScreen.getClosePopUp().click();
-        }
-    }
-
-
-    @When("I add items in cart")
-    public void iAddItemsInCart() {
-        for (int i = 0; i < 10; i++) {
-            conciergeUserAccountPage.getInStockMenuItem().should(visible, Duration.ofSeconds(20));
-            conciergeUserAccountPage.getInStockMenuItem().click();
-            conciergeUserAccountPage.getInStockBedding().should(visible, Duration.ofSeconds(20));
-            conciergeUserAccountPage.getInStockBedding().click();
-            conciergeUserAccountPage.getBeds().should(visible, Duration.ofSeconds(20));
-            conciergeUserAccountPage.getBeds().click();
-
-            for (int j = 0; j < 5; j++) {
-                executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-                sleep(1000);
-            }
-            $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul[@class='MuiGridList-root']/li[@class='MuiGridListTile-root']")).should(visible, Duration.ofSeconds(20));
-            int element = generalStepDefs.getRandomNumber(0, conciergeUserAccountPage.getToddlerBeddingList().size());
-            conciergeUserAccountPage.getToddlerBeddingList().get(element).click();
-            conciergeItemsScreen.getAddToCartButton().should(visible, Duration.ofSeconds(20));
-            conciergeItemsScreen.getAddToCartButton().scrollIntoView(true);
-            conciergeItemsScreen.getAddToCartButton().click();
-            conciergeCartPageScreen.getColorCloseButton().should(visible, Duration.ofSeconds(20));
-            conciergeCartPageScreen.getColorCloseButton().click();
-        }
-
-    }
 }
 

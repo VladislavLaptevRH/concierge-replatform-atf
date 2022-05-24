@@ -25,6 +25,14 @@ public class ConciergeAssociateStepDefs {
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     private static final Logger Log = LoggerFactory.getLogger(ConciergeAssociateStepDefs.class);
 
+
+    @Given("I log into Concierge as {string}")
+    public void iLogIntoConciergeAs(String arg0) {
+        Log.debug("I log into Concierge as " + arg0);
+        generalStepDefs.loginAsRole(arg0);
+        generalStepDefs.waitForJSandJQueryToLoad();
+    }
+
     @Then("I expect that I am on the Concierge Dashboard page")
     public void iExpectThatIAmOnTheConciergeDashboardPage() {
         conciergeUserAccountPage.getMainMenuHeader().should(Condition.be(visible), Duration.ofSeconds(10));
@@ -47,15 +55,6 @@ public class ConciergeAssociateStepDefs {
         assertEquals(conciergeUserAccountPage.getNewPortBeachGallery().getText(), "PALO ALTO");
     }
 
-    @Given("I login into Concierge with valid credentials for the store 146: West Hollywood")
-    public void iLoginIntoConciergeWithValidCredentialsForTheStoreWestHollywood() {
-        conciergeLoginPage.getUsernameField().setValue("mdovbenco");
-        conciergeLoginPage.getPasswordField().setValue("171096workouT!");
-        conciergeLoginPage.getSignInButton().click();
-        conciergeLoginPage.getLocationWestHolywood().click();
-        conciergeLoginPage.getContinueButton().click();
-    }
-
     @Then("user verifies list of galleries")
     public void userVerifiesListOfGalleries() {
         conciergeUserAccountPage.getGallerySelectButton().shouldHave(text("NEWPORT"));
@@ -68,26 +67,5 @@ public class ConciergeAssociateStepDefs {
         conciergeUserAccountPage.getNewPortBeachGallery().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getNewPortBeachGallery().click();
     }
-
-    @Given("I log into Concierge as {string}")
-    public void iLogIntoConciergeAs(String arg0) {
-        Log.debug("I log into Concierge as " + arg0);
-        generalStepDefs.loginAsRole(arg0);
-        generalStepDefs.waitForJSandJQueryToLoad();
-    }
-
-    @Given("I am on concierge dashboard for the store 146:West Hollywood")
-    public void iAmOnConciergeDashboardForTheStoreWestHollywood() {
-        generalStepDefs.loginAsRole("aleader");
-        conciergeUserAccountPage.getNewPortBeachGallery().click();
-        conciergeUserAccountPage.getWestHollywood().click();
-    }
-
-    @When("I have the following items in the cart:")
-    public void iHaveTheFollowingItemsInTheCart() {
-        conciergeUserAccountPage.getCartButton().should(visible, Duration.ofSeconds(10));
-        conciergeUserAccountPage.getCartButton().click();
-    }
-
 }
 

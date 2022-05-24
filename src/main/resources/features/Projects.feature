@@ -8,11 +8,11 @@ Feature:Project
     When I click on the first project search result
     Then I verify that availability, Delivery and Returns messaging for "<items>" is displayed
     Examples:
-      | items    |
-      | SPO      |
-      | In stock |
+      | items              |
+      | SPO                |
+      | In stock           |
 #      | SPO In stock Items |
-    #      | BO                |
+#      | BO                 |
 
   Scenario: Verify the Projects load for a logged in associate
     Given I log into Concierge as "associate"
@@ -25,10 +25,10 @@ Feature:Project
     When I search project "test" by provided "<searchBy>"
     Then I verify that search result is displayed
     Examples:
-      | searchBy  |
+      | searchBy    |
       | projectName |
       | projectID   |
-      | createdBy |
+      | createdBy   |
       | editedBy    |
 
   Scenario Outline: Verify that user is able to find project by pricing type - <pricingType>
@@ -282,6 +282,7 @@ Feature:Project
 
   Scenario Outline: Verify Member/non Member /Trade/ Non Trade toggle pricing for unclassified business client project
     Given I log into Concierge as "associate"
+    When I remove all items from cart
     When I click on projects button
     When I search project "pricingunclassifiedbusiness" by provided "projectName"
     When I click on the first project search result

@@ -20,7 +20,7 @@ public class SelectOption {
 
     private final SelenideElement quantityOfLancasterSofa = $(By.id("quantity_I24388989"));
 
-    private final SelenideElement quantityBtn = $(By.id("quantity"));
+    private final SelenideElement quantitySelectBtn = $(By.xpath("//select[contains(@id,'quantity')]"));
 
     private final SelenideElement sizeOption = $(By.xpath("//select[@id='optionSelect--Size']"));
 

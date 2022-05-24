@@ -56,7 +56,7 @@ Feature: Cart Page
     When I select price override "<method>"
     When I introduces value for override price
     When I choose reason code for price override
-    When I click on apply uppercase button for "<method>"
+    When I click on apply uppercase button for "override line item"
     Then I verify line items prices for "<method>"
     Examples:
       | method          |
@@ -109,7 +109,7 @@ Feature: Cart Page
     When I select price override "PERCENT_OFF"
     When I introduces value for override price
     When I choose reason code for price override
-    When I click on apply uppercase button for "PERCENT_OFF"
+    When I click on apply uppercase button for "override line item"
     Then I verify line items prices for "PERCENT_OFF"
     When I click on total item line price
     When I click on remove button from price override
@@ -210,6 +210,7 @@ Feature: Cart Page
     When I click on view cart button
     When I introduces promo code "FEMAD" for promo codes field
     When I click on apply promocode button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "member"
@@ -263,12 +264,11 @@ Feature: Cart Page
     When I remove client from header
     When I go to item "10011389" from search field
     When I click on add to cart button
-    When I choose order classification
     When I click on view cart button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "unclassifiedBusiness"
-    Then I verify member banner for "unclassifiedBusiness" client not displayed
+    When I look on client by "accountnumber" with "20211221164476"
     When I click on cart button from header
     When I click on checkout button
     Then I verify that membership popup for "unclassifiedBusiness" is not displayed
@@ -290,8 +290,8 @@ Feature: Cart Page
     When I continue to payment
     Examples:
       | businessClient |
-#      | 20211221164476 |
       | 20211221164474 |
+#      | 20211221164476 |
 
   Scenario: Verify membership prices for Membership client
     Given I log into Concierge as "associate"
@@ -299,8 +299,8 @@ Feature: Cart Page
     When I remove client from header
     When I go to item "10011389" from search field
     When I click on add to cart button
-    When I choose order classification
     When I click on view cart button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "member"
@@ -391,7 +391,9 @@ Feature: Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item which has "CA" restriction
+    When I go to item "112349 PTL SML" from search field
+    When I clicks on o random item
+#    When I go to item which has "CA" restriction
     When I select size option 2 for item
     When I click on add to cart button
     When I click on aggree&add button
@@ -407,7 +409,9 @@ Feature: Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item which has "NY" restriction
+    When I go to item "112349 PTL SML" from search field
+    When I clicks on o random item
+    When I select size option 2 for item
     When I click on add to cart button
     When I click on aggree&add button
     When I click on view cart button

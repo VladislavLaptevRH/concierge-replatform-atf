@@ -69,26 +69,27 @@ public class ConciergeE2EStepDefs {
 
     }
 
-    @When("I go to item which has {string} restriction")
-    public void iGoToItemWhichHasRestriction(String state) {
-        usState = state;
-        generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
-        conciergeUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
-        conciergeUserAccountPage.getSearchItemField().click();
-
-        if (state.equals("NY")) {
-            conciergeUserAccountPage.getSearchItemField().should(visible, Duration.ofSeconds(15));
-            conciergeUserAccountPage.getSearchItemField().setValue("112414 OCEN BUMP");
-        }
-        if (state.equals("CA")) {
-            conciergeUserAccountPage.getSearchItemField().should(visible, Duration.ofSeconds(15));
-            WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@class,'MuiOutlinedInput-inputAdornedStart')]")));
-            WebDriverRunner.getWebDriver().findElement(By.xpath("//input[contains(@class,'MuiOutlinedInput-inputAdornedStart')]")).sendKeys("112349 PTL SML");
-        }
-        conciergeUserAccountPage.getSearchButton().click();
-    }
+//    @When("I go to item which has {string} restriction")
+//    public void iGoToItemWhichHasRestriction(String state) {
+//        usState = state;
+//        generalStepDefs.waitForJSandJQueryToLoad();
+//        conciergeUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+//        conciergeUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
+//        conciergeUserAccountPage.getSearchItemField().click();
+//
+//        if (state.equals("NY")) {
+//            conciergeUserAccountPage.getSearchItemField().should(visible, Duration.ofSeconds(15));
+//            conciergeUserAccountPage.getSearchItemField().setValue("112414 OCEN BUMP");
+//            System.out.println();
+//        }
+//        if (state.equals("CA")) {
+//            conciergeUserAccountPage.getSearchItemField().should(visible, Duration.ofSeconds(15));
+//            WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));
+//            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@class,'MuiOutlinedInput-inputAdornedStart')]")));
+//            WebDriverRunner.getWebDriver().findElement(By.xpath("//input[contains(@class,'MuiOutlinedInput-inputAdornedStart')]")).sendKeys("112349 PTL SML");
+//        }
+//        conciergeUserAccountPage.getSearchButton().click();
+//    }
 
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
@@ -155,7 +156,7 @@ public class ConciergeE2EStepDefs {
 
 
     @When("I add {int} times an item in the cart")
-    public void iAddTimesAnItemInTheCart(int arg0) throws InterruptedException {
+    public void iAddTimesAnItemInTheCart(int arg0) {
         for (int i = 0; i < 70; i++) {
             $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']")).should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
             conciergeUserAccountPage.getDashboardTitle().shouldHave(text("DASHBOARD"));
@@ -262,16 +263,20 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on no thanks button")
     public void iClickOnNoThanksButton() {
-        generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeCartPageScreen.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.elementToBeClickable(conciergeCartPageScreen.getNoThanksButton()));
-        wait.until(ExpectedConditions.visibilityOf(conciergeCartPageScreen.getNoThanksButton()));
-        Actions actions = new Actions(WebDriverRunner.getWebDriver());
-        actions.moveToElement(conciergeCartPageScreen.getNoThanksButton());
-        conciergeCartPageScreen.getNoThanksButton().scrollIntoView(true);
-        generalStepDefs.waitForJSandJQueryToLoad();
-//        sleep(3000);
-        executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getNoThanksButton());
+        try {
+            generalStepDefs.waitForJSandJQueryToLoad();
+            conciergeCartPageScreen.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
+            wait.until(ExpectedConditions.elementToBeClickable(conciergeCartPageScreen.getNoThanksButton()));
+            wait.until(ExpectedConditions.visibilityOf(conciergeCartPageScreen.getNoThanksButton()));
+            Actions actions = new Actions(WebDriverRunner.getWebDriver());
+            actions.moveToElement(conciergeCartPageScreen.getNoThanksButton());
+            conciergeCartPageScreen.getNoThanksButton().scrollIntoView(true);
+            generalStepDefs.waitForJSandJQueryToLoad();
+            sleep(4000);
+            executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getNoThanksButton());
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Close button is not displayed");
+        }
     }
 
     @When("I choose client who is a non member")
@@ -297,12 +302,16 @@ public class ConciergeE2EStepDefs {
     @When("I remove client from header")
     public void iRemoveClientFromHeader() {
         generalStepDefs.waitForJSandJQueryToLoad();
+        sleep(5000);
         try {
-            conciergeUserAccountPage.getClientButton().shouldHave(text("Client : "), Duration.ofSeconds(10));
-            conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
-            conciergeUserAccountPage.getClientButton().click();
-            conciergeUserAccountPage.getRemoveClientByText().shouldHave(text("Remove Client"), Duration.ofSeconds(15));
-            conciergeUserAccountPage.getRemoveClientByText().click();
+            if (!conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
+                conciergeUserAccountPage.getClientButton().shouldHave(text("Client : "), Duration.ofSeconds(10));
+                conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
+                conciergeUserAccountPage.getClientButton().click();
+                conciergeUserAccountPage.getRemoveClientByText().shouldHave(text("Remove Client"), Duration.ofSeconds(5));
+                conciergeUserAccountPage.getRemoveClientByText().click();
+            }
+            System.out.println();
         } catch (AssertionError e) {
             System.out.println("Client is not selected");
         }
@@ -311,32 +320,28 @@ public class ConciergeE2EStepDefs {
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String businessClient) {
         generalStepDefs.waitForJSandJQueryToLoad();
-        try {
-            conciergeUserAccountPage.getClientLookupFirstName().should(visible, Duration.ofSeconds(12));
-            if (businessClient.equals("member")) {
-                conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
-                conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
-            }
-            if (businessClient.equals("nonmember")) {
-                conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
-                conciergeUserAccountPage.getClientLookupLastName().setValue("Nonmember");
-            }
-            if (businessClient.equals("trade")) {
-                conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
-                conciergeUserAccountPage.getClientLookupLastName().setValue("Trade");
-            }
-            if (businessClient.equals("unclassifiedBusiness")) {
-                conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
-                conciergeUserAccountPage.getClientLookupLastName().setValue("unclassifiedBusiness");
-            }
-            conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-            conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofMinutes(1));
-            conciergeUserAccountPage.getClientLookupSearchButton().click();
-            conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME"), Duration.ofMinutes(1));
-            executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getFirstResultOfClientLookup());
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-
+        conciergeUserAccountPage.getClientLookupFirstName().should(visible, Duration.ofSeconds(12));
+        if (businessClient.equals("member")) {
+            conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
+            conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
         }
+        if (businessClient.equals("nonmember")) {
+            conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
+            conciergeUserAccountPage.getClientLookupLastName().setValue("Nonmember");
+        }
+        if (businessClient.equals("trade")) {
+            conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
+            conciergeUserAccountPage.getClientLookupLastName().setValue("Trade");
+        }
+        if (businessClient.equals("unclassifiedBusiness")) {
+            conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
+            conciergeUserAccountPage.getClientLookupLastName().setValue("unclassifiedBusiness");
+        }
+        conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofMinutes(1));
+        conciergeUserAccountPage.getClientLookupSearchButton().click();
+        conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME"), Duration.ofMinutes(1));
+        executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getFirstResultOfClientLookup());
 
     }
 
@@ -403,7 +408,7 @@ public class ConciergeE2EStepDefs {
     @When("I click on see results button")
     public void iClickOnSeeResultsButton() {
         try {
-            $(By.xpath("//*[contains(text(),'See Results on')]")).should(visible, Duration.ofMinutes(1));
+            $(By.xpath("//*[contains(text(),'See Results on')]")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[contains(text(),'See Results on')]")).click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("See Results on button is not displayed");

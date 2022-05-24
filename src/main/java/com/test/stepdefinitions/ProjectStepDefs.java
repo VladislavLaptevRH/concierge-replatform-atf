@@ -21,6 +21,7 @@ public class ProjectStepDefs {
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
     ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
+    ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
     SelectOption selectOption = new SelectOption();
     Colors colors = new Colors();
     String spaceName;
@@ -237,8 +238,8 @@ public class ProjectStepDefs {
     @When("I choose preferred contact method")
     public void iChoosePreferredContactMethod() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.cssSelector(".MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input")).should(visible, Duration.ofSeconds(20));
-        sleep(2000);
+        $(By.cssSelector(".MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input")).should(Condition.and("", enabled, visible), Duration.ofSeconds(20));
+        sleep(3000);
         $(By.cssSelector(".MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input")).click();
         conciergeProjectScreen.getPreferredEmailContactMethod().shouldHave(text("Email"), Duration.ofSeconds(15));
         conciergeProjectScreen.getPreferredEmailContactMethod().click();
@@ -740,22 +741,40 @@ public class ProjectStepDefs {
     }
 
     @When("I choose {string} for unclassified business client project")
-    public void iChooseForUnclassifiedBusinessClientProject(String arg0) {
+    public void iChooseForUnclassifiedBusinessClientProject(String pricingType) {
         conciergeProjectScreen.getSettingsButton().shouldHave(text("SETTINGS"), Duration.ofSeconds(15));
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-        conciergeProjectScreen.getPricingTypeDropdown().should(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getPricingTypeDropdown().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
         conciergeProjectScreen.getPricingTypeDropdown().click();
-        $(By.xpath("//li[@data-value='" + arg0 + "']")).should(visible, Duration.ofSeconds(10));
-        $(By.xpath("//li[@data-value='" + arg0 + "']")).click();
+
+        if (pricingType.equals("NON_MEMBER")) {
+            $(By.xpath("//li[@data-value='" + pricingType + "']")).shouldHave(text("NON-MEMBER"), Duration.ofSeconds(10));
+        }
+        if (pricingType.equals("NON-TRADE")) {
+            $(By.xpath("//li[@data-value='" + pricingType + "']")).shouldHave(text("NON-TRADE"), Duration.ofSeconds(10));
+        }
+        if (pricingType.equals("MEMBER")) {
+            $(By.xpath("//li[@data-value='" + pricingType + "']")).shouldHave(text("MEMBER"), Duration.ofSeconds(10));
+        }
+        if ((pricingType.equals("TRADE"))) {
+            $(By.xpath("//li[@data-value='" + pricingType + "']")).shouldHave(text("TRADE"), Duration.ofSeconds(10));
+        }
+        sleep(2000);
+        $(By.xpath("//li[@data-value='" + pricingType + "']")).click();
     }
 
     @Then("I verify {string} for unclassified business client project")
     public void iVerifyForUnclassifiedBusinessClientProject(String pricingType) {
-        String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
         if (pricingType.equals("NON_MEMBER") || (pricingType.equals("NON_TRADE"))) {
+            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,516.00"), Duration.ofSeconds(40));
+            String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
+            $(By.xpath("//p[@class='MuiTypography-root MuiTypography-body1'][normalize-space()='$1,516.00']")).shouldHave(text("$1,516.00"), Duration.ofSeconds(120));
             assertEquals(forecastActual, "1,516", "Pricing for non member is displayed correctly");
         }
         if (pricingType.equals("MEMBER") || (pricingType.equals("TRADE"))) {
+            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,212.00"), Duration.ofSeconds(40));
+            String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
+            $(By.xpath("//p[@class='MuiTypography-root MuiTypography-body1'][normalize-space()='$1,212.00']")).shouldHave(text("$1,212.00"), Duration.ofSeconds(120));
             assertEquals(forecastActual, "1,212", "Pricing for " + pricingType + " is displayed correctly");
         }
     }
@@ -910,8 +929,8 @@ public class ProjectStepDefs {
 
     @Then("I verify that item added and project load in correct space and oppty")
     public void iVerifyThatItemAddedAndProjectLoadInCorrectSpaceAndOppty() {
-        $(By.xpath("//div[1]/button//div[contains(@class,'MuiGrid-root MuiGrid-container')]")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        $(By.xpath("//div[1]/button//div[contains(@class,'MuiGrid-root MuiGrid-container')]")).shouldHave(text("correctspace"), Duration.ofMinutes(1));
+        conciergeCartPageScreen.getSpaceDropDown().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        conciergeCartPageScreen.getSpaceDropDown().shouldHave(text("correctspace"), Duration.ofMinutes(1));
         $(By.xpath("//h6[contains(@class,'MuiTypography-h6 MuiTypography-gutterBottom MuiTypography-displayInline')]")).shouldHave(text("French Contemporary Panel 4-Door Media Console"), Duration.ofMinutes(1));
     }
 

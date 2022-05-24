@@ -46,11 +46,13 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement noThanksButton = $(By.xpath("//span[normalize-space()='NO, THANKS']"));
 
-//    private final SelenideElement clearOrderButton = $(By.xpath("//a[contains(@class,'clearOrder MuiTypography-colorPrimary')]"));
-
     private final SelenideElement becomeAmemberNow = $(By.xpath("//*[text()='BECOME A MEMBER NOW']"));
 
     private final SelenideElement orderEstimateTitle = $(By.xpath("//*[text()='Order Estimate']"));
+
+    private final SelenideElement adjustmentCodeField = $(By.xpath("//input[@id='adjustment']"));
+
+    private final SelenideElement reasonCodeField = $(By.xpath("//select[@id='reason_code']"));
 
     private final SelenideElement removeButton = $(By.xpath("//*[text()='Remove']"));
 
@@ -81,6 +83,10 @@ public class ConciergeCartPageScreen {
     private final SelenideElement passwordPromocde = $(By.xpath("//input[@type='password']"));
 
     private final SelenideElement acceptButton = $(By.xpath("//*[text()='Accept']"));
+
+    private final SelenideElement keepShopping = $(By.xpath("//*[text()='Keep Shopping']"));
+
+    private final SelenideElement applyEmpDiscountBtn = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4']//button)[2]"));
 
     private final SelenideElement applyPromocodeBtn = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-fullWidth']"));
 
@@ -115,6 +121,22 @@ public class ConciergeCartPageScreen {
     private final SelenideElement shippingAddressTitle = $(By.xpath("//*[text()='Shipping Address']"));
 
     private final SelenideElement joinNow = $(By.xpath("//*[text()='JOIN NOW']"));
+
+    private final SelenideElement applyUpperCaseBtn = $(By.xpath("//*[text()='APPLY']"));
+
+    private final SelenideElement rhGiftCardBalance = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][2]/p[@class='MuiTypography-root MuiTypography-body1']"));
+
+    private final SelenideElement spaceDropDown = $(By.xpath("//div[1]/button//div[contains(@class,'MuiGrid-root MuiGrid-container')]"));
+
+    private final SelenideElement giftBoxFee = $(By.xpath("//*[text()='Gift Box Fee']"));
+
+    private final SelenideElement removePromotionBtn = $(By.xpath("//*[text()='Remove Promotion']"));
+
+    private final SelenideElement totalAditionalProdDiscount = $(By.xpath("//*[text()='Total Additional Product Discount']"));
+
+    private final SelenideElement applyToAllCheckbox = $(By.xpath("//input[@name='applyToCart']"));
+
+    private final SelenideElement applyPostponeShipBtn = $(By.xpath("//*[@id=\"postpone-shipment\"]//*[text()='APPLY']"));
 
     private final SelenideElement addressButton = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][1]/a"));
 
