@@ -76,13 +76,12 @@ Feature: Cart Page
     When I introduces value for override price
     When I choose reason code for price override
     When I click on apply all checkbox
-    When I click on apply uppercase button for "PERCENT_OFF"
+    When I click on apply uppercase button for "override line item"
     Then I verify line items prices for "PERCENT_OFF"
 
   Scenario:Override Line item Prices - verify update button, verify remove button
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I remove client from header
     When I go to item "10011389 BRS" from search field
     When I click on add to cart button
     When I click on view cart button
@@ -90,7 +89,7 @@ Feature: Cart Page
     When I select price override "PERCENT_OFF"
     When I introduces value for override price
     When I choose reason code for price override
-    When I click on apply uppercase button for "PERCENT_OFF"
+    When I click on apply uppercase button for "override line item"
     Then I verify line items prices for "PERCENT_OFF"
     When I click on total item line price
     When I select price override "AMOUNT_OVERRIDE"
@@ -150,7 +149,6 @@ Feature: Cart Page
   Scenario: Promo codes - promo code for guest user
     Given I log into Concierge as "associate"
     And I remove all items from cart
-    When I remove client from header
     When I go to item "10011389 SS" from search field
     When I click on add to cart button
     When I click on view cart button
