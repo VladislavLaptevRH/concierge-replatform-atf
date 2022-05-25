@@ -115,7 +115,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement firstSearchResultOfProjects = $(By.xpath("//div[contains(@class,'MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-flex-start')][1]/div[contains(@class,'MuiGrid-root MuiGrid-item')]/div[1]"));
 
-    private final SelenideElement emailEstimateProjectScreen = $(By.xpath("//*[text()='EMAIL ESTIMATE']"));
+    private final SelenideElement emailEstimateProjectScreen = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-fullWidth']"));
 
     private final SelenideElement emailEstimateButton = $(By.cssSelector("button[type='submit'] span[class='MuiButton-label']"));
 

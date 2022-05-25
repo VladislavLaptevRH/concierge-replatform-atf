@@ -185,8 +185,8 @@ Feature:Project
     And I choose project by project name "removeitemsfromproject"
     When I click on save button
     When I click on go to project button
-    When I click on remove button from project for added item
-    Then I verify that item was removed
+#    When I click on remove button from project for added item
+#    Then I verify that item was removed
 
   Scenario: Verify price override for item from project
     Given I log into Concierge as "leader"
@@ -355,6 +355,7 @@ Feature:Project
 
   Scenario: Verify add new Space in the modal and add items to the selected space -CART/PDP
     Given I log into Concierge as "associate"
+    When I remove all items from cart
     When I go to item "10010966" from search field
     When I click on add to project button
     When I click on add new space button
@@ -366,6 +367,7 @@ Feature:Project
 
   Scenario: Verify the address page, pre filled address details and Email address once the project added to cart
     Given I log into Concierge as "associate"
+    When I remove all items from cart
     When I go to item "10010966" from search field
     And I select count of product
     When I click on add to project button

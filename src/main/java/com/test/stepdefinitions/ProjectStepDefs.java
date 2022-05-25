@@ -238,9 +238,9 @@ public class ProjectStepDefs {
     @When("I choose preferred contact method")
     public void iChoosePreferredContactMethod() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.cssSelector(".MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input")).should(Condition.and("", enabled, visible), Duration.ofSeconds(20));
+        $(By.xpath("//div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']")).should(Condition.and("", enabled, visible), Duration.ofSeconds(20));
         sleep(3000);
-        $(By.cssSelector(".MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input")).click();
+        $(By.xpath("//div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']")).click();
         conciergeProjectScreen.getPreferredEmailContactMethod().shouldHave(text("Email"), Duration.ofSeconds(15));
         conciergeProjectScreen.getPreferredEmailContactMethod().click();
     }
@@ -268,7 +268,10 @@ public class ProjectStepDefs {
     @When("I click on email estimate button")
     public void iClickOnEmailEstimateButton() {
         conciergeProjectScreen.getEmailEstimateButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         conciergeProjectScreen.getEmailEstimateButton().scrollIntoView(true);
+        conciergeProjectScreen.getEmailEstimateButton().should(visible, Duration.ofSeconds(15));
+        conciergeProjectScreen.getEmailEstimateButton().shouldHave(text("EMAIL ESTIMATE"), Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getEmailEstimateButton());
     }
 
@@ -292,7 +295,8 @@ public class ProjectStepDefs {
     public void iClickOnEmailEstimateButtonFromProjectScreen() {
         generalStepDefs.waitForJSandJQueryToLoad();
         $(By.xpath("//span[normalize-space()='ADD TO CART']")).shouldHave(text("ADD TO CART"), Duration.ofSeconds(15));
-        sleep(4000);
+        sleep(5000);
+        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         $(By.id("footer")).scrollIntoView(true);
         conciergeProjectScreen.getEmailEstimateProjectScreen().shouldHave(text("EMAIL ESTIMATE"), Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getEmailEstimateProjectScreen());
@@ -417,7 +421,6 @@ public class ProjectStepDefs {
 
     @When("I choose color from option")
     public void iChooseColorFromOption() {
-
         randomColor = generalStepDefs.getRandomNumber(0, 3);
         Select selectColor = new Select(selectOption.getLancasterColor());
         selectColor.selectByIndex(randomColor);
@@ -530,6 +533,8 @@ public class ProjectStepDefs {
                 "DASHBOARD\n" +
                 "PROJECTS\n" +
                 "REGISTRY\n"), Duration.ofSeconds(20));
+        sleep(3000);
+        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         $(By.id("footer")).scrollIntoView(true);
         conciergeProjectScreen.getUfdPrice().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
         conciergeProjectScreen.getUfdPrice().click();
@@ -564,11 +569,13 @@ public class ProjectStepDefs {
 
     @Then("I verify that subtotal amount updated according by quantity of items")
     public void iVerifyThatSubtotalAmountUpdatedAccordingByQuantityOfItems() {
+        sleep(4000);
         String memberPriceText = conciergeProjectScreen.getRegularPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "");
         int memberPrice = Integer.parseInt(memberPriceText);
         int totalItemPrice = randomQuantity * memberPrice;
         String finalPrice = Double.toString(totalItemPrice).replace(".", ",").replaceAll(",0", "");
         String forecast = conciergeProjectScreen.getForeCastTotalValue().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "");
+
         assertEquals(finalPrice, forecast, "Final price calculated correctly");
     }
 
@@ -914,7 +921,7 @@ public class ProjectStepDefs {
 
     @Then("I verify the address page, prefilled address and email address must be filled")
     public void iVerifyTheAddressPagePrefilledAddressAndEmailAddressMustBeFilled() {
-
+        sleep(3000);
         checkoutAddressScreen.getBillingAddressAsShippingCheckBox().click();
         checkoutAddressScreen.getContinuePaymentButton().scrollIntoView(true);
         checkoutAddressScreen.getContinuePaymentButton().should(visible, Duration.ofSeconds(15));
