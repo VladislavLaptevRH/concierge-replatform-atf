@@ -70,7 +70,7 @@ Feature:Payment
     And I continue to payment
     Then I verify subtotal, shipping fee, taxes based on postal code
 
-  Scenario : Verify member savings in payment page
+  Scenario: Verify member savings in payment page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
@@ -85,7 +85,7 @@ Feature:Payment
     And I continue to payment
     Then I verify that member savings in payment page
 
-  Scenario : Verify trade savings in payment page
+  Scenario: Verify trade savings in payment page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
@@ -99,7 +99,3 @@ Feature:Payment
     When I fill all fields from address screen
     And I continue to payment
     Then I verify that trade savings in payment page
-
-
-
-
