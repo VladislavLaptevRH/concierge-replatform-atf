@@ -224,7 +224,6 @@ public class ConciergeE2EStepDefs {
         sleep(3000);
         conciergeUserAccountPage.getSearchItemField().setValue(arg0);
         $(By.xpath("//button[contains(@class,'MuiButton-containedSizeLarge')]")).click();
-
     }
 
     @When("I choose {string} from brand menu")
@@ -590,7 +589,10 @@ public class ConciergeE2EStepDefs {
     public void iFillAllFieldsForSoldToAddress() {
         generalStepDefs.fillAddressFields();
         generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
-        System.out.println();
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
+        sleep(3000);
+        $(By.cssSelector("body > div:nth-child(7) > div:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > label:nth-child(1) > span:nth-child(1) > span:nth-child(1) > input:nth-child(1)")).click();
     }
 }
 

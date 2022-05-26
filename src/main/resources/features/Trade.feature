@@ -9,6 +9,7 @@ Feature: Trade
     And I select count of product
     And I click on add to cart button
     And I click on view cart button
+    When I choose order classification
     And I click on checkout button
     And I click on no thanks button
     When I choose client who is a "trade"
@@ -22,6 +23,7 @@ Feature: Trade
     And I select count of product
     And I click on add to cart button
     And I click on view cart button
+    When I choose order classification
     And I click on checkout button
     And I click on no thanks button
     When I choose client who is a "trade"
@@ -35,6 +37,7 @@ Feature: Trade
     And I select count of product
     And I click on add to cart button
     And I click on view cart button
+    When I choose order classification
     And I click on checkout button
     And I click on no thanks button
     And I choose client who is a "trade"
@@ -48,6 +51,7 @@ Feature: Trade
     And I select count of product
     And I click on add to cart button
     And I click on view cart button
+    When I choose order classification
     And I click on checkout button
     And I click on no thanks button
     And I choose client who is a "trade"
@@ -66,6 +70,7 @@ Feature: Trade
     And I go to item "68470071 SS" from search field
     And I click on add to cart button
     And I click on view cart button
+    When I choose order classification
     And I click on checkout button
     And I click on no thanks button
     And I choose client who is a "trade"

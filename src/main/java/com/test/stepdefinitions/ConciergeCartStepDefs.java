@@ -2,6 +2,7 @@ package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import com.test.pageObject.*;
+import com.test.utility.APIException;
 import com.test.utility.Hooks;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -11,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.Duration;
 

@@ -150,7 +150,6 @@ public class AbstractStepDefs {
         confirmationOrderScreen.getThankYouTitle().should(visible, Duration.ofSeconds(25));
         assertTrue(confirmationOrderScreen.getYourOrderHasBeenPlaced().isDisplayed());
         assertTrue(confirmationOrderScreen.getThankYouTitle().isDisplayed());
-
     }
 
     @When("I fill all fields from address screen")
