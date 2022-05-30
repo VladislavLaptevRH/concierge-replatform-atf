@@ -2,7 +2,6 @@ package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import com.test.pageObject.*;
-import com.test.utility.APIException;
 import com.test.utility.Hooks;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -12,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.Duration;
 
@@ -360,14 +358,14 @@ public class ConciergeCartStepDefs {
         conciergeUserAccountPage.getCartButton().shouldHave(text("CART " + arg0), Duration.ofMinutes(1));
     }
 
-    @Then("I verify member banner for {string} client")
+    @Then("I verify membership banner for {string} client")
     public void iVerifyMemberBannerForClient(String arg0) {
         conciergeCartPageScreen.getMembersProgramTitle().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getJoinRhMemberProgramTitle().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getJoinNow().should(visible, Duration.ofMinutes(1));
     }
 
-    @Then("I verify member banner for {string} client not displayed")
+    @Then("I verify membership banner for {string} client not displayed")
     public void iVerifyMemberBannerForClientNotDisplayed(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getMembersProgramTitle().shouldNotBe(visible, Duration.ofMinutes(1));
@@ -608,7 +606,7 @@ public class ConciergeCartStepDefs {
 
     @When("I click on check balance button")
     public void iClickOnCheckBalanceButton() {
-        conciergeCartPageScreen.getCheckBalanceButton().should(visible, Duration.ofSeconds(20));
+        conciergeCartPageScreen.getCheckBalanceButton().should(visible, Duration.ofSeconds(30));
         conciergeCartPageScreen.getCheckBalanceButton().scrollIntoView(true);
         conciergeCartPageScreen.getCheckBalanceButton().click();
     }
@@ -650,5 +648,17 @@ public class ConciergeCartStepDefs {
             conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
         }
         generalStepDefs.waitForJSandJQueryToLoad();
+    }
+
+    @Then("I verify contract savings")
+    public void iVerifyContractSavingsForCartPage() {
+        conciergeCartPageScreen.getContractSavings().should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='$494.00']")).should(visible,Duration.ofSeconds(20));
+    }
+
+    @When("I click on order details button")
+    public void iClickOnOrderDetailsButton() {
+        conciergeUserAccountPage.getSeeResultsButton().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getSeeResultsButton().click();
     }
 }

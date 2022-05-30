@@ -581,7 +581,7 @@ public class ConciergeE2EStepDefs {
 
         } else {
             $(By.xpath("//*[text()='Trade']")).should(visible, Duration.ofSeconds(20));
-            $(By.xpath("//*[text()='1724']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='1509']")).should(visible, Duration.ofSeconds(20));
         }
     }
 

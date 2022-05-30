@@ -140,6 +140,8 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement addressButton = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][1]/a"));
 
+    private final SelenideElement contractSavings = $(By.xpath("//*[text()='Contract savings']"));
+
     private final SelenideElement rhMembershipImmediatlyPay = $(By.xpath("//*[text()='Your RH Membership immediately pays for itself.']"));
 
     private final SelenideElement joinRhMemberProgramTitle = $(By.xpath("(//*[contains(text(),'Join the RH Members Program for ')])[2]"));

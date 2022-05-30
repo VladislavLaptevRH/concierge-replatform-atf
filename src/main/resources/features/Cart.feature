@@ -236,7 +236,7 @@ Feature: Cart Page
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "<businessClient>"
-    Then I verify member banner for "<businessClient>" client not displayed
+    Then I verify membership banner for "<businessClient>" client not displayed
     Examples:
       | businessClient       |
       | trade                |
@@ -252,7 +252,7 @@ Feature: Cart Page
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "trade"
-    Then I verify member banner for "trade" client not displayed
+    Then I verify membership banner for "trade" client not displayed
     When I click on checkout button
     Then I verify that membership popup for "trade" is not displayed
 
@@ -260,16 +260,13 @@ Feature: Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
+    When I choose contract gallery
+    When I click on client button from header
+    When I look on client by "accountnumber" with "20211221164476"
     When I go to item "10011389" from search field
     When I click on add to cart button
     When I click on view cart button
-    When I choose order classification
-    When I click on checkout button
-    When I click on no thanks button
-    When I look on client by "accountnumber" with "20211221164476"
-    When I click on cart button from header
-    When I click on checkout button
-    Then I verify that membership popup for "unclassifiedBusiness" is not displayed
+    Then I verify that membership popup for "contract client" is not displayed
 
   Scenario Outline: Verify Trade,Contract client address page - ship to Bill to, Sold to addresses - edit addresses
     Given I log into Concierge as "associate"
@@ -432,20 +429,6 @@ Feature: Cart Page
     When I click on no thanks button
     When I choose client who is a "member"
     Then I verify "member" savings for a "member" user
-
-  Scenario: Verify Contract savings for a contract user in cart - From PDP and Project
-    Given I log into Concierge as "associate"
-    When I remove all items from cart
-    When I remove client from header
-    When I go to item "10011389 SS" from search field
-    When I click on add to cart button
-    When I click on view cart button
-    When I choose order classification
-    When I click on checkout button
-    When I click on no thanks button
-    When I choose client who is a "unclassifiedBusiness"
-    When I click on cart button from header
-    Then I verify "contract" savings for a "contract" user
 
   Scenario: Verify address saved in address page when navigate back from order review or any page
     Given I log into Concierge as "associate"

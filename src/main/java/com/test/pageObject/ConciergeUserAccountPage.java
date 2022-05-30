@@ -11,6 +11,10 @@ import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class ConciergeUserAccountPage {
+    private final SelenideElement galleryButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item']/h6[@class='MuiTypography-root MuiTypography-subtitle1 MuiTypography-displayInline']"));
+
+    private final SelenideElement gallerySelect = $(By.xpath("//select[@name='gallery-select']"));
+
     private final SelenideElement outdoorMenu = $(By.xpath("//*[text()='Outdoor']"));
 
     private final SelenideElement chairsSubMenu = $(By.xpath("//*[text()='Chairs']"));
@@ -101,6 +105,8 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement clientLookupHeaderBtn = $(By.xpath("//li[@id='1']/button"));
 
+    private final SelenideElement contractText = $(By.xpath("//*[text()='Contract']"));
+
     private final SelenideElement clientLookupBtnId = $(By.xpath("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li[@id='1']"));
 
     private final SelenideElement clientLookupFirstName = $(By.cssSelector("input[name='firstName']"));
@@ -144,6 +150,12 @@ public class ConciergeUserAccountPage {
     private final SelenideElement toddlerBedding = $(By.xpath("//*[text()='Toddler Bedding']"));
 
     private final SelenideElement mainMenuHeader = $(By.cssSelector("#rh-header"));
+
+    private final SelenideElement contractAccountText = $(By.xpath("//*[text()='CONTRACT ACCOUNT']"));
+
+    private final SelenideElement closeButton = $(By.xpath("//*[text()='CLOSE']"));
+
+    private final SelenideElement youHaveSelectedContractAccountText = $(By.xpath("//*[text()='You have selected a Contract Account which is reserved for the Contract Team. Please select an existing trade account or create a new one.']"));
 
     private final SelenideElement searchClientResultsPlusButton = $(By.xpath("//td[@class='MuiTableCell-root MuiTableCell-body'][8]"));
 

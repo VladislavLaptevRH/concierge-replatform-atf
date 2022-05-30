@@ -7,6 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.Getter;
+import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,6 +67,16 @@ public class ConciergeAssociateStepDefs {
     public void userClicksOnGalleryButtonFromHeader() {
         conciergeUserAccountPage.getNewPortBeachGallery().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getNewPortBeachGallery().click();
+    }
+
+    @When("I choose contract gallery")
+    public void iChooseContractGallery() {
+        conciergeUserAccountPage.getGalleryButton().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getGalleryButton().click();
+        conciergeUserAccountPage.getGalleryButton().should(visible, Duration.ofSeconds(15));
+        Select gallerySelect = new Select(conciergeUserAccountPage.getGallerySelect());
+        gallerySelect.selectByValue("997");
+        conciergeUserAccountPage.getGallerySubmitButton().click();
     }
 }
 

@@ -31,6 +31,7 @@ Feature: E2E flow
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
+    When I choose order classification
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "nonmember"

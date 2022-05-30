@@ -703,14 +703,14 @@ public class ProjectStepDefs {
         conciergeProjectScreen.getForeCastAmount().shouldHave(text("Forecast Amount"), Duration.ofSeconds(15));
         sleep(3000);
         if (pricingType.equals("MEMBER")) {
-            conciergeProjectScreen.getForeCastAmount().shouldHave(text("$1,276.00"), Duration.ofSeconds(25));
+            conciergeProjectScreen.getForeCastAmount().shouldHave(text("$1,117.00"), Duration.ofSeconds(25));
             String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
-            assertEquals(prType, "$1,276.00\n", "Forecast amount for member client is displayed");
+            assertEquals(prType, "$1,117.00\n", "Forecast amount for member client is displayed");
         }
         if (pricingType.equals("NON-MEMBER")) {
-            conciergeProjectScreen.getForeCastAmount().shouldHave(text("$1,596.00"), Duration.ofSeconds(25));
+            conciergeProjectScreen.getForeCastAmount().shouldHave(text("$1,397.00"), Duration.ofSeconds(25));
             String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
-            assertEquals(prType, "$1,596.00\n", "Forecast amount for non-member client is displayed");
+            assertEquals(prType, "$1,397.00\n", "Forecast amount for non-member client is displayed");
         }
     }
 
@@ -773,16 +773,16 @@ public class ProjectStepDefs {
     @Then("I verify {string} for unclassified business client project")
     public void iVerifyForUnclassifiedBusinessClientProject(String pricingType) {
         if (pricingType.equals("NON_MEMBER") || (pricingType.equals("NON_TRADE"))) {
-            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,516.00"), Duration.ofSeconds(40));
+            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,327.00"), Duration.ofSeconds(40));
             String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
-            $(By.xpath("//p[@class='MuiTypography-root MuiTypography-body1'][normalize-space()='$1,516.00']")).shouldHave(text("$1,516.00"), Duration.ofSeconds(120));
-            assertEquals(forecastActual, "1,516", "Pricing for non member is displayed correctly");
+            $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[5]")).shouldHave(text("$1,327.00"), Duration.ofSeconds(120));
+            assertEquals(forecastActual, "1,327", "Pricing for non member is displayed correctly");
         }
         if (pricingType.equals("MEMBER") || (pricingType.equals("TRADE"))) {
-            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,212.00"), Duration.ofSeconds(40));
+            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,061.00"), Duration.ofSeconds(40));
             String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
-            $(By.xpath("//p[@class='MuiTypography-root MuiTypography-body1'][normalize-space()='$1,212.00']")).shouldHave(text("$1,212.00"), Duration.ofSeconds(120));
-            assertEquals(forecastActual, "1,212", "Pricing for " + pricingType + " is displayed correctly");
+            $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[5]")).shouldHave(text("$1,061.00"), Duration.ofSeconds(120));
+            assertEquals(forecastActual, "1,061", "Pricing for " + pricingType + " is displayed correctly");
         }
     }
 

@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class ConciergeAddressScreen {
+
     private final SelenideElement soldToTaxExempt = $(By.cssSelector("#soldToTaxExemptId"));
 
     private final SelenideElement shippingAddressText = $(By.xpath("(//h3[@class='MuiTypography-root MuiTypography-h3'])[1]"));
@@ -26,4 +27,9 @@ public class ConciergeAddressScreen {
 
     private final SelenideElement okButton = $(By.xpath("//*[text()='OK']"));
 
+    private final SelenideElement soldToAddressTitle = $(By.xpath("//*[text()='Sold To Address']"));
+
+    private final SelenideElement billingAddressTitle = $(By.xpath("//*[text()='Billing Address']"));
+
+    private final SelenideElement shippingAddressTitle = $(By.xpath("//*[text()='Shipping Address']"));
 }
