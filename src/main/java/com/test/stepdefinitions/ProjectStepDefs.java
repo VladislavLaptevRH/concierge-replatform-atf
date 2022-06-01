@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
+import java.util.UUID;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -267,11 +268,13 @@ public class ProjectStepDefs {
 
     @When("I click on email estimate button")
     public void iClickOnEmailEstimateButton() {
-        conciergeProjectScreen.getEmailEstimateButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+        sleep(3000);
+        conciergeProjectScreen.getEmailEstimateButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         conciergeProjectScreen.getEmailEstimateButton().scrollIntoView(true);
         conciergeProjectScreen.getEmailEstimateButton().should(visible, Duration.ofSeconds(15));
         conciergeProjectScreen.getEmailEstimateButton().shouldHave(text("EMAIL ESTIMATE"), Duration.ofSeconds(20));
+        sleep(3000);
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getEmailEstimateButton());
     }
 
@@ -286,7 +289,7 @@ public class ProjectStepDefs {
 
     @When("I introduces email in send copies of this project to additional emails")
     public void iIntroducesEmailInSendCopiesOfThisProjectToAdditionalEmails() {
-        aditionalEmail = generalStepDefs.getAlphaNumericString(4) + "@mailinator.com";
+        aditionalEmail = UUID.randomUUID() + "@mailinator.com";
         conciergeProjectScreen.getEmailEstimateAdditionEmailField().should(visible, Duration.ofSeconds(20));
         conciergeProjectScreen.getEmailEstimateAdditionEmailField().setValue(aditionalEmail);
     }
@@ -536,6 +539,7 @@ public class ProjectStepDefs {
         sleep(3000);
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         $(By.id("footer")).scrollIntoView(true);
+        sleep(3000);
         conciergeProjectScreen.getUfdPrice().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
         conciergeProjectScreen.getUfdPrice().click();
     }

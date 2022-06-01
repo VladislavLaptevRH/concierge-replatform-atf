@@ -7,6 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -71,12 +73,19 @@ public class ConciergeAssociateStepDefs {
 
     @When("I choose contract gallery")
     public void iChooseContractGallery() {
-        conciergeUserAccountPage.getGalleryButton().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getGalleryButton().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getGalleryButton().click();
         conciergeUserAccountPage.getGalleryButton().should(visible, Duration.ofSeconds(15));
         Select gallerySelect = new Select(conciergeUserAccountPage.getGallerySelect());
         gallerySelect.selectByValue("997");
         conciergeUserAccountPage.getGallerySubmitButton().click();
+    }
+
+    @Then("I verify footer links")
+    public void iVerifyFooterLinks() {
+        $(By.xpath("//*[text()='RH.COM']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='DASHBOARD']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='PROJECTS']")).should(visible, Duration.ofSeconds(20));
     }
 }
 

@@ -26,3 +26,8 @@ Feature:Homepage
     Given I log into Concierge as "associate"
     When user clicks on gallery button from header
     Then user verifies list of galleries
+
+  Scenario: Footer links
+    Given I log into Concierge as "associate"
+    Then I verify footer links
+

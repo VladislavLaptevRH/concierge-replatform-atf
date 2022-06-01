@@ -180,11 +180,11 @@ Feature:Project
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "10011389" from search field
-    And I select count of product
-    When I click on add to project button
-    And I choose project by project name "removeitemsfromproject"
-    When I click on save button
-    When I click on go to project button
+#    And I select count of product
+#    When I click on add to project button
+#    And I choose project by project name "removeitemsfromproject"
+#    When I click on save button
+#    When I click on go to project button
 #    When I click on remove button from project for added item
 #    Then I verify that item was removed
 

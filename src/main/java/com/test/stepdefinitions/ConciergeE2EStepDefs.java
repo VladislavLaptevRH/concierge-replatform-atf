@@ -23,6 +23,7 @@ import static org.awaitility.Awaitility.await;
 import static org.testng.Assert.assertTrue;
 
 public class ConciergeE2EStepDefs {
+    ConfirmationOrderScreen confirmationOrderScreen = new ConfirmationOrderScreen();
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
@@ -593,6 +594,73 @@ public class ConciergeE2EStepDefs {
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
         sleep(3000);
         $(By.cssSelector("body > div:nth-child(7) > div:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > label:nth-child(1) > span:nth-child(1) > span:nth-child(1) > input:nth-child(1)")).click();
+    }
+
+    @Then("I verify that I'm able to edit shipping address")
+    public void iVerifyThatIMAbleToEditShippingAddress() {
+        $(By.xpath("//*[text()='NewShippingAddress Automation']")).shouldHave(text("NewShippingAddress"), Duration.ofSeconds(25));
+    }
+
+    @When("I edit shipping address from order review page")
+    public void iEditShippingAddressFromOrderReviewPage() {
+        sleep(3000);
+        conciergeAddressScreen.getEditShippingAddress().should(visible, Duration.ofSeconds(15));
+        conciergeAddressScreen.getEditShippingAddress().click();
+        checkoutAddressScreen.getFirstNameInpt().should(visible, Duration.ofSeconds(15));
+        generalStepDefs.clearField(checkoutAddressScreen.getFirstNameInpt());
+        checkoutAddressScreen.getFirstNameInpt().setValue("NewShippingAddress");
+    }
+
+    @When("I edit billing address from order review page")
+    public void iEditBillingAddressFromOrderReviewPage() {
+        conciergeAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(15));
+        conciergeAddressScreen.getEditBillingAddress().click();
+        generalStepDefs.clearField(checkoutAddressScreen.getFirstNameBillingAddress());
+        checkoutAddressScreen.getFirstNameBillingAddress().setValue("NewBillingAddress");
+    }
+
+    @And("I verify that I'm able to edit billing address")
+    public void iVerifyThatIMAbleToEditBillingAddress() {
+        $(By.xpath("//*[text()='NewBillingAddress Automation']")).shouldHave(text("NewBillingAddress"), Duration.ofSeconds(25));
+    }
+
+    @Then("I verify the payment details and order estimate summary")
+    public void iVerifyThePaymentDetailsAndOrderEstimateSummary() {
+        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Cash/Check']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));
+
+    }
+
+    @Then("I verify spo order & terms review signature")
+    public void iVerifySpoOrderTermsReviewSignature() {
+        $(By.xpath("//*[text()='ORDER & TERMS REVIEW SIGNATURE CAPTURE']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='SIGNATURE']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='CLEAR SIGNATURE']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that all the line items in the cart with the order review page")
+    public void iVerifyThatAllTheLineItemsInTheCartWithTheOrderReviewPage() {
+        $(By.xpath("//*[text()='Qty 1']")).should(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify order details from thank you page")
+    public void iVerifyOrderDetailsFromThankYouPage() {
+        $(By.xpath("//*[text()='Shipping Address']")).should(visible, Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='Billing Address']")).should(visible, Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='Important Information']")).should(visible, Duration.ofSeconds(25));
+        conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));
+
     }
 }
 

@@ -1,5 +1,5 @@
 @conciergeRegression
-Feature: Trade
+Feature: Contract
 
   Scenario: Verify that I'm not able to select Contract Client without contract gallery
     Given I log into Concierge as "associate"

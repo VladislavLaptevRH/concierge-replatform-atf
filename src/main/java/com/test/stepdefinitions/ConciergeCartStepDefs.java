@@ -284,7 +284,6 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getPosTransactionField().setValue("1234");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-
     }
 
     @Then("I verify that Total Additional Product Discount message is {string} on review page")
@@ -310,8 +309,7 @@ public class ConciergeCartStepDefs {
             selectOption.getSelectSizeElement().scrollIntoView(true);
             Select size = new Select(selectOption.getSelectSizeElement());
             size.selectByIndex(sizeValue);
-        } catch (
-                com.codeborne.selenide.ex.ElementNotFound e) {
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Element is not displayed");
         }
     }
@@ -600,6 +598,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that mini cart value is equal to quantity of product")
     public void iVerifyThatMiniCartValueIsEqualToQuantityOfProduct() {
+        sleep(3000);
         conciergeUserAccountPage.getCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeUserAccountPage.getCartButton().shouldHave(text("CART " + randomQuantity), Duration.ofSeconds(50));
     }
@@ -652,13 +651,13 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify contract savings")
     public void iVerifyContractSavingsForCartPage() {
-        conciergeCartPageScreen.getContractSavings().should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='$494.00']")).should(visible,Duration.ofSeconds(20));
+        conciergeCartPageScreen.getContractSavings().should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='$494.00']")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I click on order details button")
     public void iClickOnOrderDetailsButton() {
-        conciergeUserAccountPage.getSeeResultsButton().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getSeeResultsButton().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getSeeResultsButton().click();
     }
 }

@@ -1,6 +1,8 @@
 package com.test.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.test.pageObject.ConciergeAddressScreen;
+import com.test.pageObject.ConciergeCartPageScreen;
 import com.test.pageObject.PaymentScreen;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,6 +19,8 @@ import static org.testng.AssertJUnit.assertEquals;
 public class PaymentStepDefs {
     PaymentScreen paymentScreen = new PaymentScreen();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+    ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
+    ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
 
     @When("I introduces payment details for several payment methods")
     public void iIntroducesPaymentDetailsForSeveralPaymentMethods() {
@@ -134,4 +138,35 @@ public class PaymentStepDefs {
     public void iVerifyThatTradeSavingsInPaymentPage() {
         $(By.xpath("//*[text()='Trade savings']")).should(visible, Duration.ofSeconds(25));
     }
+
+    @When("I edit payment method")
+    public void iEditPaymentMethod() {
+        conciergeAddressScreen.getEditPaymentOrderReview().should(visible, Duration.ofSeconds(15));
+        conciergeAddressScreen.getEditPaymentOrderReview().scrollIntoView(true);
+        conciergeAddressScreen.getEditPaymentOrderReview().click();
+        paymentScreen.getRemovePaymentBtn().shouldHave(text("Remove"), Duration.ofSeconds(15));
+        paymentScreen.getRemovePaymentBtn().should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
+        sleep(4000);
+        paymentScreen.getRemovePaymentBtn().click();
+        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("RH Credit Card"), Duration.ofMinutes(1));
+        sleep(2000);
+        paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
+        Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
+        selectPayment.selectByValue("POS");
+        conciergeCartPageScreen.getPosRegisterField().should(visible, Duration.ofMinutes(1));
+        conciergeCartPageScreen.getPosRegisterField().setValue("1234");
+        conciergeCartPageScreen.getPosTransactionField().setValue("1234");
+        paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
+        paymentScreen.getContinueToReview().click();
+    }
+
+    @When("I edit billing address from PG")
+    public void iEditBillingAddressFromPG() {
+        paymentScreen.getEditBillingAddressBtn().shouldHave(text("Edit"), Duration.ofSeconds(20));
+        paymentScreen.getEditBillingAddressBtn().click();
+        generalStepDefs.clearField(conciergeAddressScreen.getBillingAddressFirstName());
+        conciergeAddressScreen.getBillingAddressFirstName().setValue("NewBillingAddress");
+        System.out.println();
+    }
+
 }

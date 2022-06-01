@@ -27,9 +27,17 @@ public class ConciergeAddressScreen {
 
     private final SelenideElement okButton = $(By.xpath("//*[text()='OK']"));
 
+    private final SelenideElement billingAddressFirstName = $(By.id("billingAddress.firstName"));
+
     private final SelenideElement soldToAddressTitle = $(By.xpath("//*[text()='Sold To Address']"));
 
     private final SelenideElement billingAddressTitle = $(By.xpath("//*[text()='Billing Address']"));
 
     private final SelenideElement shippingAddressTitle = $(By.xpath("//*[text()='Shipping Address']"));
+
+    private final SelenideElement editPaymentOrderReview = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']/a)[2]"));
+
+    private final SelenideElement editShippingAddress = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center']/a)[1]"));
+
+    private final SelenideElement editBillingAddress = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center']/a)[2]"));
 }

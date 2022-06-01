@@ -10,6 +10,8 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class CheckoutAddressScreen {
 
+    private final SelenideElement firstNameBillingAddress = $(By.id("billingAddress.firstName"));
+
     private final SelenideElement firstNameInpt = $(By.xpath("//input[contains(@id,'firstName')and contains(@id,'shipping')]"));
 
     private final SelenideElement lastNameField = $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[2]/div/input"));

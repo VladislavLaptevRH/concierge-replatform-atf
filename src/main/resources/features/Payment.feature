@@ -105,3 +105,21 @@ Feature:Payment
     And I fill all fields for sold to address
     And I continue to payment
     Then I verify that trade savings in payment page
+
+  Scenario: Edit Address
+    Given I log into Concierge as "associate"
+    When I remove all items from cart
+    When I go to item "10035093 LBB" from search field
+    And I select count of product
+    When I click on add to cart button
+    When I click on view cart button
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "nonmember"
+    And I fill all fields from address screen
+    And I continue to payment
+    When I edit billing address from PG
+    And I continue to payment
+    Then I verify that I'm able to edit billing address
+

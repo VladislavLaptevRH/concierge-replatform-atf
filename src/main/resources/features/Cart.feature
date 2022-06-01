@@ -18,13 +18,6 @@ Feature: Cart Page
     When I click on checkout button
     Then I verify membership popup for guest user
 
-  Scenario: Clear Order
-    Given I log into Concierge as "associate"
-    When I go to item "10011389 BRS" from search field
-    When I click on add to cart button
-    When I click on view cart button
-    When I click on clear order button from cart
-
   Scenario: Line Item : Quantiy update
     Given I log into Concierge as "associate"
     When I remove all items from cart
@@ -389,7 +382,7 @@ Feature: Cart Page
     When I go to item "112349 PTL SML" from search field
     When I clicks on o random item
 #    When I go to item which has "CA" restriction
-    When I select size option 2 for item
+    When I select size option 1 for item
     When I click on add to cart button
     When I click on aggree&add button
     When I click on view cart button
