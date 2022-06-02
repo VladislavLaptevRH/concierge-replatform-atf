@@ -36,7 +36,7 @@ public class ConciergeItemsStepDefs {
 
     @When("I select fabric option")
     public void iSelectFabricProperty() {
-        sleep(3000);
+        sleep(5000);
         generalStepDefs.waitForJSandJQueryToLoad();
         generalStepDefs.waitForJSandJQueryToLoad();
         try {

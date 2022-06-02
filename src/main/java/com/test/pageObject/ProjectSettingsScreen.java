@@ -47,7 +47,7 @@ public class ProjectSettingsScreen {
 
     private final SelenideElement moodboardDeactiveButton = $(By.xpath("//button[@aria-pressed='false']"));
 
-    private final SelenideElement moodBoardButton = $(By.xpath("//*[text()='MOODBOARD']"));
+    private final SelenideElement moodBoardButton = $(By.xpath("//button[@value='MOODBOARD']"));
 
     private final SelenideElement firstNameField = $(By.cssSelector("div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)"));
 

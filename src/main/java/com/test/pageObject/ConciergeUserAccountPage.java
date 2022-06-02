@@ -33,7 +33,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement dashboardTitle = $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']"));
 
-    private final SelenideElement seeResultsButton = $(By.xpath("//span[@class='MuiButton-label']"));
+    private final SelenideElement seeResultsButton = $(By.xpath("(//span[@class='MuiButton-label'])[2]"));
 
     private final SelenideElement searchItemField = $(By.xpath("//input[contains(@class,'MuiOutlinedInput-inputAdornedStart')]"));
 

@@ -210,7 +210,6 @@ Feature: Cart Page
   Scenario:Verify mini cart count
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I remove client from header
     When I go to item "10011389 SS" from search field
     When I click on add to cart button
     When I click on view cart button

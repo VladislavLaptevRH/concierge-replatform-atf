@@ -190,7 +190,6 @@ public class ProjectStepDefs {
 
     @When("I click on the moodboard button")
     public void iClickOnTheMoodboardButton() {
-
         projectSettingsScreen.getMoodBoardButton().should(visible, Duration.ofSeconds(15));
         projectSettingsScreen.getMoodBoardButton().click();
     }
@@ -205,7 +204,7 @@ public class ProjectStepDefs {
         spaceName = generalStepDefs.getAlphaNumericString(4);
         projectSettingsScreen.getSpaceNameSpan().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         projectSettingsScreen.getSpaceNameSpan().should(visible, Duration.ofSeconds(12));
-        projectSettingsScreen.getSpaceNameSpan().setValue(spaceName);
+        projectSettingsScreen.getSpaceNameSpan().sendKeys(spaceName);
     }
 
     @When("I click on add space button")
@@ -242,6 +241,7 @@ public class ProjectStepDefs {
         $(By.xpath("//div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']")).should(Condition.and("", enabled, visible), Duration.ofSeconds(20));
         sleep(3000);
         $(By.xpath("//div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']")).click();
+        sleep(3000);
         conciergeProjectScreen.getPreferredEmailContactMethod().shouldHave(text("Email"), Duration.ofSeconds(15));
         conciergeProjectScreen.getPreferredEmailContactMethod().click();
     }
@@ -298,9 +298,10 @@ public class ProjectStepDefs {
     public void iClickOnEmailEstimateButtonFromProjectScreen() {
         generalStepDefs.waitForJSandJQueryToLoad();
         $(By.xpath("//span[normalize-space()='ADD TO CART']")).shouldHave(text("ADD TO CART"), Duration.ofSeconds(15));
-        sleep(5000);
+        sleep(3000);
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         $(By.id("footer")).scrollIntoView(true);
+        sleep(3000);
         conciergeProjectScreen.getEmailEstimateProjectScreen().shouldHave(text("EMAIL ESTIMATE"), Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getEmailEstimateProjectScreen());
     }
@@ -431,10 +432,12 @@ public class ProjectStepDefs {
 
     @When("I click on edit options button")
     public void iClickOnEditOptionsButton() {
+        sleep(3000);
         conciergeProjectScreen.getEditItemOptions().should(visible, Duration.ofSeconds(35));
         executeJavaScript("window.scrollBy(0,350)", "");
         projectSettingsScreen.getMoodBoardButton().shouldHave(text("MOODBOARD"), Duration.ofSeconds(15));
         conciergeProjectScreen.getEditItemOptions().click();
+        System.out.println();
     }
 
     @Then("verify that color was changed")
@@ -656,7 +659,8 @@ public class ProjectStepDefs {
     @Then("I verify that forecast value is update according to quantity of item")
     public void iVerifyThatForecastValueIsUpdateAccordingToQuantityOfItem() {
         conciergeProjectScreen.getRegularPrice().should(visible, Duration.ofSeconds(40));
-        int forecastExpected = randomQuantity * 84;
+        sleep(3000);
+        int forecastExpected = randomQuantity * 881;
         int forecastActual = Integer.parseInt(conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
         assertEquals(forecastActual, forecastExpected, "Forecast value has been updated");
     }
@@ -753,9 +757,9 @@ public class ProjectStepDefs {
 
     @When("I choose {string} for unclassified business client project")
     public void iChooseForUnclassifiedBusinessClientProject(String pricingType) {
-        conciergeProjectScreen.getSettingsButton().shouldHave(text("SETTINGS"), Duration.ofSeconds(15));
+        conciergeProjectScreen.getSettingsButton().shouldHave(text("SETTINGS"), Duration.ofSeconds(40));
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-        conciergeProjectScreen.getPricingTypeDropdown().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+        conciergeProjectScreen.getPricingTypeDropdown().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         conciergeProjectScreen.getPricingTypeDropdown().click();
 
         if (pricingType.equals("NON_MEMBER")) {
@@ -796,6 +800,7 @@ public class ProjectStepDefs {
         $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[5]")).scrollIntoView(true);
         sleep(2000);
         executeJavaScript("arguments[0].click();", $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[5]")));
+        sleep(2000);
         $(By.xpath("//*[text()='" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
         $(By.xpath("//*[text()='" + spaceName + "']")).click();
     }
@@ -821,6 +826,7 @@ public class ProjectStepDefs {
 
     @Then("I verify that availability, Delivery and Returns messaging for {string} is displayed")
     public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingForIsDisplayed(String arg0) {
+        sleep(3000);
         if (arg0.equals("SPO")) {
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[1]")).shouldHave(text("AVAILABILITY & DELIVERY"), Duration.ofSeconds(20)).scrollIntoView(true);
             executeJavaScript("window.scrollTo(0, 250)");
@@ -963,17 +969,21 @@ public class ProjectStepDefs {
 
     }
 
-
     @Then("I verify that sku id has been updated after changes")
     public void iVerifyThatSkuIdHasBeenUpdatedAfterChanges() {
         randomQuantity = generalStepDefs.getRandomNumber(0, 4);
         $(By.xpath("//div[1]/div/div[1]/button[2]")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//div[1]/div/div[1]/button[2]")).click();
 
+        $(By.cssSelector("#optionSelect-0")).scrollIntoView(true);
         Select selectSize = new Select($(By.cssSelector("#optionSelect-0")));
         selectSize.selectByIndex(randomQuantity);
-
+        sleep(3000);
+        $(By.xpath("//div[1]/div/div[1]/button[2]")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        $(By.xpath("//div[1]/div/div[1]/button[2]")).scrollIntoView(true);
         $(By.xpath("//div[1]/div/div[1]/button[2]")).click();
+        $(By.xpath("//div[1]/div/div[1]/button[2]")).scrollIntoView(true);
+
 
         if (randomQuantity == 0) {
             $(By.xpath("//*[text()='10070143 PEWT']")).should(visible, Duration.ofMinutes(1));

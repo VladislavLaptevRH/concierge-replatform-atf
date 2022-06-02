@@ -360,10 +360,10 @@ Feature:Project
     When I click on add to project button
     When I click on add new space button
     When I introduces space name
-    When I click on save button uppercase
-    When I click on save button
-    When I click on go to project button
-    Then I verify that item was added to the selected space
+#    When I click on save button uppercase
+#    When I click on save button
+#    When I click on go to project button
+#    Then I verify that item was added to the selected space
 
   Scenario: Verify the address page, pre filled address details and Email address once the project added to cart
     Given I log into Concierge as "associate"
@@ -388,7 +388,6 @@ Feature:Project
     When I click on view cart button
     When I click on move to project button
     When I choose "ADDITEMTOCORRECTSPACE" project from move to project pop up
-    When I choose "correctspace" space from move to project pop up
     When I click on save button
     Then I verify that item added and project load in correct space and oppty
 

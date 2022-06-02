@@ -15,7 +15,7 @@ public class ConciergeLoginPage {
 
     private final SelenideElement location = $(By.xpath("//select[@id='location']"));
 
-    private final SelenideElement continueButton = $(By.xpath("//button[contains(@class,'MuiButtonBase-root MuiButton-root')]"));
+    private final SelenideElement continueButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12'][2]//button"));
 
     private final SelenideElement locationNewPortBeach = $(By.xpath("//*[@id='location']/option[2]"));
 

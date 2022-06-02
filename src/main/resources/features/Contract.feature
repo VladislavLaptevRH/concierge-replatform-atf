@@ -65,6 +65,7 @@ Feature: Contract
     Given I log into Concierge as "associate"
     And I remove all items from cart
     When I choose contract gallery
+    When I remove client from header
     When I click on client button from header
     When I look on client by "accountnumber" with "20211221164476"
     When I clicks on a random menu item
@@ -91,6 +92,7 @@ Feature: Contract
   Scenario: Contract Prices: Project
     Given I log into Concierge as "associate"
     And I remove all items from cart
+    When I remove client from header
     When I choose contract gallery
     When I click on client button from header
     When I look on client by "accountnumber" with "20211221164476"

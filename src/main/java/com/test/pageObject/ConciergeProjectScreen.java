@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class ConciergeProjectScreen {
+    private final SelenideElement projectMemberPrice = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][1]/p/b"));
 
     private final SelenideElement pricingTypeDropdown = $(By.cssSelector("#pricingTypeDropdown"));
 

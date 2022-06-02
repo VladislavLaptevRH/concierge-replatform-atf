@@ -40,7 +40,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on add to project button")
     public void userClickOnAddToProjectButton() {
-        conciergeItemsScreen.getAddToProjectButton().should(visible, Duration.ofSeconds(12));
+        conciergeItemsScreen.getAddToProjectButton().should(Condition.and("", enabled, visible), Duration.ofSeconds(12));
         conciergeItemsScreen.getAddToProjectButton().click();
 
     }
@@ -129,9 +129,9 @@ public class ConciergeE2EStepDefs {
             generalStepDefs.waitForJSandJQueryToLoad();
             conciergeCartPageScreen.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(12));
             conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
-            conciergeCartPageScreen.getOrderEstimateTitle().shouldHave(text("Order Estimate"), Duration.ofSeconds(12));
+            conciergeCartPageScreen.getOrderEstimateTitle().shouldHave(text("Order Estimate"), Duration.ofSeconds(20));
             conciergeCartPageScreen.getClearOrderButton().click();
-            conciergeCartPageScreen.getClearOrderButtonPop().shouldHave(text("CLEAR ORDER"), Duration.ofSeconds(15));
+            conciergeCartPageScreen.getClearOrderButtonPop().shouldHave(text("CLEAR ORDER"), Duration.ofSeconds(25));
             conciergeCartPageScreen.getClearOrderButtonPop().click();
             generalStepDefs.waitForJSandJQueryToLoad();
         }
@@ -320,7 +320,7 @@ public class ConciergeE2EStepDefs {
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String businessClient) {
         generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeUserAccountPage.getClientLookupFirstName().should(visible, Duration.ofSeconds(12));
+        conciergeUserAccountPage.getClientLookupFirstName().should(visible, Duration.ofSeconds(25));
         if (businessClient.equals("member")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Member");

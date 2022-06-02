@@ -256,14 +256,7 @@ public class ConciergeCartStepDefs {
     @Then("I verify that {string} promocode was approved for cart items")
     public void iVerifyThatPromocodeWasApprovedForCartItems(String promoType) {
         generalStepDefs.waitForJSandJQueryToLoad();
-        if (promoType.equals("FEMAD")) {
-            conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='$1,896.00']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='$539.00']")).should(visible, Duration.ofSeconds(15));
-        }
-        if (promoType.equals("HM4TS97")) {
-            $(By.xpath("//*[text()='New Mover 25% Off Full-Price and 10% Off Sale HM4TS97 Successfully Added']")).should(visible, Duration.ofSeconds(20));
-        }
+        conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that total price from cart and from payment page is the same")
@@ -333,7 +326,7 @@ public class ConciergeCartStepDefs {
         sleep(4000);
         conciergeProjectScreen.getProjectName().should(visible, Duration.ofSeconds(15));
         Select selectProjectName = new Select(conciergeProjectScreen.getSelectSpaceName());
-        selectProjectName.selectByVisibleText(arg0);
+        selectProjectName.selectByValue(arg0);
     }
 
     @Then("I verify that spaces are displayed in space dropdown")
@@ -409,7 +402,9 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that membership price displayed as total price")
     public void iVerifyThatMembershipPriceDisplayedAsTotalPrice() {
-        conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$1,724.00"), Duration.ofMinutes(1));
+        String memberPrice = conciergeCartPageScreen.getPriceForMember().getText();
+        String totalPrice = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "");
+        assertEquals(memberPrice, totalPrice, "Membership price displayed as total price");
     }
 
     @When("I choose postpone shipment")
@@ -464,17 +459,21 @@ public class ConciergeCartStepDefs {
     public void iVerifyThatSavingsForAUser(String arg0, String arg1) {
         if (arg1.equals("nonmember") || (arg1.equals("contract"))) {
             conciergeCartPageScreen.getTotalMemberPrice().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
-            conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
+            String finalSalePrice = conciergeCartPageScreen.getFinalSalePrice().getText();
+            String totalMemberPrice = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "");
+            assertEquals(finalSalePrice, totalMemberPrice, "Savings for nonmember user in cart");
         }
         if (arg1.equals("trade")) {
             conciergeCartPageScreen.getTradeSavingsText().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
-            conciergeCartPageScreen.getTradeSavingsText().shouldHave(text("Trade savings"), Duration.ofMinutes(1));
-            $(By.xpath("//*[text()='$432.00']")).should(visible, Duration.ofMinutes(1));
+            String tradelSalePrice = conciergeCartPageScreen.getTradeSalePrice().getText();
+            String totalMemberPrice = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "");
+            assertEquals(tradelSalePrice, totalMemberPrice, "Savings for nonmember user in cart");
         }
         if (arg1.equals("member")) {
             conciergeCartPageScreen.getMemberSavingsText().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
-            conciergeCartPageScreen.getMemberSavingsText().shouldHave(text("Member Savings"), Duration.ofMinutes(1));
-            $(By.xpath("//*[text()='$432.00']")).should(visible, Duration.ofMinutes(1));
+            String memberSalePrice = conciergeCartPageScreen.getPriceForMember().getText();
+            String totalMemberPrice = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "");
+            assertEquals(memberSalePrice, totalMemberPrice, "Savings for nonmember user in cart");
         }
 
     }
@@ -482,6 +481,7 @@ public class ConciergeCartStepDefs {
     @When("I goes to address page from review screen")
     public void iGoesToAddressPageFromReviewScreen() {
         conciergeCartPageScreen.getAddressButton().should(visible, Duration.ofMinutes(1));
+        conciergeCartPageScreen.getAddressButton().shouldHave(text("Address"), Duration.ofMinutes(1));
         conciergeCartPageScreen.getAddressButton().click();
     }
 
@@ -577,8 +577,6 @@ public class ConciergeCartStepDefs {
     public void iVerifyThatEmployeeDiscountIsPresent() {
         conciergeCartPageScreen.getTotalAditionalProdDiscount().shouldHave(text("Total Additional Product Discount"), Duration.ofSeconds(15));
         conciergeCartPageScreen.getTotalAditionalProdDiscount().should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$646.80']")).should(visible, Duration.ofSeconds(15));
-
     }
 
     @When("I apply employee discount")

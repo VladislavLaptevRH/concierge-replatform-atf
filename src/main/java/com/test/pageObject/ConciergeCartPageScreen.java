@@ -108,6 +108,12 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement totalMemberPrice = $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-alignRight']"));
 
+    private final SelenideElement priceForMember = $(By.xpath("//p[@data-testid='price-for-member']"));
+
+    private final SelenideElement finalSalePrice = $(By.xpath("//p[@data-testid='price-for-final-sale']"));
+
+    private final SelenideElement tradeSalePrice = $(By.xpath("//p[@data-testid='price-for-trade']"));
+
     private final SelenideElement postponeShipment = $(By.xpath("//p[@id='postpone-shipment']"));
 
     private final SelenideElement postponeSelectReasonCode = $(By.xpath("//select[@id='data_reason_code']"));

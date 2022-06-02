@@ -51,6 +51,7 @@ public class ClientSearchStepDefs {
     @When("I click on client button from header")
     public void iChooseContractClient() {
         conciergeUserAccountPage.getClientButton().shouldHave(text("Client"), Duration.ofSeconds(15));
+        sleep(2000);
         conciergeUserAccountPage.getClientButton().click();
         conciergeUserAccountPage.getClientLookupHeaderBtn().shouldHave(text("Client Lookup"), Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientLookupHeaderBtn().click();

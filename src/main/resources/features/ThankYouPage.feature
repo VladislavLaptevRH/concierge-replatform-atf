@@ -52,6 +52,7 @@ Feature: ThankYouPage
     And I continue to payment
     When I choose POP for payment method
     When I click on a place order button
+    When I click on order details button
     Then I verify all the line items in the cart on thank you page
 
   Scenario: Verify the order number and email address verbiage
