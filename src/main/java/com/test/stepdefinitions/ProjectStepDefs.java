@@ -238,6 +238,7 @@ public class ProjectStepDefs {
     @When("I choose preferred contact method")
     public void iChoosePreferredContactMethod() {
         generalStepDefs.waitForJSandJQueryToLoad();
+        sleep(3000);
         $(By.xpath("//div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']")).should(Condition.and("", enabled, visible), Duration.ofSeconds(20));
         sleep(3000);
         $(By.xpath("//div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']")).click();
@@ -384,6 +385,7 @@ public class ProjectStepDefs {
 
     @When("I search project {string} by provided {string}")
     public void iSearchProjectByProvided(String projectName, String searchBy) {
+        sleep(3000);
         generalStepDefs.waitForJSandJQueryToLoad();
         $(By.cssSelector("#demo-simple-select-outlined")).should(Condition.and("", visible, enabled), Duration.ofSeconds(25));
         $(By.cssSelector("#demo-simple-select-outlined")).shouldHave(text("Project Name"), Duration.ofSeconds(20));
@@ -711,14 +713,14 @@ public class ProjectStepDefs {
         conciergeProjectScreen.getForeCastAmount().shouldHave(text("Forecast Amount"), Duration.ofSeconds(15));
         sleep(3000);
         if (pricingType.equals("MEMBER")) {
-            conciergeProjectScreen.getForeCastAmount().shouldHave(text("$1,117.00"), Duration.ofSeconds(25));
+            conciergeProjectScreen.getForeCastAmount().shouldHave(text("$1,724.00"), Duration.ofSeconds(25));
             String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
-            assertEquals(prType, "$1,117.00\n", "Forecast amount for member client is displayed");
+            assertEquals(prType, "$1,724.00\n", "Forecast amount for member client is displayed");
         }
         if (pricingType.equals("NON-MEMBER")) {
-            conciergeProjectScreen.getForeCastAmount().shouldHave(text("$1,397.00"), Duration.ofSeconds(25));
+            conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,156.00"), Duration.ofSeconds(25));
             String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
-            assertEquals(prType, "$1,397.00\n", "Forecast amount for non-member client is displayed");
+            assertEquals(prType, "$2,156.00\n", "Forecast amount for non-member client is displayed");
         }
     }
 
@@ -972,19 +974,17 @@ public class ProjectStepDefs {
     @Then("I verify that sku id has been updated after changes")
     public void iVerifyThatSkuIdHasBeenUpdatedAfterChanges() {
         randomQuantity = generalStepDefs.getRandomNumber(0, 4);
+        sleep(3000);
         $(By.xpath("//div[1]/div/div[1]/button[2]")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//div[1]/div/div[1]/button[2]")).click();
 
-        $(By.cssSelector("#optionSelect-0")).scrollIntoView(true);
+        executeJavaScript("window.scrollTo(-200, 250)");
         Select selectSize = new Select($(By.cssSelector("#optionSelect-0")));
         selectSize.selectByIndex(randomQuantity);
         sleep(3000);
         $(By.xpath("//div[1]/div/div[1]/button[2]")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        $(By.xpath("//div[1]/div/div[1]/button[2]")).scrollIntoView(true);
         $(By.xpath("//div[1]/div/div[1]/button[2]")).click();
-        $(By.xpath("//div[1]/div/div[1]/button[2]")).scrollIntoView(true);
-
-
+        sleep(2000);
         if (randomQuantity == 0) {
             $(By.xpath("//*[text()='10070143 PEWT']")).should(visible, Duration.ofMinutes(1));
         }

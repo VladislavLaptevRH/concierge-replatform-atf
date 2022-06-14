@@ -84,16 +84,12 @@ public class ConciergeOrderHistoryStepDefs {
 
     @Then("I verify that order history page is displayed")
     public void iVerifyThatOrderHistoryPageIsDisplayed() {
-        conciergeOrderHistoryForm.getOrderHistoryTitle().should(visible, Duration.ofMinutes(1));
-        conciergeOrderHistoryForm.getCustomerFirstName().should(visible, Duration.ofMinutes(1));
-        assertTrue(conciergeOrderHistoryForm.getOrderHistoryTitle().isDisplayed());
         conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("Order Date"));
         conciergeOrderHistoryForm.getCustomerAddress().shouldHave(text("Order Number"));
         conciergeOrderHistoryForm.getCustomerEmail().shouldHave(text("Shipping Location"));
         conciergeOrderHistoryForm.getCustomerPhone().shouldHave(text("Shipping Name"));
         conciergeOrderHistoryForm.getCustomerCompany().shouldHave(text("Order Status"));
         conciergeOrderHistoryForm.getCustomerTradeIdTaxExempt().shouldHave(text("Order Total"));
-        conciergeOrderHistoryForm.getOrderNotes().shouldHave(text("Notes"));
         conciergeOrderHistoryForm.getBackToSearchResultsButton().shouldHave(text("Back To Search Results"));
     }
 

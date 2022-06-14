@@ -398,7 +398,7 @@ Feature: Cart Page
     When I remove client from header
     When I go to item "112349 PTL SML" from search field
     When I clicks on o random item
-    When I select size option 2 for item
+    When I select color option
     When I click on add to cart button
     When I click on aggree&add button
     When I click on view cart button

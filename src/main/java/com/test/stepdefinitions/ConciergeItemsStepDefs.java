@@ -20,7 +20,7 @@ public class ConciergeItemsStepDefs {
 
     @When("I select debth option")
     public void iSelectDebthProperty() {
-        sleep(5000);
+        sleep(6000);
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
             executeJavaScript("window.scrollTo(0, 970)");
@@ -36,7 +36,7 @@ public class ConciergeItemsStepDefs {
 
     @When("I select fabric option")
     public void iSelectFabricProperty() {
-        sleep(5000);
+        sleep(6000);
         generalStepDefs.waitForJSandJQueryToLoad();
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
@@ -52,8 +52,7 @@ public class ConciergeItemsStepDefs {
     @When("I select color option")
     public void iSelectColorOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(5000);
+        sleep(6000);
         try {
             selectOption.getColorOption().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
             selectOption.getColorOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));

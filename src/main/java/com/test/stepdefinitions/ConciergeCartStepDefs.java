@@ -179,6 +179,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify line items prices for {string}")
     public void iVerifyLineItemsPricesFor(String arg0) {
+        sleep(3000);
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getReasonCodeField().shouldNot(visible, Duration.ofSeconds(15));
         if (arg0.equals("PERCENT_OFF")) {
@@ -655,7 +656,7 @@ public class ConciergeCartStepDefs {
 
     @When("I click on order details button")
     public void iClickOnOrderDetailsButton() {
-        conciergeUserAccountPage.getSeeResultsButton().should(visible, Duration.ofSeconds(15));
-        conciergeUserAccountPage.getSeeResultsButton().click();
+        conciergeUserAccountPage.getOrderDetailsButton().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getOrderDetailsButton().click();
     }
 }

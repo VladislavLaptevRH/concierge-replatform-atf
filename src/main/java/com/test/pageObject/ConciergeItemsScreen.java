@@ -56,7 +56,11 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement opportunityNameSelect = $(By.xpath("//select[@id='opportunityName']"));
 
+    private final SelenideElement monogramColorChampagne = $(By.xpath("//input[@value='Champagne Metallic (MCHA)']"));
+
     private final SelenideElement addMonogramCheckBox = $(By.xpath("(//span[@class='MuiIconButton-label']/input)[2]"));
+
+    private final SelenideElement addMonogramCheckBoxPdp = $(By.xpath("//span[@class='MuiIconButton-label']/input"));
 
     private final SelenideElement addGiftCheckBox = $(By.xpath("(//span[@class='MuiIconButton-label']/input)[3]"));
 

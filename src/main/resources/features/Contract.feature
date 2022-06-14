@@ -68,17 +68,18 @@ Feature: Contract
     When I remove client from header
     When I click on client button from header
     When I look on client by "accountnumber" with "20211221164476"
-    When I clicks on a random menu item
-#    Then I verify that contract price is displayed
-    When I click on collections item
-    When I clicks on o random item
+#    When I clicks on a random menu item
+##    Then I verify that contract price is displayed
+#    When I click on collections item
+#    When I clicks on o random item
+    And I go to item "68470071 SS" from search field
     Then I verify that contract price is displayed
-    When I select debth option
-    When I select fabric option
-    When I select color option
-    And I select count of product
+#    When I select debth option
+#    When I select fabric option
+#    When I select color option
+#    And I select count of product
     And I click on add to cart button
-    When I click on aggree&add button
+#    When I click on aggree&add button
     And I click on view cart button
     When I choose order classification
     And I click on checkout button

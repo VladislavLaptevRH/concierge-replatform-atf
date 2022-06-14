@@ -415,6 +415,7 @@ Feature:Project
     When I click on projects button
     When I search project "selectdeselectmoodboarditems" by provided "projectName"
     When I click on the first project search result
+    When I click on view all button from space dropdown
     Then I verify that sku id has been updated after changes
 
   Scenario: Verify the view all functionality for spaces in project
