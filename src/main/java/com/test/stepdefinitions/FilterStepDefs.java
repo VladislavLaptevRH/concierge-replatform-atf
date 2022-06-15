@@ -30,8 +30,25 @@ public class FilterStepDefs {
 
     @When("I click on brands")
     public void iClickOnBrands() {
-        $(By.xpath("//*[contains(text(),'brands')]")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[contains(text(),'brands')]")).click();
+        $(By.xpath("//*[@class='MuiTypography-root MuiTypography-subtitle1 MuiTypography-displayInline' and text()='RH']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@class='MuiTypography-root MuiTypography-subtitle1 MuiTypography-displayInline' and text()='RH']")).click();
+    }
+
+    @When ("I click on sale")
+    public void iClickOnSale() {
+        $(By.xpath("//*[@class='MuiTypography-root MuiTypography-subtitle1' and text()='SALE']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@class='MuiTypography-root MuiTypography-subtitle1' and text()='SALE']")).click();
+    }
+
+    @Then ("I verify that Sale landing page is displayed")
+    public void iVerifyThatSaleLandingPageIsDispalyed() {
+        $(By.xpath("//*[@class='MuiTypography-root jss1515 jss2178 MuiTypography-body1' and text() = 'Restoration Hardware']")).shouldHave(text("Restoration Hardware"), Duration.ofSeconds(20));
+    }
+
+    @Then ("I verify sale navigation bars are displayed")
+    public void iVerifySaleNavigationBarsAreDisplayed () {
+        List<SelenideElement> listOfNavigationBars = $$(By.xpath("//*[@class= 'MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-evenly']"));
+        assertTrue(listOfNavigationBars.size() > 0, "Navigation bars are displayed");
     }
 
 
