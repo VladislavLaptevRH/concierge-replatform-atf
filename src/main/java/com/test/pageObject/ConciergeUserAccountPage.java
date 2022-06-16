@@ -103,7 +103,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement removeClientByText = $(By.xpath("//*[text()='Remove Client']"));
 
-    private final SelenideElement brandButton = $(By.xpath("//div[2]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6"));
+    private final SelenideElement brandButton = $(By.xpath("(//div[2]/div//div[@class='MuiGrid-root MuiGrid-item'][3])[1]"));
 
     private final SelenideElement clientLookupHeaderBtn = $(By.xpath("//li[@id='1']/button"));
 

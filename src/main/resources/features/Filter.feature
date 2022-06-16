@@ -18,3 +18,8 @@ Feature: Filter
       | Closed Media       |
       | Open Media         |
       | Media Systems      |
+
+  Scenario: Verify place order
+    Given I log into stgrhnonprod
+    When I go to item using "prod2820287"
+    When I add item to cart
