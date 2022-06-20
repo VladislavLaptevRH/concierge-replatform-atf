@@ -385,7 +385,7 @@ public class ProjectStepDefs {
 
     @When("I search project {string} by provided {string}")
     public void iSearchProjectByProvided(String projectName, String searchBy) {
-        sleep(3000);
+        sleep(4000);
         generalStepDefs.waitForJSandJQueryToLoad();
         $(By.cssSelector("#demo-simple-select-outlined")).should(Condition.and("", visible, enabled), Duration.ofSeconds(25));
         $(By.cssSelector("#demo-simple-select-outlined")).shouldHave(text("Project Name"), Duration.ofSeconds(20));
@@ -662,7 +662,7 @@ public class ProjectStepDefs {
     public void iVerifyThatForecastValueIsUpdateAccordingToQuantityOfItem() {
         conciergeProjectScreen.getRegularPrice().should(visible, Duration.ofSeconds(40));
         sleep(3000);
-        int forecastExpected = randomQuantity * 881;
+        int forecastExpected = randomQuantity * 1724;
         int forecastActual = Integer.parseInt(conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
         assertEquals(forecastActual, forecastExpected, "Forecast value has been updated");
     }
@@ -798,10 +798,10 @@ public class ProjectStepDefs {
 
     @When("user choose space {string}")
     public void userChooseSpace(String spaceName) {
-        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[5]")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[5]")).scrollIntoView(true);
+        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")).scrollIntoView(true);
         sleep(2000);
-        executeJavaScript("arguments[0].click();", $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[5]")));
+        executeJavaScript("arguments[0].click();", $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")));
         sleep(2000);
         $(By.xpath("//*[text()='" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
         $(By.xpath("//*[text()='" + spaceName + "']")).click();
@@ -1004,8 +1004,8 @@ public class ProjectStepDefs {
 
     @When("I click on view all button from space dropdown")
     public void iClickOnViewAllButtonFromSpaceDropdown() {
-        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[5]")).should(visible, Duration.ofMinutes(1));
-        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[5]")).click();
+        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")).should(visible, Duration.ofMinutes(1));
+        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")).click();
         $(By.xpath("//*[text()='VIEW ALL']")).should(visible, Duration.ofSeconds(1));
         $(By.xpath("//*[text()='VIEW ALL']")).click();
     }

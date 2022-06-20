@@ -57,7 +57,7 @@ public class ConciergeItemsStepDefs {
             selectOption.getColorOption().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
             selectOption.getColorOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select selectFabric = new Select(selectOption.getColorOption());
-            selectFabric.selectByIndex(2);
+            selectFabric.selectByIndex(1);
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");
         }

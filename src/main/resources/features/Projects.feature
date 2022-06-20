@@ -8,9 +8,9 @@ Feature:Project
     When I click on the first project search result
     Then I verify that availability, Delivery and Returns messaging for "<items>" is displayed
     Examples:
-      | items              |
-      | SPO                |
-      | In stock           |
+      | items    |
+      | SPO      |
+      | In stock |
 #      | SPO In stock Items |
 #      | BO                 |
 
@@ -252,6 +252,7 @@ Feature:Project
     When I choose quantity for item from project
     Then I verify that forecast value is update according to quantity of item
 
+ #10011389 BRS
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
     Given I log into Concierge as "leader"
     When I click on projects button

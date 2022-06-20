@@ -577,11 +577,11 @@ public class ConciergeE2EStepDefs {
     @Then("I verify trade prices for {string}")
     public void iVerifyTradePricesForPDP(String pageName) {
         if (pageName.equals("project page")) {
-            $(By.xpath("//*[text()='TRADE']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='TRADE']")).should(visible, Duration.ofSeconds(30));
             $(By.xpath("//*[text()='$3,165.00']")).should(visible, Duration.ofSeconds(20));
 
         } else {
-            $(By.xpath("//*[text()='Trade']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='Trade']")).should(visible, Duration.ofSeconds(30));
             $(By.xpath("//*[text()='1509']")).should(visible, Duration.ofSeconds(20));
         }
     }

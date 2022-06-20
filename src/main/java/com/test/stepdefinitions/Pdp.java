@@ -111,8 +111,7 @@ public class Pdp {
 
     @Then("I verify mattress recycling fee")
     public void iVerifyMattressRecyclingFee() {
-        $(By.xpath("//*[text()='Mattress Fee']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='$10.50']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='mattress recycling fee']")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify that replacements parts modal pop up is displayed")

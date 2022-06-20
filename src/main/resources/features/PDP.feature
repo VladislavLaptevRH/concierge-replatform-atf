@@ -50,10 +50,6 @@ Feature: PDP
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "10011460 NONE" from search field
-    And I select count of product
-    When I click on add to cart button
-    When I click on aggree&add button
-    When I click on view cart button
     Then I verify mattress recycling fee
 
   Scenario: Relacement Items

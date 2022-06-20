@@ -204,7 +204,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement foreCastTotalValue = $(By.xpath("(//div[contains(@class,'MuiBox-root')])[10]"));
 
-    private final SelenideElement editItemOptions = $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[13]"));
+    private final SelenideElement editItemOptions = $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[14]"));
 
     private final SelenideElement regularPriceValue = $(By.xpath("(//*[contains(text(),'$')])[4]"));
 
