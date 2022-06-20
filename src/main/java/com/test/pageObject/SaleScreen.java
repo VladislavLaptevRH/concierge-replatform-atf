@@ -9,5 +9,5 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class SaleScreen {
     private final SelenideElement saleOption = $(By.xpath("//*[@class='MuiTypography-root MuiTypography-subtitle1' and text()='SALE']"));
-    private final List<SelenideElement> listOfNavigationBars = $$(By.xpath("//*[@class= 'MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-evenly']"));
+    private final List<SelenideElement> listOfNavigationBars = $$(By.xpath("//div[@class= 'MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-evenly']//div"));
 }
