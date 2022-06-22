@@ -1,9 +1,12 @@
 package com.test.stepdefinitions;
 
+import com.codeborne.selenide.WebDriverRunner;
 import com.test.pageObject.SaleScreen;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import static org.testng.Assert.*;
+import org.openqa.selenium.interactions.Actions;
+
+import static com.codeborne.selenide.Selenide.sleep;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -11,9 +14,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class SaleStepDefs {
     SaleScreen saleScreen = new SaleScreen();
+    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
     @When("I click on sale")
     public void iClickOnSale() {
@@ -29,5 +35,31 @@ public class SaleStepDefs {
             items = new ArrayList(Arrays.asList(saleScreen.getListOfNavigationBars().get(i).getText()));
         }
         GeneralStepDefs.compareList(expectedItems, items);
+    }
+
+    @When ("I click on sale menu item")
+    public void iCLickOnSaleMenuItem () {
+        sleep(7000);
+        generalStepDefs.waitForJSandJQueryToLoad();
+        saleScreen.getCatLiving().should(visible, Duration.ofSeconds(60));
+        Actions actions = new Actions(WebDriverRunner.getWebDriver());
+        actions.moveToElement(saleScreen.getCatLiving());
+        saleScreen.getCatLiving().click();
+    }
+
+    @When("I click on sub category and navigate PDP")
+    public void iClickOnSubCategory() {
+        saleScreen.getSubCatChair().should(visible, Duration.ofSeconds(30));
+        saleScreen.getSubCatChair().click();
+        saleScreen.getRandomProduct().click();
+    }
+
+    @Then("I verify prices on product page")
+    public void iVerifyPricesOnProductPage() {
+
+        sleep(7000);
+        assertEquals(saleScreen.getMemberPrice().getText(), "Member");
+        assertEquals(saleScreen.getFinalPrice().getText(), "Final Sale");
+        assertEquals(saleScreen.getRegularPrice().getText(), "Regular");
     }
 }
