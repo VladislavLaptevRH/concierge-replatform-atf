@@ -102,3 +102,8 @@ Feature: PDP
     When I click on add to cart button
     When I click on view cart button
     Then I verify price in cart is the same as price on PDP page
+
+  Scenario: SLP (Swatch Landing Page)
+    Given I log into Concierge as "associate"
+    When I go to Swatch Landing Page
+    Then I verify that swatch landing page is displayed

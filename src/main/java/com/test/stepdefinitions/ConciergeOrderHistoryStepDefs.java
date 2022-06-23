@@ -5,13 +5,14 @@ import com.test.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 
 import java.time.Duration;
 import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
 import static com.test.utility.Hooks.getWindowsHandles;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -79,6 +80,7 @@ public class ConciergeOrderHistoryStepDefs {
     @When("I click on the random result")
     public void iClickOnTheRandomResult() {
         conciergeOrderHistoryForm.getFirstResult().should(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='Automation NonMember']")).should(visible, Duration.ofSeconds(20));
         conciergeOrderHistoryForm.getFirstResult().click();
     }
 
@@ -95,12 +97,16 @@ public class ConciergeOrderHistoryStepDefs {
 
     @When("I click on random order")
     public void iClickOnRandomOrder() {
+        sleep(4000);
+        $(By.xpath("//*[text()='Automation NonMember']")).should(visible, Duration.ofSeconds(20));
         conciergeOrderHistoryForm.getFirstResult().should(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getFirstResult().click();
     }
 
     @Then("I verify that I redirected to wismo")
     public void iVerifyThatIRedirectedToWismo() {
+        $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']")).shouldHave(text("ORDER HISTORY"), Duration.ofSeconds(30));
+        sleep(3000);
         ArrayList<String> tabs = new ArrayList<>(getWindowsHandles());
         switchTo().window(tabs.get(1));
         boolean redirect = tabs.size() == 2;
@@ -110,7 +116,7 @@ public class ConciergeOrderHistoryStepDefs {
     @Then("I verifiy that Order Lookup title is displayed")
     public void iVerifiyThatOrderLookupTitleIsDisplayed() {
         conciergeOrderHistoryForm.getOrderLookUpTitle().should(visible, Duration.ofMinutes(1));
-        conciergeOrderHistoryForm.getOrderLookUpTitle().shouldHave(text("ORDER LOOKUP"),Duration.ofSeconds(30));
+        conciergeOrderHistoryForm.getOrderLookUpTitle().shouldHave(text("ORDER LOOKUP"), Duration.ofSeconds(30));
     }
 
     @When("I introduced {string} with status {string} order number in order number field")

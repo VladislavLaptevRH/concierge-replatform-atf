@@ -2,6 +2,7 @@ package com.test.stepdefinitions;
 
 import com.test.pageObject.ConciergeCartPageScreen;
 import com.test.pageObject.ConciergeItemsScreen;
+import com.test.pageObject.ConciergeUserAccountPage;
 import com.test.pageObject.PdpScreen;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -18,6 +19,7 @@ public class Pdp {
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
     ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
     PdpScreen pdpScreen = new PdpScreen();
+    ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
 
     @When("I click on add monogram checkbox from pdp")
     public void iClickOnAddMonogramCheckboxFromPdp() {
@@ -157,5 +159,19 @@ public class Pdp {
     @Then("I verify price in cart is the same as price on PDP page")
     public void iVerifyPriceInCartIsTheSameAsPriceOnPDPPage() {
         conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$1,327.00"), Duration.ofSeconds(20));
+    }
+
+    @When("I go to Swatch Landing Page")
+    public void iGoToSwatchLandingPage() {
+        conciergeUserAccountPage.getInStockButtonMenu().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getInStockButtonMenu().click();
+        $(By.xpath("//li[@class='MuiListItem-root'][13]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//li[@class='MuiListItem-root'][13]")).click();
+    }
+
+    @Then("I verify that swatch landing page is displayed")
+    public void iVerifyThatSwatchLandingPageIsDisplayed() {
+        $(By.xpath("//*[text()='Premium Fabrics']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Premium Leathers']")).should(visible, Duration.ofSeconds(15));
     }
 }
