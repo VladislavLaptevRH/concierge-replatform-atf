@@ -4,7 +4,6 @@ Feature: PDP
   Scenario:Monogram
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I remove client from header
     When I go to item "MONOGRAMMED 802-GRAM TURKISH TOWEL" from search field
     When I click on first item from grid
     When I click on add monogram checkbox from pdp
