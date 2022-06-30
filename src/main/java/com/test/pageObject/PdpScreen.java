@@ -5,8 +5,13 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+
 @Getter
 public class PdpScreen {
+
+    private SelenideElement manageRegistryButton = $(By.xpath("//*[text()='MANAGE REGISTRY']"));
+
+    private SelenideElement addToRegistryButton = $(By.xpath("(//button[@data-testid='add-to-registry-dialog-opener'])[1]"));
 
     private SelenideElement specialOrdersButton = $(By.xpath("//div[@data-testid='SELECT FROM 12 STOCKED AND 121 SPECIAL ORDER FabricS']"));
 

@@ -18,6 +18,7 @@ import static org.awaitility.Awaitility.await;
 import static org.testng.Assert.assertTrue;
 
 public class AbstractStepDefs {
+    ConciergeOrderHistoryForm conciergeOrderHistoryForm = new ConciergeOrderHistoryForm();
     SelectOption selectOption = new SelectOption();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
@@ -184,5 +185,27 @@ public class AbstractStepDefs {
         conciergeUserAccountPage.getRhConciergeLogo().click();
     }
 
+    @When("I choose client from header")
+    public void iChooseClientFromHeader() {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        if (conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
+            conciergeUserAccountPage.getClientButton().shouldHave(text("CLIENT"), Duration.ofSeconds(15));
+            sleep(2000);
+            conciergeUserAccountPage.getClientButton().click();
+            conciergeUserAccountPage.getClientLookupHeaderBtn().shouldHave(text("Client Lookup"), Duration.ofMinutes(1));
+            conciergeUserAccountPage.getClientLookupHeaderBtn().click();
+
+            generalStepDefs.waitForJSandJQueryToLoad();
+            conciergeUserAccountPage.getClientLookupFirstName().should(visible, Duration.ofSeconds(25));
+            conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
+            conciergeUserAccountPage.getClientLookupLastName().setValue("Trade");
+            conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+            conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofMinutes(1));
+            conciergeUserAccountPage.getClientLookupSearchButton().click();
+            conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME"), Duration.ofMinutes(1));
+            executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getFirstResultOfClientLookup());
+            System.out.println();
+        }
+    }
 }
 
