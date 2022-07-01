@@ -108,7 +108,7 @@ public class Hooks {
     @Before("@conciergeRegression or @conciergeSmoke")
     public void initWebDriver() {
         ConfigFileReader();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver((String) properties.get("conciergestg2url"));
     }
 
@@ -121,7 +121,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 60000;
         Configuration.reportsFolder = "target/screenshots";

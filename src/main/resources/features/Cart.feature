@@ -18,7 +18,7 @@ Feature: Cart Page
     When I click on checkout button
     Then I verify membership popup for guest user
 
-  Scenario: Line Item : Quantiy update
+  Scenario: Line Item : Quantity update
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
