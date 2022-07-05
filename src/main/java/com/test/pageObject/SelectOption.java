@@ -44,4 +44,12 @@ public class SelectOption {
 
     private final SelenideElement selectSizeElement = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Size')])[1]"));
 
+    private final SelenideElement valueOption = $(By.xpath("//select[contains(@id,'Value')]"));
+
+    private final SelenideElement selectAmount = $(By.xpath("//option[@value='3500009']"));
+
+    private final SelenideElement toInputField = $(By.xpath("//input[@id='pdp-gift-card-to']"));
+
+    private final SelenideElement fromInputField = $(By.xpath("//input[@id='pdp-gift-card-from']"));
+
 }

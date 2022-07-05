@@ -15,7 +15,7 @@ import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+
 
 public class SaleStepDefs {
     SaleScreen saleScreen = new SaleScreen();
@@ -30,11 +30,12 @@ public class SaleStepDefs {
     @Then ("I verify sale navigation bars are displayed")
     public void iVerifySaleNavigationBarsAreDisplayed () {
         List<String> items = new ArrayList<>();
-        List<String> expectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Art", "Outdoor"));
+        List<String> expectedItems = new ArrayList(Arrays.asList("LIVING", "DINING" , "BED", "BATH", "LIGHTING", "TEXTILES", "RUGS", "WINDOWS", "DÉCOR", "ART", "OUTDOOR", "SALE", "LIVING", "DINING" , "BED", "BATH", "LIGHTING", "TEXTILES", "RUGS", "WINDOWS", "DÉCOR", "OUTDOOR"));
         for (int i = 0; i < saleScreen.getListOfNavigationBars().size(); i++) {
-            items = new ArrayList(Arrays.asList(saleScreen.getListOfNavigationBars().get(i).getText()));
+            items.add(saleScreen.getListOfNavigationBars().get(i).getText());
         }
-        GeneralStepDefs.compareList(expectedItems, items);
+        assertEquals(items, expectedItems);
+
     }
 
     @When ("I click on sale menu item")

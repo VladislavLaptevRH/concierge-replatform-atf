@@ -16,4 +16,5 @@ public class PdpScreen {
 
     private SelenideElement closeSpecialOrderPopUpButton = $(By.xpath("//div[@class='MuiDialogTitle-root']//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit']"));
 
+    private final SelenideElement productTitleGiftCard = $(By.xpath("//*[@class='MuiTypography-root MuiTypography-h2' and text()='RH GIFT CARD']"));
 }

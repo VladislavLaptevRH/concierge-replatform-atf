@@ -65,4 +65,6 @@ public class ConciergeItemsScreen {
     private final SelenideElement addGiftCheckBox = $(By.xpath("(//span[@class='MuiIconButton-label']/input)[3]"));
 
     private final SelenideElement spaceNameSelect = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12'][3]//select"));
+
+    private final SelenideElement agreeAndAddToCartButton = $(By.xpath("//span[@class='MuiButton-label' and text() = 'Agree & Add To Cart']"));
 }
