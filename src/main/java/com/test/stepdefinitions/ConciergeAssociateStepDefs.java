@@ -53,14 +53,14 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I verify I see store Palo Alto in the header")
     public void iVerifyISeeStoreInTheHeader() {
-        conciergeUserAccountPage.getNewPortBeachGallery().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getNewPortBeachGallery().should(visible, Duration.ofSeconds(20));
         conciergeUserAccountPage.getNewPortBeachGallery().should(text("PALO ALTO"));
         assertEquals(conciergeUserAccountPage.getNewPortBeachGallery().getText(), "PALO ALTO");
     }
 
     @Then("user verifies list of galleries")
     public void userVerifiesListOfGalleries() {
-        conciergeUserAccountPage.getGallerySelectButton().shouldHave(text("NEWPORT"));
+        conciergeUserAccountPage.getGallerySelectButton().shouldHave(text("NEWPORT"),Duration.ofSeconds(12));
         String actualListOfGalleries = conciergeUserAccountPage.getGallerySelectButton().getText();
         assertEquals(actualListOfGalleries, actualListOfGalleries);
     }

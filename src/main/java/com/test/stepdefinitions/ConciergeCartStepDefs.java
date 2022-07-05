@@ -263,7 +263,7 @@ public class ConciergeCartStepDefs {
     @Then("I verify that total price from cart and from payment page is the same")
     public void iVerifyThatTotalPriceFromCartAndFromPaymentPageIsTheSame() {
         conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$539.00']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$549.00']")).should(visible, Duration.ofSeconds(15));
     }
 
     @When("I choose POP for payment method")

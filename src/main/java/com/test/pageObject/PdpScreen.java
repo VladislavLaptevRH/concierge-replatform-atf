@@ -13,7 +13,7 @@ public class PdpScreen {
 
     private SelenideElement addToRegistryButton = $(By.xpath("(//button[@data-testid='add-to-registry-dialog-opener'])[1]"));
 
-    private SelenideElement specialOrdersButton = $(By.xpath("//div[@data-testid='SELECT FROM 12 STOCKED AND 121 SPECIAL ORDER FabricS']"));
+    private SelenideElement specialOrdersButton = $(By.xpath("//div[contains(@data-testid,'SPECIAL ORDER FabricS')]"));
 
     private SelenideElement fogSpecialOrderColor = $(By.xpath("(//ul[@class='MuiGridList-root']//li)[5]"));
 

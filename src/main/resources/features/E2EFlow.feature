@@ -9,6 +9,7 @@ Feature: E2E flow
     When I clicks on o random item
     When I select debth option
     When I select fabric option
+    When I select length option
     When I select color option
     And I select count of product
     When I click on add to cart button
@@ -44,7 +45,7 @@ Feature: E2E flow
   Scenario: Verify that if client is a member then redirected to carts screen
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10011395 BRS" from search field
+    When I go to item "10001414 PEWT" from search field
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -57,7 +58,7 @@ Feature: E2E flow
   Scenario: Verify that if client is a non member then redirected to address screen
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10011395 BRS" from search field
+    When I go to item "68260005 BULB" from search field
     And I select count of product
     When I click on add to cart button
     When I click on view cart button

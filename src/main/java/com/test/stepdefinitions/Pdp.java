@@ -1,12 +1,11 @@
 package com.test.stepdefinitions;
 
-import com.test.pageObject.ConciergeCartPageScreen;
-import com.test.pageObject.ConciergeItemsScreen;
-import com.test.pageObject.ConciergeUserAccountPage;
-import com.test.pageObject.PdpScreen;
+import com.codeborne.selenide.WebDriverRunner;
+import com.test.pageObject.*;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 
 import java.time.Duration;
 
@@ -20,7 +19,7 @@ public class Pdp {
     ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
     PdpScreen pdpScreen = new PdpScreen();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
-
+    SelectOption selectOption = new SelectOption();
     @When("I click on add monogram checkbox from pdp")
     public void iClickOnAddMonogramCheckboxFromPdp() {
         sleep(3000);
@@ -135,6 +134,9 @@ public class Pdp {
 
     @When("I choose color from special order fabrics")
     public void iChooseColorFromSpecialOrderFabrics() {
+        sleep(3000);
+        Actions actions = new Actions(WebDriverRunner.getWebDriver());
+        actions.moveToElement(conciergeUserAccountPage.getMenuItems().get(1));
         pdpScreen.getFogSpecialOrderColor().should(visible, Duration.ofSeconds(20));
         pdpScreen.getFogSpecialOrderColor().click();
     }
@@ -142,7 +144,7 @@ public class Pdp {
     @Then("I verify that color has been chosen")
     public void iVerifyThatColorHasBeenChosen() {
         pdpScreen.getCloseSpecialOrderPopUpButton().click();
-        pdpScreen.getFogSelectedOption().shouldHave(text("Fog"), Duration.ofSeconds(20));
+        selectOption.getColorOption().shouldHave(text("Nickel"), Duration.ofSeconds(20));
 
     }
 

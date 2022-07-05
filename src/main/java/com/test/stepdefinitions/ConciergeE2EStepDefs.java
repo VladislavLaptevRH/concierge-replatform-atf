@@ -665,6 +665,14 @@ public class ConciergeE2EStepDefs {
 
     }
 
+    @When("I select length option")
+    public void iSelectLengthOption() {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        sleep(6000);
+        selectOption.getLengthOption().should(visible,Duration.ofSeconds(15));
+        Select selectLength = new Select(selectOption.getLengthOption());
+        selectLength.selectByValue("80400002");
+    }
 }
 
 

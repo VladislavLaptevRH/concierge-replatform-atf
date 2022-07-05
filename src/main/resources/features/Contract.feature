@@ -4,7 +4,7 @@ Feature: Contract
   Scenario: Verify that I'm not able to select Contract Client without contract gallery
     Given I log into Concierge as "associate"
     And I remove all items from cart
-    And I go to item "68470071 SS" from search field
+    And I go to item "61040991 BRZ" from search field
     And I click on add to cart button
     And I click on view cart button
     When I choose order classification

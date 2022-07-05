@@ -307,7 +307,7 @@ Feature: Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "10011394 BRZ" from search field
+    When I go to item "61040991 BRZ" from search field
     When I click on add to cart button
     When I click on view cart button
     When I choose postpone shipment
