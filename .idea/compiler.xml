@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="concierge-replatform-atf" />
         <module name="cucumber" />
+        <module name="concierge-replatform-atf copy" />
       </profile>
     </annotationProcessing>
   </component>
