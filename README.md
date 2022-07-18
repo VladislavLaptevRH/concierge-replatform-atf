@@ -1,4 +1,4 @@
-# concierge-replatform-atf
+# tests.concierge-replatform-atf
 automation testing framework created by mdovbenco
 
 Introductory information                        Automated Testing Framework
@@ -42,7 +42,7 @@ fields on the UI.
 
 **Download a Framework**
 **********************
-Github - https://github.com/RHCommerceDev/concierge-replatform-atf/
+Github - https://github.com/RHCommerceDev/tests.concierge-replatform-atf/
 
 **Writing a test**
 **************
@@ -76,10 +76,10 @@ mvn clean test
 -to run automation tests for filter, please type the following command:
 mvn test -Dcucumber.filter.tags='@rhnonprodFilter'
 
--to run automation tests for concierge regression, please type the following command:
+-to run automation tests for tests.concierge regression, please type the following command:
 mvn test -Dcucumber.filter.tags='@conciergeRegression'
 
--to run automation tests for concierge smoke testing, please type the following command:
+-to run automation tests for tests.concierge smoke testing, please type the following command:
 mvn test -Dcucumber.filter.tags='@conciergeSmoke'
 
 -to run automation tests for eStore regression, please type the following command:
@@ -91,7 +91,7 @@ mvn test -Dcucumber.filter.tags='@eStoreSmoke'
 
 Structure of automation testing framework:
 
-*concierge-replatform-atf - modue of automation testing framework
+*tests.concierge-replatform-atf - modue of automation testing framework
     **build - folder with screenshot from tests
     **driver - folder with chromedriver
     **src
@@ -101,7 +101,7 @@ Structure of automation testing framework:
             ******pageObject - package with page object pattern
             ******runners - package with the class from which tests started to execute
             ******stepdefinitions - package with the Java classes which implement features files
-            ******utility - package with Hooks.class - is the main class with driver session settings
+            ******tests.utility - package with Hooks.class - is the main class with driver session settings
         ****resources - resource folder which contains feature files (Feature files use for write test cases in Cucumber style)
 
 application.properties - main properties for automation testing framework (credentials data, base url)

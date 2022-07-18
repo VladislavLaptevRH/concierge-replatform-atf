@@ -24,7 +24,7 @@ pipeline.standardTemplate { label ->
                         sh """
                         apk --no-cache add tree
                         pwd 
-                        cd /home/jenkins/workspace/eCommerce/concierge-replatform-atf/target
+                        cd /home/jenkins/workspace/eCommerce/tests.concierge-replatform-atf/target
                         tree -H '.' -L 3 --noreport --charset utf-8  -o index.html
                         aws s3 sync . s3://docs.rhapsody.rh.com/public/${resultspath}
                         """
