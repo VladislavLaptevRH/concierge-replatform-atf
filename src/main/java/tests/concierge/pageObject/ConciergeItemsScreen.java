@@ -28,7 +28,7 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement detailsSpan = $(By.xpath("//*[text()='DETAILS']"));
 
-    private final SelenideElement checkoutButton = $(By.xpath("//div[contains(@class,'MuiGrid-root MuiGrid-container MuiGrid-item')][2]//button"));
+    private final SelenideElement checkoutButton = $(By.xpath("(//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth'])[1]"));
 
     private final SelenideElement closePopUpButton = $(By.xpath("/html/body/div[4]/div[3]/div/div[2]/div/div[2]/div/div[2]/button"));
 

@@ -26,7 +26,7 @@ Feature:Estore Order review
   Scenario: Edit payment
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10011389 BRS" from search field
+    When I go to item "10011392 SS" from search field
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -43,7 +43,7 @@ Feature:Estore Order review
   Scenario: Verify the payment details and Order estimate summary
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10011389 BRS" from search field
+    When I go to item "10011392 SS" from search field
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -83,7 +83,7 @@ Feature:Estore Order review
   Scenario: Verify all the line items in the cart
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10011389 BRS" from search field
+    When I go to item "10011392 SS" from search field
     And I select count of product
     When I click on add to cart button
     When I click on view cart button

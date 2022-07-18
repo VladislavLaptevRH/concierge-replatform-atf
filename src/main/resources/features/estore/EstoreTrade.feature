@@ -5,7 +5,7 @@ Feature: Estore Trade
   Scenario: Trade Client - Non Exempt
     Given I log into Concierge as "associate"
     And I remove all items from cart
-    And I go to item "10011389 BRS" from search field
+    And I go to item "10011392 SS" from search field
     And I select count of product
     And I click on add to cart button
     And I click on view cart button

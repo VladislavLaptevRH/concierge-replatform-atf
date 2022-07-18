@@ -4,7 +4,7 @@ Feature: Estore Cart Page
 
   Scenario: Order Classification
     Given I log into estore as "associate"
-    When I go to item "10011389 BRS" from search field
+    When I go to item "10011392 SS" from search field
     When I click on add to cart button
     When I click on view cart button
     Then I verify order classification
@@ -12,7 +12,7 @@ Feature: Estore Cart Page
   Scenario: Checkout membership popup for Guest user
     Given I log into Concierge as "associate"
     When I remove client from header
-    When I go to item "10011389 BRS" from search field
+    When I go to item "10011392 SS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -23,7 +23,7 @@ Feature: Estore Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "10011389 BRS" from search field
+    When I go to item "10011392 SS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on quantity line item button
@@ -32,7 +32,7 @@ Feature: Estore Cart Page
   Scenario:Remove line item - click on remove button and verify that line item is removed and subtotal and minicart value is updated
     Given I log into Concierge as "associate"
     When I remove client from header
-    When I go to item "10011389 BRS" from search field
+    When I go to item "10011392 SS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I remove all items from cart
@@ -42,7 +42,7 @@ Feature: Estore Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "10011389 BRS" from search field
+    When I go to item "10011392 SS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on cart button from header
@@ -62,7 +62,7 @@ Feature: Estore Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "10011389 BRS" from search field
+    When I go to item "10011392 SS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on total item line price
@@ -76,7 +76,7 @@ Feature: Estore Cart Page
   Scenario:Override Line item Prices - verify update button, verify remove button
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10011389 BRS" from search field
+    When I go to item "10011392 SS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on total item line price
@@ -95,7 +95,7 @@ Feature: Estore Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "10011389 BRS" from search field
+    When I go to item "10011392 SS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on total item line price
@@ -112,7 +112,7 @@ Feature: Estore Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "10011389 BRS" from search field
+    When I go to item "10011392 SS" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on UFD button from cart
