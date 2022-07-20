@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 
-import tests.estore.pageObject.EstoreItemsScreen;
 import tests.utility.Hooks;
 import tests.concierge.pageObject.*;
 import io.cucumber.java.en.And;
@@ -26,7 +25,7 @@ import static org.testng.Assert.assertTrue;
 
 public class ConciergeE2EStepDefs {
     ConfirmationOrderScreen confirmationOrderScreen = new ConfirmationOrderScreen();
-    EstoreItemsScreen estoreItemsScreen = new EstoreItemsScreen();
+    ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
     RestrictionPopUp restrictionPopUp = new RestrictionPopUp();
@@ -42,17 +41,17 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on add to project button")
     public void userClickOnAddToProjectButton() {
-        estoreItemsScreen.getAddToProjectButton().should(Condition.and("", enabled, visible), Duration.ofSeconds(12));
-        estoreItemsScreen.getAddToProjectButton().click();
+        conciergeItemsScreen.getAddToProjectButton().should(Condition.and("", enabled, visible), Duration.ofSeconds(12));
+        conciergeItemsScreen.getAddToProjectButton().click();
 
     }
 
     @When("I click on go to project button")
     public void iClickOnGoToProjectButton() {
         generalStepDefs.isElementVisible("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4'][1]//button[contains(@class,'MuiButtonBase-root MuiButton-root MuiButton-contained')]");
-        estoreItemsScreen.getContinueShoppingButton().should(visible, Duration.ofSeconds(12));
+        conciergeItemsScreen.getContinueShoppingButton().should(visible, Duration.ofSeconds(12));
 
-        estoreItemsScreen.getGoToProjectButton().click();
+        conciergeItemsScreen.getGoToProjectButton().click();
     }
 
     @When("I click on add to cart button from project screen")
@@ -97,9 +96,9 @@ public class ConciergeE2EStepDefs {
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        estoreItemsScreen.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
-        estoreItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
-        estoreItemsScreen.getAddToCartButton().click();
+        conciergeItemsScreen.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
+        conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
+        conciergeItemsScreen.getAddToCartButton().click();
     }
 
     @When("I fill all fields from address with {string} zip code")
@@ -126,9 +125,8 @@ public class ConciergeE2EStepDefs {
     @When("I remove all items from cart")
     public void iRemoveAllItemsFromCart() {
         conciergeUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(1));
-        conciergeUserAccountPage.getCartButton().shouldHave(text("CART"), Duration.ofMinutes(1));
         sleep(3000);
-        if (!conciergeUserAccountPage.getCartButton().getText().equals("CART 0")) {
+        if (!conciergeUserAccountPage.getCartButton().getText().equals("")) {
             conciergeUserAccountPage.getCartButton().click();
             generalStepDefs.waitForJSandJQueryToLoad();
             conciergeCartPageScreen.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(12));
@@ -139,6 +137,7 @@ public class ConciergeE2EStepDefs {
             conciergeCartPageScreen.getClearOrderButtonPop().click();
             generalStepDefs.waitForJSandJQueryToLoad();
         }
+        System.out.println();
     }
 
 
@@ -178,8 +177,8 @@ public class ConciergeE2EStepDefs {
             conciergeUserAccountPage.getItemSubCategory().get(0).click();
 
             conciergeCartPageScreen.getShoppingCartEmpty().should(visible, Duration.ofMinutes(1));
-            await().forever().until(() -> estoreItemsScreen.getCollectionsItems().get(0).isDisplayed());
-            estoreItemsScreen.getCollectionsItems().get(1 + rand.nextInt((1 - 0) + 1)).click();
+            await().forever().until(() -> conciergeItemsScreen.getCollectionsItems().get(0).isDisplayed());
+            conciergeItemsScreen.getCollectionsItems().get(1 + rand.nextInt((1 - 0) + 1)).click();
 
             generalStepDefs.isElementVisible("//h2[@class='MuiTypography-root MuiTypography-h2']");
             String currentUrl = Hooks.getCurrentUrl();
@@ -206,8 +205,8 @@ public class ConciergeE2EStepDefs {
             quantityButton.selectByIndex(2);
 
 
-            estoreItemsScreen.getAddToCartButton().should(visible, Duration.ofSeconds(12));
-            estoreItemsScreen.getAddToCartButton().click();
+            conciergeItemsScreen.getAddToCartButton().should(visible, Duration.ofSeconds(12));
+            conciergeItemsScreen.getAddToCartButton().click();
 
             conciergeCartPageScreen.getClosePopUp().should(visible, Duration.ofSeconds(15));
             conciergeCartPageScreen.getClosePopUp().click();
@@ -308,14 +307,12 @@ public class ConciergeE2EStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         sleep(5000);
         try {
-            if (!conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
-                conciergeUserAccountPage.getClientButton().shouldHave(text("Client : "), Duration.ofSeconds(10));
+            if ($(By.xpath("//*[contains(text(),'Client: ')]")).isDisplayed()) {
                 conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
                 conciergeUserAccountPage.getClientButton().click();
                 conciergeUserAccountPage.getRemoveClientByText().shouldHave(text("Remove Client"), Duration.ofSeconds(5));
                 conciergeUserAccountPage.getRemoveClientByText().click();
             }
-            System.out.println();
         } catch (AssertionError e) {
             System.out.println("Client is not selected");
         }
@@ -353,8 +350,8 @@ public class ConciergeE2EStepDefs {
     @And("I select count of product")
     public void iSelectCountOfProduct() {
         executeJavaScript("window.scrollTo(0, 1200)");
-        estoreItemsScreen.getDetailsSpan().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
-        estoreItemsScreen.getDetailsSpan().shouldHave(text(estoreItemsScreen.getDetailsSpan().getText()), Duration.ofMinutes(3));
+        conciergeItemsScreen.getDetailsSpan().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
+        conciergeItemsScreen.getDetailsSpan().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofMinutes(3));
         selectOption.getQuantityElement().should(visible, Duration.ofMinutes(1));
 
         Select selectQty = new Select(selectOption.getQuantityElement());
@@ -671,7 +668,7 @@ public class ConciergeE2EStepDefs {
     public void iSelectLengthOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
         sleep(6000);
-        selectOption.getLengthOption().should(visible,Duration.ofSeconds(15));
+        selectOption.getLengthOption().should(visible, Duration.ofSeconds(15));
         Select selectLength = new Select(selectOption.getLengthOption());
         selectLength.selectByValue("80400002");
     }

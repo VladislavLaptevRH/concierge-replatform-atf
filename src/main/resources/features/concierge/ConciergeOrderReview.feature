@@ -1,5 +1,4 @@
 @conciergeRegression
-@conciergeOrderReviewRegression
 Feature:Concierge Order review
 
   Scenario: Edit Shipping and Billing Address

@@ -22,7 +22,7 @@ public class ConciergeOrderHistoryStepDefs {
     ConciergeOrderHistoryForm conciergeOrderHistoryForm = new ConciergeOrderHistoryForm();
     String customerFirstName;
 
-    @When("I navigate to the order history page from the tests.concierge dashboard")
+    @When("I navigate to the order history page from the concierge dashboard")
     public void iNavigateToTheOrderHistoryPageFromTheConciergeDashboard() {
         conciergeUserAccountPage.getOrderHistoryButton().should(visible, Duration.ofMinutes(1));
         conciergeUserAccountPage.getOrderHistoryButton().click();

@@ -1,5 +1,4 @@
 @conciergeRegression
-@conciergeSaleRegression
 Feature:Concierge Sale
 
   Scenario: Sale navigation bar is displayed and functional

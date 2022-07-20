@@ -1,19 +1,16 @@
 @conciergeRegression
-@conciergeClientRegression
-Feature:Concierge Client Lookup
+Feature:Client
 
   Scenario Outline: Verify client search by <searchBy>
     Given I log into Concierge as "associate"
     When I remove client from header
-    When I click on client button
     When I search client by "<searchBy>"
     Then I verify that client results is displayed
     Examples:
       | searchBy                      |
       | email                         |
       | lastName                      |
-      | memberID
-      |
+      | memberID                      |
       | businessAccountNumberTrade    |
       | businessAccountNumberContract |
 

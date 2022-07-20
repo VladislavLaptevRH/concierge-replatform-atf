@@ -1,5 +1,4 @@
 @conciergeRegression
-@conciergeThankYouPageRegression
 Feature:Concierge ThankYouPage
 
   Scenario: Verify order details

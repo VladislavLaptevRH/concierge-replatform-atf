@@ -89,7 +89,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement westHollywood = $(By.xpath("//*[@id=\"146\"]"));
 
-    private final SelenideElement cartButton = $(By.xpath("(//a[@class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary']/h6[@class='MuiTypography-root MuiTypography-subtitle1'])[2]"));
+    private final SelenideElement cartButton = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//a[@class='MuiTypography-root MuiLink-root MuiLink-underlineNone MuiTypography-colorPrimary'])[1]"));
 
     private final SelenideElement orderHistoryButton = $(By.xpath("//a[1]/button[contains(@class,'MuiButton-root')]"));
 
@@ -97,15 +97,15 @@ public class ConciergeUserAccountPage {
 
     private final List<SelenideElement> itemSubCategory = $$(By.xpath("//div[2]//ul[@class='MuiList-root']/li[@class='MuiListItem-root']"));
 
-    private final SelenideElement clientButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][1]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6"));
+    private final SelenideElement clientButton = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center MuiGrid-justify-xs-center'])[1]"));
 
     private final SelenideElement removeClientButton = $(By.xpath("//li[@id='1']/button"));
 
-    private final SelenideElement removeClientByText = $(By.xpath("//*[text()='Remove Client']"));
+    private final SelenideElement removeClientByText = $(By.xpath("//*[text()='REMOVE CLIENT']"));
 
     private final SelenideElement brandButton = $(By.xpath("(//div[2]/div//div[@class='MuiGrid-root MuiGrid-item'][3])[1]"));
 
-    private final SelenideElement clientLookupHeaderBtn = $(By.xpath("//li[@id='1']/button"));
+    private final SelenideElement clientLookupHeaderBtn = $(By.xpath("//*[text()='CLIENT LOOKUP']"));
 
     private final SelenideElement contractText = $(By.xpath("//*[text()='Contract']"));
 

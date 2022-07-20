@@ -1,5 +1,4 @@
 @conciergeRegression
-@conciergePaymentRegression
 Feature:Concierge Payment
 
   Scenario Outline: Major CCs

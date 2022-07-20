@@ -1,6 +1,5 @@
 @conciergeRegression
-@conciergePdpRegression
-Feature: Concierge PDP
+Feature:Concierge PDP
 
   Scenario:Monogram
     Given I log into Concierge as "associate"

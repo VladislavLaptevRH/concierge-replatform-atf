@@ -1,5 +1,4 @@
 @conciergeRegression
-@cartConciergeRegression
 Feature:Concierge Cart Page
 
   Scenario: Order Classification

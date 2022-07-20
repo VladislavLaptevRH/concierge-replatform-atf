@@ -33,7 +33,7 @@ public class ClientSearchStepDefs {
     public void iClickOnClientButton() {
         conciergeUserAccountPage.getClientButton().should(Condition.and("Displayed", appear, exist), Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientButton().click();
-        conciergeUserAccountPage.getClientLookupHeaderBtn().shouldHave(text("Client Lookup"), Duration.ofMinutes(1));
+        conciergeUserAccountPage.getClientLookupHeaderBtn().shouldHave(text("CLIENT LOOKUP"), Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientLookupHeaderBtn().click();
     }
 
