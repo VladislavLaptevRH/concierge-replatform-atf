@@ -207,5 +207,11 @@ public class AbstractStepDefs {
             System.out.println();
         }
     }
+
+    @When("I verify that concierge is displayed")
+    public void iVerifyThatConciergeIsDisplayed() {
+
+    }
+
 }
 
