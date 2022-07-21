@@ -137,7 +137,6 @@ public class ConciergeE2EStepDefs {
             conciergeCartPageScreen.getClearOrderButtonPop().click();
             generalStepDefs.waitForJSandJQueryToLoad();
         }
-        System.out.println();
     }
 
 

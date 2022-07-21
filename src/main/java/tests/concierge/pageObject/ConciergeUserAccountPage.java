@@ -45,7 +45,7 @@ public class ConciergeUserAccountPage {
 
     private final List<SelenideElement> listOfBrands = $$(By.xpath("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li"));
 
-    private final SelenideElement projectsButton = $(By.xpath("//*[text()='Projects']"));
+    private final SelenideElement projectsButton = $(By.xpath("//a[@data-analytics-worhlogo='projects-logo']"));
 
     private final SelenideElement locationButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item']/h6[contains(@class,'MuiTypography-displayInline')]"));
 
