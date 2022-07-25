@@ -106,6 +106,18 @@ public class PaymentStepDefs {
 
     @Then("I verify the complete billing address")
     public void iVerifyTheCompleteBillingAddress() {
+        paymentScreen.getBillingAddress().shouldHave(text(
+                "BILLING ADDRESS\n" +
+                        "QA1 Automation\n" +
+                        "AutomationCompany\n" +
+                        "Qastreet\n" +
+                        "QaApartment\n" +
+                        "Schenectady, NY 12345\n" +
+                        "US\n" +
+                        "124131231\n" +
+                        "automationnonmember@mailinator.com\n" +
+                        "Edit"));
+
         assertEquals(paymentScreen.getBillingAddress().getText(),
                 "BILLING ADDRESS\n" +
                         "QA1 Automation\n" +

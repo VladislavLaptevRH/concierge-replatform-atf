@@ -51,7 +51,6 @@ Feature:Concierge Registry
 
   Scenario: Delete registry
     Given I log into Concierge as "associate"
-    When I remove all items from cart
     When I click on registry button
     When I click on new registry button
     When I fills all field for create registry
@@ -99,7 +98,6 @@ Feature:Concierge Registry
     When I click on rh concierge logo
     When I go to item "10011392 SS" from search field
     Then I verify that add to registry button is "displayed"
-    When I click on client button
     When I click on reset registry
     When I click on rh concierge logo
     When I go to item "10011392 SS" from search field

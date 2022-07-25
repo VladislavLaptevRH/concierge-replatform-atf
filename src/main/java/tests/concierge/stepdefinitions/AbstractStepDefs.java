@@ -178,7 +178,7 @@ public class AbstractStepDefs {
         conciergeUserAccountPage.getItemSubCategory().get(0).click();
     }
 
-    @When("I click on rh tests.concierge logo")
+    @When("I click on rh concierge logo")
     public void iClickOnRhConciergeLogo() {
         conciergeUserAccountPage.getRhConciergeLogo().should(Condition.and("", visible, enabled), Duration.ofMinutes(5));
 

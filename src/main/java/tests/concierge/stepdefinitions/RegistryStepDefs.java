@@ -1,6 +1,7 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.concierge.pageObject.PdpScreen;
 import tests.concierge.pageObject.RegistryScreen;
 import io.cucumber.java.en.Then;
@@ -10,12 +11,14 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 
 public class RegistryStepDefs {
     RegistryScreen registryScreen = new RegistryScreen();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+    ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     PdpScreen pdpScreen = new PdpScreen();
     String registrantFirstName;
     String registrantLastName;
@@ -99,6 +102,7 @@ public class RegistryStepDefs {
         if (arg0.equals("edit registry")) {
             registryScreen.getEditRegistryButton().should(Condition.visible, Duration.ofSeconds(20));
             registryScreen.getEditRegistryButton().click();
+            System.out.println();
         }
         if (arg0.equals("edit registry details")) {
             registryScreen.getEditRegistryDetailsButton().shouldHave(Condition.text("EDIT REGISTRY DETAILS"), Duration.ofSeconds(20));
@@ -120,9 +124,8 @@ public class RegistryStepDefs {
 
     @Then("I verify that registry was created")
     public void iVerifyThatRegistryWasCreated() {
-        registryScreen.getSearchResult().shouldHave(Condition.text(registrantFirstName + " " + registrantLastName + " Wedding 06/28/2022 Automation Associate Testcity, US 0"), Duration.ofSeconds(20));
+        registryScreen.getSearchResult().shouldHave(Condition.text(registrantFirstName + " " + registrantLastName), Duration.ofSeconds(20));
     }
-
     @When("I click on continue registrant button")
     public void iClickOnContinueRegistrantButton() {
         registryScreen.getContinueRegistrantButton().should(Condition.visible, Duration.ofSeconds(20));
@@ -216,8 +219,11 @@ public class RegistryStepDefs {
 
     @When("I click on reset registry")
     public void iClickOnResetRegistry() {
-        $(By.xpath("//li[@id='9']")).should(Condition.visible,Duration.ofMinutes(1));
-        $(By.xpath("//li[@id='9']")).click();
+        conciergeUserAccountPage.getClientButton().should(Condition.and("Displayed", appear, exist), Duration.ofMinutes(1));
+        conciergeUserAccountPage.getClientButton().click();
+        $(By.xpath("//*[text()='RESET REGISTRY']")).should(visible,Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='RESET REGISTRY']")).click();
+
     }
 
     @When("I search registry with more client create registries")

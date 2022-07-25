@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class ConciergeUserAccountPage {
-    private final SelenideElement galleryButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item']/h6[@class='MuiTypography-root MuiTypography-subtitle1 MuiTypography-displayInline']"));
+    private final SelenideElement galleryButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item MuiGrid-align-items-xs-center']/div[@class='MuiGrid-root MuiGrid-item'][2]"));
 
     private final SelenideElement gallerySelect = $(By.xpath("//select[@name='gallery-select']"));
 
@@ -85,7 +85,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement paloAltpGallery = $(By.xpath("//select[@id='gallery-select']/option[2]"));
 
-    private final SelenideElement gallerySubmitButton = $(By.xpath("//*[text()='Submit']"));
+    private final SelenideElement gallerySubmitButton = $(By.xpath("//*[text()='SUBMIT']"));
 
     private final SelenideElement westHollywood = $(By.xpath("//*[@id=\"146\"]"));
 
@@ -121,7 +121,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement firstResultOfClientLookup = $(By.xpath("//td[@class='MuiTableCell-root MuiTableCell-body'][1]/div"));
 
-    private final SelenideElement rhConciergeLogo = $(By.xpath("//a[@id='nav-logo-image']"));
+    private final SelenideElement rhConciergeLogo = $(By.xpath("//a[@data-analytics-worhlogo='worh-logo']"));
 
     private final SelenideElement inStockMenuItem = $(By.xpath("//*[text()='In Stock']"));
 
