@@ -1,0 +1,41 @@
+package tests.estore.stepdefinitions;
+
+import io.cucumber.java.en.Given;
+import tests.estore.pageObject.EstoreLoginPage;
+import tests.utility.Hooks;
+
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.visible;
+
+public class EstoreLoginStepDefs {
+
+    EstoreLoginPage estoreLoginPage = new EstoreLoginPage();
+    @Given("I log into eStore as {string}")
+    public void iLogIntoEStoreAs(String arg0) {
+        loginAsRole(arg0);
+    }
+
+    public void loginAsRole(String accountRole) {
+        estoreLoginPage.getAccountIcon().should(visible, Duration.ofMinutes(5));
+        estoreLoginPage.getAccountIcon().click();
+
+        estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(5));
+        estoreLoginPage.getPasswordField().should(visible, Duration.ofMinutes(5));
+
+        if (accountRole.equals("regular")) {
+            estoreLoginPage.getUsernameField().setValue("new02@rh.com");
+            estoreLoginPage.getPasswordField().setValue("Qwerty@123");
+        }
+        if (accountRole.equals("employee")) {
+            estoreLoginPage.getUsernameField().setValue("ediscount");
+            estoreLoginPage.getPasswordField().setValue("p6K6K6Mx");
+        }
+        if (accountRole.equals("leader")) {
+            estoreLoginPage.getUsernameField().setValue(Hooks.leaderLogin);
+            estoreLoginPage.getPasswordField().setValue(Hooks.leaderPassword);
+        }
+        estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
+        estoreLoginPage.getSignInButton().click();
+    }
+}
