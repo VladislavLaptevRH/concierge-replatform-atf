@@ -17,11 +17,11 @@ public class EstoreLoginStepDefs {
     }
 
     public void loginAsRole(String accountRole) {
-        estoreLoginPage.getAccountIcon().should(visible, Duration.ofMinutes(5));
+        estoreLoginPage.getAccountIcon().should(visible, Duration.ofMinutes(15));
         estoreLoginPage.getAccountIcon().click();
 
-        estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(5));
-        estoreLoginPage.getPasswordField().should(visible, Duration.ofMinutes(5));
+        estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(15));
+        estoreLoginPage.getPasswordField().should(visible, Duration.ofMinutes(15));
 
         if (accountRole.equals("regular")) {
             estoreLoginPage.getUsernameField().setValue("new02@rh.com");

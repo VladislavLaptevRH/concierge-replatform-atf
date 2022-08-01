@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class EStoreHomePageStepDefs {
+public class EstoreHomePageStepDefs {
     EstoreHomePage estoreHomePage = new EstoreHomePage();
     @Then("I expect that I am on the eStore Dashboard page")
     public void iExpectThatIAmOnTheEStoreDashboardPage() {

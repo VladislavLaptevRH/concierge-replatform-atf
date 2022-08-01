@@ -8,7 +8,7 @@ import io.cucumber.testng.CucumberOptions;
         features = {"src/main/resources/features/"}
         , glue = {"tests"}
         , plugin = {"usage", "json:target/cucumber-reports/Cucumber.json", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-        tags = "@conciergeRegression"
+        tags = "@conciergeRegression or @estoreRegression"
 )
 
 public class RunTest extends AbstractTestNGCucumberTests {

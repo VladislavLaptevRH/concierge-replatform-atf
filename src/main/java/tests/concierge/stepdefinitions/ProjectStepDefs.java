@@ -6,6 +6,7 @@ import tests.concierge.pageObject.*;
 import io.cucumber.java.en.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import tests.estore.pageObject.EstoreItemPage;
 
 import java.time.Duration;
 import java.util.UUID;
@@ -15,6 +16,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.testng.Assert.*;
 
 public class ProjectStepDefs {
+    EstoreItemPage estoreItemPage = new EstoreItemPage();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeProjectScreen conciergeProjectScreen = new ConciergeProjectScreen();
     ProjectSettingsScreen projectSettingsScreen = new ProjectSettingsScreen();

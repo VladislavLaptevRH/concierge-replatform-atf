@@ -1,5 +1,4 @@
 @estoreRegression
-@estoreHomeRegression
 Feature: Estore Homepage
 
   Scenario: Verify that home page is accessible
