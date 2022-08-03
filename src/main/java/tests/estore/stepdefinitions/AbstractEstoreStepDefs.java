@@ -65,8 +65,8 @@ public class AbstractEstoreStepDefs {
         }
     }
 
-    @When("I fill all options for item")
-    public void iFillAllOptionsForItem() {
+    @When("I fill in all options for item")
+    public void iFillInAllOptionsForItem() {
         try {
             conciergeCartPageScreen.getColorCloseButton().should(visible, Duration.ofSeconds(15));
             conciergeCartPageScreen.getColorCloseButton().click();
