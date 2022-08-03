@@ -176,8 +176,8 @@ public class AbstractEstoreStepDefs {
             System.out.println("Address fields are not available");
         }
     }
-
-    @When("I clicks on a random menu item for brands")
+   // Fix DuplicateStepDefinitionException - change the steps names so they uniqe from concierge step definition
+   /* @When("I clicks on a random menu item for brands")
     public void iClicksOnARandomMenuItemForBrands() {
         await().forever().until(() -> conciergeUserAccountPage.getMenuItems().get(0).isDisplayed());
         conciergeUserAccountPage.getMenuItems().get(0).should(visible);
@@ -221,7 +221,7 @@ public class AbstractEstoreStepDefs {
     @When("I verify that concierge is displayed")
     public void iVerifyThatConciergeIsDisplayed() {
 
-    }
+    }*/
 
 }
 
