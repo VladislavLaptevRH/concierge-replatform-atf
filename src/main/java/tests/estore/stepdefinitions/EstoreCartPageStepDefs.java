@@ -19,7 +19,9 @@ public class EstoreCartPageStepDefs {
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     EstoreItemPage estoreItemPage = new EstoreItemPage();
 
-    @When("I remove all items from estore cart")
+    // Fix DuplicateStepDefinitionException - change the steps names so they uniqe from concierge step definition
+
+    /*@When("I remove all items from estore cart")
     public void iRemoveAllItemsFromCart() {
         estoreUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(3));
         sleep(3000);
@@ -60,5 +62,5 @@ public class EstoreCartPageStepDefs {
             estoreCartPage.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
         }
         generalStepDefs.waitForJSandJQueryToLoad();
-    }
+    }*/
 }

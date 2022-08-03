@@ -19,7 +19,7 @@ public class EstoreItemsStepDefs {
     SelectOption selectOption = new SelectOption();
     EstoreGeneralStepDefs generalStepDefs = new EstoreGeneralStepDefs();
 
-    @When("I select estore debth option")
+    /*@When("I select estore debth option")
     public void iSelectDebthProperty() {
         sleep(12000);
         generalStepDefs.waitForJSandJQueryToLoad();
@@ -72,5 +72,5 @@ public class EstoreItemsStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Collection section is not displayed");
         }
-    }
+    }*/
 }

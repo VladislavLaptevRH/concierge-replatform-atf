@@ -36,8 +36,9 @@ public class AbstractEstoreStepDefs {
     EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
     EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
 
+    // Fix DuplicateStepDefinitionException - change the steps names so they uniqe from concierge step definition
 
-    @When("I clicks on a random estore menu item")
+    /*@When("I clicks on a random estore menu item")
     public void iClicksOnARandomMenuItem() {
         sleep(7000);
         generalStepDefs.waitForJSandJQueryToLoad();
@@ -130,7 +131,7 @@ public class AbstractEstoreStepDefs {
 
     }
 
-    @And("I verify that estore review screen is displayed")
+   @And("I verify that estore review screen is displayed")
     public void iVerifyThatReviewScreenIsDisplayed() {
         estoreReviewOrderPage.getBillingAddress().should(visible, Duration.ofMinutes(1));
         estoreReviewOrderPage.getShippingAddress().should(visible, Duration.ofMinutes(1));
@@ -176,8 +177,8 @@ public class AbstractEstoreStepDefs {
             System.out.println("Address fields are not available");
         }
     }
-   // Fix DuplicateStepDefinitionException - change the steps names so they uniqe from concierge step definition
-   /* @When("I clicks on a random menu item for brands")
+
+    @When("I clicks on a random menu item for brands")
     public void iClicksOnARandomMenuItemForBrands() {
         await().forever().until(() -> conciergeUserAccountPage.getMenuItems().get(0).isDisplayed());
         conciergeUserAccountPage.getMenuItems().get(0).should(visible);
