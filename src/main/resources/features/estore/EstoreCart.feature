@@ -1,6 +1,47 @@
-#@estoreRegression
-#Feature: Estore Cart Page
-#
+@estoreRegression
+Feature: Estore Cart Page
+
+  Scenario: Remove item from cart
+    Given I log into eStore as "regular"
+    When I remove all items from estore cart
+    When I go to estore item "61040991 BRZ" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on remove button from estore cart page
+    Then I verify that item from estore cart has been removed
+
+  Scenario: Apply/Remove employee discount
+    Given I log into eStore as "regular"
+    When I remove all items from estore cart
+    When I go to estore item "61040991 BRZ" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I apply employee discount for estore
+    Then I verify that I'm able to remove estore employee discount
+
+  Scenario: Apply/Remove promotion code
+    Given I log into eStore as "regular"
+    When I remove all items from estore cart
+    When I go to estore item "61040991 BRZ" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    Then I verify that I'm able to apply promotion code
+    When I remove promotion from estore cart
+
+  Scenario: Zip code validation in cart
+    Given I log into eStore as "regular"
+    When I remove all items from estore cart
+    When I go to estore item "61040991 BRZ" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on zipcode estore button
+    Then I verify US zip code validation in estore cart
+    And I verify CA zip code validation in estore cart
+
+
+
+
+
 #  Scenario: Order Classification
 #    Given I log into estore as "associate"
 #    When I go to item "10011392 SS" from search field

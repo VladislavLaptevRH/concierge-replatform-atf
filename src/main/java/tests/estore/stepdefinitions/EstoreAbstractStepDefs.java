@@ -18,7 +18,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.awaitility.Awaitility.await;
 import static org.testng.Assert.assertTrue;
 
-public class AbstractEstoreStepDefs {
+public class EstoreAbstractStepDefs {
     EstoreItemPage estoreItemPage = new EstoreItemPage();
     ConciergeOrderHistoryForm conciergeOrderHistoryForm = new ConciergeOrderHistoryForm();
     SelectOption selectOption = new SelectOption();
@@ -38,7 +38,7 @@ public class AbstractEstoreStepDefs {
 
 
     @When("I clicks on a random estore menu item")
-    public void iClicksOnARandomMenuItem() {
+    public void iClicksOnARandomEstoreMenuItem() {
         sleep(7000);
         generalStepDefs.waitForJSandJQueryToLoad();
         estoreCategories.getLivingCategory().should(visible, Duration.ofSeconds(60));
@@ -52,11 +52,11 @@ public class AbstractEstoreStepDefs {
 
 
     @When("I clicks on estore random item")
-    public void iClicksOnORandomItem() {
+    public void iClicksOnEstoreRandomItem() {
         sleep(5000);
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
-            estoreItemPage.getItems().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+            estoreItemPage.getItems().should(Condition.and("", visible, enabled), Duration.ofMinutes(3));
             estoreItemPage.getItems().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             estoreItemPage.getTwoItemsInRow().get(1).should(visible, Duration.ofMinutes(1));
@@ -65,8 +65,8 @@ public class AbstractEstoreStepDefs {
         }
     }
 
-    @When("I fill all options for item")
-    public void iFillAllOptionsForItem() {
+    @When("I fill all estore options for item")
+    public void iFillAllEstoreOptionsForItem() {
         try {
             conciergeCartPageScreen.getColorCloseButton().should(visible, Duration.ofSeconds(15));
             conciergeCartPageScreen.getColorCloseButton().click();
@@ -156,7 +156,7 @@ public class AbstractEstoreStepDefs {
     }
 
     @Then("I verify that confirmation estore order screen is displayed")
-    public void iVerifyThatOrderDetailsScreenIsDisplayed() {
+    public void iVerifyThatEstoreOrderDetailsScreenIsDisplayed() {
         generalStepDefs.waitForJSandJQueryToLoad();
         confirmationOrderScreen.getThankYouTitle().should(visible, Duration.ofSeconds(25));
         assertTrue(confirmationOrderScreen.getYourOrderHasBeenPlaced().isDisplayed());
@@ -164,7 +164,7 @@ public class AbstractEstoreStepDefs {
     }
 
     @When("I fill all fields from estore address screen")
-    public void iFillAllFieldsFromAddressScreenForBrands() {
+    public void iFillAllFieldsFromEstoreAddressScreenForBrands() {
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
             estoreCheckoutAddressScreen.getFirstNameInpt().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
@@ -177,8 +177,8 @@ public class AbstractEstoreStepDefs {
         }
     }
 
-    @When("I clicks on a random menu item for brands")
-    public void iClicksOnARandomMenuItemForBrands() {
+    @When("I clicks on a random estore menu item for brands")
+    public void iClicksOnARandomMenuEstoreItemForBrands() {
         await().forever().until(() -> conciergeUserAccountPage.getMenuItems().get(0).isDisplayed());
         conciergeUserAccountPage.getMenuItems().get(0).should(visible);
         conciergeUserAccountPage.getMenuItems().get(0).scrollIntoView(true);
@@ -188,15 +188,15 @@ public class AbstractEstoreStepDefs {
         conciergeUserAccountPage.getItemSubCategory().get(0).click();
     }
 
-    @When("I click on rh concierge logo")
-    public void iClickOnRhConciergeLogo() {
+    @When("I click on estore rh concierge logo")
+    public void iClickOnEstoreRhConciergeLogo() {
         conciergeUserAccountPage.getRhConciergeLogo().should(Condition.and("", visible, enabled), Duration.ofMinutes(5));
 
         conciergeUserAccountPage.getRhConciergeLogo().click();
     }
 
-    @When("I choose client from header")
-    public void iChooseClientFromHeader() {
+    @When("I choose estore client from header")
+    public void iChooseEstoreClientFromHeader() {
         generalStepDefs.waitForJSandJQueryToLoad();
         if (conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
             conciergeUserAccountPage.getClientButton().shouldHave(text("CLIENT"), Duration.ofSeconds(15));
@@ -216,11 +216,6 @@ public class AbstractEstoreStepDefs {
             executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getFirstResultOfClientLookup());
             System.out.println();
         }
-    }
-
-    @When("I verify that concierge is displayed")
-    public void iVerifyThatConciergeIsDisplayed() {
-
     }
 
 }

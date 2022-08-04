@@ -19,7 +19,7 @@ public class EstoreThankYouPageStepDefs {
     ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
 
 
-    @Then("I verify all the line items in the cart on thank you page")
+    @Then("I verify all the line items in the estore cart on thank you page")
     public void iVerifyAllTheLineItemsInTheCartOnThankYouPage() {
         $(By.xpath("//*[text()='Qty 1']")).should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
@@ -30,15 +30,15 @@ public class EstoreThankYouPageStepDefs {
 
     }
 
-    @Then("I verify order number and email address verbiage")
-    public void iVerifyOrderNumberAndEmailAddressVerbiage() {
+    @Then("I verify estore order number and email address verbiage")
+    public void iVerifyEstoreOrderNumberAndEmailAddressVerbiage() {
         $(By.xpath("//*[text()='Your order number is ']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='. You will receive an order confirmation via email at']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='automationnonmember@mailinator.com']")).should(visible, Duration.ofSeconds(15));
     }
 
-    @Then("I verify that thank you page is displayed")
-    public void iVerifyThatThankYouPageIsDisplayed() {
+    @Then("I verify that estore thank you page is displayed")
+    public void iVerifyThatEstoreThankYouPageIsDisplayed() {
         $(By.xpath("//*[text()='THANK YOU']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[contains(text(),'You will receive an order confirmation number shortly via email.')]")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Order details']")).should(visible, Duration.ofSeconds(20));

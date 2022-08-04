@@ -36,7 +36,7 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement orderDetailsButton = $(By.xpath("//*[text()='Order details']"));
 
-    private final SelenideElement searchItemField = $(By.xpath("//input[contains(@class,'MuiOutlinedInput-inputAdornedStart')]"));
+    private final SelenideElement searchItemField = $(By.xpath("//input[@id='site-search-input']"));
 
     private final SelenideElement searchButton = $(By.xpath("//*[text()='Search']"));
 
@@ -120,7 +120,7 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement firstResultOfClientLookup = $(By.xpath("//td[@class='MuiTableCell-root MuiTableCell-body'][1]/div"));
 
-    private final SelenideElement rhConciergeLogo = $(By.xpath("//a[@id='nav-logo-image']"));
+    private final SelenideElement rhEstoreLogo = $(By.xpath("//a[@data-analytics-worhlogo='worh-logo']"));
 
     private final SelenideElement inStockMenuItem = $(By.xpath("//*[text()='In Stock']"));
 

@@ -80,6 +80,10 @@ public class EstoreCartPage {
 
     private final SelenideElement userNamePromocode = $(By.xpath("//input[@autocomplete='new-username']"));
 
+    private final SelenideElement userNameEmployeeDiscount = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[2]"));
+
+    private final SelenideElement passwordEmployeeDiscount = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[3]"));
+
     private final SelenideElement passwordPromocde = $(By.xpath("//input[@type='password']"));
 
     private final SelenideElement acceptButton = $(By.xpath("//*[text()='Accept']"));
@@ -136,7 +140,9 @@ public class EstoreCartPage {
 
     private final SelenideElement giftBoxFee = $(By.xpath("//*[text()='Gift Box Fee']"));
 
-    private final SelenideElement removePromotionBtn = $(By.xpath("//*[text()='Remove Promotion']"));
+    private final SelenideElement zipCodeField = $(By.xpath("//input[@name='newPostalCode']"));
+
+    private final SelenideElement removePromotionBtn = $(By.xpath("//div[@class='MuiGrid-root']//*[text()='Remove']"));
 
     private final SelenideElement totalAditionalProdDiscount = $(By.xpath("//*[text()='Total Additional Product Discount']"));
 

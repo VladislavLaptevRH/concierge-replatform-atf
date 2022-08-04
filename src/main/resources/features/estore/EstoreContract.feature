@@ -1,18 +1,5 @@
 #@estoreRegression
-#@estoreContractRegression
 #Feature: Estore Contract
-#
-#  Scenario: Verify that I'm not able to select Contract Client without contract gallery
-#    Given I log into Concierge as "associate"
-#    And I remove all items from cart
-#    And I go to item "61040991 BRZ" from search field
-#    And I click on add to cart button
-#    And I click on view cart button
-#    When I choose order classification
-#    And I click on checkout button
-#    And I click on no thanks button
-#    When I look on client by "accountnumber" with "20211221164476"
-#    Then I verify that I'm able to select contract client
 #
 #  Scenario: Verify that Membership banner is not present on the cart page
 #    Given I log into Concierge as "associate"

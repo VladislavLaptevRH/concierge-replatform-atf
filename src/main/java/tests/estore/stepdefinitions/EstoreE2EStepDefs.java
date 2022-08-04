@@ -41,35 +41,36 @@ public class EstoreE2EStepDefs {
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
     EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
+    EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
     String usState = "";
     String countOfItems = null;
     WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));
 
-    @When("I click on add to project button")
-    public void userClickOnAddToProjectButton() {
+    @When("I click on add to project estore button")
+    public void userClickOnAddToProjectEstoreButton() {
         conciergeItemsScreen.getAddToProjectButton().should(Condition.and("", enabled, visible), Duration.ofSeconds(12));
         conciergeItemsScreen.getAddToProjectButton().click();
 
     }
 
-    @When("I click on go to project button")
-    public void iClickOnGoToProjectButton() {
+    @When("I click on go to project estore button")
+    public void iClickOnGoToProjectEstoreButton() {
         generalStepDefs.isElementVisible("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4'][1]//button[contains(@class,'MuiButtonBase-root MuiButton-root MuiButton-contained')]");
         conciergeItemsScreen.getContinueShoppingButton().should(visible, Duration.ofSeconds(12));
 
         conciergeItemsScreen.getGoToProjectButton().click();
     }
 
-    @When("I click on add to cart button from project screen")
-    public void iClickOnAddToCartButtonFromProjectScreen() {
+    @When("I click on add to cart estore button from project screen")
+    public void iClickOnAddToCartEstoreButtonFromProjectScreen() {
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeProjectScreen.getAddToCartButton().should(visible, Duration.ofSeconds(25));
         conciergeProjectScreen.getAddToCartButton().scrollIntoView(true);
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getAddToCartButton());
     }
 
-    @When("I choose random brand from menu")
-    public void iChooseRandomBrandFromMenu() {
+    @When("I choose random estore brand from menu")
+    public void iChooseRandomBrandFromEstoreMenu() {
         conciergeUserAccountPage.getDashboardTitle().should(visible, Duration.ofSeconds(12));
         conciergeUserAccountPage.getOrderHistoryButton().should(visible, Duration.ofSeconds(12));
         conciergeUserAccountPage.getBrandButton().click();
@@ -102,13 +103,14 @@ public class EstoreE2EStepDefs {
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
+        estoreItemPage.getAddToCartButton().scrollIntoView(true);
         estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
         estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
         estoreItemPage.getAddToCartButton().click();
     }
 
-    @When("I fill all fields from address with {string} zip code")
-    public void iFillAllFieldsFromAddressWithZipCode(String state) {
+    @When("I fill all estore fields from address with {string} zip code")
+    public void iFillAllEstoreFieldsFromAddressWithZipCode(String state) {
         generalStepDefs.fillAddressFields();
 
         if (state.equals("NY")) {
@@ -121,33 +123,33 @@ public class EstoreE2EStepDefs {
         generalStepDefs.continueToPaymentAfterAddressCheckout();
     }
 
-    @Then("I verify that restrictions pop up is displayed")
-    public void iVerifyThatRestrictionsPopUpIsDisplayed() {
+    @Then("I verify that estore restrictions pop up is displayed")
+    public void iVerifyThatEstoreRestrictionsPopUpIsDisplayed() {
         restrictionPopUp.getShippingRestricitonsTitle().should(visible, Duration.ofSeconds(40));
         assertTrue(restrictionPopUp.getShippingRestricitonsTitle().getText().contains("SHIPPING ERROR"));
         assertTrue(restrictionPopUp.getRestrictionsMessage().getText().contains("One or more items in your cart"));
     }
 
-    @When("I remove all items from cart")
-    public void iRemoveAllItemsFromCart() {
-        conciergeUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(1));
-        sleep(3000);
-        if (!conciergeUserAccountPage.getCartButton().getText().equals("")) {
-            conciergeUserAccountPage.getCartButton().click();
-            generalStepDefs.waitForJSandJQueryToLoad();
-            conciergeCartPageScreen.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(12));
-            conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
-            conciergeCartPageScreen.getOrderEstimateTitle().shouldHave(text("Order Estimate"), Duration.ofSeconds(20));
-            conciergeCartPageScreen.getClearOrderButton().click();
-            conciergeCartPageScreen.getClearOrderButtonPop().shouldHave(text("CLEAR ORDER"), Duration.ofSeconds(25));
-            conciergeCartPageScreen.getClearOrderButtonPop().click();
-            generalStepDefs.waitForJSandJQueryToLoad();
-        }
-    }
+//    @When("I remove all items from estore cart")
+//    public void iRemoveAllItemsFromEstoreSecondCart() {
+//        conciergeUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(1));
+//        sleep(3000);
+//        if (!conciergeUserAccountPage.getCartButton().getText().equals("")) {
+//            conciergeUserAccountPage.getCartButton().click();
+//            generalStepDefs.waitForJSandJQueryToLoad();
+//            conciergeCartPageScreen.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(12));
+//            conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
+//            conciergeCartPageScreen.getOrderEstimateTitle().shouldHave(text("Order Estimate"), Duration.ofSeconds(20));
+//            conciergeCartPageScreen.getClearOrderButton().click();
+//            conciergeCartPageScreen.getClearOrderButtonPop().shouldHave(text("CLEAR ORDER"), Duration.ofSeconds(25));
+//            conciergeCartPageScreen.getClearOrderButtonPop().click();
+//            generalStepDefs.waitForJSandJQueryToLoad();
+//        }
+//    }
 
 
     @When("I continue to estore payment")
-    public void continueToPaymentAfterAddressCheckout() {
+    public void continueToPaymentAfterEstoreAddressCheckout() {
         estoreCheckoutAddressScreen.getContinuePaymentButton().shouldHave(text(estoreCheckoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
         executeJavaScript("arguments[0].scrollIntoView(true);", estoreCheckoutAddressScreen.getContinuePaymentButton());
         estoreCheckoutAddressScreen.getContinuePaymentButton().shouldHave(text(estoreCheckoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
@@ -164,8 +166,8 @@ public class EstoreE2EStepDefs {
     }
 
 
-    @When("I add {int} times an item in the cart")
-    public void iAddTimesAnItemInTheCart(int arg0) {
+    @When("I add {int} times an item in the estore cart")
+    public void iAddTimesAnItemInTheEstoreCart(int arg0) {
         for (int i = 0; i < 70; i++) {
             $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']")).should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
             conciergeUserAccountPage.getDashboardTitle().shouldHave(text("DASHBOARD"));
@@ -222,21 +224,24 @@ public class EstoreE2EStepDefs {
         }
     }
 
-    @When("I go to item {string} from search field")
-    public void iGoToItemFromSearchField(String arg0) {
+    @When("I go to estore item {string} from search field")
+    public void iGoToItemFromEstoreSearchField(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
-        conciergeUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
-        conciergeUserAccountPage.getSearchItemField().click();
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).click();
+        estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+        estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
+        estoreUserAccountPage.getSearchItemField().click();
         generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.xpath("//button[contains(@class,'MuiButton-containedSizeLarge')]")).should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
+//        $(By.xpath("//button[contains(@class,'MuiButton-containedSizeLarge')]")).should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
         sleep(3000);
-        conciergeUserAccountPage.getSearchItemField().setValue(arg0);
-        $(By.xpath("//button[contains(@class,'MuiButton-containedSizeLarge')]")).click();
+        estoreUserAccountPage.getSearchItemField().setValue(arg0);
+        $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']")).click();
     }
 
-    @When("I choose {string} from brand menu")
-    public void iChooseFromBrandMenu(String brand) {
+    @When("I choose estore {string} from brand menu")
+    public void iChooseFromBrandEstoreMenu(String brand) {
         conciergeUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(12));
         conciergeUserAccountPage.getBrandButton().click();
 
@@ -270,7 +275,7 @@ public class EstoreE2EStepDefs {
     }
 
     @When("I click on estore no thanks button")
-    public void iClickOnNoThanksButton() {
+    public void iClickOnNoThanksEstoreButton() {
         try {
             generalStepDefs.waitForJSandJQueryToLoad();
             estoreCartPage.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
@@ -287,8 +292,8 @@ public class EstoreE2EStepDefs {
         }
     }
 
-    @When("I choose client who is a non member")
-    public void iChooseClientWhoIsANonMember() {
+    @When("I choose estore client who is a non member")
+    public void iChooseEstoreClientWhoIsANonMember() {
         try {
             if (conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
                 conciergeUserAccountPage.getClientButton().click();
@@ -307,8 +312,8 @@ public class EstoreE2EStepDefs {
         }
     }
 
-    @When("I remove client from header")
-    public void iRemoveClientFromHeader() {
+    @When("I remove estore client from header")
+    public void iRemoveEstoreClientFromHeader() {
         generalStepDefs.waitForJSandJQueryToLoad();
         sleep(5000);
         try {
@@ -324,7 +329,7 @@ public class EstoreE2EStepDefs {
     }
 
     @When("I choose estore client who is a {string}")
-    public void iChooseClientWhoIsAMember(String businessClient) {
+    public void iChooseEstoreClientWhoIsAMember(String businessClient) {
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeUserAccountPage.getClientLookupFirstName().should(visible, Duration.ofSeconds(25));
         if (businessClient.equals("member")) {
@@ -353,7 +358,7 @@ public class EstoreE2EStepDefs {
 
 
     @And("I select count of estore product")
-    public void iSelectCountOfProduct() {
+    public void iSelectCountOfEstoreProduct() {
         executeJavaScript("window.scrollTo(0, 1200)");
         conciergeItemsScreen.getDetailsSpan().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
         conciergeItemsScreen.getDetailsSpan().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofMinutes(3));
@@ -363,8 +368,8 @@ public class EstoreE2EStepDefs {
         selectQty.selectByIndex(2);
     }
 
-    @Then("I verify that address screen is displayed")
-    public void iVerifyThatAddressScreenIsDisplayed() {
+    @Then("I verify that estore address screen is displayed")
+    public void iVerifyThatEstoreAddressScreenIsDisplayed() {
         checkoutAddressScreen.getFirstNameInpt().should(Condition.be(visible), Duration.ofSeconds(20));
         checkoutAddressScreen.getLastNameField().should(Condition.be(visible), Duration.ofSeconds(20));
         checkoutAddressScreen.getCompanyNameField().should(Condition.be(visible), Duration.ofSeconds(20));
@@ -377,8 +382,8 @@ public class EstoreE2EStepDefs {
         assertTrue(checkoutAddressScreen.getPhoneField().isDisplayed());
     }
 
-    @When("I click on sale point of menu")
-    public void iClickOnSalePointOfMenu() {
+    @When("I click on estore sale point of menu")
+    public void iClickOnSaleEstorePointOfMenu() {
         conciergeUserAccountPage.getOutdoorMenu().shouldHave(text("Outdoor"), Duration.ofMinutes(1));
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
         actions.moveToElement(conciergeUserAccountPage.getOutdoorMenu());
@@ -388,8 +393,8 @@ public class EstoreE2EStepDefs {
 
     }
 
-    @When("I click on chairs submenu")
-    public void iClickOnChairsSubmenu() {
+    @When("I click on estore chairs submenu")
+    public void iClickOnEstoreChairsSubmenu() {
         conciergeUserAccountPage.getChairsSubMenu().shouldHave(text("Chairs"), Duration.ofMinutes(1));
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
         actions.moveToElement(conciergeUserAccountPage.getChairsSubMenu());
@@ -397,22 +402,22 @@ public class EstoreE2EStepDefs {
         conciergeUserAccountPage.getChairsSubMenu().click();
     }
 
-    @When("I select finish option")
-    public void iSelectFinishOption() {
+    @When("I select estore finish option")
+    public void iSelectEstoreFinishOption() {
         selectOption.getFinishOption().should(visible, Duration.ofMinutes(1));
         selectOption.getFinishOption().scrollIntoView(true);
         Select selectFinish = new Select(selectOption.getFinishOption());
         selectFinish.selectByIndex(1);
     }
 
-    @When("I clicks on sofa collections")
-    public void iClicksOnSofaCollections() {
+    @When("I clicks on estore sofa collections")
+    public void iClicksOnEstoreSofaCollections() {
         $(By.xpath("//*[text()='Sofa Collections']")).shouldHave(text("Sofa Collections"), Duration.ofSeconds(12));
         $(By.xpath("//*[text()='Sofa Collections']")).click();
     }
 
-    @When("I click on see results button")
-    public void iClickOnSeeResultsButton() {
+    @When("I click on see results estore button")
+    public void iClickOnSeeEstoreResultsButton() {
         try {
             $(By.xpath("//*[contains(text(),'See Results on')]")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[contains(text(),'See Results on')]")).click();
@@ -424,22 +429,22 @@ public class EstoreE2EStepDefs {
     }
 
 
-    @When("I click on {string}")
-    public void iClickOn(String arg0) {
+    @When("I click estore on {string}")
+    public void iClickEstoreOn(String arg0) {
         SelenideElement brand = $(By.xpath("//*[contains(text(),'" + arg0 + "')]")).should(visible, Duration.ofSeconds(12));
         String brandValue = brand.getText();
         countOfItems = brandValue.substring(brandValue.indexOf("("), brandValue.indexOf(")")).replaceAll("\\(", "");
         $(By.xpath("//*[contains(text(),'" + arg0 + "')]")).click();
     }
 
-    @Then("I verify that {string} are displayed")
-    public void iVerifyThatAreDisplayed(String arg0) {
+    @Then("I verify that estore {string} are displayed")
+    public void iVerifyThatAreEstoreDisplayed(String arg0) {
         $(By.xpath("//*[text()='" + arg0 + "']")).shouldHave(text(arg0), Duration.ofSeconds(20));
         $(By.xpath("//*[text()='" + arg0 + "']")).click();
     }
 
-    @When("I fiils all options for item")
-    public void iFiilsAllOptionsForItem() {
+    @When("I fiils all options for estore item")
+    public void iFiilsAllEstoreOptionsForItem() {
         //depth option
         sleep(9000);
         executeJavaScript("window.scrollTo(0, 970)");
@@ -520,8 +525,8 @@ public class EstoreE2EStepDefs {
 
     }
 
-    @When("I look on client by {string} with {string}")
-    public void iChooseClientByWhoIsA(String searchParam, String businessClient) {
+    @When("I look on estore client by {string} with {string}")
+    public void iChooseClientEstoreByWhoIsA(String searchParam, String businessClient) {
         try {
             conciergeUserAccountPage.getClientLookupFirstName().should(visible, Duration.ofSeconds(40));
             if (searchParam.equals("name")) {
@@ -562,26 +567,26 @@ public class EstoreE2EStepDefs {
         executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getFirstResultOfClientLookup());
     }
 
-    @Then("I verify zipcode")
-    public void iVerifyZipcode() {
+    @Then("I verify estore zipcode")
+    public void iVerifyEstoreZipcode() {
         generalStepDefs.clearField(checkoutAddressScreen.getZipPostalCodeField());
         checkoutAddressScreen.getZipPostalCodeField().setValue("1234");
         $(By.xpath("//*[text()='Invalid zip/postal code.']")).should(visible, Duration.ofMinutes(1));
     }
 
-    @When("I click on plus button from client lookup search results")
-    public void iClickOnPlusButtonFromClientLookupSearchResults() {
+    @When("I click on estore plus button from client lookup search results")
+    public void iClickOnEstorePlusButtonFromClientLookupSearchResults() {
         conciergeUserAccountPage.getSearchClientResultsPlusButton().should(visible, Duration.ofMinutes(1));
         conciergeUserAccountPage.getSearchClientResultsPlusButton().click();
     }
 
-    @Then("I verify that tax exempt checkbox is unchecked by default for trade client")
-    public void iVerifyThatTaxExemptCheckboxIsUncheckedByDefaultForTradeClient() {
+    @Then("I verify that estore tax exempt checkbox is unchecked by default for trade client")
+    public void iVerifyThatEstoreTaxExemptCheckboxIsUncheckedByDefaultForTradeClient() {
         conciergeAddressScreen.getSoldToTaxExempt().shouldNotBe(visible, Duration.ofSeconds(15));
     }
 
-    @Then("I verify trade prices for {string}")
-    public void iVerifyTradePricesForPDP(String pageName) {
+    @Then("I verify estore trade prices for {string}")
+    public void iVerifyEstoreTradePricesForPDP(String pageName) {
         if (pageName.equals("project page")) {
             $(By.xpath("//*[text()='TRADE']")).should(visible, Duration.ofSeconds(30));
             $(By.xpath("//*[text()='$3,165.00']")).should(visible, Duration.ofSeconds(20));
@@ -592,8 +597,8 @@ public class EstoreE2EStepDefs {
         }
     }
 
-    @And("I fill all fields for sold to address")
-    public void iFillAllFieldsForSoldToAddress() {
+    @And("I fill all estore fields for sold to address")
+    public void iFillAllEstoreFieldsForSoldToAddress() {
         generalStepDefs.fillAddressFields();
         generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
@@ -602,13 +607,13 @@ public class EstoreE2EStepDefs {
         $(By.cssSelector("body > div:nth-child(7) > div:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > label:nth-child(1) > span:nth-child(1) > span:nth-child(1) > input:nth-child(1)")).click();
     }
 
-    @Then("I verify that I'm able to edit shipping address")
-    public void iVerifyThatIMAbleToEditShippingAddress() {
+    @Then("I verify that I'm able to edit estore shipping address")
+    public void iVerifyThatIMAbleToEditEstoreShippingAddress() {
         $(By.xpath("//*[text()='NewShippingAddress Automation']")).shouldHave(text("NewShippingAddress"), Duration.ofSeconds(25));
     }
 
-    @When("I edit shipping address from order review page")
-    public void iEditShippingAddressFromOrderReviewPage() {
+    @When("I edit estore shipping address from order review page")
+    public void iEditShippingEstoreAddressFromOrderReviewPage() {
         sleep(3000);
         conciergeAddressScreen.getEditShippingAddress().should(visible, Duration.ofSeconds(15));
         conciergeAddressScreen.getEditShippingAddress().click();
@@ -617,21 +622,21 @@ public class EstoreE2EStepDefs {
         checkoutAddressScreen.getFirstNameInpt().setValue("NewShippingAddress");
     }
 
-    @When("I edit billing address from order review page")
-    public void iEditBillingAddressFromOrderReviewPage() {
+    @When("I edit estore billing address from order review page")
+    public void iEditBillingEstoreAddressFromOrderReviewPage() {
         conciergeAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(15));
         conciergeAddressScreen.getEditBillingAddress().click();
         generalStepDefs.clearField(checkoutAddressScreen.getFirstNameBillingAddress());
         checkoutAddressScreen.getFirstNameBillingAddress().setValue("NewBillingAddress");
     }
 
-    @And("I verify that I'm able to edit billing address")
-    public void iVerifyThatIMAbleToEditBillingAddress() {
+    @And("I verify that I'm able to edit estore billing address")
+    public void iVerifyThatIMAbleToEditEstoreBillingAddress() {
         $(By.xpath("//*[text()='NewBillingAddress Automation']")).shouldHave(text("NewBillingAddress"), Duration.ofSeconds(25));
     }
 
-    @Then("I verify the payment details and order estimate summary")
-    public void iVerifyThePaymentDetailsAndOrderEstimateSummary() {
+    @Then("I verify the estore payment details and order estimate summary")
+    public void iVerifyTheEstorePaymentDetailsAndOrderEstimateSummary() {
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Cash/Check']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(20));
@@ -641,15 +646,15 @@ public class EstoreE2EStepDefs {
 
     }
 
-    @Then("I verify spo order & terms review signature")
-    public void iVerifySpoOrderTermsReviewSignature() {
+    @Then("I verify estore spo order & terms review signature")
+    public void iVerifyEstoreSpoOrderTermsReviewSignature() {
         $(By.xpath("//*[text()='ORDER & TERMS REVIEW SIGNATURE CAPTURE']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='SIGNATURE']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='CLEAR SIGNATURE']")).should(visible, Duration.ofSeconds(20));
     }
 
-    @Then("I verify that all the line items in the cart with the order review page")
-    public void iVerifyThatAllTheLineItemsInTheCartWithTheOrderReviewPage() {
+    @Then("I verify that all the line items in the cart with the estore order review page")
+    public void iVerifyThatAllTheLineEstoreItemsInTheCartWithTheOrderReviewPage() {
         $(By.xpath("//*[text()='Qty 1']")).should(visible, Duration.ofSeconds(20));
         conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
@@ -657,8 +662,8 @@ public class EstoreE2EStepDefs {
         $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));
     }
 
-    @Then("I verify order details from thank you page")
-    public void iVerifyOrderDetailsFromThankYouPage() {
+    @Then("I verify order details from estore thank you page")
+    public void iVerifyEstoreOrderDetailsFromThankYouPage() {
         $(By.xpath("//*[text()='Shipping Address']")).should(visible, Duration.ofSeconds(25));
         $(By.xpath("//*[text()='Billing Address']")).should(visible, Duration.ofSeconds(25));
         $(By.xpath("//*[text()='Important Information']")).should(visible, Duration.ofSeconds(25));
@@ -666,11 +671,10 @@ public class EstoreE2EStepDefs {
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));
-
     }
 
     @When("I select estore length option")
-    public void iSelectLengthOption() {
+    public void iSelectEstoreLengthOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
         sleep(6000);
         selectOption.getLengthOption().should(visible, Duration.ofSeconds(15));
@@ -678,16 +682,31 @@ public class EstoreE2EStepDefs {
         selectLength.selectByValue("80400002");
     }
 
-    @When("I click on same as shipping address checkbox")
+    @When("I click on same as estore shipping address checkbox")
     public void iClickOnSameAsShippingAddressCheckbox() {
-        estoreAddressScreen.getSameAsShippingCheckbox().should(visible,Duration.ofSeconds(20));
-        estoreAddressScreen.getSameAsShippingCheckbox().click();
+        try {
+            sleep(5000);
+            if ($(By.xpath("//*[text()='Same as shipping address']")).isDisplayed()) {
+                $(By.xpath("//*[text()='Same as shipping address']")).click();
+            }
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Same as shipping address checkbox is not displayed");
+        }
     }
 
     @When("I click on continue payment method estore button")
     public void iClickOnContinuePaymentMethodEstoreButton() {
-        estorePaymentPage.getContinueToCheckout().should(visible,Duration.ofSeconds(25));
-        estorePaymentPage.getContinueToCheckout().click();
+        sleep(5000);
+        try {
+            if (estorePaymentPage.getContinueToCheckout().isDisplayed()) {
+                estorePaymentPage.getContinueToCheckout().should(visible, Duration.ofSeconds(25));
+                estorePaymentPage.getContinueToCheckout().click();
+            }
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Same as shipping address checkbox is not displayed");
+        }
+
+
     }
 }
 
