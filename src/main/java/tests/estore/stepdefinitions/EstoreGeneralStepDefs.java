@@ -35,7 +35,9 @@ public class EstoreGeneralStepDefs {
     EstoreCheckoutAddressScreen estoreCheckoutAddressScreen = new EstoreCheckoutAddressScreen();
     static WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(30));
 
-    public void waitForLoad(WebDriver driver) {
+    // Fix DuplicateStepDefinitionException - change the steps names so they uniqe from concierge step definition
+
+ /*   public void waitForLoad(WebDriver driver) {
         ExpectedCondition<Boolean> pageLoadCondition = webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete");
         wait.until(pageLoadCondition);
     }
@@ -66,7 +68,7 @@ public class EstoreGeneralStepDefs {
      *
      * @param accountRole - account role
      */
-    public void loginAsRole(String accountRole) {
+    /*public void loginAsRole(String accountRole) {
         conciergeLoginPage.getPasswordField().should(visible, Duration.ofMinutes(5));
         conciergeLoginPage.getUsernameField().should(visible, Duration.ofSeconds(20));
         if (accountRole.equals("associate")) {
@@ -98,7 +100,7 @@ public class EstoreGeneralStepDefs {
      *
      * @param field - field
      */
-    public void clearField(SelenideElement field) {
+    /*public void clearField(SelenideElement field) {
         field.click();
         try {
             if (!field.getAttribute("value").isEmpty()) {
@@ -114,7 +116,7 @@ public class EstoreGeneralStepDefs {
     /**
      * This method fill all fields from checkout address screen
      */
-    public void fillAddressFields() {
+    /*public void fillAddressFields() {
 //        $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")).should(visible, Duration.ofSeconds(30));
         estoreAddressScreen.getShippingAddressTitle().shouldHave(text("Shipping Address"), Duration.ofSeconds(40));
         estoreAddressScreen.getBillingAddressTitle().shouldHave(text("Billing Address"), Duration.ofSeconds(40));
@@ -151,7 +153,7 @@ public class EstoreGeneralStepDefs {
      * @param country - country
      * @param state   - state
      */
-    public void fillZipCodeStateCountry(String zipCode, String country, String state) {
+    /*public void fillZipCodeStateCountry(String zipCode, String country, String state) {
         checkoutAddressScreen.getCountryField().should(visible, Duration.ofSeconds(50));
         Select countrySelect = new Select(checkoutAddressScreen.getCountryField());
         executeJavaScript("arguments[0].scrollIntoView(true);", countrySelect);
@@ -177,7 +179,7 @@ public class EstoreGeneralStepDefs {
     /**
      * Click on continue to payment buttons
      */
-    public void continueToPaymentAfterAddressCheckout() {
+    /*public void continueToPaymentAfterAddressCheckout() {
         checkoutAddressScreen.getContinuePaymentButton().should(visible, Duration.ofSeconds(15));
         executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
         checkoutAddressScreen.getContinuePaymentButton().click();
@@ -197,7 +199,7 @@ public class EstoreGeneralStepDefs {
      * @param xPath - xpath for selenide element
      * @return
      */
-    public boolean isElementVisible(String xPath) {
+    /*public boolean isElementVisible(String xPath) {
         try {
             $(By.xpath(xPath)).should(visible, Duration.ofSeconds(40));
             return true;
@@ -211,7 +213,7 @@ public class EstoreGeneralStepDefs {
     /**
      * @param field - find by provided field
      */
-    public void searchClientBy(String field) {
+    /*public void searchClientBy(String field) {
         try {
             conciergeUserAccountPage.getClientButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(25));
             conciergeUserAccountPage.getClientButton().click();
@@ -258,7 +260,7 @@ public class EstoreGeneralStepDefs {
      * @param cvc
      * @param expirationDate This method execute payment with provided method
      */
-    public void payWith(String paymentType, String number, String cvc, String expirationDate) {
+    /*public void payWith(String paymentType, String number, String cvc, String expirationDate) {
 
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
@@ -289,7 +291,7 @@ public class EstoreGeneralStepDefs {
      * @param ls2 This method compare two lists
      * @return
      */
-    public static boolean compareList(List ls1, List ls2) {
+   /* public static boolean compareList(List ls1, List ls2) {
         return ls1.toString().contentEquals(ls2.toString()) ? true : false;
     }
 
@@ -315,7 +317,7 @@ public class EstoreGeneralStepDefs {
      * @param max Generate random number in range
      * @return - random number in range
      */
-    public static int getRandomNumberInRange(int min, int max) {
+    /*public static int getRandomNumberInRange(int min, int max) {
 
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
@@ -330,7 +332,7 @@ public class EstoreGeneralStepDefs {
      * @param n - length of required string
      * @return - random string
      */
-    public String getAlphaNumericString(int n) {
+    /*public String getAlphaNumericString(int n) {
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz";
         StringBuilder stringBuilder = new StringBuilder(n);
         for (int i = 0; i < n; i++) {
@@ -347,9 +349,9 @@ public class EstoreGeneralStepDefs {
      * @param max - max border of value
      * @return
      */
-    public int getRandomNumber(int min, int max) {
+    /*public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
-    }
+    }*/
 
 }
 
