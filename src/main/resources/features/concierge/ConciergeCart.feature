@@ -447,7 +447,7 @@ Feature:Concierge Cart Page
     When I remove client from header
     When I go to item "10011389" from search field
     When I click on add to cart button
-    When I click on aggree&add button
+   # When I click on aggree&add button
     When I click on view cart button
     When I choose order classification
     When I click on checkout button

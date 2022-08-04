@@ -263,7 +263,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that total price from cart and from payment page is the same")
     public void iVerifyThatTotalPriceFromCartAndFromPaymentPageIsTheSame() {
-        conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofSeconds(15));
+        //conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$549.00']")).should(visible, Duration.ofSeconds(15));
     }
 
@@ -285,7 +285,7 @@ public class ConciergeCartStepDefs {
     public void iVerifyThatTotalAdditionalProductDiscountMessageIsOnReviewPage(String arg0) {
         if (arg0.equals("displayed")) {
             conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofMinutes(1));
-            $(By.xpath("//*[text()='$539.00']")).should(visible, Duration.ofMinutes(1));
+            $(By.xpath("//*[text()='$471.75']")).should(visible, Duration.ofMinutes(1));
         } else {
             conciergeCartPageScreen.getTotalAditionalProdDiscount().shouldNotBe(visible, Duration.ofMinutes(1));
         }
@@ -348,7 +348,7 @@ public class ConciergeCartStepDefs {
     @Then("I verify that mini cart value is equal to {int}")
     public void iVerifyThatMiniCartValueIsEqualTo(int arg0) {
         conciergeUserAccountPage.getCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        conciergeUserAccountPage.getCartButton().shouldHave(text("CART " + arg0), Duration.ofMinutes(1));
+        conciergeUserAccountPage.getCartButton().shouldHave(text("" + arg0), Duration.ofMinutes(1));
     }
 
     @Then("I verify membership banner for {string} client")
@@ -600,7 +600,7 @@ public class ConciergeCartStepDefs {
     public void iVerifyThatMiniCartValueIsEqualToQuantityOfProduct() {
         sleep(3000);
         conciergeUserAccountPage.getCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        conciergeUserAccountPage.getCartButton().shouldHave(text("CART " + randomQuantity), Duration.ofSeconds(50));
+        conciergeUserAccountPage.getCartButton().shouldHave(text("" + randomQuantity), Duration.ofSeconds(50));
     }
 
     @When("I click on check balance button")
@@ -664,12 +664,12 @@ public class ConciergeCartStepDefs {
     @When("I remove all items from cart for minicart")
     public void iRemoveAllItemsFromCartForMinicart() {
         conciergeUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(1));
-        conciergeUserAccountPage.getCartButton().shouldHave(text("CART"), Duration.ofMinutes(1));
+        //conciergeUserAccountPage.getCartButton().shouldHave(text("CART"), Duration.ofMinutes(1));
         sleep(3000);
-        if (!conciergeUserAccountPage.getCartButton().getText().equals("CART 0")) {
+        if (!conciergeUserAccountPage.getCartButton().getText().equals("")) {
             conciergeUserAccountPage.getCartButton().click();
             generalStepDefs.waitForJSandJQueryToLoad();
-            conciergeCartPageScreen.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(12));
+           // conciergeCartPageScreen.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(12));
             conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
             conciergeCartPageScreen.getOrderEstimateTitle().shouldHave(text("Order Estimate"), Duration.ofSeconds(20));
             conciergeCartPageScreen.getClearOrderButton().click();
