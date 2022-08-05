@@ -21,7 +21,8 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement firstItemMainMenu = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][1]/h6[@class='MuiTypography-root MuiTypography-subtitle1']"));
 
-    private final SelenideElement newClientHeaderBtn = $(By.xpath("//*[text()='Client : New Client']"));
+    private final SelenideElement newClientHeaderBtn = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-justify-xs-flex-end MuiGrid-grid-xs-6']/span"));
+
 
     private final SelenideElement newClientButton = $(By.xpath("//*[text()='NEW']"));
 
@@ -35,7 +36,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement seeResultsButton = $(By.xpath("(//span[@class='MuiButton-label'])[2]"));
 
-    private final SelenideElement orderDetailsButton = $(By.xpath("//*[text()='Order details']"));
+    private final SelenideElement orderDetailsButton = $(By.xpath("//span[@class='MuiButton-label']"));
 
     private final SelenideElement searchItemField = $(By.xpath("//input[contains(@class,'MuiOutlinedInput-inputAdornedStart')]"));
 

@@ -29,8 +29,9 @@ public class SaleStepDefs {
 
     @Then ("I verify sale navigation bars are displayed")
     public void iVerifySaleNavigationBarsAreDisplayed () {
+        sleep(2000);
         List<String> items = new ArrayList<>();
-        List<String> expectedItems = new ArrayList(Arrays.asList("LIVING", "DINING" , "BED", "BATH", "LIGHTING", "TEXTILES", "RUGS", "WINDOWS", "DÉCOR", "ART", "OUTDOOR", "SALE", "LIVING", "DINING" , "BED", "BATH", "LIGHTING", "TEXTILES", "RUGS", "WINDOWS", "DÉCOR", "OUTDOOR"));
+        List<String> expectedItems = new ArrayList(Arrays.asList("LIVING", "DINING" , "BED", "BATH", "LIGHTING", "TEXTILES", "RUGS", "WINDOWS", "DÉCOR", "OUTDOOR"));
         for (int i = 0; i < saleScreen.getListOfNavigationBars().size(); i++) {
             items.add(saleScreen.getListOfNavigationBars().get(i).getText());
         }
@@ -58,9 +59,7 @@ public class SaleStepDefs {
     @Then("I verify prices on product page")
     public void iVerifyPricesOnProductPage() {
 
-        sleep(7000);
-        assertEquals(saleScreen.getMemberPrice().getText(), "Member");
-        assertEquals(saleScreen.getFinalPrice().getText(), "Final Sale");
-        assertEquals(saleScreen.getRegularPrice().getText(), "Regular");
+        sleep(3000);
+        assertEquals(saleScreen.getPrice().getText(), "Regular");
     }
 }
