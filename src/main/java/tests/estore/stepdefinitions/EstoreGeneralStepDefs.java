@@ -37,7 +37,7 @@ public class EstoreGeneralStepDefs {
 
     // Fix DuplicateStepDefinitionException - change the steps names so they uniqe from concierge step definition
 
- /*   public void waitForLoad(WebDriver driver) {
+    public void waitForLoad(WebDriver driver) {
         ExpectedCondition<Boolean> pageLoadCondition = webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete");
         wait.until(pageLoadCondition);
     }
@@ -68,7 +68,7 @@ public class EstoreGeneralStepDefs {
      *
      * @param accountRole - account role
      */
-    /*public void loginAsRole(String accountRole) {
+    public void loginAsRole(String accountRole) {
         conciergeLoginPage.getPasswordField().should(visible, Duration.ofMinutes(5));
         conciergeLoginPage.getUsernameField().should(visible, Duration.ofSeconds(20));
         if (accountRole.equals("associate")) {
@@ -100,7 +100,7 @@ public class EstoreGeneralStepDefs {
      *
      * @param field - field
      */
-    /*public void clearField(SelenideElement field) {
+    public void clearField(SelenideElement field) {
         field.click();
         try {
             if (!field.getAttribute("value").isEmpty()) {
@@ -115,8 +115,7 @@ public class EstoreGeneralStepDefs {
 
     /**
      * This method fill all fields from checkout address screen
-     */
-    /*public void fillAddressFields() {
+     */public void fillAddressFields() {
 //        $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")).should(visible, Duration.ofSeconds(30));
         estoreAddressScreen.getShippingAddressTitle().shouldHave(text("Shipping Address"), Duration.ofSeconds(40));
         estoreAddressScreen.getBillingAddressTitle().shouldHave(text("Billing Address"), Duration.ofSeconds(40));
@@ -153,7 +152,7 @@ public class EstoreGeneralStepDefs {
      * @param country - country
      * @param state   - state
      */
-    /*public void fillZipCodeStateCountry(String zipCode, String country, String state) {
+    public void fillZipCodeStateCountry(String zipCode, String country, String state) {
         checkoutAddressScreen.getCountryField().should(visible, Duration.ofSeconds(50));
         Select countrySelect = new Select(checkoutAddressScreen.getCountryField());
         executeJavaScript("arguments[0].scrollIntoView(true);", countrySelect);
@@ -199,7 +198,7 @@ public class EstoreGeneralStepDefs {
      * @param xPath - xpath for selenide element
      * @return
      */
-    /*public boolean isElementVisible(String xPath) {
+    public boolean isElementVisible(String xPath) {
         try {
             $(By.xpath(xPath)).should(visible, Duration.ofSeconds(40));
             return true;
