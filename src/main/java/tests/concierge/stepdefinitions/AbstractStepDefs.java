@@ -48,11 +48,11 @@ public class AbstractStepDefs {
         sleep(5000);
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
-            conciergeItemsScreen.getItems().get(0).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-            conciergeItemsScreen.getItems().get(0).click();
+            conciergeItemsScreen.getItems().get(1).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+            conciergeItemsScreen.getItems().get(1).click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            conciergeItemsScreen.getTwoItemsInRow().get(0).should(visible, Duration.ofMinutes(1));
-            conciergeItemsScreen.getTwoItemsInRow().get(0).click();
+            conciergeItemsScreen.getTwoItemsInRow().get(1).should(visible, Duration.ofMinutes(1));
+            conciergeItemsScreen.getTwoItemsInRow().get(1).click();
             System.out.println("Items section are not displayed");
         }
     }

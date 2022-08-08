@@ -67,9 +67,9 @@ public class ConciergeItemsStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
             conciergeItemsScreen.getCollectionsText().shouldHave(text("collections"), Duration.ofMinutes(1));
-            conciergeItemsScreen.getCollectionItem().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Collection section is not displayed");
         }
+        conciergeItemsScreen.getCollectionItem().click();
     }
 }

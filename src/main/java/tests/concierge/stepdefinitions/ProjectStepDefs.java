@@ -388,7 +388,7 @@ public class ProjectStepDefs {
 
     @When("I search project {string} by provided {string}")
     public void iSearchProjectByProvided(String projectName, String searchBy) {
-        sleep(4000);
+        sleep(8000);
         generalStepDefs.waitForJSandJQueryToLoad();
         $(By.cssSelector("#demo-simple-select-outlined")).should(Condition.and("", visible, enabled), Duration.ofSeconds(25));
         $(By.cssSelector("#demo-simple-select-outlined")).shouldHave(text("Project Name"), Duration.ofSeconds(20));
