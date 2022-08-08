@@ -19,7 +19,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement chairsSubMenu = $(By.xpath("//*[text()='Chairs']"));
 
-    private final SelenideElement firstItemMainMenu = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][1]/h6[@class='MuiTypography-root MuiTypography-subtitle1']"));
+    private final SelenideElement firstItemMainMenu = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']/div[2]"));
 
     private final SelenideElement newClientHeaderBtn = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-justify-xs-flex-end MuiGrid-grid-xs-6']/span"));
 
@@ -80,7 +80,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement saleButtonMenu = $(By.xpath("//div[14]/h6[@class='MuiTypography-root MuiTypography-subtitle1']"));
 
-    private final SelenideElement newPortBeachGallery = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item']/h6[contains(@class,'MuiTypography-subtitle1 MuiTypography')]"));
+    private final SelenideElement newPortBeachGallery = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item']/span"));
 
     private final SelenideElement gallerySelectButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-item'][1]"));
 
@@ -96,7 +96,7 @@ public class ConciergeUserAccountPage {
 
     private final List<SelenideElement> menuItems = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//div"));
 
-    private final List<SelenideElement> itemSubCategory = $$(By.xpath("//div[2]//ul[@class='MuiList-root']/li[@class='MuiListItem-root']"));
+    private final List<SelenideElement> itemSubCategory = $$(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3']/ul)[2]/li"));
 
     private final SelenideElement clientButton = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center MuiGrid-justify-xs-center'])[1]"));
 

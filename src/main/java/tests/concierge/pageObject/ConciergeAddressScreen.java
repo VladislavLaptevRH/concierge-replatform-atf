@@ -35,7 +35,7 @@ public class ConciergeAddressScreen {
 
     private final SelenideElement shippingAddressTitle = $(By.xpath("//*[text()='Shipping Address']"));
 
-    private final SelenideElement editPaymentOrderReview = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']/a)[2]"));
+    private final SelenideElement editPaymentOrderReview = $(By.xpath("//a[@href='/checkout/payment.jsp' and text() = 'Edit']"));
 
     private final SelenideElement editShippingAddress = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center']/a)[1]"));
 

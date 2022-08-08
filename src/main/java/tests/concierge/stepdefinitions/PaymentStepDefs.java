@@ -40,13 +40,13 @@ public class PaymentStepDefs {
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
         sleep(3000);
-        Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
+        /*Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue("RH");
         paymentScreen.getSplitPaymentCheckBox().should(visible, Duration.ofSeconds(20));
         paymentScreen.getSplitPaymentCheckBox().click();
-        paymentScreen.getRhCardNumberField().setValue("5856373202133257");
+        paymentScreen.getRhCardNumberField().setValue("6006101002514880");
         Select paymentPlan = new Select(paymentScreen.getSelectPaymentPlan());
-        paymentPlan.selectByValue("001");
+        paymentPlan.selectByIndex(1);
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
         paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
@@ -60,7 +60,7 @@ public class PaymentStepDefs {
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
         paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
-        paymentScreen.getContinueToReview().click();
+        paymentScreen.getContinueToReview().click(); */
         sleep(3000);
         generalStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
