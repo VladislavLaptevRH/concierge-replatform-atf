@@ -71,11 +71,10 @@ public class EstoreE2EStepDefs {
 
     @When("I choose random estore brand from menu")
     public void iChooseRandomBrandFromEstoreMenu() {
-        conciergeUserAccountPage.getDashboardTitle().should(visible, Duration.ofSeconds(12));
-        conciergeUserAccountPage.getOrderHistoryButton().should(visible, Duration.ofSeconds(12));
-        conciergeUserAccountPage.getBrandButton().click();
-        conciergeUserAccountPage.getListOfBrands().get(1).click();
-
+        estoreUserAccountPage.getDashboardTitle().should(visible, Duration.ofSeconds(12));
+        estoreUserAccountPage.getOrderHistoryButton().should(visible, Duration.ofSeconds(12));
+        estoreUserAccountPage.getBrandButton().click();
+        estoreUserAccountPage.getListOfBrands().get(1).click();
     }
 
 //    @When("I go to item which has {string} restriction")
@@ -242,8 +241,8 @@ public class EstoreE2EStepDefs {
 
     @When("I choose estore {string} from brand menu")
     public void iChooseFromBrandEstoreMenu(String brand) {
-        conciergeUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(12));
-        conciergeUserAccountPage.getBrandButton().click();
+        estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(12));
+        estoreUserAccountPage.getBrandButton().click();
 
         if (brand.equals("RH Modern")) {
             $(By.xpath("//li[@id='rhmodern']//button")).click();

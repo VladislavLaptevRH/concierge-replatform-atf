@@ -11,7 +11,11 @@ import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class EstoreUserAccountPage {
+
+    private final SelenideElement brandButton = $(By.xpath("//a[@data-testid='brand-link']"));
+
     private final SelenideElement galleryButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item']/h6[@class='MuiTypography-root MuiTypography-subtitle1 MuiTypography-displayInline']"));
+
     private final SelenideElement gallerySelect = $(By.xpath("//select[@name='gallery-select']"));
 
     private final SelenideElement outdoorMenu = $(By.xpath("//*[text()='Outdoor']"));
@@ -42,7 +46,7 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement automationClientButton = $(By.xpath("//*[contains(text(),'Client : Automation')]"));
 
-    private final List<SelenideElement> listOfBrands = $$(By.xpath("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li"));
+    private final List<SelenideElement> listOfBrands = $$(By.xpath("//div[@id='brand-links-container']//li"));
 
     private final SelenideElement projectsButton = $(By.xpath("//*[text()='Projects']"));
 
@@ -101,8 +105,6 @@ public class EstoreUserAccountPage {
     private final SelenideElement removeClientButton = $(By.xpath("//li[@id='1']/button"));
 
     private final SelenideElement removeClientByText = $(By.xpath("//*[text()='Remove Client']"));
-
-    private final SelenideElement brandButton = $(By.xpath("(//div[2]/div//div[@class='MuiGrid-root MuiGrid-item'][3])[1]"));
 
     private final SelenideElement clientLookupHeaderBtn = $(By.xpath("//li[@id='1']/button"));
 

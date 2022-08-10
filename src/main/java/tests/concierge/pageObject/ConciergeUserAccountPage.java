@@ -23,7 +23,6 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement newClientHeaderBtn = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-justify-xs-flex-end MuiGrid-grid-xs-6']/span"));
 
-
     private final SelenideElement newClientButton = $(By.xpath("//*[text()='NEW']"));
 
     private final SelenideElement memberIdField = $(By.cssSelector("input[name='memberID']"));

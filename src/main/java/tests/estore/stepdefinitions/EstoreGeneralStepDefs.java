@@ -35,7 +35,7 @@ public class EstoreGeneralStepDefs {
     EstoreCheckoutAddressScreen estoreCheckoutAddressScreen = new EstoreCheckoutAddressScreen();
     static WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(30));
 
-   public void waitForLoad(WebDriver driver) {
+    public void waitForLoad(WebDriver driver) {
         ExpectedCondition<Boolean> pageLoadCondition = webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete");
         wait.until(pageLoadCondition);
     }
@@ -119,7 +119,6 @@ public class EstoreGeneralStepDefs {
 //        $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")).should(visible, Duration.ofSeconds(30));
         estoreAddressScreen.getShippingAddressTitle().shouldHave(text("Shipping Address"), Duration.ofSeconds(40));
         estoreAddressScreen.getBillingAddressTitle().shouldHave(text("Billing Address"), Duration.ofSeconds(40));
-        executeJavaScript("arguments[0].click();", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
         clearField(estoreCheckoutAddressScreen.getFirstNameInpt());
         estoreCheckoutAddressScreen.getFirstNameInpt().setValue("QA1");
 
@@ -140,6 +139,12 @@ public class EstoreGeneralStepDefs {
 
         clearField(estoreCheckoutAddressScreen.getPhoneField());
         estoreCheckoutAddressScreen.getPhoneField().setValue("334-229-4667");
+
+        clearField(estoreAddressScreen.getEmailField());
+        estoreAddressScreen.getEmailField().setValue("test@mail.com");
+
+        clearField(estoreAddressScreen.getConfirmEmail());
+        estoreAddressScreen.getConfirmEmail().setValue("test@mail.com");
 
         estoreAddressScreen.getBillingAddressTitle().should(visible, Duration.ofSeconds(12));
     }
@@ -290,7 +295,7 @@ public class EstoreGeneralStepDefs {
      * @param ls2 This method compare two lists
      * @return
      */
-   public static boolean compareList(List ls1, List ls2) {
+    public static boolean compareList(List ls1, List ls2) {
         return ls1.toString().contentEquals(ls2.toString()) ? true : false;
     }
 

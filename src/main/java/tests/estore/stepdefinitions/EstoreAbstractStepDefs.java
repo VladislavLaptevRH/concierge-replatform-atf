@@ -177,6 +177,21 @@ public class EstoreAbstractStepDefs {
         }
     }
 
+    @When("I fill all fields for guest user from estore address screen")
+    public void iFillAllFieldsFromGuestEstoreAddressScreenForBrands() {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        try {
+            estoreCheckoutAddressScreen.getFirstNameInpt().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
+            if (estoreCheckoutAddressScreen.getFirstNameInpt().isDisplayed()) {
+                estoreGeneralStepDefs.fillAddressFields();
+                estoreGeneralStepDefs.fillZipCodeStateCountry("12345", "US", "");
+                executeJavaScript("arguments[0].click();", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
+            }
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Address fields are not available");
+        }
+    }
+
     @When("I clicks on a random estore menu item for brands")
     public void iClicksOnARandomMenuEstoreItemForBrands() {
         await().forever().until(() -> conciergeUserAccountPage.getMenuItems().get(0).isDisplayed());

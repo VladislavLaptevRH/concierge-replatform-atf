@@ -14,7 +14,7 @@ public class EstoreProjectStepDefs {
 
     // Fix DuplicateStepDefinitionException - change the steps names so they uniqe from concierge step definition
 
-  /*  @When("I click on aggree&add estore button")
+    @When("I click on aggree&add estore button")
     public void iClickOnAggreeAddButton() {
         try {
             estoreItemPage.getAggreeeAndAddToCardButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(5));
@@ -22,5 +22,5 @@ public class EstoreProjectStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Agree&add to cart button is not displayed");
         }
-    }*/
+    }
 }

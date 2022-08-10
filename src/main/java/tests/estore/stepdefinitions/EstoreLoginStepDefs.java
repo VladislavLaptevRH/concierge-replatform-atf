@@ -28,6 +28,10 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getUsernameField().setValue("new02@rh.com");
             estoreLoginPage.getPasswordField().setValue("Qwerty@123");
         }
+        if(accountRole.equals("userCAAddress")){
+            estoreLoginPage.getUsernameField().setValue("automationcastate@mailinator.com");
+            estoreLoginPage.getPasswordField().setValue("Qwerty@123");
+        }
         if (accountRole.equals("employee")) {
             estoreLoginPage.getUsernameField().setValue("ediscount");
             estoreLoginPage.getPasswordField().setValue("p6K6K6Mx");

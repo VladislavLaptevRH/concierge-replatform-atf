@@ -11,6 +11,11 @@ import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class EstoreCartPage {
+    private final SelenideElement joinNowCartEstoreButton = $(By.xpath("//*[text()='JOIN NOW']"));
+
+    private final SelenideElement joinNowMembershipButton = $(By.xpath("//div[@ctaname='Join Now']//button"));
+
+    private final SelenideElement rhMemberFooterLink = $(By.xpath("//a[@href='/membership']"));
 
     private final SelenideElement orderClassificationGalleryOrder = $(By.xpath("//option[@value='RH Gallery Order']"));
 
@@ -140,6 +145,10 @@ public class EstoreCartPage {
 
     private final SelenideElement giftBoxFee = $(By.xpath("//*[text()='Gift Box Fee']"));
 
+    private final SelenideElement memberLabel = $(By.xpath("//p[@data-testid='price-label-member']"));
+
+    private final SelenideElement memberPrice = $(By.xpath("//p[@data-testid='price-for-member']"));
+
     private final SelenideElement zipCodeField = $(By.xpath("//input[@name='newPostalCode']"));
 
     private final SelenideElement removePromotionBtn = $(By.xpath("//div[@class='MuiGrid-root']//*[text()='Remove']"));
@@ -153,6 +162,14 @@ public class EstoreCartPage {
     private final SelenideElement addressButton = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][1]/a"));
 
     private final SelenideElement contractSavings = $(By.xpath("//*[text()='Contract savings']"));
+
+    private final SelenideElement quantitySelect = $(By.xpath("//select[contains(@id,'quantity')]"));
+
+    private final SelenideElement totalLineItemPrice = $(By.xpath("//div[@id='rh-line-item-card_total']"));
+
+    private final SelenideElement viewGiftBoxBtn = $(By.xpath("//a[@href='#']"));
+
+    private final SelenideElement popupCloseButton = $(By.xpath("//button[@data-testid='form-dialog-close-button']"));
 
     private final SelenideElement rhMembershipImmediatlyPay = $(By.xpath("//*[text()='Your RH Membership immediately pays for itself.']"));
 

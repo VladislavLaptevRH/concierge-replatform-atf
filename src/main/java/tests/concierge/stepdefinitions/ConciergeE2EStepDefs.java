@@ -235,31 +235,33 @@ public class ConciergeE2EStepDefs {
         conciergeUserAccountPage.getBrandButton().click();
 
         if (brand.equals("RH Modern")) {
-            $(By.xpath("//li[@id='rhmodern']//button")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg2.rhnonprod.com/']")).shouldHave(text("RH MODERN"),Duration.ofSeconds(20));
+            $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg2.rhnonprod.com/']")).click();
         }
         if (brand.equals("RH Baby&Child")) {
-            $(By.xpath("//li[@id='rhbabyandchild']//button")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg2.rhnonprod.com/']")).shouldHave(text("RH BABY & CHILD"));
+            $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg2.rhnonprod.com/']")).click();
 
         }
         if (brand.equals("RH Teen")) {
-            $(By.xpath("//li[@id='rhteen']//button")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@id='rhteen']//button")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']")).click();
         }
         if (brand.equals("RH Outdoor")) {
-            $(By.xpath("//li[@id='outdoor']//button")).shouldHave(text("RH Outdoor"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@id='outdoor']//button")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhoutdoor.stg2.rhnonprod.com/']")).shouldHave(text("RH Outdoor"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhoutdoor.stg2.rhnonprod.com/']")).click();
         }
         if (brand.equals("RH SKI House")) {
-            $(By.xpath("//li[@id='skihouse']//button")).shouldHave(text("RH SKI House"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@id='skihouse']//button")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhskihouse.stg2.rhnonprod.com/']")).shouldHave(text("RH SKI House"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhskihouse.stg2.rhnonprod.com/']")).click();
         }
         if (brand.equals("RH Beach House")) {
-            $(By.xpath("//li[@id='rhbeachhouse']//button")).shouldHave(text("RH Beach House"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@id='rhbeachhouse']//button")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhbeachhouse.stg2.rhnonprod.com/']")).shouldHave(text("RH Beach House"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhbeachhouse.stg2.rhnonprod.com/']")).click();
         }
         if (brand.equals("RH Interiors")) {
-            $(By.xpath("//li[@id='rhinteriors']//button")).shouldHave(text("RH Interiors"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@id='rhinteriors']//button")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhinteriors.stg2.rhnonprod.com/']")).shouldHave(text("RH Interiors"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhinteriors.stg2.rhnonprod.com/']")).click();
         }
     }
 
