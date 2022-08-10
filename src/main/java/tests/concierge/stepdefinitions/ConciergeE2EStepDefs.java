@@ -319,6 +319,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String businessClient) {
+        sleep(4000);
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeUserAccountPage.getClientLookupFirstName().should(visible, Duration.ofSeconds(25));
         if (businessClient.equals("member")) {

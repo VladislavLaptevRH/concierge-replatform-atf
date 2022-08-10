@@ -67,6 +67,7 @@ Feature:Concierge Trade
     And I click on checkout button
     And I click on no thanks button
     And I choose client who is a "trade"
+    And I click on checkout button
     And I fill all fields for sold to address
     And I continue to payment
     And I choose POP for payment method

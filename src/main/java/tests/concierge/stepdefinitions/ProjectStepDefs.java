@@ -388,7 +388,7 @@ public class ProjectStepDefs {
 
     @When("I search project {string} by provided {string}")
     public void iSearchProjectByProvided(String projectName, String searchBy) {
-        sleep(8000);
+        sleep(10000);
         generalStepDefs.waitForJSandJQueryToLoad();
         $(By.cssSelector("#demo-simple-select-outlined")).should(Condition.and("", visible, enabled), Duration.ofSeconds(25));
         $(By.cssSelector("#demo-simple-select-outlined")).shouldHave(text("Project Name"), Duration.ofSeconds(20));
@@ -786,28 +786,33 @@ public class ProjectStepDefs {
     @Then("I verify {string} for unclassified business client project")
     public void iVerifyForUnclassifiedBusinessClientProject(String pricingType) {
         if (pricingType.equals("NON_MEMBER") || (pricingType.equals("NON_TRADE"))) {
-            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,327.00"), Duration.ofSeconds(40));
+            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,090.00"), Duration.ofSeconds(40));
             String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
-            $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[5]")).shouldHave(text("$1,327.00"), Duration.ofSeconds(120));
-            assertEquals(forecastActual, "1,327", "Pricing for non member is displayed correctly");
+            $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[7]")).shouldHave(text("$1,090.00"), Duration.ofSeconds(120));
+            assertEquals(forecastActual, "1,090", "Pricing for non member is displayed correctly");
         }
         if (pricingType.equals("MEMBER") || (pricingType.equals("TRADE"))) {
-            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,061.00"), Duration.ofSeconds(40));
+            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$817.00"), Duration.ofSeconds(40));
             String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
-            $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[5]")).shouldHave(text("$1,061.00"), Duration.ofSeconds(120));
-            assertEquals(forecastActual, "1,061", "Pricing for " + pricingType + " is displayed correctly");
+            $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[7]")).shouldHave(text("$817.00"), Duration.ofSeconds(120));
+            assertEquals(forecastActual, "817", "Pricing for " + pricingType + " is displayed correctly");
         }
     }
 
     @When("user choose space {string}")
     public void userChooseSpace(String spaceName) {
-        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")).scrollIntoView(true);
+        if (spaceName.equals("space2")) {
+            $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorTextPrimary' and text() =  'space1']")).click();
+            sleep(2000);
+            $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorInherit MuiTypography-alignLeft' and text()='" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
+            $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorInherit MuiTypography-alignLeft' and text()='" + spaceName + "']")).click();
+        }
         sleep(2000);
-        executeJavaScript("arguments[0].click();", $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")));
+        $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorTextPrimary' and text() = '" + spaceName + "']")).should(visible, Duration.ofSeconds(10));
+        $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorTextPrimary' and text() =  '" + spaceName + "']")).click();
         sleep(2000);
-        $(By.xpath("//*[text()='" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='" + spaceName + "']")).click();
+        $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorInherit MuiTypography-alignLeft' and text()='" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
+        $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorInherit MuiTypography-alignLeft' and text()='" + spaceName + "']")).click();
     }
 
     @Then("user verify that items for {string} are displayed")
@@ -1007,10 +1012,10 @@ public class ProjectStepDefs {
 
     @When("I click on view all button from space dropdown")
     public void iClickOnViewAllButtonFromSpaceDropdown() {
-        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")).should(visible, Duration.ofMinutes(1));
-        $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[6]")).click();
-        $(By.xpath("//*[text()='VIEW ALL']")).should(visible, Duration.ofSeconds(1));
-        $(By.xpath("//*[text()='VIEW ALL']")).click();
+        $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorTextPrimary' and text() = 'View All']")).should(visible, Duration.ofSeconds(10));
+        $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorTextPrimary' and text() = 'View All']")).click();
+        $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5' and text()='VIEW ALL']")).should(visible, Duration.ofSeconds(1));
+        $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5' and text()='VIEW ALL']")).click();
     }
 
     @Then("I verify that items from all spaces are displayed")

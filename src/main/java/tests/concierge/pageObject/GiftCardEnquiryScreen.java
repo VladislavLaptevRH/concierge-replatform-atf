@@ -12,9 +12,10 @@ import static com.codeborne.selenide.Selenide.$$;
 public class GiftCardEnquiryScreen {
 
     private final SelenideElement giftCardEnquiry = $(By.xpath("//*[@class='MuiButton-label' and text()='Gift card enquiry']"));
-    private final SelenideElement cardNumberField = $(By.xpath("//input[@id='1']"));
+    private final SelenideElement cardNumberField = $(By.xpath("//input[@type='text']"));
     private final SelenideElement cardPinField = $(By.xpath("//input[@type='password']"));
     private final SelenideElement submitButton = $(By.xpath("//*[@class='MuiButton-label' and text()='Submit']"));
     private final SelenideElement purchaseCard = $(By.xpath("//*[@class='MuiButton-label' and text()='RH']"));
     private final List<SelenideElement> listOfTransactionDetailsHeading = $$(By.xpath("//th[@scope='col']"));
+    private final List<SelenideElement> listOfTransactions = $$(By.xpath("(//tbody[@class='MuiTableBody-root'])[2]/tr"));
 }
