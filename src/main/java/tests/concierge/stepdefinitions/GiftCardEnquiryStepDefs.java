@@ -14,8 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.sleep;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class GiftCardEnquiryStepDefs {
 
@@ -46,6 +45,7 @@ public class GiftCardEnquiryStepDefs {
         for (int i = 0; i < giftCardEnquiryScreen.getListOfTransactionDetailsHeading().size(); i++) {
             items.add(giftCardEnquiryScreen.getListOfTransactionDetailsHeading().get(i).getText());
         }
+        assertNotEquals(giftCardEnquiryScreen.getListOfTransactions().size(), 0);
         assertEquals(items, expectedItems);
     }
 

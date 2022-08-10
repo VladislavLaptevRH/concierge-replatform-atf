@@ -293,7 +293,7 @@ Feature:Concierge Project
       | pricing    |
       | NON_MEMBER |
       | MEMBER     |
-      | NON_TRADE  |
+      #| NON_TRADE  |
       | TRADE      |
 #
   Scenario Outline: Verify transition between spaces
