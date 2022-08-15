@@ -38,6 +38,7 @@ public class ProjectStepDefs {
 
     @When("I click on projects button")
     public void iClickOnProjectsButton() {
+        sleep(10000);
         conciergeUserAccountPage.getProjectsButton().should(visible, Duration.ofMinutes(1));
         conciergeUserAccountPage.getProjectsButton().click();
     }
