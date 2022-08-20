@@ -4,7 +4,7 @@ Feature:Concierge Trade
   Scenario: Trade Client - Non Exempt
     Given I log into Concierge as "associate"
     And I remove all items from cart
-    And I go to item "10011392 SS" from search field
+    And I go to item "METAL BOX FRAME LEANER MIRROR" from search field
     And I select count of product
     And I click on add to cart button
     And I click on view cart button
@@ -18,7 +18,7 @@ Feature:Concierge Trade
   Scenario: Verify Trade Prices for PDP
     Given I log into Concierge as "associate"
     And I remove all items from cart
-    And I go to item "10011389 SS" from search field
+    And I go to item "METAL BOX FRAME LEANER MIRROR" from search field
     And I select count of product
     And I click on add to cart button
     And I click on view cart button
@@ -31,7 +31,7 @@ Feature:Concierge Trade
   Scenario: Verify Trade Prices for CP
     Given I log into Concierge as "associate"
     And I remove all items from cart
-    And I go to item "10011389 SS" from search field
+    And I go to item "METAL BOX FRAME LEANER MIRROR" from search field
     And I select count of product
     And I click on add to cart button
     And I click on view cart button
@@ -47,7 +47,7 @@ Feature:Concierge Trade
     When I choose contract gallery
     When I click on client button from header
     When I choose client who is a "trade"
-    And I go to item "10011389 SS" from search field
+    And I go to item "METAL BOX FRAME LEANER MIRROR" from search field
     Then I verify trade prices for "PG"
 
   Scenario: Verify trade prices for project page
@@ -60,7 +60,7 @@ Feature:Concierge Trade
   Scenario: Verify trade prices for order review page
     Given I log into Concierge as "associate"
     And I remove all items from cart
-    And I go to item "68470071 SS" from search field
+    And I go to item "HARLOW CRYSTAL TRIPLE SCONCE" from search field
     And I click on add to cart button
     And I click on view cart button
     When I choose order classification
@@ -75,7 +75,7 @@ Feature:Concierge Trade
   Scenario: Address page: Sold-to, Billing, shipping address
     Given I log into Concierge as "associate"
     And I remove all items from cart
-    And I go to item "68470071 SS" from search field
+    And I go to item "HARLOW CRYSTAL TRIPLE SCONCE" from search field
     And I click on add to cart button
     And I click on view cart button
     When I choose order classification
@@ -88,7 +88,7 @@ Feature:Concierge Trade
   Scenario: Verify that Membership banner is not present on the cart page
     Given I log into Concierge as "associate"
     And I remove all items from cart
-    And I go to item "68470071 SS" from search field
+    And I go to item "HARLOW CRYSTAL TRIPLE SCONCE" from search field
     And I click on add to cart button
     And I click on view cart button
     When I choose order classification

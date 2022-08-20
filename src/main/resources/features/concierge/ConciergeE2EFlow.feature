@@ -28,7 +28,7 @@ Feature:Concierge E2E flow
   Scenario: Verify that user is able to execute split payment using all payment methods
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10011392 SS" from search field
+    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
