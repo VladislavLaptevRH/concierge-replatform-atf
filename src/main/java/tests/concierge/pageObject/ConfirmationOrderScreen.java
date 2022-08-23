@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class ConfirmationOrderScreen {
 
-    private final SelenideElement acceptPlaceOrderBtn = $(By.xpath("//*[text()='ACCEPT & PLACE ORDER']"));
+    private final SelenideElement acceptPlaceOrderBtn = $(By.xpath("//*[@class= 'MuiButton-label' and text() ='ACCEPT & PLACE ORDER']"));
 
     private final SelenideElement signatureArea = $(By.xpath("//canvas[@width='1228']"));
 
