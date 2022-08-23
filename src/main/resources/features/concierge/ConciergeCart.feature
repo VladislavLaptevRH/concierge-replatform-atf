@@ -132,7 +132,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "FRENCH CONTEMPORARY PANEL 4-DOOR MEDIA CONSOLE" from search field
+    When I go to item "prod17310052" from search field
     When I click on add to cart button
     When I click on view cart button
     When I click on move to project button
@@ -336,8 +336,8 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "MONOGRAMMED 802-GRAM TURKISH TOWEL" from search field
-    When I click on first item from grid
+    When I go to item "prod19500002" from search field
+    #When I click on first item from grid
     When I select size option 2 for item
     When I select color option
     When I click on add to cart button

@@ -129,7 +129,8 @@ public class AbstractStepDefs {
 
     @When("I click on a place order button")
     public void iClickOnPlaceOrderButton() {
-        reviewOrderScreen.getPlaceOrderButton().should(enabled, Duration.ofMinutes(3));
+        sleep(3000);
+        reviewOrderScreen.getPlaceOrderButton().should(enabled, Duration.ofSeconds(45));
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         reviewOrderScreen.getPlaceOrderButton().should(enabled, Duration.ofMinutes(1));
         reviewOrderScreen.getPlaceOrderButton().click();
