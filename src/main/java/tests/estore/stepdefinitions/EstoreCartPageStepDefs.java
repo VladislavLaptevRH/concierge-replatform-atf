@@ -1,6 +1,5 @@
 package tests.estore.stepdefinitions;
 
-import com.codeborne.selenide.SelenideElement;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,7 +9,6 @@ import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
 
 import java.time.Duration;
-import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -52,8 +50,8 @@ public class EstoreCartPageStepDefs {
     public void iClickOnViewCartButton() {
         sleep(3000);
         generalStepDefs.waitForJSandJQueryToLoad();
-        estoreCartPage.getItemAddedToYourCart().should(visible, Duration.ofMinutes(1));
-        estoreCartPage.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
+//        estoreCartPage.getItemAddedToYourCart().should(visible, Duration.ofMinutes(1));
+//        estoreCartPage.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
         estoreItemPage.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
         estoreItemPage.getViewCartButton().should(visible, Duration.ofSeconds(60));
         estoreCartPage.getKeepShopping().should(visible, Duration.ofSeconds(15));
@@ -328,5 +326,38 @@ public class EstoreCartPageStepDefs {
             iClickOnViewCartButton();
         }
 
+    }
+
+    @When("I click on estore order details button")
+    public void iClickOnOrderDetailsButton() {
+        estoreUserAccountPage.getOrderDetailsButton().should(visible, Duration.ofSeconds(15));
+        estoreUserAccountPage.getOrderDetailsButton().click();
+    }
+
+    @When("I click on estore cart button from header")
+    public void iClickOnEstoreCartButtonFromHeader() {
+        estoreCartPage.getCartButtonOrderReview().should(visible, Duration.ofSeconds(20));
+        estoreCartPage.getCartButtonOrderReview().click();
+    }
+
+    @When("I update item quantity in estore cart")
+    public void iUpdateItemQuantityInEstoreCart() {
+    }
+
+    @Then("I verify that I'm able to increase item quantity with success")
+    public void iVerifyThatItemQuantityWasIncreasedWithSuccess() {
+        estoreItemPage.getSelectQuantity().should(visible, Duration.ofSeconds(20));
+        estoreItemPage.getSelectQuantity().scrollIntoView(true);
+        Select selectQuantity = new Select(estoreItemPage.getSelectQuantity());
+        selectQuantity.selectByValue("2");
+        $(By.xpath("//*[text()='$11,790.00']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that I'm able to decrease item quantity with success")
+    public void iVerifyThatIMAbleToDecreaseItemQuantityWithSuccess() {
+        estoreCartPage.getQuantitySelect().should(visible, Duration.ofSeconds(20));
+        Select selectQuantity = new Select(estoreCartPage.getQuantitySelect());
+        selectQuantity.selectByValue("1");
+        $(By.xpath("//*[text()='$5,895.00']")).should(visible, Duration.ofSeconds(20));
     }
 }

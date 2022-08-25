@@ -624,7 +624,7 @@ public class ConciergeE2EStepDefs {
 
     @And("I verify that I'm able to edit billing address")
     public void iVerifyThatIMAbleToEditBillingAddress() {
-        $(By.xpath("//*[text()='NewBillingAddress Automation']")).shouldHave(text("NewBillingAddress"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='NewBillingAddress test']")).shouldHave(text("NewBillingAddress"), Duration.ofSeconds(25));
     }
 
     @Then("I verify the payment details and order estimate summary")

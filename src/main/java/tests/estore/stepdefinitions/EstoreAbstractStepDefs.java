@@ -35,6 +35,7 @@ public class EstoreAbstractStepDefs {
     EstoreCategories estoreCategories = new EstoreCategories();
     EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
     EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
+    EstoreConfirmationOrderScreen estoreConfirmationOrderScreen = new EstoreConfirmationOrderScreen();
 
 
     @When("I clicks on a random estore menu item")
@@ -158,9 +159,9 @@ public class EstoreAbstractStepDefs {
     @Then("I verify that confirmation estore order screen is displayed")
     public void iVerifyThatEstoreOrderDetailsScreenIsDisplayed() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        confirmationOrderScreen.getThankYouTitle().should(visible, Duration.ofSeconds(25));
-        assertTrue(confirmationOrderScreen.getYourOrderHasBeenPlaced().isDisplayed());
-        assertTrue(confirmationOrderScreen.getThankYouTitle().isDisplayed());
+        estoreConfirmationOrderScreen.getThankYouTitle().should(visible, Duration.ofSeconds(25));
+
+        assertTrue(estoreConfirmationOrderScreen.getYourOrderHasBeenPlaced().isDisplayed());
     }
 
     @When("I fill all fields from estore address screen")

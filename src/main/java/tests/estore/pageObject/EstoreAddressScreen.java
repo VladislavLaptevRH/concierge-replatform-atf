@@ -14,6 +14,18 @@ public class EstoreAddressScreen {
 
     private final SelenideElement confirmEmail = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[10]"));
 
+    private final SelenideElement editShippinggAddress = $(By.xpath("(//*[text()='Edit'])[1]"));
+
+    private final SelenideElement shippingAddressState = $(By.xpath("//select[@id='shippingAddress.state']"));
+
+    private final SelenideElement abState = $(By.xpath("//option[@value='AB']"));
+
+    private final SelenideElement postalShippingCode = $(By.xpath("//input[@id='shippingAddress.postalCode']"));
+
+    private final SelenideElement countrySelect = $(By.xpath("//select[@id='shippingAddress.country']"));
+
+    private final SelenideElement canadaCountry = $(By.xpath("//select[@id='shippingAddress.country']//option[@value='CA']"));
+
     private final SelenideElement enterZipCodeBtn = $(By.xpath("(//span[@style='text-decoration: underline; cursor: pointer;'])[2]"));
 
     private final SelenideElement soldToTaxExempt = $(By.cssSelector("#soldToTaxExemptId"));
@@ -45,8 +57,6 @@ public class EstoreAddressScreen {
     private final SelenideElement shippingAddressTitle = $(By.xpath("//*[text()='Shipping Address']"));
 
     private final SelenideElement editPaymentOrderReview = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']/a)[2]"));
-
-    private final SelenideElement editShippingAddress = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center']/a)[1]"));
 
     private final SelenideElement editBillingAddress = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center']/a)[2]"));
 }

@@ -3,9 +3,11 @@ package tests.estore.stepdefinitions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import lombok.Getter;
 import tests.concierge.pageObject.*;
 import tests.estore.pageObject.EstoreAddressScreen;
 import tests.estore.pageObject.EstoreCheckoutAddressScreen;
+import tests.estore.pageObject.EstorePaymentPage;
 import tests.utility.Hooks;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -14,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.security.SecureRandom;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Getter
 public class EstoreGeneralStepDefs {
     ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
@@ -32,12 +36,23 @@ public class EstoreGeneralStepDefs {
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
+    EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
     EstoreCheckoutAddressScreen estoreCheckoutAddressScreen = new EstoreCheckoutAddressScreen();
+    private static final Random RANDOM = new SecureRandom();
+    private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(30));
 
     public void waitForLoad(WebDriver driver) {
         ExpectedCondition<Boolean> pageLoadCondition = webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete");
         wait.until(pageLoadCondition);
+    }
+
+    protected static String generateRandomString(int length) {
+        StringBuilder returnValue = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            returnValue.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));
+        }
+        return new String(returnValue);
     }
 
     public boolean waitForJSandJQueryToLoad() {
@@ -179,6 +194,44 @@ public class EstoreGeneralStepDefs {
 
     }
 
+    public void executePaymentWithCard(String cardType) {
+        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(5));
+
+        if (cardType.equals("visa")) {
+            Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
+            selectPayment.selectByIndex(2);
+
+            switchTo().frame($(By.cssSelector("iframe[title='Iframe for secured card number']")).should(visible, Duration.ofMinutes(1)));
+            estorePaymentPage.getCardNumberField().setValue("4678475330157543");
+            switchTo().defaultContent();
+
+            switchTo().frame($(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")).should(visible, Duration.ofMinutes(1)));
+            estorePaymentPage.getCvcField().setValue("737");
+            switchTo().defaultContent();
+
+            switchTo().frame($(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card expiry date']")).should(visible, Duration.ofMinutes(1)));
+            estorePaymentPage.getExpiryDateField().setValue("0330");
+            switchTo().defaultContent();
+        }
+        if (cardType.equals("mastercard")) {
+            Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
+            selectPayment.selectByIndex(2);
+
+            switchTo().frame($(By.cssSelector("iframe[title='Iframe for secured card number']")).should(visible, Duration.ofMinutes(1)));
+            estorePaymentPage.getCardNumberField().setValue("2222400010000008");
+            switchTo().defaultContent();
+
+            switchTo().frame($(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")).should(visible, Duration.ofMinutes(1)));
+            estorePaymentPage.getCvcField().setValue("737");
+            switchTo().defaultContent();
+
+            switchTo().frame($(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card expiry date']")).should(visible, Duration.ofMinutes(1)));
+            estorePaymentPage.getExpiryDateField().setValue("0330");
+            switchTo().defaultContent();
+        }
+
+    }
+
 
     /**
      * Click on continue to payment buttons
@@ -270,22 +323,22 @@ public class EstoreGeneralStepDefs {
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue(paymentType);
 
-        $(By.cssSelector("iframe[title='Iframe for secured card data input field']")).should(Condition.be(visible), Duration.ofMinutes(2));
-        SelenideElement selenideElement = $(By.cssSelector("iframe[title='Iframe for secured card data input field']"));
+        $(By.cssSelector("iframe[title='Iframe for secured card number']")).should(Condition.be(visible), Duration.ofMinutes(2));
+        SelenideElement selenideElement = $(By.cssSelector("iframe[title='Iframe for secured card number']"));
         switchTo().frame(selenideElement);
-        paymentScreen.getCardNumberField().setValue(number);
+        estorePaymentPage.getCardNumberField().setValue(number);
         switchTo().defaultContent();
 
         $(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")).should(Condition.be(visible), Duration.ofMinutes(2));
         switchTo().frame($(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")));
 
-        paymentScreen.getCvcField().setValue(cvc);
+        estorePaymentPage.getCvcField().setValue(cvc);
         switchTo().defaultContent();
 
-        $(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card data input field']")).should(Condition.be(visible), Duration.ofMinutes(2));
-        switchTo().frame($(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card data input field']")));
+        $(By.xpath("//iframe[@title='Iframe for secured card expiry date']")).should(Condition.be(visible), Duration.ofMinutes(2));
+        switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card expiry date']")));
 
-        paymentScreen.getExpiryDateField().setValue(expirationDate);
+        estorePaymentPage.getExpiryDateField().setValue(expirationDate);
         switchTo().defaultContent();
     }
 

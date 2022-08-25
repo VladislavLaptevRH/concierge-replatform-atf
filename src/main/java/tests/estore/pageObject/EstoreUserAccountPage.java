@@ -11,6 +11,43 @@ import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class EstoreUserAccountPage {
+    private final SelenideElement addCardButton = $(By.xpath("//*[text()='Add Card']"));
+
+    private final SelenideElement saveCardButton = $(By.xpath("//*[text()='SAVE CARD']"));
+
+    private final SelenideElement billingAddressFirstName = $(By.xpath("//input[@id='firstName']"));
+
+    private final SelenideElement billingAddressLastName = $(By.xpath("//input[@id='lastName']"));
+
+    private final SelenideElement billingAddressStreetAddress = $(By.xpath("//input[@id='addressLine1']"));
+
+    private final SelenideElement billingAddressAptFloor = $(By.xpath("//input[@id='addressLine2']"));
+
+    private final SelenideElement billingAddressCity = $(By.xpath("//input[@id='city']"));
+
+    private final SelenideElement billingAddressSelectState = $(By.xpath("//select[@id='state']"));
+
+    private final SelenideElement billingAddressPostalCode = $(By.xpath("//input[@id='postalCode']"));
+
+    private final SelenideElement billingAddressPhone = $(By.xpath("//input[@id='phone']"));
+
+    private final SelenideElement newCardNumber = $(By.xpath("//input[@class='MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd']"));
+
+    private final SelenideElement selectTypeOfCardNewCard = $(By.xpath("//select[@class='MuiSelect-root MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']"));
+
+    private final SelenideElement creditCardNewCard = $(By.xpath("(//option[@value='CC'])[1]"));
+
+    private final SelenideElement confirmDeleteButton = $(By.xpath("//*[text()='DELETE']"));
+
+    private final SelenideElement deleteButton = $(By.xpath("//*[text()='Delete']"));
+
+    private final SelenideElement paymentMethodsButton = $(By.xpath("//a[@href='/my-account/payment-info.jsp']"));
+
+    private final SelenideElement myProfileButton = $(By.xpath("//*[text()='My Account']"));
+
+    private final SelenideElement profileButton = $(By.xpath("//*[text()='PROFILE']"));
+
+    private final SelenideElement profileIconButton = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
 
     private final SelenideElement brandButton = $(By.xpath("//a[@data-testid='brand-link']"));
 

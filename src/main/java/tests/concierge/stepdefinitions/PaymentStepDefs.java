@@ -178,7 +178,6 @@ public class PaymentStepDefs {
         paymentScreen.getEditBillingAddressBtn().click();
         generalStepDefs.clearField(conciergeAddressScreen.getBillingAddressFirstName());
         conciergeAddressScreen.getBillingAddressFirstName().setValue("NewBillingAddress");
-        System.out.println();
     }
 
 }

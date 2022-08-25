@@ -24,6 +24,25 @@ public class EstoreLoginStepDefs {
         estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(15));
         estoreLoginPage.getPasswordField().should(visible, Duration.ofMinutes(15));
 
+        if(accountRole.equals("savedRhCcDiscover")){
+            estoreLoginPage.getUsernameField().setValue("bnamdeo+0010@rh.com");
+            estoreLoginPage.getPasswordField().setValue("Resto123");
+        }
+        if(accountRole.equals("savedRhCc")){
+            estoreLoginPage.getUsernameField().setValue("savedrhcc@rh.com");
+            estoreLoginPage.getPasswordField().setValue("Resto123");
+        }
+
+        if(accountRole.equals("userWithSavedMasterCardVisa")){
+            estoreLoginPage.getUsernameField().setValue("mastervisa@rh.com");
+            estoreLoginPage.getPasswordField().setValue("Resto123");
+        }
+
+        if (accountRole.equals("mastercard")) {
+            estoreLoginPage.getUsernameField().setValue("mastercard@rh.com");
+            estoreLoginPage.getPasswordField().setValue("Qwerty@123");
+        }
+
         if (accountRole.equals("regular")) {
             estoreLoginPage.getUsernameField().setValue("new02@rh.com");
             estoreLoginPage.getPasswordField().setValue("Qwerty@123");

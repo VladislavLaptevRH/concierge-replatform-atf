@@ -35,8 +35,6 @@ public class EstoreCartPage {
 
     private final SelenideElement gramTurkishTitle = $(By.xpath("//h3[normalize-space()='802-Gram Turkish Towel Collection']"));
 
-    private final SelenideElement quantityButton = $(By.xpath("//select[@id='quantity_701bfc45-0262-4a2c-bf01-92887d788333_1']"));
-
     private final SelenideElement orderClassificationSelect = $(By.id("element-orderclassification"));
 
     private final SelenideElement membersProgramTitle = $(By.xpath("//h2[@class='MuiTypography-root MuiTypography-h2 MuiTypography-noWrap']"));
@@ -59,7 +57,11 @@ public class EstoreCartPage {
 
     private final SelenideElement reasonCodeField = $(By.xpath("//select[@id='reason_code']"));
 
+    private final SelenideElement selectQuantity = $(By.xpath("//select[contains(@id,'quantity')]"));
+
     private final SelenideElement removeButton = $(By.xpath("//*[text()='Remove']"));
+
+    private final SelenideElement cartButtonOrderReview = $(By.xpath("(//a[@href='/checkout/shopping_cart.jsp'])[2]"));
 
     private final SelenideElement cartTitle = $(By.xpath("//*[text()='CART']"));
 

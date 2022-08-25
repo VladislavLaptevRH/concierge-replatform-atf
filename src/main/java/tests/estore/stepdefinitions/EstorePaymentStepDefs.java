@@ -2,70 +2,207 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import io.cucumber.java.an.E;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
-import tests.estore.pageObject.EstorePaymentPage;
+import tests.estore.pageObject.*;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 
 public class EstorePaymentStepDefs {
-    EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
+    EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
+    EstoreCartPage estoreCartPage = new EstoreCartPage();
+    EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
+    EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
     EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
+    EstoreAbstractStepDefs estoreAbstractStepDefs = new EstoreAbstractStepDefs();
+    EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
+    EstoreItemPage estoreItemPage = new EstoreItemPage();
 
-    // Fix DuplicateStepDefinitionException - change the steps names so they uniqe from concierge step definition
+    @Then("I verify that I'm able to execute estore split payment")
+    public void iVerifyThatIMAbleToExecuteEstoreSplitPayment() {
+        try {
+            estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
+            $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
+            $(By.xpath("//input[@type='text']")).setValue("10");
+            estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
 
-   /* @When("I introduces payment details for estore several payment methods")
-    public void iIntroducesPaymentDetailsForSeveralPaymentMethods() {
-        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
-        sleep(3000);
-        estoreGeneralStepDefs.payWith("VI", "4678 4753 3015 7543", "737", "0330");
-        estorePaymentPage.getSplitPaymentCheckBox().click();
-        estoreGeneralStepDefs.clearField(estorePaymentPage.getFieldAmount());
-        estorePaymentPage.getFieldAmount().setValue("3");
-        estorePaymentPage.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
-        estorePaymentPage.getContinueToReview().click();
-        sleep(3000);
-        estoreGeneralStepDefs.payWith("AX", "3411 3411 3411 347", "6765", "0225");
-        estorePaymentPage.getSplitPaymentCheckBox().click();
-        estoreGeneralStepDefs.clearField(estorePaymentPage.getFieldAmount());
-        estorePaymentPage.getFieldAmount().setValue("1");
-        estorePaymentPage.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
-        estorePaymentPage.getContinueToReview().click();
-        sleep(3000);
+            estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
+            estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+        }
+
+    }
+
+    @When("I choose saved card {string} from payment method dropdown")
+    public void iChooseSaveCardFromPaymentMethodDropdown(String cardType) {
+        estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
-        selectPayment.selectByValue("RH");
-        estorePaymentPage.getSplitPaymentCheckBox().should(visible, Duration.ofSeconds(20));
-        estorePaymentPage.getSplitPaymentCheckBox().click();
-        estorePaymentPage.getRhCardNumberField().setValue("5856373202133257");
+        if (cardType.equals("VI")) {
+            selectPayment.selectByValue("46784755611871507543");
+            $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofMinutes(2));
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
+        }
+        if (cardType.equals("MC")) {
+            selectPayment.selectByValue("22224053560881330008");
+            $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofMinutes(2));
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
+        }
+
+        estorePaymentPage.getCvcField().should(visible, Duration.ofSeconds(20));
+        estorePaymentPage.getCvcField().setValue("737");
+        switchTo().defaultContent();
+
+
+        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container']//button")).click();
+        //        estorePaymentPage.getContinueToCheckout().should(visible,Duration.ofSeconds(20));
+//        estorePaymentPage.getContinueToCheckout().click();
+
+    }
+
+    @Then("I verify that I'm able to edit payment")
+    public void iVerifyThatIMAbleToEditPayment() {
+        estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
+        estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+        $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).click();
+        estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(20));
+        estoreCartPage.getRemoveButton().click();
+        estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
+        estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+    }
+
+    @When("I edit estore billing address from PG")
+    public void iEditBillingAddressFromPG() {
+        estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getEditShippinggAddress().click();
+        $(By.xpath("(//*[text()='Edit'])[3]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//*[text()='Edit'])[3]")).click();
+        estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstName());
+        estoreAddressScreen.getBillingAddressFirstName().setValue("NewBillingAddress");
+    }
+
+
+    @When("I pay with RHCC for estore item")
+    public void iPayWithRHCCForEstoreItem() {
+        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(5));
+        Select paymentMethod = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
+        paymentMethod.selectByValue("RH");
+        estorePaymentPage.getRhCardNumberField().setValue("6006101002514930");
         Select paymentPlan = new Select(estorePaymentPage.getSelectPaymentPlan());
-        paymentPlan.selectByValue("001");
-        estoreGeneralStepDefs.clearField(estorePaymentPage.getFieldAmount());
-        estorePaymentPage.getFieldAmount().setValue("1");
-        estorePaymentPage.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
-        estorePaymentPage.getContinueToReview().click();
-        sleep(3000);
-        Select selectPayment1 = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
-        selectPayment1.selectByValue("GiftCard");
-        estorePaymentPage.getRhCardNumberField().setValue("6006493887999901635");
-        estorePaymentPage.getRhCardPin().setValue("9559");
-        estorePaymentPage.getSplitPaymentCheckBox().click();
-        estoreGeneralStepDefs.clearField(estorePaymentPage.getFieldAmount());
-        estorePaymentPage.getFieldAmount().setValue("1");
-        estorePaymentPage.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
-        estorePaymentPage.getContinueToReview().click();
-        sleep(3000);
-        estoreGeneralStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
-        estorePaymentPage.getSplitPaymentCheckBox().click();
-        estoreGeneralStepDefs.clearField(estorePaymentPage.getFieldAmount());
-        estorePaymentPage.getFieldAmount().setValue("1");
-        estorePaymentPage.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
-        estorePaymentPage.getContinueToReview().click();
-        sleep(3000);
-        estoreGeneralStepDefs.payWith("MC", "2222 4000 1000 0008", "737", "0330");
-        estorePaymentPage.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
-        estorePaymentPage.getContinueToReview().click();
-    }*/
+        paymentPlan.selectByIndex(1);
+    }
+
+    @When("I edit billing address from estore payment page")
+    public void iEditBillingAddressFromEstorePaymentPage() {
+        estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I remove added before cart")
+    public void iRemoveAddedBeforeCart() {
+        estoreUserAccountPage.getDeleteButton().shouldHave(Condition.text("Delete"), Duration.ofSeconds(20));
+        estoreUserAccountPage.getDeleteButton().click();
+        estoreUserAccountPage.getConfirmDeleteButton().shouldHave(text("DELETE"), Duration.ofSeconds(20));
+        estoreUserAccountPage.getConfirmDeleteButton().click();
+    }
+
+    @Then("I verify unavailability of Discover for CAN address")
+    public void iVerifyUnavailabilityOfDiscoverForCANAddress() {
+    }
+
+    @Then("I verify that discover is unavailable")
+    public void iVerifyThatDiscoverIsUnavailable() {
+        System.out.println();
+    }
+
+    @Then("I verify that I'm able to execute estore split payment with saved CC")
+    public void iVerifyThatIMAbleToExecuteEstoreSplitPaymentWithSavedCC() {
+        try {
+            estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
+            Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
+            selectPayment.selectByValue("46784755611871507543");
+            $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofSeconds(20));
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
+            estorePaymentPage.getCvcField().setValue("737");
+            switchTo().defaultContent();
+            $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
+            $(By.xpath("//input[@type='text']")).setValue("10");
+            estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+            selectPayment.selectByValue("22224053560881330008");
+            $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofSeconds(20));
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
+            estorePaymentPage.getCvcField().setValue("737");
+            switchTo().defaultContent();
+            $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
+            $(By.xpath("//input[@type='text']")).setValue("10");
+            estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+
+
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+        }
+    }
+
+    @And("I verify that VI and MC card are available in payment method dropdown")
+    public void iVerifyThatVIAndMCCardAreAvaialbeInPaymentMethodDropdown() {
+        estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
+        estorePaymentPage.getChoosePaymentMethodBtn().click();
+
+        $(By.xpath("//*[text()='Visa ####-7543']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Master Card ####-0008']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that credit cards are displayed in total section")
+    public void iVerifyThatCreditCardsAreDisplayedInTotalSection() {
+        $(By.xpath("//*[text()='Charge to Visa ending 7543:']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Charge to MasterCard ending 0008:']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I validate updated order estimate and card details")
+    public void iValidateUpdatedOrderEstimateAndCardDetails() {
+        $(By.xpath("//*[text()='$6,444.00']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='$5,895.00']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Subtotal ']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='TOTAL']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I update item quantity in estore pdp")
+    public void iUpdateItemQuantityInEstorePdp() {
+        estoreItemPage.getSelectQuantity().should(visible, Duration.ofSeconds(20));
+        estoreItemPage.getSelectQuantity().scrollIntoView(true);
+        Select selectQuantity = new Select(estoreItemPage.getSelectQuantity());
+        selectQuantity.selectByValue("2");
+    }
+
+    @Then("I validate updated order estimate and card details for decrease item")
+    public void iValidateUpdatedOrderEstimateAndCardDetailsForDecreaseItem() {
+        $(By.xpath("//*[text()='$12,790.00']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='$14,406.12']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Subtotal ']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='TOTAL']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify unavailability of saved for RHCC")
+    public void iVerifyUnavailabilityOfSavedForRHCC() {
+        estorePaymentPage.getChoosePaymentMethodBtn().should(visible,Duration.ofSeconds(20));
+        estorePaymentPage.getChoosePaymentMethodBtn().click();
+        $(By.xpath("//*[text()='RH Credit Card ####-4849']")).shouldNotBe(visible,Duration.ofSeconds(20));
+    }
+
+    @Then("I validate that billing address based on saved payment method")
+    public void iValidateThatBillingAddressBasedOnSavedPaymentMethod() {
+        $(By.xpath("//*[text()='SHARAN NAIR']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Lit']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='San Rafael, CA 94903']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='US']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='3342294667']")).should(visible,Duration.ofSeconds(20));
+    }
 }
