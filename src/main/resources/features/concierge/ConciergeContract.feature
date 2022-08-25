@@ -17,7 +17,7 @@ Feature:Concierge Contract
     Given I log into Concierge as "associate"
     And I remove all items from cart
     When I choose contract gallery
-    And I go to item "68470071 SS" from search field
+    And I go to item "HARLOW CRYSTAL TRIPLE SCONCE" from search field
     And I click on add to cart button
     And I click on view cart button
     When I choose order classification
@@ -30,7 +30,7 @@ Feature:Concierge Contract
     Given I log into Concierge as "associate"
     And I remove all items from cart
     When I choose contract gallery
-    And I go to item "68470071 SS" from search field
+    And I go to item "HARLOW CRYSTAL TRIPLE SCONCE" from search field
     And I click on add to cart button
     And I click on view cart button
     When I choose order classification
@@ -44,7 +44,7 @@ Feature:Concierge Contract
     Given I log into Concierge as "associate"
     And I remove all items from cart
     When I choose contract gallery
-    And I go to item "68470071 SS" from search field
+    And I go to item "HARLOW CRYSTAL TRIPLE SCONCE" from search field
     And I click on add to cart button
     And I click on view cart button
     When I choose order classification
@@ -72,7 +72,7 @@ Feature:Concierge Contract
 ##    Then I verify that contract price is displayed
 #    When I click on collections item
 #    When I clicks on o random item
-    And I go to item "68470071 SS" from search field
+    And I go to item "HARLOW CRYSTAL TRIPLE SCONCE" from search field
     Then I verify that contract price is displayed
 #    When I select debth option
 #    When I select fabric option

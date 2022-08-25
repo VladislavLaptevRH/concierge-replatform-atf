@@ -96,6 +96,7 @@ public class ConciergeE2EStepDefs {
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
+        conciergeItemsScreen.getAddToCartButton().scrollTo();
         conciergeItemsScreen.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
         conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
         conciergeItemsScreen.getAddToCartButton().click();
@@ -352,6 +353,7 @@ public class ConciergeE2EStepDefs {
     @And("I select count of product")
     public void iSelectCountOfProduct() {
         executeJavaScript("window.scrollTo(0, 1200)");
+        conciergeItemsScreen.getDetailsSpan().scrollTo();
         conciergeItemsScreen.getDetailsSpan().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
         conciergeItemsScreen.getDetailsSpan().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofMinutes(3));
         selectOption.getQuantityElement().should(visible, Duration.ofMinutes(1));

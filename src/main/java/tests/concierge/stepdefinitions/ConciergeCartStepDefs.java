@@ -285,6 +285,7 @@ public class ConciergeCartStepDefs {
     public void iVerifyThatTotalAdditionalProductDiscountMessageIsOnReviewPage(String arg0) {
         if (arg0.equals("displayed")) {
             conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofMinutes(1));
+            conciergeCartPageScreen.getTotalAditionalProdDiscount().scrollTo();
             $(By.xpath("//*[text()='$471.75']")).should(visible, Duration.ofMinutes(1));
         } else {
             conciergeCartPageScreen.getTotalAditionalProdDiscount().shouldNotBe(visible, Duration.ofMinutes(1));
