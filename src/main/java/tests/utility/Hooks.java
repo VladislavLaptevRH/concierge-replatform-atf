@@ -71,7 +71,7 @@ public class Hooks {
     @Before("@estoreRegression")
     public void initWebDrivereStore() {
         ConfigFileReader();
-        //setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver((String) properties.get("eStorestg2Url"));
     }
 
