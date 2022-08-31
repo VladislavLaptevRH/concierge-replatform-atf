@@ -8,6 +8,23 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class EstoreAddressScreen {
+
+    private final SelenideElement shippingAddressfirstName = $(By.id("shippingAddress.firstName"));
+
+    private final SelenideElement shippingAddresslastName = $(By.id("shippingAddress.lastName"));
+
+    private final SelenideElement shippingAddressStreetAddress = $(By.xpath("//input[@data-testid='shippingAddress.addressLine1']"));
+
+    private final SelenideElement shippingAddressAptFloor = $(By.id("shippingAddress.addressLine2"));
+
+    private final SelenideElement shippingAddressCity = $(By.id("shippingAddress.city"));
+
+    private final SelenideElement shippingAddressPhone = $(By.id("shippingAddress.phone"));
+
+    private final SelenideElement shippingAddressEmail = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[8]"));
+
+    private final SelenideElement shippingAddressConfirmEmail = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[9]"));
+
     private final SelenideElement submitZipCode = $(By.xpath("(//button[@type='submit'])[3]"));
 
     private final SelenideElement emailField = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[9]"));

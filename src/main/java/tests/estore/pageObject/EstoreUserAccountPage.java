@@ -11,6 +11,25 @@ import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class EstoreUserAccountPage {
+
+    private final SelenideElement confirmDeleteAddedAddress = $(By.xpath("(//*[text()='Delete'])[3]"));
+
+    private final SelenideElement firstNameRequired = $(By.xpath("//*[text()='First name required.']"));
+
+    private final SelenideElement lastNameRequired = $(By.xpath("//*[text()='Last name required.']"));
+
+    private final SelenideElement cityRequired = $(By.xpath("//*[text()='City required.']"));
+
+    private final SelenideElement stateRequired = $(By.xpath("//*[text()='State required.']"));
+
+    private final SelenideElement postlaCodeRequired = $(By.xpath("//*[text()='Postal code required.']"));
+
+    private final SelenideElement phoneRequired = $(By.xpath("//*[text()='Phone required.']"));
+
+    private final SelenideElement saveAddressButton = $(By.xpath("//*[text()='Save address']"));
+
+    private final SelenideElement addAddressButton = $(By.xpath("//*[text()='Add address']"));
+
     private final SelenideElement addCardButton = $(By.xpath("//*[text()='Add Card']"));
 
     private final SelenideElement saveCardButton = $(By.xpath("//*[text()='SAVE CARD']"));
@@ -41,13 +60,19 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement deleteButton = $(By.xpath("//*[text()='Delete']"));
 
+    private final SelenideElement deleteAddedAddressButton = $(By.xpath("(//*[text()='Delete'])[2]"));
+
     private final SelenideElement paymentMethodsButton = $(By.xpath("//a[@href='/my-account/payment-info.jsp']"));
 
     private final SelenideElement myProfileButton = $(By.xpath("//*[text()='My Account']"));
 
     private final SelenideElement profileButton = $(By.xpath("//*[text()='PROFILE']"));
 
-    private final SelenideElement profileIconButton = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
+    private final SelenideElement addressBookButton = $(By.xpath("//a[@href='/my-account/address-book.jsp']"));
+
+    private final SelenideElement profileIconButton = $(By.xpath("//a[@data-analytics-nav='account-icon']"));
+
+    private final SelenideElement profileIconButtonDiv = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
 
     private final SelenideElement brandButton = $(By.xpath("//a[@data-testid='brand-link']"));
 

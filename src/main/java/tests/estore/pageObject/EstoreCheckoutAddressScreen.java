@@ -10,6 +10,8 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class EstoreCheckoutAddressScreen {
 
+    private final SelenideElement deleteFirstShippingAddress = $(By.xpath("(//*[text()='Delete'])[1]"));
+
     private final SelenideElement continueAsGuestButton = $(By.xpath("(//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary'])[3]"));
 
     private final SelenideElement firstNameBillingAddress = $(By.id("billingAddress.firstName"));

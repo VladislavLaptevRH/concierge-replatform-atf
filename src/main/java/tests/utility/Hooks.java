@@ -71,7 +71,7 @@ public class Hooks {
     @Before("@estoreRegression")
     public void initWebDrivereStore() {
         ConfigFileReader();
-        //setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver((String) properties.get("eStorestg2Url"));
     }
 
@@ -95,12 +95,13 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = true;
+        Configuration.headless = false;
         Configuration.pageLoadStrategy = "normal";
-        Configuration.timeout = 60000;
+        Configuration.timeout = 900000000;
         Configuration.reportsFolder = "target/screenshots";
         open(url);
         currentUrl = WebDriverRunner.url();
+        System.out.println();
     }
 
     /**

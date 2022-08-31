@@ -79,7 +79,7 @@ Feature:Concierge Order review
     When I click on a place order button
     Then I verify spo order & terms review signature
 
-  Scenario: Verify all the line items in the cart
+  Scenario: Verify all the line items on the order review page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "METAL BOX FRAME LEANER MIRROR" from search field

@@ -1,6 +1,7 @@
 package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
@@ -13,6 +14,7 @@ import javax.naming.ldap.Rdn;
 import java.time.Duration;
 import java.util.UUID;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class EstoreUserAccountPageStepDefs {
@@ -21,7 +23,7 @@ public class EstoreUserAccountPageStepDefs {
     EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
     String additionalEmail;
-    String firstName;
+    static String firstName;
 
     @When("I go to profile payment method")
     public void iGoToProfilePaymentMethod() {
@@ -101,7 +103,7 @@ public class EstoreUserAccountPageStepDefs {
         $(By.xpath("//*[text()='EDIT']")).shouldHave(Condition.text("EDIT"), Duration.ofSeconds(20));
         $(By.xpath("//*[text()='EDIT']")).click();
 
-        estorePaymentPage.getContinueToCheckout().shouldHave(Condition.text("CONTINUE"),Duration.ofSeconds(20));
+        estorePaymentPage.getContinueToCheckout().shouldHave(Condition.text("CONTINUE"), Duration.ofSeconds(20));
         estorePaymentPage.getContinueToCheckout().click();
 
 //        estoreUserAccountPage.getSaveCardButton().click();
@@ -112,5 +114,75 @@ public class EstoreUserAccountPageStepDefs {
     @Then("I verify that it is shows new address")
     public void iVerifyThatItIsShowsNewAddress() {
         $(By.xpath("//*[contains(text(),'" + firstName + "')]")).shouldHave(Condition.text(firstName), Duration.ofSeconds(20));
+    }
+
+    @When("I click on address book estore button")
+    public void iClickOnAddressBookEstoreButton() {
+        estoreUserAccountPage.getAddressBookButton().should(Condition.visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getAddressBookButton().click();
+    }
+
+    @Given("I log into eStore as guest")
+    public void iLogIntoEStoreAsGuest() {
+        System.out.println("Login as guest");
+    }
+
+    @When("I click on estore my account button")
+    public void iClickOnEstoreMyAccountButton() {
+        estoreUserAccountPage.getMyProfileButton().shouldHave(Condition.text("My Account"), Duration.ofSeconds(30));
+        estoreUserAccountPage.getMyProfileButton().click();
+    }
+
+    @When("I click on add address button")
+    public void iClickOnAddAddressButton() {
+        estoreUserAccountPage.getAddAddressButton().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getAddAddressButton().click();
+
+    }
+
+    @When("I click on save address button")
+    public void iClickOnSaveAddressButton() {
+        estoreUserAccountPage.getSaveAddressButton().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getSaveAddressButton().click();
+    }
+
+    @Then("I verify that error messages are displayed for each mandatory field")
+    public void iVerifyThatErrorMessagesAreDisplayedForEachMandatoryField() {
+        estoreUserAccountPage.getFirstNameRequired().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getLastNameRequired().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getCityRequired().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getStateRequired().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getPostlaCodeRequired().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getPhoneRequired().should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that created address popup is displayed")
+    public void iVerifyThatCreatedAddressPopupIsDisplayed() {
+        $(By.xpath("//*[text()='USE ENTERED MY ACCOUNT ADDRESS BOOK']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that added address present in the grid")
+    public void iVerifyThatAddedAddressPresentInTheGrid() {
+        $(By.xpath("//*[text()='Pennsylvania Avenue']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I click on delete estore button")
+    public void iClickOnDeleteEstoreButton() {
+        estoreUserAccountPage.getDeleteAddedAddressButton().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getDeleteAddedAddressButton().click();
+    }
+
+    @When("I click on delete address button from appeared pop up")
+    public void iClickOnDeleteAddressButtonFromAppearedPopUp() {
+        estoreUserAccountPage.getConfirmDeleteAddedAddress().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getConfirmDeleteAddedAddress().click();
+    }
+
+    @When("I edit existing address on address book page")
+    public void iEditExistingAddressOnAddressBookPage() {
+        estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getEditShippinggAddress().click();
+        firstName = estoreGeneralStepDefs.generateRandomString(5);
+        estoreUserAccountPage.getBillingAddressFirstName().setValue(firstName);
     }
 }
