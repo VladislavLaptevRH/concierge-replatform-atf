@@ -650,7 +650,6 @@ public class ConciergeE2EStepDefs {
     @Then("I verify that all the line items in the cart with the order review page")
     public void iVerifyThatAllTheLineItemsInTheCartWithTheOrderReviewPage() {
         $(By.xpath("//*[text()='Qty 1']")).should(visible, Duration.ofSeconds(20));
-        conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofSeconds(10));
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));

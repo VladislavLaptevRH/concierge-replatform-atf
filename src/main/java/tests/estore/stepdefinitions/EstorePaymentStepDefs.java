@@ -13,8 +13,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
 
 public class EstorePaymentStepDefs {
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
@@ -44,6 +43,15 @@ public class EstorePaymentStepDefs {
 
     @When("I choose saved card {string} from payment method dropdown")
     public void iChooseSaveCardFromPaymentMethodDropdown(String cardType) {
+        try {
+            sleep(3000);
+            if (estoreCartPage.getRemoveButton().isDisplayed()) {
+                estoreCartPage.getRemoveButton().click();
+            }
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Remove payment button is not displayed");
+        }
+
         estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         if (cardType.equals("VI")) {
@@ -192,17 +200,23 @@ public class EstorePaymentStepDefs {
 
     @Then("I verify unavailability of saved for RHCC")
     public void iVerifyUnavailabilityOfSavedForRHCC() {
-        estorePaymentPage.getChoosePaymentMethodBtn().should(visible,Duration.ofSeconds(20));
+        estorePaymentPage.getChoosePaymentMethodBtn().should(visible, Duration.ofSeconds(20));
         estorePaymentPage.getChoosePaymentMethodBtn().click();
-        $(By.xpath("//*[text()='RH Credit Card ####-4849']")).shouldNotBe(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='RH Credit Card ####-4849']")).shouldNotBe(visible, Duration.ofSeconds(20));
     }
 
     @Then("I validate that billing address based on saved payment method")
     public void iValidateThatBillingAddressBasedOnSavedPaymentMethod() {
-        $(By.xpath("//*[text()='SHARAN NAIR']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Lit']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='San Rafael, CA 94903']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='US']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='3342294667']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='SHARAN NAIR']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Lit']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='San Rafael, CA 94903']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='3342294667']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I remove existing payment method on payment estore page")
+    public void iRemoveExistingPaymentMethodOnPaymentEstorePage() {
+        estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(20));
+        estoreCartPage.getRemoveButton().click();
     }
 }

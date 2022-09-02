@@ -183,4 +183,30 @@ public class EstoreAddressStepDefs {
     public void iVerifyThatAddedAddressEditedAddressUpdatedInTheShippingAddressList() {
         $(By.xpath("//*[contains(text(),'" + firstName + "')]")).shouldHave(Condition.text(firstName), Duration.ofSeconds(20));
     }
+
+    @Then("I verify that address on order review page the same as on address page")
+    public void iVerifyThatAddressOnOrderReviewPageTheSameAsOnAddressPage() {
+        //billings address
+        $(By.xpath("//*[text()='akshay soni']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='123 Advenue Street']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Vancouver, WA 98765']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='3342294667']")).should(visible, Duration.ofSeconds(20));
+        //shipping address
+        $(By.xpath("//*[text()='QA1cztJcmPchW Automation']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Qastreet']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='QaApartment']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Schenectady, NY 12345']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='3342294667']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='$4,195.00']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='PYRITE MOSAIC ROUND MIRROR']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Qty 1']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Subtotal ']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='$4,195.00'])[2]")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='TOTAL']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='$5,123.52']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='7543']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='PAYMENT INFORMATION']")).should(visible,Duration.ofSeconds(20));
+    }
 }
