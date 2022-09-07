@@ -120,4 +120,9 @@ public class EstoreHomePageStepDefs {
     }
 
 
+    @When("I navigate to the wishlist")
+    public void iNavigateToTheWishlist() {
+        estoreHomePage.getAccountIcon().click();
+        estoreHomePage.getWishlist().click();
+    }
 }
