@@ -60,6 +60,14 @@ public class EstoreLoginStepDefs {
                 estoreLoginPage.getUsernameField().setValue(Hooks.leaderLogin);
                 estoreLoginPage.getPasswordField().setValue(Hooks.leaderPassword);
             }
+            if (accountRole.equals("wishlist-registered")) {
+                estoreLoginPage.getUsernameField().setValue("wish@listautomation.com");
+                estoreLoginPage.getPasswordField().setValue("Qwert1234");
+            }
+            if (accountRole.equals("member")) {
+                estoreLoginPage.getUsernameField().setValue("automation@member.com");
+                estoreLoginPage.getPasswordField().setValue("Qwert1234");
+            }
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
         }
