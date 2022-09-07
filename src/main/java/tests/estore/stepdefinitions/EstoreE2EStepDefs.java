@@ -25,7 +25,6 @@ import static org.awaitility.Awaitility.await;
 import static org.testng.Assert.assertTrue;
 
 public class EstoreE2EStepDefs {
-    ConfirmationOrderScreen confirmationOrderScreen = new ConfirmationOrderScreen();
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
@@ -77,28 +76,6 @@ public class EstoreE2EStepDefs {
         estoreUserAccountPage.getListOfBrands().get(1).click();
     }
 
-//    @When("I go to item which has {string} restriction")
-//    public void iGoToItemWhichHasRestriction(String state) {
-//        usState = state;
-//        generalStepDefs.waitForJSandJQueryToLoad();
-//        conciergeUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
-//        conciergeUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
-//        conciergeUserAccountPage.getSearchItemField().click();
-//
-//        if (state.equals("NY")) {
-//            conciergeUserAccountPage.getSearchItemField().should(visible, Duration.ofSeconds(15));
-//            conciergeUserAccountPage.getSearchItemField().setValue("112414 OCEN BUMP");
-//            System.out.println();
-//        }
-//        if (state.equals("CA")) {
-//            conciergeUserAccountPage.getSearchItemField().should(visible, Duration.ofSeconds(15));
-//            WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));
-//            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@class,'MuiOutlinedInput-inputAdornedStart')]")));
-//            WebDriverRunner.getWebDriver().findElement(By.xpath("//input[contains(@class,'MuiOutlinedInput-inputAdornedStart')]")).sendKeys("112349 PTL SML");
-//        }
-//        conciergeUserAccountPage.getSearchButton().click();
-//    }
-
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
@@ -128,23 +105,6 @@ public class EstoreE2EStepDefs {
         assertTrue(restrictionPopUp.getShippingRestricitonsTitle().getText().contains("SHIPPING ERROR"));
         assertTrue(restrictionPopUp.getRestrictionsMessage().getText().contains("One or more items in your cart"));
     }
-
-//    @When("I remove all items from estore cart")
-//    public void iRemoveAllItemsFromEstoreSecondCart() {
-//        conciergeUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(1));
-//        sleep(3000);
-//        if (!conciergeUserAccountPage.getCartButton().getText().equals("")) {
-//            conciergeUserAccountPage.getCartButton().click();
-//            generalStepDefs.waitForJSandJQueryToLoad();
-//            conciergeCartPageScreen.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(12));
-//            conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
-//            conciergeCartPageScreen.getOrderEstimateTitle().shouldHave(text("Order Estimate"), Duration.ofSeconds(20));
-//            conciergeCartPageScreen.getClearOrderButton().click();
-//            conciergeCartPageScreen.getClearOrderButtonPop().shouldHave(text("CLEAR ORDER"), Duration.ofSeconds(25));
-//            conciergeCartPageScreen.getClearOrderButtonPop().click();
-//            generalStepDefs.waitForJSandJQueryToLoad();
-//        }
-//    }
 
 
     @When("I continue to estore payment")

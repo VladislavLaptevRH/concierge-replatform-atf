@@ -360,4 +360,5 @@ public class EstoreCartPageStepDefs {
         selectQuantity.selectByValue("1");
         $(By.xpath("//*[text()='$5,895.00']")).should(visible, Duration.ofSeconds(20));
     }
+
 }

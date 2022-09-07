@@ -4,7 +4,7 @@ Feature:Estore Payment
   Scenario: eStore Split Payment
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "61040991 BRZ" from search field
+    When I go to estore item "61040991 SLVR" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button

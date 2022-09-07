@@ -18,7 +18,7 @@ public class EstoreLoginStepDefs {
     }
 
     public void loginAsRole(String accountRole) {
-
+        if (!accountRole.equals("guest")) {
             estoreLoginPage.getAccountIcon().should(visible, Duration.ofMinutes(15));
             estoreLoginPage.getAccountIcon().click();
 
@@ -63,4 +63,5 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
         }
+    }
 }
