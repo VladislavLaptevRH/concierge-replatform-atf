@@ -360,4 +360,17 @@ public class EstoreCartPageStepDefs {
         selectQuantity.selectByValue("1");
         $(By.xpath("//*[text()='$5,895.00']")).should(visible, Duration.ofSeconds(20));
     }
+
+    @When("I click on add to wishlist button from cart")
+    public void iClickOnAddToWishlistButtonFromCart() {
+        sleep(2000);
+        estoreCartPage.getAddToWishlistButton().should(visible, Duration.ofSeconds(20));
+        estoreCartPage.getAddToWishlistButton().click();
+    }
+
+    @Then("I validate cart is empty")
+    public void iValidateCartIsEmpty() {
+        estoreUserAccountPage.getCartButton().click();
+        estoreCartPage.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(12));
+    }
 }

@@ -177,4 +177,6 @@ public class EstoreCartPage {
 
     private final SelenideElement joinRhMemberProgramTitle = $(By.xpath("(//*[contains(text(),'Join the RH Members Program for ')])[2]"));
 
+    private final SelenideElement addToWishlistButton = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div)[2]"));
+
 }
