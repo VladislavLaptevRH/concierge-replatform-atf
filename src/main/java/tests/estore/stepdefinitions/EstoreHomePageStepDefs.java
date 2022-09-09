@@ -125,4 +125,12 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getAccountIcon().click();
         estoreHomePage.getWishlist().click();
     }
+
+
+    @When("I navigate to the member tab")
+    public void iNavigateToTheMemberTab() {
+        sleep(2000);
+        estoreHomePage.getAccountIcon().click();
+        estoreHomePage.getMember().click();
+    }
 }

@@ -37,4 +37,5 @@ public class EstoreHomePage {
     private final SelenideElement iframeRequestAConsultationButton = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth']"));
     private final SelenideElement wishlist = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between'])[3]"));
     private final SelenideElement accountIcon = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
+    private final SelenideElement member = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between'])[4]"));
 }

@@ -5,15 +5,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import tests.estore.pageObject.EstoreItemPage;
 import tests.estore.pageObject.EstoreWishlistPage;
-
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.sleep;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class EstoreWishlistStepDefs {
