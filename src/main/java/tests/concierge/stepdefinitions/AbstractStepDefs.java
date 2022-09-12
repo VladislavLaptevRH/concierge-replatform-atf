@@ -38,6 +38,7 @@ public class AbstractStepDefs {
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
         actions.moveToElement(conciergeUserAccountPage.getFirstItemMainMenu());
         conciergeUserAccountPage.getFirstItemMainMenu().click();
+        sleep(2000);
         conciergeUserAccountPage.getItemSubCategory().get(0).should(visible, Duration.ofSeconds(30));
         conciergeUserAccountPage.getItemSubCategory().get(0).click();
     }

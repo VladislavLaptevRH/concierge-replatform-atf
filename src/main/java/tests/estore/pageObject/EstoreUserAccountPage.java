@@ -11,6 +11,11 @@ import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class EstoreUserAccountPage {
+    private final SelenideElement beddingCollectionsTest = $(By.xpath("//*[text()='Bedding Collections Test']"));
+
+    private final SelenideElement textilesText = $(By.xpath("//*[text()='Textiles']"));
+
+    private final SelenideElement bedLinesText = $(By.xpath("//*[text()='Bed Linens']"));
 
     private final SelenideElement confirmDeleteAddedAddress = $(By.xpath("(//*[text()='Delete'])[3]"));
 

@@ -7,15 +7,15 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import tests.estore.pageObject.EstoreCGScreen;
 import tests.estore.pageObject.EstoreItemPage;
+import tests.estore.pageObject.EstoreUserAccountPage;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class EstoreCGStepDefs {
-
+    EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
     EstoreItemPage estoreItemPage = new EstoreItemPage();
     EstoreCGScreen estoreCGScreen = new EstoreCGScreen();
 
@@ -43,7 +43,7 @@ public class EstoreCGStepDefs {
 
     @Then("I verify that single grid view is selected on CG page by default")
     public void iVerifyThatSingleGridViewIsSelectedOnCGPageByDefault() {
-        estoreCGScreen.getCGdefaultGridView().should(Condition.visible, Duration.ofSeconds(20));
+        estoreCGScreen.getCGdefaultGridView().should(Condition.visible, Duration.ofSeconds(40));
         estoreCGScreen.getComponentCollectionCardDetails().should(Condition.visible, Duration.ofSeconds(20));
     }
 
@@ -71,12 +71,12 @@ public class EstoreCGStepDefs {
     @Then("I verify after click on X icon model gets closed")
     public void iVerifyAfterClickOnXIconModelGetsClosed() {
         estoreCGScreen.getCortonaSofaCollectionTitelPreviewPopUp().shouldNotBe(Condition.visible, Duration.ofSeconds(20));
-
     }
 
     @When("I click on close button on preview the collection modal pop up")
     public void iClickOnCloseButtonOnPreviewTheCollectionModalPopUp() {
         estoreCGScreen.getClosePreviewModalModelPopUp().should(Condition.visible, Duration.ofSeconds(20));
+        estoreCGScreen.getClosePreviewModalModelPopUp().click();
     }
 
     @Then("I verify that collection modal is scrollable")
@@ -88,18 +88,15 @@ public class EstoreCGStepDefs {
 
     @And("I validate after scrolling all products are visible on the model")
     public void iValidateAfterScrollingAllProductsAreVisibleOnTheModel() {
-//        estoreCGScreen.getPreviewTheCollectionLastItem().should(Condition.visible, Duration.ofSeconds(20));
-
-        $(By.xpath("//*[text()='CORTONA SOFA COLLECTION']")).should(Condition.visible, Duration.ofSeconds(20));
-//        estoreCGScreen.getCortonaOttomanText().should(Condition.visible, Duration.ofSeconds(20));
+        estoreCGScreen.getCortonaSofaCollectionUppercase().should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify product image, name and prices are visible for each product on the model")
     public void iVerifyProductImageNameAndPricesAreVisibleForEachProductOnTheModel() {
-        $(By.xpath("//*[text()='Cortona Sofaa']")).should(Condition.visible, Duration.ofSeconds(20));
-        $(By.xpath("//p[@data-testid='price-for-regular']")).should(Condition.visible, Duration.ofSeconds(20));
-        $(By.xpath("//p[@data-testid='price-for-member']")).should(Condition.visible, Duration.ofSeconds(20));
-        $(By.xpath("//div[@data-cmp='cardImages']//div[@id='component-rh-image_wrapper']")).should(Condition.visible, Duration.ofSeconds(20));
+        estoreCGScreen.getCortonaSofa().should(Condition.visible, Duration.ofSeconds(40));
+        estoreCGScreen.getPriceForRegular().should(visible, Duration.ofSeconds(20));
+        estoreCGScreen.getPriceForMember().should(Condition.visible, Duration.ofSeconds(20));
+        estoreCGScreen.getCollectionModalProductImage().should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @When("I click on any product from the preview collection model")
@@ -114,5 +111,23 @@ public class EstoreCGStepDefs {
 
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
         estoreItemPage.getAddToCartButton().should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("user goes to bedding collections test")
+    public void userClicksOnBedLinesSubmenu() {
+        estoreUserAccountPage.getBedLinesText().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getBedLinesText().click();
+        estoreUserAccountPage.getBeddingCollectionsTest().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getBeddingCollectionsTest().click();
+    }
+
+    @When("user clicks on textile menu")
+    public void userClicksOnTextileMenu() {
+        estoreUserAccountPage.getTextilesText().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getTextilesText().click();
+    }
+
+    @Then("I verify that Enjoy Free Shipping On All Textiles banner is displayed")
+    public void iVerifyThatEnjoyFreeShippingOnAllTextilesBannerIsDisplayed() {
     }
 }

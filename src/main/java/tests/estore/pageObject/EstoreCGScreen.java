@@ -1,6 +1,7 @@
 package tests.estore.pageObject;
 
 import com.codeborne.selenide.SelenideElement;
+import io.cucumber.java.eo.Se;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
@@ -30,5 +31,15 @@ public class EstoreCGScreen {
     private SelenideElement cortonaOttomanText = $(By.xpath("//*[text()='Cortona Ottoman']"));
 
     private SelenideElement previewModelFirstItem = $(By.xpath("(//div[@data-cmp='cardImages'])[1]"));
+
+    private SelenideElement cortonaSofa = $(By.xpath("//*[text()='Cortona Sofaa']"));
+
+    private SelenideElement priceForRegular = $(By.xpath("//p[@data-testid='price-for-regular']"));
+
+    private SelenideElement priceForMember = $(By.xpath("//p[@data-testid='price-for-member']"));
+
+    private SelenideElement cortonaSofaCollectionUppercase = $(By.xpath("//*[text()='CORTONA SOFA COLLECTION']"));
+
+    private SelenideElement collectionModalProductImage = $(By.xpath("//div[@data-cmp='cardImages']//div[@id='component-rh-image_wrapper']"));
 
 }

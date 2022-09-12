@@ -59,8 +59,8 @@ Feature: Estore CG
     When I click on any product from the preview collection model
     Then I verify that estore PDP page is displayed
 
-
-
-
-
-
+  Scenario: Verify Textile CG having "Enjoy Free Shipping On All Textiles" banner
+    Given I log into eStore as "guest"
+    When user clicks on textile menu
+    When user goes to bedding collections test
+    Then I verify that Enjoy Free Shipping On All Textiles banner is displayed
