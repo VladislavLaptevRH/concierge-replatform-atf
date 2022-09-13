@@ -83,7 +83,7 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
         setupChromeArguments();
-        setUPWebDriver((String) properties.get("conciergestg2url"));
+        setUPWebDriver((String) properties.get("conciergestg4url"));
     }
 
     /**

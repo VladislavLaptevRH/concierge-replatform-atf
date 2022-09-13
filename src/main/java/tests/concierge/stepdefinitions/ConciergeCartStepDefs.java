@@ -653,7 +653,7 @@ public class ConciergeCartStepDefs {
     @Then("I verify contract savings")
     public void iVerifyContractSavingsForCartPage() {
         conciergeCartPageScreen.getContractSavings().should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='$494.00']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='$115.00']")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I click on order details button")
