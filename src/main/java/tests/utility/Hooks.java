@@ -83,7 +83,7 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
         setupChromeArguments();
-        setUPWebDriver((String) properties.get("conciergestg2url"));
+        setUPWebDriver((String) properties.get("conciergestg4url"));
     }
 
     /**
@@ -95,7 +95,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = true;
+        Configuration.headless = false;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 60000;
         Configuration.reportsFolder = "target/screenshots";

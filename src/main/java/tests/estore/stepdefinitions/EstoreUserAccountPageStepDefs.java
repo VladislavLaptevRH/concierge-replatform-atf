@@ -163,7 +163,7 @@ public class EstoreUserAccountPageStepDefs {
 
     @Then("I verify that added address present in the grid")
     public void iVerifyThatAddedAddressPresentInTheGrid() {
-        $(By.xpath("//*[text()='Pennsylvania Avenue']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[@class='MuiTypography-root MuiTypography-body1' and text()='Pennsylvania Avenue, 2, Schenectady, NY 12345']")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I click on delete estore button")
