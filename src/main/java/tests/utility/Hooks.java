@@ -29,13 +29,14 @@ import static com.codeborne.selenide.Selenide.*;
 @Getter
 public class Hooks {
     private static WebDriver webDriver;
-    private Properties properties;
+    public static Properties properties;
     private final String propertyFilePath = "src/main/resources/application.properties";
     public static String associatePassword;
     public static String associateLogin;
     public static String leaderPassword;
     public static String leaderLogin;
     public static String currentUrl;
+    public static String conciergeURL = "conciergestg2url";
 
     private static boolean setUpIsDone = false;
     private static final Logger Log = LoggerFactory.getLogger(FilterStepDefs.class);
@@ -83,7 +84,7 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
         setupChromeArguments();
-        setUPWebDriver((String) properties.get("conciergestg4url"));
+        setUPWebDriver((String) properties.get(conciergeURL));
     }
 
     /**
