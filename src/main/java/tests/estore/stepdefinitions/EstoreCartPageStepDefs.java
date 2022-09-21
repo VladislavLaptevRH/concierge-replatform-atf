@@ -31,7 +31,7 @@ public class EstoreCartPageStepDefs {
             int countOfProducts = Integer.parseInt(estoreUserAccountPage.getCartButton().getText());
             estoreUserAccountPage.getCartButton().click();
             estoreGeneralStepDefs.waitForJSandJQueryToLoad();
-            estoreCartPage.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(12));
+            estoreCartPage.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(20));
             try {
                 for (int i = 0; i < countOfProducts; i++) {
                     estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(30));
@@ -50,8 +50,6 @@ public class EstoreCartPageStepDefs {
     public void iClickOnViewCartButton() {
         sleep(3000);
         generalStepDefs.waitForJSandJQueryToLoad();
-//        estoreCartPage.getItemAddedToYourCart().should(visible, Duration.ofMinutes(1));
-//        estoreCartPage.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
         estoreItemPage.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
         estoreItemPage.getViewCartButton().should(visible, Duration.ofSeconds(60));
         estoreCartPage.getKeepShopping().should(visible, Duration.ofSeconds(15));
@@ -286,12 +284,12 @@ public class EstoreCartPageStepDefs {
     public void iVerifyMembershipEstoreBannerFor(String arg0) {
         if (arg0.equals("nonmember user")) {
             $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible, Duration.ofSeconds(20));
-            $(By.xpath("//*[contains(text(),'Join the RH Members Program for $175')]")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[contains(text(),'Join the RH Members Program')]")).should(visible, Duration.ofSeconds(20));
             estoreCartPage.getJoinNowCartEstoreButton().should(visible, Duration.ofSeconds(20));
         }
         if (arg0.equals("member user")) {
             $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).shouldNot(visible, Duration.ofSeconds(20));
-            $(By.xpath("//*[contains(text(),'Join the RH Members Program for $175')]")).shouldNot(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[contains(text(),'Join the RH Members Program')]")).shouldNot(visible, Duration.ofSeconds(20));
             estoreCartPage.getJoinNowCartEstoreButton().shouldNot(visible, Duration.ofSeconds(20));
         }
 
@@ -301,11 +299,11 @@ public class EstoreCartPageStepDefs {
     public void iVerifyThatTheAddedProductIsInTheCartDuringBrandSwitching() {
         estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getBrandButton().click();
-        int countOfBrands = estoreUserAccountPage.getListOfBrands().size();
-        for (int i = 1; i < countOfBrands; i++) {
+        for (int i = 1; i < 3; i++) {
             if (i > 1) {
                 estoreUserAccountPage.getBrandButton().click();
             }
+            sleep(2000);
             estoreUserAccountPage.getListOfBrands().get(i).click();
             estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(40));
         }
@@ -374,4 +372,45 @@ public class EstoreCartPageStepDefs {
         estoreCartPage.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(12));
     }
 
+    @Then("I verify that contract price is used in cart")
+    public void iVerifyThatContractPriceIsUsedInCart() {
+        estoreUserAccountPage.getContractText().should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='345']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that trade price is used in cart")
+    public void iVerifyThatTradePriceIsUsedInCart() {
+        estoreUserAccountPage.getTradeText().should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='321']")).should(visible, Duration.ofSeconds(20));
+    }
+
+
+    @Then("I verify that the price get increased in multiple of QTY")
+    public void iVerifyThatThePriceGetIncreasedInMultipleOfQTY() {
+        $(By.xpath("//*[text()='$690.00']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that price for product&line should be in US dollars")
+    public void iVerifyThatPriceForProductLineShouldBeInUS$() {
+        $(By.xpath("//*[contains(text(),'$')]")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I introduces CAN zip code for estore cart")
+    public void iIntroducesCANZipCodeForEstoreCart() {
+        $(By.xpath("(//span[@style='text-decoration: underline; cursor: pointer;'])[2]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//span[@style='text-decoration: underline; cursor: pointer;'])[2]")).click();
+        $(By.xpath("//input[@data-testid='postalcode-dialog-input']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//input[@data-testid='postalcode-dialog-input']")).clear();
+        $(By.xpath("//input[@data-testid='postalcode-dialog-input']")).setValue("A1A1A1");
+    }
+
+    @Then("I verify that the price for trade get increased in multiple of QTY")
+    public void iVerifyThatThePriceForTradeGetIncreasedInMultipleOfQTY() {
+        $(By.xpath("//*[text()='$642.00']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that trade price is used for each product")
+    public void iVerifyThatTradePriceIsUsedForEachProduct() {
+        $(By.xpath("(//*[contains(text(),'656.00')])[2]")).should(visible,Duration.ofSeconds(20));
+    }
 }

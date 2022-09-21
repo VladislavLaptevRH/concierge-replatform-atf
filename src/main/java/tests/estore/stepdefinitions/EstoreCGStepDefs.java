@@ -130,4 +130,40 @@ public class EstoreCGStepDefs {
     @Then("I verify that Enjoy Free Shipping On All Textiles banner is displayed")
     public void iVerifyThatEnjoyFreeShippingOnAllTextilesBannerIsDisplayed() {
     }
+
+    @When("I go to MO brand")
+    public void iGoToMOBrand() {
+        $(By.xpath("//a[@data-testid='brand-link']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//a[@data-testid='brand-link']")).click();
+        $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg2.rhnonprod.com/']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg2.rhnonprod.com/']")).click();
+    }
+
+    @Then("I verify that contract price is used for each product")
+    public void iVerifyThatPriceIsDisplayedInCart() {
+        $(By.xpath("(//*[text()='$479.00'])[2]")).should(visible,Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that contract price is used for each B&C product")
+    public void iVerifyThatPriceIsDisplayedInCartBC() {
+        $(By.xpath("(//*[text()='$156.00'])[2]")).should(visible,Duration.ofSeconds(20));
+    }
+
+    @When("I go to B&C brand")
+    public void iGoToBCBrand() {
+        $(By.xpath("//a[@data-testid='brand-link']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//a[@data-testid='brand-link']")).click();
+        $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg2.rhnonprod.com/']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg2.rhnonprod.com/']")).click();
+    }
+
+    @Then("I verify that contract price is used for each TN product")
+    public void iVerifyThatContractPriceIsUsedForEachTNProduct() {
+        $(By.xpath("(//*[text()='$156.00'])[2]")).should(visible,Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that trade price is used for each TN product")
+    public void iVerifyThatTradePriceIsUsedForEachTNProduct() {
+        $(By.xpath("(//*[contains(text(),'243.00')])[2]")).should(visible,Duration.ofSeconds(20));
+    }
 }

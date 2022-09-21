@@ -95,14 +95,14 @@ Feature: Estore Address Page
     When I click on estore profile button
     When I click on estore my account button
     When I click on address book estore button
+    When I remove added address before
     When I click on add address button
     When I introduce data for new profile address
     When I click on save address button
     Then I verify that created address popup is displayed
-    When I click on estore continue button
+    When I click on continue payment method estore button
     Then I verify that added address present in the grid
-    When I click on delete estore button
-    When I click on delete address button from appeared pop up
+    When I remove added address before
     When I go to estore item "10097379 PYR" from search field
     When I click on add to cart estore button
     When I click on aggree&add estore button
@@ -118,9 +118,14 @@ Feature: Estore Address Page
     When I click on estore profile button
     When I click on estore my account button
     When I click on address book estore button
+    When I remove added address before
+    When I click on add address button
+    When I introduce data for new profile address
+    When I click on save address button
+    When I click on continue payment method estore button
     When I edit existing address on address book page
     When I click on save address button
-    When I click on estore continue button
+    When I click on continue payment method estore button
     When I go to estore item "10097379 PYR" from search field
     When I click on add to cart estore button
     When I click on aggree&add estore button

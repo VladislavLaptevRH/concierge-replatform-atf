@@ -5,6 +5,7 @@ import io.cucumber.java.an.E;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import tests.estore.pageObject.*;
@@ -166,6 +167,8 @@ public class EstorePaymentStepDefs {
 
         $(By.xpath("//*[text()='Visa ####-7543']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Master Card ####-0008']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Master Card ####-0008']")).click();
+        System.out.printf("");
     }
 
     @Then("I verify that credit cards are displayed in total section")
@@ -218,5 +221,18 @@ public class EstorePaymentStepDefs {
     public void iRemoveExistingPaymentMethodOnPaymentEstorePage() {
         estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(20));
         estoreCartPage.getRemoveButton().click();
+    }
+
+    @When("I choose address with CAN zip code")
+    public void iChooseAddressWithCANZipCode() {
+        estoreAddressScreen.getShippingAddressState().should(visible,Duration.ofSeconds(20));
+        Select selectCountry = new Select(estoreAddressScreen.getCountrySelect());
+        selectCountry.selectByValue("CA");
+        sleep(2000);
+        estoreGeneralStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
+        sleep(2000);
+        estoreGeneralStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
+
+        estoreAddressScreen.getPostalShippingCode().setValue("A1A1A1");
     }
 }

@@ -181,6 +181,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that added address edited address updated in the shipping address list")
     public void iVerifyThatAddedAddressEditedAddressUpdatedInTheShippingAddressList() {
+        sleep(3000);
         $(By.xpath("//*[contains(text(),'" + firstName + "')]")).shouldHave(Condition.text(firstName), Duration.ofSeconds(20));
     }
 
@@ -208,5 +209,17 @@ public class EstoreAddressStepDefs {
         $(By.xpath("//*[text()='$5,123.52']")).should(visible,Duration.ofSeconds(20));
         $(By.xpath("//*[text()='7543']")).should(visible,Duration.ofSeconds(20));
         $(By.xpath("//*[text()='PAYMENT INFORMATION']")).should(visible,Duration.ofSeconds(20));
+    }
+
+    @When("I remove added address before")
+    public void iRemoveAddedAddressBefore() {
+        try {
+            $(By.xpath("//*[text()='Delete']")).should(visible, Duration.ofSeconds(10));
+            $(By.xpath("//*[text()='Delete']")).click();
+            $(By.xpath("(//*[text()='Delete'])[2]")).should(visible,Duration.ofSeconds(10));
+            $(By.xpath("(//*[text()='Delete'])[2]")).click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Address is not stored");
+        }
     }
 }

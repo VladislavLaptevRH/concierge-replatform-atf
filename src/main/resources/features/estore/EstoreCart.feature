@@ -4,7 +4,7 @@ Feature: Estore Cart Page
   Scenario: Remove item from cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "61040991 SLVR" from search field
+    When I go to estore item "61040991 ABRS" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on remove button from estore cart page
@@ -13,7 +13,7 @@ Feature: Estore Cart Page
   Scenario: Apply/Remove employee discount
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "61040991 SLVR" from search field
+    When I go to estore item "61040991 ABRS" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I apply employee discount for estore
@@ -22,7 +22,7 @@ Feature: Estore Cart Page
   Scenario: Apply/Remove promotion code
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "61040991 SLVR" from search field
+    When I go to estore item "61040991 ABRS" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that I'm able to apply promotion code
@@ -31,7 +31,7 @@ Feature: Estore Cart Page
   Scenario: Zip code validation in cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "61040991 SLVR" from search field
+    When I go to estore item "61040991 ABRS" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on zipcode estore button
@@ -41,7 +41,7 @@ Feature: Estore Cart Page
   Scenario: eStore - Membership price in cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "10106724 BTSG" from search field
+    When I go to estore item "61040991 ABRS" from search field
     When I click on add to cart estore button
     When I click on aggree&add estore button
     And I click on view cart estore button
@@ -50,7 +50,7 @@ Feature: Estore Cart Page
   Scenario: eStore - Line item quantity update
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "61040991 SLVR" from search field
+    When I go to estore item "61040991 ABRS" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I choose qty for item from estore cart
@@ -130,7 +130,7 @@ Feature: Estore Cart Page
   Scenario: eStore - CAN Shipping restriction
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "112349 PTL LRG" from search field
+    When I go to estore item "61040991 ABRS" from search field
     When I click on add to cart estore button
     When I click on aggree&add estore button
     And I click on view cart estore button
@@ -142,7 +142,7 @@ Feature: Estore Cart Page
   Scenario: eStore - New York Shipping restriction
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "112349 PTL LRG" from search field
+    When I go to estore item "10121333 LTOK" from search field
     When I click on add to cart estore button
     When I click on aggree&add estore button
     And I click on view cart estore button

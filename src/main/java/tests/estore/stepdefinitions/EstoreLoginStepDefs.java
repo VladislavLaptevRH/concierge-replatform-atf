@@ -5,8 +5,11 @@ import tests.estore.pageObject.EstoreLoginPage;
 import tests.utility.Hooks;
 
 import java.time.Duration;
+import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.*;
+import static tests.utility.Hooks.getWindowsHandles;
 
 public class EstoreLoginStepDefs {
 
@@ -75,5 +78,25 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
         }
+    }
+
+    @Given("I log into eStore as contract")
+    public void iLogIntoEStoreAsContract() {
+        sleep(2000);
+        open("https://stg2.rhnonprod.com/contract-sales/contract-sign-in.jsp");
+        estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
+        estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
+        estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
+        estoreLoginPage.getSignInButton().click();
+    }
+
+    @Given("I log into eStore as trade")
+    public void iLogIntoEStoreAsTrade() {
+        sleep(2000);
+        open("https://stg2.rhnonprod.com/trade-sales/trade-sign-in.jsp");
+        estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
+        estoreLoginPage.getContractTradePasswordField().setValue("20211221164474");
+        estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
+        estoreLoginPage.getSignInButton().click();
     }
 }

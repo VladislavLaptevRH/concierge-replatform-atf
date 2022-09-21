@@ -104,6 +104,7 @@ public class EstoreAbstractStepDefs {
     @When("I click on estore checkout button")
     public void iClickOnCheckoutButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
+        sleep(2000);
         conciergeItemsScreen.getCheckoutButton().shouldHave(text(conciergeItemsScreen.getCheckoutButton().getText()), Duration.ofMinutes(2));
         conciergeItemsScreen.getCheckoutButton().click();
     }

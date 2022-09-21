@@ -155,11 +155,19 @@ public class EstoreGeneralStepDefs {
         clearField(estoreCheckoutAddressScreen.getPhoneField());
         estoreCheckoutAddressScreen.getPhoneField().setValue("334-229-4667");
 
-        clearField(estoreAddressScreen.getEmailField());
-        estoreAddressScreen.getEmailField().setValue("test@mail.com");
+        try {
+            clearField(estoreAddressScreen.getEmailField());
+            estoreAddressScreen.getEmailField().setValue("test@mail.com");
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Email field is not displayed");
+        }
+        try {
+            clearField(estoreAddressScreen.getConfirmEmail());
+            estoreAddressScreen.getConfirmEmail().setValue("test@mail.com");
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Email field is not displayed");
+        }
 
-        clearField(estoreAddressScreen.getConfirmEmail());
-        estoreAddressScreen.getConfirmEmail().setValue("test@mail.com");
 
         estoreAddressScreen.getBillingAddressTitle().should(visible, Duration.ofSeconds(12));
     }

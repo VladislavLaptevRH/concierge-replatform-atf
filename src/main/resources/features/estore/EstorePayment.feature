@@ -4,7 +4,7 @@ Feature:Estore Payment
   Scenario: eStore Split Payment
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "61040991 SLVR" from search field
+    When I go to estore item "10070071 GOLD" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -16,7 +16,7 @@ Feature:Estore Payment
   Scenario: eStore Saved Cards
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "10106384 PSS" from search field
+    When I go to estore item "10097378 PYR" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -30,7 +30,7 @@ Feature:Estore Payment
   Scenario: eStore Edit Payment
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "10106384 PSS" from search field
+    When I go to estore item "10097378 PYR" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -42,7 +42,7 @@ Feature:Estore Payment
   Scenario: eStore Edit Address
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "10106384 PSS" from search field
+    When I go to estore item "10097378 PYR" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -56,7 +56,7 @@ Feature:Estore Payment
   Scenario: eStore unavailability of RHCC for CAN address
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "10106384 PSS" from search field
+    When I go to estore item "10097379 PYR" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -69,7 +69,7 @@ Feature:Estore Payment
   Scenario: eStore RHCC
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "10106384 PSS" from search field
+    When I go to estore item "10097381 PYR" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -83,7 +83,7 @@ Feature:Estore Payment
   Scenario: eStore Update address (Non impacting change) after making payment
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "10106384 PSS" from search field
+    When I go to estore item "10100453 PYT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -99,7 +99,7 @@ Feature:Estore Payment
   Scenario: eStore Update address (Impacting change) after making payment  - ?
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "10106384 PSS" from search field
+    When I go to estore item "10100453 PYT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -115,7 +115,7 @@ Feature:Estore Payment
   Scenario: eStore Order total increased after making payment
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "10106384 PSS" from search field
+    When I go to estore item "10100453 PYT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -126,7 +126,7 @@ Feature:Estore Payment
     When I click on estore continue button
     When I click on estore cart button from header
     Then I verify that I'm able to increase item quantity with success
-    When I go to estore item "10106383 PSS" from search field
+    When I go to estore item "10100453 PYT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -140,7 +140,7 @@ Feature:Estore Payment
   Scenario: eStore Order total decreased after making payment
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "10106384 PSS" from search field
+    When I go to estore item "10100453 PYT" from search field
     When I update item quantity in estore pdp
     When I click on add to cart estore button
     And I click on view cart estore button
@@ -152,7 +152,7 @@ Feature:Estore Payment
     When I click on estore continue button
     When I click on estore cart button from header
     Then I verify that I'm able to decrease item quantity with success
-    When I go to estore item "10106383 PSS" from search field
+    When I go to estore item "10100453 PYT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -205,7 +205,8 @@ Feature:Estore Payment
     And I click on view cart estore button
     When I click on estore checkout button
     And I click on estore no thanks button
-    When I fill all estore fields from address with "CAN" zip code
+    When I click on edit estore billing address button
+    When I choose address with CAN zip code
     When I continue to payment
     Then I verify that discover is unavailable
 
@@ -218,7 +219,7 @@ Feature:Estore Payment
     When I click on estore checkout button
     And I click on estore no thanks button
     When I click on edit estore billing address button
-    When I update shipping address for CAN
+    When I choose address with CAN zip code
     When I continue to estore payment
     Then I verify unavailability of saved for RHCC
 
@@ -237,7 +238,7 @@ Feature:Estore Payment
     When I click on estore continue button
     When I click on edit shipping address button on estore order review page
     When I click on edit shipping address button on estore address page
-    When I update shipping address for CAN
+    When I choose address with CAN zip code
     When I continue to estore payment
     Then I verify that current currency is canadian dollar
      When I choose saved card "VI" from payment method dropdown
@@ -269,8 +270,6 @@ Feature:Estore Payment
     And I click on estore no thanks button
     When I continue to estore payment
     Then I verify that I'm able to execute estore split payment with saved CC
-    And I verify that VI and MC card are available in payment method dropdown
-    Then I verify that credit cards are displayed in total section
 
 
 
