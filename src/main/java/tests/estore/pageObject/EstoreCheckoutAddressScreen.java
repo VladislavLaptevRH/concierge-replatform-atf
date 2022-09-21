@@ -40,7 +40,7 @@ public class EstoreCheckoutAddressScreen {
 
     private final SelenideElement billingAddressAsShippingCheckBox = $(By.cssSelector("div[class='MuiGrid-root MuiGrid-item'] input[type='checkbox']"));
 
-    private final SelenideElement continuePaymentButton = $(By.xpath("//button[contains(@class,'MuiButton-contained')]"));
+    private final SelenideElement continuePaymentButton = $(By.xpath("//span[@class='MuiButton-label' and text() = 'CONTINUE']"));
 
     private final SelenideElement continueButton = $(By.xpath("(//button[contains(@class,'MuiButton-containedPrimary')])[2]"));
 

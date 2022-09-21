@@ -107,6 +107,7 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore billing address")
     public void iFillEstoreBillingAndShippingAddress() {
+        sleep(2000);
         estoreAddressScreen.getShippingAddressfirstName().should(visible, Duration.ofSeconds(20));
         estoreAddressScreen.getShippingAddressfirstName().setValue("Safire");
         estoreAddressScreen.getShippingAddresslastName().setValue("William");
