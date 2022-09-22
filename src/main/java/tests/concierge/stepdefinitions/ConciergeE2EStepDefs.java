@@ -675,7 +675,11 @@ public class ConciergeE2EStepDefs {
         Select selectLength = new Select(selectOption.getLengthOption());
         selectLength.selectByValue("80400002");
     }
+
+    @When("I open product page with {string} and {string}")
+    public void iOpenProductPageWithAnd(String arg0, String arg1) {
+        String URL = Hooks.properties.get(Hooks.conciergeURL) + "/catalog/product/product.jsp?productId="+arg0+"&fullSkuId="+arg1+"+ABRS";
+        open(URL);
+    }
 }
-
-
 
