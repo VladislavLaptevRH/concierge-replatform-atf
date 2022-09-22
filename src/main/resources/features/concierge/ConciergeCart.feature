@@ -11,7 +11,8 @@ Feature:Concierge Cart Page
   Scenario: Checkout membership popup for Guest user
     Given I log into Concierge as "associate"
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    #When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod2260004" and "61040991"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
