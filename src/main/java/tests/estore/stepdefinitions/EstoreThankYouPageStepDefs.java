@@ -23,9 +23,9 @@ public class EstoreThankYouPageStepDefs {
     public void iVerifyAllTheLineItemsInTheCartOnThankYouPage() {
         $(By.xpath("//*[text()='Qty 1']")).should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
         conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
 
     }
@@ -39,8 +39,8 @@ public class EstoreThankYouPageStepDefs {
 
     @Then("I verify that estore thank you page is displayed")
     public void iVerifyThatEstoreThankYouPageIsDisplayed() {
-        $(By.xpath("//*[text()='THANK YOU']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[contains(text(),'You will receive an order confirmation number shortly via email.')]")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Order details']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='THANK YOU']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'You will receive an order confirmation number shortly via email.')]")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Order details']")).should(visible, Duration.ofSeconds(40));
     }
 }

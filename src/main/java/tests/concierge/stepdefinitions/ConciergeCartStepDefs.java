@@ -312,7 +312,7 @@ public class ConciergeCartStepDefs {
 
     @When("I click on add new space button")
     public void iClickOnAddNewSpaceButton() {
-        projectSettingsScreen.getAddNewSpaceButton().should(visible, Duration.ofSeconds(20));
+        projectSettingsScreen.getAddNewSpaceButton().should(visible, Duration.ofSeconds(40));
         projectSettingsScreen.getAddNewSpaceButton().click();
     }
 
@@ -652,8 +652,8 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify contract savings")
     public void iVerifyContractSavingsForCartPage() {
-        conciergeCartPageScreen.getContractSavings().should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='$115.00']")).should(visible, Duration.ofSeconds(20));
+        conciergeCartPageScreen.getContractSavings().should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='$115.00']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I click on order details button")

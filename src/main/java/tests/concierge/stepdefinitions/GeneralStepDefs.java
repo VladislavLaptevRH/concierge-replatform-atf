@@ -64,7 +64,7 @@ public class GeneralStepDefs {
      */
     public void loginAsRole(String accountRole) {
         conciergeLoginPage.getPasswordField().should(visible, Duration.ofMinutes(5));
-        conciergeLoginPage.getUsernameField().should(visible, Duration.ofSeconds(20));
+        conciergeLoginPage.getUsernameField().should(visible, Duration.ofSeconds(40));
         if (accountRole.equals("associate")) {
             conciergeLoginPage.getUsernameField().setValue(Hooks.associateLogin);
             conciergeLoginPage.getPasswordField().setValue(Hooks.associatePassword);
@@ -211,10 +211,10 @@ public class GeneralStepDefs {
         try {
             conciergeUserAccountPage.getClientButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(25));
             conciergeUserAccountPage.getClientButton().click();
-            conciergeUserAccountPage.getClientLookupHeaderBtn().should(visible, Duration.ofSeconds(20));
+            conciergeUserAccountPage.getClientLookupHeaderBtn().should(visible, Duration.ofSeconds(40));
             conciergeUserAccountPage.getClientLookupHeaderBtn().click();
 
-            conciergeUserAccountPage.getClientLookupFirstName().should(visible, Duration.ofSeconds(20));
+            conciergeUserAccountPage.getClientLookupFirstName().should(visible, Duration.ofSeconds(40));
             if (field.equals("email")) {
                 conciergeUserAccountPage.getClientLookupEmail().should(Condition.be(visible), Duration.ofSeconds(25));
                 conciergeUserAccountPage.getClientLookupEmail().setValue("test@mailinator.com");

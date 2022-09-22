@@ -94,7 +94,7 @@ public class EstoreCGStepDefs {
     @Then("I verify product image, name and prices are visible for each product on the model")
     public void iVerifyProductImageNameAndPricesAreVisibleForEachProductOnTheModel() {
         estoreCGScreen.getCortonaSofa().should(Condition.visible, Duration.ofSeconds(40));
-        estoreCGScreen.getPriceForRegular().should(visible, Duration.ofSeconds(20));
+        estoreCGScreen.getPriceForRegular().should(visible, Duration.ofSeconds(40));
         estoreCGScreen.getPriceForMember().should(Condition.visible, Duration.ofSeconds(20));
         estoreCGScreen.getCollectionModalProductImage().should(Condition.visible, Duration.ofSeconds(20));
     }
@@ -110,20 +110,20 @@ public class EstoreCGStepDefs {
     public void iVerifyThatEstorePDPPageIsDisplayed() {
 
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
-        estoreItemPage.getAddToCartButton().should(visible, Duration.ofSeconds(20));
+        estoreItemPage.getAddToCartButton().should(visible, Duration.ofSeconds(40));
     }
 
     @When("user goes to bedding collections test")
     public void userClicksOnBedLinesSubmenu() {
-        estoreUserAccountPage.getBedLinesText().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getBedLinesText().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getBedLinesText().click();
-        estoreUserAccountPage.getBeddingCollectionsTest().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getBeddingCollectionsTest().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getBeddingCollectionsTest().click();
     }
 
     @When("user clicks on textile menu")
     public void userClicksOnTextileMenu() {
-        estoreUserAccountPage.getTextilesText().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getTextilesText().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getTextilesText().click();
     }
 
@@ -164,6 +164,6 @@ public class EstoreCGStepDefs {
 
     @Then("I verify that trade price is used for each TN product")
     public void iVerifyThatTradePriceIsUsedForEachTNProduct() {
-        $(By.xpath("(//*[contains(text(),'243.00')])[2]")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Trade']")).should(visible, Duration.ofSeconds(30));
     }
 }

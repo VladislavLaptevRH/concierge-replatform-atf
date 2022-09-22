@@ -583,11 +583,11 @@ public class ConciergeE2EStepDefs {
     public void iVerifyTradePricesForPDP(String pageName) {
         if (pageName.equals("project page")) {
             $(By.xpath("//*[text()='TRADE']")).should(visible, Duration.ofSeconds(30));
-            $(By.xpath("//*[text()='$3,165.00']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='$3,165.00']")).should(visible, Duration.ofSeconds(40));
 
         } else {
             $(By.xpath("//*[text()='Trade']")).should(visible, Duration.ofSeconds(30));
-            $(By.xpath("//*[text()='1509']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='1509']")).should(visible, Duration.ofSeconds(40));
         }
     }
 
@@ -631,28 +631,28 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify the payment details and order estimate summary")
     public void iVerifyThePaymentDetailsAndOrderEstimateSummary() {
-        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Cash/Check']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Cash/Check']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
 
     }
 
     @Then("I verify spo order & terms review signature")
     public void iVerifySpoOrderTermsReviewSignature() {
-        $(By.xpath("//*[text()='ORDER & TERMS REVIEW SIGNATURE CAPTURE']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='SIGNATURE']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='CLEAR SIGNATURE']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='ORDER & TERMS REVIEW SIGNATURE CAPTURE']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='SIGNATURE']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='CLEAR SIGNATURE']")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify that all the line items in the cart with the order review page")
     public void iVerifyThatAllTheLineItemsInTheCartWithTheOrderReviewPage() {
-        $(By.xpath("//*[text()='Qty 1']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Qty 1']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify order details from thank you page")
@@ -661,9 +661,9 @@ public class ConciergeE2EStepDefs {
         $(By.xpath("//div[@data-testid='checkout-address-view']")).should(visible, Duration.ofSeconds(25));
         $(By.xpath("//*[text()='Important Information']")).should(visible, Duration.ofSeconds(25));
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofSeconds(10));
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
 
     }
 

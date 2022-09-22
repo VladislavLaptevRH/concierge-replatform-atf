@@ -33,7 +33,7 @@ public class Pdp {
         sleep(3000);
         conciergeCartPageScreen.getMonogramColors().get(2).scrollIntoView(true);
         conciergeCartPageScreen.getMonogramColors().get(2).click();
-//        conciergeItemsScreen.getMonogramColorChampagne().should(visible, Duration.ofSeconds(20));
+//        conciergeItemsScreen.getMonogramColorChampagne().should(visible, Duration.ofSeconds(40));
         sleep(2000);
         conciergeItemsScreen.getMonogramColorChampagne().scrollIntoView(true);
         conciergeItemsScreen.getMonogramColorChampagne().click();
@@ -44,10 +44,10 @@ public class Pdp {
     @Then("I verify that monogram was added for pdp")
     public void iVerifyThatMonogramWasAddedForPdp() {
         $(By.xpath("//*[text()='Bauer Bodoni 1 (BDNI-HC)']")).should(visible, Duration.ofMinutes(1));
-        $(By.xpath("//*[text()='Text']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Style']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Color']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='MCHA']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Text']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Style']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Color']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='MCHA']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I click on view in stock items")
@@ -77,9 +77,9 @@ public class Pdp {
 
     @When("I go to custom rugs")
     public void iGoToCustomRugs() {
-        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][5]/h6")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][5]/h6")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][5]/h6")).click();
-        $(By.xpath("//ul[@class='MuiList-root']/li[@class='MuiListItem-root'][13]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//ul[@class='MuiList-root']/li[@class='MuiListItem-root'][13]")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//ul[@class='MuiList-root']/li[@class='MuiListItem-root'][13]")).click();
     }
 
@@ -91,45 +91,45 @@ public class Pdp {
 
     @When("I click on windows from top menu")
     public void iClickOnWindowsFromTopMenu() {
-        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][8]/h6")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][8]/h6")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][8]/h6")).click();
 
-        $(By.xpath("(//li[@class='MuiListItem-root'][2]//p)[1]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//li[@class='MuiListItem-root'][2]//p)[1]")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("(//li[@class='MuiListItem-root'][2]//p)[1]")).click();
     }
 
     @Then("I verify that custom windows are displayed")
     public void iVerifyThatCustomWindowsAreDisplayed() {
-        $(By.xpath("//*[text()='Custom Drapery']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Custom Shades']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Custom Window Hardware']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Custom Drapery']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Custom Shades']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Custom Window Hardware']")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify that YAML carousel is displayed")
     public void iVerifyThatYAMLCarouselIsDisplayed() {
-        $(By.xpath("//*[text()='The Cloud Collection']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='The Cloud Collection']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='The Cloud Collection']")).scrollIntoView(true);
     }
 
     @Then("I verify mattress recycling fee")
     public void iVerifyMattressRecyclingFee() {
-        $(By.xpath("//*[text()='mattress recycling fee']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='mattress recycling fee']")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify that replacements parts modal pop up is displayed")
     public void iVerifyThatReplacementsPartsModalPopUpIsDisplayed() {
-        $(By.xpath("//*[text()='REPLACEMENT PARTS']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='REPLACEMENT PARTS']")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify that check for replacements parts button is displayed")
     public void iVerifyThatCheckForReplacementsPartsButtonIsDisplayed() {
-        $(By.xpath("//*[text()='CHECK FOR REPLACEMENT PARTS']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='CHECK FOR REPLACEMENT PARTS']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='CHECK FOR REPLACEMENT PARTS']")).click();
     }
 
     @When("I click on special order fabrics")
     public void iClickOnSpecialOrderFabrics() {
-        pdpScreen.getSpecialOrdersButton().should(visible, Duration.ofSeconds(20));
+        pdpScreen.getSpecialOrdersButton().should(visible, Duration.ofSeconds(40));
         pdpScreen.getSpecialOrdersButton().click();
     }
 
@@ -138,7 +138,7 @@ public class Pdp {
         sleep(3000);
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
         actions.moveToElement(conciergeUserAccountPage.getMenuItems().get(1));
-        pdpScreen.getFogSpecialOrderColor().should(visible, Duration.ofSeconds(20));
+        pdpScreen.getFogSpecialOrderColor().should(visible, Duration.ofSeconds(40));
         pdpScreen.getFogSpecialOrderColor().click();
     }
 

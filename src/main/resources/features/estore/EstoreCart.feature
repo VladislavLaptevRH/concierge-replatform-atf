@@ -59,7 +59,7 @@ Feature: Estore Cart Page
 
   Scenario: Place order for guest user
     Given I remove all items from estore cart
-    When I go to estore item "10106724 BTSG" from search field
+    When I go to estore item "63130001 NATL" from search field
     When I click on add to cart estore button
     When I click on aggree&add estore button
     And I click on view cart estore button
@@ -67,7 +67,7 @@ Feature: Estore Cart Page
     When I click on estore no thanks button
     When I click on continue as guest estore button
     When I fill all fields for guest user from estore address screen
-    When I continue to estore payment
+    When I continue to estore payment after address page
     And I introduces payment details for estore
     When I click on continue payment method estore button
     When I click on a place estore order button

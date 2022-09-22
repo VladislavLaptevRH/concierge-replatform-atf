@@ -61,22 +61,22 @@ public class ProjectStepDefs {
 
         sleep(2000);
         if (pricingType.equals("regular")) {
-            conciergeProjectScreen.getRegularPricingType().should(visible, Duration.ofSeconds(20));
+            conciergeProjectScreen.getRegularPricingType().should(visible, Duration.ofSeconds(40));
             executeJavaScript("arguments[0].click();", conciergeProjectScreen.getRegularPricingType());
         }
         if (pricingType.equals("member")) {
-            conciergeProjectScreen.getMemberPricingType().should(visible, Duration.ofSeconds(20));
+            conciergeProjectScreen.getMemberPricingType().should(visible, Duration.ofSeconds(40));
             executeJavaScript("arguments[0].click();", conciergeProjectScreen.getMemberPricingType());
         }
         if (pricingType.equals("trade")) {
-            conciergeProjectScreen.getTradePricingType().should(visible, Duration.ofSeconds(20));
+            conciergeProjectScreen.getTradePricingType().should(visible, Duration.ofSeconds(40));
             executeJavaScript("arguments[0].click();", conciergeProjectScreen.getTradePricingType());
         }
     }
 
     @Then("I verify that search result for pricing type is displayed")
     public void iVerifyThatSearchResultForPricingTypeIsDisplayed() {
-        conciergeProjectScreen.getResultsListForProjects().should(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getResultsListForProjects().should(visible, Duration.ofSeconds(40));
     }
 
     @When("I introduces {string} first and last name")
@@ -214,7 +214,7 @@ public class ProjectStepDefs {
     @When("I click on add space button")
     public void iClickOnAddSpaceButton() {
 
-        projectSettingsScreen.getAddSpaceButton().should(visible, Duration.ofSeconds(20));
+        projectSettingsScreen.getAddSpaceButton().should(visible, Duration.ofSeconds(40));
         projectSettingsScreen.getAddSpaceButton().click();
     }
 
@@ -259,7 +259,7 @@ public class ProjectStepDefs {
 
     @When("I add item to created opportunity")
     public void iAddItemToCreatedOpportunity() {
-        conciergeItemsScreen.getAddToProjectButton().should(visible, Duration.ofSeconds(20));
+        conciergeItemsScreen.getAddToProjectButton().should(visible, Duration.ofSeconds(40));
         conciergeItemsScreen.getAddToProjectButton().click();
     }
 
@@ -295,7 +295,7 @@ public class ProjectStepDefs {
     @When("I introduces email in send copies of this project to additional emails")
     public void iIntroducesEmailInSendCopiesOfThisProjectToAdditionalEmails() {
         aditionalEmail = UUID.randomUUID() + "@mailinator.com";
-        conciergeProjectScreen.getEmailEstimateAdditionEmailField().should(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getEmailEstimateAdditionEmailField().should(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getEmailEstimateAdditionEmailField().setValue(aditionalEmail);
     }
 
@@ -314,7 +314,7 @@ public class ProjectStepDefs {
     @Then("I verify that the client received the letter on the {string}")
     public void iVerifyThatTheClientReceivedTheLetterOnThe(String email) {
         open("https://www.mailinator.com/");
-        mailinator.getSearchEmailField().should(visible, Duration.ofSeconds(20));
+        mailinator.getSearchEmailField().should(visible, Duration.ofSeconds(40));
         if (email.equals("client")) {
             mailinator.getSearchEmailField().setValue(clientEmail);
         }
@@ -331,7 +331,7 @@ public class ProjectStepDefs {
 
     @When("I click on bcc associate checkbox")
     public void iClickOnBCCAssociateCheckbox() {
-        conciergeProjectScreen.getBccAssociateCheckBox().should(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getBccAssociateCheckBox().should(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getBccAssociateCheckBox().click();
     }
 
@@ -350,7 +350,7 @@ public class ProjectStepDefs {
 
     @Then("I verify that opportunity list is displayed")
     public void iVerifyThatOpportunityListIsDisplayed() {
-        conciergeProjectScreen.getSelectOpportunityName().should(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getSelectOpportunityName().should(visible, Duration.ofSeconds(40));
         assertTrue(conciergeProjectScreen.getSelectOpportunityName().isDisplayed(), "Phase 4 opportunity is displayed");
     }
 
@@ -369,7 +369,7 @@ public class ProjectStepDefs {
 
     @Then("I verify that spaces list is displayed")
     public void iVerifyThatSpacesListIsDisplayed() {
-        conciergeProjectScreen.getSelectSpaceName().should(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getSelectSpaceName().should(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getSelectSpaceName().click();
         assertTrue(conciergeProjectScreen.getSelectSpaceName().isDisplayed(), "test2 space is displayed");
         conciergeProjectScreen.getSelectSpaceName().click();
@@ -378,11 +378,11 @@ public class ProjectStepDefs {
 
     @When("I go to category")
     public void iGoToCategory() {
-        conciergeUserAccountPage.getInStockButtonMenu().should(visible, Duration.ofSeconds(20));
+        conciergeUserAccountPage.getInStockButtonMenu().should(visible, Duration.ofSeconds(40));
         conciergeUserAccountPage.getInStockButtonMenu().click();
-        conciergeUserAccountPage.getInStockBedding().should(visible, Duration.ofSeconds(20));
+        conciergeUserAccountPage.getInStockBedding().should(visible, Duration.ofSeconds(40));
         conciergeUserAccountPage.getInStockBedding().click();
-        conciergeUserAccountPage.getToddlerBedding().should(visible, Duration.ofSeconds(20));
+        conciergeUserAccountPage.getToddlerBedding().should(visible, Duration.ofSeconds(40));
         conciergeUserAccountPage.getToddlerBedding().click();
     }
 
@@ -402,7 +402,7 @@ public class ProjectStepDefs {
             generalStepDefs.waitForJSandJQueryToLoad();
             conciergeProjectScreen.getProjectIdButton().shouldHave(text("Project ID"), Duration.ofSeconds(20));
             conciergeProjectScreen.getProjectIdButton().click();
-            conciergeProjectScreen.getProjectIdField().should(visible, Duration.ofSeconds(20));
+            conciergeProjectScreen.getProjectIdField().should(visible, Duration.ofSeconds(40));
             conciergeProjectScreen.getProjectIdField().setValue("P54909938");
         }
         if (searchBy.equals("createdBy")) {
@@ -410,7 +410,7 @@ public class ProjectStepDefs {
             generalStepDefs.waitForJSandJQueryToLoad();
             conciergeProjectScreen.getCreatedByButton().shouldHave(text("Created By"), Duration.ofSeconds(20));
             executeJavaScript("arguments[0].click();", conciergeProjectScreen.getCreatedByButton());
-            conciergeProjectScreen.getClientFirstNameField().should(visible, Duration.ofSeconds(20));
+            conciergeProjectScreen.getClientFirstNameField().should(visible, Duration.ofSeconds(40));
             conciergeProjectScreen.getClientFirstNameField().setValue("Renuka");
             conciergeProjectScreen.getClientLastNameField().setValue("Boorla");
         }
@@ -482,14 +482,14 @@ public class ProjectStepDefs {
 
     @And("I choose project by project name {string}")
     public void iChooseProjectByProjectName(String projectName) {
-        conciergeProjectScreen.getProjectNameMoveToProject().should(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getProjectNameMoveToProject().should(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getProjectNameMoveToProject().click();
         $(By.xpath("//*[text()='" + projectName + "']")).click();
     }
 
     @When("I click on remove button from project for added item")
     public void iClickOnRemoveButtonFromProjectForAddedItem() {
-        conciergeProjectScreen.getREMOVEbutton().should(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getREMOVEbutton().should(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getREMOVEbutton().click();
     }
 
@@ -535,7 +535,7 @@ public class ProjectStepDefs {
 
     @Then("I verify that overriden price displayed")
     public void iVerifyThatOverridenPriceDisplayed() {
-        conciergeProjectScreen.getAdjustedPrice().should(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getAdjustedPrice().should(visible, Duration.ofSeconds(40));
     }
 
     @And("I click on unlimited furniture delivery price")
@@ -555,7 +555,7 @@ public class ProjectStepDefs {
 
     @When("I introduces {string} in dollar amount field")
     public void iIntroducesInDollarAmountField(String dollarAmount) {
-        conciergeProjectScreen.getDollarAmountField().should(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getDollarAmountField().should(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getDollarAmountField().clear();
         conciergeProjectScreen.getDollarAmountField().setValue(dollarAmount);
     }
@@ -568,7 +568,7 @@ public class ProjectStepDefs {
 
     @Then("I verified that override price for shipping displayed")
     public void iVerifiedThatOverridePriceForShippingDisplayed() {
-        conciergeProjectScreen.getAmount50().should(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getAmount50().should(visible, Duration.ofSeconds(40));
         assertTrue(conciergeProjectScreen.getAmount50().isDisplayed(), "Override price is displayed");
     }
 
@@ -674,7 +674,7 @@ public class ProjectStepDefs {
     @And("I set the random quantity {string} of goods")
     public void iSetTheRandomQuantityOfGoods(String arg0) {
         randomQuantity = generalStepDefs.getRandomNumber(1, 10);
-        $(By.id(arg0)).should(visible, Duration.ofSeconds(20));
+        $(By.id(arg0)).should(visible, Duration.ofSeconds(40));
         executeJavaScript("window.scrollTo(0, 200)");
         sleep(2000);
         Select selectQuantity = new Select($(By.id(arg0)));
@@ -697,22 +697,22 @@ public class ProjectStepDefs {
         conciergeProjectScreen.getPricingTypeDropdown().click();
         if (arg0.equals("TRADE")) {
             conciergeProjectScreen.getTradePricingType().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-            conciergeProjectScreen.getTradePricingType().should(visible, Duration.ofSeconds(20));
+            conciergeProjectScreen.getTradePricingType().should(visible, Duration.ofSeconds(40));
             conciergeProjectScreen.getTradePricingType().click();
         }
         if (arg0.equals("NON-MEMBER")) {
-            conciergeProjectScreen.getRegularPricingType().should(visible, Duration.ofSeconds(20));
+            conciergeProjectScreen.getRegularPricingType().should(visible, Duration.ofSeconds(40));
             conciergeProjectScreen.getRegularPricingType().click();
         }
         if (arg0.equals("MEMBER")) {
-            conciergeProjectScreen.getMemberPricingType().should(visible, Duration.ofSeconds(20));
+            conciergeProjectScreen.getMemberPricingType().should(visible, Duration.ofSeconds(40));
             conciergeProjectScreen.getMemberPricingType().click();
         }
     }
 
     @Then("I verify forecast for {string}")
     public void iVerifyForecastFor(String pricingType) {
-        conciergeProjectScreen.getForeCastAmount().should(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getForeCastAmount().should(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getForeCastAmount().scrollIntoView(true);
         conciergeProjectScreen.getForeCastAmount().shouldHave(text("Forecast Amount"), Duration.ofSeconds(15));
         sleep(3000);
@@ -894,7 +894,7 @@ public class ProjectStepDefs {
 
     @When("I click on create project button")
     public void iClickOnCreateProjectButton() {
-        conciergeProjectScreen.getCreateProjectButton().should(visible, Duration.ofSeconds(20));
+        conciergeProjectScreen.getCreateProjectButton().should(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getCreateProjectButton().click();
     }
 
@@ -923,9 +923,9 @@ public class ProjectStepDefs {
 
     @Then("I verify that item was added to the selected space")
     public void iVerifyThatItemWasAddedToTheSelectedSpace() {
-        $(By.xpath("(//button[contains(@class, 'MuiButtonBase-root')])[5]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//button[contains(@class, 'MuiButtonBase-root')])[5]")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("(//button[contains(@class, 'MuiButtonBase-root')])[5]")).click();
-        $(By.xpath("//*[text()='" + spaceName + "']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='" + spaceName + "']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='" + spaceName + "']")).scrollIntoView(true);
         $(By.xpath("//*[text()='" + spaceName + "']")).click();
         $(By.xpath("//img[@alt='French Contemporary Panel 4-Door Media Console']")).should(visible, Duration.ofSeconds(25));
@@ -947,7 +947,7 @@ public class ProjectStepDefs {
         checkoutAddressScreen.getContinuePaymentButton().scrollIntoView(true);
         checkoutAddressScreen.getContinuePaymentButton().should(visible, Duration.ofSeconds(15));
         checkoutAddressScreen.getContinuePaymentButton().click();
-        $(By.xpath("//*[text()='We are unable to verify your Shipping Address']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='We are unable to verify your Shipping Address']")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify that item {string} was added to project")

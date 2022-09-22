@@ -42,7 +42,7 @@ public class PaymentStepDefs {
         sleep(3000);
         /*Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue("RH");
-        paymentScreen.getSplitPaymentCheckBox().should(visible, Duration.ofSeconds(20));
+        paymentScreen.getSplitPaymentCheckBox().should(visible, Duration.ofSeconds(40));
         paymentScreen.getSplitPaymentCheckBox().click();
         paymentScreen.getRhCardNumberField().setValue("6006101002514880");
         Select paymentPlan = new Select(paymentScreen.getSelectPaymentPlan());

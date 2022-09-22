@@ -46,7 +46,7 @@ public class EstoreAbstractStepDefs {
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
         actions.moveToElement(estoreCategories.getLivingCategory());
         estoreCategories.getLivingCategory().click();
-        estoreCategories.getSofaCollections().should(visible, Duration.ofSeconds(20));
+        estoreCategories.getSofaCollections().should(visible, Duration.ofSeconds(40));
         actions.moveToElement(estoreCategories.getSofaCollections());
         estoreCategories.getSofaCollections().click();
     }
