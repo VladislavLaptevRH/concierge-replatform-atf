@@ -93,8 +93,8 @@ public class EstorePaymentStepDefs {
     public void iEditBillingAddressFromPG() {
         estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(40));
         estoreAddressScreen.getEditShippinggAddress().click();
-        $(By.xpath("(//*[text()='Edit'])[3]")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("(//*[text()='Edit'])[3]")).click();
+        $(By.xpath("(//*[text()='Edit'])[2]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//*[text()='Edit'])[2]")).click();
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstName());
         estoreAddressScreen.getBillingAddressFirstName().setValue("NewBillingAddress");
     }
@@ -179,24 +179,21 @@ public class EstorePaymentStepDefs {
 
     @Then("I validate updated order estimate and card details")
     public void iValidateUpdatedOrderEstimateAndCardDetails() {
-        $(By.xpath("//*[text()='$6,444.00']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='$5,895.00']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Subtotal ']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='TOTAL']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I update item quantity in estore pdp")
     public void iUpdateItemQuantityInEstorePdp() {
-        estoreItemPage.getSelectQuantity().should(visible, Duration.ofSeconds(40));
+        sleep(3000);
         estoreItemPage.getSelectQuantity().scrollIntoView(true);
+        estoreItemPage.getSelectQuantity().should(visible, Duration.ofSeconds(40));
         Select selectQuantity = new Select(estoreItemPage.getSelectQuantity());
         selectQuantity.selectByValue("2");
     }
 
     @Then("I validate updated order estimate and card details for decrease item")
     public void iValidateUpdatedOrderEstimateAndCardDetailsForDecreaseItem() {
-        $(By.xpath("//*[text()='$12,790.00']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='$14,406.12']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Subtotal ']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='TOTAL']")).should(visible, Duration.ofSeconds(40));
     }
@@ -225,7 +222,7 @@ public class EstorePaymentStepDefs {
 
     @When("I choose address with CAN zip code")
     public void iChooseAddressWithCANZipCode() {
-        estoreAddressScreen.getShippingAddressState().should(visible,Duration.ofSeconds(20));
+        estoreAddressScreen.getShippingAddressState().should(visible, Duration.ofSeconds(20));
         Select selectCountry = new Select(estoreAddressScreen.getCountrySelect());
         selectCountry.selectByValue("CA");
         sleep(2000);
@@ -234,5 +231,16 @@ public class EstorePaymentStepDefs {
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
 
         estoreAddressScreen.getPostalShippingCode().setValue("A1A1A1");
+    }
+
+    @When("I remove payment method which was used earlier")
+    public void iRemovePaymentMethodWhichWasUsedEarlier() {
+        try {
+            estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(30));
+            estoreCartPage.getRemoveButton().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("There is no payment method that was used before");
+        }
+
     }
 }

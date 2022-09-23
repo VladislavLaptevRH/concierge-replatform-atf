@@ -16,7 +16,7 @@ Feature: Estore E2E flow
     When I click on estore checkout button
     And I click on estore no thanks button
     When I click on same as estore shipping address checkbox
-    When I continue to estore payment
+    When I continue to estore payment after address page
     And I introduces payment details for estore
     When I click on continue payment method estore button
     When I click on a place estore order button

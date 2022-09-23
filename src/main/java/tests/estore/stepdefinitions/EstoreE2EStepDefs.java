@@ -666,6 +666,12 @@ public class EstoreE2EStepDefs {
 
 
     }
+
+    @When("I open direct product page on estore")
+    public void iOpenDirectProductPageOnEstore() {
+        String url = "https://stg2.rhnonprod.com/catalog/product/product.jsp?productId=prod690088&fullSkuId=63130001+NATL";
+        open(url);
+    }
 }
 
 

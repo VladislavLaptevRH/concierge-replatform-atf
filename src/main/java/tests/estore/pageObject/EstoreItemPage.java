@@ -14,6 +14,8 @@ public class EstoreItemPage {
 
     private final SelenideElement selectQuantity = $(By.xpath("//select[contains(@id,'prod') and contains(@id,'qty-input')]"));
 
+    private final SelenideElement selectQuantityCartPage = $(By.xpath("//select[contains(@id,'quantity')]"));
+
     private final SelenideElement firstItem = $(By.xpath("(//div[contains(@class,'cols-6')]//div[contains(@class,'MuiGrid-grid-xs-6')])[1]"));
 
     private final SelenideElement items = $(By.xpath("//a[@data-testid='productCardLink-prod27080291']"));

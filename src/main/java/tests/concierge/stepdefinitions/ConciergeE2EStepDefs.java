@@ -236,7 +236,7 @@ public class ConciergeE2EStepDefs {
         conciergeUserAccountPage.getBrandButton().click();
 
         if (brand.equals("RH Modern")) {
-            $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg2.rhnonprod.com/']")).shouldHave(text("RH MODERN"),Duration.ofSeconds(20));
+            $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg2.rhnonprod.com/']")).shouldHave(text("RH MODERN"), Duration.ofSeconds(20));
             $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg2.rhnonprod.com/']")).click();
         }
         if (brand.equals("RH Baby&Child")) {
@@ -626,7 +626,7 @@ public class ConciergeE2EStepDefs {
 
     @And("I verify that I'm able to edit billing address")
     public void iVerifyThatIMAbleToEditBillingAddress() {
-        $(By.xpath("//*[text()='NewBillingAddress test']")).shouldHave(text("NewBillingAddress"), Duration.ofSeconds(25));
+        $(By.xpath("//*[contains(text(),'NewBillingAddress')]")).shouldBe(visible, Duration.ofSeconds(25));
     }
 
     @Then("I verify the payment details and order estimate summary")
@@ -678,7 +678,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I open product page with {string} and {string}")
     public void iOpenProductPageWithAnd(String arg0, String arg1) {
-        String URL = Hooks.properties.get(Hooks.conciergeURL) + "/catalog/product/product.jsp?productId="+arg0+"&fullSkuId="+arg1+"+ABRS";
+        String URL = Hooks.properties.get(Hooks.conciergeURL) + "/catalog/product/product.jsp?productId=" + arg0 + "&fullSkuId=" + arg1 + "+ABRS";
         open(URL);
     }
 }

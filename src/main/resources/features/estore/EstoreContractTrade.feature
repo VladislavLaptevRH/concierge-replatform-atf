@@ -83,7 +83,7 @@ Feature: eStore Contract and Trade
     And I click on view cart estore button
     When I click on estore checkout button
     When I click on same as estore shipping address checkbox
-    When I continue to estore payment
+    When I continue to estore payment after address page
     When I pay with RHCC for estore item
     When I click on continue payment method estore button
     When I click on a place estore order button

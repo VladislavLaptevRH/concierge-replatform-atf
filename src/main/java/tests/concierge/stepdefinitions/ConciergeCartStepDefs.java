@@ -439,7 +439,7 @@ public class ConciergeCartStepDefs {
     public void iClickOnRemoveGiftBoxButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
         sleep(5000);
-        conciergeItemsScreen.getAddGiftCheckBox().click();
+        executeJavaScript("arguments[0].click();", conciergeItemsScreen.getAddGiftCheckBox());
     }
 
     @Then("I verify that gift box was removed")

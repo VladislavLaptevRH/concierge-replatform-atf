@@ -48,9 +48,9 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on view cart estore button")
     public void iClickOnViewCartButton() {
-        sleep(3000);
+        sleep(5000);
         generalStepDefs.waitForJSandJQueryToLoad();
-        estoreItemPage.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
+        estoreItemPage.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(80));
         estoreItemPage.getViewCartButton().should(visible, Duration.ofSeconds(60));
         estoreCartPage.getKeepShopping().should(visible, Duration.ofSeconds(15));
         estoreItemPage.getViewCartButton().click();
@@ -83,6 +83,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I apply employee discount for estore")
     public void iApplyEmployeeDiscountForEstore() {
+        sleep(3000);
         estoreCartPage.getUserNameEmployeeDiscount().should(visible, Duration.ofSeconds(40));
         estoreCartPage.getUserNameEmployeeDiscount().setValue("ediscount");
         estoreCartPage.getPasswordEmployeeDiscount().should(visible, Duration.ofSeconds(40));
@@ -121,6 +122,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify US zip code validation in estore cart")
     public void iVerifyZipCodeValidationInEstoreCart() {
+        sleep(2000);
         estoreCartPage.getZipCodeField().should(visible, Duration.ofSeconds(40));
         estoreCartPage.getZipCodeField().clear();
         estoreCartPage.getZipCodeField().setValue("54106");
@@ -185,6 +187,8 @@ public class EstoreCartPageStepDefs {
 
     @When("I update postal code in cart")
     public void iUpdatePostalCodeInCart() {
+        sleep(2000);
+        estoreCartPage.getZipCodeField().scrollIntoView(true);
         estoreCartPage.getZipCodeField().should(visible, Duration.ofSeconds(40));
         estoreCartPage.getZipCodeField().clear();
         estoreCartPage.getZipCodeField().setValue("10007");
@@ -195,12 +199,10 @@ public class EstoreCartPageStepDefs {
     @Then("I verify UFD in cart")
     public void iVerifyUFDInCart() {
         $(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$3,864.00']")).should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify SURCHARGE fee on cart page")
     public void iVerifySURCHARGEFeeOnCartPage() {
-        $(By.xpath("//*[text()='ADDITIONAL SHIPPING SURCHARGE $150']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='ADDITIONAL SHIPPING SURCHARGE']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='$150.00']")).should(visible, Duration.ofSeconds(40));
     }
@@ -332,21 +334,28 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on estore cart button from header")
     public void iClickOnEstoreCartButtonFromHeader() {
+        sleep(2000);
         estoreCartPage.getCartButtonOrderReview().should(visible, Duration.ofSeconds(40));
-        estoreCartPage.getCartButtonOrderReview().click();
+        executeJavaScript("arguments[0].click();", estoreCartPage.getCartButtonOrderReview());
+
+//        try {
+//            estoreCartPage.getCartButtonOrderReview().click();
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Cart button is not displayed");
+//        }
     }
 
     @When("I update item quantity in estore cart")
     public void iUpdateItemQuantityInEstoreCart() {
     }
 
-    @Then("I verify that I'm able to increase item quantity with success")
+    @Then("I verify that I'm able to increase item quantity with success after payment")
     public void iVerifyThatItemQuantityWasIncreasedWithSuccess() {
-        estoreItemPage.getSelectQuantity().should(visible, Duration.ofSeconds(40));
-        estoreItemPage.getSelectQuantity().scrollIntoView(true);
-        Select selectQuantity = new Select(estoreItemPage.getSelectQuantity());
+        estoreItemPage.getSelectQuantityCartPage().should(visible, Duration.ofSeconds(40));
+        estoreItemPage.getSelectQuantityCartPage().scrollIntoView(true);
+        Select selectQuantity = new Select(estoreItemPage.getSelectQuantityCartPage());
         selectQuantity.selectByValue("2");
-        $(By.xpath("//*[text()='$11,790.00']")).should(visible, Duration.ofSeconds(40));
+        sleep(3000);
     }
 
     @Then("I verify that I'm able to decrease item quantity with success")
@@ -354,8 +363,8 @@ public class EstoreCartPageStepDefs {
         estoreCartPage.getQuantitySelect().should(visible, Duration.ofSeconds(40));
         Select selectQuantity = new Select(estoreCartPage.getQuantitySelect());
         selectQuantity.selectByValue("1");
-        $(By.xpath("//*[text()='$5,895.00']")).should(visible, Duration.ofSeconds(40));
     }
+
 
     @When("I click on add to wishlist button from cart")
     public void iClickOnAddToWishlistButtonFromCart() {
