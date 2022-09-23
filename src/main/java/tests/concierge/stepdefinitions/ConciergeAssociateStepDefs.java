@@ -17,6 +17,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -79,6 +80,7 @@ public class ConciergeAssociateStepDefs {
         Select gallerySelect = new Select(conciergeUserAccountPage.getGallerySelect());
         gallerySelect.selectByValue("997");
         conciergeUserAccountPage.getGallerySubmitButton().click();
+        sleep(3000);
     }
 
     @Then("I verify footer links")

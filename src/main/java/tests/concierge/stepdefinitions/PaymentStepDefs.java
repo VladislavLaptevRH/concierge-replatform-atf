@@ -76,19 +76,19 @@ public class PaymentStepDefs {
     }
 
     @When("I execute payment for {string}")
-    public void iExecutePaymentFor(String paymentMethod) {
+    public void iExecutePaymentFor(String cardType) {
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
-        if (paymentMethod.equals("VI")) {
+        if (cardType.equals("VI")) {
             generalStepDefs.payWith("VI", "4678 4753 3015 7543", "737", "0330");
         }
-        if (paymentMethod.equals("MC")) {
+        if (cardType.equals("MC")) {
             generalStepDefs.payWith("MC", "2222 4000 1000 0008", "737", "0330");
         }
-        if (paymentMethod.equals("AX")) {
+        if (cardType.equals("AX")) {
             generalStepDefs.payWith("AX", "3411 3411 3411 347", "6765", "0225");
 
         }
-        if (paymentMethod.equals("DI")) {
+        if (cardType.equals("DI")) {
             generalStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
         }
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));

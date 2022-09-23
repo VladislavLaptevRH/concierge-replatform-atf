@@ -286,7 +286,7 @@ public class ConciergeCartStepDefs {
         if (arg0.equals("displayed")) {
             conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofMinutes(1));
             conciergeCartPageScreen.getTotalAditionalProdDiscount().scrollTo();
-            $(By.xpath("//*[text()='$471.75']")).should(visible, Duration.ofMinutes(1));
+            $(By.xpath("//*[text()='$1,075.50']")).should(visible, Duration.ofMinutes(1));
         } else {
             conciergeCartPageScreen.getTotalAditionalProdDiscount().shouldNotBe(visible, Duration.ofMinutes(1));
         }
@@ -301,8 +301,9 @@ public class ConciergeCartStepDefs {
     public void iSelectSizeOptionForItem(int sizeValue) {
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
+            conciergeItemsScreen.getAddToCartButton().scrollTo();
             selectOption.getSelectSizeElement().should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
-            selectOption.getSelectSizeElement().scrollIntoView(true);
+            //selectOption.getSelectSizeElement().scrollIntoView(true);
             Select size = new Select(selectOption.getSelectSizeElement());
             size.selectByIndex(sizeValue);
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
@@ -653,7 +654,7 @@ public class ConciergeCartStepDefs {
     @Then("I verify contract savings")
     public void iVerifyContractSavingsForCartPage() {
         conciergeCartPageScreen.getContractSavings().should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='$115.00']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='$897.00']")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I click on order details button")

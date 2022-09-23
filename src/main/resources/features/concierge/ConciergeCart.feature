@@ -3,7 +3,7 @@ Feature:Concierge Cart Page
 
   Scenario: Order Classification
     Given I log into Concierge as "associate"
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     Then I verify order classification
@@ -11,8 +11,7 @@ Feature:Concierge Cart Page
   Scenario: Checkout membership popup for Guest user
     Given I log into Concierge as "associate"
     When I remove client from header
-    #When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
-    When I open product page with "prod2260004" and "61040991"
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -23,7 +22,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I click on quantity line item button
@@ -32,7 +31,7 @@ Feature:Concierge Cart Page
   Scenario:Remove line item - click on remove button and verify that line item is removed and subtotal and minicart value is updated
     Given I log into Concierge as "associate"
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I remove all items from cart
@@ -42,7 +41,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I click on cart button from header
@@ -62,7 +61,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I click on total item line price
@@ -76,7 +75,7 @@ Feature:Concierge Cart Page
   Scenario:Override Line item Prices - verify update button, verify remove button
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I click on total item line price
@@ -95,7 +94,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I click on total item line price
@@ -112,7 +111,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I click on UFD button from cart
@@ -121,7 +120,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     And I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I introduces promo code "FEMAD" for promo codes field
@@ -133,7 +132,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "prod17310052" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I click on move to project button
@@ -143,7 +142,7 @@ Feature:Concierge Cart Page
   Scenario: Promo codes - promo code for guest user
     Given I log into Concierge as "associate"
     And I remove all items from cart
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I introduces promo code "HM4TS97" for promo codes field
@@ -153,7 +152,7 @@ Feature:Concierge Cart Page
 
   Scenario: Designed/ Sold By
     Given I log into Concierge as "associate"
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     Then I verify that designed sold by
@@ -162,7 +161,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     And I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I introduces promo code "FEMAD" for promo codes field
@@ -179,7 +178,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I introduces promo code "FEMAD" for promo codes field
@@ -197,7 +196,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I introduces promo code "FEMAD" for promo codes field
@@ -211,7 +210,7 @@ Feature:Concierge Cart Page
   Scenario:Verify mini cart count
     Given I log into Concierge as "associate"
     When I remove all items from cart for minicart
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     Then I verify that mini cart value is equal to 1
@@ -222,7 +221,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -238,7 +237,7 @@ Feature:Concierge Cart Page
   Scenario: Verify Membership Pop up while checkout for Trade - should not
     Given I log into Concierge as "associate"
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -265,7 +264,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -285,7 +284,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -298,7 +297,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I apply employee discount
@@ -308,7 +307,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "1930S MARTINI ROUND SIDE TABLE" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose postpone shipment
@@ -319,8 +318,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "MONOGRAMMED 802-GRAM TURKISH TOWEL" from search field
-    When I click on first item from grid
+    When I open product page with productId "prod19500002"
     When I select size option 2 for item
     When I select color option
     When I click on add to cart button
@@ -337,8 +335,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "prod19500002" from search field
-    #When I click on first item from grid
+    When I open product page with productId "prod19500002"
     When I select size option 2 for item
     When I select color option
     When I click on add to cart button
@@ -352,7 +349,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -366,7 +363,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -379,10 +376,11 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "112349 PTL SML" from search field
-    When I clicks on o random item
-#    When I go to item which has "CA" restriction
-    When I select size option 1 for item
+    When I open product page with productId "prod25150082"
+    When I select debth option
+    When I select fabric option
+    When I select length option
+    When I select color option
     When I click on add to cart button
     When I click on aggree&add button
     When I click on view cart button
@@ -397,8 +395,10 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "112349 PTL SML" from search field
-#    When I clicks on o random item
+    When I open product page with productId "prod25150082"
+    When I select debth option
+    When I select fabric option
+    When I select length option
     When I select color option
     When I click on add to cart button
     When I click on aggree&add button
@@ -414,7 +414,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "10011389" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -427,7 +427,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on aggree&add button
     When I click on view cart button
@@ -446,7 +446,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
    # When I click on aggree&add button
     When I click on view cart button
@@ -460,7 +460,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     Then I verify that availability, Delivery and Returns messaging in cart

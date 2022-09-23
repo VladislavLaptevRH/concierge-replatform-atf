@@ -125,13 +125,13 @@ public class GeneralStepDefs {
         checkoutAddressScreen.getCompanyNameField().setValue("AutomationCompany");
 
         clearField(checkoutAddressScreen.getStreetAddressField());
-        checkoutAddressScreen.getStreetAddressField().setValue("QaStreet");
+        checkoutAddressScreen.getStreetAddressField().setValue("7677 N 16th St");
 
         clearField(checkoutAddressScreen.getAptFloorSuiteField());
         checkoutAddressScreen.getAptFloorSuiteField().setValue("QaApartment");
 
         clearField(checkoutAddressScreen.getCityField());
-        checkoutAddressScreen.getCityField().setValue("qaCity");
+        checkoutAddressScreen.getCityField().setValue("Phoenix");
 
         clearField(checkoutAddressScreen.getPhoneField());
         checkoutAddressScreen.getPhoneField().setValue("+124131231");
@@ -258,10 +258,10 @@ public class GeneralStepDefs {
 
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
-        selectPayment.selectByValue(paymentType);
+        selectPayment.selectByValue("CC");
 
-        $(By.cssSelector("iframe[title='Iframe for secured card data input field']")).should(Condition.be(visible), Duration.ofMinutes(2));
-        SelenideElement selenideElement = $(By.cssSelector("iframe[title='Iframe for secured card data input field']"));
+        $(By.cssSelector("iframe[title='Iframe for secured card number']")).should(Condition.be(visible), Duration.ofMinutes(2));
+        SelenideElement selenideElement = $(By.cssSelector("iframe[title='Iframe for secured card number']"));
         switchTo().frame(selenideElement);
         paymentScreen.getCardNumberField().setValue(number);
         switchTo().defaultContent();
@@ -272,8 +272,8 @@ public class GeneralStepDefs {
         paymentScreen.getCvcField().setValue(cvc);
         switchTo().defaultContent();
 
-        $(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card data input field']")).should(Condition.be(visible), Duration.ofMinutes(2));
-        switchTo().frame($(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card data input field']")));
+        $(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card expiry date']")).should(Condition.be(visible), Duration.ofMinutes(2));
+        switchTo().frame($(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card expiry date']")));
 
         paymentScreen.getExpiryDateField().setValue(expirationDate);
         switchTo().defaultContent();
