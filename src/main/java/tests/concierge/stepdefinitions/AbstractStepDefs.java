@@ -163,7 +163,7 @@ public class AbstractStepDefs {
             checkoutAddressScreen.getFirstNameInpt().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
             if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
                 generalStepDefs.fillAddressFields();
-                generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
+                generalStepDefs.fillZipCodeStateCountry("85020", "US", "");
             }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Address fields are not available");

@@ -4,7 +4,7 @@ Feature:Concierge Contract
   Scenario: Verify that I'm not able to select Contract Client without contract gallery
     Given I log into Concierge as "associate"
     And I remove all items from cart
-    And I go to item "61040991 SLVR" from search field
+    When I open product page with "prod1617188" and "63130001"
     And I click on add to cart button
     And I click on view cart button
     When I choose order classification
@@ -17,7 +17,7 @@ Feature:Concierge Contract
     Given I log into Concierge as "associate"
     And I remove all items from cart
     When I choose contract gallery
-    And I go to item "61040991 SLVR" from search field
+    When I open product page with "prod1617188" and "63130001"
     And I click on add to cart button
     And I click on view cart button
     When I choose order classification
@@ -30,7 +30,7 @@ Feature:Concierge Contract
     Given I log into Concierge as "associate"
     And I remove all items from cart
     When I choose contract gallery
-    And I go to item "61040991 SLVR" from search field
+    When I open product page with "prod1617188" and "63130001"
     And I click on add to cart button
     And I click on view cart button
     When I choose order classification
@@ -44,7 +44,7 @@ Feature:Concierge Contract
     Given I log into Concierge as "associate"
     And I remove all items from cart
     When I choose contract gallery
-    And I go to item "61040991 SLVR" from search field
+    When I open product page with "prod1617188" and "63130001"
     And I click on add to cart button
     And I click on view cart button
     When I choose order classification
@@ -68,18 +68,9 @@ Feature:Concierge Contract
     When I remove client from header
     When I click on client button from header
     When I look on client by "accountnumber" with "20211221164476"
-#    When I clicks on a random menu item
-##    Then I verify that contract price is displayed
-#    When I click on collections item
-#    When I clicks on o random item
-    And I go to item "61040991 SLVR" from search field
+    When I open product page with "prod1617188" and "63130001"
     Then I verify that contract price is displayed
-#    When I select debth option
-#    When I select fabric option
-#    When I select color option
-#    And I select count of product
     And I click on add to cart button
-#    When I click on aggree&add button
     And I click on view cart button
     When I choose order classification
     And I click on checkout button

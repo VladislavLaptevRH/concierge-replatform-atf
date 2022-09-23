@@ -21,6 +21,7 @@ import java.util.Random;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.awaitility.Awaitility.await;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class ConciergeE2EStepDefs {
@@ -583,11 +584,13 @@ public class ConciergeE2EStepDefs {
     public void iVerifyTradePricesForPDP(String pageName) {
         if (pageName.equals("project page")) {
             $(By.xpath("//*[text()='TRADE']")).should(visible, Duration.ofSeconds(30));
-            $(By.xpath("//*[text()='$3,165.00']")).should(visible, Duration.ofSeconds(40));
-
+            $(By.xpath("//*[text()='$3,165.00']")).should(visible, Duration.ofSeconds(20));
+        } else if (pageName.equals("PG")) {
+            assertEquals(conciergeCartPageScreen.getTradePriceLabel().getText(), "Trade");
+            assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText(), "$1585");
         } else {
-            $(By.xpath("//*[text()='Trade']")).should(visible, Duration.ofSeconds(30));
-            $(By.xpath("//*[text()='1509']")).should(visible, Duration.ofSeconds(40));
+            assertEquals(conciergeCartPageScreen.getTradePriceLabel().getText(), "Trade");
+            assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText(), "$2688.00");
         }
     }
 
@@ -677,9 +680,14 @@ public class ConciergeE2EStepDefs {
     }
 
     @When("I open product page with {string} and {string}")
-    public void iOpenProductPageWithAnd(String arg0, String arg1) {
-        String URL = Hooks.properties.get(Hooks.conciergeURL) + "/catalog/product/product.jsp?productId=" + arg0 + "&fullSkuId=" + arg1 + "+ABRS";
+    public void iOpenProductPageWithAnd(String productId, String skuId) {
+        String URL = Hooks.properties.get(Hooks.conciergeURL) + "/catalog/product/product.jsp?productId="+productId+"&fullSkuId="+skuId+"+NATL";
         open(URL);
+    }
+
+    @When("I open product page with productId {string}")
+    public void iOpenProductPageWithProductId(String productId) {
+        String URL = Hooks.properties.get(Hooks.conciergeURL) + "/catalog/product/product.jsp?productId="+productId+"";
     }
 }
 

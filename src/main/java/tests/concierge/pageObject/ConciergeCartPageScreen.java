@@ -114,6 +114,8 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement tradeSalePrice = $(By.xpath("//p[@data-testid='price-for-trade']"));
 
+    private final SelenideElement tradePriceLabel = $(By.xpath("//p[@data-testid='price-label-trade']"));
+
     private final SelenideElement postponeShipment = $(By.xpath("//p[@id='postpone-shipment']"));
 
     private final SelenideElement postponeSelectReasonCode = $(By.xpath("//select[@id='data_reason_code']"));

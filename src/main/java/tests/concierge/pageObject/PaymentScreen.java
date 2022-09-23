@@ -22,15 +22,15 @@ public class PaymentScreen {
 
     private final SelenideElement creditCardPaymentPlan = $(By.xpath("//div[contains(@class,'Mui-error Mui-error')]/select"));
 
-    private final SelenideElement cardNumberField = $(By.xpath("//input[@id='encryptedCardNumber']"));
+    private final SelenideElement cardNumberField = $(By.xpath("//input[@data-fieldtype='encryptedCardNumber']"));
 
     private final SelenideElement fieldAmount = $(By.xpath("//div[contains(@class,'MuiOutlinedInput-adornedStart')]/input"));
 
-    private final SelenideElement expiryDateField = $(By.xpath("//input[@id='encryptedExpiryDate']"));
+    private final SelenideElement expiryDateField = $(By.xpath("//input[@data-fieldtype='encryptedExpiryDate']"));
 
     private final SelenideElement billingAddress = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-flex-start']"));
 
-    private final SelenideElement cvcField = $(By.xpath("//input[@id='encryptedSecurityCode']"));
+    private final SelenideElement cvcField = $(By.xpath("//input[@data-fieldtype='encryptedSecurityCode']"));
 
     private final SelenideElement continueToReview = $(By.xpath("//*[text()='CONTINUE TO REVIEW']"));
 
