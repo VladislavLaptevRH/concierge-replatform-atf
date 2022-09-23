@@ -50,9 +50,9 @@ public class EstoreContractTradeStepDefs {
 
     @When("I go to TN brand")
     public void iGoToTNBrand() {
-        $(By.xpath("//a[@data-testid='brand-link']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//a[@data-testid='brand-link']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//a[@data-testid='brand-link']")).click();
-        $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']")).click();
     }
 
@@ -65,12 +65,19 @@ public class EstoreContractTradeStepDefs {
 
     @And("I verify that logout from trade user is displayed")
     public void iVerifyThatLogoutFromTradeUserIsDisplayed() {
-        estoreLoginPage.getLogoutFromTradeUser().should(visible, Duration.ofSeconds(20));
+        estoreLoginPage.getLogoutFromTradeUser().should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify that trade price is used for each B&C product")
     public void iVerifyThatTradePriceIsUsedForEachBCProduct() {
-        $(By.xpath("(//*[contains(text(),'243.00')])[2]")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Trade']")).should(visible, Duration.ofSeconds(30));
+
+    }
+
+    @When("I click on confirm button from pop up zip code")
+    public void iClickOnConfirmButtonFromPopUpZipCode() {
+        $(By.xpath("//*[text()='Confirm']")).should(visible,Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Confirm']")).click();
 
     }
 }

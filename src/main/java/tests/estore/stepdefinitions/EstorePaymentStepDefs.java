@@ -66,7 +66,7 @@ public class EstorePaymentStepDefs {
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
         }
 
-        estorePaymentPage.getCvcField().should(visible, Duration.ofSeconds(20));
+        estorePaymentPage.getCvcField().should(visible, Duration.ofSeconds(40));
         estorePaymentPage.getCvcField().setValue("737");
         switchTo().defaultContent();
 
@@ -81,9 +81,9 @@ public class EstorePaymentStepDefs {
     public void iVerifyThatIMAbleToEditPayment() {
         estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
         estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
-        $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).click();
-        estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(20));
+        estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(40));
         estoreCartPage.getRemoveButton().click();
         estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
         estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
@@ -91,10 +91,10 @@ public class EstorePaymentStepDefs {
 
     @When("I edit estore billing address from PG")
     public void iEditBillingAddressFromPG() {
-        estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(40));
         estoreAddressScreen.getEditShippinggAddress().click();
-        $(By.xpath("(//*[text()='Edit'])[3]")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("(//*[text()='Edit'])[3]")).click();
+        $(By.xpath("(//*[text()='Edit'])[2]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//*[text()='Edit'])[2]")).click();
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstName());
         estoreAddressScreen.getBillingAddressFirstName().setValue("NewBillingAddress");
     }
@@ -112,7 +112,7 @@ public class EstorePaymentStepDefs {
 
     @When("I edit billing address from estore payment page")
     public void iEditBillingAddressFromEstorePaymentPage() {
-        estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(40));
     }
 
     @When("I remove added before cart")
@@ -165,67 +165,64 @@ public class EstorePaymentStepDefs {
         estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         estorePaymentPage.getChoosePaymentMethodBtn().click();
 
-        $(By.xpath("//*[text()='Visa ####-7543']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Master Card ####-0008']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Visa ####-7543']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Master Card ####-0008']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Master Card ####-0008']")).click();
         System.out.printf("");
     }
 
     @Then("I verify that credit cards are displayed in total section")
     public void iVerifyThatCreditCardsAreDisplayedInTotalSection() {
-        $(By.xpath("//*[text()='Charge to Visa ending 7543:']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Charge to MasterCard ending 0008:']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Charge to Visa ending 7543:']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Charge to MasterCard ending 0008:']")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I validate updated order estimate and card details")
     public void iValidateUpdatedOrderEstimateAndCardDetails() {
-        $(By.xpath("//*[text()='$6,444.00']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='$5,895.00']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Subtotal ']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='TOTAL']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Subtotal ']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='TOTAL']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I update item quantity in estore pdp")
     public void iUpdateItemQuantityInEstorePdp() {
-        estoreItemPage.getSelectQuantity().should(visible, Duration.ofSeconds(20));
+        sleep(3000);
         estoreItemPage.getSelectQuantity().scrollIntoView(true);
+        estoreItemPage.getSelectQuantity().should(visible, Duration.ofSeconds(40));
         Select selectQuantity = new Select(estoreItemPage.getSelectQuantity());
         selectQuantity.selectByValue("2");
     }
 
     @Then("I validate updated order estimate and card details for decrease item")
     public void iValidateUpdatedOrderEstimateAndCardDetailsForDecreaseItem() {
-        $(By.xpath("//*[text()='$12,790.00']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='$14,406.12']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Subtotal ']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='TOTAL']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Subtotal ']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='TOTAL']")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify unavailability of saved for RHCC")
     public void iVerifyUnavailabilityOfSavedForRHCC() {
-        estorePaymentPage.getChoosePaymentMethodBtn().should(visible, Duration.ofSeconds(20));
+        estorePaymentPage.getChoosePaymentMethodBtn().should(visible, Duration.ofSeconds(40));
         estorePaymentPage.getChoosePaymentMethodBtn().click();
         $(By.xpath("//*[text()='RH Credit Card ####-4849']")).shouldNotBe(visible, Duration.ofSeconds(20));
     }
 
     @Then("I validate that billing address based on saved payment method")
     public void iValidateThatBillingAddressBasedOnSavedPaymentMethod() {
-        $(By.xpath("//*[text()='SHARAN NAIR']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Lit']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='San Rafael, CA 94903']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='3342294667']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='SHARAN NAIR']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Lit']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='San Rafael, CA 94903']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='3342294667']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I remove existing payment method on payment estore page")
     public void iRemoveExistingPaymentMethodOnPaymentEstorePage() {
-        estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(20));
+        estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(40));
         estoreCartPage.getRemoveButton().click();
     }
 
     @When("I choose address with CAN zip code")
     public void iChooseAddressWithCANZipCode() {
-        estoreAddressScreen.getShippingAddressState().should(visible,Duration.ofSeconds(20));
+        estoreAddressScreen.getShippingAddressState().should(visible, Duration.ofSeconds(20));
         Select selectCountry = new Select(estoreAddressScreen.getCountrySelect());
         selectCountry.selectByValue("CA");
         sleep(2000);
@@ -234,5 +231,16 @@ public class EstorePaymentStepDefs {
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
 
         estoreAddressScreen.getPostalShippingCode().setValue("A1A1A1");
+    }
+
+    @When("I remove payment method which was used earlier")
+    public void iRemovePaymentMethodWhichWasUsedEarlier() {
+        try {
+            estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(30));
+            estoreCartPage.getRemoveButton().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("There is no payment method that was used before");
+        }
+
     }
 }

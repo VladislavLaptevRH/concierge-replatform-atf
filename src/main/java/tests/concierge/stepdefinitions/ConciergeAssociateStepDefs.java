@@ -54,7 +54,7 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I verify I see store Palo Alto in the header")
     public void iVerifyISeeStoreInTheHeader() {
-        conciergeUserAccountPage.getNewPortBeachGallery().should(visible, Duration.ofSeconds(20));
+        conciergeUserAccountPage.getNewPortBeachGallery().should(visible, Duration.ofSeconds(40));
         conciergeUserAccountPage.getNewPortBeachGallery().should(text("PALO ALTO"));
         assertEquals(conciergeUserAccountPage.getNewPortBeachGallery().getText(), "PALO ALTO");
     }
@@ -85,9 +85,9 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I verify footer links")
     public void iVerifyFooterLinks() {
-        $(By.xpath("//*[text()='RH.COM']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='DASHBOARD']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='PROJECTS']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='RH.COM']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='DASHBOARD']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='PROJECTS']")).should(visible, Duration.ofSeconds(40));
     }
 }
 

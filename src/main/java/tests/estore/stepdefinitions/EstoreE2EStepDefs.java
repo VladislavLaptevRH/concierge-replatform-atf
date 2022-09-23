@@ -186,16 +186,15 @@ public class EstoreE2EStepDefs {
     @When("I go to estore item {string} from search field")
     public void iGoToItemFromEstoreSearchField(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).click();
-        estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+        estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
         estoreUserAccountPage.getSearchItemField().click();
         generalStepDefs.waitForJSandJQueryToLoad();
-//        $(By.xpath("//button[contains(@class,'MuiButton-containedSizeLarge')]")).should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
         sleep(3000);
         estoreUserAccountPage.getSearchItemField().setValue(arg0);
-        $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']")).click();
     }
 
@@ -548,11 +547,11 @@ public class EstoreE2EStepDefs {
     public void iVerifyEstoreTradePricesForPDP(String pageName) {
         if (pageName.equals("project page")) {
             $(By.xpath("//*[text()='TRADE']")).should(visible, Duration.ofSeconds(30));
-            $(By.xpath("//*[text()='$3,165.00']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='$3,165.00']")).should(visible, Duration.ofSeconds(40));
 
         } else {
             $(By.xpath("//*[text()='Trade']")).should(visible, Duration.ofSeconds(30));
-            $(By.xpath("//*[text()='1509']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='1509']")).should(visible, Duration.ofSeconds(40));
         }
     }
 
@@ -596,29 +595,29 @@ public class EstoreE2EStepDefs {
 
     @Then("I verify the estore payment details and order estimate summary")
     public void iVerifyTheEstorePaymentDetailsAndOrderEstimateSummary() {
-        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Cash/Check']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Cash/Check']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
 
     }
 
     @Then("I verify estore spo order & terms review signature")
     public void iVerifyEstoreSpoOrderTermsReviewSignature() {
-        $(By.xpath("//*[text()='ORDER & TERMS REVIEW SIGNATURE CAPTURE']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='SIGNATURE']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='CLEAR SIGNATURE']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='ORDER & TERMS REVIEW SIGNATURE CAPTURE']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='SIGNATURE']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='CLEAR SIGNATURE']")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify that all the line items in the cart with the estore order review page")
     public void iVerifyThatAllTheLineEstoreItemsInTheCartWithTheOrderReviewPage() {
-        $(By.xpath("//*[text()='Qty 1']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Qty 1']")).should(visible, Duration.ofSeconds(40));
         conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify order details from estore thank you page")
@@ -627,9 +626,9 @@ public class EstoreE2EStepDefs {
         $(By.xpath("//*[text()='Billing Address']")).should(visible, Duration.ofSeconds(25));
         $(By.xpath("//*[text()='Important Information']")).should(visible, Duration.ofSeconds(25));
         conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I select estore length option")
@@ -666,6 +665,12 @@ public class EstoreE2EStepDefs {
         }
 
 
+    }
+
+    @When("I open direct product page on estore")
+    public void iOpenDirectProductPageOnEstore() {
+        String url = "https://stg2.rhnonprod.com/catalog/product/product.jsp?productId=prod690088&fullSkuId=63130001+NATL";
+        open(url);
     }
 }
 

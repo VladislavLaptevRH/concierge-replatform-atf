@@ -26,7 +26,7 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Validate the currency for US Zip
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I go to estore item "61040991 SLVR" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that price for product&line should be in US dollars
@@ -34,10 +34,11 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Validate the currency for CAN Zip
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I go to estore item "10009528 HORN" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I introduces CAN zip code for estore cart
+    When I click on confirm button from pop up zip code
     Then I verify that current currency is canadian dollar
 
   Scenario: eStore Contract - Validate the dropdown's are enabled
@@ -82,7 +83,7 @@ Feature: eStore Contract and Trade
     And I click on view cart estore button
     When I click on estore checkout button
     When I click on same as estore shipping address checkbox
-    When I continue to estore payment
+    When I continue to estore payment after address page
     When I pay with RHCC for estore item
     When I click on continue payment method estore button
     When I click on a place estore order button
@@ -157,7 +158,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I go to TN brand
-    When I go to estore item "104032 NATL" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that trade price is used for each TN product

@@ -55,7 +55,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that shipping address is displayed")
     public void iVerifyThatShippingAddressIsDisplayed() {
-        $(By.xpath("//*[text()='SHIPPING ADDRESS']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='SHIPPING ADDRESS']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I click on edit shipping address button on estore order review page")
@@ -98,17 +98,17 @@ public class EstoreAddressStepDefs {
 
     @Then("I validate {string} which we have entered earlier")
     public void iValidateWhichWeHaveEnteredEarlier(String arg0) {
-        $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Rock Island, IL 61201']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='3097931846']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Rock Island, IL 61201']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='3097931846']")).should(visible, Duration.ofSeconds(40));
 
     }
 
     @When("I fill estore billing address")
     public void iFillEstoreBillingAndShippingAddress() {
         sleep(2000);
-        estoreAddressScreen.getShippingAddressfirstName().should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getShippingAddressfirstName().should(visible, Duration.ofSeconds(40));
         estoreAddressScreen.getShippingAddressfirstName().setValue("Safire");
         estoreAddressScreen.getShippingAddresslastName().setValue("William");
         estoreAddressScreen.getShippingAddressStreetAddress().setValue("4224 Simpson Street");
@@ -125,7 +125,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify add a new shipping address option is present")
     public void iVerifyAddANewShippingAddressOptionIsPresent() {
-        $(By.xpath("//*[text()='Add a New Shipping Address to Your Account']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Add a New Shipping Address to Your Account']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I click on estore my account icon")
@@ -148,7 +148,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that add address button is displayed")
     public void iVerifyThatAddAddressButtonIsDisplayed() {
-        estoreUserAccountPage.getAddAddressButton().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getAddAddressButton().should(visible, Duration.ofSeconds(40));
     }
 
     @When("I introduce data for new profile address")
@@ -171,7 +171,7 @@ public class EstoreAddressStepDefs {
 
     @When("I delete the first shipping address on address estore page")
     public void iDeleteTheFirstShippingAddressOnAddressEstorePage() {
-        estoreCheckoutAddressScreen.getDeleteFirstShippingAddress().should(visible, Duration.ofSeconds(20));
+        estoreCheckoutAddressScreen.getDeleteFirstShippingAddress().should(visible, Duration.ofSeconds(40));
         estoreCheckoutAddressScreen.getDeleteFirstShippingAddress().click();
     }
 
@@ -188,28 +188,8 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that address on order review page the same as on address page")
     public void iVerifyThatAddressOnOrderReviewPageTheSameAsOnAddressPage() {
-        //billings address
-        $(By.xpath("//*[text()='akshay soni']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='123 Advenue Street']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Vancouver, WA 98765']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='3342294667']")).should(visible, Duration.ofSeconds(20));
-        //shipping address
-        $(By.xpath("//*[text()='QA1cztJcmPchW Automation']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Pennsylvania Avenue']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Qastreet']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='QaApartment']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Schenectady, NY 12345']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='3342294667']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='$4,195.00']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='PYRITE MOSAIC ROUND MIRROR']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Qty 1']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Subtotal ']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("(//*[text()='$4,195.00'])[2]")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='TOTAL']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='$5,123.52']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='7543']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='PAYMENT INFORMATION']")).should(visible,Duration.ofSeconds(20));
     }
 
     @When("I remove added address before")
@@ -217,10 +197,23 @@ public class EstoreAddressStepDefs {
         try {
             $(By.xpath("//*[text()='Delete']")).should(visible, Duration.ofSeconds(10));
             $(By.xpath("//*[text()='Delete']")).click();
-            $(By.xpath("(//*[text()='Delete'])[2]")).should(visible,Duration.ofSeconds(10));
+            $(By.xpath("(//*[text()='Delete'])[2]")).should(visible, Duration.ofSeconds(10));
             $(By.xpath("(//*[text()='Delete'])[2]")).click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Address is not stored");
         }
+    }
+
+    @When("I continue to estore payment after address page")
+    public void iContinueToEstorePaymentAfterAddressPage() {
+        $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='Continue to payment']")).click();
+        $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='CONTINUE']")).click();
+    }
+
+    @Then("I verify that added address displayed as shipping address")
+    public void iVerifyThatAddedAddressDisplayedAsShippingAddress() {
+        $(By.xpath("//*[text()='Pennsylvania Avenue']")).should(visible, Duration.ofSeconds(20));
     }
 }

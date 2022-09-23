@@ -19,6 +19,8 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement confirmDeleteAddedAddress = $(By.xpath("(//*[text()='Delete'])[3]"));
 
+    private final SelenideElement useIWantToDeleteAddedAddress = $(By.xpath("(//*[text()='Delete'])[2]"));
+
     private final SelenideElement firstNameRequired = $(By.xpath("//*[text()='First name required.']"));
 
     private final SelenideElement lastNameRequired = $(By.xpath("//*[text()='Last name required.']"));

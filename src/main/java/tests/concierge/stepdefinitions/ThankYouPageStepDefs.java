@@ -23,9 +23,9 @@ public class ThankYouPageStepDefs {
     public void iVerifyAllTheLineItemsInTheCartOnThankYouPage() {
         $(By.xpath("//*[text()='Qty 1']")).should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofSeconds(10));
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofSeconds(10));
     }
 

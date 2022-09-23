@@ -1,6 +1,7 @@
 package tests.estore.stepdefinitions;
 
 
+import com.codeborne.selenide.Condition;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -46,8 +47,8 @@ public class EstoreHomePageStepDefs {
 
     @And("I Type product name {string}")
     public void iTypeProductName(String arg0) {
-        assertTrue(estoreHomePage.getSearchInputField().isDisplayed());
-        assertTrue(estoreHomePage.getSearchCloseButton().isDisplayed());
+        estoreHomePage.getSearchInputField().should(Condition.visible,Duration.ofSeconds(30));
+        estoreHomePage.getSearchCloseButton().should(Condition.visible,Duration.ofSeconds(30));
         estoreHomePage.getSearchInputField().setValue(arg0);
         estoreHomePage.getSeeAllResultButton().click();
     }
@@ -70,6 +71,7 @@ public class EstoreHomePageStepDefs {
 
     @When("I click on RH dropdown")
     public void iClickOnRHDropdown() {
+        estoreHomePage.getCategoryDropdown().should(Condition.visible,Duration.ofSeconds(20));
         estoreHomePage.getCategoryDropdown().click();
     }
 

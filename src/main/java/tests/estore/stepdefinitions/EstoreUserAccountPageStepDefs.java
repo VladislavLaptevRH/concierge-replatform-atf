@@ -135,52 +135,52 @@ public class EstoreUserAccountPageStepDefs {
 
     @When("I click on add address button")
     public void iClickOnAddAddressButton() {
-        estoreUserAccountPage.getAddAddressButton().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getAddAddressButton().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getAddAddressButton().click();
 
     }
 
     @When("I click on save address button")
     public void iClickOnSaveAddressButton() {
-        estoreUserAccountPage.getSaveAddressButton().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getSaveAddressButton().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getSaveAddressButton().click();
     }
 
     @Then("I verify that error messages are displayed for each mandatory field")
     public void iVerifyThatErrorMessagesAreDisplayedForEachMandatoryField() {
-        estoreUserAccountPage.getFirstNameRequired().should(visible, Duration.ofSeconds(20));
-        estoreUserAccountPage.getLastNameRequired().should(visible, Duration.ofSeconds(20));
-        estoreUserAccountPage.getCityRequired().should(visible, Duration.ofSeconds(20));
-        estoreUserAccountPage.getStateRequired().should(visible, Duration.ofSeconds(20));
-        estoreUserAccountPage.getPostlaCodeRequired().should(visible, Duration.ofSeconds(20));
-        estoreUserAccountPage.getPhoneRequired().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getFirstNameRequired().should(visible, Duration.ofSeconds(40));
+        estoreUserAccountPage.getLastNameRequired().should(visible, Duration.ofSeconds(40));
+        estoreUserAccountPage.getCityRequired().should(visible, Duration.ofSeconds(40));
+        estoreUserAccountPage.getStateRequired().should(visible, Duration.ofSeconds(40));
+        estoreUserAccountPage.getPostlaCodeRequired().should(visible, Duration.ofSeconds(40));
+        estoreUserAccountPage.getPhoneRequired().should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify that created address popup is displayed")
     public void iVerifyThatCreatedAddressPopupIsDisplayed() {
-        $(By.xpath("//*[text()='USE ENTERED MY ACCOUNT ADDRESS BOOK']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='USE ENTERED MY ACCOUNT ADDRESS BOOK']")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify that added address present in the grid")
     public void iVerifyThatAddedAddressPresentInTheGrid() {
-        $(By.xpath("//p[@class='MuiTypography-root MuiTypography-body1' and text()='Pennsylvania Avenue, 2, Schenectady, NY 12345']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[@class='MuiTypography-root MuiTypography-body1' and text()='Pennsylvania Avenue, 2, Schenectady, NY 12345']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I click on delete estore button")
     public void iClickOnDeleteEstoreButton() {
-        estoreUserAccountPage.getDeleteAddedAddressButton().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getDeleteAddedAddressButton().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getDeleteAddedAddressButton().click();
     }
 
     @When("I click on delete address button from appeared pop up")
     public void iClickOnDeleteAddressButtonFromAppearedPopUp() {
-        estoreUserAccountPage.getConfirmDeleteAddedAddress().should(visible, Duration.ofSeconds(20));
-        estoreUserAccountPage.getConfirmDeleteAddedAddress().click();
+        estoreUserAccountPage.getUseIWantToDeleteAddedAddress().should(visible, Duration.ofSeconds(40));
+        estoreUserAccountPage.getUseIWantToDeleteAddedAddress().click();
     }
 
     @When("I edit existing address on address book page")
     public void iEditExistingAddressOnAddressBookPage() {
-        estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(40));
         estoreAddressScreen.getEditShippinggAddress().click();
         firstName = estoreGeneralStepDefs.generateRandomString(5);
         estoreUserAccountPage.getBillingAddressFirstName().setValue(firstName);

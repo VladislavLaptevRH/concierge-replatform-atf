@@ -80,7 +80,7 @@ public class ConciergeOrderHistoryStepDefs {
     @When("I click on the random result")
     public void iClickOnTheRandomResult() {
         conciergeOrderHistoryForm.getFirstResult().should(visible, Duration.ofMinutes(1));
-        $(By.xpath("//*[text()='Automation NonMember']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Automation NonMember']")).should(visible, Duration.ofSeconds(40));
         conciergeOrderHistoryForm.getFirstResult().click();
     }
 
@@ -98,7 +98,7 @@ public class ConciergeOrderHistoryStepDefs {
     @When("I click on random order")
     public void iClickOnRandomOrder() {
         sleep(4000);
-        $(By.xpath("//*[text()='Automation NonMember']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Automation NonMember']")).should(visible, Duration.ofSeconds(40));
         conciergeOrderHistoryForm.getFirstResult().should(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getFirstResult().click();
     }

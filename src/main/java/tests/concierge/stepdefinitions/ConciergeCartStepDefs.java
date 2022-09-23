@@ -313,7 +313,7 @@ public class ConciergeCartStepDefs {
 
     @When("I click on add new space button")
     public void iClickOnAddNewSpaceButton() {
-        projectSettingsScreen.getAddNewSpaceButton().should(visible, Duration.ofSeconds(20));
+        projectSettingsScreen.getAddNewSpaceButton().should(visible, Duration.ofSeconds(40));
         projectSettingsScreen.getAddNewSpaceButton().click();
     }
 
@@ -440,7 +440,7 @@ public class ConciergeCartStepDefs {
     public void iClickOnRemoveGiftBoxButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
         sleep(5000);
-        conciergeItemsScreen.getAddGiftCheckBox().click();
+        executeJavaScript("arguments[0].click();", conciergeItemsScreen.getAddGiftCheckBox());
     }
 
     @Then("I verify that gift box was removed")
