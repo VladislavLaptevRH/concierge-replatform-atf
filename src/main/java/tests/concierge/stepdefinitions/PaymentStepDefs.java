@@ -110,9 +110,9 @@ public class PaymentStepDefs {
                 "BILLING ADDRESS\n" +
                         "QA1 Automation\n" +
                         "AutomationCompany\n" +
-                        "Qastreet\n" +
+                        "7677 N 16th St\n" +
                         "QaApartment\n" +
-                        "Schenectady, NY 12345\n" +
+                        "Phoenix, AZ 85020-4434\n" +
                         "US\n" +
                         "124131231\n" +
                         "automationnonmember@mailinator.com\n" +
@@ -122,9 +122,9 @@ public class PaymentStepDefs {
                 "BILLING ADDRESS\n" +
                         "QA1 Automation\n" +
                         "AutomationCompany\n" +
-                        "Qastreet\n" +
+                        "7677 N 16th St\n" +
                         "QaApartment\n" +
-                        "Schenectady, NY 12345\n" +
+                        "Phoenix, AZ 85020-4434\n" +
                         "US\n" +
                         "124131231\n" +
                         "automationnonmember@mailinator.com\n" +
@@ -134,11 +134,11 @@ public class PaymentStepDefs {
     @Then("I verify subtotal, shipping fee, taxes based on postal code")
     public void iVerifySubtotalShippingFeeTaxesBasedOnPostalCode() {
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='Standard Delivery Shipping']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='Estimated Sales Tax for 12345']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$20.00']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$9.00']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='US$2.32']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='Estimated Sales Tax for 85020-4434']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,585.00']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='US$308.31']")).should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that member savings in payment page")

@@ -4,32 +4,23 @@ Feature:Concierge E2E flow
   Scenario: Verify that user is able to buy item
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I clicks on a random menu item
-    When I click on collections item
-    When I clicks on o random item
-    When I select debth option
-    When I select fabric option
-    When I select length option
-    When I select color option
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
-    When I click on aggree&add button
-    And I click on view cart button
+    When I click on view cart button
     When I choose order classification
     When I click on checkout button
     And I click on no thanks button
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     When I continue to payment
-    And I introduces payment details
+    When I execute payment for "VI"
     Then I verify that review screen is displayed
     When I click on a place order button
 
   Scenario: Verify that user is able to execute split payment using all payment methods
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -45,8 +36,7 @@ Feature:Concierge E2E flow
   Scenario: Verify that if client is a member then redirected to carts screen
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -58,8 +48,7 @@ Feature:Concierge E2E flow
   Scenario: Verify that if client is a non member then redirected to address screen
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "68260005 BULB" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -81,19 +70,18 @@ Feature:Concierge E2E flow
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     When I continue to payment
-    When I introduces payment details
+    When I execute payment for "AX"
     And I verify that review screen is displayed
     When I click on a place order button
     Then I verify that confirmation order screen is displayed
     Examples:
       | skuID    |
-      | 10010969 |
-#
+      | 63130001 |
+
   Scenario: Verify that user is able to add item to project and pay
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10035329 GRY" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to project button
     When I choose project from addToProject popup
     When I click on add to cart button from project screen
@@ -102,7 +90,7 @@ Feature:Concierge E2E flow
     Then I click on no thanks button
     When I fill all fields from address screen
     When I continue to payment
-    When I introduces payment details
+    When I execute payment for "MC"
     And I verify that review screen is displayed
 
 #  Scenario Outline: Verify that user is able to buy item from brand menu - <brands>

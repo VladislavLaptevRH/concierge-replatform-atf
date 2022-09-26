@@ -14,7 +14,7 @@ public class ConciergeOrderHistoryForm {
 
     private final SelenideElement orderHistoryTitle = $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']"));
 
-    private final SelenideElement customerLookUp = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6'][1]//h6"));
+    private final SelenideElement customerLookUp = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12'][1]//h6"));
 
     private final SelenideElement phoneNumberField = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[1]//input"));
 

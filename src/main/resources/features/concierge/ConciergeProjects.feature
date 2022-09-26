@@ -151,7 +151,7 @@ Feature:Concierge Project
 
   Scenario: Verify the Spaces list and switching between the Spaces -CART/PDP
     Given I log into Concierge as "associate"
-    When I go to item "10011389" from search field
+    When I open product page with productId "10011389"
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
