@@ -8,13 +8,13 @@ Feature: Estore Wishlist
 
   Scenario: Add an item to wishlist
     Given I log into eStore as "regular"
-    And I go to estore item "prod25160230" from search field
+    And I go to estore item "17050042WHT" from search field
     When I click on add to wishlist button
     Then I validate items in wishlist
 
   Scenario: Add an item to wishlist (Member User)
     Given I log into eStore as "member"
-    And I go to estore item "prod25160230" from search field
+    And I go to estore item "17050042WHT" from search field
     When I click on add to wishlist button
     Then I validate items in wishlist
     Then I validate member price in wishlist
@@ -22,10 +22,11 @@ Feature: Estore Wishlist
   Scenario: Add an item from cart to wishlist
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "prod25160230" from search field
+    When I go to estore item "17050042WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on add to wishlist button from cart
+    When I click on view wishlist button
     Then I validate items in wishlist
     Then I validate cart is empty
 

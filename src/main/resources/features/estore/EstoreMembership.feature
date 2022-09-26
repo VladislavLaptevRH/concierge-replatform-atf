@@ -6,7 +6,7 @@ Feature: Estore Membership
     When I navigate to the member tab
     Then I validate membership title
 
-  Scenario: eStore Membership renewal details Copy
+  Scenario: eStore Membership renewal details
     Given I log into eStore as "regular"
     When I navigate to the member tab
     Then I validate membership details

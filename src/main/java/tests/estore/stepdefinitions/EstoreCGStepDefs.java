@@ -50,9 +50,7 @@ public class EstoreCGStepDefs {
     @Then("I verify collection name, image, prices on collection banner")
     public void iVerifyCollectionNameImagePricesOnCollectionBanner() {
         $(By.xpath("//*[text()='9595']")).should(Condition.visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()=' Regular /']")).should(Condition.visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='7196']")).should(Condition.visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()=' Member']")).should(Condition.visible, Duration.ofSeconds(20));
         estoreCGScreen.getSofaCollections().should(Condition.visible, Duration.ofSeconds(20));
         $(By.xpath("//img[@alt='Cortona Sofa Collection']")).should(Condition.visible, Duration.ofSeconds(20));
     }
@@ -93,7 +91,6 @@ public class EstoreCGStepDefs {
 
     @Then("I verify product image, name and prices are visible for each product on the model")
     public void iVerifyProductImageNameAndPricesAreVisibleForEachProductOnTheModel() {
-        estoreCGScreen.getCortonaSofa().should(Condition.visible, Duration.ofSeconds(40));
         estoreCGScreen.getPriceForRegular().should(visible, Duration.ofSeconds(40));
         estoreCGScreen.getPriceForMember().should(Condition.visible, Duration.ofSeconds(20));
         estoreCGScreen.getCollectionModalProductImage().should(Condition.visible, Duration.ofSeconds(20));
@@ -141,12 +138,12 @@ public class EstoreCGStepDefs {
 
     @Then("I verify that contract price is used for each product")
     public void iVerifyThatPriceIsDisplayedInCart() {
-        $(By.xpath("(//*[text()='$479.00'])[2]")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='$35.00'])[2]")).should(visible,Duration.ofSeconds(20));
     }
 
     @Then("I verify that contract price is used for each B&C product")
     public void iVerifyThatPriceIsDisplayedInCartBC() {
-        $(By.xpath("(//*[text()='$156.00'])[2]")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='$35.00'])[2]")).should(visible,Duration.ofSeconds(20));
     }
 
     @When("I go to B&C brand")

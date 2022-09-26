@@ -71,7 +71,7 @@ public class EstoreContractTradeStepDefs {
     @Then("I verify that trade price is used for each B&C product")
     public void iVerifyThatTradePriceIsUsedForEachBCProduct() {
         $(By.xpath("//*[text()='Trade']")).should(visible, Duration.ofSeconds(30));
-
+        $(By.xpath("(//*[text()='$35.00'])[2]")).should(visible,Duration.ofSeconds(20));
     }
 
     @When("I click on confirm button from pop up zip code")

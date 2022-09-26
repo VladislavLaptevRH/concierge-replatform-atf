@@ -9,7 +9,7 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Price in the cart - RH
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I go to estore item "61040991 ABRS" from search field
+    When I open direct product page on estore
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that contract price is used in cart
@@ -17,7 +17,7 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Price on increasing the QTY in the cart
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I go to estore item "61040991 ABRS" from search field
+    When I open direct product page on estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I choose qty for item from estore cart
@@ -26,7 +26,7 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Validate the currency for US Zip
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open direct product page on estore
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that price for product&line should be in US dollars
@@ -34,7 +34,7 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Validate the currency for CAN Zip
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open direct product page on estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I introduces CAN zip code for estore cart
@@ -52,7 +52,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I go to MO brand
-    When I go to estore item "10074768 CAML" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that contract price is used for each product
@@ -61,7 +61,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I go to B&C brand
-    When I go to estore item "104032 NATL" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that contract price is used for each B&C product
@@ -70,7 +70,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I go to TN brand
-    When I go to estore item "104032 NATL" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that contract price is used for each TN product
@@ -78,7 +78,7 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Verify RHCC payment option for Contract user
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I go to estore item "10121333 NOK" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -98,7 +98,7 @@ Feature: eStore Contract and Trade
   Scenario: eStore Trade - Price in the cart - RH
     Given I log into eStore as trade
     When I remove all items from estore cart
-    When I go to estore item "10099680 BLK" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that trade price is used in cart
@@ -106,7 +106,7 @@ Feature: eStore Contract and Trade
   Scenario: eStore Trade - Price on increasing the QTY in the cart
     Given I log into eStore as trade
     When I remove all items from estore cart
-    When I go to estore item "10099680 CAML" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I choose qty for item from estore cart
@@ -115,7 +115,7 @@ Feature: eStore Contract and Trade
   Scenario: eStore Trade - Validate the currency for US Zip
     Given I log into eStore as trade
     When I remove all items from estore cart
-    When I go to estore item "10099680 CAML" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that price for product&line should be in US dollars
@@ -123,7 +123,7 @@ Feature: eStore Contract and Trade
   Scenario: eStore Trade - Validate the currency for CAN Zip
     Given I log into eStore as trade
     When I remove all items from estore cart
-    When I go to estore item "10088775 VBRS" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I introduces CAN zip code for estore cart
@@ -140,7 +140,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I go to MO brand
-    When I go to estore item "10074768 CAML" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that trade price is used for each product
@@ -149,7 +149,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I go to B&C brand
-    When I go to estore item "104032 NATL" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that trade price is used for each B&C product

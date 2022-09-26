@@ -93,20 +93,13 @@ public class EstoreUserAccountPageStepDefs {
         estoreUserAccountPage.getBillingAddressFirstName().clear();
         estoreUserAccountPage.getBillingAddressFirstName().setValue(firstName);
 
-//        estoreUserAccountPage.getBillingAddressLastName().setValue("TestLastName");
-//        estoreUserAccountPage.getBillingAddressStreetAddress().setValue("StreetAddress");
-//        estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
-//        estoreUserAccountPage.getBillingAddressCity().setValue("testCity");
-//        Select selectState = new Select(estoreUserAccountPage.getBillingAddressSelectState());
-//        selectState.selectByValue("AZ");
+        estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(30));
+        estoreUserAccountPage.getSaveCardButton().click();
 
-        $(By.xpath("//*[text()='EDIT']")).shouldHave(Condition.text("EDIT"), Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='EDIT']")).click();
-
-        estorePaymentPage.getContinueToCheckout().shouldHave(Condition.text("CONTINUE"), Duration.ofSeconds(20));
-        estorePaymentPage.getContinueToCheckout().click();
-
-//        estoreUserAccountPage.getSaveCardButton().click();
+//        $(By.xpath("//*[text()='EDIT']")).shouldHave(Condition.text("EDIT"), Duration.ofSeconds(20));
+//        $(By.xpath("//*[text()='EDIT']")).click();
+//
+//        estorePaymentPage.getContinueToCheckout().shouldHave(Condition.text("CONTINUE"), Duration.ofSeconds(20));
 //        estorePaymentPage.getContinueToCheckout().click();
 
     }

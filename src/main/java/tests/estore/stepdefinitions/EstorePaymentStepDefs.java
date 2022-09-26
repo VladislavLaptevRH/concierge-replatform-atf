@@ -91,10 +91,11 @@ public class EstorePaymentStepDefs {
 
     @When("I edit estore billing address from PG")
     public void iEditBillingAddressFromPG() {
+        sleep(3000);
         estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(40));
         estoreAddressScreen.getEditShippinggAddress().click();
-        $(By.xpath("(//*[text()='Edit'])[2]")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("(//*[text()='Edit'])[2]")).click();
+        $(By.xpath("(//*[text()='Edit'])[3]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//*[text()='Edit'])[3]")).click();
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstName());
         estoreAddressScreen.getBillingAddressFirstName().setValue("NewBillingAddress");
     }
@@ -207,11 +208,9 @@ public class EstorePaymentStepDefs {
 
     @Then("I validate that billing address based on saved payment method")
     public void iValidateThatBillingAddressBasedOnSavedPaymentMethod() {
-        $(By.xpath("//*[text()='SHARAN NAIR']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Lit']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='San Rafael, CA 94903']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='3342294667']")).should(visible, Duration.ofSeconds(40));
+        sleep(3000);
+        $(By.xpath("//*[text()='QA1 Automation']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Qastreet']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I remove existing payment method on payment estore page")

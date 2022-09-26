@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class EstoreUserAccountPage {
-    private final SelenideElement beddingCollectionsTest = $(By.xpath("//*[text()='Bedding Collections Test']"));
+    private final SelenideElement beddingCollectionsTest = $(By.xpath("//*[text()='Bedding Collections']"));
 
     private final SelenideElement textilesText = $(By.xpath("//*[text()='Textiles']"));
 
@@ -77,7 +77,7 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement addressBookButton = $(By.xpath("//a[@href='/my-account/address-book.jsp']"));
 
-    private final SelenideElement profileIconButton = $(By.xpath("//a[@data-analytics-nav='account-icon']"));
+    private final SelenideElement profileIconButton = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
 
     private final SelenideElement profileIconButtonDiv = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
 

@@ -154,7 +154,7 @@ public class EstoreAddressStepDefs {
     @When("I introduce data for new profile address")
     public void iIntroduceDataForNewProfileAddress() {
         estoreUserAccountPage.getBillingAddressFirstName().setValue("Petr");
-        estoreUserAccountPage.getBillingAddressLastName().setValue("William");
+        estoreUserAccountPage.getBillingAddressLastName().setValue(generalStepDefs.getAlphaNumericString(4));
         estoreUserAccountPage.getBillingAddressStreetAddress().setValue("Pennsylvania Avenue");
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
         estoreUserAccountPage.getBillingAddressCity().setValue("New York");
@@ -177,6 +177,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that added address is not present in the grid")
     public void iVerifyThatAddedAddressIsNotPresentInTheGrid() {
+        sleep(2000);
         $(By.xpath("//*[text()='Pennsylvania Avenue']")).shouldNotBe(visible, Duration.ofSeconds(20));
     }
 
@@ -197,8 +198,9 @@ public class EstoreAddressStepDefs {
         try {
             $(By.xpath("//*[text()='Delete']")).should(visible, Duration.ofSeconds(10));
             $(By.xpath("//*[text()='Delete']")).click();
-            $(By.xpath("(//*[text()='Delete'])[2]")).should(visible, Duration.ofSeconds(10));
-            $(By.xpath("(//*[text()='Delete'])[2]")).click();
+            $(By.xpath("(//*[text()='Delete'])[3]")).should(visible, Duration.ofSeconds(10));
+            $(By.xpath("(//*[text()='Delete'])[3]")).click();
+
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Address is not stored");
         }
@@ -206,6 +208,7 @@ public class EstoreAddressStepDefs {
 
     @When("I continue to estore payment after address page")
     public void iContinueToEstorePaymentAfterAddressPage() {
+        sleep(3000);
         $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Continue to payment']")).click();
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofMinutes(1));

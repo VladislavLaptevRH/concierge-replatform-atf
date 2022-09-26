@@ -19,7 +19,7 @@ public class EstoreWishlistStepDefs {
     @Then("I validate items in wishlist")
     public void iValidateItemsInWishlist() {
         sleep(3000);
-        assertTrue(estoreWishlistPage.getWhistItem().exists());
+        estoreWishlistPage.getWhistItem().should(visible,Duration.ofSeconds(30));
     }
 
 
@@ -38,5 +38,11 @@ public class EstoreWishlistStepDefs {
     public void iValidateMemberPriceInWishlist() {
         sleep(2000);
         assertTrue(estoreWishlistPage.getMemberPrice().exists());
+    }
+
+    @When("I click on view wishlist button")
+    public void iClickOnViewWishlistButton() {
+        estoreItemPage.getViewWishlistButton().should(visible,Duration.ofSeconds(20));
+        estoreItemPage.getViewWishlistButton().click();
     }
 }

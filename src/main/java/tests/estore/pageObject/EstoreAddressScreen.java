@@ -65,6 +65,8 @@ public class EstoreAddressScreen {
 
     private final SelenideElement billingAddressFirstName = $(By.id("billingAddress.firstName"));
 
+    private final SelenideElement addressCard = $(By.id("my-account-address-card"));
+
     private final SelenideElement soldToAddressTitle = $(By.xpath("//*[text()='Sold To Address']"));
 
     private final SelenideElement billingAddressTitle = $(By.xpath("//*[text()='Billing Address']"));

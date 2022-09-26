@@ -4,7 +4,7 @@ Feature: Estore Cart Page
   Scenario: Remove item from cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "61040991 ABRS" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on remove button from estore cart page
@@ -13,9 +13,10 @@ Feature: Estore Cart Page
   Scenario: Apply/Remove employee discount
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "61040991 ABRS" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
+    When I remove promotion from estore cart
     When I apply employee discount for estore
     Then I verify that I'm able to remove estore employee discount
 
@@ -25,6 +26,7 @@ Feature: Estore Cart Page
     When I go to estore item "61040991 ABRS" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
+    When I remove promotion from estore cart
     Then I verify that I'm able to apply promotion code
     When I remove promotion from estore cart
 
@@ -86,7 +88,7 @@ Feature: Estore Cart Page
   Scenario: eStore - Add Surcharge item to Cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I open direct product page on estore
+    When I go to estore item "42100241 GREY" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on zipcode estore button
@@ -96,7 +98,7 @@ Feature: Estore Cart Page
   Scenario: eStore - Gift Box fee in cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I open direct product page on estore
+    When I go to estore item "10073234 CAML" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on zipcode estore button
@@ -106,7 +108,7 @@ Feature: Estore Cart Page
 
   Scenario: eStore - Membership price for US and CAN
     Given I remove all items from estore cart
-    When I open direct product page on estore
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on join the rh members program from footer
@@ -120,7 +122,7 @@ Feature: Estore Cart Page
 
   Scenario: eStore - Membership pop up for guest user
     Given I remove all items from estore cart
-    When I open direct product page on estore
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     When I click on aggree&add estore button
     And I click on view cart estore button
@@ -130,7 +132,7 @@ Feature: Estore Cart Page
   Scenario: eStore - CAN Shipping restriction
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I open direct product page on estore
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     When I click on aggree&add estore button
     And I click on view cart estore button
@@ -142,7 +144,7 @@ Feature: Estore Cart Page
   Scenario: eStore - New York Shipping restriction
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I open direct product page on estore
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     When I click on aggree&add estore button
     And I click on view cart estore button
@@ -183,7 +185,7 @@ Feature: Estore Cart Page
   Scenario: eStore Cart persistence in all brands
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "42100241 GREY" from search field
+    When I go to estore item "17050042WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that the added product is in the cart during brand switching
