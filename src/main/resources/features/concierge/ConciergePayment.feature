@@ -5,8 +5,7 @@ Feature:Concierge Payment
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -15,10 +14,10 @@ Feature:Concierge Payment
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     And I continue to payment
-    When I execute payment for "<paymentmethod>"
+    When I execute payment for "<cardType>"
     And I verify that review screen is displayed
     Examples:
-      | paymentmethod |
+      | cardType |
       | VI            |
       | MC            |
       | AX            |
@@ -28,8 +27,7 @@ Feature:Concierge Payment
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "10035093 LBB" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -46,8 +44,7 @@ Feature:Concierge Payment
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "10035093 LBB" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -62,8 +59,7 @@ Feature:Concierge Payment
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I remove client from header
-    When I go to item "10035093 LBB" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -76,9 +72,9 @@ Feature:Concierge Payment
 
   Scenario: Verify member savings in payment page
     Given I log into Concierge as "associate"
+    When I remove client from header
     When I remove all items from cart
-    When I go to item "10035093 LBB" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -92,9 +88,9 @@ Feature:Concierge Payment
 
   Scenario: Verify trade savings in payment page
     Given I log into Concierge as "associate"
+    When I remove client from header
     When I remove all items from cart
-    When I go to item "10035093 LBB" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -109,8 +105,7 @@ Feature:Concierge Payment
   Scenario: Edit Address
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10035093 LBB" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification

@@ -4,8 +4,7 @@ Feature:Concierge PDP
   Scenario:Monogram
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "MONOGRAMMED 802-GRAM TURKISH TOWEL" from search field
-    When I click on first item from grid
+    When I open product page with productId "prod19500002"
     When I click on add monogram checkbox from pdp
     When I choose monogram properties for pdp
     Then I verify that monogram was added for pdp

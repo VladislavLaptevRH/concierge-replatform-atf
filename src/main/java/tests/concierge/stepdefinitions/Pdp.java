@@ -52,7 +52,8 @@ public class Pdp {
 
     @When("I click on view in stock items")
     public void iClickOnViewInStockItems() {
-        $(By.xpath("//*[text()='In-Stock']")).shouldHave(text("In-Stock"), Duration.ofSeconds(20));
+        sleep(2000);
+       // $(By.xpath("//*[text()='In-Stock']")).shouldHave(text("In-Stock"), Duration.ofSeconds(20));
         $(By.xpath("//*[text()='In-Stock']")).scrollIntoView(true);
         $(By.xpath("//*[text()='In-Stock']")).click();
     }
@@ -65,7 +66,8 @@ public class Pdp {
 
     @When("I click on view sale items")
     public void iClickOnViewSaleItems() {
-        $(By.xpath("//*[text()='Sale']")).shouldHave(text("Sale"), Duration.ofSeconds(20));
+        sleep(2000);
+        //$(By.xpath("//*[text()='Sale']")).shouldHave(text("Sale"), Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Sale']")).scrollIntoView(true);
         $(By.xpath("//*[text()='Sale']")).click();
     }
@@ -82,7 +84,7 @@ public class Pdp {
         $(By.xpath("//ul[@class='MuiList-root']/li[@class='MuiListItem-root'][13]")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//ul[@class='MuiList-root']/li[@class='MuiListItem-root'][13]")).click();
     }
-
+    //div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']/div[6]
     @Then("I verify that custom rugs are displayed")
     public void iVerifyThatCustomRugsAreDisplayed() {
         $(By.xpath("//*[text()=' Custom Braided Wool Rug']")).should(visible, Duration.ofSeconds(25));

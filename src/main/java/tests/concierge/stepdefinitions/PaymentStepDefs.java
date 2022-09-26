@@ -76,19 +76,19 @@ public class PaymentStepDefs {
     }
 
     @When("I execute payment for {string}")
-    public void iExecutePaymentFor(String paymentMethod) {
+    public void iExecutePaymentFor(String cardType) {
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
-        if (paymentMethod.equals("VI")) {
+        if (cardType.equals("VI")) {
             generalStepDefs.payWith("VI", "4678 4753 3015 7543", "737", "0330");
         }
-        if (paymentMethod.equals("MC")) {
+        if (cardType.equals("MC")) {
             generalStepDefs.payWith("MC", "2222 4000 1000 0008", "737", "0330");
         }
-        if (paymentMethod.equals("AX")) {
+        if (cardType.equals("AX")) {
             generalStepDefs.payWith("AX", "3411 3411 3411 347", "6765", "0225");
 
         }
-        if (paymentMethod.equals("DI")) {
+        if (cardType.equals("DI")) {
             generalStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
         }
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
@@ -110,9 +110,9 @@ public class PaymentStepDefs {
                 "BILLING ADDRESS\n" +
                         "QA1 Automation\n" +
                         "AutomationCompany\n" +
-                        "Qastreet\n" +
+                        "7677 N 16th St\n" +
                         "QaApartment\n" +
-                        "Schenectady, NY 12345\n" +
+                        "Phoenix, AZ 85020-4434\n" +
                         "US\n" +
                         "124131231\n" +
                         "automationnonmember@mailinator.com\n" +
@@ -122,9 +122,9 @@ public class PaymentStepDefs {
                 "BILLING ADDRESS\n" +
                         "QA1 Automation\n" +
                         "AutomationCompany\n" +
-                        "Qastreet\n" +
+                        "7677 N 16th St\n" +
                         "QaApartment\n" +
-                        "Schenectady, NY 12345\n" +
+                        "Phoenix, AZ 85020-4434\n" +
                         "US\n" +
                         "124131231\n" +
                         "automationnonmember@mailinator.com\n" +
@@ -134,11 +134,11 @@ public class PaymentStepDefs {
     @Then("I verify subtotal, shipping fee, taxes based on postal code")
     public void iVerifySubtotalShippingFeeTaxesBasedOnPostalCode() {
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='Standard Delivery Shipping']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='Estimated Sales Tax for 12345']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$20.00']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$9.00']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='US$2.32']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='Estimated Sales Tax for 85020-4434']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,585.00']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='US$308.31']")).should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that member savings in payment page")
