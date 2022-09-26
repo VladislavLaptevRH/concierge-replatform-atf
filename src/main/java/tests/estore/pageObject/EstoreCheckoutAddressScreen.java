@@ -22,7 +22,7 @@ public class EstoreCheckoutAddressScreen {
 
     private final SelenideElement companyNameField = $(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input"));
 
-    private final SelenideElement streetAddressField = $(By.xpath("//input[@id='shippingAddress.addressLine1']"));
+    private final SelenideElement streetAddressField = $(By.xpath("//input[@data-testid='shippingAddress.addressLine1']"));
 
     private final SelenideElement aptFloorSuiteField = $(By.xpath("//input[@id='shippingAddress.addressLine2']"));
 

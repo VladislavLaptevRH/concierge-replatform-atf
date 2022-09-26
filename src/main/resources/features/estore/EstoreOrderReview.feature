@@ -10,6 +10,7 @@ Feature:Estore Order review
     And I click on view cart estore button
     When I click on estore checkout button
     When I click on estore no thanks button
+    When I click on continue with original address estore button
     When I continue to estore payment after address page
     When I click on add to cart estore button
     When I remove payment method which was used earlier

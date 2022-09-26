@@ -8,15 +8,11 @@ import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
-import tests.estore.pageObject.EstoreAddressScreen;
-import tests.estore.pageObject.EstoreCheckoutAddressScreen;
-import tests.estore.pageObject.EstorePaymentPage;
-import tests.estore.pageObject.EstoreUserAccountPage;
+import tests.estore.pageObject.*;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static tests.estore.stepdefinitions.EstoreUserAccountPageStepDefs.firstName;
 
@@ -26,6 +22,7 @@ public class EstoreAddressStepDefs {
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
+    EstoreItemPage estoreItemPage = new EstoreItemPage();
 
     @When("I click on edit estore billing address button")
     public void iClickOnEditEstoreBillingAddressButton() {
@@ -112,6 +109,7 @@ public class EstoreAddressStepDefs {
         estoreAddressScreen.getShippingAddressfirstName().setValue("Safire");
         estoreAddressScreen.getShippingAddresslastName().setValue("William");
         estoreAddressScreen.getShippingAddressStreetAddress().setValue("4224 Simpson Street");
+        estoreAddressScreen.getShippingAddressAptFloor().click();
         estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
         estoreAddressScreen.getShippingAddressCity().setValue("Rock Island");
 
@@ -121,6 +119,22 @@ public class EstoreAddressStepDefs {
         estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
         estoreAddressScreen.getShippingAddressEmail().setValue("safirewilliam@gmail.com");
         estoreAddressScreen.getShippingAddressConfirmEmail().setValue("safirewilliam@gmail.com");
+    }
+
+    @When("I fill estore shipping address")
+    public void iFillEstoreShippingAndShippingAddress() {
+        sleep(2000);
+        estoreAddressScreen.getBillingAddressFirstName().should(visible, Duration.ofSeconds(40));
+        estoreAddressScreen.getBillingAddressFirstName().setValue("Safire");
+        estoreAddressScreen.getBillingAddressLastName().setValue("William");
+        estoreAddressScreen.getBillingAddressStreetAddress().setValue("4224 Simpson Street");
+        estoreAddressScreen.getBillingAddressAptFloorSuite().setValue("20");
+        estoreAddressScreen.getBillingAddressCity().setValue("Rock Island");
+
+        Select billingAddressState = new Select(estoreAddressScreen.getBillingAddressState());
+        billingAddressState.selectByValue("IL");
+        estoreAddressScreen.getBillingAddressPostlaCode().setValue("61201");
+        estoreAddressScreen.getBillingAddressPhone().setValue("309-793-1846");
     }
 
     @Then("I verify add a new shipping address option is present")
@@ -218,5 +232,21 @@ public class EstoreAddressStepDefs {
     @Then("I verify that added address displayed as shipping address")
     public void iVerifyThatAddedAddressDisplayedAsShippingAddress() {
         $(By.xpath("//*[text()='Pennsylvania Avenue']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I click on continue with original address estore button")
+    public void iClickOnContinueWithOriginalAddressEstoreButton() {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        estoreItemPage.getAddToCartButton().scrollIntoView(true);
+        estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
+        estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE WITH ORIGINAL ADDRESS"), Duration.ofSeconds(50));
+        estoreItemPage.getAddToCartButton().click();
+    }
+
+    @When("I click on continue to payment estore button")
+    public void iClickOnContinueToPayment() {
+        sleep(3000);
+        $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='Continue to payment']")).click();
     }
 }

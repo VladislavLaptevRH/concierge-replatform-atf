@@ -13,7 +13,7 @@ public class EstoreAddressScreen {
 
     private final SelenideElement shippingAddresslastName = $(By.id("shippingAddress.lastName"));
 
-    private final SelenideElement shippingAddressStreetAddress = $(By.xpath("//input[@id='shippingAddress.addressLine1']"));
+    private final SelenideElement shippingAddressStreetAddress = $(By.xpath("//input[@data-testid='shippingAddress.addressLine1']"));
 
     private final SelenideElement shippingAddressAptFloor = $(By.id("shippingAddress.addressLine2"));
 
@@ -21,9 +21,9 @@ public class EstoreAddressScreen {
 
     private final SelenideElement shippingAddressPhone = $(By.id("shippingAddress.phone"));
 
-    private final SelenideElement shippingAddressEmail = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[9]"));
+    private final SelenideElement shippingAddressEmail = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[8]"));
 
-    private final SelenideElement shippingAddressConfirmEmail = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[10]"));
+    private final SelenideElement shippingAddressConfirmEmail = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[9]"));
 
     private final SelenideElement submitZipCode = $(By.xpath("(//button[@type='submit'])[3]"));
 
@@ -64,6 +64,20 @@ public class EstoreAddressScreen {
     private final SelenideElement okButton = $(By.xpath("//*[text()='OK']"));
 
     private final SelenideElement billingAddressFirstName = $(By.id("billingAddress.firstName"));
+
+    private final SelenideElement billingAddressLastName = $(By.id("billingAddress.lastName"));
+
+    private final SelenideElement billingAddressStreetAddress = $(By.id("billingAddress.addressLine1"));
+
+    private final SelenideElement billingAddressAptFloorSuite = $(By.id("billingAddress.addressLine2"));
+
+    private final SelenideElement billingAddressCity = $(By.id("billingAddress.city"));
+
+    private final SelenideElement billingAddressState = $(By.id("billingAddress.state"));
+
+    private final SelenideElement billingAddressPhone = $(By.id("billingAddress.phone"));
+
+    private final SelenideElement billingAddressPostlaCode = $(By.id("billingAddress.postalCode"));
 
     private final SelenideElement addressCard = $(By.id("my-account-address-card"));
 

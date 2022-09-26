@@ -45,7 +45,7 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement billingAddressLastName = $(By.xpath("//input[@id='lastName']"));
 
-    private final SelenideElement billingAddressStreetAddress = $(By.xpath("//input[@id='addressLine1']"));
+    private final SelenideElement billingAddressStreetAddress = $(By.xpath("//input[@data-testid='addressLine1']"));
 
     private final SelenideElement billingAddressAptFloor = $(By.xpath("//input[@id='addressLine2']"));
 

@@ -657,6 +657,7 @@ public class EstoreE2EStepDefs {
         sleep(5000);
         try {
             if (estorePaymentPage.getContinueToCheckout().isDisplayed()) {
+                estorePaymentPage.getContinueToCheckout().scrollIntoView(true);
                 estorePaymentPage.getContinueToCheckout().should(visible, Duration.ofSeconds(25));
                 estorePaymentPage.getContinueToCheckout().click();
             }

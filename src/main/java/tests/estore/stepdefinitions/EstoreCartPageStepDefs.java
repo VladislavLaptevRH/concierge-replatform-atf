@@ -313,13 +313,10 @@ public class EstoreCartPageStepDefs {
         if (arg0.equals("nonmember user")) {
             sleep(3000);
             $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible, Duration.ofSeconds(40));
-            $(By.xpath("//*[contains(text(),'Join the RH Members Program')]")).should(visible, Duration.ofSeconds(40));
             estoreCartPage.getJoinNowCartEstoreButton().should(visible, Duration.ofSeconds(40));
         }
         if (arg0.equals("member user")) {
             sleep(3000);
-            $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).shouldNot(visible, Duration.ofSeconds(20));
-            $(By.xpath("//*[contains(text(),'on this order with your RH Membership.')]")).shouldNot(visible, Duration.ofSeconds(20));
             estoreCartPage.getJoinNowCartEstoreButton().shouldNot(visible, Duration.ofSeconds(20));
         }
 

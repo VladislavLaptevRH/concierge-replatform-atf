@@ -13,7 +13,8 @@ Feature: Estore Address Page
     When I click on continue as guest estore button
     When I fill estore billing address
     When I click on same as estore shipping address checkbox
-    When I continue to estore payment after address page
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
     Then I validate "billing address" which we have entered earlier
     When I pay with RHCC for estore item
     Then I validate "billing address" which we have entered earlier
@@ -59,7 +60,8 @@ Feature: Estore Address Page
     When I click on add address button
     When I introduce data for new profile address
     When I click on save address button
-    Then I verify that created address popup is displayed
+    When I click on continue with original address estore button
+#    Then I verify that created address popup is displayed
     When I click on estore continue button
     Then I verify that added address present in the grid
     When I click on delete estore button
