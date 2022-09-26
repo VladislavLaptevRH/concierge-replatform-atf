@@ -372,43 +372,43 @@ Feature:Concierge Cart Page
     When I choose client who is a "trade"
     Then I verify "trade" savings for a "trade" user
 
-  Scenario: Verify CAN shipping restriction
-    Given I log into Concierge as "associate"
-    When I remove all items from cart
-    When I remove client from header
-    When I open product page with productId "prod25150082"
-    When I select debth option
-    When I select fabric option
-    When I select length option
-    When I select color option
-    When I click on add to cart button
-    When I click on aggree&add button
-    When I click on view cart button
-    When I choose order classification
-    When I click on checkout button
-    When I click on no thanks button
-    When I choose client who is a "nonmember"
-    When I fill all fields from address with "CA" zip code
-    Then I verify that restrictions pop up is displayed
+#  Scenario: Verify CAN shipping restriction
+#    Given I log into Concierge as "associate"
+#    When I remove all items from cart
+#    When I remove client from header
+#    When I open product page with productId "prod25150082"
+#    When I select debth option
+#    When I select fabric option
+#    When I select length option
+#    When I select color option
+#    When I click on add to cart button
+#    When I click on aggree&add button
+#    When I click on view cart button
+#    When I choose order classification
+#    When I click on checkout button
+#    When I click on no thanks button
+#    When I choose client who is a "nonmember"
+#    When I fill all fields from address with "CA" zip code
+#    Then I verify that restrictions pop up is displayed
 
-  Scenario: Verify NY shipping restriction
-    Given I log into Concierge as "associate"
-    When I remove all items from cart
-    When I remove client from header
-    When I open product page with productId "prod25150082"
-    When I select debth option
-    When I select fabric option
-    When I select length option
-    When I select color option
-    When I click on add to cart button
-    When I click on aggree&add button
-    When I click on view cart button
-    When I choose order classification
-    When I click on checkout button
-    When I click on no thanks button
-    When I choose client who is a "nonmember"
-    When I fill all fields from address with "NY" zip code
-    Then I verify that restrictions pop up is displayed
+#  Scenario: Verify NY shipping restriction
+#    Given I log into Concierge as "associate"
+#    When I remove all items from cart
+#    When I remove client from header
+#    When I open product page with productId "prod25150082"
+#    When I select debth option
+#    When I select fabric option
+#    When I select length option
+#    When I select color option
+#    When I click on add to cart button
+#    When I click on aggree&add button
+#    When I click on view cart button
+#    When I choose order classification
+#    When I click on checkout button
+#    When I click on no thanks button
+#    When I choose client who is a "nonmember"
+#    When I fill all fields from address with "NY" zip code
+#    Then I verify that restrictions pop up is displayed
 
   Scenario: Verify Member savings for a member user in cart - From PDP and Project
     Given I log into Concierge as "associate"

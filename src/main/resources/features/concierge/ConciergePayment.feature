@@ -72,6 +72,7 @@ Feature:Concierge Payment
 
   Scenario: Verify member savings in payment page
     Given I log into Concierge as "associate"
+    When I remove client from header
     When I remove all items from cart
     When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
@@ -87,6 +88,7 @@ Feature:Concierge Payment
 
   Scenario: Verify trade savings in payment page
     Given I log into Concierge as "associate"
+    When I remove client from header
     When I remove all items from cart
     When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button

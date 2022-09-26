@@ -105,7 +105,7 @@ public class AbstractStepDefs {
     public void iClickOnContinueToPaymentButton() {
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(5));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
-        selectPayment.selectByIndex(3);
+        selectPayment.selectByValue("POS");
 
         switchTo().frame($(By.cssSelector("iframe[title='Iframe for secured card data input field']")).should(visible, Duration.ofMinutes(1)));
         paymentScreen.getCardNumberField().setValue("4678475330157543");
@@ -119,7 +119,6 @@ public class AbstractStepDefs {
         switchTo().defaultContent();
 
         paymentScreen.getContinueToReview().click();
-
     }
 
     @And("I verify that review screen is displayed")
