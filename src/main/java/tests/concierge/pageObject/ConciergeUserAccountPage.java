@@ -81,7 +81,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement newPortBeachGallery = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item']/span"));
 
-    private final SelenideElement gallerySelectButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-item'][1]"));
+    private final SelenideElement gallerySelectButton = $(By.xpath("//select[@id='gallery-select']/option"));
 
     private final SelenideElement paloAltpGallery = $(By.xpath("//select[@id='gallery-select']/option[2]"));
 

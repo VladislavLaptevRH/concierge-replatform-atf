@@ -4,8 +4,7 @@ Feature:Concierge Order review
   Scenario: Edit Shipping and Billing Address
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10106900 WBWT" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -25,8 +24,7 @@ Feature:Concierge Order review
   Scenario: Edit payment
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -42,8 +40,7 @@ Feature:Concierge Order review
   Scenario: Verify the payment details and Order estimate summary
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -82,8 +79,7 @@ Feature:Concierge Order review
   Scenario: Verify all the line items on the order review page
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
