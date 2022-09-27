@@ -597,7 +597,7 @@ public class ConciergeE2EStepDefs {
     @And("I fill all fields for sold to address")
     public void iFillAllFieldsForSoldToAddress() {
         generalStepDefs.fillAddressFields();
-        generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
+        //generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
         sleep(3000);

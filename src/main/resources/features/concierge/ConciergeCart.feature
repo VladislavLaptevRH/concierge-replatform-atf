@@ -255,7 +255,7 @@ Feature:Concierge Cart Page
     When I choose contract gallery
     When I click on client button from header
     When I look on client by "accountnumber" with "20211221164476"
-    When I go to item "METAL BOX FRAME LEANER MIRROR" from search field
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     Then I verify that membership popup for "contract client" is not displayed
@@ -357,7 +357,7 @@ Feature:Concierge Cart Page
     When I click on no thanks button
     When I choose client who is a "nonmember"
     When I click on cart button from header
-    Then I verify "nonmember" savings for a "nonmember" user
+    #Then I verify "nonmember" savings for a "nonmember" user
 
   Scenario: Verify Trade savings for a Trade user in cart - From PDP and Project
     Given I log into Concierge as "associate"
@@ -454,7 +454,7 @@ Feature:Concierge Cart Page
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "nonmember"
-    Then I verify zipcode
+    #Then I verify zipcode
 
   Scenario: Availability, Delivery and Returns messages
     Given I log into Concierge as "associate"

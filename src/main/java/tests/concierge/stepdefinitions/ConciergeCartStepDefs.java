@@ -263,8 +263,8 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that total price from cart and from payment page is the same")
     public void iVerifyThatTotalPriceFromCartAndFromPaymentPageIsTheSame() {
-        //conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$549.00']")).should(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$1,075.50']")).should(visible, Duration.ofSeconds(15));
     }
 
     @When("I choose POP for payment method")
@@ -560,8 +560,8 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that availability, Delivery and Returns messaging in cart")
     public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingInCart() {
-        $(By.xpath("//*[contains(text(),'This item is in stock and will be ready for delivery between ')]")).should(visible, Duration.ofSeconds(10));
-        $(By.xpath("//*[contains(text(),'This item is final sale and cannot be returned.')]")).should(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[contains(text(),'This item will be ready for delivery between ')]")).should(visible, Duration.ofSeconds(10));
+        $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).should(visible, Duration.ofMinutes(1));
     }
 
     @Then("I verify alternate addresses for client with multipel addresses")

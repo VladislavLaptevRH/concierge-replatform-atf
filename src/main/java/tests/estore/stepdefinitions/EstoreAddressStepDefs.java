@@ -105,6 +105,22 @@ public class EstoreAddressStepDefs {
     @When("I fill estore billing address")
     public void iFillEstoreBillingAndShippingAddress() {
         sleep(2000);
+        estoreAddressScreen.getBillingAddressFirstName().should(visible, Duration.ofSeconds(40));
+        estoreAddressScreen.getBillingAddressFirstName().setValue("Safire");
+        estoreAddressScreen.getBillingAddressLastName().setValue("William");
+        estoreAddressScreen.getBillingAddressStreetAddress().setValue("4224 Simpson Street");
+        estoreAddressScreen.getBillingAddressAptFloorSuite().setValue("20");
+        estoreAddressScreen.getBillingAddressCity().setValue("Rock Island");
+
+        Select billingAddressState = new Select(estoreAddressScreen.getBillingAddressState());
+        billingAddressState.selectByValue("IL");
+        estoreAddressScreen.getBillingAddressPostlaCode().setValue("61201");
+        estoreAddressScreen.getBillingAddressPhone().setValue("309-793-1846");
+    }
+
+    @When("I fill estore shipping address")
+    public void iFillEstoreShippingAndShippingAddress() {
+        sleep(2000);
         estoreAddressScreen.getShippingAddressfirstName().should(visible, Duration.ofSeconds(40));
         estoreAddressScreen.getShippingAddressfirstName().setValue("Safire");
         estoreAddressScreen.getShippingAddresslastName().setValue("William");
@@ -117,24 +133,6 @@ public class EstoreAddressStepDefs {
         shippingAddressState.selectByValue("IL");
         estoreAddressScreen.getPostalShippingCode().setValue("61201");
         estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
-        estoreAddressScreen.getShippingAddressEmail().setValue("safirewilliam@gmail.com");
-        estoreAddressScreen.getShippingAddressConfirmEmail().setValue("safirewilliam@gmail.com");
-    }
-
-    @When("I fill estore shipping address")
-    public void iFillEstoreShippingAndShippingAddress() {
-        sleep(2000);
-        estoreAddressScreen.getBillingAddressFirstName().should(visible, Duration.ofSeconds(40));
-        estoreAddressScreen.getBillingAddressFirstName().setValue("Safire");
-        estoreAddressScreen.getBillingAddressLastName().setValue("William");
-        estoreAddressScreen.getBillingAddressStreetAddress().setValue("4224 Simpson Street");
-        estoreAddressScreen.getBillingAddressAptFloorSuite().setValue("20");
-        estoreAddressScreen.getBillingAddressCity().setValue("Rock Island");
-
-        Select billingAddressState = new Select(estoreAddressScreen.getBillingAddressState());
-        billingAddressState.selectByValue("IL");
-        estoreAddressScreen.getBillingAddressPostlaCode().setValue("61201");
-        estoreAddressScreen.getBillingAddressPhone().setValue("309-793-1846");
     }
 
     @Then("I verify add a new shipping address option is present")

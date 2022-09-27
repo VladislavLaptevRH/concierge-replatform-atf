@@ -4,20 +4,21 @@ Feature:Estore Payment
   Scenario: eStore Split Payment
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042WHT" from search field
-    When I open direct product page on estore
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
-    When I continue to estore payment after address page
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
     Then I verify that I'm able to execute estore split payment
 
   Scenario: eStore Saved Cards
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -32,7 +33,7 @@ Feature:Estore Payment
   Scenario: eStore Edit Payment
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -44,7 +45,7 @@ Feature:Estore Payment
   Scenario: eStore Edit Address
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -59,7 +60,7 @@ Feature:Estore Payment
   Scenario: eStore unavailability of RHCC for CAN address
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -72,7 +73,7 @@ Feature:Estore Payment
   Scenario: eStore RHCC
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -87,7 +88,7 @@ Feature:Estore Payment
   Scenario: eStore Update address (Non impacting change) after making payment
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -104,7 +105,7 @@ Feature:Estore Payment
   Scenario: eStore Update address (Impacting change) after making payment
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -121,7 +122,7 @@ Feature:Estore Payment
   Scenario: eStore Order total increased after making payment
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -147,7 +148,7 @@ Feature:Estore Payment
   Scenario: eStore Order total decreased after making payment
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I update item quantity in estore pdp
     When I click on add to cart estore button
     And I click on view cart estore button
@@ -170,7 +171,7 @@ Feature:Estore Payment
   Scenario: eStore Billing address based on saved payment method
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -193,7 +194,7 @@ Feature:Estore Payment
   Scenario: eStore unavailability of Discover for CAN address
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -206,7 +207,7 @@ Feature:Estore Payment
   Scenario: eStore unavailability of Saved Discover for CAN shipping address
     Given I log into eStore as "savedRhCcDiscover"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -219,7 +220,7 @@ Feature:Estore Payment
   Scenario: eStore unavailability of Saved RHCC for CAN shipping address
     Given I log into eStore as "savedRhCc"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -232,7 +233,7 @@ Feature:Estore Payment
   Scenario: eStore Update address (Change Country) after making payment
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -256,7 +257,7 @@ Feature:Estore Payment
   Scenario: eStore masked CC
     Given I log into eStore as "mastercard"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -271,7 +272,7 @@ Feature:Estore Payment
   Scenario: eStore Saved credit cards
     Given I log into eStore as "userWithSavedMasterCardVisa"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open estore product page with productId "prod1617188" and skuId "63130001"
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
