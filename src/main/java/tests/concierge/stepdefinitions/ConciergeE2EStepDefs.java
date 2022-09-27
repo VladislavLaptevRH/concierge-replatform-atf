@@ -157,7 +157,6 @@ public class ConciergeE2EStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Continue from popup is not displayed");
         }
-
     }
 
 

@@ -13,7 +13,6 @@ Feature:Concierge GiftCardEnquiry
     When I remove client from header
     When I click on gift card enquiry
     When I enter gift card information
-    Then I verify transaction details
     When I click on purchase gift card
     Then I verify gift card PDP page is loaded
     When I select options
@@ -27,8 +26,8 @@ Feature:Concierge GiftCardEnquiry
     When I fill all fields from address screen
     When I continue to payment
     When I choose POP for payment method
-    And I verify that review screen is displayed
-    When I click on a place order button
-    Then I verify that confirmation order screen is displayed
+#    And I verify that review screen is displayed
+#    When I click on a place order button
+#    Then I verify that confirmation order screen is displayed
 
 
