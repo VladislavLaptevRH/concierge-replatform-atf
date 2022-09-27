@@ -22,6 +22,7 @@ import java.util.Random;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.awaitility.Awaitility.await;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class EstoreE2EStepDefs {
@@ -672,6 +673,20 @@ public class EstoreE2EStepDefs {
     public void iOpenDirectProductPageOnEstore() {
         String url = "https://stg2.rhnonprod.com/catalog/product/product.jsp?productId=prod690088&fullSkuId=63130001+NATL";
         open(url);
+        WebDriverRunner.getWebDriver().navigate().refresh();
+    }
+
+    @When("I open estore product page with productId {string} and skuId {string}")
+    public void iOpenEstoreProductPageWithProductIdAndSkuId(String productId, String skuId) {
+        String URL = Hooks.properties.get(Hooks.eStoreURL) + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+NATL";
+        open(URL);
+
+        generalStepDefs.waitForJSandJQueryToLoad();
+        estoreItemPage.getAddToCartButton().scrollIntoView(true);
+        assertEquals(estoreItemPage.getAddToCartButton().isEnabled(), true);
+        if (!estoreItemPage.getAddToCartButton().isEnabled()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
     }
 }
 

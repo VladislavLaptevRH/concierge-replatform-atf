@@ -37,6 +37,7 @@ public class Hooks {
     public static String leaderLogin;
     public static String currentUrl;
     public static String conciergeURL = "conciergestg2url";
+    public static String eStoreURL = "eStorestg2Url";
 
     private static boolean setUpIsDone = false;
     private static final Logger Log = LoggerFactory.getLogger(FilterStepDefs.class);
@@ -73,7 +74,7 @@ public class Hooks {
     public void initWebDrivereStore() {
         ConfigFileReader();
         setupChromeArguments();
-        setUPWebDriver((String) properties.get("eStorestg2Url"));
+        setUPWebDriver((String) properties.get(eStoreURL));
     }
 
 
