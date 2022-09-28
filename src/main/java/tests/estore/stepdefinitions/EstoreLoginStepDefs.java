@@ -51,6 +51,10 @@ public class EstoreLoginStepDefs {
                 estoreLoginPage.getUsernameField().setValue("new02@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Qwerty@123");
             }
+            if (accountRole.equals("addnewpayment")) {
+                estoreLoginPage.getUsernameField().setValue("addpaymentmethod@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Test12345");
+            }
             if (accountRole.equals("userCAAddress")) {
                 estoreLoginPage.getUsernameField().setValue("automationcastate@mailinator.com");
                 estoreLoginPage.getPasswordField().setValue("Qwerty@123");

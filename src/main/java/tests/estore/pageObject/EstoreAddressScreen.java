@@ -9,6 +9,8 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class EstoreAddressScreen {
 
+    private final SelenideElement shippingAddressCountry = $(By.id("shippingAddress.country"));
+
     private final SelenideElement shippingAddressfirstName = $(By.id("shippingAddress.firstName"));
 
     private final SelenideElement shippingAddresslastName = $(By.id("shippingAddress.lastName"));

@@ -28,7 +28,5 @@ Feature: Estore Wishlist
     When I click on add to wishlist button from cart
     When I click on view wishlist button
     Then I validate items in wishlist
-    Then I validate cart is empty
-
 
 

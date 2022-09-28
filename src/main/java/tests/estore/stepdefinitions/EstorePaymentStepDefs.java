@@ -1,6 +1,7 @@
 package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.an.E;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -30,9 +31,14 @@ public class EstorePaymentStepDefs {
     public void iVerifyThatIMAbleToExecuteEstoreSplitPayment() {
         try {
             estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
+            sleep(3000);
             $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
             $(By.xpath("//input[@type='text']")).setValue("10");
             estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+
+            sleep(3000);
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            sleep(3000);
 
             estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
             estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
@@ -44,15 +50,6 @@ public class EstorePaymentStepDefs {
 
     @When("I choose saved card {string} from payment method dropdown")
     public void iChooseSaveCardFromPaymentMethodDropdown(String cardType) {
-        try {
-            sleep(3000);
-            if (estoreCartPage.getRemoveButton().isDisplayed()) {
-                estoreCartPage.getRemoveButton().click();
-            }
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Remove payment button is not displayed");
-        }
-
         estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         if (cardType.equals("VI")) {
@@ -79,12 +76,16 @@ public class EstorePaymentStepDefs {
 
     @Then("I verify that I'm able to edit payment")
     public void iVerifyThatIMAbleToEditPayment() {
+        sleep(3000);
         estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
         estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+        sleep(4000);
         $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).click();
+        sleep(4000);
         estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(40));
         estoreCartPage.getRemoveButton().click();
+        sleep(4000);
         estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
         estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
     }
@@ -96,6 +97,7 @@ public class EstorePaymentStepDefs {
         estoreAddressScreen.getEditShippinggAddress().click();
         $(By.xpath("(//*[text()='Edit'])[3]")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("(//*[text()='Edit'])[3]")).click();
+        estoreAddressScreen.getBillingAddressFirstName().click();
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstName());
         estoreAddressScreen.getBillingAddressFirstName().setValue("NewBillingAddress");
     }
@@ -106,7 +108,7 @@ public class EstorePaymentStepDefs {
         estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(5));
         Select paymentMethod = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         paymentMethod.selectByValue("RH");
-        estorePaymentPage.getRhCardNumberField().setValue("6006101002514930");
+        estorePaymentPage.getRhCardNumberField().setValue("6006101002514880");
         Select paymentPlan = new Select(estorePaymentPage.getSelectPaymentPlan());
         paymentPlan.selectByIndex(1);
     }
@@ -118,10 +120,15 @@ public class EstorePaymentStepDefs {
 
     @When("I remove added before cart")
     public void iRemoveAddedBeforeCart() {
-        estoreUserAccountPage.getDeleteButton().shouldHave(Condition.text("Delete"), Duration.ofSeconds(20));
-        estoreUserAccountPage.getDeleteButton().click();
-        estoreUserAccountPage.getConfirmDeleteButton().shouldHave(text("DELETE"), Duration.ofSeconds(20));
-        estoreUserAccountPage.getConfirmDeleteButton().click();
+        try {
+            estoreUserAccountPage.getDeleteButton().shouldHave(Condition.text("Delete"), Duration.ofSeconds(20));
+            estoreUserAccountPage.getDeleteButton().click();
+            estoreUserAccountPage.getConfirmDeleteButton().shouldHave(text("DELETE"), Duration.ofSeconds(20));
+            estoreUserAccountPage.getConfirmDeleteButton().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Agree&add to cart button is not displayed");
+        }
+
     }
 
     @Then("I verify unavailability of Discover for CAN address")
@@ -209,8 +216,8 @@ public class EstorePaymentStepDefs {
     @Then("I validate that billing address based on saved payment method")
     public void iValidateThatBillingAddressBasedOnSavedPaymentMethod() {
         sleep(3000);
-        $(By.xpath("//*[text()='QA1 Automation']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Qastreet']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Automation Visa']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='TEST2']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I remove existing payment method on payment estore page")
@@ -241,5 +248,32 @@ public class EstorePaymentStepDefs {
             System.out.println("There is no payment method that was used before");
         }
 
+    }
+
+    @When("I remove split payment which was used earlier")
+    public void iRemovePaymentMethodWasUsedEarlier() {
+        try {
+            sleep(8000);
+            while (estoreCartPage.getRemoveButton().isDisplayed()) {
+                estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(30));
+                estoreCartPage.getRemoveButton().click();
+                sleep(4000);
+            }
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("There is no payment method that was used before");
+        }
+
+    }
+
+    @When("I execute payment with credit card on estore")
+    public void iExecutePaymentWithCreditCardOnEstore() {
+        estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
+        estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+
+    }
+
+    @Then("I verify that new payment was added")
+    public void iVerifyThatNewPaymentWasAdded() {
+        $(By.xpath("//*[contains(text(),'Visa')]")).should(visible, Duration.ofSeconds(20));
     }
 }

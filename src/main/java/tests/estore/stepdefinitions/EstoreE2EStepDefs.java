@@ -680,13 +680,16 @@ public class EstoreE2EStepDefs {
     public void iOpenEstoreProductPageWithProductIdAndSkuId(String productId, String skuId) {
         String URL = Hooks.properties.get(Hooks.eStoreURL) + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+NATL";
         open(URL);
-
-        generalStepDefs.waitForJSandJQueryToLoad();
-        estoreItemPage.getAddToCartButton().scrollIntoView(true);
-        assertEquals(estoreItemPage.getAddToCartButton().isEnabled(), true);
-        if (!estoreItemPage.getAddToCartButton().isEnabled()) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
+        sleep(5000);
+        if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
+            open(URL);
         }
+    }
+
+    @When("I refresh current estore page")
+    public void iRefreshCurrentEstorePage() {
+        sleep(3000);
+        WebDriverRunner.getWebDriver().navigate().refresh();
     }
 }
 

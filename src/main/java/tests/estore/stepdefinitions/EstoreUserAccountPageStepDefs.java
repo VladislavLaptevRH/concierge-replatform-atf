@@ -65,7 +65,12 @@ public class EstoreUserAccountPageStepDefs {
         selectState.selectByValue("AZ");
         estoreUserAccountPage.getBillingAddressPostalCode().setValue("12345");
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
+
+        $(By.xpath("//*[text()='Street Address Information, Martin Luther King Junior Boulevard, Chapel Hill, NC, USA']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Street Address Information, Martin Luther King Junior Boulevard, Chapel Hill, NC, USA']")).click();
+
         estoreUserAccountPage.getSaveCardButton().click();
+        estorePaymentPage.getContinueToCheckout().should(visible, Duration.ofSeconds(40));
         estorePaymentPage.getContinueToCheckout().click();
 
     }

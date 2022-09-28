@@ -62,7 +62,6 @@ Feature: Estore Address Page
     When I click on save address button
     When I click on continue with original address estore button
 #    Then I verify that created address popup is displayed
-    When I click on estore continue button
     Then I verify that added address present in the grid
     When I click on delete estore button
     When I click on delete address button from appeared pop up

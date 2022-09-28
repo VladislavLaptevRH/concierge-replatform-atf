@@ -14,6 +14,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static org.testng.AssertJUnit.assertEquals;
 import static tests.estore.stepdefinitions.EstoreUserAccountPageStepDefs.firstName;
 
 public class EstoreAddressStepDefs {
@@ -45,9 +46,9 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify unavailability for RHCC")
     public void iVerifyUnavailabilityForRHCC() {
-        estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
-        estorePaymentPage.getChoosePaymentMethodBtn().click();
-        estorePaymentPage.getRhCreditCardPaymentOption().shouldNotBe(visible, Duration.ofSeconds(20));
+        Select selectPaymentMethod = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
+        int optionSize = selectPaymentMethod.getOptions().size();
+        assertEquals(optionSize, 3);
     }
 
     @Then("I verify that shipping address is displayed")
@@ -64,9 +65,14 @@ public class EstoreAddressStepDefs {
 
     @When("I click on edit shipping address button on estore address page")
     public void iClickOnEditShippingAddressButtonOnEstoreAddressPage() {
-        sleep(20000);
-        estoreAddressScreen.getEditShippinggAddress().shouldHave(text("Edit"), Duration.ofSeconds(20));
-        estoreAddressScreen.getEditShippinggAddress().click();
+        try {
+            sleep(20000);
+            estoreAddressScreen.getEditShippinggAddress().shouldHave(text("Edit"), Duration.ofSeconds(20));
+            estoreAddressScreen.getEditShippinggAddress().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Agree&add to cart button is not displayed");
+        }
+
     }
 
     @Then("I verify that current currency is canadian dollar")
@@ -120,19 +126,38 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore shipping address")
     public void iFillEstoreShippingAndShippingAddress() {
-        sleep(2000);
-        estoreAddressScreen.getShippingAddressfirstName().should(visible, Duration.ofSeconds(40));
-        estoreAddressScreen.getShippingAddressfirstName().setValue("Safire");
-        estoreAddressScreen.getShippingAddresslastName().setValue("William");
-        estoreAddressScreen.getShippingAddressStreetAddress().setValue("4224 Simpson Street");
-        estoreAddressScreen.getShippingAddressAptFloor().click();
-        estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
-        estoreAddressScreen.getShippingAddressCity().setValue("Rock Island");
+        try {
+            sleep(2000);
+            estoreAddressScreen.getShippingAddressfirstName().should(visible, Duration.ofSeconds(40));
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressfirstName());
+            estoreAddressScreen.getShippingAddressfirstName().setValue("Safire");
 
-        Select shippingAddressState = new Select(estoreAddressScreen.getShippingAddressState());
-        shippingAddressState.selectByValue("IL");
-        estoreAddressScreen.getPostalShippingCode().setValue("61201");
-        estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddresslastName());
+            estoreAddressScreen.getShippingAddresslastName().setValue("William");
+
+            Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
+            shippingAddressCountry.selectByValue("US");
+
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
+            estoreAddressScreen.getShippingAddressStreetAddress().setValue("4224 Simpson Street");
+            estoreAddressScreen.getShippingAddressAptFloor().click();
+            estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
+            estoreAddressScreen.getShippingAddressCity().setValue("Rock Island");
+
+            Select shippingAddressState = new Select(estoreAddressScreen.getShippingAddressState());
+            shippingAddressState.selectByValue("IL");
+
+            estoreAddressScreen.getPostalShippingCode().click();
+            generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
+            estoreAddressScreen.getPostalShippingCode().setValue("61201");
+
+            estoreAddressScreen.getShippingAddressPhone().click();
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
+            estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Shipping address fields are not displayed");
+        }
+
     }
 
     @Then("I verify add a new shipping address option is present")
@@ -165,14 +190,29 @@ public class EstoreAddressStepDefs {
 
     @When("I introduce data for new profile address")
     public void iIntroduceDataForNewProfileAddress() {
+        estoreUserAccountPage.getBillingAddressFirstName().should(visible,Duration.ofSeconds(30));
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressFirstName());
         estoreUserAccountPage.getBillingAddressFirstName().setValue("Petr");
+
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressLastName());
         estoreUserAccountPage.getBillingAddressLastName().setValue(generalStepDefs.getAlphaNumericString(4));
+
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
         estoreUserAccountPage.getBillingAddressStreetAddress().setValue("Pennsylvania Avenue");
+
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressAptFloor());
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
+
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressCity());
         estoreUserAccountPage.getBillingAddressCity().setValue("New York");
+
         Select state = new Select(estoreUserAccountPage.getBillingAddressSelectState());
         state.selectByValue("IL");
+
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPostalCode());
         estoreUserAccountPage.getBillingAddressPostalCode().setValue("12345");
+
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPhone());
         estoreUserAccountPage.getBillingAddressPhone().setValue("(541) 777-4321");
     }
 
