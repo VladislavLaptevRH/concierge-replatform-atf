@@ -1,7 +1,7 @@
 @estoreRegression
 Feature: Estore Membership
 
-  Scenario: eStore Membership Copy
+  Scenario: eStore Membership
     Given I log into eStore as "regular"
     When I navigate to the member tab
     Then I validate membership title
@@ -14,8 +14,7 @@ Feature: Estore Membership
   Scenario: eStore Membership Add to Cart button
     Given I log into eStore as "nonmember"
     When I navigate to the member tab
-    Then I validate add to cart button
-    When I click on add to cart button from membership
+    When I goes to click on cart button from header
     Then I validate cart
 
   Scenario: eStore Link to Membership

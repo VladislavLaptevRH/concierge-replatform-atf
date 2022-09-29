@@ -141,6 +141,7 @@ public class EstoreUserAccountPageStepDefs {
     @When("I click on save address button")
     public void iClickOnSaveAddressButton() {
         estoreUserAccountPage.getSaveAddressButton().should(visible, Duration.ofSeconds(40));
+        estoreUserAccountPage.getSaveAddressButton().scrollIntoView(true);
         estoreUserAccountPage.getSaveAddressButton().click();
     }
 
@@ -154,14 +155,11 @@ public class EstoreUserAccountPageStepDefs {
         estoreUserAccountPage.getPhoneRequired().should(visible, Duration.ofSeconds(40));
     }
 
-    @Then("I verify that created address popup is displayed")
-    public void iVerifyThatCreatedAddressPopupIsDisplayed() {
-        $(By.xpath("//*[text()='USE ENTERED MY ACCOUNT ADDRESS BOOK']")).should(visible, Duration.ofSeconds(40));
-    }
+
 
     @Then("I verify that added address present in the grid")
     public void iVerifyThatAddedAddressPresentInTheGrid() {
-        $(By.xpath("//p[@class='MuiTypography-root MuiTypography-body1' and text()='Pennsylvania Avenue, 2, Schenectady, NY 12345']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//p[@class='MuiTypography-root MuiTypography-body1' and text()='2479 Deer Run,  Lewisville, TX 75067']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I click on delete estore button")

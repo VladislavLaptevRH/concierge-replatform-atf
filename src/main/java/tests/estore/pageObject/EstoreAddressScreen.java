@@ -29,9 +29,9 @@ public class EstoreAddressScreen {
 
     private final SelenideElement submitZipCode = $(By.xpath("(//button[@type='submit'])[3]"));
 
-    private final SelenideElement emailField = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[9]"));
+    private final SelenideElement emailField = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[8]"));
 
-    private final SelenideElement confirmEmail = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[10]"));
+    private final SelenideElement confirmEmail = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[9]"));
 
     private final SelenideElement editShippinggAddress = $(By.xpath("(//*[text()='Edit'])[1]"));
 

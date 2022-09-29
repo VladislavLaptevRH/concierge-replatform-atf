@@ -190,7 +190,7 @@ public class EstoreAddressStepDefs {
 
     @When("I introduce data for new profile address")
     public void iIntroduceDataForNewProfileAddress() {
-        estoreUserAccountPage.getBillingAddressFirstName().should(visible,Duration.ofSeconds(30));
+        estoreUserAccountPage.getBillingAddressFirstName().should(visible, Duration.ofSeconds(30));
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressFirstName());
         estoreUserAccountPage.getBillingAddressFirstName().setValue("Petr");
 
@@ -198,22 +198,27 @@ public class EstoreAddressStepDefs {
         estoreUserAccountPage.getBillingAddressLastName().setValue(generalStepDefs.getAlphaNumericString(4));
 
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
-        estoreUserAccountPage.getBillingAddressStreetAddress().setValue("Pennsylvania Avenue");
+        estoreUserAccountPage.getBillingAddressStreetAddress().setValue("2479 Deer Run");
+
+        $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).click();
 
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressAptFloor());
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
 
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressCity());
-        estoreUserAccountPage.getBillingAddressCity().setValue("New York");
+        estoreUserAccountPage.getBillingAddressCity().setValue("Lewisville");
 
         Select state = new Select(estoreUserAccountPage.getBillingAddressSelectState());
-        state.selectByValue("IL");
+        state.selectByValue("TX");
 
-        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPostalCode());
-        estoreUserAccountPage.getBillingAddressPostalCode().setValue("12345");
+//        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPostalCode());
+//        estoreUserAccountPage.getBillingAddressPostalCode().setValue("12345");
 
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPhone());
         estoreUserAccountPage.getBillingAddressPhone().setValue("(541) 777-4321");
+
+        sleep(5000);
     }
 
     @Then("I verify that newly added address is present in shpping address list")
@@ -241,8 +246,8 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that address on order review page the same as on address page")
     public void iVerifyThatAddressOnOrderReviewPageTheSameAsOnAddressPage() {
-        $(By.xpath("//*[text()='Pennsylvania Avenue']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Qastreet']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='4224 Simpson Street']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Rock Island, IL 61201']")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I remove added address before")
@@ -269,7 +274,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that added address displayed as shipping address")
     public void iVerifyThatAddedAddressDisplayedAsShippingAddress() {
-        $(By.xpath("//*[text()='Pennsylvania Avenue']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='2479 Deer Run']")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I click on continue with original address estore button")
@@ -286,5 +291,25 @@ public class EstoreAddressStepDefs {
         sleep(3000);
         $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Continue to payment']")).click();
+    }
+
+    @When("I fill estore shipping email address")
+    public void iFillEstoreShippingEmailAddress() {
+        estoreAddressScreen.getEmailField().should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getEmailField().sendKeys("automationtest@rh.com");
+        estoreAddressScreen.getConfirmEmail().sendKeys("automationtest@rh.com");
+    }
+
+    @When("I remove added address before for address book")
+    public void iRemoveAddedAddressBeforeForAddressBook() {
+        try {
+            $(By.xpath("//*[text()='Delete']")).should(visible, Duration.ofSeconds(10));
+            $(By.xpath("//*[text()='Delete']")).click();
+            $(By.xpath("(//*[text()='Delete'])[2]")).should(visible, Duration.ofSeconds(10));
+            $(By.xpath("(//*[text()='Delete'])[2]")).click();
+
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Address is not stored");
+        }
     }
 }

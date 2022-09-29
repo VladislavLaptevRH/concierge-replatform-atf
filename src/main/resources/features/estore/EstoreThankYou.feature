@@ -1,5 +1,5 @@
 @estoreRegression
-Feature: Estore Order review
+Feature: Estore Thank You page
 
   Scenario: Verify address, price, payment information, total, subtotal tags
     Given I log into eStore as "regular"

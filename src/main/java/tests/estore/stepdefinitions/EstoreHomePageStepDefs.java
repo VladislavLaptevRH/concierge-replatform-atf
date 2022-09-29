@@ -24,6 +24,7 @@ import static org.testng.Assert.*;
 
 public class EstoreHomePageStepDefs {
     EstoreHomePage estoreHomePage = new EstoreHomePage();
+
     @Then("I expect that I am on the eStore Dashboard page")
     public void iExpectThatIAmOnTheEStoreDashboardPage() {
     }
@@ -40,15 +41,15 @@ public class EstoreHomePageStepDefs {
 
     @And("I click on search Icon")
     public void iClickOnSearchIcon() {
-        assertTrue(estoreHomePage.getSearchIcon().isDisplayed());
+        estoreHomePage.getSearchIcon().should(Condition.visible, Duration.ofSeconds(30));
         estoreHomePage.getSearchIcon().click();
 
     }
 
     @And("I Type product name {string}")
     public void iTypeProductName(String arg0) {
-        estoreHomePage.getSearchInputField().should(Condition.visible,Duration.ofSeconds(30));
-        estoreHomePage.getSearchCloseButton().should(Condition.visible,Duration.ofSeconds(30));
+        estoreHomePage.getSearchInputField().should(Condition.visible, Duration.ofSeconds(30));
+        estoreHomePage.getSearchCloseButton().should(Condition.visible, Duration.ofSeconds(30));
         estoreHomePage.getSearchInputField().setValue(arg0);
         estoreHomePage.getSeeAllResultButton().click();
     }
@@ -71,7 +72,7 @@ public class EstoreHomePageStepDefs {
 
     @When("I click on RH dropdown")
     public void iClickOnRHDropdown() {
-        estoreHomePage.getCategoryDropdown().should(Condition.visible,Duration.ofSeconds(20));
+        estoreHomePage.getCategoryDropdown().should(Condition.visible, Duration.ofSeconds(20));
         estoreHomePage.getCategoryDropdown().click();
     }
 

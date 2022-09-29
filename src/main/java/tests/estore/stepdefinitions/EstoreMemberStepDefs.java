@@ -3,6 +3,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.testng.Assert.*;
 import java.time.Duration;
@@ -10,9 +12,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import tests.estore.pageObject.EstoreCartPage;
 import tests.estore.pageObject.EstoreItemPage;
 import tests.estore.pageObject.EstoreMemberPage;
+import tests.estore.pageObject.EstoreUserAccountPage;
 import tests.utility.Hooks;
 
 public class EstoreMemberStepDefs {
@@ -21,6 +25,7 @@ public class EstoreMemberStepDefs {
     EstoreGeneralStepDefs generalStepDefs = new EstoreGeneralStepDefs();
     EstoreItemPage estoreItemPage = new EstoreItemPage();
     EstoreCartPage estoreCartPage = new EstoreCartPage();
+    EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
 
     //Non-members
     String expectedTitle = "RH MEMBERS PROGRAM PROFILE";
@@ -80,7 +85,6 @@ public class EstoreMemberStepDefs {
     public void iValidateAddToCartButton() {
         sleep(5000);
         assertTrue(estoreMemberPage.getAddToCart().isDisplayed());
-        assertTrue(estoreMemberPage.getAddToCart().isEnabled());
     }
 
     @When("I click on add to cart button from membership")
@@ -92,23 +96,9 @@ public class EstoreMemberStepDefs {
     @Then("I validate cart")
     public void iValidateCart() {
         sleep(5000);
-        String joinNowLink = "JOIN NOW";
-        String removeLink = "REMOVE MEMBERSHIP";
-        String membershipBannerTitle = "The RH MEMBERS PROGRAM";
-        String membershipSavings = "You've elected to join the RH Members Program, and you'll save $1,474.00 on this order.";
-        estoreCartPage.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(12));
 
-        List<String> items = new ArrayList<>();
-        List<String> expectedItems = new ArrayList(Arrays.asList(membershipBannerTitle, membershipSavings ));
-        for (int i = 0; i < estoreCartPage.getMemberShipBannerList().size(); i++) {
-            items.add(estoreCartPage.getMemberShipBannerList().get(i).getText());
-        }
-        assertEquals(items, expectedItems);
-
-        assertEquals(estoreCartPage.getRemoveMembershipLink().getText(), removeLink);
-        estoreCartPage.getRemoveMembershipLink().click();
-        sleep(5000);
-        assertEquals(estoreCartPage.getRemoveMembershipLink().getText(), joinNowLink);
+        $(By.xpath("//*[text()='REMOVE MEMBERSHIP']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible,Duration.ofSeconds(10));
     }
 
     @Then("I validate email address field and link to membership button")
@@ -128,13 +118,10 @@ public class EstoreMemberStepDefs {
     @Then("I validate membership details for member user")
     public void iValidateMembershipDetailsForMemberUser() {
         sleep(5000);
-        List<String> items = new ArrayList<>();
-        List<String> expectedItems = new ArrayList(Arrays.asList(expectedTitle, expectedMembershipNumber, expectedEnrollmentDate, expectedChargeAmount, expectedPaymentMethod,
-                expectedOptOutMessage, expectedContactInfoHeading, expectedEmailAddress, expectedCancelLink, expectedCallNumber, expectedFaq, expectedTermsAndCondition ));
-        for (int i = 0; i < estoreMemberPage.getMembershipDetails().size(); i++) {
-            items.add(estoreMemberPage.getMembershipDetails().get(i).getText());
-        }
-        assertEquals(items, expectedItems);
+        $(By.xpath("//*[text()='Membership Number: ']")).should(visible,Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Enrollment: ']")).should(visible,Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='You will be charged ']")).should(visible,Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Method of Payment: ']")).should(visible,Duration.ofSeconds(30));
     }
 
     @When("I click on cancel membership link")
@@ -147,17 +134,19 @@ public class EstoreMemberStepDefs {
     @Then("I validate cancel membership content")
     public void iValidateCancelMembershipContent() {
         sleep(2000);
-        Hooks.getCurrentUrl().equals("https://stg2.rhnonprod.com/my-account/membership-cancel.jsp");
+        $(By.xpath("//*[text()='25% savings on all full-priced items from RH, RH Modern, RH Baby & Child and RH TEEN']")).should(visible,Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Additional 20% savings on all sale items']")).should(visible,Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Complimentary services with RH Interior Design']")).should(visible,Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Preferred financing† plans on the RH Credit Card available, subject to approval']")).should(visible,Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Early access to clearance events']")).should(visible,Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Continue Membership']")).should(visible,Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Cancel Membership']")).should(visible,Duration.ofSeconds(30));
 
-        List<String> items = new ArrayList<>();
-        List<String> expectedItems = new ArrayList(Arrays.asList(expectedSavings, expectedAdditionalSavings, expectedComplimentary,
-                expectedConciergeService, expectedFinance, expectedEarlyAccess ));
-        for (int i = 0; i < estoreMemberPage.getBenefitsList().size(); i++) {
-            items.add(estoreMemberPage.getBenefitsList().get(i).getText());
-        }
-        assertEquals(items, expectedItems);
-        assertTrue(estoreMemberPage.getContinueMembershipButton().isEnabled());
-        assertTrue(estoreMemberPage.getCancelMembershipButton().isEnabled());
-        assertEquals(estoreMemberPage.getCancelMessage().getText(), expectedCancelMessage);
+    }
+
+    @When("I goes to click on cart button from header")
+    public void iGoesToClickOnCartButtonFromHeader() {
+        estoreUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(1));
+        estoreUserAccountPage.getCartButton().click();
     }
 }

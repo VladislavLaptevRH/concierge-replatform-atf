@@ -28,9 +28,24 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(15));
             estoreLoginPage.getPasswordField().should(visible, Duration.ofMinutes(15));
 
+//
+            if (accountRole.equals("orderreview")) {
+                estoreLoginPage.getUsernameField().setValue("orderreview@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Orderreview1234");
+            }
+
+            if (accountRole.equals("addresspage")) {
+                estoreLoginPage.getUsernameField().setValue("addresspage@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Address1234");
+            }
+
             if (accountRole.equals("savedRhCcDiscover")) {
                 estoreLoginPage.getUsernameField().setValue("bnamdeo+0010@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Resto123");
+            }
+            if(accountRole.equals("savedaddress")){
+                estoreLoginPage.getUsernameField().setValue("addresssaved@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Address1234");
             }
             if (accountRole.equals("savedRhCc")) {
                 estoreLoginPage.getUsernameField().setValue("savedrhcc@rh.com");

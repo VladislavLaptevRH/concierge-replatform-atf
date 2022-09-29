@@ -267,6 +267,7 @@ public class EstorePaymentStepDefs {
 
     @When("I execute payment with credit card on estore")
     public void iExecutePaymentWithCreditCardOnEstore() {
+        sleep(5000);
         estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
         estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
 
