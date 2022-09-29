@@ -79,25 +79,25 @@ public class Pdp {
 
     @When("I go to custom rugs")
     public void iGoToCustomRugs() {
-        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][5]/h6")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][5]/h6")).click();
-        $(By.xpath("//ul[@class='MuiList-root']/li[@class='MuiListItem-root'][13]")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//ul[@class='MuiList-root']/li[@class='MuiListItem-root'][13]")).click();
+        $(By.xpath("//div[@data-navigation-account-item-id='rhbc_cat479005']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//div[@data-navigation-account-item-id='rhbc_cat479005']")).click();
+        $(By.xpath("//*[text()='Rugs By Fiber']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Rugs By Fiber']")).click();
     }
     //div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']/div[6]
     @Then("I verify that custom rugs are displayed")
     public void iVerifyThatCustomRugsAreDisplayed() {
-        $(By.xpath("//*[text()=' Custom Braided Wool Rug']")).should(visible, Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='Custom Sized Rugs']")).should(visible, Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='Wool Rugs']")).should(visible, Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='Performance Fiber Rugs']")).should(visible, Duration.ofSeconds(25));
     }
 
     @When("I click on windows from top menu")
     public void iClickOnWindowsFromTopMenu() {
-        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][8]/h6")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][8]/h6")).click();
+        $(By.xpath("//div[@data-navigation-account-item-id='cat160095']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//div[@data-navigation-account-item-id='cat160095']")).click();
 
-        $(By.xpath("(//li[@class='MuiListItem-root'][2]//p)[1]")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("(//li[@class='MuiListItem-root'][2]//p)[1]")).click();
+        $(By.xpath("//*[text()='Custom Window Treatments']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Custom Window Treatments']")).click();
     }
 
     @Then("I verify that custom windows are displayed")
@@ -109,12 +109,14 @@ public class Pdp {
 
     @Then("I verify that YAML carousel is displayed")
     public void iVerifyThatYAMLCarouselIsDisplayed() {
+        $(By.xpath("//*[text()='The Cloud Collection']")).scrollTo();
         $(By.xpath("//*[text()='The Cloud Collection']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='The Cloud Collection']")).scrollIntoView(true);
     }
 
     @Then("I verify mattress recycling fee")
     public void iVerifyMattressRecyclingFee() {
+        $(By.xpath("//*[text()='mattress recycling fee']")).scrollTo();
         $(By.xpath("//*[text()='mattress recycling fee']")).should(visible, Duration.ofSeconds(40));
     }
 
@@ -125,6 +127,7 @@ public class Pdp {
 
     @Then("I verify that check for replacements parts button is displayed")
     public void iVerifyThatCheckForReplacementsPartsButtonIsDisplayed() {
+        $(By.xpath("//*[text()='CHECK FOR REPLACEMENT PARTS']")).scrollTo();
         $(By.xpath("//*[text()='CHECK FOR REPLACEMENT PARTS']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='CHECK FOR REPLACEMENT PARTS']")).click();
     }
@@ -154,16 +157,18 @@ public class Pdp {
     @Then("I verify that availability, Delivery and returns messaging is displayed for {string}")
     public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingIsDisplayedFor(String arg0) {
         if (arg0.equals("SO")) {
+            $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]")).scrollTo();
             $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]")).should(visible, Duration.ofSeconds(50));
         }
         if (arg0.equals("BO")) {
+            $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).scrollTo();
             $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).should(visible, Duration.ofSeconds(50));
         }
     }
 
     @Then("I verify price in cart is the same as price on PDP page")
     public void iVerifyPriceInCartIsTheSameAsPriceOnPDPPage() {
-        conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$1,327.00"), Duration.ofSeconds(20));
+        conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$3,585.00"), Duration.ofSeconds(20));
     }
 
     @When("I go to Swatch Landing Page")
