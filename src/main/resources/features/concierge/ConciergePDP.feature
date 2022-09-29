@@ -11,7 +11,7 @@ Feature:Concierge PDP
 
   Scenario: In stock
     Given I log into Concierge as "associate"
-    When I go to item "50400811 BWNT" from search field
+    When I go to item "61590226 BRN" from search field
     When I click on view in stock items
     Then I verify that in stock modal pop up is displayed
 
@@ -78,7 +78,7 @@ Feature:Concierge PDP
   Scenario: ATC SPO - add to cart
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10067107 BWBK" from search field
+    When I go to item "10105809 BWDV" from search field
     When I click on add to cart button
     When I click on aggree&add button
     When I click on view cart button
@@ -95,8 +95,7 @@ Feature:Concierge PDP
   Scenario: Pricing - verify that price on PDP is the same as price from Cart page
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10011395 BRS" from search field
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     Then I verify price in cart is the same as price on PDP page

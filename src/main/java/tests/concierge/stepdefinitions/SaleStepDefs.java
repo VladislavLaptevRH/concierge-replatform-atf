@@ -29,7 +29,7 @@ public class SaleStepDefs {
 
     @Then ("I verify sale navigation bars are displayed")
     public void iVerifySaleNavigationBarsAreDisplayed () {
-        sleep(2000);
+        sleep(5000);
         List<String> items = new ArrayList<>();
         List<String> expectedItems = new ArrayList(Arrays.asList("LIVING", "DINING" , "BED", "BATH", "LIGHTING", "TEXTILES", "RUGS", "WINDOWS", "DÉCOR", "OUTDOOR"));
         for (int i = 0; i < saleScreen.getListOfNavigationBars().size(); i++) {
