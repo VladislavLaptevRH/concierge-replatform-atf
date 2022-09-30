@@ -1,6 +1,8 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.Cookie;
 import tests.concierge.pageObject.ConciergeLoginPage;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.Given;
@@ -34,6 +36,9 @@ public class ConciergeAssociateStepDefs {
     public void iLogIntoConciergeAs(String arg0) {
         Log.debug("I log into Concierge as " + arg0);
         generalStepDefs.loginAsRole(arg0);
+        Cookie ck = new Cookie("endpoint", "prodsupport");
+        WebDriverRunner.getWebDriver().manage().addCookie(ck);
+        WebDriverRunner.getWebDriver().navigate().refresh();
         generalStepDefs.waitForJSandJQueryToLoad();
     }
 
