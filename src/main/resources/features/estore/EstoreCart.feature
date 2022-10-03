@@ -68,7 +68,8 @@ Feature: Estore Cart Page
     When I click on estore checkout button
     When I click on estore no thanks button
     When I click on continue as guest estore button
-    When I fill estore billing address
+    When I fill estore shipping address
+    When I fill estore shipping email address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button

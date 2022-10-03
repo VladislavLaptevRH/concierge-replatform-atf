@@ -1,6 +1,8 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Given;
+import org.openqa.selenium.Cookie;
 import tests.estore.pageObject.EstoreLoginPage;
 import tests.utility.Hooks;
 
@@ -18,6 +20,10 @@ public class EstoreLoginStepDefs {
     @Given("I log into eStore as {string}")
     public void iLogIntoEStoreAs(String arg0) {
         loginAsRole(arg0);
+
+        Cookie ck = new Cookie("endpoint", "cartcheckout");
+        WebDriverRunner.getWebDriver().manage().addCookie(ck);
+        WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
     public void loginAsRole(String accountRole) {
@@ -33,6 +39,12 @@ public class EstoreLoginStepDefs {
                 estoreLoginPage.getUsernameField().setValue("orderreview@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Orderreview1234");
             }
+
+            if (accountRole.equals("noaddresses")) {
+                estoreLoginPage.getUsernameField().setValue("addressno@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Password1234");
+            }
+//            noaddresses@rh.com
 
             if (accountRole.equals("addresspage")) {
                 estoreLoginPage.getUsernameField().setValue("addresspage@rh.com");
@@ -97,6 +109,7 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
         }
+
     }
 
     @Given("I log into eStore as contract")

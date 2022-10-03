@@ -156,7 +156,7 @@ public class EstoreCGStepDefs {
 
     @Then("I verify that contract price is used for each TN product")
     public void iVerifyThatContractPriceIsUsedForEachTNProduct() {
-        $(By.xpath("(//*[text()='$156.00'])[2]")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='$35.00'])[2]")).should(visible,Duration.ofSeconds(20));
     }
 
     @Then("I verify that trade price is used for each TN product")

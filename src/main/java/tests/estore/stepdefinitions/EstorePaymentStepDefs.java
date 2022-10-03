@@ -216,8 +216,7 @@ public class EstorePaymentStepDefs {
     @Then("I validate that billing address based on saved payment method")
     public void iValidateThatBillingAddressBasedOnSavedPaymentMethod() {
         sleep(3000);
-        $(By.xpath("//*[text()='Automation Visa']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='TEST2']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I remove existing payment method on payment estore page")

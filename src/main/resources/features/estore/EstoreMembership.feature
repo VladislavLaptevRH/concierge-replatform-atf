@@ -18,7 +18,7 @@ Feature: Estore Membership
     Then I validate cart
 
   Scenario: eStore Link to Membership
-    Given I log into eStore as "regular"
+    Given I log into eStore as "member"
     When I navigate to the member tab
     Then I validate membership details
     Then I validate email address field and link to membership button

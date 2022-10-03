@@ -13,6 +13,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class EstoreContractTradeStepDefs {
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
@@ -76,6 +77,7 @@ public class EstoreContractTradeStepDefs {
 
     @When("I click on confirm button from pop up zip code")
     public void iClickOnConfirmButtonFromPopUpZipCode() {
+        sleep(5000);
         $(By.xpath("//*[text()='Confirm']")).should(visible,Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Confirm']")).click();
 

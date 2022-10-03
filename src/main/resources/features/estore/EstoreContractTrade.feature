@@ -9,7 +9,7 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Price in the cart - RH
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I open direct product page on estore
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that contract price is used in cart
@@ -17,7 +17,7 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Price on increasing the QTY in the cart
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I open direct product page on estore
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I choose qty for item from estore cart
@@ -26,19 +26,24 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Validate the currency for US Zip
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I open direct product page on estore
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that price for product&line should be in US dollars
 
   Scenario: eStore Contract - Validate the currency for CAN Zip
-    Given I log into eStore as contract
+    Given I log into eStore as "noaddresses"
     When I remove all items from estore cart
-    When I open direct product page on estore
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
-    When I introduces CAN zip code for estore cart
-    When I click on confirm button from pop up zip code
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I update shipping address for CAN
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
     Then I verify that current currency is canadian dollar
 
   Scenario: eStore Contract - Validate the dropdown's are enabled
@@ -83,11 +88,10 @@ Feature: eStore Contract and Trade
     And I click on view cart estore button
     When I click on estore checkout button
     When I click on same as estore shipping address checkbox
-    When I continue to estore payment after address page
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
     When I pay with RHCC for estore item
     When I click on continue payment method estore button
-    When I click on a place estore order button
-    Then I verify that estore thank you page is displayed
 
 #Trade
   Scenario: eStore Trade Login
@@ -127,6 +131,7 @@ Feature: eStore Contract and Trade
     When I click on add to cart estore button
     And I click on view cart estore button
     When I introduces CAN zip code for estore cart
+    When I click on confirm button from pop up zip code
     Then I verify that current currency is canadian dollar
 
   Scenario: eStore Trade - Validate the dropdown's are enabled
