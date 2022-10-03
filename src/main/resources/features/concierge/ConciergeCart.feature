@@ -10,6 +10,7 @@ Feature:Concierge Cart Page
 
   Scenario: Checkout membership popup for Guest user
     Given I log into Concierge as "associate"
+    When I remove all items from cart
     When I remove client from header
     When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button

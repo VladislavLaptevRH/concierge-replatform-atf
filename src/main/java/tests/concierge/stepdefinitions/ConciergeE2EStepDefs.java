@@ -40,6 +40,8 @@ public class ConciergeE2EStepDefs {
     String countOfItems = null;
     WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));
 
+    String environment;
+
     @When("I click on add to project button")
     public void userClickOnAddToProjectButton() {
         //conciergeItemsScreen.getAddToProjectButton().should(Condition.and("", enabled, visible), Duration.ofSeconds(12));
@@ -236,30 +238,36 @@ public class ConciergeE2EStepDefs {
         conciergeUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(12));
         conciergeUserAccountPage.getBrandButton().click();
 
+        if (Hooks.conciergeURL.contains("stg4")) {
+            environment = "stg4";
+        } else {
+            environment = "stg2";
+        }
+
         if (brand.equals("RH Modern")) {
-            $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg2.rhnonprod.com/']")).shouldHave(text("RH MODERN"), Duration.ofSeconds(20));
-            $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg2.rhnonprod.com/']")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhmodern. " + environment + ".rhnonprod.com/']")).shouldHave(text("RH MODERN"), Duration.ofSeconds(20));
+            $(By.xpath("//li[@data-analytics-url='https://rhmodern." + environment + ".rhnonprod.com/']")).click();
         }
         if (brand.equals("RH Baby&Child")) {
-            $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg2.rhnonprod.com/']")).shouldHave(text("RH BABY & CHILD"));
-            $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg2.rhnonprod.com/']")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild." + environment + ".rhnonprod.com/']")).shouldHave(text("RH BABY & CHILD"));
+            $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild." + environment + ".rhnonprod.com/']")).click();
 
         }
         if (brand.equals("RH Teen")) {
-            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhteen." + environment + ".rhnonprod.com/']")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhteen."+ environment + ".rhnonprod.com/']")).click();
         }
         if (brand.equals("RH Outdoor")) {
-            $(By.xpath("//li[@data-analytics-url='https://rhoutdoor.stg2.rhnonprod.com/']")).shouldHave(text("RH Outdoor"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@data-analytics-url='https://rhoutdoor.stg2.rhnonprod.com/']")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhoutdoor." + environment + ".rhnonprod.com/']")).shouldHave(text("RH Outdoor"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhoutdoor." + environment + ".rhnonprod.com/']")).click();
         }
         if (brand.equals("RH SKI House")) {
-            $(By.xpath("//li[@data-analytics-url='https://rhskihouse.stg2.rhnonprod.com/']")).shouldHave(text("RH SKI House"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@data-analytics-url='https://rhskihouse.stg2.rhnonprod.com/']")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhskihouse." + environment + ".rhnonprod.com/']")).shouldHave(text("RH SKI House"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhskihouse." + environment + ".rhnonprod.com/']")).click();
         }
         if (brand.equals("RH Beach House")) {
-            $(By.xpath("//li[@data-analytics-url='https://rhbeachhouse.stg2.rhnonprod.com/']")).shouldHave(text("RH Beach House"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@data-analytics-url='https://rhbeachhouse.stg2.rhnonprod.com/']")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhbeachhouse." + environment + ".rhnonprod.com/']")).shouldHave(text("RH Beach House"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhbeachhouse." + environment + ".rhnonprod.com/']")).click();
         }
         if (brand.equals("RH Interiors")) {
             $(By.xpath("//li[@data-analytics-url='https://rhinteriors.stg2.rhnonprod.com/']")).shouldHave(text("RH Interiors"), Duration.ofSeconds(10));

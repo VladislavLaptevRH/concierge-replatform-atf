@@ -39,7 +39,7 @@ public class GiftCardEnquiryStepDefs {
 
     @Then("I verify transaction details")
     public void iVerifyTransactionDetails() {
-        sleep(2000);
+        sleep(5000);
         List<String> items = new ArrayList<>();
         List<String> expectedItems = new ArrayList(Arrays.asList( "CARD NUMBER", "BALANCE", "DATE", "GALLERY", "CHARGE", "STATUS"));
         for (int i = 0; i < giftCardEnquiryScreen.getListOfTransactionDetailsHeading().size(); i++) {
