@@ -7,12 +7,14 @@ Feature:Concierge Project
     When I search project "availabilitydeliveryreturnsmessaging" by provided "projectName"
     When I click on the first project search result
     Then I verify that availability, Delivery and Returns messaging for "<items>" is displayed
+    #Need test data for stg4 - project
     Examples:
       | items    |
       | SPO      |
       | In stock |
 #      | SPO In stock Items |
-#      | BO                 |
+#      | BO                |
+
 
   Scenario: Verify the Projects load for a logged in associate
     Given I log into Concierge as "associate"
@@ -151,8 +153,7 @@ Feature:Concierge Project
 
   Scenario: Verify the Spaces list and switching between the Spaces -CART/PDP
     Given I log into Concierge as "associate"
-    When I open product page with productId "10011389"
-    And I select count of product
+    When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
     When I click on move to project button

@@ -82,6 +82,7 @@ Feature:Concierge Contract
     Then I verify that contract price is displayed
 
   Scenario: Contract Prices: Project
+    #Need Test data for stg4, test fails at the moment because project name does not exists
     Given I log into Concierge as "associate"
     And I remove all items from cart
     When I remove client from header
