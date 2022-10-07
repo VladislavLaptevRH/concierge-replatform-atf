@@ -12,7 +12,6 @@ Feature:Estore Payment
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     When I remove split payment which was used earlier
     When I refresh current estore page
     Then I verify that I'm able to execute estore split payment
@@ -28,7 +27,6 @@ Feature:Estore Payment
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I choose saved card "VI" from payment method dropdown
     When I click on a place estore order button
@@ -45,7 +43,6 @@ Feature:Estore Payment
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     When I remove payment method which was used earlier
     Then I verify that I'm able to edit payment
 
@@ -60,7 +57,6 @@ Feature:Estore Payment
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I edit estore billing address from PG
     When I continue to estore payment after address page
@@ -78,7 +74,6 @@ Feature:Estore Payment
     When I fill estore shipping address
     When I update shipping address for CAN
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     Then I verify unavailability for RHCC
 
   Scenario: eStore RHCC
@@ -92,7 +87,6 @@ Feature:Estore Payment
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I pay with RHCC for estore item
     When I click on a place estore order button
@@ -109,7 +103,6 @@ Feature:Estore Payment
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I execute payment with credit card on estore
     Then I verify that shipping address is displayed
@@ -128,7 +121,6 @@ Feature:Estore Payment
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I execute payment with credit card on estore
     Then I verify that shipping address is displayed
@@ -147,7 +139,6 @@ Feature:Estore Payment
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I execute payment with credit card on estore
     When I click on estore cart button from header
@@ -158,7 +149,6 @@ Feature:Estore Payment
     When I click on estore checkout button
     And I click on estore no thanks button
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     Then I validate updated order estimate and card details
     When I click on estore continue button
     When I click on a place estore order button
@@ -176,7 +166,6 @@ Feature:Estore Payment
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I execute payment with credit card on estore
     When I click on estore cart button from header
@@ -187,7 +176,6 @@ Feature:Estore Payment
     When I click on estore checkout button
     And I click on estore no thanks button
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     Then I validate updated order estimate and card details for decrease item
 
   Scenario: eStore Billing address based on saved payment method
@@ -199,7 +187,6 @@ Feature:Estore Payment
     When I click on estore checkout button
     And I click on estore no thanks button
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I choose saved card "VI" from payment method dropdown
     Then I validate that billing address based on saved payment method
@@ -223,7 +210,6 @@ Feature:Estore Payment
     When I update shipping address for CAN
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     Then I verify unavailability of Discover for CAN address
 
   Scenario: eStore unavailability of Saved Discover for CAN shipping address
@@ -239,7 +225,6 @@ Feature:Estore Payment
     When I update shipping address for CAN
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     Then I verify that discover is unavailable
 
   Scenario: eStore unavailability of Saved RHCC for CAN shipping address
@@ -253,7 +238,6 @@ Feature:Estore Payment
     When I click on edit estore billing address button
     When I choose address with CAN zip code
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     Then I verify unavailability of saved for RHCC
 
   Scenario: eStore Update address (Change Country) after making payment
@@ -267,7 +251,6 @@ Feature:Estore Payment
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     When I refresh current estore page
     When I remove payment method which was used earlier
 #    When I execute payment with credit card on estore
@@ -275,8 +258,7 @@ Feature:Estore Payment
 #    When I click on edit shipping address button on estore address page
 #    When I choose address with CAN zip code
 #    When I click on continue to payment estore button
-#    When I click on continue with original address estore button
-#    Then I verify that current currency is canadian dollar
+##    Then I verify that current currency is canadian dollar
 #    When I remove payment method which was used earlier
 #    When I execute payment with credit card on estore
 #    When I click on continue payment method estore button
@@ -294,7 +276,6 @@ Feature:Estore Payment
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I choose saved card "MC" from payment method dropdown
     When I click on continue payment method estore button
@@ -310,7 +291,6 @@ Feature:Estore Payment
     When I click on estore checkout button
     And I click on estore no thanks button
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     Then I verify that I'm able to execute estore split payment with saved CC
 
 

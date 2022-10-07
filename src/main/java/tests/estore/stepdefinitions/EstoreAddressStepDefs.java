@@ -199,9 +199,9 @@ public class EstoreAddressStepDefs {
 
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
         estoreUserAccountPage.getBillingAddressStreetAddress().setValue("2479 Deer Run");
-
-        $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).click();
+//
+//        $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).should(visible, Duration.ofSeconds(20));
+//        $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).click();
 
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressAptFloor());
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
@@ -212,8 +212,8 @@ public class EstoreAddressStepDefs {
         Select state = new Select(estoreUserAccountPage.getBillingAddressSelectState());
         state.selectByValue("TX");
 
-//        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPostalCode());
-//        estoreUserAccountPage.getBillingAddressPostalCode().setValue("12345");
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPostalCode());
+        estoreUserAccountPage.getBillingAddressPostalCode().setValue("12345");
 
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPhone());
         estoreUserAccountPage.getBillingAddressPhone().setValue("(541) 777-4321");
@@ -298,6 +298,7 @@ public class EstoreAddressStepDefs {
         estoreAddressScreen.getEmailField().should(visible, Duration.ofSeconds(20));
         estoreAddressScreen.getEmailField().sendKeys("automationtest@rh.com");
         estoreAddressScreen.getConfirmEmail().sendKeys("automationtest@rh.com");
+        System.out.println();
     }
 
     @When("I remove added address before for address book")
@@ -311,5 +312,12 @@ public class EstoreAddressStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Address is not stored");
         }
+    }
+
+    @Then("I verify that added address is displayed in the shipping address list")
+    public void iVerifyThatAddedAddressIsDisplayedInTheShippingAddressList() {
+        $(By.xpath("//*[text()='2479 Deer Run']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Lewisville']")).should(visible,Duration.ofSeconds(20));
+
     }
 }

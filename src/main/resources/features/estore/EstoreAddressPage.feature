@@ -1,4 +1,5 @@
 @estoreRegression
+@estoreAddressPage
 Feature: Estore Address Page
 
   Scenario: eStore Address for Guest user
@@ -14,7 +15,6 @@ Feature: Estore Address Page
     When I fill estore shipping email address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     Then I validate "billing address" which we have entered earlier
     When I pay with RHCC for estore item
     Then I validate "billing address" which we have entered earlier
@@ -60,7 +60,6 @@ Feature: Estore Address Page
     When I click on add address button
     When I introduce data for new profile address
     When I click on save address button
-    When I click on continue with original address estore button
     Then I verify that added address present in the grid
     When I go to estore item "10097379 PYR" from search field
     When I click on add to cart estore button
@@ -82,7 +81,6 @@ Feature: Estore Address Page
     When I click on add address button
     When I introduce data for new profile address
     When I click on save address button
-    When I click on continue with original address estore button
     Then I verify that added address present in the grid
     When I remove added address before for address book
     When I go to estore item "10097379 PYR" from search field
@@ -104,14 +102,13 @@ Feature: Estore Address Page
     When I introduce data for new profile address
     When I click on save address button
     When I click on continue payment method estore button
-    When I click on continue with original address estore button
     When I edit existing address on address book page
     When I click on save address button
-    When I click on continue with original address estore button
     When I go to estore item "10097379 PYR" from search field
     When I click on add to cart estore button
     When I click on aggree&add estore button
     And I click on view cart estore button
     When I click on estore checkout button
     When I click on estore no thanks button
-    Then I verify that added address edited address updated in the shipping address list
+    Then I verify that added address is displayed in the shipping address list
+#    Then I verify that added address edited address updated in the shipping address list

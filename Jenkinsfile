@@ -15,7 +15,7 @@ pipeline.standardTemplate { label ->
             }
 
             stage('Run Tests') {
-                pipeline.buildMvn("clean test -Dcucumber.filter.tags='@conciergeRegression or @estoreRegression'",true);
+                pipeline.buildMvn("clean test -Dcucumber.filter.tags='@estoreRegression'",true);
             } // end stage
 
             container("awscli") {

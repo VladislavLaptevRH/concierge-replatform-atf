@@ -43,7 +43,6 @@ Feature: eStore Contract and Trade
     When I update shipping address for CAN
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     Then I verify that current currency is canadian dollar
 
   Scenario: eStore Contract - Validate the dropdown's are enabled
@@ -89,7 +88,6 @@ Feature: eStore Contract and Trade
     When I click on estore checkout button
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     When I pay with RHCC for estore item
     When I click on continue payment method estore button
 

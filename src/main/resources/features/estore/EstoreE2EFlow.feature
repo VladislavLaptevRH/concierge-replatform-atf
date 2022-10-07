@@ -18,7 +18,6 @@ Feature: Estore E2E flow
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     When I execute payment with credit card on estore
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed

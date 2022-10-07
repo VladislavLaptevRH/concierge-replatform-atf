@@ -96,9 +96,7 @@ public class EstoreMemberStepDefs {
     @Then("I validate cart")
     public void iValidateCart() {
         sleep(5000);
-
-        $(By.xpath("//*[text()='REMOVE MEMBERSHIP']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible,Duration.ofSeconds(10));
+        $(By.xpath("//*[text()='JOIN NOW']")).should(visible,Duration.ofSeconds(10));
     }
 
     @Then("I validate email address field and link to membership button")

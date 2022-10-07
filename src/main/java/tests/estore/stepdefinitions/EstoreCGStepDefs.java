@@ -132,8 +132,8 @@ public class EstoreCGStepDefs {
     public void iGoToMOBrand() {
         $(By.xpath("//a[@data-testid='brand-link']")).should(visible,Duration.ofSeconds(20));
         $(By.xpath("//a[@data-testid='brand-link']")).click();
-        $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg2.rhnonprod.com/']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg2.rhnonprod.com/']")).click();
+        $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg4.rhnonprod.com/']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg4.rhnonprod.com/']")).click();
     }
 
     @Then("I verify that contract price is used for each product")
@@ -150,8 +150,8 @@ public class EstoreCGStepDefs {
     public void iGoToBCBrand() {
         $(By.xpath("//a[@data-testid='brand-link']")).should(visible,Duration.ofSeconds(20));
         $(By.xpath("//a[@data-testid='brand-link']")).click();
-        $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg2.rhnonprod.com/']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg2.rhnonprod.com/']")).click();
+        $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg4.rhnonprod.com/']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg4.rhnonprod.com/']")).click();
     }
 
     @Then("I verify that contract price is used for each TN product")

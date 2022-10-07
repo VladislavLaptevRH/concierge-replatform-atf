@@ -15,7 +15,7 @@ public class EstoreAddressScreen {
 
     private final SelenideElement shippingAddresslastName = $(By.id("shippingAddress.lastName"));
 
-    private final SelenideElement shippingAddressStreetAddress = $(By.xpath("//input[@data-testid='shippingAddress.addressLine1']"));
+    private final SelenideElement shippingAddressStreetAddress = $(By.id("shippingAddress.addressLine1"));
 
     private final SelenideElement shippingAddressAptFloor = $(By.id("shippingAddress.addressLine2"));
 
@@ -29,9 +29,9 @@ public class EstoreAddressScreen {
 
     private final SelenideElement submitZipCode = $(By.xpath("(//button[@type='submit'])[3]"));
 
-    private final SelenideElement emailField = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[8]"));
+    private final SelenideElement emailField = $(By.xpath("((//div[contains(@class,'MuiGrid-align-items-xs-flex-start')])[1]//input)[1]"));
 
-    private final SelenideElement confirmEmail = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[9]"));
+    private final SelenideElement confirmEmail = $(By.xpath("((//div[contains(@class,'MuiGrid-align-items-xs-flex-start')])[1]//input)[2]"));
 
     private final SelenideElement editShippinggAddress = $(By.xpath("(//*[text()='Edit'])[1]"));
 
