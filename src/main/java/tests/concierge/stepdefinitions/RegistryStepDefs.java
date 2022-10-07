@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -44,7 +45,11 @@ public class RegistryStepDefs {
 
     @Then("I verify that search result for registry search by {string} is displayed")
     public void iVerifyThatSearchResultForRegistrySearchByIsDisplayed(String arg0) {
-        registryScreen.getSearchResult().shouldHave(Condition.text("Automation Testing & Automation Testing Wedding 06/24/2022"), Duration.ofSeconds(20));
+        if (Hooks.conciergeURL.contains("stg2")) {
+            registryScreen.getSearchResult().shouldHave(Condition.text("Automation Testing & Automation Testing Wedding 06/24/2022"), Duration.ofSeconds(20));
+        } else {
+            registryScreen.getSearchResult().shouldHave(Condition.text("automation testing Wedding 10/07/2022 Automation Associate Testcity, US 0"), Duration.ofSeconds(20));
+        }
     }
 
     @When("I search registry by email")
