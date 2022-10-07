@@ -703,5 +703,11 @@ public class ConciergeE2EStepDefs {
         open(URL);
         sleep(3000);
     }
+
+    @When("I open cart")
+    public void iOpenCart() {
+        open("https://stg4-concierge.restorationhardware.com/checkout/shopping_cart.jsp");
+        sleep(2000);
+    }
 }
 

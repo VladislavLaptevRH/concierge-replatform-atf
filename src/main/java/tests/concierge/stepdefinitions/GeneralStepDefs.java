@@ -3,6 +3,10 @@ package tests.concierge.stepdefinitions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import tests.concierge.pageObject.*;
 import tests.utility.Hooks;
 import org.openqa.selenium.By;
@@ -30,6 +34,8 @@ public class GeneralStepDefs {
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
     static WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(30));
+    public static String id;
+    private static Response response;
 
     public void waitForLoad(WebDriver driver) {
         ExpectedCondition<Boolean> pageLoadCondition = webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete");
@@ -347,6 +353,30 @@ public class GeneralStepDefs {
         return (int) ((Math.random() * (max - min)) + min);
     }
 
+    /**
+     * @praram email
+     * @param userId
+     * @returns cartId
+     * */
+    public static String getCartId (String email, String userId) {
+        RestAssured.baseURI = "https://development.internal.rhapsodynonprod.com";
+        RequestSpecification request = RestAssured.given();
+        request.relaxedHTTPSValidation();
+        request.headers("Content-Type", "application/json");
+        request.headers("X-User-Scope", "ZDFlNjhkMDQ0NmM5NDRjNzhkZGFhNGE4MjQwZDVhNGZAc29tZS5jb206IFsic3RhbmRhcmQiXQ==");
+        request.headers("X-B3-SpanID","1111111111111");
+        response = request.body("{\n" +
+                        "    \"postalCode\": \"12345\",\n" +
+                        "    \"country\": \"US\",\n" +
+                        "    \"guest\": {\n" +
+                        "        \"email\": \""+email+"\",\n" +
+                        "        \"userId\": \""+userId+"\"\n" +
+                        "    }\n" +
+                        "}").post("/rhdo-cart-broker-v1/carts");
+
+        String jsonString = response.asString();
+        return JsonPath.from(jsonString).get("id");
+    }
 }
 
 
