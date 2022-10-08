@@ -87,9 +87,9 @@ Feature: eStore Contract and Trade
     And I click on view cart estore button
     When I click on estore checkout button
     When I click on same as estore shipping address checkbox
-    When I click on continue to payment estore button
-    When I pay with RHCC for estore item
-    When I click on continue payment method estore button
+#    When I click on continue to payment estore button
+#    When I pay with RHCC for estore item
+#    When I click on continue payment method estore button
 
 #Trade
   Scenario: eStore Trade Login

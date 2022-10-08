@@ -288,7 +288,7 @@ public class EstoreAddressStepDefs {
 
     @When("I click on continue to payment estore button")
     public void iClickOnContinueToPayment() {
-        sleep(3000);
+        sleep(4000);
         $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Continue to payment']")).click();
     }

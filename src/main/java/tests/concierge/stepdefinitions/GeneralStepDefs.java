@@ -370,7 +370,7 @@ public class GeneralStepDefs {
                         "    \"country\": \"US\",\n" +
                         "    \"guest\": {\n" +
                         "        \"email\": \""+email+"\",\n" +
-                        "        \"userId\": \""+userId+"\"\n" +
+                        "        \"userId\": \""+"7a4678b9-9f15-4486-a217-aa154ef8eb8b"+"\"\n" +
                         "    }\n" +
                         "}").post("/rhdo-cart-broker-v1/carts");
 

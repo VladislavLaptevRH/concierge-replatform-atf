@@ -27,15 +27,17 @@ public class EstoreUserAccountPageStepDefs {
 
     @When("I go to profile payment method")
     public void iGoToProfilePaymentMethod() {
-        estoreUserAccountPage.getProfileIconButton().should(Condition.visible, Duration.ofSeconds(120));
-        estoreUserAccountPage.getProfileIconButton().click();
-        estoreUserAccountPage.getProfileButton().shouldHave(Condition.text("PROFILE"), Duration.ofSeconds(30));
-        estoreUserAccountPage.getProfileButton().click();
-
-        estoreUserAccountPage.getMyProfileButton().shouldHave(Condition.text("My Account"), Duration.ofSeconds(30));
-        estoreUserAccountPage.getMyProfileButton().click();
-        estoreUserAccountPage.getPaymentMethodsButton().shouldHave(Condition.text("Payment Methods"), Duration.ofSeconds(20));
-        estoreUserAccountPage.getPaymentMethodsButton().click();
+        sleep(2000);
+        open("https://stg4.rhnonprod.com/my-account/payment-info.jsp");
+//        estoreUserAccountPage.getProfileIconButton().should(Condition.visible, Duration.ofSeconds(120));
+//        estoreUserAccountPage.getProfileIconButton().click();
+//        estoreUserAccountPage.getProfileButton().shouldHave(Condition.text("PROFILE"), Duration.ofSeconds(30));
+//        estoreUserAccountPage.getProfileButton().click();
+//
+//        estoreUserAccountPage.getMyProfileButton().shouldHave(Condition.text("My Account"), Duration.ofSeconds(30));
+//        estoreUserAccountPage.getMyProfileButton().click();
+//        estoreUserAccountPage.getPaymentMethodsButton().shouldHave(Condition.text("Payment Methods"), Duration.ofSeconds(20));
+//        estoreUserAccountPage.getPaymentMethodsButton().click();
     }
 
 
@@ -66,8 +68,8 @@ public class EstoreUserAccountPageStepDefs {
         estoreUserAccountPage.getBillingAddressPostalCode().setValue("12345");
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
 
-        $(By.xpath("//*[text()='Street Address Information, Martin Luther King Junior Boulevard, Chapel Hill, NC, USA']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Street Address Information, Martin Luther King Junior Boulevard, Chapel Hill, NC, USA']")).click();
+//        $(By.xpath("//*[text()='Street Address Information, Martin Luther King Junior Boulevard, Chapel Hill, NC, USA']")).should(visible, Duration.ofSeconds(20));
+//        $(By.xpath("//*[text()='Street Address Information, Martin Luther King Junior Boulevard, Chapel Hill, NC, USA']")).click();
 
         estoreUserAccountPage.getSaveCardButton().click();
         estorePaymentPage.getContinueToCheckout().should(visible, Duration.ofSeconds(40));

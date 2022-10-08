@@ -710,12 +710,12 @@ public class ConciergeCartStepDefs {
                 "    \"operationName\": \"addLineItemsToConciergeCart\",\n" +
                 "    \"variables\": {\n" +
                 "        \"email\": \"automationassociate@rh.com\",\n" +
-                "        \"cartId\": \""+ cartId +"\",\n" +
+                "        \"cartId\": \""+ "f237486a-01bf-4dc3-a0da-349f2a1c6356" +"\",\n" +
                 "        \"lineItemsInput\": {\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
                 "                    \"sku\": \"63130001 GREY\",\n" +
-                "                    \"quantity\": 2,\n" +
+                "                    \"quantity\": 1,\n" +
                 "                    \"brand\": \"RH\",\n" +
                 "                    \"giftTo\": \"\",\n" +
                 "                    \"giftFrom\": \"\",\n" +

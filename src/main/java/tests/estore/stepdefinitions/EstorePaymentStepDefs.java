@@ -50,15 +50,16 @@ public class EstorePaymentStepDefs {
 
     @When("I choose saved card {string} from payment method dropdown")
     public void iChooseSaveCardFromPaymentMethodDropdown(String cardType) {
+        sleep(4000);
         estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         if (cardType.equals("VI")) {
-            selectPayment.selectByValue("46784755611871507543");
+            selectPayment.selectByValue("46784754392242157543");
             $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofMinutes(2));
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
         }
         if (cardType.equals("MC")) {
-            selectPayment.selectByValue("22224053560881330008");
+            selectPayment.selectByValue("22224052112154880008");
             $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofMinutes(2));
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
         }
@@ -68,8 +69,8 @@ public class EstorePaymentStepDefs {
         switchTo().defaultContent();
 
 
-        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container']//button")).click();
-        //        estorePaymentPage.getContinueToCheckout().should(visible,Duration.ofSeconds(20));
+//        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container']//button")).click();
+//                estorePaymentPage.getContinueToCheckout().should(visible,Duration.ofSeconds(20));
 //        estorePaymentPage.getContinueToCheckout().click();
 
     }
@@ -95,8 +96,8 @@ public class EstorePaymentStepDefs {
         sleep(3000);
         estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(40));
         estoreAddressScreen.getEditShippinggAddress().click();
-        $(By.xpath("(//*[text()='Edit'])[3]")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("(//*[text()='Edit'])[3]")).click();
+        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).click();
         estoreAddressScreen.getBillingAddressFirstName().click();
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstName());
         estoreAddressScreen.getBillingAddressFirstName().setValue("NewBillingAddress");
@@ -145,7 +146,7 @@ public class EstorePaymentStepDefs {
         try {
             estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
             Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
-            selectPayment.selectByValue("46784755611871507543");
+            selectPayment.selectByValue("46784754392242157543");
             $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofSeconds(20));
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
             estorePaymentPage.getCvcField().setValue("737");
@@ -153,7 +154,7 @@ public class EstorePaymentStepDefs {
             $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
             $(By.xpath("//input[@type='text']")).setValue("10");
             estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
-            selectPayment.selectByValue("22224053560881330008");
+            selectPayment.selectByValue("22224052112154880008");
             $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofSeconds(20));
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
             estorePaymentPage.getCvcField().setValue("737");

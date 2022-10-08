@@ -141,7 +141,7 @@ Feature:Estore Payment
     When I click on continue to payment estore button
     When I remove payment method which was used earlier
     When I execute payment with credit card on estore
-    When I click on estore cart button from header
+    When I open estore cart
     Then I verify that I'm able to increase item quantity with success after payment
     When I go to estore item "10100453 PYT" from search field
     When I click on add to cart estore button
@@ -189,6 +189,7 @@ Feature:Estore Payment
     When I click on continue to payment estore button
     When I remove payment method which was used earlier
     When I choose saved card "VI" from payment method dropdown
+    When I click on continue payment method estore button
     Then I validate that billing address based on saved payment method
 
   Scenario: eStore Add new payment method
