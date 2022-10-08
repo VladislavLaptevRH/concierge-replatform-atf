@@ -706,7 +706,8 @@ public class ConciergeE2EStepDefs {
 
     @When("I open cart")
     public void iOpenCart() {
-        open("https://stg4-concierge.restorationhardware.com/checkout/shopping_cart.jsp");
+        String URL = Hooks.properties.get(Hooks.conciergeURL) + "/checkout/shopping_cart.jsp";
+        open(URL);
         sleep(2000);
     }
 }

@@ -3,38 +3,34 @@ Feature:Concierge Cart Page
 
   Scenario: Order Classification
     Given I log into Concierge as "associate"
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I add item to cart via API
+    When I open cart
     Then I verify order classification
 
   Scenario: Checkout membership popup for Guest user
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I remove all items from cart via API
     When I remove client from header
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I add item to cart via API
+    When I open cart
     When I choose order classification
     When I click on checkout button
     Then I verify membership popup for guest user
 
   Scenario: Line Item : Quantity update
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I remove all items from cart via API
     When I remove client from header
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I add item to cart via API
+    When I open cart
     When I click on quantity line item button
     Then I verify that quantity was updated
 
   Scenario:Remove line item - click on remove button and verify that line item is removed and subtotal and minicart value is updated
     Given I log into Concierge as "associate"
     When I remove client from header
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I add item to cart via API
+    When I open cart
     When I remove all items from cart
     Then I verify that line item was removed
 
