@@ -148,7 +148,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on zipcode estore button")
     public void iClickOnZipcodeEstoreButton() {
-        sleep(2000);
+        sleep(4000);
         estoreAddressScreen.getEnterZipCodeBtn().scrollIntoView(true);
         estoreAddressScreen.getEnterZipCodeBtn().should(visible, Duration.ofSeconds(40));
         estoreAddressScreen.getEnterZipCodeBtn().click();
