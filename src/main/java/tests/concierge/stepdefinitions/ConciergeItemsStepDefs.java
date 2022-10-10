@@ -51,7 +51,7 @@ public class ConciergeItemsStepDefs {
     @When("I select color option")
     public void iSelectColorOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(8000);
+        sleep(9000);
         try {
             selectOption.getColorOption().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
             selectOption.getColorOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
