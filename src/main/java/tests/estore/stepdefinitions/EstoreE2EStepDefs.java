@@ -79,9 +79,11 @@ public class EstoreE2EStepDefs {
 
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
+        sleep(2000);
         generalStepDefs.waitForJSandJQueryToLoad();
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
-        estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
+        sleep(3000);
+        estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(3));
         estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
         estoreItemPage.getAddToCartButton().click();
     }

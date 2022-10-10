@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -350,6 +351,9 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that I'm able to add products from all brands to cart")
     public void iVerifyThatIMAbleToAddProductsFromAllBrandsToCart() {
+        sleep(2000);
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        sleep(2000);
         estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getBrandButton().click();
         int countOfBrands = estoreUserAccountPage.getListOfBrands().size();

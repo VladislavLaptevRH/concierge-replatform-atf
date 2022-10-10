@@ -84,8 +84,8 @@ Feature: Estore Cart Page
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on zipcode estore button
-    When I update postal code in cart
-    Then I verify UFD in cart
+#    When I update postal code in cart
+#    Then I verify UFD in cart
 
   Scenario: eStore - Add Surcharge item to Cart
     Given I log into eStore as "regular"
@@ -103,10 +103,10 @@ Feature: Estore Cart Page
     When I go to estore item "10073234 CAML" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
-    When I click on zipcode estore button
-    When I update postal code in cart
-    When I click on gift box button
-    Then I verify gift box fee in estore cart
+#    When I click on zipcode estore button
+#    When I update postal code in cart
+#    When I click on gift box button
+#    Then I verify gift box fee in estore cart
 
   Scenario: eStore - Membership price for US and CAN
     Given I remove all items from estore cart

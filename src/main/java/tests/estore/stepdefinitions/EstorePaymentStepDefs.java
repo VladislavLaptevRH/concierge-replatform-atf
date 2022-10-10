@@ -144,12 +144,13 @@ public class EstorePaymentStepDefs {
     @Then("I verify that I'm able to execute estore split payment with saved CC")
     public void iVerifyThatIMAbleToExecuteEstoreSplitPaymentWithSavedCC() {
         try {
+            sleep(4000);
             estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
             Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
-            selectPayment.selectByValue("46784754392242157543");
+            selectPayment.selectByValue("45642063983482960745");
             $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofSeconds(20));
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
-            estorePaymentPage.getCvcField().setValue("737");
+            estorePaymentPage.getCvcField().setValue("321");
             switchTo().defaultContent();
             $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
             $(By.xpath("//input[@type='text']")).setValue("10");
