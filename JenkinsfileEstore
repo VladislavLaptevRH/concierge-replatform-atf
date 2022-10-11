@@ -1,7 +1,7 @@
 @Library('jenkins-rhapsody-libraries@master') _ //Importing shared Libraries
 import com.rh.rhapsody.*;
 
-Service s = Service.CONCIERGE_REPLATFORM_ATF;
+Service s = Service.ESTORE_PIPELINE;
 
 
 def resultspath = "${env.JOB_NAME}/${env.BUILD_NUMBER}"
