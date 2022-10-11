@@ -3,6 +3,7 @@ import com.rh.rhapsody.*;
 
 Service s = Service.CONCIERGE_REPLATFORM_ATF;
 
+
 def resultspath = "${env.JOB_NAME}/${env.BUILD_NUMBER}"
 println("resultspath=${resultspath}")
 
