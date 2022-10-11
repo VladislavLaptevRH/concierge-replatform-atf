@@ -1,7 +1,7 @@
 @Library('jenkins-rhapsody-libraries@master') _ //Importing shared Libraries
 import com.rh.rhapsody.*;
 
-Service s = Service.ESTORE_PIPELINE;
+Service s = Service.ESTORE_REGRESSION_TESTS;
 
 
 def resultspath = "${env.JOB_NAME}/${env.BUILD_NUMBER}"
@@ -25,7 +25,7 @@ pipeline.standardTemplate { label ->
                         sh """
                         apk --no-cache add tree
                         pwd 
-                        cd /home/jenkins/workspace/eCommerce/concierge-replatform-atf/target
+                        cd /home/jenkins/workspace/eCommerce/${env.JOB_NAME}/target
                         tree -H '.' -L 3 --noreport --charset utf-8  -o index.html
                         aws s3 sync . s3://docs.rhapsody.rh.com/public/${resultspath}
                         """
