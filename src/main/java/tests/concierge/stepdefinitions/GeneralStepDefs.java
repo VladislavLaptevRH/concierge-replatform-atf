@@ -358,7 +358,7 @@ public class GeneralStepDefs {
      * @param userId
      * @returns cartId
      * */
-    public static String getCartId (String email, String userId) {
+    public static String createtCartId (String email, String userId) {
         RestAssured.baseURI = "https://development.internal.rhapsodynonprod.com";
         RequestSpecification request = RestAssured.given();
         request.relaxedHTTPSValidation();
@@ -373,6 +373,22 @@ public class GeneralStepDefs {
                         "        \"userId\": \""+"7a4678b9-9f15-4486-a217-aa154ef8eb8b"+"\"\n" +
                         "    }\n" +
                         "}").post("/rhdo-cart-broker-v1/carts");
+
+        String jsonString = response.asString();
+        return JsonPath.from(jsonString).get("id");
+    }
+
+    /**
+     * @param userId
+     * @returns cartId
+     * */
+
+    public static String getCurrentCartId(String userId) {
+        RestAssured.baseURI = "https://development.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/agent/"+userId+"";
+        RequestSpecification request = RestAssured.given();
+        request.relaxedHTTPSValidation();
+
+        response = request.get();
 
         String jsonString = response.asString();
         return JsonPath.from(jsonString).get("id");
