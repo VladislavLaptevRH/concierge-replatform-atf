@@ -3,10 +3,9 @@ Feature:Concierge Order review
 
   Scenario: Edit Shipping and Billing Address
     Given I log into Concierge as "associate"
-    When I remove all items from cart
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I clear order via API
+    When I add item to cart via API
+    When I open cart
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
@@ -23,10 +22,9 @@ Feature:Concierge Order review
 
   Scenario: Edit payment
     Given I log into Concierge as "associate"
-    When I remove all items from cart
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I clear order via API
+    When I add item to cart via API
+    When I open cart
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
@@ -39,10 +37,9 @@ Feature:Concierge Order review
 
   Scenario: Verify the payment details and Order estimate summary
     Given I log into Concierge as "associate"
-    When I remove all items from cart
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I clear order via API
+    When I add item to cart via API
+    When I open cart
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
@@ -54,7 +51,7 @@ Feature:Concierge Order review
 
   Scenario: SPO ORDER & TERMS REVIEW SIGNATURE CAPTURE
     Given I log into Concierge as "associate"
-    And I remove all items from cart
+    When I clear order via API
     When I clicks on a random menu item
     When I click on collections item
     When I clicks on o random item
@@ -78,10 +75,9 @@ Feature:Concierge Order review
 
   Scenario: Verify all the line items on the order review page
     Given I log into Concierge as "associate"
-    When I remove all items from cart
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I clear order via API
+    When I add item to cart via API
+    When I open cart
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button

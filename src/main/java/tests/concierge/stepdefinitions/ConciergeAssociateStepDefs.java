@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -36,9 +37,11 @@ public class ConciergeAssociateStepDefs {
     public void iLogIntoConciergeAs(String arg0) {
         Log.debug("I log into Concierge as " + arg0);
         generalStepDefs.loginAsRole(arg0);
-        Cookie ck = new Cookie("endpoint", "prodsupport");
-        WebDriverRunner.getWebDriver().manage().addCookie(ck);
-        WebDriverRunner.getWebDriver().navigate().refresh();
+        if (Hooks.conciergeURL.contains("st4")) {
+            Cookie ck = new Cookie("endpoint", "prodsupport");
+            WebDriverRunner.getWebDriver().manage().addCookie(ck);
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
         generalStepDefs.waitForJSandJQueryToLoad();
     }
 
