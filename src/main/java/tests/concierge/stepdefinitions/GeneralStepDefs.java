@@ -36,6 +36,8 @@ public class GeneralStepDefs {
     static WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(30));
     public static String id;
     private static Response response;
+    private static String authEndpoint;
+    private static String clientSecret;
 
     public void waitForLoad(WebDriver driver) {
         ExpectedCondition<Boolean> pageLoadCondition = webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete");
@@ -370,7 +372,7 @@ public class GeneralStepDefs {
                         "    \"country\": \"US\",\n" +
                         "    \"guest\": {\n" +
                         "        \"email\": \""+email+"\",\n" +
-                        "        \"userId\": \""+"7a4678b9-9f15-4486-a217-aa154ef8eb8b"+"\"\n" +
+                        "        \"userId\": \""+userId+"\"\n" +
                         "    }\n" +
                         "}").post("/rhdo-cart-broker-v1/carts");
 
@@ -384,14 +386,51 @@ public class GeneralStepDefs {
      * */
 
     public static String getCurrentCartId(String userId) {
-        RestAssured.baseURI = "https://development.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/agent/"+userId+"";
+
+        if (Hooks.conciergeURL.contains("stg2")) {
+            RestAssured.baseURI = "https://staging.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/agent/"+userId+"";
+        } else {
+            RestAssured.baseURI = "https://development.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/agent/"+userId+"";
+        }
+
         RequestSpecification request = RestAssured.given();
         request.relaxedHTTPSValidation();
 
+        if  (RestAssured.baseURI.contains("staging")) {
+            String accessToken = getAuthToken();
+            request.headers("Authorization", "Bearer "+accessToken+"");
+        }
         response = request.get();
 
         String jsonString = response.asString();
         return JsonPath.from(jsonString).get("id");
+    }
+
+    /**
+     * @returns access_token
+     * */
+
+    public static String getAuthToken() {
+        if (Hooks.conciergeURL.contains("stg2")) {
+            authEndpoint = "staging";
+            clientSecret = "2119483c-ab18-42b4-9bdc-05d16720d173";
+        } else {
+            authEndpoint = "qa";
+            clientSecret = "a2e447ae-abc8-4ed3-bf46-94d3a4c88031";
+        }
+        RestAssured.baseURI = "https://auth.rhnonprod.com";
+        RequestSpecification request = RestAssured.given();
+        request.headers("Content-Type", "application/x-www-form-urlencoded");
+        request.param("grant_type", "client_credentials");
+        request.param("scope", "rhapsody-user-svc");
+        request.param("client_id", "rh-experience-layer");
+        request.param("client_secret", clientSecret);
+        request.relaxedHTTPSValidation();
+
+        response = request.post("/auth/realms/"+authEndpoint+"/protocol/openid-connect/token");
+
+        String jsonString = response.asString();
+        return JsonPath.from(jsonString).get("access_token");
     }
 }
 
