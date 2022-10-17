@@ -796,5 +796,6 @@ public class ConciergeCartStepDefs {
         String jsonString = response.asString();
         id = JsonPath.from(jsonString).get("id");
         WebDriverRunner.getWebDriver().navigate().refresh();
+        sleep(10000);
     }
 }
