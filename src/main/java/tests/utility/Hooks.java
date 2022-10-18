@@ -2,6 +2,7 @@ package tests.utility;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.Cookie;
 import org.testng.Assert;
 import tests.concierge.stepdefinitions.FilterStepDefs;
 import io.cucumber.java.After;
@@ -43,6 +44,8 @@ public class Hooks {
     private static boolean setUpIsDone = false;
     private static final Logger Log = LoggerFactory.getLogger(FilterStepDefs.class);
     protected static String profile;
+    protected static String cookie;
+    public static String endpoint;
 
 
     /**
@@ -51,9 +54,14 @@ public class Hooks {
     private void ConfigFileReader() {
 
         profile = System.getenv("ENVIRONMENT");
+        cookie = System.getenv("ENDPOINT");
 
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
+        }
+
+        if (cookie == null) {
+            System.out.println("Tests are running without cookie or endpoint");
         }
 
         BufferedReader reader;
@@ -72,6 +80,7 @@ public class Hooks {
         }
         conciergeURL = properties.getProperty("url.concierge." + profile);
         eStoreURL = properties.getProperty("url.estore." + profile);
+        endpoint = properties.getProperty("endpoint.cookie." + cookie);
         associatePassword = (String) properties.get("associatePassword");
         associateLogin = (String) properties.get("associateLogin");
         leaderPassword = (String) properties.get("leaderPassword");
@@ -108,7 +117,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = true;
+            Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 60000;
         Configuration.reportsFolder = "target/screenshots";
@@ -174,4 +183,19 @@ public class Hooks {
         return webDriver;
     }
 
+    public static void setupConciergeCookies () {
+        if (cookie != null) {
+            Cookie ck = new Cookie("endpoint", endpoint);
+            WebDriverRunner.getWebDriver().manage().addCookie(ck);
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
+    }
+
+    public static void setupEstoreCookies () {
+        if (cookie != null) {
+            Cookie ck = new Cookie("endpoint", endpoint);
+            WebDriverRunner.getWebDriver().manage().addCookie(ck);
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
+    }
 }
