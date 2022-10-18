@@ -1,14 +1,13 @@
 package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
-import io.cucumber.java.an.E;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -102,10 +101,6 @@ public class EstoreAddressStepDefs {
     @Then("I validate {string} which we have entered earlier")
     public void iValidateWhichWeHaveEnteredEarlier(String arg0) {
         $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Rock Island, IL 61201']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='3097931846']")).should(visible, Duration.ofSeconds(40));
-
     }
 
     @When("I fill estore billing address")
@@ -138,18 +133,28 @@ public class EstoreAddressStepDefs {
             Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
             shippingAddressCountry.selectByValue("US");
 
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
-            estoreAddressScreen.getShippingAddressStreetAddress().setValue("4224 Simpson Street");
+
+            if (Hooks.eStoreURL.contains("stg4")) {
+                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
+                estoreAddressScreen.getShippingAddressStreetAddress().setValue("Bradford Lane");
+            } else {
+                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
+                estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Bradford Lane");
+            }
+
+            $(By.xpath("//a[@href=\"/checkout/address.jsp\"]")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//a[@href=\"/checkout/address.jsp\"]")).click();
+
             estoreAddressScreen.getShippingAddressAptFloor().click();
             estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
-            estoreAddressScreen.getShippingAddressCity().setValue("Rock Island");
+            estoreAddressScreen.getShippingAddressCity().setValue("Newark");
 
             Select shippingAddressState = new Select(estoreAddressScreen.getShippingAddressState());
-            shippingAddressState.selectByValue("IL");
+            shippingAddressState.selectByValue("DE");
 
             estoreAddressScreen.getPostalShippingCode().click();
             generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-            estoreAddressScreen.getPostalShippingCode().setValue("61201");
+            estoreAddressScreen.getPostalShippingCode().setValue("19711");
 
             estoreAddressScreen.getShippingAddressPhone().click();
             generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
@@ -197,8 +202,15 @@ public class EstoreAddressStepDefs {
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressLastName());
         estoreUserAccountPage.getBillingAddressLastName().setValue(generalStepDefs.getAlphaNumericString(4));
 
-        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
-        estoreUserAccountPage.getBillingAddressStreetAddress().setValue("2479 Deer Run");
+        if (Hooks.eStoreURL.contains("stg2")) {
+            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddressStg2());
+            estoreUserAccountPage.getBillingAddressStreetAddressStg2().setValue("2479 Deer Run");
+        } else {
+            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
+            estoreUserAccountPage.getBillingAddressStreetAddress().setValue("2479 Deer Run");
+        }
+
+
 //
 //        $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).should(visible, Duration.ofSeconds(20));
 //        $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).click();
@@ -279,11 +291,17 @@ public class EstoreAddressStepDefs {
 
     @When("I click on continue with original address estore button")
     public void iClickOnContinueWithOriginalAddressEstoreButton() {
-        generalStepDefs.waitForJSandJQueryToLoad();
-        estoreItemPage.getAddToCartButton().scrollIntoView(true);
-        estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
-        estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE WITH ORIGINAL ADDRESS"), Duration.ofSeconds(50));
-        estoreItemPage.getAddToCartButton().click();
+        if (Hooks.eStoreURL.contains("stg2")) {
+            try {
+                generalStepDefs.waitForJSandJQueryToLoad();
+                estoreItemPage.getAddToCartButton().scrollIntoView(true);
+                estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
+                estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE WITH ORIGINAL ADDRESS"), Duration.ofSeconds(50));
+                estoreItemPage.getAddToCartButton().click();
+            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                System.out.println("Continue with original button is not displayed");
+            }
+        }
     }
 
     @When("I click on continue to payment estore button")
@@ -295,10 +313,10 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore shipping email address")
     public void iFillEstoreShippingEmailAddress() {
+        String shippingEmail = generalStepDefs.getAlphaNumericString(5) + "@rh.com";
         estoreAddressScreen.getEmailField().should(visible, Duration.ofSeconds(20));
-        estoreAddressScreen.getEmailField().sendKeys("automationtest@rh.com");
-        estoreAddressScreen.getConfirmEmail().sendKeys("automationtest@rh.com");
-        System.out.println();
+        estoreAddressScreen.getEmailField().sendKeys(shippingEmail);
+        estoreAddressScreen.getConfirmEmail().sendKeys(shippingEmail);
     }
 
     @When("I remove added address before for address book")
@@ -316,8 +334,8 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that added address is displayed in the shipping address list")
     public void iVerifyThatAddedAddressIsDisplayedInTheShippingAddressList() {
-        $(By.xpath("//*[text()='2479 Deer Run']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Lewisville']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='2479 Deer Run']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Lewisville']")).should(visible, Duration.ofSeconds(20));
 
     }
 }

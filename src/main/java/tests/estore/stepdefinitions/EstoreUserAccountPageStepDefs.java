@@ -10,9 +10,7 @@ import tests.estore.pageObject.EstoreAddressScreen;
 import tests.estore.pageObject.EstorePaymentPage;
 import tests.estore.pageObject.EstoreUserAccountPage;
 
-import javax.naming.ldap.Rdn;
 import java.time.Duration;
-import java.util.UUID;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
@@ -22,7 +20,6 @@ public class EstoreUserAccountPageStepDefs {
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
     EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
-    String additionalEmail;
     static String firstName;
 
     @When("I go to profile payment method")

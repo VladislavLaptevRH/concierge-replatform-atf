@@ -1,23 +1,20 @@
 package tests.estore.stepdefinitions;
+
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
-import static org.testng.Assert.*;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.openqa.selenium.By;
 import tests.estore.pageObject.EstoreCartPage;
 import tests.estore.pageObject.EstoreItemPage;
 import tests.estore.pageObject.EstoreMemberPage;
 import tests.estore.pageObject.EstoreUserAccountPage;
-import tests.utility.Hooks;
+
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class EstoreMemberStepDefs {
 

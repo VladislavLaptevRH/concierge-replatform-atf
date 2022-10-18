@@ -2,11 +2,9 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
-import io.cucumber.java.an.E;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import tests.estore.pageObject.*;
@@ -23,7 +21,6 @@ public class EstorePaymentStepDefs {
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
     EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
     EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
-    EstoreAbstractStepDefs estoreAbstractStepDefs = new EstoreAbstractStepDefs();
     EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
     EstoreItemPage estoreItemPage = new EstoreItemPage();
 
@@ -54,7 +51,7 @@ public class EstorePaymentStepDefs {
         estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         if (cardType.equals("VI")) {
-            selectPayment.selectByValue("46784754392242157543");
+            selectPayment.selectByValue("45642063983482960745");
             $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofMinutes(2));
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
         }
@@ -178,7 +175,6 @@ public class EstorePaymentStepDefs {
         $(By.xpath("//*[text()='Visa ####-7543']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Master Card ####-0008']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Master Card ####-0008']")).click();
-        System.out.printf("");
     }
 
     @Then("I verify that credit cards are displayed in total section")

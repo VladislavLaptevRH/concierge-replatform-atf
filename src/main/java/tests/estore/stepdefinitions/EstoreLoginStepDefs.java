@@ -7,11 +7,10 @@ import tests.estore.pageObject.EstoreLoginPage;
 import tests.utility.Hooks;
 
 import java.time.Duration;
-import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
-import static tests.utility.Hooks.getWindowsHandles;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class EstoreLoginStepDefs {
 
@@ -34,53 +33,52 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(15));
             estoreLoginPage.getPasswordField().should(visible, Duration.ofMinutes(15));
 
-//stg4
+
             if (accountRole.equals("orderreview")) {
                 estoreLoginPage.getUsernameField().setValue("orderreview@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Orderreview1234");
             }
-//stg4
+
             if (accountRole.equals("noaddresses")) {
                 estoreLoginPage.getUsernameField().setValue("addressno@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Password1234");
             }
-//            noaddresses@rh.com
-//stg4
+
             if (accountRole.equals("addresspage")) {
                 estoreLoginPage.getUsernameField().setValue("addresspage@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Address1234");
             }
-//
+
             if (accountRole.equals("savedRhCcDiscover")) {
                 estoreLoginPage.getUsernameField().setValue("bnamdeo+0010@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Resto123");
             }
-//stg4
+
             if(accountRole.equals("savedaddress")){
                 estoreLoginPage.getUsernameField().setValue("addresssaved@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Address1234");
             }
-//stg4
+
             if (accountRole.equals("savedRhCc")) {
                 estoreLoginPage.getUsernameField().setValue("savedrhcc@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Resto123");
             }
-//stg4
+
             if (accountRole.equals("userWithSavedMasterCardVisa")) {
                 estoreLoginPage.getUsernameField().setValue("mastervisa@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Resto123");
             }
-//stg4
+
             if (accountRole.equals("mastercard")) {
                 estoreLoginPage.getUsernameField().setValue("mastercard@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Qwerty@123");
             }
-//stg4
+
             if (accountRole.equals("regular")) {
                 estoreLoginPage.getUsernameField().setValue("new02@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Qwerty@123");
             }
-//stg4
+
             if (accountRole.equals("addnewpayment")) {
                 estoreLoginPage.getUsernameField().setValue("addpaymentmethod@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Test12345");
@@ -103,12 +101,12 @@ public class EstoreLoginStepDefs {
                 estoreLoginPage.getUsernameField().setValue("wish@listautomation.com");
                 estoreLoginPage.getPasswordField().setValue("Qwert1234");
             }
- //stg4
+
             if (accountRole.equals("member")) {
                 estoreLoginPage.getUsernameField().setValue("bnamdeo+0073@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Resto123");
             }
-//stg4
+
             if (accountRole.equals("nonmember")) {
                 estoreLoginPage.getUsernameField().setValue("nonmember1@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Qwert1234");

@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import tests.estore.pageObject.EstoreCGScreen;
 import tests.estore.pageObject.EstoreItemPage;
 import tests.estore.pageObject.EstoreUserAccountPage;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -130,33 +131,44 @@ public class EstoreCGStepDefs {
 
     @When("I go to MO brand")
     public void iGoToMOBrand() {
-        $(By.xpath("//a[@data-testid='brand-link']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//a[@data-testid='brand-link']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//a[@data-testid='brand-link']")).click();
-        $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg4.rhnonprod.com/']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg4.rhnonprod.com/']")).click();
+        if (Hooks.eStoreURL.contains("stg4")) {
+            $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg4.rhnonprod.com/']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg4.rhnonprod.com/']")).click();
+        } else {
+            $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg2.rhnonprod.com/']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//li[@data-analytics-url='https://rhmodern.stg2.rhnonprod.com/']")).click();
+        }
+
     }
 
     @Then("I verify that contract price is used for each product")
     public void iVerifyThatPriceIsDisplayedInCart() {
-        $(By.xpath("(//*[text()='$35.00'])[2]")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='$35.00'])[2]")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify that contract price is used for each B&C product")
     public void iVerifyThatPriceIsDisplayedInCartBC() {
-        $(By.xpath("(//*[text()='$35.00'])[2]")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='$35.00'])[2]")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I go to B&C brand")
     public void iGoToBCBrand() {
-        $(By.xpath("//a[@data-testid='brand-link']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//a[@data-testid='brand-link']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//a[@data-testid='brand-link']")).click();
-        $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg4.rhnonprod.com/']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg4.rhnonprod.com/']")).click();
+        if (Hooks.eStoreURL.contains("stg4")) {
+            $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg4.rhnonprod.com/']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg4.rhnonprod.com/']")).click();
+        } else {
+            $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg2.rhnonprod.com/']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.stg2.rhnonprod.com/']")).click();
+        }
     }
 
     @Then("I verify that contract price is used for each TN product")
     public void iVerifyThatContractPriceIsUsedForEachTNProduct() {
-        $(By.xpath("(//*[text()='$35.00'])[2]")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='$35.00'])[2]")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify that trade price is used for each TN product")

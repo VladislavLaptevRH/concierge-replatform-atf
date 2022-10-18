@@ -1,10 +1,9 @@
 package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
-import tests.concierge.pageObject.ConciergeItemsScreen;
-import tests.concierge.pageObject.SelectOption;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.support.ui.Select;
+import tests.concierge.pageObject.SelectOption;
 import tests.estore.pageObject.EstoreItemPage;
 
 import java.time.Duration;

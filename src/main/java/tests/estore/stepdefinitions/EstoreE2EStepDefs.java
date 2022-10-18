@@ -3,10 +3,6 @@ package tests.estore.stepdefinitions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
-
-import tests.estore.pageObject.*;
-import tests.utility.Hooks;
-import tests.concierge.pageObject.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -15,6 +11,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import tests.concierge.pageObject.*;
+import tests.estore.pageObject.*;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 import java.util.Random;
@@ -22,7 +21,6 @@ import java.util.Random;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.awaitility.Awaitility.await;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class EstoreE2EStepDefs {

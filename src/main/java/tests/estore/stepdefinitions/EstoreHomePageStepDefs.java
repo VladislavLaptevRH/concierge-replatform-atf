@@ -6,21 +6,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import tests.estore.pageObject.EstoreHomePage;
-
+import tests.utility.Hooks;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.sleep;
-import static com.codeborne.selenide.Selenide.webdriver;
-
-import com.codeborne.selenide.WebDriverRunner;
-import tests.utility.Hooks;
-
-import static com.codeborne.selenide.WebDriverConditions.*;
-import static org.testng.Assert.*;
 
 public class EstoreHomePageStepDefs {
     EstoreHomePage estoreHomePage = new EstoreHomePage();

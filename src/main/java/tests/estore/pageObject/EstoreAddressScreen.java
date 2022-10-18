@@ -17,6 +17,8 @@ public class EstoreAddressScreen {
 
     private final SelenideElement shippingAddressStreetAddress = $(By.id("shippingAddress.addressLine1"));
 
+    private final SelenideElement shippingAddressStreetAddressStg2 = $(By.xpath("//input[@data-testid='shippingAddress.addressLine1']"));
+
     private final SelenideElement shippingAddressAptFloor = $(By.id("shippingAddress.addressLine2"));
 
     private final SelenideElement shippingAddressCity = $(By.id("shippingAddress.city"));

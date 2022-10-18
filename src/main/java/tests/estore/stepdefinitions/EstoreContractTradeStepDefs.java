@@ -1,13 +1,13 @@
 package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
-import io.cucumber.java.an.E;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import tests.estore.pageObject.EstoreLoginPage;
 import tests.estore.pageObject.EstoreUserAccountPage;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -53,8 +53,14 @@ public class EstoreContractTradeStepDefs {
     public void iGoToTNBrand() {
         $(By.xpath("//a[@data-testid='brand-link']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//a[@data-testid='brand-link']")).click();
-        $(By.xpath("//li[@data-analytics-url='https://rhteen.stg4.rhnonprod.com/']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//li[@data-analytics-url='https://rhteen.stg4.rhnonprod.com/']")).click();
+        if(Hooks.eStoreURL.contains("stg4")){
+            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg4.rhnonprod.com/']")).should(visible, Duration.ofSeconds(40));
+            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg4.rhnonprod.com/']")).click();
+        }else{
+            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']")).should(visible, Duration.ofSeconds(40));
+            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']")).click();
+        }
+
     }
 
     @Then("I verify that trade paragraph is displayed")

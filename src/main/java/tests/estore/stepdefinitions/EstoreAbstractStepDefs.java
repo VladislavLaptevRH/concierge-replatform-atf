@@ -24,9 +24,7 @@ public class EstoreAbstractStepDefs {
     SelectOption selectOption = new SelectOption();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
-    PaymentScreen paymentScreen = new PaymentScreen();
     EstoreReviewOrderPage estoreReviewOrderPage = new EstoreReviewOrderPage();
-    ReviewOrderScreen reviewOrderScreen = new ReviewOrderScreen();
     ConfirmationOrderScreen confirmationOrderScreen = new ConfirmationOrderScreen();
     ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
     EstoreGeneralStepDefs generalStepDefs = new EstoreGeneralStepDefs();

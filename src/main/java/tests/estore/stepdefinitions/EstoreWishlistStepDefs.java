@@ -1,19 +1,16 @@
 package tests.estore.stepdefinitions;
 
-import com.codeborne.selenide.Condition;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import tests.estore.pageObject.EstoreItemPage;
-import tests.estore.pageObject.EstoreWishlistPage;
+
 import java.time.Duration;
-import static com.codeborne.selenide.Condition.*;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.sleep;
-import static org.testng.Assert.assertTrue;
 
 public class EstoreWishlistStepDefs {
 
-    EstoreWishlistPage estoreWishlistPage = new EstoreWishlistPage();
-    EstoreGeneralStepDefs generalStepDefs = new EstoreGeneralStepDefs();
     EstoreItemPage estoreItemPage = new EstoreItemPage();
 
     @Then("I validate items in wishlist")

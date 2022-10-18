@@ -1,10 +1,8 @@
 package tests.estore.stepdefinitions;
 
-import tests.concierge.pageObject.ConciergeAddressScreen;
-import tests.concierge.pageObject.ConciergeCartPageScreen;
-import tests.concierge.pageObject.PaymentScreen;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
+import tests.concierge.pageObject.ConciergeCartPageScreen;
 
 import java.time.Duration;
 
@@ -13,9 +11,6 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class EstoreThankYouPageStepDefs {
-    PaymentScreen paymentScreen = new PaymentScreen();
-    EstoreGeneralStepDefs generalStepDefs = new EstoreGeneralStepDefs();
-    ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
     ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
 
 
