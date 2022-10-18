@@ -680,7 +680,7 @@ public class EstoreE2EStepDefs {
 
     @When("I open estore product page with productId {string} and skuId {string}")
     public void iOpenEstoreProductPageWithProductIdAndSkuId(String productId, String skuId) {
-        String URL = Hooks.properties.get(Hooks.eStoreURL) + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+NATL";
+        String URL = Hooks.eStoreURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+NATL";
         open(URL);
         sleep(5000);
         if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {

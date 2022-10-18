@@ -45,7 +45,7 @@ public class ConciergeCartStepDefs {
     private static String USER_ID;
     private static final String USEREMAIL = "automationassociate@rh.com";
     private static final String PASSWORD = "Test@@123";
-    private static final String BASE_URL = String.valueOf(Hooks.properties.get(Hooks.conciergeURL));
+    public static final String BASE_URL = Hooks.conciergeURL;
     private static String id;
     private static Response response;
     private static String addItemEndpoint;
@@ -741,7 +741,7 @@ public class ConciergeCartStepDefs {
     @When("I remove all items from cart via API")
     public void iRemoveAllItemsFromCartViaAPI() {
 
-        if (Hooks.conciergeURL.contains("stg2")) {
+        if (BASE_URL.contains("stg2")) {
             USER_ID = "4c5c1919-99d6-47a3-a0f5-7d5287911944";
             addItemEndpoint = "/concierge-bff-v1-stg2/graphql";
         } else  {
@@ -771,7 +771,7 @@ public class ConciergeCartStepDefs {
     @When("I clear order via API")
     public void iClearOrderViaAPI() {
 
-        if (Hooks.conciergeURL.contains("stg2")) {
+        if (BASE_URL.contains("stg2")) {
             USER_ID = "4c5c1919-99d6-47a3-a0f5-7d5287911944";
             addItemEndpoint = "/concierge-bff-v1-stg2/graphql";
         } else  {

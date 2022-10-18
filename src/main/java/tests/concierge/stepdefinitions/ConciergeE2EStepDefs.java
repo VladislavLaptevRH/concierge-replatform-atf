@@ -689,7 +689,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I open product page with {string} and {string}")
     public void iOpenProductPageWithAnd(String productId, String skuId) {
-        String URL = Hooks.properties.get(Hooks.conciergeURL) + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+NATL";
+        String URL = Hooks.conciergeURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+NATL";
         open(URL);
         sleep(3000);
         if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
@@ -699,14 +699,14 @@ public class ConciergeE2EStepDefs {
 
     @When("I open product page with productId {string}")
     public void iOpenProductPageWithProductId(String productId) {
-        String URL = Hooks.properties.get(Hooks.conciergeURL) + "/catalog/product/product.jsp?productId="+productId+"";
+        String URL = Hooks.conciergeURL + "/catalog/product/product.jsp?productId="+productId+"";
         open(URL);
         sleep(3000);
     }
 
     @When("I open cart")
     public void iOpenCart() {
-        String URL = Hooks.properties.get(Hooks.conciergeURL) + "/checkout/shopping_cart.jsp";
+        String URL = Hooks.conciergeURL + "/checkout/shopping_cart.jsp";
         open(URL);
         sleep(2000);
     }
