@@ -18,11 +18,6 @@ pipeline.standardTemplate { label ->
                 environment "${params.ENVIRONMENT}"
             }
 
-            if (${params.ENVIRONMENT }.equals(null)) {
-                ${params.ENVIRONMENT } == "stg4"
-                ${params.ENDPOINT } == "prodsupport"
-
-            }
 
             stage('Run Tests') {
                 pipeline.buildMvn("clean test -Dcucumber.filter.tags='@conciergeRegression'", true);
