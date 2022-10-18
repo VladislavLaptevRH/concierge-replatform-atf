@@ -421,7 +421,7 @@ public class ConciergeCartStepDefs {
     @Then("I verify that membership price displayed as total price")
     public void iVerifyThatMembershipPriceDisplayedAsTotalPrice() {
         String memberPrice = conciergeCartPageScreen.getPriceForMember().getText();
-        String totalPrice = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "");
+        String totalPrice = conciergeCartPageScreen.getTotalMemberPrice().getText();
         assertEquals(memberPrice, totalPrice, "Membership price displayed as total price");
     }
 
@@ -478,19 +478,19 @@ public class ConciergeCartStepDefs {
         if (arg1.equals("nonmember") || (arg1.equals("contract"))) {
             conciergeCartPageScreen.getTotalMemberPrice().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
             String finalSalePrice = conciergeCartPageScreen.getFinalSalePrice().getText();
-            String totalMemberPrice = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "");
+            String totalMemberPrice = conciergeCartPageScreen.getTotalMemberPrice().getText();
             assertEquals(finalSalePrice, totalMemberPrice, "Savings for nonmember user in cart");
         }
         if (arg1.equals("trade")) {
             conciergeCartPageScreen.getTradeSavingsText().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
             String tradelSalePrice = conciergeCartPageScreen.getTradeSalePrice().getText();
-            String totalMemberPrice = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "");
+            String totalMemberPrice = conciergeCartPageScreen.getTotalMemberPrice().getText();
             assertEquals(tradelSalePrice, totalMemberPrice, "Savings for nonmember user in cart");
         }
         if (arg1.equals("member")) {
             conciergeCartPageScreen.getMemberSavingsText().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
             String memberSalePrice = conciergeCartPageScreen.getPriceForMember().getText();
-            String totalMemberPrice = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "");
+            String totalMemberPrice = conciergeCartPageScreen.getTotalMemberPrice().getText();
             assertEquals(memberSalePrice, totalMemberPrice, "Savings for nonmember user in cart");
         }
 
@@ -574,7 +574,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that availability, Delivery and Returns messaging in cart")
     public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingInCart() {
-        $(By.xpath("//*[contains(text(),'This item will be ready for delivery between ')]")).should(visible, Duration.ofSeconds(10));
+        $(By.xpath("//*[contains(text(),'This item is in stock and will be ready for delivery between ')]")).should(visible, Duration.ofSeconds(10));
         $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).should(visible, Duration.ofMinutes(1));
     }
 

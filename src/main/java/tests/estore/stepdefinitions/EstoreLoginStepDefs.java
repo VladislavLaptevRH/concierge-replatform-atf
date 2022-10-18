@@ -21,7 +21,7 @@ public class EstoreLoginStepDefs {
     public void iLogIntoEStoreAs(String arg0) {
         loginAsRole(arg0);
 
-        Cookie ck = new Cookie("endpoint", "search");
+        Cookie ck = new Cookie("endpoint", "contentfix");
         WebDriverRunner.getWebDriver().manage().addCookie(ck);
         WebDriverRunner.getWebDriver().navigate().refresh();
     }

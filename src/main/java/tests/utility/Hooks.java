@@ -37,7 +37,7 @@ public class Hooks {
     public static String leaderLogin;
     public static String currentUrl;
     public static String conciergeURL = "conciergestg4url";
-    public static String eStoreURL = "eStorestg4Url";
+    public static String eStoreURL = "eStorestg2Url";
 
     private static boolean setUpIsDone = false;
     private static final Logger Log = LoggerFactory.getLogger(FilterStepDefs.class);
