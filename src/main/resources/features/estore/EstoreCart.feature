@@ -9,6 +9,7 @@ Feature: Estore Cart Page
     And I click on view cart estore button
     When I click on remove button from estore cart page
     Then I verify that item from estore cart has been removed
+    When I open estore product page with productId "2323" and skuId "2132"
 
   Scenario: Apply/Remove employee discount
     Given I log into eStore as "regular"
