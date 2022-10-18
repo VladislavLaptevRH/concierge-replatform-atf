@@ -2,6 +2,7 @@ package tests.utility;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
+import org.testng.Assert;
 import tests.concierge.stepdefinitions.FilterStepDefs;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -36,17 +37,25 @@ public class Hooks {
     public static String leaderPassword;
     public static String leaderLogin;
     public static String currentUrl;
-    public static String conciergeURL = "conciergestg4url";
-    public static String eStoreURL = "eStorestg2Url";
+    public static String conciergeURL;
+    public static String eStoreURL;
 
     private static boolean setUpIsDone = false;
     private static final Logger Log = LoggerFactory.getLogger(FilterStepDefs.class);
+    protected static String profile;
 
 
     /**
      * This method get properties from application.properties file
      */
     private void ConfigFileReader() {
+
+        profile = System.getenv("ENVIRONMENT");
+
+        if (profile == null) {
+            Assert.fail("Environment Variable is NOT Set");
+        }
+
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(propertyFilePath));
@@ -61,6 +70,8 @@ public class Hooks {
             e.printStackTrace();
             throw new RuntimeException("Configuration.properties not found at " + propertyFilePath);
         }
+        conciergeURL = properties.getProperty("url.concierge." + profile);
+        eStoreURL = properties.getProperty("url.estore." + profile);
         associatePassword = (String) properties.get("associatePassword");
         associateLogin = (String) properties.get("associateLogin");
         leaderPassword = (String) properties.get("leaderPassword");
@@ -74,7 +85,7 @@ public class Hooks {
     public void initWebDrivereStore() {
         ConfigFileReader();
         setupChromeArguments();
-        setUPWebDriver((String) properties.get(eStoreURL));
+        setUPWebDriver(eStoreURL);
     }
 
 
@@ -84,8 +95,7 @@ public class Hooks {
     @Before("@conciergeRegression")
     public void initWebDriver() {
         ConfigFileReader();
-        setupChromeArguments();
-        setUPWebDriver((String) properties.get(conciergeURL));
+        setUPWebDriver(conciergeURL);
     }
 
     /**
@@ -97,7 +107,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = true;
+        Configuration.headless = false;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 60000;
         Configuration.reportsFolder = "target/screenshots";

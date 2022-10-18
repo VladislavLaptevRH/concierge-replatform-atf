@@ -8,10 +8,17 @@ println("resultspath=${resultspath}")
 
 Java11Pipeline pipeline = new Java11Pipeline(this, s, env);
 pipeline.standardTemplate { label ->
+    properties(
+        [parameters([choice(
+            choices: 'stg2\nstg3\nstg4\nprod',
+            description: 'Select environment to build',
+            name: 'ENVIRONMENT'))
     node(label) {
         try {
             stage ('checkout') {
               pipeline.checkoutCode();
+              echo "Regression will be done on environment ${params.ENVIRONMENT}"
+              environment "${params.ENVIRONMENT}"
             }
 
             stage('Run Tests') {
