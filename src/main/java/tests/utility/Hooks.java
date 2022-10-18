@@ -95,6 +95,7 @@ public class Hooks {
     @Before("@conciergeRegression")
     public void initWebDriver() {
         ConfigFileReader();
+        setupChromeArguments();
         setUPWebDriver(conciergeURL);
     }
 
