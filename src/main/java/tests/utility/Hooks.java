@@ -183,6 +183,9 @@ public class Hooks {
         return webDriver;
     }
 
+    /**
+     * Setup cookies for concierge
+     */
     public static void setupConciergeCookies () {
         if (cookie != "no_endpoint") {
             Cookie ck = new Cookie("endpoint", endpoint);
@@ -191,6 +194,9 @@ public class Hooks {
         }
     }
 
+    /**
+     * Setup cookies for eStore
+     */
     public static void setupEstoreCookies () {
         if (cookie != "no_endpoint") {
             Cookie ck = new Cookie("endpoint", endpoint);
