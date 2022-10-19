@@ -184,7 +184,7 @@ public class Hooks {
     }
 
     public static void setupConciergeCookies () {
-        if (cookie != null) {
+        if (cookie != "no_endpoint") {
             Cookie ck = new Cookie("endpoint", endpoint);
             WebDriverRunner.getWebDriver().manage().addCookie(ck);
             WebDriverRunner.getWebDriver().navigate().refresh();
@@ -192,7 +192,7 @@ public class Hooks {
     }
 
     public static void setupEstoreCookies () {
-        if (cookie != null) {
+        if (cookie != "no_endpoint") {
             Cookie ck = new Cookie("endpoint", endpoint);
             WebDriverRunner.getWebDriver().manage().addCookie(ck);
             WebDriverRunner.getWebDriver().navigate().refresh();
