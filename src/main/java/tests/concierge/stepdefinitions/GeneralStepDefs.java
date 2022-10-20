@@ -71,6 +71,9 @@ public class GeneralStepDefs {
      * @param accountRole - account role
      */
     public void loginAsRole(String accountRole) {
+        if (Hooks.conciergeURL.contains("stg4")) {
+            Hooks.setupConciergeCookies();
+        }
         conciergeLoginPage.getPasswordField().should(visible, Duration.ofMinutes(5));
         conciergeLoginPage.getUsernameField().should(visible, Duration.ofSeconds(40));
         if (accountRole.equals("associate")) {
