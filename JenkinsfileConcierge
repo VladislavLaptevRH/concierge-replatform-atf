@@ -30,7 +30,7 @@ pipeline.standardTemplate { label ->
                         sh """
                         apk --no-cache add tree
                         pwd 
-                        cd /home/jenkins/workspace/eCommerce/${env.JOB_NAME}/target
+                        cd /home/jenkins/workspace/${env.JOB_NAME}/target
                         tree -H '.' -L 3 --noreport --charset utf-8  -o index.html
                         aws s3 sync . s3://docs.rhapsody.rh.com/public/${resultspath}
                         """
