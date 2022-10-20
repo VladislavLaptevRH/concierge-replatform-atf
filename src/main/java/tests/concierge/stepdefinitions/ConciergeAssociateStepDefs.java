@@ -37,7 +37,9 @@ public class ConciergeAssociateStepDefs {
     public void iLogIntoConciergeAs(String arg0) {
         Log.debug("I log into Concierge as " + arg0);
         generalStepDefs.loginAsRole(arg0);
-        Hooks.setupConciergeCookies();
+        if (Hooks.conciergeURL.contains("stg4")) {
+            Hooks.setupConciergeCookies();
+        }
         generalStepDefs.waitForJSandJQueryToLoad();
 
     }

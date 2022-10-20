@@ -19,7 +19,9 @@ public class EstoreLoginStepDefs {
     @Given("I log into eStore as {string}")
     public void iLogIntoEStoreAs(String arg0) {
         loginAsRole(arg0);
-        Hooks.setupEstoreCookies();
+        if (Hooks.eStoreURL.contains("stg4")) {
+            Hooks.setupEstoreCookies();
+        }
     }
 
     public void loginAsRole(String accountRole) {
