@@ -1,4 +1,4 @@
-@conciergeRegression
+@conciergeRegression  @conciergePDPProductionTests
 Feature:Concierge PDP
 
   Scenario:Monogram
