@@ -53,14 +53,8 @@ public class EstoreContractTradeStepDefs {
     public void iGoToTNBrand() {
         $(By.xpath("//a[@data-testid='brand-link']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//a[@data-testid='brand-link']")).click();
-        if(Hooks.eStoreURL.contains("stg4")){
-            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg4.rhnonprod.com/']")).should(visible, Duration.ofSeconds(40));
-            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg4.rhnonprod.com/']")).click();
-        }else{
-            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']")).should(visible, Duration.ofSeconds(40));
-            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']")).click();
-        }
-
+        $(By.xpath("//li[@data-analytics-url='https://rhteen." + Hooks.profile + ".rhnonprod.com/']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//li[@data-analytics-url='https://rhteen." + Hooks.profile + ".rhnonprod.com/']")).click();
     }
 
     @Then("I verify that trade paragraph is displayed")
@@ -83,7 +77,7 @@ public class EstoreContractTradeStepDefs {
     @When("I click on confirm button from pop up zip code")
     public void iClickOnConfirmButtonFromPopUpZipCode() {
         sleep(5000);
-        $(By.xpath("//*[text()='Confirm']")).should(visible,Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Confirm']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Confirm']")).click();
 
     }

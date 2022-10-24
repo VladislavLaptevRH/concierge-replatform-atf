@@ -53,7 +53,7 @@ public class EstoreLoginStepDefs {
                 estoreLoginPage.getPasswordField().setValue("Resto123");
             }
 
-            if(accountRole.equals("savedaddress")){
+            if (accountRole.equals("savedaddress")) {
                 estoreLoginPage.getUsernameField().setValue("addresssaved@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Address1234");
             }
@@ -119,7 +119,7 @@ public class EstoreLoginStepDefs {
     @Given("I log into eStore as contract")
     public void iLogIntoEStoreAsContract() {
         sleep(2000);
-        open("https://stg4.rhnonprod.com/contract-sales/contract-sign-in.jsp");
+        open(Hooks.eStoreURL + "/contract-sales/contract-sign-in.jsp");
         estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
         estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
         estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
@@ -129,7 +129,7 @@ public class EstoreLoginStepDefs {
     @Given("I log into eStore as trade")
     public void iLogIntoEStoreAsTrade() {
         sleep(2000);
-        open("https://stg4.rhnonprod.com/trade-sales/trade-sign-in.jsp");
+        open(Hooks.eStoreURL + "/trade-sales/trade-sign-in.jsp");
         estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
         estoreLoginPage.getContractTradePasswordField().setValue("20211221164474");
         estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));

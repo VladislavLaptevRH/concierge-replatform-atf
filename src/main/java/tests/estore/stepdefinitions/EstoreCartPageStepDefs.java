@@ -198,6 +198,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I choose qty for item from estore cart")
     public void iChooseQtyForItemFromCart() {
+        sleep(3000);
         Select qtySelect = new Select(estoreCartPage.getQuantitySelect());
         estoreCartPage.getQuantitySelect().should(visible, Duration.ofSeconds(40));
         itemQuantity = 2;
@@ -226,13 +227,13 @@ public class EstoreCartPageStepDefs {
 
     @When("I update postal code in cart")
     public void iUpdatePostalCodeInCart() {
-        sleep(2000);
+        sleep(4000);
         estoreCartPage.getZipCodeField().scrollIntoView(true);
         estoreCartPage.getZipCodeField().should(visible, Duration.ofSeconds(40));
         estoreCartPage.getZipCodeField().clear();
         estoreCartPage.getZipCodeField().click();
         estoreCartPage.getZipCodeField().sendKeys("10007");
-        sleep(2000);
+        sleep(4000);
         estoreAddressScreen.getSubmitZipCode().click();
 //        clickOkZipCodeButton();
     }
@@ -447,8 +448,10 @@ public class EstoreCartPageStepDefs {
 
     @When("I introduces CAN zip code for estore cart")
     public void iIntroducesCANZipCodeForEstoreCart() {
-        $(By.xpath("(//span[@style='text-decoration: underline; cursor: pointer;'])[2]")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("(//span[@style='text-decoration: underline; cursor: pointer;'])[2]")).click();
+        sleep(3000);
+        $(By.xpath("//div[@id='component-order-summary']//p//span")).scrollIntoView(true);
+        $(By.xpath("//div[@id='component-order-summary']//p//span")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//div[@id='component-order-summary']//p//span")).click();
         $(By.xpath("//input[@data-testid='postalcode-dialog-input']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//input[@data-testid='postalcode-dialog-input']")).clear();
         $(By.xpath("//input[@data-testid='postalcode-dialog-input']")).setValue("A1A1A1");
@@ -456,7 +459,8 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that the price for trade get increased in multiple of QTY")
     public void iVerifyThatThePriceForTradeGetIncreasedInMultipleOfQTY() {
-        $(By.xpath("//*[text()='$70.00']")).should(visible, Duration.ofSeconds(40));
+        sleep(3000);
+        $(By.xpath("//*[contains(text(),'102.00')]")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify that trade price is used for each product")

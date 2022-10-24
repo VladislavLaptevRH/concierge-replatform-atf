@@ -1,4 +1,5 @@
 @estoreRegression
+@estoreHomePage
 Feature: Estore Homepage
 
   Scenario: Verify search functionality

@@ -1,4 +1,5 @@
 @estoreRegression
+@estoreAddressPage
 Feature: Estore Address Page
 
   Scenario: eStore Address for Guest user

@@ -1,4 +1,5 @@
 @estoreRegression
+@estoreCGPage
 Feature: Estore CG
 
   Scenario: CG-Verify Collection Name

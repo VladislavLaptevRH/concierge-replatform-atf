@@ -1,4 +1,5 @@
 @estoreRegression
+@estoreE2EFlow
 Feature: Estore E2E flow
 
   Scenario: Verify that user is able to buy item for estore

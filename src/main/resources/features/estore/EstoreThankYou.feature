@@ -1,4 +1,5 @@
 @estoreRegression
+@estoreThankYouPage
 Feature: Estore Thank You page
 
   Scenario: Verify address, price, payment information, total, subtotal tags

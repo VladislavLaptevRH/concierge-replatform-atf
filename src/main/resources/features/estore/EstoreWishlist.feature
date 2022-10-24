@@ -1,4 +1,5 @@
 @estoreRegression
+@estoreWishlist
 Feature: Estore Wishlist
 
   Scenario: Wishlist for registered users
