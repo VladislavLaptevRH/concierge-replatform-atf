@@ -43,8 +43,8 @@ public class Hooks {
 
     private static boolean setUpIsDone = false;
     private static final Logger Log = LoggerFactory.getLogger(FilterStepDefs.class);
-    protected static String profile;
-    protected static String cookie;
+    public static String profile;
+    public static String cookie;
     public static String endpoint;
 
 
@@ -117,7 +117,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-            Configuration.headless = true;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 60000;
         Configuration.reportsFolder = "target/screenshots";
@@ -186,7 +186,7 @@ public class Hooks {
     /**
      * Setup cookies for concierge
      */
-    public static void setupConciergeCookies () {
+    public static void setupConciergeCookies() {
         if (cookie != null) {
             Cookie ck = new Cookie("endpoint", endpoint);
             WebDriverRunner.getWebDriver().manage().addCookie(ck);
@@ -197,7 +197,7 @@ public class Hooks {
     /**
      * Setup cookies for eStore
      */
-    public static void setupEstoreCookies () {
+    public static void setupEstoreCookies() {
         if (cookie != null) {
             Cookie ck = new Cookie("endpoint", endpoint);
             WebDriverRunner.getWebDriver().manage().addCookie(ck);
