@@ -1,4 +1,5 @@
 #@conciergeRegression
+#@concierge-OrderHistory
 #Feature:Concierge Order history
 #
 #  Scenario: Order history search is accessible from the dashboard

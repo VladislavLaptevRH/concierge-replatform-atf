@@ -159,7 +159,7 @@ public class AbstractStepDefs {
     public void iFillAllFieldsFromAddressScreenForBrands() {
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
-            checkoutAddressScreen.getFirstNameInpt().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
+            checkoutAddressScreen.getFirstNameInpt().should(Condition.and("", enabled, visible), Duration.ofSeconds(10));
             if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
                 generalStepDefs.fillAddressFields();
                 generalStepDefs.fillZipCodeStateCountry("85020", "US", "");

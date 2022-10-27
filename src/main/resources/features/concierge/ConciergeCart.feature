@@ -1,4 +1,5 @@
 @conciergeRegression
+@concierge-Cart
 Feature:Concierge Cart Page
 
   @conciergeCartProductionTests
@@ -7,6 +8,7 @@ Feature:Concierge Cart Page
     When I add item to cart via API
     When I open cart
     Then I verify order classification
+
   @conciergeCartProductionTests
   Scenario: Checkout membership popup for Guest user
     Given I log into Concierge as "associate"
@@ -144,7 +146,6 @@ Feature:Concierge Cart Page
     Then I verify that "HM4TS97" promocode was approved for cart items
     And I remove promotion from cart
 
-  @conciergeCartProductionTests
   Scenario: Designed/ Sold By
     Given I log into Concierge as "associate"
     When I add item to cart via API

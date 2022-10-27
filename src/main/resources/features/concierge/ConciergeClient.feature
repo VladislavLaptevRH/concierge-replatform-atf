@@ -1,4 +1,5 @@
 @conciergeRegression
+@concierge-Client
 Feature:Client
 
   Scenario Outline: Verify client search by <searchBy>
