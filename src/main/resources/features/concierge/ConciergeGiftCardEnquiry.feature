@@ -1,4 +1,5 @@
 @conciergeRegression
+@concierge-GiftCard
 Feature:Concierge GiftCardEnquiry
 
   Scenario: Gift Card Balance Enquiry

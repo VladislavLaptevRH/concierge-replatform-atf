@@ -1,4 +1,5 @@
 @conciergeRegression
+@concierge-Trade
 Feature:Concierge Trade
 
   Scenario: Trade Client - Non Exempt

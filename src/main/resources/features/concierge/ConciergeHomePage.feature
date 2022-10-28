@@ -1,4 +1,6 @@
-@conciergeRegression @conciergeHomePageProductionTest
+@conciergeRegression
+@concierge-HomePage
+@conciergeHomePageProductionTest
 Feature:Concierge Homepage
 
   Scenario: Verify that home page is accessible
@@ -14,7 +16,7 @@ Feature:Concierge Homepage
     Then  I expect that I am on the Concierge Dashboard page
 
   Scenario: Login as leader and see dashboard
-    Given I log into Concierge as "leader"
+    Given I log into Concierge as "associate"
     Then  I expect that I am on the Concierge Dashboard page
 
   Scenario: Change store number in concierge from dashboard

@@ -151,7 +151,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement toddlerBedding = $(By.xpath("//*[text()='Toddler Bedding']"));
 
-    private final SelenideElement mainMenuHeader = $(By.cssSelector("#rh-header"));
+    private final SelenideElement mainMenuHeader = $(By.cssSelector("rh-header"));
 
     private final SelenideElement contractAccountText = $(By.xpath("//*[text()='CONTRACT ACCOUNT']"));
 

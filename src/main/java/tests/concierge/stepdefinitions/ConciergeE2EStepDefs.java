@@ -238,41 +238,72 @@ public class ConciergeE2EStepDefs {
         conciergeUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(12));
         conciergeUserAccountPage.getBrandButton().click();
 
-        if (Hooks.conciergeURL.contains("stg4")) {
-            environment = "stg4";
-        } else {
+        if (Hooks.profile.contains("stg2")) {
             environment = "stg2";
+
+        }else if (Hooks.profile.contains("stg4")){
+            environment = "stg4";
+
+        } else if (Hooks.profile.contains("prod")) {
+            environment = "null";
         }
 
-        if (brand.equals("RH Modern")) {
+        if (brand.equals("RH Modern") && Hooks.profile.equals("prod")) {
+            $(By.xpath("//li[@data-analytics-url='https://rhmodern.rh.com/']")).shouldHave(text("RH MODERN"), Duration.ofSeconds(20));
+            $(By.xpath("//li[@data-analytics-url='https://rhmodern.rh.com/']")).click();
+        } else if (brand.equals("RH Modern")){
             $(By.xpath("//li[@data-analytics-url='https://rhmodern. " + environment + ".rhnonprod.com/']")).shouldHave(text("RH MODERN"), Duration.ofSeconds(20));
             $(By.xpath("//li[@data-analytics-url='https://rhmodern." + environment + ".rhnonprod.com/']")).click();
         }
-        if (brand.equals("RH Baby&Child")) {
+
+        if (brand.equals("RH Baby&Child") && Hooks.profile.equals("prod")) {
+            $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.rh.com/']")).shouldHave(text("RH BABY & CHILD"));
+            $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild.rh.com/']")).click();
+        } else if (brand.equals("RH Baby&Child")) {
             $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild." + environment + ".rhnonprod.com/']")).shouldHave(text("RH BABY & CHILD"));
             $(By.xpath("//li[@data-analytics-url='https://rhbabyandchild." + environment + ".rhnonprod.com/']")).click();
+        }
 
-        }
-        if (brand.equals("RH Teen")) {
+        if (brand.equals("RH Teen") && Hooks.profile.equals("prod")) {
+            $(By.xpath("//li[@data-analytics-url='https://rhteen.rh.com/']")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhteen.rh.com/']")).click();
+        } else if (brand.equals("RH Teen")) {
             $(By.xpath("//li[@data-analytics-url='https://rhteen." + environment + ".rhnonprod.com/']")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@data-analytics-url='https://rhteen."+ environment + ".rhnonprod.com/']")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhteen." + environment + ".rhnonprod.com/']")).click();
         }
-        if (brand.equals("RH Outdoor")) {
+
+        if (brand.equals("RH Outdoor") && Hooks.profile.equals("prod")) {
+            $(By.xpath("//li[@data-analytics-url='https://rhoutdoor.rh.com/']")).shouldHave(text("RH Outdoor"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhoutdoor.rh.com/']")).click();
+        } else if (brand.equals("RH Outdoor"))  {
             $(By.xpath("//li[@data-analytics-url='https://rhoutdoor." + environment + ".rhnonprod.com/']")).shouldHave(text("RH Outdoor"), Duration.ofSeconds(10));
             $(By.xpath("//li[@data-analytics-url='https://rhoutdoor." + environment + ".rhnonprod.com/']")).click();
         }
-        if (brand.equals("RH SKI House")) {
+
+        if (brand.equals("RH SKI House") && Hooks.profile.equals("prod")) {
+            $(By.xpath("//li[@data-analytics-url='https://rhskihouse.rh.com/']")).shouldHave(text("RH SKI House"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhskihouse.rh.com/']")).click();
+        } else if (brand.equals("RH SKI House")) {
             $(By.xpath("//li[@data-analytics-url='https://rhskihouse." + environment + ".rhnonprod.com/']")).shouldHave(text("RH SKI House"), Duration.ofSeconds(10));
             $(By.xpath("//li[@data-analytics-url='https://rhskihouse." + environment + ".rhnonprod.com/']")).click();
         }
-        if (brand.equals("RH Beach House")) {
+
+        if (brand.equals("RH Beach House") && Hooks.profile.equals("prod")) {
+            $(By.xpath("//li[@data-analytics-url='https://rhbeachhouse.rh.com/']")).shouldHave(text("RH Beach House"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhbeachhouse.rh.com/']")).click();
+        } else if (brand.equals("RH Beach House")) {
             $(By.xpath("//li[@data-analytics-url='https://rhbeachhouse." + environment + ".rhnonprod.com/']")).shouldHave(text("RH Beach House"), Duration.ofSeconds(10));
             $(By.xpath("//li[@data-analytics-url='https://rhbeachhouse." + environment + ".rhnonprod.com/']")).click();
         }
-        if (brand.equals("RH Interiors")) {
-            $(By.xpath("//li[@data-analytics-url='https://rhinteriors.stg2.rhnonprod.com/']")).shouldHave(text("RH Interiors"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@data-analytics-url='https://rhinteriors.stg2.rhnonprod.com/']")).click();
+
+        if (brand.equals("RH Interiors") && Hooks.profile.equals("prod")) {
+            $(By.xpath("//li[@data-analytics-url='https://rhinteriors.rh.com/']")).shouldHave(text("RH Interiors"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhinteriors.rh.com/']")).click();
+        } else if (brand.equals("RH Interiors")) {
+            $(By.xpath("//li[@data-analytics-url='https://rhinteriors." + environment + ".rhnonprod.com/']")).shouldHave(text("RH Interiors"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhinteriors." + environment + ".rhnonprod.com/']")).click();
         }
+
     }
 
     @When("I click on no thanks button")
@@ -614,6 +645,7 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify that I'm able to edit shipping address")
     public void iVerifyThatIMAbleToEditShippingAddress() {
+        $(By.xpath("//*[text()='NewShippingAddress Automation']")).scrollTo();
         $(By.xpath("//*[text()='NewShippingAddress Automation']")).shouldHave(text("NewShippingAddress"), Duration.ofSeconds(25));
     }
 

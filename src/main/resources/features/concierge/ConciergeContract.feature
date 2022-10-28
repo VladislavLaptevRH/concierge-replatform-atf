@@ -1,4 +1,5 @@
 @conciergeRegression
+@concierge-Contract
 Feature:Concierge Contract
 
   Scenario: Verify that I'm not able to select Contract Client without contract gallery

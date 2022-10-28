@@ -1,4 +1,5 @@
 @conciergeRegression
+@concierge-Registry
 Feature:Concierge Registry
 
   Scenario: Search by name
