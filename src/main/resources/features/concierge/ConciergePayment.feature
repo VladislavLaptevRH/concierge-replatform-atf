@@ -4,11 +4,10 @@ Feature:Concierge Payment
 
   Scenario Outline: Major CCs
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I clear order via API
     When I remove client from header
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I add item to cart via API
+    When I open cart
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
@@ -26,11 +25,10 @@ Feature:Concierge Payment
 
   Scenario: GC/ Balance check
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I clear order via API
     When I remove client from header
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I add item to cart via API
+    When I open cart
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
@@ -43,11 +41,10 @@ Feature:Concierge Payment
 
   Scenario: Verify the Complete Billing address
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I clear order via API
     When I remove client from header
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I add item to cart via API
+    When I open cart
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
@@ -58,11 +55,10 @@ Feature:Concierge Payment
 
   Scenario: Verify the subtotal, shipping fee, taxes based on postal code
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I clear order via API
     When I remove client from header
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I add item to cart via API
+    When I open cart
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
@@ -73,11 +69,10 @@ Feature:Concierge Payment
 
   Scenario: Verify member savings in payment page
     Given I log into Concierge as "associate"
+    When I clear order via API
     When I remove client from header
-    When I remove all items from cart
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I add item to cart via API
+    When I open cart
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
@@ -89,11 +84,10 @@ Feature:Concierge Payment
 
   Scenario: Verify trade savings in payment page
     Given I log into Concierge as "associate"
+    When I clear order via API
     When I remove client from header
-    When I remove all items from cart
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I add item to cart via API
+    When I open cart
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
@@ -105,10 +99,10 @@ Feature:Concierge Payment
 
   Scenario: Edit Address
     Given I log into Concierge as "associate"
-    When I remove all items from cart
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
+    When I clear order via API
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button

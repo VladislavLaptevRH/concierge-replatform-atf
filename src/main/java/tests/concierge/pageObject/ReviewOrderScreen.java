@@ -11,8 +11,8 @@ public class ReviewOrderScreen{
     
     private final SelenideElement placeOrderButton = $(By.xpath("//button[contains(@class,'MuiButton-contained MuiButton-containedPrimary')]"));
 
-    private final SelenideElement shippingAddress = $(By.xpath("(//h3[contains(@class,'MuiTypography-root MuiTypography-h3')])[3]"));
+    private final SelenideElement shippingAddress = $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]"));
     
-    private final SelenideElement billingAddress = $(By.xpath("(//h3[contains(@class,'MuiTypography-root MuiTypography-h3')])[4]"));
+    private final SelenideElement billingAddress = $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]"));
 
 }
