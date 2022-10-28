@@ -25,7 +25,7 @@ public class RegistryScreen {
 
     private SelenideElement primaryEmailAddress = $(By.xpath("(//div[@class='MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl']/input)[1]"));
 
-    private SelenideElement registryButton = $(By.xpath("//a[@href='/registry-search-v2']"));
+    private SelenideElement registryButton = $(By.xpath("//*[text() = 'REGISTRY']"));
 
     private SelenideElement firstName = $(By.xpath("//input[@name='first_name']"));
 
