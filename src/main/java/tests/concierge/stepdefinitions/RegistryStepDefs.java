@@ -129,7 +129,7 @@ public class RegistryStepDefs {
 
     @Then("I verify that registry was created")
     public void iVerifyThatRegistryWasCreated() {
-        registryScreen.getSearchResult().shouldHave(Condition.text(registrantFirstName + " " + registrantLastName), Duration.ofSeconds(20));
+        $(By.xpath("//*[text() = \""+registrantFirstName+" "+registrantLastName+"\"]")).isDisplayed();
     }
     @When("I click on continue registrant button")
     public void iClickOnContinueRegistrantButton() {

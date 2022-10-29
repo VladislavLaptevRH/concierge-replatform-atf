@@ -13,6 +13,7 @@ import static com.codeborne.selenide.Selenide.$$;
 public class SelectOption {
 
     private final SelenideElement lancasterColor = $(By.xpath("//select[@id='optionSelect-4']"));
+    private final SelenideElement colorStg4 = $(By.id("optionSelect-2"));
 
     private final List<SelenideElement> lancastColorsList = $$(By.xpath("//select[@id='optionSelect-4']//option"));
 
