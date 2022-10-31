@@ -433,7 +433,12 @@ public class ProjectStepDefs {
     @When("I choose color from option")
     public void iChooseColorFromOption() {
         randomColor = generalStepDefs.getRandomNumber(0, 3);
-        Select selectColor = new Select(selectOption.getLancasterColor());
+        Select selectColor;
+        if (Hooks.profile.equals("stg4")) {
+            selectColor = new Select(selectOption.getColorStg4());
+        } else {
+            selectColor = new Select(selectOption.getLancasterColor());
+        }
         selectColor.selectByIndex(randomColor);
     }
 
@@ -469,6 +474,10 @@ public class ProjectStepDefs {
         randomQuantity = generalStepDefs.getRandomNumber(2, 5);
         $(By.xpath("//div[@aria-haspopup='listbox']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//div[@aria-haspopup='listbox']")).click();
+
+        if (Hooks.profile.equals("stg2")) {
+            randomQuantity = 2;
+        }
 
         $(By.xpath("//li[@data-value='" + randomQuantity + "']")).shouldHave(text(Integer.toString(randomQuantity)), Duration.ofSeconds(10));
         $(By.xpath("//li[@data-value='" + randomQuantity + "']")).scrollIntoView(true);
@@ -665,9 +674,14 @@ public class ProjectStepDefs {
 
     @Then("I verify that forecast value is update according to quantity of item")
     public void iVerifyThatForecastValueIsUpdateAccordingToQuantityOfItem() {
+        int forecastExpected;
         conciergeProjectScreen.getRegularPrice().should(visible, Duration.ofSeconds(40));
         sleep(3000);
-        int forecastExpected = randomQuantity * 1724;
+        if (Hooks.profile.equals("stg4")) {
+            forecastExpected = randomQuantity * 4496;
+        } else {
+            forecastExpected = randomQuantity * 1724;
+        }
         int forecastActual = Integer.parseInt(conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
         assertEquals(forecastActual, forecastExpected, "Forecast value has been updated");
     }
@@ -710,22 +724,32 @@ public class ProjectStepDefs {
             conciergeProjectScreen.getMemberPricingType().click();
         }
     }
+    //$4,496.00
 
     @Then("I verify forecast for {string}")
     public void iVerifyForecastFor(String pricingType) {
         conciergeProjectScreen.getForeCastAmount().should(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getForeCastAmount().scrollIntoView(true);
         conciergeProjectScreen.getForeCastAmount().shouldHave(text("Forecast Amount"), Duration.ofSeconds(15));
+        //String forecastPrice = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");;
         sleep(3000);
         if (pricingType.equals("MEMBER")) {
-            conciergeProjectScreen.getForeCastAmount().shouldHave(text("$1,724.00"), Duration.ofSeconds(25));
-            String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
-            assertEquals(prType, "$1,724.00\n", "Forecast amount for member client is displayed");
+            if (Hooks.profile.equals("stg4")) {
+                assertEquals(conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", ""), "$4,496.00\n");
+            } else {
+                conciergeProjectScreen.getForeCastAmount().shouldHave(text("$1,724.00"), Duration.ofSeconds(25));
+                String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
+                assertEquals(prType, "$1,724.00\n", "Forecast amount for member client is displayed");
+            }
         }
         if (pricingType.equals("NON-MEMBER")) {
-            conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,156.00"), Duration.ofSeconds(25));
-            String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
-            assertEquals(prType, "$2,156.00\n", "Forecast amount for non-member client is displayed");
+            if (Hooks.profile.equals("stg4")) {
+                assertEquals(conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", ""), "$5,995.00\n");
+            } else {
+                conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,156.00"), Duration.ofSeconds(25));
+                String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
+                assertEquals(prType, "$2,156.00\n", "Forecast amount for non-member client is displayed");
+            }
         }
     }
 

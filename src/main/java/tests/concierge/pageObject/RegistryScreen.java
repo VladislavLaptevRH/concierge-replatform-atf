@@ -59,9 +59,9 @@ public class RegistryScreen {
 
     private SelenideElement searchRegistryButton = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth']"));
 
-    private SelenideElement searchResult = $(By.xpath("//tbody[@class='MuiTableBody-root']"));
+    private SelenideElement searchResult = $(By.xpath("//p[@class='MuiTypography-root MuiTypography-body1']"));
 
-    private SelenideElement newRegistryButton = $(By.xpath("(//a[@href=\"/create-registry-v2\"])[2]"));
+    private SelenideElement newRegistryButton = $(By.xpath("//*[text() = 'NEW']"));
 
     private SelenideElement newRegistryEventType = $(By.xpath("//div[@id='event']"));
 

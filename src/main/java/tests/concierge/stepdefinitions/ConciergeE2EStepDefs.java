@@ -623,13 +623,25 @@ public class ConciergeE2EStepDefs {
     public void iVerifyTradePricesForPDP(String pageName) {
         if (pageName.equals("project page")) {
             $(By.xpath("//*[text()='TRADE']")).should(visible, Duration.ofSeconds(30));
-            $(By.xpath("//*[text()='$2,688.00']")).should(visible, Duration.ofSeconds(20));
+            if (Hooks.profile.equals("stg4")) {
+                $(By.xpath("//*[text()='$1,256.00']")).should(visible, Duration.ofSeconds(20));
+            } else {
+                $(By.xpath("//*[text()='$2,688.00']")).should(visible, Duration.ofSeconds(20));
+            }
         } else if (pageName.equals("PG")) {
             assertEquals(conciergeCartPageScreen.getTradePriceLabel().getText(), "Trade");
-            assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText(), "$2688");
+            if (Hooks.profile.equals("stg2")) {
+                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$2688.00");
+            } else {
+                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText(), "$2,688.00");
+            }
         } else {
             assertEquals(conciergeCartPageScreen.getTradePriceLabel().getText(), "Trade");
-            assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText(), "$2688.00");
+            if (Hooks.profile.equals("stg2")) {
+                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$2688.00");
+            } else {
+                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText(), "$2,688.00");
+            }
         }
     }
 
