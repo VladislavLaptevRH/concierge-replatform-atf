@@ -1,4 +1,4 @@
-@conciergeRegression
+@concierge-All
 @concierge-GiftCard
 Feature:Concierge GiftCardEnquiry
 
