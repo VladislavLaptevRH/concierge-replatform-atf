@@ -171,7 +171,7 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After("@conciergeRegression or @estoreRegression")
+    @After("@concierge-All or @estoreRegression")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
         /* TODO : Finish Extent Report Class Implementation */
