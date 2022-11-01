@@ -20,7 +20,7 @@ pipeline.standardTemplate { label ->
             }
 
             stage('Run Tests') {
-                pipeline.buildMvn("clean test -Dcucumber.filter.tags='@conciergeCartProductionTests or @conciergeHomePageProductionTest or @conciergePDPProductionTests'", true);
+                pipeline.buildMvn("clean test -Dcucumber.filter.tags='@concierge-All'", true);
             } // end stage
 
             container("awscli") {

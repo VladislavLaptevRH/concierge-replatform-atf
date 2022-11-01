@@ -104,7 +104,7 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for tests.concierge
      */
-    @Before("@conciergeRegression")
+    @Before("@concierge-All")
     public void initWebDriver() {
         ConfigFileReader();
         setupChromeArguments();

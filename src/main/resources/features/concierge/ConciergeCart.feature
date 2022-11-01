@@ -1,15 +1,13 @@
-@conciergeRegression
+@concierge-All
 @concierge-Cart
 Feature:Concierge Cart Page
 
-  @conciergeCartProductionTests
   Scenario: Order Classification
     Given I log into Concierge as "associate"
     When I add item to cart via API
     When I open cart
     Then I verify order classification
 
-  @conciergeCartProductionTests
   Scenario: Checkout membership popup for Guest user
     Given I log into Concierge as "associate"
     When I clear order via API
@@ -20,7 +18,6 @@ Feature:Concierge Cart Page
     When I click on checkout button
     Then I verify membership popup for guest user
 
-  @conciergeCartProductionTests
   Scenario: Line Item : Quantity update
     Given I log into Concierge as "associate"
     When I clear order via API
@@ -30,7 +27,6 @@ Feature:Concierge Cart Page
     When I click on quantity line item button
     Then I verify that quantity was updated
 
-  @conciergeCartProductionTests
   Scenario:Remove line item - click on remove button and verify that line item is removed and subtotal and minicart value is updated
     Given I log into Concierge as "associate"
     When I remove client from header
@@ -199,7 +195,6 @@ Feature:Concierge Cart Page
     When I choose client who is a "member"
     Then I verify that promo code was removed
 
-  @conciergeCartProductionTests
   Scenario:Verify mini cart count
     Given I log into Concierge as "associate"
     When I remove all items from cart for minicart
@@ -290,7 +285,6 @@ Feature:Concierge Cart Page
     When I apply employee discount
     Then I verify that employee discount is present
 
-  @conciergeCartProductionTests
   Scenario: Postpone shipment
     Given I log into Concierge as "associate"
     When I clear order via API
@@ -301,7 +295,6 @@ Feature:Concierge Cart Page
     When I click on apply uppercase button for "postpone shipment"
     Then I verify that postpone shipment was applied
 
-  @conciergeCartProductionTests
   Scenario: Monogram Edit / Remove / Add
     Given I log into Concierge as "associate"
     When I clear order via API
@@ -319,7 +312,6 @@ Feature:Concierge Cart Page
     When I remove monogram
     Then I verify that monogram was removed
 
-  @conciergeCartProductionTests
   Scenario: Gift Box Add / Remove / View
     Given I log into Concierge as "associate"
     When I clear order via API

@@ -1,4 +1,4 @@
-@conciergeRegression
+@concierge-All
 @concierge-Payment
 Feature:Concierge Payment
 
