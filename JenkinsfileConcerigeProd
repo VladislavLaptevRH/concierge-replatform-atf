@@ -24,7 +24,7 @@ pipeline.standardTemplate { label ->
             }
 
             stage('Retry Failed Tests') {
-                pipeline.buildMvn("mvn test -Dcucumber.options='-tags @target/rerun.txt'", true);
+                pipeline.buildMvn("clean test -Dcucumber.options='-tags @target/rerun.txt'", true);
             } // end stage
 
             container("awscli") {
