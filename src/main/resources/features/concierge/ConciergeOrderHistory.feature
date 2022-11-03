@@ -1,13 +1,13 @@
-#@concierge-All
-#@concierge-OrderHistory
-#Feature:Concierge Order history
-#
-#  Scenario: Order history search is accessible from the dashboard
-#    Given I log into Concierge as "associate"
-#    When I navigate to the order history page from the concierge dashboard
-#    Then I verify the customer lookup form appears
-#    And I verify the order lookup form appears
-#
+@concierge-All
+@concierge-OrderHistory
+Feature:Concierge Order history
+
+  Scenario: Order history search is accessible from the dashboard
+    Given I log into Concierge as "associate"
+    When I navigate to the order history page from the concierge dashboard
+    Then I verify the customer lookup form appears
+    And I verify the order lookup form appears
+
 #  Scenario Outline: Verify order history search returns a list of users - <firstName>
 #    Given I log into Concierge as "associate"
 #    When I navigate to the order history page from the concierge dashboard
@@ -61,4 +61,4 @@
 #      | R03283581845714 | inProcess   |
 #      | 785071          | open        |
 #      | 12345           | notExisting |
-#
+
