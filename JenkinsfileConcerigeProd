@@ -21,12 +21,6 @@ pipeline.standardTemplate { label ->
 
             stage('Run Tests') {
                 pipeline.buildMvn("clean test -Dcucumber.filter.tags='@concierge-OrderHistory'", true);
-            }
-
-            stage('Retry Failed Tests') {
-                steps {
-                    sh 'java ReRunTest'
-                }
             } // end stage
 
             container("awscli") {
