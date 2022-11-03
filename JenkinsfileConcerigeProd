@@ -25,7 +25,7 @@ pipeline.standardTemplate { label ->
 
             stage('Retry Failed Tests') {
                 steps {
-                    java ReRunTests
+                    sh 'java ReRunTest'
                 }
             } // end stage
 
