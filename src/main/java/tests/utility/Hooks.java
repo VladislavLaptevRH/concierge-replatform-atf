@@ -104,7 +104,7 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for tests.concierge
      */
-    @Before("@concierge-All")
+    @Before("@concierge-All or @target/rerun.txt")
     public void initWebDriver() {
         ConfigFileReader();
         setupChromeArguments();
@@ -171,7 +171,7 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After("@concierge-All or @estoreRegression")
+    @After("@concierge-All or @estoreRegression or @target/rerun.txt")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
         /* TODO : Finish Extent Report Class Implementation */

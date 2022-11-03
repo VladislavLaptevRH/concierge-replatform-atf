@@ -405,10 +405,8 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I clear order via API
     When I remove client from header
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on aggree&add button
-    When I click on view cart button
+    When I add item to cart via API
+    When I open cart
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button

@@ -100,7 +100,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement personalizationText = $(By.xpath("//*[text()='PERSONALIZATION']"));
 
-    private final SelenideElement editMonogramButton = $(By.cssSelector("div:nth-child(2) > p:nth-child(3)"));
+    private final SelenideElement editMonogramButton = $(By.xpath("(//*[@data-analytics-id = \"link\" and text()=\"Edit\"])[2]"));
 
     private final SelenideElement posTransactionField = $(By.xpath("(//div[contains(@class,'MuiInputBase-root MuiOutlinedInput-root')]/input)[1]"));
 

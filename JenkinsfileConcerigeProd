@@ -20,7 +20,11 @@ pipeline.standardTemplate { label ->
             }
 
             stage('Run Tests') {
-                pipeline.buildMvn("clean test -Dcucumber.filter.tags='@concierge-All'", true);
+                pipeline.buildMvn("clean test -Dcucumber.filter.tags='@concierge-OrderHistory'", true);
+            }
+
+            stage('Retry Failed Tests') {
+                 pipeline.buildMvn("clean test -Dcucumber.options='-tags @target/rerun.txt', true);
             } // end stage
 
             container("awscli") {
