@@ -617,7 +617,7 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getCheckBalanceButton().click();
     }
 
-    @Then("I verify that balance info is displayed")
+    @Then("I verify that gift card balance info is displayed")
     public void iVerifyThatBalanceInfoIsDisplayed() {
         conciergeCartPageScreen.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 1635 has balance of "), Duration.ofSeconds(25));
     }

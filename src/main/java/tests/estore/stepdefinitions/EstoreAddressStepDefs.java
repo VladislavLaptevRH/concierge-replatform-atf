@@ -145,6 +145,7 @@ public class EstoreAddressStepDefs {
             $(By.xpath("//a[@href=\"/checkout/address.jsp\"]")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//a[@href=\"/checkout/address.jsp\"]")).click();
 
+            sleep(3000);
             estoreAddressScreen.getShippingAddressAptFloor().click();
             estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
             estoreAddressScreen.getShippingAddressCity().setValue("Newark");
@@ -291,16 +292,14 @@ public class EstoreAddressStepDefs {
 
     @When("I click on continue with original address estore button")
     public void iClickOnContinueWithOriginalAddressEstoreButton() {
-        if (Hooks.eStoreURL.contains("stg2")) {
-            try {
-                generalStepDefs.waitForJSandJQueryToLoad();
-                estoreItemPage.getAddToCartButton().scrollIntoView(true);
-                estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
-                estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE WITH ORIGINAL ADDRESS"), Duration.ofSeconds(50));
-                estoreItemPage.getAddToCartButton().click();
-            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                System.out.println("Continue with original button is not displayed");
-            }
+        try {
+            generalStepDefs.waitForJSandJQueryToLoad();
+            estoreItemPage.getAddToCartButton().scrollIntoView(true);
+            estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
+            estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE WITH ORIGINAL ADDRESS"), Duration.ofSeconds(50));
+            estoreItemPage.getAddToCartButton().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Continue with original button is not displayed");
         }
     }
 
@@ -337,5 +336,69 @@ public class EstoreAddressStepDefs {
         $(By.xpath("//*[text()='2479 Deer Run']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Lewisville']")).should(visible, Duration.ofSeconds(20));
 
+    }
+
+    @When("I introduce data for new profile address without phone number")
+    public void iIntroduceDataForNewProfileAddressWithoutPhoneNumber() {
+        estoreUserAccountPage.getBillingAddressFirstName().should(visible, Duration.ofSeconds(30));
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressFirstName());
+        estoreUserAccountPage.getBillingAddressFirstName().setValue("Petr");
+
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressLastName());
+        estoreUserAccountPage.getBillingAddressLastName().setValue(generalStepDefs.getAlphaNumericString(4));
+
+        if (Hooks.eStoreURL.contains("stg2")) {
+            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddressStg2());
+            estoreUserAccountPage.getBillingAddressStreetAddressStg2().setValue("2479 Deer Run");
+        } else {
+            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
+            estoreUserAccountPage.getBillingAddressStreetAddress().setValue("2479 Deer Run");
+        }
+
+
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressAptFloor());
+        estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
+
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressCity());
+        estoreUserAccountPage.getBillingAddressCity().setValue("Lewisville");
+
+        Select state = new Select(estoreUserAccountPage.getBillingAddressSelectState());
+        state.selectByValue("TX");
+
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPostalCode());
+        estoreUserAccountPage.getBillingAddressPostalCode().setValue("12345");
+
+//        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPhone());
+//        estoreUserAccountPage.getBillingAddressPhone().setValue("(541) 777-4321");
+
+        sleep(5000);
+    }
+
+    @Then("user verify that field is required message is displayed")
+    public void userVerifyThatErrorIsDisplayed() {
+        $(By.xpath("//*[text()='Phone required.']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that billing address the same as shipping functionality")
+    public void iVerifyThatBillingAddressTheSameAsShippingFunctionality() {
+        estoreAddressScreen.getBillingAddressFirstName().shouldHave(value("Safire"), Duration.ofSeconds(20));
+        estoreAddressScreen.getBillingAddressLastName().shouldHave(value("William"), Duration.ofSeconds(20));
+    }
+
+    @Then("I verify shipping and billing address on order review page")
+    public void iVerifyShippingAddressOnOrderReviewPage() {
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("SHIPPING ADDRESS Safire William"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("BILLING ADDRESS Safire William"), Duration.ofSeconds(25));
+    }
+
+    @Then("I verify shipping and billing address on order confirmation page")
+    public void iVerifyShippingAndBillingAddressOnOrderConfirmationPage() {
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("SHIPPING ADDRESS Safire William"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("BILLING ADDRESS Safire William"), Duration.ofSeconds(25));
+
+    }
+
+    @When("I add gift message")
+    public void iAddGiftMessage() {
     }
 }

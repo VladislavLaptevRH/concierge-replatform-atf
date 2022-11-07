@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -40,32 +41,39 @@ public class EstoreCartPageStepDefs {
 
     @When("I remove all items from estore cart")
     public void iRemoveAllItemsFromEstoreCart() {
-        estoreUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(3));
-        sleep(3000);
-        int countOfCartItems = 0;
+        if (Hooks.profile.contains("stg4")) {
+            estoreUserAccountPage.getCartButtonStg4().should(visible, Duration.ofMinutes(3));
+            sleep(3000);
+            int countOfCartItems = 0;
 
-        try {
-            String countOfProducts = estoreUserAccountPage.getCartButton().getText();
-            countOfCartItems = Integer.valueOf(countOfProducts);
-        } catch (Exception e) {
-            System.out.println("Cart is empty");
+            try {
+                String countOfProducts = estoreUserAccountPage.getCartButtonStg4().getText();
+                countOfCartItems = Integer.valueOf(countOfProducts);
+            } catch (Exception e) {
+                System.out.println("Cart is empty");
+            }
+
+            if (countOfCartItems > 0) {
+                estoreGeneralStepDefs.removeFromCart(countOfCartItems);
+            }
         }
 
-        if (countOfCartItems > 0) {
-            estoreUserAccountPage.getCartButton().click();
+
+        if (Hooks.profile.contains("stg2")) {
+            estoreUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(3));
+            sleep(3000);
+            int countOfCartItems = 0;
+
             try {
-                for (int i = 0; i < countOfCartItems; i++) {
-                    estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(30));
-                    estoreCartPage.getRemoveButton().click();
-                    sleep(3000);
-                }
-                estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(15));
-                estoreUserAccountPage.getRhEstoreLogo().click();
-            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                System.out.println("Agree&add to cart button is not displayed");
-                estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(15));
-                estoreUserAccountPage.getRhEstoreLogo().click();
+                String countOfProducts = estoreUserAccountPage.getCartButton().getText();
+                countOfCartItems = Integer.valueOf(countOfProducts);
+            } catch (Exception e) {
+                System.out.println("Cart is empty");
             }
+            if (countOfCartItems > 0) {
+                estoreGeneralStepDefs.removeFromCart(countOfCartItems);
+            }
+
         }
     }
 
@@ -512,5 +520,11 @@ public class EstoreCartPageStepDefs {
         String jsonString = response.asString();
         System.out.println(jsonString);
         id = JsonPath.from(jsonString).get("id");
+    }
+
+
+    @Then("I verify that gift card balance info is displayed for estore")
+    public void iVerifyThatGiftCardBalanceInfoIsDisplayed() {
+        estoreCartPage.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 1635 has balance of "), Duration.ofSeconds(25));
     }
 }

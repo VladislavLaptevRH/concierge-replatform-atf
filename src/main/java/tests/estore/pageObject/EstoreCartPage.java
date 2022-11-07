@@ -141,7 +141,7 @@ public class EstoreCartPage {
 
     private final SelenideElement applyUpperCaseBtn = $(By.xpath("//*[text()='APPLY']"));
 
-    private final SelenideElement rhGiftCardBalance = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][2]/p[@class='MuiTypography-root MuiTypography-body1']"));
+    private final SelenideElement rhGiftCardBalance = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][1]/p"));
 
     private final SelenideElement spaceDropDown = $(By.xpath("//div[1]/button//div[contains(@class,'MuiGrid-root MuiGrid-container')]"));
 

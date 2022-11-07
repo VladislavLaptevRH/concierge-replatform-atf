@@ -77,7 +77,11 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement profileButton = $(By.xpath("//*[text()='PROFILE']"));
 
-    private final SelenideElement addressBookButton = $(By.xpath("//a[@href='/my-account/address-book.jsp']"));
+    private final SelenideElement addressBookButton = $(By.xpath("//a[@href='/us/en/my-account/address-book.jsp']"));
+
+//    private final SelenideElement addressBookButtonStg4 = $(By.xpath("//a[@href="/my-account/address-book.jsp"));
+
+
 
     private final SelenideElement profileIconButton = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
 
@@ -164,6 +168,8 @@ public class EstoreUserAccountPage {
     private final SelenideElement westHollywood = $(By.xpath("//*[@id=\"146\"]"));
 
     private final SelenideElement cartButton = $(By.xpath("//a[@href='/checkout/shopping_cart.jsp']"));
+
+    private final SelenideElement cartButtonStg4 = $(By.xpath("//a[@href='/checkout/shopping_cart.jsp']"));
 
     private final SelenideElement orderHistoryButton = $(By.xpath("//a[1]/button[contains(@class,'MuiButton-root')]"));
 

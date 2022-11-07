@@ -5,9 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import lombok.Getter;
 import tests.concierge.pageObject.*;
-import tests.estore.pageObject.EstoreAddressScreen;
-import tests.estore.pageObject.EstoreCheckoutAddressScreen;
-import tests.estore.pageObject.EstorePaymentPage;
+import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -37,7 +35,9 @@ public class EstoreGeneralStepDefs {
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
     EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
+    EstoreCartPage estoreCartPage = new EstoreCartPage();
     EstoreCheckoutAddressScreen estoreCheckoutAddressScreen = new EstoreCheckoutAddressScreen();
+    EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
     private static final Random RANDOM = new SecureRandom();
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(30));
@@ -74,6 +74,23 @@ public class EstoreGeneralStepDefs {
             }
         };
         return wait.until(jQueryLoad) && wait.until(jsLoad);
+    }
+
+    public void removeFromCart(int countOfCartItems) {
+        estoreUserAccountPage.getCartButtonStg4().click();
+        try {
+            for (int i = 0; i < countOfCartItems; i++) {
+                estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(30));
+                estoreCartPage.getRemoveButton().click();
+                sleep(3000);
+            }
+            estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(15));
+            estoreUserAccountPage.getRhEstoreLogo().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Agree&add to cart button is not displayed");
+            estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(15));
+            estoreUserAccountPage.getRhEstoreLogo().click();
+        }
     }
 
 

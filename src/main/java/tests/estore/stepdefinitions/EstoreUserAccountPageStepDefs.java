@@ -179,4 +179,82 @@ public class EstoreUserAccountPageStepDefs {
         firstName = estoreGeneralStepDefs.generateRandomString(5);
         estoreUserAccountPage.getBillingAddressFirstName().setValue(firstName);
     }
+
+    @When("I added new card {string} for estore")
+    public void iAddedNewCardForEstore(String paymentMethod) {
+        estoreUserAccountPage.getAddCardButton().should(Condition.visible, Duration.ofSeconds(30));
+        estoreUserAccountPage.getAddCardButton().click();
+        estoreUserAccountPage.getSelectTypeOfCardNewCard().should(Condition.visible, Duration.ofSeconds(20));
+        Select selectCard = new Select(estoreUserAccountPage.getSelectTypeOfCardNewCard());
+
+        if (paymentMethod.equals("AMEX")) {
+            selectCard.selectByValue("CC");
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card number']")));
+            estorePaymentPage.getCardNumberField().setValue("341134113411347");
+            switchTo().defaultContent();
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card expiry date']")));
+            estorePaymentPage.getExpiryDateField().setValue("0225");
+            switchTo().defaultContent();
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
+            estorePaymentPage.getCvcField().setValue("6765");
+        }
+        if (paymentMethod.equals("VISA")) {
+            selectCard.selectByValue("CC");
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card number']")));
+            estorePaymentPage.getCardNumberField().setValue("4678475330157543");
+            switchTo().defaultContent();
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card expiry date']")));
+            estorePaymentPage.getExpiryDateField().setValue("0330");
+            switchTo().defaultContent();
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
+            estorePaymentPage.getCvcField().setValue("737");
+        }
+        if (paymentMethod.equals("MC")) {
+            selectCard.selectByValue("CC");
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card number']")));
+            estorePaymentPage.getCardNumberField().setValue("2222400010000008");
+            switchTo().defaultContent();
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card expiry date']")));
+            estorePaymentPage.getExpiryDateField().setValue("0330");
+            switchTo().defaultContent();
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
+            estorePaymentPage.getCvcField().setValue("737");
+        }
+        if (paymentMethod.equals("DISCOVER")) {
+            selectCard.selectByValue("CC");
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card number']")));
+            estorePaymentPage.getCardNumberField().setValue("6011601160116611");
+            switchTo().defaultContent();
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card expiry date']")));
+            estorePaymentPage.getExpiryDateField().setValue("0330");
+            switchTo().defaultContent();
+            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
+            estorePaymentPage.getCvcField().setValue("737");
+        }
+
+        switchTo().defaultContent();
+        estoreUserAccountPage.getBillingAddressFirstName().setValue("TestName");
+        estoreUserAccountPage.getBillingAddressLastName().setValue("TestLastName");
+        estoreUserAccountPage.getBillingAddressStreetAddress().setValue("StreetAddress");
+        estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
+        estoreUserAccountPage.getBillingAddressCity().setValue("testCity");
+        Select selectState = new Select(estoreUserAccountPage.getBillingAddressSelectState());
+        selectState.selectByValue("AZ");
+        estoreUserAccountPage.getBillingAddressPostalCode().setValue("12345");
+        estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
+
+//        $(By.xpath("//*[text()='Street Address Information, Martin Luther King Junior Boulevard, Chapel Hill, NC, USA']")).should(visible, Duration.ofSeconds(20));
+//        $(By.xpath("//*[text()='Street Address Information, Martin Luther King Junior Boulevard, Chapel Hill, NC, USA']")).click();
+
+        estoreUserAccountPage.getSaveCardButton().click();
+        estorePaymentPage.getContinueToCheckout().should(visible, Duration.ofSeconds(40));
+        estorePaymentPage.getContinueToCheckout().click();
+    }
+
+    @Then("I verify that I'm able to add {string}")
+    public void iVerifyThatIMAbleToAdd(String paymentMethod) {
+        if (paymentMethod.equals("AMEX")) {
+            $(By.xpath("//*[contains(text(),'American Express')]")).should(visible, Duration.ofSeconds(20));
+        }
+    }
 }

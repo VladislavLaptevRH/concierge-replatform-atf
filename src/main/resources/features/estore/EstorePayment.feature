@@ -14,7 +14,6 @@ Feature:Estore Payment
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
-    When I click on continue with original address estore button
     When I remove split payment which was used earlier
     When I refresh current estore page
     Then I verify that I'm able to execute estore split payment
@@ -278,7 +277,7 @@ Feature:Estore Payment
 #    When I click on edit shipping address button on estore address page
 #    When I choose address with CAN zip code
 #    When I click on continue to payment estore button
-##    Then I verify that current currency is canadian dollar
+#    Then I verify that current currency is canadian dollar
 #    When I remove payment method which was used earlier
 #    When I execute payment with credit card on estore
 #    When I click on continue payment method estore button
@@ -315,6 +314,74 @@ Feature:Estore Payment
     When I click on continue with original address estore button
     Then I verify that I'm able to execute estore split payment with saved CC
 
+  Scenario: GC/ Balance check
+    Given I log into eStore as "mastercard"
+    When I remove all items from estore cart
+    When I go to estore item "17050042 WHT" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I choose RH Gift Card from payment method
+    When I click on check balance button
+    Then I verify that gift card balance info is displayed for estore
+
+  Scenario: Verify that user is able to execute payment via GC for USA
+    Given I log into eStore as "mastercard"
+    When I remove all items from estore cart
+    When I go to estore item "17050042 WHT" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I choose RH Gift Card from payment method
+    When I click on continue payment method estore button
+    When I click on a place estore order button
+
+  Scenario: Verify that user is able to execute payment via GC for CAN
+    Given I log into eStore as "savedRhCc"
+    When I remove all items from estore cart
+    When I go to estore item "17050042 WHT" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I update shipping address for CAN
+    When I click on edit estore billing address button
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I choose RH Gift Card from payment method
+    When I click on continue payment method estore button
+    When I click on a place estore order button
+
+  Scenario: Verify the saving AMEX payment method
+    Given I log into eStore as "addnewpayment"
+    When I go to profile payment method
+    When I remove added before cart
+    When I added new card "AMEX" for estore
+    Then I verify that I'm able to add "AMEX"
+    When I remove added before cart
+
+  Scenario: Verify the saving DI payment method
+    Given I log into eStore as "addnewpayment"
+    When I go to profile payment method
+    When I remove added before cart
+    When I added new card "DISCOVER" for estore
+    Then I verify that I'm able to add "AMEX"
+    When I remove added before cart
 
 
 
