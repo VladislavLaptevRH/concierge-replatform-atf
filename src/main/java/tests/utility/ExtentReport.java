@@ -1,24 +1,29 @@
 package tests.utility;
 import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.gherkin.model.Feature;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.JsonFormatter;
-import io.cucumber.java.Scenario;
 
 import java.io.IOException;
+
+/* TODO : Finish Extent Report Class Implementation */
 
 public class ExtentReport {
     public  static ExtentReports extent;
     public static ExtentSparkReporter config;
     public static String reportTitle;
 
-
-    public static void startReport(Scenario scenario) throws IOException {
+    public static void startReport() throws IOException {
         extent = new ExtentReports();
         config = new ExtentSparkReporter("target/cucumber-html-report");
-        JsonFormatter json = new JsonFormatter("cucumber-reports/Cucumber.json");
-        extent.createDomainFromJsonArchive("cucumber-reports/Cucumber.json");
-        extent.createTest(scenario.getName());
-        extent.attachReporter(json, config);
+        JsonFormatter json = new JsonFormatter("target/cucumber-reports/Cucumber.json");
+        extent.createDomainFromJsonArchive(json.getFile());
+        ExtentTest feature = extent.createTest(Feature.class, "Concierge Homepage");
+        feature.pass("Test passed");
+        extent.setReportUsesManualConfiguration(true);
+
+        extent.attachReporter(config);
         config.config().setReportName(getReportTitle());
     }
 
@@ -37,5 +42,10 @@ public class ExtentReport {
             reportTitle = "eStore Production Smoke Test Report";
         }
         return reportTitle;
+    }
+
+
+    public static void endReport() {
+        extent.flush();
     }
 }

@@ -4,7 +4,10 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 
@@ -23,7 +26,7 @@ public class RegistryScreen {
 
     private SelenideElement deleteRegistryButton = $(By.xpath("//*[text()='DELETE']"));
 
-    private SelenideElement primaryEmailAddress = $(By.xpath("(//div[@class='MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl']/input)[1]"));
+    private SelenideElement primaryEmailAddress = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[1]"));
 
     private SelenideElement registryButton = $(By.xpath("//*[text() = 'REGISTRY']"));
 
@@ -59,9 +62,11 @@ public class RegistryScreen {
 
     private SelenideElement searchRegistryButton = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth']"));
 
-    private SelenideElement searchResult = $(By.xpath("//tbody[@class='MuiTableBody-root']"));
+    private SelenideElement searchResult = $(By.xpath("//tbody[@class='MuiTableBody-root']/tr"));
 
-    private SelenideElement newRegistryButton = $(By.xpath("(//a[@href=\"/create-registry-v2\"])[2]"));
+    private final List <SelenideElement> listOfSearchResult = $$(By.xpath("//tbody[@class= 'MuiTableBody-root']/tr"));
+
+    private SelenideElement newRegistryButton = $(By.xpath("//*[text() = 'NEW']"));
 
     private SelenideElement newRegistryEventType = $(By.xpath("//div[@id='event']"));
 

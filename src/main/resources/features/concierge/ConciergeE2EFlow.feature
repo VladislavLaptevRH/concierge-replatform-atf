@@ -1,4 +1,4 @@
-@conciergeRegression
+@concierge-All
 @concierge-EndToEnd
 Feature:Concierge E2E flow
 

@@ -1,5 +1,6 @@
 package tests.utility;
 
+import com.aventstack.extentreports.ExtentReports;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.Cookie;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import static com.codeborne.selenide.Selenide.*;
+import com.aventstack.extentreports.ExtentReports;
 
 @Getter
 public class Hooks {
@@ -47,6 +49,7 @@ public class Hooks {
     public static String cookie;
     public static String endpoint;
 
+    ExtentReport report = new ExtentReport();
 
     /**
      * This method get properties from application.properties file
@@ -101,11 +104,13 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for tests.concierge
      */
-    @Before("@conciergeRegression")
+    @Before("@concierge-All or @target/rerun.txt")
     public void initWebDriver() {
         ConfigFileReader();
         setupChromeArguments();
         setUPWebDriver(conciergeURL);
+        /* TODO : Finish Extent Report Class Implementation */
+        //report.startReport();
     }
 
     /**
@@ -166,9 +171,11 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After("@conciergeRegression or @estoreRegression")
+    @After("@concierge-All or @estoreRegression or @target/rerun.txt")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
+        /* TODO : Finish Extent Report Class Implementation */
+        //report.endReport();
         closeWindow();
         closeWebDriver();
         System.out.println("Driver was closed");

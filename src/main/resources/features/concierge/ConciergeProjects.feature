@@ -1,4 +1,4 @@
-@conciergeRegression
+@concierge-All
 @concierge-Project
 Feature:Concierge Project
 
@@ -284,6 +284,7 @@ Feature:Concierge Project
     Then I verify that tax is not displayed
 
   Scenario Outline: Verify Member/non Member /Trade/ Non Trade toggle pricing for unclassified business client project
+    #Need data for stg4
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I click on projects button
@@ -299,6 +300,7 @@ Feature:Concierge Project
       | TRADE      |
 #
   Scenario Outline: Verify transition between spaces
+    #Need data for stg4
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "transitionbetweenspaces" by provided "projectName"
@@ -311,6 +313,7 @@ Feature:Concierge Project
       | space2 |
 
   Scenario: Verify rapid selection/deselction of project Moodboard items
+    #Need data for stg4
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "selectdeselectmoodboarditems" by provided "projectName"
@@ -383,6 +386,7 @@ Feature:Concierge Project
     Then I verify the address page, prefilled address and email address must be filled
 
   Scenario: Add Item to Project from Cart - Verify item added and project load in correct space/oppty
+    #Need data for stg4
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "10010966 BRN" from search field
@@ -395,6 +399,7 @@ Feature:Concierge Project
     Then I verify that item added and project load in correct space and oppty
 
   Scenario: Space Dropdown in projects - multiple spaces in projects
+    #Need data for stg4
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "ADDITEMTOCORRECTSPACE" by provided "projectName"
@@ -414,6 +419,7 @@ Feature:Concierge Project
     Then I verify forecast amount for selected items & spaces
 
   Scenario: Verify that SKU id has been updated after making edits for line item in the project
+    #Need data for stg4
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "selectdeselectmoodboarditems" by provided "projectName"
@@ -422,6 +428,7 @@ Feature:Concierge Project
     Then I verify that sku id has been updated after changes
 
   Scenario: Verify the view all functionality for spaces in project
+    # Need data for stg4
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "selectdeselectmoodboarditems" by provided "projectName"

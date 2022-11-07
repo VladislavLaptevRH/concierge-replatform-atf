@@ -1,4 +1,4 @@
-@conciergeRegression
+@concierge-All
 @concierge-Trade
 Feature:Concierge Trade
 

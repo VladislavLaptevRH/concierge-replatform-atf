@@ -1,4 +1,4 @@
-@conciergeRegression
+@concierge-All
 @concierge-ThankYouPage
 Feature:Concierge ThankYouPage
 

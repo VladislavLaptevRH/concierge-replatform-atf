@@ -1,6 +1,5 @@
-@conciergeRegression
+@concierge-All
 @concierge-HomePage
-@conciergeHomePageProductionTest
 Feature:Concierge Homepage
 
   Scenario: Verify that home page is accessible
