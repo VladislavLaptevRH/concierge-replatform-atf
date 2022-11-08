@@ -731,11 +731,12 @@ public class ConciergeE2EStepDefs {
 
     @When("I open product page with {string} and {string}")
     public void iOpenProductPageWithAnd(String productId, String skuId) {
-        String URL = Hooks.conciergeURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+NATL";
+        String URL = Hooks.conciergeURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+GREY";
         open(URL);
-        sleep(3000);
-        if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
-            open(URL);
+        while (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            conciergeItemsScreen.getAddToCartButton().scrollTo();
+            sleep(2000);
         }
     }
 
