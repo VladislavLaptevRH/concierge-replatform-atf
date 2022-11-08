@@ -28,7 +28,8 @@ public class CheckoutAddressScreen {
 
     private final SelenideElement countryField = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[1]"));
 
-    private final SelenideElement zipPostalCodeField = $(By.xpath("//input[@id='shippingAddress.postalCode']"));
+    private final SelenideElement zipPostalCodeField =  $(By.id("address-postal-code-field"));
+            //$(By.xpath("//input[@id='shippingAddress.postalCode']"));
 
     private final SelenideElement phoneField = $(By.cssSelector("div:nth-child(2) > div:nth-child(9) > div:nth-child(2) > input:nth-child(1)"));
 

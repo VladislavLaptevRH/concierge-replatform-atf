@@ -85,6 +85,11 @@ public class ConciergeAssociateStepDefs {
         gallerySelect.selectByValue("997");
         conciergeUserAccountPage.getGallerySubmitButton().click();
         sleep(3000);
+        //997: Contract
+
+        conciergeUserAccountPage.getGallerySelect().click();
+
+
     }
 
     @Then("I verify footer links")
