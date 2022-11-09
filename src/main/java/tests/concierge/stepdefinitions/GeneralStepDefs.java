@@ -41,7 +41,7 @@ public class GeneralStepDefs {
     private static String USER_ID;
     private static final String USEREMAIL = "automationassociate@rh.com";
     private static final String PASSWORD = "Test@@123";
-    public static final String BASE_URL = Hooks.conciergeURL;
+    public static final String BASE_URL = Hooks.conciergeBaseURL;
     private static String addItemEndpoint;
     private static String cartId;
 
@@ -77,9 +77,6 @@ public class GeneralStepDefs {
      * @param accountRole - account role
      */
     public void loginAsRole(String accountRole) {
-        if (Hooks.conciergeURL.contains("stg4")) {
-            Hooks.setupConciergeCookies();
-        }
         conciergeLoginPage.getPasswordField().should(visible, Duration.ofMinutes(5));
         conciergeLoginPage.getUsernameField().should(visible, Duration.ofSeconds(40));
         if (accountRole.equals("associate")) {

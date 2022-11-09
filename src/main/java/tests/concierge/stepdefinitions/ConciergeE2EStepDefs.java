@@ -731,25 +731,25 @@ public class ConciergeE2EStepDefs {
 
     @When("I open product page with {string} and {string}")
     public void iOpenProductPageWithAnd(String productId, String skuId) {
-        String URL = Hooks.conciergeURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+GREY";
+        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+GREY";
         open(URL);
         while (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             conciergeItemsScreen.getAddToCartButton().scrollTo();
-            sleep(2000);
+            sleep(5000);
         }
     }
 
     @When("I open product page with productId {string}")
     public void iOpenProductPageWithProductId(String productId) {
-        String URL = Hooks.conciergeURL + "/catalog/product/product.jsp?productId="+productId+"";
+        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId="+productId+"";
         open(URL);
         sleep(3000);
     }
 
     @When("I open cart")
     public void iOpenCart() {
-        String URL = Hooks.conciergeURL + "/checkout/shopping_cart.jsp";
+        String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
         open(URL);
         sleep(2000);
     }
