@@ -43,6 +43,9 @@ public class Hooks {
     public static String conciergeURL;
     public static String eStoreURL;
 
+    public static String conciergeBaseURL;
+    public static String eStoreBaseURL;
+
     private static boolean setUpIsDone = false;
     private static final Logger Log = LoggerFactory.getLogger(FilterStepDefs.class);
     public static String profile;
@@ -81,8 +84,8 @@ public class Hooks {
             e.printStackTrace();
             throw new RuntimeException("Configuration.properties not found at " + propertyFilePath);
         }
-        conciergeURL = properties.getProperty("url.concierge." + profile);
-        eStoreURL = properties.getProperty("url.estore." + profile);
+        conciergeBaseURL = properties.getProperty("url.concierge." + profile);
+        eStoreBaseURL = properties.getProperty("url.estore." + profile);
         endpoint = properties.getProperty("endpoint.cookie." + cookie);
         associatePassword = (String) properties.get("associatePassword");
         associateLogin = (String) properties.get("associateLogin");
@@ -91,11 +94,40 @@ public class Hooks {
     }
 
     /**
+     * Set up URL + endpoint  for eStore
+     */
+    public static String configureEstoreURL() {
+        if (profile.equals("stg4") && cookie != null) {
+            eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
+        } else if (profile.equals("stg2") && cookie.equals("no_endpoint")) {
+            eStoreURL = eStoreBaseURL;
+        } else if (profile.equals("stg2")) {
+            eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
+        }
+        return eStoreURL;
+    }
+
+    /**
+     * Set up URL + endpoint  for concierge
+     */
+    public static String configureConciergeURL() {
+        if (profile.equals("stg4") && cookie != null) {
+            conciergeURL = conciergeBaseURL + "/?endpoint=" + cookie;
+        } else if (profile.equals("stg2") && cookie.equals("no_endpoint")) {
+            conciergeURL = conciergeBaseURL;
+        } else if (profile.equals("stg2") ) {
+            conciergeURL = conciergeBaseURL + "/?endpoint=" + cookie;
+        }
+        return conciergeURL;
+    }
+
+    /**
      * Init web driver for regression and smoke  for tests.concierge
      */
     @Before("@estoreRegression")
     public void initWebDrivereStore() {
         ConfigFileReader();
+        configureEstoreURL();
         setupChromeArguments();
         setUPWebDriver(eStoreURL);
     }
@@ -107,6 +139,7 @@ public class Hooks {
     @Before("@concierge-All or @target/rerun.txt")
     public void initWebDriver() {
         ConfigFileReader();
+        configureConciergeURL();
         setupChromeArguments();
         setUPWebDriver(conciergeURL);
         /* TODO : Finish Extent Report Class Implementation */
