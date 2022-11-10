@@ -11,7 +11,10 @@ import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class EstoreCartPage {
+
     private final SelenideElement joinNowCartEstoreButton = $(By.xpath("//*[text()='JOIN NOW']"));
+
+    private final SelenideElement removeMembershipButton = $(By.xpath("//*[text()='REMOVE MEMBERSHIP']"));
 
     private final SelenideElement joinNowMembershipButton = $(By.xpath("//div[@ctaname='Join Now']//button"));
 

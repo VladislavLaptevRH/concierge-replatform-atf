@@ -401,4 +401,9 @@ public class EstoreAddressStepDefs {
     @When("I add gift message")
     public void iAddGiftMessage() {
     }
+
+    @When("I update estore address for {string}")
+    public void iUpdateEstoreAddressFor(String arg0) {
+        generalStepDefs.fillZipCodeStateCountry("10001", "US", "NY");
+    }
 }
