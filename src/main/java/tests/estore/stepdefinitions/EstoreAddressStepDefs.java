@@ -137,13 +137,27 @@ public class EstoreAddressStepDefs {
             if (Hooks.eStoreURL.contains("stg4")) {
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
                 estoreAddressScreen.getShippingAddressStreetAddress().setValue("Bradford Lane");
+                estoreAddressScreen.getShippingAddresslastName().click();
+                try {
+                    $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
+                    $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
+                } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                    System.out.println("Dropdown list is not displayed");
+                }
             } else {
+                sleep(3000);
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
                 estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Bradford Lane");
-            }
+                try {
+                    $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
+                    $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
+                } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                    System.out.println("Dropdown list is not displayed");
+                }
 
-            $(By.xpath("//a[@href=\"/checkout/address.jsp\"]")).should(visible, Duration.ofSeconds(20));
-            $(By.xpath("//a[@href=\"/checkout/address.jsp\"]")).click();
+//                executeJavaScript("window.scrollTo(0, 600)");
+//                estoreAddressScreen.getShippingAddresslastName().click();
+            }
 
             sleep(3000);
             estoreAddressScreen.getShippingAddressAptFloor().click();
@@ -206,9 +220,21 @@ public class EstoreAddressStepDefs {
         if (Hooks.eStoreURL.contains("stg2")) {
             generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddressStg2());
             estoreUserAccountPage.getBillingAddressStreetAddressStg2().setValue("2479 Deer Run");
+            try {
+                $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).should(visible, Duration.ofSeconds(5));
+                $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).click();
+            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                System.out.println("Dropdown list is not displayed");
+            }
         } else {
             generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
             estoreUserAccountPage.getBillingAddressStreetAddress().setValue("2479 Deer Run");
+            try {
+                $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).should(visible, Duration.ofSeconds(5));
+                $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).click();
+            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                System.out.println("Dropdown list is not displayed");
+            }
         }
 
 
