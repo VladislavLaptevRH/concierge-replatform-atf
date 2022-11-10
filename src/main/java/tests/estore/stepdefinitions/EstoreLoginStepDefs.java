@@ -107,6 +107,14 @@ public class EstoreLoginStepDefs {
                 estoreLoginPage.getUsernameField().setValue("nonmember1@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Qwert1234");
             }
+            if (accountRole.equals("regularAddMembership")) {
+                estoreLoginPage.getUsernameField().setValue("regularaddmembershiprole@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Password1234");
+            }
+            if (accountRole.equals("emptyStateField")) {
+                estoreLoginPage.getUsernameField().setValue("automationemptystatefield@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Password1234");
+            }
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
         }

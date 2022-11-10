@@ -35,3 +35,20 @@ Feature: Estore Membership
     Then I validate membership details for member user
     When I click on cancel membership link
     Then I validate cancel membership content
+
+  Scenario: Verify the membership Terms and Conditions Link
+    Given I log into eStore as "member"
+    When I navigate to the member tab
+    When I click on terms & condition link
+    Then I verify that rh members program terms & condition pop up is displayed
+
+  Scenario: Verify the email address displayed in membership page
+    Given I log into eStore as "member"
+    When I navigate to the member tab
+    Then I verify that email address displayed in membership page
+
+  Scenario: Verfiy membership FAQa link
+    Given I log into eStore as "member"
+    When I navigate to the member tab
+    When I click on FAQa link for estore
+    Then I verfiy that frequently asked questions page is displayed
