@@ -102,7 +102,7 @@ Feature: Estore Cart Page
   Scenario: eStore - Gift Box fee in cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "10073234 CAML" from search field
+    When I go to estore item "10073228 GRPH" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
 #    When I click on zipcode estore button

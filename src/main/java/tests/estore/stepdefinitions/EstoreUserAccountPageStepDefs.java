@@ -157,7 +157,7 @@ public class EstoreUserAccountPageStepDefs {
 
     @Then("I verify that added address present in the grid")
     public void iVerifyThatAddedAddressPresentInTheGrid() {
-        $(By.xpath("//p[@class='MuiTypography-root MuiTypography-body1' and text()='2479 Deer Run, 2, Lewisville, TX 12345']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='2479 Deer Run,  Lewisville, TX 12345']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I click on delete estore button")
