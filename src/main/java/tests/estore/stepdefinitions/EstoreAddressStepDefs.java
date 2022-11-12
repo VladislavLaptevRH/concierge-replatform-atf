@@ -149,6 +149,7 @@ public class EstoreAddressStepDefs {
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
                 estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Bradford Lane");
                 try {
+                    sleep(4000);
                     $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
                     $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
                 } catch (com.codeborne.selenide.ex.ElementNotFound e) {
