@@ -136,7 +136,7 @@ public class EstoreAddressStepDefs {
 
             if (Hooks.eStoreURL.contains("stg4")) {
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
-                estoreAddressScreen.getShippingAddressStreetAddress().setValue("Bradford Lane");
+                estoreAddressScreen.getShippingAddressStreetAddress().setValue("Bradford Drive, Hilliard, OH, USA");
                 estoreAddressScreen.getShippingAddresslastName().click();
                 try {
                     $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
@@ -147,7 +147,7 @@ public class EstoreAddressStepDefs {
             } else {
                 sleep(3000);
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
-                estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Bradford Lane");
+                estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
                 try {
                     sleep(4000);
                     $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
