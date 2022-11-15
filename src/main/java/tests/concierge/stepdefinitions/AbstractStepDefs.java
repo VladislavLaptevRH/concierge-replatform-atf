@@ -39,8 +39,8 @@ public class AbstractStepDefs {
         actions.moveToElement(conciergeUserAccountPage.getFirstItemMainMenu());
         conciergeUserAccountPage.getFirstItemMainMenu().click();
         sleep(2000);
-        conciergeUserAccountPage.getItemSubCategory().get(0).should(visible, Duration.ofSeconds(30));
-        conciergeUserAccountPage.getItemSubCategory().get(0).click();
+        conciergeUserAccountPage.getItemSubCategory().get(1).should(visible, Duration.ofSeconds(30));
+        conciergeUserAccountPage.getItemSubCategory().get(1).click();
     }
 
 
