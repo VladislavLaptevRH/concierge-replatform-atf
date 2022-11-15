@@ -79,9 +79,10 @@ public class ConciergeOrderHistoryStepDefs {
 
     @When("I click on the random result")
     public void iClickOnTheRandomResult() {
-        conciergeOrderHistoryForm.getFirstResult().should(visible, Duration.ofMinutes(1));
+        //conciergeOrderHistoryForm.getFirstResult().should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Automation NonMember']")).should(visible, Duration.ofSeconds(40));
-        conciergeOrderHistoryForm.getFirstResult().click();
+        //conciergeOrderHistoryForm.getFirstResult().click();
+        $(By.xpath("//*[text()='Automation NonMember']")).click();
     }
 
     @Then("I verify that order history page is displayed")

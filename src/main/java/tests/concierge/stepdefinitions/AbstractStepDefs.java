@@ -39,6 +39,8 @@ public class AbstractStepDefs {
         actions.moveToElement(conciergeUserAccountPage.getFirstItemMainMenu());
         conciergeUserAccountPage.getFirstItemMainMenu().click();
         sleep(2000);
+        conciergeUserAccountPage.getItemSubCategory().get(1).should(visible, Duration.ofSeconds(30));
+        conciergeUserAccountPage.getItemSubCategory().get(1).click();
         conciergeUserAccountPage.getFirstItemSubCategory().should(visible, Duration.ofSeconds(30));
         conciergeUserAccountPage.getFirstItemSubCategory().click();
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3'])[2]//li")).should(visible, Duration.ofSeconds(20));
