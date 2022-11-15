@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import tests.estore.pageObject.EstoreAddressScreen;
 import tests.estore.pageObject.EstorePaymentPage;
 import tests.estore.pageObject.EstoreUserAccountPage;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -24,8 +25,9 @@ public class EstoreUserAccountPageStepDefs {
 
     @When("I go to profile payment method")
     public void iGoToProfilePaymentMethod() {
+        String URL = Hooks.eStoreBaseURL + "/my-account/payment-info.jsp";
+        open(URL);
         sleep(2000);
-        open("https://stg4.rhnonprod.com/my-account/payment-info.jsp");
 //        estoreUserAccountPage.getProfileIconButton().should(Condition.visible, Duration.ofSeconds(120));
 //        estoreUserAccountPage.getProfileIconButton().click();
 //        estoreUserAccountPage.getProfileButton().shouldHave(Condition.text("PROFILE"), Duration.ofSeconds(30));
@@ -57,7 +59,24 @@ public class EstoreUserAccountPageStepDefs {
         switchTo().defaultContent();
         estoreUserAccountPage.getBillingAddressFirstName().setValue("TestName");
         estoreUserAccountPage.getBillingAddressLastName().setValue("TestLastName");
-        estoreUserAccountPage.getBillingAddressStreetAddress().setValue("StreetAddress");
+        if (Hooks.eStoreBaseURL.contains("stg2")) {
+            estoreUserAccountPage.getBillingAddressStreetAddressStg2().should(visible, Duration.ofSeconds(20));
+            estoreUserAccountPage.getBillingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
+            try {
+                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
+                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
+            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                System.out.println("Dropdown list is not displayed");
+            }
+        } else {
+            estoreUserAccountPage.getBillingAddressStreetAddress().setValue("Bradford Drive, Hilliard, OH, USA");
+            try {
+                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
+                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
+            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                System.out.println("Dropdown list is not displayed");
+            }
+        }
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
         estoreUserAccountPage.getBillingAddressCity().setValue("testCity");
         Select selectState = new Select(estoreUserAccountPage.getBillingAddressSelectState());
@@ -157,7 +176,7 @@ public class EstoreUserAccountPageStepDefs {
 
     @Then("I verify that added address present in the grid")
     public void iVerifyThatAddedAddressPresentInTheGrid() {
-        $(By.xpath("//*[text()='2479 Deer Run,  Lewisville, TX 12345']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'2479 Deer Run')]")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I click on delete estore button")

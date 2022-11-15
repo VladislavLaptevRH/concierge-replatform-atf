@@ -26,12 +26,13 @@ Feature:Estore Payment
     And I click on view cart estore button
     When I click on estore checkout button
     And I click on estore no thanks button
-    When I fill estore shipping address
-    When I click on same as estore shipping address checkbox
+#    When I fill estore shipping address
+#    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I choose saved card "VI" from payment method dropdown
+    When I click on estore continue button
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
 
@@ -64,8 +65,8 @@ Feature:Estore Payment
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I edit estore billing address from PG
-    When I continue to estore payment after address page
-    Then I verify that I'm able to edit billing address
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
 
   Scenario: eStore unavailability of RHCC for CAN address
     Given I log into eStore as "regular"
@@ -96,6 +97,7 @@ Feature:Estore Payment
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I pay with RHCC for estore item
+    When I click on estore continue button
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
 
@@ -160,8 +162,8 @@ Feature:Estore Payment
     And I click on estore no thanks button
     When I click on continue to payment estore button
     When I click on continue with original address estore button
-    Then I validate updated order estimate and card details
     When I click on estore continue button
+    Then I validate updated order estimate and card details
     When I click on a place estore order button
     Then I verify that confirmation estore order screen is displayed
 
@@ -180,7 +182,7 @@ Feature:Estore Payment
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I execute payment with credit card on estore
-    When I click on estore cart button from header
+    When I open estore cart
     Then I verify that I'm able to decrease item quantity with success
     When I go to estore item "10100453 PYT" from search field
     When I click on add to cart estore button
@@ -189,6 +191,7 @@ Feature:Estore Payment
     And I click on estore no thanks button
     When I click on continue to payment estore button
     When I click on continue with original address estore button
+    When I click on estore continue button
     Then I validate updated order estimate and card details for decrease item
 
   Scenario: eStore Billing address based on saved payment method

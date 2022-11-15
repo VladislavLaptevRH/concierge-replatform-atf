@@ -50,10 +50,8 @@ public class EstoreCGStepDefs {
 
     @Then("I verify collection name, image, prices on collection banner")
     public void iVerifyCollectionNameImagePricesOnCollectionBanner() {
-        $(By.xpath("//*[text()='9595']")).should(Condition.visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='7196']")).should(Condition.visible, Duration.ofSeconds(20));
-        estoreCGScreen.getSofaCollections().should(Condition.visible, Duration.ofSeconds(20));
-        $(By.xpath("//img[@alt='Cortona Sofa Collection']")).should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("(//img)[2]")).should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @When("I click on preview the collection link")
@@ -64,7 +62,7 @@ public class EstoreCGStepDefs {
 
     @Then("I verify that I'm landing on preview the collection model")
     public void iVerifyThatIMLandingOnPreviewTheCollectionModel() {
-        estoreCGScreen.getCortonaSofaCollectionTitelPreviewPopUp().should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("//div[@role='presentation']//*[contains(text(),'COLLECTION')]")).should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify after click on X icon model gets closed")

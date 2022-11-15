@@ -481,7 +481,8 @@ public class EstoreCartPageStepDefs {
 
     @When("I open estore cart")
     public void iOpenCart() {
-        open("https://stg4.rhnonprod.com/checkout/shopping_cart.jsp");
+        String URL = Hooks.eStoreBaseURL + "/checkout/shopping_cart.jsp";
+        open(URL);
         sleep(2000);
     }
 
