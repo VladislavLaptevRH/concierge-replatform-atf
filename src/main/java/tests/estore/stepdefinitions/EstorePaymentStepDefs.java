@@ -103,19 +103,22 @@ public class EstorePaymentStepDefs {
     @When("I edit estore billing address from PG")
     public void iEditBillingAddressFromPG() {
         sleep(3000);
-        estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(40));
-        estoreAddressScreen.getEditShippinggAddress().click();
-        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible,Duration.ofSeconds(20));
         $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).click();
-        estoreAddressScreen.getBillingAddressFirstName().click();
-        estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstName());
-        estoreAddressScreen.getBillingAddressFirstName().setValue("NewBillingAddress");
+//        estoreAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(40));
+//        estoreAddressScreen.getEditBillingAddress().click();
+//        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible, Duration.ofSeconds(15));
+//        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).click();
+        estoreAddressScreen.getShippingAddressfirstName().click();
+        estoreGeneralStepDefs.clearField(estoreAddressScreen.getShippingAddressfirstName());
+        estoreAddressScreen.getShippingAddressfirstName().setValue("NewBillingAddress");
     }
 
 
     @When("I pay with RHCC for estore item")
     public void iPayWithRHCCForEstoreItem() {
-        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(5));
+//        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(5));
+        sleep(5000);
         Select paymentMethod = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         paymentMethod.selectByValue("RH");
         estorePaymentPage.getRhCardNumberField().setValue("6006101002587258");
@@ -198,7 +201,7 @@ public class EstorePaymentStepDefs {
     @Then("I validate updated order estimate and card details")
     public void iValidateUpdatedOrderEstimateAndCardDetails() {
         $(By.xpath("//*[text()='Subtotal ']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='TOTAL']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'TOTAL')]")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I update item quantity in estore pdp")
@@ -213,7 +216,7 @@ public class EstorePaymentStepDefs {
     @Then("I validate updated order estimate and card details for decrease item")
     public void iValidateUpdatedOrderEstimateAndCardDetailsForDecreaseItem() {
         $(By.xpath("//*[text()='Subtotal ']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='TOTAL']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'TOTAL')]")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify unavailability of saved for RHCC")

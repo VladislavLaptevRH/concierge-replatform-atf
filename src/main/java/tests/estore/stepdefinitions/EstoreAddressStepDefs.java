@@ -286,8 +286,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that address on order review page the same as on address page")
     public void iVerifyThatAddressOnOrderReviewPageTheSameAsOnAddressPage() {
-        $(By.xpath("//*[text()='4224 Simpson Street']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Rock Island, IL 61201']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//div[@data-testid='checkout-address-view']")).should(visible,Duration.ofSeconds(20));
     }
 
     @When("I remove added address before")
