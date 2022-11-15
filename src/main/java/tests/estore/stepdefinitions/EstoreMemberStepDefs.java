@@ -26,7 +26,7 @@ public class EstoreMemberStepDefs {
 
     //Non-members
     String expectedTitle = "RH MEMBERS PROGRAM PROFILE";
-    String expectedRenewal =  "Your membership will auto-renew each year for $175, plus applicable taxes.";
+    String expectedRenewal = "Your membership will auto-renew each year for $175, plus applicable taxes.";
     String expectedCancel = "You may cancel auto-renewal by calling the RH Members Program Concierge at 888.889.4739.";
     String expectedParagraph = "The RH Members Program offers savings of 25% on everything RH.* Every day. Become a member for a $175, plus applicable taxes. annual fee, members will save 25% on RH, RH Modern, RH Baby & Child and RH TEEN, as well as 10% savings on all Sale. Benefits include complimentary services with RH Interior Design, concierge service to manage your orders, eligibility for preferred financing† plans on RH Credit Card and early access to clearance events. FAQs";
     String expectedParagraph2 = "*Limited exclusions apply. † Minimum payments are required for each Credit Plan. Valid for single transaction only. If the single transaction has multiple shipments, each shipment may result in a separate Credit Plan, subject to a separate minimum purchase requirement and minimum interest charge. Valid in US only. Visit an RH Gallery or RH.com for details.";
@@ -57,7 +57,6 @@ public class EstoreMemberStepDefs {
     String expectedFinance = "Preferred financing† plans on the RH Credit Card available, subject to approval";
     String expectedEarlyAccess = "Early access to clearance events";
     String expectedCancelMessage = "† Promotional financing available with RH credit card accounts offered by Comenity Bank, which determines qualifications for credit and promotion eligibility. Minimum purchase and minimum monthly payments are required. Subject to credit approval and availability. Account must be in good standing at time of transaction.";
-
 
 
     @Then("I validate membership title")
@@ -93,7 +92,7 @@ public class EstoreMemberStepDefs {
     @Then("I validate cart")
     public void iValidateCart() {
         sleep(5000);
-        $(By.xpath("//*[text()='JOIN NOW']")).should(visible,Duration.ofSeconds(10));
+        $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(10));
     }
 
     @Then("I validate email address field and link to membership button")
@@ -143,5 +142,31 @@ public class EstoreMemberStepDefs {
     public void iGoesToClickOnCartButtonFromHeader() {
         estoreUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(1));
         estoreUserAccountPage.getCartButton().click();
+    }
+
+    @When("I click on terms & condition link")
+    public void iClickOnTermsConditionLink() {
+        $(By.xpath("//*[text()='Terms & Conditions']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Terms & Conditions']")).click();
+    }
+
+    @Then("I verify that rh members program terms & condition pop up is displayed")
+    public void iVerifyThatRhMembersProgramTermsCondition() {
+        $(By.xpath("//*[text()='RH MEMBERS PROGRAM TERMS & CONDITIONS']")).should(visible, Duration.ofSeconds(30));
+    }
+
+    @Then("I verify that email address displayed in membership page")
+    public void iVerifyThatEmailAddressDisplayedInMembershipPage() {
+        $(By.xpath("//*[text()='bnamdeo+0073@rh.com']")).should(visible, Duration.ofSeconds(25));
+    }
+
+    @When("I click on FAQa link for estore")
+    public void iClickOnFAQaLinkForEstore() {
+        $(By.xpath("(//a[@href='/customer-experience/frequently-asked-questions'])[1]")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("(//a[@href='/customer-experience/frequently-asked-questions'])[1]")).click();
+    }
+
+    @Then("I verfiy that frequently asked questions page is displayed")
+    public void iVerfiyThatFrequentlyAskedQuestionsPageIsDisplayed() {
     }
 }

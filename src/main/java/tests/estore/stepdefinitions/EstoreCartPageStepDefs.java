@@ -10,6 +10,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import tests.concierge.pageObject.SaleScreen;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
@@ -28,6 +29,7 @@ public class EstoreCartPageStepDefs {
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     EstoreItemPage estoreItemPage = new EstoreItemPage();
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
+    SaleScreen saleScreen = new SaleScreen();
 
     private static final String USER_ID = "3d6b15b6-eca1-4ef5-8c3c-cc39c6a2b8a8";
     private static final String USEREMAIL = "new02@rh.com";
@@ -282,8 +284,8 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on join now membership button")
     public void iClickOnJoinNowMembershipButton() {
-        estoreCartPage.getJoinNowMembershipButton().shouldHave(text("Join Now"), Duration.ofSeconds(20));
-        estoreCartPage.getJoinNowMembershipButton().click();
+        estoreCartPage.getJoinNowCartEstoreButton().shouldHave(text("JOIN NOW"), Duration.ofSeconds(20));
+        estoreCartPage.getJoinNowCartEstoreButton().click();
     }
 
     @Then("I verify order estimate section in cart")
@@ -317,6 +319,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify {string} shipping restriction")
     public void iVerifyShippingRestriction(String arg0) {
+        System.out.println();
     }
 
     @Then("I verify that continue as guest user option is not available")
@@ -526,5 +529,64 @@ public class EstoreCartPageStepDefs {
     @Then("I verify that gift card balance info is displayed for estore")
     public void iVerifyThatGiftCardBalanceInfoIsDisplayed() {
         estoreCartPage.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 1635 has balance of "), Duration.ofSeconds(25));
+    }
+
+    @Then("I verify that estore order estimate is not displayed")
+    public void iVerifyThatEstoreLineItemWasRemoved() {
+        $(By.xpath("//*[text()='ORDER ESTIMATE']")).shouldNotBe(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that regular price is displayed for estore cart")
+    public void iVerifyThatRegularPriceIsDisplayedForEstoreCart() {
+        saleScreen.getRegularPrice().should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that {string} prices for {string} was applied")
+    public void iVerifyThatMemberPricesForWasApplied(String priceType, String skuId) {
+        if (skuId.equals("42100241 GREY") && (priceType.equals("member"))) {
+            $(By.xpath("  //*[text()='$6,996.00']")).should(visible, Duration.ofSeconds(20));
+        }
+        if (skuId.equals("42100241 GREY") && (priceType.equals("regular"))) {
+            $(By.xpath("  //*[text()='$9,095.00']")).should(visible, Duration.ofSeconds(20));
+        }
+    }
+
+    @When("I click on remove membership estore button")
+    public void iClickOnRemoveMembershipEstoreButton() {
+        estoreCartPage.getRemoveMembershipButton().scrollIntoView(true);
+        estoreCartPage.getRemoveMembershipButton().click();
+    }
+
+
+    @Then("I verify state field empty dropdown issue for International billing address")
+    public void iVerifyStateFieldEmptyDropdownIssueForInternationalBillingAddress() {
+        $(By.xpath("//*[text()='State required.']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I choose estore empty state")
+    public void iChooseEstoreEmptyState() {
+        estoreAddressScreen.getShippingAddressState().scrollIntoView(true);
+        Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
+        selectState.selectByIndex(0);
+    }
+
+    @Then("I verify estore order total in order estimate for {string}")
+    public void iVerifyEstoreOrderTotalInOrderEstimateFor(String arg0) {
+        $(By.xpath("//*[text()='$9,524.00']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify estore order total in order estimate for membership for {string}")
+    public void iVerifyEstoreOrderTotalInOrderEstimateForMembershipFor(String arg0) {
+        $(By.xpath("//*[text()='$7,425.00']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify the standard delivery charges for estore")
+    public void iVerifyTheStandardDeliveryChargesForEstore() {
+        $(By.xpath("//*[text()='Standard Delivery Shipping']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Standard Delivery Shipping']")).click();
+        $(By.xpath("//*[text()='Standard Shipping']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Standard Shipping']")).click();
+        $(By.xpath("//*[text()='U.S. Standard Shipping']")).should(visible,Duration.ofSeconds(20));
+
     }
 }

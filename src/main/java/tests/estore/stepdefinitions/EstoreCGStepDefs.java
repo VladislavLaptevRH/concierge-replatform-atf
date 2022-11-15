@@ -22,12 +22,12 @@ public class EstoreCGStepDefs {
 
     @Then("I validate the collection name is not empty")
     public void iValidateTheCollectionNameIsNotEmpty() {
-        estoreCGScreen.getSofaCollections().should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @When("I scroll on the page till back to top button is visible")
     public void iScrollOnThePageTillBackToTopButtonIsVisible() {
-        estoreCGScreen.getSofaCollections().should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(20));
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
@@ -39,7 +39,7 @@ public class EstoreCGStepDefs {
 
     @And("I verify that after click on back to top button user is scrolled to top on the page")
     public void iVerifyThatAfterClickOnBackToTopButtonUserIsScrolledToTopOnThePage() {
-        estoreCGScreen.getSofaCollections().should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify that single grid view is selected on CG page by default")

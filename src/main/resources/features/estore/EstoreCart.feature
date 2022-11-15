@@ -102,7 +102,7 @@ Feature: Estore Cart Page
   Scenario: eStore - Gift Box fee in cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "10073234 CAML" from search field
+    When I go to estore item "10073228 GRPH" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
 #    When I click on zipcode estore button
@@ -148,12 +148,15 @@ Feature: Estore Cart Page
   Scenario: eStore - New York Shipping restriction
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I go to estore item "112414 OCEN BUMP" from search field
     When I click on add to cart estore button
     When I click on aggree&add estore button
     And I click on view cart estore button
     When I click on estore checkout button
     When I click on estore no thanks button
+    When I fill estore shipping address
+    When I update estore address for "NY"
+    When I click on edit estore billing address button
     When I click on same as estore shipping address checkbox
     Then I verify "NY" shipping restriction
 
@@ -193,3 +196,65 @@ Feature: Estore Cart Page
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that the added product is in the cart during brand switching
+
+  Scenario: Verify the cart subtotal when regular user added membership card with other sku's.
+  Member prices should be applicable
+    Given I log into eStore as "regularAddMembership"
+    When I remove all items from estore cart
+    When I go to estore item "42100241 GREY" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on join now membership button
+    Then I verify that "member" prices for "42100241 GREY" was applied
+    When I click on remove membership estore button
+    Then I verify that "regular" prices for "42100241 GREY" was applied
+
+  Scenario: Verify state field Empty dropdown issue for International billing address
+    Given I log into eStore as "regular"
+    When I remove all items from estore cart
+    When I go to estore item "42100241 GREY" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on estore checkout button
+    When I click on estore no thanks button
+    When I fill estore shipping address
+    When I choose estore empty state
+    When I click on continue payment method estore button
+    Then I verify state field empty dropdown issue for International billing address
+
+  Scenario: Verify the standard delivery charges  (Free & applicable charges)
+    Given I log into eStore as "regular"
+    When I remove all items from estore cart
+    When I go to estore item "42100241 GREY" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+
+  Scenario: Add Membership and verify order total in order estimate
+    Given I log into eStore as "regularAddMembership"
+    When I remove all items from estore cart
+    When I go to estore item "42100241 GREY" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on join now membership button
+    Then I verify estore order total in order estimate for membership for "42100241 GREY"
+    When I click on remove membership estore button
+
+  Scenario: Remove Membership and verify order total in order estimate
+    Given I log into eStore as "regularAddMembership"
+    When I remove all items from estore cart
+    When I go to estore item "42100241 GREY" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on join now membership button
+    Then I verify estore order total in order estimate for membership for "42100241 GREY"
+    When I click on remove membership estore button
+    Then I verify estore order total in order estimate for "42100241 GREY"
+
+  Scenario: Verify the standard delivery charges (Free & applicable charges)
+    Given I log into eStore as "regular"
+    When I remove all items from estore cart
+    When I go to estore item "17050042 WHT" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    Then I verify the standard delivery charges for estore
+

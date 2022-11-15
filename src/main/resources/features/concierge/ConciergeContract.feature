@@ -13,7 +13,7 @@ Feature:Concierge Contract
     And I click on no thanks button
     When I look on client by "accountnumber" with "20211221164476"
     Then I verify that I'm able to select contract client
-  
+
 #Disbaled following tests because of https://restorationhardware.jira.com/browse/CE-2037
 #  Scenario: Verify that Membership banner is not present on the cart page
 #    Given I log into Concierge as "associate"

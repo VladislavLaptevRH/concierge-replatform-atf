@@ -77,11 +77,9 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement profileButton = $(By.xpath("//*[text()='PROFILE']"));
 
-    private final SelenideElement addressBookButton = $(By.xpath("//a[@href='/us/en/my-account/address-book.jsp']"));
+    private final SelenideElement addressBookButton = $(By.xpath("//a[contains(@href,'/address-book.jsp')]"));
 
 //    private final SelenideElement addressBookButtonStg4 = $(By.xpath("//a[@href="/my-account/address-book.jsp"));
-
-
 
     private final SelenideElement profileIconButton = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
 

@@ -62,7 +62,6 @@ Feature: Estore Address Page
     When I introduce data for new profile address
     When I click on save address button
     When I click on continue with original address estore button
-    Then I verify that added address present in the grid
     When I go to estore item "10097379 PYR" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
@@ -108,6 +107,7 @@ Feature: Estore Address Page
     When I click on continue with original address estore button
     When I edit existing address on address book page
     When I click on save address button
+    When I click on continue with original address estore button
     When I go to estore item "10097379 PYR" from search field
     When I click on add to cart estore button
     When I click on aggree&add estore button
