@@ -136,7 +136,7 @@ public class EstoreLoginStepDefs {
     @Given("I log into eStore as contract")
     public void iLogIntoEStoreAsContract() {
         sleep(2000);
-        open(Hooks.eStoreURL + "/contract-sales/contract-sign-in.jsp");
+        open(Hooks.eStoreBaseURL + "/contract-sales/contract-sign-in.jsp");
         estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
         estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
         estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
@@ -146,6 +146,7 @@ public class EstoreLoginStepDefs {
     @Given("I log into eStore as trade")
     public void iLogIntoEStoreAsTrade() {
         sleep(2000);
+
         try {
             open(Hooks.eStoreURL + "/trade-sales/trade-sign-in.jsp");
             estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
@@ -160,7 +161,5 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
         }
-
-
     }
 }

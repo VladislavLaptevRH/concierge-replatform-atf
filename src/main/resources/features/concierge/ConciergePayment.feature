@@ -18,9 +18,9 @@ Feature:Concierge Payment
     And I verify that review screen is displayed
     Examples:
       | cardType |
-      | VI            |
-      | MC            |
-      | AX            |
+#      | VI            |
+#      | MC            |
+#      | AX            |
       | DI            |
 
   Scenario: GC/ Balance check
