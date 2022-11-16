@@ -62,7 +62,7 @@ public class EstoreMemberStepDefs {
     @Then("I validate membership title")
     public void iValidateMembershipTitile() {
         sleep(5000);
-        assertEquals(estoreMemberPage.getMemberTitle().getText(), expectedTitle);
+        $(By.xpath("//*[text()='RH MEMBERS PROGRAM PROFILE']")).should(visible,Duration.ofSeconds(20));
     }
 
     @Then("I validate membership details")

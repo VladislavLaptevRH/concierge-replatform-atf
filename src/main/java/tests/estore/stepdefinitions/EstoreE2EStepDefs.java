@@ -82,8 +82,16 @@ public class EstoreE2EStepDefs {
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
         sleep(3000);
         estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(3));
-        estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
-        estoreItemPage.getAddToCartButton().click();
+        try {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
+            estoreItemPage.getAddToCartButton().click();
+        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
+            estoreItemPage.getAddToCartButton().click();
+        }
+
     }
 
     @When("I fill all estore fields from address with {string} zip code")
@@ -187,7 +195,7 @@ public class EstoreE2EStepDefs {
     @When("I go to estore item {string} from search field")
     public void iGoToItemFromEstoreSearchField(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).should(visible, Duration.ofSeconds(60));
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).click();
         estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));

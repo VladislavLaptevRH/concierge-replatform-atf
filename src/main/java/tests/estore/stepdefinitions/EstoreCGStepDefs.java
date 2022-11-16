@@ -78,7 +78,7 @@ public class EstoreCGStepDefs {
 
     @Then("I verify that collection modal is scrollable")
     public void iVerifyThatCollectionModalIsScrollable() {
-        estoreCGScreen.getCortonaSofaCollectionTitelPreviewPopUp().should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[contains(text(),'COLLECTION')]")).should(visible,Duration.ofSeconds(20));
         switchTo().frame($(By.id("esw_storage_iframe")));
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
     }

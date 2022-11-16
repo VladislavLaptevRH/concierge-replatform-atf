@@ -79,6 +79,7 @@ Feature:Estore Payment
     When I click on edit estore billing address button
     When I fill estore shipping address
     When I update shipping address for CAN
+    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     Then I verify unavailability for RHCC
@@ -269,12 +270,12 @@ Feature:Estore Payment
     And I click on view cart estore button
     When I click on estore checkout button
     And I click on estore no thanks button
-    When I fill estore shipping address
-    When I click on same as estore shipping address checkbox
-    When I click on continue to payment estore button
-    When I click on continue with original address estore button
-    When I refresh current estore page
-    When I remove payment method which was used earlier
+#    When I fill estore shipping address
+#    When I click on same as estore shipping address checkbox
+#    When I click on continue to payment estore button
+#    When I click on continue with original address estore button
+#    When I refresh current estore page
+#    When I remove payment method which was used earlier
 #    When I execute payment with credit card on estore
 #    When I click on edit shipping address button on estore order review page
 #    When I click on edit shipping address button on estore address page
@@ -320,7 +321,7 @@ Feature:Estore Payment
   Scenario: GC/ Balance check
     Given I log into eStore as "mastercard"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I go to estore item "17050044 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -383,7 +384,7 @@ Feature:Estore Payment
     When I go to profile payment method
     When I remove added before cart
     When I added new card "DISCOVER" for estore
-    Then I verify that I'm able to add "AMEX"
+    Then I verify that I'm able to add "DISCOVER"
     When I remove added before cart
 
 
