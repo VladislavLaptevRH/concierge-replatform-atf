@@ -115,8 +115,8 @@ Feature: Estore Cart Page
     When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
-    When I click on join the rh members program from footer
-    When I click on join now membership button
+#    When I click on join the rh members program from footer
+#    When I click on join now membership button
 #    When I click on zipcode estore button
 #    When I update "US" postal code in cart
 #    Then I verify order estimate section in cart
@@ -154,15 +154,14 @@ Feature: Estore Cart Page
     And I click on view cart estore button
     When I click on estore checkout button
     When I click on estore no thanks button
-    When I fill estore shipping address
-    When I update estore address for "NY"
+    When I fill estore shipping address for "NY"
     When I click on edit estore billing address button
     When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
     Then I verify "NY" shipping restriction
 
   Scenario: eStore - Disable Continue as a Guest user option for guest user with membership
-    Given I remove all items from estore cart
-    When I go to estore item "42100241 GREY" from search field
+    Given I go to estore item "17050042WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on join now on estore cart page membership button
@@ -177,14 +176,14 @@ Feature: Estore Cart Page
   Scenario: eStore Membership banner for member user
     Given I log into eStore as "member"
     When I remove all items from estore cart
-    When I go to estore item "10073234 CAML" from search field
+    When I go to estore item "17050042WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify membership estore banner for "member user"
 
   Scenario: eStore Membership banner for non-member user
     Given I log into eStore as "regular"
-    When I go to estore item "42100241 GREY" from search field
+    When I go to estore item "17050042WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify membership estore banner for "nonmember user"
@@ -201,18 +200,19 @@ Feature: Estore Cart Page
   Member prices should be applicable
     Given I log into eStore as "regularAddMembership"
     When I remove all items from estore cart
-    When I go to estore item "42100241 GREY" from search field
+    When I go to estore item "17050042WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
-    When I click on join now membership button
-    Then I verify that "member" prices for "42100241 GREY" was applied
     When I click on remove membership estore button
-    Then I verify that "regular" prices for "42100241 GREY" was applied
+    When I click on join now membership button
+    Then I verify that "member" prices for "17050042WHT" was applied
+    When I click on remove membership estore button
+    Then I verify that "regular" prices for "17050042WHT" was applied
 
   Scenario: Verify state field Empty dropdown issue for International billing address
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "42100241 GREY" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -225,30 +225,19 @@ Feature: Estore Cart Page
   Scenario: Verify the standard delivery charges  (Free & applicable charges)
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "42100241 GREY" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
 
   Scenario: Add Membership and verify order total in order estimate
     Given I log into eStore as "regularAddMembership"
     When I remove all items from estore cart
-    When I go to estore item "42100241 GREY" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on join now membership button
     Then I verify estore order total in order estimate for membership for "42100241 GREY"
     When I click on remove membership estore button
-
-  Scenario: Remove Membership and verify order total in order estimate
-    Given I log into eStore as "regularAddMembership"
-    When I remove all items from estore cart
-    When I go to estore item "42100241 GREY" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    When I click on join now membership button
-    Then I verify estore order total in order estimate for membership for "42100241 GREY"
-    When I click on remove membership estore button
-    Then I verify estore order total in order estimate for "42100241 GREY"
 
   Scenario: Verify the standard delivery charges (Free & applicable charges)
     Given I log into eStore as "regular"

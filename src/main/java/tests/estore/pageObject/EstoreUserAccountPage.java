@@ -85,7 +85,7 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement profileIconButtonDiv = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
 
-    private final SelenideElement brandButton = $(By.xpath("//a[@data-testid='brand-link']"));
+    private final SelenideElement brandButton = $(By.xpath("//div[@id='hamburgerIcon']"));
 
     private final SelenideElement galleryButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item']/h6[@class='MuiTypography-root MuiTypography-subtitle1 MuiTypography-displayInline']"));
 

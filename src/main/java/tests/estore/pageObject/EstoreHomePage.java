@@ -19,7 +19,7 @@ public class EstoreHomePage {
     private final SelenideElement searchIcon = $(By.xpath("//span[@class='MuiIconButton-label']"));
     private final SelenideElement hamburgerIcon = $(By.id("hamburgerIcon"));
 
-    private final SelenideElement categoryDropdown = $(By.xpath("//a[@data-testid='brand-link']"));
+    private final SelenideElement categoryDropdown = $(By.xpath("//div[@id='hamburgerIcon']"));
     private final SelenideElement locationDropdown = $(By.id("gallery-select"));
 
     private final SelenideElement searchInputField = $(By.id("site-search-input"));

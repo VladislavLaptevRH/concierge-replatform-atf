@@ -43,6 +43,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I remove all items from estore cart")
     public void iRemoveAllItemsFromEstoreCart() {
+        generalStepDefs.waitForJSandJQueryToLoad();
         if (Hooks.profile.contains("stg4")) {
             estoreUserAccountPage.getCartButtonStg4().should(visible, Duration.ofMinutes(3));
             sleep(3000);
@@ -319,7 +320,14 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify {string} shipping restriction")
     public void iVerifyShippingRestriction(String arg0) {
-        System.out.println();
+        if (arg0.equals("NY")) {
+            $(By.xpath("//*[text()='cannot be shipped to the state of']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[contains(text(),'New York')]")).should(visible, Duration.ofSeconds(20));
+        }
+        if (arg0.equals("CAN")) {
+
+        }
+
     }
 
     @Then("I verify that continue as guest user option is not available")
@@ -368,16 +376,16 @@ public class EstoreCartPageStepDefs {
         sleep(2000);
         estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getBrandButton().click();
-        int countOfBrands = estoreUserAccountPage.getListOfBrands().size();
-        for (int i = 1; i < countOfBrands; i++) {
-            if (i > 1) {
-                estoreUserAccountPage.getBrandButton().click();
-            }
-            estoreUserAccountPage.getListOfBrands().get(i).click();
-            estoreE2EStepDefs.iGoToItemFromEstoreSearchField("10073234 CAML");
-            estoreE2EStepDefs.iClickOnAddToCartButton();
-            iClickOnViewCartButton();
-        }
+//        int countOfBrands = estoreUserAccountPage.getListOfBrands().size();
+//        for (int i = 1; i < countOfBrands-4; i++) {
+//            if (i > 1) {
+//                estoreUserAccountPage.getBrandButton().click();
+//            }
+//            estoreUserAccountPage.getListOfBrands().get(i).click();
+//            estoreE2EStepDefs.iGoToItemFromEstoreSearchField("10073234 CAML");
+//            estoreE2EStepDefs.iClickOnAddToCartButton();
+//            iClickOnViewCartButton();
+//        }
 
     }
 
@@ -544,18 +552,24 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that {string} prices for {string} was applied")
     public void iVerifyThatMemberPricesForWasApplied(String priceType, String skuId) {
-        if (skuId.equals("42100241 GREY") && (priceType.equals("member"))) {
-            $(By.xpath("  //*[text()='$6,996.00']")).should(visible, Duration.ofSeconds(20));
+        if (skuId.equals("17050042WHT") && (priceType.equals("member"))) {
+            $(By.xpath("  //*[text()='$35.00']")).should(visible, Duration.ofSeconds(20));
         }
-        if (skuId.equals("42100241 GREY") && (priceType.equals("regular"))) {
-            $(By.xpath("  //*[text()='$9,095.00']")).should(visible, Duration.ofSeconds(20));
+        if (skuId.equals("17050042WHT") && (priceType.equals("regular"))) {
+            $(By.xpath("  //*[text()='$47.00']")).should(visible, Duration.ofSeconds(20));
         }
     }
 
     @When("I click on remove membership estore button")
     public void iClickOnRemoveMembershipEstoreButton() {
-        estoreCartPage.getRemoveMembershipButton().scrollIntoView(true);
-        estoreCartPage.getRemoveMembershipButton().click();
+        try {
+            estoreCartPage.getRemoveMembershipButton().scrollIntoView(true);
+            estoreCartPage.getRemoveMembershipButton().should(visible,Duration.ofSeconds(20));
+            estoreCartPage.getRemoveMembershipButton().click();
+        }catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Remove membership button is not displayed");
+        }
+
     }
 
 
@@ -571,23 +585,18 @@ public class EstoreCartPageStepDefs {
         selectState.selectByIndex(0);
     }
 
-    @Then("I verify estore order total in order estimate for {string}")
-    public void iVerifyEstoreOrderTotalInOrderEstimateFor(String arg0) {
-        $(By.xpath("//*[text()='$9,524.00']")).should(visible, Duration.ofSeconds(20));
-    }
-
     @Then("I verify estore order total in order estimate for membership for {string}")
     public void iVerifyEstoreOrderTotalInOrderEstimateForMembershipFor(String arg0) {
-        $(By.xpath("//*[text()='$7,425.00']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Subtotal with Member Savings']")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify the standard delivery charges for estore")
     public void iVerifyTheStandardDeliveryChargesForEstore() {
         $(By.xpath("//*[text()='Standard Delivery Shipping']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Standard Delivery Shipping']")).click();
-        $(By.xpath("//*[text()='Standard Shipping']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Standard Shipping']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Standard Shipping']")).click();
-        $(By.xpath("//*[text()='U.S. Standard Shipping']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='U.S. Standard Shipping']")).should(visible, Duration.ofSeconds(20));
 
     }
 }

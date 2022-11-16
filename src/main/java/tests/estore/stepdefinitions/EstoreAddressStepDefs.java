@@ -26,8 +26,13 @@ public class EstoreAddressStepDefs {
 
     @When("I click on edit estore billing address button")
     public void iClickOnEditEstoreBillingAddressButton() {
-        estoreAddressScreen.getEditShippinggAddress().should(Condition.visible, Duration.ofSeconds(20));
-        estoreAddressScreen.getEditShippinggAddress().click();
+        try {
+            estoreAddressScreen.getEditShippinggAddress().should(Condition.visible, Duration.ofSeconds(20));
+            estoreAddressScreen.getEditShippinggAddress().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Edit button is not displayed");
+        }
+
     }
 
     @When("I update shipping address for CAN")
@@ -163,14 +168,14 @@ public class EstoreAddressStepDefs {
             sleep(3000);
             estoreAddressScreen.getShippingAddressAptFloor().click();
             estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
-            estoreAddressScreen.getShippingAddressCity().setValue("Newark");
+//            estoreAddressScreen.getShippingAddressCity().setValue("Newark");
 
-            Select shippingAddressState = new Select(estoreAddressScreen.getShippingAddressState());
-            shippingAddressState.selectByValue("DE");
+//            Select shippingAddressState = new Select(estoreAddressScreen.getShippingAddressState());
+//            shippingAddressState.selectByValue("DE");
 
-            estoreAddressScreen.getPostalShippingCode().click();
-            generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-            estoreAddressScreen.getPostalShippingCode().setValue("19711");
+//            estoreAddressScreen.getPostalShippingCode().click();
+//            generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
+//            estoreAddressScreen.getPostalShippingCode().setValue("19711");
 
             estoreAddressScreen.getShippingAddressPhone().click();
             generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
@@ -183,7 +188,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify add a new shipping address option is present")
     public void iVerifyAddANewShippingAddressOptionIsPresent() {
-        $(By.xpath("//*[text()='Add a New Shipping Address to Your Account']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Add New Address')]")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I click on estore my account icon")
@@ -286,7 +291,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that address on order review page the same as on address page")
     public void iVerifyThatAddressOnOrderReviewPageTheSameAsOnAddressPage() {
-        $(By.xpath("//div[@data-testid='checkout-address-view']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//div[@data-testid='checkout-address-view']")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I remove added address before")
@@ -373,12 +378,30 @@ public class EstoreAddressStepDefs {
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressLastName());
         estoreUserAccountPage.getBillingAddressLastName().setValue(generalStepDefs.getAlphaNumericString(4));
 
-        if (Hooks.eStoreURL.contains("stg2")) {
-            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddressStg2());
-            estoreUserAccountPage.getBillingAddressStreetAddressStg2().setValue("2479 Deer Run");
+        if (Hooks.eStoreURL.contains("stg4")) {
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
+            estoreAddressScreen.getShippingAddressStreetAddress().setValue("Bradford Drive, Hilliard, OH, USA");
+            estoreAddressScreen.getShippingAddresslastName().click();
+            try {
+                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
+                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
+            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                System.out.println("Dropdown list is not displayed");
+            }
         } else {
-            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
-            estoreUserAccountPage.getBillingAddressStreetAddress().setValue("2479 Deer Run");
+            sleep(3000);
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressAddStreetField());
+            estoreAddressScreen.getShippingAddressAddStreetField().setValue("Bradford Drive, Hilliard, OH, USA");
+            try {
+                sleep(4000);
+                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
+                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
+            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                System.out.println("Dropdown list is not displayed");
+            }
+
+//                executeJavaScript("window.scrollTo(0, 600)");
+//                estoreAddressScreen.getShippingAddresslastName().click();
         }
 
 
@@ -431,5 +454,64 @@ public class EstoreAddressStepDefs {
     @When("I update estore address for {string}")
     public void iUpdateEstoreAddressFor(String arg0) {
         generalStepDefs.fillZipCodeStateCountry("10001", "US", "NY");
+    }
+
+    @When("I fill estore shipping address for {string}")
+    public void iFillEstoreShippingAddressFor(String state) {
+        try {
+            sleep(2000);
+            estoreAddressScreen.getShippingAddressfirstName().should(visible, Duration.ofSeconds(40));
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressfirstName());
+            estoreAddressScreen.getShippingAddressfirstName().setValue("Safire");
+
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddresslastName());
+            estoreAddressScreen.getShippingAddresslastName().setValue("William");
+
+            Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
+            shippingAddressCountry.selectByValue("US");
+
+
+            if (Hooks.eStoreURL.contains("stg4")) {
+                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
+                estoreAddressScreen.getShippingAddressStreetAddress().setValue("MetroTech Center, Brooklyn, NY 11201, USA");
+                estoreAddressScreen.getShippingAddresslastName().click();
+                try {
+                    $(By.xpath("//*[text()='Metrotech Center, Brooklyn, NY 11201, USA']")).should(visible, Duration.ofSeconds(5));
+                    $(By.xpath("//*[text()='Metrotech Center, Brooklyn, NY 11201, USA']")).click();
+                } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                    System.out.println("Dropdown list is not displayed");
+                }
+            } else {
+                sleep(3000);
+                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
+                estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Metrotech Center, Brooklyn, NY 11201, USA");
+                try {
+                    sleep(4000);
+                    $(By.xpath("//*[text()='MetroTech Center, Brooklyn, NY 11201, USA']")).should(visible, Duration.ofSeconds(5));
+                    $(By.xpath("//*[text()='MetroTech Center, Brooklyn, NY 11201, USA']")).click();
+                } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                    System.out.println("Dropdown list is not displayed");
+                }
+
+            }
+
+            sleep(3000);
+            estoreAddressScreen.getShippingAddressAptFloor().click();
+            estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
+            estoreAddressScreen.getShippingAddressCity().setValue("Brooklyn");
+
+            Select shippingAddressState = new Select(estoreAddressScreen.getShippingAddressState());
+            shippingAddressState.selectByValue("NY");
+
+            estoreAddressScreen.getPostalShippingCode().click();
+            generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
+            estoreAddressScreen.getPostalShippingCode().setValue("11201");
+
+            estoreAddressScreen.getShippingAddressPhone().click();
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
+            estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Shipping address fields are not displayed");
+        }
     }
 }

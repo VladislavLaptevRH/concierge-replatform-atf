@@ -57,29 +57,29 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Price in the cart - MO
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I go to MO brand
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    Then I verify that contract price is used for each product
+#    When I go to MO brand
+#    When I go to estore item "17050042 WHT" from search field
+#    When I click on add to cart estore button
+#    And I click on view cart estore button
+#    Then I verify that contract price is used for each product
 
   Scenario: eStore Contract - Price in the cart - B&C
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I go to B&C brand
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    Then I verify that contract price is used for each B&C product
+#    When I go to B&C brand
+#    When I go to estore item "17050042 WHT" from search field
+#    When I click on add to cart estore button
+#    And I click on view cart estore button
+#    Then I verify that contract price is used for each B&C product
 
   Scenario: eStore Contract - Price in the cart - TN
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I go to TN brand
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    Then I verify that contract price is used for each TN product
+#    When I go to TN brand
+#    When I go to estore item "17050042 WHT" from search field
+#    When I click on add to cart estore button
+#    And I click on view cart estore button
+#    Then I verify that contract price is used for each TN product
 
   Scenario: eStore Contract - Verify RHCC payment option for Contract user
     Given I log into eStore as contract
@@ -144,29 +144,29 @@ Feature: eStore Contract and Trade
   Scenario: eStore Trade - Price in the cart - MO
     Given I log into eStore as trade
     When I remove all items from estore cart
-    When I go to MO brand
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    Then I verify that trade price is used for each product
+#    When I go to MO brand
+#    When I go to estore item "17050042 WHT" from search field
+#    When I click on add to cart estore button
+#    And I click on view cart estore button
+#    Then I verify that trade price is used for each product
 
   Scenario: eStore Trade - Price in the cart - B&C
     Given I log into eStore as trade
     When I remove all items from estore cart
-    When I go to B&C brand
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    Then I verify that trade price is used for each B&C product
+#    When I go to B&C brand
+#    When I go to estore item "17050042 WHT" from search field
+#    When I click on add to cart estore button
+#    And I click on view cart estore button
+#    Then I verify that trade price is used for each B&C product
 
   Scenario: eStore Trade - Price in the cart - TN
     Given I log into eStore as trade
     When I remove all items from estore cart
-    When I go to TN brand
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    Then I verify that trade price is used for each TN product
+#    When I go to TN brand
+#    When I go to estore item "17050042 WHT" from search field
+#    When I click on add to cart estore button
+#    And I click on view cart estore button
+#    Then I verify that trade price is used for each TN product
 
 
 

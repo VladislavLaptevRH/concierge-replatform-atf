@@ -159,7 +159,7 @@ public class EstorePaymentStepDefs {
             sleep(4000);
             estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
             Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
-            selectPayment.selectByValue("45642063983482960745");
+            selectPayment.selectByValue("46784755611871507543");
             $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofSeconds(20));
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
             estorePaymentPage.getCvcField().setValue("321");
@@ -167,7 +167,7 @@ public class EstorePaymentStepDefs {
             $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
             $(By.xpath("//input[@type='text']")).setValue("10");
             estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
-            selectPayment.selectByValue("22224052112154880008");
+            selectPayment.selectByValue("22224053560881330008");
             $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofSeconds(20));
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
             estorePaymentPage.getCvcField().setValue("737");
