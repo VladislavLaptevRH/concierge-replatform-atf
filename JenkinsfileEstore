@@ -9,40 +9,40 @@ println("resultspath=${resultspath}")
 
 Java11Pipeline pipeline = new Java11Pipeline(this, s, env);
 pipeline.standardTemplate { label ->
-                properties([parameters([choice(choices: ['stg2', 'stg3', 'stg4', 'prod'], description: 'Select Environment to build', name: 'ENVIRONMENT'), choice(choices: ['no_endpoint'], description: 'Select optional endpoint value', name: 'ENDPOINT')])])
-                node(label) {
-                    try {
-                        stage('checkout') {
-                            pipeline.checkoutCode();
-                            echo "Regression will be done on environment ${params.ENVIRONMENT}"
-                            echo "Regression will be done with cookie ${params.ENDPOINT}"
-                            environment "${params.ENVIRONMENT}"
-                        }
+    properties([parameters([choice(choices: ['stg2', 'stg3', 'stg4', 'prod'], description: 'Select Environment to build', name: 'ENVIRONMENT'), choice(choices: ['poc&FEATURE_SSR=false', 'poc&FEATURE_SSR=true', 'no_endpoint'], description: 'Select optional endpoint value', name: 'ENDPOINT')])])
+    node(label) {
+        try {
+            stage('checkout') {
+                pipeline.checkoutCode();
+                echo "Regression will be done on environment ${params.ENVIRONMENT}"
+                echo "Regression will be done with cookie ${params.ENDPOINT}"
+                environment "${params.ENVIRONMENT}"
+            }
 
-                        stage('Run Tests') {
-                            pipeline.buildMvn("clean test -Dcucumber.filter.tags='@estoreRegression'", true);
-                        } // end stage
+            stage('Run Tests') {
+                pipeline.buildMvn("clean test -Dcucumber.filter.tags='@estoreRegression'", true);
+            } // end stage
 
-                        container("awscli") {
-                            withAWS(region: "us-east-1", role: "devops-documentation", roleAccount: "487531406788") {
-                                dir(s.rootDirectory) {
-                                    sh """
+            container("awscli") {
+                withAWS(region: "us-east-1", role: "devops-documentation", roleAccount: "487531406788") {
+                    dir(s.rootDirectory) {
+                        sh """
                         apk --no-cache add tree
                         pwd 
                         cd /home/jenkins/workspace/${env.JOB_NAME}/target
                         tree -H '.' -L 3 --noreport --charset utf-8  -o index.html
                         aws s3 sync . s3://docs.rhapsody.rh.com/public/${resultspath}
                         """
-                                } // pipeline dir
-                            }
-                        }  // pipeline/container
-
-                        slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) 'Environment' (${params.ENVIRONMENT }) 'Endpoint' (${params.ENDPOINT })   : Test Results: http://docs.rhapsody.rh.com/public/${resultspath}/cucumber-html-report/Index.html", channel: "#test-results")
-                    } catch (Exception exception) {
-                        notifyFailed()
-                        throw exception;
-                    }
+                    } // pipeline dir
                 }
+            }  // pipeline/container
+
+            slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) 'Environment' (${params.ENVIRONMENT}) 'Endpoint' (${params.ENDPOINT})   : Test Results: http://docs.rhapsody.rh.com/public/${resultspath}/cucumber-html-report/Index.html", channel: "#test-results")
+        } catch (Exception exception) {
+            notifyFailed()
+            throw exception;
+        }
+    }
     // end Node
 } // pipelineTemplate
 

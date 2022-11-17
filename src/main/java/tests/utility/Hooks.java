@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import static com.codeborne.selenide.Selenide.*;
+
 import com.aventstack.extentreports.ExtentReports;
 
 @Getter
@@ -103,6 +104,8 @@ public class Hooks {
             eStoreURL = eStoreBaseURL;
         } else if (profile.equals("stg2")) {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
+        } else if ((profile.equals("stg4") && cookie.equals("no_endpoint"))) {
+            eStoreURL = eStoreBaseURL;
         }
         return eStoreURL;
     }
@@ -115,8 +118,10 @@ public class Hooks {
             conciergeURL = conciergeBaseURL + "/?endpoint=" + cookie;
         } else if (profile.equals("stg2") && cookie.equals("no_endpoint")) {
             conciergeURL = conciergeBaseURL;
-        } else if (profile.equals("stg2") ) {
+        } else if (profile.equals("stg2")) {
             conciergeURL = conciergeBaseURL + "/?endpoint=" + cookie;
+        } else if (profile.equals("stg4") && cookie.equals("no_endpoint")) {
+            conciergeURL = conciergeBaseURL;
         }
         return conciergeURL;
     }
