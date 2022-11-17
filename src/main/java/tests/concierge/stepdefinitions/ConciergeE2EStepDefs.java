@@ -751,6 +751,7 @@ public class ConciergeE2EStepDefs {
     public void iOpenCart() {
         String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
         open(URL);
+        WebDriverRunner.getWebDriver().navigate().refresh();
         sleep(2000);
     }
 }

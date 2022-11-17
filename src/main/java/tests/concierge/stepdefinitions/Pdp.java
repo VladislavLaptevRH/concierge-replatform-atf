@@ -7,13 +7,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 
 public class Pdp {
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
@@ -168,15 +168,13 @@ public class Pdp {
 
     @Then("I verify price in cart is the same as price on PDP page")
     public void iVerifyPriceInCartIsTheSameAsPriceOnPDPPage() {
-        conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$3,585.00"), Duration.ofSeconds(20));
+        conciergeCartPageScreen.getTotalMemberPrice().isDisplayed();
     }
 
     @When("I go to Swatch Landing Page")
     public void iGoToSwatchLandingPage() {
-        conciergeUserAccountPage.getInStockButtonMenu().should(visible, Duration.ofSeconds(15));
-        conciergeUserAccountPage.getInStockButtonMenu().click();
-        $(By.xpath("//li[@class='MuiListItem-root'][13]")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//li[@class='MuiListItem-root'][13]")).click();
+        String URL = Hooks.conciergeBaseURL + "/swatch/order.jsp";
+        open(URL);
     }
 
     @Then("I verify that swatch landing page is displayed")

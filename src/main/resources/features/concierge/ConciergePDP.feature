@@ -42,7 +42,7 @@ Feature:Concierge PDP
   Scenario: YAML carousel
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "prod9740156" from search field
+    When I open product page with productId "prod6490263"
     Then I verify that YAML carousel is displayed
 
   Scenario: Mattress Recycling Fee
