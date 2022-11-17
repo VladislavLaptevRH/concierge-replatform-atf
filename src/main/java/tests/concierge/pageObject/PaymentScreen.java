@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class PaymentScreen {
-    private final SelenideElement editBillingAddressBtn = $(By.xpath("//a[@class='MuiTypography-root MuiLink-root MuiLink-underlineAlways MuiTypography-body1 MuiTypography-colorPrimary']"));
+    private final SelenideElement editBillingAddressBtn = $(By.xpath("//a[@class='MuiTypography-root MuiLink-root MuiLink-underlineAlways MuiTypography-colorPrimary']"));
 
     private final SelenideElement removePaymentBtn = $(By.xpath("//a[@class='MuiTypography-root MuiLink-root MuiLink-underlineAlways MuiTypography-caption MuiTypography-colorPrimary']"));
 
