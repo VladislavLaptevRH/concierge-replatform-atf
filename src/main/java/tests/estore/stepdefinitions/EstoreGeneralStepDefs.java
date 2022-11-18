@@ -3,6 +3,10 @@ package tests.estore.stepdefinitions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import lombok.Getter;
 import tests.concierge.pageObject.*;
 import tests.estore.pageObject.*;
@@ -41,6 +45,17 @@ public class EstoreGeneralStepDefs {
     private static final Random RANDOM = new SecureRandom();
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(30));
+
+    public static String id;
+    private static Response response;
+    private static String authEndpoint;
+    private static String clientSecret;
+    private static String USER_ID;
+    private static final String USEREMAIL = "addresspage@rh.com";
+    private static final String PASSWORD = "Test@@123";
+    public static final String BASE_URL = Hooks.eStoreBaseURL;
+    private static String addItemEndpoint;
+    private static String cartId;
 
     public void waitForLoad(WebDriver driver) {
         ExpectedCondition<Boolean> pageLoadCondition = webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete");
@@ -335,6 +350,143 @@ public class EstoreGeneralStepDefs {
         }
     }
 
+    /**
+     * @returns access_token
+     */
+
+    public static String getAuthToken() {
+        if (Hooks.eStoreBaseURL.contains("stg2")) {
+            authEndpoint = "staging";
+            clientSecret = "2119483c-ab18-42b4-9bdc-05d16720d173";
+        } else {
+            authEndpoint = "qa";
+            clientSecret = "a2e447ae-abc8-4ed3-bf46-94d3a4c88031";
+        }
+        RestAssured.baseURI = "https://auth.rhnonprod.com";
+        RequestSpecification request = RestAssured.given();
+        request.headers("Content-Type", "application/x-www-form-urlencoded");
+        request.param("grant_type", "client_credentials");
+        request.param("scope", "rhapsody-user-svc");
+        request.param("client_id", "rh-experience-layer");
+        request.param("client_secret", clientSecret);
+        request.relaxedHTTPSValidation();
+
+        response = request.post("/auth/realms/" + authEndpoint + "/protocol/openid-connect/token");
+
+        String jsonString = response.asString();
+        return JsonPath.from(jsonString).get("access_token");
+    }
+
+    /**
+     * @param userId
+     * @return cart Id
+     * This method returns production cartId
+     */
+    public static String getProdCartId(String userId) {
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given();
+        request.headers("Content-Type", "application/json");
+        response = request.body("{\n" +
+                "    \"query\": \"query CartProjection(\\n    $userId: String!, \\n    $email: String!\\n) { \\n    cartProjection(\\n        userId: $userId\\n        email: $email\\n    ) { \\n        id cartType totalLines totalItemQuantity\\n    } \\n} \",\n" +
+                "    \"variables\": {\n" +
+                "        \"userId\": \"" + userId + "\",\n" +
+                "        \"email\": \"" + USEREMAIL + "\"\n" +
+                "    }\n" +
+                "}").post("/concierge-bff-v1/graphql");
+
+        String jsonString = response.asString();
+        return JsonPath.from(jsonString).get("data.cartProjection.id");
+    }
+
+
+    public static String getCurrentCartId(String userId) {
+
+        if (Hooks.eStoreBaseURL.contains("stg2")) {
+            RestAssured.baseURI = "https://development.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/users/" + userId + "/cart";
+
+//            RestAssured.baseURI = "https://development.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/users/" + userId + "/cart";
+//            RestAssured.baseURI = "https://development.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/users/" + userId + "/cart";
+//            RestAssured.baseURI = "https://staging.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/agent/"+userId+"";
+        } else {
+            RestAssured.baseURI = "https://development.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/agent/" + userId + "";
+        }
+//        'https://development.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/users/USERID/cart'
+
+        RequestSpecification request = RestAssured.given();
+        request.relaxedHTTPSValidation();
+
+        if (RestAssured.baseURI.contains("staging")) {
+            String accessToken = getAuthToken();
+            request.headers("Authorization", "Bearer " + accessToken + "");
+        }
+        response = request.get();
+
+        String jsonString = response.asString();
+        return JsonPath.from(jsonString).get("id");
+    }
+
+    /**
+     * This method set up user configuration based on environment
+     */
+    public static void setUserEnvironment() {
+
+        if (BASE_URL.contains("stg2")) {
+            USER_ID = "c34f7501-0d56-4872-97d3-8d3254d1ff66";
+            addItemEndpoint = "/concierge-bff-v1-stg2/graphql";
+        } else if (BASE_URL.contains("stg4")) {
+            addItemEndpoint = "/concierge-bff-v1/graphql";
+            USER_ID = "3d6b15b6-eca1-4ef5-8c3c-cc39c6a2b8a8";
+        } else {
+            //production
+            addItemEndpoint = "/concierge-bff-v1/graphql";
+            USER_ID = "6192a475-4d00-4d61-aa0c-3e25c7000151";
+        }
+    }
+
+    /**
+     * This method adds line items to cart
+     */
+    public static void addLineItemsToConciergeCart() {
+        setUserEnvironment();
+        while (id == null) {
+//            if (USER_ID == "c34f7501-0d56-4872-97d3-8d3254d1ff68") {
+//                cartId = getProdCartId(USER_ID);
+//            } else {
+            cartId = getCurrentCartId(USER_ID);
+//            }
+            RestAssured.baseURI = BASE_URL;
+            RequestSpecification request = RestAssured.given();
+            request.headers("Content-Type", "application/json");
+            request.headers("Cookie", "PF_AEM_PATHS=%5E%2F(%3F%3Aalison-berger(%3F%3A%2F(%3F%3Aaperture%7C(%3F%3A(%3F%3Afulcrum%7Cpearl%7Crain)%7Cice))~IN%7C~IN)%7C(%3F%3Aalison-berger(%3F%3A%2F(%3F%3Aaperture%7C(%3F%3A(%3F%3Afulcrum%7Cpearl%7Crain)%7Cice))~R%7C~R)%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)R)H%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)OD%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)IN%7C(%3F%3A(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)%7Cgift-registry~)MO%7Cinterior-design~BC%7Cgift-registry~RH%7Cstrada-ledoux~MO)%24; endpoint=develop; fusion_search=true; ui_asset_path=/concierge-ui-v1/");
+            response = request.body("{\n" +
+                    "    \"operationName\": \"addLineItemsToConciergeCart\",\n" +
+                    "    \"variables\": {\n" +
+                    "        \"email\": \"" + USEREMAIL + "\",\n" +
+                    "        \"cartId\": \"" + cartId + "\",\n" +
+                    "        \"lineItemsInput\": {\n" +
+                    "            \"items\": [\n" +
+                    "                {\n" +
+                    "                    \"sku\": \"63130001 GREY\",\n" +
+                    "                    \"quantity\": 1,\n" +
+                    "                    \"brand\": \"RH\",\n" +
+                    "                    \"giftTo\": \"\",\n" +
+                    "                    \"giftFrom\": \"\",\n" +
+                    "                    \"giftMessage\": \"\",\n" +
+                    "                    \"productId\": \"prod1617188\",\n" +
+                    "                    \"spoTermsAccepted\": false,\n" +
+                    "                    \"spoTerms\": null\n" +
+                    "                }\n" +
+                    "            ]\n" +
+                    "        }\n" +
+                    "    },\n" +
+                    "    \"query\": \"mutation addLineItemsToConciergeCart($email: String!, $cartId: String!, $lineItemsInput: ConciergeLineItemsInput!) {\\n  addLineItemsToConciergeCart(\\n    email: $email\\n    cartId: $cartId\\n    lineItemsInput: $lineItemsInput\\n  ) {\\n    ...Cart\\n  }\\n}\\n\\nfragment Cart on ConciergeCartType {\\n  __typename\\n  id\\n  requestedDeliveryDate\\n  requestedDeliveryDateReason\\n  postalCode\\n  country\\n  coordGroupType\\n  coordGroupGroupable\\n  coordGroupUserSelected\\n  orderNumber\\n  memberSavings\\n  cartSavings\\n  memberPrice\\n  isUserMember\\n  giftBoxFee\\n  hasGiftBox\\n  hasGiftFromRegistry\\n  giftRegistryIdList\\n  totalItemQuantity\\n  totalLines\\n  containsMembership\\n  guest {\\n    userId\\n    ctId\\n    atgUserId\\n    cwUserId\\n    email\\n    type\\n    typeId\\n    sourceCode\\n  }\\n  lineItems {\\n    giftFrom\\n    giftTo\\n    notes\\n    childSafety\\n    personalizeInfo {\\n      feeHigh\\n      feeLow\\n      selectedFont {\\n        id\\n        displayName\\n        previewImage\\n        image\\n        borders {\\n          id\\n        }\\n      }\\n      selectedBorder {\\n        id\\n        image\\n        displayName\\n        minLength\\n        maxLength\\n        numberOfLines\\n      }\\n      selectedStyle {\\n        id\\n        image\\n        minLength\\n        maxLength\\n        numberOfLines\\n        displayName\\n        previewImage\\n      }\\n      selectedColor {\\n        id\\n        displayName\\n        image\\n      }\\n    }\\n    isMonogramFee\\n    shouldWaiveMonogramFee\\n    shipVia\\n    shipViaCode\\n    isMonogrammable\\n    isPersonalizable\\n    monogram {\\n      styleId\\n      description\\n      maxLines\\n      fontCode\\n      fontColorCode\\n      borderCode\\n      lines\\n      fulfillmentCode\\n    }\\n    lineId\\n    quantity\\n    maxCartQuantity\\n    sku\\n    skuType\\n    brand\\n    displayName\\n    giftBoxDetail {\\n      giftBoxFee\\n      giftBoxCurrencyCode\\n    }\\n    giftWrap\\n    deliveryEta\\n    deliveryEtaStart\\n    deliveryEtaEnd\\n    coordGroup\\n    registryId\\n    spoTerms\\n    spoTermsAccepted\\n    spoTermsAcceptedDate\\n    isMembershipSku\\n    itemRestrictions {\\n      shippingRestrictions {\\n        countries\\n        postalRanges\\n        sku\\n        states\\n        type\\n      }\\n      billingRestrictions {\\n        countries\\n        postalRanges\\n        sku\\n        states\\n        type\\n      }\\n    }\\n    availabilityInfo {\\n      displayText\\n      type\\n      props {\\n        href\\n      }\\n    }\\n    deliveryInfo {\\n      displayText\\n      type\\n      props {\\n        href\\n      }\\n    }\\n    productId\\n    product {\\n      displayName\\n      imageUrl\\n      targetUrl\\n      restrictions {\\n        spo\\n        returnPolicyMessage\\n        countryRestrictions\\n        mattressFeeLocation\\n        preBillMessage\\n        additionalMessages {\\n          curbsideMessage\\n          assemblyMessage\\n          giftCardMessage\\n          railroadMessage\\n          mattressFeeMessage\\n          cancellableMessage\\n          finalSaleMessage\\n        }\\n      }\\n    }\\n    price {\\n      itemPrice\\n      memberPrice\\n      discountPrice\\n      originalPrice\\n      overridePrice\\n      finalPrice\\n      priceStatus\\n      currencyCode\\n      totalPrice\\n      salePrice\\n      salePriceLabel\\n      priceType\\n      isOnClearance\\n      isOnSale\\n      showMemberPrice\\n      fees\\n      priceAdjustment {\\n        adjustment\\n        adjustmentType\\n        reason\\n        targetType\\n      }\\n      discounts {\\n        code\\n        name\\n        discountAmount\\n      }\\n    }\\n    options {\\n      type\\n      value\\n    }\\n    isGiftFromRegistry\\n    linkedLineItemId\\n    skuCustomization {\\n      type\\n      mountType\\n      lining\\n      panel\\n      controlType\\n      controlPosition\\n      controlLength\\n      tiltType\\n      controlAndTilt\\n      trim\\n      width\\n      length\\n      diameter\\n      roomLabel\\n      bracketColor\\n      rollType\\n      fulfillmentCode\\n    }\\n    galleryProjectId\\n    referenceId\\n    type\\n    tSSItem\\n    tSSInstallation\\n    skuRestrictions {\\n      spo\\n      membershipSku\\n      returnPolicyMessage\\n      restockingFee\\n      countryRestrictions\\n      mattressFeeLocation\\n      preBillMessage\\n      additionalMessages {\\n        curbsideMessage\\n        assemblyMessage\\n        giftCardMessage\\n        railroadMessage\\n        mattressFeeMessage\\n        cancellableMessage\\n        finalSaleMessage\\n      }\\n    }\\n    availabilityStatus\\n  }\\n  shipVia\\n  cartPrice {\\n    subtotal\\n    tax\\n    taxDetail {\\n      amount\\n      name\\n      country\\n      state\\n      imposition\\n      rate\\n    }\\n    totalPrice\\n    feeTotal\\n    currencyCode\\n    isFree\\n    fees {\\n      feeType\\n      quantity\\n      value\\n      unitCost\\n      linkedLineItemId\\n    }\\n    freightPrice {\\n      unlimitedFurnitureDelivery\\n      ground\\n      next\\n      second\\n      currency\\n      zoneCode\\n      surcharge\\n      shippingSurcharge\\n    }\\n    priceAdjustments {\\n      adjustment\\n      adjustmentType\\n      reason\\n      targetType\\n      adjustedPrice\\n      priceBeforeAdjustment\\n    }\\n  }\\n  soldToAddress {\\n    addressLine1\\n    addressLine2\\n    city\\n    state\\n    country\\n    companyName\\n    postalCode\\n    eveningPhone\\n    phone\\n    email\\n    firstName\\n    lastName\\n  }\\n  shipAddress {\\n    addressLine1\\n    addressLine2\\n    city\\n    state\\n    country\\n    companyName\\n    postalCode\\n    eveningPhone\\n    phone\\n    email\\n    firstName\\n    lastName\\n  }\\n  billAddress {\\n    addressLine1\\n    addressLine2\\n    city\\n    state\\n    country\\n    companyName\\n    postalCode\\n    phone\\n    email\\n    firstName\\n    lastName\\n  }\\n  payments {\\n    totalAmountRemaining\\n    totalAmountCovered\\n    appliedPayments {\\n      id\\n      paymentMethodType\\n      paymentType\\n      lastFour\\n      amountCovered\\n      currencyCode\\n      rhPaymentPlan\\n    }\\n  }\\n  importantInformation {\\n    type\\n    displayText\\n  }\\n  brand\\n  gallery {\\n    ctId\\n    designerCart\\n    galleryId\\n    key\\n    orderClassification\\n  }\\n  shipLabelSidemark\\n  giftMessage\\n  emailOverride\\n  commissions {\\n    available\\n    salesAttributions {\\n      agentLogin\\n      agentName\\n      percentage\\n      primary\\n    }\\n    total\\n  }\\n  discountCodes {\\n    code\\n    name\\n    description\\n  }\\n  shipRestrictedLineItems {\\n    displayName\\n    itemRestrictions {\\n      shippingRestrictions {\\n        countries\\n        postalRanges\\n        sku\\n        states\\n        type\\n      }\\n      billingRestrictions {\\n        countries\\n        postalRanges\\n        sku\\n        states\\n        type\\n      }\\n    }\\n  }\\n  billRestrictedLineItems {\\n    displayName\\n    itemRestrictions {\\n      shippingRestrictions {\\n        countries\\n        postalRanges\\n        sku\\n        states\\n        type\\n      }\\n      billingRestrictions {\\n        countries\\n        postalRanges\\n        sku\\n        states\\n        type\\n      }\\n    }\\n  }\\n  tSSEligible\\n  tSSApplied\\n  tSSFee\\n  taxExemptId\\n  totalAdditionalDiscount\\n}\\n\"\n" +
+                    "}").post(addItemEndpoint);
+
+            String jsonString = response.asString();
+            id = JsonPath.from(jsonString).get("data.addLineItemsToConciergeCart.id");
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
+    }
 
     /**
      * @param paymentType

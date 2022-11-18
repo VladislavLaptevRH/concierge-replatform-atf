@@ -7,7 +7,6 @@ Feature:Concierge Sale
     When I click on sale
     Then I verify sale navigation bars are displayed
 
-
   Scenario: Sale navigation and validate regular, member and finale sale prices on PDP.
     Given I log into Concierge as "associate"
     When I click on sale

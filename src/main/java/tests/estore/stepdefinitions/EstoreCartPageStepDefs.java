@@ -599,4 +599,9 @@ public class EstoreCartPageStepDefs {
         $(By.xpath("//*[text()='U.S. Standard Shipping']")).should(visible, Duration.ofSeconds(20));
 
     }
+
+    @When("I add item to cart via API for estore")
+    public void iAddItemToCartViaAPIforEstore() {
+        estoreGeneralStepDefs.addLineItemsToConciergeCart();
+    }
 }

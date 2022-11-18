@@ -23,11 +23,6 @@ public class EstoreLoginStepDefs {
             loginAsRole(arg0);
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             return true;
-//            WebDriverRunner.getWebDriver().navigate().refresh();
-
-//            $(By.xpath("//a[@data-analytics-nav='account-icon']")).should(visible, Duration.ofSeconds(20));
-//            $(By.xpath("//a[@data-analytics-nav='account-icon']")).click();
-//            loginAsRole(arg0);
         }
         return true;
     }
@@ -126,7 +121,7 @@ public class EstoreLoginStepDefs {
                 estoreLoginPage.getUsernameField().setValue("automationemptystatefield@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Password1234");
             }
-            sleep(2000);
+
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
         }

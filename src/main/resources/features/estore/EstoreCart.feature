@@ -4,12 +4,13 @@ Feature: Estore Cart Page
 
   Scenario: Remove item from cart
     Given I log into eStore as "regular"
-    When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    When I click on remove button from estore cart page
-    Then I verify that item from estore cart has been removed
+#    When I remove all items from estore cart
+#    When I go to estore item "17050042 WHT" from search field
+#    When I click on add to cart estore button
+    When I add item to cart via API for estore
+#    And I click on view cart estore button
+#    When I click on remove button from estore cart page
+#    Then I verify that item from estore cart has been removed
 
   Scenario: Apply/Remove employee discount
     Given I log into eStore as "regular"
@@ -24,7 +25,7 @@ Feature: Estore Cart Page
   Scenario: Apply/Remove promotion code
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "61040991 ABRS" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I remove promotion from estore cart
@@ -34,7 +35,7 @@ Feature: Estore Cart Page
   Scenario: Zip code validation in cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "61040991 ABRS" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on zipcode estore button
@@ -44,7 +45,7 @@ Feature: Estore Cart Page
   Scenario: eStore - Membership price in cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "61040991 ABRS" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     When I click on aggree&add estore button
     And I click on view cart estore button
@@ -53,7 +54,7 @@ Feature: Estore Cart Page
   Scenario: eStore - Line item quantity update
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "61040991 ABRS" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I choose qty for item from estore cart

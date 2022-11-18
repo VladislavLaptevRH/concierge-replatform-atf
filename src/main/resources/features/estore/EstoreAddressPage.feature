@@ -5,7 +5,7 @@ Feature: Estore Address Page
   Scenario: eStore Address for Guest user
     Given I log into eStore as "guest"
     When I remove all items from estore cart
-    When I go to estore item "10097379 PYR" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -23,7 +23,7 @@ Feature: Estore Address Page
   Scenario: eStore Address for Registered user - To verify Add a new shipping Address option is present
     Given I log into eStore as "savedaddress"
     When I remove all items from estore cart
-    When I go to estore item "10097379 PYR" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -32,12 +32,14 @@ Feature: Estore Address Page
 
   Scenario: eStore Address Page - To verify Add address button
     Given I log into eStore as "addresspage"
-    When I remove all items from estore cart
-    When I click on estore my account icon
-    When I click on estore profile button
-    When I click on estore my account button
-    When I click on address book estore button
-    Then I verify that add address button is displayed
+    When I add item to cart via API for estore
+
+#    When I remove all items from estore cart
+#    When I click on estore my account icon
+#    When I click on estore profile button
+#    When I click on estore my account button
+#    When I click on address book estore button
+#    Then I verify that add address button is displayed
 
   Scenario: eStore Address Page - To verify mandatory field in New address
     Given I log into eStore as "addresspage"
@@ -62,7 +64,7 @@ Feature: Estore Address Page
     When I introduce data for new profile address
     When I click on save address button
     When I click on continue with original address estore button
-    When I go to estore item "10097379 PYR" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -84,7 +86,7 @@ Feature: Estore Address Page
     When I click on save address button
     When I click on continue with original address estore button
     When I remove added address before for address book
-    When I go to estore item "10097379 PYR" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -107,7 +109,7 @@ Feature: Estore Address Page
     When I edit existing address on address book page
     When I click on save address button
     When I click on continue with original address estore button
-    When I go to estore item "10097379 PYR" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     When I click on aggree&add estore button
     And I click on view cart estore button
@@ -131,7 +133,7 @@ Feature: Estore Address Page
   Scenario: eStore Address Page - Verify same as Billing address same as Shipping functionality  - switch between the listed shipping addresses
     Given I log into eStore as "addresspage"
     When I remove all items from estore cart
-    When I go to estore item "10097379 PYR" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -143,7 +145,7 @@ Feature: Estore Address Page
   Scenario: eStore Address Page - Verify the shipping and Billing address for registered User Order review and Order Confirmation page
     Given I log into eStore as "addresspage"
     When I remove all items from estore cart
-    When I go to estore item "10097379 PYR" from search field
+    When I go to estore item "17050042 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -162,7 +164,7 @@ Feature: Estore Address Page
 Scenario: eStore Address Page - Verify Gift message and order description showing on the order review and TY page
   Given I log into eStore as "addresspage"
   When I remove all items from estore cart
-  When I go to estore item "10097379 PYR" from search field
+  When I go to estore item "17050042 WHT" from search field
   When I click on add to cart estore button
   And I click on view cart estore button
   When I click on estore checkout button
