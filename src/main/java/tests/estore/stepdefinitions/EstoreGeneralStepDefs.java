@@ -51,7 +51,7 @@ public class EstoreGeneralStepDefs {
     private static String authEndpoint;
     private static String clientSecret;
     private static String USER_ID;
-    private static final String USEREMAIL = "addresspage@rh.com";
+    private static final String USEREMAIL = "new02@rh.com";
     private static final String PASSWORD = "Test@@123";
     public static final String BASE_URL = Hooks.eStoreBaseURL;
     private static String addItemEndpoint;
@@ -377,12 +377,13 @@ public class EstoreGeneralStepDefs {
         return JsonPath.from(jsonString).get("access_token");
     }
 
+
     /**
      * @param userId
      * @return cart Id
-     * This method returns production cartId
+     * This method returns estore cartId for both stg2 and st4 environment
      */
-    public static String getProdCartId(String userId) {
+    public static String getEstoreCartId(String userId, String email) {
         RestAssured.baseURI = BASE_URL;
         RequestSpecification request = RestAssured.given();
         request.headers("Content-Type", "application/json");
@@ -390,40 +391,14 @@ public class EstoreGeneralStepDefs {
                 "    \"query\": \"query CartProjection(\\n    $userId: String!, \\n    $email: String!\\n) { \\n    cartProjection(\\n        userId: $userId\\n        email: $email\\n    ) { \\n        id cartType totalLines totalItemQuantity\\n    } \\n} \",\n" +
                 "    \"variables\": {\n" +
                 "        \"userId\": \"" + userId + "\",\n" +
-                "        \"email\": \"" + USEREMAIL + "\"\n" +
+                "        \"email\": \"" + email + "\"\n" +
                 "    }\n" +
-                "}").post("/concierge-bff-v1/graphql");
+                "}").post("/rh-experience-layer-v1-search/graphql");
 
         String jsonString = response.asString();
         return JsonPath.from(jsonString).get("data.cartProjection.id");
     }
 
-
-    public static String getCurrentCartId(String userId) {
-
-        if (Hooks.eStoreBaseURL.contains("stg2")) {
-            RestAssured.baseURI = "https://development.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/users/" + userId + "/cart";
-
-//            RestAssured.baseURI = "https://development.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/users/" + userId + "/cart";
-//            RestAssured.baseURI = "https://development.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/users/" + userId + "/cart";
-//            RestAssured.baseURI = "https://staging.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/agent/"+userId+"";
-        } else {
-            RestAssured.baseURI = "https://development.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/agent/" + userId + "";
-        }
-//        'https://development.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/users/USERID/cart'
-
-        RequestSpecification request = RestAssured.given();
-        request.relaxedHTTPSValidation();
-
-        if (RestAssured.baseURI.contains("staging")) {
-            String accessToken = getAuthToken();
-            request.headers("Authorization", "Bearer " + accessToken + "");
-        }
-        response = request.get();
-
-        String jsonString = response.asString();
-        return JsonPath.from(jsonString).get("id");
-    }
 
     /**
      * This method set up user configuration based on environment
@@ -431,59 +406,57 @@ public class EstoreGeneralStepDefs {
     public static void setUserEnvironment() {
 
         if (BASE_URL.contains("stg2")) {
+            //Todo handle different users
             USER_ID = "c34f7501-0d56-4872-97d3-8d3254d1ff66";
-            addItemEndpoint = "/concierge-bff-v1-stg2/graphql";
+            addItemEndpoint = "/rh-experience-layer-v1-stg2/graphql";
         } else if (BASE_URL.contains("stg4")) {
-            addItemEndpoint = "/concierge-bff-v1/graphql";
-            USER_ID = "3d6b15b6-eca1-4ef5-8c3c-cc39c6a2b8a8";
+            //Todo handle different users
+            addItemEndpoint = "/rh-experience-layer-v1-search/graphql";
+            USER_ID = "dc6f68a3-a223-4670-b7ab-737f1c45927b";
         } else {
-            //production
-            addItemEndpoint = "/concierge-bff-v1/graphql";
-            USER_ID = "6192a475-4d00-4d61-aa0c-3e25c7000151";
+            // Todo production
+            addItemEndpoint = "";
+            USER_ID = "";
         }
     }
 
     /**
      * This method adds line items to cart
      */
-    public static void addLineItemsToConciergeCart() {
+    public static void addLineItemsToEstoreCart() {
         setUserEnvironment();
         while (id == null) {
-//            if (USER_ID == "c34f7501-0d56-4872-97d3-8d3254d1ff68") {
-//                cartId = getProdCartId(USER_ID);
-//            } else {
-            cartId = getCurrentCartId(USER_ID);
-//            }
+            cartId = getEstoreCartId(USER_ID, USEREMAIL);
             RestAssured.baseURI = BASE_URL;
             RequestSpecification request = RestAssured.given();
             request.headers("Content-Type", "application/json");
             request.headers("Cookie", "PF_AEM_PATHS=%5E%2F(%3F%3Aalison-berger(%3F%3A%2F(%3F%3Aaperture%7C(%3F%3A(%3F%3Afulcrum%7Cpearl%7Crain)%7Cice))~IN%7C~IN)%7C(%3F%3Aalison-berger(%3F%3A%2F(%3F%3Aaperture%7C(%3F%3A(%3F%3Afulcrum%7Cpearl%7Crain)%7Cice))~R%7C~R)%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)R)H%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)OD%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)IN%7C(%3F%3A(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)%7Cgift-registry~)MO%7Cinterior-design~BC%7Cgift-registry~RH%7Cstrada-ledoux~MO)%24; endpoint=develop; fusion_search=true; ui_asset_path=/concierge-ui-v1/");
             response = request.body("{\n" +
-                    "    \"operationName\": \"addLineItemsToConciergeCart\",\n" +
+                    "    \"operationName\": \"AddLineItemsToCart\",\n" +
                     "    \"variables\": {\n" +
                     "        \"email\": \"" + USEREMAIL + "\",\n" +
                     "        \"cartId\": \"" + cartId + "\",\n" +
                     "        \"lineItemsInput\": {\n" +
                     "            \"items\": [\n" +
                     "                {\n" +
+                    "                    \"productId\": \"prod1617188\",\n" +
                     "                    \"sku\": \"63130001 GREY\",\n" +
                     "                    \"quantity\": 1,\n" +
                     "                    \"brand\": \"RH\",\n" +
                     "                    \"giftTo\": \"\",\n" +
                     "                    \"giftFrom\": \"\",\n" +
                     "                    \"giftMessage\": \"\",\n" +
-                    "                    \"productId\": \"prod1617188\",\n" +
                     "                    \"spoTermsAccepted\": false,\n" +
                     "                    \"spoTerms\": null\n" +
                     "                }\n" +
                     "            ]\n" +
                     "        }\n" +
                     "    },\n" +
-                    "    \"query\": \"mutation addLineItemsToConciergeCart($email: String!, $cartId: String!, $lineItemsInput: ConciergeLineItemsInput!) {\\n  addLineItemsToConciergeCart(\\n    email: $email\\n    cartId: $cartId\\n    lineItemsInput: $lineItemsInput\\n  ) {\\n    ...Cart\\n  }\\n}\\n\\nfragment Cart on ConciergeCartType {\\n  __typename\\n  id\\n  requestedDeliveryDate\\n  requestedDeliveryDateReason\\n  postalCode\\n  country\\n  coordGroupType\\n  coordGroupGroupable\\n  coordGroupUserSelected\\n  orderNumber\\n  memberSavings\\n  cartSavings\\n  memberPrice\\n  isUserMember\\n  giftBoxFee\\n  hasGiftBox\\n  hasGiftFromRegistry\\n  giftRegistryIdList\\n  totalItemQuantity\\n  totalLines\\n  containsMembership\\n  guest {\\n    userId\\n    ctId\\n    atgUserId\\n    cwUserId\\n    email\\n    type\\n    typeId\\n    sourceCode\\n  }\\n  lineItems {\\n    giftFrom\\n    giftTo\\n    notes\\n    childSafety\\n    personalizeInfo {\\n      feeHigh\\n      feeLow\\n      selectedFont {\\n        id\\n        displayName\\n        previewImage\\n        image\\n        borders {\\n          id\\n        }\\n      }\\n      selectedBorder {\\n        id\\n        image\\n        displayName\\n        minLength\\n        maxLength\\n        numberOfLines\\n      }\\n      selectedStyle {\\n        id\\n        image\\n        minLength\\n        maxLength\\n        numberOfLines\\n        displayName\\n        previewImage\\n      }\\n      selectedColor {\\n        id\\n        displayName\\n        image\\n      }\\n    }\\n    isMonogramFee\\n    shouldWaiveMonogramFee\\n    shipVia\\n    shipViaCode\\n    isMonogrammable\\n    isPersonalizable\\n    monogram {\\n      styleId\\n      description\\n      maxLines\\n      fontCode\\n      fontColorCode\\n      borderCode\\n      lines\\n      fulfillmentCode\\n    }\\n    lineId\\n    quantity\\n    maxCartQuantity\\n    sku\\n    skuType\\n    brand\\n    displayName\\n    giftBoxDetail {\\n      giftBoxFee\\n      giftBoxCurrencyCode\\n    }\\n    giftWrap\\n    deliveryEta\\n    deliveryEtaStart\\n    deliveryEtaEnd\\n    coordGroup\\n    registryId\\n    spoTerms\\n    spoTermsAccepted\\n    spoTermsAcceptedDate\\n    isMembershipSku\\n    itemRestrictions {\\n      shippingRestrictions {\\n        countries\\n        postalRanges\\n        sku\\n        states\\n        type\\n      }\\n      billingRestrictions {\\n        countries\\n        postalRanges\\n        sku\\n        states\\n        type\\n      }\\n    }\\n    availabilityInfo {\\n      displayText\\n      type\\n      props {\\n        href\\n      }\\n    }\\n    deliveryInfo {\\n      displayText\\n      type\\n      props {\\n        href\\n      }\\n    }\\n    productId\\n    product {\\n      displayName\\n      imageUrl\\n      targetUrl\\n      restrictions {\\n        spo\\n        returnPolicyMessage\\n        countryRestrictions\\n        mattressFeeLocation\\n        preBillMessage\\n        additionalMessages {\\n          curbsideMessage\\n          assemblyMessage\\n          giftCardMessage\\n          railroadMessage\\n          mattressFeeMessage\\n          cancellableMessage\\n          finalSaleMessage\\n        }\\n      }\\n    }\\n    price {\\n      itemPrice\\n      memberPrice\\n      discountPrice\\n      originalPrice\\n      overridePrice\\n      finalPrice\\n      priceStatus\\n      currencyCode\\n      totalPrice\\n      salePrice\\n      salePriceLabel\\n      priceType\\n      isOnClearance\\n      isOnSale\\n      showMemberPrice\\n      fees\\n      priceAdjustment {\\n        adjustment\\n        adjustmentType\\n        reason\\n        targetType\\n      }\\n      discounts {\\n        code\\n        name\\n        discountAmount\\n      }\\n    }\\n    options {\\n      type\\n      value\\n    }\\n    isGiftFromRegistry\\n    linkedLineItemId\\n    skuCustomization {\\n      type\\n      mountType\\n      lining\\n      panel\\n      controlType\\n      controlPosition\\n      controlLength\\n      tiltType\\n      controlAndTilt\\n      trim\\n      width\\n      length\\n      diameter\\n      roomLabel\\n      bracketColor\\n      rollType\\n      fulfillmentCode\\n    }\\n    galleryProjectId\\n    referenceId\\n    type\\n    tSSItem\\n    tSSInstallation\\n    skuRestrictions {\\n      spo\\n      membershipSku\\n      returnPolicyMessage\\n      restockingFee\\n      countryRestrictions\\n      mattressFeeLocation\\n      preBillMessage\\n      additionalMessages {\\n        curbsideMessage\\n        assemblyMessage\\n        giftCardMessage\\n        railroadMessage\\n        mattressFeeMessage\\n        cancellableMessage\\n        finalSaleMessage\\n      }\\n    }\\n    availabilityStatus\\n  }\\n  shipVia\\n  cartPrice {\\n    subtotal\\n    tax\\n    taxDetail {\\n      amount\\n      name\\n      country\\n      state\\n      imposition\\n      rate\\n    }\\n    totalPrice\\n    feeTotal\\n    currencyCode\\n    isFree\\n    fees {\\n      feeType\\n      quantity\\n      value\\n      unitCost\\n      linkedLineItemId\\n    }\\n    freightPrice {\\n      unlimitedFurnitureDelivery\\n      ground\\n      next\\n      second\\n      currency\\n      zoneCode\\n      surcharge\\n      shippingSurcharge\\n    }\\n    priceAdjustments {\\n      adjustment\\n      adjustmentType\\n      reason\\n      targetType\\n      adjustedPrice\\n      priceBeforeAdjustment\\n    }\\n  }\\n  soldToAddress {\\n    addressLine1\\n    addressLine2\\n    city\\n    state\\n    country\\n    companyName\\n    postalCode\\n    eveningPhone\\n    phone\\n    email\\n    firstName\\n    lastName\\n  }\\n  shipAddress {\\n    addressLine1\\n    addressLine2\\n    city\\n    state\\n    country\\n    companyName\\n    postalCode\\n    eveningPhone\\n    phone\\n    email\\n    firstName\\n    lastName\\n  }\\n  billAddress {\\n    addressLine1\\n    addressLine2\\n    city\\n    state\\n    country\\n    companyName\\n    postalCode\\n    phone\\n    email\\n    firstName\\n    lastName\\n  }\\n  payments {\\n    totalAmountRemaining\\n    totalAmountCovered\\n    appliedPayments {\\n      id\\n      paymentMethodType\\n      paymentType\\n      lastFour\\n      amountCovered\\n      currencyCode\\n      rhPaymentPlan\\n    }\\n  }\\n  importantInformation {\\n    type\\n    displayText\\n  }\\n  brand\\n  gallery {\\n    ctId\\n    designerCart\\n    galleryId\\n    key\\n    orderClassification\\n  }\\n  shipLabelSidemark\\n  giftMessage\\n  emailOverride\\n  commissions {\\n    available\\n    salesAttributions {\\n      agentLogin\\n      agentName\\n      percentage\\n      primary\\n    }\\n    total\\n  }\\n  discountCodes {\\n    code\\n    name\\n    description\\n  }\\n  shipRestrictedLineItems {\\n    displayName\\n    itemRestrictions {\\n      shippingRestrictions {\\n        countries\\n        postalRanges\\n        sku\\n        states\\n        type\\n      }\\n      billingRestrictions {\\n        countries\\n        postalRanges\\n        sku\\n        states\\n        type\\n      }\\n    }\\n  }\\n  billRestrictedLineItems {\\n    displayName\\n    itemRestrictions {\\n      shippingRestrictions {\\n        countries\\n        postalRanges\\n        sku\\n        states\\n        type\\n      }\\n      billingRestrictions {\\n        countries\\n        postalRanges\\n        sku\\n        states\\n        type\\n      }\\n    }\\n  }\\n  tSSEligible\\n  tSSApplied\\n  tSSFee\\n  taxExemptId\\n  totalAdditionalDiscount\\n}\\n\"\n" +
+                    "    \"query\": \"mutation AddLineItemsToCart($email: String!, $cartId: String!, $lineItemsInput: LineItemsInput!) {\\n  addLineItemsToCart(\\n    email: $email\\n    cartId: $cartId\\n    lineItemsInput: $lineItemsInput\\n  ) {\\n    ...Cart\\n    __typename\\n  }\\n}\\n\\nfragment Cart on CartType {\\n  __typename\\n  id\\n  requestedDeliveryDate\\n  postalCode\\n  country\\n  coordGroupType\\n  coordGroupGroupable\\n  coordGroupUserSelected\\n  orderNumber\\n  cartSavings\\n  memberPrice\\n  isUserMember\\n  giftBoxFee\\n  hasGiftBox\\n  hasGiftFromRegistry\\n  giftRegistryIdList\\n  guest {\\n    userId\\n    ctId\\n    atgUserId\\n    cwUserId\\n    email\\n    type\\n    typeId\\n    sourceCode\\n    shopperRef\\n    __typename\\n  }\\n  removedItems {\\n    invalidRegion {\\n      sku\\n      product {\\n        displayName\\n        imageUrl\\n        targetUrl\\n        alternateImages {\\n          imageUrl\\n          caption\\n          __typename\\n        }\\n        colorizeInfo {\\n          colorizable\\n          colorizeType\\n          multicolor\\n          __typename\\n        }\\n        restrictions {\\n          spo\\n          returnPolicyMessage\\n          countryRestrictions\\n          mattressFeeLocation\\n          preBillMessage\\n          additionalMessages {\\n            curbsideMessage\\n            assemblyMessage\\n            giftCardMessage\\n            railroadMessage\\n            mattressFeeMessage\\n            cancellableMessage\\n            finalSaleMessage\\n            __typename\\n          }\\n          __typename\\n        }\\n        __typename\\n      }\\n      options {\\n        type\\n        value\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n  lineItems {\\n    giftFrom\\n    giftTo\\n    personalizeInfo {\\n      feeHigh\\n      feeLow\\n      selectedFont {\\n        id\\n        displayName\\n        previewImage\\n        image\\n        borders {\\n          id\\n          __typename\\n        }\\n        __typename\\n      }\\n      selectedBorder {\\n        id\\n        image\\n        displayName\\n        minLength\\n        maxLength\\n        numberOfLines\\n        __typename\\n      }\\n      selectedStyle {\\n        id\\n        image\\n        minLength\\n        maxLength\\n        numberOfLines\\n        displayName\\n        previewImage\\n        __typename\\n      }\\n      selectedColor {\\n        id\\n        displayName\\n        image\\n        __typename\\n      }\\n      __typename\\n    }\\n    isMonogramFee\\n    shouldWaiveMonogramFee\\n    shipVia\\n    shipViaCode\\n    isMonogrammable\\n    isPersonalizable\\n    fusionId\\n    monogram {\\n      styleId\\n      description\\n      maxLines\\n      fontCode\\n      fontColorCode\\n      borderCode\\n      lines\\n      fulfillmentCode\\n      __typename\\n    }\\n    lineId\\n    quantity\\n    maxCartQuantity\\n    sku\\n    skuType\\n    brand\\n    displayName\\n    giftBoxDetail {\\n      giftBoxFee\\n      giftBoxCurrencyCode\\n      __typename\\n    }\\n    giftWrap\\n    deliveryEta\\n    deliveryEtaStart\\n    deliveryEtaEnd\\n    coordGroup\\n    registryId\\n    spoTerms\\n    spoTermsAccepted\\n    spoTermsAcceptedDate\\n    isMembershipSku\\n    itemRestrictions {\\n      shippingRestrictions {\\n        countries\\n        postalRanges\\n        sku\\n        states\\n        type\\n        category\\n        __typename\\n      }\\n      billingRestrictions {\\n        countries\\n        postalRanges\\n        sku\\n        states\\n        type\\n        __typename\\n      }\\n      specialItemRestriction\\n      __typename\\n    }\\n    availabilityInfo {\\n      displayText\\n      type\\n      props {\\n        href\\n        __typename\\n      }\\n      __typename\\n    }\\n    deliveryInfo {\\n      displayText\\n      type\\n      props {\\n        href\\n        __typename\\n      }\\n      __typename\\n    }\\n    productId\\n    product {\\n      displayName\\n      imageUrl\\n      targetUrl\\n      alternateImages {\\n        imageUrl\\n        caption\\n        __typename\\n      }\\n      colorizeInfo {\\n        colorizable\\n        colorizeType\\n        multicolor\\n        __typename\\n      }\\n      restrictions {\\n        spo\\n        returnPolicyMessage\\n        countryRestrictions\\n        mattressFeeLocation\\n        preBillMessage\\n        additionalMessages {\\n          curbsideMessage\\n          assemblyMessage\\n          giftCardMessage\\n          railroadMessage\\n          mattressFeeMessage\\n          cancellableMessage\\n          finalSaleMessage\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    price {\\n      itemPrice\\n      memberPrice\\n      priceStatus\\n      priceType\\n      currencyCode\\n      originalPrice\\n      totalPrice\\n      salePrice\\n      finalPrice\\n      salePriceLabel\\n      isOnClearance\\n      isOnSale\\n      showMemberPrice\\n      fees\\n      itemShippingSurcharge\\n      __typename\\n    }\\n    options {\\n      type\\n      value\\n      __typename\\n    }\\n    isGiftFromRegistry\\n    webPurchasable\\n    linkedLineItemId\\n    skuCustomization {\\n      type\\n      mountType\\n      lining\\n      panel\\n      controlType\\n      controlPosition\\n      controlLength\\n      tiltType\\n      controlAndTilt\\n      trim\\n      width\\n      length\\n      diameter\\n      roomLabel\\n      bracketColor\\n      rollType\\n      fulfillmentCode\\n      __typename\\n    }\\n    childSafety\\n    __typename\\n  }\\n  shipVia\\n  cartPrice {\\n    subtotal\\n    tax\\n    taxDetail {\\n      amount\\n      name\\n      country\\n      state\\n      imposition\\n      rate\\n      __typename\\n    }\\n    totalPrice\\n    feeTotal\\n    currencyCode\\n    isFree\\n    fees {\\n      feeType\\n      quantity\\n      value\\n      unitCost\\n      linkedLineItemId\\n      __typename\\n    }\\n    freightPrice {\\n      unlimitedFurnitureDelivery\\n      ground\\n      next\\n      second\\n      shippingSurcharge\\n      __typename\\n    }\\n    discounts {\\n      discountCodeTotal\\n      __typename\\n    }\\n    __typename\\n  }\\n  shipAddress {\\n    addressLine1\\n    addressLine2\\n    city\\n    state\\n    country\\n    postalCode\\n    phone\\n    email\\n    firstName\\n    lastName\\n    __typename\\n  }\\n  billAddress {\\n    addressLine1\\n    addressLine2\\n    city\\n    state\\n    country\\n    postalCode\\n    phone\\n    email\\n    firstName\\n    lastName\\n    __typename\\n  }\\n  payments {\\n    totalAmountRemaining\\n    totalAmountCovered\\n    appliedPayments {\\n      id\\n      paymentMethodType\\n      paymentType\\n      lastFour\\n      amountCovered\\n      currencyCode\\n      rhPaymentPlan\\n      __typename\\n    }\\n    __typename\\n  }\\n  importantInformation {\\n    type\\n    displayText\\n    __typename\\n  }\\n  createdAt\\n  lastModifiedAt\\n  totalLines\\n  discountCodes {\\n    code\\n    name\\n    description\\n    __typename\\n  }\\n  brand\\n  gallery {\\n    galleryId\\n    __typename\\n  }\\n  shipLabelSidemark\\n  giftMessage\\n}\\n\"\n" +
                     "}").post(addItemEndpoint);
 
             String jsonString = response.asString();
-            id = JsonPath.from(jsonString).get("data.addLineItemsToConciergeCart.id");
+            id = JsonPath.from(jsonString).get("data.addLineItemsToCart.id");
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
     }

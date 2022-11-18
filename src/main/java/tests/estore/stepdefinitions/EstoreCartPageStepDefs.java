@@ -602,6 +602,6 @@ public class EstoreCartPageStepDefs {
 
     @When("I add item to cart via API for estore")
     public void iAddItemToCartViaAPIforEstore() {
-        estoreGeneralStepDefs.addLineItemsToConciergeCart();
+        estoreGeneralStepDefs.addLineItemsToEstoreCart();
     }
 }

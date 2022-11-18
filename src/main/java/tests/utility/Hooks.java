@@ -64,11 +64,13 @@ public class Hooks {
         cookie = System.getenv("ENDPOINT");
 
         if (profile == null) {
-            Assert.fail("Environment Variable is NOT Set");
+            //Assert.fail("Environment Variable is NOT Set");
+            profile = "stg4";
         }
 
         if (cookie == null) {
             System.out.println("Tests are running without cookie or endpoint");
+            cookie = "search";
         }
 
         BufferedReader reader;

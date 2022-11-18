@@ -31,7 +31,7 @@ public class SaleStepDefs {
     public void iVerifySaleNavigationBarsAreDisplayed () {
         sleep(5000);
         List<String> items = new ArrayList<>();
-        List<String> expectedItems = new ArrayList(Arrays.asList("LI1VING", "DINING" , "BED", "BATH", "LIGHTING", "TEXTILES", "RUGS", "WINDOWS", "DÉCOR", "OUTDOOR"));
+        List<String> expectedItems = new ArrayList(Arrays.asList("LIVING", "DINING" , "BED", "BATH", "LIGHTING", "TEXTILES", "RUGS", "WINDOWS", "DÉCOR", "OUTDOOR"));
         for (int i = 0; i < saleScreen.getListOfNavigationBars().size(); i++) {
             items.add(saleScreen.getListOfNavigationBars().get(i).getText());
         }
