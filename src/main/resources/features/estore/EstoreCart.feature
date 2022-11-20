@@ -4,20 +4,17 @@ Feature: Estore Cart Page
 
   Scenario: Remove item from cart
     Given I log into eStore as "regular"
-#    When I remove all items from estore cart
-#    When I go to estore item "17050042 WHT" from search field
-#    When I click on add to cart estore button
+    When I remove all items from estore cart
     When I add item to cart via API for estore
-#    And I click on view cart estore button
-#    When I click on remove button from estore cart page
-#    Then I verify that item from estore cart has been removed
+    When I open estore cart
+    When I click on remove button from estore cart page
+    Then I verify that item from estore cart has been removed
 
   Scenario: Apply/Remove employee discount
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
+    When I add item to cart via API for estore
+    When I open estore cart
     When I remove promotion from estore cart
     When I apply employee discount for estore
     Then I verify that I'm able to remove estore employee discount
@@ -25,9 +22,8 @@ Feature: Estore Cart Page
   Scenario: Apply/Remove promotion code
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
+    When I add item to cart via API for estore
+    When I open estore cart
     When I remove promotion from estore cart
     Then I verify that I'm able to apply promotion code
     When I remove promotion from estore cart
@@ -35,9 +31,8 @@ Feature: Estore Cart Page
   Scenario: Zip code validation in cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
+    When I add item to cart via API for estore
+    When I open estore cart
     When I click on zipcode estore button
     Then I verify US zip code validation in estore cart
     And I verify CA zip code validation in estore cart
@@ -45,18 +40,15 @@ Feature: Estore Cart Page
   Scenario: eStore - Membership price in cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    When I click on aggree&add estore button
-    And I click on view cart estore button
+    When I add item to cart via API for estore
+    When I open estore cart
     Then I verify membership price in banner
 
   Scenario: eStore - Line item quantity update
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
+    When I add item to cart via API for estore
+    When I open estore cart
     When I choose qty for item from estore cart
     Then I verify that estore line item price should be update according to user selected qty
     And I verify that subtotal should be updated according to quantity selected
@@ -83,10 +75,10 @@ Feature: Estore Cart Page
   Scenario: eStore - Add UFD item to Cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "63130001 NATL" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    When I click on zipcode estore button
+#    When I go to estore item "63130001 NATL" from search field
+#    When I click on add to cart estore button
+#    And I click on view cart estore button
+#    When I click on zipcode estore button
 #    When I update postal code in cart
 #    Then I verify UFD in cart
 
@@ -113,9 +105,8 @@ Feature: Estore Cart Page
 
   Scenario: eStore - Membership price for US and CAN
     Given I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
+    When I add item to cart via API for estore
+    When I open estore cart
 #    When I click on join the rh members program from footer
 #    When I click on join now membership button
 #    When I click on zipcode estore button
@@ -213,9 +204,8 @@ Feature: Estore Cart Page
   Scenario: Verify state field Empty dropdown issue for International billing address
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
+    When I add item to cart via API for estore
+    When I open estore cart
     When I click on estore checkout button
     When I click on estore no thanks button
     When I fill estore shipping address
@@ -226,16 +216,14 @@ Feature: Estore Cart Page
   Scenario: Verify the standard delivery charges  (Free & applicable charges)
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
+    When I add item to cart via API for estore
+    When I open estore cart
 
   Scenario: Add Membership and verify order total in order estimate
     Given I log into eStore as "regularAddMembership"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
+    When I add item to cart via API for estore
+    When I open estore cart
     When I click on join now membership button
     Then I verify estore order total in order estimate for membership for "42100241 GREY"
     When I click on remove membership estore button
@@ -243,8 +231,7 @@ Feature: Estore Cart Page
   Scenario: Verify the standard delivery charges (Free & applicable charges)
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
+    When I add item to cart via API for estore
+    When I open estore cart
     Then I verify the standard delivery charges for estore
 

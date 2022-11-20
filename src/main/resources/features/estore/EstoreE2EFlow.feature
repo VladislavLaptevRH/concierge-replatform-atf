@@ -5,7 +5,7 @@ Feature: Estore E2E flow
   Scenario: Verify that user is able to buy item for estore
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I go to estore item "17050045 WHT" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button

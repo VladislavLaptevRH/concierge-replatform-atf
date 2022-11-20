@@ -64,13 +64,15 @@ public class Hooks {
         cookie = System.getenv("ENDPOINT");
 
         if (profile == null) {
-            //Assert.fail("Environment Variable is NOT Set");
-            profile = "stg4";
+            Assert.fail("Environment Variable is NOT Set");
+        } else {
+            System.out.println("Tests are running on "+ profile +" environment");
         }
 
         if (cookie == null) {
             System.out.println("Tests are running without cookie or endpoint");
-            cookie = "search";
+        } else {
+            System.out.println("Tests are running with endpoint = " + cookie);
         }
 
         BufferedReader reader;
@@ -135,7 +137,7 @@ public class Hooks {
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(eStoreURL);
     }
 
@@ -162,7 +164,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 60000;
         Configuration.reportsFolder = "target/screenshots";
