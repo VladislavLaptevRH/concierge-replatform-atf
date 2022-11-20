@@ -564,9 +564,9 @@ public class EstoreCartPageStepDefs {
     public void iClickOnRemoveMembershipEstoreButton() {
         try {
             estoreCartPage.getRemoveMembershipButton().scrollIntoView(true);
-            estoreCartPage.getRemoveMembershipButton().should(visible,Duration.ofSeconds(20));
+            estoreCartPage.getRemoveMembershipButton().should(visible, Duration.ofSeconds(20));
             estoreCartPage.getRemoveMembershipButton().click();
-        }catch (com.codeborne.selenide.ex.ElementNotFound e) {
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Remove membership button is not displayed");
         }
 
@@ -575,7 +575,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify state field empty dropdown issue for International billing address")
     public void iVerifyStateFieldEmptyDropdownIssueForInternationalBillingAddress() {
-        $(By.xpath("//*[text()='State required.']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='State required.']")).should(visible, Duration.ofSeconds(30));
     }
 
     @When("I choose estore empty state")
@@ -598,5 +598,16 @@ public class EstoreCartPageStepDefs {
         $(By.xpath("//*[text()='Standard Shipping']")).click();
         $(By.xpath("//*[text()='U.S. Standard Shipping']")).should(visible, Duration.ofSeconds(20));
 
+    }
+
+    @When("I add item to cart via API for estore")
+    public void iAddItemToCartViaAPIforEstore() {
+        if (Hooks.profile.equals("stg4")) {
+            estoreGeneralStepDefs.addLineItemsToEstoreCart();
+        } else {
+            estoreGeneralStepDefs.addLineItemsToEstoreCartStg2();
+        }
+        sleep(2000);
+        WebDriverRunner.getWebDriver().navigate().refresh();
     }
 }
