@@ -67,7 +67,7 @@ public class EstoreLoginStepDefs {
             if (accountRole.equals("savedRhCcDiscover")) {
                 estoreLoginPage.getUsernameField().setValue("bnamdeo+0010@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Resto123");
-
+                USER_ID_STG2 = "589c669f-02ee-4e0a-aa21-8e674c6c7469";
             }
 
             if (accountRole.equals("savedaddress")) {
@@ -82,7 +82,7 @@ public class EstoreLoginStepDefs {
                 estoreLoginPage.getUsernameField().setValue("savedrhcc@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Resto123");
 //                USER_ID_STG4="b860df1a-dc0a-4091-a24e-77658c6e49a2";
-                USER_ID_STG2 = "48c86406-7a20-4f60-811c-f63f385caf99";
+                USER_ID_STG2 = "af6c40e5-ca61-4489-acb1-052ab4f8a512";
                 userEmail = "savedrhcc@rh.com";
             }
 
@@ -130,6 +130,7 @@ public class EstoreLoginStepDefs {
             if (accountRole.equals("wishlist-registered")) {
                 estoreLoginPage.getUsernameField().setValue("wish@listautomation.com");
                 estoreLoginPage.getPasswordField().setValue("Qwert1234");
+                USER_ID_STG2 = "99214352-923b-454d-afe8-849bab4fb2b9";
             }
 
             if (accountRole.equals("member")) {

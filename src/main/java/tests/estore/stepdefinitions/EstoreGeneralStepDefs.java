@@ -9,6 +9,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.Getter;
 import tests.concierge.pageObject.*;
+import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 import org.openqa.selenium.By;
@@ -42,6 +43,8 @@ public class EstoreGeneralStepDefs {
     EstoreCartPage estoreCartPage = new EstoreCartPage();
     EstoreCheckoutAddressScreen estoreCheckoutAddressScreen = new EstoreCheckoutAddressScreen();
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
+    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+
     private static final Random RANDOM = new SecureRandom();
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(30));
@@ -419,9 +422,9 @@ public class EstoreGeneralStepDefs {
         }
     }
 
-    public static void addLineItemsToEstoreCartStg2() {
+    public void addLineItemsToEstoreCartStg2() {
         setUserEnvironment();
-        while (id == null) {
+
             cartId = getEstoreCartId(USER_ID, USEREMAIL);
             RestAssured.baseURI = BASE_URL;
             RequestSpecification request = RestAssured.given();
@@ -455,13 +458,13 @@ public class EstoreGeneralStepDefs {
             String jsonString = response.asString();
             id = JsonPath.from(jsonString).get("data.addLineItemsToCart.id");
             WebDriverRunner.getWebDriver().navigate().refresh();
-        }
+            generalStepDefs.waitForJSandJQueryToLoad();
     }
 
     /**
      * This method adds line items to cart
      */
-    public static void addLineItemsToEstoreCart() {
+    public void addLineItemsToEstoreCart() {
         setUserEnvironment();
         while (id == null) {
             cartId = getEstoreCartId(USER_ID, USEREMAIL);
@@ -496,6 +499,7 @@ public class EstoreGeneralStepDefs {
             String jsonString = response.asString();
             id = JsonPath.from(jsonString).get("data.addLineItemsToCart.id");
             WebDriverRunner.getWebDriver().navigate().refresh();
+            generalStepDefs.waitForJSandJQueryToLoad();
         }
     }
 

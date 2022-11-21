@@ -6,7 +6,7 @@ Feature: Estore Thank You page
     Given I log into eStore as "regular"
     When I remove all items from estore cart
     When I add item to cart via API for estore
-    When I open estore cart
+    When I goes to estore cart for estore
     When I click on estore checkout button
     When I click on estore no thanks button
     When I fill estore shipping address

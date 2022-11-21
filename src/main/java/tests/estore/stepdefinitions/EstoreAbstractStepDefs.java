@@ -111,7 +111,7 @@ public class EstoreAbstractStepDefs {
 
     @When("I introduces payment details for estore")
     public void iClickOnContinueToPaymentButton() {
-        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(5));
+        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(2));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         selectPayment.selectByIndex(2);
 

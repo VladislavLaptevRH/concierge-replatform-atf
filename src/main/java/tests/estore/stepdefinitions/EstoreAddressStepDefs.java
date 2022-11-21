@@ -160,22 +160,11 @@ public class EstoreAddressStepDefs {
                 } catch (com.codeborne.selenide.ex.ElementNotFound e) {
                     System.out.println("Dropdown list is not displayed");
                 }
-
-//                executeJavaScript("window.scrollTo(0, 600)");
-//                estoreAddressScreen.getShippingAddresslastName().click();
             }
 
             sleep(3000);
             estoreAddressScreen.getShippingAddressAptFloor().click();
             estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
-//            estoreAddressScreen.getShippingAddressCity().setValue("Newark");
-
-//            Select shippingAddressState = new Select(estoreAddressScreen.getShippingAddressState());
-//            shippingAddressState.selectByValue("DE");
-
-//            estoreAddressScreen.getPostalShippingCode().click();
-//            generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-//            estoreAddressScreen.getPostalShippingCode().setValue("19711");
 
             estoreAddressScreen.getShippingAddressPhone().click();
             generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());

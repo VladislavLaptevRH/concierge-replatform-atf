@@ -77,20 +77,18 @@ public class EstoreE2EStepDefs {
 
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
-        sleep(2000);
-        generalStepDefs.waitForJSandJQueryToLoad();
-        estoreItemPage.getAddToCartButton().scrollIntoView(true);
-        sleep(3000);
-        estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(3));
-        try {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
-            estoreItemPage.getAddToCartButton().click();
-        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
-            estoreItemPage.getAddToCartButton().click();
-        }
+//        sleep(2000);
+//        generalStepDefs.waitForJSandJQueryToLoad();
+//        executeJavaScript("window.scrollTo(0, 970)");
+//        sleep(3000);
+//        try {
+        estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
+        estoreItemPage.getAddToCartButton().click();
+//        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
+//            sleep(3000);
+//            estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
+//            estoreItemPage.getAddToCartButton().click();
+//        }
 
     }
 
@@ -206,6 +204,7 @@ public class EstoreE2EStepDefs {
         $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']")).click();
     }
+
 
     @When("I choose estore {string} from brand menu")
     public void iChooseFromBrandEstoreMenu(String brand) {
@@ -698,6 +697,22 @@ public class EstoreE2EStepDefs {
     public void iRefreshCurrentEstorePage() {
         sleep(3000);
         WebDriverRunner.getWebDriver().navigate().refresh();
+    }
+
+    @When("I open product page with {string} and {string} with {string} for estore")
+    public void iOpenProductPageWithAndForEstore(String productId, String skuId, String options) {
+        String URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
+        open(URL);
+        sleep(2000);
+        estoreItemPage.getAddToCartButton().scrollTo();
+        if (!estoreItemPage.getAddToCartButton().isEnabled()) {
+            for (int i = 0; i < 3; i++) {
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                sleep(4000);
+            }
+        }
+
+
     }
 }
 
