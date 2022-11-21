@@ -12,6 +12,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
 
 public class EstoreHomePageStepDefs {
@@ -124,8 +125,8 @@ public class EstoreHomePageStepDefs {
 
     @When("I navigate to the member tab")
     public void iNavigateToTheMemberTab() {
+        String URL = Hooks.eStoreBaseURL + "/my-account/membership.jsp";
+        open(URL);
         sleep(2000);
-        estoreHomePage.getAccountIcon().click();
-        estoreHomePage.getMember().click();
     }
 }

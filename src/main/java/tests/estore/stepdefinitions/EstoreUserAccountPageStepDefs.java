@@ -280,4 +280,11 @@ public class EstoreUserAccountPageStepDefs {
             $(By.xpath("(//*[contains(text(),'Discover')])[2]")).should(visible, Duration.ofSeconds(20));
         }
     }
+
+    @When("I goes to my account for estore")
+    public void iGoesToMyAccountForEstore() {
+        String URL = Hooks.eStoreBaseURL + "/my-account/profile.jsp";
+        open(URL);
+
+    }
 }

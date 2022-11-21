@@ -31,13 +31,7 @@ public class EstoreCartPageStepDefs {
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
     SaleScreen saleScreen = new SaleScreen();
 
-    private static final String USER_ID = "3d6b15b6-eca1-4ef5-8c3c-cc39c6a2b8a8";
-    private static final String USEREMAIL = "new02@rh.com";
-    private static final String PASSWORD = "Qwerty@123";
-    private static final String BASE_URL = "https://stg4.rhnonprod.com";
-    private static String id;
     private static Response response;
-    private static String jsonString;
     int itemQuantity;
     int lineItemPrice;
 
@@ -246,7 +240,6 @@ public class EstoreCartPageStepDefs {
         estoreCartPage.getZipCodeField().sendKeys("10007");
         sleep(4000);
         estoreAddressScreen.getSubmitZipCode().click();
-//        clickOkZipCodeButton();
     }
 
     @Then("I verify UFD in cart")
@@ -307,7 +300,6 @@ public class EstoreCartPageStepDefs {
             estoreCartPage.getZipCodeField().setValue("A1A1A1");
         }
         estoreAddressScreen.getSubmitZipCode().click();
-//        clickOkZipCodeButton();
     }
 
     @When("I click on {string} postal code in cart")
@@ -376,17 +368,6 @@ public class EstoreCartPageStepDefs {
         sleep(2000);
         estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getBrandButton().click();
-//        int countOfBrands = estoreUserAccountPage.getListOfBrands().size();
-//        for (int i = 1; i < countOfBrands-4; i++) {
-//            if (i > 1) {
-//                estoreUserAccountPage.getBrandButton().click();
-//            }
-//            estoreUserAccountPage.getListOfBrands().get(i).click();
-//            estoreE2EStepDefs.iGoToItemFromEstoreSearchField("10073234 CAML");
-//            estoreE2EStepDefs.iClickOnAddToCartButton();
-//            iClickOnViewCartButton();
-//        }
-
     }
 
     @When("I click on estore order details button")
@@ -400,12 +381,6 @@ public class EstoreCartPageStepDefs {
         sleep(2000);
         estoreCartPage.getCartButtonOrderReview().should(visible, Duration.ofSeconds(40));
         executeJavaScript("arguments[0].click();", estoreCartPage.getCartButtonOrderReview());
-
-//        try {
-//            estoreCartPage.getCartButtonOrderReview().click();
-//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-//            System.out.println("Cart button is not displayed");
-//        }
     }
 
     @When("I update item quantity in estore cart")
@@ -435,12 +410,6 @@ public class EstoreCartPageStepDefs {
         sleep(2000);
         estoreCartPage.getAddToWishlistButton().should(visible, Duration.ofSeconds(40));
         estoreCartPage.getAddToWishlistButton().click();
-    }
-
-    @Then("I validate cart is empty")
-    public void iValidateCartIsEmpty() {
-//        estoreUserAccountPage.getCartButton().click();
-//        estoreCartPage.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(12));
     }
 
     @Then("I verify that contract price is used in cart")
@@ -492,12 +461,12 @@ public class EstoreCartPageStepDefs {
         String URL = Hooks.eStoreBaseURL + "/checkout/shopping_cart.jsp";
         open(URL);
         sleep(2000);
+        WebDriverRunner.getWebDriver().navigate().refresh();
     }
+
 
     @When("I add item to estore cart")
     public void iAddItemToCartViaAPI() {
-
-//        String cartId  = generalStepDefs.getCartId(USEREMAIL, USER_ID);
         RestAssured.baseURI = "https://development.internal.rhapsodynonprod.com";
         RequestSpecification request = RestAssured.given();
         request.headers("Content-Type", "application/json");
@@ -531,7 +500,7 @@ public class EstoreCartPageStepDefs {
 
         String jsonString = response.asString();
         System.out.println(jsonString);
-        id = JsonPath.from(jsonString).get("id");
+        String id = JsonPath.from(jsonString).get("id");
     }
 
 
@@ -609,5 +578,12 @@ public class EstoreCartPageStepDefs {
         }
         sleep(2000);
         WebDriverRunner.getWebDriver().navigate().refresh();
+    }
+
+    @When("I goes to estore cart for estore")
+    public void iGoesToEstoreCartForEstore() {
+        sleep(2000);
+        estoreCartPage.getEstoreCartButton().should(visible, Duration.ofSeconds(40));
+        estoreCartPage.getEstoreCartButton().click();
     }
 }

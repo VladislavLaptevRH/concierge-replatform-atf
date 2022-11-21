@@ -64,6 +64,8 @@ public class EstoreCartPage {
 
     private final SelenideElement removeButton = $(By.xpath("//*[text()='Remove']"));
 
+    private final SelenideElement estoreCartButton = $(By.xpath("//a[@href='/checkout/shopping_cart.jsp']"));
+
     private final SelenideElement cartButtonOrderReview = $(By.xpath("(//a[@href='/checkout/shopping_cart.jsp'])[2]"));
 
     private final SelenideElement cartTitle = $(By.xpath("//*[text()='CART']"));

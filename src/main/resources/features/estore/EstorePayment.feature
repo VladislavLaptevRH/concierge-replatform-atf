@@ -24,8 +24,8 @@ Feature:Estore Payment
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
-#    When I fill estore shipping address
-#    When I click on same as estore shipping address checkbox
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
@@ -147,8 +147,8 @@ Feature:Estore Payment
     When I execute payment with credit card on estore
     When I open estore cart
     Then I verify that I'm able to increase item quantity with success after payment
-    When I go to estore item "10100453 PYT" from search field
-    When I click on add to cart estore button
+    When I add item to cart via API for estore
+    When I open estore cart
     And I click on view cart estore button
     When I click on estore checkout button
     And I click on estore no thanks button
@@ -224,9 +224,8 @@ Feature:Estore Payment
   Scenario: eStore unavailability of Saved Discover for CAN shipping address
     Given I log into eStore as "savedRhCcDiscover"
     When I remove all items from estore cart
-    When I go to estore item "17050043 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
+    When I add item to cart via API for estore
+    When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
     When I click on edit estore billing address button
@@ -306,9 +305,8 @@ Feature:Estore Payment
   Scenario: GC/ Balance check
     Given I log into eStore as "mastercard"
     When I remove all items from estore cart
-    When I go to estore item "17050044 WHT" from search field
-    When I click on add to cart estore button
-    And I click on view cart estore button
+    When I add item to cart via API for estore
+    When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
     When I fill estore shipping address
