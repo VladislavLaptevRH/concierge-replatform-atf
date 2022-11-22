@@ -129,19 +129,8 @@ public class ConciergeE2EStepDefs {
 
     @When("I remove all items from cart")
     public void iRemoveAllItemsFromCart() {
-        conciergeUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(1));
+        generalStepDefs.removeLineItemFromConciergeCart();
         sleep(3000);
-        if (!conciergeUserAccountPage.getCartButton().getText().equals("")) {
-            conciergeUserAccountPage.getCartButton().click();
-            generalStepDefs.waitForJSandJQueryToLoad();
-            conciergeCartPageScreen.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(12));
-            conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
-            conciergeCartPageScreen.getOrderEstimateTitle().shouldHave(text("Order Estimate"), Duration.ofSeconds(20));
-            conciergeCartPageScreen.getClearOrderButton().click();
-            conciergeCartPageScreen.getClearOrderButtonPop().shouldHave(text("CLEAR ORDER"), Duration.ofSeconds(25));
-            conciergeCartPageScreen.getClearOrderButtonPop().click();
-            generalStepDefs.waitForJSandJQueryToLoad();
-        }
     }
 
 
@@ -733,10 +722,13 @@ public class ConciergeE2EStepDefs {
     public void iOpenProductPageWithAnd(String productId, String skuId) {
         String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+GREY";
         open(URL);
-        while (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            conciergeItemsScreen.getAddToCartButton().scrollTo();
-            sleep(5000);
+        sleep(2000);
+        conciergeItemsScreen.getAddToCartButton().scrollTo();
+        if (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
+            for (int i = 0; i < 3; i++) {
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                sleep(4000);
+            }
         }
     }
 
