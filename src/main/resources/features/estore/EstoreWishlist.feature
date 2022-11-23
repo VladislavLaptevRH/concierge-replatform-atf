@@ -25,7 +25,6 @@ Feature: Estore Wishlist
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
-    And I click on view cart estore button
     When I click on add to wishlist button from cart
     When I click on view wishlist button
     Then I validate items in wishlist

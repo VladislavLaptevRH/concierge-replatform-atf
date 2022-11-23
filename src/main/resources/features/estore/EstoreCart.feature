@@ -55,9 +55,8 @@ Feature: Estore Cart Page
 
   Scenario: Place order for guest user
     Given I remove all items from estore cart
-    When I go to estore item "63130001 NATL" from search field
+    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
     When I click on add to cart estore button
-    When I click on aggree&add estore button
     And I click on view cart estore button
     When I click on estore checkout button
     When I click on estore no thanks button
@@ -85,7 +84,7 @@ Feature: Estore Cart Page
   Scenario: eStore - Add Surcharge item to Cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I go to estore item "42100241 GREY" from search field
+    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on zipcode estore button
@@ -96,7 +95,6 @@ Feature: Estore Cart Page
     Given I log into eStore as "regular"
     When I add item to cart via API for estore
     When I open estore cart
-    And I click on view cart estore button
 #    When I click on zipcode estore button
 #    When I update postal code in cart
 #    When I click on gift box button
@@ -117,7 +115,7 @@ Feature: Estore Cart Page
 
   Scenario: eStore - Membership pop up for guest user
     Given I remove all items from estore cart
-    When I go to estore item "17050042 WHT" from search field
+    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -128,7 +126,6 @@ Feature: Estore Cart Page
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
-    And I click on view cart estore button
     When I click on estore checkout button
     When I click on estore no thanks button
     When I click on same as estore shipping address checkbox
@@ -138,7 +135,6 @@ Feature: Estore Cart Page
     Given I log into eStore as "regular"
     When I remove all items from estore cart
     When I open product page with "rhbc_prod962216" and "112414" with "OCEN%20BUMP" for estore
-    When I go to estore item "112414 OCEN BUMP" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -150,7 +146,7 @@ Feature: Estore Cart Page
     Then I verify "NY" shipping restriction
 
   Scenario: eStore - Disable Continue as a Guest user option for guest user with membership
-    Given I go to estore item "17050042WHT" from search field
+    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on join now on estore cart page membership button
@@ -167,14 +163,12 @@ Feature: Estore Cart Page
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
-    And I click on view cart estore button
     Then I verify membership estore banner for "member user"
 
   Scenario: eStore Membership banner for non-member user
     Given I log into eStore as "regular"
     When I add item to cart via API for estore
     When I open estore cart
-    And I click on view cart estore button
     Then I verify membership estore banner for "nonmember user"
 
   Scenario: eStore Cart persistence in all brands
@@ -182,7 +176,6 @@ Feature: Estore Cart Page
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
-    And I click on view cart estore button
     Then I verify that the added product is in the cart during brand switching
 
   Scenario: Verify the cart subtotal when regular user added membership card with other sku's.
