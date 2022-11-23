@@ -59,7 +59,7 @@ public class EstoreLoginStepDefs {
             if (accountRole.equals("addresspage")) {
                 estoreLoginPage.getUsernameField().setValue("addresspage@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Address1234");
-//                USER_ID_STG4="d1eaef74-754a-4721-855d-ee6aa01d998d";
+                USER_ID_STG4="d1eaef74-754a-4721-855d-ee6aa01d998d";
                 USER_ID_STG2 = "c34f7501-0d56-4872-97d3-8d3254d1ff66";
                 userEmail = "addresspage@rh.com";
             }
@@ -81,7 +81,7 @@ public class EstoreLoginStepDefs {
             if (accountRole.equals("savedRhCc")) {
                 estoreLoginPage.getUsernameField().setValue("savedrhcc@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Resto123");
-//                USER_ID_STG4="b860df1a-dc0a-4091-a24e-77658c6e49a2";
+                USER_ID_STG4="cb8ad3e1-53e8-4185-bafb-9016299145af";
                 USER_ID_STG2 = "af6c40e5-ca61-4489-acb1-052ab4f8a512";
                 userEmail = "savedrhcc@rh.com";
             }
@@ -97,6 +97,7 @@ public class EstoreLoginStepDefs {
             if (accountRole.equals("mastercard")) {
                 estoreLoginPage.getUsernameField().setValue("mastercard@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Qwerty@123");
+                USER_ID_STG4 = "eb0c0066-ef64-4218-bb73-23753fe2fc2d";
                 USER_ID_STG2 = "7bb560b2-cda2-4b2e-9ab5-5788a88e34da";
                 userEmail = "mastercard@rh.com";
             }
@@ -112,6 +113,7 @@ public class EstoreLoginStepDefs {
                 estoreLoginPage.getUsernameField().setValue("addpaymentmethod@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Test12345");
                 USER_ID_STG2 = "c0a8f13e-bc39-4261-ab11-51aeed2e25ed";
+                USER_ID_STG4 = "c044fe4b-1e08-48d2-a45a-7d720ee43aa4";
             }
 
             if (accountRole.equals("userCAAddress")) {
@@ -131,23 +133,32 @@ public class EstoreLoginStepDefs {
                 estoreLoginPage.getUsernameField().setValue("wish@listautomation.com");
                 estoreLoginPage.getPasswordField().setValue("Qwert1234");
                 USER_ID_STG2 = "99214352-923b-454d-afe8-849bab4fb2b9";
+                USER_ID_STG4 = "32285754-7f49-4714-a94e-8be5d26f9734";
             }
 
             if (accountRole.equals("member")) {
                 estoreLoginPage.getUsernameField().setValue("automationmember@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Resto123");
                 USER_ID_STG2 = "e8d13de6-7249-4070-983e-c70034ee7051";
+                USER_ID_STG4 = "bb062529-f70d-4933-b0cc-99f0105839bc";
             }
 
             if (accountRole.equals("nonmember")) {
                 estoreLoginPage.getUsernameField().setValue("nonmember1@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Qwert1234");
                 USER_ID_STG2 = "2dddc45b-1949-41fa-8609-c156f793463e";
+                USER_ID_STG4 = "9c8d59b2-fee6-485d-adc3-78559483bc81";
             }
             if (accountRole.equals("regularAddMembership")) {
                 estoreLoginPage.getUsernameField().setValue("atfregularaddmembershiprole@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Qwert1234");
-                USER_ID_STG2 = "8e303621-c2a8-4310-95f4-c6f8f85fb12b";
+                USER_ID_STG2 = "a9b2aed7-665d-45d8-b9cb-b914e9fed772";
+                if(Hooks.profile.contains("stg4")){
+                    estoreLoginPage.getUsernameField().setValue("regulartomember@rh.com");
+                    estoreLoginPage.getPasswordField().setValue("Qwert1234");
+                    USER_ID_STG4 = "4303ef90-7890-4333-8336-795f0d9b7542";
+                }
+
             }
             if (accountRole.equals("emptyStateField")) {
                 estoreLoginPage.getUsernameField().setValue("automationemptystatefield@rh.com");

@@ -140,8 +140,8 @@ public class EstoreAddressStepDefs {
 
 
             if (Hooks.eStoreURL.contains("stg4")) {
-                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
-                estoreAddressScreen.getShippingAddressStreetAddress().setValue("Bradford Drive, Hilliard, OH, USA");
+                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
+                estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
                 estoreAddressScreen.getShippingAddresslastName().click();
                 try {
                     $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
@@ -177,7 +177,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify add a new shipping address option is present")
     public void iVerifyAddANewShippingAddressOptionIsPresent() {
-        $(By.xpath("//*[contains(text(),'Add New Address')]")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Add')]")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I click on estore my account icon")
@@ -222,8 +222,8 @@ public class EstoreAddressStepDefs {
                 System.out.println("Dropdown list is not displayed");
             }
         } else {
-            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
-            estoreUserAccountPage.getBillingAddressStreetAddress().setValue("2479 Deer Run");
+            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddressStg2());
+            estoreUserAccountPage.getBillingAddressStreetAddressStg2().setValue("2479 Deer Run");
             try {
                 $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).should(visible, Duration.ofSeconds(5));
                 $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).click();
