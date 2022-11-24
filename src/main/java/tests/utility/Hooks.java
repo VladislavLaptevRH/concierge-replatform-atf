@@ -137,7 +137,7 @@ public class Hooks {
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(eStoreURL);
     }
 
@@ -164,7 +164,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 60000;
         Configuration.reportsFolder = "target/screenshots";
