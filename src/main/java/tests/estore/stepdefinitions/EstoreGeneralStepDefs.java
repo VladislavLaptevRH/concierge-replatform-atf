@@ -466,7 +466,6 @@ public class EstoreGeneralStepDefs {
      */
     public void addLineItemsToEstoreCart() {
         setUserEnvironment();
-        while (id == null) {
             cartId = getEstoreCartId(USER_ID, USEREMAIL);
             RestAssured.baseURI = BASE_URL;
             RequestSpecification request = RestAssured.given();
@@ -480,7 +479,7 @@ public class EstoreGeneralStepDefs {
                     "        \"lineItemsInput\": {\n" +
                     "            \"items\": [\n" +
                     "                {\n" +
-                    "                    \"productId\": \"prod1617188\",\n" +
+                    "                    \"productId\": \"prod25280088\",\n" +
                     "                    \"sku\": \"17050042 WHT\",\n" +
                     "                    \"quantity\": 1,\n" +
                     "                    \"brand\": \"RH\",\n" +
@@ -500,7 +499,6 @@ public class EstoreGeneralStepDefs {
             id = JsonPath.from(jsonString).get("data.addLineItemsToCart.id");
             WebDriverRunner.getWebDriver().navigate().refresh();
             generalStepDefs.waitForJSandJQueryToLoad();
-        }
     }
 
     /**

@@ -66,7 +66,7 @@ public class Hooks {
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
         } else {
-            System.out.println("Tests are running on "+ profile +" environment");
+            System.out.println("Tests are running on " + profile + " environment");
         }
 
         if (cookie == null) {
