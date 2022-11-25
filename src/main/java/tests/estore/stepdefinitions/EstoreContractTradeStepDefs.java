@@ -17,7 +17,6 @@ import static com.codeborne.selenide.Selenide.sleep;
 
 public class EstoreContractTradeStepDefs {
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
-
     EstoreLoginPage estoreLoginPage = new EstoreLoginPage();
 
     @Then("I verify that contract paragraph is displayed")

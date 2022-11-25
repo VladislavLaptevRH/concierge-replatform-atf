@@ -187,7 +187,8 @@ public class EstoreLoginStepDefs {
         sleep(2000);
 
         try {
-            open(Hooks.eStoreURL + "/trade-sales/trade-sign-in.jsp");
+            open(Hooks.eStoreBaseURL + "/trade-sales/trade-sign-in.jsp");
+            estoreLoginPage.getContractTradeEmailField().should(visible,Duration.ofSeconds(60));
             estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
             estoreLoginPage.getContractTradePasswordField().setValue("20211221164474");
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));

@@ -97,7 +97,7 @@ public class PaymentStepDefs {
 
     @When("I choose RH Gift Card from payment method")
     public void iChooseRHGiftCardFromPaymentMethod() {
-        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
+        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Master Card ####-0008"), Duration.ofMinutes(1));
         Select selectPaymentMethod = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPaymentMethod.selectByValue("GiftCard");
         paymentScreen.getRhCardNumberField().setValue("6006493887999902500");
@@ -135,7 +135,7 @@ public class PaymentStepDefs {
     public void iVerifySubtotalShippingFeeTaxesBasedOnPostalCode() {
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='Estimated Sales Tax for 85020-4434']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Estimated Sales Tax for 85020-4434']")).should(visible, Duration.ofSeconds(15));
         //$(By.xpath("//*[text()='$3,585.00']")).should(visible, Duration.ofSeconds(15));
         //$(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
         //$(By.xpath("//*[text()='US$308.31']")).should(visible, Duration.ofSeconds(15));
@@ -182,5 +182,6 @@ public class PaymentStepDefs {
 
     @Then("I verify that balance info is displayed")
     public void iVerifyThatBalanceInfoIsDisplayed() {
+        conciergeCartPageScreen.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 2500 has balance of "), Duration.ofSeconds(25));
     }
 }
