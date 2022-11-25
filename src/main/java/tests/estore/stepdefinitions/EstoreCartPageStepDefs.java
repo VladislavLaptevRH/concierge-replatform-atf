@@ -203,7 +203,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I choose qty for item from estore cart")
     public void iChooseQtyForItemFromCart() {
-        sleep(3000);
+        sleep(7000);
         Select qtySelect = new Select(estoreCartPage.getQuantitySelect());
         estoreCartPage.getQuantitySelect().should(visible, Duration.ofSeconds(40));
         itemQuantity = 2;
@@ -506,7 +506,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that gift card balance info is displayed for estore")
     public void iVerifyThatGiftCardBalanceInfoIsDisplayed() {
-        estoreCartPage.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 1635 has balance of "), Duration.ofSeconds(25));
+        estoreCartPage.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 2500 has balance of "), Duration.ofSeconds(25));
     }
 
     @Then("I verify that estore order estimate is not displayed")

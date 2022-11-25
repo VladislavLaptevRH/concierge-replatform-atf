@@ -102,15 +102,16 @@ public class Hooks {
      * Set up URL + endpoint  for eStore
      */
     public static String configureEstoreURL() {
-        if (profile.equals("stg4") && cookie != null) {
-            eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
+        if ((profile.equals("stg4") && cookie.equals("no_endpoint"))) {
+            eStoreURL = eStoreBaseURL;
         } else if (profile.equals("stg2") && cookie.equals("no_endpoint")) {
             eStoreURL = eStoreBaseURL;
-        } else if (profile.equals("stg2")) {
+        } else if (profile.equals("stg2") && cookie != null) {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
-        } else if ((profile.equals("stg4") && cookie.equals("no_endpoint"))) {
-            eStoreURL = eStoreBaseURL;
+        } else if (profile.equals("stg4") && cookie != null) {
+            eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
         }
+
         return eStoreURL;
     }
 
@@ -164,7 +165,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = true;
+        Configuration.headless = false;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 60000;
         Configuration.reportsFolder = "target/screenshots";
