@@ -4,7 +4,7 @@ Feature:Concierge ThankYouPage
 
   Scenario: Verify order details
     Given I log into Concierge as "associate"
-    When I clear order via API
+    When I remove all items from cart via API
     When I remove client from header
     When I add item to cart via API
     When I open cart
@@ -21,7 +21,7 @@ Feature:Concierge ThankYouPage
 
   Scenario: Verify the payment details and Order estimate summary
     Given I log into Concierge as "associate"
-    When I clear order via API
+    When I remove all items from cart via API
     When I remove client from header
     When I add item to cart via API
     When I open cart
@@ -38,7 +38,7 @@ Feature:Concierge ThankYouPage
 
   Scenario: Verify all the line items in the cart
     Given I log into Concierge as "associate"
-    When I clear order via API
+    When I remove all items from cart via API
     When I remove client from header
     When I add item to cart via API
     When I open cart
@@ -55,7 +55,7 @@ Feature:Concierge ThankYouPage
 
   Scenario: Verify the order number and email address verbiage
     Given I log into Concierge as "associate"
-    When I clear order via API
+    When I remove all items from cart via API
     When I remove client from header
     When I add item to cart via API
     When I open cart

@@ -16,11 +16,13 @@ import org.slf4j.LoggerFactory;
 import tests.utility.Hooks;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -97,6 +99,33 @@ public class ConciergeAssociateStepDefs {
         $(By.xpath("//*[text()='RH.COM']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='DASHBOARD']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='PROJECTS']")).should(visible, Duration.ofSeconds(40));
+    }
+
+    @Then("I validate each cat and sub-cat")
+    public void iValidateEachCatAndSubCat() {
+        sleep(2000);
+        for (int main = 1; main < conciergeUserAccountPage.getListOfMainCategories().size(); main++) {
+            System.out.println("Main Category: " + conciergeUserAccountPage.getListOfMainCategories().get(main).getText());
+            conciergeUserAccountPage.getListOfMainCategories().get(main).click();
+            for (int sub = 0; sub < conciergeUserAccountPage.getListOfSubCategories().size(); sub++) {
+                System.out.println("Sub Category: " + conciergeUserAccountPage.getListOfSubCategories().get(sub).getText());
+                conciergeUserAccountPage.getListOfSubCategories().get(sub).click();
+                sleep(5000);
+                for (int collection = 0; collection < conciergeUserAccountPage.getListOfCollections().size(); collection++) {
+                    conciergeUserAccountPage.getListOfCollections().get(collection).click();
+                    sleep(5000);
+                    System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": "+ Hooks.getCurrentUrl());
+                    if (!Hooks.getCurrentUrl().contains("concierge")) {
+                        open(Hooks.conciergeURL);
+                        sleep(5000);
+                    }
+                    conciergeUserAccountPage.getListOfMainCategories().get(main).click();
+                    sleep(5000);
+                    conciergeUserAccountPage.getListOfSubCategories().get(sub).click();
+                    sleep(5000);
+                }
+            }
+        }
     }
 }
 

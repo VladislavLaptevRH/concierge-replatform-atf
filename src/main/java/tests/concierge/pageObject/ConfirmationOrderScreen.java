@@ -17,7 +17,7 @@ public class ConfirmationOrderScreen {
     
     private final SelenideElement orderDetailsButton = $(By.xpath("//button[contains(@class,'MuiButtonBase-root MuiButton-root')]"));
 
-    private final SelenideElement thankYouTitle = $(By.xpath("//*[@id=\"spa-root\"]/div/main/div/div[2]/div[2]/div/div/div/div/div/p[1]"));
+    private final SelenideElement thankYouTitle = $(By.xpath("//*[text()='Thank You']"));
     
-    private final SelenideElement yourOrderHasBeenPlaced = $(By.xpath("//*[@id=\"spa-root\"]/div/main/div/div[2]/div[2]/div/div/div/div/div/p[2]"));
+    private final SelenideElement yourOrderHasBeenPlaced = $(By.xpath("//*[text()='Your Order has been placed']"));
 }

@@ -7,6 +7,8 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.concierge.pageObject.*;
 import tests.utility.Hooks;
 import org.openqa.selenium.By;
@@ -23,6 +25,9 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,6 +40,7 @@ public class GeneralStepDefs {
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
     static WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(30));
     public static String id;
+    public static String error;
     private static Response response;
     private static String authEndpoint;
     private static String clientSecret;
@@ -44,6 +50,7 @@ public class GeneralStepDefs {
     public static final String BASE_URL = Hooks.conciergeBaseURL;
     private static String addItemEndpoint;
     private static String cartId;
+    private static Logger log = LoggerFactory.getLogger(FilterStepDefs.class);
 
     public void waitForLoad(WebDriver driver) {
         ExpectedCondition<Boolean> pageLoadCondition = webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete");
@@ -443,7 +450,6 @@ public class GeneralStepDefs {
      */
     public static void addLineItemsToConciergeCart() {
         setUserEnvironment();
-        while (id == null) {
             if (USER_ID == "6192a475-4d00-4d61-aa0c-3e25c7000151") {
                 cartId = getProdCartId(USER_ID);
             } else {
@@ -479,8 +485,6 @@ public class GeneralStepDefs {
 
             String jsonString = response.asString();
             id = JsonPath.from(jsonString).get("data.addLineItemsToConciergeCart.id");
-            WebDriverRunner.getWebDriver().navigate().refresh();
-        }
     }
 
     /**
