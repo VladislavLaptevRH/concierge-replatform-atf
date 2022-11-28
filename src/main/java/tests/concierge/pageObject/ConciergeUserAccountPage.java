@@ -44,6 +44,9 @@ public class ConciergeUserAccountPage {
     private final SelenideElement automationClientButton = $(By.xpath("//*[contains(text(),'Client : Automation')]"));
 
     private final List<SelenideElement> listOfBrands = $$(By.xpath("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li"));
+    private final List<SelenideElement> listOfMainCategories = $$(By.xpath("//div[@class=\"MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between\"]/div"));
+    private final List<SelenideElement> listOfSubCategories = $$(By.xpath("//div[@class=\"MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3\"]/ul/li"));
+    private final List<SelenideElement> listOfCollections = $$(By.xpath("//div[@class=\"MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3\"][2]/ul/li"));
 
     private final SelenideElement projectsButton = $(By.xpath("//a[@data-analytics-worhlogo='projects-logo']"));
 

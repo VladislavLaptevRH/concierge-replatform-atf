@@ -32,3 +32,9 @@ Feature:Concierge Homepage
     Given I log into Concierge as "associate"
     Then I verify footer links
 
+
+  Scenario: Validate Each Category And Sub-Category
+    Given I log into Concierge as "associate"
+    Then  I expect that I am on the Concierge Dashboard page
+    Then I validate each cat and sub-cat
+

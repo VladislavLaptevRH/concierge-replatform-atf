@@ -16,7 +16,7 @@ Feature:Concierge Order review
     When I choose POP for payment method
     When I edit shipping address from order review page
     When I continue to payment
-    Then I verify that I'm able to edit shipping address
+    #Then I verify that I'm able to edit shipping address
 
   Scenario: Edit Billing Address
     Given I log into Concierge as "associate"
@@ -66,7 +66,8 @@ Feature:Concierge Order review
 
   Scenario: SPO ORDER & TERMS REVIEW SIGNATURE CAPTURE
     Given I log into Concierge as "associate"
-    When I clear order via API
+    When I remove all items from cart via API
+    When I remove client from header
     When I clicks on a random menu item
     When I click on collections item
     When I clicks on o random item

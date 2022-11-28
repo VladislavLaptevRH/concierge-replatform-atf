@@ -713,7 +713,7 @@ public class ConciergeE2EStepDefs {
     public void iSelectLengthOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
         sleep(6000);
-        selectOption.getLengthOption().should(visible, Duration.ofSeconds(15));
+        //selectOption.getLengthOption().should(visible, Duration.ofSeconds(15));
         Select selectLength = new Select(selectOption.getLengthOption());
         selectLength.selectByValue("80400002");
     }
@@ -743,6 +743,14 @@ public class ConciergeE2EStepDefs {
     public void iOpenCart() {
         String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
         open(URL);
+        sleep(2000);
+        boolean isCartEmpty = $(By.xpath("//*[text()='YOUR SHOPPING CART IS EMPTY']")).isDisplayed();
+        if (isCartEmpty) {
+            System.out.println("Calling clear order api to delete old cartId");
+           // generalStepDefs.clearOrder();
+            System.out.println("Cart is empty, adding item again via API call.");
+           // generalStepDefs.addLineItemsToConciergeCart();
+        }
         WebDriverRunner.getWebDriver().navigate().refresh();
         sleep(2000);
     }

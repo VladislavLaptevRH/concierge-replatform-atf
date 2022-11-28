@@ -115,7 +115,6 @@ public class PaymentStepDefs {
                         "Phoenix, AZ 85020-4434\n" +
                         "US\n" +
                         "124131231\n" +
-                        "automationnonmember@mailinator.com\n" +
                         "Edit"));
 
         assertEquals(paymentScreen.getBillingAddress().getText(),
@@ -127,7 +126,6 @@ public class PaymentStepDefs {
                         "Phoenix, AZ 85020-4434\n" +
                         "US\n" +
                         "124131231\n" +
-                        "automationnonmember@mailinator.com\n" +
                         "Edit");
     }
 
@@ -182,5 +180,6 @@ public class PaymentStepDefs {
 
     @Then("I verify that balance info is displayed")
     public void iVerifyThatBalanceInfoIsDisplayed() {
+        conciergeCartPageScreen.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 2500 has balance of "), Duration.ofSeconds(25));
     }
 }

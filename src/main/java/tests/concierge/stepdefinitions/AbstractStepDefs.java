@@ -34,17 +34,12 @@ public class AbstractStepDefs {
     public void iClicksOnARandomMenuItem() {
         sleep(7000);
         generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeUserAccountPage.getFirstItemMainMenu().should(visible, Duration.ofSeconds(60));
-        Actions actions = new Actions(WebDriverRunner.getWebDriver());
-        actions.moveToElement(conciergeUserAccountPage.getFirstItemMainMenu());
-        conciergeUserAccountPage.getFirstItemMainMenu().click();
+        conciergeUserAccountPage.getListOfMainCategories().get(1).click();
         sleep(2000);
-        conciergeUserAccountPage.getItemSubCategory().get(1).should(visible, Duration.ofSeconds(30));
-        conciergeUserAccountPage.getItemSubCategory().get(1).click();
-        conciergeUserAccountPage.getFirstItemSubCategory().should(visible, Duration.ofSeconds(30));
-        conciergeUserAccountPage.getFirstItemSubCategory().click();
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3'])[2]//li")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3'])[2]//li")).click();
+        conciergeUserAccountPage.getListOfSubCategories().get(0).click();
+        sleep(2000);
+        conciergeUserAccountPage.getListOfCollections().get(1).click();
+        sleep(2000);
     }
 
 

@@ -4,7 +4,7 @@ Feature:Concierge Contract
 
   Scenario: Verify that I'm not able to select Contract Client without contract gallery
     Given I log into Concierge as "associate"
-    When I clear order via API
+    When I remove all items from cart via API
     When I remove client from header
     When I add item to cart via API
     When I open cart
@@ -17,7 +17,7 @@ Feature:Concierge Contract
 #Disbaled following tests because of https://restorationhardware.jira.com/browse/CE-2037
 #  Scenario: Verify that Membership banner is not present on the cart page
 #    Given I log into Concierge as "associate"
-#    When I clear order via API
+#    When I remove all items from cart via API
 #    When I choose contract gallery
 #    When I add item to cart via API
 #    When I open cart
@@ -29,7 +29,7 @@ Feature:Concierge Contract
 #
 #  Scenario: Address page: Sold-to, Billing, shipping address
 #    Given I log into Concierge as "associate"
-#    When I clear order via API
+#    When I remove all items from cart via API
 #    When I choose contract gallery
 #    When I add item to cart via API
 #    When I open cart
@@ -42,7 +42,7 @@ Feature:Concierge Contract
 #
 #  Scenario: Verify contract saving for contract type client
 #    Given I log into Concierge as "associate"
-#    When I clear order via API
+#    When I remove all items from cart via API
 #    When I choose contract gallery
 #    When I add item to cart via API
 #    When I open cart
@@ -62,7 +62,7 @@ Feature:Concierge Contract
 #
 #  Scenario: Contract Prices : CG, PG, PDP, Cart, Order Review, Thank you, Payment
 #    Given I log into Concierge as "associate"
-#    When I clear order via API
+#    When I remove all items from cart via API
 #    When I choose contract gallery
 #    When I remove client from header
 #    When I click on client button from header
@@ -83,7 +83,7 @@ Feature:Concierge Contract
 #  Scenario: Contract Prices: Project
 #    #Need Test data for stg4, test fails at the moment because project name does not exists
 #    Given I log into Concierge as "associate"
-#    When I clear order via API
+#    When I remove all items from cart via API
 #    When I remove client from header
 #    When I choose contract gallery
 #    When I click on client button from header
