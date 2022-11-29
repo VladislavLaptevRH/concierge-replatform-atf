@@ -28,6 +28,10 @@ Feature: Estore Homepage
     And I fill in the request form
     Then I Verify Thank you message
 
+  Scenario: Validate Each Category And Sub-Category for eStore
+    Given I log into eStore as "regular"
+    Then I validate each cat and sub-cat for eStore
+
 
 
 

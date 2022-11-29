@@ -2,9 +2,11 @@ package tests.estore.stepdefinitions;
 
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.estore.pageObject.EstoreHomePage;
 import tests.utility.Hooks;
 
@@ -14,9 +16,11 @@ import java.util.List;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
+import static org.testng.AssertJUnit.assertFalse;
 
 public class EstoreHomePageStepDefs {
     EstoreHomePage estoreHomePage = new EstoreHomePage();
+    ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
 
     @Then("I expect that I am on the eStore Dashboard page")
     public void iExpectThatIAmOnTheEStoreDashboardPage() {
@@ -128,5 +132,33 @@ public class EstoreHomePageStepDefs {
         String URL = Hooks.eStoreBaseURL + "/my-account/membership.jsp";
         open(URL);
         sleep(2000);
+    }
+
+    @Then("I validate each cat and sub-cat for eStore")
+    public void iValidateEachCatAndSubCatForEStore() {
+        sleep(2000);
+        for (int main = 0; main < conciergeUserAccountPage.getListOfMainCategories().size(); main++) {
+            System.out.println("Main Category: " + conciergeUserAccountPage.getListOfMainCategories().get(main).getText());
+            conciergeUserAccountPage.getListOfMainCategories().get(main).click();
+            for (int sub = 0; sub < estoreHomePage.getListOfSubCategories().size(); sub++) {
+                System.out.println("Sub Category: " + estoreHomePage.getListOfSubCategories().get(sub).getText());
+                estoreHomePage.getListOfSubCategories().get(sub).click();
+                sleep(5000);
+                for (int collection = 0; collection < conciergeUserAccountPage.getListOfCollections().size(); collection++) {
+                    conciergeUserAccountPage.getListOfCollections().get(collection).click();
+                    sleep(5000);
+                    System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": "+ Hooks.getCurrentUrl());
+                    assertFalse((WebDriverRunner.getWebDriver().getTitle().contains("404")));
+                    if (!Hooks.getCurrentUrl().contains("rhnonprod")) {
+                        open(Hooks.eStoreURL);
+                        sleep(5000);
+                    }
+                    conciergeUserAccountPage.getListOfMainCategories().get(main).click();
+                    sleep(5000);
+                    estoreHomePage.getListOfSubCategories().get(sub).click();
+                    sleep(5000);
+                }
+            }
+        }
     }
 }
