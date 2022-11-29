@@ -10,6 +10,7 @@ import tests.estore.pageObject.EstoreUserAccountPage;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.selected;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
@@ -62,7 +63,7 @@ public class EstoreMemberStepDefs {
     @Then("I validate membership title")
     public void iValidateMembershipTitile() {
         sleep(5000);
-        $(By.xpath("//*[text()='RH MEMBERS PROGRAM PROFILE']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='RH MEMBERS PROGRAM PROFILE']")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I validate membership details")
@@ -97,6 +98,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate email address field and link to membership button")
     public void iValidateEmailAddressFieldAndLinkToMembershipButton() {
+        System.out.println();
 //        estoreMemberPage.getEmailField().scrollTo();
 //        estoreMemberPage.getEmailField().isDisplayed();
 //        estoreMemberPage.getEmailField().click();
@@ -162,11 +164,21 @@ public class EstoreMemberStepDefs {
 
     @When("I click on FAQa link for estore")
     public void iClickOnFAQaLinkForEstore() {
-        $(By.xpath("(//a[@href='/customer-experience/frequently-asked-questions'])[1]")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("(//a[@href='/customer-experience/frequently-asked-questions'])[1]")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("(//a[@href='/customer-experience/frequently-asked-questions'])[1]")).click();
     }
 
     @Then("I verfiy that frequently asked questions page is displayed")
     public void iVerfiyThatFrequentlyAskedQuestionsPageIsDisplayed() {
+    }
+
+    @Then("I verify that membership is cancelled")
+    public void iVerifyThatMembershipIsCancelled() {
+        $(By.xpath("//*[text()='You have successfully added the RH Members Program to your cart.']")).shouldNotBe(visible, Duration.ofSeconds(30));
+    }
+
+    @Then("I verify that save card to account checkbox should be checked by defaults")
+    public void iVerifyThatSaveCardToAccountCheckboxShouldBeCheckedByDefaults() {
+        $(By.xpath("//input[@type='checkbox']")).should(selected, Duration.ofSeconds(30));
     }
 }
