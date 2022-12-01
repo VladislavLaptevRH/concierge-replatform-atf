@@ -335,17 +335,12 @@ public class ConciergeE2EStepDefs {
 
     @When("I remove client from header")
     public void iRemoveClientFromHeader() {
-        generalStepDefs.waitForJSandJQueryToLoad();
         sleep(5000);
-        try {
-            if ($(By.xpath("//*[contains(text(),'Client: ')]")).isDisplayed()) {
-                conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
-                conciergeUserAccountPage.getClientButton().click();
-                conciergeUserAccountPage.getRemoveClientByText().shouldHave(text("Remove Client"), Duration.ofSeconds(5));
-                conciergeUserAccountPage.getRemoveClientByText().click();
-            }
-        } catch (AssertionError e) {
-            System.out.println("Client is not selected");
+        while ($(By.xpath("//*[contains(text(),'Client: ')]")).isDisplayed()) {
+            conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
+            conciergeUserAccountPage.getClientButton().click();
+            conciergeUserAccountPage.getRemoveClientByText().shouldHave(text("Remove Client"), Duration.ofSeconds(5));
+            conciergeUserAccountPage.getRemoveClientByText().click();
         }
     }
 
