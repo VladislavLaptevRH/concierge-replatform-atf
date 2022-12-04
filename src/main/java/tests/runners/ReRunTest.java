@@ -6,7 +6,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
         monochrome = true,
         features = {"@target/rerun.txt"}
         , glue = {"tests"}
-        , plugin = {"usage", "json:target/cucumber-reports/Cucumber.json", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
+        , plugin = {"usage", "html:target/cucumber-html-report/Rerun.html"}
 )
 
 public class ReRunTest extends AbstractTestNGCucumberTests  {
