@@ -4,6 +4,7 @@
     <test name="Window">
         <classes>
             <class name="tests.runners.RunTest"></class>
+            <class name="tests.runners.ReRunTest"></class>
         </classes>
     </test>
 </suite>

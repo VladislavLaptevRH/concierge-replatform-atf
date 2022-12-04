@@ -346,22 +346,17 @@ public class ConciergeE2EStepDefs {
 
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String businessClient) {
-        sleep(4000);
-        generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeUserAccountPage.getClientLookupFirstName().should(visible, Duration.ofSeconds(25));
+        sleep(7000);
         if (businessClient.equals("member")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
-        }
-        if (businessClient.equals("nonmember")) {
+        } else if (businessClient.equals("nonmember")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Nonmember");
-        }
-        if (businessClient.equals("trade")) {
+        } else if (businessClient.equals("trade")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Trade");
-        }
-        if (businessClient.equals("unclassifiedBusiness")) {
+        } else if (businessClient.equals("unclassifiedBusiness")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("unclassifiedBusiness");
         }
@@ -369,8 +364,7 @@ public class ConciergeE2EStepDefs {
         conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientLookupSearchButton().click();
         conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME"), Duration.ofMinutes(1));
-        executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getFirstResultOfClientLookup());
-
+        conciergeUserAccountPage.getFirstResultOfClientLookup().click();
     }
 
 
