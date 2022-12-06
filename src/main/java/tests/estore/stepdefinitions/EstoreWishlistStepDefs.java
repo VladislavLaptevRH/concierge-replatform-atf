@@ -44,4 +44,5 @@ public class EstoreWishlistStepDefs {
         estoreItemPage.getViewWishlistButton().should(visible,Duration.ofSeconds(20));
         estoreItemPage.getViewWishlistButton().click();
     }
+
 }

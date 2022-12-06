@@ -644,16 +644,18 @@ public class ConciergeCartStepDefs {
 
     @When("I choose order classification")
     public void iChooseOrderClassification() {
-        generalStepDefs.waitForJSandJQueryToLoad();
+        //generalStepDefs.waitForJSandJQueryToLoad();
         Select selectOrder = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
-        conciergeCartPageScreen.getOrderClassificationSelect().selectOptionContainingText("Select an Option");
-        conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(text("Select an Option"), Duration.ofSeconds(5));
+//        conciergeCartPageScreen.getOrderClassificationSelect().selectOptionContainingText("Select an Option");
+//        conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(text("Select an Option"), Duration.ofSeconds(5));
         sleep(7000);
-        for (int i = 0; i < 10; i++) {
-            selectOrder.selectByValue("RH Gallery Order");
-            conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
-        }
-        generalStepDefs.waitForJSandJQueryToLoad();
+//        for (int i = 0; i < 10; i++) {
+//            selectOrder.selectByValue("RH Gallery Order");
+//            conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
+//        }
+        //generalStepDefs.waitForJSandJQueryToLoad();
+        selectOrder.selectByValue("RH Gallery Order");
+        conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
     }
 
     @Then("I verify contract savings")

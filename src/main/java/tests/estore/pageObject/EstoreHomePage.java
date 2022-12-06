@@ -13,8 +13,9 @@ import static com.codeborne.selenide.Selenide.$$;
 public class EstoreHomePage {
     private final List<SelenideElement> listOfNavigationBar = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']/div"));
     private final List<SelenideElement> listOfBrandNames = $$(By.xpath("//div[@id= 'brand-links-container']/ul/li"));
-    private final List<SelenideElement> listOfSubCategories = $$(By.xpath("//div[@class=\"MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3\"]/ul/li/span"));
+    private final List<SelenideElement> listOfSubCategories = $$(By.xpath("(//ul[@class=\"MuiList-root\"])[1]/li"));
     private final List<SelenideElement> listOfHamburgeritems = $$(By.xpath("//div[@class= 'MuiGrid-root MuiGrid-item']/ul/li/a/span"));
+    private final List<SelenideElement> listOfCollection = $$(By.xpath("(//ul[@class=\"MuiList-root\"])[2]/li"));
 
     private final SelenideElement searchIcon = $(By.xpath("//span[@class='MuiIconButton-label']"));
     private final SelenideElement hamburgerIcon = $(By.id("hamburgerIcon"));

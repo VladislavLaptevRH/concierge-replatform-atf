@@ -97,7 +97,6 @@ public class PaymentStepDefs {
 
     @When("I choose RH Gift Card from payment method")
     public void iChooseRHGiftCardFromPaymentMethod() {
-        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Master Card ####-0008"), Duration.ofMinutes(1));
         Select selectPaymentMethod = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPaymentMethod.selectByValue("GiftCard");
         paymentScreen.getRhCardNumberField().setValue("6006493887999902500");

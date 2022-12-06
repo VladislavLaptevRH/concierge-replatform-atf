@@ -223,4 +223,3 @@ Feature: Estore Cart Page
     When I add item to cart via API for estore
     When I goes to estore cart for estore
     Then I verify the standard delivery charges for estore
-
