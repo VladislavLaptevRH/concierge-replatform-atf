@@ -74,12 +74,12 @@ Feature: Estore Cart Page
   Scenario: eStore - Add UFD item to Cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-#    When I go to estore item "63130001 NATL" from search field
-#    When I click on add to cart estore button
-#    And I click on view cart estore button
-#    When I click on zipcode estore button
-#    When I update postal code in cart
-#    Then I verify UFD in cart
+    When I go to estore item "63130001 NATL" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on zipcode estore button
+    When I update postal code in cart
+    Then I verify UFD in cart
 
   Scenario: eStore - Add Surcharge item to Cart
     Given I log into eStore as "regular"

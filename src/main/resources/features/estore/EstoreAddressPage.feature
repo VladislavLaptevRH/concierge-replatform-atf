@@ -67,7 +67,7 @@ Feature: Estore Address Page
     Given I log into eStore as "addresspage"
     When I remove all items from estore cart
     When I goes to my account for estore
-    When I click on estore my account button
+#    When I click on estore my account button
     When I click on estore my account button
     When I click on address book estore button
     When I remove added address before for address book

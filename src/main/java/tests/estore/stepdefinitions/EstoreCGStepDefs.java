@@ -1,6 +1,7 @@
 package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -161,5 +162,13 @@ public class EstoreCGStepDefs {
     @Then("I verify that trade price is used for each TN product")
     public void iVerifyThatTradePriceIsUsedForEachTNProduct() {
         $(By.xpath("//*[text()='Trade']")).should(visible, Duration.ofSeconds(30));
+    }
+
+    @When("I goes to estore collection page")
+    public void iGoesToEstoreCollectionPage() {
+        String URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045";
+        open(URL);
+        sleep(2000);
+        WebDriverRunner.getWebDriver().navigate().refresh();
     }
 }

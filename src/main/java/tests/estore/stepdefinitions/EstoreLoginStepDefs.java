@@ -3,6 +3,8 @@ package tests.estore.stepdefinitions;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import tests.estore.pageObject.EstoreLoginPage;
@@ -59,7 +61,7 @@ public class EstoreLoginStepDefs {
             if (accountRole.equals("addresspage")) {
                 estoreLoginPage.getUsernameField().setValue("addresspage@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Address1234");
-                USER_ID_STG4="d1eaef74-754a-4721-855d-ee6aa01d998d";
+                USER_ID_STG4 = "d1eaef74-754a-4721-855d-ee6aa01d998d";
                 USER_ID_STG2 = "c34f7501-0d56-4872-97d3-8d3254d1ff66";
                 userEmail = "addresspage@rh.com";
             }
@@ -81,7 +83,7 @@ public class EstoreLoginStepDefs {
             if (accountRole.equals("savedRhCc")) {
                 estoreLoginPage.getUsernameField().setValue("savedrhcc@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Resto123");
-                USER_ID_STG4="cb8ad3e1-53e8-4185-bafb-9016299145af";
+                USER_ID_STG4 = "cb8ad3e1-53e8-4185-bafb-9016299145af";
                 USER_ID_STG2 = "af6c40e5-ca61-4489-acb1-052ab4f8a512";
                 userEmail = "savedrhcc@rh.com";
             }
@@ -153,7 +155,7 @@ public class EstoreLoginStepDefs {
                 estoreLoginPage.getUsernameField().setValue("atfregularaddmembershiprole@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Qwert1234");
                 USER_ID_STG2 = "a9b2aed7-665d-45d8-b9cb-b914e9fed772";
-                if(Hooks.profile.contains("stg4")){
+                if (Hooks.profile.contains("stg4")) {
                     estoreLoginPage.getUsernameField().setValue("regulartomember@rh.com");
                     estoreLoginPage.getPasswordField().setValue("Qwert1234");
                     USER_ID_STG4 = "4303ef90-7890-4333-8336-795f0d9b7542";
@@ -188,7 +190,7 @@ public class EstoreLoginStepDefs {
 
         try {
             open(Hooks.eStoreBaseURL + "/trade-sales/trade-sign-in.jsp");
-            estoreLoginPage.getContractTradeEmailField().should(visible,Duration.ofSeconds(60));
+            estoreLoginPage.getContractTradeEmailField().should(visible, Duration.ofSeconds(60));
             estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
             estoreLoginPage.getContractTradePasswordField().setValue("20211221164474");
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
@@ -202,5 +204,61 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
         }
+    }
+
+    @When("I introduce wrong login and password")
+    public void iIntroduceWrongLoginAndPassword() {
+        estoreLoginPage.getAccountIcon().should(visible, Duration.ofMinutes(15));
+        estoreLoginPage.getAccountIcon().click();
+
+        estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(15));
+        estoreLoginPage.getPasswordField().should(visible, Duration.ofMinutes(15));
+        estoreLoginPage.getUsernameField().setValue("wrongemail@mailinator.com");
+        estoreLoginPage.getPasswordField().setValue("wrongpassword");
+
+        estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(20));
+        estoreLoginPage.getSignInButton().click();
+
+
+    }
+
+    @Then("I verify that error message about invalid credentials is displayed")
+    public void iVerifyThatErrorMessageAboutInvalidCredentialsIsDisplayed() {
+        $(By.xpath("//*[text()='Invalid email address or password.']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Given("when I click on forgot password button")
+    public void whenIClickOnForgotPasswordButton() {
+        estoreLoginPage.getAccountIcon().should(visible, Duration.ofMinutes(15));
+        estoreLoginPage.getAccountIcon().click();
+        estoreLoginPage.getForgotPasswordButton().should(visible, Duration.ofSeconds(20));
+        estoreLoginPage.getForgotPasswordButton().click();
+    }
+
+    @Then("I verify that forgot password options works")
+    public void iVerifyThatForgotPasswordOptionsWorks() {
+        $(By.xpath("//*[text()='Forgot Password']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//input[@name='username']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//input[@id='submit']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I click on estore account")
+    public void iClickOnEstoreAccount() {
+        estoreLoginPage.getAccountIcon().should(visible, Duration.ofSeconds(20));
+        estoreLoginPage.getAccountIcon().click();
+    }
+
+    @When("I click on estore signout button")
+    public void iClickOnEstoreSignoutButton() {
+        $(By.xpath("//*[text()='SIGN OUT']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='SIGN OUT']")).click();
+        $(By.xpath("//*[text()='Sign Out']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Sign Out']")).click();
+    }
+
+    @Then("I verify that user is able to signout")
+    public void iVerifyThatUserIsAbleToSignout() {
+        estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(20));
+        estoreLoginPage.getPasswordField().should(visible, Duration.ofSeconds(20));
     }
 }

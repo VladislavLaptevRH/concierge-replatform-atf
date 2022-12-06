@@ -18,5 +18,6 @@ public class EstoreLoginPage {
     private final SelenideElement passwordField = $(By.xpath("//input[@id='login-password']"));
     private final SelenideElement signInButton = $(By.xpath("//input[@id='kc-login']"));
     private final SelenideElement accountIcon = $(By.xpath("//a[@data-analytics-nav= 'account-icon']"));
+    private final SelenideElement forgotPasswordButton = $(By.xpath("//a[@class='forgot-password']"));
 
 }
