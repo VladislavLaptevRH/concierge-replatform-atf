@@ -45,6 +45,7 @@ public class ConciergeUserAccountPage {
 
     private final List<SelenideElement> listOfBrands = $$(By.xpath("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li"));
     private final List<SelenideElement> listOfMainCategories = $$(By.xpath("//div[@class=\"MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between\"]/div"));
+
     private final List<SelenideElement> listOfSubCategories = $$(By.xpath("(//ul[@class=\"MuiList-root\"])[1]/li"));
     private final List<SelenideElement> listOfCollections = $$(By.xpath("(//ul[@class=\"MuiList-root\"])[2]/li"));
 
