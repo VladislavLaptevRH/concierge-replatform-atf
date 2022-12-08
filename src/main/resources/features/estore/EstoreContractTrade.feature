@@ -10,28 +10,28 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Price in the cart - RH
     Given I log into eStore as contract
     When I add item to cart via API for estore
-    When I goes to estore cart for estore
+    When I open estore cart
     Then I verify that contract price is used in cart
 
   Scenario: eStore Contract - Price on increasing the QTY in the cart
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
-    When I goes to estore cart for estore
+    When I open estore cart
     When I choose qty for item from estore cart
     Then I verify that the price get increased in multiple of QTY
 
   Scenario: eStore Contract - Validate the currency for US Zip
     Given I log into eStore as contract
     When I add item to cart via API for estore
-    When I goes to estore cart for estore
+    When I open estore cart
     Then I verify that price for product&line should be in US dollars
 
   Scenario: eStore Contract - Validate the currency for CAN Zip
     Given I log into eStore as "noaddresses"
     When I remove all items from estore cart
     When I add item to cart via API for estore
-    When I goes to estore cart for estore
+    When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
     When I fill estore shipping address

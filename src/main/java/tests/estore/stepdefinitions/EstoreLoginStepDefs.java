@@ -181,7 +181,12 @@ public class EstoreLoginStepDefs {
         estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
         estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
         estoreLoginPage.getSignInButton().click();
-        USER_ID_STG2 = "a70584e9-5de4-4bfb-8892-8d292bfa374c";
+        if (Hooks.profile.equals("stg2")) {
+            USER_ID_STG2 = "a70584e9-5de4-4bfb-8892-8d292bfa374c";
+        } else {
+            USER_ID_STG4 = "12fe9c72-c443-43b8-8185-2f627dbda8da";
+        }
+
     }
 
     @Given("I log into eStore as trade")
