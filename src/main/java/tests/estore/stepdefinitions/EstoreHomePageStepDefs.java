@@ -137,15 +137,15 @@ public class EstoreHomePageStepDefs {
     @Then("I validate each cat and sub-cat for eStore")
     public void iValidateEachCatAndSubCatForEStore() {
         sleep(2000);
-        for (int main = 0; main < conciergeUserAccountPage.getListOfMainCategories().size(); main++) {
-            System.out.println("Main Category: " + conciergeUserAccountPage.getListOfMainCategories().get(main).getText());
-            conciergeUserAccountPage.getListOfMainCategories().get(main).click();
+        for (int main = 0; main < estoreHomePage.getListOfNavigationBar().size(); main++) {
+            System.out.println("Main Category: " + estoreHomePage.getListOfNavigationBar().get(main).getText());
+            estoreHomePage.getListOfNavigationBar().get(main).click();
             for (int sub = 0; sub < estoreHomePage.getListOfSubCategories().size(); sub++) {
                 System.out.println("Sub Category: " + estoreHomePage.getListOfSubCategories().get(sub).getText());
                 estoreHomePage.getListOfSubCategories().get(sub).click();
                 sleep(5000);
-                for (int collection = 0; collection < conciergeUserAccountPage.getListOfCollections().size(); collection++) {
-                    conciergeUserAccountPage.getListOfCollections().get(collection).click();
+                for (int collection = 0; collection < estoreHomePage.getListOfCollection().size(); collection++) {
+                    estoreHomePage.getListOfCollection().get(collection).click();
                     sleep(5000);
                     System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": "+ Hooks.getCurrentUrl());
                     assertFalse((WebDriverRunner.getWebDriver().getTitle().contains("404")));
@@ -153,7 +153,7 @@ public class EstoreHomePageStepDefs {
                         open(Hooks.eStoreURL);
                         sleep(5000);
                     }
-                    conciergeUserAccountPage.getListOfMainCategories().get(main).click();
+                    estoreHomePage.getListOfNavigationBar().get(main).click();
                     sleep(5000);
                     estoreHomePage.getListOfSubCategories().get(sub).click();
                     sleep(5000);

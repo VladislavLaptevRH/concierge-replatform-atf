@@ -8,7 +8,7 @@ println("resultspath=${resultspath}")
 
 Java11Pipeline pipeline = new Java11Pipeline(this, s, env);
 pipeline.standardTemplate { label ->
-    properties([parameters([choice(choices: ['stg2', 'stg3', 'stg4', 'prod'], description: 'Select Environment to build', name: 'ENVIRONMENT'), choice(choices: ['poc', 'poc&FEATURE_SSR=true', 'no_endpoint'], description: 'Select optional endpoint value', name: 'ENDPOINT')])])
+    properties([parameters([choice(choices: ['stg2', 'stg3', 'stg4', 'prod'], description: 'Select Environment to build', name: 'ENVIRONMENT'), choice(choices: ['poc&FEATURE_SSR=true', 'poc', 'no_endpoint'], description: 'Select optional endpoint value', name: 'ENDPOINT')])])
     node(label) {
 
         try {
@@ -41,7 +41,8 @@ pipeline.standardTemplate { label ->
             slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) " +
                     "'Environment' (${params.ENVIRONMENT}) " +
                     "'Endpoint' (${params.ENDPOINT})  " +
-                    ": Test Results: http://docs.rhapsody.rh.com/public/${resultspath}/cucumber-html-report/Index.html", channel: "#test-results")
+                    " Test Results: http://docs.rhapsody.rh.com/public/${resultspath}/cucumber-html-report/Index.html" +
+                    " ReTry Test Results: http://docs.rhapsody.rh.com/public/${resultspath}/cucumber-html-report/Rerun.html", channel: "#test-results")
         } catch (Exception exception) {
             notifyFailed()
             throw exception;

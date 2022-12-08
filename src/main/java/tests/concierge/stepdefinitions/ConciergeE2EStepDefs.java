@@ -335,38 +335,28 @@ public class ConciergeE2EStepDefs {
 
     @When("I remove client from header")
     public void iRemoveClientFromHeader() {
-        generalStepDefs.waitForJSandJQueryToLoad();
         sleep(5000);
-        try {
-            if ($(By.xpath("//*[contains(text(),'Client: ')]")).isDisplayed()) {
-                conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
-                conciergeUserAccountPage.getClientButton().click();
-                conciergeUserAccountPage.getRemoveClientByText().shouldHave(text("Remove Client"), Duration.ofSeconds(5));
-                conciergeUserAccountPage.getRemoveClientByText().click();
-            }
-        } catch (AssertionError e) {
-            System.out.println("Client is not selected");
+        while ($(By.xpath("//*[contains(text(),'Client: ')]")).isDisplayed()) {
+            conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
+            conciergeUserAccountPage.getClientButton().click();
+            conciergeUserAccountPage.getRemoveClientByText().shouldHave(text("Remove Client"), Duration.ofSeconds(5));
+            conciergeUserAccountPage.getRemoveClientByText().click();
         }
     }
 
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String businessClient) {
-        sleep(4000);
-        generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeUserAccountPage.getClientLookupFirstName().should(visible, Duration.ofSeconds(25));
+        sleep(7000);
         if (businessClient.equals("member")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
-        }
-        if (businessClient.equals("nonmember")) {
+        } else if (businessClient.equals("nonmember")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Nonmember");
-        }
-        if (businessClient.equals("trade")) {
+        } else if (businessClient.equals("trade")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Trade");
-        }
-        if (businessClient.equals("unclassifiedBusiness")) {
+        } else if (businessClient.equals("unclassifiedBusiness")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("unclassifiedBusiness");
         }
@@ -374,8 +364,7 @@ public class ConciergeE2EStepDefs {
         conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientLookupSearchButton().click();
         conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME"), Duration.ofMinutes(1));
-        executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getFirstResultOfClientLookup());
-
+        conciergeUserAccountPage.getFirstResultOfClientLookup().click();
     }
 
 

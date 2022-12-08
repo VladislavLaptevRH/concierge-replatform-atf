@@ -4,7 +4,7 @@ Feature:Concierge Order review
 
   Scenario: Edit Shipping Address
     Given I log into Concierge as "associate"
-    When I clear order via API
+    When I remove all items from cart via API
     When I add item to cart via API
     When I open cart
     When I choose order classification
@@ -20,7 +20,7 @@ Feature:Concierge Order review
 
   Scenario: Edit Billing Address
     Given I log into Concierge as "associate"
-    When I clear order via API
+    When I remove all items from cart via API
     When I add item to cart via API
     When I open cart
     When I choose order classification
@@ -37,7 +37,7 @@ Feature:Concierge Order review
 
   Scenario: Edit payment
     Given I log into Concierge as "associate"
-    When I clear order via API
+    When I remove all items from cart via API
     When I add item to cart via API
     When I open cart
     When I choose order classification
@@ -52,7 +52,7 @@ Feature:Concierge Order review
 
   Scenario: Verify the payment details and Order estimate summary
     Given I log into Concierge as "associate"
-    When I clear order via API
+    When I remove all items from cart via API
     When I add item to cart via API
     When I open cart
     When I choose order classification
@@ -91,7 +91,7 @@ Feature:Concierge Order review
 
   Scenario: Verify all the line items on the order review page
     Given I log into Concierge as "associate"
-    When I clear order via API
+    When I remove all items from cart via API
     When I add item to cart via API
     When I open cart
     When I choose order classification
