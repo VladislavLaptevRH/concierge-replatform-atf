@@ -26,7 +26,5 @@ Feature: Estore Search
   Scenario: Verify the search results with multiple terms search: white and blue corner leather sofa
     Given I log into eStore as "regular"
     When I go to estore item "white and blue corner leather sofa" from search field
-    Then I verify that search results for "" is displayed
-
-  Scenario: Verify the prices for searched term
+    Then I verify that search results for "white and blue corner leather sofa" is displayed
 
