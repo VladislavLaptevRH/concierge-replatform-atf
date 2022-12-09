@@ -140,9 +140,17 @@ public class EstoreAddressStepDefs {
 
 
             if (Hooks.eStoreURL.contains("stg4")) {
-                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
-                estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
-                estoreAddressScreen.getShippingAddresslastName().click();
+                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
+//                estoreAddressScreen.getShippingAddressStreetAddress().setValue("Bradford Drive, Hilliard, OH, USA");
+                estoreAddressScreen.getShippingAddressStreetAddress().setValue("Bradford Drive");
+                estoreAddressScreen.getShippingAddressCity().setValue("Hilliard");
+
+                Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
+                selectState.selectByValue("OH");
+
+                generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
+                estoreAddressScreen.getPostalShippingCode().setValue("43093");
+
                 try {
                     $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
                     $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
@@ -222,8 +230,8 @@ public class EstoreAddressStepDefs {
                 System.out.println("Dropdown list is not displayed");
             }
         } else {
-            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddressStg2());
-            estoreUserAccountPage.getBillingAddressStreetAddressStg2().setValue("2479 Deer Run");
+            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
+            estoreUserAccountPage.getBillingAddressStreetAddress().setValue("2479 Deer Run");
             try {
                 $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).should(visible, Duration.ofSeconds(5));
                 $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).click();
@@ -316,7 +324,7 @@ public class EstoreAddressStepDefs {
             generalStepDefs.waitForJSandJQueryToLoad();
             estoreItemPage.getAddToCartButton().scrollIntoView(true);
             estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
-            estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE WITH ORIGINAL ADDRESS"), Duration.ofSeconds(50));
+            estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(50));
             estoreItemPage.getAddToCartButton().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Continue with original button is not displayed");
