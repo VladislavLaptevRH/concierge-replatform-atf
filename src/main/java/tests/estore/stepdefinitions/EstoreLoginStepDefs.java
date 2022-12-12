@@ -249,8 +249,15 @@ public class EstoreLoginStepDefs {
 
     @When("I click on estore account")
     public void iClickOnEstoreAccount() {
-        estoreLoginPage.getAccountIcon().should(visible, Duration.ofSeconds(20));
-        estoreLoginPage.getAccountIcon().click();
+        if (Hooks.profile.contains("stg2")) {
+            estoreLoginPage.getAccountIcon().should(visible, Duration.ofSeconds(20));
+            estoreLoginPage.getAccountIcon().click();
+        }
+        if (Hooks.profile.contains("stg4")) {
+            estoreLoginPage.getAccountIconStg4().should(visible, Duration.ofSeconds(20));
+            estoreLoginPage.getAccountIconStg4().click();
+        }
+
     }
 
     @When("I click on estore signout button")

@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.EstoreAddressScreen;
 import tests.estore.pageObject.EstorePaymentPage;
 import tests.estore.pageObject.EstoreUserAccountPage;
@@ -21,6 +22,7 @@ public class EstoreUserAccountPageStepDefs {
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
     EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
+    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     static String firstName;
 
     @When("I go to profile payment method")
@@ -28,15 +30,6 @@ public class EstoreUserAccountPageStepDefs {
         String URL = Hooks.eStoreBaseURL + "/my-account/payment-info.jsp";
         open(URL);
         sleep(2000);
-//        estoreUserAccountPage.getProfileIconButton().should(Condition.visible, Duration.ofSeconds(120));
-//        estoreUserAccountPage.getProfileIconButton().click();
-//        estoreUserAccountPage.getProfileButton().shouldHave(Condition.text("PROFILE"), Duration.ofSeconds(30));
-//        estoreUserAccountPage.getProfileButton().click();
-//
-//        estoreUserAccountPage.getMyProfileButton().shouldHave(Condition.text("My Account"), Duration.ofSeconds(30));
-//        estoreUserAccountPage.getMyProfileButton().click();
-//        estoreUserAccountPage.getPaymentMethodsButton().shouldHave(Condition.text("Payment Methods"), Duration.ofSeconds(20));
-//        estoreUserAccountPage.getPaymentMethodsButton().click();
     }
 
 
@@ -70,12 +63,19 @@ public class EstoreUserAccountPageStepDefs {
             }
         } else {
             estoreUserAccountPage.getBillingAddressStreetAddress().setValue("Bradford Drive, Hilliard, OH, USA");
-            try {
-                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
-                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
-            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                System.out.println("Dropdown list is not displayed");
-            }
+            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
+            estoreUserAccountPage.getBillingAddressStreetAddress().setValue("2479 Deer Run");
+            estoreAddressScreen.getCityAddNewCard().setValue("Hilliard");
+            Select selectCardState = new Select(estoreAddressScreen.getStateAddNewCard());
+            selectCardState.selectByValue("OH");
+            estoreAddressScreen.getPostalCodeAddNewCard().setValue("99950");
+//            try {
+//                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
+//                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
+//            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//                System.out.println("Dropdown list is not displayed");
+//            }
+
         }
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
@@ -232,15 +232,29 @@ public class EstoreUserAccountPageStepDefs {
             estorePaymentPage.getCvcField().setValue("737");
         }
         if (paymentMethod.equals("DISCOVER")) {
-            selectCard.selectByValue("CC");
-            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card number']")));
-            estorePaymentPage.getCardNumberField().setValue("6011601160116611");
-            switchTo().defaultContent();
-            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card expiry date']")));
-            estorePaymentPage.getExpiryDateField().setValue("0330");
-            switchTo().defaultContent();
-            switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
-            estorePaymentPage.getCvcField().setValue("737");
+            if (Hooks.profile.contains("stg4")) {
+                selectCard.selectByValue("CC");
+                switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card number']")));
+                estorePaymentPage.getCardNumberField().setValue("6011311276791204");
+                switchTo().defaultContent();
+                switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card expiry date']")));
+                estorePaymentPage.getExpiryDateField().setValue("0224");
+                switchTo().defaultContent();
+                switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
+                estorePaymentPage.getCvcField().setValue("238");
+            }
+            if (Hooks.profile.contains("stg2")) {
+                selectCard.selectByValue("CC");
+                switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card number']")));
+                estorePaymentPage.getCardNumberField().setValue("6011601160116611");
+                switchTo().defaultContent();
+                switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card expiry date']")));
+                estorePaymentPage.getExpiryDateField().setValue("0330");
+                switchTo().defaultContent();
+                switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
+                estorePaymentPage.getCvcField().setValue("737");
+            }
+
         }
 
         switchTo().defaultContent();
@@ -256,13 +270,12 @@ public class EstoreUserAccountPageStepDefs {
                 System.out.println("Dropdown list is not displayed");
             }
         } else {
-            estoreUserAccountPage.getBillingAddressStreetAddress().setValue("Bradford Drive, Hilliard, OH, USA");
-            try {
-                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
-                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
-            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                System.out.println("Dropdown list is not displayed");
-            }
+            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
+            estoreUserAccountPage.getBillingAddressStreetAddress().setValue("2479 Deer Run");
+            estoreAddressScreen.getCityAddNewCard().setValue("Hilliard");
+            Select selectCardState = new Select(estoreAddressScreen.getStateAddNewCard());
+            selectCardState.selectByValue("OH");
+            estoreAddressScreen.getPostalCodeAddNewCard().setValue("99950");
         }
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");

@@ -14,5 +14,5 @@ Feature: Estore Sign In/Signout
     Given I log into eStore as "regular"
     When I click on estore account
     When I click on estore signout button
-    When I click on estore account
+    When I click on estore my account icon for not logged user
     Then I verify that user is able to signout

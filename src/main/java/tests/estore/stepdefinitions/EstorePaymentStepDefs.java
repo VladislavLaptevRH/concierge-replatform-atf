@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import tests.estore.pageObject.*;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -103,7 +104,7 @@ public class EstorePaymentStepDefs {
     @When("I edit estore billing address from PG")
     public void iEditBillingAddressFromPG() {
         sleep(3000);
-        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).click();
 //        estoreAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(40));
 //        estoreAddressScreen.getEditBillingAddress().click();
@@ -159,7 +160,12 @@ public class EstorePaymentStepDefs {
             sleep(4000);
             estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
             Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
-            selectPayment.selectByValue("46784755611871507543");
+            if (Hooks.profile.contains("stg4")) {
+                selectPayment.selectByValue("45642063983482960745");
+            }
+            if (Hooks.profile.contains("stg2")) {
+                selectPayment.selectByValue("46784755611871507543");
+            }
             $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofSeconds(20));
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
             estorePaymentPage.getCvcField().setValue("321");
@@ -167,10 +173,16 @@ public class EstorePaymentStepDefs {
             $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
             $(By.xpath("//input[@type='text']")).setValue("10");
             estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
-            selectPayment.selectByValue("22224053560881330008");
+            if (Hooks.profile.contains("stg2")) {
+                selectPayment.selectByValue("22224053560881330008");
+            }
+            if (Hooks.profile.contains("stg4")) {
+                selectPayment.selectByValue("22224052112154880008");
+            }
             $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofSeconds(20));
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
             estorePaymentPage.getCvcField().setValue("737");
+            sleep(2000);
             switchTo().defaultContent();
             $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
             $(By.xpath("//input[@type='text']")).setValue("10");
@@ -229,7 +241,8 @@ public class EstorePaymentStepDefs {
     @Then("I validate that billing address based on saved payment method")
     public void iValidateThatBillingAddressBasedOnSavedPaymentMethod() {
         sleep(3000);
-        $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(40));
+//        $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='ABHIJIT CHARHATE']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I remove existing payment method on payment estore page")
