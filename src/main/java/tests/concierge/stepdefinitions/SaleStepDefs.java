@@ -32,8 +32,8 @@ public class SaleStepDefs {
         sleep(5000);
         List<String> items = new ArrayList<>();
         List<String> expectedItems = new ArrayList(Arrays.asList("LIVING", "DINING" , "BED", "BATH", "LIGHTING", "TEXTILES", "RUGS", "WINDOWS", "DÉCOR", "OUTDOOR"));
-        for (int i = 0; i < saleScreen.getListOfNavigationBars().size(); i++) {
-            items.add(saleScreen.getListOfNavigationBars().get(i).getText());
+        for (int i = 0; i < saleScreen.getListOfSaleMainCategory().size(); i++) {
+            items.add(saleScreen.getListOfSaleMainCategory().get(i).getText());
         }
         assertEquals(items, expectedItems);
 
@@ -42,17 +42,31 @@ public class SaleStepDefs {
     @When ("I click on sale menu item")
     public void iCLickOnSaleMenuItem () {
         sleep(7000);
-        generalStepDefs.waitForJSandJQueryToLoad();
-        saleScreen.getCatLiving().should(visible, Duration.ofSeconds(60));
-        Actions actions = new Actions(WebDriverRunner.getWebDriver());
-        actions.moveToElement(saleScreen.getCatLiving());
-        saleScreen.getCatLiving().click();
+        for (int i = 0; i < saleScreen.getListOfSaleMainCategory().size(); i++) {
+            if (i == 0) {
+                // click on Living
+                System.out.println(saleScreen.getListOfSaleMainCategory().get(i).getText());
+                    saleScreen.getListOfSaleMainCategory().get(i).click();
+            }
+        }
     }
 
     @When("I click on sub category and navigate PDP")
     public void iClickOnSubCategory() {
-        saleScreen.getSubCatChair().should(visible, Duration.ofSeconds(30));
-        saleScreen.getSubCatChair().click();
+        sleep(3000);
+        for (int i = 0; i < saleScreen.getListOfSaleSubCategory().size(); i++) {
+            if (i == 0) {
+                // click on Fabric Seating
+                saleScreen.getListOfSaleSubCategory().get(i).click();
+
+                for (int j = 0; i < saleScreen.getListOfSaleCollection().size(); j++) {
+                    if (j == 1) {
+                        // click on Chair
+                        saleScreen.getListOfSaleCollection().get(j).click();
+                    }
+                }
+            }
+        }
         saleScreen.getRandomProduct().click();
     }
 

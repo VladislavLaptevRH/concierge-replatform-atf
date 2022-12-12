@@ -119,14 +119,14 @@ public class Hooks {
      * Set up URL + endpoint  for concierge
      */
     public static String configureConciergeURL() {
-        if (profile.equals("stg4") && cookie != null) {
-            conciergeURL = conciergeBaseURL + "/?endpoint=" + cookie;
+        if ((profile.equals("stg4") && cookie.equals("no_endpoint"))) {
+            conciergeURL = conciergeBaseURL;
         } else if (profile.equals("stg2") && cookie.equals("no_endpoint")) {
             conciergeURL = conciergeBaseURL;
-        } else if (profile.equals("stg2")) {
+        } else if (profile.equals("stg2") && cookie != null) {
             conciergeURL = conciergeBaseURL + "/?endpoint=" + cookie;
-        } else if (profile.equals("stg4") && cookie.equals("no_endpoint")) {
-            conciergeURL = conciergeBaseURL;
+        } else if (profile.equals("stg4") && cookie != null) {
+            conciergeURL = conciergeBaseURL + "/?endpoint=" + cookie;
         }
         return conciergeURL;
     }
