@@ -672,20 +672,7 @@ public class ConciergeCartStepDefs {
 
     @When("I remove all items from cart for minicart")
     public void iRemoveAllItemsFromCartForMinicart() {
-        conciergeUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(1));
-        //conciergeUserAccountPage.getCartButton().shouldHave(text("CART"), Duration.ofMinutes(1));
-        sleep(3000);
-        if (!conciergeUserAccountPage.getCartButton().getText().equals("")) {
-            conciergeUserAccountPage.getCartButton().click();
-            generalStepDefs.waitForJSandJQueryToLoad();
-           // conciergeCartPageScreen.getCartTitle().shouldHave(text("CART"), Duration.ofSeconds(12));
-            conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
-            conciergeCartPageScreen.getOrderEstimateTitle().shouldHave(text("Order Estimate"), Duration.ofSeconds(20));
-            conciergeCartPageScreen.getClearOrderButton().click();
-            conciergeCartPageScreen.getClearOrderButtonPop().shouldHave(text("CLEAR ORDER"), Duration.ofSeconds(25));
-            conciergeCartPageScreen.getClearOrderButtonPop().click();
-            generalStepDefs.waitForJSandJQueryToLoad();
-        }
+        generalStepDefs.removeLineItemFromConciergeCart();
     }
     @When("I add item to cart via API")
     public void iAddItemToCartViaAPI() {
