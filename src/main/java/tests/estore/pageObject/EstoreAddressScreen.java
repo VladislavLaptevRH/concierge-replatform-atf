@@ -25,6 +25,12 @@ public class EstoreAddressScreen {
 
     private final SelenideElement shippingAddressCity = $(By.id("shippingAddress.city"));
 
+    private final SelenideElement cityAddNewCard = $(By.id("city"));
+
+    private final SelenideElement stateAddNewCard = $(By.id("state"));
+
+    private final SelenideElement postalCodeAddNewCard = $(By.id("postalCode"));
+
     private final SelenideElement shippingAddressPhone = $(By.id("shippingAddress.phone"));
 
     private final SelenideElement shippingAddressEmail = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[8]"));
