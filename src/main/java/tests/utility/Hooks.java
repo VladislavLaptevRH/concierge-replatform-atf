@@ -4,6 +4,8 @@ import com.aventstack.extentreports.ExtentReports;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 import tests.concierge.stepdefinitions.FilterStepDefs;
 import io.cucumber.java.After;
@@ -217,6 +219,12 @@ public class Hooks {
     @After("@concierge-All or @estoreRegression or @target/rerun.txt")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
+
+        if (scenario.isFailed()) {
+            final byte[] screenshot = ((TakesScreenshot) WebDriverRunner.getWebDriver())
+                    .getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/png", "image");
+        }
         /* TODO : Finish Extent Report Class Implementation */
         //report.endReport();
         closeWindow();
