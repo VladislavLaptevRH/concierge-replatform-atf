@@ -142,7 +142,7 @@ public class Hooks {
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
-        //setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(eStoreURL);
     }
 
