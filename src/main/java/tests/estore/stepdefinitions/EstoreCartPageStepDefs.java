@@ -586,4 +586,23 @@ public class EstoreCartPageStepDefs {
         estoreCartPage.getEstoreCartButton().should(visible, Duration.ofSeconds(40));
         estoreCartPage.getEstoreCartButton().click();
     }
+
+    @When("I add item {string} to cart via API for estore")
+    public void iAddItemToCartViaAPIForEstore(String arg0) {
+
+    }
+
+    @When("I add item {string}  and prod id {string} to cart via API for estore")
+    public void iAddItemAndProdIdToCartViaAPIForEstore(String arg0, String arg1) {
+        if (Hooks.profile.contains("stg4")) {
+            estoreGeneralStepDefs.addLineItemsToEstoreCartWithProvidedSkuStg4(arg0, arg1);
+        }
+    }
+
+    @When("I verify for back button from cart page")
+    public void iVerifyForBackButtonFromCartPage() {
+        sleep(2000);
+        WebDriverRunner.getWebDriver().navigate().back();
+        estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(20));
+    }
 }

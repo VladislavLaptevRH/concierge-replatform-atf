@@ -2,7 +2,7 @@
 @estoreSignInSignOut
 Feature: Estore Sign In/Signout
 
-  Scenario: Verify that user is not able to logi with ivalid email and password
+  Scenario: Verify that user is not able to login with ivalid email and password
     Given I introduce wrong login and password
     Then I verify that error message about invalid credentials is displayed
 

@@ -37,15 +37,18 @@ public class EstoreAddressStepDefs {
 
     @When("I update shipping address for CAN")
     public void iUpdateShippingAddressForCAN() {
-        sleep(4000);
-        Select selectCountry = new Select(estoreAddressScreen.getCountrySelect());
-        selectCountry.selectByValue("CA");
-        Select shippingAddress = new Select(estoreAddressScreen.getShippingAddressState());
-        shippingAddress.selectByValue("AB");
-        estoreAddressScreen.getShippingAddressState();
-        generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-        estoreAddressScreen.getPostalShippingCode().setValue("A1A1A1");
-
+        try {
+            sleep(4000);
+            Select selectCountry = new Select(estoreAddressScreen.getCountrySelect());
+            selectCountry.selectByValue("CA");
+            Select shippingAddress = new Select(estoreAddressScreen.getShippingAddressState());
+            shippingAddress.selectByValue("AB");
+            estoreAddressScreen.getShippingAddressState();
+            generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
+            estoreAddressScreen.getPostalShippingCode().setValue("A1A1A1");
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Edit button is not displayed");
+        }
     }
 
     @Then("I verify unavailability for RHCC")
