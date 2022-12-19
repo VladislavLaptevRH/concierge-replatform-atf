@@ -77,19 +77,8 @@ public class EstoreE2EStepDefs {
 
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
-//        sleep(2000);
-//        generalStepDefs.waitForJSandJQueryToLoad();
-//        executeJavaScript("window.scrollTo(0, 970)");
-//        sleep(3000);
-//        try {
         estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
         estoreItemPage.getAddToCartButton().click();
-//        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
-//            sleep(3000);
-//            estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
-//            estoreItemPage.getAddToCartButton().click();
-//        }
-
     }
 
     @When("I fill all estore fields from address with {string} zip code")

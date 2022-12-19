@@ -69,6 +69,3 @@ Feature: Estore Membership
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     Then I verify that save card to account checkbox should be checked by defaults
-
-
-#
