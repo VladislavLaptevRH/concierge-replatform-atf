@@ -39,6 +39,8 @@ Feature: Order history
     Given I log into eStore as "regular"
     When I click on estore my account icon
     When I click on estore order history
+    Then I verify order date and order total fields
+    When I click on details and tracking order history
     Then I verify the fileds for estore order history
 
   Scenario: Verify the total order count displayed at the bottom of the list
