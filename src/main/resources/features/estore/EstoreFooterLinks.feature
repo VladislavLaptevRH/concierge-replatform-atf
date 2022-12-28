@@ -1,5 +1,5 @@
 @estoreRegression
-@estoreCGPage
+@estoreFooterLinks
 Feature: Footer Links
 
   Scenario Outline: Verify footer resources section links

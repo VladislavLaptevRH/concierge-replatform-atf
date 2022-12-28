@@ -21,4 +21,5 @@ public class EstoreOrderReviewStepDefs {
     public void iVerifyThatPaymentHasBeenChanged() {
         $(By.xpath("//*[text()='7543']")).should(visible,Duration.ofSeconds(20));
     }
+
 }

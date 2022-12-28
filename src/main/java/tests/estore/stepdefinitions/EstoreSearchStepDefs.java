@@ -142,4 +142,12 @@ public class EstoreSearchStepDefs {
         $(By.xpath("//div[@id='hamburgerIcon']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//div[@id='hamburgerIcon']")).click();
     }
+
+    @Then("I verify sale banner for estore")
+    public void iVerifySaleBannerForEstore() {
+        System.out.println();
+        $(By.xpath("//*[text()='SAVE ']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='up to']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()=' 70%']")).should(visible, Duration.ofSeconds(20));
+    }
 }

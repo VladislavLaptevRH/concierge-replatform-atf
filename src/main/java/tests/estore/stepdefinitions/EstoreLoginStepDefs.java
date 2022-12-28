@@ -72,6 +72,12 @@ public class EstoreLoginStepDefs {
                 USER_ID_STG2 = "589c669f-02ee-4e0a-aa21-8e674c6c7469";
             }
 
+            if (accountRole.equals("notregistered")) {
+                estoreLoginPage.getUsernameField().setValue("notregistereduser@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Resto123");
+                USER_ID_STG2 = "589c669f-02ee-4e0a-aa21-8e674c6c7469";
+            }
+
             if (accountRole.equals("savedaddress")) {
                 estoreLoginPage.getUsernameField().setValue("addresssaved@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Address1234");
