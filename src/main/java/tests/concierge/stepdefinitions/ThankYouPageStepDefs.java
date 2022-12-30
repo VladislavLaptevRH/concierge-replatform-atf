@@ -35,4 +35,5 @@ public class ThankYouPageStepDefs {
         $(By.xpath("//*[text()='You will receive an order confirmation via email at']")).should(visible,Duration.ofSeconds(15));
         $(By.xpath("//*[text()='automationnonmember@mailinator.com']")).should(visible,Duration.ofSeconds(15));
     }
+
 }

@@ -16,6 +16,7 @@ import static com.codeborne.selenide.Selenide.sleep;
 public class ConciergeItemsStepDefs {
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
     SelectOption selectOption = new SelectOption();
+
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
     @When("I select debth option")

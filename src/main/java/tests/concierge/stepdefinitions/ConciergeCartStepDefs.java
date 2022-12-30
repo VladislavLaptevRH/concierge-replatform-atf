@@ -27,7 +27,9 @@ import static org.testng.Assert.assertTrue;
 
 public class ConciergeCartStepDefs {
     WebDriver webDriver = Hooks.getWebDriver();
+
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+
     ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
