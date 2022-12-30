@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.EstoreCGScreen;
 import tests.estore.pageObject.EstorePDPScreen;
+import tests.estore.pageObject.EstoreSearchScreen;
 import tests.estore.pageObject.EstoreUserAccountPage;
 
 import java.time.Duration;
@@ -20,17 +21,18 @@ public class EstoreSearchStepDefs {
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
     EstoreCGScreen estoreCGScreen = new EstoreCGScreen();
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
+    EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
 
     @Then("I verify that search result for search product via product name is displayed")
     public void iVerifyThatSearchResultForSearchProductViaProductNameIsDisplayed() {
-        $(By.xpath("//*[text()='802-GRAM TURKISH TOWEL COLLECTION']")).should(Condition.visible, Duration.ofSeconds(20));
+        estoreSearchScreen.getTurkish802towel().should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @When("I introduced random text for search field")
     public void iIntroducedRandomTextForSearchField() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).should(visible, Duration.ofSeconds(60));
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).click();
+        estoreSearchScreen.getSearchIcon().should(visible, Duration.ofSeconds(60));
+        estoreSearchScreen.getSearchIcon().click();
         estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
         estoreUserAccountPage.getSearchItemField().click();
@@ -38,19 +40,18 @@ public class EstoreSearchStepDefs {
         sleep(3000);
         estoreUserAccountPage.getSearchItemField().setValue(generalStepDefs.getAlphaNumericString(7));
 
-        $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']")).click();
-
+        estoreSearchScreen.getSeeAllResultsButton().should(visible, Duration.ofSeconds(40));
+        estoreSearchScreen.getSeeAllResultsButton().click();
     }
 
     @Then("I verify that we cannot find what you are looking message is not displayed")
     public void iVerifyThatWeCannotFindWhatYouAreLookingMessageIsNotDisplayed() {
-        $(By.xpath("//*[text()='We’re sorry, we cannot find what you are looking for.']")).should(Condition.visible, Duration.ofSeconds(20));
+        estoreSearchScreen.getSorryWeCannotFindMsg().should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify count of search results")
     public void iVerifyCountOfSearchResults() {
-        $(By.xpath("//*[text()='156']")).should(visible, Duration.ofSeconds(20));
+        estoreSearchScreen.getText156().should(visible, Duration.ofSeconds(20));
     }
 
     @When("I scroll to the bottom of the estore page")
@@ -122,32 +123,29 @@ public class EstoreSearchStepDefs {
     @Then("I verify the {string}")
     public void iVerifyThe(String gridNumber) {
         if (gridNumber.equals(3)) {
-            $(By.xpath("(//*[local-name()='svg' and @data-active='false'])[1]")).should(visible, Duration.ofSeconds(20));
-            $(By.xpath("(//*[local-name()='svg' and @data-active='false'])[1]")).click();
-            $(By.xpath("//div[contains(@class,'MuiGrid-grid-xs-4')]")).should(visible, Duration.ofSeconds(20));
+            estoreSearchScreen.getThreeColumnsInRowGridButton().should(visible, Duration.ofSeconds(20));
+            estoreSearchScreen.getThreeColumnsInRowGridButton().click();
+            estoreSearchScreen.getThreeColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
         }
         if (gridNumber.equals("2")) {
-
-            $(By.xpath("//div[contains(@class,'MuiGrid-grid-xs-6')]")).should(visible, Duration.ofSeconds(20));
+            estoreSearchScreen.getTwoColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
         }
         if (gridNumber.equals("1")) {
-            $(By.xpath("//div[contains(@class,'MuiGrid-grid-xs-12')]")).should(visible, Duration.ofSeconds(20));
-            $(By.xpath("(//*[local-name()='svg' and @data-active='false'])[2]")).should(visible, Duration.ofSeconds(20));
-            $(By.xpath("(//*[local-name()='svg' and @data-active='false'])[2]")).click();
+            estoreSearchScreen.getOneColumnInRowGridButton().should(visible, Duration.ofSeconds(20));
+            estoreSearchScreen.getOneColumnInRowGridButton().click();
         }
     }
 
     @When("I click on hamburger menu for estore")
     public void iClickOnHamburgerMenuForEstore() {
-        $(By.xpath("//div[@id='hamburgerIcon']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//div[@id='hamburgerIcon']")).click();
+        estoreSearchScreen.getHamburgerIcon().should(visible, Duration.ofSeconds(20));
+        estoreSearchScreen.getHamburgerIcon().click();
     }
 
     @Then("I verify sale banner for estore")
     public void iVerifySaleBannerForEstore() {
-        System.out.println();
-        $(By.xpath("//*[text()='SAVE ']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='up to']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()=' 70%']")).should(visible, Duration.ofSeconds(20));
+        estoreSearchScreen.getSaveText().should(visible, Duration.ofSeconds(20));
+        estoreSearchScreen.getUpToText().should(visible, Duration.ofSeconds(20));
+        estoreSearchScreen.getSave70().should(visible, Duration.ofSeconds(20));
     }
 }
