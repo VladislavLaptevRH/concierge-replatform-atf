@@ -108,14 +108,17 @@ public class Hooks {
             eStoreURL = eStoreBaseURL;
         } else if (profile.equals("stg2") && cookie.equals("no_endpoint")) {
             eStoreURL = eStoreBaseURL;
+        } else if (profile.equals("stg3") && cookie.equals("no_endpoint")) {
+            eStoreURL = eStoreBaseURL;
         } else if (profile.equals("stg2") && cookie.equals("FEATURE_SSR=true")) {
             eStoreURL = eStoreBaseURL + "/?" + cookie;
         } else if (profile.equals("stg2") && cookie != null) {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
         } else if (profile.equals("stg4") && cookie != null) {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
+        }  else if (profile.equals("stg3") && cookie != null) {
+            eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
         }
-
         return eStoreURL;
     }
 

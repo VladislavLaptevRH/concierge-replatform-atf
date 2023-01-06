@@ -551,6 +551,8 @@ public class EstoreCartPageStepDefs {
     public void iAddItemToCartViaAPIforEstore() {
         if (Hooks.profile.equals("stg4")) {
             estoreGeneralStepDefs.addLineItemsToEstoreCart();
+        } else if (Hooks.profile.equals("stg3")) {
+            estoreGeneralStepDefs.addLineItemsToEstoreCartStg3();
         } else {
             estoreGeneralStepDefs.addLineItemsToEstoreCartStg2();
         }
@@ -561,8 +563,13 @@ public class EstoreCartPageStepDefs {
     @When("I goes to estore cart for estore")
     public void iGoesToEstoreCartForEstore() {
         sleep(2000);
-        estoreCartPage.getEstoreCartButton().should(visible, Duration.ofSeconds(40));
-        estoreCartPage.getEstoreCartButton().click();
+        if (Hooks.profile.equals("stg3")) {
+            $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']")).click();
+        } else {
+            estoreCartPage.getEstoreCartButton().should(visible, Duration.ofSeconds(40));
+            estoreCartPage.getEstoreCartButton().click();
+        }
     }
 
     @When("I add item {string} to cart via API for estore")

@@ -690,7 +690,12 @@ public class EstoreE2EStepDefs {
 
     @When("I open product page with {string} and {string} with {string} for estore")
     public void iOpenProductPageWithAndForEstore(String productId, String skuId, String options) {
-        String URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
+        String URL;
+        if (Hooks.profile.equals("stg3")) {
+            URL = Hooks.eStoreBaseURL + "/us/en/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
+        } else {
+            URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
+        }
         open(URL);
         sleep(2000);
         estoreItemPage.getAddToCartButton().scrollTo();
@@ -700,8 +705,6 @@ public class EstoreE2EStepDefs {
                 sleep(4000);
             }
         }
-
-
     }
 }
 

@@ -131,6 +131,9 @@ public class EstoreAddressStepDefs {
     public void iFillEstoreShippingAndShippingAddress() {
         try {
             sleep(2000);
+            if (Hooks.eStoreURL.contains("stg3")) {
+                $(By.xpath("//*[text()='Add New Address']")).click();
+            }
             estoreAddressScreen.getShippingAddressfirstName().should(visible, Duration.ofSeconds(40));
             generalStepDefs.clearField(estoreAddressScreen.getShippingAddressfirstName());
             estoreAddressScreen.getShippingAddressfirstName().setValue("Safire");
@@ -142,7 +145,7 @@ public class EstoreAddressStepDefs {
             shippingAddressCountry.selectByValue("US");
 
 
-            if (Hooks.eStoreURL.contains("stg4")) {
+            if (Hooks.eStoreURL.contains("stg4") || Hooks.eStoreURL.contains("stg3")) {
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
 //                estoreAddressScreen.getShippingAddressStreetAddress().setValue("Bradford Drive, Hilliard, OH, USA");
                 estoreAddressScreen.getShippingAddressStreetAddress().setValue("Bradford Drive");
@@ -325,10 +328,17 @@ public class EstoreAddressStepDefs {
     public void iClickOnContinueWithOriginalAddressEstoreButton() {
         try {
             generalStepDefs.waitForJSandJQueryToLoad();
-            estoreItemPage.getAddToCartButton().scrollIntoView(true);
-            estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
-            estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(50));
-            estoreItemPage.getAddToCartButton().click();
+            //estoreItemPage.getAddToCartButton().scrollIntoView(true);
+
+            if (Hooks.profile.equals("stg3")){
+                //$(By.xpath("//*[text()='CONTINUE']")).contextClick();
+                $(By.xpath("(//button[contains(@class,'MuiButton-containedPrimary')])[2]")).click();
+            } else  {
+                estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
+                estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(50));
+                estoreItemPage.getAddToCartButton().click();
+            }
+
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Continue with original button is not displayed");
         }
