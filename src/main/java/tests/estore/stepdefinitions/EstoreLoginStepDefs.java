@@ -20,6 +20,9 @@ public class EstoreLoginStepDefs {
     EstoreLoginPage estoreLoginPage = new EstoreLoginPage();
     public static String USER_ID_STG4;
     public static String USER_ID_STG2;
+
+    public static String USER_ID_STG3;
+
     public static String userEmail;
 
 
@@ -27,6 +30,10 @@ public class EstoreLoginStepDefs {
     public boolean iLogIntoEStoreAs(String arg0) {
         try {
             loginAsRole(arg0);
+            if (Hooks.profile.equals("stg3")) {
+                sleep(2000);
+                $(By.xpath("//*[text()='ACCEPT ALL']")).click();
+            }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             return true;
         }
@@ -111,10 +118,17 @@ public class EstoreLoginStepDefs {
             }
 
             if (accountRole.equals("regular")) {
-                estoreLoginPage.getUsernameField().setValue("new02@rh.com");
-                estoreLoginPage.getPasswordField().setValue("Qwerty@123");
-                USER_ID_STG4 = "dc6f68a3-a223-4670-b7ab-737f1c45927b";
-                USER_ID_STG2 = "e3401e67-8f0b-4d75-bf48-63fa022cb34e";
+                if (Hooks.profile.equals("stg3")) {
+                    estoreLoginPage.getUsernameField().setValue("testautomation01@rh.com");
+                    estoreLoginPage.getPasswordField().setValue("Rh123456");
+                    USER_ID_STG3 = "49e2da34-3970-4636-bd1b-1bf1c7c709ff";
+                    userEmail = "testautomation01@rh.com";
+                } else {
+                    estoreLoginPage.getUsernameField().setValue("new02@rh.com");
+                    estoreLoginPage.getPasswordField().setValue("Qwerty@123");
+                    USER_ID_STG4 = "dc6f68a3-a223-4670-b7ab-737f1c45927b";
+                    USER_ID_STG2 = "e3401e67-8f0b-4d75-bf48-63fa022cb34e";
+                }
             }
 
             if (accountRole.equals("addnewpayment")) {

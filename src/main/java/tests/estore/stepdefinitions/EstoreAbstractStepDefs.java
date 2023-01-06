@@ -105,8 +105,8 @@ public class EstoreAbstractStepDefs {
     public void iClickOnCheckoutButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
         sleep(2000);
-        conciergeItemsScreen.getCheckoutButton().shouldHave(text(conciergeItemsScreen.getCheckoutButton().getText()), Duration.ofMinutes(2));
-        conciergeItemsScreen.getCheckoutButton().click();
+        $(By.xpath("//*[text()='Checkout']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Checkout']")).click();
     }
 
     @When("I introduces payment details for estore")
