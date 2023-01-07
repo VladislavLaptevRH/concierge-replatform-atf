@@ -586,6 +586,16 @@ public class EstoreCartPageStepDefs {
         }
     }
 
+    @When("I add product {string} and sku {string} to cart via API for estore")
+    public void iAddProductAndSkuToCartViaAPIForEstore(String product, String sku) {
+        if (Hooks.profile.contains("stg4")) {
+            estoreGeneralStepDefs.addLineItemsToEstoreCartWithProvidedSkuStg4(product, sku);
+        } else if (Hooks.profile.contains("stg2")) {
+            estoreGeneralStepDefs.addLineItemsToEstoreCartWithProvidedSkuStg2(product, sku);
+        }
+    }
+
+
     @When("I verify for back button from cart page")
     public void iVerifyForBackButtonFromCartPage() {
         sleep(2000);

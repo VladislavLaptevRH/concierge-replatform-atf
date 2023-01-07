@@ -74,7 +74,7 @@ Feature: Estore Cart Page
   Scenario: eStore - Add UFD item to Cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I add item "63130001 NATL"  and prod id "prod1617188" to cart via API for estore
+    When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
     When I open estore cart
     When I click on zipcode estore button
     When I update postal code in cart
@@ -83,7 +83,7 @@ Feature: Estore Cart Page
   Scenario: eStore - Add Surcharge item to Cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I add item "63130001 NATL"  and prod id "prod1617188" to cart via API for estore
+    When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
     When I open estore cart
     When I click on zipcode estore button
     When I update postal code in cart
