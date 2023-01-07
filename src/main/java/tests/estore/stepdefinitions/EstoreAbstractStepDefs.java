@@ -140,9 +140,8 @@ public class EstoreAbstractStepDefs {
 
     @When("I click on a place estore order button")
     public void iClickOnPlaceOrderButton() {
-        sleep(5000);
-        estoreReviewOrderPage.getPlaceOrderButton().should(enabled, Duration.ofMinutes(3));
-        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+
+        sleep(2000);
         estoreReviewOrderPage.getPlaceOrderButton().should(enabled, Duration.ofMinutes(1));
         estoreReviewOrderPage.getPlaceOrderButton().click();
 
