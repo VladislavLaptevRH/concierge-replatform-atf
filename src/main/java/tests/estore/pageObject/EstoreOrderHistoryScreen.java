@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class EstoreOrderHistoryScreen {
-    private SelenideElement year22 = $(By.xpath("(//*[contains(text(),'2022')])[3]"));
+    private SelenideElement year22 = $(By.xpath("(//*[contains(text(),'2023')])[3]"));
 
     private SelenideElement orderNumber = $(By.xpath("(//*[contains(text(),'#')])[3]"));
 
