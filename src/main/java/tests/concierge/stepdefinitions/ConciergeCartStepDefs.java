@@ -293,7 +293,7 @@ public class ConciergeCartStepDefs {
         if (arg0.equals("displayed")) {
             conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofMinutes(1));
             conciergeCartPageScreen.getTotalAditionalProdDiscount().scrollTo();
-            $(By.xpath("//*[text()='$1,075.50']")).should(visible, Duration.ofMinutes(1));
+            $(By.xpath("//*[text()='$672.00']")).should(visible, Duration.ofMinutes(1));
         } else {
             conciergeCartPageScreen.getTotalAditionalProdDiscount().shouldNotBe(visible, Duration.ofMinutes(1));
         }

@@ -46,7 +46,7 @@ public class ConciergeUserAccountPage {
     private final List<SelenideElement> listOfBrands = $$(By.xpath("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li"));
     private final List<SelenideElement> listOfMainCategories = $$(By.xpath("//div[@class=\"MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between\"]/div"));
 
-    private final List<SelenideElement> listOfSubCategories = $$(By.xpath("(//ul[@class=\"MuiList-root\"])[1]/li"));
+    private final List<SelenideElement> listOfSubCategories = $$(By.xpath("(//ul[@class=\"MuiList-root\"])[1]/li/span"));
     private final List<SelenideElement> listOfCollections = $$(By.xpath("(//ul[@class=\"MuiList-root\"])[2]/li"));
 
     private final SelenideElement projectsButton = $(By.xpath("//a[@data-analytics-worhlogo='projects-logo']"));
@@ -93,7 +93,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement westHollywood = $(By.xpath("//*[@id=\"146\"]"));
 
-    private final SelenideElement cartButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-align-items-xs-center MuiGrid-justify-xs-flex-end']/div[2]"));
+    private final SelenideElement cartButton =  $(By.id("header-cart-button"));
 
     private final SelenideElement orderHistoryButton = $(By.xpath("//a[1]/button[contains(@class,'MuiButton-root')]"));
 
