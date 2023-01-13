@@ -74,6 +74,6 @@ public class SaleStepDefs {
     public void iVerifyPricesOnProductPage() {
 
         sleep(3000);
-        assertEquals(saleScreen.getPrice().getText(), "Regular");
+        assertEquals(saleScreen.getPrice().getText(), "Sale");
     }
 }

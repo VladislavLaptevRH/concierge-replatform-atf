@@ -9,6 +9,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -32,14 +33,26 @@ public class AbstractStepDefs {
 
     @When("I clicks on a random menu item")
     public void iClicksOnARandomMenuItem() {
-        sleep(7000);
-        generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeUserAccountPage.getListOfMainCategories().get(1).click();
-        sleep(2000);
-        conciergeUserAccountPage.getListOfSubCategories().get(0).click();
-        sleep(2000);
-        conciergeUserAccountPage.getListOfCollections().get(1).click();
-        sleep(2000);
+        for (int main = 1; main < conciergeUserAccountPage.getListOfMainCategories().size(); main++) {
+            if (main == 1) {
+                System.out.println("Main Category: " + conciergeUserAccountPage.getListOfMainCategories().get(main).getText());
+                conciergeUserAccountPage.getListOfMainCategories().get(main).click();
+            }
+        }
+            for (int sub = 0; sub < conciergeUserAccountPage.getListOfSubCategories().size(); sub++) {
+                if (sub == 0) {
+                    System.out.println("Sub Category: " + conciergeUserAccountPage.getListOfSubCategories().get(sub).getText());
+                    conciergeUserAccountPage.getListOfSubCategories().get(sub).click();
+                }
+                for (int collection = 0; collection < conciergeUserAccountPage.getListOfCollections().size(); collection++) {
+                    if (collection == 0) {
+                        System.out.println("Collection: " + conciergeUserAccountPage.getListOfCollections().get(collection).getText());
+                        conciergeUserAccountPage.getListOfCollections().get(collection).click();
+                    }
+                }
+            }
+        sleep(5000);
+        System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": "+ Hooks.getCurrentUrl());
     }
 
 

@@ -69,7 +69,6 @@ Feature:Concierge Order review
     When I remove all items from cart via API
     When I remove client from header
     When I clicks on a random menu item
-    When I click on collections item
     When I clicks on o random item
     When I select debth option
     When I select fabric option

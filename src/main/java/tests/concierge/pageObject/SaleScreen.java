@@ -11,7 +11,7 @@ public class SaleScreen {
     private final SelenideElement saleOption = $(By.xpath("//div[@data-navigation-account-item-id= 'cat3890154']"));
     private final List<SelenideElement> listOfSaleMainCategory = $$(By.xpath("//div[@class= 'MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-evenly']/div"));
     private final List<SelenideElement> listOfSaleSubCategory = $$(By.xpath("(//ul[@class='MuiList-root'])[1]/li"));
-    private final List<SelenideElement> listOfSaleCollection = $$(By.xpath("(//ul[@class='MuiList-root'])[2]/li"));
+    private final List<SelenideElement> listOfSaleCollection = $$(By.xpath("(//ul[@class='MuiList-root'])[2]/li/div"));
     private final SelenideElement catLiving = $(By.xpath("(//div[@data-navigation-account-item-id = 'cat160024'])[2]"));
     private final SelenideElement subCatChair =$(By.xpath("(//p[@data-navigation-item-typography-id='cat10210007'])"));
     private final SelenideElement randomProduct =$(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']"));
