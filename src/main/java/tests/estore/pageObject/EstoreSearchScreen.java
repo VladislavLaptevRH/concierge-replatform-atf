@@ -18,7 +18,7 @@ public class EstoreSearchScreen {
 
     private SelenideElement threeColumnsInRowGridElement = $(By.xpath("//div[contains(@class,'MuiGrid-grid-xs-4')]"));
 
-    private SelenideElement twoColumnsInRowGridElement = $(By.xpath("//div[contains(@class,'MuiGrid-grid-xs-6')]"));
+    private SelenideElement twoColumnsInRowGridElement = $(By.xpath("(//*[local-name()='svg' and @data-active='false'])[1]"));
 
     private SelenideElement turkish802towel = $(By.xpath("//*[text()='802-GRAM TURKISH TOWEL COLLECTION']"));
 
@@ -32,11 +32,11 @@ public class EstoreSearchScreen {
 
     private SelenideElement hamburgerIcon = $(By.xpath("//div[@id='hamburgerIcon']"));
 
-    private SelenideElement saveText = $(By.xpath("//*[text()='SAVE ']"));
+    private SelenideElement saveText = $(By.xpath("//*[text()='SAVE UP TO 70% AS AN RH MEMBER*']"));
 
     private SelenideElement upToText = $(By.xpath("//*[text()='up to']"));
 
-    private SelenideElement save70 =  $(By.xpath("//*[text()=' 70%']"));
+    private SelenideElement save70 = $(By.xpath("//*[text()=' 70%']"));
 
 
 }

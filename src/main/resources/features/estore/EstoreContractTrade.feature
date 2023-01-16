@@ -150,7 +150,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Trade - Price in the cart - TN
     Given I log into eStore as trade
-    When I remove all items from estore cart
+#    When I remove all items from estore cart
 #    When I go to TN brand
 #    When I go to estore item "17050042 WHT" from search field
 #    When I click on add to cart estore button

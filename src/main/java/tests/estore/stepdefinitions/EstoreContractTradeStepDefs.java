@@ -78,6 +78,5 @@ public class EstoreContractTradeStepDefs {
         sleep(5000);
         $(By.xpath("//*[text()='Confirm']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Confirm']")).click();
-
     }
 }

@@ -94,7 +94,6 @@ public class estoreOrderHistoryStepDefs {
         estoreOrderHistoryScreen.getCwNumber().should(Condition.visible, Duration.ofSeconds(20));
     }
 
-
     @Then("I verify order date and order total fields")
     public void iVerifyOrderDateAndOrderTotalFields() {
         estoreOrderHistoryScreen.getYear22().should(Condition.visible, Duration.ofSeconds(20));

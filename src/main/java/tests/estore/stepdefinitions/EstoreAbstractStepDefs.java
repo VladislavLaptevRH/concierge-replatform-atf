@@ -23,7 +23,6 @@ public class EstoreAbstractStepDefs {
     ConciergeOrderHistoryForm conciergeOrderHistoryForm = new ConciergeOrderHistoryForm();
     SelectOption selectOption = new SelectOption();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
-    ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
     EstoreReviewOrderPage estoreReviewOrderPage = new EstoreReviewOrderPage();
     ConfirmationOrderScreen confirmationOrderScreen = new ConfirmationOrderScreen();
     ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
@@ -114,7 +113,6 @@ public class EstoreAbstractStepDefs {
         estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(2));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         selectPayment.selectByIndex(2);
-
 
         switchTo().frame($(By.cssSelector("iframe[title='Iframe for secured card number']")).should(visible, Duration.ofMinutes(1)));
         estorePaymentPage.getCardNumberField().setValue("4678475330157543");

@@ -172,7 +172,7 @@ Feature:Estore Payment
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
-    When I execute payment with credit card on estore
+    And I introduces payment details for estore guest user
     When I open estore cart
     Then I verify that I'm able to decrease item quantity with success
     When I open product page with "prod25740248" and "10100453" with "PYT" for estore

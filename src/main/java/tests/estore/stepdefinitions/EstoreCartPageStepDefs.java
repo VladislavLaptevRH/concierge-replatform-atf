@@ -30,6 +30,7 @@ public class EstoreCartPageStepDefs {
     EstoreItemPage estoreItemPage = new EstoreItemPage();
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
     SaleScreen saleScreen = new SaleScreen();
+    EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
 
     private static Response response;
     int itemQuantity;
@@ -154,10 +155,17 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on zipcode estore button")
     public void iClickOnZipcodeEstoreButton() {
-        sleep(4000);
+        sleep(5000);
         estoreAddressScreen.getEnterZipCodeBtn().scrollIntoView(true);
         estoreAddressScreen.getEnterZipCodeBtn().should(visible, Duration.ofSeconds(40));
         estoreAddressScreen.getEnterZipCodeBtn().click();
+
+        try {
+            sleep(2000);
+            executeJavaScript("arguments[0].click();", estoreAddressScreen.getEnterZipCodeBtn());
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Enter zipcode button is not displayed");
+        }
     }
 
     @Then("I verify US zip code validation in estore cart")
@@ -238,13 +246,15 @@ public class EstoreCartPageStepDefs {
         estoreCartPage.getZipCodeField().clear();
         estoreCartPage.getZipCodeField().click();
         estoreCartPage.getZipCodeField().sendKeys("10007");
-        sleep(4000);
+        sleep(5000);
+        estoreAddressScreen.getSubmitZipCode().should(visible, Duration.ofSeconds(20));
         estoreAddressScreen.getSubmitZipCode().click();
     }
 
     @Then("I verify UFD in cart")
     public void iVerifyUFDInCart() {
         $(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify SURCHARGE fee on cart page")
@@ -319,7 +329,6 @@ public class EstoreCartPageStepDefs {
         if (arg0.equals("CAN")) {
 
         }
-
     }
 
     @Then("I verify that continue as guest user option is not available")
@@ -530,6 +539,7 @@ public class EstoreCartPageStepDefs {
         estoreAddressScreen.getShippingAddressState().scrollIntoView(true);
         Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
         selectState.selectByIndex(0);
+        sleep(3000);
     }
 
     @Then("I verify estore order total in order estimate for membership for {string}")
@@ -601,5 +611,26 @@ public class EstoreCartPageStepDefs {
         sleep(2000);
         WebDriverRunner.getWebDriver().navigate().back();
         estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(20));
+    }
+
+    @And("I introduces payment details for estore guest user")
+    public void iIntroducesPaymentDetailsForEstoreGuestUser() {
+        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("RH Credit Card"), Duration.ofMinutes(2));
+        Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
+        selectPayment.selectByIndex(2);
+
+        switchTo().frame($(By.cssSelector("iframe[title='Iframe for secured card number']")).should(visible, Duration.ofMinutes(1)));
+        estorePaymentPage.getCardNumberField().setValue("4678475330157543");
+        switchTo().defaultContent();
+
+        switchTo().frame($(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")).should(visible, Duration.ofMinutes(1)));
+        estorePaymentPage.getCvcField().setValue("737");
+        switchTo().defaultContent();
+
+        switchTo().frame($(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card expiry date']")).should(visible, Duration.ofMinutes(1)));
+        estorePaymentPage.getExpiryDateField().setValue("0330");
+        switchTo().defaultContent();
+
+        estorePaymentPage.getContinueToCheckout().click();
     }
 }

@@ -16,6 +16,7 @@ import java.util.List;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
+import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
 
 public class EstoreHomePageStepDefs {
@@ -98,25 +99,24 @@ public class EstoreHomePageStepDefs {
 
     @And("I fill in the request form")
     public void iFillInTheRequestForm() {
-//        assertFalse(estoreHomePage.getFirstNameInputField().getValue().isEmpty());
-//        assertFalse(estoreHomePage.getLastNameInputField().getValue().isEmpty());
-//        assertFalse(estoreHomePage.getEmailInputField().getValue().isEmpty());
-//        estoreHomePage.getPhoneNumberInputField().setValue("9254434333");
-//        estoreHomePage.getLocationDropdown().selectOption(6);
-//        estoreHomePage.getMessageInputField().setValue("Hi, This is automation tests, please ignore the request. Thank you ");
-//        estoreHomePage.getIframeRequestAConsultationButton().click();
+        estoreHomePage.getPhoneNumberField().should(Condition.visible, Duration.ofSeconds(20));
+        estoreHomePage.getPhoneNumberField().setValue("9254434333");
+        estoreHomePage.getLocationDropdown().selectOption(6);
+        estoreHomePage.getMessageInputField().click();
+        estoreHomePage.getMessageInputField().setValue("Hi, This is automation tests, please ignore the request. Thank you ");
+        estoreHomePage.getIframeRequestAConsultationButton().click();
         sleep(3000);
     }
 
     @Then("I Verify Thank you message")
     public void iVerifyThankYouMessage() {
-//        String actual = estoreHomePage.getThankMessageText().getText();
-//        String expected = ("Thank you for telling us about your project. We're reviewing your information, and a designer will be in touch within 24 hours.\n" +
-//                "\n" +
-//                "In preparation for our first meeting, please gather any existing floor plans, photos of your space and inspiration shots that will inform your project.\n" +
-//                "\n" +
-//                "We look forward to working with you.");
-//      assertEquals(actual, expected);
+        String actual = estoreHomePage.getThankMessageText().getText();
+        String expected = ("Thank you for telling us about your project. We're reviewing your information, and a designer will be in touch within 24 hours.\n" +
+                "\n" +
+                "In preparation for our first meeting, please gather any existing floor plans, photos of your space and inspiration shots that will inform your project.\n" +
+                "\n" +
+                "We look forward to working with you.");
+        assertEquals(actual, expected);
     }
 
 
@@ -147,7 +147,7 @@ public class EstoreHomePageStepDefs {
                 for (int collection = 0; collection < estoreHomePage.getListOfCollection().size(); collection++) {
                     estoreHomePage.getListOfCollection().get(collection).click();
                     sleep(5000);
-                    System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": "+ Hooks.getCurrentUrl());
+                    System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": " + Hooks.getCurrentUrl());
                     assertFalse((WebDriverRunner.getWebDriver().getTitle().contains("404")));
                     if (!Hooks.getCurrentUrl().contains("rhnonprod")) {
                         open(Hooks.eStoreURL);

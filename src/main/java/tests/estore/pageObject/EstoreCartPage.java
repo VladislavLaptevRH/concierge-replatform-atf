@@ -104,7 +104,7 @@ public class EstoreCartPage {
 
     private final SelenideElement applyEmpDiscountBtn = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-4']//button)[2]"));
 
-    private final SelenideElement applyPromocodeBtn = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-fullWidth']"));
+    private final SelenideElement applyPromocodeBtn = $(By.xpath("(//*[text()='Apply'])[1]"));
 
     private final SelenideElement itemAddedToYourCart = $(By.xpath("//*[text()='1 Item Added To Your Cart']"));
 

@@ -147,7 +147,6 @@ public class EstoreAddressStepDefs {
 
             if (Hooks.eStoreURL.contains("stg4") || Hooks.eStoreURL.contains("stg3")) {
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
-//                estoreAddressScreen.getShippingAddressStreetAddress().setValue("Bradford Drive, Hilliard, OH, USA");
                 estoreAddressScreen.getShippingAddressStreetAddress().setValue("Bradford Drive");
                 estoreAddressScreen.getShippingAddressCity().setValue("Hilliard");
 
@@ -246,11 +245,6 @@ public class EstoreAddressStepDefs {
             }
         }
 
-
-//
-//        $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).should(visible, Duration.ofSeconds(20));
-//        $(By.xpath("//*[text()='2479 Deer Run, Lewisville, TX, USA']")).click();
-
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressAptFloor());
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
 
@@ -328,12 +322,10 @@ public class EstoreAddressStepDefs {
     public void iClickOnContinueWithOriginalAddressEstoreButton() {
         try {
             generalStepDefs.waitForJSandJQueryToLoad();
-            //estoreItemPage.getAddToCartButton().scrollIntoView(true);
 
-            if (Hooks.profile.equals("stg3")){
-                //$(By.xpath("//*[text()='CONTINUE']")).contextClick();
+            if (Hooks.profile.equals("stg3")) {
                 $(By.xpath("(//button[contains(@class,'MuiButton-containedPrimary')])[2]")).click();
-            } else  {
+            } else {
                 estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
                 estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(50));
                 estoreItemPage.getAddToCartButton().click();
@@ -342,6 +334,7 @@ public class EstoreAddressStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Continue with original button is not displayed");
         }
+        System.out.println();
     }
 
     @When("I click on continue to payment estore button")
@@ -409,9 +402,6 @@ public class EstoreAddressStepDefs {
             } catch (com.codeborne.selenide.ex.ElementNotFound e) {
                 System.out.println("Dropdown list is not displayed");
             }
-
-//                executeJavaScript("window.scrollTo(0, 600)");
-//                estoreAddressScreen.getShippingAddresslastName().click();
         }
 
 
@@ -426,10 +416,6 @@ public class EstoreAddressStepDefs {
 
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPostalCode());
         estoreUserAccountPage.getBillingAddressPostalCode().setValue("12345");
-
-//        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPhone());
-//        estoreUserAccountPage.getBillingAddressPhone().setValue("(541) 777-4321");
-
         sleep(5000);
     }
 

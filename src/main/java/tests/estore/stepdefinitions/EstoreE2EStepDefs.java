@@ -40,7 +40,6 @@ public class EstoreE2EStepDefs {
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
     EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
-    String usState = "";
     String countOfItems = null;
     WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));
 
@@ -127,7 +126,6 @@ public class EstoreE2EStepDefs {
             $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']")).should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
             conciergeUserAccountPage.getDashboardTitle().shouldHave(text("DASHBOARD"));
             conciergeUserAccountPage.getOrderHistoryButton().should(visible, Duration.ofSeconds(12));
-
             Random rand = new Random();
 
             conciergeUserAccountPage.getMenuItems().get(2).scrollIntoView(true);
@@ -379,8 +377,6 @@ public class EstoreE2EStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("See Results on button is not displayed");
         }
-
-
     }
 
 
@@ -396,88 +392,6 @@ public class EstoreE2EStepDefs {
     public void iVerifyThatAreEstoreDisplayed(String arg0) {
         $(By.xpath("//*[text()='" + arg0 + "']")).shouldHave(text(arg0), Duration.ofSeconds(20));
         $(By.xpath("//*[text()='" + arg0 + "']")).click();
-    }
-
-    @When("I fiils all options for estore item")
-    public void iFiilsAllEstoreOptionsForItem() {
-        //depth option
-        sleep(9000);
-        executeJavaScript("window.scrollTo(0, 970)");
-        try {
-
-            selectOption.getDepthProperty().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
-            Select selectDepth = new Select(selectOption.getDepthProperty());
-
-            selectDepth.selectByIndex(2);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Close button is not displayed");
-        }
-        sleep(2000);
-
-        //seatheight
-        try {
-            sleep(9000);
-            selectOption.getSeatHeight().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
-            Select seatHeight = new Select(selectOption.getSeatHeight());
-
-            seatHeight.selectByIndex(2);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Close button is not displayed");
-        }
-        sleep(2000);
-
-        //finish
-        try {
-            sleep(9000);
-            selectOption.getFinishOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
-            Select finalOption = new Select(selectOption.getFinishOption());
-
-            finalOption.selectByIndex(2);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Close button is not displayed");
-        }
-        sleep(2000);
-
-        //select color option
-        try {
-            selectOption.getColorOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
-            Select selectFabric = new Select(selectOption.getColorOption());
-            selectFabric.selectByIndex(2);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Close button is not displayed");
-        }
-
-        //select length option
-        try {
-            sleep(9000);
-            selectOption.getLengthOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
-            Select selectLength = new Select(selectOption.getLengthOption());
-            selectLength.selectByIndex(2);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Close button is not displayed");
-        }
-
-        //select fill option
-        try {
-            sleep(16);
-            selectOption.getLengthOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
-            Select selectFillOption = new Select(selectOption.getFillOption());
-            selectFillOption.selectByIndex(2);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Close button is not displayed");
-        }
-
-        //fabric option
-        try {
-            sleep(18);
-            selectOption.getFabricProperty().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
-            Select selectFabric = new Select(selectOption.getFabricProperty());
-            selectFabric.selectByIndex(2);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Close button is not displayed");
-        }
-        sleep(2000);
-
     }
 
     @When("I look on estore client by {string} with {string}")
@@ -693,6 +607,9 @@ public class EstoreE2EStepDefs {
         String URL;
         if (Hooks.profile.equals("stg3")) {
             URL = Hooks.eStoreBaseURL + "/us/en/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
+        }
+        if (Hooks.profile.equals("stg2")) {
+            URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + "CHAR" + "&categoryId=search";
         } else {
             URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
         }

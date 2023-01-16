@@ -1,12 +1,9 @@
 package tests.estore.stepdefinitions;
 
-import com.codeborne.selenide.WebDriverRunner;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
 import tests.estore.pageObject.EstoreLoginPage;
 import tests.utility.Hooks;
 
@@ -57,6 +54,10 @@ public class EstoreLoginStepDefs {
                 userEmail = "orderreview@rh.com";
             }
 
+            if (accountRole.equals("cancelMembership")) {
+                estoreLoginPage.getUsernameField().setValue("cancelmembership1@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Password1234");
+            }
             if (accountRole.equals("noaddresses")) {
                 estoreLoginPage.getUsernameField().setValue("addressno@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Password1234");
@@ -186,7 +187,6 @@ public class EstoreLoginStepDefs {
                 estoreLoginPage.getUsernameField().setValue("automationemptystatefield@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Password1234");
             }
-
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
         }
