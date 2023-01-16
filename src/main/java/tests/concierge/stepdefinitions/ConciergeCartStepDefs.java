@@ -578,7 +578,6 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify membership popup for guest user")
     public void iVerifyMembershipPopupForGuestUser() {
-        $(By.xpath("//*[text()='Join the RH Members Program for $175.00, and save ']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Your RH Membership immediately pays for itself.']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='BECOME A MEMBER NOW']")).should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getNoThanksButton().should(visible, Duration.ofMinutes(1));

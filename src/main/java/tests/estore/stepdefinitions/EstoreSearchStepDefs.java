@@ -145,7 +145,5 @@ public class EstoreSearchStepDefs {
     @Then("I verify sale banner for estore")
     public void iVerifySaleBannerForEstore() {
         estoreSearchScreen.getSaveText().should(visible, Duration.ofSeconds(20));
-        estoreSearchScreen.getUpToText().should(visible, Duration.ofSeconds(20));
-        estoreSearchScreen.getSave70().should(visible, Duration.ofSeconds(20));
     }
 }

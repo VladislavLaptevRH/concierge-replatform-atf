@@ -29,12 +29,12 @@ Feature: Estore Membership
     When I navigate to the member tab
     Then I validate membership details for member user
 
-  #Scenario: eStore Cancel Membership
-    #Given I log into eStore as "member"
-    #When I navigate to the member tab
-    #Then I validate membership details for member user
-    #When I click on cancel membership link
-    #Then I validate cancel membership content
+  Scenario: eStore Cancel Membership
+    Given I log into eStore as "cancelMembership"
+    When I navigate to the member tab
+    Then I validate membership details for member user
+    When I click on cancel membership link
+    Then I validate cancel membership content
 
   Scenario: Verify the membership Terms and Conditions Link
     Given I log into eStore as "member"

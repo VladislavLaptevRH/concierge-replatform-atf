@@ -69,12 +69,6 @@ public class EstoreUserAccountPageStepDefs {
             Select selectCardState = new Select(estoreAddressScreen.getStateAddNewCard());
             selectCardState.selectByValue("OH");
             estoreAddressScreen.getPostalCodeAddNewCard().setValue("99950");
-//            try {
-//                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
-//                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
-//            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-//                System.out.println("Dropdown list is not displayed");
-//            }
 
         }
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
@@ -110,13 +104,6 @@ public class EstoreUserAccountPageStepDefs {
 
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(30));
         estoreUserAccountPage.getSaveCardButton().click();
-
-//        $(By.xpath("//*[text()='EDIT']")).shouldHave(Condition.text("EDIT"), Duration.ofSeconds(20));
-//        $(By.xpath("//*[text()='EDIT']")).click();
-//
-//        estorePaymentPage.getContinueToCheckout().shouldHave(Condition.text("CONTINUE"), Duration.ofSeconds(20));
-//        estorePaymentPage.getContinueToCheckout().click();
-
     }
 
     @Then("I verify that it is shows new address")

@@ -178,7 +178,5 @@ public class EstoreFooterLinksStepDefs {
 
             }
         }
-
-
     }
 }

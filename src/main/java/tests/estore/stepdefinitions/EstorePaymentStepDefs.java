@@ -77,12 +77,6 @@ public class EstorePaymentStepDefs {
         estorePaymentPage.getCvcField().should(visible, Duration.ofSeconds(40));
         estorePaymentPage.getCvcField().setValue("737");
         switchTo().defaultContent();
-
-
-//        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container']//button")).click();
-//                estorePaymentPage.getContinueToCheckout().should(visible,Duration.ofSeconds(20));
-//        estorePaymentPage.getContinueToCheckout().click();
-
     }
 
     @Then("I verify that I'm able to edit payment")
@@ -106,10 +100,6 @@ public class EstorePaymentStepDefs {
         sleep(3000);
         $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).click();
-//        estoreAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(40));
-//        estoreAddressScreen.getEditBillingAddress().click();
-//        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible, Duration.ofSeconds(15));
-//        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).click();
         estoreAddressScreen.getShippingAddressfirstName().click();
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getShippingAddressfirstName());
         estoreAddressScreen.getShippingAddressfirstName().setValue("NewBillingAddress");
@@ -241,8 +231,7 @@ public class EstorePaymentStepDefs {
     @Then("I validate that billing address based on saved payment method")
     public void iValidateThatBillingAddressBasedOnSavedPaymentMethod() {
         sleep(3000);
-//        $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='ABHIJIT CHARHATE']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I remove existing payment method on payment estore page")
@@ -295,7 +284,6 @@ public class EstorePaymentStepDefs {
         sleep(5000);
         estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
         estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
-
     }
 
     @Then("I verify that new payment was added")

@@ -66,7 +66,7 @@ Feature: Estore Cart Page
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
-    And I introduces payment details for estore
+    And I introduces payment details for estore guest user
     When I click on continue payment method estore button
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed

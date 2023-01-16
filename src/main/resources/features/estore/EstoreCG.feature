@@ -1,3 +1,4 @@
+This feature was removed for Estore
 @estoreRegression
 @estoreCGPage
 Feature: Estore CG
