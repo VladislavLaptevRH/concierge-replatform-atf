@@ -12,7 +12,7 @@ Feature: Estore CG
     Given I log into eStore as "regular"
     When I remove all items from estore cart
 
-  Scenario: CG-Verifay Back To top Button
+  Scenario: CG-Verify Back To top Button
     Given I log into eStore as "guest"
     When I goes to estore collection page
     When I scroll on the page till back to top button is visible
