@@ -1,33 +1,32 @@
-This feature was removed for Estore
-@estoreRegression
-@estoreCGPage
-Feature: Estore CG
-
-  Scenario: CG-Verify Collection Name
-    Given I log into eStore as "guest"
-    When I goes to estore collection page
-    Then I validate the collection name is not empty
-
-  Scenario: CG-Verify Shop In Stock Link
-    Given I log into eStore as "regular"
-    When I remove all items from estore cart
-
-  Scenario: CG-Verify Back To top Button
-    Given I log into eStore as "guest"
-    When I goes to estore collection page
-    When I scroll on the page till back to top button is visible
-    Then I verify that back to top button is clickable
-    And I verify that after click on back to top button user is scrolled to top on the page
-
-  Scenario: Verify single Grid View is as default on CG
-    Given I log into eStore as "guest"
-    When I goes to estore collection page
-    Then I verify that single grid view is selected on CG page by default
-
-  Scenario: Verify collection name,image,prices(regular,member,sale(applicable) on collection banner
-    Given I log into eStore as "guest"
-    When I goes to estore collection page
-    Then I verify collection name, image, prices on collection banner
+#@estoreRegression
+#@estoreCGPage
+#Feature: Estore CG
+#
+#  Scenario: CG-Verify Collection Name
+#    Given I log into eStore as "guest"
+#    When I goes to estore collection page
+#    Then I validate the collection name is not empty
+#
+#  Scenario: CG-Verify Shop In Stock Link
+#    Given I log into eStore as "regular"
+#    When I remove all items from estore cart
+#
+#  Scenario: CG-Verify Back To top Button
+#    Given I log into eStore as "guest"
+#    When I goes to estore collection page
+#    When I scroll on the page till back to top button is visible
+#    Then I verify that back to top button is clickable
+#    And I verify that after click on back to top button user is scrolled to top on the page
+#
+#  Scenario: Verify single Grid View is as default on CG
+#    Given I log into eStore as "guest"
+#    When I goes to estore collection page
+#    Then I verify that single grid view is selected on CG page by default
+#
+#  Scenario: Verify collection name,image,prices(regular,member,sale(applicable) on collection banner
+#    Given I log into eStore as "guest"
+#    When I goes to estore collection page
+#    Then I verify collection name, image, prices on collection banner
 
   #Scenario: Verify CG name is visible on Preview the collection model
     #Given I log into eStore as "guest"
