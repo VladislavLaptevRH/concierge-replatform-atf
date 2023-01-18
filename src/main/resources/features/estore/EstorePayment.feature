@@ -175,7 +175,7 @@ Feature:Estore Payment
     And I introduces payment details for estore guest user
     When I open estore cart
     Then I verify that I'm able to decrease item quantity with success
-    When I open product page with "prod25740248" and "10100453" with "PYT" for estore
+    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button

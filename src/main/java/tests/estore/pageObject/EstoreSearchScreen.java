@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class EstoreSearchScreen {
 
-    private SelenideElement text156 = $(By.xpath("//*[text()='156']"));
+    private SelenideElement results = $(By.xpath("//*[contains(text(),'RESULTS')]"));
 
     private SelenideElement threeColumnsInRowGridButton = $(By.xpath("(//*[local-name()='svg' and @data-active='false'])[1]"));
 

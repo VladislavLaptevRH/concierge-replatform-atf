@@ -565,7 +565,7 @@ public class EstoreE2EStepDefs {
 
     @When("I click on continue payment method estore button")
     public void iClickOnContinuePaymentMethodEstoreButton() {
-        sleep(5000);
+        sleep(6000);
         try {
             if (estorePaymentPage.getContinueToCheckout().isDisplayed()) {
                 estorePaymentPage.getContinueToCheckout().scrollIntoView(true);
