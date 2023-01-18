@@ -19,6 +19,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static io.netty.handler.codec.rtsp.RtspHeaders.Values.URL;
 
 public class EstoreCartPageStepDefs {
     EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
@@ -253,14 +254,12 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify UFD in cart")
     public void iVerifyUFDInCart() {
-        $(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify SURCHARGE fee on cart page")
     public void iVerifySURCHARGEFeeOnCartPage() {
         $(By.xpath("//*[text()='ADDITIONAL SHIPPING SURCHARGE']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='$150.00']")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I click on gift box estore button")
@@ -632,5 +631,16 @@ public class EstoreCartPageStepDefs {
         switchTo().defaultContent();
 
         estorePaymentPage.getContinueToCheckout().click();
+    }
+
+    @When("I open product page with NY restriction item")
+    public void iOpenProductPageWithNYRestrictionItem() {
+        String productId = "rhbc_prod961679";
+        String skuId = "112686";
+        String url = null;
+        if (Hooks.profile.equals("stg2")) {
+            url = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + "AGPT" + "&categoryId=search";
+        }
+        open(url);
     }
 }

@@ -51,7 +51,7 @@ public class EstoreSearchStepDefs {
 
     @Then("I verify count of search results")
     public void iVerifyCountOfSearchResults() {
-        estoreSearchScreen.getText156().should(visible, Duration.ofSeconds(20));
+        estoreSearchScreen.getResults().should(visible, Duration.ofSeconds(20));
     }
 
     @When("I scroll to the bottom of the estore page")
@@ -119,6 +119,8 @@ public class EstoreSearchStepDefs {
     public void iVerifyThatSearchResultForSearchProductViaSkuIdIsDisplayed(String productName) {
         $(By.xpath("(//*[text()='" + productName + "'])[2]")).should(Condition.visible, Duration.ofSeconds(20));
     }
+
+
 
     @Then("I verify the {string}")
     public void iVerifyThe(String gridNumber) {

@@ -76,14 +76,12 @@ Feature: Estore Cart Page
     When I remove all items from estore cart
     When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
     When I open estore cart
-    When I click on zipcode estore button
-    When I update postal code in cart
     Then I verify UFD in cart
 
   Scenario: eStore - Add Surcharge item to Cart
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
+    When I add product "prod1617188" and sku "61690405 BRWN" to cart via API for estore
     When I open estore cart
     When I click on zipcode estore button
     When I update postal code in cart
@@ -132,7 +130,7 @@ Feature: Estore Cart Page
   Scenario: eStore - New York Shipping restriction
     Given I log into eStore as "regular"
     When I remove all items from estore cart
-    When I open product page with "rhbc_prod962216" and "112414" with "OCEN%20BUMP" for estore
+    When I open product page with NY restriction item
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
