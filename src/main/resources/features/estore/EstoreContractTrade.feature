@@ -86,6 +86,143 @@ Feature: eStore Contract and Trade
 #    When I pay with RHCC for estore item
 #    When I click on continue payment method estore button
 
+  Scenario: eStore Contract - Split Payment
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove split payment which was used earlier
+    When I refresh current estore page
+    Then I verify that I'm able to execute estore split payment
+
+  Scenario: estore Contract - Full Payment
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I execute payment with credit card on estore
+
+  Scenario: estore Contract - RHCC
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I pay with RHCC for estore item
+    When I click on estore continue button
+    When I click on a place estore order button
+    Then I verify that estore thank you page is displayed
+
+  Scenario: estore Contract - GC/ Balance check
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I choose RH Gift Card from payment method
+    When I click on check balance button
+    Then I verify that gift card balance info is displayed for estore
+
+  Scenario: eStore Contract - Edit Payment
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    Then I verify that I'm able to edit payment
+
+  Scenario: estore Contract - Checkout and place order
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I execute payment with credit card on estore
+    When I click on a place estore order button
+    Then I verify that estore thank you page is displayed
+
+  Scenario: eStore Contract - Verify UFD for different zip codes
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
+    When I open estore cart
+    When I click on zipcode estore button
+    When I update postal code in cart
+    Then I verify UFD in cart
+
+  Scenario: estore Contract - Edit address
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I edit estore billing address from PG
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+
+  Scenario Outline: eStore Contract - Major CC
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I execute estore payment for "<cardType>"
+    When I click on a place estore order button
+    Examples:
+      | cardType |
+      | VI       |
+      | MC       |
+      | AX       |
+      | DI       |
+
 #Trade
   Scenario: eStore Trade Login
     Given I log into eStore as trade
@@ -129,6 +266,143 @@ Feature: eStore Contract and Trade
     When I click on bed
     When I click on beds
     Then I verify that the dropdown's are enabled
+
+  Scenario: eStore Trade - Split Payment
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove split payment which was used earlier
+    When I refresh current estore page
+    Then I verify that I'm able to execute estore split payment
+
+  Scenario: estore Trade - Full Payment
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I execute payment with credit card on estore
+
+  Scenario: estore Trade - RHCC
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I pay with RHCC for estore item
+    When I click on estore continue button
+    When I click on a place estore order button
+    Then I verify that estore thank you page is displayed
+
+  Scenario: estore Trade - GC/ Balance check
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I choose RH Gift Card from payment method
+    When I click on check balance button
+    Then I verify that gift card balance info is displayed for estore
+
+  Scenario: eStore Trade - Edit Payment
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    Then I verify that I'm able to edit payment
+
+  Scenario Outline: estore Trade - Major CC
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I execute estore payment for "<cardType>"
+    When I click on a place estore order button
+    Examples:
+      | cardType |
+      | VI       |
+      | MC       |
+      | AX       |
+      | DI       |
+
+  Scenario: estore Trade - Checkout and place order
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I execute payment with credit card on estore
+    When I click on a place estore order button
+    Then I verify that estore thank you page is displayed
+
+  Scenario: eStore Trade - Verify UFD for different zip codes
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
+    When I open estore cart
+    When I click on zipcode estore button
+    When I update postal code in cart
+    Then I verify UFD in cart
+
+  Scenario: estore Trade - Edit address
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I edit estore billing address from PG
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
 
   Scenario: eStore Trade - Price in the cart - MO
     Given I log into eStore as trade
