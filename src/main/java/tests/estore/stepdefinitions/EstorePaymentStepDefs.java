@@ -12,8 +12,7 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class EstorePaymentStepDefs {
@@ -289,5 +288,27 @@ public class EstorePaymentStepDefs {
     @Then("I verify that new payment was added")
     public void iVerifyThatNewPaymentWasAdded() {
         $(By.xpath("//*[contains(text(),'Visa')]")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I execute estore payment for {string}")
+    public void iExecuteEstorePaymentFor(String cardType) {
+        sleep(5000);
+        if (cardType.equals("VI")) {
+            estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
+        }
+        if (cardType.equals("MC")) {
+            estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
+
+        }
+        if (cardType.equals("AX")) {
+            estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
+
+        }
+        if (cardType.equals("DI")) {
+            estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
+
+        }
+        estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+
     }
 }
