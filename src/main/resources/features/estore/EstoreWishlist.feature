@@ -9,13 +9,13 @@ Feature: Estore Wishlist
 
   Scenario: Add an item to wishlist
     Given I log into eStore as "regular"
-    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
+    When I open product page with "prod13800635" and "17050044" with "CHAR" for estore
     When I click on add to wishlist button
     Then I validate items in wishlist
 
   Scenario: Add an item to wishlist (Member User)
     Given I log into eStore as "member"
-    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
+    When I open product page with "prod13800635" and "17050044" with "CHAR" for estore
     When I click on add to wishlist button
     Then I validate items in wishlist
     Then I validate member price in wishlist
