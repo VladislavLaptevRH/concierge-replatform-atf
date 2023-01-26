@@ -100,9 +100,9 @@ public class EstorePaymentStepDefs {
         sleep(3000);
         $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).click();
-        estoreAddressScreen.getShippingAddressfirstName().click();
-        estoreGeneralStepDefs.clearField(estoreAddressScreen.getShippingAddressfirstName());
-        estoreAddressScreen.getShippingAddressfirstName().setValue("NewBillingAddress");
+        estoreAddressScreen.getShippingAddressFirstName().click();
+        estoreGeneralStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
+        estoreAddressScreen.getShippingAddressFirstName().setValue("NewBillingAddress");
     }
 
 

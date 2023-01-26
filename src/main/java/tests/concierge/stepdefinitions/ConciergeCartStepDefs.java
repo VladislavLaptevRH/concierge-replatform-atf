@@ -567,8 +567,8 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that availability, Delivery and Returns messaging in cart")
     public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingInCart() {
-        $(By.xpath("//*[contains(text(),'This item is in stock and will be ready for delivery between ')]")).should(visible, Duration.ofSeconds(10));
-        $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).should(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[contains(text(),'This item is in stock and will be ready for delivery between')]")).should(visible, Duration.ofSeconds(10));
+        $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery.')]")).should(visible, Duration.ofMinutes(1));
     }
 
     @Then("I verify alternate addresses for client with multipel addresses")

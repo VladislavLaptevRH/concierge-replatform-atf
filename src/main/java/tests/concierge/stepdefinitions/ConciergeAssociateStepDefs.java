@@ -3,6 +3,7 @@ package tests.concierge.stepdefinitions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Keys;
 import tests.concierge.pageObject.ConciergeLoginPage;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.Given;
@@ -84,15 +85,10 @@ public class ConciergeAssociateStepDefs {
         conciergeUserAccountPage.getGalleryButton().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getGalleryButton().click();
         conciergeUserAccountPage.getGalleryButton().should(visible, Duration.ofSeconds(15));
-        Select gallerySelect = new Select(conciergeUserAccountPage.getGallerySelect());
-        gallerySelect.selectByValue("997");
+        conciergeUserAccountPage.getGallerySelect().click();
+        conciergeUserAccountPage.getGalleryItem().click();
         conciergeUserAccountPage.getGallerySubmitButton().click();
         sleep(3000);
-        //997: Contract
-
-        conciergeUserAccountPage.getGallerySelect().click();
-
-
     }
 
     @Then("I verify footer links")
