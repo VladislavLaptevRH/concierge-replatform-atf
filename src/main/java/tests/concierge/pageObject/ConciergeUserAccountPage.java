@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -14,6 +15,8 @@ public class ConciergeUserAccountPage {
     private final SelenideElement galleryButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item MuiGrid-align-items-xs-center']/div[@class='MuiGrid-root MuiGrid-item'][2]"));
 
     private final SelenideElement gallerySelect = $(By.xpath("//input[@class='MuiInputBase-input MuiOutlinedInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd']"));
+
+    private final SelenideElement galleryItem = $(By.xpath("//li[contains(text(),'997')]"));
 
     private final SelenideElement outdoorMenu = $(By.xpath("//*[text()='Outdoor']"));
 

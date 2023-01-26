@@ -29,7 +29,7 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement stateRequired = $(By.xpath("//*[text()='State required.']"));
 
-    private final SelenideElement postlaCodeRequired = $(By.xpath("//*[text()='Postal code required.']"));
+    private final SelenideElement postalCodeRequired = $(By.xpath("//*[text()='Postal code required.']"));
 
     private final SelenideElement phoneRequired = $(By.xpath("//*[text()='Phone required.']"));
 
@@ -119,7 +119,7 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement automationClientButton = $(By.xpath("//*[contains(text(),'Client : Automation')]"));
 
-    private final List<SelenideElement> listOfBrands = $$(By.xpath("//div[@id='brand-links-container']//li"));
+    private final List<SelenideElement> listOfBrands = $$(By.xpath("//a[@data-analytics-rootcat='OUR PRODUCTS']"));
 
     private final SelenideElement projectsButton = $(By.xpath("//*[text()='Projects']"));
 

@@ -11,11 +11,15 @@ public class EstoreAddressScreen {
 
     private final SelenideElement shippingAddressCountry = $(By.id("shippingAddress.country"));
 
-    private final SelenideElement shippingAddressfirstName = $(By.id("shippingAddress.firstName"));
+    private final SelenideElement shippingAddressFirstName = $(By.id("shippingAddress.firstName"));
 
-    private final SelenideElement shippingAddresslastName = $(By.id("shippingAddress.lastName"));
+    private final SelenideElement shippingAddressLastName = $(By.id("lastName"));
 
-    private final SelenideElement shippingAddressStreetAddress = $(By.id("shippingAddress.addressLine1"));
+    private final SelenideElement shippingAddressStreetAddress = $(By.id("addressLine1"));
+
+    private final SelenideElement shippingAddressLastName1 = $(By.id("shippingAddress.lastName"));
+
+    private final SelenideElement shippingAddressStreetAddress1 = $(By.id("shippingAddress.addressLine1"));
 
     private final SelenideElement shippingAddressStreetAddressStg2 = $(By.xpath("//input[@data-testid='shippingAddress.addressLine1']"));
 

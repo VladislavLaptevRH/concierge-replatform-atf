@@ -13,7 +13,7 @@ Feature: Estore Search
     When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
     Then I verify that search result for search product via product name is displayed
 
-  Scenario: Search product via SKU 10115260 VLBZ
+  Scenario: Search product via SKU 17050043 CAML
     Given I log into eStore as "regular"
     When I go to estore item "17050044 CHAR" from search field
     Then I verify that search result "Cortona Sofa" for search product via sku id is displayed
