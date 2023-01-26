@@ -29,7 +29,7 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement stateRequired = $(By.xpath("//*[text()='State required.']"));
 
-    private final SelenideElement postlaCodeRequired = $(By.xpath("//*[text()='Postal code required.']"));
+    private final SelenideElement postalCodeRequired = $(By.xpath("//*[text()='Postal code required.']"));
 
     private final SelenideElement phoneRequired = $(By.xpath("//*[text()='Phone required.']"));
 

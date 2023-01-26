@@ -115,7 +115,7 @@ Feature: Estore Address Page
     When I click on save address button
     Then user verify that field is required message is displayed
 
-  Scenario: eStore Address Page - Verify same as Billing address same as Shipping functionality  - switch between the listed shipping addresses
+  Scenario: eStore Address Page - Verify same as Billing address same as Shipping functionality - switch between the listed shipping addresses
     Given I log into eStore as "addresspage"
     When I remove all items from estore cart
     When I add item to cart via API for estore

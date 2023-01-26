@@ -15,6 +15,7 @@ import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 
+import java.io.IOException;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
@@ -587,7 +588,7 @@ public class EstoreCartPageStepDefs {
     }
 
     @When("I add item {string}  and prod id {string} to cart via API for estore")
-    public void iAddItemAndProdIdToCartViaAPIForEstore(String arg0, String arg1) {
+    public void iAddItemAndProdIdToCartViaAPIForEstore(String arg0, String arg1) throws IOException {
         if (Hooks.profile.contains("stg4")) {
             estoreGeneralStepDefs.addLineItemsToEstoreCartWithProvidedSkuStg4(arg0, arg1);
         } else if (Hooks.profile.contains("stg2")) {
@@ -596,7 +597,7 @@ public class EstoreCartPageStepDefs {
     }
 
     @When("I add product {string} and sku {string} to cart via API for estore")
-    public void iAddProductAndSkuToCartViaAPIForEstore(String product, String sku) {
+    public void iAddProductAndSkuToCartViaAPIForEstore(String product, String sku) throws IOException {
         if (Hooks.profile.contains("stg4")) {
             estoreGeneralStepDefs.addLineItemsToEstoreCartWithProvidedSkuStg4(product, sku);
         } else if (Hooks.profile.contains("stg2")) {

@@ -134,20 +134,20 @@ public class EstoreAddressStepDefs {
             if (Hooks.eStoreURL.contains("stg3")) {
                 $(By.xpath("//*[text()='Add New Address']")).click();
             }
-            estoreAddressScreen.getShippingAddressfirstName().should(visible, Duration.ofSeconds(40));
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressfirstName());
-            estoreAddressScreen.getShippingAddressfirstName().setValue("Safire");
+            estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
+            estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
 
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddresslastName());
-            estoreAddressScreen.getShippingAddresslastName().setValue("William");
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
+            estoreAddressScreen.getShippingAddressLastName1().setValue("William");
 
             Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
             shippingAddressCountry.selectByValue("US");
 
 
             if (Hooks.eStoreURL.contains("stg4") || Hooks.eStoreURL.contains("stg3")) {
-                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
-                estoreAddressScreen.getShippingAddressStreetAddress().setValue("Bradford Drive");
+                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress1());
+                estoreAddressScreen.getShippingAddressStreetAddress1().setValue("Bradford Drive");
                 estoreAddressScreen.getShippingAddressCity().setValue("Hilliard");
 
                 Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
@@ -384,7 +384,7 @@ public class EstoreAddressStepDefs {
         if (Hooks.eStoreURL.contains("stg4")) {
             generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
             estoreAddressScreen.getShippingAddressStreetAddress().setValue("Bradford Drive, Hilliard, OH, USA");
-            estoreAddressScreen.getShippingAddresslastName().click();
+            estoreAddressScreen.getShippingAddressLastName().click();
             try {
                 $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
                 $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
@@ -456,12 +456,12 @@ public class EstoreAddressStepDefs {
     public void iFillEstoreShippingAddressFor(String state) {
         try {
             sleep(2000);
-            estoreAddressScreen.getShippingAddressfirstName().should(visible, Duration.ofSeconds(40));
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressfirstName());
-            estoreAddressScreen.getShippingAddressfirstName().setValue("Safire");
+            estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
+            estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
 
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddresslastName());
-            estoreAddressScreen.getShippingAddresslastName().setValue("William");
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName());
+            estoreAddressScreen.getShippingAddressLastName().setValue("William");
 
             Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
             shippingAddressCountry.selectByValue("US");
@@ -470,7 +470,7 @@ public class EstoreAddressStepDefs {
             if (Hooks.eStoreURL.contains("stg4")) {
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
                 estoreAddressScreen.getShippingAddressStreetAddress().setValue("MetroTech Center, Brooklyn, NY 11201, USA");
-                estoreAddressScreen.getShippingAddresslastName().click();
+                estoreAddressScreen.getShippingAddressLastName().click();
                 try {
                     $(By.xpath("//*[text()='Metrotech Center, Brooklyn, NY 11201, USA']")).should(visible, Duration.ofSeconds(5));
                     $(By.xpath("//*[text()='Metrotech Center, Brooklyn, NY 11201, USA']")).click();

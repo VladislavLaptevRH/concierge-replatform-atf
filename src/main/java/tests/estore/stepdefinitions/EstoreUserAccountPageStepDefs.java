@@ -148,7 +148,7 @@ public class EstoreUserAccountPageStepDefs {
         estoreUserAccountPage.getLastNameRequired().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getCityRequired().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getStateRequired().should(visible, Duration.ofSeconds(40));
-        estoreUserAccountPage.getPostlaCodeRequired().should(visible, Duration.ofSeconds(40));
+        estoreUserAccountPage.getPostalCodeRequired().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getPhoneRequired().should(visible, Duration.ofSeconds(40));
     }
 
