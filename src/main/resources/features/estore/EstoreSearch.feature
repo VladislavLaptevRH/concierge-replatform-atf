@@ -15,7 +15,7 @@ Feature: Estore Search
 
   Scenario: Search product via SKU 10115260 VLBZ
     Given I log into eStore as "regular"
-    When I go to estore item "10115260 VLBZ" from search field
+    When I go to estore item "17050044 CHAR" from search field
     Then I verify that search result "Cortona Sofa" for search product via sku id is displayed
 
   Scenario: To verify search for random text

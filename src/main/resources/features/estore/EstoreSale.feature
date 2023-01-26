@@ -22,7 +22,7 @@ Feature: Estore Sale
 
   Scenario: To Verify Sale banner
     Given I log into eStore as "regular"
-    When I click on estore sale button
+    When I go to sale estore category
     Then I verify sale banner for estore
 
   Scenario: To verify the back button from sale PDP page
