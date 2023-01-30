@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 
+import org.openqa.selenium.Keys;
 import tests.utility.Hooks;
 import tests.concierge.pageObject.*;
 import io.cucumber.java.en.And;
@@ -351,7 +352,11 @@ public class ConciergeE2EStepDefs {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
         } else if (businessClient.equals("nonmember")) {
+            conciergeUserAccountPage.getClientLookupFirstName().doubleClick();
+            conciergeUserAccountPage.getClientLookupFirstName().sendKeys(Keys.BACK_SPACE);
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
+            conciergeUserAccountPage.getClientLookupLastName().doubleClick();
+            conciergeUserAccountPage.getClientLookupLastName().sendKeys(Keys.BACK_SPACE);
             conciergeUserAccountPage.getClientLookupLastName().setValue("Nonmember");
         } else if (businessClient.equals("trade")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
