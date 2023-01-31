@@ -51,13 +51,15 @@ public class ConciergeAssociateStepDefs {
         assertTrue(conciergeUserAccountPage.getMainMenuHeader().isDisplayed(), "");
     }
 
-    @When("I change my store to store number 10")
-    public void iChangeMyStoreToStoreNumber() {
+    @When("I change my store to number {string}")
+    public void iChangeMyStoreToStoreNumber(String storeNumber) {
         conciergeUserAccountPage.getNewPortBeachGallery().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getNewPortBeachGallery().click();
-        conciergeUserAccountPage.getPaloAltpGallery().click();
-        conciergeUserAccountPage.getGallerySubmitButton().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getNewPortBeachGallery().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getGallerySelect().click();
+        conciergeUserAccountPage.getCurrentLocationGalleryItemByName(storeNumber).click();
         conciergeUserAccountPage.getGallerySubmitButton().click();
+        sleep(3000);
     }
 
     @Then("I verify I see store Palo Alto in the header")
@@ -80,13 +82,13 @@ public class ConciergeAssociateStepDefs {
         conciergeUserAccountPage.getNewPortBeachGallery().click();
     }
 
-    @When("I choose contract gallery")
-    public void iChooseContractGallery() {
+    @When("I choose gallery number {string}")
+    public void iChooseContractGallery(String galleryNumber) {
         conciergeUserAccountPage.getGalleryButton().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getGalleryButton().click();
         conciergeUserAccountPage.getGalleryButton().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getGallerySelect().click();
-        conciergeUserAccountPage.getGalleryItem().click();
+        conciergeUserAccountPage.getCurrentLocationGalleryItemByName(galleryNumber).click();
         conciergeUserAccountPage.getGallerySubmitButton().click();
         sleep(3000);
     }

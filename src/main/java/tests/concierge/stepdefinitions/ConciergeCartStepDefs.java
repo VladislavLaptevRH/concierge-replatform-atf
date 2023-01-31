@@ -592,8 +592,8 @@ public class ConciergeCartStepDefs {
     @When("I apply employee discount")
     public void iApplyEmployeeDiscount() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeCartPageScreen.getUserNamePromocode().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeCartPageScreen.getUserNamePromocode().scrollIntoView(true);
+        conciergeCartPageScreen.getUserNamePromocode().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         sleep(2000);
         conciergeCartPageScreen.getUserNamePromocode().setValue("ediscount");
         conciergeCartPageScreen.getPasswordPromocde().should(Condition.and("", visible, enabled), Duration.ofSeconds(12));

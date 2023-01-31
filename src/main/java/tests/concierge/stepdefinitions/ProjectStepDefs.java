@@ -769,6 +769,7 @@ public class ProjectStepDefs {
     @When("I verify that tax is not displayed")
     public void iVerifyThatTaxIsNotDisplayed() {
         $(By.xpath("//*[text()='Tax']")).should(visible, Duration.ofMinutes(1));
+        conciergeProjectScreen.getTaxExemptCheckBox().scrollIntoView(true);
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getTaxExemptCheckBox());
         $(By.xpath("//*[text()='Tax']")).shouldNot(visible, Duration.ofMinutes(1));
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getTaxExemptCheckBox());

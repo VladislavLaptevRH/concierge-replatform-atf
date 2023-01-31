@@ -236,7 +236,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart via API
     When I remove client from header
-    When I choose contract gallery
+    When I choose gallery number "997"
     When I click on client button from header
     When I look on client by "accountnumber" with "20211221164476"
     When I add item to cart via API

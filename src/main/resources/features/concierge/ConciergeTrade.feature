@@ -43,7 +43,7 @@ Feature:Concierge Trade
     Given I log into Concierge as "associate"
     When I remove client from header
     And I remove all items from cart
-    When I choose contract gallery
+    When I choose gallery number "997"
     When I click on client button from header
     When I choose client who is a "trade"
     When I open product page with "prod1617188" and "63130001"

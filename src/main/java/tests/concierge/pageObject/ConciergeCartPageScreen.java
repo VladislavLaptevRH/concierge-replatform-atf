@@ -86,7 +86,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement keepShopping = $(By.xpath("//*[text()='Keep Shopping']"));
 
-    private final SelenideElement applyEmpDiscountBtn = $(By.xpath("//button[@type='submit' and text() = 'Apply']"));
+    private final SelenideElement applyEmpDiscountBtn = $(By.xpath("//*[text() = 'RH Employee Discount']//*[text() = 'Apply']"));
 
     private final SelenideElement applyPromocodeBtn = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-fullWidth']"));
 
