@@ -64,20 +64,18 @@ public class Hooks {
 
         profile = System.getenv("ENVIRONMENT");
         cookie = System.getenv("ENDPOINT");
-        profile = "stg4";
-        cookie = "prodsupport";
 
-//        if (profile == null) {
-//            Assert.fail("Environment Variable is NOT Set");
-//        } else {
-//            System.out.println("Tests are running on " + profile + " environment");
-//        }
-//
-//        if (cookie == null) {
-//            System.out.println("Tests are running without cookie or endpoint");
-//        } else {
-//            System.out.println("Tests are running with endpoint = " + cookie);
-//        }
+        if (profile == null) {
+            Assert.fail("Environment Variable is NOT Set");
+        } else {
+            System.out.println("Tests are running on " + profile + " environment");
+        }
+
+        if (cookie == null) {
+            System.out.println("Tests are running without cookie or endpoint");
+        } else {
+            System.out.println("Tests are running with endpoint = " + cookie);
+        }
 
         BufferedReader reader;
         try {
@@ -147,7 +145,7 @@ public class Hooks {
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(eStoreURL);
     }
 
@@ -159,7 +157,7 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
         configureConciergeURL();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(conciergeURL);
         /* TODO : Finish Extent Report Class Implementation */
         //report.startReport();
