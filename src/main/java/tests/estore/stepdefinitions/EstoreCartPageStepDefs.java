@@ -631,7 +631,8 @@ public class EstoreCartPageStepDefs {
         estorePaymentPage.getExpiryDateField().setValue("0330");
         switchTo().defaultContent();
 
-        estorePaymentPage.getContinueToCheckout().click();
+        $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='CONTINUE']")).click();
     }
 
     @When("I open product page with NY restriction item")

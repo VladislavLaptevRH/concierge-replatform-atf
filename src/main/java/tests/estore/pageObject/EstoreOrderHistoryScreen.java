@@ -20,7 +20,7 @@ public class EstoreOrderHistoryScreen {
 
     private SelenideElement ordersText = $(By.xpath("//*[text()='Orders']"));
 
-    private SelenideElement orderHistorySafireWilliam = $(By.xpath("//*[text()=' SAFIRE WILLIAM']"));
+    private SelenideElement orderHistorySafireWilliam = $(By.xpath("//*[text()='Safire William']"));
 
     private SelenideElement orderHistoryFoundText = $(By.xpath("//*[text()='Found']"));
 
