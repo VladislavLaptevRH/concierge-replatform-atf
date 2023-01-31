@@ -82,7 +82,9 @@ public class EstorePaymentStepDefs {
     public void iVerifyThatIMAbleToEditPayment() {
         sleep(3000);
         estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
-        estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+        $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='CONTINUE']")).click();
+
         sleep(4000);
         $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).click();
@@ -282,7 +284,9 @@ public class EstorePaymentStepDefs {
     public void iExecutePaymentWithCreditCardOnEstore() {
         sleep(5000);
         estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
-        estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+        sleep(2000);
+        $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='CONTINUE']")).click();
     }
 
     @Then("I verify that new payment was added")

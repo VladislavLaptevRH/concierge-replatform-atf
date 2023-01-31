@@ -34,11 +34,12 @@ public class EstorePaymentPage {
 
     private final SelenideElement cvcField = $(By.xpath("//input[@data-fieldtype='encryptedSecurityCode']"));
 
-    private final  SelenideElement editBillingAddressBtn = $(By.xpath("//a[@href='/checkout/payment.jsp#/']"));
+    private final SelenideElement editBillingAddressBtn = $(By.xpath("//a[@href='/checkout/payment.jsp#/']"));
 
     private final SelenideElement continueToReview = $(By.xpath("//*[text()='CONTINUE TO REVIEW']"));
 
-    private final SelenideElement continueToCheckout = $(By.xpath("//*[text()='Continue to payment']"));
+    private final SelenideElement continueToCheckout = $(By.xpath("//*[text()='CONTINUE']"));
+
 
     private final SelenideElement rhccContinueToReview = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container'][2]/button"));
 
