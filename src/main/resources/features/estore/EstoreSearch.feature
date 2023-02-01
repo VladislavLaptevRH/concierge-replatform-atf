@@ -16,7 +16,7 @@ Feature: Estore Search
   Scenario: Search product via SKU 17050043 CAML
     Given I log into eStore as "regular"
     When I go to estore item "17050044 CHAR" from search field
-    Then I verify that search result "Cortona Sofa" for search product via sku id is displayed
+    Then I verify that search result "802-Gram Turkish Towel Collection" for search product via sku id is displayed
 
   Scenario: To verify search for random text
     Given I log into eStore as "regular"
@@ -53,7 +53,7 @@ Feature: Estore Search
 
   Scenario: Pricing on search result page(US and CAN)
     Given I log into eStore as "regular"
-    When I go to estore item "white and blue corner leather sofa" from search field
+    When I go to estore item "towels" from search field
     Then I verify pricing on search result page
 
   Scenario: Back button test cases

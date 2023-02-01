@@ -283,7 +283,7 @@ public class EstorePaymentStepDefs {
     @When("I execute payment with credit card on estore")
     public void iExecutePaymentWithCreditCardOnEstore() {
         sleep(5000);
-        estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
+        estoreGeneralStepDefs.payWith("CC", "4564202529200745", "321", "0223");
         sleep(2000);
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='CONTINUE']")).click();

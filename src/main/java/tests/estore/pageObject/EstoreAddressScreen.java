@@ -13,7 +13,7 @@ public class EstoreAddressScreen {
 
     private final SelenideElement shippingAddressFirstName = $(By.id("shippingAddress.firstName"));
 
-    private final SelenideElement shippingAddressLastName = $(By.id("lastName"));
+    private final SelenideElement shippingAddressLastName = $(By.id("shippingAddress.lastName"));
 
     private final SelenideElement shippingAddressStreetAddress = $(By.id("addressLine1"));
 

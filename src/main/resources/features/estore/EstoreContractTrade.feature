@@ -166,7 +166,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050045" with "WHT" for estore
-    When I click on add to cart estore button
+    When I click on adxd to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
     And I click on estore no thanks button
@@ -400,6 +400,7 @@ Feature: eStore Contract and Trade
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
+    When I click on edit estore billing address button
     When I edit estore billing address from PG
     When I click on continue to payment estore button
     When I click on continue with original address estore button
