@@ -77,6 +77,7 @@ public class EstoreE2EStepDefs {
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
         estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
+        estoreItemPage.getAddToCartButton().scrollIntoView(true);
         estoreItemPage.getAddToCartButton().click();
     }
 
@@ -565,11 +566,11 @@ public class EstoreE2EStepDefs {
 
     @When("I click on continue payment method estore button")
     public void iClickOnContinuePaymentMethodEstoreButton() {
-        sleep(6000);
+        sleep(3000);
         try {
             if (estorePaymentPage.getContinueToCheckout().isDisplayed()) {
                 estorePaymentPage.getContinueToCheckout().scrollIntoView(true);
-                estorePaymentPage.getContinueToCheckout().should(visible, Duration.ofSeconds(25));
+                estorePaymentPage.getContinueToCheckout().should(visible, Duration.ofSeconds(2));
                 estorePaymentPage.getContinueToCheckout().click();
             }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
@@ -604,15 +605,14 @@ public class EstoreE2EStepDefs {
 
     @When("I open product page with {string} and {string} with {string} for estore")
     public void iOpenProductPageWithAndForEstore(String productId, String skuId, String options) {
-        String URL;
+        String URL = null;
         if (Hooks.profile.equals("stg3")) {
             URL = Hooks.eStoreBaseURL + "/us/en/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
         }
         if (Hooks.profile.equals("stg2")) {
-            URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + "CHAR" + "&categoryId=search";
-        } else {
-            URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
+            URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options + "&categoryId=search";
         }
+
         open(URL);
         sleep(2000);
         estoreItemPage.getAddToCartButton().scrollTo();

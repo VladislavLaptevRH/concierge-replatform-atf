@@ -46,6 +46,8 @@ public class EstoreAddressStepDefs {
             estoreAddressScreen.getShippingAddressState();
             generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
             estoreAddressScreen.getPostalShippingCode().setValue("A1A1A1");
+
+
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Edit button is not displayed");
         }

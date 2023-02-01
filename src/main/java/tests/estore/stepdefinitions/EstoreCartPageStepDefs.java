@@ -358,15 +358,15 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that the added product is in the cart during brand switching")
     public void iVerifyThatTheAddedProductIsInTheCartDuringBrandSwitching() {
-        estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(40));
+        estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getBrandButton().click();
         for (int i = 1; i < 3; i++) {
             if (i > 1) {
                 estoreUserAccountPage.getBrandButton().click();
             }
-            sleep(2000);
+            estoreUserAccountPage.getListOfBrands().get(i).should(visible,Duration.ofSeconds(20));
             estoreUserAccountPage.getListOfBrands().get(i).click();
-            estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(40));
+            estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(20));
         }
     }
 
@@ -638,7 +638,7 @@ public class EstoreCartPageStepDefs {
     @When("I open product page with NY restriction item")
     public void iOpenProductPageWithNYRestrictionItem() {
         String productId = "rhbc_prod961679";
-        String skuId = "112686";
+        String skuId = "112685";
         String url = null;
         if (Hooks.profile.equals("stg2")) {
             url = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + "AGPT" + "&categoryId=search";
