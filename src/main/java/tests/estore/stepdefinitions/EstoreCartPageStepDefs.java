@@ -364,7 +364,7 @@ public class EstoreCartPageStepDefs {
             if (i > 1) {
                 estoreUserAccountPage.getBrandButton().click();
             }
-            estoreUserAccountPage.getListOfBrands().get(i).should(visible,Duration.ofSeconds(20));
+            estoreUserAccountPage.getListOfBrands().get(i).should(visible, Duration.ofSeconds(20));
             estoreUserAccountPage.getListOfBrands().get(i).click();
             estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(20));
         }
@@ -531,12 +531,14 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify state field empty dropdown issue for International billing address")
     public void iVerifyStateFieldEmptyDropdownIssueForInternationalBillingAddress() {
+        sleep(5000);
         $(By.xpath("//*[text()='State required.']")).should(visible, Duration.ofSeconds(30));
     }
 
     @When("I choose estore empty state")
     public void iChooseEstoreEmptyState() {
         estoreAddressScreen.getShippingAddressState().scrollIntoView(true);
+        sleep(2000);
         Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
         selectState.selectByIndex(0);
         sleep(3000);
@@ -620,7 +622,7 @@ public class EstoreCartPageStepDefs {
         selectPayment.selectByIndex(2);
 
         switchTo().frame($(By.cssSelector("iframe[title='Iframe for secured card number']")).should(visible, Duration.ofMinutes(1)));
-        estorePaymentPage.getCardNumberField().setValue("4678475330157543");
+        estorePaymentPage.getCardNumberField().setValue("4111111145551142");
         switchTo().defaultContent();
 
         switchTo().frame($(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")).should(visible, Duration.ofMinutes(1)));
