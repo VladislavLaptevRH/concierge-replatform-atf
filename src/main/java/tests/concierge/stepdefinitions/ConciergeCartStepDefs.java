@@ -647,15 +647,6 @@ public class ConciergeCartStepDefs {
 
     @When("I choose order classification")
     public void iChooseOrderClassification() {
-        //generalStepDefs.waitForJSandJQueryToLoad();
-//        conciergeCartPageScreen.getOrderClassificationSelect().selectOptionContainingText("Select an Option");
-//        conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(text("Select an Option"), Duration.ofSeconds(5));
-//        sleep(7000);
-//        for (int i = 0; i < 10; i++) {
-//            selectOrder.selectByValue("RH Gallery Order");
-//            conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
-//        }
-        //generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(7, SECONDS).await().until(() -> true);
         if(!conciergeCartPageScreen.getOrderClassificationSelect().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
