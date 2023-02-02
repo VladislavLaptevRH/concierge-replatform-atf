@@ -55,7 +55,7 @@ Feature: Estore Cart Page
 
   Scenario: Place order for guest user
     Given I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050044" with "CHAR" for estore
+    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
