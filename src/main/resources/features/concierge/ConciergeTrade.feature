@@ -4,7 +4,7 @@ Feature:Concierge Trade
 
   Scenario: Trade Client - Non Exempt
     Given I log into Concierge as "associate"
-    When I remove all items from cart via API
+    When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
     When I open cart
@@ -17,7 +17,7 @@ Feature:Concierge Trade
 
   Scenario: Verify Trade Prices for PDP
     Given I log into Concierge as "associate"
-    When I remove all items from cart via API
+    When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
     When I open cart
@@ -29,7 +29,7 @@ Feature:Concierge Trade
 
   Scenario: Verify Trade Prices for CP
     Given I log into Concierge as "associate"
-    When I remove all items from cart via API
+    When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
     When I open cart
@@ -58,7 +58,7 @@ Feature:Concierge Trade
 
   Scenario: Verify trade prices for order review page
     Given I log into Concierge as "associate"
-    When I remove all items from cart via API
+    When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
     When I open cart
@@ -73,7 +73,7 @@ Feature:Concierge Trade
 
   Scenario: Address page: Sold-to, Billing, shipping address
     Given I log into Concierge as "associate"
-    When I remove all items from cart via API
+    When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
     When I open cart
@@ -86,7 +86,7 @@ Feature:Concierge Trade
 
   Scenario: Verify that Membership banner is not present on the cart page
     Given I log into Concierge as "associate"
-    When I remove all items from cart via API
+    When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
     When I open cart

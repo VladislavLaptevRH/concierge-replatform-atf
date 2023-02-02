@@ -12,6 +12,8 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 public class ConciergeCartPageScreen {
 
+    private final SelenideElement continueAddingAdditionalButton = $(By.xpath("//*[text() = 'CONTINUE']"));
+
     private final SelenideElement orderClassificationGalleryOrder = $(By.xpath("//option[@value='RH Gallery Order']"));
 
     private final SelenideElement orderClassificationResidentialTrade = $(By.xpath("//option[@value='RH Residential Trade']"));
@@ -58,7 +60,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement cartTitle = $(By.xpath("//*[text()='CART']"));
 
-    private final SelenideElement clearOrderButton = $(By.xpath("//div[@class='MuiGrid-root']//a"));
+    private final SelenideElement clearOrderButton = $(By.xpath("//*[text() = 'Clear Order']"));
 
     private final SelenideElement addMonogramButton = $(By.xpath("//*[text()='add monogram']"));
 
@@ -71,6 +73,8 @@ public class ConciergeCartPageScreen {
     private final SelenideElement memberSavingsText = $(By.xpath("//*[text()='Member Savings']"));
 
     private final SelenideElement clearOrderButtonPop = $(By.xpath("//*[text()='CLEAR ORDER']"));
+
+    private final SelenideElement clearOrderButtonPopUpHeader = $(By.xpath("//*[text() = 'Are you sure you want to clear the current order?']"));
 
     private final List<SelenideElement> monogramFonts = $$(By.xpath("(//ul[@class='MuiGridList-root'])[1]//li[@class='MuiGridListTile-root']"));
 
