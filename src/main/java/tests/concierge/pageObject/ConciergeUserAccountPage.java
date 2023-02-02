@@ -99,6 +99,8 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement cartButton =  $(By.id("header-cart-button"));
 
+    private final SelenideElement cartButtonItemSum =  $(By.xpath("//*[@id = 'header-cart-button']//span"));
+
     private final SelenideElement orderHistoryButton = $(By.xpath("//a[1]/button[contains(@class,'MuiButton-root')]"));
 
     private final List<SelenideElement> menuItems = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//div"));

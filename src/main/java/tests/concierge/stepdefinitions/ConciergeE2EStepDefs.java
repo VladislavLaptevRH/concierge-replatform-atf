@@ -21,7 +21,9 @@ import java.util.Random;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -311,6 +313,24 @@ public class ConciergeE2EStepDefs {
             executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getNoThanksButton());
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");
+        }
+    }
+
+    @When("I click on continue adding additional button")
+    public void iClickOnContinueAddingAdditionalButton() {
+        try {
+            generalStepDefs.waitForJSandJQueryToLoad();
+            conciergeCartPageScreen.getContinueAddingAdditionalButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(30));
+            wait.until(ExpectedConditions.elementToBeClickable(conciergeCartPageScreen.getContinueAddingAdditionalButton()));
+            wait.until(ExpectedConditions.visibilityOf(conciergeCartPageScreen.getContinueAddingAdditionalButton()));
+            Actions actions = new Actions(WebDriverRunner.getWebDriver());
+            actions.moveToElement(conciergeCartPageScreen.getContinueAddingAdditionalButton());
+            conciergeCartPageScreen.getContinueAddingAdditionalButton().scrollIntoView(true);
+            generalStepDefs.waitForJSandJQueryToLoad();
+            sleep(4000);
+            executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getContinueAddingAdditionalButton());
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Continue button is not displayed");
         }
     }
 
@@ -714,9 +734,9 @@ public class ConciergeE2EStepDefs {
 
     @When("I open product page with {string} and {string}")
     public void iOpenProductPageWithAnd(String productId, String skuId) {
-        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+GREY";
+        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+NATL";
         open(URL);
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeItemsScreen.getAddToCartButton().scrollTo();
         if (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
             for (int i = 0; i < 3; i++) {

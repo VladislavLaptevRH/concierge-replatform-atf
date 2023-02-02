@@ -22,6 +22,8 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -646,15 +648,20 @@ public class ConciergeCartStepDefs {
     @When("I choose order classification")
     public void iChooseOrderClassification() {
         //generalStepDefs.waitForJSandJQueryToLoad();
-        Select selectOrder = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
 //        conciergeCartPageScreen.getOrderClassificationSelect().selectOptionContainingText("Select an Option");
 //        conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(text("Select an Option"), Duration.ofSeconds(5));
-        sleep(7000);
+//        sleep(7000);
 //        for (int i = 0; i < 10; i++) {
 //            selectOrder.selectByValue("RH Gallery Order");
 //            conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
 //        }
         //generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(7, SECONDS).await().until(() -> true);
+        if(!conciergeCartPageScreen.getOrderClassificationSelect().isDisplayed()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(7, SECONDS).await().until(() -> true);
+        }
+        Select selectOrder = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
         selectOrder.selectByValue("RH Gallery Order");
         conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
     }
@@ -684,6 +691,42 @@ public class ConciergeCartStepDefs {
     public void iRemoveAllItemsFromCartViaAPI() {
         generalStepDefs.removeLineItemFromConciergeCart();
     }
+
+    @When("I remove all items from cart via UI")
+    public void iRemoveAllItemsFromCartViaUI() {
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+
+        if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
+            String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
+            open(URL);
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
+            conciergeCartPageScreen.getClearOrderButton().should(Condition.be(visible), Duration.ofSeconds(10));
+            conciergeCartPageScreen.getClearOrderButton().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            if (!conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current order?"), Duration.ofMinutes(2)).isEnabled()) {
+                for (int i = 0; i < 3; i++) {
+                    conciergeCartPageScreen.getClearOrderButton().click();
+                    with().pollInterval(4, SECONDS).await().until(() -> true);
+                }
+            } else {
+                conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current order?"), Duration.ofMinutes(2));
+                conciergeCartPageScreen.getClearOrderButtonPop().should(Condition.be(visible), Duration.ofSeconds(10));
+                conciergeCartPageScreen.getClearOrderButtonPop().click();
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+            }
+            try {
+                conciergeUserAccountPage.getCartButtonItemSum().shouldNot(visible, Duration.ofMinutes(2));
+            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                System.out.println("Cart sum indicator is displayed");
+            }
+        } else {
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+        }
+    }
+
+
 
     @When("I clear order via API")
     public void iClearOrderViaAPI() {
