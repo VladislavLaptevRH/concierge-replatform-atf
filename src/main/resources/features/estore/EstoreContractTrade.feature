@@ -400,6 +400,7 @@ Feature: eStore Contract and Trade
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
+    When I click on edit estore billing address button
     When I edit estore billing address from PG
     When I click on continue to payment estore button
     When I click on continue with original address estore button
