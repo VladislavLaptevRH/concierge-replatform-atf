@@ -11,6 +11,11 @@ import static com.codeborne.selenide.Selenide.$;
 public class CheckoutAddressScreen {
 
     private final SelenideElement firstNameBillingAddress = $(By.id("billingAddress.firstName"));
+    private final SelenideElement emailAddressField = $(By.xpath("//label[text() = 'Email address']/following-sibling::div/input"));
+
+    private final SelenideElement confirmEmailAddressField = $(By.xpath("///label[text() = 'Confirm email']/following-sibling::div/input"));
+
+    private final SelenideElement checkoutAddressPopUpHeader = $(By.id("//*[text() = 'We are unable to verify your Shipping Address']"));
 
     private final SelenideElement firstNameInpt = $(By.xpath("//input[contains(@id,'firstName')and contains(@id,'shipping')]"));
 
@@ -29,7 +34,7 @@ public class CheckoutAddressScreen {
     private final SelenideElement countryField = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[1]"));
 
     private final SelenideElement zipPostalCodeField =  $(By.id("address-postal-code-field"));
-            //$(By.xpath("//input[@id='shippingAddress.postalCode']"));
+
 
     private final SelenideElement phoneField = $(By.cssSelector("div:nth-child(2) > div:nth-child(9) > div:nth-child(2) > input:nth-child(1)"));
 

@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static tests.utility.Hooks.getWindowsHandles;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -98,7 +100,7 @@ public class ConciergeOrderHistoryStepDefs {
 
     @When("I click on random order")
     public void iClickOnRandomOrder() {
-        sleep(4000);
+        with().pollInterval(4, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Automation NonMember']")).should(visible, Duration.ofSeconds(40));
         conciergeOrderHistoryForm.getFirstResult().should(visible, Duration.ofMinutes(1));
         conciergeOrderHistoryForm.getFirstResult().click();
@@ -107,7 +109,7 @@ public class ConciergeOrderHistoryStepDefs {
     @Then("I verify that I redirected to wismo")
     public void iVerifyThatIRedirectedToWismo() {
         $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']")).shouldHave(text("ORDER HISTORY"), Duration.ofSeconds(30));
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         ArrayList<String> tabs = new ArrayList<>(getWindowsHandles());
         switchTo().window(tabs.get(1));
         boolean redirect = tabs.size() == 2;

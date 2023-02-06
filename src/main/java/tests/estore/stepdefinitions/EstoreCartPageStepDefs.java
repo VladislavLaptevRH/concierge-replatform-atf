@@ -21,6 +21,8 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static io.netty.handler.codec.rtsp.RtspHeaders.Values.URL;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 public class EstoreCartPageStepDefs {
     EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
@@ -43,7 +45,7 @@ public class EstoreCartPageStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         if (Hooks.profile.contains("stg4")) {
             estoreUserAccountPage.getCartButtonStg4().should(visible, Duration.ofMinutes(3));
-            sleep(3000);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             int countOfCartItems = 0;
 
             try {
@@ -61,7 +63,7 @@ public class EstoreCartPageStepDefs {
 
         if (Hooks.profile.contains("stg2")) {
             estoreUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(3));
-            sleep(3000);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             int countOfCartItems = 0;
 
             try {
@@ -79,7 +81,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on view cart estore button")
     public void iClickOnViewCartButton() {
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         generalStepDefs.waitForJSandJQueryToLoad();
         estoreItemPage.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(80));
         estoreItemPage.getViewCartButton().should(visible, Duration.ofSeconds(60));
@@ -93,7 +95,7 @@ public class EstoreCartPageStepDefs {
         Select selectOrder = new Select(estoreCartPage.getOrderClassificationSelect());
         estoreCartPage.getOrderClassificationSelect().selectOptionContainingText("Select an Option");
         estoreCartPage.getOrderClassificationSelect().shouldHave(text("Select an Option"), Duration.ofSeconds(5));
-        sleep(7000);
+        with().pollInterval(7, SECONDS).await().until(() -> true);
         for (int i = 0; i < 10; i++) {
             selectOrder.selectByValue("RH Gallery Order");
             estoreCartPage.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
@@ -157,13 +159,13 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on zipcode estore button")
     public void iClickOnZipcodeEstoreButton() {
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreAddressScreen.getEnterZipCodeBtn().scrollIntoView(true);
         estoreAddressScreen.getEnterZipCodeBtn().should(visible, Duration.ofSeconds(40));
         estoreAddressScreen.getEnterZipCodeBtn().click();
 
         try {
-            sleep(2000);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             executeJavaScript("arguments[0].click();", estoreAddressScreen.getEnterZipCodeBtn());
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Enter zipcode button is not displayed");
@@ -213,7 +215,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I choose qty for item from estore cart")
     public void iChooseQtyForItemFromCart() {
-        sleep(7000);
+        with().pollInterval(7, SECONDS).await().until(() -> true);
         Select qtySelect = new Select(estoreCartPage.getQuantitySelect());
         estoreCartPage.getQuantitySelect().should(visible, Duration.ofSeconds(40));
         itemQuantity = 2;
@@ -242,13 +244,13 @@ public class EstoreCartPageStepDefs {
 
     @When("I update postal code in cart")
     public void iUpdatePostalCodeInCart() {
-        sleep(4000);
+        with().pollInterval(4, SECONDS).await().until(() -> true);
         estoreCartPage.getZipCodeField().scrollIntoView(true);
         estoreCartPage.getZipCodeField().should(visible, Duration.ofSeconds(40));
         estoreCartPage.getZipCodeField().clear();
         estoreCartPage.getZipCodeField().click();
         estoreCartPage.getZipCodeField().sendKeys("10007");
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreAddressScreen.getSubmitZipCode().should(visible, Duration.ofSeconds(20));
         estoreAddressScreen.getSubmitZipCode().click();
     }
@@ -266,7 +268,7 @@ public class EstoreCartPageStepDefs {
     @When("I click on gift box estore button")
     public void iClickOnRemoveGiftBoxButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreItemPage.getAddGiftCheckBox().click();
     }
 
@@ -345,12 +347,12 @@ public class EstoreCartPageStepDefs {
     @Then("I verify membership estore banner for {string}")
     public void iVerifyMembershipEstoreBannerFor(String arg0) {
         if (arg0.equals("nonmember user")) {
-            sleep(3000);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible, Duration.ofSeconds(40));
             estoreCartPage.getJoinNowCartEstoreButton().should(visible, Duration.ofSeconds(40));
         }
         if (arg0.equals("member user")) {
-            sleep(3000);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             estoreCartPage.getJoinNowCartEstoreButton().shouldNot(visible, Duration.ofSeconds(20));
         }
 
@@ -364,7 +366,7 @@ public class EstoreCartPageStepDefs {
             if (i > 1) {
                 estoreUserAccountPage.getBrandButton().click();
             }
-            sleep(2000);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             estoreUserAccountPage.getListOfBrands().get(i).click();
             estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(40));
         }
@@ -372,9 +374,9 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that I'm able to add products from all brands to cart")
     public void iVerifyThatIMAbleToAddProductsFromAllBrandsToCart() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getBrandButton().click();
     }
@@ -387,7 +389,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on estore cart button from header")
     public void iClickOnEstoreCartButtonFromHeader() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreCartPage.getCartButtonOrderReview().should(visible, Duration.ofSeconds(40));
         executeJavaScript("arguments[0].click();", estoreCartPage.getCartButtonOrderReview());
     }
@@ -398,12 +400,12 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that I'm able to increase item quantity with success after payment")
     public void iVerifyThatItemQuantityWasIncreasedWithSuccess() {
-        sleep(3000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreItemPage.getSelectQuantityCartPage().should(visible, Duration.ofSeconds(40));
         estoreItemPage.getSelectQuantityCartPage().scrollIntoView(true);
         Select selectQuantity = new Select(estoreItemPage.getSelectQuantityCartPage());
         selectQuantity.selectByValue("2");
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that I'm able to decrease item quantity with success")
@@ -416,7 +418,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on add to wishlist button from cart")
     public void iClickOnAddToWishlistButtonFromCart() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreCartPage.getAddToWishlistButton().should(visible, Duration.ofSeconds(40));
         estoreCartPage.getAddToWishlistButton().click();
     }
@@ -445,7 +447,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I introduces CAN zip code for estore cart")
     public void iIntroducesCANZipCodeForEstoreCart() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//div[@id='component-order-summary']//p//span")).scrollIntoView(true);
         $(By.xpath("//div[@id='component-order-summary']//p//span")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//div[@id='component-order-summary']//p//span")).click();
@@ -456,7 +458,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that the price for trade get increased in multiple of QTY")
     public void iVerifyThatThePriceForTradeGetIncreasedInMultipleOfQTY() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//*[contains(text(),'102.00')]")).should(visible, Duration.ofSeconds(40));
     }
 
@@ -469,7 +471,7 @@ public class EstoreCartPageStepDefs {
     public void iOpenCart() {
         String URL = Hooks.eStoreBaseURL + "/checkout/shopping_cart.jsp";
         open(URL);
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -539,7 +541,7 @@ public class EstoreCartPageStepDefs {
         estoreAddressScreen.getShippingAddressState().scrollIntoView(true);
         Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
         selectState.selectByIndex(0);
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify estore order total in order estimate for membership for {string}")
@@ -566,13 +568,13 @@ public class EstoreCartPageStepDefs {
         } else {
             estoreGeneralStepDefs.addLineItemsToEstoreCartStg2();
         }
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
     @When("I goes to estore cart for estore")
     public void iGoesToEstoreCartForEstore() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if (Hooks.profile.equals("stg3")) {
             $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']")).click();
@@ -608,7 +610,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I verify for back button from cart page")
     public void iVerifyForBackButtonFromCartPage() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().back();
         estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(20));
     }

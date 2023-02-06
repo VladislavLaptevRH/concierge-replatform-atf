@@ -11,6 +11,8 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.sleep;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 
 public class EstoreItemsStepDefs {
@@ -36,7 +38,7 @@ public class EstoreItemsStepDefs {
 
     @When("I select estore fabric option")
     public void iSelectFabricProperty() {
-        sleep(8000);
+        with().pollInterval(8, SECONDS).await().until(() -> true);
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
             selectOption.getFabricProperty().should(appear, Duration.ofSeconds(15));
@@ -51,7 +53,7 @@ public class EstoreItemsStepDefs {
     @When("I select estore color option")
     public void iSelectColorOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(8000);
+        with().pollInterval(8, SECONDS).await().until(() -> true);
         try {
             selectOption.getColorOption().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
             selectOption.getColorOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));

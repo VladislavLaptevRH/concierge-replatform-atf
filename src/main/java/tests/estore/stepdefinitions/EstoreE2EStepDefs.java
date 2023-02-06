@@ -20,7 +20,9 @@ import java.util.Random;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertTrue;
 
 public class EstoreE2EStepDefs {
@@ -186,7 +188,7 @@ public class EstoreE2EStepDefs {
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
         estoreUserAccountPage.getSearchItemField().click();
         generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(3000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getSearchItemField().setValue(arg0);
         $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']")).click();
@@ -238,7 +240,7 @@ public class EstoreE2EStepDefs {
             actions.moveToElement(estoreCartPage.getNoThanksButton());
             estoreCartPage.getNoThanksButton().scrollIntoView(true);
             generalStepDefs.waitForJSandJQueryToLoad();
-            sleep(4000);
+            with().pollInterval(4, SECONDS).await().until(() -> true);
             executeJavaScript("arguments[0].click();", estoreCartPage.getNoThanksButton());
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");
@@ -268,7 +270,7 @@ public class EstoreE2EStepDefs {
     @When("I remove estore client from header")
     public void iRemoveEstoreClientFromHeader() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         try {
             if ($(By.xpath("//*[contains(text(),'Client: ')]")).isDisplayed()) {
                 conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
@@ -472,7 +474,7 @@ public class EstoreE2EStepDefs {
         generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.cssSelector("body > div:nth-child(7) > div:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > label:nth-child(1) > span:nth-child(1) > span:nth-child(1) > input:nth-child(1)")).click();
     }
 
@@ -483,7 +485,7 @@ public class EstoreE2EStepDefs {
 
     @When("I edit estore shipping address from order review page")
     public void iEditShippingEstoreAddressFromOrderReviewPage() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeAddressScreen.getEditShippingAddress().should(visible, Duration.ofSeconds(15));
         conciergeAddressScreen.getEditShippingAddress().click();
         checkoutAddressScreen.getFirstNameInpt().should(visible, Duration.ofSeconds(15));
@@ -545,7 +547,7 @@ public class EstoreE2EStepDefs {
     @When("I select estore length option")
     public void iSelectEstoreLengthOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(6000);
+        with().pollInterval(6, SECONDS).await().until(() -> true);
         selectOption.getLengthOption().should(visible, Duration.ofSeconds(15));
         Select selectLength = new Select(selectOption.getLengthOption());
         selectLength.selectByValue("80400002");
@@ -554,7 +556,7 @@ public class EstoreE2EStepDefs {
     @When("I click on same as estore shipping address checkbox")
     public void iClickOnSameAsShippingAddressCheckbox() {
         try {
-            sleep(5000);
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             if ($(By.xpath("//*[text()='Same as shipping address']")).isDisplayed()) {
                 $(By.xpath("//*[text()='Same as shipping address']")).click();
             }
@@ -565,7 +567,7 @@ public class EstoreE2EStepDefs {
 
     @When("I click on continue payment method estore button")
     public void iClickOnContinuePaymentMethodEstoreButton() {
-        sleep(6000);
+        with().pollInterval(6, SECONDS).await().until(() -> true);
         try {
             if (estorePaymentPage.getContinueToCheckout().isDisplayed()) {
                 estorePaymentPage.getContinueToCheckout().scrollIntoView(true);
@@ -590,7 +592,7 @@ public class EstoreE2EStepDefs {
     public void iOpenEstoreProductPageWithProductIdAndSkuId(String productId, String skuId) {
         String URL = Hooks.eStoreURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+NATL";
         open(URL);
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
             open(URL);
         }
@@ -598,7 +600,7 @@ public class EstoreE2EStepDefs {
 
     @When("I refresh current estore page")
     public void iRefreshCurrentEstorePage() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -614,12 +616,12 @@ public class EstoreE2EStepDefs {
             URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
         }
         open(URL);
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreItemPage.getAddToCartButton().scrollTo();
         if (!estoreItemPage.getAddToCartButton().isEnabled()) {
             for (int i = 0; i < 3; i++) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
-                sleep(4000);
+                with().pollInterval(4, SECONDS).await().until(() -> true);
             }
         }
     }

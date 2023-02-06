@@ -16,6 +16,8 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 public class EstoreUserAccountPageStepDefs {
     EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
@@ -29,7 +31,7 @@ public class EstoreUserAccountPageStepDefs {
     public void iGoToProfilePaymentMethod() {
         String URL = Hooks.eStoreBaseURL + "/my-account/payment-info.jsp";
         open(URL);
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
 
@@ -73,7 +75,7 @@ public class EstoreUserAccountPageStepDefs {
         }
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getSaveCardButton().click();
 
@@ -98,7 +100,7 @@ public class EstoreUserAccountPageStepDefs {
         switchTo().defaultContent();
 
         firstName = estoreGeneralStepDefs.generateRandomString(5);
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getBillingAddressFirstName().clear();
         estoreUserAccountPage.getBillingAddressFirstName().setValue(firstName);
 
@@ -266,7 +268,7 @@ public class EstoreUserAccountPageStepDefs {
         }
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getSaveCardButton().click();
     }

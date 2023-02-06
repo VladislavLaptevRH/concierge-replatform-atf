@@ -11,6 +11,8 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.sleep;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class EstoreWishlistStepDefs {
@@ -21,7 +23,7 @@ public class EstoreWishlistStepDefs {
 
     @Then("I validate items in wishlist")
     public void iValidateItemsInWishlist() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreWishlistPage.getWhistItem().should(visible, Duration.ofSeconds(30));
     }
 
@@ -29,9 +31,9 @@ public class EstoreWishlistStepDefs {
     @When("I click on add to wishlist button")
     public void iClickOnAddToWishlistButton() {
         estoreGeneralStepDefs.waitForJSandJQueryToLoad();
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreItemPage.getAddToWishListButton().scrollIntoView(true);
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreItemPage.getAddToWishListButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
         estoreItemPage.getAddToWishListButton().click();
 
@@ -41,7 +43,7 @@ public class EstoreWishlistStepDefs {
 
     @Then("I validate member price in wishlist")
     public void iValidateMemberPriceInWishlist() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         assertTrue(estoreWishlistPage.getMemberPrice().exists());
     }
 

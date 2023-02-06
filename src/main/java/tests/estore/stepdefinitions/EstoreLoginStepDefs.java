@@ -11,6 +11,8 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 public class EstoreLoginStepDefs {
 
@@ -28,7 +30,7 @@ public class EstoreLoginStepDefs {
         try {
             loginAsRole(arg0);
             if (Hooks.profile.equals("stg3")) {
-                sleep(2000);
+                with().pollInterval(2, SECONDS).await().until(() -> true);
                 $(By.xpath("//*[text()='ACCEPT ALL']")).click();
             }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
@@ -195,7 +197,7 @@ public class EstoreLoginStepDefs {
 
     @Given("I log into eStore as contract")
     public void iLogIntoEStoreAsContract() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         open(Hooks.eStoreBaseURL + "/contract-sales/contract-sign-in.jsp");
         estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
         estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
@@ -211,7 +213,7 @@ public class EstoreLoginStepDefs {
 
     @Given("I log into eStore as trade")
     public void iLogIntoEStoreAsTrade() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
 
         try {
             open(Hooks.eStoreBaseURL + "/trade-sales/trade-sign-in.jsp");

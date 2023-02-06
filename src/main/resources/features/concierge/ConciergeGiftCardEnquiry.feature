@@ -10,7 +10,7 @@ Feature:Concierge GiftCardEnquiry
 
   Scenario: Purchase Gift Card
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I remove all items from cart via UI
     When I remove client from header
     When I click on gift card enquiry
     When I enter gift card information
@@ -18,7 +18,6 @@ Feature:Concierge GiftCardEnquiry
     Then I verify gift card PDP page is loaded
     When I select options
     When I click on add to cart button
-    When I click on agree and add to cart button
     When I click on view cart button
     When I choose order classification
     When I click on checkout button

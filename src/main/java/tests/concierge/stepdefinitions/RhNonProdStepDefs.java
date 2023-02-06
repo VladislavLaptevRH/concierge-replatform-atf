@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.Select;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 public class RhNonProdStepDefs {
 
@@ -61,7 +63,7 @@ public class RhNonProdStepDefs {
         rollType.selectByIndex(1);
 
         for (int i = 1; i < 33; i++) {
-            sleep(5000);
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             $(By.id("room-label")).should(Condition.visible, Duration.ofSeconds(60));
             Select roomLabel = new Select($(By.id("room-label")));
             roomLabel.selectByIndex(i);

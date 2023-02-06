@@ -30,7 +30,9 @@ import org.slf4j.LoggerFactory;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.with;
 
 public class GeneralStepDefs {
     ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
@@ -98,14 +100,16 @@ public class GeneralStepDefs {
             conciergeLoginPage.getUsernameField().setValue(Hooks.leaderLogin);
             conciergeLoginPage.getPasswordField().setValue(Hooks.leaderPassword);
         }
-
         conciergeLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getSignInButton().click();
 
+        if(!conciergeLoginPage.getLocationNewPortBeach().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         conciergeLoginPage.getLocationNewPortBeach().should(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getLocationNewPortBeach().click();
         conciergeLoginPage.getContinueButton().should(visible, Duration.ofSeconds(30));
-
         conciergeLoginPage.getContinueButton().click();
     }
 

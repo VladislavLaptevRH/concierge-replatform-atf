@@ -14,6 +14,14 @@ import static com.codeborne.selenide.Selenide.$$;
 public class ConciergeItemsScreen {
     private final SelenideElement firstItem = $(By.xpath("(//div[contains(@class,'cols-6')]//div[contains(@class,'MuiGrid-grid-xs-6')])[1]"));
 
+    private final SelenideElement error = $(By.xpath("//*[text() = 'Error while adding items to project']"));
+
+    private final SelenideElement selectSize = $(By.xpath("(//select[contains(@id, 'Size')])[1]"));
+
+    private final SelenideElement selectFinish= $(By.xpath("(//select[contains(@id, 'Finish')])[1]"));
+
+    private final SelenideElement selectQTY = $(By.xpath("(//select[contains(@id, 'qty')])[1]"));
+
     private final List<SelenideElement> items = $$(By.xpath("//div[@class= 'MuiGrid-root MuiGrid-container']/div"));
 
     private final List<SelenideElement> twoItemsSection = $$(By.xpath("//ul[contains(@class,'MuiGridList-root')]/li[@class='MuiGridListTile-root']"));

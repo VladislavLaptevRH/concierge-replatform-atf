@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
 
 
@@ -29,7 +31,7 @@ public class SaleStepDefs {
 
     @Then ("I verify sale navigation bars are displayed")
     public void iVerifySaleNavigationBarsAreDisplayed () {
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         List<String> items = new ArrayList<>();
         List<String> expectedItems = new ArrayList(Arrays.asList("LIVING", "DINING" , "BED", "BATH", "LIGHTING", "TEXTILES", "RUGS", "WINDOWS", "DÉCOR", "OUTDOOR", "BABY & CHILD", "TEEN"));
         for (int i = 0; i < saleScreen.getListOfSaleMainCategory().size(); i++) {
@@ -41,7 +43,7 @@ public class SaleStepDefs {
 
     @When ("I click on sale menu item")
     public void iCLickOnSaleMenuItem () {
-        sleep(7000);
+        with().pollInterval(7, SECONDS).await().until(() -> true);
         for (int i = 0; i < saleScreen.getListOfSaleMainCategory().size(); i++) {
             if (i == 0) {
                 // click on Living
@@ -53,7 +55,7 @@ public class SaleStepDefs {
 
     @When("I click on sub category and navigate PDP")
     public void iClickOnSubCategory() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         for (int i = 0; i < saleScreen.getListOfSaleSubCategory().size(); i++) {
             if (i == 0) {
                 // click on Fabric Seating
@@ -73,7 +75,7 @@ public class SaleStepDefs {
     @Then("I verify prices on product page")
     public void iVerifyPricesOnProductPage() {
 
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         assertEquals(saleScreen.getPrice().getText(), "Sale");
     }
 }

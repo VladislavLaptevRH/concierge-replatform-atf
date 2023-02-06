@@ -10,6 +10,8 @@ import tests.utility.Hooks;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 public class EstoreSaleStepDefs {
 
@@ -19,18 +21,18 @@ public class EstoreSaleStepDefs {
 
     @When("I click on estore sale button")
     public void iClickOnEstoreSaleButton() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreSaleScreen.getSaleButtonMenu().should(Condition.visible, Duration.ofSeconds(20));
         estoreSaleScreen.getSaleButtonMenu().click();
     }
 
     @Then("I verify that I'm able to navigate different category")
     public void iVerifyThatIMAbleToNavigateDifferentCategory() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreSaleScreen.getMainSaleList().should(Condition.visible, Duration.ofSeconds(20));
         estoreSaleScreen.getMainSaleList().click();
 
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreSaleScreen.getSubSaleList().should(Condition.visible, Duration.ofSeconds(20));
         estoreSaleScreen.getSubSaleList().click();
     }
