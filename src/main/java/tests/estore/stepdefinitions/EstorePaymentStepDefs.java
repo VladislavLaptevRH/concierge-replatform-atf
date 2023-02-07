@@ -115,7 +115,7 @@ public class EstorePaymentStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         Select paymentMethod = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         paymentMethod.selectByValue("RH");
-        estorePaymentPage.getRhCardNumberField().setValue("5856373202133257");
+        estorePaymentPage.getRhCardNumberField().setValue("6006101002587290");
         Select paymentPlan = new Select(estorePaymentPage.getSelectPaymentPlan());
         paymentPlan.selectByIndex(1);
     }
