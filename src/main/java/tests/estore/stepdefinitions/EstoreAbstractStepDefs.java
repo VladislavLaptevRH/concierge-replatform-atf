@@ -15,7 +15,9 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertTrue;
 
 public class EstoreAbstractStepDefs {
@@ -103,7 +105,9 @@ public class EstoreAbstractStepDefs {
     @When("I click on estore checkout button")
     public void iClickOnCheckoutButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(2000);
+//        sleep(2000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+
         $(By.xpath("//*[text()='Checkout']")).should(visible,Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Checkout']")).click();
     }

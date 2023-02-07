@@ -27,7 +27,7 @@ public class EstorePaymentStepDefs {
     @Then("I verify that I'm able to execute estore split payment")
     public void iVerifyThatIMAbleToExecuteEstoreSplitPayment() {
         try {
-            estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
+            estoreGeneralStepDefs.payWith("CC", "4564202529200745", "321", "0223");
             sleep(3000);
             $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
             $(By.xpath("//input[@type='text']")).setValue("10");
@@ -113,7 +113,7 @@ public class EstorePaymentStepDefs {
         sleep(5000);
         Select paymentMethod = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         paymentMethod.selectByValue("RH");
-        estorePaymentPage.getRhCardNumberField().setValue("5856373202133257");
+        estorePaymentPage.getRhCardNumberField().setValue("6006101002587290");
         Select paymentPlan = new Select(estorePaymentPage.getSelectPaymentPlan());
         paymentPlan.selectByIndex(1);
     }
@@ -283,7 +283,7 @@ public class EstorePaymentStepDefs {
     @When("I execute payment with credit card on estore")
     public void iExecutePaymentWithCreditCardOnEstore() {
         sleep(5000);
-        estoreGeneralStepDefs.payWith("CC", "4111111145551142", "737", "0330");
+        estoreGeneralStepDefs.payWith("CC", "4564202529200745", "321", "0223");
         sleep(2000);
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='CONTINUE']")).click();
