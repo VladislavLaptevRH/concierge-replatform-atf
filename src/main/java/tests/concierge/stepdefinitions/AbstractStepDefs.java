@@ -15,7 +15,9 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertTrue;
 
 public class AbstractStepDefs {
@@ -51,14 +53,14 @@ public class AbstractStepDefs {
                     }
                 }
             }
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": "+ Hooks.getCurrentUrl());
     }
 
 
     @When("I clicks on o random item")
     public void iClicksOnORandomItem() {
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
             conciergeItemsScreen.getItems().get(1).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
@@ -107,7 +109,11 @@ public class AbstractStepDefs {
 
     @When("I click on checkout button")
     public void iClickOnCheckoutButton() {
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!conciergeItemsScreen.getCheckoutButton().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeItemsScreen.getCheckoutButton().shouldHave(text(conciergeItemsScreen.getCheckoutButton().getText()), Duration.ofMinutes(2));
         conciergeItemsScreen.getCheckoutButton().click();
@@ -141,7 +147,7 @@ public class AbstractStepDefs {
 
     @When("I click on a place order button")
     public void iClickOnPlaceOrderButton() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         reviewOrderScreen.getPlaceOrderButton().should(enabled, Duration.ofSeconds(45));
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         reviewOrderScreen.getPlaceOrderButton().should(enabled, Duration.ofMinutes(1));
@@ -175,6 +181,8 @@ public class AbstractStepDefs {
             if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
                 generalStepDefs.fillAddressFields();
                 generalStepDefs.fillZipCodeStateCountry("85020", "US", "");
+                generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
+                checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
             }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Address fields are not available");
@@ -204,7 +212,7 @@ public class AbstractStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         if (conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
             conciergeUserAccountPage.getClientButton().shouldHave(text("CLIENT"), Duration.ofSeconds(15));
-            sleep(2000);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             conciergeUserAccountPage.getClientButton().click();
             conciergeUserAccountPage.getClientLookupHeaderBtn().shouldHave(text("Client Lookup"), Duration.ofMinutes(1));
             conciergeUserAccountPage.getClientLookupHeaderBtn().click();

@@ -11,6 +11,8 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.sleep;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 
 public class ConciergeItemsStepDefs {
@@ -21,7 +23,7 @@ public class ConciergeItemsStepDefs {
 
     @When("I select debth option")
     public void iSelectDebthProperty() {
-        sleep(8000);
+        with().pollInterval(8, SECONDS).await().until(() -> true);
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
             executeJavaScript("window.scrollTo(0, 970)");
@@ -37,7 +39,7 @@ public class ConciergeItemsStepDefs {
 
     @When("I select fabric option")
     public void iSelectFabricProperty() {
-        sleep(8000);
+        with().pollInterval(8, SECONDS).await().until(() -> true);
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
             selectOption.getFabricProperty().should(appear, Duration.ofSeconds(15));
@@ -52,7 +54,7 @@ public class ConciergeItemsStepDefs {
     @When("I select color option")
     public void iSelectColorOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(9000);
+        with().pollInterval(9, SECONDS).await().until(() -> true);
         try {
             selectOption.getColorOption().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
             selectOption.getColorOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));

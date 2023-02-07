@@ -15,7 +15,9 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertTrue;
 
 public class EstoreAbstractStepDefs {
@@ -37,7 +39,7 @@ public class EstoreAbstractStepDefs {
 
     @When("I clicks on a random estore menu item")
     public void iClicksOnARandomEstoreMenuItem() {
-        sleep(7000);
+        with().pollInterval(7, SECONDS).await().until(() -> true);
         generalStepDefs.waitForJSandJQueryToLoad();
         estoreCategories.getLivingCategory().should(visible, Duration.ofSeconds(60));
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
@@ -53,7 +55,7 @@ public class EstoreAbstractStepDefs {
 
     @When("I clicks on estore random item")
     public void iClicksOnEstoreRandomItem() {
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
             estoreItemPage.getItems().should(Condition.and("", visible, enabled), Duration.ofMinutes(3));
@@ -103,7 +105,7 @@ public class EstoreAbstractStepDefs {
     @When("I click on estore checkout button")
     public void iClickOnCheckoutButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Checkout']")).should(visible,Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Checkout']")).click();
     }
@@ -139,7 +141,7 @@ public class EstoreAbstractStepDefs {
     @When("I click on a place estore order button")
     public void iClickOnPlaceOrderButton() {
 
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreReviewOrderPage.getPlaceOrderButton().should(enabled, Duration.ofMinutes(1));
         estoreReviewOrderPage.getPlaceOrderButton().click();
 
@@ -215,7 +217,7 @@ public class EstoreAbstractStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         if (conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
             conciergeUserAccountPage.getClientButton().shouldHave(text("CLIENT"), Duration.ofSeconds(15));
-            sleep(2000);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             conciergeUserAccountPage.getClientButton().click();
             conciergeUserAccountPage.getClientLookupHeaderBtn().shouldHave(text("Client Lookup"), Duration.ofMinutes(1));
             conciergeUserAccountPage.getClientLookupHeaderBtn().click();

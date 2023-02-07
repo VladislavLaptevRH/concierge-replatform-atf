@@ -15,6 +15,8 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 public class RegistryStepDefs {
     RegistryScreen registryScreen = new RegistryScreen();
@@ -154,7 +156,7 @@ public class RegistryStepDefs {
     @When("I edit registry for registrant")
     public void iEditRegistryForRegistrant() {
         registrantAddress = generalStepDefs.getAlphaNumericString(5);
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         registryScreen.getRegistrantAddressLine().should(Condition.visible, Duration.ofSeconds(20));
         generalStepDefs.clearField(registryScreen.getRegistrantAddressLine());
         registryScreen.getRegistrantAddressLine().setValue(registrantAddress);

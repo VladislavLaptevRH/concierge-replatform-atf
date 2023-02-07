@@ -14,6 +14,8 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 public class Pdp {
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
@@ -23,18 +25,18 @@ public class Pdp {
     SelectOption selectOption = new SelectOption();
     @When("I click on add monogram checkbox from pdp")
     public void iClickOnAddMonogramCheckboxFromPdp() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeItemsScreen.getAddMonogramCheckBoxPdp().click();
     }
 
     @When("I choose monogram properties for pdp")
     public void iChooseMonogramPropertiesForPdp() {
 //        conciergeCartPageScreen.getMonogramColors().get(2).should(visible, Duration.ofMinutes(1));
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramColors().get(2).scrollIntoView(true);
         conciergeCartPageScreen.getMonogramColors().get(2).click();
 //        conciergeItemsScreen.getMonogramColorChampagne().should(visible, Duration.ofSeconds(40));
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeItemsScreen.getMonogramColorChampagne().scrollIntoView(true);
         conciergeItemsScreen.getMonogramColorChampagne().click();
         conciergeCartPageScreen.getMonogramText().setValue("test");
@@ -52,7 +54,7 @@ public class Pdp {
 
     @When("I click on view in stock items")
     public void iClickOnViewInStockItems() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
        // $(By.xpath("//*[text()='In-Stock']")).shouldHave(text("In-Stock"), Duration.ofSeconds(20));
         $(By.xpath("//*[text()='In-Stock']")).scrollIntoView(true);
         $(By.xpath("//*[text()='In-Stock']")).click();
@@ -66,7 +68,7 @@ public class Pdp {
 
     @When("I click on view sale items")
     public void iClickOnViewSaleItems() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         //$(By.xpath("//*[text()='Sale']")).shouldHave(text("Sale"), Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Sale']")).scrollIntoView(true);
         $(By.xpath("//*[text()='Sale']")).click();
@@ -140,7 +142,7 @@ public class Pdp {
 
     @When("I choose color from special order fabrics")
     public void iChooseColorFromSpecialOrderFabrics() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
         actions.moveToElement(conciergeUserAccountPage.getMenuItems().get(1));
         pdpScreen.getFogSpecialOrderColor().should(visible, Duration.ofSeconds(40));

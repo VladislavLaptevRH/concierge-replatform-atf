@@ -4,7 +4,7 @@ Feature:Concierge PDP
 
   Scenario:Monogram
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I remove all items from cart via UI
     When I open product page with productId "prod19500002"
     When I click on add monogram checkbox from pdp
     When I choose monogram properties for pdp
@@ -41,26 +41,26 @@ Feature:Concierge PDP
 
   Scenario: YAML carousel
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I remove all items from cart via UI
     When I open product page with productId "prod6490263"
     Then I verify that YAML carousel is displayed
 
   Scenario: Mattress Recycling Fee
     Given I log into Concierge as "associate"
-    When I remove all items from cart
-    When I go to item "10011460 NONE" from search field
+    When I remove all items from cart via UI
+    When I go to item "10039568 NONE" from search field
     Then I verify mattress recycling fee
 
   Scenario: Relacement Items
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I remove all items from cart via UI
     When I go to item "61590226 BRN" from search field
     Then I verify that check for replacements parts button is displayed
     And I verify that replacements parts modal pop up is displayed
 
   Scenario: Colorization
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I remove all items from cart via UI
     When I go to item "10115451 BWMR" from search field
     When I click on special order fabrics
     When I choose color from special order fabrics
@@ -68,7 +68,7 @@ Feature:Concierge PDP
 
   Scenario Outline: Availability, Delivery and Returns messaging for <items>
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I remove all items from cart via UI
     When I go to item "<skuID>" from search field
     Then I verify that availability, Delivery and returns messaging is displayed for "<items>"
     Examples:
@@ -78,7 +78,7 @@ Feature:Concierge PDP
 
   Scenario: ATC SPO - add to cart
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I remove all items from cart via UI
     When I go to item "10105809 BWDV" from search field
     When I click on add to cart button
     When I click on aggree&add button
@@ -87,7 +87,7 @@ Feature:Concierge PDP
 
   Scenario: ATC BO - add to cart
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I remove all items from cart via UI
     When I go to item "10077044 CLR" from search field
     When I click on add to cart button
     When I click on view cart button
@@ -95,7 +95,7 @@ Feature:Concierge PDP
 
   Scenario: Pricing - verify that price on PDP is the same as price from Cart page
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I remove all items from cart via UI
     When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
