@@ -21,7 +21,9 @@ import java.util.Random;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -37,17 +39,25 @@ public class ConciergeE2EStepDefs {
     ConciergeProjectScreen conciergeProjectScreen = new ConciergeProjectScreen();
     SelectOption selectOption = new SelectOption();
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
+    AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
+
     String usState = "";
     String countOfItems = null;
     WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));
-
     String environment;
 
     @When("I click on add to project button")
     public void userClickOnAddToProjectButton() {
         //conciergeItemsScreen.getAddToProjectButton().should(Condition.and("", enabled, visible), Duration.ofSeconds(12));
-        conciergeItemsScreen.getAddToProjectButton().scrollTo();
-        conciergeItemsScreen.getAddToProjectButton().click();
+        if(!conciergeItemsScreen.getAddToProjectButton().isEnabled()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            conciergeItemsScreen.getAddToProjectButton().scrollTo();
+            conciergeItemsScreen.getAddToProjectButton().click();
+        } else {
+            conciergeItemsScreen.getAddToProjectButton().scrollTo();
+            conciergeItemsScreen.getAddToProjectButton().click();
+        }
 
     }
 
@@ -61,6 +71,11 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on add to cart button from project screen")
     public void iClickOnAddToCartButtonFromProjectScreen() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if (!conciergeProjectScreen.getAddToCartButton().isDisplayed()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeProjectScreen.getAddToCartButton().should(visible, Duration.ofSeconds(25));
         conciergeProjectScreen.getAddToCartButton().scrollIntoView(true);
@@ -105,6 +120,7 @@ public class ConciergeE2EStepDefs {
         conciergeItemsScreen.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
         conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
         conciergeItemsScreen.getAddToCartButton().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @When("I fill all fields from address with {string} zip code")
@@ -131,12 +147,19 @@ public class ConciergeE2EStepDefs {
     @When("I remove all items from cart")
     public void iRemoveAllItemsFromCart() {
         generalStepDefs.removeLineItemFromConciergeCart();
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
 
     @When("I continue to payment")
     public void continueToPaymentAfterAddressCheckout() {
+        if(!checkoutAddressScreen.getContinuePaymentButton().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            abstractStepDefs.iClickOnCheckoutButton();
+            iClickOnNoThanksButton();
+            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+        }
         checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
         executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
         checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
@@ -218,7 +241,7 @@ public class ConciergeE2EStepDefs {
         conciergeUserAccountPage.getSearchItemField().click();
         generalStepDefs.waitForJSandJQueryToLoad();
         $(By.xpath("//button[contains(@class,'MuiButton-containedSizeLarge')]")).should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getSearchItemField().setValue(arg0);
         $(By.xpath("//button[contains(@class,'MuiButton-containedSizeLarge')]")).click();
     }
@@ -231,7 +254,7 @@ public class ConciergeE2EStepDefs {
         if (Hooks.profile.contains("stg2")) {
             environment = "stg2";
 
-        }else if (Hooks.profile.contains("stg4")){
+        } else if (Hooks.profile.contains("stg4")) {
             environment = "stg4";
 
         } else if (Hooks.profile.contains("prod")) {
@@ -241,7 +264,7 @@ public class ConciergeE2EStepDefs {
         if (brand.equals("RH Modern") && Hooks.profile.equals("prod")) {
             $(By.xpath("//li[@data-analytics-url='https://rhmodern.rh.com/']")).shouldHave(text("RH MODERN"), Duration.ofSeconds(20));
             $(By.xpath("//li[@data-analytics-url='https://rhmodern.rh.com/']")).click();
-        } else if (brand.equals("RH Modern")){
+        } else if (brand.equals("RH Modern")) {
             $(By.xpath("//li[@data-analytics-url='https://rhmodern. " + environment + ".rhnonprod.com/']")).shouldHave(text("RH MODERN"), Duration.ofSeconds(20));
             $(By.xpath("//li[@data-analytics-url='https://rhmodern." + environment + ".rhnonprod.com/']")).click();
         }
@@ -265,7 +288,7 @@ public class ConciergeE2EStepDefs {
         if (brand.equals("RH Outdoor") && Hooks.profile.equals("prod")) {
             $(By.xpath("//li[@data-analytics-url='https://rhoutdoor.rh.com/']")).shouldHave(text("RH Outdoor"), Duration.ofSeconds(10));
             $(By.xpath("//li[@data-analytics-url='https://rhoutdoor.rh.com/']")).click();
-        } else if (brand.equals("RH Outdoor"))  {
+        } else if (brand.equals("RH Outdoor")) {
             $(By.xpath("//li[@data-analytics-url='https://rhoutdoor." + environment + ".rhnonprod.com/']")).shouldHave(text("RH Outdoor"), Duration.ofSeconds(10));
             $(By.xpath("//li[@data-analytics-url='https://rhoutdoor." + environment + ".rhnonprod.com/']")).click();
         }
@@ -298,7 +321,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on no thanks button")
     public void iClickOnNoThanksButton() {
-        try {
+        if(conciergeCartPageScreen.getNoThanksButton().isDisplayed()){
             generalStepDefs.waitForJSandJQueryToLoad();
             conciergeCartPageScreen.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
             wait.until(ExpectedConditions.elementToBeClickable(conciergeCartPageScreen.getNoThanksButton()));
@@ -307,10 +330,30 @@ public class ConciergeE2EStepDefs {
             actions.moveToElement(conciergeCartPageScreen.getNoThanksButton());
             conciergeCartPageScreen.getNoThanksButton().scrollIntoView(true);
             generalStepDefs.waitForJSandJQueryToLoad();
-            sleep(4000);
+            with().pollInterval(4, SECONDS).await().until(() -> true);
             executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getNoThanksButton());
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+        } else {
             System.out.println("Close button is not displayed");
+        }
+    }
+
+    @When("I click on continue adding additional button")
+    public void iClickOnContinueAddingAdditionalButton() {
+//        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if(conciergeCartPageScreen.getContinueAddingAdditionalButton().isDisplayed()) {
+            generalStepDefs.waitForJSandJQueryToLoad();
+            conciergeCartPageScreen.getContinueAddingAdditionalButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(30));
+            wait.until(ExpectedConditions.elementToBeClickable(conciergeCartPageScreen.getContinueAddingAdditionalButton()));
+            wait.until(ExpectedConditions.visibilityOf(conciergeCartPageScreen.getContinueAddingAdditionalButton()));
+            Actions actions = new Actions(WebDriverRunner.getWebDriver());
+            actions.moveToElement(conciergeCartPageScreen.getContinueAddingAdditionalButton());
+            conciergeCartPageScreen.getContinueAddingAdditionalButton().scrollIntoView(true);
+            generalStepDefs.waitForJSandJQueryToLoad();
+            executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getContinueAddingAdditionalButton());
+            sleep(20000);
+        } else {
+            System.out.println("Continue button is not displayed");
+            sleep(25000);
         }
     }
 
@@ -336,7 +379,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I remove client from header")
     public void iRemoveClientFromHeader() {
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         while ($(By.xpath("//*[contains(text(),'Client: ')]")).isDisplayed()) {
             conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
             conciergeUserAccountPage.getClientButton().click();
@@ -347,16 +390,14 @@ public class ConciergeE2EStepDefs {
 
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String businessClient) {
-        sleep(7000);
+        with().pollInterval(7, SECONDS).await().until(() -> true);
         if (businessClient.equals("member")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
         } else if (businessClient.equals("nonmember")) {
-            conciergeUserAccountPage.getClientLookupFirstName().doubleClick();
-            conciergeUserAccountPage.getClientLookupFirstName().sendKeys(Keys.BACK_SPACE);
+            generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupFirstName());
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
-            conciergeUserAccountPage.getClientLookupLastName().doubleClick();
-            conciergeUserAccountPage.getClientLookupLastName().sendKeys(Keys.BACK_SPACE);
+            generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupLastName());
             conciergeUserAccountPage.getClientLookupLastName().setValue("Nonmember");
         } else if (businessClient.equals("trade")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
@@ -463,7 +504,7 @@ public class ConciergeE2EStepDefs {
     @When("I fiils all options for item")
     public void iFiilsAllOptionsForItem() {
         //depth option
-        sleep(9000);
+        with().pollInterval(9, SECONDS).await().until(() -> true);
         executeJavaScript("window.scrollTo(0, 970)");
         try {
 
@@ -474,11 +515,11 @@ public class ConciergeE2EStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");
         }
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
 
         //seatheight
         try {
-            sleep(9000);
+            with().pollInterval(9, SECONDS).await().until(() -> true);
             selectOption.getSeatHeight().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select seatHeight = new Select(selectOption.getSeatHeight());
 
@@ -486,11 +527,11 @@ public class ConciergeE2EStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");
         }
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
 
         //finish
         try {
-            sleep(9000);
+            with().pollInterval(9, SECONDS).await().until(() -> true);
             selectOption.getFinishOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select finalOption = new Select(selectOption.getFinishOption());
 
@@ -498,7 +539,7 @@ public class ConciergeE2EStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");
         }
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
 
         //select color option
         try {
@@ -511,7 +552,7 @@ public class ConciergeE2EStepDefs {
 
         //select length option
         try {
-            sleep(9000);
+            with().pollInterval(9, SECONDS).await().until(() -> true);
             selectOption.getLengthOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select selectLength = new Select(selectOption.getLengthOption());
             selectLength.selectByIndex(2);
@@ -538,7 +579,7 @@ public class ConciergeE2EStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");
         }
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
 
     }
 
@@ -634,7 +675,7 @@ public class ConciergeE2EStepDefs {
         //generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.cssSelector("body > div:nth-child(7) > div:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > label:nth-child(1) > span:nth-child(1) > span:nth-child(1) > input:nth-child(1)")).click();
     }
 
@@ -646,7 +687,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I edit shipping address from order review page")
     public void iEditShippingAddressFromOrderReviewPage() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeAddressScreen.getEditShippingAddress().should(visible, Duration.ofSeconds(15));
         conciergeAddressScreen.getEditShippingAddress().click();
         checkoutAddressScreen.getFirstNameInpt().should(visible, Duration.ofSeconds(15));
@@ -687,6 +728,10 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify that all the line items in the cart with the order review page")
     public void iVerifyThatAllTheLineItemsInTheCartWithTheOrderReviewPage() {
+//        if(!$(By.xpath("//*[text()='Qty 1']")).isDisplayed()){
+//            WebDriverRunner.getWebDriver().navigate().refresh();
+//            with().pollInterval(5, SECONDS).await().until(() -> true);
+//        }
         $(By.xpath("//*[text()='Qty 1']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
@@ -706,7 +751,7 @@ public class ConciergeE2EStepDefs {
     @When("I select length option")
     public void iSelectLengthOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(6000);
+        with().pollInterval(6, SECONDS).await().until(() -> true);
         //selectOption.getLengthOption().should(visible, Duration.ofSeconds(15));
         Select selectLength = new Select(selectOption.getLengthOption());
         selectLength.selectByValue("80400002");
@@ -714,39 +759,52 @@ public class ConciergeE2EStepDefs {
 
     @When("I open product page with {string} and {string}")
     public void iOpenProductPageWithAnd(String productId, String skuId) {
-        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+GREY";
+        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+NATL";
         open(URL);
-        sleep(2000);
-        conciergeItemsScreen.getAddToCartButton().scrollTo();
-        if (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
             for (int i = 0; i < 3; i++) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
-                sleep(4000);
+                with().pollInterval(5, SECONDS).await().until(() -> true);
             }
+        }
+        conciergeItemsScreen.getAddToCartButton().scrollTo();
+        conciergeItemsScreen.getAddToCartButton().should(visible, Duration.ofSeconds(10));
+        if (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
+            Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
+            sizeList.selectByVisibleText("Queen");
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            finishList.selectByVisibleText("Antiqued Grey Oak");
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
+            quantityList.selectByVisibleText("2");
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         }
     }
 
     @When("I open product page with productId {string}")
     public void iOpenProductPageWithProductId(String productId) {
-        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId="+productId+"";
+        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "";
         open(URL);
-        sleep(3000);
+        with().pollInterval(6, SECONDS).await().until(() -> true);
     }
 
     @When("I open cart")
     public void iOpenCart() {
         String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
         open(URL);
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         boolean isCartEmpty = $(By.xpath("//*[text()='YOUR SHOPPING CART IS EMPTY']")).isDisplayed();
         if (isCartEmpty) {
             System.out.println("Calling clear order api to delete old cartId");
-           // generalStepDefs.clearOrder();
+            // generalStepDefs.clearOrder();
             System.out.println("Cart is empty, adding item again via API call.");
-           // generalStepDefs.addLineItemsToConciergeCart();
+            // generalStepDefs.addLineItemsToConciergeCart();
         }
         WebDriverRunner.getWebDriver().navigate().refresh();
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 }
 

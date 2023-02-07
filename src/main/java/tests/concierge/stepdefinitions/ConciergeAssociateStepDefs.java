@@ -21,9 +21,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertFalse;
@@ -39,10 +40,15 @@ public class ConciergeAssociateStepDefs {
 
     @Given("I log into Concierge as {string}")
     public void iLogIntoConciergeAs(String arg0) {
+        if(!conciergeLoginPage.getUsernameField().exists()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        } else {
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+        }
         Log.debug("I log into Concierge as " + arg0);
         generalStepDefs.loginAsRole(arg0);
         generalStepDefs.waitForJSandJQueryToLoad();
-
     }
 
     @Then("I expect that I am on the Concierge Dashboard page")
@@ -59,7 +65,7 @@ public class ConciergeAssociateStepDefs {
         conciergeUserAccountPage.getGallerySelect().click();
         conciergeUserAccountPage.getCurrentLocationGalleryItemByName(storeNumber).click();
         conciergeUserAccountPage.getGallerySubmitButton().click();
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify I see store Palo Alto in the header")
@@ -71,7 +77,7 @@ public class ConciergeAssociateStepDefs {
 
     @Then("user verifies list of galleries")
     public void userVerifiesListOfGalleries() {
-        conciergeUserAccountPage.getGallerySelectButton().shouldHave(text("NEWPORT"),Duration.ofSeconds(12));
+        conciergeUserAccountPage.getGallerySelectButton().shouldHave(text("Newport"),Duration.ofSeconds(12));
         String actualListOfGalleries = conciergeUserAccountPage.getGallerySelectButton().getText();
         assertEquals(actualListOfGalleries, actualListOfGalleries);
     }
@@ -90,7 +96,7 @@ public class ConciergeAssociateStepDefs {
         conciergeUserAccountPage.getGallerySelect().click();
         conciergeUserAccountPage.getCurrentLocationGalleryItemByName(galleryNumber).click();
         conciergeUserAccountPage.getGallerySubmitButton().click();
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify footer links")
@@ -102,7 +108,7 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I validate each cat and sub-cat")
     public void iValidateEachCatAndSubCat() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         for (int main = 1; main < conciergeUserAccountPage.getListOfMainCategories().size(); main++) {
             System.out.println("Main Category: " + conciergeUserAccountPage.getListOfMainCategories().get(main).getText());
             try {
@@ -118,7 +124,7 @@ public class ConciergeAssociateStepDefs {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                sleep(5000);
+                with().pollInterval(5, SECONDS).await().until(() -> true);
 
                 for (int collection = 0; collection < conciergeUserAccountPage.getListOfCollections().size(); collection++) {
                     System.out.println("Collection: " + conciergeUserAccountPage.getListOfCollections().get(collection).getText());
@@ -127,18 +133,18 @@ public class ConciergeAssociateStepDefs {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    sleep(5000);
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
                     System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": "+ Hooks.getCurrentUrl());
                     if (!Hooks.getCurrentUrl().contains("concierge")) {
                         open(Hooks.conciergeURL);
-                        sleep(5000);
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
                     }
 
                     try {
                         conciergeUserAccountPage.getListOfMainCategories().get(main).click();
-                        sleep(5000);
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
                         conciergeUserAccountPage.getListOfSubCategories().get(sub).click();
-                        sleep(5000);
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

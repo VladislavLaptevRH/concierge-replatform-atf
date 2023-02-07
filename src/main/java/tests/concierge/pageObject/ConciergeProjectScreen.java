@@ -26,6 +26,8 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement clientLastNameField = $(By.xpath("//input[@id='text2']"));
 
+    private final SelenideElement addToCartButton = $(By.xpath("//*[text() = 'ADD TO CART']"));
+
     private final SelenideElement selectLocationProject = $(By.xpath("//div[@id='mui-component-select-location']"));
 
     private final SelenideElement projectNameButton = $(By.xpath("//ul//li[@data-value='projectName']"));
@@ -91,8 +93,6 @@ public class ConciergeProjectScreen {
     private final SelenideElement settingsButton = $(By.xpath("//*[text()='SETTINGS']"));
 
     private final SelenideElement printButton = $(By.xpath("//*[text()='PRINT']"));
-
-    private final SelenideElement addToCartButton = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth']/span[@class='MuiButton-label']"));
 
     private final SelenideElement items = $(By.xpath("//*[contains(text(),'ITEMS')]"));
 
@@ -209,6 +209,8 @@ public class ConciergeProjectScreen {
     private final SelenideElement regularPriceValue = $(By.xpath("(//*[contains(text(),'$')])[4]"));
 
     private final SelenideElement addToProjectProjectName = $(By.id("project-name"));
+
+    private final SelenideElement projectNamePopUpDropDownListItem = $(By.xpath("//*[text()='addToProject']"));
 
     private final SelenideElement taxExemptCheckBox = $(By.xpath("//input[@type='checkbox']"));
 

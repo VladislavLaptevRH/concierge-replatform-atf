@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.sleep;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.*;
 
 public class GiftCardEnquiryStepDefs {
@@ -35,11 +37,12 @@ public class GiftCardEnquiryStepDefs {
         giftCardEnquiryScreen.getCardNumberField().setValue("6006493887999901635");
         giftCardEnquiryScreen.getCardPinField().setValue("9559");
         giftCardEnquiryScreen.getSubmitButton().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify transaction details")
     public void iVerifyTransactionDetails() {
-        sleep(9000);
+        with().pollInterval(9, SECONDS).await().until(() -> true);
         List<String> items = new ArrayList<>();
         List<String> expectedItems = new ArrayList(Arrays.asList( "CARD NUMBER", "BALANCE", "DATE", "GALLERY", "CHARGE", "STATUS"));
         for (int i = 0; i < giftCardEnquiryScreen.getListOfTransactionDetailsHeading().size(); i++) {
@@ -58,7 +61,7 @@ public class GiftCardEnquiryStepDefs {
 
     @Then("I verify gift card PDP page is loaded")
     public void iVerifyGiftCardPDPPageIsLoaded() {
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         selectOption.getValueOption().scrollIntoView(true);
         selectOption.getValueOption().should(visible, Duration.ofMinutes(1));
     }
@@ -82,7 +85,7 @@ public class GiftCardEnquiryStepDefs {
         selectOption.getFromInputField().should(visible, Duration.ofMinutes(1));
         selectOption.getFromInputField().setValue("The Rock");
 
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
 
         selectOption.getQuantityElement().should(visible, Duration.ofMinutes(1));
         Select selectQty = new Select(selectOption.getQuantityElement());

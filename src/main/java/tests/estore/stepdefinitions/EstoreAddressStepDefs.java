@@ -13,6 +13,8 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertEquals;
 import static tests.estore.stepdefinitions.EstoreUserAccountPageStepDefs.firstName;
 
@@ -38,7 +40,7 @@ public class EstoreAddressStepDefs {
     @When("I update shipping address for CAN")
     public void iUpdateShippingAddressForCAN() {
         try {
-            sleep(4000);
+            with().pollInterval(4, SECONDS).await().until(() -> true);
             Select selectCountry = new Select(estoreAddressScreen.getCountrySelect());
             selectCountry.selectByValue("CA");
             Select shippingAddress = new Select(estoreAddressScreen.getShippingAddressState());
@@ -115,7 +117,7 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore billing address")
     public void iFillEstoreBillingAndShippingAddress() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreAddressScreen.getBillingAddressFirstName().should(visible, Duration.ofSeconds(40));
         estoreAddressScreen.getBillingAddressFirstName().setValue("Safire");
         estoreAddressScreen.getBillingAddressLastName().setValue("William");
@@ -132,7 +134,7 @@ public class EstoreAddressStepDefs {
     @When("I fill estore shipping address")
     public void iFillEstoreShippingAndShippingAddress() {
         try {
-            sleep(2000);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             if (Hooks.eStoreURL.contains("stg3")) {
                 $(By.xpath("//*[text()='Add New Address']")).click();
             }
@@ -165,11 +167,11 @@ public class EstoreAddressStepDefs {
                     System.out.println("Dropdown list is not displayed");
                 }
             } else {
-                sleep(3000);
+                with().pollInterval(3, SECONDS).await().until(() -> true);
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
                 estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
                 try {
-                    sleep(4000);
+                    with().pollInterval(4, SECONDS).await().until(() -> true);
                     $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
                     $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
                 } catch (com.codeborne.selenide.ex.ElementNotFound e) {
@@ -177,7 +179,7 @@ public class EstoreAddressStepDefs {
                 }
             }
 
-            sleep(3000);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             estoreAddressScreen.getShippingAddressAptFloor().click();
             estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
 
@@ -262,7 +264,7 @@ public class EstoreAddressStepDefs {
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPhone());
         estoreUserAccountPage.getBillingAddressPhone().setValue("(541) 777-4321");
 
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that newly added address is present in shpping address list")
@@ -278,13 +280,13 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that added address is not present in the grid")
     public void iVerifyThatAddedAddressIsNotPresentInTheGrid() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Pennsylvania Avenue']")).shouldNotBe(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify that added address edited address updated in the shipping address list")
     public void iVerifyThatAddedAddressEditedAddressUpdatedInTheShippingAddressList() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//*[contains(text(),'" + firstName + "')]")).shouldHave(Condition.text(firstName), Duration.ofSeconds(20));
     }
 
@@ -308,7 +310,7 @@ public class EstoreAddressStepDefs {
 
     @When("I continue to estore payment after address page")
     public void iContinueToEstorePaymentAfterAddressPage() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Continue to payment']")).click();
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofMinutes(1));
@@ -341,7 +343,7 @@ public class EstoreAddressStepDefs {
 
     @When("I click on continue to payment estore button")
     public void iClickOnContinueToPayment() {
-        sleep(4000);
+        with().pollInterval(4, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Continue to payment']")).click();
     }
@@ -394,11 +396,11 @@ public class EstoreAddressStepDefs {
                 System.out.println("Dropdown list is not displayed");
             }
         } else {
-            sleep(3000);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             generalStepDefs.clearField(estoreAddressScreen.getShippingAddressAddStreetField());
             estoreAddressScreen.getShippingAddressAddStreetField().setValue("Bradford Drive, Hilliard, OH, USA");
             try {
-                sleep(4000);
+                with().pollInterval(4, SECONDS).await().until(() -> true);
                 $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
                 $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
             } catch (com.codeborne.selenide.ex.ElementNotFound e) {
@@ -418,7 +420,7 @@ public class EstoreAddressStepDefs {
 
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPostalCode());
         estoreUserAccountPage.getBillingAddressPostalCode().setValue("12345");
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("user verify that field is required message is displayed")
@@ -457,7 +459,7 @@ public class EstoreAddressStepDefs {
     @When("I fill estore shipping address for {string}")
     public void iFillEstoreShippingAddressFor(String state) {
         try {
-            sleep(2000);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
             generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
             estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
@@ -480,11 +482,11 @@ public class EstoreAddressStepDefs {
                     System.out.println("Dropdown list is not displayed");
                 }
             } else {
-                sleep(3000);
+                with().pollInterval(3, SECONDS).await().until(() -> true);
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
                 estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Metrotech Center, Brooklyn, NY 11201, USA");
                 try {
-                    sleep(4000);
+                    with().pollInterval(4, SECONDS).await().until(() -> true);
                     $(By.xpath("//*[text()='MetroTech Center, Brooklyn, NY 11201, USA']")).should(visible, Duration.ofSeconds(5));
                     $(By.xpath("//*[text()='MetroTech Center, Brooklyn, NY 11201, USA']")).click();
                 } catch (com.codeborne.selenide.ex.ElementNotFound e) {
@@ -493,7 +495,7 @@ public class EstoreAddressStepDefs {
 
             }
 
-            sleep(3000);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             estoreAddressScreen.getShippingAddressAptFloor().click();
             estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
             estoreAddressScreen.getShippingAddressCity().setValue("Brooklyn");

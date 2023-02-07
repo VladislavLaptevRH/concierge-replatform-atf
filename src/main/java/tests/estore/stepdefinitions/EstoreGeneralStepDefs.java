@@ -35,7 +35,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.with;
 
 @Getter
 public class EstoreGeneralStepDefs {
@@ -105,7 +107,7 @@ public class EstoreGeneralStepDefs {
             for (int i = 0; i < countOfCartItems; i++) {
                 estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(30));
                 estoreCartPage.getRemoveButton().click();
-                sleep(3000);
+                with().pollInterval(3, SECONDS).await().until(() -> true);
             }
             estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(15));
             estoreUserAccountPage.getRhEstoreLogo().click();

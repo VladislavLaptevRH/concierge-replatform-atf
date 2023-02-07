@@ -11,6 +11,8 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 public class estoreOrderHistoryStepDefs {
     EstoreOrderHistoryScreen estoreOrderHistoryScreen = new EstoreOrderHistoryScreen();
@@ -19,7 +21,7 @@ public class estoreOrderHistoryStepDefs {
     public void iOpenOrderHistoryForEstore() {
         String URL = Hooks.eStoreBaseURL + "/my-account/order-history.jsp";
         open(URL);
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 

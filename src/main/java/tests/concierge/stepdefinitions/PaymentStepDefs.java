@@ -14,6 +14,8 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class PaymentStepDefs {
@@ -25,21 +27,21 @@ public class PaymentStepDefs {
     @When("I introduces payment details for several payment methods")
     public void iIntroducesPaymentDetailsForSeveralPaymentMethods() {
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         generalStepDefs.payWith("VI", "4678 4753 3015 7543", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
         paymentScreen.getFieldAmount().setValue("3");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         generalStepDefs.payWith("AX", "3411 3411 3411 347", "6765", "0225");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
         paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         /*Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue("RH");
         paymentScreen.getSplitPaymentCheckBox().should(visible, Duration.ofSeconds(40));
@@ -61,14 +63,14 @@ public class PaymentStepDefs {
         paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click(); */
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         generalStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
         paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         generalStepDefs.payWith("MC", "2222 4000 1000 0008", "737", "0330");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
@@ -79,13 +81,13 @@ public class PaymentStepDefs {
     public void iExecutePaymentFor(String cardType) {
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         if (cardType.equals("VI")) {
-            generalStepDefs.payWith("VI", "4678 4753 3015 7543", "737", "0330");
+            generalStepDefs.payWith("VI", "4111 1111 4555 1142", "737", "0330");
         }
         if (cardType.equals("MC")) {
             generalStepDefs.payWith("MC", "2222 4000 1000 0008", "737", "0330");
         }
         if (cardType.equals("AX")) {
-            generalStepDefs.payWith("AX", "3411 3411 3411 347", "6765", "0225");
+            generalStepDefs.payWith("AX", "3700 0000 0000 002", "7373", "0330");
 
         }
         if (cardType.equals("DI")) {
@@ -155,10 +157,10 @@ public class PaymentStepDefs {
         conciergeAddressScreen.getEditPaymentOrderReview().click();
         paymentScreen.getRemovePaymentBtn().shouldHave(text("Remove"), Duration.ofSeconds(15));
         paymentScreen.getRemovePaymentBtn().should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
-        sleep(4000);
+        with().pollInterval(4, SECONDS).await().until(() -> true);
         paymentScreen.getRemovePaymentBtn().click();
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("RH Credit Card"), Duration.ofMinutes(1));
-        sleep(2000);
+        with().pollInterval(4, SECONDS).await().until(() -> true);
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue("POS");

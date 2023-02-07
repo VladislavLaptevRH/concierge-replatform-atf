@@ -22,6 +22,8 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -33,6 +35,7 @@ public class ConciergeCartStepDefs {
     ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
+    ConciergeE2EStepDefs conciergeE2EStepDefs = new ConciergeE2EStepDefs();
     int randomQuantity;
     int priceFirstLineItem;
     int priceSecondLineItem;
@@ -78,7 +81,7 @@ public class ConciergeCartStepDefs {
 
     @When("I click on view cart button")
     public void iClickOnViewCartButton() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getItemAddedToYourCart().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
@@ -115,7 +118,7 @@ public class ConciergeCartStepDefs {
         $(By.xpath("//option[@value='" + randomQuantity + "']")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         $(By.xpath("//option[@value='" + randomQuantity + "']")).shouldHave(text(Integer.toString(randomQuantity)), Duration.ofSeconds(10));
         $(By.xpath("//option[@value='" + randomQuantity + "']")).scrollIntoView(true);
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//option[@value='" + randomQuantity + "']")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         $(By.xpath("//option[@value='" + randomQuantity + "']")).click();
 
@@ -136,7 +139,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that line item was removed")
     public void iVerifyThatLineItemWasRemoved() {
-        sleep(6000);
+        with().pollInterval(6, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Metal Box Frame Leaner Mirror']")).shouldNotBe(visible, Duration.ofMinutes(1));
     }
 
@@ -158,9 +161,9 @@ public class ConciergeCartStepDefs {
     public void iIntroducesValueForOverridePrice() {
         conciergeCartPageScreen.getAdjustmentCodeField().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getAdjustmentCodeField().click();
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         executeJavaScript("arguments[0].value='';", conciergeCartPageScreen.getAdjustmentCodeField());
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getAdjustmentCodeField().setValue("50");
     }
 
@@ -180,14 +183,14 @@ public class ConciergeCartStepDefs {
             generalStepDefs.waitForJSandJQueryToLoad();
             conciergeCartPageScreen.getApplyPostponeShipBtn().shouldHave(text("APPLY"), Duration.ofMinutes(1));
             conciergeCartPageScreen.getApplyPostponeShipBtn().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-            sleep(5000);
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             conciergeCartPageScreen.getApplyPostponeShipBtn().click();
         }
     }
 
     @Then("I verify line items prices for {string}")
     public void iVerifyLineItemsPricesFor(String arg0) {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getReasonCodeField().shouldNot(visible, Duration.ofSeconds(15));
         if (arg0.equals("PERCENT_OFF")) {
@@ -248,7 +251,7 @@ public class ConciergeCartStepDefs {
     @When("I click on apply promocode button")
     public void iClickOnApplyPromocodeButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getApplyPromocodeBtn().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getApplyPromocodeBtn().click();
     }
@@ -277,7 +280,7 @@ public class ConciergeCartStepDefs {
     @When("I choose POP for payment method")
     public void iChoosePOPForPaymentMethod() {
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue("POS");
@@ -326,7 +329,7 @@ public class ConciergeCartStepDefs {
 
     @When("I choose {string} project from move to project pop up")
     public void iChooseProjectFromMoveToProjectPopUp(String arg0) {
-        sleep(4000);
+        with().pollInterval(4, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getProjectName().should(visible, Duration.ofSeconds(15));
         Select selectProjectName = new Select(conciergeProjectScreen.getProjectName());
         selectProjectName.selectByVisibleText("additemtocorrectspace");
@@ -334,7 +337,7 @@ public class ConciergeCartStepDefs {
 
     @When("I choose {string} space from move to project pop up")
     public void iChooseSpaceFromMoveToProjectPopUp(String arg0) {
-        sleep(4000);
+        with().pollInterval(4, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getProjectName().should(visible, Duration.ofSeconds(15));
         Select selectProjectName = new Select(conciergeProjectScreen.getSelectSpaceName());
         selectProjectName.selectByValue(arg0);
@@ -446,7 +449,7 @@ public class ConciergeCartStepDefs {
     @When("I click on gift box button")
     public void iClickOnRemoveGiftBoxButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         executeJavaScript("arguments[0].click();", conciergeItemsScreen.getAddGiftCheckBox());
     }
 
@@ -521,11 +524,11 @@ public class ConciergeCartStepDefs {
     @When("I choose monogram properties")
     public void iChooseMonogramProperties() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramFonts().get(2).scrollIntoView(true);
         conciergeCartPageScreen.getMonogramFonts().get(2).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeCartPageScreen.getMonogramFonts().get(2).doubleClick();
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramColors().get(2).should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getMonogramColors().get(2).scrollIntoView(true);
         conciergeCartPageScreen.getMonogramColors().get(2).doubleClick();
@@ -536,9 +539,9 @@ public class ConciergeCartStepDefs {
     @When("I edit monogram")
     public void iEditMonogram() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getEditMonogramButton().click();
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramColors().get(5).should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getMonogramColors().get(5).doubleClick();
         conciergeCartPageScreen.getAddMonogramButton().should(visible, Duration.ofMinutes(1));
@@ -554,7 +557,7 @@ public class ConciergeCartStepDefs {
     public void iRemoveMonogram() {
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getRemoveMonogramBtn().shouldHave(text("Remove"), Duration.ofMinutes(1));
-        sleep(6000);
+        with().pollInterval(6, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getRemoveMonogramBtn().click();
     }
 
@@ -594,7 +597,7 @@ public class ConciergeCartStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getUserNamePromocode().scrollIntoView(true);
         conciergeCartPageScreen.getUserNamePromocode().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getUserNamePromocode().setValue("ediscount");
         conciergeCartPageScreen.getPasswordPromocde().should(Condition.and("", visible, enabled), Duration.ofSeconds(12));
         conciergeCartPageScreen.getPasswordPromocde().setValue("p6K6K6Mx");
@@ -606,7 +609,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that mini cart value is equal to quantity of product")
     public void iVerifyThatMiniCartValueIsEqualToQuantityOfProduct() {
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeUserAccountPage.getCartButton().shouldHave(text("" + randomQuantity), Duration.ofSeconds(50));
     }
@@ -645,18 +648,30 @@ public class ConciergeCartStepDefs {
 
     @When("I choose order classification")
     public void iChooseOrderClassification() {
-        //generalStepDefs.waitForJSandJQueryToLoad();
-        Select selectOrder = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
-//        conciergeCartPageScreen.getOrderClassificationSelect().selectOptionContainingText("Select an Option");
-//        conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(text("Select an Option"), Duration.ofSeconds(5));
-        sleep(7000);
-//        for (int i = 0; i < 10; i++) {
-//            selectOrder.selectByValue("RH Gallery Order");
-//            conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
-//        }
-        //generalStepDefs.waitForJSandJQueryToLoad();
-        selectOrder.selectByValue("RH Gallery Order");
-        conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if (!conciergeCartPageScreen.getOrderClassificationSelect().exists()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            if(conciergeCartPageScreen.getOrderClassificationSelect().isDisplayed()) {
+                conciergeCartPageScreen.getOrderClassificationSelect().click();
+                conciergeCartPageScreen.getOrderClassificationGalleryOrder().click();
+                conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
+            }
+            if(conciergeProjectScreen.getAddToCartButton().isDisplayed()) {
+                conciergeE2EStepDefs.iClickOnAddToCartButtonFromProjectScreen();
+                conciergeE2EStepDefs.iClickOnContinueAddingAdditionalButton();
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                Select selectOrder = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
+                conciergeCartPageScreen.getOrderClassificationSelect().click();
+                conciergeCartPageScreen.getOrderClassificationGalleryOrder().click();
+                conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
+            }
+        } else {
+            conciergeCartPageScreen.getOrderClassificationSelect().click();
+            conciergeCartPageScreen.getOrderClassificationGalleryOrder().click();
+            conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
+        }
     }
 
     @Then("I verify contract savings")
@@ -683,6 +698,42 @@ public class ConciergeCartStepDefs {
     @When("I remove all items from cart via API")
     public void iRemoveAllItemsFromCartViaAPI() {
         generalStepDefs.removeLineItemFromConciergeCart();
+    }
+
+    @When("I remove all items from cart via UI")
+    public void iRemoveAllItemsFromCartViaUI() {
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
+            String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
+            open(URL);
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            if(!conciergeCartPageScreen.getClearOrderButton().isDisplayed()){
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                open(URL);
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+            }
+            conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
+            conciergeCartPageScreen.getClearOrderButton().should(Condition.be(visible), Duration.ofSeconds(10));
+            conciergeCartPageScreen.getClearOrderButton().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            if (!conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current order?"), Duration.ofSeconds(30)).isEnabled()) {
+                for (int i = 0; i < 3; i++) {
+                    conciergeCartPageScreen.getClearOrderButton().click();
+                    with().pollInterval(4, SECONDS).await().until(() -> true);
+                }
+            } else {
+                conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current order?"), Duration.ofSeconds(30));
+                conciergeCartPageScreen.getClearOrderButtonPop().should(Condition.be(visible), Duration.ofSeconds(10));
+                conciergeCartPageScreen.getClearOrderButtonPop().click();
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+            }
+            try {
+                conciergeUserAccountPage.getCartButtonItemSum().shouldNot(visible, Duration.ofMinutes(2));
+            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                System.out.println("Cart sum indicator is not displayed");
+            }
+        }
     }
 
     @When("I clear order via API")

@@ -16,6 +16,8 @@ import java.util.List;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
 
@@ -54,7 +56,7 @@ public class EstoreHomePageStepDefs {
 
     @Then("Verify users is taken to product page")
     public void verifyUsersIsTakenToProductPage() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         Hooks.getCurrentUrl().equals("https://stg2.rhnonprod.com/search/results.jsp?Ntt=sofa&Ns=product.sale%7C1");
     }
 
@@ -105,7 +107,7 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getMessageInputField().click();
         estoreHomePage.getMessageInputField().setValue("Hi, This is automation tests, please ignore the request. Thank you ");
         estoreHomePage.getIframeRequestAConsultationButton().click();
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @Then("I Verify Thank you message")
@@ -131,32 +133,32 @@ public class EstoreHomePageStepDefs {
     public void iNavigateToTheMemberTab() {
         String URL = Hooks.eStoreBaseURL + "/my-account/membership.jsp";
         open(URL);
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @Then("I validate each cat and sub-cat for eStore")
     public void iValidateEachCatAndSubCatForEStore() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         for (int main = 0; main < estoreHomePage.getListOfNavigationBar().size(); main++) {
             System.out.println("Main Category: " + estoreHomePage.getListOfNavigationBar().get(main).getText());
             estoreHomePage.getListOfNavigationBar().get(main).click();
             for (int sub = 0; sub < estoreHomePage.getListOfSubCategories().size(); sub++) {
                 System.out.println("Sub Category: " + estoreHomePage.getListOfSubCategories().get(sub).getText());
                 estoreHomePage.getListOfSubCategories().get(sub).click();
-                sleep(5000);
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 for (int collection = 0; collection < estoreHomePage.getListOfCollection().size(); collection++) {
                     estoreHomePage.getListOfCollection().get(collection).click();
-                    sleep(5000);
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
                     System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": " + Hooks.getCurrentUrl());
                     assertFalse((WebDriverRunner.getWebDriver().getTitle().contains("404")));
                     if (!Hooks.getCurrentUrl().contains("rhnonprod")) {
                         open(Hooks.eStoreURL);
-                        sleep(5000);
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
                     }
                     estoreHomePage.getListOfNavigationBar().get(main).click();
-                    sleep(5000);
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
                     estoreHomePage.getListOfSubCategories().get(sub).click();
-                    sleep(5000);
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
                 }
             }
         }

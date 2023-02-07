@@ -10,6 +10,8 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.sleep;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 
 public class ClientSearchStepDefs {
@@ -19,7 +21,7 @@ public class ClientSearchStepDefs {
 
     @When("I search client by {string}")
     public void iSearchClientByEmail(String searchBy) {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         generalStepDefs.searchClientBy(searchBy);
     }
 
@@ -51,7 +53,7 @@ public class ClientSearchStepDefs {
     @When("I click on client button from header")
     public void iChooseContractClient() {
         //conciergeUserAccountPage.getClientButton().shouldHave(text("Client"), Duration.ofSeconds(15));
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getClientButton().click();
         //conciergeUserAccountPage.getClientLookupHeaderBtn().shouldHave(text("Client Lookup"), Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientLookupHeaderBtn().click();

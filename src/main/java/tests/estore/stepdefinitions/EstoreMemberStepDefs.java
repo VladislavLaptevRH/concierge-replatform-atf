@@ -14,6 +14,8 @@ import static com.codeborne.selenide.Condition.selected;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -62,7 +64,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate membership title")
     public void iValidateMembershipTitile() {
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='RH MEMBERS PROGRAM PROFILE']")).should(visible, Duration.ofSeconds(20));
     }
 
@@ -80,19 +82,19 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate add to cart button")
     public void iValidateAddToCartButton() {
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         assertTrue(estoreMemberPage.getAddToCart().isDisplayed());
     }
 
     @When("I click on add to cart button from membership")
     public void iClickOnAddToCartButtonFromMembership() {
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreMemberPage.getAddToCart().click();
     }
 
     @Then("I validate cart")
     public void iValidateCart() {
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(10));
     }
 
@@ -113,7 +115,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate membership details for member user")
     public void iValidateMembershipDetailsForMemberUser() {
-        sleep(5000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Membership Number: ']")).should(visible,Duration.ofSeconds(30));
         $(By.xpath("//*[text()='Enrollment: ']")).should(visible,Duration.ofSeconds(30));
         $(By.xpath("//*[text()='You will be charged ']")).should(visible,Duration.ofSeconds(30));
@@ -122,14 +124,14 @@ public class EstoreMemberStepDefs {
 
     @When("I click on cancel membership link")
     public void iClickOnCancelMembershipLink() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         assertTrue(estoreMemberPage.getCancelLink().isDisplayed());
         estoreMemberPage.getCancelLink().click();
     }
 
     @Then("I validate cancel membership content")
     public void iValidateCancelMembershipContent() {
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='25% savings on all full-priced items from RH, RH Modern, RH Baby & Child and RH TEEN']")).should(visible,Duration.ofSeconds(30));
         $(By.xpath("//*[text()='Additional 20% savings on all sale items']")).should(visible,Duration.ofSeconds(30));
         $(By.xpath("//*[text()='Complimentary services with RH Interior Design']")).should(visible,Duration.ofSeconds(30));
