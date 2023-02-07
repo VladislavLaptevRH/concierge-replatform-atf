@@ -360,15 +360,17 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that the added product is in the cart during brand switching")
     public void iVerifyThatTheAddedProductIsInTheCartDuringBrandSwitching() {
-        estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(40));
+        estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getBrandButton().click();
         for (int i = 1; i < 3; i++) {
             if (i > 1) {
                 estoreUserAccountPage.getBrandButton().click();
             }
+
             with().pollInterval(2, SECONDS).await().until(() -> true);
+            estoreUserAccountPage.getListOfBrands().get(i).should(visible, Duration.ofSeconds(20));
             estoreUserAccountPage.getListOfBrands().get(i).click();
-            estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(40));
+            estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(20));
         }
     }
 
@@ -533,12 +535,14 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify state field empty dropdown issue for International billing address")
     public void iVerifyStateFieldEmptyDropdownIssueForInternationalBillingAddress() {
+        sleep(5000);
         $(By.xpath("//*[text()='State required.']")).should(visible, Duration.ofSeconds(30));
     }
 
     @When("I choose estore empty state")
     public void iChooseEstoreEmptyState() {
         estoreAddressScreen.getShippingAddressState().scrollIntoView(true);
+        sleep(2000);
         Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
         selectState.selectByIndex(0);
         with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -622,7 +626,7 @@ public class EstoreCartPageStepDefs {
         selectPayment.selectByIndex(2);
 
         switchTo().frame($(By.cssSelector("iframe[title='Iframe for secured card number']")).should(visible, Duration.ofMinutes(1)));
-        estorePaymentPage.getCardNumberField().setValue("4678475330157543");
+        estorePaymentPage.getCardNumberField().setValue("4111111145551142");
         switchTo().defaultContent();
 
         switchTo().frame($(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")).should(visible, Duration.ofMinutes(1)));
@@ -640,7 +644,7 @@ public class EstoreCartPageStepDefs {
     @When("I open product page with NY restriction item")
     public void iOpenProductPageWithNYRestrictionItem() {
         String productId = "rhbc_prod961679";
-        String skuId = "112686";
+        String skuId = "112685";
         String url = null;
         if (Hooks.profile.equals("stg2")) {
             url = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + "AGPT" + "&categoryId=search";

@@ -115,7 +115,7 @@ public class EstorePaymentStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         Select paymentMethod = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         paymentMethod.selectByValue("RH");
-        estorePaymentPage.getRhCardNumberField().setValue("6006101002587258");
+        estorePaymentPage.getRhCardNumberField().setValue("5856373202133257");
         Select paymentPlan = new Select(estorePaymentPage.getSelectPaymentPlan());
         paymentPlan.selectByIndex(1);
     }
@@ -300,18 +300,18 @@ public class EstorePaymentStepDefs {
     public void iExecuteEstorePaymentFor(String cardType) {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         if (cardType.equals("VI")) {
-            estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
+            estoreGeneralStepDefs.payWith("CC", "4111111145551142", "737", "0330");
         }
         if (cardType.equals("MC")) {
             estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
 
         }
         if (cardType.equals("AX")) {
-            estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
+            estoreGeneralStepDefs.payWith("CC", "341134113411347", "6765", "0225");
 
         }
         if (cardType.equals("DI")) {
-            estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
+            estoreGeneralStepDefs.payWith("CC", "6011601160116611", "737", "0330");
 
         }
         estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();

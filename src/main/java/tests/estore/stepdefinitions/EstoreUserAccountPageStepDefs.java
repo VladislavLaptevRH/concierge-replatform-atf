@@ -43,7 +43,7 @@ public class EstoreUserAccountPageStepDefs {
         Select selectCard = new Select(estoreUserAccountPage.getSelectTypeOfCardNewCard());
         selectCard.selectByValue("CC");
         switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card number']")));
-        estorePaymentPage.getCardNumberField().setValue("4678475330157543");
+        estorePaymentPage.getCardNumberField().setValue("4111111145551142");
         switchTo().defaultContent();
         switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card expiry date']")));
         estorePaymentPage.getExpiryDateField().setValue("0330");
