@@ -75,11 +75,9 @@ public class ConciergeAssociateStepDefs {
         assertEquals(conciergeUserAccountPage.getNewPortBeachGallery().getText(), "PALO ALTO");
     }
 
-    @Then("user verifies list of galleries")
-    public void userVerifiesListOfGalleries() {
-        conciergeUserAccountPage.getGallerySelectButton().shouldHave(text("Newport"),Duration.ofSeconds(12));
-        String actualListOfGalleries = conciergeUserAccountPage.getGallerySelectButton().getText();
-        assertEquals(actualListOfGalleries, actualListOfGalleries);
+    @Then("user verifies list of galleries which have default value {string}")
+    public void userVerifiesListOfGalleries(String galleryItem) {
+    conciergeUserAccountPage.getGalleryItemByName(galleryItem).should(visible, Duration.ofSeconds(15));
     }
 
     @When("user clicks on gallery button from header")

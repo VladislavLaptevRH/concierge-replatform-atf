@@ -20,6 +20,8 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement orderClassificationInteriorDesign = $(By.xpath("//option[@value='RH Interior Design']"));
 
+    private final SelenideElement orderClassificationError = $(By.xpath("Please select an option for Order Classification."));
+
     private final SelenideElement arlesRectangularDinigTableId = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']/div/div/div[1]//p[@id='listColumn2-Item#']"));
 
     private final SelenideElement shoppingCartEmpty = $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']"));
@@ -147,6 +149,8 @@ public class ConciergeCartPageScreen {
     private final SelenideElement totalAditionalProdDiscount = $(By.xpath("//*[text()='Total Additional Product Discount']"));
 
     private final SelenideElement applyToAllCheckbox = $(By.xpath("//input[@name='applyToCart']"));
+
+    private final SelenideElement totalAdditionalProdDiscountSum = $(By.xpath(" //*[text()='Total Additional Product Discount']/../following-sibling::div/span"));
 
     private final SelenideElement applyPostponeShipBtn = $(By.xpath("//*[@id=\"postpone-shipment\"]//*[text()='APPLY']"));
 

@@ -373,7 +373,8 @@ Feature:Concierge Project
 
   Scenario: Verify the address page, pre filled address details and Email address once the project added to cart
     Given I log into Concierge as "associate"
-    When I remove all items from cart
+    When I remove all items from cart via UI
+    When I remove client from header
     When I go to item "10010966" from search field
     And I select count of product
     When I click on add to project button
@@ -383,6 +384,7 @@ Feature:Concierge Project
     When I click on checkout button
     Then I click on no thanks button
     When I choose client who is a "nonmember"
+    When I fill all fields from address screen
     Then I verify the address page, prefilled address and email address must be filled
 
   Scenario: Add Item to Project from Cart - Verify item added and project load in correct space/oppty

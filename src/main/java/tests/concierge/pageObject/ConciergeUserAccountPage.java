@@ -15,6 +15,8 @@ public class ConciergeUserAccountPage {
 
     public final String currentLocationGalleryItem = "//li[contains(text(),'%s')]";
 
+    public final String galleryItem = "//input[@value = '%s']";
+
     private final SelenideElement galleryButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item MuiGrid-align-items-xs-center']/div[@class='MuiGrid-root MuiGrid-item'][2]"));
 
     private final SelenideElement gallerySelect = $(By.xpath("//input[@class='MuiInputBase-input MuiOutlinedInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd']"));
@@ -22,6 +24,7 @@ public class ConciergeUserAccountPage {
     private final SelenideElement outdoorMenu = $(By.xpath("//*[text()='Outdoor']"));
 
     private final SelenideElement chairsSubMenu = $(By.xpath("//*[text()='Chairs']"));
+
 
     private final SelenideElement firstItemMainMenu = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']/div[1]"));
 
@@ -177,6 +180,11 @@ public class ConciergeUserAccountPage {
 
     public SelenideElement getCurrentLocationGalleryItemByName (String name){
         String path = String.format(currentLocationGalleryItem, name);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getGalleryItemByName (String name){
+        String path = String.format(galleryItem, name);
         return $(byXpath(path));
     }
 }
