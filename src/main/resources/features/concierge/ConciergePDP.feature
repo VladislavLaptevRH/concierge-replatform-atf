@@ -18,7 +18,7 @@ Feature:Concierge PDP
 
   Scenario: On Sale
     Given I log into Concierge as "associate"
-    When I go to item "17050001 DUNE" from search field
+    When I go to item "10024887 WGRY" from search field
     When I click on view sale items
     Then I verify that on sale modal pop up is displayed
 

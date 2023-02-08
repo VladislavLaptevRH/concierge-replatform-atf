@@ -84,7 +84,7 @@ public class PaymentStepDefs {
             generalStepDefs.payWith("VI", "4111 1111 4555 1142", "737", "0330");
         }
         if (cardType.equals("MC")) {
-            generalStepDefs.payWith("MC", "2222 4000 1000 0008", "737", "0330");
+            generalStepDefs.payWith("MC", "5555 3412 4444 1115", "737", "0330");
         }
         if (cardType.equals("AX")) {
             generalStepDefs.payWith("AX", "3700 0000 0000 002", "7373", "0330");

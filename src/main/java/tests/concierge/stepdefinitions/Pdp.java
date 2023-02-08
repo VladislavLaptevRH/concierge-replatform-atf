@@ -136,6 +136,11 @@ public class Pdp {
 
     @When("I click on special order fabrics")
     public void iClickOnSpecialOrderFabrics() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!pdpScreen.getSpecialOrdersButton().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         pdpScreen.getSpecialOrdersButton().should(visible, Duration.ofSeconds(40));
         pdpScreen.getSpecialOrdersButton().click();
     }
@@ -143,15 +148,14 @@ public class Pdp {
     @When("I choose color from special order fabrics")
     public void iChooseColorFromSpecialOrderFabrics() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        Actions actions = new Actions(WebDriverRunner.getWebDriver());
-        actions.moveToElement(conciergeUserAccountPage.getMenuItems().get(1));
+        pdpScreen.getTwilightColor().scrollIntoView(true);
         pdpScreen.getFogSpecialOrderColor().should(visible, Duration.ofSeconds(40));
         pdpScreen.getFogSpecialOrderColor().click();
+        pdpScreen.getCloseSpecialOrderPopUpButton().click();
     }
 
     @Then("I verify that color has been chosen")
     public void iVerifyThatColorHasBeenChosen() {
-        pdpScreen.getCloseSpecialOrderPopUpButton().click();
         selectOption.getColorOption().shouldHave(text("Nickel"), Duration.ofSeconds(20));
 
     }

@@ -17,9 +17,11 @@ public class PdpScreen {
 
     private SelenideElement fogSpecialOrderColor = $(By.xpath("(//ul[@class='MuiGridList-root']//li)[5]"));
 
+    private SelenideElement twilightColor = $(By.xpath("(//ul[@class='MuiGridList-root']//li)[15]"));
+
     private SelenideElement fogSelectedOption = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Color')])[1]//option[@data-option='selected']"));
 
-    private SelenideElement closeSpecialOrderPopUpButton = $(By.xpath("//div[@class='MuiDialogTitle-root']//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit']"));
+    private SelenideElement closeSpecialOrderPopUpButton = $(By.xpath("//button[@data-testid = 'dialog-title-close-button']"));
 
     private final SelenideElement productTitleGiftCard = $(By.xpath("//*[@class='MuiTypography-root MuiTypography-h2' and text()='RH GIFT CARD']"));
 }

@@ -254,6 +254,7 @@ public class ConciergeCartStepDefs {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getApplyPromocodeBtn().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getApplyPromocodeBtn().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @When("I introduces promo code {string} for promo codes field")
@@ -638,7 +639,19 @@ public class ConciergeCartStepDefs {
     public void iRemovePromotionFromCart() {
         conciergeCartPageScreen.getRemovePromotionBtn().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getRemovePromotionBtn().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
+
+    @And("I verify that promotion is not displayed")
+    public void iVerifyThatPromotionIsNotDisplayed()  {
+        if(conciergeCartPageScreen.getTotalAditionalProdDiscount().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+        conciergeCartPageScreen.getTotalAditionalProdDiscount().shouldNot(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getTotalAdditionalProdDiscountSum().shouldNot(visible, Duration.ofSeconds(15));
+    }
+
 
     @Then("I verify that designed sold by")
     public void iVerifyThatDesignedSoldBy() {
@@ -656,6 +669,10 @@ public class ConciergeCartStepDefs {
                 conciergeCartPageScreen.getOrderClassificationSelect().click();
                 conciergeCartPageScreen.getOrderClassificationGalleryOrder().click();
                 conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
+                if(conciergeCartPageScreen.getOrderClassificationError().isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                }
             }
             if(conciergeProjectScreen.getAddToCartButton().isDisplayed()) {
                 conciergeE2EStepDefs.iClickOnAddToCartButtonFromProjectScreen();

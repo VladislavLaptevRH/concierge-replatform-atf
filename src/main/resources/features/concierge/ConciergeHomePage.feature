@@ -23,10 +23,10 @@ Feature:Concierge Homepage
     When I change my store to number "10"
     Then I verify I see store Palo Alto in the header
 
-  Scenario: Verify that all galeries are present in list
+  Scenario: Verify that all galleries are present in list
     Given I log into Concierge as "associate"
     When user clicks on gallery button from header
-    Then user verifies list of galleries
+    Then user verifies list of galleries which have default value "5: Newport Beach"
 
   Scenario: Footer links
     Given I log into Concierge as "associate"

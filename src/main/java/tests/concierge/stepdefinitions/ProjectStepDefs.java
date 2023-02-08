@@ -667,7 +667,6 @@ public class ProjectStepDefs {
     public void iChooseProjectFromAddToProjectPopup() {
         conciergeProjectScreen.getAddToProjectProjectName().should(visible, Duration.ofMinutes(1));
         conciergeProjectScreen.getAddToProjectProjectName().click();
-        with().pollInterval(2, SECONDS).await().until(() -> true);
         with().pollInterval(5, SECONDS).await().until(() -> true);
         if(!conciergeItemsScreen.getSaveProjectPopUpButton().isEnabled() || !conciergeProjectScreen.getProjectNamePopUpDropDownListItem().isDisplayed() || conciergeItemsScreen.getError().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();

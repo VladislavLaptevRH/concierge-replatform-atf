@@ -109,7 +109,7 @@ Feature:Concierge Cart Page
     When I open cart
     When I click on UFD button from cart
 
-  Scenario: FEMA Promotion Code Description  - FEMAD
+  Scenario: FEMA Promotion Code Description - FEMAD
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -119,6 +119,7 @@ Feature:Concierge Cart Page
     When I click on apply promocode button
     Then I verify that "FEMAD" promocode was approved for cart items
     And I remove promotion from cart
+    And I verify that promotion is not displayed
 
   Scenario: Move to Project
     Given I log into Concierge as "associate"
