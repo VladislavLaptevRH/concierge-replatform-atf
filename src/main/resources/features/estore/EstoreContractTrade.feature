@@ -122,6 +122,7 @@ Feature: eStore Contract and Trade
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -174,6 +175,7 @@ Feature: eStore Contract and Trade
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
+    When I remove payment method which was used earlier
     When I execute payment with credit card on estore
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
@@ -187,23 +189,16 @@ Feature: eStore Contract and Trade
     When I update postal code in cart
     Then I verify UFD in cart
 
-  Scenario: estore Contract - Edit address
+  Scenario: Change zip code  in cart to US, currency should be in US$
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I add item to cart via API for estore
-    When I open estore cart
+    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
+    When I click on add to cart estore button
+    And I click on view cart estore button
     When I click on estore checkout button
     And I click on estore no thanks button
-    When I fill estore shipping address
-    When I click on same as estore shipping address checkbox
-    When I click on continue to payment estore button
-    When I click on continue with original address estore button
-    When I remove payment method which was used earlier
-    When I edit estore billing address from PG
-    When I click on continue to payment estore button
-    When I click on continue with original address estore button
 
-  Scenario Outline: eStore Contract - Major CC
+  Scenario Outline: Verify different payment types on payment page
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -223,11 +218,80 @@ Feature: eStore Contract and Trade
       | AX       |
       | DI       |
 
+
+  Scenario: Change zip code  in cart to CAN, currency should be in US$
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on estore checkout button
+    And I click on estore no thanks button
+
+  Scenario: estore Contract - Edit address
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I edit estore billing address from PG
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+
+  Scenario Outline: eStore Contract - Major CC
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I execute estore payment for "<cardType>"
+    When I click on a place estore order button
+    Examples:
+      | cardType |
+      | VI       |
+      | MC       |
+      | AX       |
+      | DI       |
+
 #Trade
   Scenario: eStore Trade Login
     Given I log into eStore as trade
     Then I verify that trade paragraph is displayed
     And I verify that logout from trade user is displayed
+
+  Scenario Outline: Verify different payment types on payment page
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I execute estore payment for "<cardType>"
+    When I click on a place estore order button
+    Examples:
+      | cardType |
+      | VI       |
+      | MC       |
+      | AX       |
+      | DI       |
+
 
   Scenario: eStore Trade - Price in the cart - RH
     Given I log into eStore as trade
@@ -274,6 +338,7 @@ Feature: eStore Contract and Trade
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -303,6 +368,7 @@ Feature: eStore Contract and Trade
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -320,6 +386,7 @@ Feature: eStore Contract and Trade
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -336,6 +403,7 @@ Feature: eStore Contract and Trade
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -387,6 +455,27 @@ Feature: eStore Contract and Trade
     When I click on zipcode estore button
     When I update postal code in cart
     Then I verify UFD in cart
+
+
+  Scenario: Change zip code  in cart to US, currency should be in US$
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on estore checkout button
+    And I click on estore no thanks button
+
+
+  Scenario: Change zip code  in cart to CAN, currency should be in US$
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on estore checkout button
+    And I click on estore no thanks button
+
 
   Scenario: estore Trade - Edit address
     Given I log into eStore as trade
