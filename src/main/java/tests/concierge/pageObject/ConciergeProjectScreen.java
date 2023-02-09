@@ -210,7 +210,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement addToProjectProjectName = $(By.id("project-name"));
 
-    private final SelenideElement projectNamePopUpDropDownListItem = $(By.xpath("//*[text()='addToProject']"));
+    private final SelenideElement projectNamePopUpDropDownListItem = $(By.xpath("//*[text()='TestCompany']"));
 
     private final SelenideElement taxExemptCheckBox = $(By.xpath("//input[@type='checkbox']"));
 

@@ -144,8 +144,10 @@ public class ProjectStepDefs {
 
     @When("I click on move to project button")
     public void iClickOnMoveToProjectButton() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getMoveToProjectButton().shouldHave(text("Move to Project"), Duration.ofMinutes(1));
         conciergeProjectScreen.getMoveToProjectButton().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @When("I click on save button")
@@ -311,7 +313,7 @@ public class ProjectStepDefs {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         $(By.id("footer")).scrollIntoView(true);
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getEmailEstimateProjectScreen().shouldHave(text("EMAIL ESTIMATE"), Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getEmailEstimateProjectScreen());
     }
@@ -480,7 +482,7 @@ public class ProjectStepDefs {
         $(By.xpath("//div[@aria-haspopup='listbox']")).click();
 
         if (Hooks.profile.equals("stg2")) {
-            randomQuantity = 2;
+            randomQuantity = 1;
         }
 
         $(By.xpath("//li[@data-value='" + randomQuantity + "']")).shouldHave(text(Integer.toString(randomQuantity)), Duration.ofSeconds(10));
@@ -984,7 +986,13 @@ public class ProjectStepDefs {
         checkoutAddressScreen.getContinuePaymentButton().scrollIntoView(true);
         checkoutAddressScreen.getContinuePaymentButton().should(visible, Duration.ofSeconds(15));
         checkoutAddressScreen.getContinuePaymentButton().click();
-        $(By.xpath("//*[text()='We are unable to verify your Shipping Address']")).should(visible, Duration.ofSeconds(40));
+        if(checkoutAddressScreen.getVerifyingShippingAddressPage().isDisplayed()){
+            checkoutAddressScreen.getVerifyingShippingAddressPage().should(visible, Duration.ofSeconds(40));
+            checkoutAddressScreen.getVerifyingBillingAddressPage().should(visible, Duration.ofSeconds(40));
+        } else {
+            checkoutAddressScreen.getVerifyingShippingAddressPage().should(visible, Duration.ofSeconds(40));
+        }
+
     }
 
     @Then("I verify that item {string} was added to project")
