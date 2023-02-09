@@ -35,6 +35,9 @@ public class CheckoutAddressScreen {
 
     private final SelenideElement zipPostalCodeField =  $(By.id("address-postal-code-field"));
 
+    private final SelenideElement verifyingShippingAddressPage =  $(By.xpath("//*[text()='We are unable to verify your Shipping Address']"));
+
+    private final SelenideElement verifyingBillingAddressPage =  $(By.xpath("//*[text()='We are unable to verify your Billing Address']"));
 
     private final SelenideElement phoneField = $(By.cssSelector("div:nth-child(2) > div:nth-child(9) > div:nth-child(2) > input:nth-child(1)"));
 

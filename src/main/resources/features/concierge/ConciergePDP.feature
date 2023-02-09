@@ -74,7 +74,7 @@ Feature:Concierge PDP
     Examples:
       | items | skuID         |
       | SO    | 10067107 BWBK |
-      | BO    | 10077044 CLR  |
+      | BO    | 10060297 CLR  |
 
   Scenario: ATC SPO - add to cart
     Given I log into Concierge as "associate"
@@ -88,7 +88,7 @@ Feature:Concierge PDP
   Scenario: ATC BO - add to cart
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
-    When I go to item "10077044 CLR" from search field
+    When I go to item "10060297 CLR" from search field
     When I click on add to cart button
     When I click on view cart button
     Then I verify that availability, Delivery and returns messaging is displayed for "BO"
