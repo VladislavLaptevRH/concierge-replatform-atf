@@ -13,6 +13,12 @@ Feature: Estore Search
     When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
     Then I verify that search result for search product via product name is displayed
 
+  Scenario: Search product from other category
+    Given I log into eStore as "regular"
+    When I go to estore item "cribs" from search field
+    When I click on view results
+    Then I verify cribs title for estore
+
   Scenario: Search product via SKU 17050044 EUCY
     Given I log into eStore as "regular"
     When I go to estore item "17050044 EUCY" from search field

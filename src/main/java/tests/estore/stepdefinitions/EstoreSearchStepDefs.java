@@ -6,10 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
-import tests.estore.pageObject.EstoreCGScreen;
-import tests.estore.pageObject.EstorePDPScreen;
-import tests.estore.pageObject.EstoreSearchScreen;
-import tests.estore.pageObject.EstoreUserAccountPage;
+import tests.estore.pageObject.*;
 
 import java.time.Duration;
 
@@ -24,10 +21,13 @@ public class EstoreSearchStepDefs {
     EstoreCGScreen estoreCGScreen = new EstoreCGScreen();
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
     EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
+    EstoreItemPage estoreItemPage = new EstoreItemPage();
 
     @Then("I verify that search result for search product via product name is displayed")
     public void iVerifyThatSearchResultForSearchProductViaProductNameIsDisplayed() {
         estoreSearchScreen.getTurkish802towel().should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("//span[@class='priceBox']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//span[@class='priceBox']")).shouldHave(text("$"), Duration.ofSeconds(20));
     }
 
     @When("I introduced random text for search field")
@@ -123,7 +123,6 @@ public class EstoreSearchStepDefs {
     }
 
 
-
     @Then("I verify the {string}")
     public void iVerifyThe(String gridNumber) {
         if (gridNumber.equals(3)) {
@@ -149,5 +148,16 @@ public class EstoreSearchStepDefs {
     @Then("I verify sale banner for estore")
     public void iVerifySaleBannerForEstore() {
         estoreSearchScreen.getSaveText().should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I click on view results")
+    public void iClickOnViewResults() {
+        estoreItemPage.getAddToCartButton().should(visible,Duration.ofSeconds(20));
+        estoreItemPage.getAddToCartButton().click();
+    }
+
+    @Then("I verify cribs title for estore")
+    public void iVerifyCribsTitleForEstore() {
+        $(By.xpath("//*[text()='cribs']")).should(visible,Duration.ofSeconds(20));
     }
 }
