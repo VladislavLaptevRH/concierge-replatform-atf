@@ -19,7 +19,7 @@ public class EstoreOrderReviewStepDefs {
 
     @Then("I verify that payment has been changed")
     public void iVerifyThatPaymentHasBeenChanged() {
-        $(By.xpath("//*[text()='0745']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='7543']")).should(visible, Duration.ofSeconds(20));
     }
 
 }

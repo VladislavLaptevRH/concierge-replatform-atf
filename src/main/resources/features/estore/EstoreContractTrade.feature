@@ -266,6 +266,12 @@ Feature: eStore Contract and Trade
       | AX       |
       | DI       |
 
+  Scenario: eStore Contract - Validate the currency for US Zip in cart
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+
 #Trade
   Scenario: eStore Trade Login
     Given I log into eStore as trade

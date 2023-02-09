@@ -31,6 +31,7 @@ public class EstoreCGStepDefs {
     @When("I scroll on the page till back to top button is visible")
     public void iScrollOnThePageTillBackToTopButtonIsVisible() {
         $(By.xpath("//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(20));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
@@ -81,7 +82,7 @@ public class EstoreCGStepDefs {
 
     @Then("I verify that collection modal is scrollable")
     public void iVerifyThatCollectionModalIsScrollable() {
-        $(By.xpath("//*[contains(text(),'COLLECTION')]")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[contains(text(),'COLLECTION')]")).should(visible, Duration.ofSeconds(20));
         switchTo().frame($(By.id("esw_storage_iframe")));
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
     }

@@ -29,12 +29,12 @@ public class EstoreAddressStepDefs {
     @When("I click on edit estore billing address button")
     public void iClickOnEditEstoreBillingAddressButton() {
         try {
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             estoreAddressScreen.getEditShippinggAddress().should(Condition.visible, Duration.ofSeconds(20));
-            estoreAddressScreen.getEditShippinggAddress().click();
+            executeJavaScript("arguments[0].click();", estoreAddressScreen.getEditShippinggAddress());
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Edit button is not displayed");
         }
-
     }
 
     @When("I update shipping address for CAN")
@@ -147,7 +147,6 @@ public class EstoreAddressStepDefs {
 
             Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
             shippingAddressCountry.selectByValue("US");
-
 
             if (Hooks.eStoreURL.contains("stg4") || Hooks.eStoreURL.contains("stg3")) {
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress1());
