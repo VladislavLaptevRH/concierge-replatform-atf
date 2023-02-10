@@ -28,14 +28,14 @@ public class PaymentStepDefs {
     public void iIntroducesPaymentDetailsForSeveralPaymentMethods() {
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        generalStepDefs.payWith("VI", "4678 4753 3015 7543", "737", "0330");
+        generalStepDefs.payWith("VI", "4111 1111 4555 1142", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
         paymentScreen.getFieldAmount().setValue("3");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        generalStepDefs.payWith("AX", "3411 3411 3411 347", "6765", "0225");
+        generalStepDefs.payWith("AX", "3700 0000 0000 002", "7373", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
         paymentScreen.getFieldAmount().setValue("1");
@@ -71,10 +71,9 @@ public class PaymentStepDefs {
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        generalStepDefs.payWith("MC", "2222 4000 1000 0008", "737", "0330");
+        generalStepDefs.payWith("MC", "5555 3412 4444 1115", "737", "0330");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-
     }
 
     @When("I execute payment for {string}")
