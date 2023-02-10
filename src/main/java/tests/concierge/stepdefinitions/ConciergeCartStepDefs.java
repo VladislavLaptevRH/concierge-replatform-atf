@@ -36,6 +36,8 @@ public class ConciergeCartStepDefs {
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
     ConciergeE2EStepDefs conciergeE2EStepDefs = new ConciergeE2EStepDefs();
+
+    AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
     int randomQuantity;
     int priceFirstLineItem;
     int priceSecondLineItem;
@@ -582,6 +584,12 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify membership popup for guest user")
     public void iVerifyMembershipPopupForGuestUser() {
+        if(!conciergeCartPageScreen.getNoThanksButton().isDisplayed()){
+            String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
+            open(URL);
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            abstractStepDefs.iClickOnCheckoutButton();
+        }
         $(By.xpath("//*[text()='Your RH Membership immediately pays for itself.']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='BECOME A MEMBER NOW']")).should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getNoThanksButton().should(visible, Duration.ofMinutes(1));
