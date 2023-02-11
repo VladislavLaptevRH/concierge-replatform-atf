@@ -35,7 +35,7 @@ Feature:Concierge Payment
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     And I continue to payment
-    When I choose RH Gift Card from payment method
+    When I choose "RH Gift Card" from payment method
     When I click on check balance button
     Then I verify that balance info is displayed
 

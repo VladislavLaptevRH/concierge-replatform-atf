@@ -698,7 +698,6 @@ public class ConciergeCartStepDefs {
             conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
         }
     }
-
     @Then("I verify contract savings")
     public void iVerifyContractSavingsForCartPage() {
         conciergeCartPageScreen.getContractSavings().should(visible, Duration.ofSeconds(20));
