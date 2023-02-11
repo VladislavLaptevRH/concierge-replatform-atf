@@ -250,9 +250,9 @@ public class ProjectStepDefs {
     public void iChoosePreferredContactMethod() {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        $(By.xpath("//div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']")).should(Condition.and("", enabled, visible), Duration.ofSeconds(20));
+        $(By.xpath("//label[text() = 'Preferred Contact Method']/following-sibling::div")).should(Condition.and("", enabled, visible), Duration.ofSeconds(20));
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        $(By.xpath("//div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']")).click();
+        $(By.xpath("//label[text() = 'Preferred Contact Method']/following-sibling::div")).click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getPreferredEmailContactMethod().shouldHave(text("Email"), Duration.ofSeconds(15));
         conciergeProjectScreen.getPreferredEmailContactMethod().click();

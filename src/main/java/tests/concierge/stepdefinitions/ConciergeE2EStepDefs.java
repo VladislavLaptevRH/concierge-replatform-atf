@@ -332,6 +332,7 @@ public class ConciergeE2EStepDefs {
             generalStepDefs.waitForJSandJQueryToLoad();
             with().pollInterval(4, SECONDS).await().until(() -> true);
             executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getNoThanksButton());
+            with().pollInterval(4, SECONDS).await().until(() -> true);
         } else {
             System.out.println("Close button is not displayed");
         }
@@ -391,6 +392,7 @@ public class ConciergeE2EStepDefs {
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String businessClient) {
         with().pollInterval(7, SECONDS).await().until(() -> true);
+
         if (businessClient.equals("member")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Member");

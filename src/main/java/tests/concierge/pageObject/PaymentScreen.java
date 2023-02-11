@@ -4,10 +4,13 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class PaymentScreen {
+    public final String currentPaymentMethod = "//select[@id = 'payment-method-select']/option[text() = '%s']";
+
     private final SelenideElement editBillingAddressBtn = $(By.xpath("//a[@class='MuiTypography-root MuiLink-root MuiLink-underlineAlways MuiTypography-colorPrimary']"));
 
     private final SelenideElement removePaymentBtn = $(By.xpath("//a[@class='MuiTypography-root MuiLink-root MuiLink-underlineAlways MuiTypography-caption MuiTypography-colorPrimary']"));
@@ -39,4 +42,9 @@ public class PaymentScreen {
     private final SelenideElement paymentMethodTitle = $(By.xpath("//div[contains(@class,'MuiGrid-container MuiGrid-item')]/h3[@class='MuiTypography-root MuiTypography-h3']"));
 
     private final SelenideElement splitPaymentCheckBox = $(By.xpath("//label[2]/span[@class='MuiTypography-root MuiFormControlLabel-label MuiTypography-body1']"));
+
+    public SelenideElement getCurrentPaymentMethodByName (String name){
+        String path = String.format(currentPaymentMethod, name);
+        return $(byXpath(path));
+    }
 }
