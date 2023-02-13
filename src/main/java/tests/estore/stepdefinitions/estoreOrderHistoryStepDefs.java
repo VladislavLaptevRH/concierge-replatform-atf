@@ -4,13 +4,13 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import tests.estore.pageObject.EstoreOrderHistoryScreen;
 import tests.utility.Hooks;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 
@@ -99,5 +99,19 @@ public class estoreOrderHistoryStepDefs {
     @Then("I verify order date and order total fields")
     public void iVerifyOrderDateAndOrderTotalFields() {
         estoreOrderHistoryScreen.getYear22().should(Condition.visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I open estore order history")
+    public void iGoToEstoreOrderHistory() {
+        String URL = Hooks.eStoreBaseURL + "/my-account/order-history.jsp";
+        open(URL);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+    }
+
+    @Then("I verify that status is order in progress while order is still in progress")
+    public void iVerifyThatStatusIsOrderInProgressWhileOrderIsStillInProgress() {
+        $(By.xpath("(//*[text()='Details and Tracking'])[1]")).should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='Details and Tracking'])[1]")).click();
+        $(By.xpath("(//*[text()='IN PROGRESS'])[1]")).should(Condition.visible, Duration.ofSeconds(20));
     }
 }

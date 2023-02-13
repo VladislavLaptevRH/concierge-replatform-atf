@@ -74,4 +74,19 @@ Feature: Order history
     When I click on estore order history
     Then I verify the CW order number
 
+  Scenario: Verify the status order processing while the order is still processing
+    Given I log into eStore as "regular"
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I open estore order history
+    Then I verify that status is order in progress while order is still in progress
+
 
