@@ -140,7 +140,6 @@ public class EstoreAbstractStepDefs {
 
     @When("I click on a place estore order button")
     public void iClickOnPlaceOrderButton() {
-
         with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreReviewOrderPage.getPlaceOrderButton().should(enabled, Duration.ofMinutes(1));
         estoreReviewOrderPage.getPlaceOrderButton().click();

@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class EstoreOrderReviewStepDefs {
+    EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
 
     @When("I click on estore edit payment button on order review page")
     public void iClickOnEstoreEditPaymentButtonOnOrderReviewPage() {
@@ -22,4 +23,7 @@ public class EstoreOrderReviewStepDefs {
         $(By.xpath("//*[text()='7543']")).should(visible, Duration.ofSeconds(20));
     }
 
+    @Then("I verify that I'm able to edit shipping and billing address")
+    public void iVerifyThatIMAbleToEditShippingAndBillingAddress() {
+    }
 }
