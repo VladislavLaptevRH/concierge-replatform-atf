@@ -25,12 +25,16 @@ public class EstoreCGStepDefs {
 
     @Then("I validate the collection name is not empty")
     public void iValidateTheCollectionNameIsNotEmpty() {
-        $(By.xpath("//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(20));
+        if (Hooks.cookie.contains("SSR")) {
+            $(By.xpath("//*[contains(text(),'COLLECTIONS')]")).should(Condition.visible, Duration.ofSeconds(20));
+        } else {
+            $(By.xpath("//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(5));
+        }
     }
 
     @When("I scroll on the page till back to top button is visible")
     public void iScrollOnThePageTillBackToTopButtonIsVisible() {
-        $(By.xpath("//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(20));
+        iValidateTheCollectionNameIsNotEmpty();
         with().pollInterval(3, SECONDS).await().until(() -> true);
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
     }
@@ -43,7 +47,7 @@ public class EstoreCGStepDefs {
 
     @And("I verify that after click on back to top button user is scrolled to top on the page")
     public void iVerifyThatAfterClickOnBackToTopButtonUserIsScrolledToTopOnThePage() {
-        $(By.xpath("//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(20));
+        iValidateTheCollectionNameIsNotEmpty();
     }
 
     @Then("I verify that single grid view is selected on CG page by default")
@@ -54,14 +58,8 @@ public class EstoreCGStepDefs {
 
     @Then("I verify collection name, image, prices on collection banner")
     public void iVerifyCollectionNameImagePricesOnCollectionBanner() {
-        $(By.xpath("//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(20));
+        iValidateTheCollectionNameIsNotEmpty();
         $(By.xpath("(//img)[2]")).should(Condition.visible, Duration.ofSeconds(20));
-    }
-
-    @When("I click on preview the collection link")
-    public void iClickOnPreviewTheCollectionLink() {
-        estoreCGScreen.getPreviewTheCollectionButton().should(Condition.visible, Duration.ofSeconds(20));
-        estoreCGScreen.getPreviewTheCollectionButton().click();
     }
 
     @Then("I verify that I'm landing on preview the collection model")
@@ -90,13 +88,6 @@ public class EstoreCGStepDefs {
     @And("I validate after scrolling all products are visible on the model")
     public void iValidateAfterScrollingAllProductsAreVisibleOnTheModel() {
         estoreCGScreen.getCortonaSofaCollectionUppercase().should(Condition.visible, Duration.ofSeconds(20));
-    }
-
-    @Then("I verify product image, name and prices are visible for each product on the model")
-    public void iVerifyProductImageNameAndPricesAreVisibleForEachProductOnTheModel() {
-        estoreCGScreen.getPriceForRegular().should(visible, Duration.ofSeconds(40));
-        estoreCGScreen.getPriceForMember().should(Condition.visible, Duration.ofSeconds(20));
-        estoreCGScreen.getCollectionModalProductImage().should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @When("I click on any product from the preview collection model")

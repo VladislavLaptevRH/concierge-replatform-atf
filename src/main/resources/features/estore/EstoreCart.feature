@@ -139,7 +139,6 @@ Feature: Estore Cart Page
     When I click on edit estore billing address button
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
-    When I click on continue with original address estore button
     Then I verify "NY" shipping restriction
 
   Scenario: eStore - Disable Continue as a Guest user option for guest user with membership

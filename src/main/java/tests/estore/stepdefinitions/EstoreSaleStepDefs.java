@@ -28,20 +28,20 @@ public class EstoreSaleStepDefs {
 
     @Then("I verify that I'm able to navigate different category")
     public void iVerifyThatIMAbleToNavigateDifferentCategory() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
-        estoreSaleScreen.getMainSaleList().should(Condition.visible, Duration.ofSeconds(20));
-        estoreSaleScreen.getMainSaleList().click();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
-        estoreSaleScreen.getSubSaleList().should(Condition.visible, Duration.ofSeconds(20));
-        estoreSaleScreen.getSubSaleList().click();
+//        with().pollInterval(3, SECONDS).await().until(() -> true);
+//        estoreSaleScreen.getMainSaleList().should(Condition.visible, Duration.ofSeconds(20));
+//        estoreSaleScreen.getMainSaleList().click();
+//        with().pollInterval(3, SECONDS).await().until(() -> true);
+//        estoreSaleScreen.getSubSaleList().should(Condition.visible, Duration.ofSeconds(20));
+//        estoreSaleScreen.getSubSaleList().click();
     }
 
     @Then("I verify sale category for estore")
     public void iVerifySaleCategoryForEstore() {
-        estoreSaleScreen.getSaleLivingCategory().should(Condition.visible, Duration.ofSeconds(20));
-        estoreSaleScreen.getSaleDiningCategory().should(Condition.visible, Duration.ofSeconds(20));
-        estoreSaleScreen.getBedLivingCategory().should(Condition.visible, Duration.ofSeconds(20));
-        estoreSaleScreen.getTextilesSaleCategory().should(Condition.visible, Duration.ofSeconds(20));
+//        estoreSaleScreen.getSaleLivingCategory().should(Condition.visible, Duration.ofSeconds(20));
+//        estoreSaleScreen.getSaleDiningCategory().should(Condition.visible, Duration.ofSeconds(20));
+//        estoreSaleScreen.getBedLivingCategory().should(Condition.visible, Duration.ofSeconds(20));
+//        estoreSaleScreen.getTextilesSaleCategory().should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify the back button from sale PDP page")

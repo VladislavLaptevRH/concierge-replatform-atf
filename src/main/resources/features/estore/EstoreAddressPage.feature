@@ -122,6 +122,7 @@ Feature: Estore Address Page
     When I open estore cart
     When I click on estore checkout button
     When I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on edit estore billing address button
     When I click on same as estore shipping address checkbox
