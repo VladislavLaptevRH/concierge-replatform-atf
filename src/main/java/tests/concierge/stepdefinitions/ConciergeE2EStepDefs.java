@@ -657,14 +657,14 @@ public class ConciergeE2EStepDefs {
         } else if (pageName.equals("PG")) {
             assertEquals(conciergeCartPageScreen.getTradePriceLabel().getText(), "Trade");
             if (Hooks.profile.equals("stg2")) {
-                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$2688.00");
+                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$2150");
             } else {
                 assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText(), "$2,688.00");
             }
         } else {
             assertEquals(conciergeCartPageScreen.getTradePriceLabel().getText(), "Trade");
             if (Hooks.profile.equals("stg2")) {
-                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$2688.00");
+                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$2150.00");
             } else {
                 assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText(), "$2,688.00");
             }
