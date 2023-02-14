@@ -18,9 +18,9 @@ public class ConciergeOrderHistoryForm {
 
     private final SelenideElement phoneNumberField = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[1]//input"));
 
-    private final SelenideElement firstNameField = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[2]//input"));
+    private final SelenideElement firstNameField = $(By.xpath("//input[@name = 'firstName']"));
 
-    private final SelenideElement lastNameField = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[3]//input"));
+    private final SelenideElement lastNameField = $(By.xpath("//input[@name = 'lastName']"));
 
     private final SelenideElement emailAddressField = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div[4]//input"));
 
@@ -34,7 +34,7 @@ public class ConciergeOrderHistoryForm {
     
     private final SelenideElement inactiveContinueButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-sm-12']//div[contains(@class,'MuiGrid-root MuiGrid-item')]"));
     
-    private final SelenideElement activeContinueButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-center']//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth']"));
+    private final SelenideElement activeContinueButton = $(By.xpath("//div[contains(@class, 'MuiGrid-justify-xs-center')]//button[not(@disable)]/span[text() = 'Continue']"));
     
     private final SelenideElement orderLookUpTitle = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6'][2]//div[1]/h6"));
     
