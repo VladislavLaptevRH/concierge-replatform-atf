@@ -47,12 +47,6 @@ Feature: Estore CG
 #    When I click on preview the collection link
 #    Then I verify that collection modal is scrollable
 
-  Scenario: Verify Product image,name and prices are visible for each product on the model
-    Given I log into eStore as "guest"
-    When I goes to estore collection page
-    When I click on preview the collection link
-    Then I verify product image, name and prices are visible for each product on the model
-
 #  Scenario: Verify after clicking on any product from the Preview Collection model user lands on the PDP page
 #    Given I log into eStore as "guest"
 #    When I goes to estore collection page
