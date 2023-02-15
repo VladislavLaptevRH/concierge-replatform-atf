@@ -3,8 +3,6 @@ import com.rh.rhapsody.*;
 
 Service s = Service.ESTORE_REGRESSION_TESTS;
 
-CRON_SETTINGS = '''* * * * * % ENVIRONMENT=stg2;ENDPOINT=releasethurs''';
-
 
 def resultspath = "${env.JOB_NAME}/${env.BUILD_NUMBER}"
 println("resultspath=${resultspath}")
