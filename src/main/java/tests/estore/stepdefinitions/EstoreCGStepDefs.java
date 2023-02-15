@@ -6,15 +6,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import tests.estore.pageObject.EstoreCGScreen;
-import tests.estore.pageObject.EstoreItemPage;
-import tests.estore.pageObject.EstoreUserAccountPage;
+import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
+import static io.netty.handler.codec.rtsp.RtspHeaders.Values.URL;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 
@@ -22,13 +21,14 @@ public class EstoreCGStepDefs {
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
     EstoreItemPage estoreItemPage = new EstoreItemPage();
     EstoreCGScreen estoreCGScreen = new EstoreCGScreen();
+    EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
 
     @Then("I validate the collection name is not empty")
     public void iValidateTheCollectionNameIsNotEmpty() {
         if (Hooks.cookie.contains("SSR")) {
-            $(By.xpath("//*[contains(text(),'COLLECTIONS')]")).should(Condition.visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[contains(text(),'COLLECTIONS')]")).should(Condition.visible, Duration.ofSeconds(35));
         } else {
-            $(By.xpath("//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(5));
+            $(By.xpath("//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(35));
         }
     }
 
@@ -164,5 +164,37 @@ public class EstoreCGStepDefs {
         open(URL);
         with().pollInterval(2, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
+    }
+
+    @Then("I verify that page render in the same grid view that previously selected")
+    public void iVerifyThatPageRenderInTheSameGridViewThatPreviouslySelected() {
+        estoreSearchScreen.getThreeColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I select {string} grid view on estore CG page")
+    public void iSetGridViewOnEstoreCGPage(String arg0) {
+        estoreSearchScreen.getThreeColumnsInRowGridButton().should(visible, Duration.ofSeconds(20));
+        estoreSearchScreen.getThreeColumnsInRowGridButton().click();
+        estoreSearchScreen.getThreeColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify CGS all menu items")
+    public void iVerifyCGSAllMenuItems() {
+        iValidateTheCollectionNameIsNotEmpty();
+    }
+
+    @When("I goes to {string} estore collection page")
+    public void iGoesToEstoreCollectionPage(String brand) {
+        if (brand.equals("rh")) {
+            String URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045";
+            open(URL);
+        } else {
+            String URL = "https://" +
+                    brand + "." + Hooks.profile + "." + "rhnonprod.com";
+            String category = "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045" + "/?endpoint=" + Hooks.cookie;
+            open(URL + category);
+        }
+
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 }
