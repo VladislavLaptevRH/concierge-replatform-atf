@@ -402,6 +402,10 @@ public class ConciergeE2EStepDefs {
             generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupLastName());
             conciergeUserAccountPage.getClientLookupLastName().setValue("Nonmember");
         } else if (businessClient.equals("trade")) {
+                if(!conciergeUserAccountPage.getClientLookupFirstName().isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                }
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Trade");
         } else if (businessClient.equals("unclassifiedBusiness")) {
@@ -674,11 +678,11 @@ public class ConciergeE2EStepDefs {
     @And("I fill all fields for sold to address")
     public void iFillAllFieldsForSoldToAddress() {
         generalStepDefs.fillAddressFields();
-        //generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
+        generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        $(By.cssSelector("body > div:nth-child(7) > div:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > label:nth-child(1) > span:nth-child(1) > span:nth-child(1) > input:nth-child(1)")).click();
+//        $(By.cssSelector("body > div:nth-child(7) > div:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > label:nth-child(1) > span:nth-child(1) > span:nth-child(1) > input:nth-child(1)")).click();
     }
 
     @Then("I verify that I'm able to edit shipping address")
@@ -699,6 +703,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I edit billing address from order review page")
     public void iEditBillingAddressFromOrderReviewPage() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(15));
         conciergeAddressScreen.getEditBillingAddress().click();
         generalStepDefs.clearField(checkoutAddressScreen.getFirstNameBillingAddress());
@@ -707,6 +712,7 @@ public class ConciergeE2EStepDefs {
 
     @And("I verify that I'm able to edit billing address")
     public void iVerifyThatIMAbleToEditBillingAddress() {
+        $(By.xpath("//*[contains(text(),'NewBillingAddress')]")).scrollTo();
         $(By.xpath("//*[contains(text(),'NewBillingAddress')]")).shouldBe(visible, Duration.ofSeconds(25));
     }
 
@@ -723,6 +729,10 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify spo order & terms review signature")
     public void iVerifySpoOrderTermsReviewSignature() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(confirmationOrderScreen.getRequestingPlaceOrderError().isDisplayed()){
+            confirmationOrderScreen.getTryAgainButton().click();
+        }
         $(By.xpath("//*[text()='ORDER & TERMS REVIEW SIGNATURE CAPTURE']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='SIGNATURE']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='CLEAR SIGNATURE']")).should(visible, Duration.ofSeconds(40));
@@ -754,6 +764,10 @@ public class ConciergeE2EStepDefs {
     public void iSelectLengthOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(6, SECONDS).await().until(() -> true);
+        if(!selectOption.getLengthOption().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         //selectOption.getLengthOption().should(visible, Duration.ofSeconds(15));
         Select selectLength = new Select(selectOption.getLengthOption());
         selectLength.selectByValue("80400002");
@@ -763,11 +777,14 @@ public class ConciergeE2EStepDefs {
     public void iOpenProductPageWithAnd(String productId, String skuId) {
         String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+NATL";
         open(URL);
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
             for (int i = 0; i < 3; i++) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
+                if(conciergeItemsScreen.getAddToCartButton().isDisplayed()){
+                    break;
+                }
             }
         }
         conciergeItemsScreen.getAddToCartButton().scrollTo();

@@ -16,7 +16,8 @@ Feature:Concierge Order review
     When I choose POP for payment method
     When I edit shipping address from order review page
     When I continue to payment
-    #Then I verify that I'm able to edit shipping address
+    When I click on order details button
+    Then I verify that I'm able to edit shipping address
 
   Scenario: Edit Billing Address
     Given I log into Concierge as "associate"
@@ -70,13 +71,13 @@ Feature:Concierge Order review
     When I remove client from header
     When I clicks on a random menu item
     When I clicks on o random item
-    When I select debth option
+    When I select depth option
     When I select fabric option
     When I select length option
     When I select color option
     And I select count of product
     And I click on add to cart button
-    When I click on aggree&add button
+    When I click on agree&add button
     And I click on view cart button
     When I choose order classification
     And I click on checkout button

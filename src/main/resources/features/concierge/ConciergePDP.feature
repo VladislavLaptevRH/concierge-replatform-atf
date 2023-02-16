@@ -51,7 +51,7 @@ Feature:Concierge PDP
     When I go to item "10039568 NONE" from search field
     Then I verify mattress recycling fee
 
-  Scenario: Relacement Items
+  Scenario: Replacement Items
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I go to item "61590226 BRN" from search field

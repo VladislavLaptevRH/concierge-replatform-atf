@@ -147,12 +147,11 @@ public class AbstractStepDefs {
 
     @When("I click on a place order button")
     public void iClickOnPlaceOrderButton() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(9, SECONDS).await().until(() -> true);
         reviewOrderScreen.getPlaceOrderButton().should(enabled, Duration.ofSeconds(45));
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         reviewOrderScreen.getPlaceOrderButton().should(enabled, Duration.ofMinutes(1));
         reviewOrderScreen.getPlaceOrderButton().click();
-
         try {
             confirmationOrderScreen.getAcceptPlaceOrderBtn().should(Condition.be(visible), Duration.ofSeconds(5));
             executeJavaScript("arguments[0].click();", confirmationOrderScreen.getSpoTermsCheckBox());

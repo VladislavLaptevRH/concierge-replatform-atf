@@ -1,6 +1,7 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import tests.concierge.pageObject.ConciergeItemsScreen;
 import tests.concierge.pageObject.SelectOption;
 import io.cucumber.java.en.When;
@@ -21,10 +22,14 @@ public class ConciergeItemsStepDefs {
 
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
-    @When("I select debth option")
-    public void iSelectDebthProperty() {
+    @When("I select depth option")
+    public void iSelectDepthProperty() {
         with().pollInterval(8, SECONDS).await().until(() -> true);
         generalStepDefs.waitForJSandJQueryToLoad();
+        if(!selectOption.getDepthProperty().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         try {
             executeJavaScript("window.scrollTo(0, 970)");
             selectOption.getDepthProperty().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
@@ -40,6 +45,10 @@ public class ConciergeItemsStepDefs {
     @When("I select fabric option")
     public void iSelectFabricProperty() {
         with().pollInterval(8, SECONDS).await().until(() -> true);
+        if(!selectOption.getFabricProperty().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
             selectOption.getFabricProperty().should(appear, Duration.ofSeconds(15));
@@ -55,6 +64,10 @@ public class ConciergeItemsStepDefs {
     public void iSelectColorOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(9, SECONDS).await().until(() -> true);
+        if(!selectOption.getColorOption().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         try {
             selectOption.getColorOption().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
             selectOption.getColorOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));

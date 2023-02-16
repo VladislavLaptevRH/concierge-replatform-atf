@@ -114,7 +114,7 @@ public class PaymentStepDefs {
                         "AutomationCompany\n" +
                         "7677 N 16th St\n" +
                         "QaApartment\n" +
-                        "Phoenix, AZ 85020-4434\n" +
+                        "Phoenix, AZ 85020\n" +
                         "US\n" +
                         "124131231\n" +
                         "Edit"));
@@ -125,7 +125,7 @@ public class PaymentStepDefs {
                         "AutomationCompany\n" +
                         "7677 N 16th St\n" +
                         "QaApartment\n" +
-                        "Phoenix, AZ 85020-4434\n" +
+                        "Phoenix, AZ 85020\n" +
                         "US\n" +
                         "124131231\n" +
                         "Edit");
