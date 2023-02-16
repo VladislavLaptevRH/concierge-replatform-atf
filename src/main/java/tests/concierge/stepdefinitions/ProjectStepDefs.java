@@ -182,16 +182,16 @@ public class ProjectStepDefs {
 
     @When("I click on the first project search result")
     public void iClickOnTheFirstProjectSearchResult() {
-        conciergeProjectScreen.getFirstSearchResultOfProjects().should(visible, Duration.ofMinutes(5));
-        conciergeProjectScreen.getFirstSearchResultOfProjects().click();
-        if(conciergeProjectScreen.getPopUpErrorWhileLoadingProjects().isDisplayed()){
+        if (conciergeProjectScreen.getPopUpErrorWhileLoadingProjects().isDisplayed()) {
             conciergeProjectScreen.getTryAgainButton().click();
             with().pollInterval(2, SECONDS).await().until(() -> true);
             conciergeProjectScreen.getFirstSearchResultOfProjects().should(visible, Duration.ofMinutes(5));
             conciergeProjectScreen.getFirstSearchResultOfProjects().click();
+        } else {
+            conciergeProjectScreen.getFirstSearchResultOfProjects().should(visible, Duration.ofMinutes(5));
+            conciergeProjectScreen.getFirstSearchResultOfProjects().click();
         }
     }
-
     @When("I click on settings button")
     public void iClickOnSettingsButton() {
         conciergeProjectScreen.getSettingsButton().shouldHave(text("SETTINGS"), Duration.ofMinutes(1));
@@ -896,8 +896,8 @@ public class ProjectStepDefs {
         }
     }
 
-    @When("I click on aggree&add button")
-    public void iClickOnAggreeAddButton() {
+    @When("I click on agree&add button")
+    public void iClickOnAgreeAddButton() {
         try {
             conciergeItemsScreen.getAggreeeAndAddToCardButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(5));
             conciergeItemsScreen.getAggreeeAndAddToCardButton().click();

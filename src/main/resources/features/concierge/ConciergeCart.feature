@@ -196,7 +196,7 @@ Feature:Concierge Cart Page
 
   Scenario:Verify mini cart count
     Given I log into Concierge as "associate"
-    When I remove all items from cart for minicart
+    When I remove all items from cart via UI
     When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
@@ -336,7 +336,7 @@ Feature:Concierge Cart Page
     When I click on no thanks button
     When I choose client who is a "nonmember"
     When I open cart
-    #Then I verify "nonmember" savings for a "nonmember" user
+    Then I verify "nonmember" savings for a "nonmember" user
 
   Scenario: Verify Trade savings for a Trade user in cart - From PDP and Project
     Given I log into Concierge as "associate"

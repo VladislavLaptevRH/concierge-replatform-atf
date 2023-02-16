@@ -37,7 +37,7 @@ public class ConciergeAddressScreen {
 
     private final SelenideElement editPaymentOrderReview = $(By.xpath("//a[@href='/checkout/payment.jsp' and text() = 'Edit']"));
 
-    private final SelenideElement editShippingAddress = $(By.xpath("(//a[@class='MuiTypography-root MuiLink-root MuiLink-underlineAlways MuiTypography-colorPrimary' and text() = 'Edit'])[1]"));
+    private final SelenideElement editShippingAddress = $(By.xpath("//*[text() = 'Shipping Address']/following-sibling::div/p"));
 
-    private final SelenideElement editBillingAddress = $(By.xpath("(//a[@class='MuiTypography-root MuiLink-root MuiLink-underlineAlways MuiTypography-colorPrimary' and text() = 'Edit'])[2]"));
+    private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'Billing Address']/following-sibling::div/p"));
 }
