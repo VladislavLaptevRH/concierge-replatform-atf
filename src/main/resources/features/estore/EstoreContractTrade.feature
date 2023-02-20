@@ -145,7 +145,7 @@ Feature: eStore Contract and Trade
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
-    When I choose RH Gift Card from payment method
+    When I choose "RH Gift Card" from payment method
     When I click on check balance button
     Then I verify that gift card balance info is displayed for estore
 
@@ -398,7 +398,7 @@ Feature: eStore Contract and Trade
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
-    When I choose RH Gift Card from payment method
+    When I choose "RH Gift Card" from payment method
     When I click on check balance button
     Then I verify that gift card balance info is displayed for estore
 

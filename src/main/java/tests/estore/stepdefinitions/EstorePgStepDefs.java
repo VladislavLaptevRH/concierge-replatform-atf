@@ -1,6 +1,7 @@
 package tests.estore.stepdefinitions;
 
 import io.cucumber.java.an.E;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import tests.estore.pageObject.EstoreSearchScreen;
@@ -34,4 +35,5 @@ public class EstorePgStepDefs {
     public void iVerifyThatTwoGridsAreDefaultViewInPG() {
         estoreSearchScreen.getTwoColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
     }
+
 }

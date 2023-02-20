@@ -3,6 +3,7 @@ package tests.concierge.stepdefinitions;
 import com.codeborne.selenide.Condition;
 
 import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.Keys;
 import tests.concierge.pageObject.*;
 import io.cucumber.java.en.*;
 import org.openqa.selenium.By;
@@ -43,7 +44,7 @@ public class ProjectStepDefs {
 
     @When("I click on projects button")
     public void iClickOnProjectsButton() {
-        sleep(10000);
+        with().pollInterval(9, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getProjectsButton().should(visible, Duration.ofMinutes(1));
         conciergeUserAccountPage.getProjectsButton().click();
     }
@@ -181,10 +182,16 @@ public class ProjectStepDefs {
 
     @When("I click on the first project search result")
     public void iClickOnTheFirstProjectSearchResult() {
-        conciergeProjectScreen.getFirstSearchResultOfProjects().should(visible, Duration.ofMinutes(5));
-        conciergeProjectScreen.getFirstSearchResultOfProjects().click();
+        if (conciergeProjectScreen.getPopUpErrorWhileLoadingProjects().isDisplayed()) {
+            conciergeProjectScreen.getTryAgainButton().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            conciergeProjectScreen.getFirstSearchResultOfProjects().should(visible, Duration.ofMinutes(5));
+            conciergeProjectScreen.getFirstSearchResultOfProjects().click();
+        } else {
+            conciergeProjectScreen.getFirstSearchResultOfProjects().should(visible, Duration.ofMinutes(5));
+            conciergeProjectScreen.getFirstSearchResultOfProjects().click();
+        }
     }
-
     @When("I click on settings button")
     public void iClickOnSettingsButton() {
         conciergeProjectScreen.getSettingsButton().shouldHave(text("SETTINGS"), Duration.ofMinutes(1));
@@ -250,9 +257,9 @@ public class ProjectStepDefs {
     public void iChoosePreferredContactMethod() {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        $(By.xpath("//div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']")).should(Condition.and("", enabled, visible), Duration.ofSeconds(20));
+        $(By.xpath("//label[text() = 'Preferred Contact Method']/following-sibling::div")).should(Condition.and("", enabled, visible), Duration.ofSeconds(20));
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        $(By.xpath("//div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']")).click();
+        $(By.xpath("//label[text() = 'Preferred Contact Method']/following-sibling::div")).click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getPreferredEmailContactMethod().shouldHave(text("Email"), Duration.ofSeconds(15));
         conciergeProjectScreen.getPreferredEmailContactMethod().click();
@@ -396,7 +403,14 @@ public class ProjectStepDefs {
 
     @When("I search project {string} by provided {string}")
     public void iSearchProjectByProvided(String projectName, String searchBy) {
-        sleep(10000);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!conciergeProjectScreen.getProjectNameField().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        } else if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
+            conciergeProjectScreen.getTryAgainButton().click();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+        }
         generalStepDefs.waitForJSandJQueryToLoad();
         $(By.cssSelector("#demo-simple-select-outlined")).should(Condition.and("", visible, enabled), Duration.ofSeconds(25));
         $(By.cssSelector("#demo-simple-select-outlined")).shouldHave(text("Project Name"), Duration.ofSeconds(20));
@@ -433,7 +447,6 @@ public class ProjectStepDefs {
         conciergeProjectScreen.getSearchByButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(5));
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getSearchByButton().click();
-
     }
 
     @When("I choose color from option")
@@ -519,9 +532,13 @@ public class ProjectStepDefs {
     public void iClickOnRegularPriceForItemProjects() {
         conciergeProjectScreen.getOverridePriceregularPrice().should(visible, Duration.ofMinutes(1));
         executeJavaScript("window.scrollBy(0,150)", "Scroll to regular price");
+        if(conciergeProjectScreen.getAdjustedPrice().isDisplayed()) {
+            conciergeProjectScreen.getAdjustedPrice().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        } else {
         conciergeProjectScreen.getOverridePriceregularPrice().should(visible, Duration.ofMinutes(1));
         conciergeProjectScreen.getOverridePriceregularPrice().click();
-    }
+    }}
 
     @But("I choose {string} method for price override")
     public void iChooseMethodForPriceOverride(String methodValue) {
@@ -532,7 +549,9 @@ public class ProjectStepDefs {
 
     @And("I introduce {string} percent discount")
     public void iIntroducePercentDiscount(String arg0) {
-        conciergeProjectScreen.getPercentDiscount().clear();
+        while(conciergeProjectScreen.getPresentDiscount().isDisplayed()){
+            conciergeProjectScreen.getPercentDiscount().sendKeys(Keys.BACK_SPACE);
+        }
         conciergeProjectScreen.getPercentDiscount().setValue(arg0);
     }
 
@@ -545,8 +564,13 @@ public class ProjectStepDefs {
 
     @And("I click on apply button")
     public void iClickOnApplyButton() {
-        conciergeProjectScreen.getApplyButton().should(visible, Duration.ofSeconds(12));
-        conciergeProjectScreen.getApplyButton().click();
+        if (conciergeProjectScreen.getApplyButton().isDisplayed()) {
+            conciergeProjectScreen.getApplyButton().should(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getApplyButton().click();
+        } else {
+            conciergeProjectScreen.getUpdateButton().should(visible, Duration.ofSeconds(12));
+            conciergeProjectScreen.getUpdateButton().click();
+        }
     }
 
     @Then("I verify that overriden price displayed")
@@ -781,6 +805,10 @@ public class ProjectStepDefs {
 
     @When("I verify that tax is not displayed")
     public void iVerifyThatTaxIsNotDisplayed() {
+        if(conciergeProjectScreen.getTaxCheckedCheckbox().isDisplayed()){
+            executeJavaScript("arguments[0].click();", conciergeProjectScreen.getTaxExemptCheckBox());
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+        }
         $(By.xpath("//*[text()='Tax']")).should(visible, Duration.ofMinutes(1));
         conciergeProjectScreen.getTaxExemptCheckBox().scrollIntoView(true);
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getTaxExemptCheckBox());
@@ -841,18 +869,22 @@ public class ProjectStepDefs {
 
     @When("user choose space {string}")
     public void userChooseSpace(String spaceName) {
-        if (spaceName.equals("space2")) {
-            $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorTextPrimary' and text() =  'space1']")).click();
+        if(conciergeProjectScreen.getPopUpErrorSomethingWentWrong().isDisplayed()){
+            conciergeProjectScreen.getTryAgainButton().click();
             with().pollInterval(2, SECONDS).await().until(() -> true);
-            $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorInherit MuiTypography-alignLeft' and text()='" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
-            $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorInherit MuiTypography-alignLeft' and text()='" + spaceName + "']")).click();
+        }
+        if (spaceName.equals("space2")) {
+            $(By.xpath("//div/h5[text() = 'space1']")).click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            $(By.xpath("//button/h5[text() = '" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
+            $(By.xpath("//button/h5[text() = '" + spaceName + "']")).click();
         }
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorTextPrimary' and text() = '" + spaceName + "']")).should(visible, Duration.ofSeconds(10));
-        $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorTextPrimary' and text() =  '" + spaceName + "']")).click();
+        $(By.xpath("//div/h5[contains(text(), 'space')]")).should(visible, Duration.ofSeconds(10));
+        $(By.xpath("//div/h5[contains(text(), 'space')]")).click();
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorInherit MuiTypography-alignLeft' and text()='" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
-        $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-colorInherit MuiTypography-alignLeft' and text()='" + spaceName + "']")).click();
+        $(By.xpath("//button/h5[text() = '" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
+        $(By.xpath("//button/h5[text() = '" + spaceName + "']")).click();
     }
 
     @Then("user verify that items for {string} are displayed")
@@ -864,8 +896,8 @@ public class ProjectStepDefs {
         }
     }
 
-    @When("I click on aggree&add button")
-    public void iClickOnAggreeAddButton() {
+    @When("I click on agree&add button")
+    public void iClickOnAgreeAddButton() {
         try {
             conciergeItemsScreen.getAggreeeAndAddToCardButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(5));
             conciergeItemsScreen.getAggreeeAndAddToCardButton().click();
@@ -1016,6 +1048,10 @@ public class ProjectStepDefs {
 
     @When("I removed adjustment price")
     public void iRemovedAdjustemPrice() {
+        if(conciergeProjectScreen.getPopUpErrorSomethingWentWrong().isDisplayed()){
+           conciergeProjectScreen.getTryAgainButton().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
         $(By.xpath("//*[text()='Remove']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Remove']")).click();
     }
@@ -1027,11 +1063,14 @@ public class ProjectStepDefs {
 
     @Then("I verify that sku id has been updated after changes")
     public void iVerifyThatSkuIdHasBeenUpdatedAfterChanges() {
+        if(conciergeProjectScreen.getPopUpErrorSomethingWentWrong().isDisplayed()){
+            conciergeProjectScreen.getTryAgainButton().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
         randomQuantity = generalStepDefs.getRandomNumber(0, 4);
         with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//div[1]/div/div[1]/button[2]")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//div[1]/div/div[1]/button[2]")).click();
-
         executeJavaScript("window.scrollTo(-200, 250)");
         Select selectSize = new Select($(By.cssSelector("#optionSelect-0")));
         selectSize.selectByIndex(randomQuantity);

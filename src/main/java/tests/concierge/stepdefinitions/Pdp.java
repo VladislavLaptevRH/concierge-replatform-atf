@@ -148,7 +148,7 @@ public class Pdp {
     @When("I choose color from special order fabrics")
     public void iChooseColorFromSpecialOrderFabrics() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        pdpScreen.getTwilightColor().scrollIntoView(true);
+        pdpScreen.getFogSpecialOrderColor().scrollIntoView(true);
         pdpScreen.getFogSpecialOrderColor().should(visible, Duration.ofSeconds(40));
         pdpScreen.getFogSpecialOrderColor().click();
         pdpScreen.getCloseSpecialOrderPopUpButton().click();

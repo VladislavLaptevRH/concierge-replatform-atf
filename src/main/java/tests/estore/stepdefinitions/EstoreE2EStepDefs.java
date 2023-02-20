@@ -623,6 +623,9 @@ public class EstoreE2EStepDefs {
             for (int i = 0; i < 3; i++) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 with().pollInterval(4, SECONDS).await().until(() -> true);
+                if(estoreItemPage.getAddToCartButton().isEnabled()){
+                    break;
+                }
             }
         }
     }

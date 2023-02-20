@@ -18,10 +18,10 @@ Feature:Concierge Payment
     And I verify that review screen is displayed
     Examples:
       | cardType |
-      | VI            |
-      | MC            |
-      | AX            |
-      | DI            |
+      | VI       |
+      | MC       |
+      | AX       |
+      | DI       |
 
   Scenario: GC/ Balance check
     Given I log into Concierge as "associate"
@@ -35,7 +35,7 @@ Feature:Concierge Payment
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     And I continue to payment
-    When I choose RH Gift Card from payment method
+    When I choose "RH Gift Card" from payment method
     When I click on check balance button
     Then I verify that balance info is displayed
 
@@ -93,9 +93,9 @@ Feature:Concierge Payment
     When I click on no thanks button
     When I choose client who is a "trade"
     When I click on checkout button
-#    And I fill all fields for sold to address
-#    And I continue to payment
-#    Then I verify that trade savings in payment page
+    And I fill all fields for sold to address
+    And I continue to payment
+    Then I verify that trade savings in payment page
 
   Scenario: Edit Address
     Given I log into Concierge as "associate"

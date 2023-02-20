@@ -2,6 +2,22 @@
 @estoreCGPage
 Feature: Estore CG
 
+  Scenario Outline: CG - Test CGS in all menu items (All brands)
+    Given I log into eStore as "guest"
+    When I goes to "<brands>" estore collection page
+    Then I verify CGS all menu items
+    Examples:
+      | brands         |
+      | rh             |
+      | rhcontemporary |
+      | rhinteriors    |
+      | rhmodern       |
+      | rhoutdoor      |
+      | rhbeachhouse   |
+      | rhskihouse     |
+      | rhbabyandchild |
+      | rhteen         |
+
   Scenario: CG-Verify Collection Name
     Given I log into eStore as "guest"
     When I goes to estore collection page
@@ -28,6 +44,25 @@ Feature: Estore CG
     When I goes to estore collection page
     Then I verify collection name, image, prices on collection banner
 
+  Scenario: Verify 1,2,3 grid views are working fine
+    Given I log into eStore as "guest"
+    When I goes to estore collection page
+    Then I validate "1","2" and "3" grid view should work
+
+  Scenario: Change the grid view, to to PG, go back from PG, CG page should render in the same grid view that you previously selected
+    Given I log into eStore as "guest"
+    When I goes to estore collection page
+    When I select "3" grid view on estore CG page
+    When I go to estore item "white and blue corner leather sofa" from search field
+    When I goes to estore collection page
+    Then I verify that page render in the same grid view that previously selected
+
+  Scenario: Verify Textile CG having "Enjoy Free Shipping On All Textiles" banner
+    Given I log into eStore as "guest"
+    When user clicks on textile menu
+    When user goes to bedding collections test
+    Then I verify that Enjoy Free Shipping On All Textiles banner is displayed
+
 #  Scenario: Verify CG name is visible on Preview the collection model
 #    Given I log into eStore as "guest"
 #    When I goes to estore collection page
@@ -47,12 +82,6 @@ Feature: Estore CG
 #    When I click on preview the collection link
 #    Then I verify that collection modal is scrollable
 
-  Scenario: Verify Product image,name and prices are visible for each product on the model
-    Given I log into eStore as "guest"
-    When I goes to estore collection page
-    When I click on preview the collection link
-    Then I verify product image, name and prices are visible for each product on the model
-
 #  Scenario: Verify after clicking on any product from the Preview Collection model user lands on the PDP page
 #    Given I log into eStore as "guest"
 #    When I goes to estore collection page
@@ -60,8 +89,3 @@ Feature: Estore CG
 #    When I click on any product from the preview collection model
 #    Then I verify that estore PDP page is displayed
 
-  Scenario: Verify Textile CG having "Enjoy Free Shipping On All Textiles" banner
-    Given I log into eStore as "guest"
-    When user clicks on textile menu
-    When user goes to bedding collections test
-    Then I verify that Enjoy Free Shipping On All Textiles banner is displayed

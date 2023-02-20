@@ -71,13 +71,13 @@ Feature:Concierge Order review
     When I remove client from header
     When I clicks on a random menu item
     When I clicks on o random item
-    When I select debth option
+    When I select depth option
     When I select fabric option
     When I select length option
     When I select color option
     And I select count of product
     And I click on add to cart button
-    When I click on aggree&add button
+    When I click on agree&add button
     And I click on view cart button
     When I choose order classification
     And I click on checkout button

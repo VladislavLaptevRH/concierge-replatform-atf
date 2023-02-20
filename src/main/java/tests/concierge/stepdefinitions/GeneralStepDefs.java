@@ -179,8 +179,10 @@ public class GeneralStepDefs {
         countrySelect.selectByValue(country);
         if (state.equals("")) {
             checkoutAddressScreen.getStateField().should(visible, Duration.ofSeconds(15));
+            checkoutAddressScreen.getStateField().click();
+
             Select selectState = new Select(checkoutAddressScreen.getStateField());
-            selectState.selectByIndex(ThreadLocalRandom.current().nextInt(1, 4));
+            selectState.selectByValue("AZ");
         }
         clearField(checkoutAddressScreen.getZipPostalCodeField());
         checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);

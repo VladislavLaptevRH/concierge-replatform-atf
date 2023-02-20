@@ -313,6 +313,15 @@ public class ConciergeCartStepDefs {
     @When("I select size option {int} for item")
     public void iSelectSizeOptionForItem(int sizeValue) {
         generalStepDefs.waitForJSandJQueryToLoad();
+        if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                with().pollInterval(4, SECONDS).await().until(() -> true);
+                if(conciergeItemsScreen.getAddToCartButton().isDisplayed()){
+                    break;
+                }
+            }
+        }
         try {
             conciergeItemsScreen.getAddToCartButton().scrollTo();
             selectOption.getSelectSizeElement().should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
@@ -698,7 +707,6 @@ public class ConciergeCartStepDefs {
             conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
         }
     }
-
     @Then("I verify contract savings")
     public void iVerifyContractSavingsForCartPage() {
         conciergeCartPageScreen.getContractSavings().should(visible, Duration.ofSeconds(20));
@@ -746,6 +754,9 @@ public class ConciergeCartStepDefs {
                 for (int i = 0; i < 3; i++) {
                     conciergeCartPageScreen.getClearOrderButton().click();
                     with().pollInterval(4, SECONDS).await().until(() -> true);
+                    if(conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current order?")).isEnabled()){
+                        break;
+                    }
                 }
             } else {
                 conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current order?"), Duration.ofSeconds(30));

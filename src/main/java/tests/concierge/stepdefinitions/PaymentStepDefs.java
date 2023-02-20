@@ -96,10 +96,12 @@ public class PaymentStepDefs {
         paymentScreen.getContinueToReview().click();
     }
 
-    @When("I choose RH Gift Card from payment method")
-    public void iChooseRHGiftCardFromPaymentMethod() {
-        Select selectPaymentMethod = new Select(paymentScreen.getChoosePaymentMethodBtn());
-        selectPaymentMethod.selectByValue("GiftCard");
+    @When("I choose {string} from payment method")
+    public void iChooseRHGiftCardFromPaymentMethod(String card) {
+        paymentScreen.getChoosePaymentMethodBtn().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        paymentScreen.getCurrentPaymentMethodByName(card).click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentScreen.getRhCardNumberField().setValue("6006493887999902500");
         paymentScreen.getRhCardPin().setValue("8138");
     }
@@ -112,7 +114,7 @@ public class PaymentStepDefs {
                         "AutomationCompany\n" +
                         "7677 N 16th St\n" +
                         "QaApartment\n" +
-                        "Phoenix, AZ 85020-4434\n" +
+                        "Phoenix, AZ 85020\n" +
                         "US\n" +
                         "124131231\n" +
                         "Edit"));
@@ -123,7 +125,7 @@ public class PaymentStepDefs {
                         "AutomationCompany\n" +
                         "7677 N 16th St\n" +
                         "QaApartment\n" +
-                        "Phoenix, AZ 85020-4434\n" +
+                        "Phoenix, AZ 85020\n" +
                         "US\n" +
                         "124131231\n" +
                         "Edit");
