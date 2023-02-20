@@ -57,9 +57,13 @@ public class EstoreAddressScreen {
 
     private final SelenideElement countrySelect = $(By.xpath("//select[@id='shippingAddress.country']"));
 
+    private final SelenideElement stateSelect = $(By.xpath("//select[@id='shippingAddress.state']"));
+
+    private final SelenideElement state = $(By.xpath("//*[text() = 'AB - Alberta']"));
+
     private final SelenideElement canadaCountry = $(By.xpath("//select[@id='shippingAddress.country']//option[@value='CA']"));
 
-    private final SelenideElement enterZipCodeBtn = $(By.xpath("(//span[@style='text-decoration: underline; cursor: pointer;'])[2]"));
+    private final SelenideElement enterZipCodeBtn = $(By.xpath("//*[text() = 'Enter zip code']"));
 
     private final SelenideElement soldToTaxExempt = $(By.cssSelector("#soldToTaxExemptId"));
 
@@ -72,6 +76,8 @@ public class EstoreAddressScreen {
     private final SelenideElement paymentText = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][2]/p"));
 
     private final SelenideElement reviewText = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][3]/p"));
+
+    private final SelenideElement continueToPayment = $(By.xpath("//*[text() = 'CONTINUE']"));
 
     private final SelenideElement confirmationText = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][4]/p"));
 

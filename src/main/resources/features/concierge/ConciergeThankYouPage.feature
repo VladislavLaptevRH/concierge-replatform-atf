@@ -14,7 +14,7 @@ Feature:Concierge ThankYouPage
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     And I continue to payment
-    When I choose POP for payment method
+    When I choose POS for payment method
     When I click on a place order button
     When I click on order details button
     Then I verify order details from thank you page
@@ -31,7 +31,7 @@ Feature:Concierge ThankYouPage
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     And I continue to payment
-    When I choose POP for payment method
+    When I choose POS for payment method
     When I click on a place order button
     When I click on order details button
     Then I verify the payment details and order estimate summary
@@ -48,7 +48,7 @@ Feature:Concierge ThankYouPage
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     And I continue to payment
-    When I choose POP for payment method
+    When I choose POS for payment method
     When I click on a place order button
     When I click on order details button
     Then I verify all the line items in the cart on thank you page
@@ -65,6 +65,6 @@ Feature:Concierge ThankYouPage
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     And I continue to payment
-    When I choose POP for payment method
+    When I choose POS for payment method
     When I click on a place order button
     Then I verify order number and email address verbiage

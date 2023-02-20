@@ -79,8 +79,17 @@ public class estoreOrderHistoryStepDefs {
 
     @Then("I verify the billing summary link for order history")
     public void iVerifyTheBillingSummaryLinkForOrderHistory() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!estoreOrderHistoryScreen.getBillingSummaryButton().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         estoreOrderHistoryScreen.getBillingSummaryButton().should(Condition.visible, Duration.ofSeconds(20));
         estoreOrderHistoryScreen.getBillingSummaryButton().click();
+        if(!estoreOrderHistoryScreen.getBillingSummaryBrandTitle().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         estoreOrderHistoryScreen.getBillingSummaryBrandTitle().shouldHave(Condition.text("Billing Summary"), Duration.ofSeconds(20));
     }
 

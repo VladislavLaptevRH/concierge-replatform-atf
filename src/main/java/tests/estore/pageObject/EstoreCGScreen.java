@@ -22,7 +22,7 @@ public class EstoreCGScreen {
 
     private SelenideElement componentCollectionCardDetails = $(By.id("component-collection-card-details"));
 
-    private SelenideElement previewTheCollectionButton = $(By.xpath("(//*[text()='PREVIEW THE COLLECTION'])[1]"));
+    private SelenideElement previewTheCollectionButton = $(By.xpath("(//*[@id = 'collection-gallery-grid'])[1]"));
 
     private SelenideElement cortonaSofaCollectionTitelPreviewPopUp = $(By.xpath("//*[text()='CORTONA SOFA COLLECTION']"));
 

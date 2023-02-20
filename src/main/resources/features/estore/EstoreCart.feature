@@ -100,14 +100,14 @@ Feature: Estore Cart Page
     Given I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
-#    When I click on join the rh members program from footer
-#    When I click on join now membership button
-#    When I click on zipcode estore button
-#    When I update "US" postal code in cart
-#    Then I verify order estimate section in cart
-#    When I click on "US" postal code in cart
-#    When I update "CA" postal code in cart
-#    Then I verify order estimate section in cart
+    When I click on join the rh members program from footer
+    When I click on join now membership button
+    When I click on zipcode estore button
+    When I update "US" postal code in cart
+    Then I verify order estimate section in cart
+    When I click on "US" postal code in cart
+    When I update "CA" postal code in cart
+    Then I verify order estimate section in cart
 
   Scenario: eStore - Membership pop up for guest user
     Given I remove all items from estore cart

@@ -25,9 +25,9 @@ Feature:Concierge GiftCardEnquiry
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     When I continue to payment
-    When I choose POP for payment method
-#    And I verify that review screen is displayed
-#    When I click on a place order button
-#    Then I verify that confirmation order screen is displayed
+    When I choose POS for payment method
+    And I verify that review screen is displayed
+    When I click on a place order button
+    Then I verify that confirmation order screen is displayed
 
 

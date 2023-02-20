@@ -280,7 +280,7 @@ public class ConciergeCartStepDefs {
         //$(By.xpath("//*[text()='$1,075.50']")).should(visible, Duration.ofSeconds(15));
     }
 
-    @When("I choose POP for payment method")
+    @When("I choose POS for payment method")
     public void iChoosePOPForPaymentMethod() {
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -582,7 +582,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that availability, Delivery and Returns messaging in cart")
     public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingInCart() {
-        $(By.xpath("//*[contains(text(),'This item is in stock and will be ready for delivery between')]")).should(visible, Duration.ofSeconds(10));
+        $(By.xpath("//*[contains(text(),'This item will be ready for delivery between')]")).should(visible, Duration.ofSeconds(10));
         $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery.')]")).should(visible, Duration.ofMinutes(1));
     }
 

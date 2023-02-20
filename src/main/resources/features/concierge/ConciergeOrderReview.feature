@@ -13,7 +13,7 @@ Feature:Concierge Order review
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     And I continue to payment
-    When I choose POP for payment method
+    When I choose POS for payment method
     When I edit shipping address from order review page
     When I continue to payment
     When I click on order details button
@@ -30,7 +30,7 @@ Feature:Concierge Order review
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     And I continue to payment
-    When I choose POP for payment method
+    When I choose POS for payment method
     When I edit billing address from order review page
     When I continue to payment
     When I click on order details button
@@ -47,7 +47,7 @@ Feature:Concierge Order review
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     And I continue to payment
-    When I choose POP for payment method
+    When I choose POS for payment method
     When I edit payment method
     When I click on a place order button
 
@@ -62,7 +62,7 @@ Feature:Concierge Order review
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     And I continue to payment
-    When I choose POP for payment method
+    When I choose POS for payment method
     Then I verify the payment details and order estimate summary
 
   Scenario: SPO ORDER & TERMS REVIEW SIGNATURE CAPTURE
@@ -85,7 +85,7 @@ Feature:Concierge Order review
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     When I continue to payment
-    When I choose POP for payment method
+    When I choose POS for payment method
     When I click on a place order button
     Then I verify spo order & terms review signature
 
@@ -100,5 +100,5 @@ Feature:Concierge Order review
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     And I continue to payment
-    When I choose POP for payment method
+    When I choose POS for payment method
     Then I verify that all the line items in the cart with the order review page

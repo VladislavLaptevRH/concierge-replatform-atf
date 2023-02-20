@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -40,13 +41,16 @@ public class EstoreLoginStepDefs {
     }
 
     public void loginAsRole(String accountRole) {
+        if(!estoreLoginPage.getAccountIcon().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         if (!accountRole.equals("guest")) {
             estoreLoginPage.getAccountIcon().should(visible, Duration.ofMinutes(15));
             estoreLoginPage.getAccountIcon().click();
 
             estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(15));
             estoreLoginPage.getPasswordField().should(visible, Duration.ofMinutes(15));
-
 
             if (accountRole.equals("orderreview")) {
                 estoreLoginPage.getUsernameField().setValue("orderreview@rh.com");
@@ -127,6 +131,10 @@ public class EstoreLoginStepDefs {
                     USER_ID_STG3 = "49e2da34-3970-4636-bd1b-1bf1c7c709ff";
                     userEmail = "testautomation01@rh.com";
                 } else {
+                    if(!estoreLoginPage.getUsernameField().isDisplayed()){
+                        WebDriverRunner.getWebDriver().navigate().refresh();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                    }
                     estoreLoginPage.getUsernameField().setValue("new02@rh.com");
                     estoreLoginPage.getPasswordField().setValue("Qwerty@123");
                     USER_ID_STG4 = "dc6f68a3-a223-4670-b7ab-737f1c45927b";

@@ -177,7 +177,6 @@ public class GeneralStepDefs {
         Select countrySelect = new Select(checkoutAddressScreen.getCountryField());
         executeJavaScript("arguments[0].scrollIntoView(true);", countrySelect);
         countrySelect.selectByValue(country);
-
         if (state.equals("")) {
             checkoutAddressScreen.getStateField().should(visible, Duration.ofSeconds(15));
             checkoutAddressScreen.getStateField().click();
@@ -185,7 +184,6 @@ public class GeneralStepDefs {
             Select selectState = new Select(checkoutAddressScreen.getStateField());
             selectState.selectByValue("AZ");
         }
-
         clearField(checkoutAddressScreen.getZipPostalCodeField());
         checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);
 

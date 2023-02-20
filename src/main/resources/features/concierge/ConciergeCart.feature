@@ -177,7 +177,7 @@ Feature:Concierge Cart Page
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     When I continue to payment
-    When I choose POP for payment method
+    When I choose POS for payment method
     Then I verify that Total Additional Product Discount message is "displayed" on review page
 
   Scenario:Promo codes - verify that promo code was removed for member client
@@ -412,7 +412,7 @@ Feature:Concierge Cart Page
     When I choose client who is a "nonmember"
     When I fill all fields from address screen
     When I continue to payment
-    When I choose POP for payment method
+    When I choose POS for payment method
     And I verify that review screen is displayed
     When I goes to address page from review screen
     Then I verify that address saved in address page
