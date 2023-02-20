@@ -535,17 +535,18 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify state field empty dropdown issue for International billing address")
     public void iVerifyStateFieldEmptyDropdownIssueForInternationalBillingAddress() {
-        sleep(5000);
+        with().pollInterval(9, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='State required.']")).should(visible, Duration.ofSeconds(30));
     }
 
     @When("I choose estore empty state")
     public void iChooseEstoreEmptyState() {
         estoreAddressScreen.getShippingAddressState().scrollIntoView(true);
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
-        selectState.selectByIndex(0);
+        selectState.selectByValue("");
         with().pollInterval(3, SECONDS).await().until(() -> true);
+
     }
 
     @Then("I verify estore order total in order estimate for membership for {string}")

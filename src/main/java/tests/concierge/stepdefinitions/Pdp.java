@@ -156,7 +156,7 @@ public class Pdp {
 
     @Then("I verify that color has been chosen")
     public void iVerifyThatColorHasBeenChosen() {
-        selectOption.getColorOption().shouldHave(text("Nickel"), Duration.ofSeconds(20));
+        selectOption.getColorOption().shouldHave(text("Fog"), Duration.ofSeconds(20));
 
     }
 

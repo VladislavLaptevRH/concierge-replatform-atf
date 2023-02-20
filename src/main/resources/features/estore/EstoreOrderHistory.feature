@@ -68,7 +68,7 @@ Feature: Order history
     When I click on estore order history
     Then I verify the details and tracling link for the order placed
 
-  Scenario: Veridy the CW order number displayed once the order is Available
+  Scenario: Verify the CW order number displayed once the order is Available
     Given I log into eStore as "regular"
     When I click on estore my account icon
     When I click on estore order history

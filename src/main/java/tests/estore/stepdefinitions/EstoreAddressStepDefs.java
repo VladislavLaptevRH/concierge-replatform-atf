@@ -1,6 +1,7 @@
 package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
@@ -329,9 +330,14 @@ public class EstoreAddressStepDefs {
             if (Hooks.profile.equals("stg3")) {
                 $(By.xpath("(//button[contains(@class,'MuiButton-containedPrimary')])[2]")).click();
             } else {
+                if(!estoreItemPage.getAddToCartButton().isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                }
                 estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
                 estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(50));
                 estoreItemPage.getAddToCartButton().click();
+                with().pollInterval(3, SECONDS).await().until(() -> true);
             }
 
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
@@ -342,9 +348,10 @@ public class EstoreAddressStepDefs {
 
     @When("I click on continue to payment estore button")
     public void iClickOnContinueToPayment() {
-        with().pollInterval(4, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Continue to payment']")).click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @When("I fill estore shipping email address")

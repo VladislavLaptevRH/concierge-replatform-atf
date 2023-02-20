@@ -66,7 +66,7 @@ public class EstoreCGStepDefs {
 
     @Then("I verify that I'm landing on preview the collection model")
     public void iVerifyThatIMLandingOnPreviewTheCollectionModel() {
-        $(By.xpath("//div[@role='presentation']//*[contains(text(),'COLLECTION')]")).should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("(//*[contains(text(),'Collection')])[3]")).should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify after click on X icon model gets closed")

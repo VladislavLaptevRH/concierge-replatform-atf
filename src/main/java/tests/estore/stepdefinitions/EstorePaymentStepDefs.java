@@ -249,10 +249,12 @@ public class EstorePaymentStepDefs {
         Select selectCountry = new Select(estoreAddressScreen.getCountrySelect());
         selectCountry.selectByValue("CA");
         with().pollInterval(2, SECONDS).await().until(() -> true);
+        estoreAddressScreen.getStateSelect().click();
+        estoreAddressScreen.getState().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
         with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-
         estoreAddressScreen.getPostalShippingCode().setValue("A1A1A1");
     }
 

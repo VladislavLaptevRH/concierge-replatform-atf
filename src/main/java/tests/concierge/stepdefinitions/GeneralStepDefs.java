@@ -177,13 +177,11 @@ public class GeneralStepDefs {
         Select countrySelect = new Select(checkoutAddressScreen.getCountryField());
         executeJavaScript("arguments[0].scrollIntoView(true);", countrySelect);
         countrySelect.selectByValue(country);
-
         if (state.equals("")) {
             checkoutAddressScreen.getStateField().should(visible, Duration.ofSeconds(15));
             Select selectState = new Select(checkoutAddressScreen.getStateField());
             selectState.selectByIndex(ThreadLocalRandom.current().nextInt(1, 4));
         }
-
         clearField(checkoutAddressScreen.getZipPostalCodeField());
         checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);
 
