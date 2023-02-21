@@ -207,7 +207,7 @@ public class EstoreLoginStepDefs {
     public void iLogIntoEStoreAsContract() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         open(Hooks.eStoreBaseURL + "/contract-sales/contract-sign-in.jsp");
-        estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
+        estoreLoginPage.getContractTradeEmailField().setValue("rboorla+2222@rh.com");
         estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
 
         estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
@@ -227,8 +227,8 @@ public class EstoreLoginStepDefs {
         try {
             open(Hooks.eStoreBaseURL + "/trade-sales/trade-sign-in.jsp");
             estoreLoginPage.getContractTradeEmailField().should(visible, Duration.ofSeconds(60));
-            estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
-            estoreLoginPage.getContractTradePasswordField().setValue("20211221164474");
+            estoreLoginPage.getContractTradeEmailField().setValue("rboorla+700@rh.com");
+            estoreLoginPage.getContractTradePasswordField().setValue("20230220167059");
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
             USER_ID_STG2 = "c42863ab-8179-4bd6-a72d-628a95fac78b";
