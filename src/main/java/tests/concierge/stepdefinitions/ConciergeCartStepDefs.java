@@ -428,6 +428,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that membership price displayed as total price")
     public void iVerifyThatMembershipPriceDisplayedAsTotalPrice() {
+
         String memberPrice = conciergeCartPageScreen.getPriceForMember().getText();
         String totalPrice = conciergeCartPageScreen.getTotalMemberPrice().getText();
         assertEquals(memberPrice, totalPrice, "Membership price displayed as total price");

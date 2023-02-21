@@ -9,6 +9,9 @@ import tests.estore.pageObject.EstoreMemberPage;
 import tests.estore.pageObject.EstoreUserAccountPage;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.codeborne.selenide.Condition.selected;
 import static com.codeborne.selenide.Condition.visible;
@@ -70,14 +73,14 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate membership details")
     public void iValidateMembershipDetails() {
-//        sleep(5000);
-//        List<String> items = new ArrayList<>();
-//        List<String> expectedItems = new ArrayList(Arrays.asList(expectedTitle, expectedParagraph, expectedParagraph2,
-//                expectedCreditCard, expectedRHCreditCard, expectedAnnual, expectedRenewal, expectedCancel, expectedEmail, expectedEnterEmail ));
-//        for (int i = 0; i < estoreMemberPage.getMembershipDetails().size(); i++) {
-//            items.add(estoreMemberPage.getMembershipDetails().get(i).getText());
-//        }
-//        assertEquals(items, expectedItems);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        List<String> items = new ArrayList<>();
+        List<String> expectedItems = new ArrayList(Arrays.asList(expectedTitle, expectedParagraph, expectedParagraph2,
+                expectedCreditCard, expectedRHCreditCard, expectedAnnual, expectedRenewal, expectedCancel, expectedEmail, expectedEnterEmail ));
+        for (int i = 0; i < estoreMemberPage.getMembershipDetails().size(); i++) {
+            items.add(estoreMemberPage.getMembershipDetails().get(i).getText());
+        }
+        assertEquals(items, expectedItems);
     }
 
     @Then("I validate add to cart button")
