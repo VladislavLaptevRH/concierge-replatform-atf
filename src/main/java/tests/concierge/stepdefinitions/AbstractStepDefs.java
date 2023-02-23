@@ -182,6 +182,7 @@ public class AbstractStepDefs {
                 generalStepDefs.fillZipCodeStateCountry("85020", "US", "");
                 generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
                 checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
+                with().pollInterval(3, SECONDS).await().until(() -> true);
             }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Address fields are not available");

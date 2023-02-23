@@ -22,7 +22,7 @@ Feature:Concierge GiftCardEnquiry
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
     When I choose POS for payment method
