@@ -41,6 +41,8 @@ public class ConciergeE2EStepDefs {
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
     AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
 
+    PaymentStepDefs paymentStepDefs = new PaymentStepDefs();
+
     String usState = "";
     String countOfItems = null;
     WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));
@@ -173,7 +175,6 @@ public class ConciergeE2EStepDefs {
             System.out.println("Continue from popup is not displayed");
         }
     }
-
 
     @When("I add {int} times an item in the cart")
     public void iAddTimesAnItemInTheCart(int arg0) {
@@ -391,32 +392,41 @@ public class ConciergeE2EStepDefs {
 
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String businessClient) {
+        if(!conciergeUserAccountPage.getClientLookupFirstName().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         with().pollInterval(7, SECONDS).await().until(() -> true);
-
-        if (businessClient.equals("member")) {
+        if (businessClient.equals("Member")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
-        } else if (businessClient.equals("nonmember")) {
+        } else if (businessClient.equals("Non-Member")) {
             generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupFirstName());
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupLastName());
             conciergeUserAccountPage.getClientLookupLastName().setValue("Nonmember");
-        } else if (businessClient.equals("trade")) {
+        } else if (businessClient.equals("Trade")) {
                 if(!conciergeUserAccountPage.getClientLookupFirstName().isDisplayed()){
                     WebDriverRunner.getWebDriver().navigate().refresh();
                     with().pollInterval(5, SECONDS).await().until(() -> true);
                 }
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Trade");
-        } else if (businessClient.equals("unclassifiedBusiness")) {
+        } else if (businessClient.equals("Unclassified")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
-            conciergeUserAccountPage.getClientLookupLastName().setValue("unclassifiedBusiness");
+            conciergeUserAccountPage.getClientLookupLastName().setValue("UnclassifiedBusiness");
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientLookupSearchButton().click();
-        conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME"), Duration.ofMinutes(1));
-        conciergeUserAccountPage.getFirstResultOfClientLookup().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if(!conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME")).isDisplayed()){
+            conciergeUserAccountPage.getClientLookupSearchButton().click();
+            with().pollInterval(9, SECONDS).await().until(() -> true);
+        }
+        conciergeUserAccountPage.getFirstResultOfClientLookupByName(businessClient).click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
 
@@ -693,12 +703,13 @@ public class ConciergeE2EStepDefs {
 
     @When("I edit shipping address from order review page")
     public void iEditShippingAddressFromOrderReviewPage() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeAddressScreen.getEditShippingAddress().should(visible, Duration.ofSeconds(15));
         conciergeAddressScreen.getEditShippingAddress().click();
         checkoutAddressScreen.getFirstNameInpt().should(visible, Duration.ofSeconds(15));
         generalStepDefs.clearField(checkoutAddressScreen.getFirstNameInpt());
         checkoutAddressScreen.getFirstNameInpt().setValue("NewShippingAddress");
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @When("I edit billing address from order review page")
@@ -733,6 +744,7 @@ public class ConciergeE2EStepDefs {
         if(confirmationOrderScreen.getRequestingPlaceOrderError().isDisplayed()){
             confirmationOrderScreen.getTryAgainButton().click();
         }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='ORDER & TERMS REVIEW SIGNATURE CAPTURE']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='SIGNATURE']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='CLEAR SIGNATURE']")).should(visible, Duration.ofSeconds(40));
@@ -744,6 +756,7 @@ public class ConciergeE2EStepDefs {
 //            WebDriverRunner.getWebDriver().navigate().refresh();
 //            with().pollInterval(5, SECONDS).await().until(() -> true);
 //        }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Qty 1']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));

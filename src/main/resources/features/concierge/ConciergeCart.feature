@@ -16,6 +16,7 @@ Feature:Concierge Cart Page
     When I open cart
     When I choose order classification
     When I click on checkout button
+    Then I click on no thanks button
     Then I verify membership popup for guest user
 
   Scenario: Line Item : Quantity update
@@ -158,7 +159,7 @@ Feature:Concierge Cart Page
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
     Then I verify that total price from cart and from payment page is the same
@@ -174,7 +175,7 @@ Feature:Concierge Cart Page
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
     When I choose POS for payment method
@@ -191,7 +192,7 @@ Feature:Concierge Cart Page
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "member"
+    When I choose client who is a "Member"
     Then I verify that promo code was removed
 
   Scenario:Verify mini cart count
@@ -217,8 +218,8 @@ Feature:Concierge Cart Page
     Then I verify membership banner for "<businessClient>" client not displayed
     Examples:
       | businessClient       |
-      | trade                |
-      | unclassifiedBusiness |
+      | Trade                |
+      | Unclassified |
 
   Scenario: Verify Membership Pop up while checkout for Trade - should not
     Given I log into Concierge as "associate"
@@ -228,7 +229,7 @@ Feature:Concierge Cart Page
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "trade"
+    When I choose client who is a "Trade"
     Then I verify membership banner for "trade" client not displayed
     When I click on checkout button
     Then I verify that membership popup for "trade" is not displayed
@@ -272,7 +273,7 @@ Feature:Concierge Cart Page
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "member"
+    When I choose client who is a "Member"
     Then I verify that membership price displayed as total price
 
   Scenario: Verify Employee discount checkout
@@ -334,7 +335,7 @@ Feature:Concierge Cart Page
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     When I open cart
     Then I verify "nonmember" savings for a "nonmember" user
 
@@ -347,7 +348,7 @@ Feature:Concierge Cart Page
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "trade"
+    When I choose client who is a "Trade"
     Then I verify "trade" savings for a "trade" user
 
 #  Scenario: Verify CAN shipping restriction
@@ -397,7 +398,7 @@ Feature:Concierge Cart Page
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "member"
+    When I choose client who is a "Member"
     Then I verify "member" savings for a "member" user
 
   Scenario: Verify address saved in address page when navigate back from order review or any page
@@ -409,7 +410,7 @@ Feature:Concierge Cart Page
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
     When I choose POS for payment method
@@ -426,7 +427,7 @@ Feature:Concierge Cart Page
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     #Then I verify zipcode
 
   Scenario: Availability, Delivery and Returns messages
@@ -442,6 +443,6 @@ Feature:Concierge Cart Page
     When I remove all items from cart via UI
     When I remove client from header
     When I click on client button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     When I click on plus button from client lookup search results
     Then I verify alternate addresses for client with multipel addresses
