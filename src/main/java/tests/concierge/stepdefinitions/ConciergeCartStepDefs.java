@@ -685,41 +685,10 @@ public class ConciergeCartStepDefs {
         if (!conciergeCartPageScreen.getOrderClassificationSelect().exists()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
-            if (conciergeCartPageScreen.getOrderClassificationSelect().isDisplayed()) {
-                conciergeCartPageScreen.getOrderClassificationSelect().click();
-                conciergeCartPageScreen.getOrderClassificationGalleryOrder().click();
-                conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
-//                if (conciergeCartPageScreen.getOrderClassificationError().isDisplayed()) {
-//                    WebDriverRunner.getWebDriver().navigate().refresh();
-//                    with().pollInterval(5, SECONDS).await().until(() -> true);
-//                }
-            }
-            if (conciergeProjectScreen.getAddToCartButton().isDisplayed()) {
-                conciergeE2EStepDefs.iClickOnAddToCartButtonFromProjectScreen();
-                conciergeE2EStepDefs.iClickOnContinueAddingAdditionalButton();
-                WebDriverRunner.getWebDriver().navigate().refresh();
-                with().pollInterval(5, SECONDS).await().until(() -> true);
-                conciergeCartPageScreen.getOrderClassificationSelect().click();
-                conciergeCartPageScreen.getOrderClassificationGalleryOrder().click();
-                conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
-            }
-        } else {
-            conciergeCartPageScreen.getOrderClassificationSelect().click();
-            with().pollInterval(1, SECONDS).await().until(() -> true);
-            conciergeCartPageScreen.getOrderClassificationGalleryOrder().click();
-            with().pollInterval(1, SECONDS).await().until(() -> true);
-//            conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order"), Duration.ofSeconds(5));
-            if(!conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order")).isDisplayed()){
-                for(int i = 0; i < 3; i++) {
-                    conciergeCartPageScreen.getOrderClassificationSelect().click();
-                    with().pollInterval(2, SECONDS).await().until(() -> true);
-                    if (conciergeCartPageScreen.getOrderClassificationSelect().shouldHave(value("RH Gallery Order")).isDisplayed()) {
-                        break;
-                    }
-                }
-            }
-
         }
+        Select orderClassificationDropDownList = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
+        orderClassificationDropDownList.selectByValue("RH Gallery Order");
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
     @Then("I verify contract savings")
     public void iVerifyContractSavingsForCartPage() {
