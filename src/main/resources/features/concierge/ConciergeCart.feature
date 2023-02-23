@@ -217,8 +217,8 @@ Feature:Concierge Cart Page
     When I choose client who is a "<businessClient>"
     Then I verify membership banner for "<businessClient>" client not displayed
     Examples:
-      | businessClient       |
-      | Trade                |
+      | businessClient |
+      | Trade |
       | Unclassified |
 
   Scenario: Verify Membership Pop up while checkout for Trade - should not

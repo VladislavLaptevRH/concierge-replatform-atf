@@ -117,6 +117,23 @@ public class AbstractStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeItemsScreen.getCheckoutButton().shouldHave(text(conciergeItemsScreen.getCheckoutButton().getText()), Duration.ofMinutes(2));
         conciergeItemsScreen.getCheckoutButton().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(conciergeCartPageScreen.getOrderClassificationError().isDisplayed()) {
+            for(int i = 0; i < 3; i++){
+                Select orderClassificationDropDownList = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
+                orderClassificationDropDownList.selectByValue("RH Gallery Order");
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+//                conciergeCartPageScreen.getOrderClassificationSelect().click();
+//                with().pollInterval(1, SECONDS).await().until(() -> true);
+//                conciergeCartPageScreen.getOrderClassificationGalleryOrder().click();
+//                with().pollInterval(1, SECONDS).await().until(() -> true);
+                if (!conciergeCartPageScreen.getOrderClassificationError().isDisplayed()) {
+                    break;
+                }
+            }
+            conciergeItemsScreen.getCheckoutButton().click();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
     }
 
     @When("I introduces payment details")
