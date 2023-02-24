@@ -18,8 +18,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.*;
 
 public class EstoreHomePageStepDefs {
     EstoreHomePage estoreHomePage = new EstoreHomePage();
@@ -54,10 +53,10 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getSeeAllResultButton().click();
     }
 
-    @Then("Verify users is taken to product page")
+    @Then("verify users is taken to search result page")
     public void verifyUsersIsTakenToProductPage() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        Hooks.getCurrentUrl().equals("https://stg2.rhnonprod.com/search/results.jsp?Ntt=sofa&Ns=product.sale%7C1");
+        assertTrue(Hooks.getCurrentUrl().equals(Hooks.eStoreURL + "/search/results.jsp?Ntt=sofa&Ns=product.sale%7C1"));
     }
 
     @Then("I verify RH dropdown and list of brand names")

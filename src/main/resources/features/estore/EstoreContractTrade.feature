@@ -28,7 +28,7 @@ Feature: eStore Contract and Trade
     Then I verify that price for product&line should be in US dollars
 
   Scenario: eStore Contract - Validate the currency for CAN Zip
-    Given I log into eStore as "noaddresses"
+    Given I log into eStore as "noaddresses" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -359,7 +359,6 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button

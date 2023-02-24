@@ -36,4 +36,5 @@ public class EstorePgStepDefs {
         estoreSearchScreen.getTwoColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
     }
 
+
 }

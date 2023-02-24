@@ -3,7 +3,7 @@
 Feature: Footer Links
 
   Scenario Outline: Verify footer resources section links
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     Then I verify that I'm able to access "<link>"
     Examples:
       | link                  |
@@ -17,7 +17,7 @@ Feature: Footer Links
       | SITE MAP              |
 
   Scenario Outline: Verify footer customer experience links
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     Then I verify that I'm able to access "<link>"
     Examples:
       | link                |
@@ -30,7 +30,7 @@ Feature: Footer Links
       | FAQS                |
 
   Scenario Outline: Verify our company
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     Then I verify that I'm able to access "<link>"
     Examples:
       | link    |
@@ -41,7 +41,7 @@ Feature: Footer Links
       | CAREERS |
 
   Scenario Outline: Verify legal links
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     Then I verify that I'm able to access "<link>"
     Examples:
       | link                 |

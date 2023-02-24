@@ -3,7 +3,7 @@
 Feature:Estore Payment
 
   Scenario: eStore Split Payment
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -18,7 +18,7 @@ Feature:Estore Payment
     Then I verify that I'm able to execute estore split payment
 
   Scenario: eStore Saved Cards
-    Given I log into eStore as "userWithSavedMasterCardVisa"
+    Given I log into eStore as "userWithSavedMasterCardVisa" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -35,7 +35,7 @@ Feature:Estore Payment
     Then I verify that estore thank you page is displayed
 
   Scenario: eStore Edit Payment
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -49,7 +49,7 @@ Feature:Estore Payment
     Then I verify that I'm able to edit payment
 
   Scenario: eStore Edit Address
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -65,7 +65,7 @@ Feature:Estore Payment
     When I click on continue with original address estore button
 
   Scenario: eStore unavailability of RHCC for CAN address
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -80,7 +80,7 @@ Feature:Estore Payment
     Then I verify unavailability for RHCC
 
   Scenario: eStore RHCC
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -97,7 +97,7 @@ Feature:Estore Payment
     Then I verify that estore thank you page is displayed
 
   Scenario: eStore Update address (Non impacting change) after making payment
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -115,7 +115,7 @@ Feature:Estore Payment
     Then I verify that shipping address is displayed
 
   Scenario: eStore Update address (Impacting change) after making payment
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -133,7 +133,7 @@ Feature:Estore Payment
     Then I verify that shipping address is displayed
 
   Scenario: eStore Order total increased after making payment
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -159,7 +159,7 @@ Feature:Estore Payment
     Then I verify that confirmation estore order screen is displayed
 
   Scenario: eStore Order total decreased after making payment
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050045" with "WHT" for estore
     When I update item quantity in estore pdp
@@ -186,7 +186,7 @@ Feature:Estore Payment
     Then I validate updated order estimate and card details for decrease item
 
   Scenario: eStore Billing address based on saved payment method
-    Given I log into eStore as "userWithSavedMasterCardVisa"
+    Given I log into eStore as "userWithSavedMasterCardVisa" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -207,7 +207,7 @@ Feature:Estore Payment
     Then I verify that new payment was added
 
   Scenario: eStore unavailability of Discover for CAN address
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -249,7 +249,7 @@ Feature:Estore Payment
     Then I verify unavailability of saved for RHCC
 
   Scenario: eStore Update address (Change Country) after making payment
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -292,7 +292,7 @@ Feature:Estore Payment
     Then I verify that estore thank you page is displayed
 
   Scenario: eStore Saved credit cards
-    Given I log into eStore as "userWithSavedMasterCardVisa"
+    Given I log into eStore as "userWithSavedMasterCardVisa" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart

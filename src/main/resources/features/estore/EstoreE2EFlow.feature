@@ -3,7 +3,7 @@
 Feature: Estore E2E flow
 
   Scenario: Verify that user is able to buy item for estore
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050045" with "WHT" for estore
     When I click on add to cart estore button

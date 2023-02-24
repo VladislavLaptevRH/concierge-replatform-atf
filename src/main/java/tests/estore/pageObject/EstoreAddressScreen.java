@@ -63,7 +63,7 @@ public class EstoreAddressScreen {
 
     private final SelenideElement canadaCountry = $(By.xpath("//select[@id='shippingAddress.country']//option[@value='CA']"));
 
-    private final SelenideElement enterZipCodeBtn = $(By.xpath("//*[text() = 'Enter zip code']"));
+    private final SelenideElement enterZipCodeBtn = $(By.xpath("//div[@id='component-order-summary']//span"));
 
     private final SelenideElement soldToTaxExempt = $(By.cssSelector("#soldToTaxExemptId"));
 

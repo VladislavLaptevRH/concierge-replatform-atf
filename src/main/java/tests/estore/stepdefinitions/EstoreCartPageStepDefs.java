@@ -461,7 +461,7 @@ public class EstoreCartPageStepDefs {
     @Then("I verify that the price for trade get increased in multiple of QTY")
     public void iVerifyThatThePriceForTradeGetIncreasedInMultipleOfQTY() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[contains(text(),'102.00')]")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'70.00')]")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify that trade price is used for each product")

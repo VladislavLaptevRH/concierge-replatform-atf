@@ -3,7 +3,7 @@
 Feature: Estore Cart Page
 
   Scenario: Remove item from cart
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -11,7 +11,7 @@ Feature: Estore Cart Page
     Then I verify that item from estore cart has been removed
 
   Scenario: Apply/Remove employee discount
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -20,7 +20,7 @@ Feature: Estore Cart Page
     Then I verify that I'm able to remove estore employee discount
 
   Scenario: Apply/Remove promotion code
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -29,7 +29,7 @@ Feature: Estore Cart Page
     When I remove promotion from estore cart
 
   Scenario: Zip code validation in cart
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -38,14 +38,14 @@ Feature: Estore Cart Page
     And I verify CA zip code validation in estore cart
 
   Scenario: eStore - Membership price in cart
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
     Then I verify membership price in banner
 
   Scenario: eStore - Line item quantity update
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -72,14 +72,14 @@ Feature: Estore Cart Page
     Then I verify that estore thank you page is displayed
 
   Scenario: eStore - Add UFD item to Cart
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
     When I open estore cart
     Then I verify UFD in cart
 
   Scenario: eStore - Add Surcharge item to Cart
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add product "prod1617188" and sku "61690405 BRWN" to cart via API for estore
     When I open estore cart
@@ -88,7 +88,7 @@ Feature: Estore Cart Page
     Then I verify SURCHARGE fee on cart page
 
   Scenario: eStore - Gift Box fee in cart
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I add item to cart via API for estore
     When I open estore cart
 #    When I click on zipcode estore button
@@ -118,7 +118,7 @@ Feature: Estore Cart Page
     Then I verify membership popup for guest user
 
   Scenario: eStore - CAN Shipping restriction
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -128,7 +128,7 @@ Feature: Estore Cart Page
     Then I verify "CAN" shipping restriction
 
   Scenario: eStore - New York Shipping restriction
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I open product page with NY restriction item
     When I click on add to cart estore button
@@ -150,25 +150,25 @@ Feature: Estore Cart Page
     Then I verify that continue as guest user option is not available
 
   Scenario: eStore Add products from all brands to cart
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     Then I verify that I'm able to add products from all brands to cart
 
   Scenario: eStore Membership banner for member user
-    Given I log into eStore as "member"
+    Given I log into eStore as "member" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
     Then I verify membership estore banner for "member user"
 
   Scenario: eStore Membership banner for non-member user
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I add item to cart via API for estore
     When I open estore cart
     Then I verify membership estore banner for "nonmember user"
 
   Scenario: eStore Cart persistence in all brands
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -187,7 +187,7 @@ Feature: Estore Cart Page
     Then I verify that "regular" prices for "17050042WHT" was applied
 
   Scenario: Verify state field Empty dropdown issue for International billing address
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -199,7 +199,7 @@ Feature: Estore Cart Page
     Then I verify state field empty dropdown issue for International billing address
 
   Scenario: Verify the standard delivery charges  (Free & applicable charges)
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -214,7 +214,7 @@ Feature: Estore Cart Page
     When I click on remove membership estore button
 
   Scenario: Verify the standard delivery charges (Free & applicable charges)
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
