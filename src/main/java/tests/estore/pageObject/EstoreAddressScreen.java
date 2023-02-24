@@ -77,7 +77,9 @@ public class EstoreAddressScreen {
 
     private final SelenideElement reviewText = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][3]/p"));
 
-    private final SelenideElement continueToPayment = $(By.xpath("//*[text() = 'CONTINUE']"));
+    private final SelenideElement continueToPayment = $(By.xpath("//*[text() = 'Continue to payment']"));
+
+    private final SelenideElement continuePayment = $(By.xpath("//*[text() = 'CONTINUE']"));
 
     private final SelenideElement confirmationText = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][4]/p"));
 

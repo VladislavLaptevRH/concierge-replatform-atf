@@ -579,8 +579,20 @@ public class EstoreE2EStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Same as shipping address checkbox is not displayed");
         }
+    }
 
-
+    @When("I click on continue payment estore button")
+    public void iClickOnContinuePaymenEstoreButton() {
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        try {
+            if (estoreAddressScreen.getContinuePayment().isDisplayed()) {
+                estoreAddressScreen.getContinuePayment().scrollIntoView(true);
+                estoreAddressScreen.getContinuePayment().should(visible, Duration.ofSeconds(2));
+                estoreAddressScreen.getContinuePayment().click();
+            }
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Same as shipping address checkbox is not displayed");
+        }
     }
 
     @When("I open direct product page on estore")

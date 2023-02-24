@@ -391,7 +391,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on estore cart button from header")
     public void iClickOnEstoreCartButtonFromHeader() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreCartPage.getCartButtonOrderReview().should(visible, Duration.ofSeconds(40));
         executeJavaScript("arguments[0].click();", estoreCartPage.getCartButtonOrderReview());
     }
@@ -535,7 +535,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify state field empty dropdown issue for International billing address")
     public void iVerifyStateFieldEmptyDropdownIssueForInternationalBillingAddress() {
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='State required.']")).should(visible, Duration.ofSeconds(30));
     }
 
