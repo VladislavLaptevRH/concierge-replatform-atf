@@ -30,6 +30,7 @@ public class EstoreCGStepDefs {
         } else {
             $(By.xpath("//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(35));
         }
+        System.out.println();
     }
 
     @When("I scroll on the page till back to top button is visible")
@@ -56,7 +57,7 @@ public class EstoreCGStepDefs {
         estoreCGScreen.getComponentCollectionCardDetails().should(Condition.visible, Duration.ofSeconds(20));
     }
 
-    @Then("I verify collection name, image, prices on collection banner")
+    @Then("I verify collection name, image on collection banner")
     public void iVerifyCollectionNameImagePricesOnCollectionBanner() {
         iValidateTheCollectionNameIsNotEmpty();
         $(By.xpath("(//img)[2]")).should(Condition.visible, Duration.ofSeconds(20));

@@ -3,7 +3,7 @@
 Feature: Estore Thank You page
 
   Scenario: Verify address, price, payment information, total, subtotal tags
-    Given I log into eStore as "regular"
+    Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore

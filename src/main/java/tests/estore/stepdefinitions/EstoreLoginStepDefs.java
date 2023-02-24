@@ -26,7 +26,7 @@ public class EstoreLoginStepDefs {
     public static String userEmail;
 
 
-    @Given("I log into eStore as {string}")
+    @Given("I log into eStore as {string} user")
     public boolean iLogIntoEStoreAs(String arg0) {
         try {
             loginAsRole(arg0);
@@ -213,7 +213,7 @@ public class EstoreLoginStepDefs {
         estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
         estoreLoginPage.getSignInButton().click();
         if (Hooks.profile.equals("stg2")) {
-            USER_ID_STG2 = "a70584e9-5de4-4bfb-8892-8d292bfa374c";
+            USER_ID_STG2 = "c394260f-0ced-4e20-b4ee-3bce53851f21";
         } else {
             USER_ID_STG4 = "12fe9c72-c443-43b8-8185-2f627dbda8da";
         }
@@ -231,7 +231,7 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getContractTradePasswordField().setValue("20230220167059");
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
-            USER_ID_STG2 = "c42863ab-8179-4bd6-a72d-628a95fac78b";
+            USER_ID_STG2 = "21e477e0-c989-48db-82ff-4422172805e2";
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             $(By.xpath("//a[@data-analytics-nav='account-icon']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//a[@data-analytics-nav='account-icon']")).click();

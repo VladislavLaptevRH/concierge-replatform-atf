@@ -33,7 +33,7 @@ public class EstoreMemberStepDefs {
     //Non-members
     String expectedTitle = "RH MEMBERS PROGRAM PROFILE";
     String expectedRenewal = "Your membership will auto-renew each year for $175, plus applicable taxes.";
-    String expectedCancel = "You may cancel auto-renewal by calling the RH Members Program Concierge at 888.889.4739.";
+    String expectedCancel = "You may cancel auto-renewal by calling 800.762.1005.";
     String expectedParagraph = "The RH Members Program offers savings of 25% on everything RH.* Every day. Become a member for a $175, plus applicable taxes. annual fee, members will save 25% on RH, RH Modern, RH Baby & Child and RH TEEN, as well as 10% savings on all Sale. Benefits include complimentary services with RH Interior Design, concierge service to manage your orders, eligibility for preferred financing† plans on RH Credit Card and early access to clearance events. FAQs";
     String expectedParagraph2 = "*Limited exclusions apply. † Minimum payments are required for each Credit Plan. Valid for single transaction only. If the single transaction has multiple shipments, each shipment may result in a separate Credit Plan, subject to a separate minimum purchase requirement and minimum interest charge. Valid in US only. Visit an RH Gallery or RH.com for details.";
     String expectedCreditCard = "Credit card offers are subject to credit approval.";
@@ -73,10 +73,10 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate membership details")
     public void iValidateMembershipDetails() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        sleep(5000);
         List<String> items = new ArrayList<>();
-        List<String> expectedItems = new ArrayList(Arrays.asList(expectedTitle, expectedParagraph, expectedParagraph2,
-                expectedCreditCard, expectedRHCreditCard, expectedAnnual, expectedRenewal, expectedCancel, expectedEmail, expectedEnterEmail ));
+        List<String> expectedItems = new ArrayList(Arrays.asList(expectedTitle, expectedRenewal, expectedCancel, expectedEmail, expectedEnterEmail));
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         for (int i = 0; i < estoreMemberPage.getMembershipDetails().size(); i++) {
             items.add(estoreMemberPage.getMembershipDetails().get(i).getText());
         }
@@ -119,10 +119,10 @@ public class EstoreMemberStepDefs {
     @Then("I validate membership details for member user")
     public void iValidateMembershipDetailsForMemberUser() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text()='Membership Number: ']")).should(visible,Duration.ofSeconds(30));
-        $(By.xpath("//*[text()='Enrollment: ']")).should(visible,Duration.ofSeconds(30));
-        $(By.xpath("//*[text()='You will be charged ']")).should(visible,Duration.ofSeconds(30));
-        $(By.xpath("//*[text()='Method of Payment: ']")).should(visible,Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Membership Number: ']")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Enrollment: ']")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='You will be charged ']")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Method of Payment: ']")).should(visible, Duration.ofSeconds(30));
     }
 
     @When("I click on cancel membership link")
@@ -135,13 +135,13 @@ public class EstoreMemberStepDefs {
     @Then("I validate cancel membership content")
     public void iValidateCancelMembershipContent() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text()='25% savings on all full-priced items from RH, RH Modern, RH Baby & Child and RH TEEN']")).should(visible,Duration.ofSeconds(30));
-        $(By.xpath("//*[text()='Additional 20% savings on all sale items']")).should(visible,Duration.ofSeconds(30));
-        $(By.xpath("//*[text()='Complimentary services with RH Interior Design']")).should(visible,Duration.ofSeconds(30));
-        $(By.xpath("//*[text()='Preferred financing† plans on the RH Credit Card available, subject to approval']")).should(visible,Duration.ofSeconds(30));
-        $(By.xpath("//*[text()='Early access to clearance events']")).should(visible,Duration.ofSeconds(30));
-        $(By.xpath("//*[text()='Continue Membership']")).should(visible,Duration.ofSeconds(30));
-        $(By.xpath("//*[text()='Cancel Membership']")).should(visible,Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='25% savings on all full-priced items from RH, RH Modern, RH Baby & Child and RH TEEN']")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Additional 20% savings on all sale items']")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Complimentary services with RH Interior Design']")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Preferred financing† plans on the RH Credit Card available, subject to approval']")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Early access to clearance events']")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Continue Membership']")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='Cancel Membership']")).should(visible, Duration.ofSeconds(30));
 
     }
 

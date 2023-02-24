@@ -46,7 +46,7 @@ public class EstoreSearchStepDefs {
         estoreSearchScreen.getSeeAllResultsButton().click();
     }
 
-    @Then("I verify that we cannot find what you are looking message is not displayed")
+    @Then("I verify that we cannot find what you are looking message is displayed")
     public void iVerifyThatWeCannotFindWhatYouAreLookingMessageIsNotDisplayed() {
         estoreSearchScreen.getSorryWeCannotFindMsg().should(Condition.visible, Duration.ofSeconds(20));
     }
