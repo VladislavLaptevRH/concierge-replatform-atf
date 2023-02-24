@@ -81,7 +81,7 @@ Feature:Concierge PDP
     When I remove all items from cart via UI
     When I go to item "10105809 BWDV" from search field
     When I click on add to cart button
-    When I click on aggree&add button
+    When I click on agree&add button
     When I click on view cart button
     Then I verify that availability, Delivery and returns messaging is displayed for "SO"
 

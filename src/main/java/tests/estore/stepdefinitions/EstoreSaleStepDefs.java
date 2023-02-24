@@ -1,8 +1,11 @@
 package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.EstoreCGScreen;
 import tests.estore.pageObject.EstoreSaleScreen;
@@ -18,7 +21,6 @@ public class EstoreSaleStepDefs {
 
     EstoreCGScreen estoreCGScreen = new EstoreCGScreen();
     EstoreSaleScreen estoreSaleScreen = new EstoreSaleScreen();
-
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     String URL;
 
@@ -33,7 +35,7 @@ public class EstoreSaleStepDefs {
     public void iVerifyThatIMAbleToNavigateDifferentCategory() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreSaleScreen.getMainSaleList().should(Condition.visible, Duration.ofSeconds(20));
-       estoreSaleScreen.getMainSaleList().click();
+        estoreSaleScreen.getMainSaleList().click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreSaleScreen.getSubSaleList().should(Condition.visible, Duration.ofSeconds(20));
         estoreSaleScreen.getSubSaleList().click();
@@ -56,7 +58,7 @@ public class EstoreSaleStepDefs {
 
     @When("I go to sale estore category")
     public void iGoToSaleEstoreCategory() {
-        URL = Hooks.eStoreURL + "/catalog/category/products.jsp?categoryId=cat10240094&pgterm=RH+Dressers&sale=true&topCatId=cat3890154&parentCatId=cat780002";
+        URL = "https://stg2.rhnonprod.com/catalog/category/products.jsp?categoryId=cat10240094&pgterm=RH+Dressers&sale=true&topCatId=cat3890154&parentCatId=cat780002";
         open(URL);
     }
 }

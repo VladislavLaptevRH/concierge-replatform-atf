@@ -11,7 +11,7 @@ Feature:Concierge Payment
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
     When I execute payment for "<cardType>"
@@ -32,7 +32,7 @@ Feature:Concierge Payment
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
     When I choose "RH Gift Card" from payment method
@@ -48,7 +48,7 @@ Feature:Concierge Payment
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
     Then I verify the complete billing address
@@ -62,7 +62,7 @@ Feature:Concierge Payment
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
     Then I verify subtotal, shipping fee, taxes based on postal code
@@ -91,7 +91,7 @@ Feature:Concierge Payment
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "trade"
+    When I choose client who is a "Trade"
     When I click on checkout button
     And I fill all fields for sold to address
     And I continue to payment
@@ -106,7 +106,7 @@ Feature:Concierge Payment
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     And I fill all fields from address screen
     And I continue to payment
     When I edit billing address from PG

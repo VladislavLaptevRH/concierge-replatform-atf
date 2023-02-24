@@ -12,7 +12,7 @@ Feature:Concierge E2E flow
     When I choose order classification
     When I click on checkout button
     And I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
     When I execute payment for "VI"
@@ -29,7 +29,7 @@ Feature:Concierge E2E flow
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
     When I introduces payment details for several payment methods
@@ -47,7 +47,7 @@ Feature:Concierge E2E flow
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "member"
+    When I choose client who is a "Member"
     Then I verify that cart is displayed
 
   Scenario: Verify that if client is a non member then redirected to address screen
@@ -59,7 +59,7 @@ Feature:Concierge E2E flow
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     Then I verify that address screen is displayed
 
   Scenario Outline: Verify that user is able to buy item through search item by SKU id
@@ -73,7 +73,7 @@ Feature:Concierge E2E flow
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
     When I execute payment for "AX"

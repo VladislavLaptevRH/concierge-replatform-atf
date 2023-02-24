@@ -20,7 +20,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement orderClassificationInteriorDesign = $(By.xpath("//option[@value='RH Interior Design']"));
 
-    private final SelenideElement orderClassificationError = $(By.xpath("Please select an option for Order Classification."));
+    private final SelenideElement orderClassificationError = $(By.xpath("//*[text() = 'Please select an option for Order Classification.']"));
 
     private final SelenideElement arlesRectangularDinigTableId = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']/div/div/div[1]//p[@id='listColumn2-Item#']"));
 

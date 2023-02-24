@@ -13,6 +13,8 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 public class ConciergeUserAccountPage {
 
+    private final String firstResultOfClientLookupParameterized = "(//*[text() = 'MEMBERSHIP']/../../..//*[starts-with(text(), '%s')])[1]";
+
     public final String currentLocationGalleryItem = "//li[contains(text(),'%s')]";
 
     public final String galleryItem = "//input[@value = '%s']";
@@ -185,6 +187,11 @@ public class ConciergeUserAccountPage {
 
     public SelenideElement getGalleryItemByName (String name){
         String path = String.format(galleryItem, name);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getFirstResultOfClientLookupByName (String name){
+        String path = String.format(firstResultOfClientLookupParameterized, name);
         return $(byXpath(path));
     }
 }

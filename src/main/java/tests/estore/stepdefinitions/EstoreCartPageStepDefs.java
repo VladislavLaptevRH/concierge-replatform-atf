@@ -644,8 +644,8 @@ public class EstoreCartPageStepDefs {
 
     @When("I open product page with NY restriction item")
     public void iOpenProductPageWithNYRestrictionItem() {
-        String productId = "rhbc_prod961679";
-        String skuId = "112686";
+        String productId = "rhbc_prod961678";
+        String skuId = "112685";
         String url = null;
         if (Hooks.profile.equals("stg2")) {
             url = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + "AGPT" + "&categoryId=search";
