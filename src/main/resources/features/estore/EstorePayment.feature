@@ -331,7 +331,7 @@ Feature:Estore Payment
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I choose "RH Gift Card" from payment method
-    When I click on continue payment method estore button
+    When I click on continue payment estore button
     When I click on a place estore order button
 
   Scenario: Verify that user is able to execute payment via GC for CAN
@@ -350,7 +350,7 @@ Feature:Estore Payment
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I choose "RH Gift Card" from payment method
-    When I click on continue payment method estore button
+    When I click on continue payment estore button
     When I click on a place estore order button
 
   Scenario: Verify the saving AMEX payment method
