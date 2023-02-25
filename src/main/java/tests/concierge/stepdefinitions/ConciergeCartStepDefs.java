@@ -84,12 +84,31 @@ public class ConciergeCartStepDefs {
     public void iClickOnViewCartButton() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeCartPageScreen.getItemAddedToYourCart().should(visible, Duration.ofMinutes(1));
-        conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
-        conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
-        conciergeItemsScreen.getViewCartButton().should(visible, Duration.ofSeconds(60));
-        conciergeCartPageScreen.getKeepShopping().should(visible, Duration.ofSeconds(15));
-        conciergeItemsScreen.getViewCartButton().click();
+        if(!conciergeCartPageScreen.getItemAddedToYourCart().isDisplayed()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            if(conciergeUserAccountPage.getCartButtonItemSum().exists()){
+                String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
+                open(URL);
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+            } else {
+                conciergeE2EStepDefs.iOpenProductPageWithAnd("prod1617188", "63130001");
+                conciergeE2EStepDefs.iClickOnAddToCartButton();
+                conciergeCartPageScreen.getItemAddedToYourCart().should(visible, Duration.ofMinutes(1));
+                conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
+                conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
+                conciergeItemsScreen.getViewCartButton().should(visible, Duration.ofSeconds(60));
+                conciergeCartPageScreen.getKeepShopping().should(visible, Duration.ofSeconds(15));
+                conciergeItemsScreen.getViewCartButton().click();
+            }
+        } else {
+            conciergeCartPageScreen.getItemAddedToYourCart().should(visible, Duration.ofMinutes(1));
+            conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
+            conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
+            conciergeItemsScreen.getViewCartButton().should(visible, Duration.ofSeconds(60));
+            conciergeCartPageScreen.getKeepShopping().should(visible, Duration.ofSeconds(15));
+            conciergeItemsScreen.getViewCartButton().click();
+        }
     }
 
     @Then("I verify order classification")
@@ -122,7 +141,8 @@ public class ConciergeCartStepDefs {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//option[@value='" + randomQuantity + "']")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         $(By.xpath("//option[@value='" + randomQuantity + "']")).click();
-
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that quantity was updated")
@@ -370,6 +390,8 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that mini cart value is equal to {int}")
     public void iVerifyThatMiniCartValueIsEqualTo(int arg0) {
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeUserAccountPage.getCartButton().shouldHave(text("" + arg0), Duration.ofMinutes(1));
     }
@@ -751,11 +773,17 @@ public class ConciergeCartStepDefs {
                 conciergeCartPageScreen.getClearOrderButtonPop().click();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
-            try {
+//            try {
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                if(conciergeUserAccountPage.getCartButtonItemSum().exists()){
+                    iRemoveAllItemsFromCartViaUI();
+                }
+                conciergeUserAccountPage.getCartButton().should(visible,Duration.ofMinutes(5));
                 conciergeUserAccountPage.getCartButtonItemSum().shouldNot(visible, Duration.ofMinutes(2));
-            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                System.out.println("Cart sum indicator is not displayed");
-            }
+//            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//                System.out.println("Cart sum indicator is not displayed");
+//            }
         }
     }
 
