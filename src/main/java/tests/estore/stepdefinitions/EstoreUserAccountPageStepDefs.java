@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.EstoreAddressScreen;
+import tests.estore.pageObject.EstoreCartPage;
 import tests.estore.pageObject.EstorePaymentPage;
 import tests.estore.pageObject.EstoreUserAccountPage;
 import tests.utility.Hooks;
@@ -18,6 +19,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class EstoreUserAccountPageStepDefs {
     EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
@@ -25,6 +27,7 @@ public class EstoreUserAccountPageStepDefs {
     EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+    EstoreCartPage estoreCartPage = new EstoreCartPage();
     static String firstName;
 
     @When("I go to profile payment method")
@@ -287,6 +290,18 @@ public class EstoreUserAccountPageStepDefs {
     public void iGoesToMyAccountForEstore() {
         String URL = Hooks.eStoreBaseURL + "/my-account/profile.jsp";
         open(URL);
-
     }
+
+
+    @When("I verify the max length for last name text field")
+    public void iVerifyTheMaxLengthForLastNameTextField() {
+        estoreUserAccountPage.getBillingAddressLastName().setValue("lastnamelastnamelastnamelastnamelastnamelastname");
+    }
+
+    @When("I verify the min length for last name text field")
+    public void iVerifyTheMinLengthForLastNameTextField() {
+        estoreUserAccountPage.getBillingAddressLastName().setValue("abc");
+    }
+
+
 }

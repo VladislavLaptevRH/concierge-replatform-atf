@@ -42,7 +42,6 @@ pipeline.standardTemplate { label ->
                     "'Environment' (${params.ENVIRONMENT}) " +
                     "'Endpoint' (${params.ENDPOINT})  " +
                     " Test Results: http://docs.rhapsody.rh.com/public/${resultspath}/cucumber-html-report/Index.html" +
-                    " ReTry Test Results: http://docs.rhapsody.rh.com/public/${resultspath}/cucumber-html-report/Rerun.html", channel: "#test-results")
         } catch (Exception exception) {
             notifyFailed()
             throw exception;

@@ -135,10 +135,10 @@ public class EstoreLoginStepDefs {
                         WebDriverRunner.getWebDriver().navigate().refresh();
                         with().pollInterval(5, SECONDS).await().until(() -> true);
                     }
-                    estoreLoginPage.getUsernameField().setValue("new02@rh.com");
+                    estoreLoginPage.getUsernameField().setValue("regularautomation@rh.com");
                     estoreLoginPage.getPasswordField().setValue("Qwerty@123");
                     USER_ID_STG4 = "dc6f68a3-a223-4670-b7ab-737f1c45927b";
-                    USER_ID_STG2 = "e3401e67-8f0b-4d75-bf48-63fa022cb34e";
+                    USER_ID_STG2 = "6d7c77ad-59bf-4fe9-a841-f790b97487c0";
                 }
             }
 
