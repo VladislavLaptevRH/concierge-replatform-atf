@@ -14,8 +14,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.*;
@@ -93,8 +92,8 @@ public class EstoreHomePageStepDefs {
 
     @When("I scroll down to Request a design consultation and click")
     public void iScrollDownToRequestADesignConsultationAndClick() {
+        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         estoreHomePage.getRequestConsultationButton().scrollTo();
-        estoreHomePage.getRequestConsultationButton().exists();
         estoreHomePage.getRequestConsultationButton().click();
     }
 

@@ -116,7 +116,7 @@ public class Hooks {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
         } else if (profile.equals("stg4") && cookie != null) {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
-        }  else if (profile.equals("stg3") && cookie != null) {
+        } else if (profile.equals("stg3") && cookie != null) {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
         }
         return eStoreURL;
