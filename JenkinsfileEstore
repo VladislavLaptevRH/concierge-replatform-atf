@@ -41,7 +41,9 @@ pipeline.standardTemplate { label ->
                 }
             }  // pipeline/container
 
-            slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) 'Environment' (${params.ENVIRONMENT}) 'Endpoint' (${params.ENDPOINT})   : Test Results: http://docs.rhapsody.rh.com/public/${resultspath}/cucumber-html-report/Index.html")
+            slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) 'Environment' (${params.ENVIRONMENT}) 'Endpoint' (${params.ENDPOINT})  " +
+                    " : Test Results: http://docs.rhapsody.rh.com/public/${resultspath}/cucumber-html-report/Index.html",
+                    channel: "#test-results")
         } catch (Exception exception) {
             notifyFailed()
             throw exception;
