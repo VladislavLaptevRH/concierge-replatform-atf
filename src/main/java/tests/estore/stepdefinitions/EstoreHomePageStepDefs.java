@@ -106,6 +106,7 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getMessageInputField().setValue("Hi, This is automation tests, please ignore the request. Thank you ");
         estoreHomePage.getIframeRequestAConsultationButton().click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
+
     }
 
     @Then("I Verify Thank you message")

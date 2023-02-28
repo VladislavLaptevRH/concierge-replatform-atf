@@ -72,3 +72,10 @@ Feature: Estore account
     When I click on estore update personal information data button
     When I close estore your profile has been updated pop up
     Then I verify that the updated last name is saved
+
+  Scenario: Verify the Update Personal Email Information Functionality -update to existing email (Error message should be displayed regarding Entered email is already registered)
+    Given I log into eStore as "regular" user
+    When I goes to my account for estore
+    When I update account email with the existing email
+    When I click on estore update personal information data button
+    Then I verify that error message is displayed regarding entered email is already registered
