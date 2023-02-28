@@ -92,24 +92,20 @@ public class EstoreHomePageStepDefs {
 
     @When("I scroll down to Request a design consultation and click")
     public void iScrollDownToRequestADesignConsultationAndClick() {
-//        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-//        estoreHomePage.getRequestConsultationButton().scrollTo();
-//        estoreHomePage.getRequestConsultationButton().click();
+        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+        estoreHomePage.getRequestConsultationButton().scrollTo();
+        estoreHomePage.getRequestConsultationButton().click();
     }
 
     @And("I fill in the request form")
     public void iFillInTheRequestForm() {
-        try {
-            estoreHomePage.getPhoneNumberField().should(Condition.visible, Duration.ofSeconds(20));
-            estoreHomePage.getPhoneNumberField().setValue("9254434333");
-            estoreHomePage.getLocationDropdown().selectOption(6);
-            estoreHomePage.getMessageInputField().click();
-            estoreHomePage.getMessageInputField().setValue("Hi, This is automation tests, please ignore the request. Thank you ");
-            estoreHomePage.getIframeRequestAConsultationButton().click();
-            with().pollInterval(3, SECONDS).await().until(() -> true);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Request form is not displayed");
-        }
+        estoreHomePage.getPhoneNumberField().should(Condition.visible, Duration.ofSeconds(20));
+        estoreHomePage.getPhoneNumberField().setValue("9254434333");
+        estoreHomePage.getLocationDropdown().selectOption(6);
+        estoreHomePage.getMessageInputField().click();
+        estoreHomePage.getMessageInputField().setValue("Hi, This is automation tests, please ignore the request. Thank you ");
+        estoreHomePage.getIframeRequestAConsultationButton().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
 
     }
 
