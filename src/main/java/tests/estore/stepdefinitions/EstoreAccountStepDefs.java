@@ -109,4 +109,15 @@ public class EstoreAccountStepDefs {
     public void iVerifyThatTheUpdatedLastNameIsSaved() {
         assertTrue(estoreUserAccountPage.getBillingAddressLastName().getValue().equals(lastName));
     }
+
+    @When("I update account email with the existing email")
+    public void iUpdateAccountEmailWithTheExistingEmail() {
+        estoreUserAccountPage.getEmailField().should(visible, Duration.ofSeconds(20));
+        generalStepDefs.clearField(estoreUserAccountPage.getEmailField());
+        estoreUserAccountPage.getEmailField().setValue("regularautomation@rh.com");    }
+
+    @Then("I verify that error message is displayed regarding entered email is already registered")
+    public void iVerifyThatErrorMessageIsDisplayedRegardingEnteredEmailIsAlreadyRegistered() {
+        System.out.println();
+    }
 }

@@ -122,7 +122,6 @@ public class EstoreSearchStepDefs {
         $(By.xpath("(//*[text()='" + productName + "'])[2]")).should(Condition.visible, Duration.ofSeconds(20));
     }
 
-
     @Then("I verify the {string}")
     public void iVerifyThe(String gridNumber) {
         if (gridNumber.equals(3)) {
