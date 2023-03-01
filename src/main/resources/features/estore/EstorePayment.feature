@@ -200,7 +200,7 @@ Feature:Estore Payment
     Then I validate that billing address based on saved payment method
 
   Scenario: eStore Add new payment method
-    Given I log into eStore as "addnewpayment"
+    Given I log into eStore as "addnewpayment" user
     When I go to profile payment method
     When I remove added before cart
     When I add new card for estore
@@ -221,7 +221,7 @@ Feature:Estore Payment
     Then I verify unavailability of Discover for CAN address
 
   Scenario: eStore unavailability of Saved Discover for CAN shipping address
-    Given I log into eStore as "savedRhCcDiscover"
+    Given I log into eStore as "savedRhCcDiscover" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -236,7 +236,7 @@ Feature:Estore Payment
     Then I verify that discover is unavailable
 
   Scenario: eStore unavailability of Saved RHCC for CAN shipping address
-    Given I log into eStore as "savedRhCc"
+    Given I log into eStore as "savedRhCc" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -275,7 +275,7 @@ Feature:Estore Payment
     Then I verify that estore thank you page is displayed
 
   Scenario: eStore masked CC
-    Given I log into eStore as "mastercard"
+    Given I log into eStore as "mastercard" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -303,7 +303,7 @@ Feature:Estore Payment
     Then I verify that I'm able to execute estore split payment with saved CC
 
   Scenario: GC/ Balance check
-    Given I log into eStore as "mastercard"
+    Given I log into eStore as "mastercard" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -314,12 +314,12 @@ Feature:Estore Payment
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
-    When I choose "RH Gift Card" from payment method
+    When I choose "GiftCard" from payment method
     When I click on check balance button
     Then I verify that gift card balance info is displayed for estore
 
   Scenario: Verify that user is able to execute payment via GC for USA
-    Given I log into eStore as "mastercard"
+    Given I log into eStore as "mastercard" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -335,7 +335,7 @@ Feature:Estore Payment
     When I click on a place estore order button
 
   Scenario: Verify that user is able to execute payment via GC for CAN
-    Given I log into eStore as "savedRhCc"
+    Given I log into eStore as "savedRhCc" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -354,7 +354,7 @@ Feature:Estore Payment
     When I click on a place estore order button
 
   Scenario: Verify the saving AMEX payment method
-    Given I log into eStore as "addnewpayment"
+    Given I log into eStore as "addnewpayment" user
     When I go to profile payment method
     When I remove added before cart
     When I added new card "AMEX" for estore
@@ -362,7 +362,7 @@ Feature:Estore Payment
     When I remove added before cart
 
   Scenario: Verify the saving DI payment method
-    Given I log into eStore as "addnewpayment"
+    Given I log into eStore as "addnewpayment" user
     When I go to profile payment method
     When I remove added before cart
     When I added new card "DISCOVER" for estore
