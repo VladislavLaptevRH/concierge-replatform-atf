@@ -6,6 +6,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.interactions.Actions;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.estore.pageObject.EstoreHomePage;
 import tests.utility.Hooks;
@@ -22,6 +23,7 @@ import static org.testng.AssertJUnit.*;
 public class EstoreHomePageStepDefs {
     EstoreHomePage estoreHomePage = new EstoreHomePage();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
+    EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
 
     @Then("I expect that I am on the eStore Dashboard page")
     public void iExpectThatIAmOnTheEStoreDashboardPage() {
@@ -92,7 +94,9 @@ public class EstoreHomePageStepDefs {
 
     @When("I scroll down to Request a design consultation and click")
     public void iScrollDownToRequestADesignConsultationAndClick() {
-        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        executeJavaScript("window.scrollTo(0, 1000)");
+        executeJavaScript("window.scrollTo(0, 3000)");
         estoreHomePage.getRequestConsultationButton().scrollTo();
         estoreHomePage.getRequestConsultationButton().click();
     }

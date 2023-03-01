@@ -571,29 +571,13 @@ public class EstoreE2EStepDefs {
     public void iClickOnContinuePaymentMethodEstoreButton() {
         with().pollInterval(6, SECONDS).await().until(() -> true);
         try {
-            if (estoreAddressScreen.getContinueToPayment().isDisplayed()) {
-                estoreAddressScreen.getContinueToPayment().scrollIntoView(true);
-                estoreAddressScreen.getContinueToPayment().should(visible, Duration.ofSeconds(2));
-                estoreAddressScreen.getContinueToPayment().click();
-            }
+            estoreAddressScreen.getContinueToPayment().scrollIntoView(true);
+            estoreAddressScreen.getContinueToPayment().should(visible, Duration.ofSeconds(2));
+            estoreAddressScreen.getContinueToPayment().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Same as shipping address checkbox is not displayed");
+            System.out.println("Continue button is not displayed");
+            executeJavaScript("arguments[0].click();", estoreAddressScreen.getContinueToPayment());
         }
-    }
-
-    @When("I click on continue payment estore button")
-    public void iClickOnContinuePaymenEstoreButton() {
-        with().pollInterval(6, SECONDS).await().until(() -> true);
-        try {
-            if (estoreAddressScreen.getContinuePayment().isDisplayed()) {
-                estoreAddressScreen.getContinuePayment().scrollIntoView(true);
-                estoreAddressScreen.getContinuePayment().should(visible, Duration.ofSeconds(2));
-                estoreAddressScreen.getContinuePayment().click();
-            }
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Same as shipping address checkbox is not displayed");
-        }
-    }
 
     @When("I open direct product page on estore")
     public void iOpenDirectProductPageOnEstore() {
@@ -635,7 +619,7 @@ public class EstoreE2EStepDefs {
             for (int i = 0; i < 3; i++) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 with().pollInterval(4, SECONDS).await().until(() -> true);
-                if(estoreItemPage.getAddToCartButton().isEnabled()){
+                if (estoreItemPage.getAddToCartButton().isEnabled()) {
                     break;
                 }
             }

@@ -231,7 +231,6 @@ public class Hooks {
         }
         /* TODO : Finish Extent Report Class Implementation */
         //report.endReport();
-        closeWindow();
         closeWebDriver();
         System.out.println("Driver was closed");
     }

@@ -30,11 +30,12 @@ public class EstoreAddressStepDefs {
     @When("I click on edit estore billing address button")
     public void iClickOnEditEstoreBillingAddressButton() {
         try {
-            with().pollInterval(3, SECONDS).await().until(() -> true);
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             estoreAddressScreen.getEditShippinggAddress().should(Condition.visible, Duration.ofSeconds(20));
             executeJavaScript("arguments[0].click();", estoreAddressScreen.getEditShippinggAddress());
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Edit button is not displayed");
+            executeJavaScript("arguments[0].click();", estoreAddressScreen.getEditShippinggAddress());
         }
     }
 
@@ -330,7 +331,7 @@ public class EstoreAddressStepDefs {
             if (Hooks.profile.equals("stg3")) {
                 $(By.xpath("(//button[contains(@class,'MuiButton-containedPrimary')])[2]")).click();
             } else {
-                if(!estoreItemPage.getAddToCartButton().isDisplayed()){
+                if (!estoreItemPage.getAddToCartButton().isDisplayed()) {
                     WebDriverRunner.getWebDriver().navigate().refresh();
                     with().pollInterval(5, SECONDS).await().until(() -> true);
                 }
@@ -348,7 +349,7 @@ public class EstoreAddressStepDefs {
 
     @When("I click on continue to payment estore button")
     public void iClickOnContinueToPayment() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(7, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Continue to payment']")).click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
