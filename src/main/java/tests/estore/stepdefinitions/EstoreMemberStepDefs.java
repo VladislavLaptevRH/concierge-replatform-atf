@@ -76,6 +76,7 @@ public class EstoreMemberStepDefs {
         sleep(5000);
         List<String> items = new ArrayList<>();
         List<String> expectedItems = new ArrayList(Arrays.asList(expectedTitle, expectedRenewal, expectedCancel, expectedEmail, expectedEnterEmail));
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         for (int i = 0; i < estoreMemberPage.getMembershipDetails().size(); i++) {
             items.add(estoreMemberPage.getMembershipDetails().get(i).getText());
         }

@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class CheckoutAddressScreen {
 
+    private final SelenideElement orderDetailsButton = $(By.xpath("//*[contains( text(), 'View Order Details')]"));
     private final SelenideElement firstNameBillingAddress = $(By.id("billingAddress.firstName"));
     private final SelenideElement emailAddressField = $(By.xpath("//label[text() = 'Email address']/following-sibling::div/input"));
 
@@ -18,7 +19,7 @@ public class CheckoutAddressScreen {
     private final SelenideElement checkoutAddressPopUpHeader = $(By.id("//*[text() = 'We are unable to verify your Shipping Address']"));
 
     private final SelenideElement firstNameInpt = $(By.xpath("//input[contains(@id,'firstName')and contains(@id,'shipping')]"));
-
+    private final SelenideElement tryAgainButton = $(By.xpath("//*[text() = 'TRY AGAIN']"));
     private final SelenideElement lastNameField = $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[2]/div/input"));
 
     private final SelenideElement companyNameField = $(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input"));

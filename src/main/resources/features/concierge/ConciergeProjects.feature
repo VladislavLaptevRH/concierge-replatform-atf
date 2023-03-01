@@ -383,7 +383,7 @@ Feature:Concierge Project
     When I choose order classification
     When I click on checkout button
     Then I click on no thanks button
-    When I choose client who is a "nonmember"
+    When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     Then I verify the address page, prefilled address and email address must be filled
 

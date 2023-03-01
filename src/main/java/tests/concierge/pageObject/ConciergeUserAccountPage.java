@@ -13,6 +13,8 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 public class ConciergeUserAccountPage {
 
+    private final String firstResultOfClientLookupParameterized = "(//*[text() = 'MEMBERSHIP']/../../..//*[starts-with(text(), '%s')])[1]";
+
     public final String currentLocationGalleryItem = "//li[contains(text(),'%s')]";
 
     public final String galleryItem = "//input[@value = '%s']";
@@ -102,6 +104,8 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement cartButton =  $(By.id("header-cart-button"));
 
+    private final SelenideElement cartItemSum =  $(By.xpath("//*[@id = 'header-cart-button']/div/span"));
+
     private final SelenideElement cartButtonItemSum =  $(By.xpath("//*[@id = 'header-cart-button']//span"));
 
     private final SelenideElement orderHistoryButton = $(By.xpath("//a[1]/button[contains(@class,'MuiButton-root')]"));
@@ -185,6 +189,11 @@ public class ConciergeUserAccountPage {
 
     public SelenideElement getGalleryItemByName (String name){
         String path = String.format(galleryItem, name);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getFirstResultOfClientLookupByName (String name){
+        String path = String.format(firstResultOfClientLookupParameterized, name);
         return $(byXpath(path));
     }
 }

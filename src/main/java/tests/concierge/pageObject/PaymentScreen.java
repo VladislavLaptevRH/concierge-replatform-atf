@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class PaymentScreen {
-    public final String currentPaymentMethod = "//select[@id = 'payment-method-select']/option[text() = '%s']";
+    public final String currentPaymentMethod = "//select[@placeholder= 'Payment method']/option[text() = '%s']";
 
     public final String currentPaymentMethodPlace = "//*[@placeholder = 'Payment method']//*[@value='%s']";
 

@@ -12,13 +12,13 @@ public class EstoreSearchScreen {
 
     private SelenideElement results = $(By.xpath("//*[contains(text(),'RESULTS')]"));
 
-    private SelenideElement threeColumnsInRowGridButton = $(By.xpath("(//*[local-name()='svg' and @data-active='false'])[1]"));
+    private SelenideElement threeColumnsInRowGridButton = $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[3]"));
 
-    private SelenideElement oneColumnInRowGridButton = $(By.xpath("(//*[local-name()='svg' and @data-active='false'])[2]"));
+    private SelenideElement oneColumnInRowGridButton = $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[1]"));
 
     private SelenideElement threeColumnsInRowGridElement = $(By.xpath("//div[contains(@class,'MuiGrid-grid-xs-4')]"));
 
-    private SelenideElement twoColumnsInRowGridElement = $(By.xpath("(//*[local-name()='svg' and @data-active='false'])[1]"));
+    private SelenideElement twoColumnsInRowGridElement = $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[2]"));
 
     private SelenideElement turkish802towel = $(By.xpath("//*[text()='802-GRAM TURKISH TOWEL COLLECTION']"));
 

@@ -578,7 +578,6 @@ public class EstoreE2EStepDefs {
             System.out.println("Continue button is not displayed");
             executeJavaScript("arguments[0].click();", estoreAddressScreen.getContinueToPayment());
         }
-    }
 
     @When("I open direct product page on estore")
     public void iOpenDirectProductPageOnEstore() {

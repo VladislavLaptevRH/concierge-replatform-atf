@@ -391,7 +391,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on estore cart button from header")
     public void iClickOnEstoreCartButtonFromHeader() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreCartPage.getCartButtonOrderReview().should(visible, Duration.ofSeconds(40));
         executeJavaScript("arguments[0].click();", estoreCartPage.getCartButtonOrderReview());
     }
@@ -535,7 +535,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify state field empty dropdown issue for International billing address")
     public void iVerifyStateFieldEmptyDropdownIssueForInternationalBillingAddress() {
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='State required.']")).should(visible, Duration.ofSeconds(30));
     }
 
@@ -644,8 +644,8 @@ public class EstoreCartPageStepDefs {
 
     @When("I open product page with NY restriction item")
     public void iOpenProductPageWithNYRestrictionItem() {
-        String productId = "rhbc_prod961679";
-        String skuId = "112686";
+        String productId = "rhbc_prod961678";
+        String skuId = "112685";
         String url = null;
         if (Hooks.profile.equals("stg2")) {
             url = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + "AGPT" + "&categoryId=search";

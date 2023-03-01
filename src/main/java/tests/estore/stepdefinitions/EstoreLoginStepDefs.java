@@ -39,7 +39,6 @@ public class EstoreLoginStepDefs {
         }
         return true;
     }
-
     public void loginAsRole(String accountRole) {
         if(!estoreLoginPage.getAccountIcon().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
