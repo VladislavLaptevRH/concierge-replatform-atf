@@ -86,7 +86,6 @@ public class EstorePaymentStepDefs {
         estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='CONTINUE']")).click();
-
         with().pollInterval(4, SECONDS).await().until(() -> true);
         $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).click();
@@ -111,8 +110,11 @@ public class EstorePaymentStepDefs {
 
     @When("I pay with RHCC for estore item")
     public void iPayWithRHCCForEstoreItem() {
-//        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(5));
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         Select paymentMethod = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         paymentMethod.selectByValue("RH");
         estorePaymentPage.getRhCardNumberField().setValue("6006101002587290");

@@ -105,7 +105,11 @@ public class EstoreAbstractStepDefs {
     @When("I click on estore checkout button")
     public void iClickOnCheckoutButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!$(By.xpath("//*[text()='Checkout']")).isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         $(By.xpath("//*[text()='Checkout']")).should(visible,Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Checkout']")).click();
     }

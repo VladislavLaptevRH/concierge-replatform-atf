@@ -721,8 +721,11 @@ public class ConciergeCartStepDefs {
     @When("I click on order details button")
     public void iClickOnOrderDetailsButton() {
         try {
-            conciergeUserAccountPage.getOrderDetailsButton().should(visible, Duration.ofSeconds(15));
-            conciergeUserAccountPage.getOrderDetailsButton().click();
+            if(conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed()){
+                conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").click();
+            } else {
+                conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").click();
+            }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Order details button is not displayed");
         }
