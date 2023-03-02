@@ -82,9 +82,10 @@ Feature: eStore Contract and Trade
     When I goes to estore cart for estore
     When I click on estore checkout button
     When I click on same as estore shipping address checkbox
-#    When I click on continue to payment estore button
-#    When I pay with RHCC for estore item
-#    When I click on continue payment method estore button
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I pay with RHCC for estore item
+    When I click on continue payment method estore button
 
   Scenario: eStore Contract - Split Payment
     Given I log into eStore as contract
@@ -199,6 +200,7 @@ Feature: eStore Contract and Trade
     And I click on estore no thanks button
 
   Scenario Outline: Verify different payment types on payment page
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -246,6 +248,7 @@ Feature: eStore Contract and Trade
     When I click on continue with original address estore button
 
   Scenario Outline: eStore Contract - Major CC
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -279,6 +282,7 @@ Feature: eStore Contract and Trade
     And I verify that logout from trade user is displayed
 
   Scenario Outline: Verify different payment types on payment page
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -338,6 +342,7 @@ Feature: eStore Contract and Trade
     Then I verify that the dropdown's are enabled
 
   Scenario: eStore Trade - Split Payment
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -354,6 +359,7 @@ Feature: eStore Contract and Trade
     Then I verify that I'm able to execute estore split payment
 
   Scenario: estore Trade - Full Payment
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -367,6 +373,7 @@ Feature: eStore Contract and Trade
     When I execute payment with credit card on estore
 
   Scenario: estore Trade - RHCC
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -385,6 +392,7 @@ Feature: eStore Contract and Trade
     Then I verify that estore thank you page is displayed
 
   Scenario: estore Trade - GC/ Balance check
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -417,6 +425,7 @@ Feature: eStore Contract and Trade
     Then I verify that I'm able to edit payment
 
   Scenario Outline: estore Trade - Major CC
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -437,6 +446,7 @@ Feature: eStore Contract and Trade
       | DI       |
 
   Scenario: estore Trade - Checkout and place order
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050045" with "WHT" for estore
@@ -462,7 +472,8 @@ Feature: eStore Contract and Trade
     Then I verify UFD in cart
 
 
-  Scenario: Change zip code  in cart to US, currency should be in US$
+  Scenario: Change zip code in cart to US, currency should be in US$
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050045" with "WHT" for estore
@@ -472,7 +483,7 @@ Feature: eStore Contract and Trade
     And I click on estore no thanks button
 
 
-  Scenario: Change zip code  in cart to CAN, currency should be in US$
+  Scenario: Change zip code in cart to CAN, currency should be in US$
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050045" with "WHT" for estore
@@ -483,6 +494,7 @@ Feature: eStore Contract and Trade
 
 
   Scenario: estore Trade - Edit address
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -500,6 +512,7 @@ Feature: eStore Contract and Trade
     When I click on continue with original address estore button
 
   Scenario: eStore Trade - Price in the cart - MO
+
     Given I log into eStore as trade
     When I remove all items from estore cart
 #    When I go to MO brand
@@ -509,6 +522,7 @@ Feature: eStore Contract and Trade
 #    Then I verify that trade price is used for each product
 
   Scenario: eStore Trade - Price in the cart - B&C
+
     Given I log into eStore as trade
     When I remove all items from estore cart
 #    When I go to B&C brand
@@ -518,6 +532,7 @@ Feature: eStore Contract and Trade
 #    Then I verify that trade price is used for each B&C product
 
   Scenario: eStore Trade - Price in the cart - TN
+
     Given I log into eStore as trade
 #    When I remove all items from estore cart
 #    When I go to TN brand

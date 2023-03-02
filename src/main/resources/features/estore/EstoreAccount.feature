@@ -19,7 +19,6 @@ Feature: Estore account
     When I click on estore sign out button
     When I click on confirm sign out button
 
-
   Scenario: Verify that by updating personal information, application should get saved the entered details
     Given I log into eStore as "regular" user
     When I goes to my account for estore

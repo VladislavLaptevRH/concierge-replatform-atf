@@ -26,6 +26,10 @@ public class EstoreAddressStepDefs {
     EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
     EstoreItemPage estoreItemPage = new EstoreItemPage();
+    EstoreAbstractStepDefs estoreAbstractStepDefs = new EstoreAbstractStepDefs();
+
+    EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
+
 
     @When("I click on edit estore billing address button")
     public void iClickOnEditEstoreBillingAddressButton() {
@@ -319,6 +323,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that added address displayed as shipping address")
     public void iVerifyThatAddedAddressDisplayedAsShippingAddress() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='2479 Deer Run']")).should(visible, Duration.ofSeconds(20));
     }
 
@@ -326,7 +331,7 @@ public class EstoreAddressStepDefs {
     public void iClickOnContinueWithOriginalAddressEstoreButton() {
         try {
             generalStepDefs.waitForJSandJQueryToLoad();
-
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             if (Hooks.profile.equals("stg3")) {
                 $(By.xpath("(//button[contains(@class,'MuiButton-containedPrimary')])[2]")).click();
             } else {
@@ -349,6 +354,11 @@ public class EstoreAddressStepDefs {
     @When("I click on continue to payment estore button")
     public void iClickOnContinueToPayment() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!$(By.xpath("//*[text()='Continue to payment']")).isDisplayed()){
+            estoreAbstractStepDefs.iClickOnCheckoutButton();
+            estoreE2EStepDefs.iClickOnNoThanksEstoreButton();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Continue to payment']")).click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -442,6 +452,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify shipping and billing address on order review page")
     public void iVerifyShippingAddressOnOrderReviewPage() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("SHIPPING ADDRESS Safire William"), Duration.ofSeconds(25));
         $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("BILLING ADDRESS Safire William"), Duration.ofSeconds(25));
     }
