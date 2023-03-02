@@ -396,7 +396,7 @@ public class EstoreGeneralStepDefs {
     public static String getEstoreCartId(String userId, String email) {
         String getCartProjectionEndpoint;
         if (Hooks.profile.equals("stg2") || Hooks.profile.equals("stg4")) {
-            getCartProjectionEndpoint =  "/rh-experience-layer-v1-search/graphql";
+            getCartProjectionEndpoint = "/rh-experience-layer-v1-search/graphql";
         } else {
             getCartProjectionEndpoint = "/rh-experience-layer-v1-stg3/graphql";
         }
@@ -729,6 +729,7 @@ public class EstoreGeneralStepDefs {
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
     }
+
 
 }
 

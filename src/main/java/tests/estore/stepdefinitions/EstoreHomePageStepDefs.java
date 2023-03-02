@@ -6,6 +6,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.interactions.Actions;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.estore.pageObject.EstoreHomePage;
 import tests.utility.Hooks;
@@ -14,8 +15,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.*;
@@ -23,6 +23,7 @@ import static org.testng.AssertJUnit.*;
 public class EstoreHomePageStepDefs {
     EstoreHomePage estoreHomePage = new EstoreHomePage();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
+    EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
 
     @Then("I expect that I am on the eStore Dashboard page")
     public void iExpectThatIAmOnTheEStoreDashboardPage() {
@@ -93,8 +94,10 @@ public class EstoreHomePageStepDefs {
 
     @When("I scroll down to Request a design consultation and click")
     public void iScrollDownToRequestADesignConsultationAndClick() {
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        executeJavaScript("window.scrollTo(0, 1000)");
+        executeJavaScript("window.scrollTo(0, 3000)");
         estoreHomePage.getRequestConsultationButton().scrollTo();
-        estoreHomePage.getRequestConsultationButton().exists();
         estoreHomePage.getRequestConsultationButton().click();
     }
 
@@ -107,6 +110,7 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getMessageInputField().setValue("Hi, This is automation tests, please ignore the request. Thank you ");
         estoreHomePage.getIframeRequestAConsultationButton().click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
+
     }
 
     @Then("I Verify Thank you message")

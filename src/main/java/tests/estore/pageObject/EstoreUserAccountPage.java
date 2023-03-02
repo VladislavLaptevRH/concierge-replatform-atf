@@ -11,6 +11,13 @@ import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class EstoreUserAccountPage {
+
+    private final SelenideElement emailField = $(By.xpath("//input[@id='email']"));
+
+    private final SelenideElement yourProfileHasBeenUpdate = $(By.xpath("//*[text()='YOUR PROFILE HAS BEEN UPDATED.']"));
+
+    private final SelenideElement updatePersonalButton = $(By.xpath("//*[text()='UPDATE PERSONAL INFORMATION']"));
+
     private final SelenideElement beddingCollectionsTest = $(By.xpath("//*[text()='Bedding Collections']"));
 
     private final SelenideElement textilesText = $(By.xpath("//*[text()='Textiles']"));

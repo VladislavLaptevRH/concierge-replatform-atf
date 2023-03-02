@@ -11,6 +11,8 @@ import static com.codeborne.selenide.Selenide.$;
 public class PaymentScreen {
     public final String currentPaymentMethod = "//select[@placeholder= 'Payment method']/option[text() = '%s']";
 
+    public final String currentPaymentMethodPlace = "//*[@placeholder = 'Payment method']//*[@value='%s']";
+
     private final SelenideElement editBillingAddressBtn = $(By.xpath("//*[text() = 'Billing Address']/following-sibling::div/p"));
 
     private final SelenideElement removePaymentBtn = $(By.xpath("//a[@class='MuiTypography-root MuiLink-root MuiLink-underlineAlways MuiTypography-caption MuiTypography-colorPrimary']"));
@@ -44,7 +46,7 @@ public class PaymentScreen {
     private final SelenideElement splitPaymentCheckBox = $(By.xpath("//label[2]/span[@class='MuiTypography-root MuiFormControlLabel-label MuiTypography-body1']"));
 
     public SelenideElement getCurrentPaymentMethodByName (String name){
-        String path = String.format(currentPaymentMethod, name);
+        String path = String.format(currentPaymentMethodPlace, name);
         return $(byXpath(path));
     }
 }
