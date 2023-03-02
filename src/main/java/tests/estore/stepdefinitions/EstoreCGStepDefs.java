@@ -195,7 +195,12 @@ public class EstoreCGStepDefs {
             String category = "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045" + "/?endpoint=" + Hooks.cookie;
             open(URL + category);
         }
-
         with().pollInterval(2, SECONDS).await().until(() -> true);
+    }
+
+
+    @When("I search with any keyword")
+    public void iSearchWithAnyKeyword() {
+
     }
 }

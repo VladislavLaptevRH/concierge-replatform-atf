@@ -1,10 +1,12 @@
 package tests.estore.pageObject;
 
 import com.codeborne.selenide.SelenideElement;
+import lombok.Getter;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
 
+@Getter
 public class EstorePGScreen {
     private final SelenideElement postponeShipOnOrAfterDate = $(By.xpath("//p[@id='ship-on-or-after-date']"));
 
@@ -49,4 +51,7 @@ public class EstorePGScreen {
     private final SelenideElement totalLineItemPrice = $(By.xpath("//div[@id='rh-line-item-card_total']"));
 
     private final SelenideElement viewGiftBoxBtn = $(By.xpath("//a[@href='#']"));
+
+    private final SelenideElement saleButtonFilter = $(By.xpath("//*[text()='sale']"));
 }
+

@@ -39,8 +39,9 @@ public class EstoreLoginStepDefs {
         }
         return true;
     }
+
     public void loginAsRole(String accountRole) {
-        if(!estoreLoginPage.getAccountIcon().isDisplayed()){
+        if (!estoreLoginPage.getAccountIcon().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
@@ -130,7 +131,7 @@ public class EstoreLoginStepDefs {
                     USER_ID_STG3 = "49e2da34-3970-4636-bd1b-1bf1c7c709ff";
                     userEmail = "testautomation01@rh.com";
                 } else {
-                    if(!estoreLoginPage.getUsernameField().isDisplayed()){
+                    if (!estoreLoginPage.getUsernameField().isDisplayed()) {
                         WebDriverRunner.getWebDriver().navigate().refresh();
                         with().pollInterval(5, SECONDS).await().until(() -> true);
                     }
@@ -204,11 +205,10 @@ public class EstoreLoginStepDefs {
 
     @Given("I log into eStore as contract")
     public void iLogIntoEStoreAsContract() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
         open(Hooks.eStoreBaseURL + "/contract-sales/contract-sign-in.jsp");
+        estoreLoginPage.getContractTradeEmailField().should(visible, Duration.ofSeconds(10));
         estoreLoginPage.getContractTradeEmailField().setValue("rboorla+2222@rh.com");
         estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
-
         estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
         estoreLoginPage.getSignInButton().click();
         if (Hooks.profile.equals("stg2")) {
