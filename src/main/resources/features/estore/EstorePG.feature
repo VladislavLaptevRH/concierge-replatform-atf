@@ -24,3 +24,10 @@ Feature: Estore PG
     When I scroll on the page till back to top button is visible
     Then I verify that back to top button is clickable
     And I verify that after click on back to top button user is scrolled to top on the page
+
+  Scenario: Apply filter on PG and search for any term, application should give newly searched items
+    Given I log into eStore as "guest" user
+    When I goes to estore product sale page
+    When I apply In stock to Sale filter
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search results page is displayed with newly searched products
