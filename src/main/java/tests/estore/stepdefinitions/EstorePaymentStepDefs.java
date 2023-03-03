@@ -100,11 +100,13 @@ public class EstorePaymentStepDefs {
     @When("I edit estore billing address from PG")
     public void iEditBillingAddressFromPG() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).click();
-        estoreAddressScreen.getShippingAddressFirstName().click();
-        estoreGeneralStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
-        estoreAddressScreen.getShippingAddressFirstName().setValue("NewBillingAddress");
+//        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible, Duration.ofSeconds(20));
+//        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).click();
+        estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getEditShippinggAddress().click();
+        estoreAddressScreen.getBillingAddressFirstName().click();
+        estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstName());
+        estoreAddressScreen.getBillingAddressFirstName().setValue("NewBillingAddress");
     }
 
 
