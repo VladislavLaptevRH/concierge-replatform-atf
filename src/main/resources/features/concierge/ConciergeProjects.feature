@@ -74,7 +74,7 @@ Feature:Concierge Project
     When I click on the first project search result
     When I click on the moodboard button
     Then moodboard screen is displayed
-#
+
   Scenario: Verify that user is able to add new space and edit
     Given I log into Concierge as "associate"
     When I click on projects button

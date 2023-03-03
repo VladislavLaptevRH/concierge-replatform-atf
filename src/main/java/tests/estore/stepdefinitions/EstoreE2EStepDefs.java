@@ -571,12 +571,19 @@ public class EstoreE2EStepDefs {
     public void iClickOnContinuePaymentMethodEstoreButton() {
         with().pollInterval(6, SECONDS).await().until(() -> true);
         try {
-            estoreAddressScreen.getContinueToPayment().scrollIntoView(true);
-            estoreAddressScreen.getContinueToPayment().should(visible, Duration.ofSeconds(2));
-            estoreAddressScreen.getContinueToPayment().click();
+            if(estoreAddressScreen.getContinueToPayment().isDisplayed()){
+                estoreAddressScreen.getContinueToPayment().scrollIntoView(true);
+                estoreAddressScreen.getContinueToPayment().should(visible, Duration.ofSeconds(2));
+                estoreAddressScreen.getContinueToPayment().click();
+                with().pollInterval(3, SECONDS).await().until(() -> true);
+            } else {
+                estoreAddressScreen.getContinuePayment().scrollIntoView(true);
+                estoreAddressScreen.getContinuePayment().should(visible, Duration.ofSeconds(2));
+               estoreAddressScreen.getContinuePayment().click();
+                with().pollInterval(3, SECONDS).await().until(() -> true);
+            }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Continue button is not displayed");
-            executeJavaScript("arguments[0].click();", estoreAddressScreen.getContinueToPayment());
         }
     }
 

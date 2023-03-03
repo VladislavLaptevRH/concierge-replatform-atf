@@ -639,6 +639,10 @@ public class EstoreGeneralStepDefs {
      */
     public void payWith(String paymentType, String number, String cvc, String expirationDate) {
 
+        if(!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(60));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue(paymentType);
