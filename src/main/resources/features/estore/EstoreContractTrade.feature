@@ -461,7 +461,6 @@ Feature: eStore Contract and Trade
     When I click on estore checkout button
     And I click on estore no thanks button
 
-
   Scenario: estore Trade - Edit address
     Given I log into eStore as trade
     When I remove all items from estore cart

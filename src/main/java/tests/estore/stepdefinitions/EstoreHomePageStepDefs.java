@@ -13,6 +13,7 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -24,6 +25,8 @@ public class EstoreHomePageStepDefs {
     EstoreHomePage estoreHomePage = new EstoreHomePage();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
+
+    String result = "";
 
     @Then("I expect that I am on the eStore Dashboard page")
     public void iExpectThatIAmOnTheEStoreDashboardPage() {
@@ -52,12 +55,15 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getSearchCloseButton().should(Condition.visible, Duration.ofSeconds(30));
         estoreHomePage.getSearchInputField().setValue(arg0);
         estoreHomePage.getSeeAllResultButton().click();
+        result = arg0;
     }
 
     @Then("verify users is taken to search result page")
     public void verifyUsersIsTakenToProductPage() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        assertTrue(Hooks.getCurrentUrl().equals(Hooks.eStoreURL + "/search/results.jsp?Ntt=sofa&Ns=product.sale%7C1"));
+        String URL = Hooks.eStoreURL.replaceAll("endpoint=releasetues", "");
+        URL = URL.substring(0, URL.length() - 2);
+        assertEquals(Hooks.getCurrentUrl(), URL + "/search/results.jsp?Ntt=" + result + "&Ns=product.sale%7C1");
     }
 
     @Then("I verify RH dropdown and list of brand names")

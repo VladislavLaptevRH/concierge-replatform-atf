@@ -172,7 +172,7 @@ Feature:Estore Payment
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
-    And I introduces payment details for estore guest user
+    And I introduces payment details for estore guest user for payment
     When I open estore cart
     Then I verify that I'm able to decrease item quantity with success
     When I open product page with "prod13800635" and "17050045" with "WHT" for estore
@@ -314,7 +314,7 @@ Feature:Estore Payment
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
-    When I choose "GiftCard" from payment method
+    When I choose "RH Gift Card" from payment method
     When I click on check balance button
     Then I verify that gift card balance info is displayed for estore
 
@@ -331,7 +331,7 @@ Feature:Estore Payment
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I choose "RH Gift Card" from payment method
-    When I click on continue payment estore button
+    When I click on continue payment method estore button
     When I click on a place estore order button
 
   Scenario: Verify that user is able to execute payment via GC for CAN
@@ -350,7 +350,7 @@ Feature:Estore Payment
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I choose "RH Gift Card" from payment method
-    When I click on continue payment estore button
+    When I click on continue payment method estore button
     When I click on a place estore order button
 
   Scenario: Verify the saving AMEX payment method
@@ -368,12 +368,3 @@ Feature:Estore Payment
     When I added new card "DISCOVER" for estore
     Then I verify that I'm able to add "DISCOVER"
     When I remove added before cart
-
-
-
-
-
-
-
-
-
