@@ -65,17 +65,20 @@ public class Hooks {
         profile = System.getenv("ENVIRONMENT");
         cookie = System.getenv("ENDPOINT");
 
-        if (profile == null) {
-            Assert.fail("Environment Variable is NOT Set");
-        } else {
-            System.out.println("Tests are running on " + profile + " environment");
-        }
+        profile = "stg2";
+        cookie = "releasetues";
 
-        if (cookie == null) {
-            System.out.println("Tests are running without cookie or endpoint");
-        } else {
-            System.out.println("Tests are running with endpoint = " + cookie);
-        }
+//        if (profile == null) {
+//            Assert.fail("Environment Variable is NOT Set");
+//        } else {
+//            System.out.println("Tests are running on " + profile + " environment");
+//        }
+//
+//        if (cookie == null) {
+//            System.out.println("Tests are running without cookie or endpoint");
+//        } else {
+//            System.out.println("Tests are running with endpoint = " + cookie);
+//        }
 
         BufferedReader reader;
         try {
@@ -145,7 +148,7 @@ public class Hooks {
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
-        setupChromeArguments();
+//        setupChromeArguments();
         setUPWebDriver(eStoreURL);
     }
 
@@ -157,7 +160,7 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
         configureConciergeURL();
-        setupChromeArguments();
+//        setupChromeArguments();
         setUPWebDriver(conciergeURL);
         /* TODO : Finish Extent Report Class Implementation */
         //report.startReport();
@@ -172,7 +175,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = true;
+        Configuration.headless = false;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 60000;
         Configuration.reportsFolder = "target/screenshots";
