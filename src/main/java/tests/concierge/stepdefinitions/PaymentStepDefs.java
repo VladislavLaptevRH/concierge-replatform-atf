@@ -98,9 +98,9 @@ public class PaymentStepDefs {
 
     @When("I choose {string} from payment method")
     public void iChooseRHGiftCardFromPaymentMethod(String card) {
-        paymentScreen.getChoosePaymentMethodBtn().click();
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        paymentScreen.getCurrentPaymentMethodByName(card).click();
+        Select selectPaymentMethod = new Select( paymentScreen.getChoosePaymentMethodBtn());
+        selectPaymentMethod.selectByVisibleText(card);
         with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentScreen.getRhCardNumberField().setValue("6006493887999902500");
         paymentScreen.getRhCardPin().setValue("8138");

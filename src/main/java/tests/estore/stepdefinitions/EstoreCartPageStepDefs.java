@@ -290,8 +290,12 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on join now membership button")
     public void iClickOnJoinNowMembershipButton() {
-        estoreCartPage.getJoinNowCartEstoreButton().shouldHave(text("JOIN NOW"), Duration.ofSeconds(20));
-        estoreCartPage.getJoinNowCartEstoreButton().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if(estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()){
+            estoreCartPage.getVariableJoinButtonByName("JOIN NOW").click();
+        } else {
+            estoreCartPage.getVariableJoinButtonByName("Join Now").click();
+        }
     }
 
     @Then("I verify order estimate section in cart")
@@ -340,8 +344,12 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on join now on estore cart page membership button")
     public void iClickOnJoinNowOnEstoreCartPageMembershipButton() {
-        estoreCartPage.getJoinNowCartEstoreButton().shouldHave(text("JOIN NOW"), Duration.ofSeconds(20));
-        estoreCartPage.getJoinNowCartEstoreButton().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()){
+            estoreCartPage.getVariableJoinButtonByName("JOIN NOW").click();
+        } else {
+            estoreCartPage.getVariableJoinButtonByName("Join Now").click();
+        }
     }
 
     @Then("I verify membership estore banner for {string}")
@@ -349,11 +357,19 @@ public class EstoreCartPageStepDefs {
         if (arg0.equals("nonmember user")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);
             $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible, Duration.ofSeconds(40));
-            estoreCartPage.getJoinNowCartEstoreButton().should(visible, Duration.ofSeconds(40));
+            if(estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()){
+                estoreCartPage.getVariableJoinButtonByName("JOIN NOW").click();
+            } else {
+                estoreCartPage.getVariableJoinButtonByName("Join Now").click();
+            }
         }
         if (arg0.equals("member user")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);
-            estoreCartPage.getJoinNowCartEstoreButton().shouldNot(visible, Duration.ofSeconds(20));
+            if(estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()){
+                estoreCartPage.getVariableJoinButtonByName("JOIN NOW").click();
+            } else {
+                estoreCartPage.getVariableJoinButtonByName("Join Now").click();
+            }
         }
 
     }
@@ -620,8 +636,13 @@ public class EstoreCartPageStepDefs {
         estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(20));
     }
 
-    @And("I introduces payment details for estore guest user")
-    public void iIntroducesPaymentDetailsForEstoreGuestUser() {
+    @And("I introduces payment details for estore guest user for cart")
+    public void iIntroducesPaymentDetailsForEstoreGuestUserForCart() {
+        if(!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+
         estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("RH Credit Card"), Duration.ofMinutes(2));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         selectPayment.selectByIndex(2);
@@ -636,6 +657,25 @@ public class EstoreCartPageStepDefs {
 
         switchTo().frame($(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card expiry date']")).should(visible, Duration.ofMinutes(1)));
         estorePaymentPage.getExpiryDateField().setValue("0330");
+        switchTo().defaultContent();
+
+        $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='CONTINUE']")).click();
+    }
+
+    @And("I introduces payment details for estore guest user for payment")
+    public void iIntroducesPaymentDetailsForEstoreGuestUserForPayment() {
+        if(!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()){
+            String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+
+        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Visa ####-7543"), Duration.ofMinutes(2));
+        Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
+        selectPayment.selectByVisibleText("Visa ####-7543");
+
+        switchTo().frame($(By.xpath("//iframe[@class='js-iframe']")).should(visible, Duration.ofMinutes(1)));
+        estorePaymentPage.getCvcField().setValue("737");
         switchTo().defaultContent();
 
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofMinutes(1));

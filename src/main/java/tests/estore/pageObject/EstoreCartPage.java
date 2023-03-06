@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -13,6 +14,8 @@ import static com.codeborne.selenide.Selenide.$$;
 public class EstoreCartPage {
 
     private final SelenideElement joinNowCartEstoreButton = $(By.xpath("//*[text() = 'JOIN NOW']"));
+
+    private final String variableJoinButton = "//*[text() = '%s']";
 
     private final SelenideElement removeMembershipButton = $(By.xpath("//*[text()='REMOVE MEMBERSHIP']"));
 
@@ -184,9 +187,14 @@ public class EstoreCartPage {
 
     private final SelenideElement joinRhMemberProgramTitle = $(By.xpath("//*[contains(text(),'Join the RH Members Program for ')]"));
 
-    private final SelenideElement addToWishlistButton = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2']/div)[2]"));
+    private final SelenideElement addToWishlistButton = $(By.xpath("//*[text() = 'ADD TO WISHLIST']"));
 
     private final SelenideElement removeMembershipLink = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-center']/span"));
 
     private final List<SelenideElement> memberShipBannerList = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-center']/p"));
+
+    public SelenideElement getVariableJoinButtonByName (String name){
+        String path = String.format(variableJoinButton, name);
+        return $(byXpath(path));
+    }
 }

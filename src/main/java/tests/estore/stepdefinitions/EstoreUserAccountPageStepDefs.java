@@ -118,6 +118,7 @@ public class EstoreUserAccountPageStepDefs {
 
     @When("I click on address book estore button")
     public void iClickOnAddressBookEstoreButton() {
+//        with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getAddressBookButton().should(Condition.visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getAddressBookButton().click();
     }
@@ -129,6 +130,7 @@ public class EstoreUserAccountPageStepDefs {
 
     @When("I click on estore my account button")
     public void iClickOnEstoreMyAccountButton() {
+//        with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getMyProfileButton().shouldHave(Condition.text("My Account"), Duration.ofSeconds(30));
         estoreUserAccountPage.getMyProfileButton().click();
     }

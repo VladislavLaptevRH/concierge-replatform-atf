@@ -86,7 +86,6 @@ public class EstorePaymentStepDefs {
         estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='CONTINUE']")).click();
-
         with().pollInterval(4, SECONDS).await().until(() -> true);
         $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).click();
@@ -101,18 +100,25 @@ public class EstorePaymentStepDefs {
     @When("I edit estore billing address from PG")
     public void iEditBillingAddressFromPG() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
+        if($(By.xpath("//a[@href='/checkout/payment.jsp#/']")).isDisplayed()){
         $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).click();
-        estoreAddressScreen.getShippingAddressFirstName().click();
-        estoreGeneralStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
-        estoreAddressScreen.getShippingAddressFirstName().setValue("NewBillingAddress");
+        }
+        estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getEditShippinggAddress().click();
+        estoreAddressScreen.getBillingAddressFirstName().click();
+        estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstName());
+        estoreAddressScreen.getBillingAddressFirstName().setValue("NewBillingAddress");
     }
 
 
     @When("I pay with RHCC for estore item")
     public void iPayWithRHCCForEstoreItem() {
-//        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(5));
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         Select paymentMethod = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         paymentMethod.selectByValue("RH");
         estorePaymentPage.getRhCardNumberField().setValue("6006101002587290");
