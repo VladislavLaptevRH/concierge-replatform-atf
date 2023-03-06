@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 public class EstoreUserAccountPage {
 
+
     private final SelenideElement emailField = $(By.xpath("//input[@id='email']"));
 
     private final SelenideElement yourProfileHasBeenUpdate = $(By.xpath("//*[text()='YOUR PROFILE HAS BEEN UPDATED.']"));

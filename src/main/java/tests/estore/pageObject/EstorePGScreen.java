@@ -4,10 +4,20 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class EstorePGScreen {
+
+    private final SelenideElement sofa = $(By.xpath("//*[text()='sofa']"));
+
+    private final SelenideElement gridView3 = $(By.xpath("(//div[contains(@class,'MuiGrid-grid-xs-4')])[4]"));
+
+    private final SelenideElement gridView2 = $(By.xpath("(//div[contains(@class,'MuiGrid-grid-xs-6')])[4]"));
+
     private final SelenideElement postponeShipOnOrAfterDate = $(By.xpath("//p[@id='ship-on-or-after-date']"));
 
     private final SelenideElement soldToAddressTitle = $(By.xpath("//*[text()='Sold To Address']"));
@@ -53,5 +63,19 @@ public class EstorePGScreen {
     private final SelenideElement viewGiftBoxBtn = $(By.xpath("//a[@href='#']"));
 
     private final SelenideElement saleButtonFilter = $(By.xpath("//*[text()='sale']"));
+
+    private final SelenideElement inStockFilter = $(By.xpath("//*[text()='in-stock']"));
+
+    private final SelenideElement materialFilter = $(By.xpath("//*[text()='Material']"));
+
+    private final SelenideElement sizeFilter = $(By.xpath("//*[text()='Size']"));
+
+    private final SelenideElement sortFilter = $(By.xpath("//*[text()='sort']"));
+
+    private final SelenideElement saleFilterApplied = $(By.xpath("(//*[text()='sale'])[2]"));
+
+    private final List<SelenideElement> listOfPgFusionElements = $$(By.xpath("//*[@id='component-rh-image_wrapper']"));
+
+    private final SelenideElement livingCategory = $(By.xpath("//*[@data-navigation-account-item-id='cat160024']"));
 }
 
