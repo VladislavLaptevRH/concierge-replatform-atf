@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import tests.estore.pageObject.*;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -45,7 +46,7 @@ public class EstoreAbstractStepDefs {
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
         actions.moveToElement(estoreCategories.getLivingCategory());
         estoreCategories.getLivingCategory().click();
-        $(By.xpath("//*[text()='Fabric Seating']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Fabric Seating']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Fabric Seating']")).click();
         estoreCategories.getSofaCollections().should(visible, Duration.ofSeconds(40));
         actions.moveToElement(estoreCategories.getSofaCollections());
@@ -237,5 +238,9 @@ public class EstoreAbstractStepDefs {
         }
     }
 
+    @When("I goes to random estore brand")
+    public void iGoesToRandomEstoreBrand() {
+
+    }
 }
 
