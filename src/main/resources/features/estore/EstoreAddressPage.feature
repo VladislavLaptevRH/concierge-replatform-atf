@@ -92,7 +92,6 @@ Feature: Estore Address Page
     When I click on add address button
     When I introduce data for new profile address
     When I click on save address button
-    When I click on continue payment method estore button
     When I click on continue with original address estore button
     When I edit existing address on address book page
     When I click on save address button

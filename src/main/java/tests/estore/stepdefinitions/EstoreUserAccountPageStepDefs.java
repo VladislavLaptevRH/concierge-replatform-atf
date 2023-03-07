@@ -147,6 +147,7 @@ public class EstoreUserAccountPageStepDefs {
         estoreUserAccountPage.getSaveAddressButton().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getSaveAddressButton().scrollIntoView(true);
         estoreUserAccountPage.getSaveAddressButton().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that error messages are displayed for each mandatory field")

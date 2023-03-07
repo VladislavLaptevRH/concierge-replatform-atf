@@ -39,7 +39,9 @@ public class EstoreAddressStepDefs {
             executeJavaScript("arguments[0].click();", estoreAddressScreen.getEditShippinggAddress());
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Edit button is not displayed");
-            executeJavaScript("arguments[0].click();", estoreAddressScreen.getEditShippinggAddress());
+            if(estoreAddressScreen.getEditShippinggAddress().isDisplayed()){
+                executeJavaScript("arguments[0].click();", estoreAddressScreen.getEditShippinggAddress());
+            }
         }
     }
 
@@ -75,7 +77,7 @@ public class EstoreAddressStepDefs {
 
     @When("I click on edit shipping address button on estore order review page")
     public void iClickOnEditShippingAddressButtonOnEstoreOrderReviewPage() {
-        sleep(20000);
+        with().pollInterval(9, SECONDS).await().until(() -> true);
         estoreAddressScreen.getEditShippinggAddress().shouldHave(text("Edit"), Duration.ofSeconds(20));
         estoreAddressScreen.getEditShippinggAddress().click();
     }
@@ -83,7 +85,7 @@ public class EstoreAddressStepDefs {
     @When("I click on edit shipping address button on estore address page")
     public void iClickOnEditShippingAddressButtonOnEstoreAddressPage() {
         try {
-            sleep(20000);
+            with().pollInterval(9, SECONDS).await().until(() -> true);
             estoreAddressScreen.getEditShippinggAddress().shouldHave(text("Edit"), Duration.ofSeconds(20));
             estoreAddressScreen.getEditShippinggAddress().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {

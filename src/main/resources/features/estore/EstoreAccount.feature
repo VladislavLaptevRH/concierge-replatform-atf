@@ -40,7 +40,7 @@ Feature: Estore account
     Given I log into eStore as "regular" user
     When I goes to my account for estore
     When I verify the min length for last name text field
-#    -
+
   Scenario: Verify by entering already existing email ID, application should get an error message
     Given I log into eStore as "regular" user
     When I goes to my account for estore
