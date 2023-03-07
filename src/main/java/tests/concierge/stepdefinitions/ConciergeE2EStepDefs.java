@@ -697,18 +697,34 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify that I'm able to edit shipping address")
     public void iVerifyThatIMAbleToEditShippingAddress() {
-        $(By.xpath("//*[text()='NewShippingAddress Automation']")).scrollTo();
-        $(By.xpath("//*[text()='NewShippingAddress Automation']")).shouldHave(text("NewShippingAddress"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='NewShippingAddress NewLastName']")).scrollTo();
+        $(By.xpath("//*[text()='NewShippingAddress NewLastName']")).shouldHave(text("NewShippingAddress NewLastName"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='NewCompanyName']")).shouldHave(text("NewCompanyName"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='Newappartment']")).shouldHave(text("Newappartment"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='37 New Road']")).shouldHave(text("37 New Road"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
     }
 
     @When("I edit shipping address from order review page")
     public void iEditShippingAddressFromOrderReviewPage() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeAddressScreen.getEditShippingAddress().should(visible, Duration.ofSeconds(15));
         conciergeAddressScreen.getEditShippingAddress().click();
         checkoutAddressScreen.getFirstNameInpt().should(visible, Duration.ofSeconds(15));
         generalStepDefs.clearField(checkoutAddressScreen.getFirstNameInpt());
         checkoutAddressScreen.getFirstNameInpt().setValue("NewShippingAddress");
+        generalStepDefs.clearField(checkoutAddressScreen.getLastNameField());
+        checkoutAddressScreen.getLastNameField().setValue("NewLastName");
+        generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameField());
+        checkoutAddressScreen.getCompanyNameField().setValue("NewCompanyName");
+        generalStepDefs.clearField(checkoutAddressScreen.getStreetAddressField());
+        checkoutAddressScreen.getStreetAddressField().setValue("37 new road");
+        generalStepDefs.clearField(checkoutAddressScreen.getAptFloorSuiteField());
+        checkoutAddressScreen.getAptFloorSuiteField().setValue("NewAppartment");
+        generalStepDefs.clearField(checkoutAddressScreen.getCityField());
+        checkoutAddressScreen.getCityField().setValue("Milpitas");
+        generalStepDefs.clearField(checkoutAddressScreen.getPhoneField());
+        checkoutAddressScreen.getPhoneField().setValue("3234546576");
         with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
@@ -718,13 +734,29 @@ public class ConciergeE2EStepDefs {
         conciergeAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(15));
         conciergeAddressScreen.getEditBillingAddress().click();
         generalStepDefs.clearField(checkoutAddressScreen.getFirstNameBillingAddress());
-        checkoutAddressScreen.getFirstNameBillingAddress().setValue("NewBillingAddress");
+        checkoutAddressScreen.getFirstNameBillingAddress().setValue("NewFirstName");
+        generalStepDefs.clearField(checkoutAddressScreen.getLastNameBillingAddress());
+        checkoutAddressScreen.getLastNameBillingAddress().setValue("NewLastName");
+        generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameBillingAddress());
+        checkoutAddressScreen.getCompanyNameBillingAddress().setValue("NewCompanyName");
+        generalStepDefs.clearField(checkoutAddressScreen.getAddressLine1BillingAddress());
+        checkoutAddressScreen.getAddressLine1BillingAddress().setValue("37 new road");
+        generalStepDefs.clearField(checkoutAddressScreen.getAddressLine2BillingAddress());
+        checkoutAddressScreen.getAddressLine2BillingAddress().setValue("NewAppartment");
+        generalStepDefs.clearField(checkoutAddressScreen.getCityFieldBillingAddress());
+        checkoutAddressScreen.getCityFieldBillingAddress().setValue("Milpitas");
+        generalStepDefs.clearField(checkoutAddressScreen.getPhoneBillingAddress());
+        checkoutAddressScreen.getPhoneBillingAddress().setValue("3234546576");
     }
 
     @And("I verify that I'm able to edit billing address")
     public void iVerifyThatIMAbleToEditBillingAddress() {
-        $(By.xpath("//*[contains(text(),'NewBillingAddress')]")).scrollTo();
-        $(By.xpath("//*[contains(text(),'NewBillingAddress')]")).shouldBe(visible, Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='NewFirstName NewLastName']")).scrollTo();
+        $(By.xpath("//*[text()='NewFirstName NewLastName']")).shouldHave(text("NewFirstName NewLastName"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='NewCompanyName']")).shouldHave(text("NewCompanyName"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='Newappartment']")).shouldHave(text("Newappartment"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='37 New Road']")).shouldHave(text("37 New Road"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
     }
 
     @Then("I verify the payment details and order estimate summary")
