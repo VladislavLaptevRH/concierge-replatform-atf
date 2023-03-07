@@ -60,11 +60,13 @@ public class EstoreHomePageStepDefs {
 
     @Then("verify users is taken to search result page")
     public void verifyUsersIsTakenToProductPage() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         String URL = Hooks.eStoreURL.replaceAll("endpoint=releasetues", "");
+        URL = URL.split(String.valueOf('&'))[0];
         URL = URL.substring(0, URL.length() - 2);
         assertEquals(Hooks.getCurrentUrl(), URL + "/search/results.jsp?Ntt=" + result + "&Ns=product.sale%7C1");
     }
+
 
     @Then("I verify RH dropdown and list of brand names")
     public void iVerifyRHDropdownAndListOfBrandNames() {
