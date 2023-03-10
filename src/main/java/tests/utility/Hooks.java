@@ -160,8 +160,6 @@ public class Hooks {
         configureConciergeURL();
         setupChromeArguments();
         setUPWebDriver(conciergeURL);
-        /* TODO : Finish Extent Report Class Implementation */
-        //report.startReport();
     }
 
     /**
