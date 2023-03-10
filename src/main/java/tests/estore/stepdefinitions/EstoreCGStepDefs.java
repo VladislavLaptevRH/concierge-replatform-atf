@@ -30,7 +30,7 @@ public class EstoreCGStepDefs {
         } else {
             $(By.xpath("//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(35));
         }
-        System.out.println();
+
     }
 
     @When("I scroll on the page till back to top button is visible")

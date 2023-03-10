@@ -40,7 +40,7 @@ public class ConciergeAssociateStepDefs {
 
     @Given("I log into Concierge as {string}")
     public void iLogIntoConciergeAs(String arg0) {
-        if(!conciergeLoginPage.getUsernameField().exists()) {
+        if (!conciergeLoginPage.getUsernameField().exists()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         } else {
@@ -77,7 +77,7 @@ public class ConciergeAssociateStepDefs {
 
     @Then("user verifies list of galleries which have default value {string}")
     public void userVerifiesListOfGalleries(String galleryItem) {
-    conciergeUserAccountPage.getGalleryItemByName(galleryItem).should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getGalleryItemByName(galleryItem).should(visible, Duration.ofSeconds(15));
     }
 
     @When("user clicks on gallery button from header")
@@ -132,7 +132,7 @@ public class ConciergeAssociateStepDefs {
                         e.printStackTrace();
                     }
                     with().pollInterval(5, SECONDS).await().until(() -> true);
-                    System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": "+ Hooks.getCurrentUrl());
+                    System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": " + Hooks.getCurrentUrl());
                     if (!Hooks.getCurrentUrl().contains("concierge")) {
                         open(Hooks.conciergeURL);
                         with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -149,6 +149,28 @@ public class ConciergeAssociateStepDefs {
                 }
             }
         }
+    }
+
+    @Given("I choose {string} gallery for intl concierge")
+    public void iChooseGalleryForIntlConcierge(String arg0) {
+        System.out.println();
+    }
+
+    @Given("I log into intl Concierge as {string}")
+    public void iLogIntoIntlConciergeAs(String accountRole) {
+        conciergeLoginPage.getPasswordField().should(visible, Duration.ofMinutes(5));
+        conciergeLoginPage.getUsernameField().should(visible, Duration.ofSeconds(40));
+        if (accountRole.equals("associate")) {
+            conciergeLoginPage.getUsernameField().setValue(Hooks.associateLogin);
+            conciergeLoginPage.getPasswordField().setValue(Hooks.associatePassword);
+        }
+        conciergeLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
+        conciergeLoginPage.getSignInButton().click();
+    }
+
+    @When("I choose gallery number {string} for gallery intl concierge")
+    public void iChooseGalleryNumberForGalleryIntlConcierge(String arg0) {
+        System.out.println();
     }
 }
 

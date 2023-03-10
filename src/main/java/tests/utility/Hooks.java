@@ -134,6 +134,8 @@ public class Hooks {
             conciergeURL = conciergeBaseURL + "/?endpoint=" + cookie;
         } else if (profile.equals("stg4") && cookie != null) {
             conciergeURL = conciergeBaseURL + "/?endpoint=" + cookie;
+        } else if (profile.equals("stg3") && cookie != null) {
+            conciergeURL = conciergeBaseURL + "/?endpoint=" + cookie;
         }
         return conciergeURL;
     }
@@ -148,7 +150,6 @@ public class Hooks {
         setupChromeArguments();
         setUPWebDriver(eStoreURL);
     }
-
 
     /**
      * Init web driver for regression and smoke  for tests.concierge
