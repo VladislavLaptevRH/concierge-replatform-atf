@@ -1,4 +1,0 @@
-@estoreRegression
-Feature: Estore Signout
-
-
