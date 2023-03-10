@@ -301,6 +301,15 @@ public class ConciergeCartStepDefs {
 
     @When("I choose POS for payment method")
     public void iChoosePOPForPaymentMethod() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if($(By.xpath("//*[text()='Continue to payment']")).isDisplayed()){
+            $(By.xpath("//*[text()='Continue to payment']")).click();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+        }
+        else if(!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
@@ -720,15 +729,13 @@ public class ConciergeCartStepDefs {
 
     @When("I click on order details button")
     public void iClickOnOrderDetailsButton() {
-        try {
             if(conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed()){
                 conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").click();
-            } else {
+            } else if (conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").isDisplayed()){
                 conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").click();
+            } else {
+                with().pollInterval(1, SECONDS).await().until(() -> true);
             }
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Order details button is not displayed");
-        }
     }
 
     @When("I remove all items from cart for minicart")

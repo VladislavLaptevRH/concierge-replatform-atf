@@ -166,14 +166,22 @@ public class ConciergeE2EStepDefs {
         executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
         checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
         checkoutAddressScreen.getContinuePaymentButton().click();
-        try {
-            checkoutAddressScreen.getContinueButton().should(visible, Duration.ofSeconds(40));
-            executeJavaScript("arguments[0].click();", checkoutAddressScreen.getContinueButton());
-            conciergeAddressScreen.getOkButton().should(visible, Duration.ofSeconds(12));
-            conciergeAddressScreen.getOkButton().click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Continue from popup is not displayed");
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if(conciergeProjectScreen.getTryAgainButton().isDisplayed()){
+            conciergeProjectScreen.getTryAgainButton().click();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+            checkoutAddressScreen.getContinuePaymentButton().click();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
         }
+//        try {
+//            checkoutAddressScreen.getContinueButton().should(visible, Duration.ofSeconds(40));
+//            executeJavaScript("arguments[0].click();", checkoutAddressScreen.getContinueButton());
+//            conciergeAddressScreen.getOkButton().should(visible, Duration.ofSeconds(12));
+//            conciergeAddressScreen.getOkButton().click();
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Continue from popup is not displayed");
+//        }
     }
 
     @When("I add {int} times an item in the cart")

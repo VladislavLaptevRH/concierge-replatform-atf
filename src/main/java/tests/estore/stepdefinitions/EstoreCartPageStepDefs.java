@@ -382,14 +382,12 @@ public class EstoreCartPageStepDefs {
             if (i > 1) {
                 estoreUserAccountPage.getBrandButton().click();
             }
-
             with().pollInterval(2, SECONDS).await().until(() -> true);
             estoreUserAccountPage.getListOfBrands().get(i).should(visible, Duration.ofSeconds(20));
             estoreUserAccountPage.getListOfBrands().get(i).click();
             estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(20));
         }
     }
-
     @Then("I verify that I'm able to add products from all brands to cart")
     public void iVerifyThatIMAbleToAddProductsFromAllBrandsToCart() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -404,18 +402,15 @@ public class EstoreCartPageStepDefs {
         estoreUserAccountPage.getOrderDetailsButton().should(visible, Duration.ofSeconds(15));
         estoreUserAccountPage.getOrderDetailsButton().click();
     }
-
     @When("I click on estore cart button from header")
     public void iClickOnEstoreCartButtonFromHeader() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreCartPage.getCartButtonOrderReview().should(visible, Duration.ofSeconds(40));
         executeJavaScript("arguments[0].click();", estoreCartPage.getCartButtonOrderReview());
     }
-
     @When("I update item quantity in estore cart")
     public void iUpdateItemQuantityInEstoreCart() {
     }
-
     @Then("I verify that I'm able to increase item quantity with success after payment")
     public void iVerifyThatItemQuantityWasIncreasedWithSuccess() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -425,15 +420,12 @@ public class EstoreCartPageStepDefs {
         selectQuantity.selectByValue("2");
         with().pollInterval(3, SECONDS).await().until(() -> true);
     }
-
     @Then("I verify that I'm able to decrease item quantity with success")
     public void iVerifyThatIMAbleToDecreaseItemQuantityWithSuccess() {
         estoreCartPage.getQuantitySelect().should(visible, Duration.ofSeconds(40));
         Select selectQuantity = new Select(estoreCartPage.getQuantitySelect());
         selectQuantity.selectByValue("1");
     }
-
-
     @When("I click on add to wishlist button from cart")
     public void iClickOnAddToWishlistButtonFromCart() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
