@@ -13,6 +13,7 @@ Feature: Estore Address Page
     When I click on continue as guest estore button
     When I fill estore shipping address
     When I fill estore shipping email address
+    When I click on edit estore billing address button
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -124,6 +125,7 @@ Feature: Estore Address Page
     When I click on estore no thanks button
     When I click on edit shipping address button on estore address page
     When I fill estore shipping address
+    When I click on edit estore billing address button
     When I click on same as estore shipping address checkbox
     Then I verify that billing address the same as shipping functionality
 
@@ -135,6 +137,7 @@ Feature: Estore Address Page
     When I click on estore checkout button
     When I click on estore no thanks button
     When I fill estore shipping address
+    When I click on edit estore billing address button
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -153,6 +156,7 @@ Feature: Estore Address Page
     When I click on estore checkout button
     When I click on estore no thanks button
     When I fill estore shipping address
+    When I click on edit estore billing address button
     When I click on same as estore shipping address checkbox
     When I add gift message
     When I click on continue to payment estore button
