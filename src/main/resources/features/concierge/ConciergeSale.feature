@@ -1,6 +1,6 @@
 @concierge-All
 @concierge-Sale
-Feature:Concierge Sale
+Feature: Concierge Sale
 
   Scenario: Sale navigation bar is displayed and functional
     Given I log into Concierge as "associate"

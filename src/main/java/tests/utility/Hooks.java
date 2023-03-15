@@ -147,7 +147,7 @@ public class Hooks {
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(eStoreURL);
     }
 
@@ -159,7 +159,7 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
         configureConciergeURL();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(conciergeURL);
         /* TODO : Finish Extent Report Class Implementation */
         //report.startReport();

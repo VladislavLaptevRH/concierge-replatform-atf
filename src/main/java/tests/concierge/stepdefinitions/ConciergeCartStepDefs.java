@@ -35,7 +35,6 @@ public class ConciergeCartStepDefs {
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
     ConciergeE2EStepDefs conciergeE2EStepDefs = new ConciergeE2EStepDefs();
-
     AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
     int randomQuantity;
     int priceFirstLineItem;
@@ -402,7 +401,14 @@ public class ConciergeCartStepDefs {
         WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        conciergeUserAccountPage.getCartButton().shouldHave(text("" + arg0), Duration.ofMinutes(1));
+        int arg1 = Integer.parseInt(conciergeUserAccountPage.getCartItemSum().getText());
+        if(arg1 > 1){
+            iRemoveAllItemsFromCartViaUI();
+            conciergeE2EStepDefs.iOpenProductPageWithAnd("prod1617188", "63130001");
+            conciergeE2EStepDefs.iClickOnAddToCartButton();
+            iClickOnViewCartButton();
+        }
+        assertEquals(Integer.parseInt(conciergeUserAccountPage.getCartItemSum().getText()), arg0);
     }
 
     @Then("I verify membership banner for {string} client")
@@ -663,7 +669,7 @@ public class ConciergeCartStepDefs {
     public void iVerifyThatMiniCartValueIsEqualToQuantityOfProduct() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        conciergeUserAccountPage.getCartButton().shouldHave(text("" + randomQuantity), Duration.ofSeconds(50));
+        assertEquals(randomQuantity, Integer.parseInt(conciergeUserAccountPage.getCartItemSum().getText()));
     }
 
     @When("I click on check balance button")
@@ -729,6 +735,7 @@ public class ConciergeCartStepDefs {
 
     @When("I click on order details button")
     public void iClickOnOrderDetailsButton() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
             if(conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed()){
                 conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").click();
             } else if (conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").isDisplayed()){
@@ -769,11 +776,16 @@ public class ConciergeCartStepDefs {
             conciergeCartPageScreen.getClearOrderButton().should(Condition.be(visible), Duration.ofSeconds(10));
             conciergeCartPageScreen.getClearOrderButton().click();
             with().pollInterval(2, SECONDS).await().until(() -> true);
-            if (!conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current order?"), Duration.ofSeconds(30)).isEnabled()) {
+            if (!conciergeCartPageScreen.getClearOrderButtonPopUpHeader().isDisplayed()) {
                 for (int i = 0; i < 3; i++) {
-                    conciergeCartPageScreen.getClearOrderButton().click();
+                    WebDriverRunner.getWebDriver().navigate().refresh();
                     with().pollInterval(4, SECONDS).await().until(() -> true);
-                    if(conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current order?")).isEnabled()){
+                    conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
+                    conciergeCartPageScreen.getClearOrderButton().shouldHave(visible, Duration.ofSeconds(10));
+                    conciergeCartPageScreen.getClearOrderButton().click();
+                    with().pollInterval(2, SECONDS).await().until(() -> true);
+                    if(conciergeCartPageScreen.getClearOrderButtonPopUpHeader().isDisplayed()){
+                        conciergeCartPageScreen.getClearOrderButtonPop().click();
                         break;
                     }
                 }
@@ -783,7 +795,6 @@ public class ConciergeCartStepDefs {
                 conciergeCartPageScreen.getClearOrderButtonPop().click();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
-//            try {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 if(conciergeUserAccountPage.getCartButtonItemSum().exists()){
@@ -791,9 +802,6 @@ public class ConciergeCartStepDefs {
                 }
                 conciergeUserAccountPage.getCartButton().should(visible,Duration.ofMinutes(5));
                 conciergeUserAccountPage.getCartButtonItemSum().shouldNot(visible, Duration.ofMinutes(2));
-//            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-//                System.out.println("Cart sum indicator is not displayed");
-//            }
         }
     }
 

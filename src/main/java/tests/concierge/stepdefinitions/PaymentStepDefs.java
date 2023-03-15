@@ -1,6 +1,7 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import tests.concierge.pageObject.ConciergeAddressScreen;
 import tests.concierge.pageObject.ConciergeCartPageScreen;
 import tests.concierge.pageObject.PaymentScreen;
@@ -78,6 +79,10 @@ public class PaymentStepDefs {
 
     @When("I execute payment for {string}")
     public void iExecutePaymentFor(String cardType) {
+        if(!paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method")).isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+        }
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         if (cardType.equals("VI")) {
             generalStepDefs.payWith("VI", "4111 1111 4555 1142", "737", "0330");
@@ -114,7 +119,7 @@ public class PaymentStepDefs {
                         "AutomationCompany\n" +
                         "7677 N 16th St\n" +
                         "QaApartment\n" +
-                        "Phoenix, AZ 85020\n" +
+                        "Phoenix, AZ 85020-4434\n" +
                         "US\n" +
                         "124131231\n" +
                         "Edit"));
@@ -125,7 +130,7 @@ public class PaymentStepDefs {
                         "AutomationCompany\n" +
                         "7677 N 16th St\n" +
                         "QaApartment\n" +
-                        "Phoenix, AZ 85020\n" +
+                        "Phoenix, AZ 85020-4434\n" +
                         "US\n" +
                         "124131231\n" +
                         "Edit");
