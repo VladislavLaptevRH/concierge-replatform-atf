@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -76,16 +77,26 @@ public class EstoreSearchStepDefs {
 
     @When("I select low to high for estore")
     public void iSelectLowToHighForEstore() {
-        estorePDPScreen.getSortButton().should(visible, Duration.ofSeconds(20));
-        estorePDPScreen.getSortButton().click();
+        if (Hooks.cookie.equals("releasethurs")) {
+            estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
+            estorePDPScreen.getSortByButton().click();
+        } else {
+            estorePDPScreen.getSortButton().should(visible, Duration.ofSeconds(20));
+            estorePDPScreen.getSortButton().click();
+        }
         estorePDPScreen.getPriceLowToHigh().should(visible, Duration.ofSeconds(20));
         estorePDPScreen.getPriceLowToHigh().click();
     }
 
     @When("I select high to low for estore")
     public void iSelectHighToLowForEstore() {
-        estorePDPScreen.getSortButton().should(visible, Duration.ofSeconds(20));
-        estorePDPScreen.getSortButton().click();
+        if (Hooks.cookie.equals("releasethurs")) {
+            estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
+            estorePDPScreen.getSortByButton().click();
+        } else {
+            estorePDPScreen.getSortButton().should(visible, Duration.ofSeconds(20));
+            estorePDPScreen.getSortButton().click();
+        }
         estorePDPScreen.getPriceHighToLow().should(visible, Duration.ofSeconds(20));
         estorePDPScreen.getPriceHighToLow().click();
     }
@@ -151,12 +162,12 @@ public class EstoreSearchStepDefs {
 
     @When("I click on view results")
     public void iClickOnViewResults() {
-        estoreItemPage.getAddToCartButton().should(visible,Duration.ofSeconds(20));
+        estoreItemPage.getAddToCartButton().should(visible, Duration.ofSeconds(20));
         estoreItemPage.getAddToCartButton().click();
     }
 
     @Then("I verify cribs title for estore")
     public void iVerifyCribsTitleForEstore() {
-        $(By.xpath("//*[text()='cribs']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='cribs']")).should(visible, Duration.ofSeconds(20));
     }
 }

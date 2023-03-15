@@ -22,4 +22,8 @@ public class ConciergeLoginPage {
     private final SelenideElement locationWestHolywood = $(By.xpath("//*[@id='location']/option[36]"));
 
     private final SelenideElement signInButton = $(By.xpath("//button[@class='login-form__submit']"));
+//stg3
+    private final SelenideElement locationInput = $(By.xpath("//input[contains(@id,'mui')]"));
+
+
 }

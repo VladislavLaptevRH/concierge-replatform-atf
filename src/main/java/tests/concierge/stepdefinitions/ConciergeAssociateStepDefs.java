@@ -170,7 +170,12 @@ public class ConciergeAssociateStepDefs {
 
     @When("I choose gallery number {string} for gallery intl concierge")
     public void iChooseGalleryNumberForGalleryIntlConcierge(String arg0) {
-        System.out.println();
+        conciergeLoginPage.getLocationInput().should(visible, Duration.ofSeconds(20));
+        conciergeLoginPage.getLocationInput().click();
+        $(By.xpath("//*[text()='701: Aynhoe']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='701: Aynhoe']")).click();
+        conciergeLoginPage.getContinueButton().should(visible, Duration.ofSeconds(30));
+        conciergeLoginPage.getContinueButton().click();
     }
 }
 
