@@ -77,7 +77,7 @@ public class EstoreAddressStepDefs {
 
     @When("I click on edit shipping address button on estore order review page")
     public void iClickOnEditShippingAddressButtonOnEstoreOrderReviewPage() {
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreAddressScreen.getEditShippinggAddress().shouldHave(text("Edit"), Duration.ofSeconds(20));
         estoreAddressScreen.getEditShippinggAddress().click();
     }
@@ -85,7 +85,7 @@ public class EstoreAddressStepDefs {
     @When("I click on edit shipping address button on estore address page")
     public void iClickOnEditShippingAddressButtonOnEstoreAddressPage() {
         try {
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             estoreAddressScreen.getEditShippinggAddress().shouldHave(text("Edit"), Duration.ofSeconds(20));
             estoreAddressScreen.getEditShippinggAddress().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {

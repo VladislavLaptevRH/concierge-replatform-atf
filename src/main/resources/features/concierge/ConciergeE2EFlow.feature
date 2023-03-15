@@ -1,6 +1,6 @@
 @concierge-All
 @concierge-EndToEnd
-Feature:Concierge E2E flow
+Feature: Concierge E2E flow
 
   Scenario: Verify that user is able to buy item
     Given I log into Concierge as "associate"

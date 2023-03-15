@@ -1,6 +1,6 @@
 @concierge-All
 @concierge-GiftCard
-Feature:Concierge GiftCardEnquiry
+Feature: Concierge GiftCardEnquiry
 
   Scenario: Gift Card Balance Enquiry
     Given I log into Concierge as "associate"
@@ -29,5 +29,3 @@ Feature:Concierge GiftCardEnquiry
     And I verify that review screen is displayed
     When I click on a place order button
     Then I verify that confirmation order screen is displayed
-
-

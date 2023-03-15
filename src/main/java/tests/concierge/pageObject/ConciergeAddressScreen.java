@@ -11,7 +11,7 @@ public class ConciergeAddressScreen {
 
     private final SelenideElement soldToTaxExempt = $(By.cssSelector("#soldToTaxExemptId"));
 
-    private final SelenideElement shippingAddressText = $(By.xpath("(//h3[@class='MuiTypography-root MuiTypography-h3'])[1]"));
+    private final SelenideElement shippingAddressText = $(By.xpath("//*[text() = 'Shipping Address']"));
 
     private final SelenideElement checkOutTitle = $(By.xpath("//h3[@class='MuiTypography-root MuiTypography-h3 MuiTypography-alignCenter']"));
 

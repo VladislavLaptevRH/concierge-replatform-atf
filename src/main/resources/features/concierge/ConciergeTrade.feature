@@ -1,6 +1,6 @@
 @concierge-All
 @concierge-Trade
-Feature:Concierge Trade
+Feature: Concierge Trade
 
   Scenario: Trade Client - Non Exempt
     Given I log into Concierge as "associate"
@@ -95,4 +95,3 @@ Feature:Concierge Trade
     And I click on no thanks button
     And I choose client who is a "Trade"
     Then I verify membership banner for "trade" client not displayed
-

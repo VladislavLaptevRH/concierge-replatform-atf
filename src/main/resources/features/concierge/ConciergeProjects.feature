@@ -1,6 +1,6 @@
 @concierge-All
 @concierge-Project
-Feature:Concierge Project
+Feature: Concierge Project
 
   Scenario Outline: Availability, Delivery and Returns messaging for Instock, BO, SPO, SPO Instock Items
     Given I log into Concierge as "associate"

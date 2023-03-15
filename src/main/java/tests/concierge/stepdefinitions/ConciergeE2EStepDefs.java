@@ -40,7 +40,6 @@ public class ConciergeE2EStepDefs {
     SelectOption selectOption = new SelectOption();
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
     AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
-
     PaymentStepDefs paymentStepDefs = new PaymentStepDefs();
 
     String usState = "";
@@ -166,13 +165,13 @@ public class ConciergeE2EStepDefs {
         executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
         checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
         checkoutAddressScreen.getContinuePaymentButton().click();
-        try {
-            checkoutAddressScreen.getContinueButton().should(visible, Duration.ofSeconds(40));
-            executeJavaScript("arguments[0].click();", checkoutAddressScreen.getContinueButton());
-            conciergeAddressScreen.getOkButton().should(visible, Duration.ofSeconds(12));
-            conciergeAddressScreen.getOkButton().click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Continue from popup is not displayed");
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if(conciergeProjectScreen.getTryAgainButton().isDisplayed()){
+            conciergeProjectScreen.getTryAgainButton().click();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+            checkoutAddressScreen.getContinuePaymentButton().click();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
         }
     }
 
@@ -392,11 +391,19 @@ public class ConciergeE2EStepDefs {
 
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String businessClient) {
+        conciergeItemsScreen.getCheckoutButton().shouldNot(visible, Duration.ofSeconds(5));
         if(!conciergeUserAccountPage.getClientLookupFirstName().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
+            if(!conciergeUserAccountPage.getClientLookupFirstName().isDisplayed()){
+                String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
+                open(URL);
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                abstractStepDefs.iClickOnCheckoutButton();
+                iClickOnNoThanksButton();
+            }
         }
-        with().pollInterval(7, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if (businessClient.equals("Member")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
@@ -839,4 +846,3 @@ public class ConciergeE2EStepDefs {
         with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 }
-

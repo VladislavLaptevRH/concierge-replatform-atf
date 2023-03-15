@@ -164,6 +164,7 @@ public class RegistryStepDefs {
 
     @Then("I verify that registry was edited")
     public void iVerifyThatRegistryWasEdited() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='" + registrantAddress + "']")).should(Condition.visible, Duration.ofSeconds(20));
     }
 

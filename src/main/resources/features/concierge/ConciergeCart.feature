@@ -164,7 +164,7 @@ Feature:Concierge Cart Page
     When I continue to payment
     Then I verify that total price from cart and from payment page is the same
 
-  Scenario:Promo codes - verify that total price from cart and from payment page is the same after applying promo code
+  Scenario: Promo codes - verify that total price from cart and from payment page is the same after applying promo code
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -313,6 +313,7 @@ Feature:Concierge Cart Page
     Then I verify that monogram was removed
 
   Scenario: Gift Box Add / Remove / View
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -428,7 +429,7 @@ Feature:Concierge Cart Page
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
-    #Then I verify zipcode
+    Then I verify zipcode
 
   Scenario: Availability, Delivery and Returns messages
     Given I log into Concierge as "associate"
@@ -438,7 +439,7 @@ Feature:Concierge Cart Page
     When I open cart
     Then I verify that availability, Delivery and Returns messaging in cart
 
-  Scenario:Verify alternate addresses for client with multiple addresses
+  Scenario: Verify alternate addresses for client with multiple addresses
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
