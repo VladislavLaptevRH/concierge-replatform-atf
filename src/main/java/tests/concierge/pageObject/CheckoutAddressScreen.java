@@ -11,7 +11,13 @@ import static com.codeborne.selenide.Selenide.$;
 public class CheckoutAddressScreen {
 
     private final SelenideElement orderDetailsButton = $(By.xpath("//*[contains( text(), 'View Order Details')]"));
-    private final SelenideElement firstNameBillingAddress = $(By.id("billingAddress.firstName"));
+    private final SelenideElement firstNameBillingAddress = $(By.xpath("//div[@id='billingAddresslbl']/descendant::input[@id='billingAddress.firstName']"));
+    private final SelenideElement lastNameBillingAddress = $(By.xpath("//div[@id='billingAddresslbl']/descendant::input[@id='address-last-name-field']"));
+    private final SelenideElement companyNameBillingAddress = $(By.xpath("//div[@id='billingAddresslbl']/descendant::input[@id='address-company-name-field']"));
+    private final SelenideElement addressLine1BillingAddress = $(By.xpath("//div[@id='billingAddresslbl']/descendant::input[@id='address-address-line-1']"));
+    private final SelenideElement addressLine2BillingAddress = $(By.xpath("//div[@id='billingAddresslbl']/descendant::input[@id='address-address-line-2']"));
+    private final SelenideElement phoneBillingAddress = $(By.xpath("//div[@id='billingAddresslbl']/descendant::input[@id='address-phone-field']"));
+    private final SelenideElement cityFieldBillingAddress = $(By.xpath("//div[@id='billingAddresslbl']/descendant::input[@id='address-city-field']"));
     private final SelenideElement emailAddressField = $(By.xpath("//label[text() = 'Email address']/following-sibling::div/input"));
 
     private final SelenideElement confirmEmailAddressField = $(By.xpath("///label[text() = 'Confirm email']/following-sibling::div/input"));

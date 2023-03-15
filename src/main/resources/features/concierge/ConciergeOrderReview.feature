@@ -1,6 +1,6 @@
 @concierge-All
 @concierge-OrderReview
-Feature:Concierge Order review
+Feature: Concierge Order review
 
   Scenario: Edit Shipping Address
     Given I log into Concierge as "associate"
@@ -88,6 +88,7 @@ Feature:Concierge Order review
     When I continue to payment
     When I choose POS for payment method
     When I click on a place order button
+    When I click on order details button
     Then I verify spo order & terms review signature
 
   Scenario: Verify all the line items on the order review page

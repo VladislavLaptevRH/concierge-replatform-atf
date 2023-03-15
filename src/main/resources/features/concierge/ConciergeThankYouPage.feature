@@ -1,6 +1,6 @@
 @concierge-All
 @concierge-ThankYouPage
-Feature:Concierge ThankYouPage
+Feature: Concierge ThankYouPage
 
   Scenario: Verify order details
     Given I log into Concierge as "associate"

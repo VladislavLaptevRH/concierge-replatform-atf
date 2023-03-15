@@ -109,7 +109,7 @@ public class AbstractStepDefs {
 
     @When("I click on checkout button")
     public void iClickOnCheckoutButton() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         if(!conciergeItemsScreen.getCheckoutButton().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -123,10 +123,6 @@ public class AbstractStepDefs {
                 Select orderClassificationDropDownList = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
                 orderClassificationDropDownList.selectByValue("RH Gallery Order");
                 with().pollInterval(5, SECONDS).await().until(() -> true);
-//                conciergeCartPageScreen.getOrderClassificationSelect().click();
-//                with().pollInterval(1, SECONDS).await().until(() -> true);
-//                conciergeCartPageScreen.getOrderClassificationGalleryOrder().click();
-//                with().pollInterval(1, SECONDS).await().until(() -> true);
                 if (!conciergeCartPageScreen.getOrderClassificationError().isDisplayed()) {
                     break;
                 }
@@ -251,6 +247,4 @@ public class AbstractStepDefs {
     public void iVerifyThatConciergeIsDisplayed() {
 
     }
-
 }
-

@@ -13,7 +13,7 @@ public class PaymentScreen {
 
     public final String currentPaymentMethodPlace = "//*[@placeholder = 'Payment method']//*[@value='%s']";
 
-    private final SelenideElement editBillingAddressBtn = $(By.xpath("//*[text() = 'Billing Address']/following-sibling::div/p"));
+    private final SelenideElement editBillingAddressBtn = $(By.xpath("//*[text() = 'Billing Address']/following-sibling::div/a"));
 
     private final SelenideElement removePaymentBtn = $(By.xpath("//a[@class='MuiTypography-root MuiLink-root MuiLink-underlineAlways MuiTypography-caption MuiTypography-colorPrimary']"));
 

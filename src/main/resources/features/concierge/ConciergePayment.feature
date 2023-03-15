@@ -1,6 +1,6 @@
 @concierge-All
 @concierge-Payment
-Feature:Concierge Payment
+Feature: Concierge Payment
 
   Scenario Outline: Major CCs
     Given I log into Concierge as "associate"
@@ -76,7 +76,7 @@ Feature:Concierge Payment
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "member"
+    When I choose client who is a "Member"
     When I click on checkout button
     When I fill all fields from address screen
     And I continue to payment

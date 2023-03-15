@@ -58,7 +58,7 @@ public class EstorePgStepDefs {
     @When("I apply In stock to Sale filter")
     public void iApplyInStockToSaleFilter() {
         WebDriverRunner.getWebDriver().navigate().refresh();
-        estorePGScreen.getSaleButtonFilter().shouldHave(text("sale"), Duration.ofSeconds(20));
+        estorePGScreen.getSaleButtonFilter().shouldHave(text("SALE"), Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", estorePGScreen.getSaleButtonFilter());
     }
 
@@ -97,8 +97,8 @@ public class EstorePgStepDefs {
 
     @When("I change a grid view from default {int} grid view to {int} grid view")
     public void iChangeAGridViewFromDefaultGridViewToGridView(int arg0, int arg1) {
-        $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[4]")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[4]")).click();
+        $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[3]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[3]")).click();
     }
 
     @Then("I verify that page is displayed with the previous grid selected")
@@ -130,8 +130,8 @@ public class EstorePgStepDefs {
     @Then("I verify alignment for two and three grid views")
     public void iVerifyAlignmentForTwoAndThreeGridViews() {
         estorePGScreen.getGridView3().should(visible, Duration.ofSeconds(10));
-        $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[4]")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[4]")).click();
+        $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[3]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[3]")).click();
     }
 
     @Then("I verify that application render to the same view grid which was selected")
