@@ -30,10 +30,10 @@ public class EstoreLoginStepDefs {
     public boolean iLogIntoEStoreAs(String arg0) {
         try {
             loginAsRole(arg0);
-            if (Hooks.profile.equals("stg3")) {
-                with().pollInterval(2, SECONDS).await().until(() -> true);
-                $(By.xpath("//*[text()='ACCEPT ALL']")).click();
-            }
+//            if (Hooks.profile.equals("stg3")) {
+//                with().pollInterval(2, SECONDS).await().until(() -> true);
+//                $(By.xpath("//*[text()='ACCEPT ALL']")).click();
+//            }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             return true;
         }

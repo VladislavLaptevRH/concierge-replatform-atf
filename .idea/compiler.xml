@@ -7,9 +7,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="concierge-replatform-atf" />
         <module name="cucumber" />
-        <module name="concierge-replatform-atf copy" />
+        <module name="concierge-replatform-atf" />
       </profile>
     </annotationProcessing>
   </component>

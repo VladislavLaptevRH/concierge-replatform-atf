@@ -62,7 +62,7 @@ Feature: Estore Search
     When I go to estore item "towels" from search field
     Then I verify pricing on search result page
 
-  Scenario: Back button test cases
+  Scenario: Back button
     Given I log into eStore as "regular" user
     When I go to estore item "white and blue corner leather sofa" from search field
     When I navigate for the first product PDP

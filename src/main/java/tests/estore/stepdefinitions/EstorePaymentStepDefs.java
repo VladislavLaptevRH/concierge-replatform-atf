@@ -325,4 +325,5 @@ public class EstorePaymentStepDefs {
         estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
 
     }
+
 }

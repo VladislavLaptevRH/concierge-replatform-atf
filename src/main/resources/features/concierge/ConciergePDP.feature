@@ -12,7 +12,7 @@ Feature: Concierge PDP
 
   Scenario: In stock
     Given I log into Concierge as "associate"
-    When I go to item "61590226 BRN" from search field
+    When I go to item "10024887 WGRY" from search field
     When I click on view in stock items
     Then I verify that in stock modal pop up is displayed
 

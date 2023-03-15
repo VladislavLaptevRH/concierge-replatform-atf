@@ -11,6 +11,8 @@ import static com.codeborne.selenide.Selenide.$;
 public class EstorePDPScreen {
     private final SelenideElement sortButton = $(By.xpath("//*[text()='sort']"));
 
+    private final SelenideElement sortByButton = $(By.xpath("//*[text()='sort by:']"));
+
     private final SelenideElement priceLowToHigh = $(By.xpath("//*[text()='Price Low to High']"));
 
     private final SelenideElement priceHighToLow = $(By.xpath("//*[text()='Price High to Low']"));

@@ -27,6 +27,7 @@ public class EstoreSaleStepDefs {
     @When("I click on estore sale button")
     public void iClickOnEstoreSaleButton() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
+
         estoreSaleScreen.getSaleButtonMenu().should(Condition.visible, Duration.ofSeconds(20));
         estoreSaleScreen.getSaleButtonMenu().click();
     }

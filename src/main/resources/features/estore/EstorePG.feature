@@ -85,7 +85,7 @@ Feature: Estore PG
     When I go to estore item "sofa" from search field
     Then I verify that PG page is displayed with all filter options
 
-  Scenario: Change the different grid and search the any product via search
+  Scenario: Change the different grid and search the turkish towel product via search
     Given I log into eStore as "guest" user
     When I go to estore item "sofa" from search field
     When I change a grid view from default 3 grid view to 2 grid view

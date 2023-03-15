@@ -102,11 +102,11 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement westHollywood = $(By.xpath("//*[@id=\"146\"]"));
 
-    private final SelenideElement cartButton =  $(By.id("header-cart-button"));
+    private final SelenideElement cartButton = $(By.id("header-cart-button"));
 
-    private final SelenideElement cartItemSum =  $(By.xpath("//*[@id = 'header-cart-button']/div/span"));
+    private final SelenideElement cartItemSum = $(By.xpath("//*[@id = 'header-cart-button']/div/span"));
 
-    private final SelenideElement cartButtonItemSum =  $(By.xpath("//*[@id = 'header-cart-button']//span"));
+    private final SelenideElement cartButtonItemSum = $(By.xpath("//*[@id = 'header-cart-button']//span"));
 
     private final SelenideElement orderHistoryButton = $(By.xpath("//a[1]/button[contains(@class,'MuiButton-root')]"));
 
@@ -182,21 +182,25 @@ public class ConciergeUserAccountPage {
 
     private final List<SelenideElement> toddlerBeddingList = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul[@class='MuiGridList-root']/li[@class='MuiGridListTile-root']"));
 
-    public SelenideElement getCurrentLocationGalleryItemByName (String name){
+    private final SelenideElement clientLookupStg3LastName = $(By.xpath("//input[@id='lastName']"));
+
+
+    public SelenideElement getCurrentLocationGalleryItemByName(String name) {
         String path = String.format(currentLocationGalleryItem, name);
         return $(byXpath(path));
     }
 
-    public SelenideElement getGalleryItemByName (String name){
+    public SelenideElement getGalleryItemByName(String name) {
         String path = String.format(galleryItem, name);
         return $(byXpath(path));
     }
 
-    public SelenideElement getFirstResultOfClientLookupByName (String name){
+    public SelenideElement getFirstResultOfClientLookupByName(String name) {
         String path = String.format(firstResultOfClientLookupParameterized, name);
         return $(byXpath(path));
     }
-    public SelenideElement getOrderDetailsButtonByName (String name){
+
+    public SelenideElement getOrderDetailsButtonByName(String name) {
         String path = String.format(orderDetailsButton, name);
         return $(byXpath(path));
     }
