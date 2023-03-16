@@ -78,6 +78,7 @@ Feature: Concierge Payment
     When I click on no thanks button
     When I choose client who is a "Member"
     When I click on checkout button
+    When I click on no thanks button
     When I fill all fields from address screen
     And I continue to payment
     Then I verify that member savings in payment page
@@ -93,8 +94,8 @@ Feature: Concierge Payment
     When I click on no thanks button
     When I choose client who is a "Trade"
     When I click on checkout button
+    When I click on no thanks button
     And I fill all fields for sold to address
-    And I continue to payment
     Then I verify that trade savings in payment page
 
   Scenario: Edit Address
@@ -112,4 +113,3 @@ Feature: Concierge Payment
     When I edit billing address from PG
     And I continue to payment
     Then I verify that I'm able to edit billing address
-

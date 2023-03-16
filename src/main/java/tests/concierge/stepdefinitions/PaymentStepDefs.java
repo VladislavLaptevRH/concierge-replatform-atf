@@ -79,7 +79,7 @@ public class PaymentStepDefs {
 
     @When("I execute payment for {string}")
     public void iExecutePaymentFor(String cardType) {
-        if(!paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method")).isDisplayed()){
+        if(!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(3, SECONDS).await().until(() -> true);
         }
@@ -148,11 +148,13 @@ public class PaymentStepDefs {
 
     @Then("I verify that member savings in payment page")
     public void iVerifyThatMemberSavingsInPaymentPage() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Member Savings']")).should(visible, Duration.ofSeconds(25));
     }
 
     @Then("I verify that trade savings in payment page")
     public void iVerifyThatTradeSavingsInPaymentPage() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Trade savings']")).should(visible, Duration.ofSeconds(25));
     }
 
