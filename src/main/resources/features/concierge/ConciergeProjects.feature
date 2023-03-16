@@ -16,7 +16,6 @@ Feature: Concierge Project
 #      | SPO In stock Items |
 #      | BO                |
 
-
   Scenario: Verify the Projects load for a logged in associate
     Given I log into Concierge as "associate"
     When I click on projects button

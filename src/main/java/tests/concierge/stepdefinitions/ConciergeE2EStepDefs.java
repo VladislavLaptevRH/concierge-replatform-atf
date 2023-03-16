@@ -326,15 +326,24 @@ public class ConciergeE2EStepDefs {
             conciergeCartPageScreen.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
             wait.until(ExpectedConditions.elementToBeClickable(conciergeCartPageScreen.getNoThanksButton()));
             wait.until(ExpectedConditions.visibilityOf(conciergeCartPageScreen.getNoThanksButton()));
-            Actions actions = new Actions(WebDriverRunner.getWebDriver());
-            actions.moveToElement(conciergeCartPageScreen.getNoThanksButton());
-            conciergeCartPageScreen.getNoThanksButton().scrollIntoView(true);
+//            Actions actions = new Actions(WebDriverRunner.getWebDriver());
+//            actions.moveToElement(conciergeCartPageScreen.getNoThanksButton());
+//            conciergeCartPageScreen.getNoThanksButton().scrollIntoView(true);
             generalStepDefs.waitForJSandJQueryToLoad();
-            with().pollInterval(4, SECONDS).await().until(() -> true);
+//            with().pollInterval(2, SECONDS).await().until(() -> true);
             executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getNoThanksButton());
-            with().pollInterval(4, SECONDS).await().until(() -> true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         } else {
             System.out.println("Close button is not displayed");
+        }
+        if(conciergeCartPageScreen.getNoThanksButton().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
+                conciergeCartPageScreen.getNoThanksButton().click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+                if (!conciergeCartPageScreen.getNoThanksButton().isDisplayed()) {
+                    break;
+                }
+            }
         }
     }
 
@@ -707,6 +716,14 @@ public class ConciergeE2EStepDefs {
         generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[1]")).scrollIntoView(true);
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[1]")).click();
+        $(By.xpath("//*[text() = 'Continue to payment']")).scrollIntoView(true);
+        $(By.xpath("//*[text() = 'Continue to payment']")).click();
+        $(By.xpath("//*[text() = 'CONTINUE']")).scrollIntoView(true);
+        $(By.xpath("//*[text() = 'CONTINUE']")).click();
+        $(By.xpath("//*[text() = 'OK']")).shouldHave(visible, Duration.ofSeconds(6));
+        $(By.xpath("//*[text() = 'OK']")).click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
 //        $(By.cssSelector("body > div:nth-child(7) > div:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > label:nth-child(1) > span:nth-child(1) > span:nth-child(1) > input:nth-child(1)")).click();
     }

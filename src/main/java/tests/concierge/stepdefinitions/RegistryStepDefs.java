@@ -1,6 +1,7 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.concierge.pageObject.PdpScreen;
 import tests.concierge.pageObject.RegistryScreen;
@@ -165,7 +166,8 @@ public class RegistryStepDefs {
     @Then("I verify that registry was edited")
     public void iVerifyThatRegistryWasEdited() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text()='" + registrantAddress + "']")).should(Condition.visible, Duration.ofSeconds(20));
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        $(By.xpath("(//*[text()='" + registrantAddress + "'])[2]")).should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @When("I click on delete registry button")
