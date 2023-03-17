@@ -3,6 +3,7 @@
 Feature: Estore Address Page
 
   Scenario: eStore Address for Guest user
+
     Given I log into eStore as "guest" user
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050045" with "WHT" for estore
@@ -21,6 +22,7 @@ Feature: Estore Address Page
     Then I validate "billing address" which we have entered earlier
 
   Scenario: eStore Address for Registered user - To verify Add a new shipping Address option is present
+
     Given I log into eStore as "savedaddress" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -46,6 +48,7 @@ Feature: Estore Address Page
     Then I verify that error messages are displayed for each mandatory field
 
   Scenario: eStore Address Page - To verify newly added address is present in shipping address list
+
     Given I log into eStore as "addresspage" user
     When I goes to my account for estore
     When I click on estore my account button
@@ -64,6 +67,7 @@ Feature: Estore Address Page
     When I click on delete address button from appeared pop up
 
   Scenario: eStore Address Page - To verify the deleted address removed from the shipping address list
+
     Given I log into eStore as "addresspage" user
     When I remove all items from estore cart
     When I goes to my account for estore
@@ -83,6 +87,7 @@ Feature: Estore Address Page
     Then I verify that added address is not present in the grid
 
   Scenario: eStore Address Page - To verify the edited address updated in the shipping address list
+
     Given I log into eStore as "addresspage" user
     When I remove all items from estore cart
     When I goes to my account for estore
@@ -115,6 +120,7 @@ Feature: Estore Address Page
     Then user verify that field is required message is displayed
 
   Scenario: eStore Address Page - Verify same as Billing address same as Shipping functionality - switch between the listed shipping addresses
+
     Given I log into eStore as "addresspage" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -126,7 +132,8 @@ Feature: Estore Address Page
     When I click on same as estore shipping address checkbox
     Then I verify that billing address the same as shipping functionality
 
-  Scenario: eStore Address Page - Verify the shipping and Billing address for registered User Order review and Order Confirmation page
+  Scenario: eStore Address Page - Verify the shipping and Billing address for registered User Order review and Order Confirmation pageko9
+
     Given I log into eStore as "addresspage" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -146,6 +153,7 @@ Feature: Estore Address Page
     Then I verify shipping and billing address on order confirmation page
 
   Scenario: eStore Address Page - Verify Gift message and order description showing on the order review and TY page
+
     Given I log into eStore as "addresspage" user
     When I remove all items from estore cart
     When I add item to cart via API for estore

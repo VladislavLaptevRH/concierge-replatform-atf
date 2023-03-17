@@ -55,4 +55,6 @@ public class CheckoutAddressScreen {
     private final SelenideElement continuePaymentButton = $(By.xpath("//button[contains(@class,'MuiButton-contained')]"));
 
     private final SelenideElement continueButton = $(By.xpath("(//button[contains(@class,'MuiButton-containedPrimary')])[2]"));
+
+    private final SelenideElement confirmEditedAddress = $(By.xpath("//*[text() = 'CONTINUE']"));
 }

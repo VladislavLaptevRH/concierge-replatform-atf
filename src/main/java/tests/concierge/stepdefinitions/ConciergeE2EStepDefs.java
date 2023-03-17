@@ -151,6 +151,12 @@ public class ConciergeE2EStepDefs {
         with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
+    @When("I confirm edited address")
+    public void iConfirmEditedAddress() {
+        checkoutAddressScreen.getContinueButton().should(visible, Duration.ofSeconds(2));
+        checkoutAddressScreen.getContinueButton().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+    }
 
     @When("I continue to payment")
     public void continueToPaymentAfterAddressCheckout() {
@@ -389,21 +395,21 @@ public class ConciergeE2EStepDefs {
 
     @When("I remove client from header")
     public void iRemoveClientFromHeader() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
-        while ($(By.xpath("//*[contains(text(),'Client: ')]")).isDisplayed()) {
             conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
             conciergeUserAccountPage.getClientButton().click();
-            conciergeUserAccountPage.getRemoveClientByText().shouldHave(text("Remove Client"), Duration.ofSeconds(5));
-            conciergeUserAccountPage.getRemoveClientByText().click();
-        }
+           if(conciergeUserAccountPage.getRemoveClientByText().isDisplayed()) {
+               conciergeUserAccountPage.getRemoveClientByText().click();
+           } else {
+               WebDriverRunner.getWebDriver().navigate().refresh();
+               System.out.println("Client is absent");
+           }
     }
 
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String businessClient) {
-
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeItemsScreen.getCheckoutButton().shouldNot(visible, Duration.ofSeconds(5));
         if(!conciergeUserAccountPage.getClientLookupFirstName().isDisplayed()){
-
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
             if(!conciergeUserAccountPage.getClientLookupFirstName().isDisplayed()){
@@ -851,16 +857,15 @@ public class ConciergeE2EStepDefs {
 
     @When("I open product page with {string} and {string} for stg3")
     public void iOpenProductPageStg3(String productId, String skuId) {
-        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+EUCY";
+        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+GREY";
         open(URL);
         with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @When("I open product page with {string} and {string}")
     public void iOpenProductPageWithAnd(String productId, String skuId) {
-        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+EUCY";
+        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+GREY";
         open(URL);
-        with().pollInterval(5, SECONDS).await().until(() -> true);
         if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
             for (int i = 0; i < 3; i++) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
@@ -873,16 +878,13 @@ public class ConciergeE2EStepDefs {
         conciergeItemsScreen.getAddToCartButton().scrollTo();
         conciergeItemsScreen.getAddToCartButton().should(visible, Duration.ofSeconds(10));
         if (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
+            conciergeItemsScreen.getChoseFinishOption().click();
             Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
             sizeList.selectByVisibleText("Queen");
-            with().pollInterval(2, SECONDS).await().until(() -> true);
             Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
-            with().pollInterval(2, SECONDS).await().until(() -> true);
             finishList.selectByVisibleText("Antiqued Grey Oak");
-            with().pollInterval(2, SECONDS).await().until(() -> true);
             Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
-            quantityList.selectByVisibleText("2");
-            with().pollInterval(2, SECONDS).await().until(() -> true);
+            quantityList.selectByVisibleText("1");
         }
     }
 

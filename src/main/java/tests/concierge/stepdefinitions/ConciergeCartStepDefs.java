@@ -81,7 +81,6 @@ public class ConciergeCartStepDefs {
 
     @When("I click on view cart button")
     public void iClickOnViewCartButton() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
         generalStepDefs.waitForJSandJQueryToLoad();
         if(!conciergeCartPageScreen.getItemAddedToYourCart().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
@@ -634,10 +633,16 @@ public class ConciergeCartStepDefs {
     @Then("I verify membership popup for guest user")
     public void iVerifyMembershipPopupForGuestUser() {
         if(!conciergeCartPageScreen.getNoThanksButton().isDisplayed()){
-            String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
-            open(URL);
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-            abstractStepDefs.iClickOnCheckoutButton();
+            for(int i = 0; i < 3; i++){
+                String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
+                open(URL);
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+                abstractStepDefs.iClickOnCheckoutButton();
+                if($(By.xpath("//*[text()='Your RH Membership immediately pays for itself.']")).isDisplayed()){
+                    break;
+                }
+            }
+
         }
         $(By.xpath("//*[text()='Your RH Membership immediately pays for itself.']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='BECOME A MEMBER NOW']")).should(visible, Duration.ofMinutes(1));
