@@ -13,5 +13,3 @@ Feature: Concierge Sale
     When I click on sale menu item
     When I click on sub category and navigate PDP
     Then I verify prices on product page
-
-

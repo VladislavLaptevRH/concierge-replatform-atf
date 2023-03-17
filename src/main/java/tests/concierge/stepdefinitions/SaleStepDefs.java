@@ -33,7 +33,7 @@ public class SaleStepDefs {
     public void iVerifySaleNavigationBarsAreDisplayed () {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         List<String> items = new ArrayList<>();
-        List<String> expectedItems = new ArrayList(Arrays.asList("LIVING", "DINING" , "BED", "BATH", "LIGHTING", "TEXTILES", "RUGS", "WINDOWS", "DÉCOR", "OUTDOOR", "BABY & CHILD", "TEEN"));
+        List<String> expectedItems = new ArrayList(Arrays.asList("Living", "Dining" , "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "Baby & Child", "Teen"));
         for (int i = 0; i < saleScreen.getListOfSaleMainCategory().size(); i++) {
             items.add(saleScreen.getListOfSaleMainCategory().get(i).getText());
         }
@@ -55,27 +55,25 @@ public class SaleStepDefs {
 
     @When("I click on sub category and navigate PDP")
     public void iClickOnSubCategory() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
-        for (int i = 0; i < saleScreen.getListOfSaleSubCategory().size(); i++) {
-            if (i == 0) {
-                // click on Fabric Seating
-                saleScreen.getListOfSaleSubCategory().get(i).click();
-
-                for (int j = 0; i < saleScreen.getListOfSaleCollection().size(); j++) {
-                    if (j == 1) {
-                        // click on Chair
-                        saleScreen.getListOfSaleCollection().get(j).click();
-                    }
-                }
-            }
-        }
-        saleScreen.getRandomProduct().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        int randomSubCategory = generalStepDefs.getRandomNumber(1, saleScreen.getListOfSaleSubCategory().size());
+        saleScreen.getListOfSaleSubCategory().get(randomSubCategory).click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+        int randomCollection= generalStepDefs.getRandomNumber(1, saleScreen.getListOfSaleCollection().size());
+        saleScreen.getListOfSaleCollection().get(randomCollection).click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+        int randomProduct = generalStepDefs.getRandomNumber(1, saleScreen.getRandomProduct().size());
+        saleScreen.getRandomProduct().get(randomProduct).click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify prices on product page")
     public void iVerifyPricesOnProductPage() {
-
         with().pollInterval(3, SECONDS).await().until(() -> true);
+        if(!saleScreen.getPrice().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         assertEquals(saleScreen.getPrice().getText(), "Sale");
     }
 }

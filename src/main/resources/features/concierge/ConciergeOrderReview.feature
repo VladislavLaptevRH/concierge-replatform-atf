@@ -16,6 +16,7 @@ Feature: Concierge Order review
     When I choose POS for payment method
     When I edit shipping address from order review page
     When I continue to payment
+    When I confirm edited address
     When I click on order details button
     Then I verify that I'm able to edit shipping address
 
@@ -34,6 +35,7 @@ Feature: Concierge Order review
     When I choose POS for payment method
     When I edit billing address from order review page
     When I continue to payment
+    When I confirm edited address
     When I click on order details button
     And I verify that I'm able to edit billing address
 
