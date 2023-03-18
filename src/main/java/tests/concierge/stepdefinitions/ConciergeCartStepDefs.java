@@ -777,6 +777,7 @@ public class ConciergeCartStepDefs {
                 open(URL);
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
+//            !!!
             conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
             conciergeCartPageScreen.getClearOrderButton().should(Condition.be(visible), Duration.ofSeconds(10));
             conciergeCartPageScreen.getClearOrderButton().click();
