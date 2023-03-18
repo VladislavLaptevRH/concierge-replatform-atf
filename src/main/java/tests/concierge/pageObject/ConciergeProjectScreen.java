@@ -16,6 +16,8 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement taxCheckedCheckbox = $(By.xpath("//*[text() = 'Tax Exempt']/../preceding-sibling::div/span[contains(@class, 'Mui-checked')]"));
 
+    private final SelenideElement continueWithSuggestedAddressButton = $(By.xpath("//*[text() = 'CONTINUE WITH SUGGESTED ADDRESS']"));
+
     private final SelenideElement popUpErrorSomethingWentWrong = $(By.xpath("//*[text()='SOMETHING WENT WRONG.']"));
 
     private final SelenideElement popUpErrorWhileLoadingProjects = $(By.xpath("//*[text()='Error while loading projects']"));

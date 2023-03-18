@@ -179,6 +179,15 @@ public class ConciergeE2EStepDefs {
             checkoutAddressScreen.getContinuePaymentButton().click();
             with().pollInterval(3, SECONDS).await().until(() -> true);
         }
+        if(conciergeProjectScreen.getContinueWithSuggestedAddressButton().isDisplayed()){
+            conciergeProjectScreen.getContinueWithSuggestedAddressButton().click();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+
+        if($(By.xpath("//*[text() = 'CONTINUE']")).isDisplayed()){
+            $(By.xpath("//*[text() = 'CONTINUE']")).click();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
     }
 
     @When("I add {int} times an item in the cart")
@@ -793,6 +802,8 @@ public class ConciergeE2EStepDefs {
         $(By.xpath("//*[text()='NewCompanyName']")).shouldHave(text("NewCompanyName"), Duration.ofSeconds(25));
         $(By.xpath("//*[text()='Newappartment']")).shouldHave(text("Newappartment"), Duration.ofSeconds(25));
         $(By.xpath("//*[text()='37 New Road']")).shouldHave(text("37 New Road"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='Phoenix, AZ 85020']")).shouldHave(text("Phoenix, AZ 85020"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
         $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
     }
 

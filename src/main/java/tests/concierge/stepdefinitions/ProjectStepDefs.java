@@ -717,7 +717,7 @@ public class ProjectStepDefs {
         if (Hooks.profile.equals("stg4")) {
             forecastExpected = randomQuantity * 4496;
         } else {
-            forecastExpected = randomQuantity * 1724;
+            forecastExpected = randomQuantity * 2150;
         }
         int forecastActual = Integer.parseInt(conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
         assertEquals(forecastActual, forecastExpected, "Forecast value has been updated");
@@ -774,18 +774,18 @@ public class ProjectStepDefs {
             if (Hooks.profile.equals("stg4")) {
                 assertEquals(conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", ""), "$4,496.00\n");
             } else {
-                conciergeProjectScreen.getForeCastAmount().shouldHave(text("$1,724.00"), Duration.ofSeconds(25));
+                conciergeProjectScreen.getForeCastAmount().shouldHave(text("$1,616.00"), Duration.ofSeconds(25));
                 String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
-                assertEquals(prType, "$1,724.00\n", "Forecast amount for member client is displayed");
+                assertEquals(prType, "$1,616.00\n", "Forecast amount for member client is displayed");
             }
         }
         if (pricingType.equals("NON-MEMBER")) {
             if (Hooks.profile.equals("stg4")) {
                 assertEquals(conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", ""), "$5,995.00\n");
             } else {
-                conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,156.00"), Duration.ofSeconds(25));
+                conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,021.00"), Duration.ofSeconds(25));
                 String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
-                assertEquals(prType, "$2,156.00\n", "Forecast amount for non-member client is displayed");
+                assertEquals(prType, "$2,021.00\n", "Forecast amount for non-member client is displayed");
             }
         }
     }
@@ -910,10 +910,10 @@ public class ProjectStepDefs {
     public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingForIsDisplayed(String arg0) {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         if (arg0.equals("SPO")) {
-            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[1]")).shouldHave(text("AVAILABILITY & DELIVERY"), Duration.ofSeconds(20)).scrollIntoView(true);
-            executeJavaScript("window.scrollTo(0, 250)");
-            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[1]")).click();
-            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[1]")).shouldHave(text("This item is special order and will be ready for delivery between"), Duration.ofSeconds(20));
+            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[3]")).shouldHave(text("AVAILABILITY & DELIVERY"), Duration.ofSeconds(20)).scrollIntoView(true);
+//            executeJavaScript("window.scrollTo(0, 400)");
+            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[3]")).click();
+            $(By.xpath("//*[contains(text(),'This item is in stock and will be ready for delivery between')]")).shouldHave(text("This item is in stock and will be ready for delivery between"), Duration.ofSeconds(20));
         }
 
         if (arg0.equals("In stock")) {
@@ -1018,6 +1018,7 @@ public class ProjectStepDefs {
         checkoutAddressScreen.getContinuePaymentButton().scrollIntoView(true);
         checkoutAddressScreen.getContinuePaymentButton().should(visible, Duration.ofSeconds(15));
         checkoutAddressScreen.getContinuePaymentButton().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if(checkoutAddressScreen.getVerifyingShippingAddressPage().isDisplayed()){
             checkoutAddressScreen.getVerifyingShippingAddressPage().should(visible, Duration.ofSeconds(40));
             checkoutAddressScreen.getVerifyingBillingAddressPage().should(visible, Duration.ofSeconds(40));

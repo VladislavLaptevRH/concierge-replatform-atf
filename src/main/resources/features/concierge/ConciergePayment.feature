@@ -110,6 +110,6 @@ Feature: Concierge Payment
     When I choose client who is a "Non-Member"
     And I fill all fields from address screen
     And I continue to payment
-    When I edit billing address from PG
+    When I edit billing address from order review page
     And I continue to payment
     Then I verify that I'm able to edit billing address
