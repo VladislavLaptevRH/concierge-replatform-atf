@@ -223,6 +223,7 @@ Feature:Concierge Cart Page
 
   Scenario: Verify Membership Pop up while checkout for Trade - should not
     Given I log into Concierge as "associate"
+    When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
     When I open cart
