@@ -41,6 +41,7 @@ public class ConciergeE2EStepDefs {
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
     AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
     PaymentStepDefs paymentStepDefs = new PaymentStepDefs();
+    PdpScreen pdpScreen = new PdpScreen();
 
     String usState = "";
     String countOfItems = null;
@@ -412,6 +413,7 @@ public class ConciergeE2EStepDefs {
                WebDriverRunner.getWebDriver().navigate().refresh();
                System.out.println("Client is absent");
            }
+        pdpScreen.getCloseSpecialOrderPopUpButton();
     }
 
     @When("I choose client who is a {string}")
