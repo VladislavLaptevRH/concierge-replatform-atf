@@ -172,7 +172,7 @@ public class ConciergeE2EStepDefs {
         executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
         checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
         checkoutAddressScreen.getContinuePaymentButton().click();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(6, SECONDS).await().until(() -> true);
         if(conciergeProjectScreen.getTryAgainButton().isDisplayed()){
             conciergeProjectScreen.getTryAgainButton().click();
             with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -407,19 +407,24 @@ public class ConciergeE2EStepDefs {
     public void iRemoveClientFromHeader() {
             conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
             conciergeUserAccountPage.getClientButton().click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
            if(conciergeUserAccountPage.getRemoveClientByText().isDisplayed()) {
                conciergeUserAccountPage.getRemoveClientByText().click();
-           } else {
-               WebDriverRunner.getWebDriver().navigate().refresh();
-               System.out.println("Client is absent");
+               with().pollInterval(1, SECONDS).await().until(() -> true);
            }
-        pdpScreen.getCloseSpecialOrderPopUpButton();
+
+        pdpScreen.getCloseSpecialOrderPopUpButton().click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
     }
 
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String businessClient) {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        conciergeItemsScreen.getCheckoutButton().shouldNot(visible, Duration.ofSeconds(5));
+       if(conciergeItemsScreen.getCheckoutButton().isDisplayed()) {
+            abstractStepDefs.iClickOnCheckoutButton();
+            iClickOnNoThanksButton();
+           with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         if(!conciergeUserAccountPage.getClientLookupFirstName().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);

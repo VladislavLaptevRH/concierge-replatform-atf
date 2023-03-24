@@ -23,7 +23,7 @@ public class ConciergeLoginPage {
 
     private final SelenideElement signInButton = $(By.xpath("//button[@class='login-form__submit']"));
 //stg3
-    private final SelenideElement locationInput = $(By.xpath("//input[contains(@id,'mui')]"));
+    private final SelenideElement locationInput = $(By.xpath("//select[@id = 'location']"));
 
 
 }

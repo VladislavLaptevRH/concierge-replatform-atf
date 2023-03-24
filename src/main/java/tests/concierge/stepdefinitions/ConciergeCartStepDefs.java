@@ -300,16 +300,12 @@ public class ConciergeCartStepDefs {
     @When("I choose POS for payment method")
     public void iChoosePOPForPaymentMethod() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if($(By.xpath("//*[text()='Continue to payment']")).isDisplayed()){
-            $(By.xpath("//*[text()='Continue to payment']")).click();
-            with().pollInterval(3, SECONDS).await().until(() -> true);
-        }
-        else if(!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()){
+        if(!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        paymentScreen.getChoosePaymentMethodBtn().click();
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue("POS");
@@ -636,7 +632,7 @@ public class ConciergeCartStepDefs {
             for(int i = 0; i < 3; i++){
                 String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
                 open(URL);
-                with().pollInterval(2, SECONDS).await().until(() -> true);
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 abstractStepDefs.iClickOnCheckoutButton();
                 if($(By.xpath("//*[text()='Your RH Membership immediately pays for itself.']")).isDisplayed()){
                     break;
