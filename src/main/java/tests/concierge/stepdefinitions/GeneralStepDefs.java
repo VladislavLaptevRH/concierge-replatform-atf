@@ -7,6 +7,7 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.concierge.pageObject.*;
@@ -103,12 +104,17 @@ public class GeneralStepDefs {
         conciergeLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getSignInButton().click();
 
-        if(!conciergeLoginPage.getLocationNewPortBeach().isDisplayed()){
+        if(conciergeLoginPage.getCurrentLocation().isDisplayed()){
+            conciergeLoginPage.getInputGallery().setValue("5: Newport Beach").sendKeys(Keys.DOWN, Keys.RETURN);
+        }
+        else if(!conciergeLoginPage.getLocationNewPortBeach().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        conciergeLoginPage.getLocationNewPortBeach().should(visible, Duration.ofSeconds(30));
-        conciergeLoginPage.getLocationNewPortBeach().click();
+        if(!conciergeLoginPage.getCurrentLocation().isDisplayed()){
+            conciergeLoginPage.getLocationNewPortBeach().should(visible, Duration.ofSeconds(30));
+            conciergeLoginPage.getLocationNewPortBeach().click();
+        }
         conciergeLoginPage.getContinueButton().should(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getContinueButton().click();
     }
