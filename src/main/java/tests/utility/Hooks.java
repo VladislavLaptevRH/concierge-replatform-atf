@@ -65,13 +65,19 @@ public class Hooks {
         profile = System.getenv("ENVIRONMENT");
         cookie = System.getenv("ENDPOINT");
 
+
+
+
         if (profile == null) {
-            Assert.fail("Environment Variable is NOT Set");
+            profile = "stg2";
+//            Assert.fail("Environment Variable is NOT Set");
         } else {
             System.out.println("Tests are running on " + profile + " environment");
         }
 
         if (cookie == null) {
+            cookie = "prodsupport";
+//          "prodsupport","releasetues";
             System.out.println("Tests are running without cookie or endpoint");
         } else {
             System.out.println("Tests are running with endpoint = " + cookie);
@@ -116,7 +122,7 @@ public class Hooks {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
         } else if (profile.equals("stg4") && cookie != null) {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
-        } else if (profile.equals("stg3") && cookie != null) {
+        }  else if (profile.equals("stg3") && cookie != null) {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
         }
         return eStoreURL;
@@ -134,8 +140,6 @@ public class Hooks {
             conciergeURL = conciergeBaseURL + "/?endpoint=" + cookie;
         } else if (profile.equals("stg4") && cookie != null) {
             conciergeURL = conciergeBaseURL + "/?endpoint=" + cookie;
-        } else if (profile.equals("stg3") && cookie != null) {
-            conciergeURL = conciergeBaseURL + "/?endpoint=" + cookie;
         }
         return conciergeURL;
     }
@@ -147,9 +151,10 @@ public class Hooks {
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
-        setupChromeArguments();
+//        setupChromeArguments();
         setUPWebDriver(eStoreURL);
     }
+
 
     /**
      * Init web driver for regression and smoke  for tests.concierge
@@ -158,8 +163,10 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
         configureConciergeURL();
-        setupChromeArguments();
+//        setupChromeArguments();
         setUPWebDriver(conciergeURL);
+        /* TODO : Finish Extent Report Class Implementation */
+        //report.startReport();
     }
 
     /**
@@ -169,9 +176,9 @@ public class Hooks {
         System.out.println("Inside initDriver method");
         WebDriverManager.chromedriver().setup();
         Configuration.driverManagerEnabled = true;
-        Configuration.browser = "chrome";
+        Configuration.browser = "edge";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = true;
+        Configuration.headless = false;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 60000;
         Configuration.reportsFolder = "target/screenshots";
@@ -186,6 +193,7 @@ public class Hooks {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
+        options.addArguments("--remote-allow-origins=*");
         options.addArguments("--window-size=1366,768");
         DesiredCapabilities dr = new DesiredCapabilities();
         dr.setBrowserName("chrome");
@@ -230,6 +238,7 @@ public class Hooks {
         }
         /* TODO : Finish Extent Report Class Implementation */
         //report.endReport();
+        closeWindow();
         closeWebDriver();
         System.out.println("Driver was closed");
     }
