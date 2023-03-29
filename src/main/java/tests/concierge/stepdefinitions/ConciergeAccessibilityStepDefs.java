@@ -1,5 +1,7 @@
 package tests.concierge.stepdefinitions;
 
+//import jdk.internal.org.jline.utils.Display;
+import org.openqa.selenium.By;
 import tests.concierge.pageObject.ConciergeLoginPage;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.Given;
@@ -12,6 +14,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import static com.codeborne.selenide.Selenide.$;
 
 import static com.codeborne.selenide.Condition.visible;
 
@@ -61,13 +64,99 @@ public class ConciergeAccessibilityStepDefs {
         conciergeLoginPage.getContinueButton().click();
     }
 
-    @Then("user verifies that all items from menu are displayed")
-    public void userVerifiesThatAllItemsFromMenuAreDisplayed() {
-        List<String> expectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Art", "Outdoor", "SALE"));
-        List<String> items = new ArrayList<>();
+    public void checkMenu(List menuItem){
+        List<String> rhItems = new ArrayList<>();
         for (int i = 0; i < conciergeUserAccountPage.getMenuItems().size(); i++) {
-            items = new ArrayList(Arrays.asList(conciergeUserAccountPage.getMenuItems().get(i).getText()));
+            rhItems = new ArrayList(Arrays.asList(conciergeUserAccountPage.getMenuItems().get(i).getText()));
         }
-        GeneralStepDefs.compareList(expectedItems, items);
+        GeneralStepDefs.compareList(menuItem, rhItems);
+    }
+
+    public void accessSubMenu(String each){
+        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//descendant::span[text()='"+each+"']")).should(visible,Duration.ofSeconds(120)).click();
+        conciergeUserAccountPage.getFirstSubMenu().should(visible, Duration.ofSeconds(40)).click();
+    }
+    @Then("User verifies that all items from menu are displayed for {string}")
+    public void userVerifiesThatAllItemsFromMenuAreDisplayed(String brand) {
+        switch (brand){
+            case "RH":
+                List<String> rhExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "BABY & CHILD", "TEEN", "SALE"));
+                checkMenu(rhExpectedItems);
+                for (String each : rhExpectedItems) {
+                    if(each.equals("BABY & CHILD") || each.equals("TEEN")){
+                        continue;
+                    }
+                    else{
+                        accessSubMenu(each);
+                    }
+                }
+                break;
+            case "RH CONTEMPORARY":
+                List<String> rhConExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Art", "Outdoor", "SALE"));
+                checkMenu(rhConExpectedItems);
+                for (String each : rhConExpectedItems) {
+                       accessSubMenu(each);
+                }
+                break;
+            case "RH INTERIORS":
+                List<String> rhIntExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "SALE"));
+                checkMenu(rhIntExpectedItems);
+                for (String each : rhIntExpectedItems) {
+                    accessSubMenu(each);
+                }
+                break;
+            case "RH MODERN":
+                List<String> rhModExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "SALE"));
+                checkMenu(rhModExpectedItems);
+                for (String each : rhModExpectedItems) {
+                    if(each.equals("Outdoor")){
+                        continue;
+                    }
+                    else {
+                        accessSubMenu(each);
+                    }
+                }
+                break;
+            case "RH BEACH HOUSE":
+                List<String> rhBeachExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs",  "Décor", "Art", "Outdoor", "SALE"));
+                checkMenu(rhBeachExpectedItems);
+                for (String each : rhBeachExpectedItems) {
+                        accessSubMenu(each);
+                }
+                break;
+            case "RH SKI HOUSE":
+                List<String> rhSkiExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs",  "Décor", "Outdoor", "SALE"));
+                checkMenu(rhSkiExpectedItems);
+                for (String each : rhSkiExpectedItems) {
+                    accessSubMenu(each);
+                }
+                break;
+            case "RH BABY & CHILD":
+                List<String> rhBathExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Nursery", "Décor", "Lighting", "Rugs", "Windows",  "Storage", "Playroom", "Gifts","TEEN","SALE"));
+                checkMenu(rhBathExpectedItems);
+                for (String each : rhBathExpectedItems) {
+                    if(each.equals("TEEN")){
+                        continue;
+                    }
+                    else {
+                        accessSubMenu(each);
+                    }
+                }
+                break;
+            case "RH TEEN":
+                List<String> rhTeenExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Décor", "Lighting", "Rugs", "Windows",  "Storage", "Study", "Gifts","BATH & CHILD","SALE"));
+                checkMenu(rhTeenExpectedItems);
+                for (String each : rhTeenExpectedItems) {
+                    if(each.equals("BATH & CHILD")){
+                        continue;
+                    }
+                    else {
+                        accessSubMenu(each);
+                    }
+                }
+                break;
+
+        }
+
     }
 }
