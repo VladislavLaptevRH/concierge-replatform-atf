@@ -175,6 +175,8 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement cartButton = $(By.xpath("//a[@href='/checkout/shopping_cart.jsp']"));
 
+    private final SelenideElement cartButtonUserService = $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']"));
+
     private final SelenideElement cartButtonStg4 = $(By.xpath("//a[@href='/checkout/shopping_cart.jsp']"));
 
     private final SelenideElement orderHistoryButton = $(By.xpath("//a[1]/button[contains(@class,'MuiButton-root')]"));

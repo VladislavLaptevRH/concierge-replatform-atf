@@ -79,7 +79,7 @@ public class PaymentStepDefs {
 
     @When("I execute payment for {string}")
     public void iExecutePaymentFor(String cardType) {
-        if(!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()){
+        if (!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(3, SECONDS).await().until(() -> true);
         }
@@ -97,6 +97,16 @@ public class PaymentStepDefs {
         if (cardType.equals("DI")) {
             generalStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
         }
+        if (cardType.equals("POS")) {
+            paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
+            Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
+            selectPayment.selectByValue("POS");
+            $(By.xpath("(//input)[1]")).should(visible, Duration.ofSeconds(10));
+            $(By.xpath("(//input)[1]")).setValue("11111");
+            $(By.xpath("(//input)[2]")).setValue("11");
+
+
+        }
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
     }
@@ -104,7 +114,7 @@ public class PaymentStepDefs {
     @When("I choose {string} from payment method")
     public void iChooseRHGiftCardFromPaymentMethod(String card) {
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        Select selectPaymentMethod = new Select( paymentScreen.getChoosePaymentMethodBtn());
+        Select selectPaymentMethod = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPaymentMethod.selectByVisibleText(card);
         with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentScreen.getRhCardNumberField().setValue("6006493887999902500");
@@ -190,5 +200,10 @@ public class PaymentStepDefs {
     @Then("I verify that balance info is displayed")
     public void iVerifyThatBalanceInfoIsDisplayed() {
         conciergeCartPageScreen.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 2500 has balance of "), Duration.ofSeconds(25));
+    }
+
+    @When("I execute POS concierge payment")
+    public void iExecutePOSConciergePayment() {
+        System.out.println();
     }
 }

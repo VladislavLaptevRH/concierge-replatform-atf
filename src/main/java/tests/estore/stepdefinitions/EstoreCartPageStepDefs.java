@@ -9,6 +9,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import tests.concierge.pageObject.SaleScreen;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
@@ -43,6 +44,37 @@ public class EstoreCartPageStepDefs {
     @When("I remove all items from estore cart")
     public void iRemoveAllItemsFromEstoreCart() {
         generalStepDefs.waitForJSandJQueryToLoad();
+        if (Hooks.cookie.equals("userservice")) {
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+            int countOfCartItems = 0;
+
+            try {
+                Actions actions = new Actions(WebDriverRunner.getWebDriver());
+                actions.moveToElement(estoreUserAccountPage.getCartButtonUserService());
+                String countOfProducts = estoreUserAccountPage.getCartButtonUserService().getText();
+                countOfCartItems = Integer.valueOf(countOfProducts);
+            } catch (Exception e) {
+                System.out.println("Cart is empty");
+            }
+            if (countOfCartItems > 0) {
+                estoreGeneralStepDefs.removeFromCart(countOfCartItems);
+            }
+        } else {
+            estoreUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(2));
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+            int countOfCartItems = 0;
+
+            try {
+                String countOfProducts = estoreUserAccountPage.getCartButton().getText();
+                countOfCartItems = Integer.valueOf(countOfProducts);
+            } catch (Exception e) {
+                System.out.println("Cart is empty");
+            }
+            if (countOfCartItems > 0) {
+                estoreGeneralStepDefs.removeFromCart(countOfCartItems);
+            }
+        }
+
         if (Hooks.profile.contains("stg4")) {
             estoreUserAccountPage.getCartButtonStg4().should(visible, Duration.ofMinutes(3));
             with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -58,24 +90,6 @@ public class EstoreCartPageStepDefs {
             if (countOfCartItems > 0) {
                 estoreGeneralStepDefs.removeFromCart(countOfCartItems);
             }
-        }
-
-
-        if (Hooks.profile.contains("stg2")) {
-            estoreUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(3));
-            with().pollInterval(3, SECONDS).await().until(() -> true);
-            int countOfCartItems = 0;
-
-            try {
-                String countOfProducts = estoreUserAccountPage.getCartButton().getText();
-                countOfCartItems = Integer.valueOf(countOfProducts);
-            } catch (Exception e) {
-                System.out.println("Cart is empty");
-            }
-            if (countOfCartItems > 0) {
-                estoreGeneralStepDefs.removeFromCart(countOfCartItems);
-            }
-
         }
     }
 
@@ -291,7 +305,7 @@ public class EstoreCartPageStepDefs {
     @When("I click on join now membership button")
     public void iClickOnJoinNowMembershipButton() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        if(estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()){
+        if (estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()) {
             estoreCartPage.getVariableJoinButtonByName("JOIN NOW").click();
         } else {
             estoreCartPage.getVariableJoinButtonByName("Join Now").click();
@@ -345,7 +359,7 @@ public class EstoreCartPageStepDefs {
     @When("I click on join now on estore cart page membership button")
     public void iClickOnJoinNowOnEstoreCartPageMembershipButton() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()){
+        if (estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()) {
             estoreCartPage.getVariableJoinButtonByName("JOIN NOW").click();
         } else {
             estoreCartPage.getVariableJoinButtonByName("Join Now").click();
@@ -357,7 +371,7 @@ public class EstoreCartPageStepDefs {
         if (arg0.equals("nonmember user")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);
             $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible, Duration.ofSeconds(40));
-            if(estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()){
+            if (estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()) {
                 estoreCartPage.getVariableJoinButtonByName("JOIN NOW").click();
             } else {
                 estoreCartPage.getVariableJoinButtonByName("Join Now").click();
@@ -365,7 +379,7 @@ public class EstoreCartPageStepDefs {
         }
         if (arg0.equals("member user")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);
-            if(estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()){
+            if (estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()) {
                 estoreCartPage.getVariableJoinButtonByName("JOIN NOW").click();
             } else {
                 estoreCartPage.getVariableJoinButtonByName("Join Now").click();
@@ -388,6 +402,7 @@ public class EstoreCartPageStepDefs {
             estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(20));
         }
     }
+
     @Then("I verify that I'm able to add products from all brands to cart")
     public void iVerifyThatIMAbleToAddProductsFromAllBrandsToCart() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -402,15 +417,18 @@ public class EstoreCartPageStepDefs {
         estoreUserAccountPage.getOrderDetailsButton().should(visible, Duration.ofSeconds(15));
         estoreUserAccountPage.getOrderDetailsButton().click();
     }
+
     @When("I click on estore cart button from header")
     public void iClickOnEstoreCartButtonFromHeader() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreCartPage.getCartButtonOrderReview().should(visible, Duration.ofSeconds(40));
         executeJavaScript("arguments[0].click();", estoreCartPage.getCartButtonOrderReview());
     }
+
     @When("I update item quantity in estore cart")
     public void iUpdateItemQuantityInEstoreCart() {
     }
+
     @Then("I verify that I'm able to increase item quantity with success after payment")
     public void iVerifyThatItemQuantityWasIncreasedWithSuccess() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -420,12 +438,14 @@ public class EstoreCartPageStepDefs {
         selectQuantity.selectByValue("2");
         with().pollInterval(3, SECONDS).await().until(() -> true);
     }
+
     @Then("I verify that I'm able to decrease item quantity with success")
     public void iVerifyThatIMAbleToDecreaseItemQuantityWithSuccess() {
         estoreCartPage.getQuantitySelect().should(visible, Duration.ofSeconds(40));
         Select selectQuantity = new Select(estoreCartPage.getQuantitySelect());
         selectQuantity.selectByValue("1");
     }
+
     @When("I click on add to wishlist button from cart")
     public void iClickOnAddToWishlistButtonFromCart() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -630,7 +650,7 @@ public class EstoreCartPageStepDefs {
 
     @And("I introduces payment details for estore guest user for cart")
     public void iIntroducesPaymentDetailsForEstoreGuestUserForCart() {
-        if(!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()){
+        if (!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
@@ -657,7 +677,7 @@ public class EstoreCartPageStepDefs {
 
     @And("I introduces payment details for estore guest user for payment")
     public void iIntroducesPaymentDetailsForEstoreGuestUserForPayment() {
-        if(!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()){
+        if (!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()) {
             String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }

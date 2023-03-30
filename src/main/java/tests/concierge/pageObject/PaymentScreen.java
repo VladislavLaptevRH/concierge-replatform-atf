@@ -45,7 +45,9 @@ public class PaymentScreen {
 
     private final SelenideElement splitPaymentCheckBox = $(By.xpath("//label[2]/span[@class='MuiTypography-root MuiFormControlLabel-label MuiTypography-body1']"));
 
-    public SelenideElement getCurrentPaymentMethodByName (String name){
+    private final SelenideElement posOption = $(By.xpath("//option[@id='payment-option-POS']"));
+
+    public SelenideElement getCurrentPaymentMethodByName(String name) {
         String path = String.format(currentPaymentMethodPlace, name);
         return $(byXpath(path));
     }
