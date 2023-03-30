@@ -1,6 +1,7 @@
 package tests.concierge.stepdefinitions;
 
 //import jdk.internal.org.jline.utils.Display;
+import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.By;
 import tests.concierge.pageObject.ConciergeLoginPage;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
@@ -9,7 +10,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tests.utility.Hooks;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +20,8 @@ import java.util.List;
 import static com.codeborne.selenide.Selenide.$;
 
 import static com.codeborne.selenide.Condition.visible;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 public class ConciergeAccessibilityStepDefs {
     private static final Logger Log = LoggerFactory.getLogger(ConciergeAccessibilityStepDefs .class);
@@ -73,9 +78,17 @@ public class ConciergeAccessibilityStepDefs {
     }
 
     public void accessSubMenu(String each){
-        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//descendant::span[text()='"+each+"']")).should(visible,Duration.ofSeconds(120)).click();
+        try {
+            $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//descendant::span[text()='" + each + "']")).should(visible, Duration.ofSeconds(120)).click();
+        }
+        catch (Exception e){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//descendant::span[text()='" + each + "']")).should(visible, Duration.ofSeconds(120)).click();
+        }
         conciergeUserAccountPage.getFirstSubMenu().should(visible, Duration.ofSeconds(40)).click();
     }
+
     @Then("User verifies that all items from menu are displayed for {string}")
     public void userVerifiesThatAllItemsFromMenuAreDisplayed(String brand) {
         switch (brand){

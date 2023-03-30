@@ -40,11 +40,11 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement newClientButton = $(By.xpath("//*[text()='NEW']"));
 
-    private final SelenideElement memberIdField = $(By.cssSelector("input[name='memberID']"));
+    private final SelenideElement memberIdField = $(By.cssSelector("input[name='memberIdOrTradeId']"));
 
-    private final SelenideElement businessAcNumber = $(By.cssSelector("input[name='tradeID']"));
+    private final SelenideElement businessAcNumber = $(By.cssSelector("input[name='memberIdOrTradeId']"));
 
-    private final SelenideElement clientLookupEmail = $(By.cssSelector("input[name='email']"));
+    private final SelenideElement clientLookupEmail = $(By.cssSelector("input[id='email']"));
 
     private final SelenideElement dashboardTitle = $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']"));
 
@@ -136,7 +136,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement clientLookupFirstName = $(By.cssSelector("input[name='firstName']"));
 
-    private final SelenideElement clientLookupLastName = $(By.cssSelector("input[name='lastName']"));
+    private final SelenideElement clientLookupLastName = $(By.cssSelector("input[id='lastName']"));
 
     private final SelenideElement clientLookupPhoneNumber = $(By.xpath("//input[@name='phoneNumber']"));
 

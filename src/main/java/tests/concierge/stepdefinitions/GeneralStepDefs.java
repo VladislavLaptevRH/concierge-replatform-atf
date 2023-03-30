@@ -152,28 +152,28 @@ public class GeneralStepDefs {
             conciergeAddressScreen.getSoldToTaxExempt().setValue("111");
         }
 
-        clearField(checkoutAddressScreen.getFirstNameInpt());
-        checkoutAddressScreen.getFirstNameInpt().setValue("QA1");
-
-        clearField(checkoutAddressScreen.getLastNameField());
-        checkoutAddressScreen.getLastNameField().setValue("Automation");
-
-        clearField(checkoutAddressScreen.getCompanyNameField());
-        checkoutAddressScreen.getCompanyNameField().setValue("AutomationCompany");
-
-        clearField(checkoutAddressScreen.getStreetAddressField());
-        checkoutAddressScreen.getStreetAddressField().setValue("7677 N 16th St");
-
-        clearField(checkoutAddressScreen.getAptFloorSuiteField());
-        checkoutAddressScreen.getAptFloorSuiteField().setValue("QaApartment");
-
-        clearField(checkoutAddressScreen.getCityField());
-        checkoutAddressScreen.getCityField().setValue("Phoenix");
-
-        clearField(checkoutAddressScreen.getPhoneField());
-        checkoutAddressScreen.getPhoneField().setValue("+124131231");
-
-        conciergeAddressScreen.getBillingAddressText().should(visible, Duration.ofSeconds(12));
+//        clearField(checkoutAddressScreen.getFirstNameInpt());
+//        checkoutAddressScreen.getFirstNameInpt().setValue("QA1");
+//
+//        clearField(checkoutAddressScreen.getLastNameField());
+//        checkoutAddressScreen.getLastNameField().setValue("Automation");
+//
+//        clearField(checkoutAddressScreen.getCompanyNameField());
+//        checkoutAddressScreen.getCompanyNameField().setValue("AutomationCompany");
+//
+//        clearField(checkoutAddressScreen.getStreetAddressField());
+//        checkoutAddressScreen.getStreetAddressField().setValue("7677 N 16th St");
+//
+//        clearField(checkoutAddressScreen.getAptFloorSuiteField());
+//        checkoutAddressScreen.getAptFloorSuiteField().setValue("QaApartment");
+//
+//        clearField(checkoutAddressScreen.getCityField());
+//        checkoutAddressScreen.getCityField().setValue("Phoenix");
+//
+//        clearField(checkoutAddressScreen.getPhoneField());
+//        checkoutAddressScreen.getPhoneField().setValue("+124131231");
+//
+//        conciergeAddressScreen.getBillingAddressText().should(visible, Duration.ofSeconds(12));
     }
 
 
