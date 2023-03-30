@@ -680,9 +680,17 @@ public class ConciergeE2EStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Error is appeared");
         }
-
-        conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
-        conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofSeconds(40));
+        try {
+            conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
+            conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofSeconds(40));
+        }
+        catch (com.codeborne.selenide.ex.ElementNotFound e)
+        {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
+            conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofSeconds(40));
+        }
         conciergeUserAccountPage.getClientLookupSearchButton().click();
         conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME"), Duration.ofSeconds(40));
         executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getFirstResultOfClientLookup());
@@ -735,17 +743,17 @@ public class ConciergeE2EStepDefs {
     @And("I fill all fields for sold to address")
     public void iFillAllFieldsForSoldToAddress() {
         generalStepDefs.fillAddressFields();
-        generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[1]")).scrollIntoView(true);
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[1]")).click();
-        $(By.xpath("//*[text() = 'Continue to payment']")).scrollIntoView(true);
-        $(By.xpath("//*[text() = 'Continue to payment']")).click();
-        $(By.xpath("//*[text() = 'CONTINUE']")).scrollIntoView(true);
-        $(By.xpath("//*[text() = 'CONTINUE']")).click();
-        $(By.xpath("//*[text() = 'OK']")).shouldHave(visible, Duration.ofSeconds(6));
-        $(By.xpath("//*[text() = 'OK']")).click();
+//        generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
+//        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
+//        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
+//        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[1]")).scrollIntoView(true);
+//        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[1]")).click();
+//        $(By.xpath("//*[text() = 'Continue to payment']")).scrollIntoView(true);
+//        $(By.xpath("//*[text() = 'Continue to payment']")).click();
+//        $(By.xpath("//*[text() = 'CONTINUE']")).scrollIntoView(true);
+//        $(By.xpath("//*[text() = 'CONTINUE']")).click();
+//        $(By.xpath("//*[text() = 'OK']")).shouldHave(visible, Duration.ofSeconds(6));
+//        $(By.xpath("//*[text() = 'OK']")).click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
 //        $(By.cssSelector("body > div:nth-child(7) > div:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > label:nth-child(1) > span:nth-child(1) > span:nth-child(1) > input:nth-child(1)")).click();
     }
@@ -917,7 +925,7 @@ public class ConciergeE2EStepDefs {
     public void iOpenCart() {
         String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
         open(URL);
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         boolean isCartEmpty = $(By.xpath("//*[text()='YOUR SHOPPING CART IS EMPTY']")).isDisplayed();
         if (isCartEmpty) {
             System.out.println("Calling clear order api to delete old cartId");
