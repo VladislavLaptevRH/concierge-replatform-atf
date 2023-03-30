@@ -3,6 +3,7 @@ package tests.concierge.pageObject;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
+
 import static com.codeborne.selenide.Selenide.$;
 
 @Getter
@@ -22,8 +23,8 @@ public class ConciergeLoginPage {
     private final SelenideElement locationWestHolywood = $(By.xpath("//*[@id='location']/option[36]"));
 
     private final SelenideElement signInButton = $(By.xpath("//button[@class='login-form__submit']"));
-//stg3
-    private final SelenideElement locationInput = $(By.xpath("//select[@id = 'location']"));
+    //stg3
+    private final SelenideElement locationInput = $(By.xpath("//input[contains(@id,'mui')]"));
 
 
 }
