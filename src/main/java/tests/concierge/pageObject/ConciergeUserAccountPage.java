@@ -41,10 +41,12 @@ public class ConciergeUserAccountPage {
     private final SelenideElement newClientButton = $(By.xpath("//*[text()='NEW']"));
 
     private final SelenideElement memberIdField = $(By.cssSelector("input[name='memberIdOrTradeId']"));
+    private final SelenideElement memberIdField1 = $(By.cssSelector("input[name='memberID']"));
 
     private final SelenideElement businessAcNumber = $(By.xpath("//*[contains(text(), 'Business Account Number')]/../..//input"));
 
     private final SelenideElement clientLookupEmail = $(By.cssSelector("input[id='email']"));
+    private final SelenideElement clientLookupEmailByName = $(By.cssSelector("input[name='email']"));
 
     private final SelenideElement dashboardTitle = $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']"));
 
