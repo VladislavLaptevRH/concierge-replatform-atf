@@ -27,7 +27,6 @@ public class EstoreWishlistStepDefs {
         estoreWishlistPage.getWhistItem().should(visible, Duration.ofSeconds(30));
     }
 
-
     @When("I click on add to wishlist button")
     public void iClickOnAddToWishlistButton() {
         estoreGeneralStepDefs.waitForJSandJQueryToLoad();

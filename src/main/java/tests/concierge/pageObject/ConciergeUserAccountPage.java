@@ -42,7 +42,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement memberIdField = $(By.cssSelector("input[name='memberIdOrTradeId']"));
 
-    private final SelenideElement businessAcNumber = $(By.cssSelector("input[name='memberIdOrTradeId']"));
+    private final SelenideElement businessAcNumber = $(By.xpath("//*[contains(text(), 'Business Account Number')]/../..//input"));
 
     private final SelenideElement clientLookupEmail = $(By.cssSelector("input[id='email']"));
 
@@ -134,11 +134,11 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement clientLookupBtnId = $(By.xpath("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li[@id='1']"));
 
-    private final SelenideElement clientLookupFirstName = $(By.cssSelector("input[id='firstName']"));
+    private final SelenideElement clientLookupFirstName = $(By.xpath("//*[text() = 'First Name']/../..//input"));
 
     private final SelenideElement clientLookupFirstNameByName = $(By.cssSelector("input[name='firstName']"));
 
-    private final SelenideElement clientLookupLastName = $(By.cssSelector("input[id='lastName']"));
+    private final SelenideElement clientLookupLastName = $(By.xpath("//*[text() = 'Last Name']/../..//input"));
 
     private final SelenideElement clientLookupPhoneNumber = $(By.xpath("//input[@name='phoneNumber']"));
 

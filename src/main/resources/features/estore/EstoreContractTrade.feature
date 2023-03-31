@@ -76,11 +76,13 @@ Feature: eStore Contract and Trade
 #    Then I verify that contract price is used for each TN product
 
   Scenario: eStore Contract - Verify RHCC payment option for Contract user
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
     When I click on estore checkout button
+    When I fill all fields from address screen
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -200,6 +202,7 @@ Feature: eStore Contract and Trade
     And I click on estore no thanks button
 
   Scenario Outline: Verify different payment types on payment page
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -382,6 +385,7 @@ Feature: eStore Contract and Trade
     Then I verify that gift card balance info is displayed for estore
 
   Scenario: eStore Trade - Edit Payment
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -397,6 +401,7 @@ Feature: eStore Contract and Trade
     Then I verify that I'm able to edit payment
 
   Scenario Outline: estore Trade - Major CC
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -441,8 +446,8 @@ Feature: eStore Contract and Trade
     When I update postal code in cart
     Then I verify UFD in cart
 
-
   Scenario: Change zip code in cart to US, currency should be in US$
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050045" with "WHT" for estore
@@ -450,7 +455,6 @@ Feature: eStore Contract and Trade
     And I click on view cart estore button
     When I click on estore checkout button
     And I click on estore no thanks button
-
 
   Scenario: Change zip code in cart to CAN, currency should be in US$
     Given I log into eStore as trade
@@ -504,12 +508,3 @@ Feature: eStore Contract and Trade
 #    When I click on add to cart estore button
 #    And I click on view cart estore button
 #    Then I verify that trade price is used for each TN product
-
-
-
-
-
-
-
-
-

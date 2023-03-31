@@ -266,10 +266,11 @@ public class EstorePaymentStepDefs {
 
     @When("I remove payment method which was used earlier")
     public void iRemovePaymentMethodWhichWasUsedEarlier() {
-        try {
-            estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(30));
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(estoreCartPage.getRemoveButton().isDisplayed()){
             estoreCartPage.getRemoveButton().click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+        } else {
             System.out.println("There is no payment method that was used before");
         }
 

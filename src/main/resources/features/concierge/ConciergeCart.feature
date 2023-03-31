@@ -69,7 +69,7 @@ Feature:Concierge Cart Page
     When I click on apply uppercase button for "override line item"
     Then I verify line items prices for "PERCENT_OFF"
 
-  Scenario:Override Line item Prices - verify update button, verify remove button
+  Scenario: Override Line item Prices - verify update button, verify remove button
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I add item to cart via API
@@ -86,7 +86,7 @@ Feature:Concierge Cart Page
     When I click on update button from price override pop up
     Then I verify line items prices for "AMOUNT_OVERRIDE"
 
-  Scenario:Override Line item Prices - verify remove button
+  Scenario: Override Line item Prices - verify remove button
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -247,6 +247,7 @@ Feature:Concierge Cart Page
     Then I verify that membership popup for "contract client" is not displayed
 
   Scenario Outline: Verify Trade,Contract client address page - ship to Bill to, Sold to addresses - edit addresses
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -301,7 +302,7 @@ Feature:Concierge Cart Page
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with productId "prod19500002"
-    When I select size option 2 for item
+    When I select size option 'Bath Sheet' for item
     When I select color option
     When I click on add to cart button
     When I click on view cart button
@@ -318,7 +319,7 @@ Feature:Concierge Cart Page
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with productId "prod19500002"
-    When I select size option 2 for item
+    When I select size option 'Bath Sheet' for item
     When I select color option
     When I click on add to cart button
     When I click on view cart button
@@ -404,6 +405,7 @@ Feature:Concierge Cart Page
 #    Then I verify "member" savings for a "member" user
 
   Scenario: Verify address saved in address page when navigate back from order review or any page
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -421,6 +423,7 @@ Feature:Concierge Cart Page
     Then I verify that address saved in address page
 
   Scenario: Zipcode Validation
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header

@@ -24,31 +24,31 @@ public class CheckoutAddressScreen {
 
     private final SelenideElement checkoutAddressPopUpHeader = $(By.id("//*[text() = 'We are unable to verify your Shipping Address']"));
 
-    private final SelenideElement firstNameInpt = $(By.xpath("//input[contains(@id,'firstName')and contains(@id,'shipping')]"));
+    private final SelenideElement firstNameInpt = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'First Name']/..//input"));
     private final SelenideElement tryAgainButton = $(By.xpath("//*[text() = 'TRY AGAIN']"));
-    private final SelenideElement lastNameField = $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[2]/div/input"));
+    private final SelenideElement lastNameField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Last Name']/..//input"));
 
-    private final SelenideElement companyNameField = $(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input"));
+    private final SelenideElement companyNameField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Company Name (optional)']/..//input"));
 
-    private final SelenideElement streetAddressField = $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[5]/div/input"));
+    private final SelenideElement streetAddressField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Street Address']/..//input"));
 
-    private final SelenideElement aptFloorSuiteField = $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[6]/div/input"));
+    private final SelenideElement aptFloorSuiteField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Apt., Floor, Suite, etc. (optional)']/..//input"));
 
-    private final SelenideElement cityField = $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[7]/div/input"));
+    private final SelenideElement cityField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'City']/..//input"));
 
     private final SelenideElement stateField = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]"));
 
     private final SelenideElement countryField = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[1]"));
 
-    private final SelenideElement zipPostalCodeField =  $(By.id("address-postal-code-field"));
+    private final SelenideElement zipPostalCodeField =  $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Zip/Postal Code']/..//input"));
 
     private final SelenideElement verifyingShippingAddressPage =  $(By.xpath("//*[text()='We are unable to verify your Shipping Address']"));
 
     private final SelenideElement verifyingBillingAddressPage =  $(By.xpath("//*[text()='We are unable to verify your Billing Address']"));
 
-    private final SelenideElement phoneField = $(By.cssSelector("div:nth-child(2) > div:nth-child(9) > div:nth-child(2) > input:nth-child(1)"));
+    private final SelenideElement phoneField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Phone']/..//input"));
 
-    private final SelenideElement eveningPhone = $(By.xpath("/input[@id='37']"));
+    private final SelenideElement eveningPhone = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Evening Phone (Optional)']/..//input"));
 
     private final SelenideElement billingAddressAsShippingCheckBox = $(By.xpath("(//input[@type='checkbox'])[1]"));
 

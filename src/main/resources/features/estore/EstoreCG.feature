@@ -88,4 +88,3 @@ Feature: Estore CG
 #    When I click on preview the collection link
 #    When I click on any product from the preview collection model
 #    Then I verify that estore PDP page is displayed
-

@@ -27,6 +27,14 @@ public class EstoreItemPage {
     private final List<SelenideElement> collectionsItems = $$(By.xpath("//div[contains(@class,'MuiGrid-item MuiGrid-grid-xs-12')]/div/ul[contains(@class,'MuiGridList-root')]/li[@class='MuiGridListTile-root']"));
 
     private final SelenideElement addToCartButton = $(By.xpath("(//button[@data-testid='add-to-cart-dialog-opener'])[1]"));
+    private final SelenideElement addToCartDisabledButton = $(By.xpath("(//*[@data-testid= 'add-to-cart-dialog-opener'])[1][@disabled]"));
+
+    private final SelenideElement selectFabric = $(By.xpath("(//select[contains(@id, 'Fabric')])[1]"));
+
+    private final SelenideElement selectFinish= $(By.xpath("(//select[contains(@id, 'Finish')])[1]"));
+
+    private final SelenideElement selectQTY = $(By.xpath("(//select[contains(@id, 'qty')])[1]"));
+    private final SelenideElement selectColor = $(By.xpath("(//select[contains(@id, 'Color')])[1]"));
 
     private final SelenideElement viewCartButton = $(By.cssSelector("#ajax-proceed-to-cart"));
 
