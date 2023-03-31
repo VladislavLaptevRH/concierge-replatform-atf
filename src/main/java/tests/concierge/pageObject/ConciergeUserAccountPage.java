@@ -134,7 +134,9 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement clientLookupBtnId = $(By.xpath("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li[@id='1']"));
 
-    private final SelenideElement clientLookupFirstName = $(By.cssSelector("input[name='firstName']"));
+    private final SelenideElement clientLookupFirstName = $(By.cssSelector("input[id='firstName']"));
+
+    private final SelenideElement clientLookupFirstNameByName = $(By.cssSelector("input[name='firstName']"));
 
     private final SelenideElement clientLookupLastName = $(By.cssSelector("input[id='lastName']"));
 
