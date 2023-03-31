@@ -173,19 +173,19 @@ public class ConciergeE2EStepDefs {
         checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
         checkoutAddressScreen.getContinuePaymentButton().click();
         with().pollInterval(6, SECONDS).await().until(() -> true);
-        if(conciergeProjectScreen.getTryAgainButton().isDisplayed()){
+        if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
             conciergeProjectScreen.getTryAgainButton().click();
             with().pollInterval(3, SECONDS).await().until(() -> true);
             abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
             checkoutAddressScreen.getContinuePaymentButton().click();
             with().pollInterval(3, SECONDS).await().until(() -> true);
         }
-        if(conciergeProjectScreen.getContinueWithSuggestedAddressButton().isDisplayed()){
+        if (conciergeProjectScreen.getContinueWithSuggestedAddressButton().isDisplayed()) {
             conciergeProjectScreen.getContinueWithSuggestedAddressButton().click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
 
-        if($(By.xpath("//*[text() = 'CONTINUE']")).isDisplayed()){
+        if ($(By.xpath("//*[text() = 'CONTINUE']")).isDisplayed()) {
             $(By.xpath("//*[text() = 'CONTINUE']")).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
@@ -352,7 +352,7 @@ public class ConciergeE2EStepDefs {
         } else {
             System.out.println("Close button is not displayed");
         }
-        if(conciergeCartPageScreen.getNoThanksButton().isDisplayed()) {
+        if (conciergeCartPageScreen.getNoThanksButton().isDisplayed()) {
             for (int i = 0; i < 3; i++) {
                 conciergeCartPageScreen.getNoThanksButton().click();
                 with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -405,13 +405,13 @@ public class ConciergeE2EStepDefs {
 
     @When("I remove client from header")
     public void iRemoveClientFromHeader() {
-            conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
-            conciergeUserAccountPage.getClientButton().click();
+        conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getClientButton().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
-           if(conciergeUserAccountPage.getRemoveClientByText().isDisplayed()) {
-               conciergeUserAccountPage.getRemoveClientByText().click();
-               with().pollInterval(1, SECONDS).await().until(() -> true);
-           }
+        if (conciergeUserAccountPage.getRemoveClientByText().isDisplayed()) {
+            conciergeUserAccountPage.getRemoveClientByText().click();
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+        }
 
         pdpScreen.getCloseSpecialOrderPopUpButton().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
@@ -420,11 +420,12 @@ public class ConciergeE2EStepDefs {
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String businessClient) {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-       if(conciergeItemsScreen.getCheckoutButton().isDisplayed()) {
+        if (conciergeItemsScreen.getCheckoutButton().isDisplayed()) {
             abstractStepDefs.iClickOnCheckoutButton();
             iClickOnNoThanksButton();
-           with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(5, SECONDS).await().until(() -> true);
         }
+
         if(!conciergeUserAccountPage.getClientLookupFirstNameByName().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -883,7 +884,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I open product page with {string} and {string} for stg3")
     public void iOpenProductPageStg3(String productId, String skuId) {
-        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+GREY";
+        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+FOG";
         open(URL);
         with().pollInterval(5, SECONDS).await().until(() -> true);
     }
