@@ -24,7 +24,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement tryAgainButton = $(By.xpath("//*[text()='TRY AGAIN']"));
 
-    private final SelenideElement continueCreateAProjectButton = $(By.xpath("//*[text()='CONTINUE']"));
+    private final SelenideElement continueCreateAProjectButton = $(By.xpath("//*[text()='CREATE ACCOUNT']"));
 
     private final SelenideElement continueButtonPopUp = $(By.xpath("//div[contains(@class,'MuiGrid-justify-xs-center')][1]/button"));
 
@@ -77,6 +77,7 @@ public class ConciergeProjectScreen {
     private final SelenideElement pricingTypeSelect = $(By.cssSelector("#mui-component-select-type"));
 
     private final SelenideElement newProjectButton = $(By.xpath("//*[text()='New Project']"));
+    private final SelenideElement newProjectPlusIcon = $(By.xpath("//span[text()='NEW']//parent::div/preceding-sibling::div"));
 
     private final SelenideElement preferredContactMethodSelect = $(By.xpath("//div[contains(@class,'MuiInputBase-fullWidth MuiInputBase-formControl')]/div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']"));
 
@@ -169,6 +170,10 @@ public class ConciergeProjectScreen {
     private final SelenideElement itemIdSpan = $(By.xpath("//*[text()='Item#']"));
 
     private final SelenideElement REMOVEbutton = $(By.xpath("//*[text()='REMOVE']"));
+
+    private final SelenideElement clientPhone = $(By.cssSelector("input[id='phone']"));
+
+    private final SelenideElement clientPostalCode = $(By.cssSelector("input[id='postalCode']"));
 
     private final SelenideElement regularPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'][1]/p)[2]"));
 

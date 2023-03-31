@@ -239,7 +239,7 @@ public class EstoreE2EStepDefs {
 
     @When("I click on estore no thanks button")
     public void iClickOnNoThanksEstoreButton() {
-        try {
+        if(estoreCartPage.getNoThanksButton().isDisplayed()){
             generalStepDefs.waitForJSandJQueryToLoad();
             estoreCartPage.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
             wait.until(ExpectedConditions.elementToBeClickable(estoreCartPage.getNoThanksButton()));
@@ -250,7 +250,7 @@ public class EstoreE2EStepDefs {
             generalStepDefs.waitForJSandJQueryToLoad();
             with().pollInterval(4, SECONDS).await().until(() -> true);
             executeJavaScript("arguments[0].click();", estoreCartPage.getNoThanksButton());
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+        } else {
             System.out.println("Close button is not displayed");
         }
     }
@@ -388,7 +388,6 @@ public class EstoreE2EStepDefs {
             System.out.println("See Results on button is not displayed");
         }
     }
-
 
     @When("I click estore on {string}")
     public void iClickEstoreOn(String arg0) {
@@ -640,6 +639,3 @@ public class EstoreE2EStepDefs {
         }
     }
 }
-
-
-

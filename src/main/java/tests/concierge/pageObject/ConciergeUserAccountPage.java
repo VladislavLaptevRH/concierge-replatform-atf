@@ -21,6 +21,10 @@ public class ConciergeUserAccountPage {
 
     public final String galleryItem = "//input[@value = '%s']";
 
+    public final String brand = "//span[text()='%s']";
+
+    public final String button = "//span[text()='%s']";
+
     private final SelenideElement galleryButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item MuiGrid-align-items-xs-center']/div[@class='MuiGrid-root MuiGrid-item'][2]"));
 
     private final SelenideElement gallerySelect = $(By.xpath("//input[@class='MuiInputBase-input MuiOutlinedInput-input MuiAutocomplete-input MuiAutocomplete-inputFocused MuiInputBase-inputAdornedEnd MuiOutlinedInput-inputAdornedEnd']"));
@@ -36,11 +40,13 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement newClientButton = $(By.xpath("//*[text()='NEW']"));
 
-    private final SelenideElement memberIdField = $(By.cssSelector("input[name='memberID']"));
+    private final SelenideElement memberIdField = $(By.cssSelector("input[name='memberIdOrTradeId']"));
+    private final SelenideElement memberIdField1 = $(By.cssSelector("input[name='memberID']"));
 
-    private final SelenideElement businessAcNumber = $(By.cssSelector("input[name='tradeID']"));
+    private final SelenideElement businessAcNumber = $(By.xpath("//*[contains(text(), 'Business Account Number')]/../..//input"));
 
-    private final SelenideElement clientLookupEmail = $(By.cssSelector("input[name='email']"));
+    private final SelenideElement clientLookupEmail = $(By.cssSelector("input[id='email']"));
+    private final SelenideElement clientLookupEmailByName = $(By.cssSelector("input[name='email']"));
 
     private final SelenideElement dashboardTitle = $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']"));
 
@@ -130,9 +136,11 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement clientLookupBtnId = $(By.xpath("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li[@id='1']"));
 
-    private final SelenideElement clientLookupFirstName = $(By.cssSelector("input[name='firstName']"));
+    private final SelenideElement clientLookupFirstName = $(By.xpath("//*[text() = 'First Name']/../..//input"));
 
-    private final SelenideElement clientLookupLastName = $(By.cssSelector("input[name='lastName']"));
+    private final SelenideElement clientLookupFirstNameByName = $(By.cssSelector("input[name='firstName']"));
+
+    private final SelenideElement clientLookupLastName = $(By.xpath("//*[text() = 'Last Name']/../..//input"));
 
     private final SelenideElement clientLookupPhoneNumber = $(By.xpath("//input[@name='phoneNumber']"));
 
@@ -183,6 +191,14 @@ public class ConciergeUserAccountPage {
     private final List<SelenideElement> toddlerBeddingList = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul[@class='MuiGridList-root']/li[@class='MuiGridListTile-root']"));
 
     private final SelenideElement clientLookupStg3LastName = $(By.xpath("//input[@id='lastName']"));
+    private final SelenideElement brandLink = $(By.xpath("//a[@data-testid='brand-link']"));
+    private final SelenideElement firstSubMenu = $(By.xpath("//div[@role='tooltip']//descendant::div[contains(@class,'MuiGrid-container')]//child::div[contains(@class,'MuiGrid-root')][2]//descendant::li[contains(@class,'MuiListItem-root')][1]"));
+    private final SelenideElement usename = $(By.xpath("//span[text()='Automation Associate']"));
+    private final SelenideElement searchLens = $(By.xpath("//button[contains(@class,'MuiIconButton')]"));
+    private final SelenideElement userIcon = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
+    private final SelenideElement pageLabel1 = $(By.xpath("//i[text()='Concierge']"));
+    private final SelenideElement pageLabel2 = $(By.xpath("//h1[text()='Dashboard']"));
+    private final SelenideElement existingGallery = $(By.xpath("//span[text()='NEWPORT BEACH']"));
 
 
     public SelenideElement getCurrentLocationGalleryItemByName(String name) {
@@ -202,6 +218,16 @@ public class ConciergeUserAccountPage {
 
     public SelenideElement getOrderDetailsButtonByName(String name) {
         String path = String.format(orderDetailsButton, name);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getBrand(String brandname){
+        String path = String.format(brand, brandname);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getButton(String buttonname){
+        String path = String.format(button, buttonname);
         return $(byXpath(path));
     }
 

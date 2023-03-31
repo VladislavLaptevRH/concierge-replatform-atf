@@ -106,7 +106,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement personalizationText = $(By.xpath("//*[text()='PERSONALIZATION']"));
 
-    private final SelenideElement editMonogramButton = $(By.xpath("(//*[@data-analytics-id = \"link\" and text()=\"Edit\"])[2]"));
+    private final SelenideElement editMonogramButton = $(By.xpath("(//*[text() = 'Edit'])[2]"));
 
     private final SelenideElement posTransactionField = $(By.xpath("(//div[contains(@class,'MuiInputBase-root MuiOutlinedInput-root')]/input)[1]"));
 
@@ -126,7 +126,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement postponeSelectReasonCode = $(By.xpath("//select[@id='data_reason_code']"));
 
-    private final SelenideElement postponeShipOnOrAfterDate = $(By.xpath("//p[@id='ship-on-or-after-date']"));
+    private final SelenideElement postponeShipOnOrAfterDate = $(By.xpath("//*[contains(text(), 'Ship on or after')]"));
 
     private final SelenideElement soldToAddressTitle = $(By.xpath("//*[text()='Sold To Address']"));
 

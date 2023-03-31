@@ -711,5 +711,19 @@ public class EstoreCartPageStepDefs {
             url = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + "AGPT" + "&categoryId=search";
         }
         open(url);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        if(estoreItemPage.getAddToCartDisabledButton().isDisplayed()){
+            Select finishList = new Select(estoreItemPage.getSelectFinish());
+            finishList.selectByVisibleText("Antiqued Brass");
+            Select fabricList = new Select(estoreItemPage.getSelectFabric());
+            fabricList.selectByVisibleText("Perennials Performance Textured Linen Weave");
+            Select quantityList = new Select(estoreItemPage.getSelectQTY());
+            quantityList.selectByVisibleText("1");
+            Select colorList = new Select(estoreItemPage.getSelectColor());
+            colorList.selectByVisibleText("White");
+        } else {
+            System.out.println("Everything is ok");
+        }
     }
 }
