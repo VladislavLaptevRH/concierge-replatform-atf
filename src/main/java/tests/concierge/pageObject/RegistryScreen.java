@@ -20,7 +20,7 @@ public class RegistryScreen {
 
     private SelenideElement purhcaseRegistryButton = $(By.xpath("//*[text()='PURCHASE']"));
 
-    private SelenideElement editRegistryButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][3]/a"));
+    private SelenideElement editRegistryButton = $(By.xpath("//span[text()='Edit']//parent::a"));
 
     private SelenideElement continueRegistrantButton = $(By.xpath("(//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth'])[2]"));
 
