@@ -97,11 +97,24 @@ public class ConciergeAssociateStepDefs {
         with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
-    @Then("I verify footer links")
-    public void iVerifyFooterLinks() {
-        $(By.xpath("//*[text()='RH.COM']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='DASHBOARD']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='PROJECTS']")).should(visible, Duration.ofSeconds(40));
+    @Then("I verify footer links for {string}")
+    public void iVerifyFooterLinks(String footer) {
+        $(By.xpath("//*[text()='"+footer+"']")).should(visible, Duration.ofSeconds(40)).click();
+        switch (footer) {
+            case "RH.COM":
+                switchTo().window(1);
+                assertEquals(Hooks.getCurrentUrl(), "https://rh.com/");
+                break;
+            case "DASHBOARD":
+                conciergeLoginPage.getDashboard().should(visible, Duration.ofSeconds(40));
+                break;
+            case "PROJECTS":
+                conciergeLoginPage.getProjects().should(visible, Duration.ofSeconds(40));
+                break;
+            case "REGISTRY":
+                conciergeLoginPage.getRegistry().should(visible, Duration.ofSeconds(40));
+                break;
+        }
     }
 
     @Then("I validate each cat and sub-cat")
@@ -170,12 +183,90 @@ public class ConciergeAssociateStepDefs {
 
     @When("I choose gallery number {string} for gallery intl concierge")
     public void iChooseGalleryNumberForGalleryIntlConcierge(String arg0) {
-        conciergeLoginPage.getLocationInput().should(visible, Duration.ofSeconds(20));
-        conciergeLoginPage.getLocationInput().click();
-        $(By.xpath("//*[text()='701: Aynhoe']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='701: Aynhoe']")).click();
+        if(conciergeLoginPage.getCurrentLocation().isDisplayed()){
+            conciergeLoginPage.getInputGallery().setValue("5: Newport Beach").sendKeys(Keys.DOWN, Keys.RETURN);
+        }
+        else {
+            conciergeLoginPage.getLocationInput().should(visible, Duration.ofSeconds(20));
+            conciergeLoginPage.getLocationInput().click();
+            $(By.xpath("//*[text()='701: Aynhoe']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='701: Aynhoe']")).click();
+        }
         conciergeLoginPage.getContinueButton().should(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getContinueButton().click();
     }
-}
 
+    @Then("I change the brand to {string}")
+    public void iChangeBrand(String brand){
+    conciergeUserAccountPage.getBrandButton().should(visible,Duration.ofSeconds(40)).click();
+    conciergeUserAccountPage.getBrand(brand).should(visible,Duration.ofSeconds(40)).click();
+    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40)).click();
+    }
+
+    @Then("I verify the logo")
+    public void iVerifyLogo(){
+        conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40)).click();
+    }
+
+    @Then("I verify the username")
+    public void iVerifyUsername(){
+        conciergeUserAccountPage.getUsename().should(visible,Duration.ofSeconds(40));
+    }
+
+    @Then("I verify project button")
+    public void iVerifyProjectButton(){
+        conciergeUserAccountPage.getProjectsButton().should(visible,Duration.ofSeconds(40));
+    }
+
+    @Then("I Verify search leans")
+    public void iVerifyDSearchLeans(){
+        conciergeUserAccountPage.getSearchLens().should(visible,Duration.ofSeconds(40));
+    }
+
+    @Then("I verify user icon")
+    public void iVerifyUserIcon(){
+        conciergeUserAccountPage.getUserIcon().should(visible,Duration.ofSeconds(40));
+    }
+
+    @Then("I verify cart")
+    public void iVerifyCart(){
+        conciergeUserAccountPage.getCartButton().should(visible,Duration.ofSeconds(40));
+    }
+
+    @Then("I verify brand is button")
+    public void iVerifyBrand(){
+        conciergeUserAccountPage.getBrandButton().should(visible,Duration.ofSeconds(40));
+    }
+
+    @Then("I verify main menu")
+    public void iVerifyMainMenu(){
+        List<String> rhExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "BABY & CHILD", "TEEN", "SALE"));
+        List<String> rhItems = new ArrayList<>();
+        for (int i = 0; i < conciergeUserAccountPage.getMenuItems().size(); i++) {
+            rhItems = new ArrayList(Arrays.asList(conciergeUserAccountPage.getMenuItems().get(i).getText()));
+        }
+        GeneralStepDefs.compareList(rhExpectedItems, rhItems);
+    }
+
+    @Then("I verify page label")
+    public void iVerifyPageLabel(){
+        conciergeUserAccountPage.getPageLabel1().should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getPageLabel2().should(visible,Duration.ofSeconds(40));
+    }
+
+    @Then("I verify button {string} on homepage")
+    public void iVerifyButtonOnHomepage(String button){
+        conciergeUserAccountPage.getButton(button).should(visible,Duration.ofSeconds(40));
+    }
+
+    @Then("I verify search item field and search button")
+    public void iVerifySearchItem(){
+        conciergeUserAccountPage.getSearchItemField().should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getSearchButton().should(visible,Duration.ofSeconds(40));
+    }
+
+    @Then("I verify the gallery")
+    public void iVerifyGallery(){
+        conciergeUserAccountPage.getExistingGallery().should(visible,Duration.ofSeconds(40));
+    }
+}

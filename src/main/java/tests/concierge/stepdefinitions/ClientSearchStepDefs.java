@@ -22,8 +22,8 @@ public class ClientSearchStepDefs {
 
     @When("I search client by {string}")
     public void iSearchClientByEmail(String searchBy) {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
-        generalStepDefs.searchClientBy(searchBy);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            generalStepDefs.searchClientBy(searchBy);
     }
 
     @Then("I verify that client results is displayed")

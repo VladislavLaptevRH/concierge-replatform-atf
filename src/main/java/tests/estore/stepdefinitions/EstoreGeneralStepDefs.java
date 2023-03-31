@@ -9,6 +9,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.Getter;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.interactions.Actions;
 import tests.concierge.pageObject.*;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
@@ -102,7 +103,16 @@ public class EstoreGeneralStepDefs {
     }
 
     public void removeFromCart(int countOfCartItems) {
-        estoreUserAccountPage.getCartButtonStg4().click();
+        if (Hooks.cookie.equals("userservice")) {
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+            Actions actions = new Actions(WebDriverRunner.getWebDriver());
+            actions.moveToElement(estoreUserAccountPage.getCartButtonUserService());
+            estoreUserAccountPage.getCartButtonUserService().should(visible, Duration.ofSeconds(20));
+            estoreUserAccountPage.getCartButtonUserService().click();
+        } else {
+            estoreUserAccountPage.getCartButtonStg4().click();
+
+        }
         try {
             for (int i = 0; i < countOfCartItems; i++) {
                 estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(30));
@@ -639,7 +649,7 @@ public class EstoreGeneralStepDefs {
      */
     public void payWith(String paymentType, String number, String cvc, String expirationDate) {
 
-        if(!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()){
+        if (!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }

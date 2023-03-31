@@ -173,19 +173,19 @@ public class ConciergeE2EStepDefs {
         checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
         checkoutAddressScreen.getContinuePaymentButton().click();
         with().pollInterval(6, SECONDS).await().until(() -> true);
-        if(conciergeProjectScreen.getTryAgainButton().isDisplayed()){
+        if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
             conciergeProjectScreen.getTryAgainButton().click();
             with().pollInterval(3, SECONDS).await().until(() -> true);
             abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
             checkoutAddressScreen.getContinuePaymentButton().click();
             with().pollInterval(3, SECONDS).await().until(() -> true);
         }
-        if(conciergeProjectScreen.getContinueWithSuggestedAddressButton().isDisplayed()){
+        if (conciergeProjectScreen.getContinueWithSuggestedAddressButton().isDisplayed()) {
             conciergeProjectScreen.getContinueWithSuggestedAddressButton().click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
 
-        if($(By.xpath("//*[text() = 'CONTINUE']")).isDisplayed()){
+        if ($(By.xpath("//*[text() = 'CONTINUE']")).isDisplayed()) {
             $(By.xpath("//*[text() = 'CONTINUE']")).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
@@ -352,7 +352,7 @@ public class ConciergeE2EStepDefs {
         } else {
             System.out.println("Close button is not displayed");
         }
-        if(conciergeCartPageScreen.getNoThanksButton().isDisplayed()) {
+        if (conciergeCartPageScreen.getNoThanksButton().isDisplayed()) {
             for (int i = 0; i < 3; i++) {
                 conciergeCartPageScreen.getNoThanksButton().click();
                 with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -405,13 +405,13 @@ public class ConciergeE2EStepDefs {
 
     @When("I remove client from header")
     public void iRemoveClientFromHeader() {
-            conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
-            conciergeUserAccountPage.getClientButton().click();
+        conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getClientButton().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
-           if(conciergeUserAccountPage.getRemoveClientByText().isDisplayed()) {
-               conciergeUserAccountPage.getRemoveClientByText().click();
-               with().pollInterval(1, SECONDS).await().until(() -> true);
-           }
+        if (conciergeUserAccountPage.getRemoveClientByText().isDisplayed()) {
+            conciergeUserAccountPage.getRemoveClientByText().click();
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+        }
 
         pdpScreen.getCloseSpecialOrderPopUpButton().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
@@ -420,15 +420,15 @@ public class ConciergeE2EStepDefs {
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String businessClient) {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-       if(conciergeItemsScreen.getCheckoutButton().isDisplayed()) {
+        if (conciergeItemsScreen.getCheckoutButton().isDisplayed()) {
             abstractStepDefs.iClickOnCheckoutButton();
             iClickOnNoThanksButton();
-           with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        if(!conciergeUserAccountPage.getClientLookupFirstName().isDisplayed()){
+        if (!conciergeUserAccountPage.getClientLookupFirstName().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
-            if(!conciergeUserAccountPage.getClientLookupFirstName().isDisplayed()){
+            if (!conciergeUserAccountPage.getClientLookupFirstName().isDisplayed()) {
                 String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
                 open(URL);
                 with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -680,9 +680,17 @@ public class ConciergeE2EStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Error is appeared");
         }
-
-        conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
-        conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofSeconds(40));
+        try {
+            conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
+            conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofSeconds(40));
+        }
+        catch (com.codeborne.selenide.ex.ElementNotFound e)
+        {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
+            conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofSeconds(40));
+        }
         conciergeUserAccountPage.getClientLookupSearchButton().click();
         conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME"), Duration.ofSeconds(40));
         executeJavaScript("arguments[0].click();", conciergeUserAccountPage.getFirstResultOfClientLookup());
@@ -735,17 +743,17 @@ public class ConciergeE2EStepDefs {
     @And("I fill all fields for sold to address")
     public void iFillAllFieldsForSoldToAddress() {
         generalStepDefs.fillAddressFields();
-        generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[1]")).scrollIntoView(true);
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[1]")).click();
-        $(By.xpath("//*[text() = 'Continue to payment']")).scrollIntoView(true);
-        $(By.xpath("//*[text() = 'Continue to payment']")).click();
-        $(By.xpath("//*[text() = 'CONTINUE']")).scrollIntoView(true);
-        $(By.xpath("//*[text() = 'CONTINUE']")).click();
-        $(By.xpath("//*[text() = 'OK']")).shouldHave(visible, Duration.ofSeconds(6));
-        $(By.xpath("//*[text() = 'OK']")).click();
+//        generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
+//        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
+//        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
+//        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[1]")).scrollIntoView(true);
+//        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[1]")).click();
+//        $(By.xpath("//*[text() = 'Continue to payment']")).scrollIntoView(true);
+//        $(By.xpath("//*[text() = 'Continue to payment']")).click();
+//        $(By.xpath("//*[text() = 'CONTINUE']")).scrollIntoView(true);
+//        $(By.xpath("//*[text() = 'CONTINUE']")).click();
+//        $(By.xpath("//*[text() = 'OK']")).shouldHave(visible, Duration.ofSeconds(6));
+//        $(By.xpath("//*[text() = 'OK']")).click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
 //        $(By.cssSelector("body > div:nth-child(7) > div:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > label:nth-child(1) > span:nth-child(1) > span:nth-child(1) > input:nth-child(1)")).click();
     }
@@ -875,7 +883,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I open product page with {string} and {string} for stg3")
     public void iOpenProductPageStg3(String productId, String skuId) {
-        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+GREY";
+        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+FOG";
         open(URL);
         with().pollInterval(5, SECONDS).await().until(() -> true);
     }
@@ -917,7 +925,7 @@ public class ConciergeE2EStepDefs {
     public void iOpenCart() {
         String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
         open(URL);
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         boolean isCartEmpty = $(By.xpath("//*[text()='YOUR SHOPPING CART IS EMPTY']")).isDisplayed();
         if (isCartEmpty) {
             System.out.println("Calling clear order api to delete old cartId");

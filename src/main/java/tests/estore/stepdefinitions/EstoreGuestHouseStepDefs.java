@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import tests.estore.pageObject.EstoreGuestHouseScreen;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -16,7 +17,7 @@ public class EstoreGuestHouseStepDefs {
 
     @Given("I go to estore guesthouse home page")
     public void iGoToEstoreGuesthouseHomePage() {
-        open("https://stg2-rhguesthouse.rhnonprod.com/");
+        open("https://stg2-rhguesthouse.rhnonprod.com?endpoint=" + Hooks.cookie);
     }
 
     @When("I click on the estore guesthouse dining room page")
