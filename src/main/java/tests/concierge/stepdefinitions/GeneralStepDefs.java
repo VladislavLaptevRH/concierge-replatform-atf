@@ -256,16 +256,28 @@ public class GeneralStepDefs {
 
             conciergeUserAccountPage.getClientLookupFirstName().should(visible, Duration.ofSeconds(40));
             if (field.equals("email")) {
-                conciergeUserAccountPage.getClientLookupEmail().should(Condition.be(visible), Duration.ofSeconds(25));
-                conciergeUserAccountPage.getClientLookupEmail().setValue("test@mailinator.com");
+                try {
+                    conciergeUserAccountPage.getClientLookupEmail().should(Condition.be(visible), Duration.ofSeconds(25));
+                    conciergeUserAccountPage.getClientLookupEmail().setValue("test@mailinator.com");
+                }
+                catch (com.codeborne.selenide.ex.ElementNotFound e){
+                    conciergeUserAccountPage.getClientLookupEmailByName().should(Condition.be(visible), Duration.ofSeconds(25));
+                    conciergeUserAccountPage.getClientLookupEmailByName().setValue("test@mailinator.com");
+                }
             }
             if (field.equals("lastName")) {
                 conciergeUserAccountPage.getClientLookupLastName().should(Condition.be(visible), Duration.ofSeconds(25));
                 conciergeUserAccountPage.getClientLookupLastName().setValue("NonMember");
             }
             if (field.equals("memberID")) {
-                conciergeUserAccountPage.getMemberIdField().should(Condition.be(visible), Duration.ofSeconds(25));
-                conciergeUserAccountPage.getMemberIdField().setValue("101318450");
+                try {
+                    conciergeUserAccountPage.getMemberIdField().should(Condition.be(visible), Duration.ofSeconds(25));
+                    conciergeUserAccountPage.getMemberIdField().setValue("101318450");
+                }
+                catch (com.codeborne.selenide.ex.ElementNotFound e){
+                    conciergeUserAccountPage.getMemberIdField1().should(Condition.be(visible), Duration.ofSeconds(25));
+                    conciergeUserAccountPage.getMemberIdField1().setValue("101318450");
+                }
             }
             if (field.contains("businessAccountNumberContract")) {
                 conciergeUserAccountPage.getBusinessAcNumber().should(Condition.be(visible), Duration.ofSeconds(25));
