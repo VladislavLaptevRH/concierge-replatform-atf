@@ -188,18 +188,21 @@ public class AbstractStepDefs {
     @When("I fill all fields from address screen")
     public void iFillAllFieldsFromAddressScreenForBrands() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        try {
-            checkoutAddressScreen.getFirstNameInpt().should(Condition.and("", enabled, visible), Duration.ofSeconds(10));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
             if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
                 generalStepDefs.fillAddressFields();
-                generalStepDefs.fillZipCodeStateCountry("85020", "US", "");
-                generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
-                checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
+                generalStepDefs.fillZipCodeStateCountry("85020", "US", "AZ - Arizona");
+                if(checkoutAddressScreen.getEmailAddressField().isDisplayed()){
+                    generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
+                    checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
+                } else {
+                    System.out.println("Email field is not available");
+                }
                 with().pollInterval(3, SECONDS).await().until(() -> true);
+
+            } else {
+                System.out.println("Address fields are not available");
             }
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Address fields are not available");
-        }
     }
 
     @When("I clicks on a random menu item for brands")

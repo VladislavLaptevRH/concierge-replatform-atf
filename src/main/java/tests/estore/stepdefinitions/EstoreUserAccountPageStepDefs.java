@@ -305,6 +305,4 @@ public class EstoreUserAccountPageStepDefs {
     public void iVerifyTheMinLengthForLastNameTextField() {
         estoreUserAccountPage.getBillingAddressLastName().setValue("abc");
     }
-
-
 }

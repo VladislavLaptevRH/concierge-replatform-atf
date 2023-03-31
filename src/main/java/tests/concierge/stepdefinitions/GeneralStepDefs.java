@@ -7,6 +7,7 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.concierge.pageObject.*;
@@ -103,12 +104,13 @@ public class GeneralStepDefs {
         conciergeLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getSignInButton().click();
 
-        if(!conciergeLoginPage.getLocationNewPortBeach().isDisplayed()){
+        if(!conciergeLoginPage.getLocationDropDownList().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        conciergeLoginPage.getLocationNewPortBeach().should(visible, Duration.ofSeconds(30));
-        conciergeLoginPage.getLocationNewPortBeach().click();
+
+        conciergeLoginPage.getLocationDropDownList().click();
+        $(By.xpath("//*[text() = '5: Newport Beach']")).click();
         conciergeLoginPage.getContinueButton().should(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getContinueButton().click();
     }
@@ -139,7 +141,6 @@ public class GeneralStepDefs {
 //        $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")).should(visible, Duration.ofSeconds(30));
         conciergeAddressScreen.getShippingAddressText().shouldHave(text("Shipping Address"), Duration.ofSeconds(40));
         conciergeAddressScreen.getBillingAddressText().shouldHave(text("Billing Address"), Duration.ofSeconds(40));
-        executeJavaScript("arguments[0].click();", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
 
         if(conciergeAddressScreen.getSoldToTaxExempt().isDisplayed()){
             clearField(conciergeAddressScreen.getSoldToTaxExempt());
@@ -147,16 +148,22 @@ public class GeneralStepDefs {
         }
 
         clearField(checkoutAddressScreen.getFirstNameInpt());
-        checkoutAddressScreen.getFirstNameInpt().setValue("QA1");
+        checkoutAddressScreen.getFirstNameInpt().setValue("QAFirst");
 
         clearField(checkoutAddressScreen.getLastNameField());
         checkoutAddressScreen.getLastNameField().setValue("Automation");
 
-        clearField(checkoutAddressScreen.getCompanyNameField());
-        checkoutAddressScreen.getCompanyNameField().setValue("AutomationCompany");
+        if(checkoutAddressScreen.getCompanyNameField().isDisplayed()){
+            clearField(checkoutAddressScreen.getCompanyNameField());
+            checkoutAddressScreen.getCompanyNameField().setValue("AutomationCompany");
+        } else {
+            System.out.println("This field is unavailable");
+        }
 
         clearField(checkoutAddressScreen.getStreetAddressField());
-        checkoutAddressScreen.getStreetAddressField().setValue("7677 N 16th St");
+        checkoutAddressScreen.getStreetAddressField().setValue("North 16th Street");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        checkoutAddressScreen.getStreetAddressField().sendKeys(Keys.ENTER);
 
         clearField(checkoutAddressScreen.getAptFloorSuiteField());
         checkoutAddressScreen.getAptFloorSuiteField().setValue("QaApartment");
@@ -165,7 +172,9 @@ public class GeneralStepDefs {
         checkoutAddressScreen.getCityField().setValue("Phoenix");
 
         clearField(checkoutAddressScreen.getPhoneField());
-        checkoutAddressScreen.getPhoneField().setValue("+124131231");
+        checkoutAddressScreen.getPhoneField().setValue("1241312319");
+
+        executeJavaScript("arguments[0].click();", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
 
         conciergeAddressScreen.getBillingAddressText().should(visible, Duration.ofSeconds(12));
     }
@@ -183,15 +192,15 @@ public class GeneralStepDefs {
         Select countrySelect = new Select(checkoutAddressScreen.getCountryField());
         executeJavaScript("arguments[0].scrollIntoView(true);", countrySelect);
         countrySelect.selectByValue(country);
-        if (state.equals("")) {
-            checkoutAddressScreen.getStateField().should(visible, Duration.ofSeconds(15));
-            checkoutAddressScreen.getStateField().click();
 
             Select selectState = new Select(checkoutAddressScreen.getStateField());
             selectState.selectByValue("AZ");
-        }
-        clearField(checkoutAddressScreen.getZipPostalCodeField());
-        checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);
+          if(checkoutAddressScreen.getZipPostalCodeField().isDisplayed()){
+              clearField(checkoutAddressScreen.getZipPostalCodeField());
+              checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);
+              } else {
+              System.out.println("Zip code unavailable");
+          }
 
         if (state.equals("NY")) {
             SelenideElement stateNyButton = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='" + state + "']"));

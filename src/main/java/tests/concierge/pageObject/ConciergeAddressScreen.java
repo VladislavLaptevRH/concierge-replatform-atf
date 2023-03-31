@@ -23,7 +23,7 @@ public class ConciergeAddressScreen {
 
     private final SelenideElement confirmationText = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][4]/p"));
 
-    private final SelenideElement billingAddressText = $(By.xpath("//div[@id='billingAddresslbl']/h3"));
+    private final SelenideElement billingAddressText = $(By.xpath("//*[text()='Billing Address']"));
 
     private final SelenideElement okButton = $(By.xpath("//*[text()='OK']"));
 

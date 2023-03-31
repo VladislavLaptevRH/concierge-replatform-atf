@@ -141,62 +141,66 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore shipping address")
     public void iFillEstoreShippingAndShippingAddress() {
-        try {
-            with().pollInterval(2, SECONDS).await().until(() -> true);
-            if (Hooks.eStoreURL.contains("stg3")) {
-                $(By.xpath("//*[text()='Add New Address']")).click();
-            }
-            estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
-            estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+            try {
+                if ($(By.xpath("//*[text() = 'Shipping Address']/..//span[1]/*[text() = 'Edit']")).isDisplayed()) {
+                    System.out.println("The shipping address was already filled");
+                } else {
+                    with().pollInterval(2, SECONDS).await().until(() -> true);
+                    if (Hooks.eStoreURL.contains("stg3")) {
+                        $(By.xpath("//*[text()='Add New Address']")).click();
+                    }
+                    estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
+                    generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
+                    estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
 
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
-            estoreAddressScreen.getShippingAddressLastName1().setValue("William");
+                    generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
+                    estoreAddressScreen.getShippingAddressLastName1().setValue("William");
 
-            Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
-            shippingAddressCountry.selectByValue("US");
+                    Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
+                    shippingAddressCountry.selectByValue("US");
 
-            if (Hooks.eStoreURL.contains("stg4") || Hooks.eStoreURL.contains("stg3")) {
-                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress1());
-                estoreAddressScreen.getShippingAddressStreetAddress1().setValue("Bradford Drive");
-                estoreAddressScreen.getShippingAddressCity().setValue("Hilliard");
+                    if (Hooks.eStoreURL.contains("stg4") || Hooks.eStoreURL.contains("stg3")) {
+                        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress1());
+                        estoreAddressScreen.getShippingAddressStreetAddress1().setValue("Bradford Drive");
+                        estoreAddressScreen.getShippingAddressCity().setValue("Hilliard");
 
-                Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
-                selectState.selectByValue("OH");
+                        Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
+                        selectState.selectByValue("OH");
 
-                generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-                estoreAddressScreen.getPostalShippingCode().setValue("43093");
+                        generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
+                        estoreAddressScreen.getPostalShippingCode().setValue("43093");
 
-                try {
-                    $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
-                    $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
-                } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                    System.out.println("Dropdown list is not displayed");
+                        try {
+                            $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
+                            $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
+                        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                            System.out.println("Dropdown list is not displayed");
+                        }
+                    } else {
+                        with().pollInterval(3, SECONDS).await().until(() -> true);
+                        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
+                        estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
+                        try {
+                            with().pollInterval(4, SECONDS).await().until(() -> true);
+                            $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
+                            $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
+                        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                            System.out.println("Dropdown list is not displayed");
+                        }
+                    }
+
+                    with().pollInterval(3, SECONDS).await().until(() -> true);
+                    estoreAddressScreen.getShippingAddressAptFloor().click();
+                    estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
+
+                    estoreAddressScreen.getShippingAddressPhone().click();
+                    generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
+                    estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
                 }
-            } else {
-                with().pollInterval(3, SECONDS).await().until(() -> true);
-                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
-                estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
-                try {
-                    with().pollInterval(4, SECONDS).await().until(() -> true);
-                    $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
-                    $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
-                } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                    System.out.println("Dropdown list is not displayed");
-                }
+            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                System.out.println("Shipping address fields are not displayed");
             }
-
-            with().pollInterval(3, SECONDS).await().until(() -> true);
-            estoreAddressScreen.getShippingAddressAptFloor().click();
-            estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
-
-            estoreAddressScreen.getShippingAddressPhone().click();
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
-            estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Shipping address fields are not displayed");
-        }
-
     }
 
     @Then("I verify add a new shipping address option is present")
@@ -364,7 +368,7 @@ public class EstoreAddressStepDefs {
         }
         $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
         executeJavaScript("arguments[0].click();", $(By.xpath("//*[text()='Continue to payment']")));
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @When("I fill estore shipping email address")
@@ -456,15 +460,18 @@ public class EstoreAddressStepDefs {
     @Then("I verify shipping and billing address on order review page")
     public void iVerifyShippingAddressOnOrderReviewPage() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("SHIPPING ADDRESS Safire William"), Duration.ofSeconds(25));
-        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("BILLING ADDRESS Safire William"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("SHIPPING ADDRESS"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("Safire William"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("BILLING ADDRESS"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("Safire William"), Duration.ofSeconds(25));
     }
 
     @Then("I verify shipping and billing address on order confirmation page")
     public void iVerifyShippingAndBillingAddressOnOrderConfirmationPage() {
-        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("SHIPPING ADDRESS Safire William"), Duration.ofSeconds(25));
-        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("BILLING ADDRESS Safire William"), Duration.ofSeconds(25));
-
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("SHIPPING ADDRESS"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("Safire William"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("BILLING ADDRESS"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("Safire William"), Duration.ofSeconds(25));
     }
 
     @When("I add gift message")
