@@ -45,6 +45,7 @@ Feature: Estore Cart Page
     Then I verify membership price in banner
 
   Scenario: eStore - Line item quantity update
+
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -142,7 +143,6 @@ Feature: Estore Cart Page
     Then I verify "NY" shipping restriction
 
   Scenario: eStore - Disable Continue as a Guest user option for guest user with membership
-
     When I open product page with "prod13800635" and "17050045" with "WHT" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
@@ -172,6 +172,7 @@ Feature: Estore Cart Page
     Then I verify membership estore banner for "nonmember user"
 
   Scenario: eStore Cart persistence in all brands
+
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -209,7 +210,6 @@ Feature: Estore Cart Page
     When I goes to estore cart for estore
 
   Scenario: Add Membership and verify order total in order estimate
-
     Given I log into eStore as "regularAddMembership" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
