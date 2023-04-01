@@ -192,8 +192,8 @@ public class EstoreE2EStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getSearchItemField().setValue(arg0);
-        $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']")).click();
+        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click();
     }
 
 

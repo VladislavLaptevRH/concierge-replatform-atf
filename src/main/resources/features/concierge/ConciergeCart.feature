@@ -28,7 +28,7 @@ Feature:Concierge Cart Page
     When I click on quantity line item button
     Then I verify that quantity was updated
 
-  Scenario:Remove line item - click on remove button and verify that line item is removed and subtotal and minicart value is updated
+  Scenario: Remove line item - click on remove button and verify that line item is removed and subtotal and minicart value is updated
     Given I log into Concierge as "associate"
     When I remove client from header
     When I add item to cart via API
@@ -102,7 +102,7 @@ Feature:Concierge Cart Page
     When I click on remove button from price override
     Then I verify that price override was removed
 
-  Scenario:Shipping Override (SD, UFD) -  i can introduce only zero in unlimited furniture delivery field, verify that error should be appeared -> Value must be 0.
+  Scenario: Shipping Override (SD, UFD) -  i can introduce only zero in unlimited furniture delivery field, verify that error should be appeared -> Value must be 0.
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -444,6 +444,7 @@ Feature:Concierge Cart Page
     Then I verify that availability, Delivery and Returns messaging in cart
 
   Scenario: Verify alternate addresses for client with multiple addresses
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header

@@ -452,7 +452,7 @@ public class GeneralStepDefs {
             clientSecret = "a2e447ae-abc8-4ed3-bf46-94d3a4c88031";
         }
         RestAssured.baseURI = "https://auth.rhnonprod.com";
-        RequestSpecification request = RestAssured.given();
+        RequestSpecification request = RestAssured.given().relaxedHTTPSValidation();
         request.headers("Content-Type", "application/x-www-form-urlencoded");
         request.param("grant_type", "client_credentials");
         request.param("scope", "rhapsody-user-svc");
