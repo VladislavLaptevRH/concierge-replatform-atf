@@ -11,6 +11,7 @@ import io.restassured.specification.RequestSpecification;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.w3c.dom.ls.LSOutput;
 import tests.concierge.pageObject.SaleScreen;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
@@ -612,15 +613,22 @@ public class EstoreCartPageStepDefs {
 
     @When("I goes to estore cart for estore")
     public void iGoesToEstoreCartForEstore() {
+        if ((Hooks.cookie.equals("userservice")) && (Hooks.profile.equals("stg2"))) {
+            Actions actions = new Actions(WebDriverRunner.getWebDriver());
+            actions.moveToElement(estoreUserAccountPage.getCartButtonUserService());
+            estoreUserAccountPage.getCartButtonUserService().should(visible, Duration.ofSeconds(30));
+            estoreUserAccountPage.getCartButtonUserService().click();
+        }
         with().pollInterval(2, SECONDS).await().until(() -> true);
         if (Hooks.profile.equals("stg3")) {
             $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']")).click();
-        } else {
+        }
+        if (!(Hooks.cookie.equals("userservice")) && (Hooks.profile.equals("stg2"))) {
             estoreCartPage.getEstoreCartButton().should(visible, Duration.ofSeconds(40));
             estoreCartPage.getEstoreCartButton().click();
         }
-    }
+}
 
     @When("I add item {string} to cart via API for estore")
     public void iAddItemToCartViaAPIForEstore(String arg0) {
