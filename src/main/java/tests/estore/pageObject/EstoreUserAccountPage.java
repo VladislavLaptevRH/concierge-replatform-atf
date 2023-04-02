@@ -173,9 +173,9 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement westHollywood = $(By.xpath("//*[@id=\"146\"]"));
 
-    private final SelenideElement cartButton = $(By.xpath("//a[@href='/checkout/shopping_cart.jsp']"));
+    private final SelenideElement cartButton = $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']//span"));
 
-    private final SelenideElement cartButtonUserService = $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']"));
+    private final SelenideElement cartButtonUserService = $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']//span"));
 
     private final SelenideElement cartButtonStg4 = $(By.xpath("//a[@href='/checkout/shopping_cart.jsp']"));
 

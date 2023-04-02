@@ -461,17 +461,17 @@ public class EstoreAddressStepDefs {
     public void iVerifyShippingAddressOnOrderReviewPage() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("SHIPPING ADDRESS"), Duration.ofSeconds(25));
-        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("Safire William"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("2479 Deer Run"), Duration.ofSeconds(25));
         $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("BILLING ADDRESS"), Duration.ofSeconds(25));
-        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("Safire William"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("2479 Deer Run"), Duration.ofSeconds(25));
     }
 
     @Then("I verify shipping and billing address on order confirmation page")
     public void iVerifyShippingAndBillingAddressOnOrderConfirmationPage() {
         $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("SHIPPING ADDRESS"), Duration.ofSeconds(25));
-        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("Safire William"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("2479 Deer Run"), Duration.ofSeconds(25));
         $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("BILLING ADDRESS"), Duration.ofSeconds(25));
-        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("Safire William"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("2479 Deer Run"), Duration.ofSeconds(25));
     }
 
     @When("I add gift message")

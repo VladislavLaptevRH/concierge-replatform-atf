@@ -41,7 +41,7 @@ public class EstoreAddressScreen {
 
     private final SelenideElement shippingAddressConfirmEmail = $(By.xpath("(//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[9]"));
 
-    private final SelenideElement submitZipCode = $(By.xpath("//*[text()='Confirm']"));
+    private final SelenideElement submitZipCode = $(By.xpath("//*[text()='CONFIRM']"));
 
     private final SelenideElement emailField = $(By.xpath("((//div[contains(@class,'MuiGrid-align-items-xs-flex-start')])[1]//input)[1]"));
 

@@ -459,7 +459,8 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that membership price displayed as total price")
     public void iVerifyThatMembershipPriceDisplayedAsTotalPrice() {
-        if(!conciergeCartPageScreen.getPriceForMember().isDisplayed()){
+    with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!conciergeCartPageScreen.getPriceForMember().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }

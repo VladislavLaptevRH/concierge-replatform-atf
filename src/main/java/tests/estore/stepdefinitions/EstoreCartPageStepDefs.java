@@ -49,17 +49,22 @@ public class EstoreCartPageStepDefs {
             with().pollInterval(3, SECONDS).await().until(() -> true);
             int countOfCartItems = 0;
 
-            try {
+            if(estoreUserAccountPage.getCartButtonUserService().isDisplayed()){
                 Actions actions = new Actions(WebDriverRunner.getWebDriver());
-                actions.moveToElement(estoreUserAccountPage.getCartButtonUserService());
+                actions.moveToElement(estoreUserAccountPage.getCartButtonUserService()).build().perform();
+
                 String countOfProducts = estoreUserAccountPage.getCartButtonUserService().getText();
                 countOfCartItems = Integer.valueOf(countOfProducts);
-            } catch (Exception e) {
+                } else {
                 System.out.println("Cart is empty");
             }
+
             if (countOfCartItems > 0) {
                 estoreGeneralStepDefs.removeFromCart(countOfCartItems);
+            } else {
+                System.out.println("Cart is empty");
             }
+
         } else {
             estoreUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(2));
             with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -500,7 +505,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I open estore cart")
     public void iOpenCart() {
-        String URL = Hooks.eStoreBaseURL + "/checkout/shopping_cart.jsp";
+        String URL = Hooks.eStoreBaseURL + "/us/en/checkout/shopping_cart.jsp";
         open(URL);
         with().pollInterval(2, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
