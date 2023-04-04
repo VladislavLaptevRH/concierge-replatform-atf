@@ -192,6 +192,7 @@ public class EstoreE2EStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getSearchItemField().setValue(arg0);
+
         $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click();
     }
@@ -570,7 +571,7 @@ public class EstoreE2EStepDefs {
     public void iClickOnContinuePaymentMethodEstoreButton() {
         with().pollInterval(6, SECONDS).await().until(() -> true);
         try {
-            if(estoreAddressScreen.getContinueToPayment().isDisplayed()){
+            if (estoreAddressScreen.getContinueToPayment().isDisplayed()) {
                 estoreAddressScreen.getContinueToPayment().scrollIntoView(true);
                 estoreAddressScreen.getContinueToPayment().should(visible, Duration.ofSeconds(2));
                 estoreAddressScreen.getContinueToPayment().click();
@@ -578,7 +579,7 @@ public class EstoreE2EStepDefs {
             } else {
                 estoreAddressScreen.getContinuePayment().scrollIntoView(true);
                 estoreAddressScreen.getContinuePayment().should(visible, Duration.ofSeconds(2));
-               estoreAddressScreen.getContinuePayment().click();
+                estoreAddressScreen.getContinuePayment().click();
                 with().pollInterval(3, SECONDS).await().until(() -> true);
             }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {

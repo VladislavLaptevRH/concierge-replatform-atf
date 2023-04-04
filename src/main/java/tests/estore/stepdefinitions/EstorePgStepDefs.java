@@ -97,14 +97,13 @@ public class EstorePgStepDefs {
 
     @When("I change a grid view from default {int} grid view to {int} grid view")
     public void iChangeAGridViewFromDefaultGridViewToGridView(int arg0, int arg1) {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
-        $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[3]")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[3]")).click();
+       $(By.xpath("//*[local-name()='svg' and @data-active='false']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[local-name()='svg' and @data-active='false']")).click();
     }
 
     @Then("I verify that page is displayed with the previous grid selected")
     public void iVerifyThatPageIsDisplayedWithThePreviousGridSelected() {
-        $(By.xpath("//*[@class='MuiGrid-root jss93 MuiGrid-item MuiGrid-grid-xs-6']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//*[local-name()='svg' and @data-active='true'])[1]")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I navigate to PG page from top menu")
@@ -154,7 +153,7 @@ public class EstorePgStepDefs {
         estorePGScreen.getMaterialFilter().should(visible, Duration.ofSeconds(10));
         estorePGScreen.getInStockFilter().should(visible, Duration.ofSeconds(10));
         estorePGScreen.getSizeFilter().should(visible, Duration.ofSeconds(10));
-        estorePGScreen.getSortFilter().should(visible,Duration.ofSeconds(10));
+        estorePGScreen.getSortFilter().should(visible, Duration.ofSeconds(10));
     }
 
     @When("I goes to {string} estore brand")
