@@ -26,6 +26,7 @@ Feature: Estore Sale
     Then I verify sale banner for estore
 
   Scenario: To verify the back button from sale PDP page
+
     Given I log into eStore as "regular" user
     When I click on estore sale button
     When I verify that I'm able to navigate different category

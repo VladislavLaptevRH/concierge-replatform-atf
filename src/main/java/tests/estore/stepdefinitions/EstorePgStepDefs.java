@@ -97,6 +97,7 @@ public class EstorePgStepDefs {
 
     @When("I change a grid view from default {int} grid view to {int} grid view")
     public void iChangeAGridViewFromDefaultGridViewToGridView(int arg0, int arg1) {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[3]")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[3]")).click();
     }
@@ -130,8 +131,11 @@ public class EstorePgStepDefs {
     @Then("I verify alignment for two and three grid views")
     public void iVerifyAlignmentForTwoAndThreeGridViews() {
         estorePGScreen.getGridView3().should(visible, Duration.ofSeconds(10));
-        $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[3]")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("(//*[text() = 'sort']/../..//div[2]/*)[3]")).click();
+        $(By.xpath("//*[text() = 'sort by:']/../following-sibling::*[1]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text() = 'sort by:']/../following-sibling::*[1]")).click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text() = 'sort by:']/../following-sibling::*[2]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text() = 'sort by:']/../following-sibling::*[2]")).click();
     }
 
     @Then("I verify that application render to the same view grid which was selected")

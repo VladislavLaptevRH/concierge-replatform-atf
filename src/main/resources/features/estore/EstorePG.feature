@@ -96,9 +96,3 @@ Feature: Estore PG
     Given I log into eStore as "guest" user
     When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
     Then I verify that search results page is displayed with newly searched products
-
-
-
-
-
-

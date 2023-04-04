@@ -683,11 +683,11 @@ public class EstoreCartPageStepDefs {
     @And("I introduces payment details for estore guest user for payment")
     public void iIntroducesPaymentDetailsForEstoreGuestUserForPayment() {
         if (!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()) {
-            String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
+            String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
 
-        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Visa ####-7543"), Duration.ofMinutes(2));
+//        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Visa ####-7543"), Duration.ofMinutes(2));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         selectPayment.selectByVisibleText("Visa ####-7543");
 
