@@ -87,8 +87,8 @@ public class EstorePaymentStepDefs {
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='CONTINUE']")).click();
         with().pollInterval(4, SECONDS).await().until(() -> true);
-        $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("(//a[@href='/checkout/payment.jsp'])[2]")).click();
+        $(By.xpath("(//a[@href='/us/en/checkout/shopping_cart.jsp'])[2]")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("(//a[@href='/us/en/checkout/shopping_cart.jsp'])[2]")).click();
         with().pollInterval(4, SECONDS).await().until(() -> true);
         estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(40));
         estoreCartPage.getRemoveButton().click();
@@ -100,12 +100,15 @@ public class EstorePaymentStepDefs {
     @When("I edit estore billing address from PG")
     public void iEditBillingAddressFromPG() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
+        if($(By.xpath("//*[text() = 'Something went wrong']")).isDisplayed()){
+            $(By.xpath("//*[@data-testid = 'dialog-title-close-button']")).click();
+        }
         if($(By.xpath("//a[@href='/checkout/payment.jsp#/']")).isDisplayed()){
         $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).click();
         }
-        estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(20));
-        estoreAddressScreen.getEditShippinggAddress().click();
+        estoreAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getEditBillingAddress().click();
         estoreAddressScreen.getBillingAddressFirstName().click();
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstName());
         estoreAddressScreen.getBillingAddressFirstName().setValue("NewBillingAddress");
@@ -261,7 +264,7 @@ public class EstorePaymentStepDefs {
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
         with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-        estoreAddressScreen.getPostalShippingCode().setValue("A1A1A1");
+        estoreAddressScreen.getPostalShippingCode().setValue("11111");
     }
 
     @When("I remove payment method which was used earlier")

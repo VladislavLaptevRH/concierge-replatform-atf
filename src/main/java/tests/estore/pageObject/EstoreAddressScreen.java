@@ -59,7 +59,7 @@ public class EstoreAddressScreen {
 
     private final SelenideElement stateSelect = $(By.xpath("//select[@id='shippingAddress.state']"));
 
-    private final SelenideElement state = $(By.xpath("//*[text() = 'AB - Alberta']"));
+    private final SelenideElement state = $(By.xpath("//*[text() = 'AZ - Arizona']"));
 
     private final SelenideElement canadaCountry = $(By.xpath("//select[@id='shippingAddress.country']//option[@value='CA']"));
 
@@ -115,5 +115,5 @@ public class EstoreAddressScreen {
 
     private final SelenideElement editPaymentOrderReview = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']/a)[2]"));
 
-    private final SelenideElement editBillingAddress = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-center']/a)[2]"));
+    private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'BILLING ADDRESS']/following-sibling::div"));
 }

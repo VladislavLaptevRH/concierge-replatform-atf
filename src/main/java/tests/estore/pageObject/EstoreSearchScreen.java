@@ -26,7 +26,7 @@ public class EstoreSearchScreen {
 
     private SelenideElement sorryWeCannotFindMsg = $(By.xpath("//*[text()='We’re sorry, we cannot find what you are looking for.']"));
 
-    private SelenideElement seeAllResultsButton = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']"));
+    private SelenideElement seeAllResultsButton = $(By.xpath("//*[text() = 'SEE ALL RESULTS']"));
 
     private SelenideElement searchButton = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary']"));
 

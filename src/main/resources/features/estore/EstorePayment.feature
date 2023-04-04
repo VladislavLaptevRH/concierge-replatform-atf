@@ -35,6 +35,7 @@ Feature:Estore Payment
     Then I verify that estore thank you page is displayed
 
   Scenario: eStore Edit Payment
+
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -49,6 +50,7 @@ Feature:Estore Payment
     Then I verify that I'm able to edit payment
 
   Scenario: eStore Edit Address
+
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -65,6 +67,7 @@ Feature:Estore Payment
     When I click on continue with original address estore button
 
   Scenario: eStore unavailability of RHCC for CAN address
+
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -249,6 +252,7 @@ Feature:Estore Payment
     Then I verify unavailability of saved for RHCC
 
   Scenario: eStore Update address (Change Country) after making payment
+
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore

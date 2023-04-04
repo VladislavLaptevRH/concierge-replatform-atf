@@ -80,7 +80,11 @@ public class EstoreSearchStepDefs {
         if (Hooks.cookie.equals("releasethurs")) {
             estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getSortByButton().click();
-        } else {
+        }
+         if(Hooks.cookie.equals("userservice")){
+                estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
+                estorePDPScreen.getSortByButton().click();
+            } else {
             estorePDPScreen.getSortButton().should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getSortButton().click();
         }
@@ -93,7 +97,11 @@ public class EstoreSearchStepDefs {
         if (Hooks.cookie.equals("releasethurs")) {
             estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getSortByButton().click();
-        } else {
+        }
+        if(Hooks.cookie.equals("userservice")){
+            estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
+            estorePDPScreen.getSortByButton().click();
+        }else {
             estorePDPScreen.getSortButton().should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getSortButton().click();
         }
