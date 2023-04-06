@@ -52,11 +52,10 @@ public class EstoreAddressStepDefs {
             Select selectCountry = new Select(estoreAddressScreen.getCountrySelect());
             selectCountry.selectByValue("CA");
             Select shippingAddress = new Select(estoreAddressScreen.getShippingAddressState());
-            shippingAddress.selectByValue("AB");
+            shippingAddress.selectByValue("AZ");
             estoreAddressScreen.getShippingAddressState();
             generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-            estoreAddressScreen.getPostalShippingCode().setValue("A1A1A1");
-
+            estoreAddressScreen.getPostalShippingCode().setValue("11111");
 
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Edit button is not displayed");
@@ -346,6 +345,12 @@ public class EstoreAddressStepDefs {
                     WebDriverRunner.getWebDriver().navigate().refresh();
                     with().pollInterval(5, SECONDS).await().until(() -> true);
                 }
+                if (!estoreItemPage.getAddToCartButtonNotDisabled().isDisplayed()) {
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                    iClickOnContinueToPayment();
+                }
+
                 estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
                 estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(50));
                 estoreItemPage.getAddToCartButton().click();
@@ -461,17 +466,17 @@ public class EstoreAddressStepDefs {
     public void iVerifyShippingAddressOnOrderReviewPage() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("SHIPPING ADDRESS"), Duration.ofSeconds(25));
-        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("Safire William"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("2479 Deer Run"), Duration.ofSeconds(25));
         $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("BILLING ADDRESS"), Duration.ofSeconds(25));
-        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("Safire William"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("2479 Deer Run"), Duration.ofSeconds(25));
     }
 
     @Then("I verify shipping and billing address on order confirmation page")
     public void iVerifyShippingAndBillingAddressOnOrderConfirmationPage() {
         $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("SHIPPING ADDRESS"), Duration.ofSeconds(25));
-        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("Safire William"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).shouldHave(text("2479 Deer Run"), Duration.ofSeconds(25));
         $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("BILLING ADDRESS"), Duration.ofSeconds(25));
-        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("Safire William"), Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[2]")).shouldHave(text("2479 Deer Run"), Duration.ofSeconds(25));
     }
 
     @When("I add gift message")

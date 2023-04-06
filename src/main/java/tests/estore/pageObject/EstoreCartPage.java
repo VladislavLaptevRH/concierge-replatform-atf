@@ -67,7 +67,7 @@ public class EstoreCartPage {
 
     private final SelenideElement removeButton = $(By.xpath("//*[text()='Remove']"));
 
-    private final SelenideElement estoreCartButton = $(By.xpath("//a[@href='/checkout/shopping_cart.jsp']"));
+    private final SelenideElement estoreCartButton = $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']"));
 
     private final SelenideElement cartButtonOrderReview = $(By.xpath("(//a[@href='/checkout/shopping_cart.jsp'])[2]"));
 
@@ -159,7 +159,7 @@ public class EstoreCartPage {
 
     private final SelenideElement memberPrice = $(By.xpath("//p[@data-testid='price-for-member']"));
 
-    private final SelenideElement zipCodeField = $(By.xpath("//input[@name='newPostalCode']"));
+    private final SelenideElement zipCodeField = $(By.xpath("//*[text() = 'Postal Code']/..//input"));
 
     private final SelenideElement regularItemPrice = $(By.xpath("(//p[@id='price'])[1]"));
 

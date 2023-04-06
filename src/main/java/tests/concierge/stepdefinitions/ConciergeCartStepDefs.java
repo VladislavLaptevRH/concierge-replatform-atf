@@ -1,14 +1,7 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
-
 import com.codeborne.selenide.WebDriverRunner;
-import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import tests.utility.Hooks;
-import tests.concierge.pageObject.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -16,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import tests.concierge.pageObject.*;
+import tests.utility.Hooks;
 
 import java.text.DecimalFormat;
 import java.time.Duration;
@@ -24,7 +19,8 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class ConciergeCartStepDefs {
     WebDriver webDriver = Hooks.getWebDriver();
@@ -146,7 +142,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that quantity was updated")
     public void iVerifyThatQuantityWasUpdated() {
-        conciergeUserAccountPage.getCartButton().getText().equals("CART " + randomQuantity);
+        assertEquals("CART " + randomQuantity, conciergeUserAccountPage.getCartButton().getText());
     }
 
     @When("I click on remove button from cart page")
@@ -460,6 +456,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that membership price displayed as total price")
     public void iVerifyThatMembershipPriceDisplayedAsTotalPrice() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if (!conciergeCartPageScreen.getPriceForMember().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -486,7 +483,7 @@ public class ConciergeCartStepDefs {
     @Then("I verify that postpone shipment was applied")
     public void iVerifyThatPostponeShipmentWasApplied() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeCartPageScreen.getPostponeShipOnOrAfterDate().isDisplayed();
+        conciergeCartPageScreen.getPostponeShipOnOrAfterDate().should(visible, Duration.ofSeconds(10));
     }
 
     @Then("I verify that gift box was added")
@@ -750,17 +747,17 @@ public class ConciergeCartStepDefs {
 
     @When("I remove all items from cart for minicart")
     public void iRemoveAllItemsFromCartForMinicart() {
-        generalStepDefs.removeLineItemFromConciergeCart();
+        GeneralStepDefs.removeLineItemFromConciergeCart();
     }
 
     @When("I add item to cart via API")
     public void iAddItemToCartViaAPI() {
-        generalStepDefs.addLineItemsToConciergeCart();
+        GeneralStepDefs.addLineItemsToConciergeCart();
     }
 
     @When("I remove all items from cart via API")
     public void iRemoveAllItemsFromCartViaAPI() {
-        generalStepDefs.removeLineItemFromConciergeCart();
+        GeneralStepDefs.removeLineItemFromConciergeCart();
     }
 
     @When("I remove all items from cart via UI")
@@ -812,6 +809,6 @@ public class ConciergeCartStepDefs {
 
     @When("I clear order via API")
     public void iClearOrderViaAPI() {
-        generalStepDefs.clearOrder();
+        GeneralStepDefs.clearOrder();
     }
 }
