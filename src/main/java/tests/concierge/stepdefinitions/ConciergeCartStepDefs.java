@@ -36,6 +36,7 @@ public class ConciergeCartStepDefs {
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
     ConciergeE2EStepDefs conciergeE2EStepDefs = new ConciergeE2EStepDefs();
     AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
+    ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
     int randomQuantity;
     int priceFirstLineItem;
     int priceSecondLineItem;
@@ -82,10 +83,10 @@ public class ConciergeCartStepDefs {
     @When("I click on view cart button")
     public void iClickOnViewCartButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        if(!conciergeCartPageScreen.getItemAddedToYourCart().isDisplayed()) {
+        if (!conciergeCartPageScreen.getItemAddedToYourCart().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
-            if(conciergeUserAccountPage.getCartButtonItemSum().exists()){
+            if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
                 String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
                 open(URL);
                 with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -300,7 +301,7 @@ public class ConciergeCartStepDefs {
     @When("I choose POS for payment method")
     public void iChoosePOPForPaymentMethod() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()){
+        if (!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
@@ -339,7 +340,7 @@ public class ConciergeCartStepDefs {
             for (int i = 0; i < 3; i++) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 with().pollInterval(4, SECONDS).await().until(() -> true);
-                if(conciergeItemsScreen.getAddToCartButton().isDisplayed()){
+                if (conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
                     break;
                 }
             }
@@ -398,7 +399,7 @@ public class ConciergeCartStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         int arg1 = Integer.parseInt(conciergeUserAccountPage.getCartItemSum().getText());
-        if(arg1 > 1){
+        if (arg1 > 1) {
             iRemoveAllItemsFromCartViaUI();
             conciergeE2EStepDefs.iOpenProductPageWithAnd("prod1617188", "63130001");
             conciergeE2EStepDefs.iClickOnAddToCartButton();
@@ -441,7 +442,7 @@ public class ConciergeCartStepDefs {
 
     @And("I edit ship to, bill to, sold to addresses")
     public void iEditShipToBillToSoldToAddresses() {
-        $(By.xpath("(//*[text()='Edit'])[1]")).click();
+        conciergeAddressScreen.getEditAddressButton().click();
         checkoutAddressScreen.getCompanyNameField().should(visible, Duration.ofMinutes(1));
         generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameField());
         checkoutAddressScreen.getCompanyNameField().setValue("changedCompanyNameSoldAddress");
@@ -459,7 +460,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that membership price displayed as total price")
     public void iVerifyThatMembershipPriceDisplayedAsTotalPrice() {
-        if(!conciergeCartPageScreen.getPriceForMember().isDisplayed()){
+        if (!conciergeCartPageScreen.getPriceForMember().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
@@ -628,13 +629,13 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify membership popup for guest user")
     public void iVerifyMembershipPopupForGuestUser() {
-        if(!conciergeCartPageScreen.getNoThanksButton().isDisplayed()){
-            for(int i = 0; i < 3; i++){
+        if (!conciergeCartPageScreen.getNoThanksButton().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
                 String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
                 open(URL);
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 abstractStepDefs.iClickOnCheckoutButton();
-                if($(By.xpath("//*[text()='Your RH Membership immediately pays for itself.']")).isDisplayed()){
+                if ($(By.xpath("//*[text()='Your RH Membership immediately pays for itself.']")).isDisplayed()) {
                     break;
                 }
             }
@@ -701,8 +702,8 @@ public class ConciergeCartStepDefs {
     }
 
     @And("I verify that promotion is not displayed")
-    public void iVerifyThatPromotionIsNotDisplayed()  {
-        if(conciergeCartPageScreen.getTotalAditionalProdDiscount().isDisplayed()){
+    public void iVerifyThatPromotionIsNotDisplayed() {
+        if (conciergeCartPageScreen.getTotalAditionalProdDiscount().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
@@ -728,6 +729,7 @@ public class ConciergeCartStepDefs {
         orderClassificationDropDownList.selectByValue("RH Gallery Order");
         with().pollInterval(5, SECONDS).await().until(() -> true);
     }
+
     @Then("I verify contract savings")
     public void iVerifyContractSavingsForCartPage() {
         conciergeCartPageScreen.getContractSavings().should(visible, Duration.ofSeconds(20));
@@ -737,19 +739,20 @@ public class ConciergeCartStepDefs {
     @When("I click on order details button")
     public void iClickOnOrderDetailsButton() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-            if(conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed()){
-                conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").click();
-            } else if (conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").isDisplayed()){
-                conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").click();
-            } else {
-                with().pollInterval(1, SECONDS).await().until(() -> true);
-            }
+        if (conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed()) {
+            conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").click();
+        } else if (conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").isDisplayed()) {
+            conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").click();
+        } else {
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+        }
     }
 
     @When("I remove all items from cart for minicart")
     public void iRemoveAllItemsFromCartForMinicart() {
         generalStepDefs.removeLineItemFromConciergeCart();
     }
+
     @When("I add item to cart via API")
     public void iAddItemToCartViaAPI() {
         generalStepDefs.addLineItemsToConciergeCart();
@@ -768,7 +771,7 @@ public class ConciergeCartStepDefs {
             String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
             open(URL);
             with().pollInterval(5, SECONDS).await().until(() -> true);
-            if(!conciergeCartPageScreen.getClearOrderButton().isDisplayed()){
+            if (!conciergeCartPageScreen.getClearOrderButton().isDisplayed()) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 open(URL);
                 with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -786,7 +789,7 @@ public class ConciergeCartStepDefs {
                     conciergeCartPageScreen.getClearOrderButton().shouldHave(visible, Duration.ofSeconds(10));
                     conciergeCartPageScreen.getClearOrderButton().click();
                     with().pollInterval(2, SECONDS).await().until(() -> true);
-                    if(conciergeCartPageScreen.getClearOrderButtonPopUpHeader().isDisplayed()){
+                    if (conciergeCartPageScreen.getClearOrderButtonPopUpHeader().isDisplayed()) {
                         conciergeCartPageScreen.getClearOrderButtonPop().click();
                         break;
                     }
@@ -797,13 +800,13 @@ public class ConciergeCartStepDefs {
                 conciergeCartPageScreen.getClearOrderButtonPop().click();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
-                WebDriverRunner.getWebDriver().navigate().refresh();
-                with().pollInterval(5, SECONDS).await().until(() -> true);
-                if(conciergeUserAccountPage.getCartButtonItemSum().exists()){
-                    iRemoveAllItemsFromCartViaUI();
-                }
-                conciergeUserAccountPage.getCartButton().should(visible,Duration.ofMinutes(5));
-                conciergeUserAccountPage.getCartButtonItemSum().shouldNot(visible, Duration.ofMinutes(2));
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
+                iRemoveAllItemsFromCartViaUI();
+            }
+            conciergeUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(5));
+            conciergeUserAccountPage.getCartButtonItemSum().shouldNot(visible, Duration.ofMinutes(2));
         }
     }
 
