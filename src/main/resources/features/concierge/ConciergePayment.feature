@@ -81,6 +81,7 @@ Feature: Concierge Payment
     When I click on no thanks button
     When I fill all fields from address screen
     And I continue to payment
+    When I click on continue with original address button
     Then I verify that member savings in payment page
 
   Scenario: Verify trade savings in payment page
