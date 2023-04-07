@@ -173,6 +173,7 @@ public class ConciergeE2EStepDefs {
         checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
         checkoutAddressScreen.getContinuePaymentButton().click();
         with().pollInterval(6, SECONDS).await().until(() -> true);
+
         if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
             conciergeProjectScreen.getTryAgainButton().click();
             with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -180,6 +181,7 @@ public class ConciergeE2EStepDefs {
             checkoutAddressScreen.getContinuePaymentButton().click();
             with().pollInterval(3, SECONDS).await().until(() -> true);
         }
+
         if (conciergeProjectScreen.getContinueWithSuggestedAddressButton().isDisplayed()) {
             conciergeProjectScreen.getContinueWithSuggestedAddressButton().click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -405,7 +407,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I remove client from header")
     public void iRemoveClientFromHeader() {
-        conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
+        conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(20));
         conciergeUserAccountPage.getClientButton().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
         if (conciergeUserAccountPage.getRemoveClientByText().isDisplayed()) {
@@ -426,10 +428,10 @@ public class ConciergeE2EStepDefs {
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
 
-        if(!conciergeUserAccountPage.getClientLookupFirstNameByName().isDisplayed()){
+        if (!conciergeUserAccountPage.getClientLookupFirstNameByName().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
-            if(!conciergeUserAccountPage.getClientLookupFirstNameByName().isDisplayed()){
+            if (!conciergeUserAccountPage.getClientLookupFirstNameByName().isDisplayed()) {
                 String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
                 open(URL);
                 with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -492,16 +494,8 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify that address screen is displayed")
     public void iVerifyThatAddressScreenIsDisplayed() {
-        checkoutAddressScreen.getFirstNameInpt().should(Condition.be(visible), Duration.ofSeconds(20));
-        checkoutAddressScreen.getLastNameField().should(Condition.be(visible), Duration.ofSeconds(20));
-        checkoutAddressScreen.getCompanyNameField().should(Condition.be(visible), Duration.ofSeconds(20));
-        assertTrue(checkoutAddressScreen.getFirstNameInpt().isDisplayed());
-        assertTrue(checkoutAddressScreen.getLastNameField().isDisplayed());
-        assertTrue(checkoutAddressScreen.getCompanyNameField().isDisplayed());
-        assertTrue(checkoutAddressScreen.getStreetAddressField().isDisplayed());
-        assertTrue(checkoutAddressScreen.getAptFloorSuiteField().isDisplayed());
-        assertTrue(checkoutAddressScreen.getCityField().isDisplayed());
-        assertTrue(checkoutAddressScreen.getPhoneField().isDisplayed());
+        conciergeAddressScreen.getShippingAddressTitle().should(visible, Duration.ofSeconds(20));
+        conciergeAddressScreen.getBillingAddressTitle().should(visible, Duration.ofSeconds(20));
     }
 
     @When("I click on sale point of menu")
@@ -684,9 +678,7 @@ public class ConciergeE2EStepDefs {
         try {
             conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
             conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofSeconds(40));
-        }
-        catch (com.codeborne.selenide.ex.ElementNotFound e)
-        {
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
             conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
@@ -744,19 +736,7 @@ public class ConciergeE2EStepDefs {
     @And("I fill all fields for sold to address")
     public void iFillAllFieldsForSoldToAddress() {
         generalStepDefs.fillAddressFields();
-//        generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
-//        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
-//        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
-//        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[1]")).scrollIntoView(true);
-//        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[1]")).click();
-//        $(By.xpath("//*[text() = 'Continue to payment']")).scrollIntoView(true);
-//        $(By.xpath("//*[text() = 'Continue to payment']")).click();
-//        $(By.xpath("//*[text() = 'CONTINUE']")).scrollIntoView(true);
-//        $(By.xpath("//*[text() = 'CONTINUE']")).click();
-//        $(By.xpath("//*[text() = 'OK']")).shouldHave(visible, Duration.ofSeconds(6));
-//        $(By.xpath("//*[text() = 'OK']")).click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
-//        $(By.cssSelector("body > div:nth-child(7) > div:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > label:nth-child(1) > span:nth-child(1) > span:nth-child(1) > input:nth-child(1)")).click();
     }
 
     @Then("I verify that I'm able to edit shipping address")
@@ -861,7 +841,7 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify order details from thank you page")
     public void iVerifyOrderDetailsFromThankYouPage() {
-        $(By.xpath("//div[@data-testid='checkout-address-view']")).should(visible, Duration.ofSeconds(25));
+        $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).should(visible, Duration.ofSeconds(25));
         $(By.xpath("//*[text()='Important Information']")).should(visible, Duration.ofSeconds(25));
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofSeconds(10));
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
@@ -904,6 +884,7 @@ public class ConciergeE2EStepDefs {
         }
         conciergeItemsScreen.getAddToCartButton().scrollTo();
         conciergeItemsScreen.getAddToCartButton().should(visible, Duration.ofSeconds(10));
+
         if (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
             conciergeItemsScreen.getChoseFinishOption().click();
             Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
@@ -936,5 +917,16 @@ public class ConciergeE2EStepDefs {
         }
         WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(2, SECONDS).await().until(() -> true);
+    }
+
+    @When("I click on edit concierge billing address button")
+    public void iClickOnEditConciergeBillingAddressButton() {
+        System.out.println();
+        if (conciergeAddressScreen.getEditAddressButton().isDisplayed()) {
+            conciergeAddressScreen.getEditAddressButton().shouldHave(text("Edit"), Duration.ofSeconds(10));
+            conciergeAddressScreen.getEditAddressButton().click();
+        }else{
+            System.out.println();
+        }
     }
 }

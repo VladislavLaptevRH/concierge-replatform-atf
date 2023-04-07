@@ -126,8 +126,7 @@ Feature: Estore Address Page
     When I click on same as estore shipping address checkbox
     Then I verify that billing address the same as shipping functionality
 
-  Scenario: eStore Address Page - Verify the shipping and Billing address for registered User Order review and Order Confirmation pageko9
-
+  Scenario: eStore Address Page - Verify the shipping and Billing address for registered User Order review and Order Confirmation page
     Given I log into eStore as "addresspage" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
