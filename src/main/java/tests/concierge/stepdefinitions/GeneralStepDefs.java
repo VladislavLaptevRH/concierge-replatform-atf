@@ -173,8 +173,9 @@ public class GeneralStepDefs {
 
         clearField(checkoutAddressScreen.getPhoneField());
         checkoutAddressScreen.getPhoneField().setValue("1241312319");
-
-        executeJavaScript("arguments[0].click();", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
+        if(checkoutAddressScreen.getBillingAddressAsShippingCheckBox().isDisplayed()){
+            executeJavaScript("arguments[0].click();", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
+            }
 
         conciergeAddressScreen.getBillingAddressText().should(visible, Duration.ofSeconds(12));
     }

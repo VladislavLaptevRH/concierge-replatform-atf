@@ -78,7 +78,7 @@ public class EstoreContractTradeStepDefs {
     @When("I click on confirm button from pop up zip code")
     public void iClickOnConfirmButtonFromPopUpZipCode() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text()='Confirm']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Confirm']")).click();
+        $(By.xpath("//*[text()='CONFIRM']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='CONFIRM']")).click();
     }
 }

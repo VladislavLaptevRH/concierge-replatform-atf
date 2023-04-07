@@ -28,6 +28,7 @@ Feature: eStore Contract and Trade
     Then I verify that price for product&line should be in US dollars
 
   Scenario: eStore Contract - Validate the currency for CAN Zip
+
     Given I log into eStore as "noaddresses" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -76,7 +77,6 @@ Feature: eStore Contract and Trade
 #    Then I verify that contract price is used for each TN product
 
   Scenario: eStore Contract - Verify RHCC payment option for Contract user
-
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -86,6 +86,7 @@ Feature: eStore Contract and Trade
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
+    When I remove payment method which was used earlier
     When I pay with RHCC for estore item
     When I click on continue payment method estore button
 
@@ -153,6 +154,7 @@ Feature: eStore Contract and Trade
     Then I verify that gift card balance info is displayed for estore
 
   Scenario: eStore Contract - Edit Payment
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -202,7 +204,6 @@ Feature: eStore Contract and Trade
     And I click on estore no thanks button
 
   Scenario Outline: Verify different payment types on payment page
-
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -248,6 +249,7 @@ Feature: eStore Contract and Trade
     When I edit estore billing address from PG
     When I click on continue to payment estore button
     When I click on continue with original address estore button
+    Then I see new Billing address
 
   Scenario Outline: eStore Contract - Major CC
     Given I log into eStore as contract
@@ -305,6 +307,7 @@ Feature: eStore Contract and Trade
     Then I verify that price for product&line should be in US dollars
 
   Scenario: eStore Trade - Validate the currency for CAN Zip
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -401,7 +404,6 @@ Feature: eStore Contract and Trade
     Then I verify that I'm able to edit payment
 
   Scenario Outline: estore Trade - Major CC
-
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -433,6 +435,7 @@ Feature: eStore Contract and Trade
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
+    When I remove payment method which was used earlier
     When I execute payment with credit card on estore
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
@@ -447,7 +450,6 @@ Feature: eStore Contract and Trade
     Then I verify UFD in cart
 
   Scenario: Change zip code in cart to US, currency should be in US$
-
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050045" with "WHT" for estore
