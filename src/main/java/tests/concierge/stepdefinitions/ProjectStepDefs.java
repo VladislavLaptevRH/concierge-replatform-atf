@@ -105,23 +105,21 @@ public class ProjectStepDefs {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("unclassifiedBusiness");
         }
-        conciergeUserAccountPage.getClientLookupEmail().shouldBe(visible, Duration.ofSeconds(12));
-        conciergeUserAccountPage.getClientLookupEmail().setValue("test@test.com");
-        conciergeProjectScreen.getClientPhone().shouldBe(visible, Duration.ofSeconds(12));
-        conciergeProjectScreen.getClientPhone().setValue("1234567890");
-        conciergeProjectScreen.getClientPostalCode().shouldBe(visible, Duration.ofSeconds(12));
-        conciergeProjectScreen.getClientPostalCode().setValue("95035");
+//        conciergeUserAccountPage.getClientLookupEmail().shouldBe(visible, Duration.ofSeconds(12));
+//        conciergeUserAccountPage.getClientLookupEmail().setValue("test@test.com");
+//        conciergeProjectScreen.getClientPhone().shouldBe(visible, Duration.ofSeconds(12));
+//        conciergeProjectScreen.getClientPhone().setValue("1234567890");
+//        conciergeProjectScreen.getClientPostalCode().shouldBe(visible, Duration.ofSeconds(12));
+//        conciergeProjectScreen.getClientPostalCode().setValue("95035");
         conciergeProjectScreen.getContinueCreateAProjectButton().click();
-//        conciergeProjectScreen.getProjectResultsFirstRow().should(visible, Duration.ofSeconds(12));
-//        conciergeProjectScreen.getProjectResultsFirstRow().click();
+        conciergeProjectScreen.getProjectResultsFirstRow().should(visible, Duration.ofSeconds(12));
+        conciergeProjectScreen.getProjectResultsFirstRow().click();
     }
 
     @When("I click on new project button")
     public void iClickOnNewProjectButton() {
         conciergeProjectScreen.getNewProjectButton().should(visible, Duration.ofSeconds(12));
         conciergeProjectScreen.getNewProjectButton().click();
-        conciergeProjectScreen.getNewProjectPlusIcon().should(visible,Duration.ofSeconds(12));
-        conciergeProjectScreen.getNewProjectPlusIcon().click();
     }
 
     @When("I introduces details for new project")

@@ -82,7 +82,7 @@ public class ConciergeCartPageScreen {
 
     private final List<SelenideElement> monogramColors = $$(By.xpath("(//ul[@class='MuiGridList-root'])[2]//li[@class='MuiGridListTile-root']"));
 
-    private final SelenideElement removeMonogramBtn = $(By.xpath("//*[@data-analytics-id = \"link\" and text()=\"Remove\"]"));
+    private final SelenideElement removeMonogramBtn = $(By.xpath("(//*[text()='Remove'])[1]"));
 
     private final SelenideElement userNamePromocode = $(By.xpath("//input[@autocomplete='new-username']"));
 

@@ -202,4 +202,14 @@ public class PaymentStepDefs {
     public void iExecutePOSConciergePayment() {
         System.out.println();
     }
+
+    @When("I click on continue with original address button")
+    public void iClickOnContinueWithOriginalAddressButton() {
+        try {
+            $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).should(Condition.and("", Condition.enabled, Condition.visible), Duration.ofSeconds(60));
+            $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Continue with original address button is not displayed");
+        }
+    }
 }
