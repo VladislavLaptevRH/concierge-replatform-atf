@@ -1,6 +1,6 @@
 @estoreRegression
 @estorePayment
-Feature:Estore Payment
+Feature: Estore Payment
 
   Scenario: eStore Split Payment
     Given I log into eStore as "regular" user

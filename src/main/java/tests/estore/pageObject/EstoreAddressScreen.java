@@ -89,6 +89,8 @@ public class EstoreAddressScreen {
 
     private final SelenideElement billingAddressFirstName = $(By.id("billingAddress.firstName"));
 
+    private final SelenideElement billingAddressFirstNameNew = $(By.xpath("//input[@id = 'billingAddress.firstName']"));
+
     private final SelenideElement billingAddressLastName = $(By.id("billingAddress.lastName"));
 
     private final SelenideElement billingAddressStreetAddress = $(By.id("billingAddress.addressLine1"));
@@ -115,5 +117,6 @@ public class EstoreAddressScreen {
 
     private final SelenideElement editPaymentOrderReview = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']/a)[2]"));
 
-    private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'BILLING ADDRESS']/following-sibling::div"));
+    private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'BILLING ADDRESS']/following-sibling::div/*[text() = 'Edit']"));
+    private final SelenideElement editBillingAddressNew = $(By.xpath("//*[text() = 'Billing Address']/..//*[text() = 'Edit']"));
 }

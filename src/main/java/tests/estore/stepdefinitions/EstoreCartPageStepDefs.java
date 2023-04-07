@@ -247,7 +247,6 @@ public class EstoreCartPageStepDefs {
         estoreCartPage.getRegularItemPrice().should(visible, Duration.ofSeconds(20));
         String itemPrice = estoreCartPage.getRegularItemPrice().getText().replace("$", "").replace(".00", "");
         lineItemPrice = Integer.parseInt(itemPrice) * itemQuantity;
-
         estoreCartPage.getTotalLineItemPrice().shouldHave(text(String.valueOf(lineItemPrice)), Duration.ofSeconds(40));
     }
 
@@ -487,9 +486,9 @@ public class EstoreCartPageStepDefs {
         $(By.xpath("//div[@id='component-order-summary']//p//span")).scrollIntoView(true);
         $(By.xpath("//div[@id='component-order-summary']//p//span")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//div[@id='component-order-summary']//p//span")).click();
-        $(By.xpath("//input[@data-testid='postalcode-dialog-input']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//input[@data-testid='postalcode-dialog-input']")).clear();
-        $(By.xpath("//input[@data-testid='postalcode-dialog-input']")).setValue("A1A1A1");
+        $(By.xpath("//input[@id='postal-code-international']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//input[@id='postal-code-international']")).clear();
+        $(By.xpath("//input[@id='postal-code-international']")).setValue("11111");
     }
 
     @Then("I verify that the price for trade get increased in multiple of QTY")
