@@ -142,7 +142,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that quantity was updated")
     public void iVerifyThatQuantityWasUpdated() {
-        assertEquals("CART " + randomQuantity, conciergeUserAccountPage.getCartButton().getText());
+        assertEquals(randomQuantity, Integer.parseInt(conciergeUserAccountPage.getCartButtonItemSum().getText()));
     }
 
     @When("I click on remove button from cart page")
@@ -438,17 +438,22 @@ public class ConciergeCartStepDefs {
 
     @And("I edit ship to, bill to, sold to addresses")
     public void iEditShipToBillToSoldToAddresses() {
-        conciergeAddressScreen.getEditAddressButton().click();
+        if(conciergeAddressScreen.getEditAddressButton().isDisplayed()){
+            conciergeAddressScreen.getEditAddressButton().click();
+        }
         checkoutAddressScreen.getCompanyNameField().should(visible, Duration.ofMinutes(1));
         generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameField());
         checkoutAddressScreen.getCompanyNameField().setValue("changedCompanyNameSoldAddress");
-        $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
-        $(By.xpath("(//*[text()='Edit'])[10]")).click();
+        if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()){
+            $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
+            $(By.xpath("(//*[text()='Edit'])[10]")).click();
+        }
         $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")).should(visible, Duration.ofMinutes(1));
         generalStepDefs.clearField($(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")));
         $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")).setValue("changedCompanyNameBillingAddress");
-
-        $(By.xpath("(//*[text()='Edit'])[1]")).click();
+       if($(By.xpath("(//*[text()='Edit'])[1]")).isDisplayed()){
+           $(By.xpath("(//*[text()='Edit'])[1]")).click();
+           }
         $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")).should(visible, Duration.ofMinutes(1));
         generalStepDefs.clearField($(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")));
         $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")).setValue("changedCompanyNameShippingAddress");
@@ -546,6 +551,11 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that address saved in address page")
     public void iVerifyThatAddressSavedInAddressPage() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if($(By.xpath("(//*[text()='Edit'])[1]")).isDisplayed()) {
+            $(By.xpath("(//*[text()='Edit'])[1]")).scrollIntoView(true);
+            $(By.xpath("(//*[text()='Edit'])[1]")).click();
+        }
         checkoutAddressScreen.getFirstNameInpt().should(visible, Duration.ofMinutes(1));
         checkoutAddressScreen.getFirstNameInpt().shouldHave(value("QAFirst"), Duration.ofMinutes(1));
         checkoutAddressScreen.getLastNameField().shouldHave(value("Automation"), Duration.ofMinutes(1));
@@ -765,9 +775,9 @@ public class ConciergeCartStepDefs {
         WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
-            String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
+            String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
             open(URL);
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             if (!conciergeCartPageScreen.getClearOrderButton().isDisplayed()) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 open(URL);
@@ -798,7 +808,6 @@ public class ConciergeCartStepDefs {
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
             WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
             if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
                 iRemoveAllItemsFromCartViaUI();
             }

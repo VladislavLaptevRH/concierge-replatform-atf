@@ -163,7 +163,7 @@ public class GeneralStepDefs {
         clearField(checkoutAddressScreen.getStreetAddressField());
         checkoutAddressScreen.getStreetAddressField().setValue("North 16th Street");
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        checkoutAddressScreen.getStreetAddressField().sendKeys(Keys.ENTER);
+//        checkoutAddressScreen.getStreetAddressField().sendKeys(Keys.ENTER);
 
         clearField(checkoutAddressScreen.getAptFloorSuiteField());
         checkoutAddressScreen.getAptFloorSuiteField().setValue("QaApartment");
