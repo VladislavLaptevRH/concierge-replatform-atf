@@ -691,6 +691,11 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify zipcode")
     public void iVerifyZipcode() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()) {
+            $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
+            $(By.xpath("(//*[text()='Edit'])[10]")).click();
+        }
         generalStepDefs.clearField(checkoutAddressScreen.getZipPostalCodeField());
         checkoutAddressScreen.getZipPostalCodeField().setValue("1234");
         $(By.xpath("//*[text()='Invalid zip/postal code.']")).should(visible, Duration.ofMinutes(1));

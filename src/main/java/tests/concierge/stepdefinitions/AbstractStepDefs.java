@@ -189,6 +189,10 @@ public class AbstractStepDefs {
     public void iFillAllFieldsFromAddressScreenForBrands() {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(3, SECONDS).await().until(() -> true);
+        if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()) {
+            $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
+            $(By.xpath("(//*[text()='Edit'])[10]")).click();
+        }
             if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
                 generalStepDefs.fillAddressFields();
                 generalStepDefs.fillZipCodeStateCountry("85020", "US", "AZ - Arizona");
