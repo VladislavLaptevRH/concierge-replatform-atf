@@ -344,6 +344,7 @@ public class ConciergeCartStepDefs {
         try {
             with().pollInterval(2, SECONDS).await().until(() -> true);
             conciergeItemsScreen.getAddToCartButton().scrollTo();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             selectOption.getSelectSizeElement().should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
             selectOption.getSelectSizeElement().scrollIntoView(true);
             Select size = new Select(selectOption.getSelectSizeElement());
@@ -676,7 +677,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that mini cart value is equal to quantity of product")
     public void iVerifyThatMiniCartValueIsEqualToQuantityOfProduct() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         assertEquals(randomQuantity, Integer.parseInt(conciergeUserAccountPage.getCartItemSum().getText()));
     }

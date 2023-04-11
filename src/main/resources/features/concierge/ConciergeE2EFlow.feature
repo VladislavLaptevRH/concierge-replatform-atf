@@ -15,6 +15,7 @@ Feature: Concierge E2E flow
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
+    When I click on continue with original address button
     When I execute payment for "VI"
     Then I verify that review screen is displayed
     When I click on a place order button
@@ -32,6 +33,7 @@ Feature: Concierge E2E flow
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
+    When I click on continue with original address button
     When I introduces payment details for several payment methods
     When I click on a place order button
     Then I verify that confirmation order screen is displayed

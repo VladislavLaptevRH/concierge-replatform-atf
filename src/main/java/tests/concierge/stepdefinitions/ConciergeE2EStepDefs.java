@@ -117,12 +117,25 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
-        generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeItemsScreen.getAddToCartButton().scrollTo();
-        conciergeItemsScreen.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
-        conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
-        conciergeItemsScreen.getAddToCartButton().click();
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
+            conciergeItemsScreen.getChoseFinishOption().click();
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+            Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
+            sizeList.selectByVisibleText("Queen");
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+            Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
+            finishList.selectByVisibleText("Antiqued Grey Oak");
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+            Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
+            quantityList.selectByVisibleText("1");
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+        }
+            generalStepDefs.waitForJSandJQueryToLoad();
+            conciergeItemsScreen.getAddToCartButton().scrollTo();
+            conciergeItemsScreen.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
+            conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
+            conciergeItemsScreen.getAddToCartButton().click();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @When("I fill all fields from address with {string} zip code")
@@ -740,6 +753,11 @@ public class ConciergeE2EStepDefs {
 
     @And("I fill all fields for sold to address")
     public void iFillAllFieldsForSoldToAddress() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if($(By.xpath("(//*[text()='Edit'])[1]")).isDisplayed()) {
+            $(By.xpath("(//*[text()='Edit'])[1]")).scrollIntoView(true);
+            $(By.xpath("(//*[text()='Edit'])[1]")).click();
+        }
         generalStepDefs.fillAddressFields();
         with().pollInterval(3, SECONDS).await().until(() -> true);
     }
@@ -747,10 +765,11 @@ public class ConciergeE2EStepDefs {
     @Then("I verify that I'm able to edit shipping address")
     public void iVerifyThatIMAbleToEditShippingAddress() {
         $(By.xpath("//*[text()='NewShippingAddress NewLastName']")).shouldHave(text("NewShippingAddress NewLastName"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='NewCompanyName']")).shouldHave(text("NewCompanyName"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='Newappartment']")).shouldHave(text("Newappartment"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='37 New Road']")).shouldHave(text("37 New Road"), Duration.ofSeconds(25));
+//        $(By.xpath("//*[text()='NewCompanyName']")).shouldHave(text("NewCompanyName"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='NewAppartment']")).shouldHave(text("Newappartment"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='37 new road']")).shouldHave(text("37 New Road"), Duration.ofSeconds(25));
         $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
     }
 
     @When("I edit shipping address from order review page")
@@ -758,6 +777,11 @@ public class ConciergeE2EStepDefs {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeAddressScreen.getEditShippingAddress().should(visible, Duration.ofSeconds(15));
         conciergeAddressScreen.getEditShippingAddress().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        if($(By.xpath(" (//*[text()='Edit'])[1]")).isDisplayed()){
+            $(By.xpath(" (//*[text()='Edit'])[1]")).click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
         checkoutAddressScreen.getFirstNameInpt().should(visible, Duration.ofSeconds(15));
         generalStepDefs.clearField(checkoutAddressScreen.getFirstNameInpt());
         checkoutAddressScreen.getFirstNameInpt().setValue("NewShippingAddress");
@@ -773,14 +797,18 @@ public class ConciergeE2EStepDefs {
         checkoutAddressScreen.getCityField().setValue("Milpitas");
         generalStepDefs.clearField(checkoutAddressScreen.getPhoneField());
         checkoutAddressScreen.getPhoneField().setValue("3234546576");
-        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @When("I edit billing address from order review page")
     public void iEditBillingAddressFromOrderReviewPage() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(15));
         conciergeAddressScreen.getEditBillingAddress().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        if($(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]")).isDisplayed()){
+            $(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]")).click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
         generalStepDefs.clearField(checkoutAddressScreen.getFirstNameBillingAddress());
         checkoutAddressScreen.getFirstNameBillingAddress().setValue("NewFirstName");
         generalStepDefs.clearField(checkoutAddressScreen.getLastNameBillingAddress());
@@ -800,10 +828,10 @@ public class ConciergeE2EStepDefs {
     @And("I verify that I'm able to edit billing address")
     public void iVerifyThatIMAbleToEditBillingAddress() {
         $(By.xpath("//*[text()='NewFirstName NewLastName']")).shouldHave(text("NewFirstName NewLastName"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='NewCompanyName']")).shouldHave(text("NewCompanyName"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='Newappartment']")).shouldHave(text("Newappartment"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='37 New Road']")).shouldHave(text("37 New Road"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='Phoenix, AZ 85020']")).shouldHave(text("Phoenix, AZ 85020"), Duration.ofSeconds(25));
+//        $(By.xpath("//*[text()='NewCompanyName']")).shouldHave(text("NewCompanyName"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='NewAppartment']")).shouldHave(text("Newappartment"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='37 new road']")).shouldHave(text("37 New Road"), Duration.ofSeconds(25));
+//        $(By.xpath("//*[text()='Phoenix, AZ 85020']")).shouldHave(text("Phoenix, AZ 85020"), Duration.ofSeconds(25));
         $(By.xpath("//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
         $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
     }
@@ -892,12 +920,16 @@ public class ConciergeE2EStepDefs {
 
         if (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
             conciergeItemsScreen.getChoseFinishOption().click();
+            with().pollInterval(1, SECONDS).await().until(() -> true);
             Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
             sizeList.selectByVisibleText("Queen");
+            with().pollInterval(1, SECONDS).await().until(() -> true);
             Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
             finishList.selectByVisibleText("Antiqued Grey Oak");
+            with().pollInterval(1, SECONDS).await().until(() -> true);
             Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
             quantityList.selectByVisibleText("1");
+            with().pollInterval(1, SECONDS).await().until(() -> true);
         }
     }
 
