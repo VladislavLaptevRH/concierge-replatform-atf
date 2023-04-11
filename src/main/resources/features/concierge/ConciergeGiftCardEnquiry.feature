@@ -25,6 +25,7 @@ Feature: Concierge GiftCardEnquiry
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
+    When I click on continue with original address button
     When I choose POS for payment method
     And I verify that review screen is displayed
     When I click on a place order button

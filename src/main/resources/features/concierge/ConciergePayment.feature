@@ -14,6 +14,7 @@ Feature: Concierge Payment
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
+    When I click on continue with original address button
     When I execute payment for "<cardType>"
     And I verify that review screen is displayed
     Examples:
@@ -35,6 +36,7 @@ Feature: Concierge Payment
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
+    When I click on continue with original address button
     When I choose "RH Gift Card" from payment method
     When I click on check balance button
     Then I verify that balance info is displayed
@@ -51,6 +53,7 @@ Feature: Concierge Payment
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
+    When I click on continue with original address button
     Then I verify the complete billing address
 
   Scenario: Verify the subtotal, shipping fee, taxes based on postal code
@@ -65,6 +68,7 @@ Feature: Concierge Payment
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
+    When I click on continue with original address button
     Then I verify subtotal, shipping fee, taxes based on postal code
 
   Scenario: Verify member savings in payment page
@@ -111,6 +115,8 @@ Feature: Concierge Payment
     When I choose client who is a "Non-Member"
     And I fill all fields from address screen
     And I continue to payment
+    When I click on continue with original address button
     When I edit billing address from order review page
     And I continue to payment
+    When I click on continue with original address button
     Then I verify that I'm able to edit billing address
