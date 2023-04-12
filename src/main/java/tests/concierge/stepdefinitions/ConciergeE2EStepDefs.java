@@ -117,6 +117,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         if (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
             conciergeItemsScreen.getChoseFinishOption().click();
             with().pollInterval(1, SECONDS).await().until(() -> true);

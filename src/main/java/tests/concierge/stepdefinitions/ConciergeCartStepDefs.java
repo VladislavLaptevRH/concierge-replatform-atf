@@ -746,7 +746,7 @@ public class ConciergeCartStepDefs {
 
     @When("I click on order details button")
     public void iClickOnOrderDetailsButton() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if (conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed()) {
             conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").click();
         } else if (conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").isDisplayed()) {
