@@ -48,7 +48,7 @@ public class PaymentStepDefs {
             }
         }
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         generalStepDefs.payWith("VI", "4111 1111 4555 1142", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());

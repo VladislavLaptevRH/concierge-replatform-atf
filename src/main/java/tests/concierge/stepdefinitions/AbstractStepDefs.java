@@ -209,7 +209,7 @@ public class AbstractStepDefs {
             } else {
                 System.out.println("Address fields are not available");
             }
-            if( $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
+            if(checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
                 if (!$(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
                     $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).click();
                     with().pollInterval(2, SECONDS).await().until(() -> true);
