@@ -13,7 +13,7 @@ Feature: Concierge Project
       | items    |
       | SPO      |
       | In stock |
-#      | SPO In stock Items |
+      | SPO In stock Items |
 #      | BO                |
 
   Scenario: Verify the Projects load for a logged in associate
@@ -49,7 +49,7 @@ Feature: Concierge Project
     When I click on projects button
     When I click on new project button
     When I introduces "<businessClient>" first and last name
-    When I introduces details for new project
+#    When I introduces details for new project
     Then I verify that new project for <"businessClient"> was created
     Examples:
       | businessClient       |
@@ -275,6 +275,7 @@ Feature: Concierge Project
     Then user verifies that project page is displayed
 
   Scenario: Verify Tax exempt in projects for Trade projects
+
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "TEST_TRADE_3MAR_1PM" by provided "projectName"
@@ -321,6 +322,7 @@ Feature: Concierge Project
     When I verify selections and deselection of project moodboard items
 
   Scenario Outline: Create New project - Gallery, Design, Trade project types
+
     Given I log into Concierge as "associate"
     When I click on projects button
     When I click on new project button
@@ -420,6 +422,7 @@ Feature: Concierge Project
     Then I verify forecast amount for selected items & spaces
 
   Scenario: Verify that SKU id has been updated after making edits for line item in the project
+
     #Need data for stg4
     Given I log into Concierge as "associate"
     When I click on projects button

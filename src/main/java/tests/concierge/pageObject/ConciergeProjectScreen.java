@@ -24,7 +24,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement tryAgainButton = $(By.xpath("//*[text()='TRY AGAIN']"));
 
-    private final SelenideElement continueCreateAProjectButton = $(By.xpath("//*[text()='CREATE ACCOUNT']"));
+    private final SelenideElement continueCreateAProjectButton = $(By.xpath("//*[text()='CREATE NEW ACCOUNT']"));
 
     private final SelenideElement continueButtonPopUp = $(By.xpath("//div[contains(@class,'MuiGrid-justify-xs-center')][1]/button"));
 
@@ -125,7 +125,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement moveToProjectButton = $(By.xpath("//div[contains(@class,'MuiGrid-grid-md-12')]//*[text()='Move to Project']"));
 
-    private final SelenideElement projectResultsFirstRow = $(By.xpath("//tr[contains(@class,'MuiTableRow-root')]/td[1]"));
+    private final SelenideElement projectResultsFirstRow = $(By.xpath("(//*[contains(text(), 'Member')])[1]"));
 
     private final SelenideElement firstSearchResultOfProjects = $(By.xpath("//div[contains(@class,'MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-flex-start')][1]/div[contains(@class,'MuiGrid-root MuiGrid-item')]/div[1]"));
 
@@ -157,7 +157,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement bccAssociateCheckBox = $(By.xpath("//*[text()='BCC Associate']"));
 
-    private final SelenideElement aMemberValue = $(By.xpath("//*[text()='A. Member']"));
+    private final SelenideElement aMemberValue = $(By.xpath("(//*[text()='A. Member'])[1]"));
 
     private final SelenideElement testCompanyValue = $(By.xpath("//*[text()='TestCompany']"));
 
@@ -171,9 +171,9 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement REMOVEbutton = $(By.xpath("//*[text()='REMOVE']"));
 
-    private final SelenideElement clientPhone = $(By.cssSelector("input[id='phone']"));
+    private final SelenideElement clientPhone = $(By.cssSelector("input[name='phoneNumber']"));
 
-    private final SelenideElement clientPostalCode = $(By.cssSelector("input[id='postalCode']"));
+    private final SelenideElement clientPostalCode = $(By.cssSelector("input[name='postalCode']"));
 
     private final SelenideElement regularPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'][1]/p)[2]"));
 

@@ -294,6 +294,12 @@ public class GeneralStepDefs {
             conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(25));
 
             conciergeUserAccountPage.getClientLookupSearchButton().click();
+            if($(By.xpath("//*[text() = 'Select a country.']")).isDisplayed()){
+                Select country = new Select($(By.xpath("//select[@id = 'country']")));
+                country.selectByValue("US");
+                conciergeUserAccountPage.getClientLookupSearchButton().click();
+            }
+
         } catch (
                 Exception e) {
             System.out.println("Client is selected");
@@ -318,19 +324,19 @@ public class GeneralStepDefs {
         switchTo().frame(selenideElement);
         paymentScreen.getCardNumberField().setValue(number);
         switchTo().defaultContent();
-        with().pollInterval(1, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")).should(Condition.be(visible), Duration.ofMinutes(2));
         switchTo().frame($(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")));
 
         paymentScreen.getCvcField().setValue(cvc);
         switchTo().defaultContent();
-        with().pollInterval(1, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card expiry date']")).should(Condition.be(visible), Duration.ofMinutes(2));
         switchTo().frame($(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card expiry date']")));
 
         paymentScreen.getExpiryDateField().setValue(expirationDate);
         switchTo().defaultContent();
-        with().pollInterval(1, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
 
