@@ -485,6 +485,11 @@ public class ConciergeE2EStepDefs {
         conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientLookupSearchButton().click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
+        if($(By.xpath("//*[text() = 'Select a country.']")).isDisplayed()){
+            Select country = new Select($(By.xpath("//select[@id = 'country']")));
+            country.selectByValue("US");
+            conciergeUserAccountPage.getClientLookupSearchButton().click();
+            }
         if (!conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME")).isDisplayed()) {
             conciergeUserAccountPage.getClientLookupSearchButton().click();
             with().pollInterval(9, SECONDS).await().until(() -> true);

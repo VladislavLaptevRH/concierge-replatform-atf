@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import tests.concierge.pageObject.*;
 import io.cucumber.java.en.*;
 import org.openqa.selenium.By;
@@ -105,15 +106,22 @@ public class ProjectStepDefs {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("unclassifiedBusiness");
         }
-//        conciergeUserAccountPage.getClientLookupEmail().shouldBe(visible, Duration.ofSeconds(12));
-//        conciergeUserAccountPage.getClientLookupEmail().setValue("test@test.com");
-//        conciergeProjectScreen.getClientPhone().shouldBe(visible, Duration.ofSeconds(12));
-//        conciergeProjectScreen.getClientPhone().setValue("1234567890");
-//        conciergeProjectScreen.getClientPostalCode().shouldBe(visible, Duration.ofSeconds(12));
-//        conciergeProjectScreen.getClientPostalCode().setValue("95035");
+        $(By.xpath("//*[text() = 'CONTINUE']")).click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getContinueCreateAProjectButton().click();
-        conciergeProjectScreen.getProjectResultsFirstRow().should(visible, Duration.ofSeconds(12));
-        conciergeProjectScreen.getProjectResultsFirstRow().click();
+        conciergeUserAccountPage.getClientLookupEmail().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeUserAccountPage.getClientLookupEmail().setValue("test@test.com");
+        conciergeProjectScreen.getClientPhone().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeProjectScreen.getClientPhone().setValue("1234567890");
+        conciergeProjectScreen.getClientPostalCode().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeProjectScreen.getClientPostalCode().setValue("95035");
+        conciergeProjectScreen.getContinueCreateAProjectButton().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text() = 'Preferred Contact Method']/../div/div")).click();
+        $(By.xpath("//*[text() = 'Phone']")).click();
+        $(By.xpath("//*[text() = 'CREATE PROJECT']")).click();
+//        conciergeProjectScreen.getProjectResultsFirstRow().should(visible, Duration.ofSeconds(12));
+//        conciergeProjectScreen.getProjectResultsFirstRow().click();
     }
 
     @When("I click on new project button")
@@ -139,13 +147,13 @@ public class ProjectStepDefs {
             assertEquals(conciergeProjectScreen.getAMemberValue().getText(), "A. Member");
         }
         if (businessClient.equals("nonmember")) {
-            assertEquals($(By.xpath("//*[text()='A. Nonmember']")).getText(), "A. Nonmember");
+            assertEquals($(By.xpath("(//*[text()='A. Nonmember'])[1]")).getText(), "A. Nonmember");
         }
         if (businessClient.equals("trade")) {
-            assertEquals($(By.xpath("//*[text()='A. Trade']")).getText(), "A. Trade");
+            assertEquals($(By.xpath("(//*[text()='A. Trade'])[1]")).getText(), "A. Trade");
         }
         if (businessClient.equals("")) {
-            assertEquals($(By.xpath("//*[text()='A. Member']")).getText(), "TestCompany");
+            assertEquals($(By.xpath("(//*[text()='A. Member'])[1]")).getText(), "TestCompany");
         }
     }
 
@@ -917,23 +925,30 @@ public class ProjectStepDefs {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         if (arg0.equals("SPO")) {
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[3]")).shouldHave(text("AVAILABILITY & DELIVERY"), Duration.ofSeconds(20)).scrollIntoView(true);
-//            executeJavaScript("window.scrollTo(0, 400)");
+            executeJavaScript("window.scrollTo(0, 800)");
+//            Actions actions = new Actions(WebDriverRunner.getWebDriver());
+//            actions.moveToElement($(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[3]")));
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[3]")).click();
             $(By.xpath("//*[contains(text(),'This item is in stock and will be ready for delivery between')]")).shouldHave(text("This item is in stock and will be ready for delivery between"), Duration.ofSeconds(20));
         }
-
         if (arg0.equals("In stock")) {
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).shouldHave(text("AVAILABILITY & DELIVERY"),Duration.ofSeconds(20)).scrollIntoView(true);
-            executeJavaScript("window.scrollTo(0, 400)");
+            executeJavaScript("window.scrollTo(0, 800)");
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+//            Actions actions = new Actions(WebDriverRunner.getWebDriver());
+//            actions.moveToElement($(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")));
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).click();
 //            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[2]")).shouldHave(text("This item is in stock and will be delivered"), Duration.ofSeconds(20));
         }
 
         if (arg0.equals("SPO In stock Items")) {
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).shouldHave(text("AVAILABILITY & DELIVERY"), Duration.ofSeconds(20)).scrollIntoView(true);
             executeJavaScript("window.scrollTo(0, 800)");
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).click();
-            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[3]")).shouldHave(text("This item is in stock and will be delivered"), Duration.ofSeconds(20));
+            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[3]")).shouldHave(text("This item is in stock and will be ready for delivery"), Duration.ofSeconds(20));
         }
 
     }
@@ -1079,8 +1094,8 @@ public class ProjectStepDefs {
         $(By.xpath("//div[1]/div/div[1]/button[2]")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//div[1]/div/div[1]/button[2]")).click();
         executeJavaScript("window.scrollTo(-200, 250)");
-        Select selectSize = new Select($(By.cssSelector("#optionSelect-0")));
-        selectSize.selectByIndex(randomQuantity);
+//        Select selectSize = new Select($(By.cssSelector("#optionSelect-0")));
+//        selectSize.selectByIndex(randomQuantity);
         with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//div[1]/div/div[1]/button[2]")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         $(By.xpath("//div[1]/div/div[1]/button[2]")).click();

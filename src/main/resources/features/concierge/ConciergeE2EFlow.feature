@@ -21,6 +21,7 @@ Feature: Concierge E2E flow
     When I click on a place order button
 
   Scenario: Verify that user is able to execute split payment using all payment methods
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
