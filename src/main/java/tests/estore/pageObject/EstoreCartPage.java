@@ -111,7 +111,7 @@ public class EstoreCartPage {
 
     private final SelenideElement itemAddedToYourCart = $(By.xpath("//*[text()='1 Item Added To Your Cart']"));
 
-    private final SelenideElement promotionCodeField = $(By.xpath("(//div[contains(@class,'MuiInputBase-formControl')]//input)[1]"));
+    private final SelenideElement promotionCodeField = $(By.xpath("(//div[contains(@class,'MuiFormControl-root')])[2]//input"));
 
     private final SelenideElement ufdCartButton = $(By.xpath("//*[text()='Unlimited Furniture Delivery']"));
 

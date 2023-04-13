@@ -103,7 +103,7 @@ public class EstoreGeneralStepDefs {
     }
 
     public void removeFromCart(int countOfCartItems) {
-        if (Hooks.cookie.equals("userservice")) {
+        if (Hooks.cookie.contains("userservice")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);
             Actions actions = new Actions(WebDriverRunner.getWebDriver());
             actions.moveToElement(estoreUserAccountPage.getCartButtonUserService());

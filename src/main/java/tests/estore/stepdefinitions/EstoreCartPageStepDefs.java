@@ -45,7 +45,7 @@ public class EstoreCartPageStepDefs {
     @When("I remove all items from estore cart")
     public void iRemoveAllItemsFromEstoreCart() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        if (Hooks.cookie.equals("userservice")) {
+        if (Hooks.cookie.contains("userservice")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);
             int countOfCartItems = 0;
 
@@ -612,18 +612,15 @@ public class EstoreCartPageStepDefs {
 
     @When("I goes to estore cart for estore")
     public void iGoesToEstoreCartForEstore() {
-        if ((Hooks.cookie.equals("userservice")) && (Hooks.profile.equals("stg2"))) {
-            Actions actions = new Actions(WebDriverRunner.getWebDriver());
-            actions.moveToElement(estoreUserAccountPage.getCartButtonUserService());
-            estoreUserAccountPage.getCartButtonUserService().should(visible, Duration.ofSeconds(30));
-            estoreUserAccountPage.getCartButtonUserService().click();
+        if ((Hooks.cookie.contains("userservice")) && (Hooks.profile.equals("stg2"))) {
+            open(Hooks.eStoreBaseURL + "/us/en/checkout/shopping_cart.jsp");
         }
         with().pollInterval(2, SECONDS).await().until(() -> true);
         if (Hooks.profile.equals("stg3")) {
             $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']")).click();
         }
-        if (!(Hooks.cookie.equals("userservice")) && (Hooks.profile.equals("stg2"))) {
+        if (!(Hooks.cookie.contains("userservice")) && (Hooks.profile.equals("stg2"))) {
             estoreCartPage.getEstoreCartButton().should(visible, Duration.ofSeconds(40));
             estoreCartPage.getEstoreCartButton().click();
         }

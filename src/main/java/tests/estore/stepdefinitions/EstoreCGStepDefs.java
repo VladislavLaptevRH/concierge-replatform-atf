@@ -28,7 +28,7 @@ public class EstoreCGStepDefs {
         if (Hooks.cookie.contains("SSR")) {
             $(By.xpath("//*[contains(text(),'COLLECTIONS')]")).should(Condition.visible, Duration.ofSeconds(35));
         } else {
-                if ((Hooks.cookie.equals("releasethurs")) || (Hooks.cookie.equals("userservice"))) {
+                if ((Hooks.cookie.equals("releasethurs")) || (Hooks.cookie.contains("userservice"))) {
                     $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(35));
                 } else {
                     $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(35));
