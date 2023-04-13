@@ -154,6 +154,7 @@ public class AbstractStepDefs {
 
     @And("I verify that review screen is displayed")
     public void iVerifyThatReviewScreenIsDisplayed() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         reviewOrderScreen.getBillingAddress().should(visible, Duration.ofMinutes(1));
         reviewOrderScreen.getShippingAddress().should(visible, Duration.ofMinutes(1));
     }
@@ -189,6 +190,10 @@ public class AbstractStepDefs {
     public void iFillAllFieldsFromAddressScreenForBrands() {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(3, SECONDS).await().until(() -> true);
+        if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()) {
+            $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
+            $(By.xpath("(//*[text()='Edit'])[10]")).click();
+        }
             if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
                 generalStepDefs.fillAddressFields();
                 generalStepDefs.fillZipCodeStateCountry("85020", "US", "AZ - Arizona");
@@ -198,10 +203,17 @@ public class AbstractStepDefs {
                 } else {
                     System.out.println("Email field is not available");
                 }
+
                 with().pollInterval(3, SECONDS).await().until(() -> true);
 
             } else {
                 System.out.println("Address fields are not available");
+            }
+            if(checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
+                if (!$(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
+                    $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).click();
+                    with().pollInterval(2, SECONDS).await().until(() -> true);
+                }
             }
     }
 

@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class CheckoutAddressScreen {
 
     private final SelenideElement orderDetailsButton = $(By.xpath("//*[contains( text(), 'View Order Details')]"));
+    private final SelenideElement billingAddressCheckbox = $(By.xpath("//*[@id ='billing-shipping-address-same-checkbox']"));
     private final SelenideElement firstNameBillingAddress = $(By.xpath("//div[@id='billingAddresslbl']/descendant::input[@id='billingAddress.firstName']"));
     private final SelenideElement lastNameBillingAddress = $(By.xpath("//div[@id='billingAddresslbl']/descendant::input[@id='address-last-name-field']"));
     private final SelenideElement companyNameBillingAddress = $(By.xpath("//div[@id='billingAddresslbl']/descendant::input[@id='address-company-name-field']"));

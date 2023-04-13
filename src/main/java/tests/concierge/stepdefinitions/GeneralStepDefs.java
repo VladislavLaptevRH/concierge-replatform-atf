@@ -163,7 +163,7 @@ public class GeneralStepDefs {
         clearField(checkoutAddressScreen.getStreetAddressField());
         checkoutAddressScreen.getStreetAddressField().setValue("North 16th Street");
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        checkoutAddressScreen.getStreetAddressField().sendKeys(Keys.ENTER);
+//        checkoutAddressScreen.getStreetAddressField().sendKeys(Keys.ENTER);
 
         clearField(checkoutAddressScreen.getAptFloorSuiteField());
         checkoutAddressScreen.getAptFloorSuiteField().setValue("QaApartment");
@@ -173,8 +173,9 @@ public class GeneralStepDefs {
 
         clearField(checkoutAddressScreen.getPhoneField());
         checkoutAddressScreen.getPhoneField().setValue("1241312319");
-
-        executeJavaScript("arguments[0].click();", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
+        if(checkoutAddressScreen.getBillingAddressAsShippingCheckBox().isDisplayed()){
+            executeJavaScript("arguments[0].click();", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
+            }
 
         conciergeAddressScreen.getBillingAddressText().should(visible, Duration.ofSeconds(12));
     }
@@ -293,6 +294,12 @@ public class GeneralStepDefs {
             conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(25));
 
             conciergeUserAccountPage.getClientLookupSearchButton().click();
+            if($(By.xpath("//*[text() = 'Select a country.']")).isDisplayed()){
+                Select country = new Select($(By.xpath("//select[@id = 'country']")));
+                country.selectByValue("US");
+                conciergeUserAccountPage.getClientLookupSearchButton().click();
+            }
+
         } catch (
                 Exception e) {
             System.out.println("Client is selected");
@@ -317,19 +324,19 @@ public class GeneralStepDefs {
         switchTo().frame(selenideElement);
         paymentScreen.getCardNumberField().setValue(number);
         switchTo().defaultContent();
-        with().pollInterval(1, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")).should(Condition.be(visible), Duration.ofMinutes(2));
         switchTo().frame($(By.xpath("//div[contains(@class,'securityCode')]//iframe[@class='js-iframe']")));
 
         paymentScreen.getCvcField().setValue(cvc);
         switchTo().defaultContent();
-        with().pollInterval(1, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card expiry date']")).should(Condition.be(visible), Duration.ofMinutes(2));
         switchTo().frame($(By.xpath("//div[contains(@class,'expiryDate')]//iframe[@title='Iframe for secured card expiry date']")));
 
         paymentScreen.getExpiryDateField().setValue(expirationDate);
         switchTo().defaultContent();
-        with().pollInterval(1, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
 
