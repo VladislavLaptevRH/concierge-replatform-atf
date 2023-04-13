@@ -45,7 +45,6 @@ Feature: Estore Cart Page
     Then I verify membership price in banner
 
   Scenario: eStore - Line item quantity update
-
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -92,10 +91,10 @@ Feature: Estore Cart Page
     Given I log into eStore as "regular" user
     When I add item to cart via API for estore
     When I open estore cart
-#    When I click on zipcode estore button
-#    When I update postal code in cart
-#    When I click on gift box button
-#    Then I verify gift box fee in estore cart
+    When I click on zipcode estore button
+    When I update postal code in cart
+    When I click on gift box button
+    Then I verify gift box fee in estore cart
 
   Scenario: eStore - Membership price for US and CAN
     Given I remove all items from estore cart
@@ -155,8 +154,7 @@ Feature: Estore Cart Page
     When I remove all items from estore cart
     Then I verify that I'm able to add products from all brands to cart
 
-  Scenario: eStore Membership banner for member user
-
+ Scenario: eStore Membership banner for member user
     Given I log into eStore as "member" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -164,7 +162,6 @@ Feature: Estore Cart Page
     Then I verify membership estore banner for "member user"
 
   Scenario: eStore Membership banner for non-member user
-
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -172,7 +169,6 @@ Feature: Estore Cart Page
     Then I verify membership estore banner for "nonmember user"
 
   Scenario: eStore Cart persistence in all brands
-
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
