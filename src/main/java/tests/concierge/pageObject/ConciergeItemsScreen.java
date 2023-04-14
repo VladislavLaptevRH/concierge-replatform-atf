@@ -32,6 +32,8 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement addToCartButton = $(By.xpath("(//button[@data-testid='add-to-cart-dialog-opener'])[1]"));
 
+    private final SelenideElement addToCartButtonDisabled = $(By.xpath("(//button[@data-testid='add-to-cart-dialog-opener'])[1][@disabled]"));
+
     private final SelenideElement viewCartButton = $(By.cssSelector("#ajax-proceed-to-cart"));
 
     private final SelenideElement detailsSpan = $(By.xpath("//*[text()='DETAILS']"));
