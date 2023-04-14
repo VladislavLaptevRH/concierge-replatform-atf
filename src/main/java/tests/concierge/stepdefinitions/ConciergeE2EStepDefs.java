@@ -118,7 +118,7 @@ public class ConciergeE2EStepDefs {
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        if (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
+        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
             conciergeItemsScreen.getChoseFinishOption().click();
             with().pollInterval(1, SECONDS).await().until(() -> true);
             Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
@@ -421,6 +421,11 @@ public class ConciergeE2EStepDefs {
 
     @When("I remove client from header")
     public void iRemoveClientFromHeader() {
+        if(!conciergeUserAccountPage.getClientButton().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(20));
         conciergeUserAccountPage.getClientButton().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
@@ -428,8 +433,9 @@ public class ConciergeE2EStepDefs {
             conciergeUserAccountPage.getRemoveClientByText().click();
             with().pollInterval(1, SECONDS).await().until(() -> true);
         }
-
-        pdpScreen.getCloseSpecialOrderPopUpButton().click();
+        if(pdpScreen.getCloseSpecialOrderPopUpButton().exists()){
+            pdpScreen.getCloseSpecialOrderPopUpButton().click();
+        }
         with().pollInterval(1, SECONDS).await().until(() -> true);
     }
 

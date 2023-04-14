@@ -29,6 +29,8 @@ public class PaymentStepDefs {
 
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
 
+    PdpScreen pdpScreen = new PdpScreen();
+
     @When("I introduces payment details for several payment methods")
     public void iIntroducesPaymentDetailsForSeveralPaymentMethods() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -231,5 +233,11 @@ public class PaymentStepDefs {
             System.out.println("Continue with original address button is not displayed");
         }
         with().pollInterval(5, SECONDS).await().until(() -> true);
+
+        if(pdpScreen.getCloseSpecialOrderPopUpButton().isDisplayed()){
+            pdpScreen.getCloseSpecialOrderPopUpButton().click();
+            $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
     }
 }
