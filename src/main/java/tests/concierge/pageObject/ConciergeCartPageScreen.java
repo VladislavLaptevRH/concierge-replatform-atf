@@ -36,7 +36,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement quantityButton = $(By.xpath("//select[@id='quantity_701bfc45-0262-4a2c-bf01-92887d788333_1']"));
 
-    private final SelenideElement orderClassificationSelect = $(By.id("element-orderclassification"));
+    private final SelenideElement orderClassificationSelect = $(By.xpath("//*[@name = 'orderClassification']"));
 
     private final SelenideElement membersProgramTitle = $(By.xpath("//h2[@class='MuiTypography-root MuiTypography-h2 MuiTypography-noWrap']"));
 

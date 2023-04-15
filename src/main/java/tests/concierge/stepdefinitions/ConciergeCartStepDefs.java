@@ -71,6 +71,11 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that cart is displayed")
     public void iVerifyThatCartIsDisplayed() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!conciergeCartPageScreen.getOrderClassificationSelect().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         conciergeCartPageScreen.getOrderClassificationSelect().should(visible, Duration.ofSeconds(40));
         assertTrue(conciergeCartPageScreen.getOrderClassificationSelect().isDisplayed(), "Order classification is displayed");
         assertTrue(conciergeItemsScreen.getCheckoutButton().isDisplayed(), "Checkout button is displayed");
@@ -779,7 +784,7 @@ public class ConciergeCartStepDefs {
             String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
             open(URL);
             with().pollInterval(3, SECONDS).await().until(() -> true);
-            if (!conciergeCartPageScreen.getClearOrderButton().isDisplayed()) {
+            if (!conciergeCartPageScreen.getClearOrderButton().exists()) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 open(URL);
                 with().pollInterval(5, SECONDS).await().until(() -> true);

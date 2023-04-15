@@ -2,7 +2,7 @@
 @concierge-PDP
 Feature: Concierge PDP
 
-  Scenario:Monogram
+  Scenario: Monogram
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I open product page with productId "prod19500002"
@@ -40,6 +40,7 @@ Feature: Concierge PDP
     Then I verify that custom windows are displayed
 
   Scenario: YAML carousel
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I open product page with productId "prod6490263"
