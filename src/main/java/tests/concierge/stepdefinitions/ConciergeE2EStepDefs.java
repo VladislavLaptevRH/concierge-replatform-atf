@@ -118,25 +118,50 @@ public class ConciergeE2EStepDefs {
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
+        generalStepDefs.waitForJSandJQueryToLoad();
+        conciergeItemsScreen.getAddToCartButton().scrollTo();
         if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-            conciergeItemsScreen.getChoseFinishOption().click();
-            with().pollInterval(1, SECONDS).await().until(() -> true);
-            Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
-            sizeList.selectByVisibleText("Queen");
-            with().pollInterval(1, SECONDS).await().until(() -> true);
-            Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
-            finishList.selectByVisibleText("Antiqued Grey Oak");
-            with().pollInterval(1, SECONDS).await().until(() -> true);
-            Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
-            quantityList.selectByVisibleText("1");
-            with().pollInterval(1, SECONDS).await().until(() -> true);
+            if(conciergeItemsScreen.getSelectFabric().isDisplayed()){
+                Select fabricList = new Select(conciergeItemsScreen.getSelectFabric());
+                fabricList.selectByVisibleText("Perennials Performance Textured Linen Weave");
+                with().pollInterval(1, SECONDS).await().until(() -> true);
+            }
+            if(conciergeItemsScreen.getSelectSize().isDisplayed()){
+                Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
+                sizeList.selectByVisibleText("Washcloth");
+                with().pollInterval(1, SECONDS).await().until(() -> true);
+            }
+            if(conciergeItemsScreen.getSelectColor().isDisplayed()){
+                Select colorList = new Select(conciergeItemsScreen.getSelectColor());
+                colorList.selectByVisibleText("Fog");
+                with().pollInterval(1, SECONDS).await().until(() -> true);
+            }
+            if(conciergeItemsScreen.getSelectFinish().isDisplayed()){
+                Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
+                finishList.selectByVisibleText("Fog");
+                with().pollInterval(1, SECONDS).await().until(() -> true);
+            }
+            if(conciergeItemsScreen.getSelectQTY().isDisplayed()){
+                Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
+                quantityList.selectByVisibleText("1");
+                with().pollInterval(1, SECONDS).await().until(() -> true);
+            }
+
         }
-            generalStepDefs.waitForJSandJQueryToLoad();
-            conciergeItemsScreen.getAddToCartButton().scrollTo();
-            conciergeItemsScreen.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
+
+        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                with().pollInterval(4, SECONDS).await().until(() -> true);
+                if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+                    break;
+                }
+            }
+        }
             conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
             conciergeItemsScreen.getAddToCartButton().click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
+
     }
 
     @When("I fill all fields from address with {string} zip code")

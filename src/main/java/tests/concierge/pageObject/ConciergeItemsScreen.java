@@ -18,6 +18,9 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement selectSize = $(By.xpath("(//select[contains(@id, 'Size')])[1]"));
 
+    private final SelenideElement selectFabric = $(By.xpath("(//select[contains(@id, 'Fabric')])[1]"));
+    private final SelenideElement selectColor = $(By.xpath("(//select[contains(@id, 'Color')])[1]"));
+
     private final SelenideElement selectFinish= $(By.xpath("(//select[contains(@id, 'Finish')])[1]"));
 
     private final SelenideElement selectQTY = $(By.xpath("(//select[contains(@id, 'qty')])[1]"));
@@ -56,7 +59,7 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement metalFloatingMirror = $(By.xpath("(//*[text()='Metal Floating Mirror'])[2]"));
 
-    private final SelenideElement lapazSofaItem = $(By.xpath("//a[@href='/catalog/product/product.jsp?productId=prod25840134']"));
+    private final SelenideElement lapazSofaItem = $(By.xpath("//a[@href='/us/en/catalog/product/product.jsp?productId=prod25840134']"));
 
     private final SelenideElement collectionItem = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4']"));
 
