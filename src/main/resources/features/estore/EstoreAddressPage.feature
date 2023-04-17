@@ -20,30 +20,30 @@ Feature: Estore Address Page
     When I pay with RHCC for estore item
     Then I validate "billing address" which we have entered earlier
 
-#  Scenario: eStore Address for Registered user - To verify Add a new shipping Address option is present
-#    Given I log into eStore as "savedaddress" user
-#    When I remove all items from estore cart
-#    When I add item to cart via API for estore
-#    When I open estore cart
-#    When I click on estore checkout button
-#    When I click on estore no thanks button
-#    Then I verify add a new shipping address option is present
-#
-#  Scenario: eStore Address Page - To verify Add address button
-#    Given I log into eStore as "addresspage" user
-#    When I goes to my account for estore
-#    When I click on estore my account button
-#    When I click on address book estore button
-#    Then I verify that add address button is displayed
-#
-#  Scenario: eStore Address Page - To verify mandatory field in New address
-#    Given I log into eStore as "addresspage" user
-#    When I goes to my account for estore
-#    When I click on estore my account button
-#    When I click on address book estore button
-#    When I click on add address button
-#    When I click on save address button
-#    Then I verify that error messages are displayed for each mandatory field
+  Scenario: eStore Address for Registered user - To verify Add a new shipping Address option is present
+    Given I log into eStore as "savedaddress" user
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    When I click on estore no thanks button
+    Then I verify add a new shipping address option is present
+
+  Scenario: eStore Address Page - To verify Add address button
+    Given I log into eStore as "addresspage" user
+    When I goes to my account for estore
+    When I click on estore my account button
+    When I click on address book estore button
+    Then I verify that add address button is displayed
+
+  Scenario: eStore Address Page - To verify mandatory field in New address
+    Given I log into eStore as "addresspage" user
+    When I goes to my account for estore
+    When I click on estore my account button
+    When I click on address book estore button
+    When I click on add address button
+    When I click on save address button
+    Then I verify that error messages are displayed for each mandatory field
 
   Scenario: eStore Address Page - To verify newly added address is present in shipping address list
     Given I log into eStore as "addresspage" user

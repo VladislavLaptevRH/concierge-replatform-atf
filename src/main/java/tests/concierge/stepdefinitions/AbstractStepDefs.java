@@ -54,7 +54,7 @@ public class AbstractStepDefs {
             }
         }
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": " + Hooks.getCurrentUrl());
+        System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": "+ Hooks.getCurrentUrl());
     }
 
 
@@ -110,7 +110,7 @@ public class AbstractStepDefs {
     @When("I click on checkout button")
     public void iClickOnCheckoutButton() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        if (!conciergeItemsScreen.getCheckoutButton().isDisplayed()) {
+        if(!conciergeItemsScreen.getCheckoutButton().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
@@ -118,8 +118,8 @@ public class AbstractStepDefs {
         conciergeItemsScreen.getCheckoutButton().shouldHave(text(conciergeItemsScreen.getCheckoutButton().getText()), Duration.ofMinutes(2));
         conciergeItemsScreen.getCheckoutButton().click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if (conciergeCartPageScreen.getOrderClassificationError().isDisplayed()) {
-            for (int i = 0; i < 3; i++) {
+        if(conciergeCartPageScreen.getOrderClassificationError().isDisplayed()) {
+            for(int i = 0; i < 3; i++){
                 Select orderClassificationDropDownList = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
                 orderClassificationDropDownList.selectByValue("RH Gallery Order");
                 with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -154,6 +154,7 @@ public class AbstractStepDefs {
 
     @And("I verify that review screen is displayed")
     public void iVerifyThatReviewScreenIsDisplayed() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         reviewOrderScreen.getBillingAddress().should(visible, Duration.ofMinutes(1));
         reviewOrderScreen.getShippingAddress().should(visible, Duration.ofMinutes(1));
     }
@@ -189,18 +190,30 @@ public class AbstractStepDefs {
     public void iFillAllFieldsFromAddressScreenForBrands() {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(3, SECONDS).await().until(() -> true);
+        if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()) {
+            $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
+            $(By.xpath("(//*[text()='Edit'])[10]")).click();
+        }
         if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
             generalStepDefs.fillAddressFields();
             generalStepDefs.fillZipCodeStateCountry("85020", "US", "AZ - Arizona");
-            if (checkoutAddressScreen.getEmailAddressField().isDisplayed()) {
+            if(checkoutAddressScreen.getEmailAddressField().isDisplayed()){
                 generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
                 checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
             } else {
                 System.out.println("Email field is not available");
             }
+
             with().pollInterval(3, SECONDS).await().until(() -> true);
+
         } else {
             System.out.println("Address fields are not available");
+        }
+        if(checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
+            if (!$(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
+                $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+            }
         }
     }
 

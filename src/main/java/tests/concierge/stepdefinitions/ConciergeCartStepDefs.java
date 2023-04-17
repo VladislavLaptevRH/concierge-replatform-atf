@@ -71,6 +71,11 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that cart is displayed")
     public void iVerifyThatCartIsDisplayed() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!conciergeCartPageScreen.getOrderClassificationSelect().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         conciergeCartPageScreen.getOrderClassificationSelect().should(visible, Duration.ofSeconds(40));
         assertTrue(conciergeCartPageScreen.getOrderClassificationSelect().isDisplayed(), "Order classification is displayed");
         assertTrue(conciergeItemsScreen.getCheckoutButton().isDisplayed(), "Checkout button is displayed");
@@ -142,7 +147,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that quantity was updated")
     public void iVerifyThatQuantityWasUpdated() {
-        assertEquals("CART " + randomQuantity, conciergeUserAccountPage.getCartButton().getText());
+        assertEquals(randomQuantity, Integer.parseInt(conciergeUserAccountPage.getCartButtonItemSum().getText()));
     }
 
     @When("I click on remove button from cart page")
@@ -344,6 +349,7 @@ public class ConciergeCartStepDefs {
         try {
             with().pollInterval(2, SECONDS).await().until(() -> true);
             conciergeItemsScreen.getAddToCartButton().scrollTo();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             selectOption.getSelectSizeElement().should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
             selectOption.getSelectSizeElement().scrollIntoView(true);
             Select size = new Select(selectOption.getSelectSizeElement());
@@ -438,17 +444,22 @@ public class ConciergeCartStepDefs {
 
     @And("I edit ship to, bill to, sold to addresses")
     public void iEditShipToBillToSoldToAddresses() {
-        conciergeAddressScreen.getEditAddressButton().click();
+        if(conciergeAddressScreen.getEditAddressButton().isDisplayed()){
+            conciergeAddressScreen.getEditAddressButton().click();
+        }
         checkoutAddressScreen.getCompanyNameField().should(visible, Duration.ofMinutes(1));
         generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameField());
         checkoutAddressScreen.getCompanyNameField().setValue("changedCompanyNameSoldAddress");
-        $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
-        $(By.xpath("(//*[text()='Edit'])[10]")).click();
+        if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()){
+            $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
+            $(By.xpath("(//*[text()='Edit'])[10]")).click();
+        }
         $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")).should(visible, Duration.ofMinutes(1));
         generalStepDefs.clearField($(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")));
         $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")).setValue("changedCompanyNameBillingAddress");
-
-        $(By.xpath("(//*[text()='Edit'])[1]")).click();
+        if($(By.xpath("(//*[text()='Edit'])[1]")).isDisplayed()){
+            $(By.xpath("(//*[text()='Edit'])[1]")).click();
+        }
         $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")).should(visible, Duration.ofMinutes(1));
         generalStepDefs.clearField($(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")));
         $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")).setValue("changedCompanyNameShippingAddress");
@@ -546,6 +557,11 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that address saved in address page")
     public void iVerifyThatAddressSavedInAddressPage() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if($(By.xpath("(//*[text()='Edit'])[1]")).isDisplayed()) {
+            $(By.xpath("(//*[text()='Edit'])[1]")).scrollIntoView(true);
+            $(By.xpath("(//*[text()='Edit'])[1]")).click();
+        }
         checkoutAddressScreen.getFirstNameInpt().should(visible, Duration.ofMinutes(1));
         checkoutAddressScreen.getFirstNameInpt().shouldHave(value("QAFirst"), Duration.ofMinutes(1));
         checkoutAddressScreen.getLastNameField().shouldHave(value("Automation"), Duration.ofMinutes(1));
@@ -666,7 +682,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that mini cart value is equal to quantity of product")
     public void iVerifyThatMiniCartValueIsEqualToQuantityOfProduct() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getCartButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         assertEquals(randomQuantity, Integer.parseInt(conciergeUserAccountPage.getCartItemSum().getText()));
     }
@@ -735,7 +751,7 @@ public class ConciergeCartStepDefs {
 
     @When("I click on order details button")
     public void iClickOnOrderDetailsButton() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if (conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed()) {
             conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").click();
         } else if (conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").isDisplayed()) {
@@ -765,10 +781,10 @@ public class ConciergeCartStepDefs {
         WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
-            String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
+            String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
             open(URL);
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-            if (!conciergeCartPageScreen.getClearOrderButton().isDisplayed()) {
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+            if (!conciergeCartPageScreen.getClearOrderButton().exists()) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 open(URL);
                 with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -798,7 +814,6 @@ public class ConciergeCartStepDefs {
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
             WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
             if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
                 iRemoveAllItemsFromCartViaUI();
             }

@@ -2,19 +2,16 @@ package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
-import tests.concierge.pageObject.ConciergeAddressScreen;
-import tests.concierge.pageObject.ConciergeCartPageScreen;
-import tests.concierge.pageObject.PaymentScreen;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import tests.concierge.pageObject.*;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertEquals;
@@ -25,8 +22,32 @@ public class PaymentStepDefs {
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
     ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
 
+    ConciergeProjectScreen conciergeProjectScreen = new ConciergeProjectScreen();
+
+    AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
+
+    CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
+
+    PdpScreen pdpScreen = new PdpScreen();
+
     @When("I introduces payment details for several payment methods")
     public void iIntroducesPaymentDetailsForSeveralPaymentMethods() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
+                conciergeProjectScreen.getTryAgainButton().click();
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                $(By.xpath(" (//*[text()='Edit'])[1]")).click();
+                with().pollInterval(1, SECONDS).await().until(() -> true);
+                abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+                checkoutAddressScreen.getContinuePaymentButton().click();
+                iClickOnContinueWithOriginalAddressButton();
+                with().pollInterval(3, SECONDS).await().until(() -> true);
+                if (paymentScreen.getChoosePaymentMethodBtn().isDisplayed()) {
+                    break;
+                }
+            }
+        }
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         with().pollInterval(3, SECONDS).await().until(() -> true);
         generalStepDefs.payWith("VI", "4111 1111 4555 1142", "737", "0330");
@@ -35,15 +56,15 @@ public class PaymentStepDefs {
         paymentScreen.getFieldAmount().setValue("3");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         generalStepDefs.payWith("AX", "3700 0000 0000 002", "7373", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
         paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
-        /*Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue("RH");
         paymentScreen.getSplitPaymentCheckBox().should(visible, Duration.ofSeconds(40));
         paymentScreen.getSplitPaymentCheckBox().click();
@@ -54,7 +75,7 @@ public class PaymentStepDefs {
         paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-        sleep(3000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         Select selectPayment1 = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment1.selectByValue("GiftCard");
         paymentScreen.getRhCardNumberField().setValue("6006493887999901635");
@@ -63,18 +84,19 @@ public class PaymentStepDefs {
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
         paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
-        paymentScreen.getContinueToReview().click(); */
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        paymentScreen.getContinueToReview().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         generalStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
         paymentScreen.getFieldAmount().setValue("1");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         generalStepDefs.payWith("MC", "5555 3412 4444 1115", "737", "0330");
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
     }
 
     @When("I execute payment for {string}")
@@ -104,8 +126,6 @@ public class PaymentStepDefs {
             $(By.xpath("(//input)[1]")).should(visible, Duration.ofSeconds(10));
             $(By.xpath("(//input)[1]")).setValue("11111");
             $(By.xpath("(//input)[2]")).setValue("11");
-
-
         }
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
@@ -146,10 +166,10 @@ public class PaymentStepDefs {
     public void iVerifySubtotalShippingFeeTaxesBasedOnPostalCode() {
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='Estimated Sales Tax for 85020-4434']")).should(visible, Duration.ofSeconds(15));
-        //$(By.xpath("//*[text()='$3,585.00']")).should(visible, Duration.ofSeconds(15));
-        //$(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
-        //$(By.xpath("//*[text()='US$308.31']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Estimated Sales Tax for 85020']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,222.16']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='US $255.16']")).should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that member savings in payment page")
@@ -210,6 +230,13 @@ public class PaymentStepDefs {
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Continue with original address button is not displayed");
+        }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+
+        if(pdpScreen.getCloseSpecialOrderPopUpButton().isDisplayed()){
+            pdpScreen.getCloseSpecialOrderPopUpButton().click();
+            $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
         }
     }
 }
