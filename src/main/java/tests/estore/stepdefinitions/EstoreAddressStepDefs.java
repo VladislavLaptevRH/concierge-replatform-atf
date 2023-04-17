@@ -365,13 +365,15 @@ public class EstoreAddressStepDefs {
 
     @When("I click on continue to payment estore button")
     public void iClickOnContinueToPayment() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(7, SECONDS).await().until(() -> true);
         if (!$(By.xpath("//*[text()='Continue to payment']")).isDisplayed()) {
             estoreAbstractStepDefs.iClickOnCheckoutButton();
             estoreE2EStepDefs.iClickOnNoThanksEstoreButton();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
         $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='Continue to payment']")).scrollIntoView(true);
+
         executeJavaScript("arguments[0].click();", $(By.xpath("//*[text()='Continue to payment']")));
         with().pollInterval(2, SECONDS).await().until(() -> true);
     }

@@ -41,20 +41,20 @@ public class AbstractStepDefs {
                 conciergeUserAccountPage.getListOfMainCategories().get(main).click();
             }
         }
-            for (int sub = 0; sub < conciergeUserAccountPage.getListOfSubCategories().size(); sub++) {
-                if (sub == 0) {
-                    System.out.println("Sub Category: " + conciergeUserAccountPage.getListOfSubCategories().get(sub).getText());
-                    conciergeUserAccountPage.getListOfSubCategories().get(sub).click();
-                }
-                for (int collection = 0; collection < conciergeUserAccountPage.getListOfCollections().size(); collection++) {
-                    if (collection == 0) {
-                        System.out.println("Collection: " + conciergeUserAccountPage.getListOfCollections().get(collection).getText());
-                        conciergeUserAccountPage.getListOfCollections().get(collection).click();
-                    }
+        for (int sub = 0; sub < conciergeUserAccountPage.getListOfSubCategories().size(); sub++) {
+            if (sub == 0) {
+                System.out.println("Sub Category: " + conciergeUserAccountPage.getListOfSubCategories().get(sub).getText());
+                conciergeUserAccountPage.getListOfSubCategories().get(sub).click();
+            }
+            for (int collection = 0; collection < conciergeUserAccountPage.getListOfCollections().size(); collection++) {
+                if (collection == 0) {
+                    System.out.println("Collection: " + conciergeUserAccountPage.getListOfCollections().get(collection).getText());
+                    conciergeUserAccountPage.getListOfCollections().get(collection).click();
                 }
             }
+        }
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": "+ Hooks.getCurrentUrl());
+        System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": " + Hooks.getCurrentUrl());
     }
 
 
@@ -110,7 +110,7 @@ public class AbstractStepDefs {
     @When("I click on checkout button")
     public void iClickOnCheckoutButton() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        if(!conciergeItemsScreen.getCheckoutButton().isDisplayed()){
+        if (!conciergeItemsScreen.getCheckoutButton().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
@@ -118,8 +118,8 @@ public class AbstractStepDefs {
         conciergeItemsScreen.getCheckoutButton().shouldHave(text(conciergeItemsScreen.getCheckoutButton().getText()), Duration.ofMinutes(2));
         conciergeItemsScreen.getCheckoutButton().click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(conciergeCartPageScreen.getOrderClassificationError().isDisplayed()) {
-            for(int i = 0; i < 3; i++){
+        if (conciergeCartPageScreen.getOrderClassificationError().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
                 Select orderClassificationDropDownList = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
                 orderClassificationDropDownList.selectByValue("RH Gallery Order");
                 with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -189,20 +189,19 @@ public class AbstractStepDefs {
     public void iFillAllFieldsFromAddressScreenForBrands() {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(3, SECONDS).await().until(() -> true);
-            if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
-                generalStepDefs.fillAddressFields();
-                generalStepDefs.fillZipCodeStateCountry("85020", "US", "AZ - Arizona");
-                if(checkoutAddressScreen.getEmailAddressField().isDisplayed()){
-                    generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
-                    checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
-                } else {
-                    System.out.println("Email field is not available");
-                }
-                with().pollInterval(3, SECONDS).await().until(() -> true);
-
+        if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
+            generalStepDefs.fillAddressFields();
+            generalStepDefs.fillZipCodeStateCountry("85020", "US", "AZ - Arizona");
+            if (checkoutAddressScreen.getEmailAddressField().isDisplayed()) {
+                generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
+                checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
             } else {
-                System.out.println("Address fields are not available");
+                System.out.println("Email field is not available");
             }
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+        } else {
+            System.out.println("Address fields are not available");
+        }
     }
 
     @When("I clicks on a random menu item for brands")

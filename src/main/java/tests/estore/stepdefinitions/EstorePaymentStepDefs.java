@@ -86,15 +86,6 @@ public class EstorePaymentStepDefs {
         estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='CONTINUE']")).click();
-        with().pollInterval(4, SECONDS).await().until(() -> true);
-        $(By.xpath("(//a[@href='/us/en/checkout/shopping_cart.jsp'])[2]")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("(//a[@href='/us/en/checkout/shopping_cart.jsp'])[2]")).click();
-        with().pollInterval(4, SECONDS).await().until(() -> true);
-        estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(40));
-        estoreCartPage.getRemoveButton().click();
-        with().pollInterval(4, SECONDS).await().until(() -> true);
-        estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
-        estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
     }
 
     @When("I edit estore billing address from PG")
