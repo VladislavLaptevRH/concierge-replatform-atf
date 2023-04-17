@@ -162,6 +162,7 @@ Feature:Concierge Cart Page
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
+    When I click on continue with original address button
     Then I verify that total price from cart and from payment page is the same
 
   Scenario: Promo codes - verify that total price from cart and from payment page is the same after applying promo code
@@ -178,6 +179,7 @@ Feature:Concierge Cart Page
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
+    When I click on continue with original address button
     When I choose POS for payment method
     Then I verify that Total Additional Product Discount message is "displayed" on review page
 
@@ -247,7 +249,6 @@ Feature:Concierge Cart Page
     Then I verify that membership popup for "contract client" is not displayed
 
   Scenario Outline: Verify Trade,Contract client address page - ship to Bill to, Sold to addresses - edit addresses
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -405,7 +406,6 @@ Feature:Concierge Cart Page
 #    Then I verify "member" savings for a "member" user
 
   Scenario: Verify address saved in address page when navigate back from order review or any page
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -417,13 +417,13 @@ Feature:Concierge Cart Page
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
+    When I click on continue with original address button
     When I choose POS for payment method
     And I verify that review screen is displayed
     When I goes to address page from review screen
     Then I verify that address saved in address page
 
   Scenario: Zipcode Validation
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header

@@ -15,11 +15,13 @@ Feature: Concierge E2E flow
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
+    When I click on continue with original address button
     When I execute payment for "VI"
     Then I verify that review screen is displayed
     When I click on a place order button
 
   Scenario: Verify that user is able to execute split payment using all payment methods
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -32,6 +34,7 @@ Feature: Concierge E2E flow
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
+    When I click on continue with original address button
     When I introduces payment details for several payment methods
     When I click on a place order button
     Then I verify that confirmation order screen is displayed

@@ -98,11 +98,16 @@ public class EstorePaymentStepDefs {
         $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).click();
         }
-        estoreAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(20));
-        estoreAddressScreen.getEditBillingAddress().click();
-        estoreAddressScreen.getBillingAddressFirstName().click();
-        estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstName());
-        estoreAddressScreen.getBillingAddressFirstName().setValue("NewBillingAddress");
+
+        if(estoreAddressScreen.getEditBillingAddress().isDisplayed()){
+            estoreAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(20));
+            estoreAddressScreen.getEditBillingAddress().click();
+        }
+        estoreAddressScreen.getEditBillingAddressNew().should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getEditBillingAddressNew().click();
+        estoreAddressScreen.getBillingAddressFirstNameNew().click();
+        estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstNameNew());
+        estoreAddressScreen.getBillingAddressFirstNameNew().setValue("NewBillingAddress");
     }
 
 
@@ -262,8 +267,13 @@ public class EstorePaymentStepDefs {
     public void iRemovePaymentMethodWhichWasUsedEarlier() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         if(estoreCartPage.getRemoveButton().isDisplayed()){
-            estoreCartPage.getRemoveButton().click();
-            with().pollInterval(3, SECONDS).await().until(() -> true);
+                for(int i = 0; i < 3; i++){
+                    estoreCartPage.getRemoveButton().click();
+                    with().pollInterval(3, SECONDS).await().until(() -> true);
+                    if(!estoreCartPage.getRemoveButton().isDisplayed()) {
+                    break;
+                }
+            }
         } else {
             System.out.println("There is no payment method that was used before");
         }

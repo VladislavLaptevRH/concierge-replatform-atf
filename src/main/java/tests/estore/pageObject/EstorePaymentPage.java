@@ -40,7 +40,6 @@ public class EstorePaymentPage {
 
     private final SelenideElement continueToCheckout = $(By.xpath("//*[text()='CONTINUE']"));
 
-
     private final SelenideElement rhccContinueToReview = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container'][2]/button"));
 
     private final SelenideElement paymentMethodTitle = $(By.xpath("//div[contains(@class,'MuiGrid-container MuiGrid-item')]/h3[@class='MuiTypography-root MuiTypography-h3']"));

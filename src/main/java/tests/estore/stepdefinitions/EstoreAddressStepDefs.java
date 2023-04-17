@@ -16,6 +16,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
+import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
 import static tests.estore.stepdefinitions.EstoreUserAccountPageStepDefs.firstName;
 
@@ -29,6 +30,8 @@ public class EstoreAddressStepDefs {
     EstoreAbstractStepDefs estoreAbstractStepDefs = new EstoreAbstractStepDefs();
 
     EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
+
+    EstoreUserAccountPageStepDefs estoreUserAccountPageStepDefs = new EstoreUserAccountPageStepDefs();
 
 
     @When("I click on edit estore billing address button")
@@ -176,6 +179,7 @@ public class EstoreAddressStepDefs {
                     } catch (com.codeborne.selenide.ex.ElementNotFound e) {
                         System.out.println("Dropdown list is not displayed");
                     }
+
                 } else {
                     with().pollInterval(3, SECONDS).await().until(() -> true);
                     generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
@@ -333,6 +337,12 @@ public class EstoreAddressStepDefs {
         $(By.xpath("//*[text()='2479 Deer Run']")).should(visible, Duration.ofSeconds(20));
     }
 
+    @Then("I see new Billing address")
+    public void iSeeNewBillingAddress() {
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        $(By.xpath("(//*[text() = 'BILLING ADDRESS']/following-sibling::*)[1]")).shouldHave(text("NewBillingAddress"), Duration.ofSeconds(40));
+    }
+
     @When("I click on continue with original address estore button")
     public void iClickOnContinueWithOriginalAddressEstoreButton() {
         try {
@@ -357,6 +367,15 @@ public class EstoreAddressStepDefs {
                 with().pollInterval(3, SECONDS).await().until(() -> true);
             }
 
+            if(estoreItemPage.getAddToCartButton().isDisplayed()){
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                estoreUserAccountPageStepDefs.iClickOnAddAddressButton();
+                iIntroduceDataForNewProfileAddress();
+                estoreUserAccountPageStepDefs.iClickOnSaveAddressButton();
+                iClickOnContinueWithOriginalAddressEstoreButton();
+            }
+
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Continue with original button is not displayed");
         }
@@ -376,6 +395,15 @@ public class EstoreAddressStepDefs {
 
         executeJavaScript("arguments[0].click();", $(By.xpath("//*[text()='Continue to payment']")));
         with().pollInterval(2, SECONDS).await().until(() -> true);
+        if($(By.xpath("//*[contains(text(), 'required')]")).isDisplayed()){
+            iFillEstoreShippingAndShippingAddress();
+            iFillEstoreShippingEmailAddress();
+            estoreE2EStepDefs.iClickOnSameAsShippingAddressCheckbox();
+            estoreE2EStepDefs.iClickOnSameAsShippingAddressCheckbox();
+            $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
+            executeJavaScript("arguments[0].click();", $(By.xpath("//*[text()='Continue to payment']")));
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
     }
 
     @When("I fill estore shipping email address")

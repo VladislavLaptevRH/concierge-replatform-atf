@@ -108,7 +108,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement westHollywood = $(By.xpath("//*[@id=\"146\"]"));
 
-    private final SelenideElement cartButton = $(By.id("header-cart-button"));
+    private final SelenideElement cartButton = $(By.xpath("//*[@id = 'header-cart-button']"));
 
     private final SelenideElement cartItemSum = $(By.xpath("//*[@id = 'header-cart-button']/div/span"));
 

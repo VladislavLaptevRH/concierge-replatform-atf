@@ -180,6 +180,7 @@ public class EstoreUserAccountPageStepDefs {
 
     @When("I edit existing address on address book page")
     public void iEditExistingAddressOnAddressBookPage() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(40));
         estoreAddressScreen.getEditShippinggAddress().click();
         firstName = estoreGeneralStepDefs.generateRandomString(5);

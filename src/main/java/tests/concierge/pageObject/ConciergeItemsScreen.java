@@ -18,6 +18,9 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement selectSize = $(By.xpath("(//select[contains(@id, 'Size')])[1]"));
 
+    private final SelenideElement selectFabric = $(By.xpath("(//select[contains(@id, 'Fabric')])[1]"));
+    private final SelenideElement selectColor = $(By.xpath("(//select[contains(@id, 'Color')])[1]"));
+
     private final SelenideElement selectFinish= $(By.xpath("(//select[contains(@id, 'Finish')])[1]"));
 
     private final SelenideElement selectQTY = $(By.xpath("(//select[contains(@id, 'qty')])[1]"));
@@ -31,6 +34,8 @@ public class ConciergeItemsScreen {
     private final List<SelenideElement> collectionsItems = $$(By.xpath("//div[contains(@class,'MuiGrid-item MuiGrid-grid-xs-12')]/div/ul[contains(@class,'MuiGridList-root')]/li[@class='MuiGridListTile-root']"));
 
     private final SelenideElement addToCartButton = $(By.xpath("(//button[@data-testid='add-to-cart-dialog-opener'])[1]"));
+
+    private final SelenideElement addToCartButtonDisabled = $(By.xpath("(//button[@data-testid='add-to-cart-dialog-opener'])[1][@disabled]"));
 
     private final SelenideElement viewCartButton = $(By.cssSelector("#ajax-proceed-to-cart"));
 
@@ -54,7 +59,7 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement metalFloatingMirror = $(By.xpath("(//*[text()='Metal Floating Mirror'])[2]"));
 
-    private final SelenideElement lapazSofaItem = $(By.xpath("//a[@href='/catalog/product/product.jsp?productId=prod25840134']"));
+    private final SelenideElement lapazSofaItem = $(By.xpath("//a[@href='/us/en/catalog/product/product.jsp?productId=prod25840134']"));
 
     private final SelenideElement collectionItem = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4']"));
 

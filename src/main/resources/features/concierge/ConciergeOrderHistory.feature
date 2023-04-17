@@ -61,4 +61,3 @@ Feature:Concierge Order history
       | R03283581845714 | inProcess   |
       | 785071          | open        |
       | 12345           | notExisting |
-

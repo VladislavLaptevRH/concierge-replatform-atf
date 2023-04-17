@@ -114,4 +114,3 @@ Feature:Concierge Registry
 #    When I search registry with more client create registries
 #    When I click on "SEARCH" registry button
 #    Then I verify that pagination is displayed
-

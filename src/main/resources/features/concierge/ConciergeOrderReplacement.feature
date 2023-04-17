@@ -16,6 +16,7 @@ Feature: Order replacement
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
+    When I click on continue with original address button
     When I execute payment for "VI"
     Then I verify that review screen is displayed
 
@@ -33,6 +34,7 @@ Feature: Order replacement
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
+    When I click on continue with original address button
     When I execute payment for "MC"
     Then I verify that review screen is displayed
     When I click on a place order button
@@ -51,6 +53,7 @@ Feature: Order replacement
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
+    When I click on continue with original address button
     When I execute payment for "AX"
     Then I verify that review screen is displayed
     When I click on a place order button
@@ -69,6 +72,7 @@ Feature: Order replacement
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
+    When I click on continue with original address button
     When I execute payment for "DI"
     Then I verify that review screen is displayed
     When I click on a place order button
@@ -87,5 +91,6 @@ Feature: Order replacement
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
+    When I click on continue with original address button
     When I execute payment for "POS"
     Then I verify that review screen is displayed

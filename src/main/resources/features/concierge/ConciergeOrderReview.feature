@@ -3,6 +3,7 @@
 Feature: Concierge Order review
 
   Scenario: Edit Shipping Address
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I add item to cart via API
@@ -13,9 +14,11 @@ Feature: Concierge Order review
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
+    When I click on continue with original address button
     When I choose POS for payment method
     When I edit shipping address from order review page
     When I continue to payment
+    When I click on continue with original address button
     When I confirm edited address
     When I click on order details button
     Then I verify that I'm able to edit shipping address
@@ -31,10 +34,12 @@ Feature: Concierge Order review
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
+    When I click on continue with original address button
     When I click on no thanks button
     When I choose POS for payment method
     When I edit billing address from order review page
     When I continue to payment
+    When I click on continue with original address button
     When I confirm edited address
     When I click on order details button
     And I verify that I'm able to edit billing address
@@ -50,6 +55,7 @@ Feature: Concierge Order review
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
+    When I click on continue with original address button
     When I choose POS for payment method
     When I edit payment method
     When I click on a place order button
@@ -65,10 +71,12 @@ Feature: Concierge Order review
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
+    When I click on continue with original address button
     When I choose POS for payment method
     Then I verify the payment details and order estimate summary
 
   Scenario: SPO ORDER & TERMS REVIEW SIGNATURE CAPTURE
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -88,6 +96,7 @@ Feature: Concierge Order review
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     When I continue to payment
+    When I click on continue with original address button
     When I choose POS for payment method
     When I click on a place order button
     When I click on order details button
@@ -104,5 +113,6 @@ Feature: Concierge Order review
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
+    When I click on continue with original address button
     When I choose POS for payment method
     Then I verify that all the line items in the cart with the order review page
