@@ -41,18 +41,18 @@ public class AbstractStepDefs {
                 conciergeUserAccountPage.getListOfMainCategories().get(main).click();
             }
         }
-            for (int sub = 0; sub < conciergeUserAccountPage.getListOfSubCategories().size(); sub++) {
-                if (sub == 0) {
-                    System.out.println("Sub Category: " + conciergeUserAccountPage.getListOfSubCategories().get(sub).getText());
-                    conciergeUserAccountPage.getListOfSubCategories().get(sub).click();
-                }
-                for (int collection = 0; collection < conciergeUserAccountPage.getListOfCollections().size(); collection++) {
-                    if (collection == 0) {
-                        System.out.println("Collection: " + conciergeUserAccountPage.getListOfCollections().get(collection).getText());
-                        conciergeUserAccountPage.getListOfCollections().get(collection).click();
-                    }
+        for (int sub = 0; sub < conciergeUserAccountPage.getListOfSubCategories().size(); sub++) {
+            if (sub == 0) {
+                System.out.println("Sub Category: " + conciergeUserAccountPage.getListOfSubCategories().get(sub).getText());
+                conciergeUserAccountPage.getListOfSubCategories().get(sub).click();
+            }
+            for (int collection = 0; collection < conciergeUserAccountPage.getListOfCollections().size(); collection++) {
+                if (collection == 0) {
+                    System.out.println("Collection: " + conciergeUserAccountPage.getListOfCollections().get(collection).getText());
+                    conciergeUserAccountPage.getListOfCollections().get(collection).click();
                 }
             }
+        }
         with().pollInterval(5, SECONDS).await().until(() -> true);
         System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": "+ Hooks.getCurrentUrl());
     }
@@ -194,27 +194,27 @@ public class AbstractStepDefs {
             $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
             $(By.xpath("(//*[text()='Edit'])[10]")).click();
         }
-            if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
-                generalStepDefs.fillAddressFields();
-                generalStepDefs.fillZipCodeStateCountry("85020", "US", "AZ - Arizona");
-                if(checkoutAddressScreen.getEmailAddressField().isDisplayed()){
-                    generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
-                    checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
-                } else {
-                    System.out.println("Email field is not available");
-                }
-
-                with().pollInterval(3, SECONDS).await().until(() -> true);
-
+        if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
+            generalStepDefs.fillAddressFields();
+            generalStepDefs.fillZipCodeStateCountry("85020", "US", "AZ - Arizona");
+            if(checkoutAddressScreen.getEmailAddressField().isDisplayed()){
+                generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
+                checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
             } else {
-                System.out.println("Address fields are not available");
+                System.out.println("Email field is not available");
             }
-            if(checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
-                if (!$(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
-                    $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).click();
-                    with().pollInterval(2, SECONDS).await().until(() -> true);
-                }
+
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+
+        } else {
+            System.out.println("Address fields are not available");
+        }
+        if(checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
+            if (!$(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
+                $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
             }
+        }
     }
 
     @When("I clicks on a random menu item for brands")

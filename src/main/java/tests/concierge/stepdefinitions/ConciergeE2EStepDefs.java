@@ -158,9 +158,9 @@ public class ConciergeE2EStepDefs {
                 }
             }
         }
-            conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
-            conciergeItemsScreen.getAddToCartButton().click();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
+        conciergeItemsScreen.getAddToCartButton().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
 
     }
 
@@ -520,7 +520,7 @@ public class ConciergeE2EStepDefs {
             Select country = new Select($(By.xpath("//select[@id = 'country']")));
             country.selectByValue("US");
             conciergeUserAccountPage.getClientLookupSearchButton().click();
-            }
+        }
         if (!conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME")).isDisplayed()) {
             conciergeUserAccountPage.getClientLookupSearchButton().click();
             with().pollInterval(9, SECONDS).await().until(() -> true);

@@ -12,8 +12,7 @@ import tests.utility.Hooks;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 
@@ -36,13 +35,13 @@ public class EstoreContractTradeStepDefs {
     @When("I click on bed")
     public void iClickOnBed() {
         $(By.xpath("//*[text()='Bed']")).should(Condition.visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Bed']")).click();
+        executeJavaScript("arguments[0].click();", $(By.xpath("//*[text()='Bed']")));
     }
 
     @When("I click on beds")
     public void iClickOnBeds() {
         $(By.xpath("//*[text()='Beds']")).should(Condition.visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Beds']")).click();
+        executeJavaScript("arguments[0].click();", $(By.xpath("//*[text()='Beds']")));
     }
 
     @Then("I verify that the dropdown's are enabled")

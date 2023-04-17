@@ -550,9 +550,9 @@ public class ProjectStepDefs {
             conciergeProjectScreen.getAdjustedPrice().click();
             with().pollInterval(2, SECONDS).await().until(() -> true);
         } else {
-        conciergeProjectScreen.getOverridePriceregularPrice().should(visible, Duration.ofMinutes(1));
-        conciergeProjectScreen.getOverridePriceregularPrice().click();
-    }}
+            conciergeProjectScreen.getOverridePriceregularPrice().should(visible, Duration.ofMinutes(1));
+            conciergeProjectScreen.getOverridePriceregularPrice().click();
+        }}
 
     @But("I choose {string} method for price override")
     public void iChooseMethodForPriceOverride(String methodValue) {
@@ -1071,7 +1071,7 @@ public class ProjectStepDefs {
     @When("I removed adjustment price")
     public void iRemovedAdjustemPrice() {
         if(conciergeProjectScreen.getPopUpErrorSomethingWentWrong().isDisplayed()){
-           conciergeProjectScreen.getTryAgainButton().click();
+            conciergeProjectScreen.getTryAgainButton().click();
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         $(By.xpath("//*[text()='Remove']")).should(visible, Duration.ofMinutes(1));

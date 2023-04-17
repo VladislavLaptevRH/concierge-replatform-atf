@@ -49,13 +49,13 @@ public class EstoreCartPageStepDefs {
             with().pollInterval(3, SECONDS).await().until(() -> true);
             int countOfCartItems = 0;
 
-            if(estoreUserAccountPage.getCartButtonUserService().isDisplayed()){
+            if (estoreUserAccountPage.getCartButtonUserService().isDisplayed()) {
                 Actions actions = new Actions(WebDriverRunner.getWebDriver());
                 actions.moveToElement(estoreUserAccountPage.getCartButtonUserService()).build().perform();
 
                 String countOfProducts = estoreUserAccountPage.getCartButtonUserService().getText();
                 countOfCartItems = Integer.valueOf(countOfProducts);
-                } else {
+            } else {
                 System.out.println("Cart is empty");
             }
 
@@ -376,21 +376,13 @@ public class EstoreCartPageStepDefs {
         if (arg0.equals("nonmember user")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);
             $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible, Duration.ofSeconds(40));
-            if (estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()) {
-                estoreCartPage.getVariableJoinButtonByName("JOIN NOW").click();
-            } else {
-                estoreCartPage.getVariableJoinButtonByName("Join Now").click();
-            }
+            $(By.xpath("//*[contains(text(),'Join the RH Members Program for $175, and save')]")).should(visible, Duration.ofSeconds(40));
         }
         if (arg0.equals("member user")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);
-            if (estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()) {
-                estoreCartPage.getVariableJoinButtonByName("JOIN NOW").click();
-            } else {
-                estoreCartPage.getVariableJoinButtonByName("Join Now").click();
-            }
+            $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible, Duration.ofSeconds(40));
+            $(By.xpath("//*[contains(text(),'Automation, ')]")).should(visible, Duration.ofSeconds(30));
         }
-
     }
 
     @Then("I verify that the added product is in the cart during brand switching")
@@ -624,7 +616,7 @@ public class EstoreCartPageStepDefs {
             estoreCartPage.getEstoreCartButton().should(visible, Duration.ofSeconds(40));
             estoreCartPage.getEstoreCartButton().click();
         }
-}
+    }
 
     @When("I add item {string} to cart via API for estore")
     public void iAddItemToCartViaAPIForEstore(String arg0) {
@@ -714,7 +706,7 @@ public class EstoreCartPageStepDefs {
         open(url);
         with().pollInterval(2, SECONDS).await().until(() -> true);
 
-        if(estoreItemPage.getAddToCartDisabledButton().isDisplayed()){
+        if (estoreItemPage.getAddToCartDisabledButton().isDisplayed()) {
             Select finishList = new Select(estoreItemPage.getSelectFinish());
             finishList.selectByVisibleText("Antiqued Brass");
             Select fabricList = new Select(estoreItemPage.getSelectFabric());

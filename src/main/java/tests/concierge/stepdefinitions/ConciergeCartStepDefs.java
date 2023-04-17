@@ -457,9 +457,9 @@ public class ConciergeCartStepDefs {
         $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")).should(visible, Duration.ofMinutes(1));
         generalStepDefs.clearField($(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")));
         $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")).setValue("changedCompanyNameBillingAddress");
-       if($(By.xpath("(//*[text()='Edit'])[1]")).isDisplayed()){
-           $(By.xpath("(//*[text()='Edit'])[1]")).click();
-           }
+        if($(By.xpath("(//*[text()='Edit'])[1]")).isDisplayed()){
+            $(By.xpath("(//*[text()='Edit'])[1]")).click();
+        }
         $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")).should(visible, Duration.ofMinutes(1));
         generalStepDefs.clearField($(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")));
         $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")).setValue("changedCompanyNameShippingAddress");
