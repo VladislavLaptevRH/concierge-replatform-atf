@@ -178,4 +178,8 @@ public class EstoreSearchStepDefs {
     public void iVerifyCribsTitleForEstore() {
         $(By.xpath("//*[text()='cribs']")).should(visible, Duration.ofSeconds(20));
     }
+
+    @When("I apply new arrivals facet")
+    public void iApplyNewArrivalsFacet() {
+    }
 }

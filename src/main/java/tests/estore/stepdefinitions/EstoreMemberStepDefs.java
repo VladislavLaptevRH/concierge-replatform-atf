@@ -1,12 +1,11 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.Condition;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import tests.estore.pageObject.EstoreCartPage;
-import tests.estore.pageObject.EstoreItemPage;
-import tests.estore.pageObject.EstoreMemberPage;
-import tests.estore.pageObject.EstoreUserAccountPage;
+import org.openqa.selenium.support.ui.Select;
+import tests.estore.pageObject.*;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -29,6 +28,7 @@ public class EstoreMemberStepDefs {
     EstoreItemPage estoreItemPage = new EstoreItemPage();
     EstoreCartPage estoreCartPage = new EstoreCartPage();
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
+    EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
 
     //Non-members
     String expectedTitle = "RH MEMBERS PROGRAM PROFILE";
@@ -184,6 +184,9 @@ public class EstoreMemberStepDefs {
 
     @Then("I verify that save card to account checkbox should be checked by defaults")
     public void iVerifyThatSaveCardToAccountCheckboxShouldBeCheckedByDefaults() {
+        estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
+        Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
+        selectPayment.selectByValue("CC");
         $(By.xpath("//input[@type='checkbox']")).should(selected, Duration.ofSeconds(30));
     }
 }

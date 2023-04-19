@@ -90,8 +90,7 @@ Feature: Estore Search
       | 2          |
       | 3          |
 
-    Scenario: Apply any facet and verify the count of product
-
-      Given I log into eStore as "regular" user
-      When I go to estore item "sofa" from search field
-      When I apply new arrivals facet
+  Scenario: Apply any facet and verify the count of product
+    Given I log into eStore as "regular" user
+    When I go to estore item "sofa" from search field
+    When I apply new arrivals facet

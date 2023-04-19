@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class EstorePDPScreen {
-    private final SelenideElement sortButton = $(By.xpath("//*[text()='sort']"));
+    private final SelenideElement sortButton = $(By.xpath("(//*[contains(text(),'sort')])[2]"));
 
     private final SelenideElement sortByButton = $(By.xpath("//*[text()='sort by:']"));
 

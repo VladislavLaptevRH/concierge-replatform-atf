@@ -39,7 +39,6 @@ public class EstoreAccountStepDefs {
 
     @Then("I verify that by updating personal information, application should get saved the entered details")
     public void iVerifyThatByUpdatingPersonalInformationApplicationShouldGetSavedTheEnteredDetails() {
-        estoreCartPage.getPopupCloseButton().click();
         assertTrue(estoreUserAccountPage.getBillingAddressFirstName().getValue().equals(firstName));
     }
 
@@ -95,7 +94,6 @@ public class EstoreAccountStepDefs {
 
     @When("I update first name for estore account")
     public void iUpdateFirstNameForEstoreAccount() {
-
         firstName = generalStepDefs.getAlphaNumericString(4);
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressFirstName());
         estoreUserAccountPage.getBillingAddressFirstName().setValue(firstName);
