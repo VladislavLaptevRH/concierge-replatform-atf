@@ -3,7 +3,6 @@
 Feature: Concierge Order review
 
   Scenario: Edit Shipping Address
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I add item to cart via API

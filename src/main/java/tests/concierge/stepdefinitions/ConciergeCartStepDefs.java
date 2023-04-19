@@ -637,7 +637,8 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify alternate addresses for client with multipel addresses")
     public void iVerifyAlternateAddressesForClientWithMultipelAddresses() {
-        $(By.xpath("//td[@class='MuiTableCell-root MuiTableCell-body'][2]")).should(visible, Duration.ofMinutes(1));
+        int addressesSize = conciergeUserAccountPage.getClientSearchResultAddresses().size();
+        assertTrue(addressesSize > 1);
     }
 
     @Then("I verify membership popup for guest user")

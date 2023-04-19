@@ -146,20 +146,22 @@ public class PaymentStepDefs {
     public void iVerifyTheCompleteBillingAddress() {
         paymentScreen.getBillingAddress().shouldHave(text(
                 "BILLING ADDRESS\n" +
-                        "Automation NonMember\n" +
-                        "7677 N 16TH ST\n" +
-                        "PHOENIX, AZ 85020-4434\n" +
+                        "QAFirst Automation\n" +
+                        "North 16th Street\n" +
+                        "QaApartment\n" +
+                        "Phoenix, AZ 85020\n" +
                         "US\n" +
-                        "124131231\n" +
+                        "1241312319\n" +
                         "Edit"));
 
         assertEquals(paymentScreen.getBillingAddress().getText(),
                 "BILLING ADDRESS\n" +
-                        "Automation NonMember\n" +
-                        "7677 N 16TH ST\n" +
-                        "PHOENIX, AZ 85020-4434\n" +
+                        "QAFirst Automation\n" +
+                        "North 16th Street\n" +
+                        "QaApartment\n" +
+                        "Phoenix, AZ 85020\n" +
                         "US\n" +
-                        "124131231\n" +
+                        "1241312319\n" +
                         "Edit");
     }
 

@@ -751,8 +751,44 @@ public class ConciergeE2EStepDefs {
         $(By.xpath("//*[text()='Invalid zip/postal code.']")).should(visible, Duration.ofMinutes(1));
     }
 
-    @When("I click on plus button from client lookup search results")
+    @When("I choose a Non-Member client and click on plus button from client lookup search results")
     public void iClickOnPlusButtonFromClientLookupSearchResults() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if (conciergeItemsScreen.getCheckoutButton().isDisplayed()) {
+            abstractStepDefs.iClickOnCheckoutButton();
+            iClickOnNoThanksButton();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+        if (!conciergeUserAccountPage.getClientLookupFirstNameByName().isDisplayed()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            if (!conciergeUserAccountPage.getClientLookupFirstNameByName().isDisplayed()) {
+                String URL = Hooks.conciergeBaseURL + "/us/eu/checkout/shopping_cart.jsp";
+                open(URL);
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                abstractStepDefs.iClickOnCheckoutButton();
+                iClickOnNoThanksButton();
+            }
+        }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+            generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupFirstNameByName());
+            conciergeUserAccountPage.getClientLookupFirstNameByName().setValue("Automation");
+            generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupLastName());
+            conciergeUserAccountPage.getClientLookupLastName().setValue("Nonmember");
+
+        conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofMinutes(1));
+        conciergeUserAccountPage.getClientLookupSearchButton().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if($(By.xpath("//*[text() = 'Select a country.']")).isDisplayed()){
+            Select country = new Select($(By.xpath("//select[@id = 'country']")));
+            country.selectByValue("US");
+            conciergeUserAccountPage.getClientLookupSearchButton().click();
+        }
+        if (!conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME")).isDisplayed()) {
+            conciergeUserAccountPage.getClientLookupSearchButton().click();
+            with().pollInterval(9, SECONDS).await().until(() -> true);
+        }
         conciergeUserAccountPage.getSearchClientResultsPlusButton().should(visible, Duration.ofMinutes(1));
         conciergeUserAccountPage.getSearchClientResultsPlusButton().click();
     }
