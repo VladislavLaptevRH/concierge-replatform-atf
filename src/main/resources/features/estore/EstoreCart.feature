@@ -97,7 +97,6 @@ Feature: Estore Cart Page
     Then I verify gift box fee in estore cart
 
   Scenario: eStore - Membership price for US and CAN
-
     Given I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore

@@ -45,6 +45,7 @@ Feature: Concierge Project
       | trade       |
 
   Scenario Outline: Verify that user is able to create project for client - <businessClient>
+
     Given I log into Concierge as "associate"
     When I click on projects button
     When I click on new project button
@@ -373,6 +374,7 @@ Feature: Concierge Project
 #    Then I verify that item was added to the selected space
 
   Scenario: Verify the address page, pre filled address details and Email address once the project added to cart
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header

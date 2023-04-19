@@ -26,6 +26,8 @@ public class ProjectStepDefs {
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeProjectScreen conciergeProjectScreen = new ConciergeProjectScreen();
     ProjectSettingsScreen projectSettingsScreen = new ProjectSettingsScreen();
+
+    PaymentStepDefs paymentStepDefs = new PaymentStepDefs();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     Mailinator mailinator = new Mailinator();
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
@@ -931,7 +933,7 @@ public class ProjectStepDefs {
 //            actions.moveToElement($(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[3]")));
             with().pollInterval(3, SECONDS).await().until(() -> true);
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[3]")).click();
-            $(By.xpath("//*[contains(text(),'This item is in stock and will be ready for delivery between')]")).shouldHave(text("This item is in stock and will be ready for delivery between"), Duration.ofSeconds(20));
+            $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between')]")).shouldHave(text("This item is special order and will be ready for delivery between"), Duration.ofSeconds(20));
         }
         if (arg0.equals("In stock")) {
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).shouldHave(text("AVAILABILITY & DELIVERY"),Duration.ofSeconds(20)).scrollIntoView(true);
@@ -949,7 +951,7 @@ public class ProjectStepDefs {
             executeJavaScript("window.scrollTo(0, 800)");
             with().pollInterval(3, SECONDS).await().until(() -> true);
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).click();
-            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[3]")).shouldHave(text("This item is in stock and will be ready for delivery"), Duration.ofSeconds(20));
+            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[3]")).shouldHave(text("This item is special order and will be ready for delivery between"), Duration.ofSeconds(20));
         }
 
     }
@@ -1045,6 +1047,7 @@ public class ProjectStepDefs {
             checkoutAddressScreen.getVerifyingShippingAddressPage().should(visible, Duration.ofSeconds(40));
             checkoutAddressScreen.getVerifyingBillingAddressPage().should(visible, Duration.ofSeconds(40));
         } else {
+            paymentStepDefs.iClickOnContinueWithOriginalAddressButton();
             checkoutAddressScreen.getVerifyingShippingAddressPage().should(visible, Duration.ofSeconds(40));
         }
 

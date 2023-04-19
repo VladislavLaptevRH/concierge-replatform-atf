@@ -153,8 +153,8 @@ public class EstoreMemberStepDefs {
 
     @When("I click on terms & condition link")
     public void iClickOnTermsConditionLink() {
-        $(By.xpath("//*[text()='RH Members Program Terms & Conditions']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='RH Members Program Terms & Conditions']")).click();
+        $(By.xpath("//*[contains(text(),'Terms & Conditions')]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[contains(text(),'Terms & Conditions')]")).click();
     }
 
     @Then("I verify that rh members program terms & condition pop up is displayed")
@@ -164,7 +164,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I verify that email address displayed in membership page")
     public void iVerifyThatEmailAddressDisplayedInMembershipPage() {
-        $(By.xpath("//*[text()='bnamdeo+0073@rh.com']")).should(visible, Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='automationmember@rh.com']")).should(visible, Duration.ofSeconds(25));
     }
 
     @When("I click on FAQa link for estore")
