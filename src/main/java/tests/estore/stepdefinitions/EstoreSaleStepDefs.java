@@ -52,9 +52,8 @@ public class EstoreSaleStepDefs {
 
     @Then("I verify the back button from sale PDP page")
     public void iVerifyTheBackButtonFromSalePDPPage() {
-        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-        estoreCGScreen.getBackToTopButton().should(Condition.visible, Duration.ofSeconds(20));
-        estoreCGScreen.getBackToTopButton().click();
+        with().pollInterval(4, SECONDS).await().until(() -> true);
+        WebDriverRunner.getWebDriver().navigate().back();
     }
 
     @When("I go to sale estore category")

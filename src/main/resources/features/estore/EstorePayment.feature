@@ -35,7 +35,6 @@ Feature: Estore Payment
     Then I verify that estore thank you page is displayed
 
   Scenario: eStore Edit Payment
-
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -50,7 +49,6 @@ Feature: Estore Payment
     Then I verify that I'm able to edit payment
 
   Scenario: eStore Edit Address
-
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -66,8 +64,8 @@ Feature: Estore Payment
     When I click on continue to payment estore button
     When I click on continue with original address estore button
 
+      #canada issue
   Scenario: eStore unavailability of RHCC for CAN address
-
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -98,7 +96,7 @@ Feature: Estore Payment
     When I click on estore continue button
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
-
+#
   Scenario: eStore Update address (Non impacting change) after making payment
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
@@ -209,6 +207,7 @@ Feature: Estore Payment
     When I add new card for estore
     Then I verify that new payment was added
 
+      #canada issue
   Scenario: eStore unavailability of Discover for CAN address
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
@@ -223,6 +222,7 @@ Feature: Estore Payment
     When I click on continue with original address estore button
     Then I verify unavailability of Discover for CAN address
 
+      #canada issue
   Scenario: eStore unavailability of Saved Discover for CAN shipping address
     Given I log into eStore as "savedRhCcDiscover" user
     When I remove all items from estore cart
@@ -238,6 +238,7 @@ Feature: Estore Payment
     When I click on continue with original address estore button
     Then I verify that discover is unavailable
 
+      #canada issue
   Scenario: eStore unavailability of Saved RHCC for CAN shipping address
     Given I log into eStore as "savedRhCc" user
     When I remove all items from estore cart
@@ -251,8 +252,8 @@ Feature: Estore Payment
     When I click on continue with original address estore button
     Then I verify unavailability of saved for RHCC
 
+  #canada issue
   Scenario: eStore Update address (Change Country) after making payment
-
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -338,6 +339,7 @@ Feature: Estore Payment
     When I click on continue payment method estore button
     When I click on a place estore order button
 
+      #canada issue
   Scenario: Verify that user is able to execute payment via GC for CAN
     Given I log into eStore as "savedRhCc" user
     When I remove all items from estore cart

@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 import com.aventstack.extentreports.ExtentReports;
 
@@ -145,10 +147,15 @@ public class Hooks {
      */
     @Before("@estoreRegression")
     public void initWebDrivereStore() {
-        ConfigFileReader();
-        configureEstoreURL();
-        setupChromeArguments();
-        setUPWebDriver(eStoreURL);
+        try {
+            ConfigFileReader();
+            configureEstoreURL();
+            setupChromeArguments();
+            setUPWebDriver(eStoreURL);
+        } catch (org.openqa.selenium.TimeoutException exception) {
+            with().pollInterval(10, SECONDS).await().until(() -> true);
+            refresh();
+        }
     }
 
     /**

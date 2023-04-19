@@ -65,6 +65,7 @@ Feature: Estore Membership
     When I goes to estore cart for estore
     When I click on estore checkout button
     When I fill estore shipping address
+    When I click on edit estore billing address button
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
