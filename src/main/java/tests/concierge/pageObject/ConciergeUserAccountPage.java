@@ -33,7 +33,6 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement chairsSubMenu = $(By.xpath("//*[text()='Chairs']"));
 
-
     private final SelenideElement firstItemMainMenu = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']/div[1]"));
 
     private final SelenideElement newClientHeaderBtn = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-justify-xs-flex-end MuiGrid-grid-xs-6']/span"));
@@ -120,6 +119,8 @@ public class ConciergeUserAccountPage {
 
     private final List<SelenideElement> itemSubCategory = $$(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3'])/ul/li"));
 
+    private final List<SelenideElement> clientSearchResultAddresses = $$(By.xpath("//td[@class='MuiTableCell-root MuiTableCell-body'][2]"));
+
     private final SelenideElement firstItemSubCategory = $(By.xpath("((//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-3'])[1]//ul//li)[1]//span"));
 
     private final SelenideElement clientButton = $(By.id("header-client-button"));
@@ -186,7 +187,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement youHaveSelectedContractAccountText = $(By.xpath("//*[text()='You have selected a Contract Account which is reserved for the Contract Team. Please select an existing trade account or create a new one.']"));
 
-    private final SelenideElement searchClientResultsPlusButton = $(By.xpath("//td[@class='MuiTableCell-root MuiTableCell-body'][8]"));
+    private final SelenideElement searchClientResultsPlusButton = $(By.xpath("(//td[@class='MuiTableCell-root MuiTableCell-body'][8])[1]"));
 
     private final List<SelenideElement> toddlerBeddingList = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul[@class='MuiGridList-root']/li[@class='MuiGridListTile-root']"));
 

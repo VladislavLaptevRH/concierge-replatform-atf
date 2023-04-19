@@ -444,11 +444,9 @@ Feature:Concierge Cart Page
     Then I verify that availability, Delivery and Returns messaging in cart
 
   Scenario: Verify alternate addresses for client with multiple addresses
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
     When I click on client button
-    When I choose client who is a "Non-Member"
-    When I click on plus button from client lookup search results
+    When I choose a Non-Member client and click on plus button from client lookup search results
     Then I verify alternate addresses for client with multipel addresses

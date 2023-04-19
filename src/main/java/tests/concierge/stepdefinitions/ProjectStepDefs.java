@@ -178,6 +178,7 @@ public class ProjectStepDefs {
 
     @Then("I verify that projects screen is displayed")
     public void iVerifyThatProjectsScreenIsDisplayed() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getForecastSetButton().should(visible, Duration.ofSeconds(40));
         assertTrue(conciergeProjectScreen.getSettingsButton().isDisplayed(), "Settings button is displayed");
         conciergeProjectScreen.getPrintButton().should(visible, Duration.ofSeconds(40));
