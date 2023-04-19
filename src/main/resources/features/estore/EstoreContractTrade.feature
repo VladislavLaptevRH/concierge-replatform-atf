@@ -28,6 +28,7 @@ Feature: eStore Contract and Trade
     Then I verify that price for product&line should be in US dollars
 
   Scenario: eStore Contract - Validate the currency for CAN Zip
+
     Given I log into eStore as "noaddresses" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -75,7 +76,8 @@ Feature: eStore Contract and Trade
 #    And I click on view cart estore button
 #    Then I verify that contract price is used for each TN product
 
-  Scenario: eStore Contract - Verify RHCC payment option for Contract user
+  Scenario: eStore Contract - Verify RHCC payment option for Contract user with editing
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -91,6 +93,7 @@ Feature: eStore Contract and Trade
     When I click on continue payment method estore button
 
   Scenario: eStore Contract - Split Payment
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -107,6 +110,7 @@ Feature: eStore Contract and Trade
     Then I verify that I'm able to execute estore split payment
 
   Scenario: estore Contract - Full Payment
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore

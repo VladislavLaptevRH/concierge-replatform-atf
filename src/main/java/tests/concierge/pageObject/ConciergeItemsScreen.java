@@ -75,7 +75,7 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement addMonogramCheckBoxPdp = $(By.xpath("//span[@class='MuiIconButton-label']/input"));
 
-    private final SelenideElement addGiftCheckBox = $(By.xpath("(//span[@data-testid = 'monogram-checkbox'])[2]"));
+    private final SelenideElement addGiftCheckBox = $(By.xpath("//span[@data-testid = 'monogram-checkbox']"));
 
     private final SelenideElement spaceNameSelect = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12'][3]//select"));
 

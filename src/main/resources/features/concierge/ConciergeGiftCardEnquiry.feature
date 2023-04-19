@@ -9,6 +9,7 @@ Feature: Concierge GiftCardEnquiry
     Then I verify transaction details
 
   Scenario: Purchase Gift Card
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header

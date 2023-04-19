@@ -63,8 +63,8 @@ public class EstoreHomePageStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         String URL = Hooks.eStoreURL.replaceAll("endpoint=releasetues", "");
         URL = URL.split(String.valueOf('&'))[0];
-        URL = URL.substring(0, URL.length() - 2);
-        assertEquals(Hooks.getCurrentUrl(), URL + "/search/results.jsp?Ntt=" + result + "&Ns=product.sale%7C1");
+        URL = URL.substring(0, URL.length() - 22);
+        assertEquals(Hooks.getCurrentUrl(), URL + "/us/en/search/results.jsp?Ntt=" + result + "&Ns=product.sale%7C1");
     }
 
 
@@ -103,8 +103,7 @@ public class EstoreHomePageStepDefs {
     @When("I scroll down to Request a design consultation and click")
     public void iScrollDownToRequestADesignConsultationAndClick() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        executeJavaScript("window.scrollTo(0, 1000)");
-        executeJavaScript("window.scrollTo(0, 3000)");
+        executeJavaScript("window.scrollTo(0, 11000)");
         estoreHomePage.getRequestConsultationButton().scrollTo();
         estoreHomePage.getRequestConsultationButton().click();
     }

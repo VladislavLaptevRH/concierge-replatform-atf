@@ -779,6 +779,7 @@ public class ConciergeCartStepDefs {
 
     @When("I remove all items from cart via UI")
     public void iRemoveAllItemsFromCartViaUI() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {

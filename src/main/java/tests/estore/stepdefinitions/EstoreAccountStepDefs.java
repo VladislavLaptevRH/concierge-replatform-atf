@@ -95,6 +95,7 @@ public class EstoreAccountStepDefs {
 
     @When("I update first name for estore account")
     public void iUpdateFirstNameForEstoreAccount() {
+
         firstName = generalStepDefs.getAlphaNumericString(4);
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressFirstName());
         estoreUserAccountPage.getBillingAddressFirstName().setValue(firstName);

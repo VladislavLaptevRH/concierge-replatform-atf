@@ -41,7 +41,6 @@ Feature: Estore CG
     Then I verify that single grid view is selected on CG page by default
 
   Scenario: Verify collection name,image (regular,member,sale(applicable) on collection banner
-
     Given I log into eStore as "guest" user
     When I goes to estore collection page
     Then I verify collection name, image on collection banner
