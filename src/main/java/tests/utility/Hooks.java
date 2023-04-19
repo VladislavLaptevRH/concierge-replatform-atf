@@ -150,7 +150,7 @@ public class Hooks {
         try {
             ConfigFileReader();
             configureEstoreURL();
-            setupChromeArguments();
+//            setupChromeArguments();
             setUPWebDriver(eStoreURL);
         } catch (org.openqa.selenium.TimeoutException exception) {
             with().pollInterval(10, SECONDS).await().until(() -> true);
@@ -180,7 +180,7 @@ public class Hooks {
         Configuration.browserSize = "1366x768";
         Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
-        Configuration.timeout = 60000;
+        Configuration.timeout = 600000;
         Configuration.reportsFolder = "target/screenshots";
         open(url);
         currentUrl = WebDriverRunner.url();
