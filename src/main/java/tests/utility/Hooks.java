@@ -3,9 +3,8 @@ package tests.utility;
 import com.aventstack.extentreports.ExtentReports;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import tests.concierge.stepdefinitions.FilterStepDefs;
 import io.cucumber.java.After;
@@ -13,7 +12,6 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -68,13 +66,15 @@ public class Hooks {
         cookie = System.getenv("ENDPOINT");
 
         if (profile == null) {
-            Assert.fail("Environment Variable is NOT Set");
+            profile = "stg2";
+//            Assert.fail("Environment Variable is NOT Set");
         } else {
             System.out.println("Tests are running on " + profile + " environment");
         }
 
         if (cookie == null) {
-            System.out.println("Tests are running without cookie or endpoint");
+            cookie = "releasetues";
+//            System.out.println("Tests are running without cookie or endpoint");
         } else {
             System.out.println("Tests are running with endpoint = " + cookie);
         }
@@ -150,9 +150,9 @@ public class Hooks {
         try {
             ConfigFileReader();
             configureEstoreURL();
-//            setupChromeArguments();
+            setupChromeArguments();
             setUPWebDriver(eStoreURL);
-        } catch (org.openqa.selenium.TimeoutException exception) {
+        } catch (TimeoutException | MalformedURLException exception) {
             with().pollInterval(10, SECONDS).await().until(() -> true);
             refresh();
         }
@@ -165,7 +165,7 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
         configureConciergeURL();
-        setupChromeArguments();
+//        setupChromeArguments();
         setUPWebDriver(conciergeURL);
     }
 
@@ -178,7 +178,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 600000;
         Configuration.reportsFolder = "target/screenshots";
@@ -189,21 +189,15 @@ public class Hooks {
     /**
      * Set up chrome arguments for Jenkins run
      */
-    public void setupChromeArguments() {
+    public void setupChromeArguments() throws MalformedURLException {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("--window-size=1366,768");
         DesiredCapabilities dr = new DesiredCapabilities();
-        dr.setBrowserName("chrome");
         dr.setCapability(ChromeOptions.CAPABILITY, options);
-        String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
-        RemoteWebDriver driver = null;
-        try {
-            driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        WebDriver driver = null;
+        driver = new ChromeDriver(dr);
         WebDriverRunner.setWebDriver(driver);
     }
 
