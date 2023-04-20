@@ -150,7 +150,7 @@ public class Hooks {
         try {
             ConfigFileReader();
             configureEstoreURL();
-//            setupChromeArguments();
+            setupChromeArguments();
             setUPWebDriver(eStoreURL);
         } catch (org.openqa.selenium.TimeoutException exception) {
             with().pollInterval(10, SECONDS).await().until(() -> true);

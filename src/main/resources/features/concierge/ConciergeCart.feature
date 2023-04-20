@@ -300,7 +300,6 @@ Feature:Concierge Cart Page
     Then I verify that postpone shipment was applied
 
   Scenario: Monogram Edit / Remove / Add
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
