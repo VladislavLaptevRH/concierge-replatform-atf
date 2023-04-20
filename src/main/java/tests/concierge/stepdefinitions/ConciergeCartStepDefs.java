@@ -611,6 +611,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that monogram was edited")
     public void iVerifyThatMonogramWasEdited() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Dark Silver Metallic (MDSL)']")).shouldHave(text("Dark Silver Metallic (MDSL)"), Duration.ofSeconds(30));
     }
 
@@ -624,6 +625,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that monogram was removed")
     public void iVerifyThatMonogramWasRemoved() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getPersonalizationText().shouldNotBe(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Bauer Bodoni 2 (BDNI-HD)']")).shouldNotBe(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Dark Silver Metallic (MDSL)']")).shouldNotBe(visible, Duration.ofMinutes(1));
@@ -782,6 +784,10 @@ public class ConciergeCartStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!conciergeUserAccountPage.getCartButtonItemSum().exists()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
             String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
             open(URL);

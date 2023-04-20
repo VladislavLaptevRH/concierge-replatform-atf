@@ -137,6 +137,3 @@ Feature: Concierge E2E flow
 #      | RH SKI House   |
 #      | RH Beach House |
 #      | RH Interiors   |
-
-
-
