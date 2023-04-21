@@ -194,6 +194,7 @@ public class Hooks {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("--window-size=1366,768");
+        options.addArguments("--remote-allow-origins=*");
         DesiredCapabilities dr = new DesiredCapabilities();
         dr.setCapability(ChromeOptions.CAPABILITY, options);
         WebDriver driver = null;
