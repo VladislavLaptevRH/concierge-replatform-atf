@@ -75,7 +75,6 @@ Feature: Concierge Order review
     Then I verify the payment details and order estimate summary
 
   Scenario: SPO ORDER & TERMS REVIEW SIGNATURE CAPTURE
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -97,8 +96,7 @@ Feature: Concierge Order review
     When I continue to payment
     When I click on continue with original address button
     When I choose POS for payment method
-    When I click on a place order button
-    When I click on order details button
+    When I click on a place order button without signature
     Then I verify spo order & terms review signature
 
   Scenario: Verify all the line items on the order review page

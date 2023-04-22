@@ -993,7 +993,7 @@ public class ConciergeE2EStepDefs {
         conciergeItemsScreen.getAddToCartButton().should(visible, Duration.ofSeconds(10));
 
         if (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
-            conciergeItemsScreen.getChoseFinishOption().click();
+//            conciergeItemsScreen.getChoseFinishOption().click();
             with().pollInterval(1, SECONDS).await().until(() -> true);
             Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
             sizeList.selectByVisibleText("Queen");

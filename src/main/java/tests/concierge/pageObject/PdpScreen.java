@@ -4,7 +4,10 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class PdpScreen {
@@ -24,4 +27,8 @@ public class PdpScreen {
     private final SelenideElement specialOrderPopUpHeaderHeader = $(By.xpath("//p[@data-testid = 'swatch-panel-dialog-delivery-message']"));
 
     private final SelenideElement productTitleGiftCard = $(By.xpath("//*[@class='MuiTypography-root MuiTypography-h2' and text()='RH GIFT CARD']"));
+
+    private final List<SelenideElement> itemYAMLList = $$(By.xpath("//*[text() = 'YOU MIGHT ALSO LIKE']/..//span"));
+
+
 }
