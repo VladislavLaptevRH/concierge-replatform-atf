@@ -178,6 +178,15 @@ public class AbstractStepDefs {
         }
     }
 
+    @When("I click on a place order button without signature")
+    public void iClickOnPlaceOrderButtonWithoutSignature() {
+        with().pollInterval(9, SECONDS).await().until(() -> true);
+        reviewOrderScreen.getPlaceOrderButton().should(enabled, Duration.ofSeconds(45));
+        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+        reviewOrderScreen.getPlaceOrderButton().should(enabled, Duration.ofMinutes(1));
+        reviewOrderScreen.getPlaceOrderButton().click();
+    }
+
     @Then("I verify that confirmation order screen is displayed")
     public void iVerifyThatOrderDetailsScreenIsDisplayed() {
         generalStepDefs.waitForJSandJQueryToLoad();

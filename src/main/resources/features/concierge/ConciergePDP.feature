@@ -40,10 +40,9 @@ Feature: Concierge PDP
     Then I verify that custom windows are displayed
 
   Scenario: YAML carousel
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
-    When I open product page with productId "prod6490263"
+    When I open product page with productId "prod14900056"
     Then I verify that YAML carousel is displayed
 
   Scenario: Mattress Recycling Fee
