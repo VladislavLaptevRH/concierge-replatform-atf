@@ -213,7 +213,9 @@ public class ConciergeCartStepDefs {
     public void iVerifyLineItemsPricesFor(String arg0) {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofMinutes(1));
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getReasonCodeField().shouldNot(visible, Duration.ofSeconds(15));
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if (arg0.equals("PERCENT_OFF")) {
             String lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", "");
             float line = Float.parseFloat(lineItemPriceValueBeforeOverride) / 2;
@@ -225,6 +227,7 @@ public class ConciergeCartStepDefs {
             assertEquals(expectedValuePriceValue, Integer.parseInt(lineItemPriceValueAfterOverride));
         }
         if (arg0.equals("AMOUNT_OVERRIDE")) {
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             String lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
             assertEquals(lineItemPriceValueAfterOverride, "50");
         }
@@ -444,8 +447,9 @@ public class ConciergeCartStepDefs {
 
     @And("I edit ship to, bill to, sold to addresses")
     public void iEditShipToBillToSoldToAddresses() {
-        if(conciergeAddressScreen.getEditAddressButton().isDisplayed()){
-            conciergeAddressScreen.getEditAddressButton().click();
+        if(conciergeAddressScreen.getEditSAddressButton().isDisplayed()){
+            conciergeAddressScreen.getEditSAddressButton().scrollIntoView(true);
+            conciergeAddressScreen.getEditSAddressButton().click();
         }
         checkoutAddressScreen.getCompanyNameField().should(visible, Duration.ofMinutes(1));
         generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameField());

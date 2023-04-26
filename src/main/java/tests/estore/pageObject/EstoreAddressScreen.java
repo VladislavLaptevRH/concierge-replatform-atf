@@ -9,7 +9,9 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class EstoreAddressScreen {
 
-    private final SelenideElement shippingAddressCountry = $(By.id("shippingAddress.country"));
+    private final SelenideElement shippingAddressCountry = $(By.xpath("//*[@id = 'shippingAddress.country']"));
+
+    private final SelenideElement shippingAddressCountryDisabled = $(By.xpath("//*[@id = 'shippingAddress.country'][@disabled]"));
 
     private final SelenideElement shippingAddressFirstName = $(By.id("shippingAddress.firstName"));
 

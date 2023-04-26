@@ -35,7 +35,9 @@ public class ConciergeAddressScreen {
 
     private final SelenideElement shippingAddressTitle = $(By.xpath("//*[text()='Shipping Address']"));
 
-    private final SelenideElement editAddressButton = $(By.xpath("(//*[text()='Edit'])[1]"));
+    private final SelenideElement editSAddressButton = $(By.xpath("(//*[text() = 'Shipping Address']/..//*[text()='Edit'])[4]"));
+
+    private final SelenideElement editBAddressButton = $(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]"));
 
     private final SelenideElement editPaymentOrderReview = $(By.xpath("//a[@href='/us/en/checkout/payment.jsp' and text() = 'Edit']"));
 

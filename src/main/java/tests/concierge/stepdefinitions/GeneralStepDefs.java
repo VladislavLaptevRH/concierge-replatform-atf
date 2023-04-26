@@ -190,10 +190,11 @@ public class GeneralStepDefs {
      */
     public void fillZipCodeStateCountry(String zipCode, String country, String state) {
         checkoutAddressScreen.getCountryField().should(visible, Duration.ofSeconds(50));
-        Select countrySelect = new Select(checkoutAddressScreen.getCountryField());
-        executeJavaScript("arguments[0].scrollIntoView(true);", countrySelect);
-        countrySelect.selectByValue(country);
-
+        if(!checkoutAddressScreen.getShippingAddressCountryDisabled().isDisplayed()){
+            Select countrySelect = new Select(checkoutAddressScreen.getCountryField());
+            executeJavaScript("arguments[0].scrollIntoView(true);", countrySelect);
+            countrySelect.selectByValue(country);
+        }
         Select selectState = new Select(checkoutAddressScreen.getStateField());
         selectState.selectByValue("AZ");
         if(checkoutAddressScreen.getZipPostalCodeField().isDisplayed()){
