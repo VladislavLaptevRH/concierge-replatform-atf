@@ -1033,9 +1033,9 @@ public class ConciergeE2EStepDefs {
     @When("I click on edit concierge billing address button")
     public void iClickOnEditConciergeBillingAddressButton() {
         System.out.println();
-        if (conciergeAddressScreen.getEditAddressButton().isDisplayed()) {
-            conciergeAddressScreen.getEditAddressButton().shouldHave(text("Edit"), Duration.ofSeconds(10));
-            conciergeAddressScreen.getEditAddressButton().click();
+        if (conciergeAddressScreen.getEditBAddressButton().isDisplayed()) {
+            conciergeAddressScreen.getEditBAddressButton().shouldHave(text("Edit"), Duration.ofSeconds(10));
+            conciergeAddressScreen.getEditBAddressButton().click();
         }else{
             System.out.println();
         }

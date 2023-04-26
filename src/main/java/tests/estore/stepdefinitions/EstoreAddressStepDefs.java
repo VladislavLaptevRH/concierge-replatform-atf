@@ -159,8 +159,10 @@ public class EstoreAddressStepDefs {
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
                 estoreAddressScreen.getShippingAddressLastName1().setValue("William");
 
-                Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
-                shippingAddressCountry.selectByValue("US");
+                if(!estoreAddressScreen.getShippingAddressCountryDisabled().isDisplayed()){
+                    Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
+                    shippingAddressCountry.selectByValue("US");
+                }
 
                 if (Hooks.eStoreURL.contains("stg4") || Hooks.eStoreURL.contains("stg3")) {
                     generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress1());

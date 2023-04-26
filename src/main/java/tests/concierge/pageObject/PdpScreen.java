@@ -6,12 +6,14 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class PdpScreen {
 
+    public final String itemYAMLList = "(//*[text() = 'YOU MIGHT ALSO LIKE']/..//span)[%s]";
     private final SelenideElement manageRegistryButton = $(By.xpath("//*[text()='MANAGE REGISTRY']"));
 
     private final SelenideElement addToRegistryButton = $(By.xpath("(//button[@data-testid='add-to-registry-dialog-opener'])[1]"));
@@ -28,7 +30,11 @@ public class PdpScreen {
 
     private final SelenideElement productTitleGiftCard = $(By.xpath("//*[@class='MuiTypography-root MuiTypography-h2' and text()='RH GIFT CARD']"));
 
-    private final List<SelenideElement> itemYAMLList = $$(By.xpath("//*[text() = 'YOU MIGHT ALSO LIKE']/..//span"));
+//    private final List<SelenideElement> itemYAMLList = $$(By.xpath("//*[text() = 'YOU MIGHT ALSO LIKE']/..//span"));
 
 
+    public SelenideElement getTtemYAMLListByNumber(int number) {
+        String path = String.format(itemYAMLList, number);
+        return $(byXpath(path));
+    }
 }

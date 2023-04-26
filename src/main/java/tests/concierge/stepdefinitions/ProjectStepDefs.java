@@ -891,15 +891,19 @@ public class ProjectStepDefs {
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         if (spaceName.equals("space2")) {
-            $(By.xpath("//div/h5[text() = 'space1']")).click();
+            WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(2, SECONDS).await().until(() -> true);
+            $(By.xpath("//div/h5[text() = 'space1']")).click();
+            $(By.xpath("//button/h5[text() = '" + spaceName + "']")).scrollIntoView(true);
             $(By.xpath("//button/h5[text() = '" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
             $(By.xpath("//button/h5[text() = '" + spaceName + "']")).click();
         }
+        WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        $(By.xpath("//div/h5[contains(text(), 'space')]")).should(visible, Duration.ofSeconds(10));
-        $(By.xpath("//div/h5[contains(text(), 'space')]")).click();
+        $(By.xpath("//div/h5[contains(text(), 'space2')]")).should(visible, Duration.ofSeconds(10));
+        $(By.xpath("//div/h5[contains(text(), 'space2')]")).click();
         with().pollInterval(2, SECONDS).await().until(() -> true);
+        $(By.xpath("//button/h5[text() = '" + spaceName + "']")).scrollIntoView(true);
         $(By.xpath("//button/h5[text() = '" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
         $(By.xpath("//button/h5[text() = '" + spaceName + "']")).click();
     }

@@ -123,13 +123,15 @@ public class Pdp {
         List<String> items2 = new ArrayList<>();
         List<String> expectedItems = new ArrayList<>(Arrays.asList("CLOUD SOFA", "CLOUD TRACK ARM SOFA" , "CLOUD SLOPE ARM MODULAR CUSTOMIZABLE SECTIONAL"));
         for (int i = 0; i < 3; i++) {
-            items1.add(pdpScreen.getItemYAMLList().get(i).getText());
+            items1.add(pdpScreen.getTtemYAMLListByNumber(i+1).getText());
+            with().pollInterval(1, SECONDS).await().until(() -> true);
         }
+        with().pollInterval(1, SECONDS).await().until(() -> true);
         assertEquals(items1, expectedItems);
         $(By.xpath("(//*[text() = 'YOU MIGHT ALSO LIKE']/..//ul/div/div)[3]")).click();
         with().pollInterval(2, SECONDS).await().until(() -> true);
         for (int i = 3; i < 6 ; i++) {
-            items2.add(pdpScreen.getItemYAMLList().get(i).getText());
+            items2.add(pdpScreen.getTtemYAMLListByNumber(i+1).getText());
         }
         assertNotEquals(items2, expectedItems);
     }
