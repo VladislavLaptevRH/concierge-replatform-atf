@@ -73,6 +73,13 @@ public class ConciergeItemsStepDefs {
             selectOption.getColorOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select selectFabric = new Select(selectOption.getColorOption());
             selectFabric.selectByIndex(1);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
+            sizeList.selectByVisibleText("Bath Sheet") ;
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
+            quantityList.selectByVisibleText("1");
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");
         }
