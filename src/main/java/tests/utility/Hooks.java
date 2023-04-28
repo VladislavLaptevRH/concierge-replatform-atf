@@ -158,7 +158,7 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
         configureConciergeURL();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(conciergeURL);
     }
 
