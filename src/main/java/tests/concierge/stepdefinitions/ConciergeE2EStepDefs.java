@@ -117,6 +117,8 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
+//        with().pollInterval(3, SECONDS).await().until(() -> true);
+//        WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(3, SECONDS).await().until(() -> true);
         if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
             for (int i = 0; i < 3; i++) {
@@ -137,7 +139,7 @@ public class ConciergeE2EStepDefs {
             }
             if(conciergeItemsScreen.getSelectSize().isDisplayed()){
                 Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
-                sizeList.selectByVisibleText("Washcloth");
+                sizeList.selectByVisibleText("Washcloth") ;
                 with().pollInterval(1, SECONDS).await().until(() -> true);
             }
             if(conciergeItemsScreen.getSelectColor().isDisplayed()){
