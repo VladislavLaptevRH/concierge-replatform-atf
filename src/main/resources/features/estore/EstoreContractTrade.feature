@@ -28,7 +28,6 @@ Feature: eStore Contract and Trade
     Then I verify that price for product&line should be in US dollars
 
   Scenario: eStore Contract - Validate the currency for CAN Zip
-
     Given I log into eStore as "noaddresses" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -93,7 +92,6 @@ Feature: eStore Contract and Trade
     When I click on continue payment method estore button
 
   Scenario: eStore Contract - Split Payment
-
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -621,7 +619,6 @@ Feature: eStore Contract and Trade
     Then I verify that gift card balance info is displayed for estore
 
   Scenario: eStore Trade - Edit Payment
-
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
