@@ -118,6 +118,15 @@ public class ConciergeE2EStepDefs {
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
+        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                with().pollInterval(4, SECONDS).await().until(() -> true);
+                if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+                    break;
+                }
+            }
+        }
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeItemsScreen.getAddToCartButton().scrollTo();
         if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
@@ -145,17 +154,6 @@ public class ConciergeE2EStepDefs {
                 Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
                 quantityList.selectByVisibleText("1");
                 with().pollInterval(1, SECONDS).await().until(() -> true);
-            }
-
-        }
-
-        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-            for (int i = 0; i < 3; i++) {
-                WebDriverRunner.getWebDriver().navigate().refresh();
-                with().pollInterval(4, SECONDS).await().until(() -> true);
-                if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-                    break;
-                }
             }
         }
         conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
@@ -194,6 +192,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I confirm edited address")
     public void iConfirmEditedAddress() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         checkoutAddressScreen.getContinueButton().should(visible, Duration.ofSeconds(2));
         checkoutAddressScreen.getContinueButton().click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -212,8 +211,7 @@ public class ConciergeE2EStepDefs {
         executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
         checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
         checkoutAddressScreen.getContinuePaymentButton().click();
-        with().pollInterval(6, SECONDS).await().until(() -> true);
-
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
             conciergeProjectScreen.getTryAgainButton().click();
             with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -228,6 +226,16 @@ public class ConciergeE2EStepDefs {
         }
 
         if ($(By.xpath("//*[text() = 'CONTINUE']")).isDisplayed()) {
+            $(By.xpath("//*[text() = 'CONTINUE']")).click();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+
+        if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
+            conciergeProjectScreen.getTryAgainButton().click();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+            checkoutAddressScreen.getContinuePaymentButton().click();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             $(By.xpath("//*[text() = 'CONTINUE']")).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
@@ -839,9 +847,9 @@ public class ConciergeE2EStepDefs {
     @Then("I verify that I'm able to edit shipping address")
     public void iVerifyThatIMAbleToEditShippingAddress() {
         $(By.xpath("//*[text()='NewShippingAddress NewLastName']")).shouldHave(text("NewShippingAddress NewLastName"), Duration.ofSeconds(25));
-//        $(By.xpath("//*[text()='NewCompanyName']")).shouldHave(text("NewCompanyName"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='NewAppartment']")).shouldHave(text("Newappartment"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='37 new road']")).shouldHave(text("37 New Road"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='NewCompanyName']")).shouldHave(text("NewCompanyName"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='Newappartment']")).shouldHave(text("Newappartment"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='37 New Road']")).shouldHave(text("37 New Road"), Duration.ofSeconds(25));
         $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
         $(By.xpath("//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
     }
@@ -849,9 +857,19 @@ public class ConciergeE2EStepDefs {
     @When("I edit shipping address from order review page")
     public void iEditShippingAddressFromOrderReviewPage() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        conciergeAddressScreen.getEditShippingAddress().should(visible, Duration.ofSeconds(15));
-        conciergeAddressScreen.getEditShippingAddress().click();
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        if(!conciergeAddressScreen.getEditShippingAddress().isDisplayed() || !conciergeAddressScreen.getEditShippingAddressCapital().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+        }
+        if(conciergeAddressScreen.getEditShippingAddress().isDisplayed()){
+            conciergeAddressScreen.getEditShippingAddress().should(visible, Duration.ofSeconds(15));
+            conciergeAddressScreen.getEditShippingAddress().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        } else {
+            conciergeAddressScreen.getEditShippingAddressCapital().should(visible, Duration.ofSeconds(15));
+            conciergeAddressScreen.getEditShippingAddressCapital().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
         if($(By.xpath(" (//*[text()='Edit'])[1]")).isDisplayed()){
             $(By.xpath(" (//*[text()='Edit'])[1]")).click();
             with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -876,9 +894,14 @@ public class ConciergeE2EStepDefs {
     @When("I edit billing address from order review page")
     public void iEditBillingAddressFromOrderReviewPage() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        conciergeAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(15));
-        conciergeAddressScreen.getEditBillingAddress().click();
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        if(!conciergeAddressScreen.getEditBillingAddress().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+        }
+            conciergeAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(15));
+            conciergeAddressScreen.getEditBillingAddress().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+
         if($(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]")).isDisplayed()){
             $(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]")).click();
             with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -902,11 +925,11 @@ public class ConciergeE2EStepDefs {
     @And("I verify that I'm able to edit billing address")
     public void iVerifyThatIMAbleToEditBillingAddress() {
         $(By.xpath("//*[text()='NewFirstName NewLastName']")).shouldHave(text("NewFirstName NewLastName"), Duration.ofSeconds(25));
-//        $(By.xpath("//*[text()='NewCompanyName']")).shouldHave(text("NewCompanyName"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='NewAppartment']")).shouldHave(text("Newappartment"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='37 new road']")).shouldHave(text("37 New Road"), Duration.ofSeconds(25));
-//        $(By.xpath("//*[text()='Phoenix, AZ 85020']")).shouldHave(text("Phoenix, AZ 85020"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='NewCompanyName']")).shouldHave(text("NewCompanyName"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='Newappartment']")).shouldHave(text("Newappartment"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='37 New Road']")).shouldHave(text("37 New Road"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='Billing Address']/..//*[text()='Phoenix, AZ 85020']")).shouldHave(text("Phoenix, AZ 85020"), Duration.ofSeconds(25));
+        $(By.xpath("//*[text()='Billing Address']/..//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
         $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
     }
 

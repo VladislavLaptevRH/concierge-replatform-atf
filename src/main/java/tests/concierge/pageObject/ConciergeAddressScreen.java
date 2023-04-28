@@ -39,9 +39,15 @@ public class ConciergeAddressScreen {
 
     private final SelenideElement editBAddressButton = $(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]"));
 
-    private final SelenideElement editPaymentOrderReview = $(By.xpath("//a[@href='/us/en/checkout/payment.jsp' and text() = 'Edit']"));
+    private final SelenideElement editPaymentOrderReviewEN = $(By.xpath("//a[@href='/us/en/checkout/payment.jsp' and text() = 'Edit']"));
 
-    private final SelenideElement editShippingAddress = $(By.xpath("//*[text() = 'SHIPPING ADDRESS']/following-sibling::div/*[text() = 'Edit']"));
+    private final SelenideElement editPaymentOrderReview = $(By.xpath("//a[@href='/checkout/payment.jsp' and text() = 'Edit']"));
 
-    private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'BILLING ADDRESS']/following-sibling::div/*[text() = 'Edit']"));
+    private final SelenideElement editShippingAddressCapital = $(By.xpath("//*[text() = 'SHIPPING ADDRESS']/following-sibling::div/*[text() = 'Edit']"));
+
+    private final SelenideElement editShippingAddress = $(By.xpath("//*[text() = 'Shipping Address']/following-sibling::div/*[text() = 'Edit']"));
+
+    private final SelenideElement editBillingAddressCapital = $(By.xpath("//*[text() = 'BILLING ADDRESS']/following-sibling::div/*[text() = 'Edit']"));
+
+    private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'Billing Address']/following-sibling::div/*[text() = 'Edit']"));
 }

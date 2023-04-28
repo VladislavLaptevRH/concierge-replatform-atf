@@ -45,7 +45,6 @@ Feature: Concierge Project
       | trade       |
 
   Scenario Outline: Verify that user is able to create project for client - <businessClient>
-
     Given I log into Concierge as "associate"
     When I click on projects button
     When I click on new project button
@@ -161,6 +160,7 @@ Feature: Concierge Project
     Then I verify that spaces list is displayed
 
   Scenario: Verify that user is able to update item option
+
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "modifyitemsoptions" by provided "projectName"

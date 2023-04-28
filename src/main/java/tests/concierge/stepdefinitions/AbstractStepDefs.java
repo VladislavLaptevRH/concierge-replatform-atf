@@ -212,6 +212,11 @@ public class AbstractStepDefs {
             } else {
                 System.out.println("Email field is not available");
             }
+            if(checkoutAddressScreen.getConfirmEmailAddressField().isDisplayed()){
+                checkoutAddressScreen.getConfirmEmailAddressField().setValue("test@mailinator.com");
+            } else {
+                System.out.println("Email confirm field is not available");
+            }
 
             with().pollInterval(3, SECONDS).await().until(() -> true);
 
