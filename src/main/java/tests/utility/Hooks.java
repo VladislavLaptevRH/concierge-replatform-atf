@@ -62,9 +62,11 @@ public class Hooks {
      */
     private void ConfigFileReader() {
 
-        profile = System.getenv("ENVIRONMENT");
-        cookie = System.getenv("ENDPOINT");
+//        profile = System.getenv("ENVIRONMENT");
+//        cookie = System.getenv("ENDPOINT");
 
+        profile = "stg2";
+        cookie = "releasetues";
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
         } else {
