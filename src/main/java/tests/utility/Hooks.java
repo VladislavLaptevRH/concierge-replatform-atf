@@ -62,11 +62,9 @@ public class Hooks {
      */
     private void ConfigFileReader() {
 
-//        profile = System.getenv("ENVIRONMENT");
-//        cookie = System.getenv("ENDPOINT");
+        profile = System.getenv("ENVIRONMENT");
+        cookie = System.getenv("ENDPOINT");
 
-        profile = "stg2";
-        cookie = "releasetues";
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
         } else {
@@ -147,15 +145,10 @@ public class Hooks {
      */
     @Before("@estoreRegression")
     public void initWebDrivereStore() {
-        try {
-            ConfigFileReader();
-            configureEstoreURL();
-            setupChromeArguments();
-            setUPWebDriver(eStoreURL);
-        } catch (TimeoutException | MalformedURLException exception) {
-            with().pollInterval(10, SECONDS).await().until(() -> true);
-            refresh();
-        }
+        ConfigFileReader();
+        configureEstoreURL();
+        setupChromeArguments();
+        setUPWebDriver(eStoreURL);
     }
 
     /**
@@ -189,16 +182,21 @@ public class Hooks {
     /**
      * Set up chrome arguments for Jenkins run
      */
-    public void setupChromeArguments() throws MalformedURLException {
+    public void setupChromeArguments() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("--window-size=1366,768");
-        options.addArguments("--remote-allow-origins=*");
         DesiredCapabilities dr = new DesiredCapabilities();
+        dr.setBrowserName("chrome");
         dr.setCapability(ChromeOptions.CAPABILITY, options);
-        WebDriver driver = null;
-        driver = new ChromeDriver(dr);
+        String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
+        RemoteWebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         WebDriverRunner.setWebDriver(driver);
     }
 
