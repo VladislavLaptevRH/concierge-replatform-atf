@@ -27,18 +27,21 @@ public class EstorePgStepDefs {
 
     @Then("I validate {string},{string} and {string} grid view should work")
     public void iValidateAndGridViewShouldWork(String arg0, String arg1, String arg2) {
-        if (arg2.equals(3)) {
+        if (arg0.equals("1")) {
             estoreSearchScreen.getThreeColumnsInRowGridButton().should(visible, Duration.ofSeconds(20));
             estoreSearchScreen.getThreeColumnsInRowGridButton().click();
             estoreSearchScreen.getThreeColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
         }
         if (arg1.equals("2")) {
             estoreSearchScreen.getTwoColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
+            estoreSearchScreen.getTwoColumnsInRowGridElement().click();
         }
-        if (arg0.equals("1")) {
+
+        if (arg2.equals("3")) {
             estoreSearchScreen.getOneColumnInRowGridButton().should(visible, Duration.ofSeconds(20));
             estoreSearchScreen.getOneColumnInRowGridButton().click();
         }
+
     }
 
 
@@ -97,7 +100,7 @@ public class EstorePgStepDefs {
 
     @When("I change a grid view from default {int} grid view to {int} grid view")
     public void iChangeAGridViewFromDefaultGridViewToGridView(int arg0, int arg1) {
-       $(By.xpath("//*[local-name()='svg' and @data-active='false']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[local-name()='svg' and @data-active='false']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[local-name()='svg' and @data-active='false']")).click();
     }
 
