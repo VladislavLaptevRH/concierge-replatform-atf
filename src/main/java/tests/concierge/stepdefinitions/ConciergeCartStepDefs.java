@@ -451,9 +451,9 @@ public class ConciergeCartStepDefs {
             conciergeAddressScreen.getEditSAddressButton().scrollIntoView(true);
             conciergeAddressScreen.getEditSAddressButton().click();
         }
-        checkoutAddressScreen.getCompanyNameField().should(visible, Duration.ofMinutes(1));
-        generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameField());
-        checkoutAddressScreen.getCompanyNameField().setValue("changedCompanyNameSoldAddress");
+        checkoutAddressScreen.getCompanyNameFieldNew().should(visible, Duration.ofMinutes(1));
+        generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameFieldNew());
+        checkoutAddressScreen.getCompanyNameFieldNew().setValue("changedCompanyNameSoldAddress");
         if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()){
             $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
             $(By.xpath("(//*[text()='Edit'])[10]")).click();
@@ -801,7 +801,6 @@ public class ConciergeCartStepDefs {
                 open(URL);
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
-//            !!!
             conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
             conciergeCartPageScreen.getClearOrderButton().should(Condition.be(visible), Duration.ofSeconds(10));
             conciergeCartPageScreen.getClearOrderButton().click();
@@ -826,9 +825,7 @@ public class ConciergeCartStepDefs {
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
             WebDriverRunner.getWebDriver().navigate().refresh();
-            if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
-                iRemoveAllItemsFromCartViaUI();
-            }
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             conciergeUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(5));
             conciergeUserAccountPage.getCartButtonItemSum().shouldNot(visible, Duration.ofMinutes(2));
         }

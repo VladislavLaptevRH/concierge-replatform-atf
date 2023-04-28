@@ -111,8 +111,8 @@ public class ProjectStepDefs {
         $(By.xpath("//*[text() = 'CONTINUE']")).click();
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getContinueCreateAProjectButton().click();
-        conciergeUserAccountPage.getClientLookupEmail().shouldBe(visible, Duration.ofSeconds(12));
-        conciergeUserAccountPage.getClientLookupEmail().setValue("test@test.com");
+        conciergeUserAccountPage.getClientLookupEmailByName().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeUserAccountPage.getClientLookupEmailByName().setValue("test@test.com");
         conciergeProjectScreen.getClientPhone().shouldBe(visible, Duration.ofSeconds(12));
         conciergeProjectScreen.getClientPhone().setValue("1234567890");
         conciergeProjectScreen.getClientPostalCode().shouldBe(visible, Duration.ofSeconds(12));
@@ -523,7 +523,7 @@ public class ProjectStepDefs {
 
     @Then("verify that quantity for item was changed")
     public void verifyThatQuantityForItemWasChanged() {
-        assertEquals(randomQuantity, Integer.parseInt($(By.xpath("//div[@aria-haspopup='listbox']")).getText()));
+        assertEquals(randomQuantity, Integer.parseInt($(By.xpath("(//div[@aria-haspopup='listbox'])[3]")).getText()));
     }
 
     @And("I choose project by project name {string}")

@@ -249,7 +249,6 @@ Feature:Concierge Cart Page
     Then I verify that membership popup for "contract client" is not displayed
 
   Scenario Outline: Verify Trade,Contract client address page - ship to Bill to, Sold to addresses - edit addresses
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
