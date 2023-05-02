@@ -8,7 +8,6 @@ Feature: Estore Guest house
     Then I verify that estore guesthouse dining room page is accessible
 
   Scenario: Verify Champagne Caviar bar page
-
     Given I go to estore guesthouse home page
     When I click on the estore Champagne Caviar bar page
     Then I verify that estore Champagne Caviar bar page is displayed
