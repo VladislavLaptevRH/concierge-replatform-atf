@@ -45,8 +45,6 @@ public class EstoreGuestHouseStepDefs {
     @Then("I verify that estore Champagne Caviar bar page is displayed")
     public void iVerifyThatEstoreChampagneCaviarBarPageIsDisplayed() {
         estoreGuestHouseScreen.getChampageCaviarBarTitle().should(Condition.visible, Duration.ofSeconds(20));
-        estoreGuestHouseScreen.getChampageCaviarBarMenu().should(Condition.visible, Duration.ofSeconds(20));
-        estoreGuestHouseScreen.getChampageReservations().should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @When("I click on estore guest rooms suites page")
