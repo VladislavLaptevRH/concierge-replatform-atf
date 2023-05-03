@@ -184,7 +184,7 @@ public class Hooks {
         options.addArguments("--headless");
         options.addArguments("--window-size=1366,768");
         options.addArguments("--no-sandbox");
-//        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--remote-allow-origins=*");
         WebDriver driver = null;
         driver = new ChromeDriver(options);
         WebDriverRunner.setWebDriver(driver);
