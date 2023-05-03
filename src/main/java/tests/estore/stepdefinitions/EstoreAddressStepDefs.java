@@ -159,7 +159,7 @@ public class EstoreAddressStepDefs {
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
                 estoreAddressScreen.getShippingAddressLastName1().setValue("William");
 
-                if(!estoreAddressScreen.getShippingAddressCountryDisabled().isDisplayed()){
+                if (!estoreAddressScreen.getShippingAddressCountryDisabled().isDisplayed()) {
                     Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
                     shippingAddressCountry.selectByValue("US");
                 }
@@ -369,7 +369,7 @@ public class EstoreAddressStepDefs {
                 with().pollInterval(3, SECONDS).await().until(() -> true);
             }
 
-            if(estoreItemPage.getAddToCartButton().isDisplayed()){
+            if (estoreItemPage.getAddToCartButton().isDisplayed()) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 estoreUserAccountPageStepDefs.iClickOnAddAddressButton();
@@ -392,12 +392,13 @@ public class EstoreAddressStepDefs {
             estoreE2EStepDefs.iClickOnNoThanksEstoreButton();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
-        $(By.xpath("//*[text()='Continue to payment']")).scrollIntoView(true);
 
-        executeJavaScript("arguments[0].click();", $(By.xpath("//*[text()='Continue to payment']")));
+        $(By.xpath("//*[text()='Continue to payment']")).scrollIntoView(true);
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        if($(By.xpath("//*[contains(text(), 'required')]")).isDisplayed()){
+        $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1)).click();
+
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        if ($(By.xpath("//*[contains(text(), 'required')]")).isDisplayed()) {
             iFillEstoreShippingAndShippingAddress();
             iFillEstoreShippingEmailAddress();
             estoreE2EStepDefs.iClickOnSameAsShippingAddressCheckbox();
