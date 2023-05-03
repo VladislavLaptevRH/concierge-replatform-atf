@@ -73,14 +73,11 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate membership details")
     public void iValidateMembershipDetails() {
-        sleep(5000);
-        List<String> items = new ArrayList<>();
-        List<String> expectedItems = new ArrayList(Arrays.asList(expectedTitle, expectedRenewal, expectedCancel, expectedEmail, expectedEnterEmail));
-        with().pollInterval(5, SECONDS).await().until(() -> true);
-        for (int i = 0; i < estoreMemberPage.getMembershipDetails().size(); i++) {
-            items.add(estoreMemberPage.getMembershipDetails().get(i).getText());
-        }
-        assertEquals(items, expectedItems);
+        $(By.xpath("//*[text()='RH MEMBERS PROGRAM PROFILE']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='CONTACT INFORMATION']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='FAQs']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Terms & Conditions']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='RH Members Program ']")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I validate add to cart button")
@@ -98,7 +95,13 @@ public class EstoreMemberStepDefs {
     @Then("I validate cart")
     public void iValidateCart() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(10));
+        if ($(By.xpath("//*[text()='JOIN NOW']")).isDisplayed()) {
+            $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(10));
+        } else {
+            estoreCartPage.getRemoveMembershipButton().should(visible, Duration.ofSeconds(20));
+            estoreCartPage.getRemoveMembershipButton().click();
+            $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(10));
+        }
     }
 
     @Then("I validate email address field and link to membership button")

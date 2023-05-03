@@ -111,8 +111,8 @@ public class ProjectStepDefs {
         $(By.xpath("//*[text() = 'CONTINUE']")).click();
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getContinueCreateAProjectButton().click();
-        conciergeUserAccountPage.getClientLookupEmail().shouldBe(visible, Duration.ofSeconds(12));
-        conciergeUserAccountPage.getClientLookupEmail().setValue("test@test.com");
+        conciergeUserAccountPage.getClientLookupEmailByName().shouldBe(visible, Duration.ofSeconds(12));
+        conciergeUserAccountPage.getClientLookupEmailByName().setValue("test@test.com");
         conciergeProjectScreen.getClientPhone().shouldBe(visible, Duration.ofSeconds(12));
         conciergeProjectScreen.getClientPhone().setValue("1234567890");
         conciergeProjectScreen.getClientPostalCode().shouldBe(visible, Duration.ofSeconds(12));
@@ -523,7 +523,7 @@ public class ProjectStepDefs {
 
     @Then("verify that quantity for item was changed")
     public void verifyThatQuantityForItemWasChanged() {
-        assertEquals(randomQuantity, Integer.parseInt($(By.xpath("//div[@aria-haspopup='listbox']")).getText()));
+        assertEquals(randomQuantity, Integer.parseInt($(By.xpath("(//div[@aria-haspopup='listbox'])[3]")).getText()));
     }
 
     @And("I choose project by project name {string}")
@@ -891,15 +891,19 @@ public class ProjectStepDefs {
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         if (spaceName.equals("space2")) {
-            $(By.xpath("//div/h5[text() = 'space1']")).click();
+            WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(2, SECONDS).await().until(() -> true);
+            $(By.xpath("//div/h5[text() = 'space1']")).click();
+            $(By.xpath("//button/h5[text() = '" + spaceName + "']")).scrollIntoView(true);
             $(By.xpath("//button/h5[text() = '" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
             $(By.xpath("//button/h5[text() = '" + spaceName + "']")).click();
         }
+        WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        $(By.xpath("//div/h5[contains(text(), 'space')]")).should(visible, Duration.ofSeconds(10));
-        $(By.xpath("//div/h5[contains(text(), 'space')]")).click();
+        $(By.xpath("//div/h5[contains(text(), 'space2')]")).should(visible, Duration.ofSeconds(10));
+        $(By.xpath("//div/h5[contains(text(), 'space2')]")).click();
         with().pollInterval(2, SECONDS).await().until(() -> true);
+        $(By.xpath("//button/h5[text() = '" + spaceName + "']")).scrollIntoView(true);
         $(By.xpath("//button/h5[text() = '" + spaceName + "']")).shouldHave(text(spaceName), Duration.ofSeconds(15));
         $(By.xpath("//button/h5[text() = '" + spaceName + "']")).click();
     }

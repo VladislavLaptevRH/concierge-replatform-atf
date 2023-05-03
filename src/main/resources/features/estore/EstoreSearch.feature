@@ -93,4 +93,13 @@ Feature: Estore Search
   Scenario: Apply any facet and verify the count of product
     Given I log into eStore as "regular" user
     When I go to estore item "sofa" from search field
-    When I apply new arrivals facet
+    Then I apply new arrivals facet
+
+  Scenario: Verify the in stock facet selection and in stock product
+    Given I log into eStore as "regular" user
+    When I go to estore item "sofa" from search field
+    Then I verify in stock facet selection
+
+  Scenario: Verify the results with multiple term search and facet selections
+    Given I log into eStore as "regular" user
+    When I go to estore item "leather Sofa" from search field

@@ -59,7 +59,7 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement metalFloatingMirror = $(By.xpath("(//*[text()='Metal Floating Mirror'])[2]"));
 
-    private final SelenideElement lapazSofaItem = $(By.xpath("//a[@href='/us/en/catalog/product/product.jsp?productId=prod25840134']"));
+    private final SelenideElement lapazSofaItem = $(By.xpath("//a[@href='/catalog/product/product.jsp?productId=prod25840134']"));
 
     private final SelenideElement collectionItem = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-4']"));
 
@@ -71,11 +71,11 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement monogramColorChampagne = $(By.xpath("//input[@value='Champagne Metallic (MCHA)']"));
 
-    private final SelenideElement addMonogramCheckBox = $(By.xpath("(//span[@class='MuiIconButton-label']/input)[2]"));
+    private final SelenideElement addMonogramCheckBox = $(By.xpath("//*[contains(text(), 'Add Monogram for')]/../..//input"));
 
     private final SelenideElement addMonogramCheckBoxPdp = $(By.xpath("//span[@class='MuiIconButton-label']/input"));
 
-    private final SelenideElement addGiftCheckBox = $(By.xpath("//span[@data-testid = 'monogram-checkbox']"));
+    private final SelenideElement addGiftCheckBox = $(By.xpath("//*[contains(text(), 'Add Gift Box for')]/../..//input"));
 
     private final SelenideElement spaceNameSelect = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-12 MuiGrid-grid-md-12'][3]//select"));
 

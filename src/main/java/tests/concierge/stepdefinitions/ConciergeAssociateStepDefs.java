@@ -183,8 +183,9 @@ public class ConciergeAssociateStepDefs {
 
     @When("I choose gallery number {string} for gallery intl concierge")
     public void iChooseGalleryNumberForGalleryIntlConcierge(String arg0) {
-        if(conciergeLoginPage.getCurrentLocation().isDisplayed()){
-            conciergeLoginPage.getInputGallery().setValue("5: Newport Beach").sendKeys(Keys.DOWN, Keys.RETURN);
+        if(conciergeLoginPage.getCurrentLocation().isDisplayed() || conciergeLoginPage.getLocation().isDisplayed()){
+            conciergeLoginPage.getInputGalleryList().click();
+            $(By.xpath("//*[text()='5: Newport Beach']")).click();
         }
         else {
             conciergeLoginPage.getLocationInput().should(visible, Duration.ofSeconds(20));

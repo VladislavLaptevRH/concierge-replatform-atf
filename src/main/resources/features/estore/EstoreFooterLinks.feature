@@ -47,6 +47,6 @@ Feature: Footer Links
       | link                 |
       | PRIVACY              |
       | TERMS OF USE         |
-#      | TEXT MESSAGING TERMS |
-#      | RH IN CANADA         |
-#      | SAFETY RECALLS       |
+      | TEXT MESSAGING TERMS |
+      | RH IN CANADA         |
+      | SAFETY RECALLS       |

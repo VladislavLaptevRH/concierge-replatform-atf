@@ -81,10 +81,10 @@ public class EstoreSearchStepDefs {
             estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getSortByButton().click();
         }
-         if(Hooks.cookie.contains("userservice")){
-                estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
-                estorePDPScreen.getSortByButton().click();
-            } else {
+        if (Hooks.cookie.contains("userservice")) {
+            estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
+            estorePDPScreen.getSortByButton().click();
+        } else {
             estorePDPScreen.getSortButton().should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getSortButton().click();
         }
@@ -98,10 +98,10 @@ public class EstoreSearchStepDefs {
             estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getSortByButton().click();
         }
-        if(Hooks.cookie.contains("userservice")){
+        if (Hooks.cookie.contains("userservice")) {
             estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getSortByButton().click();
-        }else {
+        } else {
             estorePDPScreen.getSortButton().should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getSortButton().click();
         }
@@ -179,7 +179,24 @@ public class EstoreSearchStepDefs {
         $(By.xpath("//*[text()='cribs']")).should(visible, Duration.ofSeconds(20));
     }
 
-    @When("I apply new arrivals facet")
+    @Then("I apply new arrivals facet")
     public void iApplyNewArrivalsFacet() {
+        $(By.xpath("//*[text()='new arrivals']")).should(visible, Duration.ofSeconds(20)).click();
+        $(By.xpath("//*[text()='RESULTS']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='new arrivals'])[2]")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify in stock facet selection")
+    public void iVerifyInStock() {
+        $(By.xpath("//*[text()='in-stock']")).should(visible, Duration.ofSeconds(20)).click();
+        $(By.xpath("//*[text()='Color']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Depth']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Fabric']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Finish']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Length']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that I'm able to apply any facet")
+    public void iVerifyThatIMAbleToApplyAnyFacet() {
     }
 }

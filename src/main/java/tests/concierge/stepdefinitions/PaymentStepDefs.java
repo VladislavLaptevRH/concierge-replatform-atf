@@ -12,6 +12,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertEquals;
@@ -68,7 +69,7 @@ public class PaymentStepDefs {
         selectPayment.selectByValue("RH");
         paymentScreen.getSplitPaymentCheckBox().should(visible, Duration.ofSeconds(40));
         paymentScreen.getSplitPaymentCheckBox().click();
-        paymentScreen.getRhCardNumberField().setValue("6006101002514880");
+        paymentScreen.getRhCardNumberField().setValue("6006101002617097");
         Select paymentPlan = new Select(paymentScreen.getSelectPaymentPlan());
         paymentPlan.selectByIndex(1);
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
@@ -146,6 +147,7 @@ public class PaymentStepDefs {
         paymentScreen.getBillingAddress().shouldHave(text(
                 "BILLING ADDRESS\n" +
                         "QAFirst Automation\n" +
+                        "AutomationCompany\n" +
                         "North 16th Street\n" +
                         "QaApartment\n" +
                         "Phoenix, AZ 85020\n" +
@@ -156,6 +158,7 @@ public class PaymentStepDefs {
         assertEquals(paymentScreen.getBillingAddress().getText(),
                 "BILLING ADDRESS\n" +
                         "QAFirst Automation\n" +
+                        "AutomationCompany\n" +
                         "North 16th Street\n" +
                         "QaApartment\n" +
                         "Phoenix, AZ 85020\n" +
@@ -188,9 +191,16 @@ public class PaymentStepDefs {
 
     @When("I edit payment method")
     public void iEditPaymentMethod() {
-        conciergeAddressScreen.getEditPaymentOrderReview().should(visible, Duration.ofSeconds(15));
-        conciergeAddressScreen.getEditPaymentOrderReview().scrollIntoView(true);
-        conciergeAddressScreen.getEditPaymentOrderReview().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        executeJavaScript("window.scrollTo(0, 2000)");
+        if(conciergeAddressScreen.getEditPaymentOrderReview().isDisplayed()){
+            conciergeAddressScreen.getEditPaymentOrderReview().scrollIntoView(true);
+            conciergeAddressScreen.getEditPaymentOrderReview().click();
+        } else {
+            conciergeAddressScreen.getEditPaymentOrderReviewEN().scrollIntoView(true);
+            conciergeAddressScreen.getEditPaymentOrderReviewEN().click();
+        }
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentScreen.getRemovePaymentBtn().shouldHave(text("Remove"), Duration.ofSeconds(15));
         paymentScreen.getRemovePaymentBtn().should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
         with().pollInterval(4, SECONDS).await().until(() -> true);
@@ -227,14 +237,11 @@ public class PaymentStepDefs {
 
     @When("I click on continue with original address button")
     public void iClickOnContinueWithOriginalAddressButton() {
-        try {
+        if($(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).isDisplayed()){
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).should(Condition.and("", Condition.enabled, Condition.visible), Duration.ofSeconds(60));
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Continue with original address button is not displayed");
+            with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        with().pollInterval(5, SECONDS).await().until(() -> true);
-
         if(pdpScreen.getCloseSpecialOrderPopUpButton().isDisplayed()){
             pdpScreen.getCloseSpecialOrderPopUpButton().click();
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();

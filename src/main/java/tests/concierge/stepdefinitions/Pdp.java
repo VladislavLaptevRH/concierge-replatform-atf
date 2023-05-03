@@ -10,12 +10,17 @@ import org.openqa.selenium.interactions.Actions;
 import tests.utility.Hooks;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 
 public class Pdp {
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
@@ -111,9 +116,24 @@ public class Pdp {
 
     @Then("I verify that YAML carousel is displayed")
     public void iVerifyThatYAMLCarouselIsDisplayed() {
-        $(By.xpath("//*[text()='The Cloud Collection']")).scrollTo();
-        $(By.xpath("//*[text()='The Cloud Collection']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='The Cloud Collection']")).scrollIntoView(true);
+        $(By.xpath("//*[text()='YOU MIGHT ALSO LIKE']")).scrollTo();
+        $(By.xpath("//*[text()='YOU MIGHT ALSO LIKE']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='YOU MIGHT ALSO LIKE']")).scrollIntoView(true);
+        List<String> items1 = new ArrayList<>();
+        List<String> items2 = new ArrayList<>();
+        List<String> expectedItems = new ArrayList<>(Arrays.asList("CLOUD SOFA", "CLOUD TRACK ARM SOFA" , "CLOUD SLOPE ARM MODULAR CUSTOMIZABLE SECTIONAL"));
+        for (int i = 0; i < 3; i++) {
+            items1.add(pdpScreen.getTtemYAMLListByNumber(i+1).getText());
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+        }
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+        assertEquals(items1, expectedItems);
+        $(By.xpath("(//*[text() = 'YOU MIGHT ALSO LIKE']/..//ul/div/div)[3]")).click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        for (int i = 3; i < 6 ; i++) {
+            items2.add(pdpScreen.getTtemYAMLListByNumber(i+1).getText());
+        }
+        assertNotEquals(items2, expectedItems);
     }
 
     @Then("I verify mattress recycling fee")

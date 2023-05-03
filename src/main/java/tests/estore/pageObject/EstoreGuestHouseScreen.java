@@ -25,7 +25,7 @@ public class EstoreGuestHouseScreen {
 
     private SelenideElement caviarBar = $(By.xpath("//a[@id='caviar_bar']"));
 
-    private SelenideElement champageCaviarBarTitle = $(By.xpath("//*[text()='the champagne & caviar bar']"));
+    private SelenideElement champageCaviarBarTitle = $(By.xpath("//*[text()='THE CHAMPAGNE & CAVIAR BAR']"));
 
     private SelenideElement champageCaviarBarMenu = $(By.xpath("//*[text()='MENU']"));
 

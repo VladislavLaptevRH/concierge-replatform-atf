@@ -56,18 +56,18 @@ public class Hooks {
      */
     private void ConfigFileReader() {
 
-//        profile = System.getenv("ENVIRONMENT");
-//        cookie = System.getenv("ENDPOINT");
+        profile = System.getenv("ENVIRONMENT");
+        cookie = System.getenv("ENDPOINT");
 
-        profile = "stg2";
-        cookie = "releasetues";
         if (profile == null) {
+//            profile = "stg2";
             Assert.fail("Environment Variable is NOT Set");
         } else {
             System.out.println("Tests are running on " + profile + " environment");
         }
 
         if (cookie == null) {
+//            cookie = "contentfix";
             System.out.println("Tests are running without cookie or endpoint");
         } else {
             System.out.println("Tests are running with endpoint = " + cookie);
@@ -141,15 +141,10 @@ public class Hooks {
      */
     @Before("@estoreRegression")
     public void initWebDrivereStore() {
-        try {
-            ConfigFileReader();
-            configureEstoreURL();
-            setupChromeArguments();
-            setUPWebDriver(eStoreURL);
-        } catch (TimeoutException | MalformedURLException exception) {
-            with().pollInterval(10, SECONDS).await().until(() -> true);
-            refresh();
-        }
+        ConfigFileReader();
+        configureEstoreURL();
+        setupChromeArguments();
+        setUPWebDriver(eStoreURL);
     }
 
     /**
@@ -159,7 +154,7 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
         configureConciergeURL();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(conciergeURL);
     }
 
@@ -183,7 +178,7 @@ public class Hooks {
     /**
      * Set up chrome arguments for Jenkins run
      */
-    public void setupChromeArguments() throws MalformedURLException {
+    public void setupChromeArguments() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");

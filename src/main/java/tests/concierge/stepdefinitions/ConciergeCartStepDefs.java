@@ -213,7 +213,9 @@ public class ConciergeCartStepDefs {
     public void iVerifyLineItemsPricesFor(String arg0) {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofMinutes(1));
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getReasonCodeField().shouldNot(visible, Duration.ofSeconds(15));
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if (arg0.equals("PERCENT_OFF")) {
             String lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", "");
             float line = Float.parseFloat(lineItemPriceValueBeforeOverride) / 2;
@@ -225,6 +227,7 @@ public class ConciergeCartStepDefs {
             assertEquals(expectedValuePriceValue, Integer.parseInt(lineItemPriceValueAfterOverride));
         }
         if (arg0.equals("AMOUNT_OVERRIDE")) {
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             String lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
             assertEquals(lineItemPriceValueAfterOverride, "50");
         }
@@ -444,12 +447,13 @@ public class ConciergeCartStepDefs {
 
     @And("I edit ship to, bill to, sold to addresses")
     public void iEditShipToBillToSoldToAddresses() {
-        if(conciergeAddressScreen.getEditAddressButton().isDisplayed()){
-            conciergeAddressScreen.getEditAddressButton().click();
+        if(conciergeAddressScreen.getEditSAddressButton().isDisplayed()){
+            conciergeAddressScreen.getEditSAddressButton().scrollIntoView(true);
+            conciergeAddressScreen.getEditSAddressButton().click();
         }
-        checkoutAddressScreen.getCompanyNameField().should(visible, Duration.ofMinutes(1));
-        generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameField());
-        checkoutAddressScreen.getCompanyNameField().setValue("changedCompanyNameSoldAddress");
+        checkoutAddressScreen.getCompanyNameFieldNew().should(visible, Duration.ofMinutes(1));
+        generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameFieldNew());
+        checkoutAddressScreen.getCompanyNameFieldNew().setValue("changedCompanyNameSoldAddress");
         if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()){
             $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
             $(By.xpath("(//*[text()='Edit'])[10]")).click();
@@ -611,6 +615,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that monogram was edited")
     public void iVerifyThatMonogramWasEdited() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Dark Silver Metallic (MDSL)']")).shouldHave(text("Dark Silver Metallic (MDSL)"), Duration.ofSeconds(30));
     }
 
@@ -624,6 +629,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that monogram was removed")
     public void iVerifyThatMonogramWasRemoved() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getPersonalizationText().shouldNotBe(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Bauer Bodoni 2 (BDNI-HD)']")).shouldNotBe(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Dark Silver Metallic (MDSL)']")).shouldNotBe(visible, Duration.ofMinutes(1));
@@ -782,6 +788,10 @@ public class ConciergeCartStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!conciergeUserAccountPage.getCartButtonItemSum().exists()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
             String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
             open(URL);
@@ -791,7 +801,6 @@ public class ConciergeCartStepDefs {
                 open(URL);
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
-//            !!!
             conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
             conciergeCartPageScreen.getClearOrderButton().should(Condition.be(visible), Duration.ofSeconds(10));
             conciergeCartPageScreen.getClearOrderButton().click();
@@ -816,9 +825,7 @@ public class ConciergeCartStepDefs {
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
             WebDriverRunner.getWebDriver().navigate().refresh();
-            if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
-                iRemoveAllItemsFromCartViaUI();
-            }
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             conciergeUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(5));
             conciergeUserAccountPage.getCartButtonItemSum().shouldNot(visible, Duration.ofMinutes(2));
         }
