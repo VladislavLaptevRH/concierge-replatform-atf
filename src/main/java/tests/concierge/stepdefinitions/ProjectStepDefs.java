@@ -3,6 +3,7 @@ package tests.concierge.stepdefinitions;
 import com.codeborne.selenide.Condition;
 
 import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.ex.ElementNotFound;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import tests.concierge.pageObject.*;
@@ -468,14 +469,27 @@ public class ProjectStepDefs {
 
     @When("I choose color from option")
     public void iChooseColorFromOption() {
-        randomColor = generalStepDefs.getRandomNumber(0, 3);
+        randomColor = generalStepDefs.getRandomNumber(1, 4);
         Select selectColor;
         if (Hooks.profile.equals("stg4")) {
             selectColor = new Select(selectOption.getColorStg4());
         } else {
-            selectColor = new Select(selectOption.getLancasterColor());
+        if(!$(By.xpath("//label[text() = 'Color']")).isDisplayed()){
+            $(By.xpath("(//*[@class = 'MuiSvgIcon-root MuiSvgIcon-fontSizeSmall'])[2]")).hover();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            $(By.xpath("(//*[@class = 'MuiSvgIcon-root MuiSvgIcon-fontSizeSmall'])[2]")).doubleClick();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         }
-        selectColor.selectByIndex(randomColor);
+        if(selectOption.getLancasterColor().isDisplayed()){
+            selectColor = new Select(selectOption.getLancasterColor());
+            selectColor.selectByIndex(randomColor);
+        } else {
+            selectOption.getLancasterColorForProdSupport().click();
+            selectOption.getTtemColorListByNumber(randomColor).click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+        }
+
     }
 
     @When("I click on edit options button")
@@ -490,16 +504,16 @@ public class ProjectStepDefs {
 
     @Then("verify that color was changed")
     public void verifyThatColorWasChanged() {
-        if (randomColor == 0) {
+        if (randomColor == 1) {
             assertTrue(colors.getChestnut().isDisplayed());
         }
-        if (randomColor == 1) {
+        if (randomColor == 2) {
             assertTrue(colors.getCocoa().isDisplayed());
         }
-        if (randomColor == 2) {
+        if (randomColor == 3) {
             assertTrue(colors.getEbony().isDisplayed());
         }
-        if (randomColor == 3) {
+        if (randomColor == 4) {
             assertTrue(colors.getEspressoColor().isDisplayed());
         }
     }
@@ -523,20 +537,28 @@ public class ProjectStepDefs {
 
     @Then("verify that quantity for item was changed")
     public void verifyThatQuantityForItemWasChanged() {
-        assertEquals(randomQuantity, Integer.parseInt($(By.xpath("(//div[@aria-haspopup='listbox'])[3]")).getText()));
+        assertEquals(randomQuantity, Integer.parseInt($(By.xpath("//*[@class = 'MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input']")).getText()));
     }
 
     @And("I choose project by project name {string}")
     public void iChooseProjectByProjectName(String projectName) {
         conciergeProjectScreen.getProjectNameMoveToProject().should(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getProjectNameMoveToProject().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        conciergeProjectScreen.getProjectNameMoveToProject().doubleClick();
+        conciergeProjectScreen.getProjectNameMoveToProject().sendKeys(Keys.BACK_SPACE);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        conciergeProjectScreen.getProjectNameMoveToProject().setValue(projectName);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='" + projectName + "']")).click();
     }
 
     @When("I click on remove button from project for added item")
     public void iClickOnRemoveButtonFromProjectForAddedItem() {
-        conciergeProjectScreen.getREMOVEbutton().should(visible, Duration.ofSeconds(40));
-        conciergeProjectScreen.getREMOVEbutton().click();
+        while (conciergeProjectScreen.getItemIdSpan().isDisplayed()) {
+            conciergeProjectScreen.getREMOVEbutton().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
     }
 
     @Then("I verify that item was removed")
@@ -929,31 +951,29 @@ public class ProjectStepDefs {
 
     @Then("I verify that availability, Delivery and Returns messaging for {string} is displayed")
     public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingForIsDisplayed(String arg0) {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
         if (arg0.equals("SPO")) {
-            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[3]")).shouldHave(text("AVAILABILITY & DELIVERY"), Duration.ofSeconds(20)).scrollIntoView(true);
-            executeJavaScript("window.scrollTo(0, 800)");
+//            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[1]")).shouldHave(text("AVAILABILITY & DELIVERY"), Duration.ofSeconds(20)).scrollIntoView(true);
 //            Actions actions = new Actions(WebDriverRunner.getWebDriver());
-//            actions.moveToElement($(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[3]")));
-            with().pollInterval(3, SECONDS).await().until(() -> true);
-            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[3]")).click();
+//            actions.moveToElement($(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[1]"))).build();
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+            executeJavaScript("window.scrollTo(0, 400)");
+            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[1]")).hover();
+            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[1]")).click();
             $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between')]")).shouldHave(text("This item is special order and will be ready for delivery between"), Duration.ofSeconds(20));
         }
         if (arg0.equals("In stock")) {
-            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).shouldHave(text("AVAILABILITY & DELIVERY"),Duration.ofSeconds(20)).scrollIntoView(true);
-            executeJavaScript("window.scrollTo(0, 800)");
-            with().pollInterval(3, SECONDS).await().until(() -> true);
-//            Actions actions = new Actions(WebDriverRunner.getWebDriver());
-//            actions.moveToElement($(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")));
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+            executeJavaScript("window.scrollTo(0, 600)");
+            $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).hover();
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).click();
-//            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[2]")).shouldHave(text("This item is in stock and will be delivered"), Duration.ofSeconds(20));
+            $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[2]")).shouldHave(text("This item is in stock and will be ready for delivery between"), Duration.ofSeconds(20));
         }
 
         if (arg0.equals("SPO In stock Items")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).shouldHave(text("AVAILABILITY & DELIVERY"), Duration.ofSeconds(20)).scrollIntoView(true);
             executeJavaScript("window.scrollTo(0, 800)");
-            with().pollInterval(3, SECONDS).await().until(() -> true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             $(By.xpath("(//*[text()='AVAILABILITY & DELIVERY'])[2]")).click();
             $(By.xpath("(//div[@class='MuiTypography-root MuiTypography-caption MuiTypography-gutterBottom'])[3]")).shouldHave(text("This item is special order and will be ready for delivery between"), Duration.ofSeconds(20));
         }

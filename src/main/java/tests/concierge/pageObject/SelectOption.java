@@ -6,13 +6,16 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class SelectOption {
 
+    public final String itemColorLList = "(//*[@data-test = 'sentinelStart']/following-sibling::div/ul/li)[%s]";
     private final SelenideElement lancasterColor = $(By.xpath("//select[@id='optionSelect-4']"));
+    private final SelenideElement lancasterColorForProdSupport = $(By.xpath("//label[text() = 'Color']/../div"));
     private final SelenideElement colorStg4 = $(By.id("optionSelect-2"));
 
     private final List<SelenideElement> lancastColorsList = $$(By.xpath("//select[@id='optionSelect-4']//option"));
@@ -52,5 +55,10 @@ public class SelectOption {
     private final SelenideElement toInputField = $(By.xpath("//input[@id='pdp-gift-card-to']"));
 
     private final SelenideElement fromInputField = $(By.xpath("//input[@id='pdp-gift-card-from']"));
+
+    public SelenideElement getTtemColorListByNumber(int number) {
+        String path = String.format(itemColorLList, number);
+        return $(byXpath(path));
+    }
 
 }

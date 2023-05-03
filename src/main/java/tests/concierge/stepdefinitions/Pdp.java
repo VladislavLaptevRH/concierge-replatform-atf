@@ -81,7 +81,7 @@ public class Pdp {
 
     @Then("I verify that on sale modal pop up is displayed")
     public void iVerifyThatOnSaleModalPopUpIsDisplayed() {
-        $(By.xpath("//*[text()='ON SALE']")).shouldHave(text("ON SALE"), Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='Sale'])[1]")).shouldHave(text("Sale"), Duration.ofSeconds(20));
     }
 
     @When("I go to custom rugs")

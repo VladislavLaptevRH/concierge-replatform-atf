@@ -615,6 +615,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that monogram was edited")
     public void iVerifyThatMonogramWasEdited() {
+        WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Dark Silver Metallic (MDSL)']")).shouldHave(text("Dark Silver Metallic (MDSL)"), Duration.ofSeconds(30));
     }
@@ -623,8 +624,10 @@ public class ConciergeCartStepDefs {
     public void iRemoveMonogram() {
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getRemoveMonogramBtn().shouldHave(text("Remove"), Duration.ofMinutes(1));
-        with().pollInterval(6, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getRemoveMonogramBtn().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that monogram was removed")
@@ -796,13 +799,18 @@ public class ConciergeCartStepDefs {
             String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
             open(URL);
             with().pollInterval(3, SECONDS).await().until(() -> true);
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             if (!conciergeCartPageScreen.getClearOrderButton().exists()) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 open(URL);
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
-            conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
+            if(!conciergeCartPageScreen.getClearOrderButton().exists()){
+                System.out.println("400, 503 error");
+            }
             conciergeCartPageScreen.getClearOrderButton().should(Condition.be(visible), Duration.ofSeconds(10));
+            conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
             conciergeCartPageScreen.getClearOrderButton().click();
             with().pollInterval(2, SECONDS).await().until(() -> true);
             if (!conciergeCartPageScreen.getClearOrderButtonPopUpHeader().isDisplayed()) {
