@@ -169,7 +169,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement itemIdSpan = $(By.xpath("//*[text()='Item#']"));
 
-    private final SelenideElement REMOVEbutton = $(By.xpath("//*[text()='REMOVE']"));
+    private final SelenideElement REMOVEbutton = $(By.xpath("//*[text()='REMOVE']/preceding-sibling::button"));
 
     private final SelenideElement clientPhone = $(By.cssSelector("input[name='phoneNumber']"));
 

@@ -13,7 +13,7 @@ Feature: Concierge Project
       | items    |
       | SPO      |
       | In stock |
-      | SPO In stock Items |
+#      | SPO In stock Items |
 #      | BO                |
 
   Scenario: Verify the Projects load for a logged in associate
@@ -44,6 +44,7 @@ Feature: Concierge Project
       | member      |
       | trade       |
 
+#   Works only for prodsupport
   Scenario Outline: Verify that user is able to create project for client - <businessClient>
     Given I log into Concierge as "associate"
     When I click on projects button
@@ -95,7 +96,7 @@ Feature: Concierge Project
     When I choose preferred contact method
     When I click on create opportunity button
     When I click on rh concierge logo
-    When I go to item "10011389" from search field
+    When I go to item "63130001" from search field
     And I select count of product
     When I add item to created opportunity
     When I click on save button
@@ -139,12 +140,12 @@ Feature: Concierge Project
     Then I verify that project list is displayed
     Examples:
       | skuid    |
-      | 10011389 |
+      | 63130001 |
 
   Scenario: Verify the Opportunities list and switching between the opportunities -CART/PDP
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10011389" from search field
+    When I go to item "63130001" from search field
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -160,7 +161,6 @@ Feature: Concierge Project
     Then I verify that spaces list is displayed
 
   Scenario: Verify that user is able to update item option
-
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "modifyitemsoptions" by provided "projectName"
@@ -181,16 +181,17 @@ Feature: Concierge Project
   Scenario: Verify that user is able to remove items from project
     Given I log into Concierge as "associate"
     When I remove all items from cart
-    When I go to item "10011389" from search field
-#    And I select count of product
-#    When I click on add to project button
-#    And I choose project by project name "removeitemsfromproject"
-#    When I click on save button
-#    When I click on go to project button
-#    When I click on remove button from project for added item
-#    Then I verify that item was removed
+    When I go to item "63130001" from search field
+    And I select count of product
+    When I click on add to project button
+    And I choose project by project name "removeitemsfromproject"
+    When I click on save button
+    When I click on go to project button
+    When I click on remove button from project for added item
+    Then I verify that item was removed
 
   Scenario: Verify price override for item from project
+
     Given I log into Concierge as "leader"
     And I remove client from header
     When I click on projects button
@@ -217,6 +218,7 @@ Feature: Concierge Project
     Then I verified that override price for shipping displayed
 
   Scenario: Verify subtotal/forecast by updating qty for items
+
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "subototalforecastupdatingqty" by provided "projectName"
@@ -256,6 +258,7 @@ Feature: Concierge Project
 
  #10011392 SS
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
+
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "verifyforecastbypricingtype" by provided "projectName"
@@ -285,6 +288,7 @@ Feature: Concierge Project
     Then I verify that tax is not displayed
 
   Scenario Outline: Verify Member/non Member /Trade/ Non Trade toggle pricing for unclassified business client project
+
     #Need data for stg4
     Given I log into Concierge as "associate"
     When I remove all items from cart
@@ -297,9 +301,9 @@ Feature: Concierge Project
       | pricing    |
       | NON_MEMBER |
       | MEMBER     |
-      #| NON_TRADE  |
+      | NON_TRADE  |
       | TRADE      |
-#
+
   Scenario Outline: Verify transition between spaces
     #Need data for stg4
     Given I log into Concierge as "leader"
@@ -355,6 +359,7 @@ Feature: Concierge Project
     Then I verify that opportunities list in dropdown is displayed from add to project modal
 
   Scenario: Verify the Add to Project Modal in CART/PDP - Spaces list in dropdown
+
     Given I log into Concierge as "associate"
     When I go to item "10010966" from search field
     And I select count of product
@@ -362,6 +367,7 @@ Feature: Concierge Project
     Then I verify that space list in dropdown is displayed from add to project modal
 
   Scenario: Verify add new Space in the modal and add items to the selected space -CART/PDP
+
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "10010966" from search field

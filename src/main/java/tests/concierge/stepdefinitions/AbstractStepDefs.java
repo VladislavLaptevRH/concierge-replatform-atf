@@ -245,7 +245,6 @@ public class AbstractStepDefs {
     @When("I click on rh concierge logo")
     public void iClickOnRhConciergeLogo() {
         conciergeUserAccountPage.getRhConciergeLogo().should(Condition.and("", visible, enabled), Duration.ofMinutes(5));
-
         conciergeUserAccountPage.getRhConciergeLogo().click();
     }
 
