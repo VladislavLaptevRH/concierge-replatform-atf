@@ -65,20 +65,17 @@ public class Hooks {
         profile = System.getenv("ENVIRONMENT");
         cookie = System.getenv("ENDPOINT");
 
-        profile = "stg2";
-        cookie = "contentfix";
+        if (profile == null) {
+            Assert.fail("Environment Variable is NOT Set");
+        } else {
+            System.out.println("Tests are running on " + profile + " environment");
+        }
 
-//        if (profile == null) {
-//            Assert.fail("Environment Variable is NOT Set");
-//        } else {
-//            System.out.println("Tests are running on " + profile + " environment");
-//        }
-//
-//        if (cookie == null) {
-//            System.out.println("Tests are running without cookie or endpoint");
-//        } else {
-//            System.out.println("Tests are running with endpoint = " + cookie);
-//        }
+        if (cookie == null) {
+            System.out.println("Tests are running without cookie or endpoint");
+        } else {
+            System.out.println("Tests are running with endpoint = " + cookie);
+        }
 
         BufferedReader reader;
         try {
@@ -151,7 +148,7 @@ public class Hooks {
         try {
             ConfigFileReader();
             configureEstoreURL();
-//            setupChromeArguments();
+            setupChromeArguments();
             setUPWebDriver(eStoreURL);
         } catch (org.openqa.selenium.TimeoutException e) {
             with().pollInterval(6, SECONDS).await().until(() -> true);
@@ -170,7 +167,7 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
         configureConciergeURL();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(conciergeURL);
     }
 
@@ -183,7 +180,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 600000;
         Configuration.reportsFolder = "target/screenshots";
