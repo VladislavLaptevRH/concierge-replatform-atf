@@ -255,8 +255,16 @@ public class ConciergeCartStepDefs {
 
     @When("I click on remove button from price override")
     public void iClickOnRemoveButtonFromPriceOverride() {
-        conciergeProjectScreen.getREMOVEbutton().should(visible, Duration.ofMinutes(1));
-        conciergeProjectScreen.getREMOVEbutton().click();
+        while(conciergeProjectScreen.getREMOVEbutton().isDisplayed()){
+            if(Integer.parseInt($(By.xpath("//*[@class = 'MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input']")).getText()) > 1){
+                $(By.xpath("//*[@class = 'MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input']")).click();
+                $(By.xpath("//*[text() = '1']")).click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+            }
+            conciergeProjectScreen.getREMOVEbutton().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            conciergeProjectScreen.getREMOVEbutton().shouldNot(visible, Duration.ofMinutes(1));
+        }
     }
 
     @Then("I verify that price override was removed")

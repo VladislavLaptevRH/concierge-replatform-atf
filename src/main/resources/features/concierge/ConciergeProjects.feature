@@ -191,12 +191,15 @@ Feature: Concierge Project
     Then I verify that item was removed
 
   Scenario: Verify price override for item from project
-
     Given I log into Concierge as "leader"
+    When I remove all items from cart
     And I remove client from header
-    When I click on projects button
-    When I search project "overrideprice" by provided "projectName"
-    When I click on the first project search result
+    When I go to item "10072181 LOAK" from search field
+    And I select count of product
+    When I click on add to project button
+    And I choose project by project name "overridePrice"
+    When I click on save button
+    When I click on go to project button
     And I click on regular price for item projects
     But I choose "percentOff" method for price override
     And I introduce "10" percent discount
@@ -204,8 +207,9 @@ Feature: Concierge Project
     When I click on apply button
     Then I verify that overriden price displayed
     When I click on adjusted price
-    When I removed adjustment price
-    When I click on remove button from price override
+    When I removed adjusted price
+    When Adjusted price was removed
+    Then I click on remove button from price override
 
   Scenario: Verify shipping overrides in projects
     Given I log into Concierge as "leader"
@@ -258,14 +262,24 @@ Feature: Concierge Project
 
  #10011392 SS
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
-
     Given I log into Concierge as "leader"
     When I click on projects button
-    When I search project "verifyforecastbypricingtype" by provided "projectName"
+    When I search project "overridinglineitems" by provided "projectName"
     When I click on the first project search result
+    Then I click on remove button from price override
+    When I remove all items from cart
+    When I click on rh concierge logo
+    And I remove client from header
+    When I go to item "10072181 LOAK" from search field
+    And I select count of product
+    When I click on add to project button
+    And I choose project by project name "verifyforecastbypricingtype"
+    When I click on save button
+    When I click on go to project button
     When I click on edit options button
     When I choose pricing type "<pricingType>"
     Then I verify forecast for "<pricingType>"
+    Then I click on remove button from price override
     Examples:
       | pricingType |
       | NON-MEMBER  |

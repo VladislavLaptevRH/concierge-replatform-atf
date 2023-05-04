@@ -496,10 +496,9 @@ public class ProjectStepDefs {
     public void iClickOnEditOptionsButton() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getEditItemOptions().should(visible, Duration.ofSeconds(35));
-        executeJavaScript("window.scrollBy(0,350)", "");
         projectSettingsScreen.getMoodBoardButton().shouldHave(text("MOODBOARD"), Duration.ofSeconds(15));
-        conciergeProjectScreen.getEditItemOptions().click();
-        System.out.println();
+        conciergeProjectScreen.getEditItemOptions().hover();
+        conciergeProjectScreen.getEditItemOptions().doubleClick();
     }
 
     @Then("verify that color was changed")
@@ -545,8 +544,10 @@ public class ProjectStepDefs {
         conciergeProjectScreen.getProjectNameMoveToProject().should(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getProjectNameMoveToProject().click();
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        conciergeProjectScreen.getProjectNameMoveToProject().doubleClick();
-        conciergeProjectScreen.getProjectNameMoveToProject().sendKeys(Keys.BACK_SPACE);
+        while ($(By.xpath("//label[@id = 'project-name-label' and contains(@class, 'MuiFormLabel-filled')]")).isDisplayed()){
+            conciergeProjectScreen.getProjectNameMoveToProject().doubleClick();
+            conciergeProjectScreen.getProjectNameMoveToProject().sendKeys(Keys.BACK_SPACE);
+        }
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getProjectNameMoveToProject().setValue(projectName);
         with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -813,18 +814,61 @@ public class ProjectStepDefs {
             if (Hooks.profile.equals("stg4")) {
                 assertEquals(conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", ""), "$4,496.00\n");
             } else {
-                conciergeProjectScreen.getForeCastAmount().shouldHave(text("$1,616.00"), Duration.ofSeconds(25));
-                String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
-                assertEquals(prType, "$1,616.00\n", "Forecast amount for member client is displayed");
+                if(!$(By.xpath("//*[@class = 'MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    with().pollInterval(3, SECONDS).await().until(() -> true);
+                }
+                if(Integer.parseInt($(By.xpath("//*[@class = 'MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input']")).getText()) > 1){
+                    $(By.xpath("//*[@class = 'MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input']")).click();
+                    $(By.xpath("//*[text() = '1']")).click();
+                    with().pollInterval(2, SECONDS).await().until(() -> true);
+                }
+                if(Hooks.cookie.equals("userservice")){
+                    conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,313.00"), Duration.ofSeconds(25));
+                    String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
+                    assertEquals(prType, "$2,313.00\n", "Forecast amount for member client is displayed");
+                }
+                if(Hooks.cookie.equals("prodsupport")){
+                    conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,088.00"), Duration.ofSeconds(25));
+                    String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
+                    assertEquals(prType, "$2,088.00\n", "Forecast amount for member client is displayed");
+                }
+                if(Hooks.cookie.equals("contentfix")){
+                    conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,088.00"), Duration.ofSeconds(25));
+                    String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
+                    assertEquals(prType, "$2,088.00\n", "Forecast amount for member client is displayed");
+                }
+
             }
         }
         if (pricingType.equals("NON-MEMBER")) {
             if (Hooks.profile.equals("stg4")) {
                 assertEquals(conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", ""), "$5,995.00\n");
             } else {
-                conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,021.00"), Duration.ofSeconds(25));
-                String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
-                assertEquals(prType, "$2,021.00\n", "Forecast amount for non-member client is displayed");
+                if(!$(By.xpath("//*[@class = 'MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    with().pollInterval(3, SECONDS).await().until(() -> true);
+                }
+                if(Integer.parseInt($(By.xpath("//*[@class = 'MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input']")).getText()) > 1){
+                    $(By.xpath("//*[@class = 'MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input']")).click();
+                    $(By.xpath("//*[text() = '1']")).click();
+                    with().pollInterval(2, SECONDS).await().until(() -> true);
+                }
+                if(Hooks.cookie.equals("userservice")){
+                    conciergeProjectScreen.getForeCastAmount().shouldHave(text("$3,085.00"), Duration.ofSeconds(25));
+                    String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
+                    assertEquals(prType, "$3,085.00\n", "Forecast amount for member client is displayed");
+                }
+                if(Hooks.cookie.equals("prodsupport")){
+                    conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,785.00"), Duration.ofSeconds(25));
+                    String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
+                    assertEquals(prType, "$2,785.00\n", "Forecast amount for member client is displayed");
+                }
+                if(Hooks.cookie.equals("contentfix")){
+                    conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,785.00"), Duration.ofSeconds(25));
+                    String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
+                    assertEquals(prType, "$2,785.00\n", "Forecast amount for member client is displayed");
+                }
             }
         }
     }
@@ -1091,19 +1135,33 @@ public class ProjectStepDefs {
 
     @When("I click on adjusted price")
     public void iClickOnAdjustedPrice() {
+        executeJavaScript("window.scrollTo(0, 200)");
         conciergeProjectScreen.getAdjustedPrice().should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
         conciergeProjectScreen.getAdjustedPrice().should(visible, Duration.ofMinutes(1));
         conciergeProjectScreen.getAdjustedPrice().click();
     }
 
-    @When("I removed adjustment price")
-    public void iRemovedAdjustemPrice() {
+    @When("I removed adjusted price")
+    public void iRemovedAdjustedPrice() {
         if(conciergeProjectScreen.getPopUpErrorSomethingWentWrong().isDisplayed()){
             conciergeProjectScreen.getTryAgainButton().click();
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
-        $(By.xpath("//*[text()='Remove']")).should(visible, Duration.ofMinutes(1));
-        $(By.xpath("//*[text()='Remove']")).click();
+         if($(By.xpath("//button/*[text()='REMOVE']")).isDisplayed()) {
+             $(By.xpath("//button/*[text()='REMOVE']")).should(visible, Duration.ofMinutes(1));
+             $(By.xpath("//button/*[text()='REMOVE']")).click();
+             with().pollInterval(2, SECONDS).await().until(() -> true);
+         }
+        if($(By.xpath("//button/*[text()='Remove']")).isDisplayed()) {
+            $(By.xpath("//button/*[text()='Remove']")).should(visible, Duration.ofMinutes(1));
+            $(By.xpath("//button/*[text()='Remove']")).click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+    }
+
+    @When("Adjusted price was removed")
+    public void AdjustemPriceWasRemoved() {
+        conciergeProjectScreen.getAdjustedPrice().shouldNot(visible, Duration.ofSeconds(30));
     }
 
     @When("I verify selections and deselection of project moodboard items")
