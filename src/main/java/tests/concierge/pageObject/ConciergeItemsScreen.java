@@ -45,7 +45,7 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement closePopUpButton = $(By.xpath("/html/body/div[4]/div[3]/div/div[2]/div/div[2]/div/div[2]/button"));
 
-    private final SelenideElement addToProjectButton = $(By.xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary']//*[text()='ADD TO PROJECT'][1]"));
+    private final SelenideElement addToProjectButton = $(By.xpath("(//*[text()='ADD TO PROJECT'])[1]"));
 
     private final SelenideElement saveProjectPopUpButton = $(By.xpath("//div[2]/button[contains(@class,'MuiButton-containedPrimary MuiButton-fullWidth')]"));
 
