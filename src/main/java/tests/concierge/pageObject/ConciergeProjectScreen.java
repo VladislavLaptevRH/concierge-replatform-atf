@@ -169,13 +169,13 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement itemIdSpan = $(By.xpath("//*[text()='Item#']"));
 
-    private final SelenideElement REMOVEbutton = $(By.xpath("//*[text()='REMOVE']/preceding-sibling::button"));
+    private final SelenideElement REMOVEbutton = $(By.xpath("(//*[text()='REMOVE']/preceding-sibling::button)[1]"));
 
     private final SelenideElement clientPhone = $(By.cssSelector("input[name='phoneNumber']"));
 
     private final SelenideElement clientPostalCode = $(By.cssSelector("input[name='postalCode']"));
 
-    private final SelenideElement regularPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'][1]/p)[2]"));
+    private final SelenideElement regularPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'][1]/p)[1]"));
 
     private final SelenideElement overridePriceregularPrice = $(By.xpath("(//*[text() = 'REGULAR']/../..//p)[1]"));
 

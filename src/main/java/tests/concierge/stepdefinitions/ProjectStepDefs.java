@@ -519,10 +519,23 @@ public class ProjectStepDefs {
 
     @When("I choose quantity for item from project")
     public void iChooseQuantityForItemFromProject() {
-        executeJavaScript("window.scrollTo(0, 200)");
+        generalStepDefs.waitForJSandJQueryToLoad();
         randomQuantity = generalStepDefs.getRandomNumber(2, 5);
-        $(By.xpath("//div[@aria-haspopup='listbox']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//div[@aria-haspopup='listbox']")).click();
+        executeJavaScript("window.scrollTo(0, 120)");
+        if(Hooks.cookie.equals("userservice")){
+            $(By.xpath("//div[@aria-haspopup='listbox']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//div[@aria-haspopup='listbox']")).click();
+        }
+        if(Hooks.cookie.equals("prodsupport")){
+            $(By.xpath("(//div[@aria-haspopup='listbox'])[3]")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("(//div[@aria-haspopup='listbox'])[3]")).click();
+        }
+        if(Hooks.cookie.equals("contentfix")){
+            $(By.xpath("(//div[@aria-haspopup='listbox'])[1]")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("(//div[@aria-haspopup='listbox'])[1]")).click();
+        }
+
+
 
         if (Hooks.profile.equals("stg2")) {
             randomQuantity = 1;
@@ -547,6 +560,7 @@ public class ProjectStepDefs {
         while ($(By.xpath("//label[@id = 'project-name-label' and contains(@class, 'MuiFormLabel-filled')]")).isDisplayed()){
             conciergeProjectScreen.getProjectNameMoveToProject().doubleClick();
             conciergeProjectScreen.getProjectNameMoveToProject().sendKeys(Keys.BACK_SPACE);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getProjectNameMoveToProject().setValue(projectName);
@@ -668,7 +682,6 @@ public class ProjectStepDefs {
         int totalItemPrice = randomQuantity * memberPrice;
         String finalPrice = Double.toString(totalItemPrice).replace(".", ",").replaceAll(",0", "");
         String forecast = conciergeProjectScreen.getForeCastTotalValue().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "");
-
         assertEquals(finalPrice, forecast, "Final price calculated correctly");
     }
 
@@ -754,10 +767,38 @@ public class ProjectStepDefs {
         int forecastExpected;
         conciergeProjectScreen.getRegularPrice().should(visible, Duration.ofSeconds(40));
         with().pollInterval(3, SECONDS).await().until(() -> true);
+
+        if(!$(By.xpath("//label[text() = 'Size']")).isDisplayed()){
+            $(By.xpath("(//*[@class = 'MuiSvgIcon-root MuiSvgIcon-fontSizeSmall'])[2]")).hover();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            $(By.xpath("(//*[@class = 'MuiSvgIcon-root MuiSvgIcon-fontSizeSmall'])[2]")).doubleClick();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+        if(Hooks.cookie.equals("userservice")){
+            if($(By.xpath("//label[text() = 'Size']")).isDisplayed()){
+                Select sizeList = new Select($(By.xpath("//select[@id ='optionSelect-0']")));
+                sizeList.selectByVisibleText("Queen");
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+            }
+        }
+        if(Hooks.cookie.equals("prodsupport")){
+            if($(By.xpath("//label[text() = 'Size']")).isDisplayed()){
+                $(By.xpath("(//label[text() = 'Size']/..//div)[2]")).click();
+                $(By.xpath("(//*[text() = 'Queen '])[2]")).click();
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+            }
+        }
+        if(Hooks.cookie.equals("contentfix")){
+            if($(By.xpath("//label[text() = 'Size']")).isDisplayed()){
+                Select sizeList = new Select($(By.xpath("//select[@id ='optionSelect-0']")));
+                sizeList.selectByVisibleText("Queen");
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+            }
+        }
         if (Hooks.profile.equals("stg4")) {
             forecastExpected = randomQuantity * 4496;
         } else {
-            forecastExpected = randomQuantity * 2150;
+            forecastExpected = randomQuantity * 2088;
         }
         int forecastActual = Integer.parseInt(conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
         assertEquals(forecastActual, forecastExpected, "Forecast value has been updated");
