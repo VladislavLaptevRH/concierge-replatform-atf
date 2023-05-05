@@ -222,13 +222,18 @@ Feature: Concierge Project
     Then I verified that override price for shipping displayed
 
   Scenario: Verify subtotal/forecast by updating qty for items
-
     Given I log into Concierge as "leader"
-    When I click on projects button
-    When I search project "subototalforecastupdatingqty" by provided "projectName"
-    When I click on the first project search result
+    When I remove all items from cart
+    And I remove client from header
+    When I go to item "10072181 LOAK" from search field
+    And I select count of product
+    When I click on add to project button
+    And I choose project by project name "subototalforecastupdatingqty"
+    When I click on save button
+    When I click on go to project button
     When I choose quantity for item from project
     Then I verify that subtotal amount updated according by quantity of items
+    Then I click on remove button from price override
 
   Scenario: Verify subtotal/forecast by updating by hide/unhide items
     Given I log into Concierge as "leader"
@@ -253,12 +258,24 @@ Feature: Concierge Project
 
   Scenario: Verify subtotal/forecast by updating qty overriding line items (all types/ one or more items - apply all functionality)
     Given I log into Concierge as "associate"
+    When I remove all items from cart
     When I click on projects button
     When I search project "overridinglineitems" by provided "projectName"
     When I click on the first project search result
+    Then I click on remove button from price override
+    When I remove all items from cart
+    When I click on rh concierge logo
+    And I remove client from header
+    When I go to item "10072181 BLK" from search field
+    And I select count of product
+    When I click on add to project button
+    And I choose project by project name "overridinglineitems"
+    When I click on save button
+    When I click on go to project button
     When I click on edit options button
     When I choose quantity for item from project
     Then I verify that forecast value is update according to quantity of item
+    Then I click on remove button from price override
 
  #10011392 SS
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
@@ -373,7 +390,6 @@ Feature: Concierge Project
     Then I verify that opportunities list in dropdown is displayed from add to project modal
 
   Scenario: Verify the Add to Project Modal in CART/PDP - Spaces list in dropdown
-
     Given I log into Concierge as "associate"
     When I go to item "10010966" from search field
     And I select count of product

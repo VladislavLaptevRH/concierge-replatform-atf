@@ -602,7 +602,7 @@ public class ConciergeE2EStepDefs {
         if (conciergeItemsScreen.getSelectFinish().isDisplayed()) {
             try {
                 Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
-                finishList.selectByVisibleText("Antiqued Natural");
+                finishList.selectByVisibleText("Black Oak");
             } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e) {
                 System.out.println("Element not found");
             }

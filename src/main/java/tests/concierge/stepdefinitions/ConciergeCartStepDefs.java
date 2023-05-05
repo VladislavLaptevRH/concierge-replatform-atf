@@ -2,6 +2,7 @@ package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.ex.ElementNotFound;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -255,16 +256,13 @@ public class ConciergeCartStepDefs {
 
     @When("I click on remove button from price override")
     public void iClickOnRemoveButtonFromPriceOverride() {
-        while(conciergeProjectScreen.getREMOVEbutton().isDisplayed()){
-            if(Integer.parseInt($(By.xpath("//*[@class = 'MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input']")).getText()) > 1){
-                $(By.xpath("//*[@class = 'MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input']")).click();
-                $(By.xpath("//*[text() = '1']")).click();
-                with().pollInterval(2, SECONDS).await().until(() -> true);
-            }
+        while(conciergeProjectScreen.getREMOVEbutton().isDisplayed()) {
+            conciergeProjectScreen.getREMOVEbutton().scrollTo();
+            conciergeProjectScreen.getREMOVEbutton().scrollIntoView(true);
             conciergeProjectScreen.getREMOVEbutton().click();
-            with().pollInterval(2, SECONDS).await().until(() -> true);
-            conciergeProjectScreen.getREMOVEbutton().shouldNot(visible, Duration.ofMinutes(1));
+            with().pollInterval(3, SECONDS).await().until(() -> true);
         }
+        conciergeProjectScreen.getREMOVEbutton().shouldNot(visible);
     }
 
     @Then("I verify that price override was removed")
