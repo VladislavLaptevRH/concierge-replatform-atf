@@ -13,7 +13,7 @@ Java11Pipeline pipeline = new Java11Pipeline(this, s, env);
 
 
 pipeline.standardTemplate { label ->
-    properties([parameters([choice(choices: ['stg2', 'stg3', 'stg4', 'prod'], description: 'Select Environment to build', name: 'ENVIRONMENT'), choice(choices: ['contentfix', 'contentfix&FEATURE_SSR=true','releasetues', 'releasetues&FEATURE_SSR=true', 'releasethurs', 'releasethurs&FEATURE_SSR=true', 'poc&FEATURE_SSR=true', 'poc', 'FEATURE_SSR=true', 'cartcheckout', 'cartcheckout&FEATURE_SSR=true', 'rhr', 'rhr&FEATURE_SSR=true', 'intl', 'hotfix','userservice','userservice&FEATURE_SSR=true'], description: 'Select optional endpoint value', name: 'ENDPOINT')])])
+    properties([parameters([choice(choices: ['stg2', 'stg3', 'stg4', 'prod'], description: 'Select Environment to build', name: 'ENVIRONMENT'), choice(choices: ['releasetues', 'releasetues&FEATURE_SSR=true''contentfix', 'contentfix&FEATURE_SSR=true', 'releasethurs', 'releasethurs&FEATURE_SSR=true', 'poc&FEATURE_SSR=true', 'poc', 'FEATURE_SSR=true', 'cartcheckout', 'cartcheckout&FEATURE_SSR=true', 'rhr', 'rhr&FEATURE_SSR=true', 'intl', 'hotfix','userservice','userservice&FEATURE_SSR=true'], description: 'Select optional endpoint value', name: 'ENDPOINT')])])
     node(label) {
         try {
             stage('checkout') {
