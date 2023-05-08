@@ -145,25 +145,10 @@ public class Hooks {
      */
     @Before("@estoreRegression")
     public void initWebDrivereStore() {
-        try {
             ConfigFileReader();
             configureEstoreURL();
             setupChromeArguments();
             setUPWebDriver(eStoreURL);
-        } catch (org.openqa.selenium.TimeoutException e) {
-            with().pollInterval(6, SECONDS).await().until(() -> true);
-            ConfigFileReader();
-            configureEstoreURL();
-            setupChromeArguments();
-            setUPWebDriver(eStoreURL);
-        } catch (org.openqa.selenium.SessionNotCreatedException e) {
-            with().pollInterval(6, SECONDS).await().until(() -> true);
-            ConfigFileReader();
-            configureEstoreURL();
-            setupChromeArguments();
-            setUPWebDriver(eStoreURL);
-        }
-
     }
 
     /**
@@ -188,7 +173,7 @@ public class Hooks {
         Configuration.browserSize = "1366x768";
         Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
-        Configuration.timeout = 99000000;
+        Configuration.timeout = 2000000;
         Configuration.reportsFolder = "target/screenshots";
         open(url);
         currentUrl = WebDriverRunner.url();
