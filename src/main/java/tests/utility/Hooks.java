@@ -173,7 +173,7 @@ public class Hooks {
         Configuration.browserSize = "1366x768";
         Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
-        Configuration.timeout = 2000000;
+        Configuration.timeout = 600000;
         Configuration.reportsFolder = "target/screenshots";
         open(url);
         currentUrl = WebDriverRunner.url();

@@ -8,7 +8,7 @@ Feature: Estore Membership
     Then I validate membership title
 
   Scenario: eStore Membership renewal details
-    Given I log into eStore as "regular" user
+    Given I log into eStore as "member" user
     When I navigate to the member tab
     Then I validate membership details
 
