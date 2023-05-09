@@ -52,8 +52,8 @@ public class EstoreAddressStepDefs {
     public void iUpdateShippingAddressForCAN() {
         try {
             with().pollInterval(4, SECONDS).await().until(() -> true);
-            Select selectCountry = new Select(estoreAddressScreen.getCountrySelect());
-            selectCountry.selectByValue("CA");
+//            Select selectCountry = new Select(estoreAddressScreen.getCountrySelect());
+//            selectCountry.selectByValue("CA");
             Select shippingAddress = new Select(estoreAddressScreen.getShippingAddressState());
             shippingAddress.selectByValue("AZ");
             estoreAddressScreen.getShippingAddressState();
