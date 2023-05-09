@@ -96,7 +96,7 @@ Feature: Estore Payment
     When I click on estore continue button
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
-#
+
   Scenario: eStore Update address (Non impacting change) after making payment
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
@@ -306,6 +306,7 @@ Feature: Estore Payment
     And I click on estore no thanks button
     When I click on continue to payment estore button
     When I click on continue with original address estore button
+    When I remove payment method which was used earlier
     Then I verify that I'm able to execute estore split payment with saved CC
 
   Scenario: GC/ Balance check
@@ -340,7 +341,7 @@ Feature: Estore Payment
     When I click on continue payment method estore button
     When I click on a place estore order button
 
-      #canada issue
+#      canada issue
   Scenario: Verify that user is able to execute payment via GC for CAN
     Given I log into eStore as "savedRhCc" user
     When I remove all items from estore cart

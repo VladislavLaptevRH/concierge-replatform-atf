@@ -8,8 +8,7 @@ Feature: Estore Membership
     Then I validate membership title
 
   Scenario: eStore Membership renewal details
-
-    Given I log into eStore as "regular" user
+    Given I log into eStore as "member" user
     When I navigate to the member tab
     Then I validate membership details
 
@@ -60,7 +59,6 @@ Feature: Estore Membership
     Then I verify that membership is cancelled
 
   Scenario: User having membership on cart and navigates to Payment Page - "Save card to account" checkbox should be checked by default
-
     Given I log into eStore as "member" user
     When I remove all items from estore cart
     When I add item to cart via API for estore

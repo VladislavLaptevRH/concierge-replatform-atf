@@ -3,7 +3,6 @@
 Feature: Estore CG
 
   Scenario Outline: CG - Test CGS in all menu items (All brands)
-
     Given I log into eStore as "guest" user
     When I goes to "<brands>" estore collection page
     Then I verify CGS all menu items

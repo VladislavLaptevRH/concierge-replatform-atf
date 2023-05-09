@@ -547,14 +547,16 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on remove membership estore button")
     public void iClickOnRemoveMembershipEstoreButton() {
-        try {
-            estoreCartPage.getRemoveMembershipButton().scrollIntoView(true);
-            estoreCartPage.getRemoveMembershipButton().should(visible, Duration.ofSeconds(20));
-            estoreCartPage.getRemoveMembershipButton().click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Remove membership button is not displayed");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        if (estoreCartPage.getRemoveMembershipButton().isDisplayed()) {
+            try {
+                estoreCartPage.getRemoveMembershipButton().scrollIntoView(true);
+                estoreCartPage.getRemoveMembershipButton().should(visible, Duration.ofSeconds(20));
+                estoreCartPage.getRemoveMembershipButton().click();
+            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+                System.out.println("Remove membership button is not displayed");
+            }
         }
-
     }
 
 

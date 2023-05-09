@@ -103,3 +103,20 @@ Feature: Estore Search
   Scenario: Verify the results with multiple term search and facet selections
     Given I log into eStore as "regular" user
     When I go to estore item "leather Sofa" from search field
+    Then I verify the results with multiple term search
+
+  Scenario: Brands refinement should only appear in concierge search, not on eStore
+    Given I log into eStore as "regular" user
+    When I go to estore item "table" from search field
+    Then I verify that brands refinement does not appear in estore search page
+
+  Scenario: Hide swatches on Product Grid
+    Given I log into eStore as "regular" user
+    When I go to estore item "sofa" from search field
+    Then I verify that swathces are not displayed
+
+  Scenario: Apply multiple facet and verify the count of product
+    Given I log into eStore as "regular" user
+    When I go to estore item "table" from search field
+    When I apply multiple facet on estore search page
+

@@ -145,19 +145,10 @@ public class Hooks {
      */
     @Before("@estoreRegression")
     public void initWebDrivereStore() {
-        try {
             ConfigFileReader();
             configureEstoreURL();
             setupChromeArguments();
             setUPWebDriver(eStoreURL);
-        } catch (org.openqa.selenium.TimeoutException e) {
-            with().pollInterval(6, SECONDS).await().until(() -> true);
-            ConfigFileReader();
-            configureEstoreURL();
-            setupChromeArguments();
-            setUPWebDriver(eStoreURL);
-        }
-
     }
 
     /**
