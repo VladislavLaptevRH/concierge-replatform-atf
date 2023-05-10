@@ -22,9 +22,9 @@ public class EstoreOrderHistoryScreen {
 
     private SelenideElement orderHistorySafireWilliam = $(By.xpath("//*[text()='Safire William']"));
 
-    private SelenideElement orderHistoryFoundText = $(By.xpath("//*[text()='Found']"));
+    private SelenideElement orderHistoryFoundText = $(By.xpath("//*[text()='We cannot find any submitted online orders for your account.']"));
 
-    private SelenideElement orderHistoryOrderText = $(By.xpath("//*[text()='Order']"));
+    private SelenideElement orderHistoryOrderText = $(By.xpath("//*[text()='ORDERS']"));
 
     private SelenideElement orderHistoryButton = $(By.xpath("//li[@data-navigation-account-item-id='/my-account/order-history.jsp']"));
 
