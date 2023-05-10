@@ -212,6 +212,10 @@ public class EstoreSearchStepDefs {
 
     @When("I apply multiple facet on estore search page")
     public void iApplyMultipleFacetOnEstoreSearchPage() {
-        System.out.println();
+        $(By.xpath("//*[text()='new arrivals']")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='new arrivals']")).click();
+        $(By.xpath("//*[text()='sale']")).click();
+        $(By.xpath("//*[text()='in-stock']")).click();
+        $(By.xpath("//*[contains(text(),'RESULTS')]")).shouldBe(visible, Duration.ofSeconds(20));
     }
 }
