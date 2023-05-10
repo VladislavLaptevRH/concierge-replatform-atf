@@ -1,17 +1,3 @@
-@Library('jenkins-rhapsody-libraries@master') _ //Importing shared Libraries
-import com.rh.rhapsody.*;
-
-Service s = Service.ESTORE_REGRESSION_TESTS;
-
-CRON_SETTINGS = '''* * * * * % ENVIRONMENT=stg2;ENDPOINT=releasethurs''';
-
-
-def resultspath = "${env.JOB_NAME}/${env.BUILD_NUMBER}"
-println("resultspath=${resultspath}")
-
-Java11Pipeline pipeline = new Java11Pipeline(this, s, env);
-
-
 pipeline.standardTemplate { label ->
     properties([parameters([choice(choices: ['stg2', 'stg3', 'stg4', 'prod'], description: 'Select Environment to build', name: 'ENVIRONMENT'), choice(choices: ['releasetues', 'releasetues&FEATURE_SSR=true','contentfix', 'contentfix&FEATURE_SSR=true', 'releasethurs', 'releasethurs&FEATURE_SSR=true', 'poc&FEATURE_SSR=true', 'poc', 'FEATURE_SSR=true', 'cartcheckout', 'cartcheckout&FEATURE_SSR=true', 'rhr', 'rhr&FEATURE_SSR=true', 'intl', 'hotfix','userservice','userservice&FEATURE_SSR=true'], description: 'Select optional endpoint value', name: 'ENDPOINT')])])
     node(label) {
@@ -37,7 +23,3 @@ pipeline.standardTemplate { label ->
     }
     // end Node
 } // pipelineTemplate
-
-def notifyFailed() {
-    slackSend(color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})", channel: "#test-results")
-}
