@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
@@ -336,7 +337,7 @@ public class EstoreAddressStepDefs {
     @Then("I verify that added address displayed as shipping address")
     public void iVerifyThatAddedAddressDisplayedAsShippingAddress() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text()='2479 Deer Run']")).should(visible, Duration.ofSeconds(20));
+       $(By.xpath("//*[text()='2479 Deer Run']")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I see new Billing address")
