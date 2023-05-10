@@ -10,7 +10,7 @@ pipeline.standardTemplate { label ->
             }
 
             stage('Run Tests') {
-                pipeline.buildMvn("clean test -Dcucumber.filter.tags='@estoreRegression'", true);
+                pipeline.buildMvn("sudo clean test -Dcucumber.filter.tags='@estoreRegression'", true);
             } // end stage
 
             slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) 'Environment' (${params.ENVIRONMENT}) 'Endpoint' (${params.ENDPOINT})  " +
