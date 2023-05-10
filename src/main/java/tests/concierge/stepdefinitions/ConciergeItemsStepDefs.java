@@ -71,11 +71,11 @@ public class ConciergeItemsStepDefs {
         try {
             selectOption.getColorOption().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
             selectOption.getColorOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
-            Select selectFabric = new Select(selectOption.getColorOption());
-            selectFabric.selectByIndex(1);
-            with().pollInterval(2, SECONDS).await().until(() -> true);
             Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
             sizeList.selectByVisibleText("Bath Sheet") ;
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            Select selectFabric = new Select(selectOption.getColorOption());
+            selectFabric.selectByIndex(1);
             with().pollInterval(2, SECONDS).await().until(() -> true);
             Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
             quantityList.selectByVisibleText("1");

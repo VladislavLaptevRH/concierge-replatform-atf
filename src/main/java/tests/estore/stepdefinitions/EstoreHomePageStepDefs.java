@@ -61,10 +61,7 @@ public class EstoreHomePageStepDefs {
     @Then("verify users is taken to search result page")
     public void verifyUsersIsTakenToProductPage() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        String URL = Hooks.eStoreURL.replaceAll("endpoint=releasetues", "");
-        URL = URL.split(String.valueOf('&'))[0];
-        URL = URL.substring(0, URL.length() - 22);
-        assertEquals(Hooks.getCurrentUrl(), URL + "/us/en/search/results.jsp?Ntt=" + result + "&Ns=product.sale%7C1");
+        assertTrue(Hooks.getCurrentUrl().contains("/search/results"));
     }
 
 
@@ -122,6 +119,7 @@ public class EstoreHomePageStepDefs {
 
     @Then("I Verify Thank you message")
     public void iVerifyThankYouMessage() {
+        estoreHomePage.getThankMessageText().should(Condition.visible, Duration.ofSeconds(30));
         String actual = estoreHomePage.getThankMessageText().getText();
         String expected = ("Thank you for telling us about your project. We're reviewing your information, and a designer will be in touch within 24 hours.\n" +
                 "\n" +

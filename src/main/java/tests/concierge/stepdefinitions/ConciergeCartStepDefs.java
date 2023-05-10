@@ -2,6 +2,7 @@ package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.ex.ElementNotFound;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -255,8 +256,13 @@ public class ConciergeCartStepDefs {
 
     @When("I click on remove button from price override")
     public void iClickOnRemoveButtonFromPriceOverride() {
-        conciergeProjectScreen.getREMOVEbutton().should(visible, Duration.ofMinutes(1));
-        conciergeProjectScreen.getREMOVEbutton().click();
+        while(conciergeProjectScreen.getREMOVEbutton().isDisplayed()) {
+            conciergeProjectScreen.getREMOVEbutton().scrollTo();
+            conciergeProjectScreen.getREMOVEbutton().scrollIntoView(true);
+            conciergeProjectScreen.getREMOVEbutton().click();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+        }
+        conciergeProjectScreen.getREMOVEbutton().shouldNot(visible);
     }
 
     @Then("I verify that price override was removed")
@@ -615,6 +621,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that monogram was edited")
     public void iVerifyThatMonogramWasEdited() {
+        WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Dark Silver Metallic (MDSL)']")).shouldHave(text("Dark Silver Metallic (MDSL)"), Duration.ofSeconds(30));
     }
@@ -623,8 +630,10 @@ public class ConciergeCartStepDefs {
     public void iRemoveMonogram() {
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getRemoveMonogramBtn().shouldHave(text("Remove"), Duration.ofMinutes(1));
-        with().pollInterval(6, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getRemoveMonogramBtn().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that monogram was removed")
@@ -796,13 +805,18 @@ public class ConciergeCartStepDefs {
             String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
             open(URL);
             with().pollInterval(3, SECONDS).await().until(() -> true);
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             if (!conciergeCartPageScreen.getClearOrderButton().exists()) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 open(URL);
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
-            conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
+            if(!conciergeCartPageScreen.getClearOrderButton().exists()){
+                System.out.println("400, 503 error");
+            }
             conciergeCartPageScreen.getClearOrderButton().should(Condition.be(visible), Duration.ofSeconds(10));
+            conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
             conciergeCartPageScreen.getClearOrderButton().click();
             with().pollInterval(2, SECONDS).await().until(() -> true);
             if (!conciergeCartPageScreen.getClearOrderButtonPopUpHeader().isDisplayed()) {

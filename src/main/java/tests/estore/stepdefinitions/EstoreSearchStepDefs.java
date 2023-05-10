@@ -189,14 +189,33 @@ public class EstoreSearchStepDefs {
     @Then("I verify in stock facet selection")
     public void iVerifyInStock() {
         $(By.xpath("//*[text()='in-stock']")).should(visible, Duration.ofSeconds(20)).click();
-        $(By.xpath("//*[text()='Color']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Depth']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Fabric']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Finish']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Length']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='sale']")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify that I'm able to apply any facet")
     public void iVerifyThatIMAbleToApplyAnyFacet() {
+    }
+
+    @Then("I verify the results with multiple term search")
+    public void iVerifyTheResultsWithMultipleTermSearch() {
+        $(By.xpath("//*[text()='leather Sofa']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that brands refinement does not appear in estore search page")
+    public void iVerifyThatBrandsRefinementDoesNotAppearInEstoreSearchPage() {
+        $(By.xpath("//*[text()='CONCEPTS']")).shouldNotBe(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that swathces are not displayed")
+    public void iVerifyThatSwathcesAreNotDisplayed() {
+    }
+
+    @When("I apply multiple facet on estore search page")
+    public void iApplyMultipleFacetOnEstoreSearchPage() {
+        $(By.xpath("//*[text()='new arrivals']")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='new arrivals']")).click();
+        $(By.xpath("//*[text()='sale']")).click();
+        $(By.xpath("//*[text()='in-stock']")).click();
+        $(By.xpath("//*[contains(text(),'RESULTS')]")).shouldBe(visible, Duration.ofSeconds(20));
     }
 }

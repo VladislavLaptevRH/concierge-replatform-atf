@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
@@ -336,7 +337,7 @@ public class EstoreAddressStepDefs {
     @Then("I verify that added address displayed as shipping address")
     public void iVerifyThatAddedAddressDisplayedAsShippingAddress() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text()='2479 Deer Run']")).should(visible, Duration.ofSeconds(20));
+       $(By.xpath("//*[text()='2479 Deer Run']")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I see new Billing address")
@@ -528,8 +529,8 @@ public class EstoreAddressStepDefs {
             generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName());
             estoreAddressScreen.getShippingAddressLastName().setValue("William");
 
-            Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
-            shippingAddressCountry.selectByValue("US");
+//            Selenidect shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
+//            shippingAddressCountry.selectByValue("US");
 
 
             if (Hooks.eStoreURL.contains("stg4")) {
@@ -573,6 +574,73 @@ public class EstoreAddressStepDefs {
             estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Shipping address fields are not displayed");
+        }
+    }
+
+    @When("I fill estore shipping address for CAN")
+    public void iFillEstoreShippingAddressForCAN() {
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+//        try {
+        if ($(By.xpath("//*[text() = 'Shipping Address']/..//span[1]/*[text() = 'Edit']")).isDisplayed()) {
+            System.out.println("The shipping address was already filled");
+        } else {
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            if (Hooks.eStoreURL.contains("stg3")) {
+                $(By.xpath("//*[text()='Add New Address']")).click();
+            }
+            estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
+            estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
+
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
+            estoreAddressScreen.getShippingAddressLastName1().setValue("William");
+
+//                if (!estoreAddressScreen.getShippingAddressCountryDisabled().isDisplayed()) {
+//                    Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
+//                    shippingAddressCountry.selectByValue("US");
+//                }
+
+            if (Hooks.eStoreURL.contains("stg4") || Hooks.eStoreURL.contains("stg3")) {
+                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress1());
+                estoreAddressScreen.getShippingAddressStreetAddress1().setValue("Bradford Drive");
+                estoreAddressScreen.getShippingAddressCity().setValue("Hilliard");
+
+                Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
+                selectState.selectByValue("OH");
+
+                generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
+                estoreAddressScreen.getPostalShippingCode().setValue("43093");
+            }
+//                    try {
+//                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(exist, Duration.ofSeconds(5));
+//                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
+//                    } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//                        System.out.println("Dropdown list is not displayed");
+//                    }
+
+//                } else {
+//                    with().pollInterval(3, SECONDS).await().until(() -> true);
+//                    generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
+//                    estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
+//                    try {
+//                        with().pollInterval(4, SECONDS).await().until(() -> true);
+//                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
+//                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
+//                    } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//                        System.out.println("Dropdown list is not displayed");
+//                    }
+//                }
+
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+            estoreAddressScreen.getShippingAddressAptFloor().click();
+            estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
+
+            estoreAddressScreen.getShippingAddressPhone().click();
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
+            estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Shipping address fields are not displayed");
+//        }
         }
     }
 

@@ -1,5 +1,7 @@
 package tests.concierge.stepdefinitions;
 
+import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.By;
 import tests.concierge.pageObject.ConciergeItemsScreen;
 import tests.concierge.pageObject.GiftCardEnquiryScreen;
 import tests.concierge.pageObject.PdpScreen;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
@@ -38,11 +41,16 @@ public class GiftCardEnquiryStepDefs {
         giftCardEnquiryScreen.getCardPinField().setValue("9559");
         giftCardEnquiryScreen.getSubmitButton().click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
+
     }
 
     @Then("I verify transaction details")
     public void iVerifyTransactionDetails() {
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!($(By.xpath("//*[text()='TRANSACTION DETAIL']")).isDisplayed())){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         List<String> items = new ArrayList<>();
         List<String> expectedItems = new ArrayList(Arrays.asList( "CARD NUMBER", "BALANCE", "DATE", "GALLERY", "CHARGE", "STATUS"));
         for (int i = 0; i < giftCardEnquiryScreen.getListOfTransactionDetailsHeading().size(); i++) {

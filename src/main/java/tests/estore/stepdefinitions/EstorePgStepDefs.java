@@ -147,6 +147,7 @@ public class EstorePgStepDefs {
 
     @Then("I verify that redirected to the exact product on PG")
     public void iVerifyThatRedirectedToTheExactProductOnPG() {
+        estorePGScreen.getSofa().scrollIntoView(true);
         estorePGScreen.getSofa().should(visible, Duration.ofSeconds(20));
     }
 
@@ -164,4 +165,5 @@ public class EstorePgStepDefs {
         String url = Hooks.eStoreBaseURL.replaceAll("https://", "");
         open("https://" + brand + "." + url);
     }
+
 }

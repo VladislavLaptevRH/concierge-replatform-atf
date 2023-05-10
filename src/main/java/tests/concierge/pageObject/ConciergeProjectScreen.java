@@ -169,15 +169,15 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement itemIdSpan = $(By.xpath("//*[text()='Item#']"));
 
-    private final SelenideElement REMOVEbutton = $(By.xpath("//*[text()='REMOVE']"));
+    private final SelenideElement REMOVEbutton = $(By.xpath("(//*[text()='REMOVE']/preceding-sibling::button)[1]"));
 
     private final SelenideElement clientPhone = $(By.cssSelector("input[name='phoneNumber']"));
 
     private final SelenideElement clientPostalCode = $(By.cssSelector("input[name='postalCode']"));
 
-    private final SelenideElement regularPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'][1]/p)[2]"));
+    private final SelenideElement regularPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'][1]/p)[1]"));
 
-    private final SelenideElement overridePriceregularPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'][1]/p)[1]"));
+    private final SelenideElement overridePriceregularPrice = $(By.xpath("(//*[text() = 'REGULAR']/../..//p)[1]"));
 
     private final SelenideElement amount50 = $(By.xpath("//*[text()='$50.00']"));
 
@@ -185,7 +185,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement amount4923 = $(By.xpath("//*[text()='$2,223.90']"));
 
-    private final SelenideElement adjustedPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'][1]/p)[3]"));
+    private final SelenideElement adjustedPrice = $(By.xpath("(//*[text() = 'ADJUSTED']/../..//p)[1]"));
 
     private final SelenideElement ufdPrice = $(By.xpath("//div[@id='sticky-project-footer-content']//span[normalize-space()='$549.00']"));
 
