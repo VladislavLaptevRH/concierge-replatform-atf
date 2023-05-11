@@ -414,10 +414,10 @@ Feature: Concierge Project
     When I click on add to project button
     When I click on add new space button
     When I introduces space name
-#    When I click on save button uppercase
-#    When I click on save button
-#    When I click on go to project button
-#    Then I verify that item was added to the selected space
+    When I click on save button uppercase
+    When I click on save button
+    When I click on go to project button
+    Then I verify that item was added to the selected space
 
   Scenario: Verify the address page, pre filled address details and Email address once the project added to cart
 

@@ -67,7 +67,6 @@ public class ConciergeE2EStepDefs {
     public void iClickOnGoToProjectButton() {
         generalStepDefs.isElementVisible("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4'][1]//button[contains(@class,'MuiButtonBase-root MuiButton-root MuiButton-contained')]");
         conciergeItemsScreen.getContinueShoppingButton().should(visible, Duration.ofSeconds(12));
-
         conciergeItemsScreen.getGoToProjectButton().click();
     }
 
