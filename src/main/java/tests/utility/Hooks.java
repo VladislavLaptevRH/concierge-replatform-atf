@@ -145,10 +145,10 @@ public class Hooks {
      */
     @Before("@estoreRegression")
     public void initWebDrivereStore() {
-            ConfigFileReader();
-            configureEstoreURL();
-            setupChromeArguments();
-            setUPWebDriver(eStoreURL);
+        ConfigFileReader();
+        configureEstoreURL();
+        setupChromeArguments();
+        setUPWebDriver(eStoreURL);
     }
 
     /**
