@@ -257,8 +257,8 @@ public class ConciergeCartStepDefs {
     @When("I click on remove button from price override")
     public void iClickOnRemoveButtonFromPriceOverride() {
         while(conciergeProjectScreen.getREMOVEbutton().isDisplayed()) {
-            conciergeProjectScreen.getREMOVEbutton().scrollTo();
-            conciergeProjectScreen.getREMOVEbutton().scrollIntoView(true);
+            generalStepDefs.waitForJSandJQueryToLoad();
+            executeJavaScript("window.scrollTo(0, 120)");
             conciergeProjectScreen.getREMOVEbutton().click();
             with().pollInterval(3, SECONDS).await().until(() -> true);
         }

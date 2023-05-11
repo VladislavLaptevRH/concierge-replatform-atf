@@ -593,7 +593,7 @@ public class ConciergeE2EStepDefs {
         if(conciergeItemsScreen.getSelectSize().isDisplayed()){
             try {
                 Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
-                sizeList.selectByVisibleText("Queen");
+                sizeList.selectByIndex(1);
             } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e){
                 System.out.println("Element not found");
             }
@@ -602,7 +602,7 @@ public class ConciergeE2EStepDefs {
         if (conciergeItemsScreen.getSelectFinish().isDisplayed()) {
             try {
                 Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
-                finishList.selectByVisibleText("Black Oak");
+                finishList.selectByIndex(1);
             } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e) {
                 System.out.println("Element not found");
             }
