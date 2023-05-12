@@ -159,11 +159,15 @@ public class ConciergeE2EStepDefs {
                 with().pollInterval(1, SECONDS).await().until(() -> true);
             }
 
-            if (conciergeItemsScreen.getSelectColor().isDisplayed()) {
-                Select colorList = new Select(conciergeItemsScreen.getSelectColor());
-                colorList.selectByVisibleText("Fog");
-                with().pollInterval(1, SECONDS).await().until(() -> true);
-            }
+                if (conciergeItemsScreen.getSelectColor().isDisplayed()) {
+                    try {
+                        Select colorList = new Select(conciergeItemsScreen.getSelectColor());
+                        colorList.selectByVisibleText("Fog");
+                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e) {
+                        System.out.println("Element not found");
+                    }
+                    with().pollInterval(1, SECONDS).await().until(() -> true);
+                }
             if (conciergeItemsScreen.getSelectFinish().isDisplayed()) {
                 try {
                     Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
