@@ -57,7 +57,7 @@ Feature: Order history
     Then I verify that the pagination for the order history is displayed
 
   Scenario: Verify the Billing summary link for order - Order to be in shipped/delivered state
-    Given I log into eStore as "userWithSavedMasterCardVisa" user
+    Given I log into eStore as "member" user
     When I click on estore my account icon
     When I click on estore order history
     Then I verify the billing summary link for order history
@@ -86,5 +86,7 @@ Feature: Order history
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
+    When I execute payment with credit card on estore
+    When I click on a place estore order button
     When I open estore order history
     Then I verify that status is order in progress while order is still in progress

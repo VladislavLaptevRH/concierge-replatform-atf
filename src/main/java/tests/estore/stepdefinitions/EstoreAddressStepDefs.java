@@ -148,7 +148,8 @@ public class EstoreAddressStepDefs {
         estoreCheckoutAddressScreen.getContinuePaymentButton().shouldHave(text(estoreCheckoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
         executeJavaScript("arguments[0].scrollIntoView(true);", estoreCheckoutAddressScreen.getContinuePaymentButton());
         estoreCheckoutAddressScreen.getContinuePaymentButton().shouldHave(text(estoreCheckoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
-        estoreCheckoutAddressScreen.getContinuePaymentButton().click();
+        estoreCheckoutAddressScreen.getContinuePaymentButton().hover();
+        estoreCheckoutAddressScreen.getContinuePaymentButton().should(interactable, Duration.ofSeconds(20)).click();
     }
 
 
@@ -179,6 +180,7 @@ public class EstoreAddressStepDefs {
         try {
             if ($(By.xpath("//*[text() = 'Shipping Address']/..//span[1]/*[text() = 'Edit']")).isDisplayed()) {
                 System.out.println("The shipping address was already filled");
+                estoreAddressScreen.getEditShippinggAddress().click();
             } else {
                 with().pollInterval(2, SECONDS).await().until(() -> true);
                 if (Hooks.eStoreURL.contains("stg3")) {
@@ -422,7 +424,7 @@ public class EstoreAddressStepDefs {
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
 
-        $(By.xpath("//*[text()='Continue to payment']")).should(interactable,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Continue to payment']")).should(interactable, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Continue to payment']")).scrollIntoView(true);
         with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1)).click();

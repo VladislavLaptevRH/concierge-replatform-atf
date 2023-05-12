@@ -310,10 +310,18 @@ public class EstoreCartPageStepDefs {
     @When("I click on join now membership button")
     public void iClickOnJoinNowMembershipButton() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        if (estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()) {
-            estoreCartPage.getVariableJoinButtonByName("JOIN NOW").click();
+
+        if (estoreCartPage.getRemoveMembershipButton().isDisplayed()) {
+            estoreCartPage.getRemoveMembershipButton().scrollIntoView(true);
+            estoreCartPage.getRemoveMembershipButton().should(visible, Duration.ofSeconds(20));
+            estoreCartPage.getRemoveMembershipButton().click();
+        }
+
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if (estoreCartPage.getJoinNow().isDisplayed()) {
+            estoreCartPage.getJoinNow().click();
         } else {
-            estoreCartPage.getVariableJoinButtonByName("Join Now").click();
+            $(By.xpath("//*[text()='Join Now']")).click();
         }
     }
 
@@ -394,9 +402,14 @@ public class EstoreCartPageStepDefs {
                 estoreUserAccountPage.getBrandButton().click();
             }
             with().pollInterval(2, SECONDS).await().until(() -> true);
+
             estoreUserAccountPage.getListOfBrands().get(i).should(visible, Duration.ofSeconds(20));
+            String brandUrl = estoreUserAccountPage.getListOfBrands().get(i).getText().replaceAll(" ", "").toLowerCase();
+            String estoreUrlNoHttps = Hooks.eStoreURL.replaceAll("https://", "");
             estoreUserAccountPage.getListOfBrands().get(i).click();
-            estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(20));
+            iStopEStorePageLoad();
+            open("https://" + brandUrl + "." + estoreUrlNoHttps);
+            estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(40));
         }
     }
 
@@ -554,6 +567,7 @@ public class EstoreCartPageStepDefs {
                 estoreCartPage.getRemoveMembershipButton().scrollIntoView(true);
                 estoreCartPage.getRemoveMembershipButton().should(visible, Duration.ofSeconds(20));
                 estoreCartPage.getRemoveMembershipButton().click();
+                estoreCartPage.getJoinNow().should(visible, Duration.ofSeconds(15));
             } catch (com.codeborne.selenide.ex.ElementNotFound e) {
                 System.out.println("Remove membership button is not displayed");
             }

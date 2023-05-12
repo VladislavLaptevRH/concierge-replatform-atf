@@ -10,8 +10,9 @@ import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.switchTo;
+import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static tests.utility.Hooks.getWindowsHandles;
 
 public class EstoreFooterLinksStepDefs {
@@ -20,6 +21,10 @@ public class EstoreFooterLinksStepDefs {
 
     @Then("I verify that I'm able to access {string}")
     public void iVerifyThatIMAbleToAccess(String link) {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        estoreFooterScreen.getLocateAGallery().scrollIntoView(true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        estoreFooterScreen.getLocateAGallery().scrollIntoView(true);
         if (link.equals("LOCATE A GALLERY")) {
             estoreFooterScreen.getLocateAGallery().should(visible, Duration.ofSeconds(20));
             estoreFooterScreen.getLocateAGallery().click();
