@@ -138,8 +138,8 @@ public class PaymentStepDefs {
         Select selectPaymentMethod = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPaymentMethod.selectByVisibleText(card);
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        paymentScreen.getRhCardNumberField().setValue("6006493887999902500");
-        paymentScreen.getRhCardPin().setValue("8138");
+        paymentScreen.getRhCardNumberField().setValue("6006493887999902229");
+        paymentScreen.getRhCardPin().setValue("1980");
     }
 
     @Then("I verify the complete billing address")

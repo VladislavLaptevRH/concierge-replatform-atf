@@ -212,7 +212,7 @@ public class EstoreLoginStepDefs {
         estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
         estoreLoginPage.getSignInButton().click();
         if (Hooks.profile.equals("stg2")) {
-            USER_ID_STG2 = "c394260f-0ced-4e20-b4ee-3bce53851f21";
+            USER_ID_STG2 = "a70584e9-5de4-4bfb-8892-8d292bfa374c";
         } else {
             USER_ID_STG4 = "12fe9c72-c443-43b8-8185-2f627dbda8da";
         }
@@ -222,7 +222,6 @@ public class EstoreLoginStepDefs {
     @Given("I log into eStore as trade")
     public void iLogIntoEStoreAsTrade() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
-
         try {
             open(Hooks.eStoreBaseURL + "/trade-sales/trade-sign-in.jsp");
             estoreLoginPage.getContractTradeEmailField().should(visible, Duration.ofSeconds(60));
@@ -231,6 +230,9 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
             USER_ID_STG2 = "21e477e0-c989-48db-82ff-4422172805e2";
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            executeJavaScript("window.stop();");
+
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             $(By.xpath("//a[@data-analytics-nav='account-icon']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//a[@data-analytics-nav='account-icon']")).click();
@@ -238,6 +240,8 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getContractTradePasswordField().setValue("20211221164474");
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
+        } catch (org.openqa.selenium.WebDriverException e) {
+            iLogIntoEStoreAsTrade();
         }
     }
 
