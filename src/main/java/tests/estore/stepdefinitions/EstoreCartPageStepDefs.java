@@ -478,9 +478,10 @@ public class EstoreCartPageStepDefs {
         $(By.xpath("//div[@id='component-order-summary']//p//span")).scrollIntoView(true);
         $(By.xpath("//div[@id='component-order-summary']//p//span")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//div[@id='component-order-summary']//p//span")).click();
-        $(By.xpath("//input[@id='postal-code-international']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//div[@id='country-zipcode-selection']")).should(visible, Duration.ofSeconds(20)).click();
+        $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20)).click();
         $(By.xpath("//input[@id='postal-code-international']")).clear();
-        $(By.xpath("//input[@id='postal-code-international']")).setValue("11111");
+        $(By.xpath("//input[@id='postal-code-international']")).setValue("M4J 3S3");
     }
 
     @Then("I verify that the price for trade get increased in multiple of QTY")
@@ -522,7 +523,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that gift card balance info is displayed for estore")
     public void iVerifyThatGiftCardBalanceInfoIsDisplayed() {
-        estoreCartPage.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 2500 has balance of "), Duration.ofSeconds(25));
+        estoreCartPage.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 2229 has balance of "), Duration.ofSeconds(25));
     }
 
     @Then("I verify that estore order estimate is not displayed")
@@ -615,8 +616,9 @@ public class EstoreCartPageStepDefs {
             $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']")).click();
         }
         if (!(Hooks.cookie.contains("userservice")) && (Hooks.profile.equals("stg2"))) {
-            estoreCartPage.getEstoreCartButton().should(visible, Duration.ofSeconds(40));
-            estoreCartPage.getEstoreCartButton().click();
+            open(Hooks.eStoreBaseURL + "/us/en/checkout/shopping_cart.jsp");
+//            estoreCartPage.getEstoreCartButton().should(visible, Duration.ofSeconds(40));
+//            estoreCartPage.getEstoreCartButton().click();
         }
     }
 
@@ -720,5 +722,20 @@ public class EstoreCartPageStepDefs {
         } else {
             System.out.println("Everything is ok");
         }
+    }
+
+    @When("I choose CAN country from footer")
+    public void iChooseCANCountryFromFooter() {
+        $(By.xpath("//div[@id='country-selection']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//div[@id='country-selection']")).scrollIntoView(true);
+        $(By.xpath("//div[@id='country-selection']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//div[@id='country-selection']")).click();
+        $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//li[@data-value='CA']")).click();
+    }
+
+    @When("I stop eStore page load")
+    public void iStopEStorePageLoad() {
+        executeJavaScript("window.stop();");
     }
 }

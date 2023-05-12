@@ -107,11 +107,12 @@ public class EstoreAbstractStepDefs {
     public void iClickOnCheckoutButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(!$(By.xpath("//*[text()='Checkout']")).isDisplayed()){
+        if (!$(By.xpath("//*[text()='Checkout']")).isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        $(By.xpath("//*[text()='Checkout']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Checkout']")).should(interactable, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Checkout']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Checkout']")).click();
     }
 
