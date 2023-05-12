@@ -53,4 +53,3 @@ Feature:Estore Order review
     When I remove payment method which was used earlier
     When I execute payment with credit card on estore
     Then I verify that I'm able to edit shipping and billing address
-

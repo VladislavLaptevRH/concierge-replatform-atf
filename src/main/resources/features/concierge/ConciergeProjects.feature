@@ -281,7 +281,7 @@ Feature: Concierge Project
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
     Given I log into Concierge as "leader"
     When I click on projects button
-    When I search project "overridinglineitems" by provided "projectName"
+    When I search project "verifyforecastbypricingtype" by provided "projectName"
     When I click on the first project search result
     Then I click on remove button from price override
     When I remove all items from cart
@@ -294,6 +294,7 @@ Feature: Concierge Project
     When I click on save button
     When I click on go to project button
     When I click on edit options button
+    When I choose quantity for item from project
     When I choose pricing type "<pricingType>"
     Then I verify forecast for "<pricingType>"
     Then I click on remove button from price override
@@ -310,7 +311,6 @@ Feature: Concierge Project
     Then user verifies that project page is displayed
 
   Scenario: Verify Tax exempt in projects for Trade projects
-
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "TEST_TRADE_3MAR_1PM" by provided "projectName"
@@ -319,15 +319,25 @@ Feature: Concierge Project
     Then I verify that tax is not displayed
 
   Scenario Outline: Verify Member/non Member /Trade/ Non Trade toggle pricing for unclassified business client project
-
     #Need data for stg4
     Given I log into Concierge as "associate"
-    When I remove all items from cart
     When I click on projects button
     When I search project "pricingunclassifiedbusiness" by provided "projectName"
     When I click on the first project search result
+    Then I click on remove button from price override
+    When I remove all items from cart
+    When I click on rh concierge logo
+    And I remove client from header
+    When I go to item "12320938 CHR" from search field
+    And I select count of product
+    When I click on add to project button
+    And I choose project by project name "pricingunclassifiedbusiness"
+    When I click on save button
+    When I click on go to project button
+    When I choose quantity for item from project
     When I choose "<pricing>" for unclassified business client project
     Then I verify "<pricing>" for unclassified business client project
+    Then I click on remove button from price override
     Examples:
       | pricing    |
       | NON_MEMBER |
@@ -404,10 +414,10 @@ Feature: Concierge Project
     When I click on add to project button
     When I click on add new space button
     When I introduces space name
-#    When I click on save button uppercase
-#    When I click on save button
-#    When I click on go to project button
-#    Then I verify that item was added to the selected space
+    When I click on save button uppercase
+    When I click on save button
+    When I click on go to project button
+    Then I verify that item was added to the selected space
 
   Scenario: Verify the address page, pre filled address details and Email address once the project added to cart
 

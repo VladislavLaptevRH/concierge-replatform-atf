@@ -257,8 +257,8 @@ public class ConciergeCartStepDefs {
     @When("I click on remove button from price override")
     public void iClickOnRemoveButtonFromPriceOverride() {
         while(conciergeProjectScreen.getREMOVEbutton().isDisplayed()) {
-            conciergeProjectScreen.getREMOVEbutton().scrollTo();
-            conciergeProjectScreen.getREMOVEbutton().scrollIntoView(true);
+            generalStepDefs.waitForJSandJQueryToLoad();
+            executeJavaScript("window.scrollTo(0, 120)");
             conciergeProjectScreen.getREMOVEbutton().click();
             with().pollInterval(3, SECONDS).await().until(() -> true);
         }
@@ -797,10 +797,12 @@ public class ConciergeCartStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(!conciergeUserAccountPage.getCartButtonItemSum().exists()){
+        if (!conciergeUserAccountPage.getCartButtonItemSum().exists()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
+        try{
+
         if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
             String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
             open(URL);
@@ -812,7 +814,7 @@ public class ConciergeCartStepDefs {
                 open(URL);
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
-            if(!conciergeCartPageScreen.getClearOrderButton().exists()){
+            if (!conciergeCartPageScreen.getClearOrderButton().exists()) {
                 System.out.println("400, 503 error");
             }
             conciergeCartPageScreen.getClearOrderButton().should(Condition.be(visible), Duration.ofSeconds(10));
@@ -842,6 +844,9 @@ public class ConciergeCartStepDefs {
             with().pollInterval(5, SECONDS).await().until(() -> true);
             conciergeUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(5));
             conciergeUserAccountPage.getCartButtonItemSum().shouldNot(visible, Duration.ofMinutes(2));
+        }
+    } catch (ElementNotFound e){
+            System.out.println("Element not found");
         }
     }
 

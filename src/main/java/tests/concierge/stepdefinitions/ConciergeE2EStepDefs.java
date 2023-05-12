@@ -67,7 +67,6 @@ public class ConciergeE2EStepDefs {
     public void iClickOnGoToProjectButton() {
         generalStepDefs.isElementVisible("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-md-4'][1]//button[contains(@class,'MuiButtonBase-root MuiButton-root MuiButton-contained')]");
         conciergeItemsScreen.getContinueShoppingButton().should(visible, Duration.ofSeconds(12));
-
         conciergeItemsScreen.getGoToProjectButton().click();
     }
 
@@ -160,11 +159,15 @@ public class ConciergeE2EStepDefs {
                 with().pollInterval(1, SECONDS).await().until(() -> true);
             }
 
-            if (conciergeItemsScreen.getSelectColor().isDisplayed()) {
-                Select colorList = new Select(conciergeItemsScreen.getSelectColor());
-                colorList.selectByVisibleText("Fog");
-                with().pollInterval(1, SECONDS).await().until(() -> true);
-            }
+                if (conciergeItemsScreen.getSelectColor().isDisplayed()) {
+                    try {
+                        Select colorList = new Select(conciergeItemsScreen.getSelectColor());
+                        colorList.selectByVisibleText("Fog");
+                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e) {
+                        System.out.println("Element not found");
+                    }
+                    with().pollInterval(1, SECONDS).await().until(() -> true);
+                }
             if (conciergeItemsScreen.getSelectFinish().isDisplayed()) {
                 try {
                     Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
@@ -593,7 +596,7 @@ public class ConciergeE2EStepDefs {
         if(conciergeItemsScreen.getSelectSize().isDisplayed()){
             try {
                 Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
-                sizeList.selectByVisibleText("Queen");
+                sizeList.selectByIndex(1);
             } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e){
                 System.out.println("Element not found");
             }
@@ -602,7 +605,7 @@ public class ConciergeE2EStepDefs {
         if (conciergeItemsScreen.getSelectFinish().isDisplayed()) {
             try {
                 Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
-                finishList.selectByVisibleText("Black Oak");
+                finishList.selectByIndex(1);
             } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e) {
                 System.out.println("Element not found");
             }

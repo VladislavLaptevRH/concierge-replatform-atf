@@ -69,6 +69,7 @@ public class EstoreAddressStepDefs {
 
         try {
             with().pollInterval(4, SECONDS).await().until(() -> true);
+
             $(By.xpath("//*[text()='Brew Creek Road, Whistler, BC, Canada']")).should(interactable, Duration.ofSeconds(5));
             $(By.xpath("//*[text()='Brew Creek Road, Whistler, BC, Canada']")).should(visible, Duration.ofSeconds(5));
             $(By.xpath("//*[text()='Brew Creek Road, Whistler, BC, Canada']")).click();
