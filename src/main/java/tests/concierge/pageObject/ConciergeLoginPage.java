@@ -23,6 +23,7 @@ public class ConciergeLoginPage {
     private final SelenideElement locationDropDownList = $(By.xpath("//*[contains(text(), 'Location')]/..//*[contains(@class , 'MuiInputBase-root')]"));
 
     private final SelenideElement currentLocation = $(By.xpath("//label[text()='Current Location']"));
+    private final SelenideElement locationListButton = $(By.xpath("//button[@aria-label = 'Open']"));
     private final SelenideElement inputGallery = $(By.xpath("//input[@type='text']"));
 
     private final SelenideElement inputGalleryList = $(By.xpath("//select[@id='location']"));
