@@ -116,6 +116,7 @@ Feature: Estore Payment
     Then I verify that shipping address is displayed
 
   Scenario: eStore Update address (Impacting change) after making payment
+
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore

@@ -88,5 +88,3 @@ Feature: Order history
     When I click on continue with original address estore button
     When I open estore order history
     Then I verify that status is order in progress while order is still in progress
-
-

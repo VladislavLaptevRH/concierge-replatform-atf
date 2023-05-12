@@ -527,8 +527,18 @@ public class ProjectStepDefs {
             $(By.xpath("//div[@aria-haspopup='listbox']")).click();
         }
         if(Hooks.cookie.equals("prodsupport")){
-            $(By.xpath("(//div[@aria-haspopup='listbox'])[3]")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("(//div[@aria-haspopup='listbox'])[3]")).click();
+            try {
+                $(By.xpath("(//div[@aria-haspopup='listbox'])[3]")).should(visible, Duration.ofSeconds(15));
+                $(By.xpath("(//div[@aria-haspopup='listbox'])[3]")).click();
+            } catch (ElementNotFound e){
+                System.out.println("Element no found");
+            }
+            try {
+                $(By.xpath("(//div[@aria-haspopup='listbox'])[1]")).should(visible, Duration.ofSeconds(15));
+                $(By.xpath("(//div[@aria-haspopup='listbox'])[1]")).click();
+            } catch (ElementNotFound e){
+                System.out.println("Element no found");
+            }
         }
         if(Hooks.cookie.equals("contentfix")){
             $(By.xpath("(//div[@aria-haspopup='listbox'])[1]")).should(visible, Duration.ofSeconds(15));
@@ -559,12 +569,12 @@ public class ProjectStepDefs {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         while ($(By.xpath("//label[@id = 'project-name-label' and contains(@class, 'MuiFormLabel-filled')]")).isDisplayed()){
             conciergeProjectScreen.getProjectNameMoveToProject().doubleClick();
+            with().pollInterval(1, SECONDS).await().until(() -> true);
             conciergeProjectScreen.getProjectNameMoveToProject().sendKeys(Keys.BACK_SPACE);
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
-        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getProjectNameMoveToProject().setValue(projectName);
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='" + projectName + "']")).click();
     }
 
@@ -977,10 +987,16 @@ public class ProjectStepDefs {
 
     @Then("I verify {string} for unclassified business client project")
     public void iVerifyForUnclassifiedBusinessClientProject(String pricingType) {
-        if (pricingType.equals("NON_MEMBER") || (pricingType.equals("NON_TRADE"))) {
+        if (pricingType.equals("NON_MEMBER")) {
             conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,090.00"), Duration.ofSeconds(40));
             String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
             $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[7]")).shouldHave(text("$1,090.00"), Duration.ofSeconds(120));
+            assertEquals(forecastActual, "1,090", "Pricing for non member is displayed correctly");
+        }
+        if (pricingType.equals("NON_TRADE")) {
+            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,090.00"), Duration.ofSeconds(40));
+            String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
+            $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[5]")).shouldHave(text("$1,090.00"), Duration.ofSeconds(120));
             assertEquals(forecastActual, "1,090", "Pricing for non member is displayed correctly");
         }
         if (pricingType.equals("MEMBER") || (pricingType.equals("TRADE"))) {
