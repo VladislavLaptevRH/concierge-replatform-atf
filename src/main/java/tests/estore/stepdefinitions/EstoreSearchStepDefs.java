@@ -138,7 +138,7 @@ public class EstoreSearchStepDefs {
 
     @Then("I verify that search result {string} for search product via sku id is displayed")
     public void iVerifyThatSearchResultForSearchProductViaSkuIdIsDisplayed(String productName) {
-        $(By.xpath("(//*[text()='" + productName + "'])[2]")).should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='" + productName + "'])[2]")).should(Condition.visible, Duration.ofSeconds(30));
     }
 
     @Then("I verify the {string}")

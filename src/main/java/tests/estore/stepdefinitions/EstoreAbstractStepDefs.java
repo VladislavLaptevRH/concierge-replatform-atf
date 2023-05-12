@@ -111,9 +111,9 @@ public class EstoreAbstractStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
+        $(By.xpath("//*[text()='Checkout']")).shouldHave(text("Checkout"), Duration.ofSeconds(30));
         $(By.xpath("//*[text()='Checkout']")).should(interactable, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Checkout']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Checkout']")).click();
+        $(By.xpath("//*[text()='Checkout']")).should(visible, Duration.ofSeconds(20)).click();
     }
 
     @When("I introduces payment details for estore")
@@ -148,7 +148,7 @@ public class EstoreAbstractStepDefs {
     public void iClickOnPlaceOrderButton() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreReviewOrderPage.getPlaceOrderButton().should(enabled, Duration.ofMinutes(1));
-        estoreReviewOrderPage.getPlaceOrderButton().click();
+        estoreReviewOrderPage.getPlaceOrderButton().should(interactable, Duration.ofMinutes(1)).click();
         try {
             confirmationOrderScreen.getAcceptPlaceOrderBtn().should(Condition.be(visible), Duration.ofSeconds(5));
             executeJavaScript("arguments[0].click();", confirmationOrderScreen.getSpoTermsCheckBox());

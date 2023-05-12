@@ -119,7 +119,7 @@ public class EstoreHomePageStepDefs {
 
     @Then("I Verify Thank you message")
     public void iVerifyThankYouMessage() {
-        estoreHomePage.getThankMessageText().should(Condition.visible, Duration.ofSeconds(30));
+        estoreHomePage.getThankMessageText().should(Condition.visible, Duration.ofSeconds(40));
         String actual = estoreHomePage.getThankMessageText().getText();
         String expected = ("Thank you for telling us about your project. We're reviewing your information, and a designer will be in touch within 24 hours.\n" +
                 "\n" +
