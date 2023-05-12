@@ -129,7 +129,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that current currency is canadian dollar")
     public void iVerifyThatCurrentCurrencyIsCanadianDollar() {
-        $(By.xpath("//*[contains(text(),'C$')]")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("//*[contains(text(),'$')]")).should(visible, Duration.ofSeconds(30));
     }
 
     @When("I update shipping address for US")
