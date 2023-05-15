@@ -212,9 +212,11 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify line items prices for {string}")
     public void iVerifyLineItemsPricesFor(String arg0) {
+        generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofMinutes(1));
         with().pollInterval(2, SECONDS).await().until(() -> true);
+        executeJavaScript("window.scrollTo(0, -500)");
         conciergeCartPageScreen.getReasonCodeField().shouldNot(visible, Duration.ofSeconds(15));
         with().pollInterval(2, SECONDS).await().until(() -> true);
         if (arg0.equals("PERCENT_OFF")) {
@@ -230,6 +232,7 @@ public class ConciergeCartStepDefs {
         if (arg0.equals("AMOUNT_OVERRIDE")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);
             String lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
+            executeJavaScript("window.scrollTo(0, -500)");
             assertEquals(lineItemPriceValueAfterOverride, "50");
         }
     }
@@ -453,26 +456,62 @@ public class ConciergeCartStepDefs {
 
     @And("I edit ship to, bill to, sold to addresses")
     public void iEditShipToBillToSoldToAddresses() {
-        if(conciergeAddressScreen.getEditSAddressButton().isDisplayed()){
-            conciergeAddressScreen.getEditSAddressButton().scrollIntoView(true);
-            conciergeAddressScreen.getEditSAddressButton().click();
+        if(Hooks.cookie.contains("userservice&FEATURE_SUPPRESS_UK=false") || Hooks.cookie.contains("userservice")){
+            if(conciergeAddressScreen.getEditSAddressButtonUserService().isDisplayed()){
+                conciergeAddressScreen.getEditSAddressButtonUserService().scrollIntoView(true);
+                conciergeAddressScreen.getEditSAddressButtonUserService().click();
+            }
+        } else {
+            if (conciergeAddressScreen.getEditSAddressButton().isDisplayed()) {
+                conciergeAddressScreen.getEditSAddressButton().scrollIntoView(true);
+                conciergeAddressScreen.getEditSAddressButton().click();
+            }
         }
-        checkoutAddressScreen.getCompanyNameFieldNew().should(visible, Duration.ofMinutes(1));
-        generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameFieldNew());
-        checkoutAddressScreen.getCompanyNameFieldNew().setValue("changedCompanyNameSoldAddress");
+
+            if(Hooks.cookie.contains("userservice&FEATURE_SUPPRESS_UK=false") || Hooks.cookie.contains("userservice")) {
+                checkoutAddressScreen.getCompanyNameFieldNewUserService().should(visible, Duration.ofMinutes(1));
+                generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameFieldNewUserService());
+            } else {
+                checkoutAddressScreen.getCompanyNameFieldNew().should(visible, Duration.ofMinutes(1));
+                generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameFieldNew());
+            }
+
+        if(Hooks.cookie.contains("userservice&FEATURE_SUPPRESS_UK=false") || Hooks.cookie.contains("userservice")) {
+            checkoutAddressScreen.getCompanyNameFieldNewUserService().should(visible, Duration.ofMinutes(1));
+            generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameFieldNewUserService());
+            checkoutAddressScreen.getCompanyNameFieldNewUserService().setValue("changedCompanyNameSoldAddress");
+        } else {
+            checkoutAddressScreen.getCompanyNameFieldNew().should(visible, Duration.ofMinutes(1));
+            generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameFieldNew());
+            checkoutAddressScreen.getCompanyNameFieldNew().setValue("changedCompanyNameSoldAddress");
+        }
         if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()){
             $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
             $(By.xpath("(//*[text()='Edit'])[10]")).click();
         }
-        $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")).should(visible, Duration.ofMinutes(1));
-        generalStepDefs.clearField($(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")));
-        $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")).setValue("changedCompanyNameBillingAddress");
+
+        if(Hooks.cookie.contains("userservice&FEATURE_SUPPRESS_UK=false") || Hooks.cookie.contains("userservice")) {
+            $(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input")).should(visible, Duration.ofMinutes(1));
+            generalStepDefs.clearField($(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input")));
+            $(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input")).setValue("changedCompanyNameBillingAddress");
+        } else {
+            $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")).should(visible, Duration.ofMinutes(1));
+            generalStepDefs.clearField($(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")));
+            $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")).setValue("changedCompanyNameBillingAddress");
+        }
         if($(By.xpath("(//*[text()='Edit'])[1]")).isDisplayed()){
             $(By.xpath("(//*[text()='Edit'])[1]")).click();
         }
-        $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")).should(visible, Duration.ofMinutes(1));
-        generalStepDefs.clearField($(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")));
-        $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")).setValue("changedCompanyNameShippingAddress");
+
+        if(Hooks.cookie.contains("userservice&FEATURE_SUPPRESS_UK=false") || Hooks.cookie.contains("userservice")) {
+            $(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input")).should(visible, Duration.ofMinutes(1));
+            generalStepDefs.clearField($(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input")));
+            $(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input")).setValue("changedCompanyNameShippingAddress");
+        } else {
+            $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")).should(visible, Duration.ofMinutes(1));
+            generalStepDefs.clearField($(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")));
+            $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")).setValue("changedCompanyNameShippingAddress");
+        }
     }
 
     @Then("I verify that membership price displayed as total price")

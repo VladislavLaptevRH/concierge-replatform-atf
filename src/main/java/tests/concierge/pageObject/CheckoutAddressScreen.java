@@ -32,6 +32,8 @@ public class CheckoutAddressScreen {
     private final SelenideElement companyNameField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Company Name (optional)']/..//input"));
     private final SelenideElement companyNameFieldNew = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Company Name']/..//input"));
 
+    private final SelenideElement companyNameFieldNewUserService = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Company Name (optional)']/..//input"));
+
     private final SelenideElement streetAddressField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Street Address']/..//input"));
 
     private final SelenideElement aptFloorSuiteField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Apt., Floor, Suite, etc. (optional)']/..//input"));

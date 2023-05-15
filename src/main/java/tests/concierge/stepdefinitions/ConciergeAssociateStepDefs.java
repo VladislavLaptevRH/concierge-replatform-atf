@@ -103,7 +103,7 @@ public class ConciergeAssociateStepDefs {
         switch (footer) {
             case "RH.COM":
                 switchTo().window(1);
-                assertEquals(Hooks.getCurrentUrl(), "https://rh.com/");
+                assertEquals(Hooks.getCurrentUrl(), "https://rh.com/us/en/");
                 break;
             case "DASHBOARD":
                 conciergeLoginPage.getDashboard().should(visible, Duration.ofSeconds(40));

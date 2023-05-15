@@ -46,6 +46,7 @@ Feature: Concierge Project
 
 #   Works only for prodsupport
   Scenario Outline: Verify that user is able to create project for client - <businessClient>
+
     Given I log into Concierge as "associate"
     When I click on projects button
     When I click on new project button
@@ -68,6 +69,7 @@ Feature: Concierge Project
     Then I verify that project setting screen is displayed
 
   Scenario: Verify project list moodboard
+
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "test" by provided "projectName"
@@ -103,6 +105,7 @@ Feature: Concierge Project
     Then I verify that item was added
 
   Scenario Outline: Verify email estimation - send to client verify the email address received and sent for <email>
+
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "modifyitemsoptions" by provided "projectName"
@@ -161,6 +164,7 @@ Feature: Concierge Project
     Then I verify that spaces list is displayed
 
   Scenario: Verify that user is able to update item option
+
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "modifyitemsoptions" by provided "projectName"
@@ -222,6 +226,7 @@ Feature: Concierge Project
     Then I verified that override price for shipping displayed
 
   Scenario: Verify subtotal/forecast by updating qty for items
+
     Given I log into Concierge as "leader"
     When I remove all items from cart
     And I remove client from header
@@ -279,6 +284,7 @@ Feature: Concierge Project
 
  #10011392 SS
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
+
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "verifyforecastbypricingtype" by provided "projectName"
@@ -319,6 +325,7 @@ Feature: Concierge Project
     Then I verify that tax is not displayed
 
   Scenario Outline: Verify Member/non Member /Trade/ Non Trade toggle pricing for unclassified business client project
+
     #Need data for stg4
     Given I log into Concierge as "associate"
     When I click on projects button
@@ -480,6 +487,7 @@ Feature: Concierge Project
     Then I verify that sku id has been updated after changes
 
   Scenario: Verify the view all functionality for spaces in project
+
     # Need data for stg4
     Given I log into Concierge as "associate"
     When I click on projects button
