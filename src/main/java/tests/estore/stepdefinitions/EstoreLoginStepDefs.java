@@ -197,6 +197,13 @@ public class EstoreLoginStepDefs {
                 estoreLoginPage.getUsernameField().setValue("automationemptystatefield@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Password1234");
             }
+
+            if (accountRole.equals("buymembership")) {
+                estoreLoginPage.getUsernameField().setValue("automationbytmember@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Password1234");
+                USER_ID_STG2 = "484e852a-2923-49e3-8a57-8074c402fb30";
+                userEmail = "automationbytmember@rh.com";
+            }
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
         }

@@ -57,7 +57,7 @@ Feature: Order history
     Then I verify that the pagination for the order history is displayed
 
   Scenario: Verify the Billing summary link for order - Order to be in shipped/delivered state
-    Given I log into eStore as "member" user
+    Given I log into eStore as "userWithSavedMasterCardVisa" user
     When I click on estore my account icon
     When I click on estore order history
     Then I verify the billing summary link for order history
@@ -66,7 +66,7 @@ Feature: Order history
     Given I log into eStore as "member" user
     When I click on estore my account icon
     When I click on estore order history
-    Then I verify the details and tracling link for the order placed
+    Then I verify the details and tracking link for the order placed
 
   Scenario: Verify the CW order number displayed once the order is Available
     Given I log into eStore as "member" user
