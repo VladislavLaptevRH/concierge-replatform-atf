@@ -28,6 +28,7 @@ Feature: Concierge Trade
     Then I verify trade prices for "PDP"
 
   Scenario: Verify Trade Prices for CP
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -40,6 +41,7 @@ Feature: Concierge Trade
     Then I verify trade prices for "PDP"
 
   Scenario: Verify Trade Prices for PG
+
     Given I log into Concierge as "associate"
     When I remove client from header
     And I remove all items from cart

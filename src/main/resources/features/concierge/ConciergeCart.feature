@@ -184,6 +184,7 @@ Feature:Concierge Cart Page
     Then I verify that Total Additional Product Discount message is "displayed" on review page
 
   Scenario: Promo codes - verify that promo code was removed for member client
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -268,6 +269,7 @@ Feature:Concierge Cart Page
 #      | 20211221164476 |
 
   Scenario: Verify membership prices for Membership client
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header

@@ -23,18 +23,21 @@ Feature: Concierge PDP
     Then I verify that on sale modal pop up is displayed
 
   Scenario: Custom rugs
+
     Given I log into Concierge as "associate"
     When I choose "RH Teen" from brand menu
     When I go to custom rugs
     Then I verify that custom rugs are displayed
 
   Scenario: Custom Jewelry
+
     Given I log into Concierge as "associate"
     When I choose "RH Teen" from brand menu
     When I go to custom rugs
     Then I verify that custom rugs are displayed
 
   Scenario: Custom Windows
+
     Given I log into Concierge as "associate"
     When I click on windows from top menu
     Then I verify that custom windows are displayed
@@ -46,12 +49,14 @@ Feature: Concierge PDP
     Then I verify that YAML carousel is displayed
 
   Scenario: Mattress Recycling Fee
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I go to item "95550731 NONE" from search field
     Then I verify mattress recycling fee
 
   Scenario: Replacement Items
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I go to item "61590226 BRN" from search field
@@ -59,6 +64,7 @@ Feature: Concierge PDP
     And I verify that replacements parts modal pop up is displayed
 
   Scenario: Colorization
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I go to item "10115451 BWMR" from search field
@@ -67,6 +73,7 @@ Feature: Concierge PDP
     Then I verify that color has been chosen
 
   Scenario Outline: Availability, Delivery and Returns messaging for <items>
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I go to item "<skuID>" from search field
@@ -86,6 +93,7 @@ Feature: Concierge PDP
     Then I verify that availability, Delivery and returns messaging is displayed for "SO"
 
   Scenario: ATC BO - add to cart
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I go to item "10060297 CLR" from search field

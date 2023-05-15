@@ -40,6 +40,7 @@ Feature: Concierge E2E flow
     Then I verify that confirmation order screen is displayed
 
   Scenario: Verify that if client is a member then redirected to carts screen
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -66,6 +67,7 @@ Feature: Concierge E2E flow
     Then I verify that address screen is displayed
 
   Scenario Outline: Verify that user is able to buy item through search item by SKU id
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header

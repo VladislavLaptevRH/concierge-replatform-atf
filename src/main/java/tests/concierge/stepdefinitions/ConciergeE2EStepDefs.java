@@ -918,12 +918,21 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify that I'm able to edit shipping address")
     public void iVerifyThatIMAbleToEditShippingAddress() {
-        $(By.xpath("//*[text()='NewShippingAddress NewLastName']")).shouldHave(text("NewShippingAddress NewLastName"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='NewCompanyName']")).shouldHave(text("NewCompanyName"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='Newappartment']")).shouldHave(text("Newappartment"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='37 New Road']")).shouldHave(text("37 New Road"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
+        if(Hooks.cookie.contains("prodsupport")){
+            $(By.xpath("//*[text()='NewShippingAddress NewLastName']")).shouldHave(text("NewShippingAddress NewLastName"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='NewCompanyName']")).shouldHave(text("NewCompanyName"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='Newappartment']")).shouldHave(text("Newappartment"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='37 New Road']")).shouldHave(text("37 New Road"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
+        } else {
+            $(By.xpath("//*[text()='NewShippingAddress NewLastName']")).shouldHave(text("NewShippingAddress NewLastName"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='NewAppartment']")).shouldHave(text("NewAppartment"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='Milpitas, AZ 85020']")).shouldHave(text("Milpitas, AZ 85020"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='37 new road']")).shouldHave(text("37 new road"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
+        }
     }
 
     @When("I edit shipping address from order review page")
@@ -966,18 +975,32 @@ public class ConciergeE2EStepDefs {
     @When("I edit billing address from order review page")
     public void iEditBillingAddressFromOrderReviewPage() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        if(!conciergeAddressScreen.getEditBillingAddress().isDisplayed()){
+        if(!conciergeAddressScreen.getEditBillingAddress().isDisplayed() || !conciergeAddressScreen.getEditBillingAddressCapital().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(3, SECONDS).await().until(() -> true);
         }
+
+        if(Hooks.cookie.contains("prodsupport")){
             conciergeAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(15));
             conciergeAddressScreen.getEditBillingAddress().click();
             with().pollInterval(2, SECONDS).await().until(() -> true);
-
-        if($(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]")).isDisplayed()){
-            $(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]")).click();
+        } else {
+            conciergeAddressScreen.getEditBillingAddressCapital().should(visible, Duration.ofSeconds(15));
+            conciergeAddressScreen.getEditBillingAddressCapital().click();
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
+
+         if(Hooks.cookie.contains("prodsupport")){
+          $(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]"));
+        $(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]")).click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+          } else {
+             $(By.xpath("(//*[text() = 'BILLING ADDRESS']/..//*[text()='Edit'])[1]"));
+                 $(By.xpath("(//*[text() = 'BILLING ADDRESS']/..//*[text()='Edit'])[1]")).click();
+                 with().pollInterval(2, SECONDS).await().until(() -> true);
+
+         }
+
         generalStepDefs.clearField(checkoutAddressScreen.getFirstNameBillingAddress());
         checkoutAddressScreen.getFirstNameBillingAddress().setValue("NewFirstName");
         generalStepDefs.clearField(checkoutAddressScreen.getLastNameBillingAddress());
