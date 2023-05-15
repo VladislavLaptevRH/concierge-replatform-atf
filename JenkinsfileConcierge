@@ -8,7 +8,7 @@ println("resultspath=${resultspath}")
 
 Java11Pipeline pipeline = new Java11Pipeline(this, s, env);
 pipeline.standardTemplate { label ->
-    properties([parameters([choice(choices: ['stg2', 'stg3', 'stg4', 'prod'], description: 'Select Environment to build', name: 'ENVIRONMENT'), choice(choices: ['userservice','userservice&FEATURE_SUPPRESS_UK=false','contentfix','contentfix&FEATURE_SSR=true','userservice&FEATURE_SSR=true','prodsupport', 'prodsupport&FEATURE_SSR=true', 'no_endpoint', 'paymentportal', 'paymentportal&FEATURE_SSR=true', 'poc&FEATURE_SSR=true', 'poc'], description: 'Select optional endpoint value', name: 'ENDPOINT')])])
+    properties([parameters([choice(choices: ['stg2', 'stg3', 'stg4', 'prod'], description: 'Select Environment to build', name: 'ENVIRONMENT'), choice(choices: ['contentfix','userservice','userservice&FEATURE_SUPPRESS_UK=false','contentfix&FEATURE_SSR=true','userservice&FEATURE_SSR=true','prodsupport', 'prodsupport&FEATURE_SSR=true', 'no_endpoint', 'paymentportal', 'paymentportal&FEATURE_SSR=true', 'poc&FEATURE_SSR=true', 'poc'], description: 'Select optional endpoint value', name: 'ENDPOINT')])])
     node(label) {
 
         try {
