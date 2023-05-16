@@ -93,7 +93,7 @@ public class estoreOrderHistoryStepDefs {
         estoreOrderHistoryScreen.getBillingSummaryBrandTitle().shouldHave(Condition.text("Billing Summary"), Duration.ofSeconds(20));
     }
 
-    @Then("I verify the details and tracling link for the order placed")
+    @Then("I verify the details and tracking link for the order placed")
     public void iVerifyTheDetailsAndTraclingLinkForTheOrderPlaced() {
         estoreOrderHistoryScreen.getDetailsAndTrackingButton().should(Condition.visible, Duration.ofSeconds(20));
         estoreOrderHistoryScreen.getDetailsAndTrackingButton().click();
