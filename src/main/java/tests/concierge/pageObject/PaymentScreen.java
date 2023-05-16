@@ -18,6 +18,7 @@ public class PaymentScreen {
     private final SelenideElement removePaymentBtn = $(By.xpath("//a[@class='MuiTypography-root MuiLink-root MuiLink-underlineAlways MuiTypography-caption MuiTypography-colorPrimary']"));
 
     private final SelenideElement choosePaymentMethodBtn = $(By.xpath("//div[contains(@class,'Mui')]//select[contains(@class,'MuiInputBase-input')]"));
+    private final SelenideElement choosePaymentMethodBtnDisplayed = $(By.xpath("//select[contains(@class,'MuiInputBase-input')]/option[text() = 'Choose a payment method']"));
 
     private final SelenideElement selectPaymentPlan = $(By.xpath("//div[contains(@class,'MuiInputBase-fullWidth')]/select"));
 

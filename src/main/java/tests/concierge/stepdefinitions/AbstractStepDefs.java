@@ -120,6 +120,7 @@ public class AbstractStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         if(conciergeCartPageScreen.getOrderClassificationError().isDisplayed()) {
             for(int i = 0; i < 3; i++){
+                WebDriverRunner.getWebDriver().navigate().refresh();
                 Select orderClassificationDropDownList = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
                 orderClassificationDropDownList.selectByValue("RH Gallery Order");
                 with().pollInterval(5, SECONDS).await().until(() -> true);
