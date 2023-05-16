@@ -593,6 +593,14 @@ public class ConciergeE2EStepDefs {
         if (!selectOption.getQuantityElement().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
+        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+                    break;
+                }
+            }
+        }
         if(conciergeItemsScreen.getSelectSize().isDisplayed()){
             try {
                 Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
@@ -1155,7 +1163,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I open cart")
     public void iOpenCart() {
-        String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
+        String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
         open(URL);
         with().pollInterval(5, SECONDS).await().until(() -> true);
         boolean isCartEmpty = $(By.xpath("//*[text()='YOUR SHOPPING CART IS EMPTY']")).isDisplayed();

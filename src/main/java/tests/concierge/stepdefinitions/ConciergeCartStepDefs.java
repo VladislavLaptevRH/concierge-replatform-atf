@@ -46,6 +46,7 @@ public class ConciergeCartStepDefs {
     ConciergeProjectScreen conciergeProjectScreen = new ConciergeProjectScreen();
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
 
+    PaymentStepDefs paymentStepDefs = new PaymentStepDefs();
 
     @When("I navigate to the cart page")
     public void iNavigateToTheCartPage() {
@@ -89,7 +90,7 @@ public class ConciergeCartStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
             if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
-                String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
+                String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
                 open(URL);
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             } else {
@@ -220,16 +221,25 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getReasonCodeField().shouldNot(visible, Duration.ofSeconds(15));
         with().pollInterval(2, SECONDS).await().until(() -> true);
         if (arg0.equals("PERCENT_OFF")) {
+            Select countryQuantity = new Select(conciergeCartPageScreen.getQuantityButton());
+            countryQuantity.selectByValue("1");
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             String lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", "");
             float line = Float.parseFloat(lineItemPriceValueBeforeOverride) / 2;
             assertEquals(digitFormatDoubleZero.format(line), lineItemPriceValueAfterOverride);
         }
         if (arg0.equals("AMOUNT_OFF")) {
+                Select countryQuantity = new Select(conciergeCartPageScreen.getQuantityButton());
+                countryQuantity.selectByValue("1");
+                with().pollInterval(5, SECONDS).await().until(() -> true);
             String lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
             int expectedValuePriceValue = Integer.parseInt(lineItemPriceValueBeforeOverride) - 50;
             assertEquals(expectedValuePriceValue, Integer.parseInt(lineItemPriceValueAfterOverride));
         }
         if (arg0.equals("AMOUNT_OVERRIDE")) {
+                Select countryQuantity = new Select(conciergeCartPageScreen.getQuantityButton());
+                countryQuantity.selectByValue("1");
+                with().pollInterval(5, SECONDS).await().until(() -> true);
             with().pollInterval(3, SECONDS).await().until(() -> true);
             String lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
             executeJavaScript("window.scrollTo(0, -500)");
@@ -292,6 +302,18 @@ public class ConciergeCartStepDefs {
 
     @When("I introduces promo code {string} for promo codes field")
     public void iIntroducesPromoCodeForPromoCodesField(String promo) {
+        if(!conciergeCartPageScreen.getPromotionCodeField().isDisplayed()){
+            iRemoveAllItemsFromCartViaUI();
+            conciergeE2EStepDefs.iRemoveClientFromHeader();
+            iAddItemToCartViaAPI();
+            conciergeE2EStepDefs.iOpenCart();
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        Select countryQuantity = new Select(conciergeCartPageScreen.getQuantityButton());
+        countryQuantity.selectByValue("1");
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getPromotionCodeField().should(empty, Duration.ofMinutes(1));
         conciergeCartPageScreen.getPromotionCodeField().scrollIntoView(true);
         conciergeCartPageScreen.getPromotionCodeField().click();
@@ -307,6 +329,24 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that total price from cart and from payment page is the same")
     public void iVerifyThatTotalPriceFromCartAndFromPaymentPageIsTheSame() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!conciergeCartPageScreen.getTotalAditionalProdDiscount().isDisplayed()){
+            iRemoveAllItemsFromCartViaUI();
+            conciergeE2EStepDefs.iRemoveClientFromHeader();
+            iAddItemToCartViaAPI();
+            conciergeE2EStepDefs.iOpenCart();
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            iIntroducesPromoCodeForPromoCodesField("FEMAD");
+            iClickOnApplyPromocodeButton();
+            iChooseOrderClassification();
+            abstractStepDefs.iClickOnCheckoutButton();
+            conciergeE2EStepDefs.iClickOnNoThanksButton();
+            conciergeE2EStepDefs.iChooseClientWhoIsAMember("Non-Member");
+            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+            conciergeE2EStepDefs.continueToPaymentAfterAddressCheckout();
+            paymentStepDefs.iClickOnContinueWithOriginalAddressButton();
+        }
         conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$2,492.37']")).should(visible, Duration.ofSeconds(15));
     }
@@ -314,9 +354,26 @@ public class ConciergeCartStepDefs {
     @When("I choose POS for payment method")
     public void iChoosePOPForPaymentMethod() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if (!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()) {
+        if (!paymentScreen.getChoosePaymentMethodBtnDisplayed().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+        if (!paymentScreen.getChoosePaymentMethodBtnDisplayed().isDisplayed()) {
+            iRemoveAllItemsFromCartViaUI();
+            conciergeE2EStepDefs.iRemoveClientFromHeader();
+            iAddItemToCartViaAPI();
+            conciergeE2EStepDefs.iOpenCart();
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            iIntroducesPromoCodeForPromoCodesField("FEMAD");
+            iClickOnApplyPromocodeButton();
+            iChooseOrderClassification();
+            abstractStepDefs.iClickOnCheckoutButton();
+            conciergeE2EStepDefs.iClickOnNoThanksButton();
+            conciergeE2EStepDefs.iChooseClientWhoIsAMember("Non-Member");
+            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+            conciergeE2EStepDefs.continueToPaymentAfterAddressCheckout();
+            paymentStepDefs.iClickOnContinueWithOriginalAddressButton();
         }
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         paymentScreen.getChoosePaymentMethodBtn().click();
@@ -332,6 +389,24 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that Total Additional Product Discount message is {string} on review page")
     public void iVerifyThatTotalAdditionalProductDiscountMessageIsOnReviewPage(String arg0) {
+        if(!conciergeCartPageScreen.getTotalAditionalProdDiscount().isDisplayed()){
+            iRemoveAllItemsFromCartViaUI();
+            conciergeE2EStepDefs.iRemoveClientFromHeader();
+            iAddItemToCartViaAPI();
+            conciergeE2EStepDefs.iOpenCart();
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            iIntroducesPromoCodeForPromoCodesField("FEMAD");
+            iClickOnApplyPromocodeButton();
+            iChooseOrderClassification();
+            abstractStepDefs.iClickOnCheckoutButton();
+            conciergeE2EStepDefs.iClickOnNoThanksButton();
+            conciergeE2EStepDefs.iChooseClientWhoIsAMember("Non-Member");
+            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+            conciergeE2EStepDefs.continueToPaymentAfterAddressCheckout();
+            paymentStepDefs.iClickOnContinueWithOriginalAddressButton();
+            iChoosePOPForPaymentMethod();
+        }
         if (arg0.equals("displayed")) {
             conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofMinutes(1));
             conciergeCartPageScreen.getTotalAditionalProdDiscount().scrollTo();

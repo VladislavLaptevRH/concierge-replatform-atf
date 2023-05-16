@@ -102,10 +102,11 @@ public class PaymentStepDefs {
 
     @When("I execute payment for {string}")
     public void iExecutePaymentFor(String cardType) {
-        if (!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()) {
+        if (!paymentScreen.getChoosePaymentMethodBtnDisplayed().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(3, SECONDS).await().until(() -> true);
         }
+
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         if (cardType.equals("VI")) {
             generalStepDefs.payWith("VI", "4111 1111 4555 1142", "737", "0330");

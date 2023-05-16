@@ -34,7 +34,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement gramTurkishTitle = $(By.xpath("//h3[normalize-space()='802-Gram Turkish Towel Collection']"));
 
-    private final SelenideElement quantityButton = $(By.xpath("//select[@id='quantity_701bfc45-0262-4a2c-bf01-92887d788333_1']"));
+    private final SelenideElement quantityButton = $(By.xpath("//select[contains(@id,'quantity')]"));
 
     private final SelenideElement orderClassificationSelect = $(By.xpath("//*[@name = 'orderClassification']"));
 
