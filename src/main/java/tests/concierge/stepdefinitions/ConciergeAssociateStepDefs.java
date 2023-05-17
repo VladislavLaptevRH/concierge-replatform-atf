@@ -2,6 +2,7 @@ package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.ex.ElementNotFound;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Keys;
 import tests.concierge.pageObject.ConciergeLoginPage;
@@ -103,7 +104,11 @@ public class ConciergeAssociateStepDefs {
         switch (footer) {
             case "RH.COM":
                 switchTo().window(1);
-                assertEquals(Hooks.getCurrentUrl(), "https://rh.com/us/en/");
+                try {
+                    assertEquals(Hooks.getCurrentUrl(), "https://rh.com/us/en/");
+                } catch (ElementNotFound e){
+                    assertEquals(Hooks.getCurrentUrl(), "https://rh.com/");
+                }
                 break;
             case "DASHBOARD":
                 conciergeLoginPage.getDashboard().should(visible, Duration.ofSeconds(40));

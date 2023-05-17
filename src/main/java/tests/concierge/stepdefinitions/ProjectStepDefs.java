@@ -177,6 +177,7 @@ public class ProjectStepDefs {
             conciergeProjectScreen.getSaveMoveToProjectUppercase().should(Condition.and("", visible, enabled), Duration.ofSeconds(10));
             conciergeProjectScreen.getSaveMoveToProjectUppercase().click();
         }
+
     }
 
     @Then("I verify that projects screen is displayed")

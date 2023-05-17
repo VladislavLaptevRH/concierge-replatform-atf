@@ -358,23 +358,6 @@ public class ConciergeCartStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        if (!paymentScreen.getChoosePaymentMethodBtnDisplayed().isDisplayed()) {
-            iRemoveAllItemsFromCartViaUI();
-            conciergeE2EStepDefs.iRemoveClientFromHeader();
-            iAddItemToCartViaAPI();
-            conciergeE2EStepDefs.iOpenCart();
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-            iIntroducesPromoCodeForPromoCodesField("FEMAD");
-            iClickOnApplyPromocodeButton();
-            iChooseOrderClassification();
-            abstractStepDefs.iClickOnCheckoutButton();
-            conciergeE2EStepDefs.iClickOnNoThanksButton();
-            conciergeE2EStepDefs.iChooseClientWhoIsAMember("Non-Member");
-            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
-            conciergeE2EStepDefs.continueToPaymentAfterAddressCheckout();
-            paymentStepDefs.iClickOnContinueWithOriginalAddressButton();
-        }
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         paymentScreen.getChoosePaymentMethodBtn().click();
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
@@ -531,62 +514,29 @@ public class ConciergeCartStepDefs {
 
     @And("I edit ship to, bill to, sold to addresses")
     public void iEditShipToBillToSoldToAddresses() {
-        if(Hooks.cookie.contains("userservice&FEATURE_SUPPRESS_UK=false") || Hooks.cookie.contains("userservice")){
             if(conciergeAddressScreen.getEditSAddressButtonUserService().isDisplayed()){
                 conciergeAddressScreen.getEditSAddressButtonUserService().scrollIntoView(true);
                 conciergeAddressScreen.getEditSAddressButtonUserService().click();
             }
-        } else {
-            if (conciergeAddressScreen.getEditSAddressButton().isDisplayed()) {
-                conciergeAddressScreen.getEditSAddressButton().scrollIntoView(true);
-                conciergeAddressScreen.getEditSAddressButton().click();
-            }
-        }
-
-            if(Hooks.cookie.contains("userservice&FEATURE_SUPPRESS_UK=false") || Hooks.cookie.contains("userservice")) {
                 checkoutAddressScreen.getCompanyNameFieldNewUserService().should(visible, Duration.ofMinutes(1));
                 generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameFieldNewUserService());
-            } else {
-                checkoutAddressScreen.getCompanyNameFieldNew().should(visible, Duration.ofMinutes(1));
-                generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameFieldNew());
-            }
-
-        if(Hooks.cookie.contains("userservice&FEATURE_SUPPRESS_UK=false") || Hooks.cookie.contains("userservice")) {
             checkoutAddressScreen.getCompanyNameFieldNewUserService().should(visible, Duration.ofMinutes(1));
             generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameFieldNewUserService());
             checkoutAddressScreen.getCompanyNameFieldNewUserService().setValue("changedCompanyNameSoldAddress");
-        } else {
-            checkoutAddressScreen.getCompanyNameFieldNew().should(visible, Duration.ofMinutes(1));
-            generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameFieldNew());
-            checkoutAddressScreen.getCompanyNameFieldNew().setValue("changedCompanyNameSoldAddress");
-        }
         if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()){
             $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
             $(By.xpath("(//*[text()='Edit'])[10]")).click();
         }
-
-        if(Hooks.cookie.contains("userservice&FEATURE_SUPPRESS_UK=false") || Hooks.cookie.contains("userservice")) {
             $(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input")).should(visible, Duration.ofMinutes(1));
             generalStepDefs.clearField($(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input")));
             $(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input")).setValue("changedCompanyNameBillingAddress");
-        } else {
-            $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")).should(visible, Duration.ofMinutes(1));
-            generalStepDefs.clearField($(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")));
-            $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[2]")).setValue("changedCompanyNameBillingAddress");
-        }
+
         if($(By.xpath("(//*[text()='Edit'])[1]")).isDisplayed()){
             $(By.xpath("(//*[text()='Edit'])[1]")).click();
         }
-
-        if(Hooks.cookie.contains("userservice&FEATURE_SUPPRESS_UK=false") || Hooks.cookie.contains("userservice")) {
             $(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input")).should(visible, Duration.ofMinutes(1));
             generalStepDefs.clearField($(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input")));
             $(By.xpath("//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input")).setValue("changedCompanyNameShippingAddress");
-        } else {
-            $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")).should(visible, Duration.ofMinutes(1));
-            generalStepDefs.clearField($(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")));
-            $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]")).setValue("changedCompanyNameShippingAddress");
-        }
     }
 
     @Then("I verify that membership price displayed as total price")

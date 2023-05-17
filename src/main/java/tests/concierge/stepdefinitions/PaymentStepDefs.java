@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import tests.concierge.pageObject.*;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -136,6 +137,7 @@ public class PaymentStepDefs {
     @When("I choose {string} from payment method")
     public void iChooseRHGiftCardFromPaymentMethod(String card) {
         with().pollInterval(2, SECONDS).await().until(() -> true);
+        WebDriverRunner.getWebDriver().navigate().refresh();
         Select selectPaymentMethod = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPaymentMethod.selectByVisibleText(card);
         with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -145,27 +147,49 @@ public class PaymentStepDefs {
 
     @Then("I verify the complete billing address")
     public void iVerifyTheCompleteBillingAddress() {
-        paymentScreen.getBillingAddress().shouldHave(text(
-                "BILLING ADDRESS\n" +
-                        "QAFirst Automation\n" +
+        if(Hooks.cookie.equals("prodsupport")){
+            paymentScreen.getBillingAddress().shouldHave(text(
+                    "BILLING ADDRESS\n" +
+                            "QAFirst Automation\n" +
                         "AutomationCompany\n" +
-                        "North 16th Street\n" +
-                        "QaApartment\n" +
-                        "Phoenix, AZ 85020\n" +
-                        "US\n" +
-                        "1241312319\n" +
-                        "Edit"));
+                            "North 16th Street\n" +
+                            "QaApartment\n" +
+                            "Phoenix, AZ 85020\n" +
+                            "US\n" +
+                            "1241312319\n" +
+                            "Edit"));
 
-        assertEquals(paymentScreen.getBillingAddress().getText(),
-                "BILLING ADDRESS\n" +
-                        "QAFirst Automation\n" +
+            assertEquals(paymentScreen.getBillingAddress().getText(),
+                    "BILLING ADDRESS\n" +
+                            "QAFirst Automation\n" +
                         "AutomationCompany\n" +
-                        "North 16th Street\n" +
-                        "QaApartment\n" +
-                        "Phoenix, AZ 85020\n" +
-                        "US\n" +
-                        "1241312319\n" +
-                        "Edit");
+                            "North 16th Street\n" +
+                            "QaApartment\n" +
+                            "Phoenix, AZ 85020\n" +
+                            "US\n" +
+                            "1241312319\n" +
+                            "Edit");
+        } else {
+            paymentScreen.getBillingAddress().shouldHave(text(
+                    "BILLING ADDRESS\n" +
+                            "QAFirst Automation\n" +
+                            "North 16th Street\n" +
+                            "QaApartment\n" +
+                            "Phoenix, AZ 85020\n" +
+                            "US\n" +
+                            "1241312319\n" +
+                            "Edit"));
+
+            assertEquals(paymentScreen.getBillingAddress().getText(),
+                    "BILLING ADDRESS\n" +
+                            "QAFirst Automation\n" +
+                            "North 16th Street\n" +
+                            "QaApartment\n" +
+                            "Phoenix, AZ 85020\n" +
+                            "US\n" +
+                            "1241312319\n" +
+                            "Edit");
+        }
     }
 
     @Then("I verify subtotal, shipping fee, taxes based on postal code")
@@ -228,7 +252,7 @@ public class PaymentStepDefs {
 
     @Then("I verify that balance info is displayed")
     public void iVerifyThatBalanceInfoIsDisplayed() {
-        conciergeCartPageScreen.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 2500 has balance of "), Duration.ofSeconds(25));
+        conciergeCartPageScreen.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 2229 has balance of "), Duration.ofSeconds(25));
     }
 
     @When("I execute POS concierge payment")

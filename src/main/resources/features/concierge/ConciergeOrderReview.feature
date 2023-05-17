@@ -3,7 +3,6 @@
 Feature: Concierge Order review
 
   Scenario: Edit Shipping Address
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I add item to cart via API
@@ -24,7 +23,6 @@ Feature: Concierge Order review
     Then I verify that I'm able to edit shipping address
 
   Scenario: Edit Billing Address
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I add item to cart via API
@@ -38,9 +36,7 @@ Feature: Concierge Order review
     When I click on continue with original address button
     When I click on no thanks button
     When I choose POS for payment method
-
     When I edit billing address from order review page
-
     When I continue to payment
     When I click on continue with original address button
     When I confirm edited address

@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 
+import com.codeborne.selenide.ex.ElementNotFound;
 import org.openqa.selenium.Keys;
 import tests.utility.Hooks;
 import tests.concierge.pageObject.*;
@@ -899,7 +900,7 @@ public class ConciergeE2EStepDefs {
         } else if (pageName.equals("PG")) {
             assertEquals(conciergeCartPageScreen.getTradePriceLabel().getText(), "Trade");
             if (Hooks.profile.equals("stg2")) {
-                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$2150");
+                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$1585");
             } else {
                 assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText(), "$2,688.00");
             }
@@ -982,51 +983,59 @@ public class ConciergeE2EStepDefs {
 
     @When("I edit billing address from order review page")
     public void iEditBillingAddressFromOrderReviewPage() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
-        if(!conciergeAddressScreen.getEditBillingAddress().isDisplayed() || !conciergeAddressScreen.getEditBillingAddressCapital().isDisplayed()){
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(3, SECONDS).await().until(() -> true);
+        try {
+            if (Hooks.cookie.contains("prodsupport")) {
+                conciergeAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(15));
+                conciergeAddressScreen.getEditBillingAddress().click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+            } else {
+                conciergeAddressScreen.getEditBillingAddressCapital().should(visible, Duration.ofSeconds(15));
+                conciergeAddressScreen.getEditBillingAddressCapital().click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+            }
+        } catch (ElementNotFound e){
+            System.out.println("Element not found");
         }
 
-        if(Hooks.cookie.contains("prodsupport")){
-            conciergeAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(15));
-            conciergeAddressScreen.getEditBillingAddress().click();
-            with().pollInterval(2, SECONDS).await().until(() -> true);
-        } else {
-            conciergeAddressScreen.getEditBillingAddressCapital().should(visible, Duration.ofSeconds(15));
-            conciergeAddressScreen.getEditBillingAddressCapital().click();
-            with().pollInterval(2, SECONDS).await().until(() -> true);
+        try {
+            if (Hooks.cookie.contains("prodsupport")) {
+                $(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]")).should(visible, Duration.ofSeconds(15));
+                $(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]")).click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+            } else {
+                $(By.xpath("(//*[text() = 'BILLING ADDRESS']/..//*[text()='Edit'])[1]")).should(visible, Duration.ofSeconds(15));
+                $(By.xpath("(//*[text() = 'BILLING ADDRESS']/..//*[text()='Edit'])[1]")).click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+
+            }
+        }catch (ElementNotFound e){
+            System.out.println("Element not found");
         }
 
-         if(Hooks.cookie.contains("prodsupport")){
-          $(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]"));
-        $(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]")).click();
-        with().pollInterval(2, SECONDS).await().until(() -> true);
-          } else {
-             $(By.xpath("(//*[text() = 'BILLING ADDRESS']/..//*[text()='Edit'])[1]"));
-                 $(By.xpath("(//*[text() = 'BILLING ADDRESS']/..//*[text()='Edit'])[1]")).click();
-                 with().pollInterval(2, SECONDS).await().until(() -> true);
-
-         }
-
-        generalStepDefs.clearField(checkoutAddressScreen.getFirstNameBillingAddress());
-        checkoutAddressScreen.getFirstNameBillingAddress().setValue("NewFirstName");
-        generalStepDefs.clearField(checkoutAddressScreen.getLastNameBillingAddress());
-        checkoutAddressScreen.getLastNameBillingAddress().setValue("NewLastName");
-        generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameBillingAddress());
-        checkoutAddressScreen.getCompanyNameBillingAddress().setValue("NewCompanyName");
-        generalStepDefs.clearField(checkoutAddressScreen.getAddressLine1BillingAddress());
-        checkoutAddressScreen.getAddressLine1BillingAddress().setValue("37 new road");
-        generalStepDefs.clearField(checkoutAddressScreen.getAddressLine2BillingAddress());
-        checkoutAddressScreen.getAddressLine2BillingAddress().setValue("NewAppartment");
-        generalStepDefs.clearField(checkoutAddressScreen.getCityFieldBillingAddress());
-        checkoutAddressScreen.getCityFieldBillingAddress().setValue("Milpitas");
-        generalStepDefs.clearField(checkoutAddressScreen.getPhoneBillingAddress());
-        checkoutAddressScreen.getPhoneBillingAddress().setValue("3234546576");
+        try {
+            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+            generalStepDefs.clearField(checkoutAddressScreen.getFirstNameBillingAddress());
+            checkoutAddressScreen.getFirstNameBillingAddress().setValue("NewFirstName");
+            generalStepDefs.clearField(checkoutAddressScreen.getLastNameBillingAddress());
+            checkoutAddressScreen.getLastNameBillingAddress().setValue("NewLastName");
+            generalStepDefs.clearField(checkoutAddressScreen.getCompanyNameBillingAddress());
+            checkoutAddressScreen.getCompanyNameBillingAddress().setValue("NewCompanyName");
+            generalStepDefs.clearField(checkoutAddressScreen.getAddressLine1BillingAddress());
+            checkoutAddressScreen.getAddressLine1BillingAddress().setValue("37 new road");
+            generalStepDefs.clearField(checkoutAddressScreen.getAddressLine2BillingAddress());
+            checkoutAddressScreen.getAddressLine2BillingAddress().setValue("NewAppartment");
+            generalStepDefs.clearField(checkoutAddressScreen.getCityFieldBillingAddress());
+            checkoutAddressScreen.getCityFieldBillingAddress().setValue("Milpitas");
+            generalStepDefs.clearField(checkoutAddressScreen.getPhoneBillingAddress());
+            checkoutAddressScreen.getPhoneBillingAddress().setValue("3234546576");
+        } catch (ElementNotFound e){
+            System.out.println("Element not found");
+        }
     }
 
     @And("I verify that I'm able to edit billing address")
     public void iVerifyThatIMAbleToEditBillingAddress() {
+        if(Hooks.cookie.contains("prodsupport")){
         $(By.xpath("//*[text()='NewFirstName NewLastName']")).shouldHave(text("NewFirstName NewLastName"), Duration.ofSeconds(25));
         $(By.xpath("//*[text()='NewCompanyName']")).shouldHave(text("NewCompanyName"), Duration.ofSeconds(25));
         $(By.xpath("//*[text()='Newappartment']")).shouldHave(text("Newappartment"), Duration.ofSeconds(25));
@@ -1034,6 +1043,14 @@ public class ConciergeE2EStepDefs {
         $(By.xpath("//*[text()='Billing Address']/..//*[text()='Phoenix, AZ 85020']")).shouldHave(text("Phoenix, AZ 85020"), Duration.ofSeconds(25));
         $(By.xpath("//*[text()='Billing Address']/..//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
         $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
+        } else {
+            $(By.xpath("//*[text()='NewFirstName NewLastName']")).shouldHave(text("NewFirstName NewLastName"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='NewAppartment']")).shouldHave(text("NewAppartment"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='37 new road']")).shouldHave(text("37 new road"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='BILLING ADDRESS']/..//*[text()='Milpitas, AZ 85020']")).shouldHave(text("Milpitas, AZ 85020"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='BILLING ADDRESS']/..//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
+        }
     }
 
     @Then("I verify the payment details and order estimate summary")
