@@ -25,7 +25,6 @@ Feature: Concierge Payment
       | DI       |
 
   Scenario: GC/ Balance check
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -43,7 +42,6 @@ Feature: Concierge Payment
     Then I verify that balance info is displayed
 
   Scenario: Verify the Complete Billing address
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -107,7 +105,6 @@ Feature: Concierge Payment
     Then I verify that trade savings in payment page
 
   Scenario: Edit Address
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header

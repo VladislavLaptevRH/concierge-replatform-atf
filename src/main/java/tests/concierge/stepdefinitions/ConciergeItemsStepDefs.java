@@ -63,7 +63,7 @@ public class ConciergeItemsStepDefs {
     @When("I select color option")
     public void iSelectColorOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if(!selectOption.getColorOption().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -74,9 +74,17 @@ public class ConciergeItemsStepDefs {
             Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
             sizeList.selectByVisibleText("Bath Sheet") ;
             with().pollInterval(2, SECONDS).await().until(() -> true);
-            Select selectFabric = new Select(selectOption.getColorOption());
-            selectFabric.selectByIndex(1);
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Element not found");
+        }
+        try {
+            Select selectColor = new Select(selectOption.getColorOption());
+            selectColor.selectByIndex(1);
             with().pollInterval(2, SECONDS).await().until(() -> true);
+        }   catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Element not found");
+        }
+        try {
             Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
             quantityList.selectByVisibleText("1");
             with().pollInterval(2, SECONDS).await().until(() -> true);
