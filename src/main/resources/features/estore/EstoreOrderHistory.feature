@@ -57,7 +57,7 @@ Feature: Order history
     Then I verify that the pagination for the order history is displayed
 
   Scenario: Verify the Billing summary link for order - Order to be in shipped/delivered state
-    Given I log into eStore as "userWithSavedMasterCardVisa" user
+    Given I log into eStore as "regular" user
     When I click on estore my account icon
     When I click on estore order history
     Then I verify the billing summary link for order history

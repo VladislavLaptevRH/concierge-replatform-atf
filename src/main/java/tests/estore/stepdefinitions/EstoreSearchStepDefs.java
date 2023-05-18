@@ -101,6 +101,10 @@ public class EstoreSearchStepDefs {
         if (Hooks.cookie.contains("userservice")) {
             estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getSortByButton().click();
+        }
+        if (Hooks.cookie.contains("FEATURE_SSR=true")) {
+            estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
+            estorePDPScreen.getSortByButton().click();
         } else {
             estorePDPScreen.getSortButton().should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getSortButton().click();

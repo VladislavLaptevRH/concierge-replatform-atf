@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -252,12 +253,13 @@ public class EstoreCartPageStepDefs {
 
     @And("I verify that subtotal should be updated according to quantity selected")
     public void iVerifyThatSubtotalShouldBeUpdatedAccordingToQuantitySelected() {
-        $(By.xpath("(//*[text()='" + "$" + lineItemPrice + ".00" + "'])[2]")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("(//*[text()='" + "$" + lineItemPrice + ".00" + "'])[2]")).should(Condition.and("", visible, enabled, interactable), Duration.ofSeconds(50));
     }
 
     @When("I click on continue as guest estore button")
     public void iClickOnContinueAsGuestEstoreButton() {
         estoreCheckoutAddressScreen.getContinueAsGuestButton().should(visible, Duration.ofSeconds(40));
+        estoreCheckoutAddressScreen.getContinueAsGuestButton().should(interactable, Duration.ofSeconds(40));
         estoreCheckoutAddressScreen.getContinueAsGuestButton().click();
     }
 
@@ -281,6 +283,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify SURCHARGE fee on cart page")
     public void iVerifySURCHARGEFeeOnCartPage() {
+        $(By.xpath("//*[text()='ADDITIONAL SHIPPING SURCHARGE']")).should(interactable, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='ADDITIONAL SHIPPING SURCHARGE']")).should(visible, Duration.ofSeconds(40));
     }
 
@@ -356,6 +359,7 @@ public class EstoreCartPageStepDefs {
     @Then("I verify {string} shipping restriction")
     public void iVerifyShippingRestriction(String arg0) {
         if (arg0.equals("NY")) {
+            $(By.xpath("//*[text()='cannot be shipped to the state of']")).should(interactable, Duration.ofSeconds(20));
             $(By.xpath("//*[text()='cannot be shipped to the state of']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//*[contains(text(),'New York')]")).should(visible, Duration.ofSeconds(20));
         }
@@ -383,6 +387,7 @@ public class EstoreCartPageStepDefs {
     public void iVerifyMembershipEstoreBannerFor(String arg0) {
         if (arg0.equals("nonmember user")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);
+            $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(interactable, Duration.ofSeconds(40));
             $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible, Duration.ofSeconds(40));
             $(By.xpath("//*[contains(text(),'Join the RH Members Program for $175, and save')]")).should(visible, Duration.ofSeconds(40));
         }
@@ -409,7 +414,7 @@ public class EstoreCartPageStepDefs {
             estoreUserAccountPage.getListOfBrands().get(i).click();
             iStopEStorePageLoad();
             open("https://" + brandUrl + "." + estoreUrlNoHttps);
-            estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(40));
+            estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(80));
         }
     }
 
