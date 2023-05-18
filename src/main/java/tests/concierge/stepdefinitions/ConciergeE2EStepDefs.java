@@ -199,6 +199,14 @@ public class ConciergeE2EStepDefs {
             }
         }
             conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
+        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+                    break;
+                }
+            }
+        }
             conciergeItemsScreen.getAddToCartButton().click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
 
