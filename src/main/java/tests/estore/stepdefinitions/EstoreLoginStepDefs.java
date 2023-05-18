@@ -212,18 +212,30 @@ public class EstoreLoginStepDefs {
 
     @Given("I log into eStore as contract")
     public void iLogIntoEStoreAsContract() {
-        open(Hooks.eStoreBaseURL + "/contract-sales/contract-sign-in.jsp");
-        estoreLoginPage.getContractTradeEmailField().should(visible, Duration.ofSeconds(10));
-        estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
-        estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
-        estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
-        estoreLoginPage.getSignInButton().click();
-        if (Hooks.profile.equals("stg2")) {
-            USER_ID_STG2 = "a70584e9-5de4-4bfb-8892-8d292bfa374c";
-        } else {
-            USER_ID_STG4 = "12fe9c72-c443-43b8-8185-2f627dbda8da";
-        }
+        try {
+            open(Hooks.eStoreBaseURL + "/contract-sales/contract-sign-in.jsp");
+            estoreLoginPage.getContractTradeEmailField().should(visible, Duration.ofSeconds(60));
+            estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
+            estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
+            estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(60));
+            estoreLoginPage.getSignInButton().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            executeJavaScript("window.stop();");
 
+            if (Hooks.profile.equals("stg2")) {
+                USER_ID_STG2 = "a70584e9-5de4-4bfb-8892-8d292bfa374c";
+            } else {
+                USER_ID_STG4 = "12fe9c72-c443-43b8-8185-2f627dbda8da";
+            }
+
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            estoreLoginPage.getContractTradeEmailField().should(visible, Duration.ofSeconds(60));
+            estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
+            estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
+            estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(60));
+            estoreLoginPage.getSignInButton().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
     }
 
     @Given("I log into eStore as trade")

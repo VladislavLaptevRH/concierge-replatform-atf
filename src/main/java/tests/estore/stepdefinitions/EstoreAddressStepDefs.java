@@ -394,7 +394,7 @@ public class EstoreAddressStepDefs {
                     iClickOnContinueToPayment();
                 }
 
-                estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
+                estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled, interactable), Duration.ofSeconds(50));
                 estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(50));
                 estoreItemPage.getAddToCartButton().click();
                 with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -412,7 +412,6 @@ public class EstoreAddressStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Continue with original button is not displayed");
         }
-        System.out.println();
     }
 
     @When("I click on continue to payment estore button")

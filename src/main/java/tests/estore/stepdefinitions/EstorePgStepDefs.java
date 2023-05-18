@@ -29,6 +29,7 @@ public class EstorePgStepDefs {
     public void iValidateAndGridViewShouldWork(String arg0, String arg1, String arg2) {
         if (arg0.equals("1")) {
             estoreSearchScreen.getThreeColumnsInRowGridButton().should(visible, Duration.ofSeconds(20));
+            estoreSearchScreen.getThreeColumnsInRowGridButton().should(interactable, Duration.ofSeconds(20));
             estoreSearchScreen.getThreeColumnsInRowGridButton().click();
             estoreSearchScreen.getThreeColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
         }

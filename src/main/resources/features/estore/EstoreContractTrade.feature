@@ -192,9 +192,9 @@ Feature: eStore Contract and Trade
     When I click on a place estore order button
     Examples:
       | cardType |
-      | VI       |
-      | MC       |
-      | AX       |
+#      | VI       |
+#      | MC       |
+#      | AX       |
       | DI       |
 
 

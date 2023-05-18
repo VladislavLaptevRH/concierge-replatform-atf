@@ -24,8 +24,6 @@ Feature: Estore Payment
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
-#    When I fill estore shipping address
-#    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
@@ -66,7 +64,7 @@ Feature: Estore Payment
 
       #canada issue
   Scenario: eStore unavailability of RHCC for CAN address
-    Given I log into eStore as "regular" user
+    Given I log into eStore as "noaddresses" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
