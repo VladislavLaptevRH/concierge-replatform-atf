@@ -109,7 +109,7 @@ public class Pdp {
 
     @Then("I verify that custom windows are displayed")
     public void iVerifyThatCustomWindowsAreDisplayed() {
-        $(By.xpath("//*[text()='Custom Drapery']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Custom Drapery Collections']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Custom Shades']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Custom Window Hardware']")).should(visible, Duration.ofSeconds(40));
     }
@@ -169,10 +169,13 @@ public class Pdp {
     @When("I choose color from special order fabrics")
     public void iChooseColorFromSpecialOrderFabrics() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-//        pdpScreen.getFogSpecialOrderColor().scrollIntoView(true);
         pdpScreen.getFogSpecialOrderColor().should(visible, Duration.ofSeconds(40));
+        pdpScreen.getFogSpecialOrderColor().hover();
         pdpScreen.getFogSpecialOrderColor().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getCloseSpecialOrderPopUpButton().hover();
         pdpScreen.getCloseSpecialOrderPopUpButton().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that color has been chosen")

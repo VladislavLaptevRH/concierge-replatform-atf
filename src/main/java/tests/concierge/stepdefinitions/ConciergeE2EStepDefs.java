@@ -388,8 +388,8 @@ public class ConciergeE2EStepDefs {
             $(By.xpath("//li[@data-analytics-url='https://rhteen.rh.com/']")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
             $(By.xpath("//li[@data-analytics-url='https://rhteen.rh.com/']")).click();
         } else if (brand.equals("RH Teen")) {
-            $(By.xpath("//li[@data-analytics-url='https://rhteen." + environment + ".rhnonprod.com/']")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@data-analytics-url='https://rhteen." + environment + ".rhnonprod.com/']")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhteen.rh.com/']/span")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhteen.rh.com/']/span")).click();
         }
 
         if (brand.equals("RH Outdoor") && Hooks.profile.equals("prod")) {
@@ -536,8 +536,9 @@ public class ConciergeE2EStepDefs {
         }
         with().pollInterval(5, SECONDS).await().until(() -> true);
         if (businessClient.equals("Member")) {
-            conciergeUserAccountPage.getClientLookupFirstNameByName().setValue("Automation");
-            conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
+//            conciergeUserAccountPage.getClientLookupFirstNameByName().setValue("Automation");
+//            conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
+            conciergeUserAccountPage.getClientLookupEmail().setValue("testmemberacc0517@gmail.com");
         } else if (businessClient.equals("Non-Member")) {
             generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupFirstNameByName());
             conciergeUserAccountPage.getClientLookupFirstNameByName().setValue("Automation");

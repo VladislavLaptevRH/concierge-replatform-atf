@@ -20,6 +20,8 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement orderClassificationInteriorDesign = $(By.xpath("//option[@value='RH Interior Design']"));
 
+    private final SelenideElement closePopUp = $(By.xpath("//button[@data-testid='dialog-title-close-button']"));
+
     private final SelenideElement orderClassificationError = $(By.xpath("//*[text() = 'Please select an option for Order Classification.']"));
 
     private final SelenideElement arlesRectangularDinigTableId = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']/div/div/div[1]//p[@id='listColumn2-Item#']"));
@@ -39,8 +41,6 @@ public class ConciergeCartPageScreen {
     private final SelenideElement orderClassificationSelect = $(By.xpath("//*[@name = 'orderClassification']"));
 
     private final SelenideElement membersProgramTitle = $(By.xpath("//h2[@class='MuiTypography-root MuiTypography-h2 MuiTypography-noWrap']"));
-
-    private final SelenideElement closePopUp = $(By.xpath("//button[@data-testid='form-dialog-close-button']"));
 
     private final SelenideElement updateButton = $(By.xpath("//*[text()='UPDATE']"));
 

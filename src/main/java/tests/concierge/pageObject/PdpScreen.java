@@ -20,7 +20,7 @@ public class PdpScreen {
 
     private final SelenideElement specialOrdersButton = $(By.xpath("//div[contains(@data-testid,'SPECIAL ORDER FabricS')]"));
 
-    private final SelenideElement fogSpecialOrderColor = $(By.xpath("(//*[text() = 'Fog '])[2]"));
+    private final SelenideElement fogSpecialOrderColor = $(By.xpath("//*[text() = 'Fog ']"));
 
     private final SelenideElement fogSelectedOption = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Color')])[1]//option[@data-option='selected']"));
 
