@@ -275,13 +275,16 @@ public class ConciergeCartStepDefs {
 
     @When("I click on remove button from price override")
     public void iClickOnRemoveButtonFromPriceOverride() {
-        while(conciergeProjectScreen.getREMOVEbutton().isDisplayed()) {
-            generalStepDefs.waitForJSandJQueryToLoad();
-            executeJavaScript("window.scrollTo(0, 120)");
-            conciergeProjectScreen.getREMOVEbutton().click();
+        generalStepDefs.waitForJSandJQueryToLoad();
+        String items = conciergeProjectScreen.getItems().getText().replaceAll("ITEMS: ", "");
+        int IntItems = Integer.parseInt(items);
+        for(int i = IntItems; i > 0; i--){
+            conciergeProjectScreen.getUpButton().doubleClick();
+            conciergeProjectScreen.getREMOVEbuttonList().get(0).hover();
+            conciergeProjectScreen.getREMOVEbuttonList().get(0).click();
             with().pollInterval(3, SECONDS).await().until(() -> true);
         }
-        conciergeProjectScreen.getREMOVEbutton().shouldNot(visible);
+        conciergeProjectScreen.getREMOVEbuttonList().get(0).shouldNot(visible);
     }
 
     @Then("I verify that price override was removed")

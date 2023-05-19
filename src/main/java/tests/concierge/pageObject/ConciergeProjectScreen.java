@@ -4,7 +4,10 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class ConciergeProjectScreen {
@@ -14,6 +17,8 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement removeText = $(By.xpath("//*[text()='Remove']"));
 
+    private final SelenideElement UpButton = $(By.xpath("(//p[contains(text(), 'ITEMS')]/../..//button)[1]"));
+    private final SelenideElement DownButton = $(By.xpath("(//p[contains(text(), 'ITEMS')]/../..//button)[2]"));
     private final SelenideElement taxCheckedCheckbox = $(By.xpath("//*[text() = 'Tax Exempt']/../preceding-sibling::div/span[contains(@class, 'Mui-checked')]"));
 
     private final SelenideElement continueWithSuggestedAddressButton = $(By.xpath("//*[text() = 'CONTINUE WITH SUGGESTED ADDRESS']"));
@@ -168,6 +173,8 @@ public class ConciergeProjectScreen {
     private final SelenideElement test2Space = $(By.xpath("//option[text()='test2']"));
 
     private final SelenideElement itemIdSpan = $(By.xpath("//*[text()='Item#']"));
+
+    private final List<SelenideElement> REMOVEbuttonList = $$(By.xpath("(//*[text()='REMOVE']/preceding-sibling::button)[1]"));
 
     private final SelenideElement REMOVEbutton = $(By.xpath("(//*[text()='REMOVE']/preceding-sibling::button)[1]"));
 

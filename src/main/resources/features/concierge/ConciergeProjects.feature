@@ -216,6 +216,7 @@ Feature: Concierge Project
     Then I click on remove button from price override
 
   Scenario: Verify shipping overrides in projects
+
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "overrideshipping" by provided "projectName"
@@ -262,6 +263,7 @@ Feature: Concierge Project
     When I click on "YES" button
 
   Scenario: Verify subtotal/forecast by updating qty overriding line items (all types/ one or more items - apply all functionality)
+
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I click on projects button
@@ -284,7 +286,6 @@ Feature: Concierge Project
 
  #10011392 SS
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
-
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "verifyforecastbypricingtype" by provided "projectName"
@@ -374,6 +375,7 @@ Feature: Concierge Project
     When I click on the moodboard button
     When I verify selections and deselection of project moodboard items
 
+#   Works only for prodsupport
   Scenario Outline: Create New project - Gallery, Design, Trade project types
 
     Given I log into Concierge as "associate"

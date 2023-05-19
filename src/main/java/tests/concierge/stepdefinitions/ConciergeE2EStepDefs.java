@@ -596,6 +596,14 @@ public class ConciergeE2EStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
         executeJavaScript("window.scrollTo(0, 600)");
+        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+            for (int i = 0; i < 10; i++) {
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+                    break;
+                }
+            }
+        }
         conciergeItemsScreen.getDetailsSpan().scrollTo();
         conciergeItemsScreen.getDetailsSpan().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
         conciergeItemsScreen.getDetailsSpan().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofSeconds(20));
@@ -603,14 +611,7 @@ public class ConciergeE2EStepDefs {
         if (!selectOption.getQuantityElement().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
-        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-            for (int i = 0; i < 3; i++) {
-                WebDriverRunner.getWebDriver().navigate().refresh();
-                if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-                    break;
-                }
-            }
-        }
+
         if(conciergeItemsScreen.getSelectSize().isDisplayed()){
             try {
                 Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
