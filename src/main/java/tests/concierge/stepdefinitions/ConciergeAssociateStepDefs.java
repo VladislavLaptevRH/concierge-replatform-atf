@@ -155,7 +155,6 @@ public class ConciergeAssociateStepDefs {
                         open(Hooks.conciergeURL);
                         with().pollInterval(5, SECONDS).await().until(() -> true);
                     }
-
                     try {
                         conciergeUserAccountPage.getListOfMainCategories().get(main).click();
                         with().pollInterval(5, SECONDS).await().until(() -> true);
