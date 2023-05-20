@@ -99,7 +99,7 @@ Feature:Concierge Cart Page
     When I click on apply uppercase button for "override line item"
     Then I verify line items prices for "PERCENT_OFF"
     When I click on total item line price
-    When I click on remove button from price override
+    Then I click on remove button from price override
     Then I verify that price override was removed
 
   Scenario: Shipping Override (SD, UFD) -  i can introduce only zero in unlimited furniture delivery field, verify that error should be appeared -> Value must be 0.
