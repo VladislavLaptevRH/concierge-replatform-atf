@@ -38,6 +38,8 @@ public class ConciergeCartStepDefs {
     int priceFirstLineItem;
     int priceSecondLineItem;
     String lineItemPriceValueBeforeOverride;
+
+    String lineItemPriceValueAfterOverride;
     String totalPriceCart;
     DecimalFormat digitFormatDoubleZero = new DecimalFormat("0.00");
     PaymentScreen paymentScreen = new PaymentScreen();
@@ -45,8 +47,8 @@ public class ConciergeCartStepDefs {
     ProjectSettingsScreen projectSettingsScreen = new ProjectSettingsScreen();
     ConciergeProjectScreen conciergeProjectScreen = new ConciergeProjectScreen();
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
-
     PaymentStepDefs paymentStepDefs = new PaymentStepDefs();
+    float line;
 
     @When("I navigate to the cart page")
     public void iNavigateToTheCartPage() {
@@ -170,7 +172,6 @@ public class ConciergeCartStepDefs {
     public void iClickOnTotalItemLinePrice() {
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getTotalMemberPrice().scrollIntoView(true);
-        lineItemPriceValueBeforeOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
         conciergeCartPageScreen.getTotalMemberPrice().click();
     }
 
@@ -229,15 +230,17 @@ public class ConciergeCartStepDefs {
             countryQuantity.selectByValue("1");
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
-            String lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", "");
-            float line = Float.parseFloat(lineItemPriceValueBeforeOverride) / 2;
-            assertEquals(digitFormatDoubleZero.format(line), lineItemPriceValueAfterOverride);
+            lineItemPriceValueBeforeOverride = conciergeCartPageScreen.getTotalRegularPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", "");
+            lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
+            line = Float.parseFloat(lineItemPriceValueBeforeOverride) / 2;
+            assertEquals(digitFormatDoubleZero.format(line), conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", ""));
+            assertEquals(lineItemPriceValueAfterOverride, digitFormatDoubleZero.format(line));
         }
         if (arg0.equals("AMOUNT_OFF")) {
                 Select countryQuantity = new Select(conciergeCartPageScreen.getQuantityButton());
                 countryQuantity.selectByValue("1");
             WebDriverRunner.getWebDriver().navigate().refresh();
-                with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             String lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
             int expectedValuePriceValue = Integer.parseInt(lineItemPriceValueBeforeOverride) - 50;
             assertEquals(expectedValuePriceValue, Integer.parseInt(lineItemPriceValueAfterOverride));
@@ -246,7 +249,7 @@ public class ConciergeCartStepDefs {
                 Select countryQuantity = new Select(conciergeCartPageScreen.getQuantityButton());
                 countryQuantity.selectByValue("1");
             WebDriverRunner.getWebDriver().navigate().refresh();
-                with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             String lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
             executeJavaScript("window.scrollTo(0, -500)");
             assertEquals(lineItemPriceValueAfterOverride, "50");
@@ -273,8 +276,8 @@ public class ConciergeCartStepDefs {
         assertEquals(priceSecondLineItem, priceSecondLineItemAfterOverride / 2);
     }
 
-    @When("I click on remove button from price override")
-    public void iClickOnRemoveButtonFromPriceOverride() {
+    @When("I click on remove button from project")
+    public void iClickOnRemoveButtonFromProject() {
         generalStepDefs.waitForJSandJQueryToLoad();
         String items = conciergeProjectScreen.getItems().getText().replaceAll("ITEMS: ", "");
         int IntItems = Integer.parseInt(items);
@@ -287,10 +290,17 @@ public class ConciergeCartStepDefs {
         conciergeProjectScreen.getREMOVEbuttonList().get(0).shouldNot(visible);
     }
 
+    @When("I click on remove button from price override")
+    public void iClickOnRemoveButtonFromPriceOverride() {
+        conciergeProjectScreen.getPriceOverrodeRemoveButton().doubleClick();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        conciergeProjectScreen.getPriceOverrodeRemoveButton().shouldNot(visible);
+
+    }
     @Then("I verify that price override was removed")
     public void iVerifyThatPriceOverrideWasRemoved() {
-        String lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
-        assertEquals(lineItemPriceValueBeforeOverride, lineItemPriceValueAfterOverride, "Price override was removed");
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        assertEquals(lineItemPriceValueBeforeOverride, conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", ""), "Price override was removed");
     }
 
     @When("I click on UFD button from cart")

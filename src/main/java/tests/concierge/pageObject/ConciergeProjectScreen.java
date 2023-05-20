@@ -178,6 +178,8 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement REMOVEbutton = $(By.xpath("(//*[text()='REMOVE']/preceding-sibling::button)[1]"));
 
+    private final SelenideElement priceOverrodeRemoveButton = $(By.xpath("//*[text()='REMOVE']"));
+
     private final SelenideElement clientPhone = $(By.cssSelector("input[name='phoneNumber']"));
 
     private final SelenideElement clientPostalCode = $(By.cssSelector("input[name='postalCode']"));

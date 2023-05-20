@@ -213,7 +213,7 @@ Feature: Concierge Project
     When I click on adjusted price
     When I removed adjusted price
     When Adjusted price was removed
-    Then I click on remove button from price override
+    Then I click on remove button from project
 
   Scenario: Verify shipping overrides in projects
 
@@ -239,7 +239,7 @@ Feature: Concierge Project
     When I click on go to project button
     When I choose quantity for item from project
     Then I verify that subtotal amount updated according by quantity of items
-    Then I click on remove button from price override
+    Then I click on remove button from project
 
   Scenario: Verify subtotal/forecast by updating by hide/unhide items
     Given I log into Concierge as "leader"
@@ -269,7 +269,7 @@ Feature: Concierge Project
     When I click on projects button
     When I search project "overridinglineitems" by provided "projectName"
     When I click on the first project search result
-    Then I click on remove button from price override
+    Then I click on remove button from project
     When I remove all items from cart
     When I click on rh concierge logo
     And I remove client from header
@@ -282,7 +282,7 @@ Feature: Concierge Project
     When I click on edit options button
     When I choose quantity for item from project
     Then I verify that forecast value is update according to quantity of item
-    Then I click on remove button from price override
+    Then I click on remove button from project
 
  #10011392 SS
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
@@ -290,7 +290,7 @@ Feature: Concierge Project
     When I click on projects button
     When I search project "verifyforecastbypricingtype" by provided "projectName"
     When I click on the first project search result
-    Then I click on remove button from price override
+    Then I click on remove button from project
     When I remove all items from cart
     When I click on rh concierge logo
     And I remove client from header
@@ -304,7 +304,7 @@ Feature: Concierge Project
     When I choose quantity for item from project
     When I choose pricing type "<pricingType>"
     Then I verify forecast for "<pricingType>"
-    Then I click on remove button from price override
+    Then I click on remove button from project
     Examples:
       | pricingType |
       | NON-MEMBER  |
@@ -332,7 +332,7 @@ Feature: Concierge Project
     When I click on projects button
     When I search project "pricingunclassifiedbusiness" by provided "projectName"
     When I click on the first project search result
-    Then I click on remove button from price override
+    Then I click on remove button from project
     When I remove all items from cart
     When I click on rh concierge logo
     And I remove client from header
@@ -345,7 +345,7 @@ Feature: Concierge Project
     When I choose quantity for item from project
     When I choose "<pricing>" for unclassified business client project
     Then I verify "<pricing>" for unclassified business client project
-    Then I click on remove button from price override
+    Then I click on remove button from project
     Examples:
       | pricing    |
       | NON_MEMBER |
