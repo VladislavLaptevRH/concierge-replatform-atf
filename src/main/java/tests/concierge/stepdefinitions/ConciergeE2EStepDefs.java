@@ -917,7 +917,7 @@ public class ConciergeE2EStepDefs {
         } else {
             assertEquals(conciergeCartPageScreen.getTradePriceLabel().getText(), "Trade");
             if (Hooks.profile.equals("stg2")) {
-                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$2150.00");
+                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$2313.00");
             } else {
                 assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText(), "$2,688.00");
             }

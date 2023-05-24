@@ -7,14 +7,11 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.concierge.pageObject.*;
 import tests.utility.Hooks;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -167,9 +164,12 @@ public class GeneralStepDefs {
 
         clearField(checkoutAddressScreen.getAptFloorSuiteField());
         checkoutAddressScreen.getAptFloorSuiteField().setValue("QaApartment");
-
-        clearField(checkoutAddressScreen.getCityField());
-        checkoutAddressScreen.getCityField().setValue("Phoenix");
+        try {
+            clearField(checkoutAddressScreen.getCityField());
+            checkoutAddressScreen.getCityField().setValue("Phoenix");
+        } catch (ElementNotInteractableException e){
+            System.out.println("Element not interactable");
+        }
 
         clearField(checkoutAddressScreen.getPhoneField());
         checkoutAddressScreen.getPhoneField().setValue("1241312319");

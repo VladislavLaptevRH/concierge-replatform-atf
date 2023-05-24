@@ -11,6 +11,7 @@ Feature: Estore Sign In/Signout
     Then I verify that forgot password options works
 
   Scenario: To check if user is able to sign out properly
+
     Given I log into eStore as "regular" user
     When I click on estore account
     When I click on estore signout button
@@ -18,6 +19,7 @@ Feature: Estore Sign In/Signout
     Then I verify that user is able to signout
 
   Scenario: Verify the signout functionaity
+
     Given I log into eStore as "regular" user
     When I click on estore my account icon
     When I click on estore sign out button
@@ -25,6 +27,7 @@ Feature: Estore Sign In/Signout
     When I click on estore my account icon for not logged user
 
   Scenario: Verify the user is completely signed out of all brands
+
     Given I log into eStore as "regular" user
     When I click on estore my account icon
     When I click on estore sign out button
