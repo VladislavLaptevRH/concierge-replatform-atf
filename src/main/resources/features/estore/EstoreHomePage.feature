@@ -28,6 +28,7 @@ Feature: Estore Homepage
     Then I verify list of items in hamburger menu
 
   Scenario: Verify CTA functionality
+
     Given I log into eStore as "regular" user
     When I scroll down to Request a design consultation and click
     And I fill in the request form

@@ -127,6 +127,7 @@ Feature: eStore Contract and Trade
     Then I verify that gift card balance info is displayed for estore
 
   Scenario: eStore Contract - Edit Payment
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -160,6 +161,7 @@ Feature: eStore Contract and Trade
 #    Then I verify that estore thank you page is displayed
 
   Scenario: eStore Contract - Verify UFD for different zip codes
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
@@ -169,6 +171,7 @@ Feature: eStore Contract and Trade
     Then I verify UFD in cart
 
   Scenario: Change zip code  in cart to US, currency should be in US$
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050045" with "WHT" for estore
@@ -178,6 +181,7 @@ Feature: eStore Contract and Trade
     And I click on estore no thanks button
 
   Scenario Outline: Verify different payment types on payment page
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -197,7 +201,6 @@ Feature: eStore Contract and Trade
       | AX       |
       | DI       |
 
-
   Scenario: Change zip code in cart to CAN, currency should be in US$
     Given I log into eStore as contract
     When I remove all items from estore cart
@@ -208,6 +211,7 @@ Feature: eStore Contract and Trade
     And I click on estore no thanks button
 
   Scenario: eStore Contract - Verify RHCC payment option for Contract user
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -222,6 +226,7 @@ Feature: eStore Contract and Trade
     When I click on continue payment method estore button
 
   Scenario: estore Contract - Full Payment
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -253,6 +258,7 @@ Feature: eStore Contract and Trade
     Then I verify that estore thank you page is displayed
 
   Scenario: estore Contract - Edit address
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -271,6 +277,7 @@ Feature: eStore Contract and Trade
     Then I see new Billing address
 
   Scenario Outline: eStore Contract - Major CC
+
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -329,6 +336,7 @@ Feature: eStore Contract and Trade
     Then I verify that current currency is canadian dollar
 
   Scenario: eStore Trade - Validate the dropdown's are enabled
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I click on bed
@@ -336,6 +344,7 @@ Feature: eStore Contract and Trade
     Then I verify that the dropdown's are enabled
 
   Scenario: eStore Trade - Split Payment
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -352,6 +361,7 @@ Feature: eStore Contract and Trade
     Then I verify that I'm able to execute estore split payment
 
   Scenario: estore Trade - Full Payment
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -365,6 +375,7 @@ Feature: eStore Contract and Trade
     When I execute payment with credit card on estore
 
   Scenario: estore Trade - RHCC
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -415,6 +426,7 @@ Feature: eStore Contract and Trade
     Then I verify that I'm able to edit payment
 
   Scenario Outline: estore Trade - Major CC
+
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -480,6 +492,7 @@ Feature: eStore Contract and Trade
     And I click on estore no thanks button
 
   Scenario: estore Trade - Edit address
+
     Given I log into eStore as trade
     When I stop eStore page load
     When I remove all items from estore cart

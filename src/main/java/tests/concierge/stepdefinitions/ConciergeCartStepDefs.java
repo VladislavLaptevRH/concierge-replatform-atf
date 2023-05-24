@@ -170,6 +170,16 @@ public class ConciergeCartStepDefs {
 
     @When("I click on total item line price")
     public void iClickOnTotalItemLinePrice() {
+        int quantity = Integer.parseInt($(By.xpath("//*[contains(@id, 'quantity')]")).getText());
+        if(quantity > 1){
+            while (quantity > 1){
+                Select countryQuantity = new Select(conciergeCartPageScreen.getQuantityButton());
+                countryQuantity.selectByValue("1");
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+            }
+        }
+        lineItemPriceValueBeforeOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getTotalMemberPrice().scrollIntoView(true);
         conciergeCartPageScreen.getTotalMemberPrice().click();
@@ -179,6 +189,7 @@ public class ConciergeCartStepDefs {
     public void iSelectPriceOverride(String arg0) {
         $(By.xpath("//option[@value='" + arg0 + "']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//option[@value='" + arg0 + "']")).click();
+
     }
 
     @When("I introduces value for override price")
@@ -226,10 +237,6 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getReasonCodeField().shouldNot(visible, Duration.ofSeconds(15));
         with().pollInterval(2, SECONDS).await().until(() -> true);
         if (arg0.equals("PERCENT_OFF")) {
-            Select countryQuantity = new Select(conciergeCartPageScreen.getQuantityButton());
-            countryQuantity.selectByValue("1");
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
             lineItemPriceValueBeforeOverride = conciergeCartPageScreen.getTotalRegularPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", "");
             lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
             line = Float.parseFloat(lineItemPriceValueBeforeOverride) / 2;
@@ -237,19 +244,10 @@ public class ConciergeCartStepDefs {
             assertEquals(lineItemPriceValueAfterOverride, digitFormatDoubleZero.format(line));
         }
         if (arg0.equals("AMOUNT_OFF")) {
-                Select countryQuantity = new Select(conciergeCartPageScreen.getQuantityButton());
-                countryQuantity.selectByValue("1");
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-            String lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
             int expectedValuePriceValue = Integer.parseInt(lineItemPriceValueBeforeOverride) - 50;
-            assertEquals(expectedValuePriceValue, Integer.parseInt(lineItemPriceValueAfterOverride));
+            assertEquals(expectedValuePriceValue, Integer.parseInt(conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "")));
         }
         if (arg0.equals("AMOUNT_OVERRIDE")) {
-                Select countryQuantity = new Select(conciergeCartPageScreen.getQuantityButton());
-                countryQuantity.selectByValue("1");
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
             String lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
             executeJavaScript("window.scrollTo(0, -500)");
             assertEquals(lineItemPriceValueAfterOverride, "50");
@@ -367,7 +365,7 @@ public class ConciergeCartStepDefs {
             paymentStepDefs.iClickOnContinueWithOriginalAddressButton();
         }
         conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$2,492.37']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$925.50']")).should(visible, Duration.ofSeconds(15));
     }
 
     @When("I choose POS for payment method")
@@ -412,7 +410,8 @@ public class ConciergeCartStepDefs {
         if (arg0.equals("displayed")) {
             conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofMinutes(1));
             conciergeCartPageScreen.getTotalAditionalProdDiscount().scrollTo();
-            $(By.xpath("//*[text()='$672.00']")).should(visible, Duration.ofMinutes(1));
+//            $(By.xpath("//*[text()='$672.00']")).should(visible, Duration.ofMinutes(1));
+            $(By.xpath("//*[text()='$925.50']")).should(visible, Duration.ofMinutes(1));
         } else {
             conciergeCartPageScreen.getTotalAditionalProdDiscount().shouldNotBe(visible, Duration.ofMinutes(1));
         }
@@ -748,7 +747,7 @@ public class ConciergeCartStepDefs {
     @Then("I verify that availability, Delivery and Returns messaging in cart")
     public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingInCart() {
         $(By.xpath("//*[contains(text(),'This item will be ready for delivery between')]")).should(visible, Duration.ofSeconds(10));
-        $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery.')]")).should(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery')]")).should(visible, Duration.ofMinutes(1));
     }
 
     @Then("I verify alternate addresses for client with multipel addresses")

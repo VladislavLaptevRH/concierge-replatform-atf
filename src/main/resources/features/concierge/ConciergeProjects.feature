@@ -69,7 +69,6 @@ Feature: Concierge Project
     Then I verify that project setting screen is displayed
 
   Scenario: Verify project list moodboard
-
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "test" by provided "projectName"
@@ -89,6 +88,7 @@ Feature: Concierge Project
     When I click on add space button
 
   Scenario: Verify that user is able to create new opportunity and add items
+
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "test" by provided "projectName"
@@ -105,7 +105,6 @@ Feature: Concierge Project
     Then I verify that item was added
 
   Scenario Outline: Verify email estimation - send to client verify the email address received and sent for <email>
-
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "modifyitemsoptions" by provided "projectName"
@@ -183,6 +182,7 @@ Feature: Concierge Project
     Then verify that quantity for item was changed
 
   Scenario: Verify that user is able to remove items from project
+
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "63130001" from search field
@@ -286,6 +286,7 @@ Feature: Concierge Project
 
  #10011392 SS
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
+
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "verifyforecastbypricingtype" by provided "projectName"

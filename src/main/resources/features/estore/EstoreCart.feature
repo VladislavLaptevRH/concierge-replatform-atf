@@ -177,7 +177,6 @@ Feature: Estore Cart Page
 
   Scenario: Verify the cart subtotal when regular user added membership card with other sku's.
   Member prices should be applicable
-
     Given I log into eStore as "regularAddMembership" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
