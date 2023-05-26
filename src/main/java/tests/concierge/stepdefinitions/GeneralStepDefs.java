@@ -507,7 +507,7 @@ public class GeneralStepDefs {
                 "        \"lineItemsInput\": {\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
-                "                    \"sku\": \"10072182 BLK\",\n" +
+                "                    \"sku\": \"10072178 LOAK\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"brand\": \"RH\",\n" +
                 "                    \"giftTo\": \"\",\n" +
