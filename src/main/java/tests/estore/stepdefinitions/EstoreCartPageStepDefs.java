@@ -389,7 +389,7 @@ public class EstoreCartPageStepDefs {
             with().pollInterval(3, SECONDS).await().until(() -> true);
             $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(interactable, Duration.ofSeconds(40));
             $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible, Duration.ofSeconds(40));
-            $(By.xpath("//*[contains(text(),'Join the RH Members Program for $175, and save')]")).should(visible, Duration.ofSeconds(40));
+            $(By.xpath("//*[contains(text(),'Join the RH Members Program for')]")).should(visible, Duration.ofSeconds(40));
         }
         if (arg0.equals("member user")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);

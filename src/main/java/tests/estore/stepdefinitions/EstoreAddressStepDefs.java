@@ -193,10 +193,6 @@ public class EstoreAddressStepDefs {
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
                 estoreAddressScreen.getShippingAddressLastName1().setValue("William");
 
-//                if (!estoreAddressScreen.getShippingAddressCountryDisabled().isDisplayed()) {
-//                    Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
-//                    shippingAddressCountry.selectByValue("US");
-//                }
 
                 if (Hooks.eStoreURL.contains("stg4") || Hooks.eStoreURL.contains("stg3")) {
                     generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress1());
@@ -210,7 +206,7 @@ public class EstoreAddressStepDefs {
                     estoreAddressScreen.getPostalShippingCode().setValue("43093");
 
                     try {
-                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(exist, Duration.ofSeconds(5));
+                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(Condition.and("", exist, visible, interactable), Duration.ofSeconds(5));
                         $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
                     } catch (com.codeborne.selenide.ex.ElementNotFound e) {
                         System.out.println("Dropdown list is not displayed");
@@ -222,14 +218,15 @@ public class EstoreAddressStepDefs {
                     estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
                     try {
                         with().pollInterval(4, SECONDS).await().until(() -> true);
-                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
+                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(Condition.and("", exist, visible, interactable), Duration.ofSeconds(5));
                         $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
                     } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                        System.out.println("Dropdown list is not displayed");
+                        System.out.println("Dropdown is not displayed");
                     }
                 }
 
 
+                estoreAddressScreen.getShippingAddressPhone().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
                 estoreAddressScreen.getShippingAddressPhone().click();
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
                 estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
@@ -423,9 +420,11 @@ public class EstoreAddressStepDefs {
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
 
+        $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Continue to payment']")).should(interactable, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Continue to payment']")).scrollIntoView(true);
         with().pollInterval(2, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()='Continue to payment']")).should(interactable, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1)).click();
 
         with().pollInterval(2, SECONDS).await().until(() -> true);

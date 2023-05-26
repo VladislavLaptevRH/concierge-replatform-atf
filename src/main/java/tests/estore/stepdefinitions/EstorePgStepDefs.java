@@ -166,5 +166,4 @@ public class EstorePgStepDefs {
         String url = Hooks.eStoreBaseURL.replaceAll("https://", "");
         open("https://" + brand + "." + url);
     }
-
 }

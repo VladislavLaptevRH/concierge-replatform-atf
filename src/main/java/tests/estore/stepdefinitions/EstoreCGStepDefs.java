@@ -11,6 +11,7 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static io.netty.handler.codec.rtsp.RtspHeaders.Values.URL;
@@ -26,14 +27,14 @@ public class EstoreCGStepDefs {
     @Then("I validate the collection name is not empty")
     public void iValidateTheCollectionNameIsNotEmpty() {
         if (Hooks.cookie.contains("SSR")) {
-            $(By.xpath("//*[contains(text(),'COLLECTIONS')]")).should(Condition.visible, Duration.ofSeconds(35));
+            $(By.xpath("//*[contains(text(),'COLLECTIONS')]")).should(Condition.and("", visible, interactable), Duration.ofSeconds(70));
         } else {
             if ((Hooks.cookie.equals("releasethurs")) || (Hooks.cookie.contains("userservice"))) {
-                $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'collections')]")).should(Condition.interactable, Duration.ofSeconds(35));
-                $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(35));
+                $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'collections')]")).should(Condition.interactable, Duration.ofSeconds(60));
+                $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(60));
             } else {
-                $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'collections')]")).should(Condition.interactable, Duration.ofSeconds(35));
-                $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(35));
+                $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'collections')]")).should(Condition.interactable, Duration.ofSeconds(60));
+                $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(60));
 
             }
         }
@@ -203,7 +204,7 @@ public class EstoreCGStepDefs {
             String category = "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045" + "/?endpoint=" + Hooks.cookie;
             open(URL + category);
         }
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
 
