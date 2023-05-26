@@ -39,6 +39,8 @@ public class ConciergeCartStepDefs {
     int priceSecondLineItem;
     String lineItemPriceValueBeforeOverride;
 
+    String lineItemPriceValueBefore;
+
     String lineItemPriceValueAfterOverride;
     String totalPriceCart;
     DecimalFormat digitFormatDoubleZero = new DecimalFormat("0.00");
@@ -48,7 +50,8 @@ public class ConciergeCartStepDefs {
     ConciergeProjectScreen conciergeProjectScreen = new ConciergeProjectScreen();
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
     PaymentStepDefs paymentStepDefs = new PaymentStepDefs();
-    float line;
+    int line;
+    String actual = "";
 
     @When("I navigate to the cart page")
     public void iNavigateToTheCartPage() {
@@ -179,7 +182,7 @@ public class ConciergeCartStepDefs {
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
         }
-        lineItemPriceValueBeforeOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
+        lineItemPriceValueBefore = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getTotalMemberPrice().scrollIntoView(true);
         conciergeCartPageScreen.getTotalMemberPrice().click();
@@ -237,14 +240,15 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getReasonCodeField().shouldNot(visible, Duration.ofSeconds(15));
         with().pollInterval(2, SECONDS).await().until(() -> true);
         if (arg0.equals("PERCENT_OFF")) {
-            lineItemPriceValueBeforeOverride = conciergeCartPageScreen.getTotalRegularPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", "");
+            lineItemPriceValueBeforeOverride = conciergeCartPageScreen.getTotalRegularPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
             lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
-            line = Float.parseFloat(lineItemPriceValueBeforeOverride) / 2;
-            assertEquals(digitFormatDoubleZero.format(line), conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", ""));
-            assertEquals(lineItemPriceValueAfterOverride, digitFormatDoubleZero.format(line));
+            line = Integer.parseInt(lineItemPriceValueBeforeOverride) / 2;
+            actual = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
+            assertEquals(line, Integer.parseInt(actual));
+            assertEquals(Integer.parseInt(lineItemPriceValueAfterOverride), line);
         }
         if (arg0.equals("AMOUNT_OFF")) {
-            int expectedValuePriceValue = Integer.parseInt(lineItemPriceValueBeforeOverride) - 50;
+            int expectedValuePriceValue = Integer.parseInt(lineItemPriceValueBefore) - 50;
             assertEquals(expectedValuePriceValue, Integer.parseInt(conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "")));
         }
         if (arg0.equals("AMOUNT_OVERRIDE")) {
@@ -298,7 +302,8 @@ public class ConciergeCartStepDefs {
     @Then("I verify that price override was removed")
     public void iVerifyThatPriceOverrideWasRemoved() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        assertEquals(lineItemPriceValueBeforeOverride, conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", ""), "Price override was removed");
+        actual = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll(".00", "").replaceAll("\\$", "").replaceAll("C", "");
+        assertEquals(lineItemPriceValueBeforeOverride, actual, "Price override was removed");
     }
 
     @When("I click on UFD button from cart")
@@ -365,7 +370,7 @@ public class ConciergeCartStepDefs {
             paymentStepDefs.iClickOnContinueWithOriginalAddressButton();
         }
         conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$925.50']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$951.00']")).should(visible, Duration.ofSeconds(15));
     }
 
     @When("I choose POS for payment method")
@@ -411,7 +416,7 @@ public class ConciergeCartStepDefs {
             conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofMinutes(1));
             conciergeCartPageScreen.getTotalAditionalProdDiscount().scrollTo();
 //            $(By.xpath("//*[text()='$672.00']")).should(visible, Duration.ofMinutes(1));
-            $(By.xpath("//*[text()='$925.50']")).should(visible, Duration.ofMinutes(1));
+            $(By.xpath("//*[text()='$951.00']")).should(visible, Duration.ofMinutes(1));
         } else {
             conciergeCartPageScreen.getTotalAditionalProdDiscount().shouldNotBe(visible, Duration.ofMinutes(1));
         }
@@ -884,6 +889,11 @@ public class ConciergeCartStepDefs {
 
     @When("I add item to cart via API")
     public void iAddItemToCartViaAPI() {
+        GeneralStepDefs.addLineItemsToConciergeCart();
+    }
+
+    @When("I add item to cart via API with sela item")
+    public void iAddItemToCartViaAPIWithSelaItem() {
         GeneralStepDefs.addLineItemsToConciergeCart();
     }
 
