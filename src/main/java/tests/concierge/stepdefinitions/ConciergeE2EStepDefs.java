@@ -985,8 +985,10 @@ public class ConciergeE2EStepDefs {
         checkoutAddressScreen.getStreetAddressField().setValue("37 new road");
         generalStepDefs.clearField(checkoutAddressScreen.getAptFloorSuiteField());
         checkoutAddressScreen.getAptFloorSuiteField().setValue("NewAppartment");
+
         generalStepDefs.clearField(checkoutAddressScreen.getCityField());
         checkoutAddressScreen.getCityField().setValue("Milpitas");
+
         generalStepDefs.clearField(checkoutAddressScreen.getPhoneField());
         checkoutAddressScreen.getPhoneField().setValue("3234546576");
     }

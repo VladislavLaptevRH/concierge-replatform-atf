@@ -160,11 +160,13 @@ public class GeneralStepDefs {
         clearField(checkoutAddressScreen.getStreetAddressField());
         checkoutAddressScreen.getStreetAddressField().setValue("North 16th Street");
         with().pollInterval(2, SECONDS).await().until(() -> true);
-//        checkoutAddressScreen.getStreetAddressField().sendKeys(Keys.ENTER);
 
         clearField(checkoutAddressScreen.getAptFloorSuiteField());
         checkoutAddressScreen.getAptFloorSuiteField().setValue("QaApartment");
         try {
+            executeJavaScript("window.scrollTo(0, 600)");
+//            executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getCityField());
+//            executeJavaScript("arguments[0].click();", checkoutAddressScreen.getCityField());
             clearField(checkoutAddressScreen.getCityField());
             checkoutAddressScreen.getCityField().setValue("Phoenix");
         } catch (ElementNotInteractableException e){
