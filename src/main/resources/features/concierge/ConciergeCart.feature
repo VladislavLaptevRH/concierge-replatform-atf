@@ -56,6 +56,7 @@ Feature:Concierge Cart Page
       | AMOUNT_OVERRIDE |
 
   Scenario: Override Line item Prices - for all line items from cart
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -87,6 +88,7 @@ Feature:Concierge Cart Page
     Then I verify line items prices for "AMOUNT_OVERRIDE"
 
   Scenario: Override Line item Prices - verify remove button
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
