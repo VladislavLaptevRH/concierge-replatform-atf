@@ -57,6 +57,7 @@ public class GiftCardEnquiryStepDefs {
         List<String> expectedItems = new ArrayList(Arrays.asList( "CARD NUMBER", "BALANCE", "DATE", "GALLERY", "CHARGE", "STATUS"));
         for (int i = 0; i < giftCardEnquiryScreen.getListOfTransactionDetailsHeading().size(); i++) {
             items.add(giftCardEnquiryScreen.getListOfTransactionDetailsHeading().get(i).getText());
+            with().pollInterval(1, SECONDS).await().until(() -> true);
         }
         assertNotEquals(giftCardEnquiryScreen.getListOfTransactions().size(), 0);
         assertEquals(items, expectedItems);

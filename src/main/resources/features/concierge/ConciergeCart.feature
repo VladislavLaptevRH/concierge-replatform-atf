@@ -332,7 +332,6 @@ Feature:Concierge Cart Page
     Then I verify that gift box was removed
 
   Scenario: Verify Member savings for a Non member user in cart - From PDP and Project
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header

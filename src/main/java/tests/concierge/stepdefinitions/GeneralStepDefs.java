@@ -165,12 +165,14 @@ public class GeneralStepDefs {
         checkoutAddressScreen.getAptFloorSuiteField().setValue("QaApartment");
         try {
             executeJavaScript("window.scrollTo(0, 600)");
-//            executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getCityField());
 //            executeJavaScript("arguments[0].click();", checkoutAddressScreen.getCityField());
             clearField(checkoutAddressScreen.getCityField());
             checkoutAddressScreen.getCityField().setValue("Phoenix");
         } catch (ElementNotInteractableException e){
             System.out.println("Element not interactable");
+            executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getCityField());
+            clearField(checkoutAddressScreen.getCityField());
+            checkoutAddressScreen.getCityField().setValue("Phoenix");
         }
 
         clearField(checkoutAddressScreen.getPhoneField());
@@ -509,7 +511,7 @@ public class GeneralStepDefs {
                 "        \"lineItemsInput\": {\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
-                "                    \"sku\": \"10072178 LOAK\",\n" +
+                "                    \"sku\": \"10036326 BLWH\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"brand\": \"RH\",\n" +
                 "                    \"giftTo\": \"\",\n" +

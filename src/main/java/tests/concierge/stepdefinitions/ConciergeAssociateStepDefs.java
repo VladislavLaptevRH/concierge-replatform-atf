@@ -266,8 +266,16 @@ public class ConciergeAssociateStepDefs {
     }
 
     @Then("I verify button {string} on homepage")
-    public void iVerifyButtonOnHomepage(String button){
-        conciergeUserAccountPage.getButton(button).should(visible,Duration.ofSeconds(40));
+    public void iVerifyButtonOnHomepage(String button) {
+        if (Hooks.cookie.equals("userservice")) {
+            if(button.equals("RH card lookup")){
+                conciergeUserAccountPage.getButton("RH Card lookup").should(visible, Duration.ofSeconds(40));
+            } else {
+                conciergeUserAccountPage.getButton(button).should(visible, Duration.ofSeconds(40));
+            }
+        } else {
+            conciergeUserAccountPage.getButton(button).should(visible, Duration.ofSeconds(40));
+        }
     }
 
     @Then("I verify search item field and search button")

@@ -152,7 +152,7 @@ public class ConciergeAccessibilityStepDefs {
                         continue;
                     }
                     else {
-                        accessSubMenu(each);
+                         accessSubMenu(each);
                     }
                 }
                 break;
