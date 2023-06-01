@@ -69,8 +69,8 @@ public class ConciergeItemsStepDefs {
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
         try {
-            selectOption.getColorOption().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
-            selectOption.getColorOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
+            conciergeItemsScreen.getSelectSize().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
+            conciergeItemsScreen.getSelectSize().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
             sizeList.selectByVisibleText("Bath Sheet") ;
             with().pollInterval(2, SECONDS).await().until(() -> true);

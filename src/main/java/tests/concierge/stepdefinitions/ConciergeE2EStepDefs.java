@@ -591,14 +591,52 @@ public class ConciergeE2EStepDefs {
 
     @And("I select count of product")
     public void iSelectCountOfProduct() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
-        if (!conciergeItemsScreen.getDetailsSpan().isDisplayed()) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        try {
+            if (Hooks.cookie.equals("contentfix")) {
+                if (!$(By.xpath("//*[text()=' DETAILS']")).isDisplayed()) {
+                    for (int i = 0; i < 3; i++) {
+                        WebDriverRunner.getWebDriver().navigate().refresh();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                        if (conciergeItemsScreen.getDetailsSpan().isDisplayed()) {
+                            break;
+                        }
+                    }
+                }
+            } else {
+                if (!conciergeItemsScreen.getDetailsSpan().isDisplayed()) {
+                    for (int i = 0; i < 3; i++) {
+                        WebDriverRunner.getWebDriver().navigate().refresh();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                        if (conciergeItemsScreen.getDetailsSpan().isDisplayed()) {
+                            break;
+                        }
+                    }
+                }
+            }
+        } catch (ElementNotFound e){
+            System.out.println("Details button is not displaying");
         }
+
+        if (Hooks.cookie.equals("contentfix")) {
+            if (!$(By.xpath("//*[text()=' DETAILS']")).isDisplayed()) {
+               abstractStepDefs.iClickOnRhConciergeLogo();
+                iGoToItemFromSearchField("63130001");
+
+
+            }
+        } else {
+            if (!conciergeItemsScreen.getDetailsSpan().isDisplayed()) {
+                abstractStepDefs.iClickOnRhConciergeLogo();
+                iGoToItemFromSearchField("63130001");
+            }
+        }
+
         executeJavaScript("window.scrollTo(0, 600)");
         if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 3; i++) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
                     break;
                 }
@@ -947,7 +985,7 @@ public class ConciergeE2EStepDefs {
         } else {
             $(By.xpath("//*[text()='NewShippingAddress NewLastName']")).shouldHave(text("NewShippingAddress NewLastName"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='NewAppartment']")).shouldHave(text("NewAppartment"), Duration.ofSeconds(25));
-            $(By.xpath("//*[text()='Milpitas, AZ 85020']")).shouldHave(text("Milpitas, AZ 85020"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='Milpitas, AZ, 85020']")).shouldHave(text("Milpitas, AZ, 85020"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='37 new road']")).shouldHave(text("37 new road"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
@@ -1059,7 +1097,7 @@ public class ConciergeE2EStepDefs {
             $(By.xpath("//*[text()='NewFirstName NewLastName']")).shouldHave(text("NewFirstName NewLastName"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='NewAppartment']")).shouldHave(text("NewAppartment"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='37 new road']")).shouldHave(text("37 new road"), Duration.ofSeconds(25));
-            $(By.xpath("//*[text()='BILLING ADDRESS']/..//*[text()='Milpitas, AZ 85020']")).shouldHave(text("Milpitas, AZ 85020"), Duration.ofSeconds(25));
+            $(By.xpath("//*[text()='BILLING ADDRESS']/..//*[text()='Milpitas, AZ, 85020']")).shouldHave(text("Milpitas, AZ, 85020"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='BILLING ADDRESS']/..//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
         }
