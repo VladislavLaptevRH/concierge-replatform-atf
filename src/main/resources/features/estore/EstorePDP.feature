@@ -66,5 +66,16 @@ Feature: Estore PDP
       When I go to estore item "sofa" from search field
       Then I verify the search icon functionality
 
+    Scenario: Verify the product price as per the selected country in the dropdown.
+      Given I log into eStore as "regular" user
+      When I remove all items from estore cart
+      When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+      When I choose CAN country from footer
+      Then I verify the product price for the selected country
 
+    Scenario: Verify the product price on PDP for non-sale cushion and frame product
+      Given I log into eStore as "regular" user
+      When I remove all items from estore cart
+      When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+      Then I verify the product price on PDP for non-sale cushion and frame product
 

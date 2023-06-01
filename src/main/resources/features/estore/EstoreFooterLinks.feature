@@ -2,20 +2,19 @@
 @estoreFooterLinks
 Feature: Footer Links
 
-#  Scenario Outline: Verify footer resources section links
-#
-#    Given I log into eStore as "regular" user
-#    Then I verify that I'm able to access "<link>"
-#    Examples:
-#      | link                  |
-#      | LOCATE A GALLERY      |
-#      | VIEW SOURCE BOOKS     |
-#      | REQUEST A SOURCE BOOK |
-#      | SIGNUP FOR EMAILS     |
-#      | RH MEMBERS PROGRAM    |
-#      | RH TRADE              |
-#      | RH CREDIT CARD        |
-#      | SITE MAP              |
+  Scenario Outline: Verify footer resources section links
+    Given I log into eStore as "regular" user
+    Then I verify that I'm able to access "<link>"
+    Examples:
+      | link                  |
+      | LOCATE A GALLERY      |
+      | VIEW SOURCE BOOKS     |
+      | REQUEST A SOURCE BOOK |
+      | SIGNUP FOR EMAILS     |
+      | RH MEMBERS PROGRAM    |
+      | RH TRADE              |
+      | RH CREDIT CARD        |
+      | SITE MAP              |
 
   Scenario Outline: Verify footer customer experience links
     Given I log into eStore as "regular" user

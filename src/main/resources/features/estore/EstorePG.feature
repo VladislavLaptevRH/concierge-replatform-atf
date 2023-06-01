@@ -4,7 +4,7 @@ Feature: Estore PG
   Scenario: Grid view Mobile Only 1 and 2 grid view
 
     Given I log into eStore as "guest" user
-    When I go to estore item "white and blue corner leather sofa" from search field
+    When I go to estore item "sofa" from search field
     Then I validate "1","2" and "3" grid view should work
 
   Scenario: Verify two grids are default Grid view in PG
