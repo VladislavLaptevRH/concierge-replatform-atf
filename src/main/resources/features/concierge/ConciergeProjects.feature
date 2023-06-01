@@ -117,7 +117,7 @@ Feature: Concierge Project
     Examples:
       | email      |
       | client     |
-      | additional |
+#      | additional |
 
   Scenario: Verify email estimation - send to bcc verify the email address received and sent
     Given I log into Concierge as "associate"

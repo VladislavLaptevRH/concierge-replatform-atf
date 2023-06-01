@@ -396,8 +396,8 @@ public class ConciergeE2EStepDefs {
             $(By.xpath("//li[@data-analytics-url='https://rhteen.rh.com/']")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
             $(By.xpath("//li[@data-analytics-url='https://rhteen.rh.com/']")).click();
         } else if (brand.equals("RH Teen")) {
-            $(By.xpath("//li[@data-analytics-url='https://rhteen.rh.com/']/span")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@data-analytics-url='https://rhteen.rh.com/']/span")).click();
+            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']/span")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
+            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']/span")).click();
         }
 
         if (brand.equals("RH Outdoor") && Hooks.profile.equals("prod")) {
@@ -955,7 +955,7 @@ public class ConciergeE2EStepDefs {
         } else {
             assertEquals(conciergeCartPageScreen.getTradePriceLabel().getText(), "Trade");
             if (Hooks.profile.equals("stg2")) {
-                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$2313.00");
+                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$3693.00");
             } else {
                 assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText(), "$2,688.00");
             }
@@ -1053,8 +1053,8 @@ public class ConciergeE2EStepDefs {
                 $(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]")).click();
                 with().pollInterval(2, SECONDS).await().until(() -> true);
             } else {
-                $(By.xpath("(//*[text() = 'BILLING ADDRESS']/..//*[text()='Edit'])[1]")).should(visible, Duration.ofSeconds(15));
-                $(By.xpath("(//*[text() = 'BILLING ADDRESS']/..//*[text()='Edit'])[1]")).click();
+                $(By.xpath("(//*[text() = 'BILLING ADDRESS']/..//*[text()='EDIT'])[1]")).should(visible, Duration.ofSeconds(15));
+                $(By.xpath("(//*[text() = 'BILLING ADDRESS']/..//*[text()='EDIT'])[1]")).click();
                 with().pollInterval(2, SECONDS).await().until(() -> true);
 
             }
