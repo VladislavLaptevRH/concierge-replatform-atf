@@ -70,7 +70,7 @@ public class EstorePGScreen {
 
     private final SelenideElement sizeFilter = $(By.xpath("//*[text()='Size']"));
 
-    private final SelenideElement sortFilter = $(By.xpath("//*[text()='sort by:']"));
+    private final SelenideElement sortFilter = $(By.xpath("//*[text()='sort']"));
 
     private final SelenideElement saleFilterApplied = $(By.xpath("(//*[text()='Sale'])[2]"));
 

@@ -115,7 +115,10 @@ public class EstorePDP {
 
     @Then("I verify the sku for single and multiple ids")
     public void iVerifyTheSkuForSingleAndMultipleIds() {
-        estorePdpPageScreen.getColorOption().should(visible, Duration.ofSeconds(20)).scrollIntoView(true).should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getColorOption().should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getColorOption().scrollIntoView(true).should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getSizeOption().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
+
         Select selectColor = new Select(estorePdpPageScreen.getColorOption());
         selectColor.selectByIndex(3);
 
@@ -147,5 +150,19 @@ public class EstorePDP {
     public void iVerifyTheSearchIconFunctionality() {
         estorePGScreen.getInStockFilter().should(visible, Duration.ofSeconds(30));
         estorePGScreen.getSofa().should(visible, Duration.ofSeconds(30));
+    }
+
+    @Then("I verify the product price for the selected country")
+    public void iVerifyTheProductPriceForTheSelectedCountry() {
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$29"),Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$16"),Duration.ofSeconds(30));
+    }
+
+    @Then("I verify the product price on PDP for non-sale cushion and frame product")
+    public void iVerifyTheProductPriceOnPDPForNonSaleCushionAndFrameProduct() {
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$19"),Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$11"),Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheSecondPrice().shouldHave(text("$27"),Duration.ofSeconds(30));
+        estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$36"),Duration.ofSeconds(30));
     }
 }

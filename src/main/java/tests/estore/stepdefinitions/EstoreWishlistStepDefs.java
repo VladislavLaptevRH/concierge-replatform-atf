@@ -3,13 +3,16 @@ package tests.estore.stepdefinitions;
 import com.codeborne.selenide.Condition;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import tests.estore.pageObject.EstoreItemPage;
 import tests.estore.pageObject.EstoreWishlistPage;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
@@ -48,8 +51,13 @@ public class EstoreWishlistStepDefs {
 
     @When("I click on view wishlist button")
     public void iClickOnViewWishlistButton() {
-        estoreItemPage.getViewWishlistButton().should(visible, Duration.ofSeconds(20));
-        estoreItemPage.getViewWishlistButton().click();
+        if (Hooks.cookie.equals("contentfix")) {
+            $(By.xpath("//*[text()='VIEW WISHLIST']")).should(visible, Duration.ofSeconds(30));
+            $(By.xpath("//*[text()='VIEW WISHLIST']")).click();
+        } else {
+            estoreItemPage.getViewWishlistButton().should(visible, Duration.ofSeconds(20));
+            estoreItemPage.getViewWishlistButton().click();
+        }
     }
 
 }

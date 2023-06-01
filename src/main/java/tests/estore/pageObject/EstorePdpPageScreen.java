@@ -19,6 +19,10 @@ public class EstorePdpPageScreen {
 
     private final SelenideElement memberPrice = $(By.xpath("//p[@data-testid='price-for-member']"));
 
+    private final SelenideElement memberTheFirstPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
+
+    private final SelenideElement memberTheSecondPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[3]"));
+
     private final SelenideElement memberPriceLabel = $(By.xpath("//p[@id='price-label-member']"));
 
     private final SelenideElement regularPriceLabel = $(By.xpath("//p[@id='price-label-regular']"));
