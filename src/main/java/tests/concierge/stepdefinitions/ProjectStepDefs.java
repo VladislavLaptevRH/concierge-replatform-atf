@@ -303,10 +303,11 @@ public class ProjectStepDefs {
 
     @Then("I verify that item was added")
     public void iVerifyThatItemWasAdded() {
-        conciergeProjectScreen.getSaveMoveToProject().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
-        executeJavaScript("arguments[0].click();", conciergeProjectScreen.getSaveMoveToProject());
         conciergeProjectScreen.getGoToProjectButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getGoToProjectButton());
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        String actualItemName = $(By.xpath("//h6[contains(@class, 'MuiTypography-h6')]")).getText();
+        assertEquals(conciergeE2EStepDefs.itemName,actualItemName);
     }
 
     @When("I click on email estimate button")
@@ -360,11 +361,11 @@ public class ProjectStepDefs {
             mailinator.getSearchEmailField().setValue(aditionalEmail);
         }
         mailinator.getGoButton().click();
-//        mailinator.getFirstLetter().should(visible, Duration.ofSeconds(25));
-//        mailinator.getFirstLetter().click();
-//        switchTo().frame(mailinator.getMessageBodyIframe());
-//        mailinator.getBodyEmailText().should(visible, Duration.ofSeconds(15));
-//        mailinator.getAssociateName().should(visible, Duration.ofSeconds(15));
+        mailinator.getFirstLetter().should(visible, Duration.ofMinutes(1));
+        mailinator.getFirstLetter().click();
+        switchTo().frame(mailinator.getMessageBodyIframe());
+        mailinator.getBodyEmailText().should(visible, Duration.ofSeconds(15));
+        mailinator.getAssociateName().should(visible, Duration.ofSeconds(15));
     }
 
     @When("I click on bcc associate checkbox")
@@ -507,6 +508,15 @@ public class ProjectStepDefs {
         conciergeProjectScreen.getEditItemOptions().doubleClick();
     }
 
+    @When("I click on edit options button for update item")
+    public void iClickOnEditOptionsButtonForUpdateItem() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        conciergeProjectScreen.getEditItemOptions().should(visible, Duration.ofSeconds(35));
+        projectSettingsScreen.getMoodBoardButton().shouldHave(text("MOODBOARD"), Duration.ofSeconds(15));
+        conciergeProjectScreen.getEditItemOptions().hover();
+        conciergeProjectScreen.getEditItemOptions().click();
+    }
+
     @Then("verify that color was changed")
     public void verifyThatColorWasChanged() {
         if (randomColor == 1) {
@@ -535,7 +545,7 @@ public class ProjectStepDefs {
                     selectSize.selectByIndex(1);
                 } else {
                     conciergeProjectScreen.getEditItemOptions().hover();
-                    conciergeProjectScreen.getEditItemOptions().doubleClick();
+                    conciergeProjectScreen.getEditItemOptions().click();
                     Select selectSize = new Select($(By.xpath("//select[@id='optionSelect-0']")));
                     selectSize.selectByIndex(1);
                 }
@@ -577,7 +587,7 @@ public class ProjectStepDefs {
                     selectSize.selectByIndex(1);
                 } else {
                     conciergeProjectScreen.getEditItemOptions().hover();
-                    conciergeProjectScreen.getEditItemOptions().doubleClick();
+                    conciergeProjectScreen.getEditItemOptions().click();;
                     Select selectSize = new Select($(By.xpath("//select[@id='optionSelect-0']")));
                     selectSize.selectByIndex(1);
                 }

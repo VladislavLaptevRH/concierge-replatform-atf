@@ -88,11 +88,11 @@ Feature: Concierge Project
     When I click on add space button
 
   Scenario: Verify that user is able to create new opportunity and add items
-
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "test" by provided "projectName"
     When I click on the first project search result
+    Then I click on remove button from project
     When I click on add new opportunity button
     When I introduce opportunity name
     When I choose preferred contact method
@@ -103,6 +103,7 @@ Feature: Concierge Project
     When I add item to created opportunity
     When I click on save button
     Then I verify that item was added
+    Then I click on remove button from project
 
   Scenario Outline: Verify email estimation - send to client verify the email address received and sent for <email>
     Given I log into Concierge as "associate"
@@ -117,7 +118,7 @@ Feature: Concierge Project
     Examples:
       | email      |
       | client     |
-#      | additional |
+      | additional |
 
   Scenario: Verify email estimation - send to bcc verify the email address received and sent
     Given I log into Concierge as "associate"
@@ -163,12 +164,11 @@ Feature: Concierge Project
     Then I verify that spaces list is displayed
 
   Scenario: Verify that user is able to update item option
-
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "modifyitemsoptions" by provided "projectName"
     When I click on the first project search result
-    When I click on edit options button
+    When I click on edit options button for update item
     When I choose color from option
     Then verify that color was changed
 
@@ -182,7 +182,6 @@ Feature: Concierge Project
     Then verify that quantity for item was changed
 
   Scenario: Verify that user is able to remove items from project
-
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "63130001" from search field
@@ -216,7 +215,6 @@ Feature: Concierge Project
     Then I click on remove button from project
 
   Scenario: Verify shipping overrides in projects
-
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "overrideshipping" by provided "projectName"
@@ -227,9 +225,13 @@ Feature: Concierge Project
     Then I verified that override price for shipping displayed
 
   Scenario: Verify subtotal/forecast by updating qty for items
-
     Given I log into Concierge as "leader"
     When I remove all items from cart
+    When I click on projects button
+    When I search project "subototalforecastupdatingqty" by provided "projectName"
+    When I click on the first project search result
+    Then I click on remove button from project
+    When I click on rh concierge logo
     And I remove client from header
     When I go to item "10072181 LOAK" from search field
     And I select count of product
@@ -270,7 +272,6 @@ Feature: Concierge Project
     When I search project "overridinglineitems" by provided "projectName"
     When I click on the first project search result
     Then I click on remove button from project
-    When I remove all items from cart
     When I click on rh concierge logo
     And I remove client from header
     When I go to item "10072181 BLK" from search field
@@ -286,7 +287,6 @@ Feature: Concierge Project
 
  #10011392 SS
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
-
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "verifyforecastbypricingtype" by provided "projectName"
@@ -327,7 +327,6 @@ Feature: Concierge Project
     Then I verify that tax is not displayed
 
   Scenario Outline: Verify Member/non Member /Trade/ Non Trade toggle pricing for unclassified business client project
-
     #Need data for stg4
     Given I log into Concierge as "associate"
     When I click on projects button

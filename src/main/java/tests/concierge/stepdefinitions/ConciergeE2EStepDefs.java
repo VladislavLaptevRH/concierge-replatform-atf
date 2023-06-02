@@ -48,6 +48,7 @@ public class ConciergeE2EStepDefs {
     String countOfItems = null;
     WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));
     String environment;
+    public static String itemName = "";
 
     @When("I click on add to project button")
     public void userClickOnAddToProjectButton() {
@@ -588,10 +589,10 @@ public class ConciergeE2EStepDefs {
         with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
-
     @And("I select count of product")
     public void iSelectCountOfProduct() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
+        itemName = $(By.xpath("//h2[contains(@class, 'MuiTypography-h2')]")).getText();
         try {
             if (Hooks.cookie.equals("contentfix")) {
                 if (!$(By.xpath("//*[text()=' DETAILS']")).isDisplayed()) {
@@ -622,8 +623,6 @@ public class ConciergeE2EStepDefs {
             if (!$(By.xpath("//*[text()=' DETAILS']")).isDisplayed()) {
                abstractStepDefs.iClickOnRhConciergeLogo();
                 iGoToItemFromSearchField("63130001");
-
-
             }
         } else {
             if (!conciergeItemsScreen.getDetailsSpan().isDisplayed()) {
@@ -631,7 +630,6 @@ public class ConciergeE2EStepDefs {
                 iGoToItemFromSearchField("63130001");
             }
         }
-
         executeJavaScript("window.scrollTo(0, 600)");
         if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
             for (int i = 0; i < 3; i++) {
@@ -677,7 +675,6 @@ public class ConciergeE2EStepDefs {
             }
             with().pollInterval(1, SECONDS).await().until(() -> true);
         }
-
     }
 
     @Then("I verify that address screen is displayed")
