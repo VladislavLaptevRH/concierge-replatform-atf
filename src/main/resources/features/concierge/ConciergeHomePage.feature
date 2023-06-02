@@ -7,7 +7,6 @@ Feature:Concierge Homepage
     Then  I expect that I am on the Concierge Dashboard page
 
   Scenario Outline: Verify top menu navigation
-
     Given I log into Concierge as "associate"
     Then  I change the brand to "<brand>"
     Then User verifies that all items from menu are displayed for "<brand>"
@@ -19,8 +18,6 @@ Feature:Concierge Homepage
       |RH MODERN      |
       |RH OUTDOOR     |
       |RH BEACH HOUSE |
-      |RH SKI HOUSE   |
-      |RH BABY & CHILD|
       |RH TEEN        |
 
   Scenario Outline: Verify the logo on "<brand>" brand

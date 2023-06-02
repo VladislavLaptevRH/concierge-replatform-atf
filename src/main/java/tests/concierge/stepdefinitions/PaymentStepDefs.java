@@ -262,6 +262,7 @@ public class PaymentStepDefs {
 
     @When("I click on continue with original address button")
     public void iClickOnContinueWithOriginalAddressButton() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if($(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).isDisplayed()){
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).should(Condition.and("", Condition.enabled, Condition.visible), Duration.ofSeconds(60));
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();

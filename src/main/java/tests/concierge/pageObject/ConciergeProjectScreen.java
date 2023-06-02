@@ -196,7 +196,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement adjustedPrice = $(By.xpath("(//*[text() = 'ADJUSTED']/../..//p)[1]"));
 
-    private final SelenideElement ufdPrice = $(By.xpath("//div[@id='sticky-project-footer-content']//span[normalize-space()='$549.00']"));
+    private final SelenideElement ufdPrice = $(By.xpath("(//div[@id='sticky-project-footer-content']//div[@aria-describedby='override-popover-null']/span)[1]"));
 
     private final SelenideElement percentDiscount = $(By.id("outlined-helperText"));
 

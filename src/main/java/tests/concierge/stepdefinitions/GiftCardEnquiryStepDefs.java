@@ -10,14 +10,14 @@ import tests.concierge.pageObject.SelectOption;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.support.ui.Select;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.*;
@@ -38,7 +38,6 @@ public class GiftCardEnquiryStepDefs {
 
     @When ("I enter gift card information")
     public void iEnterGiftCardInformation() {
-        WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         giftCardEnquiryScreen.getCardNumberField().setValue("6006493887999901635");
         giftCardEnquiryScreen.getCardPinField().setValue("9559");
@@ -49,15 +48,21 @@ public class GiftCardEnquiryStepDefs {
     @Then("I verify transaction details")
     public void iVerifyTransactionDetails() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(!($(By.xpath("//*[text()='TRANSACTION DETAIL']")).isDisplayed())){
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!$(By.xpath("//*[text()='TRANSACTION DETAIL']")).isDisplayed()){
+            for(int i = 0; i < 3; i++) {
+                String URL = Hooks.conciergeBaseURL + "/us/en/customer/gift-card-check-balance.jsp";
+                open(URL);
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                iEnterGiftCardInformation();
+                if($(By.xpath("//*[text()='TRANSACTION DETAIL']")).isDisplayed()){
+                    break;
+                }
+            }
         }
         List<String> items = new ArrayList<>();
         List<String> expectedItems = new ArrayList(Arrays.asList( "CARD NUMBER", "BALANCE", "DATE", "GALLERY", "CHARGE", "STATUS"));
         for (int i = 0; i < giftCardEnquiryScreen.getListOfTransactionDetailsHeading().size(); i++) {
             items.add(giftCardEnquiryScreen.getListOfTransactionDetailsHeading().get(i).getText());
-            with().pollInterval(1, SECONDS).await().until(() -> true);
         }
         assertNotEquals(giftCardEnquiryScreen.getListOfTransactions().size(), 0);
         assertEquals(items, expectedItems);
