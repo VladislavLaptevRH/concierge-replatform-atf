@@ -56,7 +56,6 @@ Feature:Concierge Cart Page
       | AMOUNT_OVERRIDE |
 
   Scenario: Override Line item Prices - for all line items from cart
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -88,7 +87,6 @@ Feature:Concierge Cart Page
     Then I verify line items prices for "AMOUNT_OVERRIDE"
 
   Scenario: Override Line item Prices - verify remove button
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -167,7 +165,7 @@ Feature:Concierge Cart Page
     When I click on continue with original address button
     Then I verify that total price from cart and from payment page is the same
 
-  Scenario: Promo codes - verify that total price from cart and from payment page is the same after applying promo code
+  Scenario: Promo codes - Total Additional Product Discount message is displayed on review page
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
