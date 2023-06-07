@@ -92,6 +92,11 @@ Feature: Concierge E2E flow
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
+    When I click on projects button
+    When I search project "TESTCOMPANY" by provided "projectName"
+    When I click on the first project search result
+    Then I click on remove button from project
+    When I click on rh concierge logo
     When I open product page with "prod1617188" and "63130001"
     When I click on add to project button
     When I choose project from addToProject popup
