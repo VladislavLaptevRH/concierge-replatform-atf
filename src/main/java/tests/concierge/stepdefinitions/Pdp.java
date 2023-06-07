@@ -75,8 +75,8 @@ public class Pdp {
     public void iClickOnViewSaleItems() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         //$(By.xpath("//*[text()='Sale']")).shouldHave(text("Sale"), Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Sale']")).scrollIntoView(true);
-        $(By.xpath("//*[text()='Sale']")).click();
+        $(By.xpath("//*[text()='VIEW SELECT ITEMS ON SALE']")).scrollIntoView(true);
+        $(By.xpath("//*[text()='VIEW SELECT ITEMS ON SALE']")).click();
     }
 
     @Then("I verify that on sale modal pop up is displayed")

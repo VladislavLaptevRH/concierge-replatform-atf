@@ -11,8 +11,9 @@ Feature: Concierge PDP
     Then I verify that monogram was added for pdp
 
   Scenario: In stock
+
     Given I log into Concierge as "associate"
-    When I go to item "10024887 WGRY" from search field
+    When I go to item "60450996 BLNL" from search field
     When I click on view in stock items
     Then I verify that in stock modal pop up is displayed
 
