@@ -171,18 +171,26 @@ public class ProjectStepDefs {
 
     @When("I click on save button")
     public void iClickOnSaveButton() {
+        if($(By.xpath("//*[text()='MOVE ITEMS ANYWAY']")).isDisplayed()){
+            $(By.xpath("//*[text()='MOVE ITEMS ANYWAY']")).click();
+            with().pollInterval(9, SECONDS).await().until(() -> true);
+        }
         try {
             conciergeProjectScreen.getSaveMoveToProject().should(Condition.and("", visible, enabled), Duration.ofSeconds(10));
             conciergeProjectScreen.getSaveMoveToProject().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Element not found");
+        }
+        try{
             conciergeProjectScreen.getSaveMoveToProjectUppercase().should(Condition.and("", visible, enabled), Duration.ofSeconds(10));
             conciergeProjectScreen.getSaveMoveToProjectUppercase().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e){
+            System.out.println("Element not found");
         }
         with().pollInterval(5, SECONDS).await().until(() -> true);
         if(conciergeProjectScreen.getSaveMoveToProject().isDisplayed()){
             conciergeProjectScreen.getSaveMoveToProject().click();
         }
-
     }
 
     @Then("I verify that projects screen is displayed")

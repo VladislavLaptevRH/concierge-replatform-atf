@@ -156,10 +156,10 @@ public class AbstractStepDefs {
     @And("I verify that review screen is displayed")
     public void iVerifyThatReviewScreenIsDisplayed() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(!reviewOrderScreen.getBillingAddress().isDisplayed()){
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-        }
+//        if(!reviewOrderScreen.getBillingAddress().isDisplayed()){
+//            WebDriverRunner.getWebDriver().navigate().refresh();
+//            with().pollInterval(5, SECONDS).await().until(() -> true);
+//        }
         reviewOrderScreen.getBillingAddress().should(visible, Duration.ofMinutes(1));
         reviewOrderScreen.getShippingAddress().should(visible, Duration.ofMinutes(1));
     }

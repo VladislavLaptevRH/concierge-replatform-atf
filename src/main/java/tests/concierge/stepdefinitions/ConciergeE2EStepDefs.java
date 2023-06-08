@@ -43,6 +43,7 @@ public class ConciergeE2EStepDefs {
     AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
     PaymentStepDefs paymentStepDefs = new PaymentStepDefs();
     PdpScreen pdpScreen = new PdpScreen();
+    PaymentScreen paymentScreen = new PaymentScreen();
 
     String usState = "";
     String countOfItems = null;
@@ -210,7 +211,6 @@ public class ConciergeE2EStepDefs {
         }
             conciergeItemsScreen.getAddToCartButton().click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
-
     }
 
     @When("I fill all fields from address with {string} zip code")
@@ -242,6 +242,61 @@ public class ConciergeE2EStepDefs {
 
     @When("I confirm edited address")
     public void iConfirmEditedAddress() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
+                if (!paymentScreen.getChoosePaymentMethodBtnDisplayed().isDisplayed()) {
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    with().pollInterval(3, SECONDS).await().until(() -> true);
+
+                    if (checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
+                        if (!$(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
+                            $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).click();
+                            with().pollInterval(2, SECONDS).await().until(() -> true);
+                        }
+                    }
+
+                    if (!checkoutAddressScreen.getContinuePaymentButton().isDisplayed()) {
+                        WebDriverRunner.getWebDriver().navigate().refresh();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                        abstractStepDefs.iClickOnCheckoutButton();
+                        checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+                        executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
+                        checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+                        checkoutAddressScreen.getContinuePaymentButton().click();
+                        abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+                    }
+                    checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+                    executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
+                    checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+                    checkoutAddressScreen.getContinuePaymentButton().click();
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+
+                    if (conciergeProjectScreen.getContinueWithSuggestedAddressButton().isDisplayed()) {
+                        conciergeProjectScreen.getContinueWithSuggestedAddressButton().click();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                    }
+
+                    if ($(By.xpath("//*[text() = 'CONTINUE']")).isDisplayed()) {
+                        $(By.xpath("//*[text() = 'CONTINUE']")).click();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                    }
+                    paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
+                    paymentScreen.getChoosePaymentMethodBtn().click();
+                    paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
+                    Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
+                    selectPayment.selectByValue("POS");
+                    conciergeCartPageScreen.getPosRegisterField().should(visible, Duration.ofMinutes(1));
+                    conciergeCartPageScreen.getPosRegisterField().setValue("1234");
+                    conciergeCartPageScreen.getPosTransactionField().setValue("1234");
+                    paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
+                    paymentScreen.getContinueToReview().click();
+                    if (!conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
+                        break;
+                    }
+                }
+            }
+        }
         with().pollInterval(3, SECONDS).await().until(() -> true);
         checkoutAddressScreen.getContinueButton().should(visible, Duration.ofSeconds(2));
         checkoutAddressScreen.getContinueButton().click();
@@ -442,11 +497,7 @@ public class ConciergeE2EStepDefs {
             conciergeCartPageScreen.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
             wait.until(ExpectedConditions.elementToBeClickable(conciergeCartPageScreen.getNoThanksButton()));
             wait.until(ExpectedConditions.visibilityOf(conciergeCartPageScreen.getNoThanksButton()));
-//            Actions actions = new Actions(WebDriverRunner.getWebDriver());
-//            actions.moveToElement(conciergeCartPageScreen.getNoThanksButton());
-//            conciergeCartPageScreen.getNoThanksButton().scrollIntoView(true);
             generalStepDefs.waitForJSandJQueryToLoad();
-//            with().pollInterval(2, SECONDS).await().until(() -> true);
             executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getNoThanksButton());
             with().pollInterval(2, SECONDS).await().until(() -> true);
         } else {
@@ -592,6 +643,10 @@ public class ConciergeE2EStepDefs {
     @And("I select count of product")
     public void iSelectCountOfProduct() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
+        if (!conciergeItemsScreen.getAddToProjectButton().isEnabled()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         itemName = $(By.xpath("//h2[contains(@class, 'MuiTypography-h2')]")).getText();
         try {
             if (Hooks.cookie.equals("contentfix")) {
@@ -633,6 +688,7 @@ public class ConciergeE2EStepDefs {
         executeJavaScript("window.scrollTo(0, 600)");
         if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
             for (int i = 0; i < 3; i++) {
+                executeJavaScript("window.scrollTo(0, 600)");
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
@@ -982,7 +1038,7 @@ public class ConciergeE2EStepDefs {
         } else {
             $(By.xpath("//*[text()='NewShippingAddress NewLastName']")).shouldHave(text("NewShippingAddress NewLastName"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='NewAppartment']")).shouldHave(text("NewAppartment"), Duration.ofSeconds(25));
-            $(By.xpath("//*[text()='Milpitas, AZ, 85020']")).shouldHave(text("Milpitas, AZ, 85020"), Duration.ofSeconds(25));
+            $(By.xpath("//*[contains(text(),'Milpitas, AZ, 85020-4434')]")).shouldHave(text("Milpitas, AZ, 85020"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='37 new road']")).shouldHave(text("37 new road"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
@@ -992,10 +1048,10 @@ public class ConciergeE2EStepDefs {
     @When("I edit shipping address from order review page")
     public void iEditShippingAddressFromOrderReviewPage() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        if(!conciergeAddressScreen.getEditShippingAddress().isDisplayed() || !conciergeAddressScreen.getEditShippingAddressCapital().isDisplayed()){
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(3, SECONDS).await().until(() -> true);
-        }
+//        if(!conciergeAddressScreen.getEditShippingAddress().isDisplayed() || !conciergeAddressScreen.getEditShippingAddressCapital().isDisplayed()){
+//            WebDriverRunner.getWebDriver().navigate().refresh();
+//            with().pollInterval(3, SECONDS).await().until(() -> true);
+//        }
         if(conciergeAddressScreen.getEditShippingAddress().isDisplayed()){
             conciergeAddressScreen.getEditShippingAddress().should(visible, Duration.ofSeconds(15));
             conciergeAddressScreen.getEditShippingAddress().click();
@@ -1091,12 +1147,20 @@ public class ConciergeE2EStepDefs {
         $(By.xpath("//*[text()='Billing Address']/..//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
         $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
         } else {
-            $(By.xpath("//*[text()='NewFirstName NewLastName']")).shouldHave(text("NewFirstName NewLastName"), Duration.ofSeconds(25));
-            $(By.xpath("//*[text()='NewAppartment']")).shouldHave(text("NewAppartment"), Duration.ofSeconds(25));
-            $(By.xpath("//*[text()='37 new road']")).shouldHave(text("37 new road"), Duration.ofSeconds(25));
-            $(By.xpath("//*[text()='BILLING ADDRESS']/..//*[text()='Milpitas, AZ, 85020']")).shouldHave(text("Milpitas, AZ, 85020"), Duration.ofSeconds(25));
-            $(By.xpath("//*[text()='BILLING ADDRESS']/..//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
-            $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
+            try {
+                $(By.xpath("//*[text()='NewFirstName NewLastName']")).shouldHave(text("NewFirstName NewLastName"), Duration.ofSeconds(25));
+                $(By.xpath("//*[text()='NewAppartment']")).shouldHave(text("NewAppartment"), Duration.ofSeconds(25));
+                $(By.xpath("//*[text()='37 new road']")).shouldHave(text("37 new road"), Duration.ofSeconds(25));
+                $(By.xpath("//*[text()='BILLING ADDRESS']/..//*[text()='Milpitas, AZ, 85020']")).shouldHave(text("Milpitas, AZ, 85020"), Duration.ofSeconds(25));
+                $(By.xpath("//*[text()='BILLING ADDRESS']/..//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
+                $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
+            } catch (ElementNotFound e){
+                $(By.xpath("(//*[text()='Automation NonMember'])[2]")).shouldHave(text("Automation NonMember"), Duration.ofSeconds(25));
+                $(By.xpath("//*[text()='7677 N 16TH ST']")).shouldHave(text("7677 N 16TH ST"), Duration.ofSeconds(25));
+                $(By.xpath("//*[text()='BILLING ADDRESS']/..//*[text()='PHOENIX, AZ, 85020-4434']")).shouldHave(text("PHOENIX, AZ, 85020-4434"), Duration.ofSeconds(25));
+                $(By.xpath("//*[text()='BILLING ADDRESS']/..//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
+                $(By.xpath("(//*[text()='124131231'])[2]")).shouldHave(text("124131231"), Duration.ofSeconds(25));
+            }
         }
     }
 

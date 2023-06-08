@@ -72,7 +72,7 @@ public class ConciergeItemsStepDefs {
             conciergeItemsScreen.getSelectSize().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
             conciergeItemsScreen.getSelectSize().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
-            sizeList.selectByVisibleText("Bath Sheet") ;
+            sizeList.selectByIndex(1);
             with().pollInterval(2, SECONDS).await().until(() -> true);
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Element not found");
@@ -86,7 +86,21 @@ public class ConciergeItemsStepDefs {
         }
         try {
             Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
-            quantityList.selectByVisibleText("1");
+            quantityList.selectByIndex(2);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Close button is not displayed");
+        }
+        try {
+            Select fillList = new Select(conciergeItemsScreen.getSelectFill());
+            fillList.selectByIndex(1);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Close button is not displayed");
+        }
+        try {
+            Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
+            finishList.selectByIndex(1);
             with().pollInterval(2, SECONDS).await().until(() -> true);
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");

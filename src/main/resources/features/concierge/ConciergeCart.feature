@@ -303,7 +303,6 @@ Feature:Concierge Cart Page
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with productId "prod19500002"
-    When I select size option 'Bath Sheet' for item
     When I select color option
     When I click on add to cart button
     When I click on view cart button

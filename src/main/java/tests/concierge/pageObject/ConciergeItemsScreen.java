@@ -26,6 +26,9 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement selectQTY = $(By.xpath("(//select[contains(@id, 'qty')])[1]"));
 
+    private final SelenideElement selectFill = $(By.xpath("(//select[contains(@id, 'Fill')])[1]"));
+
+
     private final List<SelenideElement> items = $$(By.xpath("//div[@class= 'MuiGrid-root MuiGrid-container']/div"));
 
     private final List<SelenideElement> twoItemsSection = $$(By.xpath("//ul[contains(@class,'MuiGridList-root')]/li[@class='MuiGridListTile-root']"));

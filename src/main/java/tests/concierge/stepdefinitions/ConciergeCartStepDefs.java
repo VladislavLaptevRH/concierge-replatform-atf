@@ -393,9 +393,67 @@ public class ConciergeCartStepDefs {
     @When("I choose POS for payment method")
     public void iChoosePOPForPaymentMethod() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if (!paymentScreen.getChoosePaymentMethodBtnDisplayed().isDisplayed()) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
+                if (!paymentScreen.getChoosePaymentMethodBtnDisplayed().isDisplayed()) {
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    with().pollInterval(3, SECONDS).await().until(() -> true);
+
+                    if (checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
+                        if (!$(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
+                            $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).click();
+                            with().pollInterval(2, SECONDS).await().until(() -> true);
+                        }
+                    }
+
+                    if (!checkoutAddressScreen.getContinuePaymentButton().isDisplayed()) {
+                        WebDriverRunner.getWebDriver().navigate().refresh();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                        abstractStepDefs.iClickOnCheckoutButton();
+                        checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+                        executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
+                        checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+                        checkoutAddressScreen.getContinuePaymentButton().click();
+                        abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+                    }
+                    checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+                    executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
+                    checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+                    checkoutAddressScreen.getContinuePaymentButton().click();
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                    if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
+                        conciergeProjectScreen.getTryAgainButton().click();
+                        with().pollInterval(3, SECONDS).await().until(() -> true);
+                        abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+                        checkoutAddressScreen.getContinuePaymentButton().click();
+                        with().pollInterval(3, SECONDS).await().until(() -> true);
+                    }
+
+                    if (conciergeProjectScreen.getContinueWithSuggestedAddressButton().isDisplayed()) {
+                        conciergeProjectScreen.getContinueWithSuggestedAddressButton().click();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                    }
+
+                    if ($(By.xpath("//*[text() = 'CONTINUE']")).isDisplayed()) {
+                        $(By.xpath("//*[text() = 'CONTINUE']")).click();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                    }
+
+                    if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
+                        conciergeProjectScreen.getTryAgainButton().click();
+                        with().pollInterval(3, SECONDS).await().until(() -> true);
+                        abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+                        checkoutAddressScreen.getContinuePaymentButton().click();
+                        with().pollInterval(3, SECONDS).await().until(() -> true);
+                        $(By.xpath("//*[text() = 'CONTINUE']")).click();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                    }
+                    paymentStepDefs.iClickOnContinueWithOriginalAddressButton();
+                    if (paymentScreen.getChoosePaymentMethodBtnDisplayed().isDisplayed()) {
+                        break;
+                    }
+                }
+            }
         }
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         paymentScreen.getChoosePaymentMethodBtn().click();
