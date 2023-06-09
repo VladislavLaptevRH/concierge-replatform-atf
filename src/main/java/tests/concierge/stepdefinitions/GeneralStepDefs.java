@@ -200,7 +200,7 @@ public class GeneralStepDefs {
             countrySelect.selectByValue(country);
         }
         Select selectState = new Select(checkoutAddressScreen.getStateField());
-        selectState.selectByVisibleText("- Arizona");
+        selectState.selectByValue(state);
         if(checkoutAddressScreen.getZipPostalCodeField().isDisplayed()){
             clearField(checkoutAddressScreen.getZipPostalCodeField());
             checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);
