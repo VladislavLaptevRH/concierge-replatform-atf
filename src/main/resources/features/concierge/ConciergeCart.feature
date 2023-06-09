@@ -99,7 +99,7 @@ Feature:Concierge Cart Page
     When I click on apply uppercase button for "override line item"
     Then I verify line items prices for "PERCENT_OFF"
     When I click on total item line price
-    When I click on remove button from price override
+    Then I click on remove button from price override
     Then I verify that price override was removed
 
   Scenario: Shipping Override (SD, UFD) -  i can introduce only zero in unlimited furniture delivery field, verify that error should be appeared -> Value must be 0.
@@ -165,7 +165,7 @@ Feature:Concierge Cart Page
     When I click on continue with original address button
     Then I verify that total price from cart and from payment page is the same
 
-  Scenario: Promo codes - verify that total price from cart and from payment page is the same after applying promo code
+  Scenario: Promo codes - Total Additional Product Discount message is displayed on review page
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -303,7 +303,6 @@ Feature:Concierge Cart Page
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with productId "prod19500002"
-    When I select size option 'Bath Sheet' for item
     When I select color option
     When I click on add to cart button
     When I click on view cart button
@@ -333,7 +332,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via API with sela item
     When I open cart
     When I choose order classification
     When I click on checkout button

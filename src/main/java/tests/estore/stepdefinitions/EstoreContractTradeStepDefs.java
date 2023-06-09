@@ -11,6 +11,7 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -79,5 +80,7 @@ public class EstoreContractTradeStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='CONFIRM']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='CONFIRM']")).click();
+        $(By.xpath("//*[text()='CONFIRM CHANGE']")).should(interactable, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='CONFIRM CHANGE']")).should(visible, Duration.ofSeconds(20)).click();
     }
 }

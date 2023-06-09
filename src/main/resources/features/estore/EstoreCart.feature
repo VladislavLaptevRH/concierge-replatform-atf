@@ -121,9 +121,10 @@ Feature: Estore Cart Page
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
+    When I choose CAN country from footer
     When I click on estore checkout button
-    When I click on estore no thanks button
-    When I click on same as estore shipping address checkbox
+    And I click on estore no thanks button
+    When I update shipping address for CAN
     Then I verify "CAN" shipping restriction
 
   Scenario: eStore - New York Shipping restriction

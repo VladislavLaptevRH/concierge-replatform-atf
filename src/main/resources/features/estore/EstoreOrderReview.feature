@@ -1,7 +1,6 @@
 @estoreRegression
 @estoreOrderReview
 Feature:Estore Order review
-
   Scenario: Verify address, price, payment information, total, subtotal tags
     Given I log into eStore as "orderreview" user
     When I remove all items from estore cart
@@ -19,6 +18,7 @@ Feature:Estore Order review
     Then I verify that address on order review page the same as on address page
 
   Scenario: Edit payment
+
     Given I log into eStore as "orderreview" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -53,4 +53,3 @@ Feature:Estore Order review
     When I remove payment method which was used earlier
     When I execute payment with credit card on estore
     Then I verify that I'm able to edit shipping and billing address
-

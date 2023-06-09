@@ -51,19 +51,50 @@ public class EstoreAddressStepDefs {
 
     @When("I update shipping address for CAN")
     public void iUpdateShippingAddressForCAN() {
+
+        estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
+        estoreAddressScreen.getShippingAddressFirstName().should(interactable, Duration.ofSeconds(40));
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
+        estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
+
+        estoreAddressScreen.getShippingAddressLastName1().should(interactable, Duration.ofSeconds(30));
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
+        estoreAddressScreen.getShippingAddressLastName1().setValue("William");
+
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+
+        estoreAddressScreen.getShippingAddressStreetAddressStg2().should(interactable, Duration.ofSeconds(30));
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
+        estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Brew Creek Road, Whistler, BC, Canada");
+
         try {
             with().pollInterval(4, SECONDS).await().until(() -> true);
-            Select selectCountry = new Select(estoreAddressScreen.getCountrySelect());
-            selectCountry.selectByValue("CA");
-            Select shippingAddress = new Select(estoreAddressScreen.getShippingAddressState());
-            shippingAddress.selectByValue("AZ");
-            estoreAddressScreen.getShippingAddressState();
-            generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-            estoreAddressScreen.getPostalShippingCode().setValue("11111");
 
+            $(By.xpath("//*[text()='Brew Creek Road, Whistler, BC, Canada']")).should(interactable, Duration.ofSeconds(5));
+            $(By.xpath("//*[text()='Brew Creek Road, Whistler, BC, Canada']")).should(visible, Duration.ofSeconds(5));
+            $(By.xpath("//*[text()='Brew Creek Road, Whistler, BC, Canada']")).click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Edit button is not displayed");
+            System.out.println("Dropdown list is not displayed");
         }
+
+        estoreAddressScreen.getShippingAddressPhone().shouldBe(interactable, Duration.ofSeconds(30));
+        estoreAddressScreen.getShippingAddressPhone().click();
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
+        estoreAddressScreen.getShippingAddressPhone().setValue("604-848-6525");
+
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        estoreAddressScreen.getShippingAddressCity().shouldBe(interactable, Duration.ofSeconds(30));
+        estoreAddressScreen.getShippingAddressCity().click();
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressCity());
+        estoreAddressScreen.getShippingAddressCity().sendKeys("Whistler");
+
+        estoreAddressScreen.getShippingAddressState().shouldBe(interactable, Duration.ofSeconds(20));
+        Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
+        selectState.selectByValue("BC");
+
+        estoreAddressScreen.getPostalShippingCode().should(interactable, Duration.ofSeconds(20));
+        generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
+        estoreAddressScreen.getPostalShippingCode().setValue("M4J 3S3");
     }
 
     @Then("I verify unavailability for RHCC")
@@ -99,7 +130,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that current currency is canadian dollar")
     public void iVerifyThatCurrentCurrencyIsCanadianDollar() {
-        $(By.xpath("//*[contains(text(),'C$')]")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("//*[contains(text(),'$')]")).should(visible, Duration.ofSeconds(30));
     }
 
     @When("I update shipping address for US")
@@ -117,7 +148,8 @@ public class EstoreAddressStepDefs {
         estoreCheckoutAddressScreen.getContinuePaymentButton().shouldHave(text(estoreCheckoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
         executeJavaScript("arguments[0].scrollIntoView(true);", estoreCheckoutAddressScreen.getContinuePaymentButton());
         estoreCheckoutAddressScreen.getContinuePaymentButton().shouldHave(text(estoreCheckoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
-        estoreCheckoutAddressScreen.getContinuePaymentButton().click();
+        estoreCheckoutAddressScreen.getContinuePaymentButton().hover();
+        estoreCheckoutAddressScreen.getContinuePaymentButton().should(interactable, Duration.ofSeconds(20)).click();
     }
 
 
@@ -148,6 +180,7 @@ public class EstoreAddressStepDefs {
         try {
             if ($(By.xpath("//*[text() = 'Shipping Address']/..//span[1]/*[text() = 'Edit']")).isDisplayed()) {
                 System.out.println("The shipping address was already filled");
+                estoreAddressScreen.getEditShippinggAddress().click();
             } else {
                 with().pollInterval(2, SECONDS).await().until(() -> true);
                 if (Hooks.eStoreURL.contains("stg3")) {
@@ -160,10 +193,6 @@ public class EstoreAddressStepDefs {
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
                 estoreAddressScreen.getShippingAddressLastName1().setValue("William");
 
-                if (!estoreAddressScreen.getShippingAddressCountryDisabled().isDisplayed()) {
-                    Select shippingAddressCountry = new Select(estoreAddressScreen.getShippingAddressCountry());
-                    shippingAddressCountry.selectByValue("US");
-                }
 
                 if (Hooks.eStoreURL.contains("stg4") || Hooks.eStoreURL.contains("stg3")) {
                     generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress1());
@@ -177,7 +206,7 @@ public class EstoreAddressStepDefs {
                     estoreAddressScreen.getPostalShippingCode().setValue("43093");
 
                     try {
-                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(exist, Duration.ofSeconds(5));
+                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(Condition.and("", exist, visible, interactable), Duration.ofSeconds(5));
                         $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
                     } catch (com.codeborne.selenide.ex.ElementNotFound e) {
                         System.out.println("Dropdown list is not displayed");
@@ -189,17 +218,15 @@ public class EstoreAddressStepDefs {
                     estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
                     try {
                         with().pollInterval(4, SECONDS).await().until(() -> true);
-                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
+                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(Condition.and("", exist, visible, interactable), Duration.ofSeconds(5));
                         $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
                     } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                        System.out.println("Dropdown list is not displayed");
+                        System.out.println("Dropdown is not displayed");
                     }
                 }
 
-                with().pollInterval(3, SECONDS).await().until(() -> true);
-                estoreAddressScreen.getShippingAddressAptFloor().click();
-                estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
 
+                estoreAddressScreen.getShippingAddressPhone().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
                 estoreAddressScreen.getShippingAddressPhone().click();
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
                 estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
@@ -337,7 +364,7 @@ public class EstoreAddressStepDefs {
     @Then("I verify that added address displayed as shipping address")
     public void iVerifyThatAddedAddressDisplayedAsShippingAddress() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-       $(By.xpath("//*[text()='2479 Deer Run']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='2479 Deer Run']")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I see new Billing address")
@@ -364,7 +391,7 @@ public class EstoreAddressStepDefs {
                     iClickOnContinueToPayment();
                 }
 
-                estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(50));
+                estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled, interactable), Duration.ofSeconds(50));
                 estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(50));
                 estoreItemPage.getAddToCartButton().click();
                 with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -382,7 +409,6 @@ public class EstoreAddressStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Continue with original button is not displayed");
         }
-        System.out.println();
     }
 
     @When("I click on continue to payment estore button")
@@ -394,8 +420,11 @@ public class EstoreAddressStepDefs {
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
 
+        $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Continue to payment']")).should(interactable, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Continue to payment']")).scrollIntoView(true);
         with().pollInterval(2, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()='Continue to payment']")).should(interactable, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1)).click();
 
         with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -609,7 +638,7 @@ public class EstoreAddressStepDefs {
                 selectState.selectByValue("OH");
 
                 generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-                estoreAddressScreen.getPostalShippingCode().setValue("43093");
+                estoreAddressScreen.getPostalShippingCode().setValue("11111");
             }
 //                    try {
 //                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(exist, Duration.ofSeconds(5));

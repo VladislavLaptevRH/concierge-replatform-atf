@@ -46,6 +46,7 @@ Feature: Concierge Project
 
 #   Works only for prodsupport
   Scenario Outline: Verify that user is able to create project for client - <businessClient>
+
     Given I log into Concierge as "associate"
     When I click on projects button
     When I click on new project button
@@ -91,6 +92,7 @@ Feature: Concierge Project
     When I click on projects button
     When I search project "test" by provided "projectName"
     When I click on the first project search result
+    Then I click on remove button from project
     When I click on add new opportunity button
     When I introduce opportunity name
     When I choose preferred contact method
@@ -101,6 +103,7 @@ Feature: Concierge Project
     When I add item to created opportunity
     When I click on save button
     Then I verify that item was added
+    Then I click on remove button from project
 
   Scenario Outline: Verify email estimation - send to client verify the email address received and sent for <email>
     Given I log into Concierge as "associate"
@@ -165,7 +168,7 @@ Feature: Concierge Project
     When I click on projects button
     When I search project "modifyitemsoptions" by provided "projectName"
     When I click on the first project search result
-    When I click on edit options button
+    When I click on edit options button for update item
     When I choose color from option
     Then verify that color was changed
 
@@ -209,7 +212,7 @@ Feature: Concierge Project
     When I click on adjusted price
     When I removed adjusted price
     When Adjusted price was removed
-    Then I click on remove button from price override
+    Then I click on remove button from project
 
   Scenario: Verify shipping overrides in projects
     Given I log into Concierge as "leader"
@@ -224,6 +227,11 @@ Feature: Concierge Project
   Scenario: Verify subtotal/forecast by updating qty for items
     Given I log into Concierge as "leader"
     When I remove all items from cart
+    When I click on projects button
+    When I search project "subototalforecastupdatingqty" by provided "projectName"
+    When I click on the first project search result
+    Then I click on remove button from project
+    When I click on rh concierge logo
     And I remove client from header
     When I go to item "10072181 LOAK" from search field
     And I select count of product
@@ -233,7 +241,7 @@ Feature: Concierge Project
     When I click on go to project button
     When I choose quantity for item from project
     Then I verify that subtotal amount updated according by quantity of items
-    Then I click on remove button from price override
+    Then I click on remove button from project
 
   Scenario: Verify subtotal/forecast by updating by hide/unhide items
     Given I log into Concierge as "leader"
@@ -257,13 +265,13 @@ Feature: Concierge Project
     When I click on "YES" button
 
   Scenario: Verify subtotal/forecast by updating qty overriding line items (all types/ one or more items - apply all functionality)
+
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I click on projects button
     When I search project "overridinglineitems" by provided "projectName"
     When I click on the first project search result
-    Then I click on remove button from price override
-    When I remove all items from cart
+    Then I click on remove button from project
     When I click on rh concierge logo
     And I remove client from header
     When I go to item "10072181 BLK" from search field
@@ -275,15 +283,15 @@ Feature: Concierge Project
     When I click on edit options button
     When I choose quantity for item from project
     Then I verify that forecast value is update according to quantity of item
-    Then I click on remove button from price override
+    Then I click on remove button from project
 
  #10011392 SS
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
     Given I log into Concierge as "leader"
     When I click on projects button
-    When I search project "overridinglineitems" by provided "projectName"
+    When I search project "verifyforecastbypricingtype" by provided "projectName"
     When I click on the first project search result
-    Then I click on remove button from price override
+    Then I click on remove button from project
     When I remove all items from cart
     When I click on rh concierge logo
     And I remove client from header
@@ -294,9 +302,10 @@ Feature: Concierge Project
     When I click on save button
     When I click on go to project button
     When I click on edit options button
+    When I choose quantity for item from project
     When I choose pricing type "<pricingType>"
     Then I verify forecast for "<pricingType>"
-    Then I click on remove button from price override
+    Then I click on remove button from project
     Examples:
       | pricingType |
       | NON-MEMBER  |
@@ -310,7 +319,6 @@ Feature: Concierge Project
     Then user verifies that project page is displayed
 
   Scenario: Verify Tax exempt in projects for Trade projects
-
     Given I log into Concierge as "leader"
     When I click on projects button
     When I search project "TEST_TRADE_3MAR_1PM" by provided "projectName"
@@ -319,15 +327,25 @@ Feature: Concierge Project
     Then I verify that tax is not displayed
 
   Scenario Outline: Verify Member/non Member /Trade/ Non Trade toggle pricing for unclassified business client project
-
     #Need data for stg4
     Given I log into Concierge as "associate"
-    When I remove all items from cart
     When I click on projects button
     When I search project "pricingunclassifiedbusiness" by provided "projectName"
     When I click on the first project search result
+    Then I click on remove button from project
+    When I remove all items from cart
+    When I click on rh concierge logo
+    And I remove client from header
+    When I go to item "12320938 CHR" from search field
+    And I select count of product
+    When I click on add to project button
+    And I choose project by project name "pricingunclassifiedbusiness"
+    When I click on save button
+    When I click on go to project button
+    When I choose quantity for item from project
     When I choose "<pricing>" for unclassified business client project
     Then I verify "<pricing>" for unclassified business client project
+    Then I click on remove button from project
     Examples:
       | pricing    |
       | NON_MEMBER |
@@ -357,6 +375,7 @@ Feature: Concierge Project
     When I click on the moodboard button
     When I verify selections and deselection of project moodboard items
 
+#   Works only for prodsupport
   Scenario Outline: Create New project - Gallery, Design, Trade project types
 
     Given I log into Concierge as "associate"
@@ -404,10 +423,10 @@ Feature: Concierge Project
     When I click on add to project button
     When I click on add new space button
     When I introduces space name
-#    When I click on save button uppercase
-#    When I click on save button
-#    When I click on go to project button
-#    Then I verify that item was added to the selected space
+    When I click on save button uppercase
+    When I click on save button
+    When I click on go to project button
+    Then I verify that item was added to the selected space
 
   Scenario: Verify the address page, pre filled address details and Email address once the project added to cart
 
@@ -470,6 +489,7 @@ Feature: Concierge Project
     Then I verify that sku id has been updated after changes
 
   Scenario: Verify the view all functionality for spaces in project
+
     # Need data for stg4
     Given I log into Concierge as "associate"
     When I click on projects button

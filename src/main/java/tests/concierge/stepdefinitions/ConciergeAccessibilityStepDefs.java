@@ -2,6 +2,7 @@ package tests.concierge.stepdefinitions;
 
 //import jdk.internal.org.jline.utils.Display;
 import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.ex.ElementNotFound;
 import org.openqa.selenium.By;
 import tests.concierge.pageObject.ConciergeLoginPage;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
@@ -78,15 +79,14 @@ public class ConciergeAccessibilityStepDefs {
     }
 
     public void accessSubMenu(String each){
-        try {
-            $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//descendant::span[text()='" + each + "']")).should(visible, Duration.ofSeconds(120)).click();
-        }
-        catch (Exception e){
+//        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//descendant::span[text()='" + each + "']")).isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
-            $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//descendant::span[text()='" + each + "']")).should(visible, Duration.ofSeconds(120)).click();
         }
+        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//descendant::span[text()='" + each + "']")).should(visible, Duration.ofSeconds(120)).click();
         conciergeUserAccountPage.getFirstSubMenu().should(visible, Duration.ofSeconds(40)).click();
+//        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("User verifies that all items from menu are displayed for {string}")
@@ -152,7 +152,7 @@ public class ConciergeAccessibilityStepDefs {
                         continue;
                     }
                     else {
-                        accessSubMenu(each);
+                         accessSubMenu(each);
                     }
                 }
                 break;
@@ -168,8 +168,6 @@ public class ConciergeAccessibilityStepDefs {
                     }
                 }
                 break;
-
         }
-
     }
 }

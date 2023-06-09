@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="1" ignored="0" total="1" passed="0">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Regression" duration-ms="46134" started-at="2023-06-07T17:16:12 EEST" finished-at="2023-06-07T17:16:58 EEST">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@27f723]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test name="Window" duration-ms="46134" started-at="2023-06-07T17:16:12 EEST" finished-at="2023-06-07T17:16:58 EEST">
+      <class name="tests.runners.RunTest">
+        <test-method status="PASS" signature="setUpClass()[pri:0, instance:tests.runners.RunTest@27f723]" name="setUpClass" is-config="true" duration-ms="1221" started-at="2023-06-07T17:16:12 EEST" finished-at="2023-06-07T17:16:13 EEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method status="FAIL" signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@27f723]" name="runScenario" duration-ms="27665" started-at="2023-06-07T17:16:13 EEST" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-06-07T17:16:41 EEST">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the personal Info displayed after Sign in - First, last name and email"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore account]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[1 expected:<1> but was:<2>]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: 1 expected:<1> but was:<2>
+at org.testng.AssertJUnit.assertEquals(AssertJUnit.java:115)
+at tests.estore.stepdefinitions.EstoreAccountStepDefs.iVerifyThatThePersonalInfoIsDisplayed(EstoreAccountStepDefs.java:34)
+at ✽.I verify that the personal info is displayed(file:///Users/mihail/IdeaProjects/concierge-replatform-atf/src/main/resources/features/estore/EstoreAccount.feature:8)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method status="PASS" signature="tearDownClass()[pri:0, instance:tests.runners.RunTest@27f723]" name="tearDownClass" is-config="true" duration-ms="17209" started-at="2023-06-07T17:16:41 EEST" finished-at="2023-06-07T17:16:58 EEST">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- tests.runners.RunTest -->
+    </test> <!-- Window -->
+  </suite> <!-- Regression -->
+</testng-results>

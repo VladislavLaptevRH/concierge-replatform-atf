@@ -7,14 +7,11 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.concierge.pageObject.*;
 import tests.utility.Hooks;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -163,13 +160,20 @@ public class GeneralStepDefs {
         clearField(checkoutAddressScreen.getStreetAddressField());
         checkoutAddressScreen.getStreetAddressField().setValue("North 16th Street");
         with().pollInterval(2, SECONDS).await().until(() -> true);
-//        checkoutAddressScreen.getStreetAddressField().sendKeys(Keys.ENTER);
 
         clearField(checkoutAddressScreen.getAptFloorSuiteField());
         checkoutAddressScreen.getAptFloorSuiteField().setValue("QaApartment");
-
-        clearField(checkoutAddressScreen.getCityField());
-        checkoutAddressScreen.getCityField().setValue("Phoenix");
+        try {
+            executeJavaScript("window.scrollTo(0, 600)");
+//            executeJavaScript("arguments[0].click();", checkoutAddressScreen.getCityField());
+            clearField(checkoutAddressScreen.getCityField());
+            checkoutAddressScreen.getCityField().setValue("Phoenix");
+        } catch (ElementNotInteractableException e){
+            System.out.println("Element not interactable");
+            executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getCityField());
+            clearField(checkoutAddressScreen.getCityField());
+            checkoutAddressScreen.getCityField().setValue("Phoenix");
+        }
 
         clearField(checkoutAddressScreen.getPhoneField());
         checkoutAddressScreen.getPhoneField().setValue("1241312319");
@@ -196,7 +200,7 @@ public class GeneralStepDefs {
             countrySelect.selectByValue(country);
         }
         Select selectState = new Select(checkoutAddressScreen.getStateField());
-        selectState.selectByValue("AZ");
+        selectState.selectByValue(state);
         if(checkoutAddressScreen.getZipPostalCodeField().isDisplayed()){
             clearField(checkoutAddressScreen.getZipPostalCodeField());
             checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);
@@ -507,7 +511,7 @@ public class GeneralStepDefs {
                 "        \"lineItemsInput\": {\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
-                "                    \"sku\": \"63130001 GREY\",\n" +
+                "                    \"sku\": \"10036326 BLWH\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"brand\": \"RH\",\n" +
                 "                    \"giftTo\": \"\",\n" +

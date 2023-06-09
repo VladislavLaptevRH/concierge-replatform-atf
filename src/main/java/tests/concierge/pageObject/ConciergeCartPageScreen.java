@@ -20,6 +20,8 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement orderClassificationInteriorDesign = $(By.xpath("//option[@value='RH Interior Design']"));
 
+    private final SelenideElement closePopUp = $(By.xpath("//button[@data-testid='dialog-title-close-button']"));
+
     private final SelenideElement orderClassificationError = $(By.xpath("//*[text() = 'Please select an option for Order Classification.']"));
 
     private final SelenideElement arlesRectangularDinigTableId = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']/div/div/div[1]//p[@id='listColumn2-Item#']"));
@@ -34,13 +36,11 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement gramTurkishTitle = $(By.xpath("//h3[normalize-space()='802-Gram Turkish Towel Collection']"));
 
-    private final SelenideElement quantityButton = $(By.xpath("//select[@id='quantity_701bfc45-0262-4a2c-bf01-92887d788333_1']"));
+    private final SelenideElement quantityButton = $(By.xpath("//select[contains(@id,'quantity')]"));
 
     private final SelenideElement orderClassificationSelect = $(By.xpath("//*[@name = 'orderClassification']"));
 
     private final SelenideElement membersProgramTitle = $(By.xpath("//h2[@class='MuiTypography-root MuiTypography-h2 MuiTypography-noWrap']"));
-
-    private final SelenideElement closePopUp = $(By.xpath("//button[@data-testid='form-dialog-close-button']"));
 
     private final SelenideElement updateButton = $(By.xpath("//*[text()='UPDATE']"));
 
@@ -113,6 +113,8 @@ public class ConciergeCartPageScreen {
     private final SelenideElement posRegisterField = $(By.xpath("(//div[contains(@class,'MuiInputBase-root MuiOutlinedInput-root')]/input)[2]"));
 
     private final SelenideElement totalMemberPrice = $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-alignRight']"));
+
+    private final SelenideElement totalRegularPrice = $(By.xpath("//*[@data-testid = 'price-for-regular']"));
 
     private final SelenideElement priceForMember = $(By.xpath("//p[@data-testid='price-for-member']"));
 

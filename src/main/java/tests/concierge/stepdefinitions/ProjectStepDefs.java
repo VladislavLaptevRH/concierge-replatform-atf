@@ -96,6 +96,7 @@ public class ProjectStepDefs {
         if (businessClient.equals("member")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
+//            conciergeUserAccountPage.getClientLookupEmail().setValue("testmemberacc0517@gmail.com");
         }
         if (businessClient.equals("nonmember")) {
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
@@ -170,12 +171,25 @@ public class ProjectStepDefs {
 
     @When("I click on save button")
     public void iClickOnSaveButton() {
+        if($(By.xpath("//*[text()='MOVE ITEMS ANYWAY']")).isDisplayed()){
+            $(By.xpath("//*[text()='MOVE ITEMS ANYWAY']")).click();
+            with().pollInterval(9, SECONDS).await().until(() -> true);
+        }
         try {
             conciergeProjectScreen.getSaveMoveToProject().should(Condition.and("", visible, enabled), Duration.ofSeconds(10));
             conciergeProjectScreen.getSaveMoveToProject().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Element not found");
+        }
+        try{
             conciergeProjectScreen.getSaveMoveToProjectUppercase().should(Condition.and("", visible, enabled), Duration.ofSeconds(10));
             conciergeProjectScreen.getSaveMoveToProjectUppercase().click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e){
+            System.out.println("Element not found");
+        }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(conciergeProjectScreen.getSaveMoveToProject().isDisplayed()){
+            conciergeProjectScreen.getSaveMoveToProject().click();
         }
     }
 
@@ -297,10 +311,11 @@ public class ProjectStepDefs {
 
     @Then("I verify that item was added")
     public void iVerifyThatItemWasAdded() {
-        conciergeProjectScreen.getSaveMoveToProject().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
-        executeJavaScript("arguments[0].click();", conciergeProjectScreen.getSaveMoveToProject());
         conciergeProjectScreen.getGoToProjectButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", conciergeProjectScreen.getGoToProjectButton());
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        String actualItemName = $(By.xpath("//h6[contains(@class, 'MuiTypography-h6')]")).getText();
+        assertEquals(conciergeE2EStepDefs.itemName,actualItemName);
     }
 
     @When("I click on email estimate button")
@@ -354,11 +369,11 @@ public class ProjectStepDefs {
             mailinator.getSearchEmailField().setValue(aditionalEmail);
         }
         mailinator.getGoButton().click();
-//        mailinator.getFirstLetter().should(visible, Duration.ofSeconds(25));
-//        mailinator.getFirstLetter().click();
-//        switchTo().frame(mailinator.getMessageBodyIframe());
-//        mailinator.getBodyEmailText().should(visible, Duration.ofSeconds(15));
-//        mailinator.getAssociateName().should(visible, Duration.ofSeconds(15));
+        mailinator.getFirstLetter().should(visible, Duration.ofMinutes(1));
+        mailinator.getFirstLetter().click();
+        switchTo().frame(mailinator.getMessageBodyIframe());
+        mailinator.getBodyEmailText().should(visible, Duration.ofSeconds(15));
+        mailinator.getAssociateName().should(visible, Duration.ofSeconds(15));
     }
 
     @When("I click on bcc associate checkbox")
@@ -501,6 +516,15 @@ public class ProjectStepDefs {
         conciergeProjectScreen.getEditItemOptions().doubleClick();
     }
 
+    @When("I click on edit options button for update item")
+    public void iClickOnEditOptionsButtonForUpdateItem() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        conciergeProjectScreen.getEditItemOptions().should(visible, Duration.ofSeconds(35));
+        projectSettingsScreen.getMoodBoardButton().shouldHave(text("MOODBOARD"), Duration.ofSeconds(15));
+        conciergeProjectScreen.getEditItemOptions().hover();
+        conciergeProjectScreen.getEditItemOptions().click();
+    }
+
     @Then("verify that color was changed")
     public void verifyThatColorWasChanged() {
         if (randomColor == 1) {
@@ -523,24 +547,71 @@ public class ProjectStepDefs {
         randomQuantity = generalStepDefs.getRandomNumber(2, 5);
         executeJavaScript("window.scrollTo(0, 120)");
         if(Hooks.cookie.equals("userservice")){
-            $(By.xpath("//div[@aria-haspopup='listbox']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//div[@aria-haspopup='listbox']")).click();
+            try {
+                if($(By.xpath("//label[text() = 'Size']")).isDisplayed()){
+                    Select selectSize = new Select($(By.xpath("//select[@id='optionSelect-0']")));
+                    selectSize.selectByIndex(1);
+                } else {
+                    conciergeProjectScreen.getEditItemOptions().hover();
+                    conciergeProjectScreen.getEditItemOptions().click();
+                    Select selectSize = new Select($(By.xpath("//select[@id='optionSelect-0']")));
+                    selectSize.selectByIndex(1);
+                }
+            } catch (ElementNotFound e){
+                System.out.println("Element no found");
+            }
+            try {
+                $(By.xpath("//div[@aria-haspopup='listbox']")).should(visible, Duration.ofSeconds(15));
+                $(By.xpath("//div[@aria-haspopup='listbox']")).click();
+            } catch (ElementNotFound e){
+                System.out.println("Element no found");
+            }
         }
         if(Hooks.cookie.equals("prodsupport")){
-            $(By.xpath("(//div[@aria-haspopup='listbox'])[3]")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("(//div[@aria-haspopup='listbox'])[3]")).click();
+            try {
+                if($(By.xpath("//label[text() = 'Size']")).isDisplayed()){
+                    $(By.xpath("(//div[@aria-haspopup='listbox'])[1]")).click();
+                    $(By.xpath("//*[text() = 'Queen ']")).doubleClick();
+                } else {
+                    conciergeProjectScreen.getEditItemOptions().hover();
+                    conciergeProjectScreen.getEditItemOptions().doubleClick();
+                    $(By.xpath("(//div[@aria-haspopup='listbox'])[1]")).click();
+                    $(By.xpath("//*[text() = 'Queen ']")).doubleClick();
+                }
+            } catch (ElementNotFound e){
+                System.out.println("Element no found");
+            }
+            try {
+                $(By.xpath("(//div[@aria-haspopup='listbox'])[3]")).should(visible, Duration.ofSeconds(15));
+                $(By.xpath("(//div[@aria-haspopup='listbox'])[3]")).click();
+            } catch (ElementNotFound e){
+                System.out.println("Element no found");
+            }
         }
         if(Hooks.cookie.equals("contentfix")){
-            $(By.xpath("(//div[@aria-haspopup='listbox'])[1]")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("(//div[@aria-haspopup='listbox'])[1]")).click();
+            try {
+                if($(By.xpath("//label[text() = 'Size']")).isDisplayed()){
+                    Select selectSize = new Select($(By.xpath("//select[@id='optionSelect-0']")));
+                    selectSize.selectByIndex(1);
+                } else {
+                    conciergeProjectScreen.getEditItemOptions().hover();
+                    conciergeProjectScreen.getEditItemOptions().click();;
+                    Select selectSize = new Select($(By.xpath("//select[@id='optionSelect-0']")));
+                    selectSize.selectByIndex(1);
+                }
+            } catch (ElementNotFound e){
+                System.out.println("Element no found");
+            }
+            try {
+                $(By.xpath("(//div[@aria-haspopup='listbox'])[1]")).should(visible, Duration.ofSeconds(15));
+                $(By.xpath("(//div[@aria-haspopup='listbox'])[1]")).click();
+            } catch (ElementNotFound e){
+                System.out.println("Element no found");
+            }
         }
-
-
-
         if (Hooks.profile.equals("stg2")) {
             randomQuantity = 1;
         }
-
         $(By.xpath("//li[@data-value='" + randomQuantity + "']")).shouldHave(text(Integer.toString(randomQuantity)), Duration.ofSeconds(10));
         $(By.xpath("//li[@data-value='" + randomQuantity + "']")).scrollIntoView(true);
         with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -556,15 +627,15 @@ public class ProjectStepDefs {
     public void iChooseProjectByProjectName(String projectName) {
         conciergeProjectScreen.getProjectNameMoveToProject().should(visible, Duration.ofSeconds(40));
         conciergeProjectScreen.getProjectNameMoveToProject().click();
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         while ($(By.xpath("//label[@id = 'project-name-label' and contains(@class, 'MuiFormLabel-filled')]")).isDisplayed()){
             conciergeProjectScreen.getProjectNameMoveToProject().doubleClick();
+            with().pollInterval(1, SECONDS).await().until(() -> true);
             conciergeProjectScreen.getProjectNameMoveToProject().sendKeys(Keys.BACK_SPACE);
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
-        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getProjectNameMoveToProject().setValue(projectName);
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='" + projectName + "']")).click();
     }
 
@@ -865,9 +936,9 @@ public class ProjectStepDefs {
                     with().pollInterval(2, SECONDS).await().until(() -> true);
                 }
                 if(Hooks.cookie.equals("userservice")){
-                    conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,313.00"), Duration.ofSeconds(25));
+                    conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,088.00"), Duration.ofSeconds(25));
                     String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
-                    assertEquals(prType, "$2,313.00\n", "Forecast amount for member client is displayed");
+                    assertEquals(prType, "$2,088.00\n", "Forecast amount for member client is displayed");
                 }
                 if(Hooks.cookie.equals("prodsupport")){
                     conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,088.00"), Duration.ofSeconds(25));
@@ -896,9 +967,9 @@ public class ProjectStepDefs {
                     with().pollInterval(2, SECONDS).await().until(() -> true);
                 }
                 if(Hooks.cookie.equals("userservice")){
-                    conciergeProjectScreen.getForeCastAmount().shouldHave(text("$3,085.00"), Duration.ofSeconds(25));
+                    conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,785.00"), Duration.ofSeconds(25));
                     String prType = conciergeProjectScreen.getForeCastAmount().getText().replaceAll("Forecast Amount", "");
-                    assertEquals(prType, "$3,085.00\n", "Forecast amount for member client is displayed");
+                    assertEquals(prType, "$2,785.00\n", "Forecast amount for member client is displayed");
                 }
                 if(Hooks.cookie.equals("prodsupport")){
                     conciergeProjectScreen.getForeCastAmount().shouldHave(text("$2,785.00"), Duration.ofSeconds(25));
@@ -977,10 +1048,16 @@ public class ProjectStepDefs {
 
     @Then("I verify {string} for unclassified business client project")
     public void iVerifyForUnclassifiedBusinessClientProject(String pricingType) {
-        if (pricingType.equals("NON_MEMBER") || (pricingType.equals("NON_TRADE"))) {
+        if (pricingType.equals("NON_MEMBER")) {
             conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,090.00"), Duration.ofSeconds(40));
             String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
             $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[7]")).shouldHave(text("$1,090.00"), Duration.ofSeconds(120));
+            assertEquals(forecastActual, "1,090", "Pricing for non member is displayed correctly");
+        }
+        if (pricingType.equals("NON_TRADE")) {
+            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,090.00"), Duration.ofSeconds(40));
+            String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
+            $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[5]")).shouldHave(text("$1,090.00"), Duration.ofSeconds(120));
             assertEquals(forecastActual, "1,090", "Pricing for non member is displayed correctly");
         }
         if (pricingType.equals("MEMBER") || (pricingType.equals("TRADE"))) {

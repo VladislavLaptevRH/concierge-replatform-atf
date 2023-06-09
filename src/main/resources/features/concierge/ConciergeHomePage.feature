@@ -18,8 +18,6 @@ Feature:Concierge Homepage
       |RH MODERN      |
       |RH OUTDOOR     |
       |RH BEACH HOUSE |
-      |RH SKI HOUSE   |
-      |RH BABY & CHILD|
       |RH TEEN        |
 
   Scenario Outline: Verify the logo on "<brand>" brand

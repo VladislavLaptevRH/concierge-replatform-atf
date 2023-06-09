@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import tests.concierge.pageObject.*;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -102,10 +103,67 @@ public class PaymentStepDefs {
 
     @When("I execute payment for {string}")
     public void iExecutePaymentFor(String cardType) {
-        if (!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(3, SECONDS).await().until(() -> true);
+            for(int i = 0; i < 3; i++) {
+                if (!paymentScreen.getChoosePaymentMethodBtnDisplayed().isDisplayed()) {
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    with().pollInterval(3, SECONDS).await().until(() -> true);
+
+                    if(checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
+                        if (!$(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
+                            $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).click();
+                            with().pollInterval(2, SECONDS).await().until(() -> true);
+                        }
+                    }
+
+                    if (!checkoutAddressScreen.getContinuePaymentButton().isDisplayed()) {
+                        WebDriverRunner.getWebDriver().navigate().refresh();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                        abstractStepDefs.iClickOnCheckoutButton();
+                        checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+                        executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
+                        checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+                        checkoutAddressScreen.getContinuePaymentButton().click();
+                        abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+                    }
+                    checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+                    executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
+                    checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+                    checkoutAddressScreen.getContinuePaymentButton().click();
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                    if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
+                        conciergeProjectScreen.getTryAgainButton().click();
+                        with().pollInterval(3, SECONDS).await().until(() -> true);
+                        abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+                        checkoutAddressScreen.getContinuePaymentButton().click();
+                        with().pollInterval(3, SECONDS).await().until(() -> true);
+                    }
+
+                    if (conciergeProjectScreen.getContinueWithSuggestedAddressButton().isDisplayed()) {
+                        conciergeProjectScreen.getContinueWithSuggestedAddressButton().click();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                    }
+
+                    if ($(By.xpath("//*[text() = 'CONTINUE']")).isDisplayed()) {
+                        $(By.xpath("//*[text() = 'CONTINUE']")).click();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                    }
+
+                    if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
+                        conciergeProjectScreen.getTryAgainButton().click();
+                        with().pollInterval(3, SECONDS).await().until(() -> true);
+                        abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+                        checkoutAddressScreen.getContinuePaymentButton().click();
+                        with().pollInterval(3, SECONDS).await().until(() -> true);
+                        $(By.xpath("//*[text() = 'CONTINUE']")).click();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                    }
+                    iClickOnContinueWithOriginalAddressButton();
+                    if(paymentScreen.getChoosePaymentMethodBtnDisplayed().isDisplayed()){
+                        break;
+                    }
+            }
         }
+
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         if (cardType.equals("VI")) {
             generalStepDefs.payWith("VI", "4111 1111 4555 1142", "737", "0330");
@@ -135,36 +193,59 @@ public class PaymentStepDefs {
     @When("I choose {string} from payment method")
     public void iChooseRHGiftCardFromPaymentMethod(String card) {
         with().pollInterval(2, SECONDS).await().until(() -> true);
+        WebDriverRunner.getWebDriver().navigate().refresh();
         Select selectPaymentMethod = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPaymentMethod.selectByVisibleText(card);
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        paymentScreen.getRhCardNumberField().setValue("6006493887999902500");
-        paymentScreen.getRhCardPin().setValue("8138");
+        paymentScreen.getRhCardNumberField().setValue("6006493887999902229");
+        paymentScreen.getRhCardPin().setValue("1980");
     }
 
     @Then("I verify the complete billing address")
     public void iVerifyTheCompleteBillingAddress() {
-        paymentScreen.getBillingAddress().shouldHave(text(
-                "BILLING ADDRESS\n" +
-                        "QAFirst Automation\n" +
+        if(Hooks.cookie.equals("prodsupport")){
+            paymentScreen.getBillingAddress().shouldHave(text(
+                    "BILLING ADDRESS\n" +
+                            "QAFirst Automation\n" +
                         "AutomationCompany\n" +
-                        "North 16th Street\n" +
-                        "QaApartment\n" +
-                        "Phoenix, AZ 85020\n" +
-                        "US\n" +
-                        "1241312319\n" +
-                        "Edit"));
+                            "North 16th Street\n" +
+                            "QaApartment\n" +
+                            "Phoenix, AZ 85020\n" +
+                            "US\n" +
+                            "1241312319\n" +
+                            "Edit"));
 
-        assertEquals(paymentScreen.getBillingAddress().getText(),
-                "BILLING ADDRESS\n" +
-                        "QAFirst Automation\n" +
+            assertEquals(paymentScreen.getBillingAddress().getText(),
+                    "BILLING ADDRESS\n" +
+                            "QAFirst Automation\n" +
                         "AutomationCompany\n" +
-                        "North 16th Street\n" +
-                        "QaApartment\n" +
-                        "Phoenix, AZ 85020\n" +
-                        "US\n" +
-                        "1241312319\n" +
-                        "Edit");
+                            "North 16th Street\n" +
+                            "QaApartment\n" +
+                            "Phoenix, AZ 85020\n" +
+                            "US\n" +
+                            "1241312319\n" +
+                            "Edit");
+        } else {
+            paymentScreen.getBillingAddress().shouldHave(text(
+                    "BILLING ADDRESS\n" +
+                            "QAFirst Automation\n" +
+                            "North 16th Street\n" +
+                            "QaApartment\n" +
+                            "Phoenix, AZ 85020\n" +
+                            "US\n" +
+                            "1241312319\n" +
+                            "Edit"));
+
+            assertEquals(paymentScreen.getBillingAddress().getText(),
+                    "BILLING ADDRESS\n" +
+                            "QAFirst Automation\n" +
+                            "North 16th Street\n" +
+                            "QaApartment\n" +
+                            "Phoenix, AZ 85020\n" +
+                            "US\n" +
+                            "1241312319\n" +
+                            "Edit");
+        }
     }
 
     @Then("I verify subtotal, shipping fee, taxes based on postal code")
@@ -172,9 +253,9 @@ public class PaymentStepDefs {
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Estimated Sales Tax for 85020']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$3,222.16']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$5,317.06']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='US $255.16']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$421.06']")).should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that member savings in payment page")
@@ -227,7 +308,7 @@ public class PaymentStepDefs {
 
     @Then("I verify that balance info is displayed")
     public void iVerifyThatBalanceInfoIsDisplayed() {
-        conciergeCartPageScreen.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 2500 has balance of "), Duration.ofSeconds(25));
+        conciergeCartPageScreen.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 2229 has balance of "), Duration.ofSeconds(25));
     }
 
     @When("I execute POS concierge payment")
@@ -237,6 +318,7 @@ public class PaymentStepDefs {
 
     @When("I click on continue with original address button")
     public void iClickOnContinueWithOriginalAddressButton() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if($(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).isDisplayed()){
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).should(Condition.and("", Condition.enabled, Condition.visible), Duration.ofSeconds(60));
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();

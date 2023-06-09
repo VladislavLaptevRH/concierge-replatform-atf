@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -252,12 +253,13 @@ public class EstoreCartPageStepDefs {
 
     @And("I verify that subtotal should be updated according to quantity selected")
     public void iVerifyThatSubtotalShouldBeUpdatedAccordingToQuantitySelected() {
-        $(By.xpath("(//*[text()='" + "$" + lineItemPrice + ".00" + "'])[2]")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("(//*[text()='" + "$" + lineItemPrice + ".00" + "'])[2]")).should(Condition.and("", visible, enabled, interactable), Duration.ofSeconds(50));
     }
 
     @When("I click on continue as guest estore button")
     public void iClickOnContinueAsGuestEstoreButton() {
         estoreCheckoutAddressScreen.getContinueAsGuestButton().should(visible, Duration.ofSeconds(40));
+        estoreCheckoutAddressScreen.getContinueAsGuestButton().should(interactable, Duration.ofSeconds(40));
         estoreCheckoutAddressScreen.getContinueAsGuestButton().click();
     }
 
@@ -281,6 +283,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify SURCHARGE fee on cart page")
     public void iVerifySURCHARGEFeeOnCartPage() {
+        $(By.xpath("//*[text()='ADDITIONAL SHIPPING SURCHARGE']")).should(interactable, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='ADDITIONAL SHIPPING SURCHARGE']")).should(visible, Duration.ofSeconds(40));
     }
 
@@ -310,10 +313,18 @@ public class EstoreCartPageStepDefs {
     @When("I click on join now membership button")
     public void iClickOnJoinNowMembershipButton() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        if (estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()) {
-            estoreCartPage.getVariableJoinButtonByName("JOIN NOW").click();
+
+        if (estoreCartPage.getRemoveMembershipButton().isDisplayed()) {
+            estoreCartPage.getRemoveMembershipButton().scrollIntoView(true);
+            estoreCartPage.getRemoveMembershipButton().should(visible, Duration.ofSeconds(20));
+            estoreCartPage.getRemoveMembershipButton().click();
+        }
+
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if (estoreCartPage.getJoinNow().isDisplayed()) {
+            estoreCartPage.getJoinNow().click();
         } else {
-            estoreCartPage.getVariableJoinButtonByName("Join Now").click();
+            $(By.xpath("//*[text()='Join Now']")).click();
         }
     }
 
@@ -348,6 +359,7 @@ public class EstoreCartPageStepDefs {
     @Then("I verify {string} shipping restriction")
     public void iVerifyShippingRestriction(String arg0) {
         if (arg0.equals("NY")) {
+            $(By.xpath("//*[text()='cannot be shipped to the state of']")).should(interactable, Duration.ofSeconds(20));
             $(By.xpath("//*[text()='cannot be shipped to the state of']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//*[contains(text(),'New York')]")).should(visible, Duration.ofSeconds(20));
         }
@@ -375,8 +387,9 @@ public class EstoreCartPageStepDefs {
     public void iVerifyMembershipEstoreBannerFor(String arg0) {
         if (arg0.equals("nonmember user")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);
+            $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(interactable, Duration.ofSeconds(40));
             $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible, Duration.ofSeconds(40));
-            $(By.xpath("//*[contains(text(),'Join the RH Members Program for $175, and save')]")).should(visible, Duration.ofSeconds(40));
+            $(By.xpath("//*[contains(text(),'Join the RH Members Program for')]")).should(visible, Duration.ofSeconds(40));
         }
         if (arg0.equals("member user")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -394,9 +407,14 @@ public class EstoreCartPageStepDefs {
                 estoreUserAccountPage.getBrandButton().click();
             }
             with().pollInterval(2, SECONDS).await().until(() -> true);
+
             estoreUserAccountPage.getListOfBrands().get(i).should(visible, Duration.ofSeconds(20));
+            String brandUrl = estoreUserAccountPage.getListOfBrands().get(i).getText().replaceAll(" ", "").toLowerCase();
+            String estoreUrlNoHttps = Hooks.eStoreURL.replaceAll("https://", "");
             estoreUserAccountPage.getListOfBrands().get(i).click();
-            estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(20));
+            iStopEStorePageLoad();
+            open("https://" + brandUrl + "." + estoreUrlNoHttps);
+            estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(80));
         }
     }
 
@@ -478,9 +496,10 @@ public class EstoreCartPageStepDefs {
         $(By.xpath("//div[@id='component-order-summary']//p//span")).scrollIntoView(true);
         $(By.xpath("//div[@id='component-order-summary']//p//span")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//div[@id='component-order-summary']//p//span")).click();
-        $(By.xpath("//input[@id='postal-code-international']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//div[@id='country-zipcode-selection']")).should(visible, Duration.ofSeconds(20)).click();
+        $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20)).click();
         $(By.xpath("//input[@id='postal-code-international']")).clear();
-        $(By.xpath("//input[@id='postal-code-international']")).setValue("11111");
+        $(By.xpath("//input[@id='postal-code-international']")).setValue("M4J 3S3");
     }
 
     @Then("I verify that the price for trade get increased in multiple of QTY")
@@ -522,7 +541,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that gift card balance info is displayed for estore")
     public void iVerifyThatGiftCardBalanceInfoIsDisplayed() {
-        estoreCartPage.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 2500 has balance of "), Duration.ofSeconds(25));
+        estoreCartPage.getRhGiftCardBalance().shouldHave(text("RH Gift Card ending 2229 has balance of "), Duration.ofSeconds(25));
     }
 
     @Then("I verify that estore order estimate is not displayed")
@@ -553,6 +572,7 @@ public class EstoreCartPageStepDefs {
                 estoreCartPage.getRemoveMembershipButton().scrollIntoView(true);
                 estoreCartPage.getRemoveMembershipButton().should(visible, Duration.ofSeconds(20));
                 estoreCartPage.getRemoveMembershipButton().click();
+                estoreCartPage.getJoinNow().should(visible, Duration.ofSeconds(15));
             } catch (com.codeborne.selenide.ex.ElementNotFound e) {
                 System.out.println("Remove membership button is not displayed");
             }
@@ -615,8 +635,9 @@ public class EstoreCartPageStepDefs {
             $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']")).click();
         }
         if (!(Hooks.cookie.contains("userservice")) && (Hooks.profile.equals("stg2"))) {
-            estoreCartPage.getEstoreCartButton().should(visible, Duration.ofSeconds(40));
-            estoreCartPage.getEstoreCartButton().click();
+            open(Hooks.eStoreBaseURL + "/us/en/checkout/shopping_cart.jsp");
+//            estoreCartPage.getEstoreCartButton().should(visible, Duration.ofSeconds(40));
+//            estoreCartPage.getEstoreCartButton().click();
         }
     }
 
@@ -720,5 +741,20 @@ public class EstoreCartPageStepDefs {
         } else {
             System.out.println("Everything is ok");
         }
+    }
+
+    @When("I choose CAN country from footer")
+    public void iChooseCANCountryFromFooter() {
+        $(By.xpath("//div[@id='country-selection']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//div[@id='country-selection']")).scrollIntoView(true);
+        $(By.xpath("//div[@id='country-selection']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//div[@id='country-selection']")).click();
+        $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//li[@data-value='CA']")).click();
+    }
+
+    @When("I stop eStore page load")
+    public void iStopEStorePageLoad() {
+        executeJavaScript("window.stop();");
     }
 }

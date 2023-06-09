@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 46.488 sec <<< FAILURE! - in TestSuite
+runScenario(tests.runners.RunTest)  Time elapsed: 27.67 sec  <<< FAILURE!
+java.lang.AssertionError: 1 expected:<1> but was:<2>
+	at org.testng.AssertJUnit.assertEquals(AssertJUnit.java:115)
+	at tests.estore.stepdefinitions.EstoreAccountStepDefs.iVerifyThatThePersonalInfoIsDisplayed(EstoreAccountStepDefs.java:34)
+	at ✽.I verify that the personal info is displayed(file:///Users/mihail/IdeaProjects/concierge-replatform-atf/src/main/resources/features/estore/EstoreAccount.feature:8)
+

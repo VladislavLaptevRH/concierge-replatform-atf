@@ -101,6 +101,10 @@ public class EstoreSearchStepDefs {
         if (Hooks.cookie.contains("userservice")) {
             estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getSortByButton().click();
+        }
+        if (Hooks.cookie.contains("FEATURE_SSR=true")) {
+            estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
+            estorePDPScreen.getSortByButton().click();
         } else {
             estorePDPScreen.getSortButton().should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getSortButton().click();
@@ -138,7 +142,7 @@ public class EstoreSearchStepDefs {
 
     @Then("I verify that search result {string} for search product via sku id is displayed")
     public void iVerifyThatSearchResultForSearchProductViaSkuIdIsDisplayed(String productName) {
-        $(By.xpath("(//*[text()='" + productName + "'])[2]")).should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='" + productName + "'])[2]")).should(Condition.visible, Duration.ofSeconds(30));
     }
 
     @Then("I verify the {string}")
@@ -212,8 +216,6 @@ public class EstoreSearchStepDefs {
 
     @When("I apply multiple facet on estore search page")
     public void iApplyMultipleFacetOnEstoreSearchPage() {
-        $(By.xpath("//*[text()='new arrivals']")).shouldBe(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='new arrivals']")).click();
         $(By.xpath("//*[text()='sale']")).click();
         $(By.xpath("//*[text()='in-stock']")).click();
         $(By.xpath("//*[contains(text(),'RESULTS')]")).shouldBe(visible, Duration.ofSeconds(20));

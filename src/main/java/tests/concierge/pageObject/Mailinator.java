@@ -19,8 +19,8 @@ public class Mailinator {
 
     private final SelenideElement yourEstimateTitle = $(By.xpath("//*[contains(text(),'Your Estimate for')]"));
 
-    private final SelenideElement associateName = $(By.xpath("//*[contains(text(),'Automation Associate')]"));
+    private final SelenideElement associateName = $(By.xpath("//div[contains(text(),'Automation Associate')]"));
 
-    private final SelenideElement bodyEmailText = $(By.xpath("//*[contains(text(),'this is test description')]"));
+    private final SelenideElement bodyEmailText = $(By.xpath("//div[contains(text(),'this is test description')]"));
 
 }

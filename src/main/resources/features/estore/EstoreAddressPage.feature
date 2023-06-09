@@ -81,7 +81,7 @@ Feature: Estore Address Page
     When I click on estore checkout button
     When I click on estore no thanks button
     Then I verify that added address is not present in the grid
-
+#!
   Scenario: eStore Address Page - To verify the edited address updated in the shipping address list
     Given I log into eStore as "addresspage" user
     When I remove all items from estore cart
@@ -127,6 +127,7 @@ Feature: Estore Address Page
     Then I verify that billing address the same as shipping functionality
 
   Scenario: eStore Address Page - Verify the shipping and Billing address for registered User Order review and Order Confirmation page
+
     Given I log into eStore as "addresspage" user
     When I remove all items from estore cart
     When I add item to cart via API for estore

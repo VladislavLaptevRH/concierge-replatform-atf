@@ -42,4 +42,6 @@ public class EstoreHomePage {
     private final SelenideElement wishlist = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between'])[3]"));
     private final SelenideElement accountIcon = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
     private final SelenideElement member = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between'])[4]"));
+
+    private final SelenideElement homePageLogo = $(By.xpath("//a[@href='https://stg2.rhnonprod.com']"));
 }

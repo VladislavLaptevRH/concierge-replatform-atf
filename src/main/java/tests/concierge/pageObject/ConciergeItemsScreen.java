@@ -19,11 +19,15 @@ public class ConciergeItemsScreen {
     private final SelenideElement selectSize = $(By.xpath("(//select[contains(@id, 'Size')])[1]"));
 
     private final SelenideElement selectFabric = $(By.xpath("(//select[contains(@id, 'Fabric')])[1]"));
+
     private final SelenideElement selectColor = $(By.xpath("(//select[contains(@id, 'Color')])[1]"));
 
     private final SelenideElement selectFinish= $(By.xpath("(//select[contains(@id, 'Finish')])[1]"));
 
     private final SelenideElement selectQTY = $(By.xpath("(//select[contains(@id, 'qty')])[1]"));
+
+    private final SelenideElement selectFill = $(By.xpath("(//select[contains(@id, 'Fill')])[1]"));
+
 
     private final List<SelenideElement> items = $$(By.xpath("//div[@class= 'MuiGrid-root MuiGrid-container']/div"));
 

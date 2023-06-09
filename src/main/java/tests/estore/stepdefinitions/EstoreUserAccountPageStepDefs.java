@@ -15,6 +15,7 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -137,7 +138,7 @@ public class EstoreUserAccountPageStepDefs {
 
     @When("I click on add address button")
     public void iClickOnAddAddressButton() {
-        estoreUserAccountPage.getAddAddressButton().should(visible, Duration.ofSeconds(40));
+        estoreUserAccountPage.getAddAddressButton().should(Condition.and("Wait address button", visible, interactable), Duration.ofSeconds(40));
         estoreUserAccountPage.getAddAddressButton().click();
 
     }

@@ -2,6 +2,7 @@ package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.ex.ElementNotFound;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Keys;
 import tests.concierge.pageObject.ConciergeLoginPage;
@@ -103,7 +104,11 @@ public class ConciergeAssociateStepDefs {
         switch (footer) {
             case "RH.COM":
                 switchTo().window(1);
-                assertEquals(Hooks.getCurrentUrl(), "https://rh.com/");
+                try {
+                    assertEquals(Hooks.getCurrentUrl(), "https://rh.com/us/en/");
+                } catch (ElementNotFound e){
+                    assertEquals(Hooks.getCurrentUrl(), "https://rh.com/");
+                }
                 break;
             case "DASHBOARD":
                 conciergeLoginPage.getDashboard().should(visible, Duration.ofSeconds(40));
@@ -150,7 +155,6 @@ public class ConciergeAssociateStepDefs {
                         open(Hooks.conciergeURL);
                         with().pollInterval(5, SECONDS).await().until(() -> true);
                     }
-
                     try {
                         conciergeUserAccountPage.getListOfMainCategories().get(main).click();
                         with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -184,8 +188,14 @@ public class ConciergeAssociateStepDefs {
     @When("I choose gallery number {string} for gallery intl concierge")
     public void iChooseGalleryNumberForGalleryIntlConcierge(String arg0) {
         if(conciergeLoginPage.getCurrentLocation().isDisplayed() || conciergeLoginPage.getLocation().isDisplayed()){
-            conciergeLoginPage.getInputGalleryList().click();
-            $(By.xpath("//*[text()='5: Newport Beach']")).click();
+           if(Hooks.cookie.equals("prodsupport")){
+               conciergeLoginPage.getInputGalleryList().click();
+               $(By.xpath("//*[text()='5: Newport Beach']")).click();
+           } else {
+               conciergeLoginPage.getLocationListButton().click();
+               $(By.xpath("//*[text()='5: Newport Beach']")).click();
+            }
+
         }
         else {
             conciergeLoginPage.getLocationInput().should(visible, Duration.ofSeconds(20));
@@ -256,8 +266,16 @@ public class ConciergeAssociateStepDefs {
     }
 
     @Then("I verify button {string} on homepage")
-    public void iVerifyButtonOnHomepage(String button){
-        conciergeUserAccountPage.getButton(button).should(visible,Duration.ofSeconds(40));
+    public void iVerifyButtonOnHomepage(String button) {
+        if (Hooks.cookie.equals("userservice")) {
+            if(button.equals("RH card lookup")){
+                conciergeUserAccountPage.getButton("RH Card lookup").should(visible, Duration.ofSeconds(40));
+            } else {
+                conciergeUserAccountPage.getButton(button).should(visible, Duration.ofSeconds(40));
+            }
+        } else {
+            conciergeUserAccountPage.getButton(button).should(visible, Duration.ofSeconds(40));
+        }
     }
 
     @Then("I verify search item field and search button")

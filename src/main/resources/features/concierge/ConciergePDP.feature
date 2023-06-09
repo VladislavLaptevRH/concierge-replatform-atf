@@ -11,8 +11,9 @@ Feature: Concierge PDP
     Then I verify that monogram was added for pdp
 
   Scenario: In stock
+
     Given I log into Concierge as "associate"
-    When I go to item "10024887 WGRY" from search field
+    When I go to item "60450996 BLNL" from search field
     When I click on view in stock items
     Then I verify that in stock modal pop up is displayed
 
@@ -48,13 +49,13 @@ Feature: Concierge PDP
   Scenario: Mattress Recycling Fee
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
-    When I go to item "95550731 NONE" from search field
+    When I go to item "10004670 NONE" from search field
     Then I verify mattress recycling fee
 
   Scenario: Replacement Items
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
-    When I go to item "61590226 BRN" from search field
+    When I go to item "10061570 CTCM" from search field
     Then I verify that check for replacements parts button is displayed
     And I verify that replacements parts modal pop up is displayed
 
@@ -73,8 +74,8 @@ Feature: Concierge PDP
     Then I verify that availability, Delivery and returns messaging is displayed for "<items>"
     Examples:
       | items | skuID         |
-      | SO    | 10067107 BWBK |
-      | BO    | 10060297 CLR  |
+      | SO    | 10060978 BMEB |
+      | BO    | 17050043 FOG  |
 
   Scenario: ATC SPO - add to cart
     Given I log into Concierge as "associate"

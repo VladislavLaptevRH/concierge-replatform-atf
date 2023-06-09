@@ -197,6 +197,13 @@ public class EstoreLoginStepDefs {
                 estoreLoginPage.getUsernameField().setValue("automationemptystatefield@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Password1234");
             }
+
+            if (accountRole.equals("buymembership")) {
+                estoreLoginPage.getUsernameField().setValue("automationbytmember@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Password1234");
+                USER_ID_STG2 = "484e852a-2923-49e3-8a57-8074c402fb30";
+                userEmail = "automationbytmember@rh.com";
+            }
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
         }
@@ -205,24 +212,35 @@ public class EstoreLoginStepDefs {
 
     @Given("I log into eStore as contract")
     public void iLogIntoEStoreAsContract() {
-        open(Hooks.eStoreBaseURL + "/contract-sales/contract-sign-in.jsp");
-        estoreLoginPage.getContractTradeEmailField().should(visible, Duration.ofSeconds(10));
-        estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
-        estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
-        estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
-        estoreLoginPage.getSignInButton().click();
-        if (Hooks.profile.equals("stg2")) {
-            USER_ID_STG2 = "c394260f-0ced-4e20-b4ee-3bce53851f21";
-        } else {
-            USER_ID_STG4 = "12fe9c72-c443-43b8-8185-2f627dbda8da";
-        }
+        try {
+            open(Hooks.eStoreBaseURL + "/contract-sales/contract-sign-in.jsp");
+            estoreLoginPage.getContractTradeEmailField().should(visible, Duration.ofSeconds(60));
+            estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
+            estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
+            estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(60));
+            estoreLoginPage.getSignInButton().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            executeJavaScript("window.stop();");
 
+            if (Hooks.profile.equals("stg2")) {
+                USER_ID_STG2 = "a70584e9-5de4-4bfb-8892-8d292bfa374c";
+            } else {
+                USER_ID_STG4 = "12fe9c72-c443-43b8-8185-2f627dbda8da";
+            }
+
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            estoreLoginPage.getContractTradeEmailField().should(visible, Duration.ofSeconds(60));
+            estoreLoginPage.getContractTradeEmailField().setValue("rboorla@rh.com");
+            estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
+            estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(60));
+            estoreLoginPage.getSignInButton().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
     }
 
     @Given("I log into eStore as trade")
     public void iLogIntoEStoreAsTrade() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
-
         try {
             open(Hooks.eStoreBaseURL + "/trade-sales/trade-sign-in.jsp");
             estoreLoginPage.getContractTradeEmailField().should(visible, Duration.ofSeconds(60));
@@ -231,6 +249,9 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
             USER_ID_STG2 = "21e477e0-c989-48db-82ff-4422172805e2";
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            executeJavaScript("window.stop();");
+
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             $(By.xpath("//a[@data-analytics-nav='account-icon']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//a[@data-analytics-nav='account-icon']")).click();
@@ -238,6 +259,8 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getContractTradePasswordField().setValue("20211221164474");
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
+        } catch (org.openqa.selenium.WebDriverException e) {
+            iLogIntoEStoreAsTrade();
         }
     }
 
