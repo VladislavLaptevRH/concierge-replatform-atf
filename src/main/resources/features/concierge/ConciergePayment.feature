@@ -57,6 +57,7 @@ Feature: Concierge Payment
 #    Then I verify the complete billing address
 
   Scenario: Verify the subtotal, shipping fee, taxes based on postal code
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header

@@ -290,6 +290,9 @@ public class ConciergeCartStepDefs {
     @When("I click on remove button from project")
     public void iClickOnRemoveButtonFromProject() {
         generalStepDefs.waitForJSandJQueryToLoad();
+//        if(){
+//
+//        }
         String items = conciergeProjectScreen.getItems().getText().replaceAll("ITEMS: ", "");
         int IntItems = Integer.parseInt(items);
         for(int i = IntItems; i > 0; i--){
@@ -985,52 +988,58 @@ public class ConciergeCartStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        try{
-
-        if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
-            String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
-            open(URL);
-            with().pollInterval(3, SECONDS).await().until(() -> true);
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(3, SECONDS).await().until(() -> true);
-            if (!conciergeCartPageScreen.getClearOrderButton().exists()) {
-                WebDriverRunner.getWebDriver().navigate().refresh();
-                open(URL);
-                with().pollInterval(5, SECONDS).await().until(() -> true);
-            }
-            if (!conciergeCartPageScreen.getClearOrderButton().exists()) {
-                System.out.println("400, 503 error");
-            }
-            conciergeCartPageScreen.getClearOrderButton().should(Condition.be(visible), Duration.ofSeconds(10));
-            conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
-            conciergeCartPageScreen.getClearOrderButton().click();
-            with().pollInterval(2, SECONDS).await().until(() -> true);
-            if (!conciergeCartPageScreen.getClearOrderButtonPopUpHeader().isDisplayed()) {
-                for (int i = 0; i < 3; i++) {
-                    WebDriverRunner.getWebDriver().navigate().refresh();
-                    with().pollInterval(4, SECONDS).await().until(() -> true);
-                    conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
-                    conciergeCartPageScreen.getClearOrderButton().shouldHave(visible, Duration.ofSeconds(10));
-                    conciergeCartPageScreen.getClearOrderButton().click();
-                    with().pollInterval(2, SECONDS).await().until(() -> true);
-                    if (conciergeCartPageScreen.getClearOrderButtonPopUpHeader().isDisplayed()) {
-                        conciergeCartPageScreen.getClearOrderButtonPop().click();
-                        break;
-                    }
-                }
-            } else {
-                conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current order?"), Duration.ofSeconds(30));
-                conciergeCartPageScreen.getClearOrderButtonPop().should(Condition.be(visible), Duration.ofSeconds(10));
-                conciergeCartPageScreen.getClearOrderButtonPop().click();
-                with().pollInterval(5, SECONDS).await().until(() -> true);
-            }
+        if(conciergeUserAccountPage.getCartButtonItemSum().isDisplayed()){
+            GeneralStepDefs.removeLineItemFromConciergeCart();
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
-            conciergeUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(5));
-            conciergeUserAccountPage.getCartButtonItemSum().shouldNot(visible, Duration.ofMinutes(2));
-        }
-    } catch (ElementNotFound e){
-            System.out.println("Element not found");
+            if(conciergeUserAccountPage.getCartButtonItemSum().isDisplayed()){
+                try{
+                    if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
+                        String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
+                        open(URL);
+                        with().pollInterval(3, SECONDS).await().until(() -> true);
+                        WebDriverRunner.getWebDriver().navigate().refresh();
+                        with().pollInterval(3, SECONDS).await().until(() -> true);
+                        if (!conciergeCartPageScreen.getClearOrderButton().exists()) {
+                            WebDriverRunner.getWebDriver().navigate().refresh();
+                            open(URL);
+                            with().pollInterval(5, SECONDS).await().until(() -> true);
+                        }
+                        if (!conciergeCartPageScreen.getClearOrderButton().exists()) {
+                            System.out.println("400, 503 error");
+                        }
+                        conciergeCartPageScreen.getClearOrderButton().should(Condition.be(visible), Duration.ofSeconds(10));
+                        conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
+                        conciergeCartPageScreen.getClearOrderButton().click();
+                        with().pollInterval(2, SECONDS).await().until(() -> true);
+                        if (!conciergeCartPageScreen.getClearOrderButtonPopUpHeader().isDisplayed()) {
+                            for (int i = 0; i < 3; i++) {
+                                WebDriverRunner.getWebDriver().navigate().refresh();
+                                with().pollInterval(4, SECONDS).await().until(() -> true);
+                                conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
+                                conciergeCartPageScreen.getClearOrderButton().shouldHave(visible, Duration.ofSeconds(10));
+                                conciergeCartPageScreen.getClearOrderButton().click();
+                                with().pollInterval(2, SECONDS).await().until(() -> true);
+                                if (conciergeCartPageScreen.getClearOrderButtonPopUpHeader().isDisplayed()) {
+                                    conciergeCartPageScreen.getClearOrderButtonPop().click();
+                                    break;
+                                }
+                            }
+                        } else {
+                            conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current order?"), Duration.ofSeconds(30));
+                            conciergeCartPageScreen.getClearOrderButtonPop().should(Condition.be(visible), Duration.ofSeconds(10));
+                            conciergeCartPageScreen.getClearOrderButtonPop().click();
+                            with().pollInterval(5, SECONDS).await().until(() -> true);
+                        }
+                        WebDriverRunner.getWebDriver().navigate().refresh();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                        conciergeUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(5));
+
+                    }
+                } catch (ElementNotFound e){
+                    System.out.println("Element not found");
+                }
+            }
         }
     }
 

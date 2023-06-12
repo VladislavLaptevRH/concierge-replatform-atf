@@ -106,6 +106,7 @@ Feature: Concierge Project
     Then I click on remove button from project
 
   Scenario Outline: Verify email estimation - send to client verify the email address received and sent for <email>
+
     Given I log into Concierge as "associate"
     When I click on projects button
     When I search project "modifyitemsoptions" by provided "projectName"
@@ -196,6 +197,11 @@ Feature: Concierge Project
   Scenario: Verify price override for item from project
     Given I log into Concierge as "leader"
     When I remove all items from cart
+    When I click on projects button
+    When I search project "overridePrice" by provided "projectName"
+    When I click on the first project search result
+    Then I click on remove button from project
+    When I click on rh concierge logo
     And I remove client from header
     When I go to item "10072181 LOAK" from search field
     And I select count of product
@@ -215,7 +221,13 @@ Feature: Concierge Project
     Then I click on remove button from project
 
   Scenario: Verify shipping overrides in projects
+
     Given I log into Concierge as "leader"
+    When I click on projects button
+    When I search project "overrideshipping" by provided "projectName"
+    When I click on the first project search result
+    Then I click on remove button from project
+    When I click on rh concierge logo
     When I click on projects button
     When I search project "overrideshipping" by provided "projectName"
     When I click on the first project search result
@@ -420,6 +432,7 @@ Feature: Concierge Project
     Given I log into Concierge as "associate"
     When I remove all items from cart
     When I go to item "10010966" from search field
+    And I select count of product
     When I click on add to project button
     When I click on add new space button
     When I introduces space name
@@ -446,6 +459,7 @@ Feature: Concierge Project
     Then I verify the address page, prefilled address and email address must be filled
 
   Scenario: Add Item to Project from Cart - Verify item added and project load in correct space/oppty
+
     #Need data for stg4
     Given I log into Concierge as "associate"
     When I remove all items from cart
