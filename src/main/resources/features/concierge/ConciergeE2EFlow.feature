@@ -40,6 +40,7 @@ Feature: Concierge E2E flow
     Then I verify that confirmation order screen is displayed
 
   Scenario: Verify that if client is a member then redirected to carts screen
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -54,6 +55,7 @@ Feature: Concierge E2E flow
     Then I verify that cart is displayed
 
   Scenario: Verify that if client is a non member then redirected to address screen
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I open product page with "prod1617188" and "63130001"
@@ -89,6 +91,7 @@ Feature: Concierge E2E flow
       | 63130001 |
 
   Scenario: Verify that user is able to add item to project and pay
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
