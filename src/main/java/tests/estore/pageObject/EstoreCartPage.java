@@ -13,6 +13,8 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 public class EstoreCartPage {
 
+    private SelenideElement postalCodeButton = $(By.xpath("//*[@id='component-order-summary']//span"));
+
     private final SelenideElement joinNowCartEstoreButton = $(By.xpath("//*[text() = 'JOIN NOW']"));
 
     private final String variableJoinButton = "//*[text() = '%s']";

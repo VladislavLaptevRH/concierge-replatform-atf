@@ -160,17 +160,21 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore billing address")
     public void iFillEstoreBillingAndShippingAddress() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreAddressScreen.getBillingAddressFirstName().should(visible, Duration.ofSeconds(40));
+        generalStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstName());
         estoreAddressScreen.getBillingAddressFirstName().setValue("Safire");
+        generalStepDefs.clearField(estoreAddressScreen.getBillingAddressLastName());
         estoreAddressScreen.getBillingAddressLastName().setValue("William");
+        generalStepDefs.clearField(estoreAddressScreen.getBillingAddressStreetAddress());
         estoreAddressScreen.getBillingAddressStreetAddress().setValue("4224 Simpson Street");
-        estoreAddressScreen.getBillingAddressAptFloorSuite().setValue("20");
+        generalStepDefs.clearField(estoreAddressScreen.getBillingAddressCity());
         estoreAddressScreen.getBillingAddressCity().setValue("Rock Island");
 
         Select billingAddressState = new Select(estoreAddressScreen.getBillingAddressState());
         billingAddressState.selectByValue("IL");
+        generalStepDefs.clearField(estoreAddressScreen.getBillingAddressPostlaCode());
         estoreAddressScreen.getBillingAddressPostlaCode().setValue("61201");
+        generalStepDefs.clearField(estoreAddressScreen.getBillingAddressPhone());
         estoreAddressScreen.getBillingAddressPhone().setValue("309-793-1846");
     }
 
@@ -382,23 +386,21 @@ public class EstoreAddressStepDefs {
                 $(By.xpath("(//button[contains(@class,'MuiButton-containedPrimary')])[2]")).click();
             } else {
                 if (!estoreItemPage.getAddToCartButton().isDisplayed()) {
-                    WebDriverRunner.getWebDriver().navigate().refresh();
                     with().pollInterval(5, SECONDS).await().until(() -> true);
                 }
                 if (!estoreItemPage.getAddToCartButtonNotDisabled().isDisplayed()) {
-                    WebDriverRunner.getWebDriver().navigate().refresh();
                     with().pollInterval(5, SECONDS).await().until(() -> true);
                     iClickOnContinueToPayment();
                 }
 
                 estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled, interactable), Duration.ofSeconds(50));
                 estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(50));
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 estoreItemPage.getAddToCartButton().click();
                 with().pollInterval(3, SECONDS).await().until(() -> true);
             }
 
             if (estoreItemPage.getAddToCartButton().isDisplayed()) {
-                WebDriverRunner.getWebDriver().navigate().refresh();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 estoreUserAccountPageStepDefs.iClickOnAddAddressButton();
                 iIntroduceDataForNewProfileAddress();
@@ -420,20 +422,21 @@ public class EstoreAddressStepDefs {
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
 
-        $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Continue to payment']")).should(interactable, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Continue to payment']")).should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Continue to payment']")).scrollIntoView(true);
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text()='Continue to payment']")).should(interactable, Duration.ofMinutes(1));
-        $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1)).click();
+        $(By.xpath("//*[text()='Continue to payment']")).should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
+        sleep(10000);
+        $(By.xpath("//span[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1)).click();
 
         with().pollInterval(2, SECONDS).await().until(() -> true);
         if ($(By.xpath("//*[contains(text(), 'required')]")).isDisplayed()) {
             iFillEstoreShippingAndShippingAddress();
-            iFillEstoreShippingEmailAddress();
+//            iFillEstoreShippingEmailAddress();
             estoreE2EStepDefs.iClickOnSameAsShippingAddressCheckbox();
             estoreE2EStepDefs.iClickOnSameAsShippingAddressCheckbox();
-            $(By.xpath("//*[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1));
+            $(By.xpath("//*[text()='Continue to payment']")).should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
+            sleep(3000);
             executeJavaScript("arguments[0].click();", $(By.xpath("//*[text()='Continue to payment']")));
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }

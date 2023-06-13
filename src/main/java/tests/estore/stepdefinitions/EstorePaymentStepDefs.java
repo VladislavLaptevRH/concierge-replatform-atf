@@ -91,19 +91,19 @@ public class EstorePaymentStepDefs {
     @When("I edit estore billing address from PG")
     public void iEditBillingAddressFromPG() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        if($(By.xpath("//*[text() = 'Something went wrong']")).isDisplayed()){
+        if ($(By.xpath("//*[text() = 'Something went wrong']")).isDisplayed()) {
             $(By.xpath("//*[@data-testid = 'dialog-title-close-button']")).click();
         }
-        if($(By.xpath("//a[@href='/checkout/payment.jsp#/']")).isDisplayed()){
-        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).click();
+        if ($(By.xpath("//a[@href='/checkout/payment.jsp#/']")).isDisplayed()) {
+            $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//a[@href='/checkout/payment.jsp#/']")).click();
         }
 
-        if(estoreAddressScreen.getEditBillingAddress().isDisplayed()){
+        if (estoreAddressScreen.getEditBillingAddress().isDisplayed()) {
             estoreAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(20));
             estoreAddressScreen.getEditBillingAddress().click();
         }
-        estoreAddressScreen.getEditBillingAddressNew().should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getEditBillingAddressNew().should(and("", visible, interactable), Duration.ofSeconds(20));
         estoreAddressScreen.getEditBillingAddressNew().click();
         estoreAddressScreen.getBillingAddressFirstNameNew().click();
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstNameNew());
@@ -114,7 +114,7 @@ public class EstorePaymentStepDefs {
     @When("I pay with RHCC for estore item")
     public void iPayWithRHCCForEstoreItem() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()){
+        if (!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
@@ -266,11 +266,11 @@ public class EstorePaymentStepDefs {
     @When("I remove payment method which was used earlier")
     public void iRemovePaymentMethodWhichWasUsedEarlier() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(estoreCartPage.getRemoveButton().isDisplayed()){
-                for(int i = 0; i < 3; i++){
-                    estoreCartPage.getRemoveButton().click();
-                    with().pollInterval(3, SECONDS).await().until(() -> true);
-                    if(!estoreCartPage.getRemoveButton().isDisplayed()) {
+        if (estoreCartPage.getRemoveButton().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
+                estoreCartPage.getRemoveButton().click();
+                with().pollInterval(3, SECONDS).await().until(() -> true);
+                if (!estoreCartPage.getRemoveButton().isDisplayed()) {
                     break;
                 }
             }
@@ -329,6 +329,12 @@ public class EstorePaymentStepDefs {
         }
         estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
 
+    }
+
+    @When("I click on edit estore billing address button on payment page")
+    public void iClickOnEditEstoreBillingAddressButtonOnPaymentPage() {
+        $(By.xpath("//*[text()='EDIT']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='EDIT']")).click();
     }
 
 }

@@ -490,6 +490,8 @@ public class EstoreCartPageStepDefs {
         $(By.xpath("//*[contains(text(),'$')]")).should(visible, Duration.ofSeconds(40));
     }
 
+
+
     @When("I introduces CAN zip code for estore cart")
     public void iIntroducesCANZipCodeForEstoreCart() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -743,18 +745,32 @@ public class EstoreCartPageStepDefs {
         }
     }
 
-    @When("I choose CAN country from footer")
-    public void iChooseCANCountryFromFooter() {
+    @When("I choose {string} country from footer")
+    public void iChooseCANCountryFromFooter(String country) {
         $(By.xpath("//div[@id='country-selection']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//div[@id='country-selection']")).scrollIntoView(true);
         $(By.xpath("//div[@id='country-selection']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//div[@id='country-selection']")).click();
-        $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//li[@data-value='CA']")).click();
+        if (country.equals("CA")) {
+            $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//li[@data-value='CA']")).click();
+        }
+        if (country.equals("US")) {
+            $(By.xpath("//li[@data-value='US']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//li[@data-value='US']")).click();
+        }
+        if(country.equals("US zip code")){
+            System.out.println();
+        }
     }
 
     @When("I stop eStore page load")
     public void iStopEStorePageLoad() {
         executeJavaScript("window.stop();");
+    }
+
+    @When("I choose CAN country from footer")
+    public void iChooseCANCountryFromFooter() {
+
     }
 }

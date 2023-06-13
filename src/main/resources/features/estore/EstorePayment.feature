@@ -47,7 +47,6 @@ Feature: Estore Payment
     Then I verify that I'm able to edit payment
 
   Scenario: eStore Edit Address
-
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -131,6 +130,7 @@ Feature: Estore Payment
     When I click on a place estore order button
     When I click on estore order details button
     Then I verify that shipping address is displayed
+
 
   Scenario: eStore Order total increased after making payment
     Given I log into eStore as "regular" user

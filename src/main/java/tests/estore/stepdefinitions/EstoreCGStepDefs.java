@@ -1,21 +1,25 @@
 package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import tests.concierge.stepdefinitions.AbstractStepDefs;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 
 import java.time.Duration;
+import java.util.concurrent.Callable;
 
 import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static io.netty.handler.codec.rtsp.RtspHeaders.Values.URL;
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
 import static org.awaitility.Awaitility.with;
 
 public class EstoreCGStepDefs {
@@ -23,6 +27,7 @@ public class EstoreCGStepDefs {
     EstoreItemPage estoreItemPage = new EstoreItemPage();
     EstoreCGScreen estoreCGScreen = new EstoreCGScreen();
     EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
+    AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
 
     @Then("I validate the collection name is not empty")
     public void iValidateTheCollectionNameIsNotEmpty() {
@@ -132,12 +137,10 @@ public class EstoreCGStepDefs {
     public void iVerifyThatEnjoyFreeShippingOnAllTextilesBannerIsDisplayed() {
     }
 
-    @When("I go to MO brand")
-    public void iGoToMOBrand() {
-        $(By.xpath("//a[@data-testid='brand-link']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//a[@data-testid='brand-link']")).click();
-        $(By.xpath("//li[@data-analytics-url='https://rhmodern." + Hooks.profile + ".rhnonprod.com/']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//li[@data-analytics-url='https://rhmodern." + Hooks.profile + ".rhnonprod.com/']")).click();
+    @When("I go to {string} brand")
+    public void iGoToMOBrand(String brand) {
+        open("https://rhmodern." + Hooks.profile + ".rhnonprod.com/");
+        $(By.xpath("//*[@data-analytics-worhlogo='worh-logo']")).should(visible, Duration.ofSeconds(25));
     }
 
     @Then("I verify that contract price is used for each product")

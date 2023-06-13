@@ -121,7 +121,7 @@ Feature: Estore Cart Page
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
-    When I choose CAN country from footer
+    When I choose "CA" country from footer
     When I click on estore checkout button
     And I click on estore no thanks button
     When I update shipping address for CAN

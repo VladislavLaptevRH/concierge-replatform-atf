@@ -21,25 +21,33 @@ Feature: eStore Contract and Trade
     When I choose qty for item from estore cart
     Then I verify that the price get increased in multiple of QTY
 
-  Scenario: eStore Contract - Validate the currency for US Zip
+  Scenario: eStore Contract - Validate the currency for US-Zip on PDP
     Given I log into eStore as contract
-    When I add item to cart via API for estore
-    When I open estore cart
-    Then I verify that price for product&line should be in US dollars
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I update "US" postal code on pdp page
+    Then I verify that price for product&line should be in US dollars on PDP page
 
-  Scenario: eStore Contract - Validate the currency for CAN Zip
-    Given I log into eStore as "noaddresses" user
+  Scenario: eStore Contract - Validate the currency for CAN-Zip on PDP
+    Given I log into eStore as contract
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I update "CAN" postal code on pdp page
+    Then I verify that price for product&line should be in US dollars on PDP page
+
+  Scenario: eStore Contract - Validate the currency for US-Zip in cart
+    Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
-    When I choose CAN country from footer
-    When I click on estore checkout button
-    And I click on estore no thanks button
-    When I update shipping address for CAN
-    When I click on same as estore shipping address checkbox
-    When I click on continue to payment estore button
-    When I click on continue with original address estore button
-    Then I verify that current currency is canadian dollar
+    When I update "US" postal code on cart page
+    Then I verify that currency should be in US dollar
+
+  Scenario: eStore Contract - Validate the currency for CAN-Zip in cart
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I update "CA" postal code on cart page
+    Then I verify that currency should be in US dollar
 
   Scenario: eStore Contract - Validate the dropdown's are enabled
     Given I log into eStore as contract
@@ -48,32 +56,44 @@ Feature: eStore Contract and Trade
     When I click on beds
     Then I verify that the dropdown's are enabled
 
-#  Scenario: eStore Contract - Price in the cart - MO
-#    Given I log into eStore as contract
-#    When I remove all items from estore cart
-#    When I go to MO brand
-#    When I go to estore item "17050042 WHT" from search field
-#    When I click on add to cart estore button
-#    And I click on view cart estore button
-#    Then I verify that contract price is used for each product
+  Scenario: eStore Contract - Shipping is different from billing
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on edit estore billing address button
+    When I fill estore billing address
+    When I click on continue to payment estore button
 
-#  Scenario: eStore Contract - Price in the cart - B&C
-#    Given I log into eStore as contract
-#    When I remove all items from estore cart
-#    When I go to B&C brand
-#    When I go to estore item "17050042 WHT" from search field
-#    When I click on add to cart estore button
-#    And I click on view cart estore button
-#    Then I verify that contract price is used for each B&C product
+  Scenario: eStore Contract - Price in the cart - MO
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I go to "MO" brand
+    When I go to estore item "17050042 WHT" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    Then I verify that "contract" price is used for each "MO" product
 
-#  Scenario: eStore Contract - Price in the cart - TN
-#    Given I log into eStore as contract
-#    When I remove all items from estore cart
-#    When I go to TN brand
-#    When I go to estore item "17050042 WHT" from search field
-#    When I click on add to cart estore button
-#    And I click on view cart estore button
-#    Then I verify that contract price is used for each TN product
+  Scenario: eStore Contract - Price in the cart - B&C
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I go to "B&C" brand
+    When I go to estore item "17050042 WHT" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    Then I verify that "contract" price is used for each "B&C" product
+
+  Scenario: eStore Contract - Price in the cart - TN
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I go to "TN" brand
+    When I go to estore item "17050042 WHT" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    Then I verify that "contract" price is used for each "TN" product
 
   Scenario: eStore Contract - Split Payment
     Given I log into eStore as contract
@@ -127,7 +147,6 @@ Feature: eStore Contract and Trade
     Then I verify that gift card balance info is displayed for estore
 
   Scenario: eStore Contract - Edit Payment
-
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -142,26 +161,8 @@ Feature: eStore Contract and Trade
     When I remove payment method which was used earlier
     Then I verify that I'm able to edit payment
 
-#  Scenario: eStore Contract - Price in the cart - MO
-#    Given I log into eStore as contract
-#    When I remove all items from estore cart
-#    When I go to MO brand
-#    When I go to estore item "17050042 WHT" from search field
-#    When I click on add to cart estore button
-#    And I click on view cart estore button
-#    When I click on estore checkout button
-#    And I click on estore no thanks button
-#    When I fill estore shipping address
-#    When I click on same as estore shipping address checkbox
-#    When I click on continue to payment estore button
-#    When I click on continue with original address estore button
-#    When I remove payment method which was used earlier
-#    When I execute payment with credit card on estore
-#    When I click on a place estore order button
-#    Then I verify that estore thank you page is displayed
 
   Scenario: eStore Contract - Verify UFD for different zip codes
-
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
@@ -170,18 +171,7 @@ Feature: eStore Contract and Trade
     When I update postal code in cart
     Then I verify UFD in cart
 
-  Scenario: Change zip code  in cart to US, currency should be in US$
-
-    Given I log into eStore as contract
-    When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    When I click on estore checkout button
-    And I click on estore no thanks button
-
   Scenario Outline: Verify different payment types on payment page
-
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -200,15 +190,6 @@ Feature: eStore Contract and Trade
       | MC       |
       | AX       |
       | DI       |
-
-  Scenario: Change zip code in cart to CAN, currency should be in US$
-    Given I log into eStore as contract
-    When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    When I click on estore checkout button
-    And I click on estore no thanks button
 
   Scenario: eStore Contract - Verify RHCC payment option for Contract user
 
@@ -258,26 +239,27 @@ Feature: eStore Contract and Trade
     Then I verify that estore thank you page is displayed
 
   Scenario: estore Contract - Edit address
-
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
-    When I click on edit shipping address button on estore address page
-    When I fill estore shipping address
-    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
+    When I click on edit estore billing address button on payment page
     When I edit estore billing address from PG
-    When I click on continue to payment estore button
-    When I click on continue with original address estore button
-    Then I see new Billing address
+
+  Scenario: eStore Contract - Verify the subtotal, shipping fee, taxes based on postal code
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I update "CA" postal code on cart page
+    Then I verify the subtotal, shipping fee, taxes based on postal code
 
   Scenario Outline: eStore Contract - Major CC
-
     Given I log into eStore as contract
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -298,11 +280,47 @@ Feature: eStore Contract and Trade
       | AX       |
       | DI       |
 
+  Scenario: eStore Contract - Verify the subtotal, shipping fee, taxes based on postal code
+    Given I log into eStore as contract
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I update "CA" postal code on cart page
+    Then I verify the subtotal, shipping fee, taxes based on postal code
+
 #Trade
   Scenario: eStore Trade Login
     Given I log into eStore as trade
     Then I verify that trade paragraph is displayed
     And I verify that logout from trade user is displayed
+
+  Scenario: eStore Trade - Validate the currency for US-Zip on PDP
+    Given I log into eStore as trade
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I update "US" postal code on pdp page
+    Then I verify that price for product&line should be in US dollars on PDP page
+
+  Scenario: eStore Trade - Validate the currency for CAN-Zip on PDP
+    Given I log into eStore as trade
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I update "CAN" postal code on pdp page
+    Then I verify that price for product&line should be in US dollars on PDP page
+
+  Scenario: eStore Trade - Validate the currency for CAN-Zip in cart
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I update "CA" postal code on cart page
+    Then I verify that currency should be in US dollar
+
+  Scenario: eStore Trade - Validate the currency for US-Zip in cart
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I update "US" postal code on cart page
+    Then I verify that currency should be in US dollar
 
   Scenario: eStore Trade - Price in the cart - RH
     Given I log into eStore as trade
@@ -319,21 +337,6 @@ Feature: eStore Contract and Trade
     When I choose qty for item from estore cart
     Then I verify that the price for trade get increased in multiple of QTY
 
-  Scenario: eStore Trade - Validate the currency for US Zip
-    Given I log into eStore as trade
-    When I remove all items from estore cart
-    When I add item to cart via API for estore
-    When I goes to estore cart for estore
-    Then I verify that price for product&line should be in US dollars
-
-  Scenario: eStore Trade - Validate the currency for CAN Zip
-    Given I log into eStore as trade
-    When I remove all items from estore cart
-    When I add item to cart via API for estore
-    When I goes to estore cart for estore
-    When I introduces CAN zip code for estore cart
-    When I click on confirm button from pop up zip code
-    Then I verify that current currency is canadian dollar
 
   Scenario: eStore Trade - Validate the dropdown's are enabled
 
@@ -344,7 +347,6 @@ Feature: eStore Contract and Trade
     Then I verify that the dropdown's are enabled
 
   Scenario: eStore Trade - Split Payment
-
     Given I log into eStore as trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -492,7 +494,6 @@ Feature: eStore Contract and Trade
     And I click on estore no thanks button
 
   Scenario: estore Trade - Edit address
-
     Given I log into eStore as trade
     When I stop eStore page load
     When I remove all items from estore cart
@@ -511,29 +512,62 @@ Feature: eStore Contract and Trade
     When I click on continue to payment estore button
     When I click on continue with original address estore button
 
-#  Scenario: eStore Trade - Price in the cart - MO
-#    Given I log into eStore as trade
-#    When I remove all items from estore cart
-#    When I go to MO brand
-#    When I go to estore item "17050042 WHT" from search field
-#    When I click on add to cart estore button
-#    And I click on view cart estore button
-#    Then I verify that trade price is used for each product
+  Scenario: eStore Trade - Price in the cart - MO
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I go to "MO" brand
+    When I go to estore item "17050042 WHT" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    Then I verify that "trade" price is used for each "MO" product
 
-#  Scenario: eStore Trade - Price in the cart - B&C
-#    Given I log into eStore as trade
-#    When I remove all items from estore cart
-#    When I go to B&C brand
-#    When I go to estore item "17050042 WHT" from search field
-#    When I click on add to cart estore button
-#    And I click on view cart estore button
-#    Then I verify that trade price is used for each B&C product
+  Scenario: eStore Trade - Price in the cart - B&C
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I go to "B&C" brand
+    When I go to estore item "17050042 WHT" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    Then I verify that "trade" price is used for each "B&C" product
 
-#  Scenario: eStore Trade - Price in the cart - TN
-#    Given I log into eStore as trade
-#    When I remove all items from estore cart
-#    When I go to TN brand
-#    When I go to estore item "17050042 WHT" from search field
-#    When I click on add to cart estore button
-#    And I click on view cart estore button
-#    Then I verify that trade price is used for each TN product
+  Scenario: eStore Trade - Price in the cart - TN
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I go to "TN" brand
+    When I go to estore item "17050042 WHT" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    Then I verify that "trade" price is used for each "TN" product
+
+  Scenario: eStore Trade - Edit Address
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I click on edit estore billing address button on payment page
+    When I edit estore billing address from PG
+
+  Scenario: eStore Trade - Shipping is different from billing
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on edit estore billing address button
+    When I fill estore billing address
+    When I click on continue to payment estore button
+
+  Scenario: eStore Trade - Verify the subtotal, shipping fee, taxes based on postal code
+    Given I log into eStore as trade
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I update "CA" postal code on cart page
+    Then I verify the subtotal, shipping fee, taxes based on postal code
