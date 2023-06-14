@@ -103,7 +103,6 @@ Feature: Concierge Order review
     Then I verify spo order & terms review signature
 
   Scenario: Verify all the line items on the order review page
-
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I add item to cart via API
