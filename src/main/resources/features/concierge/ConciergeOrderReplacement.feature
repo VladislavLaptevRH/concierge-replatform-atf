@@ -3,7 +3,6 @@
 Feature: Order replacement
 
   Scenario: concierge - Order replacement - Visa payment
-
     Given I log into intl Concierge as "associate"
     When I choose gallery number "701" for gallery intl concierge
     When I remove all items from cart via UI
