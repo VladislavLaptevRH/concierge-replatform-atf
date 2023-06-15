@@ -30,7 +30,7 @@ Feature: Estore PDP
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
-    When I update postal code on pdp page
+    When I update "CAN" postal code on pdp page
     Then verify the product price as per the postal code
 
   Scenario Outline: Verify Line Items functionality:
@@ -70,7 +70,7 @@ Feature: Estore PDP
       Given I log into eStore as "regular" user
       When I remove all items from estore cart
       When I open product page with "prod13800635" and "17050043" with "INDG" for estore
-      When I choose CAN country from footer
+      When I update "CAN" postal code on pdp page
       Then I verify the product price for the selected country
 
     Scenario: Verify the product price on PDP for non-sale cushion and frame product

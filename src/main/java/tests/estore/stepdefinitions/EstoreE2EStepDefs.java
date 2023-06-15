@@ -40,7 +40,6 @@ public class EstoreE2EStepDefs {
     EstoreCheckoutAddressScreen estoreCheckoutAddressScreen = new EstoreCheckoutAddressScreen();
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
-    EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
     String countOfItems = null;
     WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));

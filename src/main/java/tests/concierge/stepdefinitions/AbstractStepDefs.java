@@ -1,6 +1,7 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import tests.concierge.pageObject.*;
 import io.cucumber.java.en.And;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 import tests.utility.Hooks;
 
 import java.time.Duration;
+import java.util.concurrent.Callable;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;

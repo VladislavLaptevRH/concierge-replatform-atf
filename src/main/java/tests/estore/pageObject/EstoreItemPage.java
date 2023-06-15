@@ -29,6 +29,7 @@ public class EstoreItemPage {
     private final SelenideElement addToCartButton = $(By.xpath("(//button[@data-testid='add-to-cart-dialog-opener'])[1]"));
 
     private final SelenideElement addToCartButtonNotDisabled = $(By.xpath("(//button[@data-testid='add-to-cart-dialog-opener'])[1][not(@disabled)]"));
+
     private final SelenideElement addToCartDisabledButton = $(By.xpath("(//*[@data-testid= 'add-to-cart-dialog-opener'])[1][@disabled]"));
 
     private final SelenideElement selectFabric = $(By.xpath("(//select[contains(@id, 'Fabric')])[1]"));
