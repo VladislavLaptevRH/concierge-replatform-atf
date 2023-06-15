@@ -103,7 +103,7 @@ public class EstorePaymentStepDefs {
             estoreAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(20));
             estoreAddressScreen.getEditBillingAddress().click();
         }
-        estoreAddressScreen.getEditBillingAddressNew().should(and("", visible, interactable), Duration.ofSeconds(20));
+        estoreAddressScreen.getEditBillingAddressNew().should(and("Visible,interactable", visible, interactable), Duration.ofSeconds(20));
         estoreAddressScreen.getEditBillingAddressNew().click();
         estoreAddressScreen.getBillingAddressFirstNameNew().click();
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstNameNew());

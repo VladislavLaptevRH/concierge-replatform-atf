@@ -192,9 +192,6 @@ public class EstoreGeneralStepDefs {
         clearField(estoreCheckoutAddressScreen.getLastNameField());
         estoreCheckoutAddressScreen.getLastNameField().setValue("Automation");
 
-//        clearField(estoreCheckoutAddressScreen.getCompanyNameField());
-//        estoreCheckoutAddressScreen.getCompanyNameField().setValue("AutomationCompany");
-
         clearField(estoreCheckoutAddressScreen.getStreetAddressField());
         estoreCheckoutAddressScreen.getStreetAddressField().setValue("QaStreet");
 

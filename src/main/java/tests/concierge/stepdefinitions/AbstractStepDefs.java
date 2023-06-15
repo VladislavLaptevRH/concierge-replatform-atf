@@ -35,10 +35,6 @@ public class AbstractStepDefs {
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
 
 
-    public Callable<Boolean> assertionWaitForTitle(String start) {
-        return () -> Selenide.title().toLowerCase().startsWith(start);
-    }
-
     @When("I clicks on a random menu item")
     public void iClicksOnARandomMenuItem() {
         for (int main = 1; main < conciergeUserAccountPage.getListOfMainCategories().size(); main++) {

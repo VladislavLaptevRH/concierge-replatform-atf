@@ -491,7 +491,6 @@ public class EstoreCartPageStepDefs {
     }
 
 
-
     @When("I introduces CAN zip code for estore cart")
     public void iIntroducesCANZipCodeForEstoreCart() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -759,9 +758,6 @@ public class EstoreCartPageStepDefs {
             $(By.xpath("//li[@data-value='US']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//li[@data-value='US']")).click();
         }
-        if(country.equals("US zip code")){
-            System.out.println();
-        }
     }
 
     @When("I stop eStore page load")
@@ -769,8 +765,4 @@ public class EstoreCartPageStepDefs {
         executeJavaScript("window.stop();");
     }
 
-    @When("I choose CAN country from footer")
-    public void iChooseCANCountryFromFooter() {
-
-    }
 }
