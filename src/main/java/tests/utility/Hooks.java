@@ -67,7 +67,7 @@ public class Hooks {
         }
 
         if (cookie == null) {
-            cookie = "contentfix";
+            cookie = "releasetues";
 //            System.out.println("Tests are running without cookie or endpoint");
         } else {
             System.out.println("Tests are running with endpoint = " + cookie);
