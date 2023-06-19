@@ -112,6 +112,7 @@ public class EstoreContractTradeStepDefs {
     public void iVerifyTheSubtotalShippingFeeTaxesBasedOnPostalCode() {
         $(By.xpath("//*[text()='Subtotal ']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Standard Delivery Shipping']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Estimated Sales Tax for 19701']")).shouldNotBe(visible, Duration.ofSeconds(20));
 
     }
 }

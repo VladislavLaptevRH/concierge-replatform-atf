@@ -426,7 +426,7 @@ public class EstoreAddressStepDefs {
         $(By.xpath("//*[text()='Continue to payment']")).scrollIntoView(true);
         with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Continue to payment']")).should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
-        with().pollInterval(10, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//span[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1)).click();
 
         with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -645,4 +645,13 @@ public class EstoreAddressStepDefs {
         }
     }
 
+    @When("I choose {string} shipping address")
+    public void iChooseMDShippingAddress(String state) {
+        estoreAddressScreen.selectAddressState(state);
+    }
+
+    @When("I introduct the following postal code {string} for shipping address")
+    public void iIntroductTheFollowingPostalCodeForShippingAddress(String postalCode) {
+        estoreAddressScreen.introducePostalCode(postalCode);
+    }
 }
