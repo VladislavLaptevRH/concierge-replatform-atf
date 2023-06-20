@@ -416,18 +416,18 @@ public class EstoreAddressStepDefs {
     @When("I click on continue to payment estore button")
     public void iClickOnContinueToPayment() {
         with().pollInterval(7, SECONDS).await().until(() -> true);
-        if (!$(By.xpath("//*[text()='Continue to payment']")).isDisplayed()) {
+        if (!$(By.xpath("//button[@type='submit']")).isDisplayed()) {
             estoreAbstractStepDefs.iClickOnCheckoutButton();
             estoreE2EStepDefs.iClickOnNoThanksEstoreButton();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
 
-        $(By.xpath("//*[text()='Continue to payment']")).should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Continue to payment']")).scrollIntoView(true);
+        $(By.xpath("//button[@type='submit']")).should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
+        $(By.xpath("//button[@type='submit']")).scrollIntoView(true);
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text()='Continue to payment']")).should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
+        $(By.xpath("//button[@type='submit']")).should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        $(By.xpath("//span[text()='Continue to payment']")).should(visible, Duration.ofMinutes(1)).click();
+        $(By.xpath("//button[@type='submit']")).should(visible, Duration.ofMinutes(1)).click();
 
         with().pollInterval(2, SECONDS).await().until(() -> true);
         if ($(By.xpath("//*[contains(text(), 'required')]")).isDisplayed()) {
@@ -436,7 +436,7 @@ public class EstoreAddressStepDefs {
             estoreE2EStepDefs.iClickOnSameAsShippingAddressCheckbox();
             $(By.xpath("//*[text()='Continue to payment']")).should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
             with().pollInterval(3, SECONDS).await().until(() -> true);
-            executeJavaScript("arguments[0].click();", $(By.xpath("//*[text()='Continue to payment']")));
+            executeJavaScript("arguments[0].click();", $(By.xpath("//button[@type='submit']")));
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
     }
