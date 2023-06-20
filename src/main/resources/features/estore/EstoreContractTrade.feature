@@ -224,7 +224,7 @@ Feature: eStore Contract and Trade
   Scenario: estore Contract - Checkout and place order
     Given I log into eStore as contract
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
+    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -451,7 +451,7 @@ Feature: eStore Contract and Trade
   Scenario: estore Trade - Checkout and place order
     Given I log into eStore as trade
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
+    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -478,7 +478,7 @@ Feature: eStore Contract and Trade
   Scenario: Change zip code in cart to US, currency should be in US$
     Given I log into eStore as trade
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
+    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -487,7 +487,7 @@ Feature: eStore Contract and Trade
   Scenario: Change zip code in cart to CAN, currency should be in US$
     Given I log into eStore as trade
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050045" with "WHT" for estore
+    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -569,5 +569,11 @@ Feature: eStore Contract and Trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
-    When I update "CA" postal code on cart page
+    When I click on estore checkout button
+    When I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
+    When I choose "DE" shipping address
+    When I introduct the following postal code "19701" for shipping address
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
     Then I verify the subtotal, shipping fee, taxes based on postal code
