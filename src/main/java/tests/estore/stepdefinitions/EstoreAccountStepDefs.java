@@ -128,7 +128,7 @@ public class EstoreAccountStepDefs {
 
     @When("I choose country for eStore from footer")
     public void iChooseCountryForEStoreFromFooter() {
-        if (Hooks.country.equals("UK")) {
+        if (Hooks.country.equals("GB")) {
             estoreHomePage.chooseGBCountry();
         }
         if (Hooks.country.equals("CA")) {
