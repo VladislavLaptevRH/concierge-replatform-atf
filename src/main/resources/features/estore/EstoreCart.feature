@@ -4,6 +4,7 @@ Feature: Estore Cart Page
 
   Scenario: Remove item from cart
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -12,6 +13,7 @@ Feature: Estore Cart Page
 
   Scenario: Apply/Remove employee discount
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -21,6 +23,7 @@ Feature: Estore Cart Page
 
   Scenario: Apply/Remove promotion code
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -30,6 +33,7 @@ Feature: Estore Cart Page
 
   Scenario: Zip code validation in cart
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -39,6 +43,7 @@ Feature: Estore Cart Page
 
   Scenario: eStore - Membership price in cart
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -46,6 +51,7 @@ Feature: Estore Cart Page
 
   Scenario: eStore - Line item quantity update
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -55,6 +61,7 @@ Feature: Estore Cart Page
 
   Scenario: Place order for guest user
     Given I remove all items from estore cart
+    When I choose country for eStore from footer
     When I open product page with "prod13800635" and "17050042" with "IRON" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
@@ -72,6 +79,7 @@ Feature: Estore Cart Page
 
   Scenario: eStore - Add UFD item to Cart
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
     When I open estore cart
@@ -79,6 +87,7 @@ Feature: Estore Cart Page
 
   Scenario: eStore - Add Surcharge item to Cart
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add product "prod1617188" and sku "61690405 BRWN" to cart via API for estore
     When I open estore cart
@@ -88,6 +97,7 @@ Feature: Estore Cart Page
 
   Scenario: eStore - Gift Box fee in cart
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I add item to cart via API for estore
     When I open estore cart
     When I click on zipcode estore button
@@ -97,6 +107,7 @@ Feature: Estore Cart Page
 
   Scenario: eStore - Membership price for US and CAN
     Given I remove all items from estore cart
+    When I choose country for eStore from footer
     When I add item to cart via API for estore
     When I goes to estore cart for estore
     When I click on join the rh members program from footer
@@ -110,6 +121,7 @@ Feature: Estore Cart Page
 
   Scenario: eStore - Membership pop up for guest user
     Given I remove all items from estore cart
+    When I choose country for eStore from footer
     When I open product page with "prod13800635" and "17050042" with "IRON" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
@@ -118,6 +130,7 @@ Feature: Estore Cart Page
 
   Scenario: eStore - CAN Shipping restriction
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -129,6 +142,7 @@ Feature: Estore Cart Page
 
   Scenario: eStore - New York Shipping restriction
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with NY restriction item
     When I click on add to cart estore button
@@ -151,11 +165,13 @@ Feature: Estore Cart Page
 
   Scenario: eStore Add products from all brands to cart
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     Then I verify that I'm able to add products from all brands to cart
 
- Scenario: eStore Membership banner for member user
+  Scenario: eStore Membership banner for member user
     Given I log into eStore as "member" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -163,6 +179,7 @@ Feature: Estore Cart Page
 
   Scenario: eStore Membership banner for non-member user
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -170,6 +187,7 @@ Feature: Estore Cart Page
 
   Scenario: eStore Cart persistence in all brands
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -178,6 +196,7 @@ Feature: Estore Cart Page
   Scenario: Verify the cart subtotal when regular user added membership card with other sku's.
   Member prices should be applicable
     Given I log into eStore as "regularAddMembership" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -189,6 +208,7 @@ Feature: Estore Cart Page
 
   Scenario: Verify state field Empty dropdown issue for International billing address
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -201,12 +221,14 @@ Feature: Estore Cart Page
 
   Scenario: Verify the standard delivery charges  (Free & applicable charges)
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
 
   Scenario: Add Membership and verify order total in order estimate
     Given I log into eStore as "regularAddMembership" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -216,6 +238,7 @@ Feature: Estore Cart Page
 
   Scenario: Verify the standard delivery charges (Free & applicable charges)
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
