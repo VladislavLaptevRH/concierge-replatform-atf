@@ -13,7 +13,11 @@ Java11Pipeline pipeline = new Java11Pipeline(this, s, env);
 
 
 pipeline.standardTemplate { label ->
-    properties([parameters([choice(choices: ['stg2', 'stg3', 'stg4', 'prod'], description: 'Select Environment to build', name: 'ENVIRONMENT'), choice(choices: ['releasethurs', 'releasetues&FEATURE_SSR=true','releasethurs&FEATURE_SSR=true','releasetues','contentfix', 'contentfix&FEATURE_SUPPRESS_UK=false', 'releasetues&FEATURE_SUPPRESS_UK=false', 'releasetues&FEATURE_SSR=true&FEATURE_SUPPRESS_UK=false','contentfix&FEATURE_SSR=true', 'poc&FEATURE_SSR=true', 'poc', 'FEATURE_SSR=true', 'cartcheckout', 'cartcheckout&FEATURE_SSR=true', 'rhr', 'rhr&FEATURE_SSR=true', 'intl', 'hotfix','userservice','userservice&FEATURE_SSR=true'], description: 'Select optional endpoint value', name: 'ENDPOINT')], choice(choices: ['US', 'GB', 'CA'], description: 'Select country to run', name: 'COUNTRY'))])
+   properties([parameters([
+         choice(choices: ['stg4', 'stg3', 'stg2', 'prod'], description: 'Select Environment to build', name: 'ENVIRONMENT'),
+     choice(choices: ['no_endpoint','no_endpoint&FEATURE_SSR=true', 'search', 'contentfix', 'cartcheckout', 'searchdev', 'rhrdev', 'rhr','prodsupportdev&FEATURE_SSR=true','prodsupportdev'], description: 'Select optional endpoint value', name: 'ENDPOINT'),
+       choice(choices: ['US', 'GB', 'CA'], description: 'Select Country to build', name: 'COUNTRY')
+     ])])
     node(label) {
         try {
             stage('checkout') {
