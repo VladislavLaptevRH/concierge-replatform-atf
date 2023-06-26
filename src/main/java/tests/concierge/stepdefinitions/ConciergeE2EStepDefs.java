@@ -1231,7 +1231,7 @@ public class ConciergeE2EStepDefs {
             try {
                 Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
                 sizeList.selectByVisibleText("Queen");
-            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e){
+            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
                 System.out.println("Element not found");
             }
             with().pollInterval(1, SECONDS).await().until(() -> true);
@@ -1239,26 +1239,26 @@ public class ConciergeE2EStepDefs {
             Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
             finishList.selectByVisibleText("Antiqued Grey Oak");
             with().pollInterval(1, SECONDS).await().until(() -> true);
-            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e){
+            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
                 System.out.println("Element not found");
             }
             try {
                 Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
                 finishList.selectByVisibleText("Antiqued Grey Oak");
-            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e){
+            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
                 System.out.println("Element not found");
             }
             try {
                 Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
                 finishList.selectByVisibleText("Antiqued Grey Oak");
-            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e){
+            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
                 System.out.println("Element not found");
             }
             with().pollInterval(1, SECONDS).await().until(() -> true);
             try {
                 Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
                 quantityList.selectByVisibleText("1");
-            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e){
+            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
                 System.out.println("Element not found");
             }
         }
