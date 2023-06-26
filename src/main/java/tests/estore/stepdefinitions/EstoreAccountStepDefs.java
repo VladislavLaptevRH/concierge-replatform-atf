@@ -131,6 +131,7 @@ public class EstoreAccountStepDefs {
         if (Hooks.country.equals("GB")) {
             estoreHomePage.chooseGBCountry();
         }
+
         if (Hooks.country.equals("CA")) {
             estoreHomePage.chooseCACountry();
         }

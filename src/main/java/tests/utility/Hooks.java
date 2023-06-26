@@ -67,13 +67,11 @@ public class Hooks {
         cookie = System.getenv("ENDPOINT");
         country = System.getenv("COUNTRY");
 
-        System.out.println("Test are running for the following country" + country);
-        System.out.println("Test are running for the following country");
-
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
         } else {
             System.out.println("Tests are running on " + profile + " environment");
+            System.out.println("Tests are running on " + country + " country");
         }
 
         if (cookie == null) {
@@ -106,6 +104,7 @@ public class Hooks {
         leaderPassword = (String) properties.get("leaderPassword");
         leaderLogin = (String) properties.get("leaderLogin");
     }
+
 
     /**
      * Set up URL + endpoint  for eStore
@@ -152,6 +151,7 @@ public class Hooks {
      */
     @Before("@estoreRegression")
     public void initWebDrivereStore() {
+        System.out.println("Test are running for the following country" + country);
         ConfigFileReader();
         configureEstoreURL();
         setupChromeArguments();

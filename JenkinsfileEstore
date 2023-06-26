@@ -24,7 +24,7 @@ pipeline.standardTemplate { label ->
                 pipeline.checkoutCode();
                 echo "Regression will be done on environment ${params.ENVIRONMENT}"
                 echo "Regression will be done with cookie ${params.ENDPOINT}"
-                echo "Regression will be done with cookie ${params.COUNTRY}"
+                echo "Regression will be done with country ${params.COUNTRY}"
 
                 environment "${params.ENVIRONMENT}"
             }
