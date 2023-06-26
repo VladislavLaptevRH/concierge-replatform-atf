@@ -105,6 +105,9 @@ public class Hooks {
         leaderLogin = (String) properties.get("leaderLogin");
     }
 
+    private void displayCountry() {
+        System.out.println("display country");
+    }
 
     /**
      * Set up URL + endpoint  for eStore
@@ -151,8 +154,7 @@ public class Hooks {
      */
     @Before("@estoreRegression")
     public void initWebDrivereStore() {
-        System.out.println("-------Jenkins");
-        System.out.println("Tests are running on " + country + " country");
+        displayCountry();
         ConfigFileReader();
         configureEstoreURL();
         setupChromeArguments();
@@ -174,8 +176,6 @@ public class Hooks {
      * Initialize Web driver
      */
     public void setUPWebDriver(String url) {
-        System.out.println("-------Jenkins");
-        System.out.println("Tests are running on " + country + " country");
         System.out.println("Inside initDriver method");
         WebDriverManager.chromedriver().setup();
         Configuration.driverManagerEnabled = true;
