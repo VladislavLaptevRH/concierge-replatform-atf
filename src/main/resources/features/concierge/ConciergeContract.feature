@@ -4,9 +4,10 @@ Feature:Concierge Contract
 
   Scenario: Verify that I'm not able to select Contract Client without contract gallery
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     And I click on checkout button

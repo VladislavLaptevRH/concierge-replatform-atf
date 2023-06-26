@@ -64,8 +64,9 @@ Feature: Concierge Order review
   Scenario: Verify the payment details and Order estimate summary
 
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     When I click on checkout button
@@ -79,6 +80,7 @@ Feature: Concierge Order review
 
   Scenario: SPO ORDER & TERMS REVIEW SIGNATURE CAPTURE
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I clicks on a random menu item
@@ -104,8 +106,9 @@ Feature: Concierge Order review
 
   Scenario: Verify all the line items on the order review page
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     When I click on checkout button

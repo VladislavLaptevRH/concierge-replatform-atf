@@ -4,6 +4,7 @@ Feature: Order replacement
 
   Scenario: concierge - Order replacement - Visa payment
     Given I log into intl Concierge as "associate"
+    When I choose country for concierge from footer
     When I choose gallery number "701" for gallery intl concierge
     When I remove all items from cart via UI
     When I remove client from header
@@ -22,6 +23,7 @@ Feature: Order replacement
 
   Scenario: concierge - Order replacement - Mastercard payment
     Given I log into intl Concierge as "associate"
+    When I choose country for concierge from footer
     When I choose gallery number "701" for gallery intl concierge
     When I remove all items from cart via UI
     When I remove client from header
@@ -41,6 +43,7 @@ Feature: Order replacement
 
   Scenario: concierge - Order replacement - AMEX payment
     Given I log into intl Concierge as "associate"
+    When I choose country for concierge from footer
     When I choose gallery number "701" for gallery intl concierge
     When I remove all items from cart via UI
     When I remove client from header
@@ -60,6 +63,7 @@ Feature: Order replacement
 
   Scenario: concierge - Order replacement - Discovery payment
     Given I log into intl Concierge as "associate"
+    When I choose country for concierge from footer
     When I choose gallery number "701" for gallery intl concierge
     When I remove all items from cart via UI
     When I remove client from header
@@ -79,6 +83,7 @@ Feature: Order replacement
 
   Scenario: concierge - Order replacement - POS payment
     Given I log into intl Concierge as "associate"
+    When I choose country for concierge from footer
     When I choose gallery number "701" for gallery intl concierge
     When I remove all items from cart via UI
     When I remove client from header
