@@ -67,8 +67,6 @@ public class Hooks {
         cookie = System.getenv("ENDPOINT");
         country = System.getenv("COUNTRY");
 
-        System.out.println("-------Jenkins");
-
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
         } else {
@@ -153,6 +151,8 @@ public class Hooks {
      */
     @Before("@estoreRegression")
     public void initWebDrivereStore() {
+        System.out.println("-------Jenkins");
+        System.out.println("Tests are running on " + country + " country");
         ConfigFileReader();
         configureEstoreURL();
         setupChromeArguments();
@@ -174,6 +174,8 @@ public class Hooks {
      * Initialize Web driver
      */
     public void setUPWebDriver(String url) {
+        System.out.println("-------Jenkins");
+        System.out.println("Tests are running on " + country + " country");
         System.out.println("Inside initDriver method");
         WebDriverManager.chromedriver().setup();
         Configuration.driverManagerEnabled = true;
