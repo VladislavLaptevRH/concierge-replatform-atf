@@ -67,21 +67,19 @@ public class Hooks {
         cookie = System.getenv("ENDPOINT");
         country = System.getenv("COUNTRY");
 
-        profile = "stg2";
-        cookie = "userservice";
 
-//        if (profile == null) {
-//            Assert.fail("Environment Variable is NOT Set");
-//        } else {
-//            System.out.println("Tests are running on " + profile + " environment");
-//            System.out.println("Tests are running on " + country + " country");
-//        }
-//
-//        if (cookie == null) {
-//            System.out.println("Tests are running without cookie or endpoint");
-//        } else {
-//            System.out.println("Tests are running with endpoint = " + cookie);
-//        }
+        if (profile == null) {
+            Assert.fail("Environment Variable is NOT Set");
+        } else {
+            System.out.println("Tests are running on " + profile + " environment");
+            System.out.println("Tests are running on " + country + " country");
+        }
+
+        if (cookie == null) {
+            System.out.println("Tests are running without cookie or endpoint");
+        } else {
+            System.out.println("Tests are running with endpoint = " + cookie);
+        }
 
         BufferedReader reader;
         try {
@@ -153,7 +151,7 @@ public class Hooks {
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(eStoreURL);
     }
 
@@ -164,7 +162,7 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
         configureConciergeURL();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(conciergeURL);
     }
 
@@ -177,7 +175,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 600000;
         Configuration.reportsFolder = "target/screenshots";
