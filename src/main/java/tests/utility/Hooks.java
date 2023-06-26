@@ -78,9 +78,7 @@ public class Hooks {
             System.out.println("Tests are running without cookie or endpoint");
         } else {
             System.out.println("Tests are running with endpoint = " + cookie);
-
         }
-
 
         BufferedReader reader;
         try {
