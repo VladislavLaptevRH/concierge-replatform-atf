@@ -13,6 +13,7 @@ Feature: Estore Sign In/Signout
   Scenario: To check if user is able to sign out properly
 
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I click on estore account
     When I click on estore signout button
     When I click on estore my account icon for not logged user
@@ -20,6 +21,7 @@ Feature: Estore Sign In/Signout
 
   Scenario: Verify the signout functionaity
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I click on estore my account icon
     When I click on estore sign out button
     When I click on confirm sign out button
@@ -27,6 +29,7 @@ Feature: Estore Sign In/Signout
 
   Scenario: Verify the user is completely signed out of all brands
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I click on estore my account icon
     When I click on estore sign out button
     When I click on confirm sign out button

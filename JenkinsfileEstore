@@ -13,13 +13,19 @@ Java11Pipeline pipeline = new Java11Pipeline(this, s, env);
 
 
 pipeline.standardTemplate { label ->
-    properties([parameters([choice(choices: ['stg2', 'stg3', 'stg4', 'prod'], description: 'Select Environment to build', name: 'ENVIRONMENT'), choice(choices: ['releasethurs', 'releasethurs&FEATURE_SSR=true','releasetues', 'releasetues&FEATURE_SSR=true','contentfix', 'contentfix&FEATURE_SUPPRESS_UK=false', 'releasetues&FEATURE_SUPPRESS_UK=false', 'releasetues&FEATURE_SSR=true&FEATURE_SUPPRESS_UK=false','contentfix&FEATURE_SSR=true', 'poc&FEATURE_SSR=true', 'poc', 'FEATURE_SSR=true', 'cartcheckout', 'cartcheckout&FEATURE_SSR=true', 'rhr', 'rhr&FEATURE_SSR=true', 'intl', 'hotfix','userservice','userservice&FEATURE_SSR=true'], description: 'Select optional endpoint value', name: 'ENDPOINT')])])
+   properties([parameters([
+         choice(choices: ['stg2', 'stg3', 'stg4', 'prod'], description: 'Select Environment to build', name: 'ENVIRONMENT'),
+     choice(choices: ['releasetues', 'releasetues&FEATURE_SSR=true','releasethurs', 'releasethurs&FEATURE_SSR=true','contentfix', 'contentfix&FEATURE_SUPPRESS_UK=false', 'releasetues&FEATURE_SUPPRESS_UK=false', 'releasetues&FEATURE_SSR=true&FEATURE_SUPPRESS_UK=false','contentfix&FEATURE_SSR=true', 'poc&FEATURE_SSR=true', 'poc', 'FEATURE_SSR=true', 'cartcheckout', 'cartcheckout&FEATURE_SSR=true', 'rhr', 'rhr&FEATURE_SSR=true', 'intl', 'hotfix','userservice','userservice&FEATURE_SSR=true'], description: 'Select optional endpoint value', name: 'ENDPOINT'),
+       choice(choices: ['US', 'GB', 'CA'], description: 'Select Country to build', name: 'COUNTRY')
+     ])])
     node(label) {
         try {
             stage('checkout') {
                 pipeline.checkoutCode();
                 echo "Regression will be done on environment ${params.ENVIRONMENT}"
                 echo "Regression will be done with cookie ${params.ENDPOINT}"
+                echo "Regression will be done with country ${params.COUNTRY}"
+
                 environment "${params.ENVIRONMENT}"
             }
 
@@ -41,7 +47,7 @@ pipeline.standardTemplate { label ->
                 }
             }  // pipeline/container
 
-            slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) 'Environment' (${params.ENVIRONMENT}) 'Endpoint' (${params.ENDPOINT})  " +
+            slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) 'Environment' (${params.ENVIRONMENT}) 'Endpoint' (${params.ENDPOINT}) 'Country' (${params.COUNTRY})  " +
                     " : Test Results: http://docs.rhapsody.rh.com/public/${resultspath}/cucumber-html-report/Index.html",
                     channel: "#test-results")
         } catch (Exception exception) {

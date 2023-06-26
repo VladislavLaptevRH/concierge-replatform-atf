@@ -4,6 +4,7 @@ Feature: Estore Payment
 
   Scenario: eStore Split Payment
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -19,6 +20,7 @@ Feature: Estore Payment
 
   Scenario: eStore Saved Cards
     Given I log into eStore as "userWithSavedMasterCardVisa" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -34,6 +36,7 @@ Feature: Estore Payment
 
   Scenario: eStore Edit Payment
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -48,6 +51,7 @@ Feature: Estore Payment
 
   Scenario: eStore Edit Address
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -65,6 +69,7 @@ Feature: Estore Payment
       #canada issue
   Scenario: eStore unavailability of RHCC for CAN address
     Given I log into eStore as "noaddresses" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -80,6 +85,7 @@ Feature: Estore Payment
 
   Scenario: eStore RHCC
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -97,6 +103,7 @@ Feature: Estore Payment
 
   Scenario: eStore Update address (Non impacting change) after making payment
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -115,6 +122,7 @@ Feature: Estore Payment
 
   Scenario: eStore Update address (Impacting change) after making payment
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -134,6 +142,7 @@ Feature: Estore Payment
 
   Scenario: eStore Order total increased after making payment
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -160,6 +169,7 @@ Feature: Estore Payment
 
   Scenario: eStore Order total decreased after making payment
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050042" with "IRON" for estore
     When I update item quantity in estore pdp
@@ -187,6 +197,7 @@ Feature: Estore Payment
 
   Scenario: eStore Billing address based on saved payment method
     Given I log into eStore as "userWithSavedMasterCardVisa" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -201,6 +212,7 @@ Feature: Estore Payment
 
   Scenario: eStore Add new payment method
     Given I log into eStore as "addnewpayment" user
+    When I choose country for eStore from footer
     When I go to profile payment method
     When I remove added before cart
     When I add new card for estore
@@ -209,6 +221,7 @@ Feature: Estore Payment
       #canada issue
   Scenario: eStore unavailability of Discover for CAN address
     Given I log into eStore as "noaddresses" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -224,6 +237,7 @@ Feature: Estore Payment
       #canada issue
   Scenario: eStore unavailability of Saved Discover for CAN shipping address
     Given I log into eStore as "savedRhCcDiscover" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -239,6 +253,7 @@ Feature: Estore Payment
       #canada issue
   Scenario: eStore unavailability of Saved RHCC for CAN shipping address
     Given I log into eStore as "savedRhCc" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -255,6 +270,7 @@ Feature: Estore Payment
   #canada issue
 #  Scenario: eStore Update address (Change Country) after making payment
 #    Given I log into eStore as "regular" user
+#    When I choose country for eStore from footer
 #    When I remove all items from estore cart
 #    When I add item to cart via API for estore
 #    When I open estore cart
@@ -281,6 +297,7 @@ Feature: Estore Payment
 
   Scenario: eStore masked CC
     Given I log into eStore as "mastercard" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -298,6 +315,7 @@ Feature: Estore Payment
 
   Scenario: eStore Saved credit cards
     Given I log into eStore as "userWithSavedMasterCardVisa" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -310,6 +328,7 @@ Feature: Estore Payment
 
   Scenario: GC/ Balance check
     Given I log into eStore as "mastercard" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -326,6 +345,7 @@ Feature: Estore Payment
 
   Scenario: Verify that user is able to execute payment via GC for USA
     Given I log into eStore as "mastercard" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -343,6 +363,7 @@ Feature: Estore Payment
 #      canada issue
   Scenario: Verify that user is able to execute payment via GC for CAN
     Given I log into eStore as "savedRhCc" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -361,6 +382,7 @@ Feature: Estore Payment
 
   Scenario: Verify the saving AMEX payment method
     Given I log into eStore as "addnewpayment" user
+    When I choose country for eStore from footer
     When I go to profile payment method
     When I remove added before cart
     When I added new card "AMEX" for estore
@@ -369,6 +391,7 @@ Feature: Estore Payment
 
   Scenario: Verify the saving DI payment method
     Given I log into eStore as "addnewpayment" user
+    When I choose country for eStore from footer
     When I go to profile payment method
     When I remove added before cart
     When I added new card "DISCOVER" for estore
@@ -377,6 +400,7 @@ Feature: Estore Payment
 
   Scenario Outline: eStore - Major CC
     Given I log into eStore as "noaddresses" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart

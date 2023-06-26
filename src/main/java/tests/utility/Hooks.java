@@ -53,6 +53,7 @@ public class Hooks {
     private static final Logger Log = LoggerFactory.getLogger(FilterStepDefs.class);
     public static String profile;
     public static String cookie;
+    public static String country;
     public static String endpoint;
 
     ExtentReport report = new ExtentReport();
@@ -64,11 +65,13 @@ public class Hooks {
 
         profile = System.getenv("ENVIRONMENT");
         cookie = System.getenv("ENDPOINT");
+        country = System.getenv("COUNTRY");
 
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
         } else {
             System.out.println("Tests are running on " + profile + " environment");
+            System.out.println("Tests are running on " + country + " country");
         }
 
         if (cookie == null) {

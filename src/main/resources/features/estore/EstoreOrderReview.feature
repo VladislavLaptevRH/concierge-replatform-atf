@@ -3,6 +3,7 @@
 Feature:Estore Order review
   Scenario: Verify address, price, payment information, total, subtotal tags
     Given I log into eStore as "orderreview" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -20,6 +21,7 @@ Feature:Estore Order review
   Scenario: Edit payment
 
     Given I log into eStore as "orderreview" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -40,6 +42,7 @@ Feature:Estore Order review
 
   Scenario: Edit Shipping and Billing Address
     Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050042" with "IRON" for estore
     When I click on add to cart estore button
