@@ -5,7 +5,7 @@ Feature:Concierge Cart Page
   Scenario: Order Classification
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     Then I verify order classification
 
