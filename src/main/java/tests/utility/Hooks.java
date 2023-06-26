@@ -105,10 +105,6 @@ public class Hooks {
         leaderLogin = (String) properties.get("leaderLogin");
     }
 
-    private void displayCountry() {
-        System.out.println("display country");
-    }
-
     /**
      * Set up URL + endpoint  for eStore
      */
@@ -154,7 +150,6 @@ public class Hooks {
      */
     @Before("@estoreRegression")
     public void initWebDrivereStore() {
-        displayCountry();
         ConfigFileReader();
         configureEstoreURL();
         setupChromeArguments();
