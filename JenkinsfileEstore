@@ -24,6 +24,8 @@ pipeline.standardTemplate { label ->
                 pipeline.checkoutCode();
                 echo "Regression will be done on environment ${params.ENVIRONMENT}"
                 echo "Regression will be done with cookie ${params.ENDPOINT}"
+                echo "Regression will be done with cookie ${params.COUNTRY}"
+
                 environment "${params.ENVIRONMENT}"
             }
 
@@ -45,7 +47,7 @@ pipeline.standardTemplate { label ->
                 }
             }  // pipeline/container
 
-            slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) 'Environment' (${params.ENVIRONMENT}) 'Endpoint' (${params.ENDPOINT})  " +
+            slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) 'Environment' (${params.ENVIRONMENT}) 'Endpoint' (${params.ENDPOINT}) 'Country' (${params.COUNTRY})  " +
                     " : Test Results: http://docs.rhapsody.rh.com/public/${resultspath}/cucumber-html-report/Index.html",
                     channel: "#test-results")
         } catch (Exception exception) {
