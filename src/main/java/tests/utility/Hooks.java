@@ -79,6 +79,8 @@ public class Hooks {
             System.out.println("Tests are running with endpoint = " + cookie);
         }
 
+        System.out.println("Test are runing for the following country" + country);
+
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(propertyFilePath));
