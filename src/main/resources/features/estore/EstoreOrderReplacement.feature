@@ -4,6 +4,7 @@
 #
 #  Scenario: estore - Order replacement - Visa payment
 #    Given I log into eStore as "regular" user
+#    When I choose country for eStore from footer
 #    When I remove all items from estore cart
 #    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
 #    When I click on add to cart estore button
@@ -20,6 +21,7 @@
 #
 #  Scenario: estore - Order replacement - Mastercard payment
 #    Given I log into eStore as "regular" user
+#    When I choose country for eStore from footer
 #    When I remove all items from estore cart
 #    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
 #    When I click on add to cart estore button
@@ -36,6 +38,7 @@
 #
 #  Scenario: estore - Order replacement - Amex payment
 #    Given I log into eStore as "regular" user
+#    When I choose country for eStore from footer
 #    When I remove all items from estore cart
 #    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
 #    When I click on add to cart estore button
@@ -52,6 +55,7 @@
 #
 #  Scenario: estore - Order replacement - Discovery payment
 #    Given I log into eStore as "regular" user
+#    When I choose country for eStore from footer
 #    When I remove all items from estore cart
 #    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
 #    When I click on add to cart estore button

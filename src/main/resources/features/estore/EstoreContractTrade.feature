@@ -4,17 +4,20 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Contract Login
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     Then I verify that contract paragraph is displayed
     And I verify that logout from contract user is displayed
 
   Scenario: eStore Contract - Price in the cart - RH
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I add item to cart via API for estore
     When I open estore cart
     Then I verify that contract price is used in cart
 
   Scenario: eStore Contract - Price on increasing the QTY in the cart
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -23,18 +26,21 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Contract - Validate the currency for US-Zip on PDP
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     When I update "US" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
   Scenario: eStore Contract - Validate the currency for CAN-Zip on PDP
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     When I update "CAN" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
   Scenario: eStore Contract - Validate the currency for US-Zip in cart
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -43,6 +49,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Contract - Validate the currency for CAN-Zip in cart
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -51,6 +58,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Contract - Validate the dropdown's are enabled
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I click on bed
     When I click on beds
@@ -58,6 +66,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Contract - Shipping is different from billing
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -70,6 +79,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Contract - Price in the cart - MO
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "MO" brand
     When I go to estore item "17050042 WHT" from search field
@@ -79,6 +89,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Contract - Price in the cart - B&C
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "B&C" brand
     When I go to estore item "17050042 WHT" from search field
@@ -88,6 +99,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Contract - Price in the cart - TN
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "TN" brand
     When I go to estore item "17050042 WHT" from search field
@@ -97,6 +109,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Contract - Split Payment
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -113,6 +126,7 @@ Feature: eStore Contract and Trade
 
   Scenario: estore Contract - RHCC
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -131,6 +145,7 @@ Feature: eStore Contract and Trade
 
   Scenario: estore Contract - GC/ Balance check
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -148,6 +163,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Contract - Edit Payment
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -164,6 +180,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Contract - Verify UFD for different zip codes
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
     When I open estore cart
@@ -173,6 +190,7 @@ Feature: eStore Contract and Trade
 
   Scenario Outline: Verify different payment types on payment page
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -194,6 +212,7 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Verify RHCC payment option for Contract user
 
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -209,6 +228,7 @@ Feature: eStore Contract and Trade
   Scenario: estore Contract - Full Payment
 
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -223,6 +243,7 @@ Feature: eStore Contract and Trade
 
   Scenario: estore Contract - Checkout and place order
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050042" with "IRON" for estore
     When I click on add to cart estore button
@@ -240,6 +261,7 @@ Feature: eStore Contract and Trade
 
   Scenario: estore Contract - Edit address
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -253,6 +275,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Contract - Verify the subtotal, shipping fee, taxes based on postal code
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -261,6 +284,7 @@ Feature: eStore Contract and Trade
 
   Scenario Outline: eStore Contract - Major CC
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -282,6 +306,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Contract - Verify the subtotal, shipping fee, taxes based on postal code
     Given I log into eStore as contract
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -291,23 +316,27 @@ Feature: eStore Contract and Trade
 #Trade
   Scenario: eStore Trade Login
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     Then I verify that trade paragraph is displayed
     And I verify that logout from trade user is displayed
 
   Scenario: eStore Trade - Validate the currency for US-Zip on PDP
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     When I update "US" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
   Scenario: eStore Trade - Validate the currency for CAN-Zip on PDP
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     When I update "CAN" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
   Scenario: eStore Trade - Validate the currency for CAN-Zip in cart
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -316,6 +345,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Trade - Validate the currency for US-Zip in cart
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -324,6 +354,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Trade - Price in the cart - RH
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -331,6 +362,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Trade - Price on increasing the QTY in the cart
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
@@ -339,8 +371,8 @@ Feature: eStore Contract and Trade
 
 
   Scenario: eStore Trade - Validate the dropdown's are enabled
-
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I click on bed
     When I click on beds
@@ -348,6 +380,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Trade - Split Payment
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -365,6 +398,7 @@ Feature: eStore Contract and Trade
   Scenario: estore Trade - Full Payment
 
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -379,6 +413,7 @@ Feature: eStore Contract and Trade
   Scenario: estore Trade - RHCC
 
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -397,6 +432,7 @@ Feature: eStore Contract and Trade
 
   Scenario: estore Trade - GC/ Balance check
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -414,6 +450,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Trade - Edit Payment
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -430,6 +467,7 @@ Feature: eStore Contract and Trade
   Scenario Outline: estore Trade - Major CC
 
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -450,6 +488,7 @@ Feature: eStore Contract and Trade
 
   Scenario: estore Trade - Checkout and place order
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050042" with "IRON" for estore
     When I click on add to cart estore button
@@ -468,6 +507,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Trade - Verify UFD for different zip codes
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
     When I open estore cart
@@ -477,6 +517,7 @@ Feature: eStore Contract and Trade
 
   Scenario: Change zip code in cart to US, currency should be in US$
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050042" with "IRON" for estore
     When I click on add to cart estore button
@@ -486,6 +527,7 @@ Feature: eStore Contract and Trade
 
   Scenario: Change zip code in cart to CAN, currency should be in US$
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050042" with "IRON" for estore
     When I click on add to cart estore button
@@ -495,6 +537,7 @@ Feature: eStore Contract and Trade
 
   Scenario: estore Trade - Edit address
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I stop eStore page load
     When I remove all items from estore cart
     When I add item to cart via API for estore
@@ -514,6 +557,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Trade - Price in the cart - MO
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "MO" brand
     When I go to estore item "17050042 WHT" from search field
@@ -523,6 +567,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Trade - Price in the cart - B&C
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "B&C" brand
     When I go to estore item "17050042 WHT" from search field
@@ -532,6 +577,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Trade - Price in the cart - TN
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "TN" brand
     When I go to estore item "17050042 WHT" from search field
@@ -541,6 +587,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Trade - Edit Address
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -554,6 +601,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Trade - Shipping is different from billing
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
@@ -566,6 +614,7 @@ Feature: eStore Contract and Trade
 
   Scenario: eStore Trade - Verify the subtotal, shipping fee, taxes based on postal code
     Given I log into eStore as trade
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart

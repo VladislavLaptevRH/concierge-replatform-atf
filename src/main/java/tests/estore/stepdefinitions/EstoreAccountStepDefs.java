@@ -8,8 +8,10 @@ import org.openqa.selenium.By;
 import org.w3c.dom.ls.LSOutput;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.EstoreCartPage;
+import tests.estore.pageObject.EstoreHomePage;
 import tests.estore.pageObject.EstoreLoginPage;
 import tests.estore.pageObject.EstoreUserAccountPage;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -25,6 +27,7 @@ public class EstoreAccountStepDefs {
     EstoreLoginPage estoreLoginPage = new EstoreLoginPage();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     EstoreCartPage estoreCartPage = new EstoreCartPage();
+    EstoreHomePage estoreHomePage = new EstoreHomePage();
 
     String firstName;
     String lastName;
@@ -123,4 +126,14 @@ public class EstoreAccountStepDefs {
         System.out.println();
     }
 
+    @When("I choose country for eStore from footer")
+    public void iChooseCountryForEStoreFromFooter() {
+        if (Hooks.country.equals("GB")) {
+            estoreHomePage.chooseGBCountry();
+        }
+
+        if (Hooks.country.equals("CA")) {
+            estoreHomePage.chooseCACountry();
+        }
+    }
 }
