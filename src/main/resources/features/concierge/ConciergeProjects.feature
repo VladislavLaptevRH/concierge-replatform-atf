@@ -4,6 +4,7 @@ Feature: Concierge Project
 
   Scenario Outline: Availability, Delivery and Returns messaging for Instock, BO, SPO, SPO Instock Items
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "availabilitydeliveryreturnsmessaging" by provided "projectName"
     When I click on the first project search result
@@ -18,11 +19,13 @@ Feature: Concierge Project
 
   Scenario: Verify the Projects load for a logged in associate
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     Then I verify that search result is displayed
 
   Scenario Outline: Verify that user is able to find project by <searchBy>
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "test" by provided "<searchBy>"
     Then I verify that search result is displayed
@@ -35,6 +38,7 @@ Feature: Concierge Project
 
   Scenario Outline: Verify that user is able to find project by pricing type - <pricingType>
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project by "<pricingType>"
     Then I verify that search result for pricing type is displayed
@@ -48,6 +52,7 @@ Feature: Concierge Project
   Scenario Outline: Verify that user is able to create project for client - <businessClient>
 
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I click on new project button
     When I introduces "<businessClient>" first and last name
@@ -62,6 +67,7 @@ Feature: Concierge Project
 
   Scenario: Verify project settings are available
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "test" by provided "projectName"
     When I click on the first project search result
@@ -70,6 +76,7 @@ Feature: Concierge Project
 
   Scenario: Verify project list moodboard
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "test" by provided "projectName"
     When I click on the first project search result
@@ -78,6 +85,7 @@ Feature: Concierge Project
 
   Scenario: Verify that user is able to add new space and edit
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "test" by provided "projectName"
     When I click on the first project search result
@@ -89,6 +97,7 @@ Feature: Concierge Project
 
   Scenario: Verify that user is able to create new opportunity and add items
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "test" by provided "projectName"
     When I click on the first project search result
@@ -108,6 +117,7 @@ Feature: Concierge Project
   Scenario Outline: Verify email estimation - send to client verify the email address received and sent for <email>
 
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "modifyitemsoptions" by provided "projectName"
     When I click on the first project search result
@@ -123,6 +133,7 @@ Feature: Concierge Project
 
   Scenario: Verify email estimation - send to bcc verify the email address received and sent
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "modifyitemsoptions" by provided "projectName"
     When I click on the first project search result
@@ -135,6 +146,7 @@ Feature: Concierge Project
 
   Scenario Outline: Verify the Project list and switching between the projects -CART/PDP
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart
     When I go to item "<skuid>" from search field
     And I select count of product
@@ -148,6 +160,7 @@ Feature: Concierge Project
 
   Scenario: Verify the Opportunities list and switching between the opportunities -CART/PDP
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart
     When I go to item "63130001" from search field
     And I select count of product
@@ -158,6 +171,7 @@ Feature: Concierge Project
 
   Scenario: Verify the Spaces list and switching between the Spaces -CART/PDP
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
     When I click on view cart button
@@ -166,6 +180,7 @@ Feature: Concierge Project
 
   Scenario: Verify that user is able to update item option
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "modifyitemsoptions" by provided "projectName"
     When I click on the first project search result
@@ -175,6 +190,7 @@ Feature: Concierge Project
 
   Scenario: Verify that user is able to update item quantity
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "subototalforecastupdatingqty" by provided "projectName"
     When I click on the first project search result
@@ -184,6 +200,7 @@ Feature: Concierge Project
 
   Scenario: Verify that user is able to remove items from project
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart
     When I go to item "63130001" from search field
     And I select count of product
@@ -196,6 +213,7 @@ Feature: Concierge Project
 
   Scenario: Verify price override for item from project
     Given I log into Concierge as "leader"
+    When I choose country for concierge from footer
     When I remove all items from cart
     When I click on projects button
     When I search project "overridePrice" by provided "projectName"
@@ -223,6 +241,7 @@ Feature: Concierge Project
   Scenario: Verify shipping overrides in projects
 
     Given I log into Concierge as "leader"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "overrideshipping" by provided "projectName"
     When I click on the first project search result
@@ -238,6 +257,7 @@ Feature: Concierge Project
 
   Scenario: Verify subtotal/forecast by updating qty for items
     Given I log into Concierge as "leader"
+    When I choose country for concierge from footer
     When I remove all items from cart
     When I click on projects button
     When I search project "subototalforecastupdatingqty" by provided "projectName"
@@ -257,6 +277,7 @@ Feature: Concierge Project
 
   Scenario: Verify subtotal/forecast by updating by hide/unhide items
     Given I log into Concierge as "leader"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "hideunhideitems" by provided "projectName"
     When I click on the first project search result
@@ -264,12 +285,14 @@ Feature: Concierge Project
 
   Scenario: Verify subtotal/forecast by updating qty hide/unhide spaces
     Given I log into Concierge as "leader"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "hideunhidespace" by provided "projectName"
     When I click on the first project search result
 
   Scenario: Verify test project list and moodboard print - moodboard CMD+P or Browser print only
     Given I log into Concierge as "leader"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "overrideshipping" by provided "projectName"
     When I click on the first project search result
@@ -279,6 +302,7 @@ Feature: Concierge Project
   Scenario: Verify subtotal/forecast by updating qty overriding line items (all types/ one or more items - apply all functionality)
 
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart
     When I click on projects button
     When I search project "overridinglineitems" by provided "projectName"
@@ -300,6 +324,7 @@ Feature: Concierge Project
  #10011392 SS
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
     Given I log into Concierge as "leader"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "verifyforecastbypricingtype" by provided "projectName"
     When I click on the first project search result
@@ -325,6 +350,7 @@ Feature: Concierge Project
 
   Scenario: Verify switch between pages in Myprojects List
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     Then user verifies that project page is displayed
     When user go to the next page "2" of projects
@@ -332,6 +358,7 @@ Feature: Concierge Project
 
   Scenario: Verify Tax exempt in projects for Trade projects
     Given I log into Concierge as "leader"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "TEST_TRADE_3MAR_1PM" by provided "projectName"
     When I click on the first project search result
@@ -341,6 +368,7 @@ Feature: Concierge Project
   Scenario Outline: Verify Member/non Member /Trade/ Non Trade toggle pricing for unclassified business client project
     #Need data for stg4
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "pricingunclassifiedbusiness" by provided "projectName"
     When I click on the first project search result
@@ -368,6 +396,7 @@ Feature: Concierge Project
   Scenario Outline: Verify transition between spaces
     #Need data for stg4
     Given I log into Concierge as "leader"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "transitionbetweenspaces" by provided "projectName"
     When I click on the first project search result
@@ -381,6 +410,7 @@ Feature: Concierge Project
   Scenario: Verify rapid selection/deselction of project Moodboard items
     #Need data for stg4
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "selectdeselectmoodboarditems" by provided "projectName"
     When I click on the first project search result
@@ -391,6 +421,7 @@ Feature: Concierge Project
   Scenario Outline: Create New project - Gallery, Design, Trade project types
 
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I click on new project button
     When I introduces "member" first and last name
@@ -408,6 +439,7 @@ Feature: Concierge Project
 
   Scenario: Verify the Add to Project Modal in CART/PDP - Projects list in dropdown
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I go to item "10010966" from search field
     And I select count of product
     When I click on add to project button
@@ -415,6 +447,7 @@ Feature: Concierge Project
 
   Scenario: Verify the Add to Project Modal in CART/PDP - Opportunities list in dropdown
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I go to item "10010966" from search field
     And I select count of product
     When I click on add to project button
@@ -422,6 +455,7 @@ Feature: Concierge Project
 
   Scenario: Verify the Add to Project Modal in CART/PDP - Spaces list in dropdown
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I go to item "10010966" from search field
     And I select count of product
     When I click on add to project button
@@ -430,6 +464,7 @@ Feature: Concierge Project
   Scenario: Verify add new Space in the modal and add items to the selected space -CART/PDP
 
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart
     When I go to item "10010966" from search field
     And I select count of product
@@ -444,6 +479,7 @@ Feature: Concierge Project
   Scenario: Verify the address page, pre filled address details and Email address once the project added to cart
 
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I go to item "10010966" from search field
@@ -462,6 +498,7 @@ Feature: Concierge Project
 
     #Need data for stg4
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart
     When I go to item "10010966 BRN" from search field
     And I select count of product
@@ -475,6 +512,7 @@ Feature: Concierge Project
   Scenario: Space Dropdown in projects - multiple spaces in projects
     #Need data for stg4
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "ADDITEMTOCORRECTSPACE" by provided "projectName"
     When I click on the first project search result
@@ -482,6 +520,7 @@ Feature: Concierge Project
 
   Scenario: Verify Forecast Set in SF for a project - Selected spaces and entire oppty
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "OVERRIDESHIPPING" by provided "projectName"
     When I click on the first project search result
@@ -496,6 +535,7 @@ Feature: Concierge Project
 
     #Need data for stg4
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "selectdeselectmoodboarditems" by provided "projectName"
     When I click on the first project search result
@@ -506,6 +546,7 @@ Feature: Concierge Project
 
     # Need data for stg4
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on projects button
     When I search project "selectdeselectmoodboarditems" by provided "projectName"
     When I click on the first project search result

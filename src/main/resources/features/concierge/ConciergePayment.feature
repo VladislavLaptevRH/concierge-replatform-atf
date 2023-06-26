@@ -59,9 +59,10 @@ Feature: Concierge Payment
   Scenario: Verify the subtotal, shipping fee, taxes based on postal code
 
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     When I click on checkout button
@@ -74,9 +75,10 @@ Feature: Concierge Payment
 
   Scenario: Verify member savings in payment page
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     When I click on checkout button
@@ -91,9 +93,10 @@ Feature: Concierge Payment
 
   Scenario: Verify trade savings in payment page
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     When I click on checkout button
@@ -106,9 +109,10 @@ Feature: Concierge Payment
 
   Scenario: Edit Address
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     When I click on checkout button

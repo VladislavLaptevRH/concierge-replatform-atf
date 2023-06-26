@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import tests.concierge.pageObject.*;
+import tests.estore.stepdefinitions.EstoreCartPageStepDefs;
 import tests.utility.Hooks;
 
 import java.text.DecimalFormat;
@@ -35,6 +36,8 @@ public class ConciergeCartStepDefs {
     ConciergeE2EStepDefs conciergeE2EStepDefs = new ConciergeE2EStepDefs();
     AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
+
+    EstoreCartPageStepDefs estoreCartPageStepDefs = new EstoreCartPageStepDefs();
     int randomQuantity;
     int priceFirstLineItem;
     int priceSecondLineItem;
@@ -967,6 +970,13 @@ public class ConciergeCartStepDefs {
     @When("I add item to cart via API")
     public void iAddItemToCartViaAPI() {
         GeneralStepDefs.addLineItemsToConciergeCart();
+    }
+
+    @When("I add item to cart via UI")
+    public void iAddItemToCartViaUI() {
+        conciergeE2EStepDefs.iOpenProductPageWithAnd("prod1617188", "63130001");
+        conciergeE2EStepDefs.iClickOnAddToCartButton();
+        estoreCartPageStepDefs.iClickOnViewCartButton();
     }
 
     @When("I add item to cart via API with sela item")
