@@ -6,7 +6,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     Then I verify order classification
 
@@ -15,7 +15,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     When I click on checkout button
@@ -27,7 +27,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I click on quantity line item button
     Then I verify that quantity was updated
@@ -36,7 +36,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I remove all items from cart
     Then I verify that line item was removed
@@ -46,7 +46,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I click on cart button from header
     When I click on total item line price
@@ -66,7 +66,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I click on total item line price
     When I select price override "PERCENT_OFF"
@@ -80,7 +80,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I click on total item line price
     When I select price override "PERCENT_OFF"
@@ -99,7 +99,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I click on total item line price
     When I select price override "PERCENT_OFF"
@@ -116,7 +116,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I click on UFD button from cart
 
@@ -125,7 +125,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I introduces promo code "FEMAD" for promo codes field
     When I click on apply promocode button
@@ -138,7 +138,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I click on move to project button
     When I click on save button
@@ -148,7 +148,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I introduces promo code "FEMAD" for promo codes field
     When I click on apply promocode button
@@ -158,7 +158,7 @@ Feature:Concierge Cart Page
   Scenario: Designed/ Sold By
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     Then I verify that designed sold by
 
@@ -167,7 +167,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I introduces promo code "FEMAD" for promo codes field
     When I click on apply promocode button
@@ -185,7 +185,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I introduces promo code "FEMAD" for promo codes field
     When I click on apply promocode button
@@ -204,7 +204,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I introduces promo code "FEMAD" for promo codes field
     When I click on apply promocode button
@@ -230,7 +230,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     When I click on checkout button
@@ -247,7 +247,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     When I click on checkout button
@@ -265,7 +265,7 @@ Feature:Concierge Cart Page
     When I choose gallery number "997"
     When I click on client button from header
     When I look on client by "accountnumber" with "20211221164476"
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     Then I verify that membership popup for "contract client" is not displayed
 
@@ -274,7 +274,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     When I click on checkout button
@@ -294,7 +294,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     When I click on checkout button
@@ -308,7 +308,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I apply employee discount
     Then I verify that employee discount is present
@@ -318,7 +318,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose postpone shipment
     When I click on apply uppercase button for "postpone shipment"
@@ -375,7 +375,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     When I click on checkout button
@@ -439,7 +439,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     When I click on checkout button
@@ -458,7 +458,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     When I click on checkout button
@@ -471,7 +471,7 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     Then I verify that availability, Delivery and Returns messaging in cart
 
