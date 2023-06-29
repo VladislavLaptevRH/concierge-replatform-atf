@@ -64,46 +64,76 @@ public class ConciergeItemsStepDefs {
     public void iSelectColorOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(!selectOption.getColorOption().isDisplayed()){
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-        }
-        try {
+//        if(!selectOption.getColorOption().isDisplayed()){
+//            WebDriverRunner.getWebDriver().navigate().refresh();
+//            with().pollInterval(5, SECONDS).await().until(() -> true);
+//        }
+//        try {
+        if (conciergeItemsScreen.getSelectSize().isDisplayed()) {
             conciergeItemsScreen.getSelectSize().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
             conciergeItemsScreen.getSelectSize().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
             sizeList.selectByIndex(1);
             with().pollInterval(2, SECONDS).await().until(() -> true);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Element not found");
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Element not found");
+//        }
         }
-        try {
+//        try {
+        if (selectOption.getColorOption().isDisplayed()) {
             Select selectColor = new Select(selectOption.getColorOption());
             selectColor.selectByIndex(1);
             with().pollInterval(2, SECONDS).await().until(() -> true);
-        }   catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Element not found");
+//        }   catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Element not found");
+//        }
         }
-        try {
+//        try {
+        if (conciergeItemsScreen.getSelectQTY().isDisplayed()) {
             Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
             quantityList.selectByIndex(2);
             with().pollInterval(2, SECONDS).await().until(() -> true);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Close button is not displayed");
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Close button is not displayed");
+//        }
         }
-        try {
+//        try {
+        if (conciergeItemsScreen.getSelectFill().isDisplayed()) {
             Select fillList = new Select(conciergeItemsScreen.getSelectFill());
             fillList.selectByIndex(1);
             with().pollInterval(2, SECONDS).await().until(() -> true);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Close button is not displayed");
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Close button is not displayed");
+//        }
         }
-        try {
+//        try {
+        if (conciergeItemsScreen.getSelectFinish().isDisplayed()) {
             Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
             finishList.selectByIndex(1);
             with().pollInterval(2, SECONDS).await().until(() -> true);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Close button is not displayed");
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Close button is not displayed");
+//        }
+        }
+
+        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                try {
+                    Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
+                    sizeList.selectByIndex(1);
+                    Select selectColor = new Select(selectOption.getColorOption());
+                    selectColor.selectByIndex(1);
+                    Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
+                    quantityList.selectByIndex(2);
+                } catch (com.codeborne.selenide.ex.ElementNotFound e){
+                    System.out.println("Close button is not displayed");
+                }
+                if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+                    break;
+                }
+            }
         }
     }
 

@@ -4,12 +4,14 @@ Feature: Concierge GiftCardEnquiry
 
   Scenario: Gift Card Balance Enquiry
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on gift card enquiry
     When I enter gift card information
     Then I verify transaction details
 
   Scenario: Purchase Gift Card
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I click on gift card enquiry

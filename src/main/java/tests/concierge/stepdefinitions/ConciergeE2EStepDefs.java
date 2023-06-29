@@ -119,96 +119,97 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on add to cart button")
     public void iClickOnAddToCartButton() {
-//        with().pollInterval(3, SECONDS).await().until(() -> true);
-//        WebDriverRunner.getWebDriver().navigate().refresh();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
-        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-            for (int i = 0; i < 3; i++) {
-                WebDriverRunner.getWebDriver().navigate().refresh();
-                if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-                    break;
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+            generalStepDefs.waitForJSandJQueryToLoad();
+            conciergeItemsScreen.getAddToCartButton().scrollTo();
+            if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+                if (conciergeItemsScreen.getSelectFabric().isDisplayed()) {
+                    try {
+                        Select fabricList = new Select(conciergeItemsScreen.getSelectFabric());
+                        fabricList.selectByIndex(1);
+                        with().pollInterval(2, SECONDS).await().until(() -> true);
+                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+                        System.out.println("Element Fabric not found");
+                    }
+                    with().pollInterval(2, SECONDS).await().until(() -> true);
                 }
-            }
-        }
-        generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeItemsScreen.getAddToCartButton().scrollTo();
-        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-            if (conciergeItemsScreen.getSelectFabric().isDisplayed()) {
-                try {
-                    Select fabricList = new Select(conciergeItemsScreen.getSelectFabric());
-                    fabricList.selectByVisibleText("Perennials Performance Textured Linen Weave");
-                    with().pollInterval(1, SECONDS).await().until(() -> true);
-                } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e) {
-                    System.out.println("Element not found");
+                if (conciergeItemsScreen.getSelectSize().isDisplayed()) {
+                    try {
+                        Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
+                        sizeList.selectByIndex(1);
+                   } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+                       System.out.println("Element Size not found");
+                    }
+                    with().pollInterval(2, SECONDS).await().until(() -> true);
                 }
-            }
-            if (conciergeItemsScreen.getSelectSize().isDisplayed()) {
-                try {
-                    Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
-                    sizeList.selectByVisibleText("Washcloth");
-                } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e) {
-                    System.out.println("Element not found");
-                }
-                with().pollInterval(1, SECONDS).await().until(() -> true);
-            }
-
-            if (conciergeItemsScreen.getSelectSize().isDisplayed()) {
-                try {
-                    Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
-                    sizeList.selectByVisibleText("Queen");
-                } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e) {
-                    System.out.println("Element not found");
-                }
-                with().pollInterval(1, SECONDS).await().until(() -> true);
-            }
-
                 if (conciergeItemsScreen.getSelectColor().isDisplayed()) {
                     try {
                         Select colorList = new Select(conciergeItemsScreen.getSelectColor());
-                        colorList.selectByVisibleText("Fog");
-                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e) {
-                        System.out.println("Element not found");
+                        colorList.selectByIndex(2);
+                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+                        System.out.println("Element color not found");
                     }
-                    with().pollInterval(1, SECONDS).await().until(() -> true);
+                    with().pollInterval(2, SECONDS).await().until(() -> true);
                 }
-            if (conciergeItemsScreen.getSelectFinish().isDisplayed()) {
-                try {
-                    Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
-                    finishList.selectByVisibleText("Fog");
-                } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e) {
-                    System.out.println("Element not found");
+                if (conciergeItemsScreen.getSelectFinish().isDisplayed()) {
+                    try {
+                        Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
+                        finishList.selectByIndex(1);
+                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+                        System.out.println("Element finish not found");
+                    }
+                    with().pollInterval(2, SECONDS).await().until(() -> true);
                 }
-                with().pollInterval(1, SECONDS).await().until(() -> true);
-            }
-            if (conciergeItemsScreen.getSelectFinish().isDisplayed()) {
-                try {
-                    Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
-                    finishList.selectByVisibleText("Antiqued Natural");
-                } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e) {
-                    System.out.println("Element not found");
+
+                if (conciergeItemsScreen.getSelectQTY().isDisplayed()) {
+                    try {
+                        Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
+                        quantityList.selectByIndex(2);
+                        with().pollInterval(2, SECONDS).await().until(() -> true);
+                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+                        System.out.println("Element qty not found");
+                    }
                 }
-                with().pollInterval(1, SECONDS).await().until(() -> true);
             }
 
-            if (conciergeItemsScreen.getSelectQTY().isDisplayed()) {
+            if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
                 try {
-                    Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
-                    quantityList.selectByVisibleText("1");
-                    with().pollInterval(1, SECONDS).await().until(() -> true);
-                } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e) {
+                    for (int i = 0; i < 3; i++) {
+                        WebDriverRunner.getWebDriver().navigate().refresh();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                            try {
+                                Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
+                                sizeList.selectByIndex(2);
+                            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+                                System.out.println("Element Size not found");
+                            }
+                            with().pollInterval(1, SECONDS).await().until(() -> true);
+                        try {
+                            Select colorList = new Select(conciergeItemsScreen.getSelectColor());
+                            colorList.selectByIndex(2);
+                        } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+                            System.out.println("Element color not found");
+                        }
+                        with().pollInterval(2, SECONDS).await().until(() -> true);
+                        try {
+                            Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
+                            quantityList.selectByIndex(2);
+                            with().pollInterval(1, SECONDS).await().until(() -> true);
+                        } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+                            System.out.println("Element qty not found");
+                        }
+                        with().pollInterval(2, SECONDS).await().until(() -> true);
+                        if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+                            break;
+                        }
+                    }
+                } catch (ElementNotFound e){
                     System.out.println("Element not found");
                 }
             }
-        }
-            conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
-        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-            for (int i = 0; i < 3; i++) {
-                WebDriverRunner.getWebDriver().navigate().refresh();
-                if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-                    break;
-                }
-            }
-        }
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getAddToCartButton().scrollTo();
+        conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
             conciergeItemsScreen.getAddToCartButton().click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
     }
@@ -577,6 +578,11 @@ public class ConciergeE2EStepDefs {
     @When("I choose client who is a {string}")
     public void iChooseClientWhoIsAMember(String businessClient) {
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        if($(By.xpath("//h3[text() = 'Shipping Address']")).isDisplayed()){
+            String URL = Hooks.conciergeBaseURL + "/us/en/sf-client-lookup-form";
+            open(URL);
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         if (conciergeItemsScreen.getCheckoutButton().isDisplayed()) {
             abstractStepDefs.iClickOnCheckoutButton();
             iClickOnNoThanksButton();
@@ -643,62 +649,37 @@ public class ConciergeE2EStepDefs {
     @And("I select count of product")
     public void iSelectCountOfProduct() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        if (!conciergeItemsScreen.getAddToProjectButton().isEnabled()) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-        }
-        itemName = $(By.xpath("//h2[contains(@class, 'MuiTypography-h2')]")).getText();
-        try {
-            if (Hooks.cookie.equals("contentfix")) {
-                if (!$(By.xpath("//*[text()=' DETAILS']")).isDisplayed()) {
-                    for (int i = 0; i < 3; i++) {
-                        WebDriverRunner.getWebDriver().navigate().refresh();
-                        with().pollInterval(5, SECONDS).await().until(() -> true);
-                        if (conciergeItemsScreen.getDetailsSpan().isDisplayed()) {
-                            break;
-                        }
-                    }
-                }
-            } else {
-                if (!conciergeItemsScreen.getDetailsSpan().isDisplayed()) {
-                    for (int i = 0; i < 3; i++) {
-                        WebDriverRunner.getWebDriver().navigate().refresh();
-                        with().pollInterval(5, SECONDS).await().until(() -> true);
-                        if (conciergeItemsScreen.getDetailsSpan().isDisplayed()) {
-                            break;
-                        }
-                    }
+        if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                if (conciergeItemsScreen.getDetailsSpan().isDisplayed()) {
+                    break;
                 }
             }
-        } catch (ElementNotFound e){
-            System.out.println("Details button is not displaying");
         }
-
+        itemName = $(By.xpath("//h2[contains(@class, 'MuiTypography-h2')]")).getText();
         if (Hooks.cookie.equals("contentfix")) {
-            if (!$(By.xpath("//*[text()=' DETAILS']")).isDisplayed()) {
+            if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
                abstractStepDefs.iClickOnRhConciergeLogo();
                 iGoToItemFromSearchField("63130001");
             }
         } else {
-            if (!conciergeItemsScreen.getDetailsSpan().isDisplayed()) {
+            if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
                 abstractStepDefs.iClickOnRhConciergeLogo();
                 iGoToItemFromSearchField("63130001");
             }
         }
         executeJavaScript("window.scrollTo(0, 600)");
-        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-            for (int i = 0; i < 3; i++) {
-                executeJavaScript("window.scrollTo(0, 600)");
-                WebDriverRunner.getWebDriver().navigate().refresh();
-                with().pollInterval(5, SECONDS).await().until(() -> true);
-                if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-                    break;
-                }
-            }
+        try {
+            conciergeItemsScreen.getDetailsSpan().scrollTo();
+            conciergeItemsScreen.getDetailsSpan().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
+            conciergeItemsScreen.getDetailsSpan().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofSeconds(20));
+        } catch (ElementNotFound e){
+            conciergeItemsScreen.getDetailsSpanWithSpase().scrollTo();
+            conciergeItemsScreen.getDetailsSpanWithSpase().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
+            conciergeItemsScreen.getDetailsSpanWithSpase().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofSeconds(20));
         }
-        conciergeItemsScreen.getDetailsSpan().scrollTo();
-        conciergeItemsScreen.getDetailsSpan().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
-        conciergeItemsScreen.getDetailsSpan().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofSeconds(20));
         selectOption.getQuantityElement().should(visible, Duration.ofMinutes(1));
         if (!selectOption.getQuantityElement().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
@@ -1218,9 +1199,10 @@ public class ConciergeE2EStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        //selectOption.getLengthOption().should(visible, Duration.ofSeconds(15));
+        selectOption.getLengthOption().should(visible, Duration.ofSeconds(15));
         Select selectLength = new Select(selectOption.getLengthOption());
         selectLength.selectByValue("80400002");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @When("I open product page with {string} and {string} for stg3")
@@ -1249,7 +1231,7 @@ public class ConciergeE2EStepDefs {
             try {
                 Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
                 sizeList.selectByVisibleText("Queen");
-            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e){
+            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
                 System.out.println("Element not found");
             }
             with().pollInterval(1, SECONDS).await().until(() -> true);
@@ -1257,26 +1239,26 @@ public class ConciergeE2EStepDefs {
             Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
             finishList.selectByVisibleText("Antiqued Grey Oak");
             with().pollInterval(1, SECONDS).await().until(() -> true);
-            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e){
+            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
                 System.out.println("Element not found");
             }
             try {
                 Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
                 finishList.selectByVisibleText("Antiqued Grey Oak");
-            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e){
+            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
                 System.out.println("Element not found");
             }
             try {
                 Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
                 finishList.selectByVisibleText("Antiqued Grey Oak");
-            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e){
+            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
                 System.out.println("Element not found");
             }
             with().pollInterval(1, SECONDS).await().until(() -> true);
             try {
                 Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
                 quantityList.selectByVisibleText("1");
-            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException e){
+            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
                 System.out.println("Element not found");
             }
         }
