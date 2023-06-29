@@ -119,6 +119,7 @@ public class EstorePaymentStepDefs {
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
         Select paymentMethod = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentMethod.selectByValue("RH");
         estorePaymentPage.getRhCardNumberField().setValue("6006101002587290");
         Select paymentPlan = new Select(estorePaymentPage.getSelectPaymentPlan());
@@ -333,8 +334,8 @@ public class EstorePaymentStepDefs {
 
     @When("I click on edit estore billing address button on payment page")
     public void iClickOnEditEstoreBillingAddressButtonOnPaymentPage() {
-        $(By.xpath("//*[text()='EDIT']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='EDIT']")).click();
+        estorePaymentPage.getEditBillingAddressBtn().should(visible, Duration.ofSeconds(20));
+        estorePaymentPage.getEditBillingAddressBtn().click();
     }
 
 }

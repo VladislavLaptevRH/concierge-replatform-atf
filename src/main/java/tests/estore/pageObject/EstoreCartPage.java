@@ -161,7 +161,7 @@ public class EstoreCartPage {
 
     private final SelenideElement memberPrice = $(By.xpath("//p[@data-testid='price-for-member']"));
 
-    private final SelenideElement zipCodeField = $(By.xpath("//*[text() = 'Postal Code']/..//input"));
+    private final SelenideElement zipCodeField = $(By.xpath("//*[@id='postal-code-international']"));
 
     private final SelenideElement regularItemPrice = $(By.xpath("(//p[@id='price'])[1]"));
 

@@ -32,7 +32,7 @@ Feature: Estore Address Page
     Then I verify add a new shipping address option is present
 
   Scenario: eStore Address Page - To verify Add address button
-    Given I log into eStore as "guest" user
+    Given I log into eStore as "noaddresses" user
     When I choose country for eStore from footer
     When I goes to my account for estore
     When I click on estore my account button
