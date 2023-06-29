@@ -7,7 +7,7 @@ Feature: Concierge Trade
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     And I click on checkout button
@@ -21,7 +21,7 @@ Feature: Concierge Trade
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     And I click on checkout button
@@ -34,7 +34,7 @@ Feature: Concierge Trade
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     And I click on checkout button
@@ -66,7 +66,7 @@ Feature: Concierge Trade
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     And I click on checkout button
@@ -82,7 +82,7 @@ Feature: Concierge Trade
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     And I click on checkout button
@@ -96,7 +96,7 @@ Feature: Concierge Trade
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add item to cart via UI
     When I open cart
     When I choose order classification
     And I click on checkout button
