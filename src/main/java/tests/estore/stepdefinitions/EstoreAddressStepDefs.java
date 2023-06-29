@@ -38,13 +38,13 @@ public class EstoreAddressStepDefs {
     @When("I click on edit estore billing address button")
     public void iClickOnEditEstoreBillingAddressButton() {
         try {
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-            estoreAddressScreen.getEditShippinggAddress().should(Condition.visible, Duration.ofSeconds(20));
-            executeJavaScript("arguments[0].click();", estoreAddressScreen.getEditShippinggAddress());
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+            estoreAddressScreen.getEditBillingAddress().should(Condition.and("Visible, interactable",visible,interactable), Duration.ofSeconds(20));
+            executeJavaScript("arguments[0].click();", estoreAddressScreen.getEditBillingAddress());
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Edit button is not displayed");
-            if (estoreAddressScreen.getEditShippinggAddress().isDisplayed()) {
-                executeJavaScript("arguments[0].click();", estoreAddressScreen.getEditShippinggAddress());
+            if (estoreAddressScreen.getEditBillingAddress().isDisplayed()) {
+                executeJavaScript("arguments[0].click();", estoreAddressScreen.getEditBillingAddress());
             }
         }
     }
@@ -382,6 +382,7 @@ public class EstoreAddressStepDefs {
         try {
             generalStepDefs.waitForJSandJQueryToLoad();
             with().pollInterval(5, SECONDS).await().until(() -> true);
+
             if (Hooks.profile.equals("stg3")) {
                 $(By.xpath("(//button[contains(@class,'MuiButton-containedPrimary')])[2]")).click();
             } else {
