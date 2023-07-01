@@ -614,10 +614,10 @@ public class GeneralStepDefs {
      This method set up user configuration based on environment
      */
     public static void setUserEnvironment() {
-
+        String endpoint = Hooks.cookie;
         if (BASE_URL.contains("stg2")) {
             USER_ID = "4c5c1919-99d6-47a3-a0f5-7d5287911944";
-            addItemEndpoint = "/concierge-bff-v1-userservice/graphql";
+            addItemEndpoint = "/concierge-bff-v1-" + endpoint + "/graphql";
         } else if (BASE_URL.contains("stg4")) {
             addItemEndpoint = "/concierge-bff-v1/graphql";
             USER_ID = "3d6b15b6-eca1-4ef5-8c3c-cc39c6a2b8a8";
