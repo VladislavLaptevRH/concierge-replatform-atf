@@ -512,7 +512,7 @@ public class GeneralStepDefs {
                 "        \"lineItemsInput\": {\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
-                "                    \"sku\": \"10036326 BLWH\",\n" +
+                "                    \"sku\": \"10023954 ANTB\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"brand\": \"RH\",\n" +
                 "                    \"giftTo\": \"\",\n" +
@@ -617,7 +617,7 @@ public class GeneralStepDefs {
 
         if (BASE_URL.contains("stg2")) {
             USER_ID = "4c5c1919-99d6-47a3-a0f5-7d5287911944";
-            addItemEndpoint = "/concierge-bff-v1-stg2/graphql";
+            addItemEndpoint = "/concierge-bff-v1-userservice/graphql";
         } else if (BASE_URL.contains("stg4")) {
             addItemEndpoint = "/concierge-bff-v1/graphql";
             USER_ID = "3d6b15b6-eca1-4ef5-8c3c-cc39c6a2b8a8";
