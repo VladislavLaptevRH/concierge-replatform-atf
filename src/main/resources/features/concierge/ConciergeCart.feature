@@ -10,17 +10,17 @@ Feature:Concierge Cart Page
     When I open cart
     Then I verify order classification
 
-#  Scenario: Checkout membership popup for Guest user
-#    Given I log into Concierge as "associate"
-#    When I choose country for concierge from footer
-#    When I remove all items from cart via UI
-#    When I remove client from header
-#    When I add item to cart via UI
-#    When I open cart
-#    When I choose order classification
-#    When I click on checkout button
-#    Then I click on no thanks button
-#    Then I verify membership popup for guest user
+  Scenario: Checkout membership popup for Guest user
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    Then I click on no thanks button
+    Then I verify membership popup for guest user
 #
 #  Scenario: Line Item : Quantity update
 #    Given I log into Concierge as "associate"
