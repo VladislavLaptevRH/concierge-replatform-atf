@@ -210,7 +210,6 @@ Feature: eStore Contract and Trade
       | DI       |
 
   Scenario: eStore Contract - Verify RHCC payment option for Contract user
-
     Given I log into eStore as contract
     When I choose country for eStore from footer
     When I remove all items from estore cart
@@ -226,7 +225,6 @@ Feature: eStore Contract and Trade
     When I click on continue payment method estore button
 
   Scenario: estore Contract - Full Payment
-
     Given I log into eStore as contract
     When I choose country for eStore from footer
     When I remove all items from estore cart
@@ -411,7 +409,6 @@ Feature: eStore Contract and Trade
     When I execute payment with credit card on estore
 
   Scenario: estore Trade - RHCC
-
     Given I log into eStore as trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
@@ -465,7 +462,6 @@ Feature: eStore Contract and Trade
     Then I verify that I'm able to edit payment
 
   Scenario Outline: estore Trade - Major CC
-
     Given I log into eStore as trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
@@ -550,7 +546,7 @@ Feature: eStore Contract and Trade
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
-    When I click on edit estore billing address button
+    When I click on edit estore billing address button on payment page
     When I edit estore billing address from PG
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -607,6 +603,7 @@ Feature: eStore Contract and Trade
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on edit estore billing address button
     When I fill estore billing address

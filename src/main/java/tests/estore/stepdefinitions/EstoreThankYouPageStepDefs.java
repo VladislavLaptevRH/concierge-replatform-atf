@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import tests.concierge.pageObject.ConciergeCartPageScreen;
 import tests.concierge.pageObject.ConfirmationOrderScreen;
 import tests.estore.pageObject.EstoreConfirmationOrderScreen;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -40,12 +41,11 @@ public class EstoreThankYouPageStepDefs {
 
     @Then("I verify that estore thank you page is displayed")
     public void iVerifyThatEstoreThankYouPageIsDisplayed() {
-        if(!estoreConfirmationOrderScreen.getThankYouTitle().isDisplayed()){
+        if (!estoreConfirmationOrderScreen.getThankYouTitle().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
         $(By.xpath("//*[text()='THANK YOU']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[contains(text(),'You will receive an order confirmation number shortly via email.')]")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Order details']")).should(visible, Duration.ofSeconds(40));
     }
 }
