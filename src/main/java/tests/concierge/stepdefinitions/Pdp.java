@@ -2,6 +2,8 @@ package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.WebDriverRunner;
 
+import com.codeborne.selenide.ex.ElementNotFound;
+import org.openqa.selenium.support.ui.Select;
 import tests.concierge.pageObject.*;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -81,7 +83,7 @@ public class Pdp {
 
     @Then("I verify that on sale modal pop up is displayed")
     public void iVerifyThatOnSaleModalPopUpIsDisplayed() {
-        $(By.xpath("(//*[text()='Sale'])[1]")).shouldHave(text("Sale"), Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='ON SALE']")).shouldHave(text("Sale"), Duration.ofSeconds(20));
     }
 
     @When("I go to custom rugs")
@@ -139,6 +141,10 @@ public class Pdp {
     @Then("I verify mattress recycling fee")
     public void iVerifyMattressRecyclingFee() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!$(By.xpath("//*[text()='mattress recycling fee']")).isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         $(By.xpath("//*[text()='mattress recycling fee']")).scrollTo();
         $(By.xpath("//*[text()='mattress recycling fee']")).should(visible, Duration.ofSeconds(40));
     }
@@ -157,6 +163,18 @@ public class Pdp {
 
     @When("I click on special order fabrics")
     public void iClickOnSpecialOrderFabrics() {
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if (conciergeItemsScreen.getSelectSize().isDisplayed()) {
+            try {
+                Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
+                sizeList.selectByIndex(1);
+            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException |
+                     ElementNotFound e) {
+                System.out.println("Element Size not found");
+            }
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
         with().pollInterval(5, SECONDS).await().until(() -> true);
         if(!pdpScreen.getSpecialOrdersButton().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
@@ -187,12 +205,21 @@ public class Pdp {
     @Then("I verify that availability, Delivery and returns messaging is displayed for {string}")
     public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingIsDisplayedFor(String arg0) {
         if (arg0.equals("SO")) {
-            $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]")).scrollTo();
-            $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]")).should(visible, Duration.ofSeconds(50));
+            if (!$(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]")).isDisplayed()) {
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+            }
+                $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]")).scrollTo();
+                $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]")).should(visible, Duration.ofSeconds(30));
+
         }
         if (arg0.equals("BO")) {
+            if (!$(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).isDisplayed()) {
+                WebDriverRunner.getWebDriver().navigate().refresh();
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+            }
             $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).scrollTo();
-            $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).should(visible, Duration.ofSeconds(50));
+            $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).should(visible, Duration.ofSeconds(30));
         }
     }
 
