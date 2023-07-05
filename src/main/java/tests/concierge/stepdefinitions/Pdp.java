@@ -77,6 +77,10 @@ public class Pdp {
     public void iClickOnViewSaleItems() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         //$(By.xpath("//*[text()='Sale']")).shouldHave(text("Sale"), Duration.ofSeconds(20));
+        if(!$(By.xpath("//*[text()='VIEW SELECT ITEMS ON SALE']")).isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         $(By.xpath("//*[text()='VIEW SELECT ITEMS ON SALE']")).scrollIntoView(true);
         $(By.xpath("//*[text()='VIEW SELECT ITEMS ON SALE']")).click();
     }
@@ -204,6 +208,7 @@ public class Pdp {
 
     @Then("I verify that availability, Delivery and returns messaging is displayed for {string}")
     public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingIsDisplayedFor(String arg0) {
+
         if (arg0.equals("SO")) {
             if (!$(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]")).isDisplayed()) {
                 WebDriverRunner.getWebDriver().navigate().refresh();

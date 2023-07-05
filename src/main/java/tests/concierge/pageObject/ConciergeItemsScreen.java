@@ -20,6 +20,8 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement selectFabric = $(By.xpath("(//select[contains(@id, 'Fabric')])[1]"));
 
+    private final SelenideElement selectCanopyHeight= $(By.xpath("(//select[contains(@id, 'Canopy Height')])[1]"));
+
     private final SelenideElement selectColor = $(By.xpath("(//select[contains(@id, 'Color')])[1]"));
 
     private final SelenideElement selectFinish= $(By.xpath("(//select[contains(@id, 'Finish')])[1]"));
