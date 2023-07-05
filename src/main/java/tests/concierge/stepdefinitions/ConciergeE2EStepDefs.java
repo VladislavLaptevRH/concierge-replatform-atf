@@ -408,6 +408,10 @@ public class ConciergeE2EStepDefs {
     @When("I go to item {string} from search field")
     public void iGoToItemFromSearchField(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
+        if(!conciergeUserAccountPage.getSearchItemField().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         conciergeUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
         conciergeUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
         conciergeUserAccountPage.getSearchItemField().click();
@@ -427,6 +431,7 @@ public class ConciergeE2EStepDefs {
             }
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if (conciergeItemsScreen.getSelectSize().isDisplayed()) {
             try {
                 Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
@@ -436,7 +441,17 @@ public class ConciergeE2EStepDefs {
             }
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
-
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        if (conciergeItemsScreen.getSelectCanopyHeight().isDisplayed()) {
+            try {
+                Select canopyHeight = new Select(conciergeItemsScreen.getSelectCanopyHeight());
+                canopyHeight.selectByIndex(1);
+            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+                System.out.println("Element Canopy Height not found");
+            }
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if (conciergeItemsScreen.getSelectFill().isDisplayed()) {
             try {
                 Select fillList = new Select(conciergeItemsScreen.getSelectFill());
@@ -446,7 +461,7 @@ public class ConciergeE2EStepDefs {
             }
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
-
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if (conciergeItemsScreen.getSelectLeather().isDisplayed()) {
             try {
                 Select fillLeather = new Select(conciergeItemsScreen.getSelectLeather());
@@ -456,7 +471,7 @@ public class ConciergeE2EStepDefs {
             }
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
-
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if (conciergeItemsScreen.getSelectColor().isDisplayed()) {
             try {
                 Select colorList = new Select(conciergeItemsScreen.getSelectColor());
@@ -466,6 +481,7 @@ public class ConciergeE2EStepDefs {
             }
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if (conciergeItemsScreen.getSelectFinish().isDisplayed()) {
             try {
                 Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
@@ -475,7 +491,7 @@ public class ConciergeE2EStepDefs {
             }
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if (conciergeItemsScreen.getSelectQTY().isDisplayed()) {
             try {
                 Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
@@ -1308,18 +1324,6 @@ public class ConciergeE2EStepDefs {
             Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
             finishList.selectByVisibleText("Antiqued Grey Oak");
             with().pollInterval(1, SECONDS).await().until(() -> true);
-            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
-                System.out.println("Element not found");
-            }
-            try {
-                Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
-                finishList.selectByVisibleText("Antiqued Grey Oak");
-            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
-                System.out.println("Element not found");
-            }
-            try {
-                Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
-                finishList.selectByVisibleText("Antiqued Grey Oak");
             } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
                 System.out.println("Element not found");
             }
