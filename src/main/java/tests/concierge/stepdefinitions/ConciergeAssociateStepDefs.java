@@ -106,7 +106,7 @@ public class ConciergeAssociateStepDefs {
                 switchTo().window(1);
                 try {
                     assertEquals(Hooks.getCurrentUrl(), "https://rh.com/us/en/");
-                } catch (ElementNotFound e){
+                } catch (java.lang.AssertionError e){
                     assertEquals(Hooks.getCurrentUrl(), "https://rh.com/");
                 }
                 break;

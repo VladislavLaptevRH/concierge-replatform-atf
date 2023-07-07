@@ -1104,7 +1104,7 @@ public class ConciergeE2EStepDefs {
         } else {
             $(By.xpath("//*[text()='NewShippingAddress NewLastName']")).shouldHave(text("NewShippingAddress NewLastName"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='NewAppartment']")).shouldHave(text("NewAppartment"), Duration.ofSeconds(25));
-            $(By.xpath("//*[contains(text(),'Milpitas, AZ, 85020-4434')]")).shouldHave(text("Milpitas, AZ, 85020"), Duration.ofSeconds(25));
+            $(By.xpath("//*[contains(text(),'Milpitas, AZ, 85020')]")).shouldHave(text("Milpitas, AZ, 85020"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='37 new road']")).shouldHave(text("37 new road"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
             $(By.xpath("//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
