@@ -421,18 +421,17 @@ Feature:Concierge Cart Page
 #    When I fill all fields from address with "NY" zip code
 #    Then I verify that restrictions pop up is displayed
 
-#  Bug - ticket number...
-#  Scenario: Verify Member savings for a member user in cart - From PDP and Project
-#    Given I log into Concierge as "associate"
-#    When I remove all items from cart via UI
-#    When I remove client from header
-#    When I add item to cart via API
-#    When I open cart
-#    When I choose order classification
-#    When I click on checkout button
-#    When I click on no thanks button
-#    When I choose client who is a "Member"
-#    Then I verify "member" savings for a "member" user
+  Scenario: Verify Member savings for a member user in cart - From PDP and Project
+    Given I log into Concierge as "associate"
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Member"
+    Then I verify "member" savings for a "member" user
 
   Scenario: Verify address saved in address page when navigate back from order review or any page
     Given I log into Concierge as "associate"
