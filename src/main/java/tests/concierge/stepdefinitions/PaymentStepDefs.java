@@ -253,20 +253,20 @@ public class PaymentStepDefs {
                             "QAFirst Automation\n" +
                             "North 16th Street\n" +
                             "QaApartment\n" +
-                            "Phoenix, AZ 85020\n" +
+                            "Phoenix, AZ, 85020\n" +
                             "US\n" +
                             "1241312319\n" +
-                            "Edit"));
+                            "EDIT"));
 
             assertEquals(paymentScreen.getBillingAddress().getText(),
                     "BILLING ADDRESS\n" +
                             "QAFirst Automation\n" +
                             "North 16th Street\n" +
                             "QaApartment\n" +
-                            "Phoenix, AZ 85020\n" +
+                            "Phoenix, AZ, 85020\n" +
                             "US\n" +
                             "1241312319\n" +
-                            "Edit");
+                            "EDIT");
         }
     }
 
@@ -275,9 +275,9 @@ public class PaymentStepDefs {
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Estimated Sales Tax for 85020']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$5,317.06']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$2,687.00']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$421.06']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$255.08']")).should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that member savings in payment page")
