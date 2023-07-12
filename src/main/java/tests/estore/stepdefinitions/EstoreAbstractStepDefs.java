@@ -40,7 +40,7 @@ public class EstoreAbstractStepDefs {
 
     @When("I clicks on a random estore menu item")
     public void iClicksOnARandomEstoreMenuItem() {
-        with().pollInterval(7, SECONDS).await().until(() -> true);
+
         generalStepDefs.waitForJSandJQueryToLoad();
         estoreCategories.getLivingCategory().should(visible, Duration.ofSeconds(60));
         Actions actions = new Actions(WebDriverRunner.getWebDriver());
@@ -56,7 +56,7 @@ public class EstoreAbstractStepDefs {
 
     @When("I clicks on estore random item")
     public void iClicksOnEstoreRandomItem() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
             estoreItemPage.getItems().should(Condition.and("", visible, enabled), Duration.ofMinutes(3));
@@ -106,10 +106,10 @@ public class EstoreAbstractStepDefs {
     @When("I click on estore checkout button")
     public void iClickOnCheckoutButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+
         if (!$(By.xpath("//*[text()='Checkout']")).isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+    
         }
         $(By.xpath("//*[text()='Checkout']")).shouldHave(text("Checkout"), Duration.ofSeconds(30));
         $(By.xpath("//*[text()='Checkout']")).should(interactable, Duration.ofSeconds(20));
@@ -146,7 +146,7 @@ public class EstoreAbstractStepDefs {
 
     @When("I click on a place estore order button")
     public void iClickOnPlaceOrderButton() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
         estoreReviewOrderPage.getPlaceOrderButton().should(enabled, Duration.ofMinutes(1));
         estoreReviewOrderPage.getPlaceOrderButton().should(interactable, Duration.ofMinutes(1)).click();
         try {
@@ -221,7 +221,7 @@ public class EstoreAbstractStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         if (conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
             conciergeUserAccountPage.getClientButton().shouldHave(text("CLIENT"), Duration.ofSeconds(15));
-            with().pollInterval(2, SECONDS).await().until(() -> true);
+            
             conciergeUserAccountPage.getClientButton().click();
             conciergeUserAccountPage.getClientLookupHeaderBtn().shouldHave(text("Client Lookup"), Duration.ofMinutes(1));
             conciergeUserAccountPage.getClientLookupHeaderBtn().click();

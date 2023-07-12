@@ -60,7 +60,7 @@ public class EstoreHomePageStepDefs {
 
     @Then("verify users is taken to search result page")
     public void verifyUsersIsTakenToProductPage() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+
         assertTrue(Hooks.getCurrentUrl().contains("/search/results"));
     }
 
@@ -99,7 +99,7 @@ public class EstoreHomePageStepDefs {
 
     @When("I scroll down to Request a design consultation and click")
     public void iScrollDownToRequestADesignConsultationAndClick() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
         executeJavaScript("window.scrollTo(0, 11000)");
         estoreHomePage.getRequestConsultationButton().scrollTo();
         estoreHomePage.getRequestConsultationButton().click();
@@ -113,7 +113,7 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getMessageInputField().click();
         estoreHomePage.getMessageInputField().setValue("Hi, This is automation tests, please ignore the request. Thank you ");
         estoreHomePage.getIframeRequestAConsultationButton().click();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
 
     }
 
@@ -141,34 +141,35 @@ public class EstoreHomePageStepDefs {
     public void iNavigateToTheMemberTab() {
         String URL = Hooks.eStoreBaseURL + "/my-account/membership.jsp";
         open(URL);
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
     }
 
     @Then("I validate each cat and sub-cat for eStore")
     public void iValidateEachCatAndSubCatForEStore() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
         for (int main = 0; main < estoreHomePage.getListOfNavigationBar().size(); main++) {
             System.out.println("Main Category: " + estoreHomePage.getListOfNavigationBar().get(main).getText());
             estoreHomePage.getListOfNavigationBar().get(main).click();
             for (int sub = 0; sub < estoreHomePage.getListOfSubCategories().size(); sub++) {
                 System.out.println("Sub Category: " + estoreHomePage.getListOfSubCategories().get(sub).getText());
                 estoreHomePage.getListOfSubCategories().get(sub).click();
-                with().pollInterval(5, SECONDS).await().until(() -> true);
+        
                 for (int collection = 0; collection < estoreHomePage.getListOfCollection().size(); collection++) {
                     estoreHomePage.getListOfCollection().get(collection).click();
-                    with().pollInterval(5, SECONDS).await().until(() -> true);
+            
                     System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": " + Hooks.getCurrentUrl());
                     assertFalse((WebDriverRunner.getWebDriver().getTitle().contains("404")));
                     if (!Hooks.getCurrentUrl().contains("rhnonprod")) {
                         open(Hooks.eStoreURL);
-                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                
                     }
                     estoreHomePage.getListOfNavigationBar().get(main).click();
-                    with().pollInterval(5, SECONDS).await().until(() -> true);
+            
                     estoreHomePage.getListOfSubCategories().get(sub).click();
-                    with().pollInterval(5, SECONDS).await().until(() -> true);
+            
                 }
             }
         }
     }
+
 }

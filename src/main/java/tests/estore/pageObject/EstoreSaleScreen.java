@@ -23,7 +23,7 @@ public class EstoreSaleScreen {
 
     private SelenideElement textilesSaleCategory = $(By.xpath("//*[text()='Textiles']"));
 
-    private SelenideElement mainSaleList = $(By.xpath("(//ul[@class='MuiList-root'])[1]//li[3]/span"));
+    private SelenideElement mainSaleList = $(By.xpath("(//ul[@class='MuiList-root'])[1]//li[1]/span"));
 
     private SelenideElement subSaleList = $(By.xpath("(//ul[@class='MuiList-root'])[2]//li[3]/span"));
 

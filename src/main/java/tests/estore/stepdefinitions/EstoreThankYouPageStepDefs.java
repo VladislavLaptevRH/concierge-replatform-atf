@@ -43,7 +43,7 @@ public class EstoreThankYouPageStepDefs {
     public void iVerifyThatEstoreThankYouPageIsDisplayed() {
         if (!estoreConfirmationOrderScreen.getThankYouTitle().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+    
         }
         $(By.xpath("//*[text()='THANK YOU']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[contains(text(),'You will receive an order confirmation number shortly via email.')]")).should(visible, Duration.ofSeconds(40));

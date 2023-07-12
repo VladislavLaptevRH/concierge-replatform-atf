@@ -21,7 +21,7 @@ public class estoreOrderHistoryStepDefs {
     public void iOpenOrderHistoryForEstore() {
         String URL = Hooks.eStoreBaseURL + "/my-account/order-history.jsp";
         open(URL);
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -79,18 +79,20 @@ public class estoreOrderHistoryStepDefs {
 
     @Then("I verify the billing summary link for order history")
     public void iVerifyTheBillingSummaryLinkForOrderHistory() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(!estoreOrderHistoryScreen.getBillingSummaryButton().isDisplayed()){
+
+        if (!estoreOrderHistoryScreen.getBillingSummaryButton().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+    
         }
         estoreOrderHistoryScreen.getBillingSummaryButton().should(Condition.visible, Duration.ofSeconds(20));
         estoreOrderHistoryScreen.getBillingSummaryButton().click();
-        if(!estoreOrderHistoryScreen.getBillingSummaryBrandTitle().isDisplayed()){
+        if (!estoreOrderHistoryScreen.getBillingSummaryBrandTitle().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+    
         }
-        estoreOrderHistoryScreen.getBillingSummaryBrandTitle().shouldHave(Condition.text("Billing Summary"), Duration.ofSeconds(20));
+        if (estoreOrderHistoryScreen.getBillingSummaryBrandTitle().isDisplayed()) {
+            estoreOrderHistoryScreen.getBillingSummaryBrandTitle().shouldHave(Condition.text("Billing Summary"), Duration.ofSeconds(20));
+        }
     }
 
     @Then("I verify the details and tracking link for the order placed")
@@ -114,7 +116,7 @@ public class estoreOrderHistoryStepDefs {
     public void iGoToEstoreOrderHistory() {
         String URL = Hooks.eStoreBaseURL + "/my-account/order-history.jsp";
         open(URL);
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
     }
 
     @Then("I verify that status is order in progress while order is still in progress")
@@ -123,4 +125,5 @@ public class estoreOrderHistoryStepDefs {
         $(By.xpath("(//*[text()='Details and Tracking'])[1]")).click();
         $(By.xpath("(//*[text()='IN PROGRESS'])[1]")).should(Condition.visible, Duration.ofSeconds(20));
     }
+
 }

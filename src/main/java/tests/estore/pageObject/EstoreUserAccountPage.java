@@ -1,9 +1,12 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import tests.concierge.stepdefinitions.GeneralStepDefs;
 
+import java.time.Duration;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -12,6 +15,11 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 public class EstoreUserAccountPage {
 
+    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+
+    private final SelenideElement createAccountButton = $(By.xpath("//*[@id='kc-register']"));
+
+    private final SelenideElement createAccountButtonForm = $(By.xpath("//*[@id='kc-form-buttons']"));
 
     private final SelenideElement emailField = $(By.xpath("//input[@id='email']"));
 
@@ -250,4 +258,61 @@ public class EstoreUserAccountPage {
     private final SelenideElement searchClientResultsPlusButton = $(By.xpath("//td[@class='MuiTableCell-root MuiTableCell-body'][8]"));
 
     private final List<SelenideElement> toddlerBeddingList = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true']/div/ul[@class='MuiGridList-root']/li[@class='MuiGridListTile-root']"));
+
+    private final SelenideElement firstNameField = $(By.id("firstName"));
+
+    private final SelenideElement lastNameField = $(By.id("lastName"));
+
+    private final SelenideElement passwordField = $(By.id("password"));
+
+    private final SelenideElement passwordConfirmField = $(By.id("password-confirm"));
+
+    private final SelenideElement createAccountField = $(By.id("kc-form-buttons"));
+
+    private final SelenideElement createTitle = $(By.xpath("//*[text()='MY ACCOUNT']"));
+
+    String password;
+
+    private final SelenideElement agreePrivacyPolicyCheckbox = $(By.xpath("//*[@for='termsAndConditions']"));
+
+    public void introduceFirstNameIntoCreateAccountForm() {
+        firstNameField.should(Condition.visible, Duration.ofSeconds(30));
+        firstNameField.setValue(generalStepDefs.getAlphaNumericString(5));
+    }
+
+    public void introduceLastNameIntoCreateAccountForm() {
+        lastNameField.should(Condition.visible, Duration.ofSeconds(30));
+        lastNameField.setValue(generalStepDefs.getAlphaNumericString(8));
+    }
+
+    public void introduceEmailIntoCreateAccountForm() {
+        emailField.should(Condition.visible, Duration.ofSeconds(30));
+        emailField.setValue(generalStepDefs.getAlphaNumericString(8) + "@mailinator.com");
+    }
+
+    public void introducePasswordIntoCreateAccountForm() {
+        password = generalStepDefs.getAlphaNumericString(6);
+        passwordField.should(Condition.visible, Duration.ofSeconds(30));
+        passwordField.setValue(password + "A1");
+    }
+
+    public void introduceConfirmPasswordIntoCreateAccountForm() {
+        passwordConfirmField.should(Condition.visible, Duration.ofSeconds(30));
+        passwordConfirmField.setValue(password + "A1");
+    }
+
+    public void clickToCreateAccountButtonForm() {
+        createAccountButtonForm.should(Condition.interactable, Duration.ofSeconds(30));
+        createAccountButtonForm.click();
+    }
+
+    public void clickToCreateNewAccountButton() {
+        createAccountButton.should(Condition.interactable, Duration.ofSeconds(30));
+        createAccountButton.click();
+    }
+
+    public void clickToAgreePrivacyPolicyCheckbox() {
+        agreePrivacyPolicyCheckbox.click();
+    }
+
 }

@@ -77,7 +77,7 @@ public class EstoreE2EStepDefs {
 
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
         estoreItemPage.getAddToCartButton().click();
@@ -189,7 +189,7 @@ public class EstoreE2EStepDefs {
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
         estoreUserAccountPage.getSearchItemField().click();
         generalStepDefs.waitForJSandJQueryToLoad();
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+
         estoreUserAccountPage.getSearchItemField().setValue(arg0);
 
         $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
@@ -242,7 +242,7 @@ public class EstoreE2EStepDefs {
             actions.moveToElement(estoreCartPage.getNoThanksButton());
             estoreCartPage.getNoThanksButton().scrollIntoView(true);
             generalStepDefs.waitForJSandJQueryToLoad();
-            with().pollInterval(4, SECONDS).await().until(() -> true);
+    
             executeJavaScript("arguments[0].click();", estoreCartPage.getNoThanksButton());
         } else {
             System.out.println("Close button is not displayed");
@@ -272,7 +272,7 @@ public class EstoreE2EStepDefs {
     @When("I remove estore client from header")
     public void iRemoveEstoreClientFromHeader() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+
         try {
             if ($(By.xpath("//*[contains(text(),'Client: ')]")).isDisplayed()) {
                 conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(10));
@@ -475,7 +475,7 @@ public class EstoreE2EStepDefs {
         generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         $(By.cssSelector("body > div:nth-child(7) > div:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > label:nth-child(1) > span:nth-child(1) > span:nth-child(1) > input:nth-child(1)")).click();
     }
 
@@ -486,7 +486,7 @@ public class EstoreE2EStepDefs {
 
     @When("I edit estore shipping address from order review page")
     public void iEditShippingEstoreAddressFromOrderReviewPage() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         conciergeAddressScreen.getEditShippingAddress().should(visible, Duration.ofSeconds(15));
         conciergeAddressScreen.getEditShippingAddress().click();
         checkoutAddressScreen.getFirstNameInpt().should(visible, Duration.ofSeconds(15));
@@ -548,7 +548,7 @@ public class EstoreE2EStepDefs {
     @When("I select estore length option")
     public void iSelectEstoreLengthOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        with().pollInterval(6, SECONDS).await().until(() -> true);
+
         selectOption.getLengthOption().should(visible, Duration.ofSeconds(15));
         Select selectLength = new Select(selectOption.getLengthOption());
         selectLength.selectByValue("80400002");
@@ -557,7 +557,7 @@ public class EstoreE2EStepDefs {
     @When("I click on same as estore shipping address checkbox")
     public void iClickOnSameAsShippingAddressCheckbox() {
         try {
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+    
             if ($(By.xpath("//*[text()='Same as shipping address']")).isDisplayed()) {
                 $(By.xpath("//*[text()='Same as shipping address']")).click();
             }
@@ -568,18 +568,18 @@ public class EstoreE2EStepDefs {
 
     @When("I click on continue payment method estore button")
     public void iClickOnContinuePaymentMethodEstoreButton() {
-        with().pollInterval(6, SECONDS).await().until(() -> true);
+
         try {
             if (estoreAddressScreen.getContinueToPayment().isDisplayed()) {
                 estoreAddressScreen.getContinueToPayment().scrollIntoView(true);
                 estoreAddressScreen.getContinueToPayment().should(visible, Duration.ofSeconds(2));
                 estoreAddressScreen.getContinueToPayment().click();
-                with().pollInterval(3, SECONDS).await().until(() -> true);
+                
             } else {
                 estoreAddressScreen.getContinuePayment().scrollIntoView(true);
                 estoreAddressScreen.getContinuePayment().should(visible, Duration.ofSeconds(2));
                 estoreAddressScreen.getContinuePayment().click();
-                with().pollInterval(3, SECONDS).await().until(() -> true);
+                
             }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Continue button is not displayed");
@@ -597,7 +597,7 @@ public class EstoreE2EStepDefs {
     public void iOpenEstoreProductPageWithProductIdAndSkuId(String productId, String skuId) {
         String URL = Hooks.eStoreURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+NATL";
         open(URL);
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+
         if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
             open(URL);
         }
@@ -605,7 +605,7 @@ public class EstoreE2EStepDefs {
 
     @When("I refresh current estore page")
     public void iRefreshCurrentEstorePage() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -620,12 +620,12 @@ public class EstoreE2EStepDefs {
         }
 
         open(URL);
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
         estoreItemPage.getAddToCartButton().scrollTo();
         if (!estoreItemPage.getAddToCartButton().isEnabled()) {
             for (int i = 0; i < 3; i++) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
-                with().pollInterval(4, SECONDS).await().until(() -> true);
+        
                 if (estoreItemPage.getAddToCartButton().isEnabled()) {
                     break;
                 }

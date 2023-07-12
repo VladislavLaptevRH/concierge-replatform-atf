@@ -2,7 +2,6 @@
 Feature: Estore PG
 
   Scenario: Grid view Mobile Only 1 and 2 grid view
-
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
     When I go to estore item "sofa" from search field
@@ -22,7 +21,7 @@ Feature: Estore PG
     Then I verify that back to top button is clickable
     And I verify that after click on back to top button user is scrolled to top on the page
 
-  Scenario: Back button after appying filter
+  Scenario: Back button after applying filter
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
     When I goes to estore product sale page

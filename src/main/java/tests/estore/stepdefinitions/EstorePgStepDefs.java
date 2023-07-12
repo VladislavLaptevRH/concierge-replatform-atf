@@ -55,7 +55,7 @@ public class EstorePgStepDefs {
     public void iGoesToEstorePg() {
         String URL = Hooks.eStoreBaseURL + "/search/results.jsp?Ntt=tables&Ns=product.sale%7C1";
         open(URL);
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -73,7 +73,7 @@ public class EstorePgStepDefs {
 
     @When("I scroll on the PG page till back to top button is visible")
     public void iScrollOnThePGPageTillBackToTopButtonIsVisible() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
