@@ -67,7 +67,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate membership title")
     public void iValidateMembershipTitile() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+
         $(By.xpath("//*[text()='RH MEMBERS PROGRAM PROFILE']")).should(visible, Duration.ofSeconds(20));
     }
 
@@ -82,19 +82,19 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate add to cart button")
     public void iValidateAddToCartButton() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+
         assertTrue(estoreMemberPage.getAddToCart().isDisplayed());
     }
 
     @When("I click on add to cart button from membership")
     public void iClickOnAddToCartButtonFromMembership() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+
         estoreMemberPage.getAddToCart().click();
     }
 
     @Then("I validate cart")
     public void iValidateCart() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+
         if ($(By.xpath("//*[text()='JOIN NOW']")).isDisplayed()) {
             $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(10));
         } else {
@@ -121,7 +121,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate membership details for member user")
     public void iValidateMembershipDetailsForMemberUser() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+
         $(By.xpath("//*[text()='Membership Number: ']")).should(visible, Duration.ofSeconds(30));
         $(By.xpath("//*[text()='Enrollment: ']")).should(visible, Duration.ofSeconds(30));
         $(By.xpath("//*[text()='You will be charged ']")).should(visible, Duration.ofSeconds(30));
@@ -130,14 +130,14 @@ public class EstoreMemberStepDefs {
 
     @When("I click on cancel membership link")
     public void iClickOnCancelMembershipLink() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
         assertTrue(estoreMemberPage.getCancelLink().isDisplayed());
         estoreMemberPage.getCancelLink().click();
     }
 
     @Then("I validate cancel membership content")
     public void iValidateCancelMembershipContent() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
         $(By.xpath("//*[text()='25% savings on all full-priced items from RH, RH Modern, RH Baby & Child and RH TEEN']")).should(visible, Duration.ofSeconds(30));
         $(By.xpath("//*[text()='Additional 20% savings on all sale items']")).should(visible, Duration.ofSeconds(30));
         $(By.xpath("//*[text()='Complimentary services with RH Interior Design']")).should(visible, Duration.ofSeconds(30));

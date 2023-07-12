@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import java.time.Duration;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -53,6 +54,11 @@ public class EstoreHomePage {
 
     private final SelenideElement caCountry = $(By.xpath("//li[@data-value='CA']"));
 
+
+    public void clickToAccountButtonForregisteredUser() {
+        accountIcon.should(interactable, Duration.ofSeconds(20));
+        accountIcon.click();
+    }
 
     public void chooseGBCountry() {
         countrySelection.should(visible).scrollIntoView(true).click();

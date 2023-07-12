@@ -22,7 +22,6 @@ public class EstoreItemsStepDefs {
 
     @When("I select estore debth option")
     public void iSelectDebthProperty() {
-        sleep(12000);
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
             executeJavaScript("window.scrollTo(0, 970)");
@@ -38,7 +37,7 @@ public class EstoreItemsStepDefs {
 
     @When("I select estore fabric option")
     public void iSelectFabricProperty() {
-        with().pollInterval(8, SECONDS).await().until(() -> true);
+
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
             selectOption.getFabricProperty().should(appear, Duration.ofSeconds(15));
@@ -53,7 +52,7 @@ public class EstoreItemsStepDefs {
     @When("I select estore color option")
     public void iSelectColorOption() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        with().pollInterval(8, SECONDS).await().until(() -> true);
+
         try {
             selectOption.getColorOption().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
             selectOption.getColorOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));

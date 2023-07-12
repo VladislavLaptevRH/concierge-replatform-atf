@@ -67,9 +67,6 @@ public class Hooks {
         cookie = System.getenv("ENDPOINT");
         country = System.getenv("COUNTRY");
 
-//        profile = "stg2";
-//        cookie = "userservice";
-
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
         } else {

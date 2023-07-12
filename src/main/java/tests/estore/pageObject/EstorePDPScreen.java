@@ -9,6 +9,9 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class EstorePDPScreen {
+
+    private final SelenideElement addToCartInactiveButton = $(By.xpath("(//*[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-10'])[1]//button[contains(@class,'disabled') and @id='component-related-product-card_add-to-cart-btn']"));
+
     private final SelenideElement sortButton = $(By.xpath("(//*[contains(text(),'sort')])[2]"));
 
     private final SelenideElement sortByButton = $(By.xpath("//*[text()='sort by:']"));
