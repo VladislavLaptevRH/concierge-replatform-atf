@@ -4,10 +4,12 @@ Feature:Concierge Homepage
 
   Scenario: Login as associate and Verify that home page is accessible
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     Then  I expect that I am on the Concierge Dashboard page
 
   Scenario Outline: Verify top menu navigation
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     Then  I change the brand to "<brand>"
     Then User verifies that all items from menu are displayed for "<brand>"
     Examples:
@@ -22,6 +24,7 @@ Feature:Concierge Homepage
 
   Scenario Outline: Verify the logo on "<brand>" brand
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     Then  I change the brand to "<brand>"
     Then I verify the logo
     Examples:
@@ -38,6 +41,7 @@ Feature:Concierge Homepage
 
   Scenario Outline: Verify brand dropdown
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     Then  I change the brand to "<brand>"
     Examples:
       |brand|
@@ -53,6 +57,7 @@ Feature:Concierge Homepage
 
   Scenario Outline: Footer links
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     Then I verify footer links for "<links>"
     Examples:
       | links     |
@@ -63,6 +68,7 @@ Feature:Concierge Homepage
 
   Scenario: Verify homepage content
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     Then  I expect that I am on the Concierge Dashboard page
     Then I verify the username
     Then I verify the gallery
@@ -83,10 +89,12 @@ Feature:Concierge Homepage
 
   Scenario: Change store number in concierge from dashboard
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I change my store to number "10"
     Then I verify I see store Palo Alto in the header
 
   Scenario: Verify that all galleries are present in list
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When user clicks on gallery button from header
     Then user verifies list of galleries which have default value "5: Newport Beach"

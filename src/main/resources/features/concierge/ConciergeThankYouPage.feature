@@ -4,6 +4,7 @@ Feature: Concierge ThankYouPage
 
   Scenario: Verify order details
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -22,6 +23,7 @@ Feature: Concierge ThankYouPage
 
   Scenario: Verify the payment details and Order estimate summary
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -40,6 +42,7 @@ Feature: Concierge ThankYouPage
 
   Scenario: Verify all the line items in the cart
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -58,6 +61,7 @@ Feature: Concierge ThankYouPage
 
   Scenario: Verify the order number and email address verbiage
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API

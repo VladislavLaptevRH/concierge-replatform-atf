@@ -54,7 +54,7 @@ Feature: Concierge PDP
   Scenario: Replacement Items
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
-    When I go to item "10061570 CTCM" from search field
+    When I go to item "10004670 NONE" from search field
     Then I verify that check for replacements parts button is displayed
     And I verify that replacements parts modal pop up is displayed
 
@@ -73,11 +73,12 @@ Feature: Concierge PDP
     Then I verify that availability, Delivery and returns messaging is displayed for "<items>"
     Examples:
       | items | skuID         |
-      | SO    | 10060978 BMEB |
+      | SO    | 19970830 CTIC |
       | BO    | 17050043 FOG  |
 
   Scenario: ATC SPO - add to cart
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10105809 BWDV" from search field
     When I click on add to cart button
@@ -87,6 +88,7 @@ Feature: Concierge PDP
 
   Scenario: ATC BO - add to cart
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10060297 CLR" from search field
     When I click on add to cart button
@@ -95,6 +97,7 @@ Feature: Concierge PDP
 
   Scenario: Pricing - verify that price on PDP is the same as price from Cart page
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
@@ -103,5 +106,6 @@ Feature: Concierge PDP
 
   Scenario: SLP (Swatch Landing Page)
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I go to Swatch Landing Page
     Then I verify that swatch landing page is displayed

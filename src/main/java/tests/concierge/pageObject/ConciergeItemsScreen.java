@@ -20,6 +20,8 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement selectFabric = $(By.xpath("(//select[contains(@id, 'Fabric')])[1]"));
 
+    private final SelenideElement selectCanopyHeight= $(By.xpath("(//select[contains(@id, 'Canopy Height')])[1]"));
+
     private final SelenideElement selectColor = $(By.xpath("(//select[contains(@id, 'Color')])[1]"));
 
     private final SelenideElement selectFinish= $(By.xpath("(//select[contains(@id, 'Finish')])[1]"));
@@ -28,7 +30,7 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement selectFill = $(By.xpath("(//select[contains(@id, 'Fill')])[1]"));
 
-
+    private final SelenideElement selectLeather = $(By.xpath("(//select[contains(@id, 'Leather')])[1]"));
     private final List<SelenideElement> items = $$(By.xpath("//div[@class= 'MuiGrid-root MuiGrid-container']/div"));
 
     private final List<SelenideElement> twoItemsSection = $$(By.xpath("//ul[contains(@class,'MuiGridList-root')]/li[@class='MuiGridListTile-root']"));
@@ -44,6 +46,8 @@ public class ConciergeItemsScreen {
     private final SelenideElement viewCartButton = $(By.cssSelector("#ajax-proceed-to-cart"));
 
     private final SelenideElement detailsSpan = $(By.xpath("//*[text()='DETAILS']"));
+
+    private final SelenideElement detailsSpanWithSpase = $(By.xpath("//*[text()=' DETAILS']"));
 
     private final SelenideElement checkoutButton = $(By.xpath("(//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth'])[1]"));
 

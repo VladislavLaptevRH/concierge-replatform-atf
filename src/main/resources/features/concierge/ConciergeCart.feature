@@ -4,12 +4,15 @@ Feature:Concierge Cart Page
 
   Scenario: Order Classification
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
     When I add item to cart via API
     When I open cart
     Then I verify order classification
 
   Scenario: Checkout membership popup for Guest user
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -21,6 +24,7 @@ Feature:Concierge Cart Page
 
   Scenario: Line Item : Quantity update
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -30,6 +34,7 @@ Feature:Concierge Cart Page
 
   Scenario: Remove line item - click on remove button and verify that line item is removed and subtotal and minicart value is updated
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove client from header
     When I add item to cart via API
     When I open cart
@@ -38,6 +43,7 @@ Feature:Concierge Cart Page
 
   Scenario Outline: Override Line item Prices - with <method> override price methods
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -57,6 +63,7 @@ Feature:Concierge Cart Page
 
   Scenario: Override Line item Prices - for all line items from cart
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -71,6 +78,7 @@ Feature:Concierge Cart Page
 
   Scenario: Override Line item Prices - verify update button, verify remove button
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I add item to cart via API
     When I open cart
@@ -88,6 +96,7 @@ Feature:Concierge Cart Page
 
   Scenario: Override Line item Prices - verify remove button
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -104,6 +113,7 @@ Feature:Concierge Cart Page
 
   Scenario: Shipping Override (SD, UFD) -  i can introduce only zero in unlimited furniture delivery field, verify that error should be appeared -> Value must be 0.
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -112,6 +122,7 @@ Feature:Concierge Cart Page
 
   Scenario: FEMA Promotion Code Description - FEMAD
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -124,6 +135,7 @@ Feature:Concierge Cart Page
 
   Scenario: Move to Project
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -134,6 +146,7 @@ Feature:Concierge Cart Page
 
   Scenario: Promo codes - promo code for guest user
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I add item to cart via API
     When I open cart
@@ -144,12 +157,14 @@ Feature:Concierge Cart Page
 
   Scenario: Designed/ Sold By
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I add item to cart via API
     When I open cart
     Then I verify that designed sold by
 
   Scenario: Promo codes - verify that total price from cart and from payment page is the same after applying promocode
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -167,6 +182,7 @@ Feature:Concierge Cart Page
 
   Scenario: Promo codes - Total Additional Product Discount message is displayed on review page
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -185,6 +201,7 @@ Feature:Concierge Cart Page
 
   Scenario: Promo codes - verify that promo code was removed for member client
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -199,6 +216,7 @@ Feature:Concierge Cart Page
 
   Scenario: Verify mini cart count
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
@@ -209,6 +227,7 @@ Feature:Concierge Cart Page
 
   Scenario Outline: Verify Membership banner for <businessClient> - should not be present
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -225,6 +244,7 @@ Feature:Concierge Cart Page
 
   Scenario: Verify Membership Pop up while checkout for Trade - should not
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -239,6 +259,7 @@ Feature:Concierge Cart Page
 
   Scenario: Verify Membership Pop up while checkout for contract - should not be present
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I choose gallery number "997"
@@ -250,6 +271,7 @@ Feature:Concierge Cart Page
 
   Scenario Outline: Verify Trade,Contract client address page - ship to Bill to, Sold to addresses - edit addresses
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -269,6 +291,7 @@ Feature:Concierge Cart Page
 
   Scenario: Verify membership prices for Membership client
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -280,7 +303,9 @@ Feature:Concierge Cart Page
     Then I verify that membership price displayed as total price
 
   Scenario: Verify Employee discount checkout
+
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -290,6 +315,7 @@ Feature:Concierge Cart Page
 
   Scenario: Postpone shipment
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -300,6 +326,7 @@ Feature:Concierge Cart Page
 
   Scenario: Monogram Edit / Remove / Add
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with productId "prod19500002"
@@ -316,6 +343,7 @@ Feature:Concierge Cart Page
 
   Scenario: Gift Box Add / Remove / View
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with productId "prod19500002"
@@ -330,6 +358,7 @@ Feature:Concierge Cart Page
 
   Scenario: Verify Member savings for a Non member user in cart - From PDP and Project
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API with sela item
@@ -343,6 +372,7 @@ Feature:Concierge Cart Page
 
   Scenario: Verify Trade savings for a Trade user in cart - From PDP and Project
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -391,21 +421,21 @@ Feature:Concierge Cart Page
 #    When I fill all fields from address with "NY" zip code
 #    Then I verify that restrictions pop up is displayed
 
-#  Bug - ticket number...
-#  Scenario: Verify Member savings for a member user in cart - From PDP and Project
-#    Given I log into Concierge as "associate"
-#    When I remove all items from cart via UI
-#    When I remove client from header
-#    When I add item to cart via API
-#    When I open cart
-#    When I choose order classification
-#    When I click on checkout button
-#    When I click on no thanks button
-#    When I choose client who is a "Member"
-#    Then I verify "member" savings for a "member" user
+  Scenario: Verify Member savings for a member user in cart - From PDP and Project
+    Given I log into Concierge as "associate"
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Member"
+    Then I verify "member" savings for a "member" user
 
   Scenario: Verify address saved in address page when navigate back from order review or any page
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -424,6 +454,7 @@ Feature:Concierge Cart Page
 
   Scenario: Zipcode Validation
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -436,6 +467,7 @@ Feature:Concierge Cart Page
 
   Scenario: Availability, Delivery and Returns messages
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -444,6 +476,7 @@ Feature:Concierge Cart Page
 
   Scenario: Verify alternate addresses for client with multiple addresses
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I click on client button

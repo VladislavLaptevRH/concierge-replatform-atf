@@ -3,21 +3,27 @@
 Feature:Concierge Registry
 
   Scenario: Search by name
+
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on registry button
     When I search registry by name
     When I click on "SEARCH" registry button
     Then I verify that search result for registry search by "name" is displayed
 
   Scenario: Search by email
+
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on registry button
     When I search registry by email
     When I click on "SEARCH" registry button
     Then I verify that search result for registry search by "email" is displayed
 
   Scenario: Search by event type
+
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on registry button
     When I search registry by event type
     When I click on "SEARCH" registry button
@@ -25,6 +31,7 @@ Feature:Concierge Registry
 
   Scenario: Create A New Registry
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on registry button
     When I click on new registry button
     When I fills all field for create registry
@@ -38,6 +45,7 @@ Feature:Concierge Registry
 
   Scenario: Edit registry
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on registry button
     When I search registry by name
     When I click on "SEARCH" registry button
@@ -52,6 +60,7 @@ Feature:Concierge Registry
 
   Scenario: Delete registry
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on registry button
     When I click on new registry button
     When I fills all field for create registry
@@ -84,6 +93,7 @@ Feature:Concierge Registry
 
   Scenario: Manage Registry
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on registry button
     When I search registry by name
     When I click on "SEARCH" registry button
@@ -106,6 +116,7 @@ Feature:Concierge Registry
 
   Scenario: Coregistraint name
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on registry button
 
 #  Scenario: Pagination for searched registry

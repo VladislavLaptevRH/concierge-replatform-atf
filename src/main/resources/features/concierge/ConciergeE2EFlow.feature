@@ -4,6 +4,7 @@ Feature: Concierge E2E flow
 
   Scenario: Verify that user is able to buy item
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with "prod1617188" and "63130001"
@@ -41,6 +42,7 @@ Feature: Concierge E2E flow
 
   Scenario: Verify that if client is a member then redirected to carts screen
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I remove client from header
@@ -55,6 +57,7 @@ Feature: Concierge E2E flow
 
   Scenario: Verify that if client is a non member then redirected to address screen
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I open product page with "prod1617188" and "63130001"
     When I click on add to cart button
@@ -67,6 +70,7 @@ Feature: Concierge E2E flow
 
   Scenario Outline: Verify that user is able to buy item through search item by SKU id
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I go to item "<skuID>" from search field
@@ -90,11 +94,12 @@ Feature: Concierge E2E flow
 
   Scenario: Verify that user is able to add item to project and pay
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I click on projects button
     When I search project "TESTCOMPANY" by provided "projectName"
-    When I click on the first project search result
+    When I click on the project search result
     Then I click on remove button from project
     When I click on rh concierge logo
     When I open product page with "prod1617188" and "63130001"
