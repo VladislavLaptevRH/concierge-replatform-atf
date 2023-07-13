@@ -134,6 +134,8 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement firstSearchResultOfProjects = $(By.xpath("//div[contains(@class,'MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-flex-start')][1]/div[contains(@class,'MuiGrid-root MuiGrid-item')]/div[1]"));
 
+    private final SelenideElement thirtySixSearchResultOfProjects = $(By.xpath("//div[contains(@class,'MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-flex-start')][1]/div[contains(@class,'MuiGrid-root MuiGrid-item')]/div[36]"));
+
     private final SelenideElement emailEstimateProjectScreen = $(By.xpath("//button/*[text() = 'EMAIL ESTIMATE']"));
 
     private final SelenideElement emailEstimateButton = $(By.cssSelector("button[type='submit'] span[class='MuiButton-label']"));

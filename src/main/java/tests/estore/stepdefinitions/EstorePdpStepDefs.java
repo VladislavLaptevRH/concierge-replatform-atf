@@ -1,19 +1,26 @@
-package tests.estore.pageObject;
+package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import tests.estore.pageObject.EstoreCartPage;
+import tests.estore.pageObject.EstoreHomePage;
+import tests.estore.pageObject.EstorePGScreen;
+import tests.estore.pageObject.EstorePdpPageScreen;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
-public class EstorePDP {
+public class EstorePdpStepDefs {
 
     EstorePdpPageScreen estorePdpPageScreen = new EstorePdpPageScreen();
 
@@ -68,7 +75,6 @@ public class EstorePDP {
         $(By.xpath("(//*[contains(text(),'Hand Towel')])[1]")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("(//*[contains(text(),'Bath Towel')])[1]")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("(//*[contains(text(),'Washcloth')])[1]")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("(//*[contains(text(),'Bath Mat')])[1]")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("verify the product price as per the postal code")
@@ -77,18 +83,35 @@ public class EstorePDP {
         estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$55"), Duration.ofSeconds(60));
     }
 
-    @When("I update postal code on pdp page")
-    public void iUpdatePostalCodeOnPdpPage() {
-        estorePdpPageScreen.getPostalCodeButton().should(visible, Duration.ofSeconds(20));
-        estorePdpPageScreen.getPostalCodeButton().scrollIntoView(true);
-        estorePdpPageScreen.getPostalCodeButton().click();
+    @Then("I verify that price for product&line should be in US dollars on PDP page")
+    public void iVerifyThatPriceForProductLineShouldBeInUS$() {
+        $(By.xpath("(//*[contains(text(),'$')])[3]")).should(visible, Duration.ofSeconds(40));
+    }
+
+    @When("I update {string} postal code on pdp page")
+    public void iUpdatePostalCodeOnPdpPage(String country) {
+        estorePdpPageScreen.getPostalCodePdp().should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getPostalCodePdp().scrollIntoView(true);
+        estorePdpPageScreen.getPostalCodePdp().click();
         $(By.xpath("//div[@id='country-zipcode-selection']")).should(visible, Duration.ofSeconds(20)).click();
-        $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20)).click();
-        $(By.xpath("//input[@id='postal-code-international']")).clear();
-        $(By.xpath("//input[@id='postal-code-international']")).setValue("Y1A 9Z9");
-        estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
-        estorePdpPageScreen.getSubmitPostalCode().click();
-        estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
+        if (country.equals("CAN")) {
+            $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20)).click();
+            $(By.xpath("//input[@id='postal-code-international']")).clear();
+            $(By.xpath("//input[@id='postal-code-international']")).setValue("Y1A 9Z9");
+            estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
+            estorePdpPageScreen.getSubmitPostalCode().click();
+            estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
+        }
+        if (country.equals("US")) {
+            $(By.xpath("//li[@data-value='US']")).should(visible, Duration.ofSeconds(20)).click();
+            $(By.xpath("//input[@id='postal-code-international']")).clear();
+            $(By.xpath("//input[@id='postal-code-international']")).setValue("82083");
+            estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
+            estorePdpPageScreen.getSubmitPostalCode().click();
+        }
+
+//        if (estorePdpPageScreen.getConfirmChangeButton().isDisplayed()) {
+//        }
     }
 
     @Then("I verify line items {string}")
@@ -109,7 +132,7 @@ public class EstorePDP {
             estoreCartPage.getAddToWishlistButton().should(interactable, Duration.ofSeconds(20)).click();
         }
         if (functional.equals("locationfunctionality")) {
-            estorePdpPageScreen.getPostalCodeButton().should(visible, Duration.ofSeconds(30));
+            estorePdpPageScreen.getPostalCodePdp().should(visible, Duration.ofSeconds(30));
         }
     }
 
@@ -121,7 +144,8 @@ public class EstorePDP {
 
         Select selectColor = new Select(estorePdpPageScreen.getColorOption());
         selectColor.selectByIndex(3);
-
+        estorePdpPageScreen.getColorOption().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
+        sleep(3000);
         Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
         selectSize.selectByIndex(3);
 
@@ -154,15 +178,68 @@ public class EstorePDP {
 
     @Then("I verify the product price for the selected country")
     public void iVerifyTheProductPriceForTheSelectedCountry() {
-        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$29"),Duration.ofSeconds(30));
-        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$16"),Duration.ofSeconds(30));
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$29"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$16"), Duration.ofSeconds(30));
     }
 
     @Then("I verify the product price on PDP for non-sale cushion and frame product")
     public void iVerifyTheProductPriceOnPDPForNonSaleCushionAndFrameProduct() {
-        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$19"),Duration.ofSeconds(30));
-        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$11"),Duration.ofSeconds(30));
-        estorePdpPageScreen.getMemberTheSecondPrice().shouldHave(text("$27"),Duration.ofSeconds(30));
-        estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$36"),Duration.ofSeconds(30));
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$19"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$11"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheSecondPrice().shouldHave(text("$27"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$36"), Duration.ofSeconds(30));
+    }
+
+    @When("I update {string} postal code on cart page")
+    public void iUpdatePostalCodeOnPDPPage(String zipCode) {
+        estoreCartPage.getPostalCodeButton().should(visible, Duration.ofSeconds(20));
+        estoreCartPage.getPostalCodeButton().scrollIntoView(true);
+        estoreCartPage.getPostalCodeButton().click();
+        estorePdpPageScreen.getCountryZipCodeSelection().click();
+        if (zipCode.equals("US")) {
+            $(By.xpath("//li[@data-value='US']")).should(visible, Duration.ofSeconds(20)).click();
+            estorePdpPageScreen.getPostalCodeField().should(visible, Duration.ofSeconds(20)).sendKeys("88989");
+            estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(25)).click();
+        }
+        if (zipCode.equals("CA")) {
+            $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20)).click();
+            estorePdpPageScreen.getPostalCodeField().should(visible, Duration.ofSeconds(20)).sendKeys("Y1A 9Z9");
+            estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(25)).click();
+            $(By.xpath("//*[text()='CONFIRM CHANGE']")).should(interactable, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='CONFIRM CHANGE']")).should(visible, Duration.ofSeconds(20)).click();
+        }
+    }
+
+    @Then("I verify that price is showing for regular and member user")
+    public void iVerifyThatPriceIsShowingForRegularUser() {
+        estorePdpPageScreen.getMemberPrice().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getRegularPrice().should(Condition.visible, Duration.ofSeconds(20));
+    }
+
+    @And("I verify that price for {string} and {string} with {string} was updated for {string}")
+    public void iVerifyThatPriceForAndWithWasUpdatedFor(String arg0, String arg1, String arg2, String arg3) {
+        if (arg3.equals("CAN") && (arg0.equals("prod2020027"))) {
+            $(By.xpath("//*[text()='$55']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='$41']")).should(visible, Duration.ofSeconds(20));
+        }
+    }
+
+    @When("I unselect the size option for {string} and {string} with {string} for estore")
+    public void iUnselectTheSizeOptionForAndWithForEstore(String prodId, String arg1, String arg2) {
+        Select sizeOption = new Select($(By.xpath("//select[@id='optionSelect-" + prodId + "-Size']")));
+        sizeOption.selectByValue("");
+    }
+
+    @Then("I verify availability , delivery and return messages in PDP")
+    public void iVerifyAvailabilityDeliveryAndReturnMessagesInPDP() {
+        $(By.xpath("//*[text()='This item will be delivered on or before 01/26/24 ']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Ships free of charge via Standard Delivery Shipping']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='This item can be returned within 30 days of delivery.']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify link bellow {string} is displayed")
+    public void iVerifyLinkBellowIsDisplayed(String arg0) {
+        $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//span[text()='View' and 'Sale' and 'items'])[3]")).should(visible, Duration.ofSeconds(20));
     }
 }

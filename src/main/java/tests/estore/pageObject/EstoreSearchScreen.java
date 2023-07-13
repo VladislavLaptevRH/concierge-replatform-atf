@@ -12,7 +12,7 @@ public class EstoreSearchScreen {
 
     private SelenideElement results = $(By.xpath("//*[contains(text(),'RESULTS')]"));
 
-    private SelenideElement threeColumnsInRowGridButton = $(By.xpath("(//*[contains(@class, 'MuiSvgIcon-root')])[7]"));
+    private SelenideElement threeColumnsInRowGridButton = $(By.xpath("//*[@column='3']"));
 
     private SelenideElement oneColumnInRowGridButton = $(By.xpath("(//*[contains(@class, 'MuiSvgIcon-root')])[5]"));
 

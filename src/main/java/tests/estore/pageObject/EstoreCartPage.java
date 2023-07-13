@@ -13,6 +13,10 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 public class EstoreCartPage {
 
+//    private SelenideElement quantitySelect = $(By.id("quantity-select"));
+
+    private SelenideElement postalCodeButton = $(By.xpath("//*[@id='component-order-summary']//span"));
+
     private final SelenideElement joinNowCartEstoreButton = $(By.xpath("//*[text() = 'JOIN NOW']"));
 
     private final String variableJoinButton = "//*[text() = '%s']";
@@ -65,7 +69,7 @@ public class EstoreCartPage {
 
     private final SelenideElement selectQuantity = $(By.xpath("//select[contains(@id,'quantity')]"));
 
-    private final SelenideElement removeButton = $(By.xpath("//*[text()='Remove']"));
+    private final SelenideElement removeButton = $(By.xpath("//*[@data-testid='component-rh-line-item-card-actions_remove']"));
 
     private final SelenideElement estoreCartButton = $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']"));
 
@@ -159,7 +163,7 @@ public class EstoreCartPage {
 
     private final SelenideElement memberPrice = $(By.xpath("//p[@data-testid='price-for-member']"));
 
-    private final SelenideElement zipCodeField = $(By.xpath("//*[text() = 'Postal Code']/..//input"));
+    private final SelenideElement zipCodeField = $(By.xpath("//*[@id='postal-code-international']"));
 
     private final SelenideElement regularItemPrice = $(By.xpath("(//p[@id='price'])[1]"));
 
@@ -193,7 +197,7 @@ public class EstoreCartPage {
 
     private final List<SelenideElement> memberShipBannerList = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-center']/p"));
 
-    public SelenideElement getVariableJoinButtonByName (String name){
+    public SelenideElement getVariableJoinButtonByName(String name) {
         String path = String.format(variableJoinButton, name);
         return $(byXpath(path));
     }

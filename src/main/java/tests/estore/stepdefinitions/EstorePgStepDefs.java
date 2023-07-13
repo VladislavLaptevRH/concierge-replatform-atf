@@ -55,7 +55,7 @@ public class EstorePgStepDefs {
     public void iGoesToEstorePg() {
         String URL = Hooks.eStoreBaseURL + "/search/results.jsp?Ntt=tables&Ns=product.sale%7C1";
         open(URL);
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -73,7 +73,7 @@ public class EstorePgStepDefs {
 
     @When("I scroll on the PG page till back to top button is visible")
     public void iScrollOnThePGPageTillBackToTopButtonIsVisible() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
@@ -128,17 +128,15 @@ public class EstorePgStepDefs {
 
     @Then("I verify that sale verbiage message are present on PG page")
     public void iVerifyThatSaleVerbiageMessageArePresentOnPGPage() {
-
+        $(By.xpath("//*[text()='VIEW SELECT ITEMS ON SALE']")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify alignment for two and three grid views")
     public void iVerifyAlignmentForTwoAndThreeGridViews() {
         estorePGScreen.getGridView3().should(visible, Duration.ofSeconds(10));
-        $(By.xpath("//*[text() = 'sort by:']/../following-sibling::*[1]")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text() = 'sort by:']/../following-sibling::*[1]")).click();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text() = 'sort by:']/../following-sibling::*[2]")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text() = 'sort by:']/../following-sibling::*[2]")).click();
+        $(By.xpath("//*[contains(@class,'cols-4 ')]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@column='2']")).click();
+        $(By.xpath("//*[contains(@class,'cols-6 ')]")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify that application render to the same view grid which was selected")

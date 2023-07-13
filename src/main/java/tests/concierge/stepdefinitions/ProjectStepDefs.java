@@ -224,6 +224,19 @@ public class ProjectStepDefs {
             conciergeProjectScreen.getFirstSearchResultOfProjects().click();
         }
     }
+
+    @When("I click on the project search result")
+    public void iClickOnTheProjectSearchResult() {
+        if (conciergeProjectScreen.getPopUpErrorWhileLoadingProjects().isDisplayed()) {
+            conciergeProjectScreen.getTryAgainButton().click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            conciergeProjectScreen.getThirtySixSearchResultOfProjects().should(visible, Duration.ofMinutes(5));
+            conciergeProjectScreen.getThirtySixSearchResultOfProjects().click();
+        } else {
+            conciergeProjectScreen.getThirtySixSearchResultOfProjects().should(visible, Duration.ofMinutes(5));
+            conciergeProjectScreen.getThirtySixSearchResultOfProjects().click();
+        }
+    }
     @When("I click on settings button")
     public void iClickOnSettingsButton() {
         conciergeProjectScreen.getSettingsButton().shouldHave(text("SETTINGS"), Duration.ofMinutes(1));

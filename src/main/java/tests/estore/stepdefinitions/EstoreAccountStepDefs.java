@@ -2,14 +2,17 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.w3c.dom.ls.LSOutput;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.EstoreCartPage;
+import tests.estore.pageObject.EstoreHomePage;
 import tests.estore.pageObject.EstoreLoginPage;
 import tests.estore.pageObject.EstoreUserAccountPage;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -24,6 +27,7 @@ public class EstoreAccountStepDefs {
     EstoreLoginPage estoreLoginPage = new EstoreLoginPage();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     EstoreCartPage estoreCartPage = new EstoreCartPage();
+    EstoreHomePage estoreHomePage = new EstoreHomePage();
 
     String firstName;
     String lastName;
@@ -102,6 +106,7 @@ public class EstoreAccountStepDefs {
     @When("I update last name for estore account")
     public void iUpdateLastNameForEstoreAccount() {
         lastName = generalStepDefs.getAlphaNumericString(4);
+        estoreUserAccountPage.getBillingAddressLastName().click();
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressLastName());
         estoreUserAccountPage.getBillingAddressLastName().setValue(lastName);
     }
@@ -123,4 +128,53 @@ public class EstoreAccountStepDefs {
         System.out.println();
     }
 
+    @When("I choose country for eStore from footer")
+    public void iChooseCountryForEStoreFromFooter() {
+        if (Hooks.country.equals("GB")) {
+            estoreHomePage.chooseGBCountry();
+        }
+
+        if (Hooks.country.equals("CA")) {
+            estoreHomePage.chooseCACountry();
+        }
+    }
+
+    @Then("I verify that I'm able to create the new account")
+    public void iVerifyThatIMAbleToCreateTheNewAccount() {
+        estoreUserAccountPage.getCreateTitle().should(visible, Duration.ofSeconds(30));
+    }
+
+    @When("I click on create account button")
+    public void iClickOnCreateAccountButton() {
+        estoreUserAccountPage.clickToCreateNewAccountButton();
+    }
+
+    @When("I introduces the required details")
+    public void iIntroducesTheRequiredDetails() {
+        estoreUserAccountPage.introduceFirstNameIntoCreateAccountForm();
+        estoreUserAccountPage.introduceLastNameIntoCreateAccountForm();
+        estoreUserAccountPage.introduceEmailIntoCreateAccountForm();
+        estoreUserAccountPage.introducePasswordIntoCreateAccountForm();
+        estoreUserAccountPage.introduceConfirmPasswordIntoCreateAccountForm();
+    }
+
+    @When("I click on create account button from form")
+    public void iClickOnCreateAccountButtonFromForm() {
+        estoreUserAccountPage.clickToCreateAccountButtonForm();
+    }
+
+    @Given("I click on estore my account icon for guest user")
+    public void iClickOnEstoreMyAccountIconForGuestUser() {
+        estoreLoginPage.clickToAccountIcon();
+    }
+
+    @When("I click on agree privacy policy checkbox")
+    public void iClickOnAgreePrivacyPolicyCheckbox() {
+        estoreUserAccountPage.clickToAgreePrivacyPolicyCheckbox();
+    }
+
+    @When("I click on estore my account icon for registered user")
+    public void iClickOnEstoreMyAccountIconForRegisteredUser() {
+        estoreHomePage.clickToAccountButtonForregisteredUser();
+    }
 }

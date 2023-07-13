@@ -10,8 +10,7 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.enabled;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -26,16 +25,16 @@ public class EstoreWishlistStepDefs {
 
     @Then("I validate items in wishlist")
     public void iValidateItemsInWishlist() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         estoreWishlistPage.getWhistItem().should(visible, Duration.ofSeconds(30));
     }
 
     @When("I click on add to wishlist button")
     public void iClickOnAddToWishlistButton() {
         estoreGeneralStepDefs.waitForJSandJQueryToLoad();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         estoreItemPage.getAddToWishListButton().scrollIntoView(true);
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         estoreItemPage.getAddToWishListButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
         estoreItemPage.getAddToWishListButton().click();
 
@@ -45,19 +44,19 @@ public class EstoreWishlistStepDefs {
 
     @Then("I validate member price in wishlist")
     public void iValidateMemberPriceInWishlist() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
         assertTrue(estoreWishlistPage.getMemberPrice().exists());
     }
 
     @When("I click on view wishlist button")
     public void iClickOnViewWishlistButton() {
-        if (Hooks.cookie.equals("contentfix")) {
-            $(By.xpath("//*[text()='VIEW WISHLIST']")).should(visible, Duration.ofSeconds(30));
-            $(By.xpath("//*[text()='VIEW WISHLIST']")).click();
-        } else {
-            estoreItemPage.getViewWishlistButton().should(visible, Duration.ofSeconds(20));
-            estoreItemPage.getViewWishlistButton().click();
-        }
+        estoreItemPage.getViewWishlistButton().should(Condition.and("Visible, interactable condition", visible, interactable), Duration.ofSeconds(20));
+        estoreItemPage.getViewWishlistButton().click();
     }
 
+    @Then("I verify that I'm able to remove wishlist from cart")
+    public void iVerifyThatIMAbleToRemoveWishlistFromCart() {
+        estoreWishlistPage.getRemoveButtonWishList().should(visible, Duration.ofSeconds(20));
+        estoreWishlistPage.getRemoveButtonWishList().click();
+    }
 }

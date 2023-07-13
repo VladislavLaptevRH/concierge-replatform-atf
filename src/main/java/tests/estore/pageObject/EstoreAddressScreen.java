@@ -1,13 +1,20 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
+import tests.concierge.stepdefinitions.GeneralStepDefs;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class EstoreAddressScreen {
+
+    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
     private final SelenideElement shippingAddressCountry = $(By.xpath("//*[@id = 'shippingAddress.country']"));
 
@@ -95,9 +102,9 @@ public class EstoreAddressScreen {
 
     private final SelenideElement billingAddressLastName = $(By.id("billingAddress.lastName"));
 
-    private final SelenideElement billingAddressStreetAddress = $(By.id("billingAddress.addressLine1"));
+    private final SelenideElement billingAddressStreetAddress = $(By.xpath("//*[@data-testid='billingAddress.addressLine1']"));
 
-    private final SelenideElement billingAddressAptFloorSuite = $(By.id("billingAddress.addressLine2"));
+    private final SelenideElement billingAddressAptFloorSuite = $(By.xpath("//*[@data-testid='billingAddress.addressLine2']"));
 
     private final SelenideElement billingAddressCity = $(By.id("billingAddress.city"));
 
@@ -120,5 +127,21 @@ public class EstoreAddressScreen {
     private final SelenideElement editPaymentOrderReview = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']/a)[2]"));
 
     private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'BILLING ADDRESS']/following-sibling::div/*[text() = 'Edit']"));
+
     private final SelenideElement editBillingAddressNew = $(By.xpath("//*[text() = 'Billing Address']/..//*[text() = 'Edit']"));
+
+    public void selectAddressState(String state) {
+        shippingAddressState.should(Condition.and("Visible, interactable", Condition.visible, Condition.interactable), Duration.ofSeconds(25));
+        Select selectAddressState = new Select(shippingAddressState);
+        selectAddressState.selectByValue(state);
+    }
+
+    public void introducePostalCode(String postalCode) {
+        postalShippingCode.should(Condition.and("Visible, interactable", Condition.visible, Condition.interactable), Duration.ofSeconds(25));
+        generalStepDefs.clearField(postalShippingCode);
+        postalShippingCode.sendKeys(postalCode);
+    }
+
 }
+
+

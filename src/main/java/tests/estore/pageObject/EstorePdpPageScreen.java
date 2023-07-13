@@ -9,6 +9,11 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class EstorePdpPageScreen {
+
+    private final SelenideElement postalCodePdp = $(By.xpath("(//*[@data-testid='postal-code-dialog-opener'])[1]"));
+
+    private final SelenideElement countryZipCodeSelection = $(By.xpath("//*[@id='country-zipcode-selection']"));
+
     private final SelenideElement regularPrice = $(By.xpath("//p[@data-testid='price-for-regular']"));
 
     private final SelenideElement regularTheFirstPrice = $(By.xpath("(//p[@data-testid='price-for-regular'])[1]"));
@@ -43,7 +48,7 @@ public class EstorePdpPageScreen {
 
     private SelenideElement dimensionsButton = $(By.xpath("//*[text()='DIMENSIONS']"));
 
-    private SelenideElement postalCodeButton = $(By.xpath("(//span[@data-testid='postal-code-dialog-opener'])[1]"));
+    private SelenideElement postalCodeButton = $(By.xpath("//*[@id='component-order-summary']//span"));
 
     private SelenideElement submitPostalCode = $(By.xpath("//button[@data-testid='submit-postal']"));
 
@@ -54,4 +59,8 @@ public class EstorePdpPageScreen {
     private SelenideElement colorOption = $(By.xpath("(//select[contains(@id,'option') and contains(@id,'Color')])[1]"));
 
     private SelenideElement skuIdValue = $(By.xpath("(//p[@data-testid='item-sku-id-desktop'])[1]"));
+
+    private SelenideElement postalCodeField = $(By.xpath("//*[@id='postal-code-international']"));
+
+    private SelenideElement dollarSign = $(By.xpath("//*[contains(text(),'$')]"));
 }

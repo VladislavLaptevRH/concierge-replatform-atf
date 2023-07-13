@@ -15,6 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import tests.concierge.stepdefinitions.FilterStepDefs;
 
 import java.io.BufferedReader;
@@ -47,6 +48,7 @@ public class Hooks {
     private static final Logger Log = LoggerFactory.getLogger(FilterStepDefs.class);
     public static String profile;
     public static String cookie;
+    public static String country;
     public static String endpoint;
 
     ExtentReport report = new ExtentReport();
@@ -58,17 +60,17 @@ public class Hooks {
 
         profile = System.getenv("ENVIRONMENT");
         cookie = System.getenv("ENDPOINT");
+        country = System.getenv("COUNTRY");
 
         if (profile == null) {
-            profile = "stg2";
-//            Assert.fail("Environment Variable is NOT Set");
+            Assert.fail("Environment Variable is NOT Set");
         } else {
             System.out.println("Tests are running on " + profile + " environment");
+            System.out.println("Tests are running on " + country + " country");
         }
 
         if (cookie == null) {
-            cookie = "releasetues";
-//            System.out.println("Tests are running without cookie or endpoint");
+            System.out.println("Tests are running without cookie or endpoint");
         } else {
             System.out.println("Tests are running with endpoint = " + cookie);
         }

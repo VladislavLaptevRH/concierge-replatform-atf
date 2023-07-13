@@ -1,21 +1,25 @@
 package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import tests.concierge.stepdefinitions.AbstractStepDefs;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 
 import java.time.Duration;
+import java.util.concurrent.Callable;
 
 import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static io.netty.handler.codec.rtsp.RtspHeaders.Values.URL;
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
 import static org.awaitility.Awaitility.with;
 
 public class EstoreCGStepDefs {
@@ -23,6 +27,7 @@ public class EstoreCGStepDefs {
     EstoreItemPage estoreItemPage = new EstoreItemPage();
     EstoreCGScreen estoreCGScreen = new EstoreCGScreen();
     EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
+    AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
 
     @Then("I validate the collection name is not empty")
     public void iValidateTheCollectionNameIsNotEmpty() {
@@ -43,9 +48,9 @@ public class EstoreCGStepDefs {
     @When("I scroll on the page till back to top button is visible")
     public void iScrollOnThePageTillBackToTopButtonIsVisible() {
         iValidateTheCollectionNameIsNotEmpty();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
@@ -132,12 +137,10 @@ public class EstoreCGStepDefs {
     public void iVerifyThatEnjoyFreeShippingOnAllTextilesBannerIsDisplayed() {
     }
 
-    @When("I go to MO brand")
-    public void iGoToMOBrand() {
-        $(By.xpath("//a[@data-testid='brand-link']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//a[@data-testid='brand-link']")).click();
-        $(By.xpath("//li[@data-analytics-url='https://rhmodern." + Hooks.profile + ".rhnonprod.com/']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//li[@data-analytics-url='https://rhmodern." + Hooks.profile + ".rhnonprod.com/']")).click();
+    @When("I go to {string} brand")
+    public void iGoToMOBrand(String brand) {
+        open("https://rhmodern." + Hooks.profile + ".rhnonprod.com/");
+        $(By.xpath("//*[@data-analytics-worhlogo='worh-logo']")).should(visible, Duration.ofSeconds(25));
     }
 
     @Then("I verify that contract price is used for each product")
@@ -172,7 +175,7 @@ public class EstoreCGStepDefs {
     public void iGoesToEstoreCollectionPage() {
         String URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045";
         open(URL);
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -204,12 +207,20 @@ public class EstoreCGStepDefs {
             String category = "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045" + "/?endpoint=" + Hooks.cookie;
             open(URL + category);
         }
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+
     }
 
-
-    @When("I search with any keyword")
-    public void iSearchWithAnyKeyword() {
-
+    @When("I go to {string} on eStore")
+    public void iGoToOnEStore(String collectionName) {
+        String URL = "";
+        if (collectionName.equals("SEATING COLLECTIONS")) {
+            URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10210013&sale=false&topCatId=cat160024&parentCatId=cat950002";
+        }
+        if (collectionName.equals("FABRIC CHAIR COLLECTIONS")) {
+            URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045";
+        }
+        open(URL);
+        
+        WebDriverRunner.getWebDriver().navigate().refresh();
     }
 }

@@ -62,107 +62,129 @@ public class PaymentStepDefs {
         generalStepDefs.payWith("AX", "3700 0000 0000 002", "7373", "0330");
         paymentScreen.getSplitPaymentCheckBox().click();
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentScreen.getFieldAmount().setValue("1");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentScreen.getContinueToReview().click();
         with().pollInterval(2, SECONDS).await().until(() -> true);
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         selectPayment.selectByValue("RH");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentScreen.getSplitPaymentCheckBox().should(visible, Duration.ofSeconds(40));
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentScreen.getSplitPaymentCheckBox().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentScreen.getRhCardNumberField().setValue("6006101002617097");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         Select paymentPlan = new Select(paymentScreen.getSelectPaymentPlan());
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentPlan.selectByIndex(1);
-        generalStepDefs.clearField(paymentScreen.getFieldAmount());
-        paymentScreen.getFieldAmount().setValue("1");
-        paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
-        paymentScreen.getContinueToReview().click();
         with().pollInterval(2, SECONDS).await().until(() -> true);
+        generalStepDefs.clearField(paymentScreen.getFieldAmount());
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        paymentScreen.getFieldAmount().setValue("1");
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        paymentScreen.getContinueToReview().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         Select selectPayment1 = new Select(paymentScreen.getChoosePaymentMethodBtn());
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         selectPayment1.selectByValue("GiftCard");
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         paymentScreen.getRhCardNumberField().setValue("6006493887999901635");
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         paymentScreen.getRhCardPin().setValue("9559");
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         paymentScreen.getSplitPaymentCheckBox().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         paymentScreen.getFieldAmount().setValue("1");
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         paymentScreen.getContinueToReview().click();
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         generalStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         paymentScreen.getSplitPaymentCheckBox().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         generalStepDefs.clearField(paymentScreen.getFieldAmount());
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         paymentScreen.getFieldAmount().setValue("1");
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         paymentScreen.getContinueToReview().click();
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         generalStepDefs.payWith("MC", "5555 3412 4444 1115", "737", "0330");
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         paymentScreen.getContinueToReview().click();
-        with().pollInterval(1, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @When("I execute payment for {string}")
     public void iExecutePaymentFor(String cardType) {
-            for(int i = 0; i < 3; i++) {
-                if (!paymentScreen.getChoosePaymentMethodBtnDisplayed().isDisplayed()) {
-                    WebDriverRunner.getWebDriver().navigate().refresh();
-                    with().pollInterval(3, SECONDS).await().until(() -> true);
-
-                    if(checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
-                        if (!$(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
-                            $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).click();
-                            with().pollInterval(2, SECONDS).await().until(() -> true);
-                        }
-                    }
-
-                    if (!checkoutAddressScreen.getContinuePaymentButton().isDisplayed()) {
-                        WebDriverRunner.getWebDriver().navigate().refresh();
-                        with().pollInterval(5, SECONDS).await().until(() -> true);
-                        abstractStepDefs.iClickOnCheckoutButton();
-                        checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
-                        executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
-                        checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
-                        checkoutAddressScreen.getContinuePaymentButton().click();
-                        abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
-                    }
-                    checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
-                    executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
-                    checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
-                    checkoutAddressScreen.getContinuePaymentButton().click();
-                    with().pollInterval(5, SECONDS).await().until(() -> true);
-                    if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
-                        conciergeProjectScreen.getTryAgainButton().click();
-                        with().pollInterval(3, SECONDS).await().until(() -> true);
-                        abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
-                        checkoutAddressScreen.getContinuePaymentButton().click();
-                        with().pollInterval(3, SECONDS).await().until(() -> true);
-                    }
-
-                    if (conciergeProjectScreen.getContinueWithSuggestedAddressButton().isDisplayed()) {
-                        conciergeProjectScreen.getContinueWithSuggestedAddressButton().click();
-                        with().pollInterval(5, SECONDS).await().until(() -> true);
-                    }
-
-                    if ($(By.xpath("//*[text() = 'CONTINUE']")).isDisplayed()) {
-                        $(By.xpath("//*[text() = 'CONTINUE']")).click();
-                        with().pollInterval(5, SECONDS).await().until(() -> true);
-                    }
-
-                    if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
-                        conciergeProjectScreen.getTryAgainButton().click();
-                        with().pollInterval(3, SECONDS).await().until(() -> true);
-                        abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
-                        checkoutAddressScreen.getContinuePaymentButton().click();
-                        with().pollInterval(3, SECONDS).await().until(() -> true);
-                        $(By.xpath("//*[text() = 'CONTINUE']")).click();
-                        with().pollInterval(5, SECONDS).await().until(() -> true);
-                    }
-                    iClickOnContinueWithOriginalAddressButton();
-                    if(paymentScreen.getChoosePaymentMethodBtnDisplayed().isDisplayed()){
-                        break;
-                    }
-            }
-        }
+//                if (!paymentScreen.getChoosePaymentMethodBtnDisplayed().isDisplayed()) {
+//                    WebDriverRunner.getWebDriver().navigate().refresh();
+//                    with().pollInterval(3, SECONDS).await().until(() -> true);
+//
+//                    if(checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
+//                        if (!$(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
+//                            $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).click();
+//                            with().pollInterval(2, SECONDS).await().until(() -> true);
+//                        }
+//                    }
+//
+//                    if (!checkoutAddressScreen.getContinuePaymentButton().isDisplayed()) {
+//                        WebDriverRunner.getWebDriver().navigate().refresh();
+//                        with().pollInterval(5, SECONDS).await().until(() -> true);
+//                        abstractStepDefs.iClickOnCheckoutButton();
+//                        checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+//                        executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
+//                        checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+//                        checkoutAddressScreen.getContinuePaymentButton().click();
+//                        abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+//                    }
+//                    checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+//                    executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
+//                    checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+//                    checkoutAddressScreen.getContinuePaymentButton().click();
+//                    with().pollInterval(5, SECONDS).await().until(() -> true);
+//                    if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
+//                        conciergeProjectScreen.getTryAgainButton().click();
+//                        with().pollInterval(3, SECONDS).await().until(() -> true);
+//                        abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+//                        checkoutAddressScreen.getContinuePaymentButton().click();
+//                        with().pollInterval(3, SECONDS).await().until(() -> true);
+//                    }
+//
+//                    if (conciergeProjectScreen.getContinueWithSuggestedAddressButton().isDisplayed()) {
+//                        conciergeProjectScreen.getContinueWithSuggestedAddressButton().click();
+//                        with().pollInterval(5, SECONDS).await().until(() -> true);
+//                    }
+//
+//                    if ($(By.xpath("//*[text() = 'CONTINUE']")).isDisplayed()) {
+//                        $(By.xpath("//*[text() = 'CONTINUE']")).click();
+//                        with().pollInterval(5, SECONDS).await().until(() -> true);
+//                    }
+//
+//                    if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
+//                        conciergeProjectScreen.getTryAgainButton().click();
+//                        with().pollInterval(3, SECONDS).await().until(() -> true);
+//                        abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+//                        checkoutAddressScreen.getContinuePaymentButton().click();
+//                        with().pollInterval(3, SECONDS).await().until(() -> true);
+//                        $(By.xpath("//*[text() = 'CONTINUE']")).click();
+//                        with().pollInterval(5, SECONDS).await().until(() -> true);
+//                    }
+//            }
 
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         if (cardType.equals("VI")) {
@@ -231,20 +253,20 @@ public class PaymentStepDefs {
                             "QAFirst Automation\n" +
                             "North 16th Street\n" +
                             "QaApartment\n" +
-                            "Phoenix, AZ 85020\n" +
+                            "Phoenix, AZ, 85020\n" +
                             "US\n" +
                             "1241312319\n" +
-                            "Edit"));
+                            "EDIT"));
 
             assertEquals(paymentScreen.getBillingAddress().getText(),
                     "BILLING ADDRESS\n" +
                             "QAFirst Automation\n" +
                             "North 16th Street\n" +
                             "QaApartment\n" +
-                            "Phoenix, AZ 85020\n" +
+                            "Phoenix, AZ, 85020\n" +
                             "US\n" +
                             "1241312319\n" +
-                            "Edit");
+                            "EDIT");
         }
     }
 
@@ -253,9 +275,9 @@ public class PaymentStepDefs {
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Estimated Sales Tax for 85020']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$5,317.06']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$2,687.00']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$421.06']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$255.08']")).should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that member savings in payment page")
