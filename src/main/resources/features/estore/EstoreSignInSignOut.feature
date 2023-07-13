@@ -2,7 +2,7 @@
 @estoreSignInSignOut
 Feature: Estore Sign In/Signout
 
-  Scenario: Verify that user is not able to login with ivalid email and password
+  Scenario: Verify that user is not able to login with invalid email and password
     Given I introduce wrong login and password
     Then I verify that error message about invalid credentials is displayed
 
@@ -11,7 +11,6 @@ Feature: Estore Sign In/Signout
     Then I verify that forgot password options works
 
   Scenario: To check if user is able to sign out properly
-
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I click on estore account

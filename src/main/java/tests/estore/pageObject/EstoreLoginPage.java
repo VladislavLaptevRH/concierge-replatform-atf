@@ -1,8 +1,11 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -21,4 +24,8 @@ public class EstoreLoginPage {
     private final SelenideElement accountIconStg4 = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
     private final SelenideElement forgotPasswordButton = $(By.xpath("//a[@class='forgot-password']"));
 
+    public void clickToAccountIcon() {
+        accountIcon.should(Condition.interactable, Duration.ofSeconds(20));
+        accountIcon.click();
+    }
 }

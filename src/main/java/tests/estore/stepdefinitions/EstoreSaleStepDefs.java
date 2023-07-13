@@ -13,6 +13,7 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
@@ -26,33 +27,26 @@ public class EstoreSaleStepDefs {
 
     @When("I click on estore sale button")
     public void iClickOnEstoreSaleButton() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
-
-        estoreSaleScreen.getSaleButtonMenu().should(Condition.visible, Duration.ofSeconds(20));
+        estoreSaleScreen.getSaleButtonMenu().should(visible, Duration.ofSeconds(20));
         estoreSaleScreen.getSaleButtonMenu().click();
     }
 
     @Then("I verify that I'm able to navigate different category")
     public void iVerifyThatIMAbleToNavigateDifferentCategory() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
-        estoreSaleScreen.getMainSaleList().should(Condition.visible, Duration.ofSeconds(20));
+        estoreSaleScreen.getMainSaleList().should(Condition.and("Visible, interactable", Condition.interactable, visible), Duration.ofSeconds(20));
         estoreSaleScreen.getMainSaleList().click();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
-        estoreSaleScreen.getSubSaleList().should(Condition.visible, Duration.ofSeconds(20));
-        estoreSaleScreen.getSubSaleList().click();
     }
 
     @Then("I verify sale category for estore")
     public void iVerifySaleCategoryForEstore() {
-        estoreSaleScreen.getSaleLivingCategory().should(Condition.visible, Duration.ofSeconds(20));
-        estoreSaleScreen.getSaleDiningCategory().should(Condition.visible, Duration.ofSeconds(20));
-        estoreSaleScreen.getBedLivingCategory().should(Condition.visible, Duration.ofSeconds(20));
-        estoreSaleScreen.getTextilesSaleCategory().should(Condition.visible, Duration.ofSeconds(20));
+        estoreSaleScreen.getSaleLivingCategory().should(visible, Duration.ofSeconds(20));
+        estoreSaleScreen.getSaleDiningCategory().should(visible, Duration.ofSeconds(20));
+        estoreSaleScreen.getBedLivingCategory().should(visible, Duration.ofSeconds(20));
+        estoreSaleScreen.getTextilesSaleCategory().should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify the back button from sale PDP page")
     public void iVerifyTheBackButtonFromSalePDPPage() {
-        with().pollInterval(4, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().back();
     }
 

@@ -48,9 +48,9 @@ public class EstoreCGStepDefs {
     @When("I scroll on the page till back to top button is visible")
     public void iScrollOnThePageTillBackToTopButtonIsVisible() {
         iValidateTheCollectionNameIsNotEmpty();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
@@ -175,7 +175,7 @@ public class EstoreCGStepDefs {
     public void iGoesToEstoreCollectionPage() {
         String URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045";
         open(URL);
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -207,12 +207,20 @@ public class EstoreCGStepDefs {
             String category = "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045" + "/?endpoint=" + Hooks.cookie;
             open(URL + category);
         }
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+
     }
 
-
-    @When("I search with any keyword")
-    public void iSearchWithAnyKeyword() {
-
+    @When("I go to {string} on eStore")
+    public void iGoToOnEStore(String collectionName) {
+        String URL = "";
+        if (collectionName.equals("SEATING COLLECTIONS")) {
+            URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10210013&sale=false&topCatId=cat160024&parentCatId=cat950002";
+        }
+        if (collectionName.equals("FABRIC CHAIR COLLECTIONS")) {
+            URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045";
+        }
+        open(URL);
+        
+        WebDriverRunner.getWebDriver().navigate().refresh();
     }
 }

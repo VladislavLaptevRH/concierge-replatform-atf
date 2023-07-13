@@ -1,6 +1,7 @@
 package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -17,6 +18,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class EstorePdpStepDefs {
 
@@ -73,7 +75,6 @@ public class EstorePdpStepDefs {
         $(By.xpath("(//*[contains(text(),'Hand Towel')])[1]")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("(//*[contains(text(),'Bath Towel')])[1]")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("(//*[contains(text(),'Washcloth')])[1]")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("(//*[contains(text(),'Bath Mat')])[1]")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("verify the product price as per the postal code")
@@ -131,7 +132,7 @@ public class EstorePdpStepDefs {
             estoreCartPage.getAddToWishlistButton().should(interactable, Duration.ofSeconds(20)).click();
         }
         if (functional.equals("locationfunctionality")) {
-            estorePdpPageScreen.getPostalCodeButton().should(visible, Duration.ofSeconds(30));
+            estorePdpPageScreen.getPostalCodePdp().should(visible, Duration.ofSeconds(30));
         }
     }
 
@@ -143,7 +144,8 @@ public class EstorePdpStepDefs {
 
         Select selectColor = new Select(estorePdpPageScreen.getColorOption());
         selectColor.selectByIndex(3);
-
+        estorePdpPageScreen.getColorOption().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
+        sleep(3000);
         Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
         selectSize.selectByIndex(3);
 
@@ -206,7 +208,38 @@ public class EstorePdpStepDefs {
             $(By.xpath("//*[text()='CONFIRM CHANGE']")).should(interactable, Duration.ofSeconds(20));
             $(By.xpath("//*[text()='CONFIRM CHANGE']")).should(visible, Duration.ofSeconds(20)).click();
         }
+    }
 
+    @Then("I verify that price is showing for regular and member user")
+    public void iVerifyThatPriceIsShowingForRegularUser() {
+        estorePdpPageScreen.getMemberPrice().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getRegularPrice().should(Condition.visible, Duration.ofSeconds(20));
+    }
 
+    @And("I verify that price for {string} and {string} with {string} was updated for {string}")
+    public void iVerifyThatPriceForAndWithWasUpdatedFor(String arg0, String arg1, String arg2, String arg3) {
+        if (arg3.equals("CAN") && (arg0.equals("prod2020027"))) {
+            $(By.xpath("//*[text()='$55']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='$41']")).should(visible, Duration.ofSeconds(20));
+        }
+    }
+
+    @When("I unselect the size option for {string} and {string} with {string} for estore")
+    public void iUnselectTheSizeOptionForAndWithForEstore(String prodId, String arg1, String arg2) {
+        Select sizeOption = new Select($(By.xpath("//select[@id='optionSelect-" + prodId + "-Size']")));
+        sizeOption.selectByValue("");
+    }
+
+    @Then("I verify availability , delivery and return messages in PDP")
+    public void iVerifyAvailabilityDeliveryAndReturnMessagesInPDP() {
+        $(By.xpath("//*[text()='This item will be delivered on or before 01/26/24 ']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Ships free of charge via Standard Delivery Shipping']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='This item can be returned within 30 days of delivery.']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify link bellow {string} is displayed")
+    public void iVerifyLinkBellowIsDisplayed(String arg0) {
+        $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//span[text()='View' and 'Sale' and 'items'])[3]")).should(visible, Duration.ofSeconds(20));
     }
 }

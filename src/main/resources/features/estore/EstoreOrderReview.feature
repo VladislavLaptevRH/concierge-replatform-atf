@@ -19,7 +19,6 @@ Feature:Estore Order review
     Then I verify that address on order review page the same as on address page
 
   Scenario: Edit payment
-
     Given I log into eStore as "orderreview" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
@@ -37,7 +36,6 @@ Feature:Estore Order review
     When I click on estore edit payment button on order review page
     When I remove existing payment method on payment estore page
     When I execute payment with credit card on estore
-#    When I click on continue payment method estore button
     Then I verify that payment has been changed
 
   Scenario: Edit Shipping and Billing Address

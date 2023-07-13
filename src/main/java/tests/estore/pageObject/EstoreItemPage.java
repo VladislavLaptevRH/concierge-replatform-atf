@@ -34,7 +34,7 @@ public class EstoreItemPage {
 
     private final SelenideElement selectFabric = $(By.xpath("(//select[contains(@id, 'Fabric')])[1]"));
 
-    private final SelenideElement selectFinish= $(By.xpath("(//select[contains(@id, 'Finish')])[1]"));
+    private final SelenideElement selectFinish = $(By.xpath("(//select[contains(@id, 'Finish')])[1]"));
 
     private final SelenideElement selectQTY = $(By.xpath("(//select[contains(@id, 'qty')])[1]"));
     private final SelenideElement selectColor = $(By.xpath("(//select[contains(@id, 'Color')])[1]"));
@@ -83,7 +83,7 @@ public class EstoreItemPage {
 
     private final SelenideElement agreeAndAddToCartButton = $(By.xpath("//span[@class='MuiButton-label' and text() = 'Agree & Add To Cart']"));
 
-    private final SelenideElement addToWishListButton =  $(By.xpath("(//div[@data-testid='add-to-wish-list'])[1]"));
+    private final SelenideElement addToWishListButton = $(By.xpath("(//div[@data-testid='add-to-wish-list'])[1]"));
 
-    private final SelenideElement viewWishlistButton = $(By.xpath("//span[@class='MuiButton-label' and text() = 'View Wishlist']"));
+    private final SelenideElement viewWishlistButton = $(By.xpath("//*[text()='View Wishlist']"));
 }

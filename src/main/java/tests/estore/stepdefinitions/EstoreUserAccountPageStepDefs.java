@@ -35,9 +35,8 @@ public class EstoreUserAccountPageStepDefs {
     public void iGoToProfilePaymentMethod() {
         String URL = Hooks.eStoreBaseURL + "/my-account/payment-info.jsp";
         open(URL);
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
     }
-
 
     @When("I add new card for estore")
     public void iAddNewCardForEstore() {
@@ -79,7 +78,7 @@ public class EstoreUserAccountPageStepDefs {
         }
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getSaveCardButton().click();
 
@@ -104,7 +103,7 @@ public class EstoreUserAccountPageStepDefs {
         switchTo().defaultContent();
 
         firstName = estoreGeneralStepDefs.generateRandomString(5);
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         estoreUserAccountPage.getBillingAddressFirstName().clear();
         estoreUserAccountPage.getBillingAddressFirstName().setValue(firstName);
 
@@ -119,7 +118,7 @@ public class EstoreUserAccountPageStepDefs {
 
     @When("I click on address book estore button")
     public void iClickOnAddressBookEstoreButton() {
-//        with().pollInterval(5, SECONDS).await().until(() -> true);
+//
         estoreUserAccountPage.getAddressBookButton().should(Condition.visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getAddressBookButton().click();
     }
@@ -131,7 +130,7 @@ public class EstoreUserAccountPageStepDefs {
 
     @When("I click on estore my account button")
     public void iClickOnEstoreMyAccountButton() {
-//        with().pollInterval(5, SECONDS).await().until(() -> true);
+//
         estoreUserAccountPage.getMyProfileButton().shouldHave(Condition.text("My Account"), Duration.ofSeconds(30));
         estoreUserAccountPage.getMyProfileButton().click();
     }
@@ -148,7 +147,7 @@ public class EstoreUserAccountPageStepDefs {
         estoreUserAccountPage.getSaveAddressButton().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getSaveAddressButton().scrollIntoView(true);
         estoreUserAccountPage.getSaveAddressButton().click();
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        
     }
 
     @Then("I verify that error messages are displayed for each mandatory field")
@@ -181,7 +180,7 @@ public class EstoreUserAccountPageStepDefs {
 
     @When("I edit existing address on address book page")
     public void iEditExistingAddressOnAddressBookPage() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+
         estoreAddressScreen.getEditShippinggAddress().should(visible, Duration.ofSeconds(40));
         estoreAddressScreen.getEditShippinggAddress().click();
         firstName = estoreGeneralStepDefs.generateRandomString(5);
@@ -276,7 +275,7 @@ public class EstoreUserAccountPageStepDefs {
         }
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getSaveCardButton().click();
     }

@@ -56,13 +56,13 @@ Feature: Estore CG
     When I goes to estore collection page
     Then I validate "1","2" and "3" grid view should work
 
-  Scenario: Change the grid view, to to PG, go back from PG, CG page should render in the same grid view that you previously selected
+  Scenario: Change the grid view, go to PG, go back from PG, CG page should render in the same grid view that you previously selected
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
-    When I goes to estore collection page
+    When I go to "FABRIC CHAIR COLLECTIONS" on eStore
     When I select "3" grid view on estore CG page
     When I go to estore item "white and blue corner leather sofa" from search field
-    When I goes to estore collection page
+    When I go to "SEATING COLLECTIONS" on eStore
     Then I verify that page render in the same grid view that previously selected
 
   Scenario: Verify Textile CG having "Enjoy Free Shipping On All Textiles" banner
@@ -71,33 +71,3 @@ Feature: Estore CG
     When user clicks on textile menu
     When user goes to bedding collections test
     Then I verify that Enjoy Free Shipping On All Textiles banner is displayed
-
-#  Scenario: Verify CG name is visible on Preview the collection model
-#    Given I log into eStore as "guest" user
-#    When I choose country for eStore from footer
-#    When I goes to estore collection page
-#    When I click on preview the collection link
-#    Then I verify that I'm landing on preview the collection model
-#
-#  Scenario: Verify the close button on Preview the Collection Modal
-#    Given I log into eStore as "guest" user
-#    When I choose country for eStore from footer
-#    When I goes to estore collection page
-#    When I click on preview the collection link
-#    When I click on close button on preview the collection modal pop up
-#    Then I verify after click on X icon model gets closed
-#
-#  Scenario: Verify Preview the Collection Modal is scrollable and after scrooling all products are visible on the model
-#    Given I log into eStore as "guest" user
-#    When I choose country for eStore from footer
-#    When I goes to estore collection page
-#    When I click on preview the collection link
-#    Then I verify that collection modal is scrollable
-
-#  Scenario: Verify after clicking on any product from the Preview Collection model user lands on the PDP page
-#    Given I log into eStore as "guest" user
-#    When I choose country for eStore from footer
-#    When I goes to estore collection page
-#    When I click on preview the collection link
-#    When I click on any product from the preview collection model
-#    Then I verify that estore PDP page is displayed

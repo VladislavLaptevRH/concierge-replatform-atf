@@ -62,7 +62,7 @@ Feature: Estore Payment
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
-    When I edit estore billing address from PG
+    When I click on edit estore billing address button on payment page
     When I click on continue to payment estore button
     When I click on continue with original address estore button
 
@@ -73,6 +73,7 @@ Feature: Estore Payment
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
+    When I choose "CAN" country from footer
     When I click on estore checkout button
     And I click on estore no thanks button
     When I click on edit estore billing address button
@@ -168,7 +169,7 @@ Feature: Estore Payment
     Then I verify that confirmation estore order screen is displayed
 
   Scenario: eStore Order total decreased after making payment
-    Given I log into eStore as "regular" user
+    Given I log into eStore as "userWithSavedMasterCardVisa" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050042" with "IRON" for estore
@@ -408,6 +409,30 @@ Feature: Estore Payment
     When I click on no thanks button
     When I click on edit shipping address button on estore address page
     When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I execute estore payment for "<cardType>"
+    When I click on a place estore order button
+    Examples:
+      | cardType |
+      | VI       |
+      | MC       |
+      | AX       |
+      | DI       |
+
+  Scenario Outline: eStore - Major CC - CAN
+    Given I log into eStore as "noaddresses" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I choose "CAN" country from footer
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I click on edit estore billing address button
+    When I update shipping address for CAN
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
