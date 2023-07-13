@@ -40,7 +40,7 @@ public class EstoreSearchStepDefs {
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
         estoreUserAccountPage.getSearchItemField().click();
         generalStepDefs.waitForJSandJQueryToLoad();
-        
+
         estoreUserAccountPage.getSearchItemField().setValue(generalStepDefs.getAlphaNumericString(7));
 
         estoreSearchScreen.getSeeAllResultsButton().should(visible, Duration.ofSeconds(40));
@@ -59,7 +59,7 @@ public class EstoreSearchStepDefs {
 
     @When("I scroll to the bottom of the estore page")
     public void iScrollToTheBottomOfTheEstorePage() {
-        
+        $(By.id("rh-header")).should(visible, Duration.ofSeconds(20));
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
 
     }
@@ -127,7 +127,7 @@ public class EstoreSearchStepDefs {
 
     @Then("I verify that I'm able to use back button")
     public void iVerifyThatIMAbleToUseBackButton() {
-        
+
         WebDriverRunner.getWebDriver().navigate().back();
         estorePDPScreen.getFirstProduct().should(visible, Duration.ofSeconds(20));
 
@@ -135,7 +135,7 @@ public class EstoreSearchStepDefs {
 
     @Then("I verify that I'm able to use back button from CG")
     public void iVerifyThatIMAbleToUseBackButtonFromCG() {
-        
+
         WebDriverRunner.getWebDriver().navigate().back();
         estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(20));
     }

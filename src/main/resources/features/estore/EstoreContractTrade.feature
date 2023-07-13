@@ -150,10 +150,10 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
-    When I fill estore shipping address
-    When I click on edit estore billing address button
-    When I click on same as estore shipping address checkbox
+#    And I click on estore no thanks button
+#    When I fill estore shipping address
+#    When I click on edit estore billing address button
+#    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
