@@ -18,10 +18,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.NoSuchElementException;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.slf4j.Logger;
@@ -495,8 +493,15 @@ public class GeneralStepDefs {
      */
     public static void addLineItemsToConciergeCart() {
         String endpoint = Hooks.cookie;
+        String country = Hooks.country;
+        String SKU = "";
+        if(Objects.equals(country, "US") || Objects.equals(country, "CA")){
+            SKU = "63780104 LOAK";
+        } else {
+            SKU = "63780104 LOAK";
+        }
         setUserEnvironment();
-        if (USER_ID == "6192a475-4d00-4d61-aa0c-3e25c7000151") {
+        if (Objects.equals(USER_ID, "6192a475-4d00-4d61-aa0c-3e25c7000151")) {
             cartId = getProdCartId(USER_ID);
         } else {
             cartId = getCurrentCartId(USER_ID);
@@ -513,7 +518,7 @@ public class GeneralStepDefs {
                 "        \"lineItemsInput\": {\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
-                "                    \"sku\": \"10023954 ANTB\",\n" +
+                "                    \"sku\": \"" + SKU + "\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"brand\": \"RH\",\n" +
                 "                    \"giftTo\": \"\",\n" +

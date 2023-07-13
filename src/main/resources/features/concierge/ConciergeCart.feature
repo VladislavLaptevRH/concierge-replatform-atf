@@ -42,6 +42,7 @@ Feature:Concierge Cart Page
     Then I verify that line item was removed
 
   Scenario Outline: Override Line item Prices - with <method> override price methods
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -62,6 +63,7 @@ Feature:Concierge Cart Page
       | AMOUNT_OVERRIDE |
 
   Scenario: Override Line item Prices - for all line items from cart
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -77,6 +79,7 @@ Feature:Concierge Cart Page
     Then I verify line items prices for "PERCENT_OFF"
 
   Scenario: Override Line item Prices - verify update button, verify remove button
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -95,6 +98,7 @@ Feature:Concierge Cart Page
     Then I verify line items prices for "AMOUNT_OVERRIDE"
 
   Scenario: Override Line item Prices - verify remove button
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -134,6 +138,7 @@ Feature:Concierge Cart Page
     And I verify that promotion is not displayed
 
   Scenario: Move to Project
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -163,6 +168,7 @@ Feature:Concierge Cart Page
     Then I verify that designed sold by
 
   Scenario: Promo codes - verify that total price from cart and from payment page is the same after applying promocode
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -181,6 +187,7 @@ Feature:Concierge Cart Page
     Then I verify that total price from cart and from payment page is the same
 
   Scenario: Promo codes - Total Additional Product Discount message is displayed on review page
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -200,6 +207,7 @@ Feature:Concierge Cart Page
     Then I verify that Total Additional Product Discount message is "displayed" on review page
 
   Scenario: Promo codes - verify that promo code was removed for member client
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -303,7 +311,6 @@ Feature:Concierge Cart Page
     Then I verify that membership price displayed as total price
 
   Scenario: Verify Employee discount checkout
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
