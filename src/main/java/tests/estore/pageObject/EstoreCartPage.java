@@ -57,7 +57,7 @@ public class EstoreCartPage {
 
     private final SelenideElement colorCloseButton = $(By.xpath("//div[@class='MuiDialogTitle-root']/button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit']"));
 
-    private final SelenideElement noThanksButton = $(By.xpath("//span[normalize-space()='NO, THANKS']"));
+    private final SelenideElement noThanksButton = $(By.xpath("//button[@id='dialog-rh-membership_no-thanks-button']"));
 
     private final SelenideElement becomeAmemberNow = $(By.xpath("//*[text()='BECOME A MEMBER NOW']"));
 

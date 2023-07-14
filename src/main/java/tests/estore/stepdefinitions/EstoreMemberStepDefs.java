@@ -94,14 +94,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate cart")
     public void iValidateCart() {
-
-        if ($(By.xpath("//*[text()='JOIN NOW']")).isDisplayed()) {
-            $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(10));
-        } else {
-            estoreCartPage.getRemoveMembershipButton().should(visible, Duration.ofSeconds(20));
-            estoreCartPage.getRemoveMembershipButton().click();
-            $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(10));
-        }
+        $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(10));
     }
 
     @Then("I validate email address field and link to membership button")
@@ -130,14 +123,14 @@ public class EstoreMemberStepDefs {
 
     @When("I click on cancel membership link")
     public void iClickOnCancelMembershipLink() {
-        
+
         assertTrue(estoreMemberPage.getCancelLink().isDisplayed());
         estoreMemberPage.getCancelLink().click();
     }
 
     @Then("I validate cancel membership content")
     public void iValidateCancelMembershipContent() {
-        
+
         $(By.xpath("//*[text()='25% savings on all full-priced items from RH, RH Modern, RH Baby & Child and RH TEEN']")).should(visible, Duration.ofSeconds(30));
         $(By.xpath("//*[text()='Additional 20% savings on all sale items']")).should(visible, Duration.ofSeconds(30));
         $(By.xpath("//*[text()='Complimentary services with RH Interior Design']")).should(visible, Duration.ofSeconds(30));
@@ -187,6 +180,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I verify that save card to account checkbox should be checked by defaults")
     public void iVerifyThatSaveCardToAccountCheckboxShouldBeCheckedByDefaults() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         selectPayment.selectByValue("CC");
