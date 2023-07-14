@@ -58,12 +58,12 @@ public class Hooks {
      */
     private void ConfigFileReader() {
 
-        profile = System.getenv("ENVIRONMENT");
-        cookie = System.getenv("ENDPOINT");
-        country = System.getenv("COUNTRY");
-//        profile = "stg2";
-//        country = "US";
-//        cookie = "releasetues";
+//        profile = System.getenv("ENVIRONMENT");
+//        cookie = System.getenv("ENDPOINT");
+//        country = System.getenv("COUNTRY");
+        profile = "stg2";
+        country = "US";
+        cookie = "releasetues";
 
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
