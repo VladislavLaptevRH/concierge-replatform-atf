@@ -155,11 +155,11 @@ public class EstoreCartPageStepDefs {
     public void iRemovePromotionFromCart() {
         try {
             estoreCartPage.getRemovePromotionBtn().should(visible, Duration.ofSeconds(15));
+            estoreCartPage.getRemovePromotionBtn().scrollIntoView(true);
             estoreCartPage.getRemovePromotionBtn().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Promotion code was not applied");
         }
-
     }
 
     @Then("I verify that I'm able to remove estore employee discount")

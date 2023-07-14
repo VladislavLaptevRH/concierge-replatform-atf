@@ -180,7 +180,7 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore shipping address")
     public void iFillEstoreShippingAndShippingAddress() {
-
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         try {
             if ($(By.xpath("//*[text() = 'Shipping Address']/..//span[1]/*[text() = 'Edit']")).isDisplayed()) {
                 System.out.println("The shipping address was already filled");
@@ -193,7 +193,7 @@ public class EstoreAddressStepDefs {
                 estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
                 estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
-
+                with().pollInterval(2, SECONDS).await().until(() -> true);
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
                 estoreAddressScreen.getShippingAddressLastName1().setValue("William");
 
@@ -229,7 +229,7 @@ public class EstoreAddressStepDefs {
                     }
                 }
 
-
+                with().pollInterval(2, SECONDS).await().until(() -> true);
                 estoreAddressScreen.getShippingAddressPhone().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
                 estoreAddressScreen.getShippingAddressPhone().click();
                 generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
