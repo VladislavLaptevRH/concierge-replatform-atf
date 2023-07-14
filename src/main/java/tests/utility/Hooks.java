@@ -61,6 +61,9 @@ public class Hooks {
         profile = System.getenv("ENVIRONMENT");
         cookie = System.getenv("ENDPOINT");
         country = System.getenv("COUNTRY");
+//        profile = "stg2";
+//        country = "US";
+//        cookie = "releasetues";
 
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
@@ -170,8 +173,8 @@ public class Hooks {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
         Configuration.headless = true;
-        Configuration.pageLoadStrategy = "normal";
-        Configuration.timeout = 600000;
+        Configuration.pageLoadStrategy = "none";
+        Configuration.timeout = 30000;
         Configuration.reportsFolder = "target/screenshots";
         open(url);
         currentUrl = WebDriverRunner.url();
@@ -183,13 +186,17 @@ public class Hooks {
     public void setupChromeArguments() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--window-size=1366,768");
         options.addArguments("--no-sandbox");
         options.addArguments("--remote-allow-origins=*");
-        WebDriver driver = null;
-        driver = new ChromeDriver(options);
-        WebDriverRunner.setWebDriver(driver);
+        options.addArguments("--disable-gpu");
+        options.addArguments("enable-automation");
+        options.addArguments("--disable-infobars");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-browser-side-navigation");
+        Configuration.browserCapabilities = options;
+//        WebDriver driver = null;
+//        driver = new ChromeDriver(options);
+//        WebDriverRunner.setWebDriver(driver);
     }
 
     /**
