@@ -36,7 +36,7 @@ public class EstoreAccountStepDefs {
     @Then("I verify that the personal info is displayed")
     public void iVerifyThatThePersonalInfoIsDisplayed() {
         assertEquals("1", "1", "2");
-//        assertFalse(estoreUserAccountPage.getBillingAddressFirstName().getValue().isEmpty());
+//        assertFalse(estoreUserAccountPage.getBillingAddressFirstName().getValue().equals("1"));
 //        assertFalse(estoreUserAccountPage.getBillingAddressLastName().getValue().isEmpty());
 //        assertTrue(estoreLoginPage.getContractTradeEmailField().getValue().equals("regularautomation@rh.com"));
     }
