@@ -225,7 +225,7 @@ public class Hooks {
         if (scenario.isFailed()) {
             final byte[] screenshot = ((TakesScreenshot) WebDriverRunner.getWebDriver())
                     .getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", "image");
+            scenario.attach(screenshot, "image/png", "embedded");
         }
         /* TODO : Finish Extent Report Class Implementation */
         //report.endReport();
