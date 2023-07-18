@@ -60,7 +60,6 @@ public class Hooks {
      * This method get properties from application.properties file
      */
     private void ConfigFileReader() {
-
         profile = System.getenv("ENVIRONMENT");
         cookie = System.getenv("ENDPOINT");
         country = System.getenv("COUNTRY");
