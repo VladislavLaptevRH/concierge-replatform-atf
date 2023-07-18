@@ -99,6 +99,10 @@ public class ConciergeCartStepDefs {
     @When("I click on view cart button")
     public void iClickOnViewCartButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
+        if($(By.xpath("//*[text() = 'Agree & Add To Cart']")).isDisplayed()){
+            $(By.xpath("//*[text() = 'Agree & Add To Cart']")).click();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
         if (!conciergeCartPageScreen.getItemAddedToYourCart().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -293,9 +297,6 @@ public class ConciergeCartStepDefs {
     @When("I click on remove button from project")
     public void iClickOnRemoveButtonFromProject() {
         generalStepDefs.waitForJSandJQueryToLoad();
-//        if(){
-//
-//        }
         String items = conciergeProjectScreen.getItems().getText().replaceAll("ITEMS: ", "");
         int IntItems = Integer.parseInt(items);
         for(int i = IntItems; i > 0; i--){
