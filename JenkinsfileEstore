@@ -1,4 +1,4 @@
-@Library('jenkins-rhapsody-libraries@master') _ //Importing shared Libraries
+@Library('jenkins-rhapsody-libraries@estorecoverage') _ //Importing shared Libraries
 import com.rh.rhapsody.*;
 
 Service s = Service.ESTORE_REGRESSION_TESTS;
