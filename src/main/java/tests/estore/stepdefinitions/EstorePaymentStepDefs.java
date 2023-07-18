@@ -29,15 +29,16 @@ public class EstorePaymentStepDefs {
     @Then("I verify that I'm able to execute estore split payment")
     public void iVerifyThatIMAbleToExecuteEstoreSplitPayment() {
         try {
+            $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
             estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
-            
+
             $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
             $(By.xpath("//input[@type='text']")).setValue("10");
             estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
 
-            
+
             WebDriverRunner.getWebDriver().navigate().refresh();
-            
+
 
             estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
             estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
@@ -49,7 +50,7 @@ public class EstorePaymentStepDefs {
 
     @When("I choose saved card {string} from payment method dropdown")
     public void iChooseSaveCardFromPaymentMethodDropdown(String cardType) {
-
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         if (cardType.equals("VI")) {
@@ -82,7 +83,7 @@ public class EstorePaymentStepDefs {
 
     @Then("I verify that I'm able to edit payment")
     public void iVerifyThatIMAbleToEditPayment() {
-        
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='CONTINUE']")).click();
@@ -90,7 +91,7 @@ public class EstorePaymentStepDefs {
 
     @When("I edit estore billing address from PG")
     public void iEditBillingAddressFromPG() {
-        
+
         if ($(By.xpath("//*[text() = 'Something went wrong']")).isDisplayed()) {
             $(By.xpath("//*[@data-testid = 'dialog-title-close-button']")).click();
         }
@@ -113,13 +114,13 @@ public class EstorePaymentStepDefs {
 
     @When("I pay with RHCC for estore item")
     public void iPayWithRHCCForEstoreItem() {
-
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         if (!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-    
+
         }
         Select paymentMethod = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
-        
+
         paymentMethod.selectByValue("RH");
         estorePaymentPage.getRhCardNumberField().setValue("6006101002587290");
         Select paymentPlan = new Select(estorePaymentPage.getSelectPaymentPlan());
@@ -156,7 +157,7 @@ public class EstorePaymentStepDefs {
     @Then("I verify that I'm able to execute estore split payment with saved CC")
     public void iVerifyThatIMAbleToExecuteEstoreSplitPaymentWithSavedCC() {
         try {
-    
+            $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
             estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
             Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
             if (Hooks.profile.contains("stg4")) {
@@ -181,7 +182,7 @@ public class EstorePaymentStepDefs {
             $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofSeconds(20));
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
             estorePaymentPage.getCvcField().setValue("737");
-            
+
             switchTo().defaultContent();
             $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
             $(By.xpath("//input[@type='text']")).setValue("10");
@@ -217,7 +218,7 @@ public class EstorePaymentStepDefs {
 
     @When("I update item quantity in estore pdp")
     public void iUpdateItemQuantityInEstorePdp() {
-        
+
         estoreItemPage.getSelectQuantity().scrollIntoView(true);
         estoreItemPage.getSelectQuantity().should(visible, Duration.ofSeconds(40));
         Select selectQuantity = new Select(estoreItemPage.getSelectQuantity());
@@ -239,7 +240,7 @@ public class EstorePaymentStepDefs {
 
     @Then("I validate that billing address based on saved payment method")
     public void iValidateThatBillingAddressBasedOnSavedPaymentMethod() {
-        
+
         $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(40));
     }
 
@@ -254,23 +255,23 @@ public class EstorePaymentStepDefs {
         estoreAddressScreen.getShippingAddressState().should(visible, Duration.ofSeconds(20));
         Select selectCountry = new Select(estoreAddressScreen.getCountrySelect());
         selectCountry.selectByValue("CA");
-        
+
         estoreAddressScreen.getStateSelect().click();
         estoreAddressScreen.getState().click();
-        
+
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-        
+
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
         estoreAddressScreen.getPostalShippingCode().setValue("11111");
     }
 
     @When("I remove payment method which was used earlier")
     public void iRemovePaymentMethodWhichWasUsedEarlier() {
-
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         if (estoreCartPage.getRemoveButton().isDisplayed()) {
             for (int i = 0; i < 3; i++) {
                 estoreCartPage.getRemoveButton().click();
-                
+
                 if (!estoreCartPage.getRemoveButton().isDisplayed()) {
                     break;
                 }
@@ -284,11 +285,11 @@ public class EstorePaymentStepDefs {
     @When("I remove split payment which was used earlier")
     public void iRemovePaymentMethodWasUsedEarlier() {
         try {
-    
+
             while (estoreCartPage.getRemoveButton().isDisplayed()) {
                 estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(30));
                 estoreCartPage.getRemoveButton().click();
-        
+
             }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("There is no payment method that was used before");
@@ -298,8 +299,9 @@ public class EstorePaymentStepDefs {
 
     @When("I execute payment with credit card on estore")
     public void iExecutePaymentWithCreditCardOnEstore() {
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
-        
+
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='CONTINUE']")).click();
     }
@@ -311,6 +313,7 @@ public class EstorePaymentStepDefs {
 
     @When("I execute estore payment for {string}")
     public void iExecuteEstorePaymentFor(String cardType) {
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(40));
 
         if (cardType.equals("VI")) {
             estoreGeneralStepDefs.payWith("CC", "4111111145551142", "737", "0330");

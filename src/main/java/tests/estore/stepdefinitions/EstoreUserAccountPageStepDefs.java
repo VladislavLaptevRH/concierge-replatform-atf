@@ -15,8 +15,7 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.interactable;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
@@ -35,7 +34,7 @@ public class EstoreUserAccountPageStepDefs {
     public void iGoToProfilePaymentMethod() {
         String URL = Hooks.eStoreBaseURL + "/my-account/payment-info.jsp";
         open(URL);
-        
+
     }
 
     @When("I add new card for estore")
@@ -57,6 +56,7 @@ public class EstoreUserAccountPageStepDefs {
         switchTo().defaultContent();
         estoreUserAccountPage.getBillingAddressFirstName().setValue("TestName");
         estoreUserAccountPage.getBillingAddressLastName().setValue("TestLastName");
+
         if (Hooks.eStoreBaseURL.contains("stg2")) {
             estoreUserAccountPage.getBillingAddressStreetAddressStg2().should(visible, Duration.ofSeconds(20));
             estoreUserAccountPage.getBillingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
@@ -78,7 +78,8 @@ public class EstoreUserAccountPageStepDefs {
         }
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
-        
+
+        $(By.cssSelector("select[id='state']")).shouldHave(text("OH - Ohio"), Duration.ofSeconds(20));
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getSaveCardButton().click();
 
@@ -103,7 +104,7 @@ public class EstoreUserAccountPageStepDefs {
         switchTo().defaultContent();
 
         firstName = estoreGeneralStepDefs.generateRandomString(5);
-        
+
         estoreUserAccountPage.getBillingAddressFirstName().clear();
         estoreUserAccountPage.getBillingAddressFirstName().setValue(firstName);
 
@@ -147,7 +148,7 @@ public class EstoreUserAccountPageStepDefs {
         estoreUserAccountPage.getSaveAddressButton().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getSaveAddressButton().scrollIntoView(true);
         estoreUserAccountPage.getSaveAddressButton().click();
-        
+
     }
 
     @Then("I verify that error messages are displayed for each mandatory field")
@@ -275,7 +276,9 @@ public class EstoreUserAccountPageStepDefs {
         }
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
-        
+
+        $(By.cssSelector("select[id='state']")).shouldHave(text("OH - Ohio"), Duration.ofSeconds(20));
+
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getSaveCardButton().click();
     }

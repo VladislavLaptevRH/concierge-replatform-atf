@@ -1,5 +1,5 @@
-@estoreRegression
-@estoreOrderReview
+@estoreTestRun
+
 Feature:Estore Order review
   Scenario: Verify address, price, payment information, total, subtotal tags
     Given I log into eStore as "orderreview" user

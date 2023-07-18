@@ -58,12 +58,9 @@ public class Hooks {
      */
     private void ConfigFileReader() {
 
-//        profile = System.getenv("ENVIRONMENT");
-//        cookie = System.getenv("ENDPOINT");
-//        country = System.getenv("COUNTRY");
-        profile = "stg2";
-        country = "US";
-        cookie = "releasetues";
+        profile = System.getenv("ENVIRONMENT");
+        cookie = System.getenv("ENDPOINT");
+        country = System.getenv("COUNTRY");
 
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
@@ -186,6 +183,7 @@ public class Hooks {
     public void setupChromeArguments() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
         options.addArguments("--no-sandbox");
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-gpu");
@@ -194,9 +192,9 @@ public class Hooks {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-browser-side-navigation");
         Configuration.browserCapabilities = options;
-//        WebDriver driver = null;
-//        driver = new ChromeDriver(options);
-//        WebDriverRunner.setWebDriver(driver);
+        WebDriver driver;
+        driver = new ChromeDriver(options);
+        WebDriverRunner.setWebDriver(driver);
     }
 
     /**
@@ -218,7 +216,7 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After("@concierge-All or @estoreRegression or @target/rerun.txt")
+    @After("@concierge-All or @estoreTestRun or @estoreParallelTestRun or @target/rerun.txt")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
 

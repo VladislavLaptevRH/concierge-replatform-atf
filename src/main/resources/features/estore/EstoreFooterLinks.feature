@@ -1,5 +1,5 @@
-@estoreRegression
-@estoreFooterLinks
+@estoreParallelTestRun
+
 Feature: Footer Links
 
   Scenario Outline: Verify footer resources section links
