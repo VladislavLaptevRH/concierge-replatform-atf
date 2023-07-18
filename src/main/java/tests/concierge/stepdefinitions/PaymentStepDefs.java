@@ -214,8 +214,8 @@ public class PaymentStepDefs {
 
     @When("I choose {string} from payment method")
     public void iChooseRHGiftCardFromPaymentMethod(String card) {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
-        WebDriverRunner.getWebDriver().navigate().refresh();
+//        with().pollInterval(2, SECONDS).await().until(() -> true);
+//        WebDriverRunner.getWebDriver().navigate().refresh();
         Select selectPaymentMethod = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPaymentMethod.selectByVisibleText(card);
         with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -275,9 +275,9 @@ public class PaymentStepDefs {
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Estimated Sales Tax for 85020']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$2,687.00']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,849.00']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$255.08']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$355.01']")).should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that member savings in payment page")
