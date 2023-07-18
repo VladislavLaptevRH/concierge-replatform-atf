@@ -65,7 +65,6 @@ public class Hooks {
         cookie = System.getenv("ENDPOINT");
         country = System.getenv("COUNTRY");
 
-
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
         } else {
@@ -149,7 +148,7 @@ public class Hooks {
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(eStoreURL);
     }
 
@@ -173,7 +172,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 30000;
         Configuration.reportsFolder = "target/screenshots";
@@ -187,6 +186,7 @@ public class Hooks {
     public void setupChromeArguments() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
         options.addArguments("--no-sandbox");
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-gpu");

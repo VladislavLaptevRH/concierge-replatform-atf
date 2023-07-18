@@ -9,8 +9,7 @@ import org.testng.annotations.DataProvider;
         features = {"src/main/resources/features/"}
         , glue = {"tests"}
         , plugin = {"usage", "json:target/cucumber-reports/Cucumber.json",
-        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
-        "timeline:test-output-thread/"},
+        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
 
         tags = "@estoreCriticalPath or @estoreWishlist or @estoreThankYouPage or @estorePayment or @estoreOrderReview " +
                 "or @estoreMembership or @estoreHomePage or @estoreE2EFlow or @estoreContractTradePage or " +
