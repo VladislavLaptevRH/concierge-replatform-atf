@@ -235,28 +235,14 @@ public class EstoreE2EStepDefs {
 
     @When("I click on estore no thanks button")
     public void iClickOnNoThanksEstoreButton() {
-//        if (estoreCartPage.getNoThanksButton().isDisplayed()) {
         generalStepDefs.waitForJSandJQueryToLoad();
-        estoreCartPage.getNoThanksButton().should(visible, Duration.ofSeconds(20));
-        estoreCartPage.getNoThanksButton().should(appear, Duration.ofSeconds(20));
-        estoreCartPage.getNoThanksButton().should(exist, Duration.ofSeconds(20));
-
-        estoreCartPage.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
-        estoreCartPage.getNoThanksButton().should(interactable, Duration.ofSeconds(20));
+        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
+        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).should(appear, Duration.ofSeconds(10));
+        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).should(exist, Duration.ofSeconds(10));
+        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).should(interactable, Duration.ofSeconds(10));
         with().pollInterval(2, SECONDS).await().until(() -> true);
-//        WebDriverRunner.getWebDriver().findElement(By.id("dialog-rh-membership_no-thanks-button")).sendKeys(Keys.ENTER);
-        estoreCartPage.getNoThanksButton().doubleClick();
-//        executeJavaScript("arguments[0].click();", estoreCartPage.getNoThanksButton());
+        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).doubleClick();
 
-//            Actions actions = new Actions(WebDriverRunner.getWebDriver());
-//            actions.moveToElement(estoreCartPage.getNoThanksButton());
-//            estoreCartPage.getNoThanksButton().scrollIntoView(true);
-//            generalStepDefs.waitForJSandJQueryToLoad();
-//
-//            executeJavaScript("arguments[0].click();", estoreCartPage.getNoThanksButton());
-//        } else {
-//            System.out.println("Close button is not displayed");
-//        }
     }
 
     @When("I choose estore client who is a non member")

@@ -169,6 +169,8 @@ public class EstoreCartPage {
 
     private final SelenideElement removePromotionBtn = $(By.xpath("//div[@class='MuiGrid-root']//*[text()='Remove']"));
 
+    private final SelenideElement removePaymentBeforeText = $(By.xpath("//*[text()='Remove']"));
+
     private final SelenideElement totalAditionalProdDiscount = $(By.xpath("//*[text()='Total Additional Product Discount']"));
 
     private final SelenideElement applyToAllCheckbox = $(By.xpath("//input[@name='applyToCart']"));

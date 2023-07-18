@@ -267,13 +267,11 @@ public class EstorePaymentStepDefs {
     @When("I remove payment method which was used earlier")
     public void iRemovePaymentMethodWhichWasUsedEarlier() {
         $(By.id("component-order-summary")).should(Condition.and("", exist, appear), Duration.ofSeconds(25));
-
-//        with().pollInterval(3, SECONDS).await().until(() -> true);
-        if (estoreCartPage.getRemoveButton().isDisplayed()) {
+        if (estoreCartPage.getRemovePaymentBeforeText().isDisplayed()) {
             for (int i = 0; i < 3; i++) {
-                estoreCartPage.getRemoveButton().shouldBe(Condition.and("Appear, interactable", appear, interactable, visible), Duration.ofSeconds(20));
-                estoreCartPage.getRemoveButton().click();
-                if (!estoreCartPage.getRemoveButton().isDisplayed()) {
+                estoreCartPage.getRemovePaymentBeforeText().shouldBe(Condition.and("Appear, interactable", exist, appear, interactable, visible), Duration.ofSeconds(20));
+                estoreCartPage.getRemovePaymentBeforeText().click();
+                if (!estoreCartPage.getRemovePaymentBeforeText().isDisplayed()) {
                     break;
                 }
             }
