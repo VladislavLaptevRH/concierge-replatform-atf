@@ -1,5 +1,5 @@
-@estoreRegression
-@estoreMembership
+@estoreTestRun
+
 Feature: Estore Membership
 
   Scenario: eStore Membership

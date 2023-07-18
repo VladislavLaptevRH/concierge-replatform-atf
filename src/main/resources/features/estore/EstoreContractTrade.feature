@@ -1,5 +1,5 @@
-@estoreRegression
-@estoreContractTradePage
+@estoreTestRun
+
 Feature: eStore Contract and Trade
 
   Scenario: eStore Contract Login

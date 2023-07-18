@@ -180,64 +180,33 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore shipping address")
     public void iFillEstoreShippingAndShippingAddress() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
-        try {
-            if ($(By.xpath("//*[text() = 'Shipping Address']/..//span[1]/*[text() = 'Edit']")).isDisplayed()) {
-                System.out.println("The shipping address was already filled");
-                estoreAddressScreen.getEditShippinggAddress().click();
-            } else {
 
-                if (Hooks.eStoreURL.contains("stg3")) {
-                    $(By.xpath("//*[text()='Add New Address']")).click();
-                }
-                estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
-                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
-                estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
-                with().pollInterval(2, SECONDS).await().until(() -> true);
-                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
-                estoreAddressScreen.getShippingAddressLastName1().setValue("William");
+        estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
+        estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
 
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
+        estoreAddressScreen.getShippingAddressLastName1().setValue("William");
 
-                if (Hooks.eStoreURL.contains("stg4") || Hooks.eStoreURL.contains("stg3")) {
-                    generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress1());
-                    estoreAddressScreen.getShippingAddressStreetAddress1().setValue("Bradford Drive");
-                    estoreAddressScreen.getShippingAddressCity().setValue("Hilliard");
+        $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).click();
+        generalStepDefs.clearField($(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")));
+        $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).setValue("4524 Ocala Street");
 
-                    Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
-                    selectState.selectByValue("OH");
+        $(By.cssSelector("input[id=\"shippingAddress.city\"]")).click();
+        generalStepDefs.clearField($(By.cssSelector("input[id=\"shippingAddress.city\"]")));
+        $(By.cssSelector("input[id=\"shippingAddress.city\"]")).setValue("Orlando");
 
-                    generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-                    estoreAddressScreen.getPostalShippingCode().setValue("43093");
+        $(By.cssSelector("select[id=\"shippingAddress.state\"]")).should(interactable, Duration.ofSeconds(20));
+        Select selectCaState = new Select($(By.cssSelector("select[id=\"shippingAddress.state\"]")));
+        selectCaState.selectByValue("FL");
 
-                    try {
-                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(Condition.and("", exist, visible, interactable), Duration.ofSeconds(5));
-                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
-                    } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                        System.out.println("Dropdown list is not displayed");
-                    }
+        $(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")).click();
+        generalStepDefs.clearField($(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")));
+        $(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")).setValue("32801");
 
-                } else {
-
-                    generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
-                    estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
-                    try {
-
-                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(Condition.and("", exist, visible, interactable), Duration.ofSeconds(5));
-                        $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
-                    } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                        System.out.println("Dropdown is not displayed");
-                    }
-                }
-
-                with().pollInterval(2, SECONDS).await().until(() -> true);
-                estoreAddressScreen.getShippingAddressPhone().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
-                estoreAddressScreen.getShippingAddressPhone().click();
-                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
-                estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
-            }
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Shipping address fields are not displayed");
-        }
+        estoreAddressScreen.getShippingAddressPhone().click();
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
+        estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
     }
 
     @Then("I verify add a new shipping address option is present")
@@ -589,8 +558,6 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore shipping address for CAN")
     public void iFillEstoreShippingAddressForCAN() {
-
-//        try {
         if ($(By.xpath("//*[text() = 'Shipping Address']/..//span[1]/*[text() = 'Edit']")).isDisplayed()) {
             System.out.println("The shipping address was already filled");
         } else {
@@ -605,26 +572,25 @@ public class EstoreAddressStepDefs {
             generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
             estoreAddressScreen.getShippingAddressLastName1().setValue("William");
 
-            if (Hooks.eStoreURL.contains("stg4") || Hooks.eStoreURL.contains("stg3")) {
-                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress1());
-                estoreAddressScreen.getShippingAddressStreetAddress1().setValue("Bradford Drive");
-                estoreAddressScreen.getShippingAddressCity().setValue("Hilliard");
+            $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).click();
+            generalStepDefs.clearField($(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")));
+            $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).setValue("101 JASPER AVE SW");
 
-                Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
-                selectState.selectByValue("OH");
+            $(By.cssSelector("input[id=\"shippingAddress.city\"]")).click();
+            generalStepDefs.clearField($(By.cssSelector("input[id=\"shippingAddress.city\"]")));
+            $(By.cssSelector("input[id=\"shippingAddress.city\"]")).setValue("Kelowna");
 
-                generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-                estoreAddressScreen.getPostalShippingCode().setValue("11111");
-            }
+            $(By.cssSelector("select[id=\"shippingAddress.state\"]")).should(interactable, Duration.ofSeconds(30));
+            Select selectCaState = new Select($(By.cssSelector("select[id=\"shippingAddress.state\"]")));
+            selectCaState.selectByValue("BC");
 
-
-            estoreAddressScreen.getShippingAddressAptFloor().click();
-            estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
+            $(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")).click();
+            generalStepDefs.clearField($(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")));
+            $(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")).setValue("M4B1G5");
 
             estoreAddressScreen.getShippingAddressPhone().click();
             generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
             estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
-
         }
     }
 

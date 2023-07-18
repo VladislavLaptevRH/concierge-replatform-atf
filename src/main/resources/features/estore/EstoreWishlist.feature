@@ -1,5 +1,5 @@
-@estoreRegression
-@estoreWishlist
+@estoreParallelTestRun
+
 Feature: Estore Wishlist
 
   Scenario: Wishlist for registered users
@@ -16,7 +16,7 @@ Feature: Estore Wishlist
     Then I validate items in wishlist
 
   Scenario: Add an item to wishlist (Member User)
-     Given I log into eStore as "member" user
+    Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I open product page with "prod2020027" and "17050043" with "FOG" for estore
     When I click on add to wishlist button

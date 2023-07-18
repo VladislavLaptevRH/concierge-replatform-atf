@@ -1,5 +1,5 @@
-@estoreRegression
-@estoreCart
+@estoreTestRun
+
 Feature: Estore Cart Page
 
   Scenario: Remove item from cart
