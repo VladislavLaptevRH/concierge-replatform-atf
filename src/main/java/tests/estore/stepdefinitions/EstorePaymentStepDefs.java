@@ -29,6 +29,7 @@ public class EstorePaymentStepDefs {
     @Then("I verify that I'm able to execute estore split payment")
     public void iVerifyThatIMAbleToExecuteEstoreSplitPayment() {
         try {
+            $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
             estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
 
             $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
@@ -49,7 +50,7 @@ public class EstorePaymentStepDefs {
 
     @When("I choose saved card {string} from payment method dropdown")
     public void iChooseSaveCardFromPaymentMethodDropdown(String cardType) {
-
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         if (cardType.equals("VI")) {
@@ -82,7 +83,7 @@ public class EstorePaymentStepDefs {
 
     @Then("I verify that I'm able to edit payment")
     public void iVerifyThatIMAbleToEditPayment() {
-
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//*[text()='CONTINUE']")).click();
@@ -113,7 +114,7 @@ public class EstorePaymentStepDefs {
 
     @When("I pay with RHCC for estore item")
     public void iPayWithRHCCForEstoreItem() {
-
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         if (!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
 
@@ -156,7 +157,7 @@ public class EstorePaymentStepDefs {
     @Then("I verify that I'm able to execute estore split payment with saved CC")
     public void iVerifyThatIMAbleToExecuteEstoreSplitPaymentWithSavedCC() {
         try {
-
+            $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
             estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
             Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
             if (Hooks.profile.contains("stg4")) {
@@ -195,6 +196,7 @@ public class EstorePaymentStepDefs {
 
     @And("I verify that VI and MC card are available in payment method dropdown")
     public void iVerifyThatVIAndMCCardAreAvaialbeInPaymentMethodDropdown() {
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         estorePaymentPage.getChoosePaymentMethodBtn().click();
 
@@ -298,6 +300,7 @@ public class EstorePaymentStepDefs {
 
     @When("I execute payment with credit card on estore")
     public void iExecutePaymentWithCreditCardOnEstore() {
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
 
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofSeconds(15));
@@ -311,7 +314,7 @@ public class EstorePaymentStepDefs {
 
     @When("I execute estore payment for {string}")
     public void iExecuteEstorePaymentFor(String cardType) {
-
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         if (cardType.equals("VI")) {
             estoreGeneralStepDefs.payWith("CC", "4111111145551142", "737", "0330");
         }

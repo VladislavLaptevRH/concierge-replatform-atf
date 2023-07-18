@@ -60,9 +60,11 @@ public class Hooks {
      * This method get properties from application.properties file
      */
     private void ConfigFileReader() {
+
         profile = System.getenv("ENVIRONMENT");
         cookie = System.getenv("ENDPOINT");
         country = System.getenv("COUNTRY");
+
 
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
@@ -143,7 +145,7 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for tests.concierge
      */
-    @Before("@estoreRegression")
+    @Before("@estoreTestRun or @estoreParallelTestRun")
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
@@ -171,7 +173,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = true;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = true;
+        Configuration.headless = false;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 30000;
         Configuration.reportsFolder = "target/screenshots";
@@ -228,7 +230,7 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After("@concierge-All or @estoreRegression or @target/rerun.txt")
+    @After("@concierge-All or @estoreTestRun or @estoreParallelTestRun or @target/rerun.txt")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
 
