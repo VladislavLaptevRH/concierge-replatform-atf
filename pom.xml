@@ -117,6 +117,7 @@
                         </property>
                     </properties>
                     <suiteXmlFiles>TestSuite/TestNG.xml</suiteXmlFiles>
+                    <suiteXmlFiles>TestSuite/TestNGConcierge.xml</suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                     <workingDirectory>${basedir}</workingDirectory>
                 </configuration>
