@@ -1,6 +1,21 @@
 #@estoreCriticalPath
 #Feature: Estore critical path
 #
+#  Scenario Outline: Verify top menu navigation
+#    Given I log into eStore as "regular" user
+#    When I choose country for concierge from footer
+#    Then  I change the brand to "<brand>" for eStore
+#    Then User verifies that all items from menu are displayed for "<brand>"
+#    Examples:
+#      | brand           |
+#      | RH              |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH TEEN         |
+
 #  Scenario Outline: CG - Test CGS in all menu items (All brands)
 #    Given I log into eStore as "guest" user
 #    When I choose country for eStore from footer

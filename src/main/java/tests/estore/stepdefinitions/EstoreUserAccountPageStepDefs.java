@@ -314,6 +314,5 @@ public class EstoreUserAccountPageStepDefs {
     public void iChangeTheBrandToForEStore(String brand) {
         estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(40)).click();
         estoreUserAccountPage.getBrand(brand).should(visible, Duration.ofSeconds(40)).click();
-//        conciergeUserAccountPage.getRhConciergeLogo().should(visible, Duration.ofSeconds(40));
     }
 }
