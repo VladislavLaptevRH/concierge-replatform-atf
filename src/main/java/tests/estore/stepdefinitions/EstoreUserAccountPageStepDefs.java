@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.EstoreAddressScreen;
 import tests.estore.pageObject.EstoreCartPage;
@@ -29,13 +30,14 @@ public class EstoreUserAccountPageStepDefs {
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     EstoreCartPage estoreCartPage = new EstoreCartPage();
+    ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     static String firstName;
 
     @When("I go to profile payment method")
     public void iGoToProfilePaymentMethod() {
         String URL = Hooks.eStoreBaseURL + "/my-account/payment-info.jsp";
         open(URL);
-        
+
     }
 
     @When("I add new card for estore")
@@ -78,7 +80,7 @@ public class EstoreUserAccountPageStepDefs {
         }
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
-        
+
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getSaveCardButton().click();
 
@@ -103,7 +105,7 @@ public class EstoreUserAccountPageStepDefs {
         switchTo().defaultContent();
 
         firstName = estoreGeneralStepDefs.generateRandomString(5);
-        
+
         estoreUserAccountPage.getBillingAddressFirstName().clear();
         estoreUserAccountPage.getBillingAddressFirstName().setValue(firstName);
 
@@ -147,7 +149,7 @@ public class EstoreUserAccountPageStepDefs {
         estoreUserAccountPage.getSaveAddressButton().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getSaveAddressButton().scrollIntoView(true);
         estoreUserAccountPage.getSaveAddressButton().click();
-        
+
     }
 
     @Then("I verify that error messages are displayed for each mandatory field")
@@ -275,7 +277,7 @@ public class EstoreUserAccountPageStepDefs {
         }
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
-        
+
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getSaveCardButton().click();
     }
@@ -305,5 +307,13 @@ public class EstoreUserAccountPageStepDefs {
     @When("I verify the min length for last name text field")
     public void iVerifyTheMinLengthForLastNameTextField() {
         estoreUserAccountPage.getBillingAddressLastName().setValue("abc");
+    }
+
+
+    @Then("I change the brand to {string} for eStore")
+    public void iChangeTheBrandToForEStore(String brand) {
+        estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(40)).click();
+        estoreUserAccountPage.getBrand(brand).should(visible, Duration.ofSeconds(40)).click();
+//        conciergeUserAccountPage.getRhConciergeLogo().should(visible, Duration.ofSeconds(40));
     }
 }

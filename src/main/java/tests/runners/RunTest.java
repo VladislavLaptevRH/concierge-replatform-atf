@@ -11,15 +11,13 @@ import org.testng.annotations.DataProvider;
         , plugin = {"usage", "json:target/cucumber-reports/Cucumber.json",
         "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
 
-        tags = "@estoreTestRun"
+        tags = "@estoreTestRun or @concierge-All or @concierge-Cart or @concierge-Client or @concierge-Contract or @concierge-EndToEnd or" +
+                "@concierge-GiftCard or@concierge-HomePage or@concierge-OrderReview or@concierge-Payment or" +
+                "@concierge-PDP or@concierge-Project or@concierge-Registry or@concierge-Sale or " +
+                "@concierge-ThankYouPage or@concierge-Trade or@concierge-OrderHistory"
 )
 
 public class RunTest extends AbstractTestNGCucumberTests {
-    @Override
-    @DataProvider(parallel = true)
-    public Object[][] scenarios() {
-        return super.scenarios();
-    }
 
 }
 

@@ -9,13 +9,12 @@ import org.testng.annotations.DataProvider;
         features = {"src/main/resources/features/"}
         , glue = {"tests"}
         , plugin = {"usage", "json:target/cucumber-reports/Cucumber.json",
-        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
-        ,
-
+        "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
         tags = "@estoreParallelTestRun"
 )
 
 public class ParallelTestRun extends AbstractTestNGCucumberTests {
+
     @Override
     @DataProvider(parallel = true)
     public Object[][] scenarios() {
