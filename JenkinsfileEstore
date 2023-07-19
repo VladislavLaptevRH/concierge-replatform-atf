@@ -30,7 +30,7 @@ pipeline.standardTemplate { label ->
             }
 
             stage('Run Tests') {
-                pipeline.buildMvn("clean test -Dsuite-xml='.../TestSuite/TestNG.xml'", true);
+                pipeline.buildMvn("clean test -Dcucumber.filter.tags='@estoreTestRun or @estoreParallelTestRun'", true);
             } // end stage
 
             container("awscli") {
