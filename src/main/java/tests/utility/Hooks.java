@@ -145,7 +145,7 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for tests.concierge
      */
-    @Before("@estoreTestRun or @estoreParallelTestRun")
+    @Before("@estoreTestRun")
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
