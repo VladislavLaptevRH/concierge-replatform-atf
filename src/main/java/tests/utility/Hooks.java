@@ -189,15 +189,12 @@ public class Hooks {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("--no-sandbox");
-        options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-gpu");
         options.addArguments("enable-automation");
         options.addArguments("--disable-infobars");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-browser-side-navigation");
         options.addArguments("--window-size=1366,768");
         options.addArguments("--force-device-scale-factor=1");
-        Configuration.browserCapabilities = options;
         DesiredCapabilities dr = new DesiredCapabilities();
         dr.setBrowserName("chrome");
         dr.setCapability(ChromeOptions.CAPABILITY, options);
