@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import tests.concierge.pageObject.*;
@@ -114,7 +115,7 @@ public class EstoreAbstractStepDefs {
         $(By.id("component-cartheader_checkout-button")).should(visible, Duration.ofSeconds(20));
         with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.id("component-cartheader_checkout-button")).should(interactable, Duration.ofSeconds(20));
-        $(By.id("component-cartheader_checkout-button")).click();
+        $(By.id("component-cartheader_checkout-button")).click(ClickOptions.usingJavaScript());
     }
 
     @When("I introduces payment details for estore")

@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,7 +11,7 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
@@ -43,7 +44,7 @@ public class EstoreLoginStepDefs {
     public void loginAsRole(String accountRole) {
         if (!estoreLoginPage.getAccountIcon().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-    
+
         }
         if (!accountRole.equals("guest")) {
             estoreLoginPage.getAccountIcon().should(visible, Duration.ofMinutes(15));
@@ -133,7 +134,7 @@ public class EstoreLoginStepDefs {
                 } else {
                     if (!estoreLoginPage.getUsernameField().isDisplayed()) {
                         WebDriverRunner.getWebDriver().navigate().refresh();
-                
+
                     }
                     estoreLoginPage.getUsernameField().setValue("regularautomation@rh.com");
                     estoreLoginPage.getPasswordField().setValue("Qwerty@123");
@@ -219,7 +220,7 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(60));
             estoreLoginPage.getSignInButton().click();
-            
+
             executeJavaScript("window.stop();");
 
             if (Hooks.profile.equals("stg2")) {
@@ -234,22 +235,22 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getContractTradePasswordField().setValue("20211221164476");
             estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(60));
             estoreLoginPage.getSignInButton().click();
-            
+
         }
     }
 
     @Given("I log into eStore as trade")
     public void iLogIntoEStoreAsTrade() {
-        
+
         try {
             open(Hooks.eStoreBaseURL + "/trade-sales/trade-sign-in.jsp");
-            estoreLoginPage.getContractTradeEmailField().should(visible, Duration.ofSeconds(60));
+            estoreLoginPage.getContractTradeEmailField().should(Condition.and("", interactable, appear), Duration.ofSeconds(30));
             estoreLoginPage.getContractTradeEmailField().setValue("rboorla+700@rh.com");
             estoreLoginPage.getContractTradePasswordField().setValue("20230220167059");
-            estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
+            estoreLoginPage.getSignInButton().should(interactable, Duration.ofSeconds(30));
             estoreLoginPage.getSignInButton().click();
             USER_ID_STG2 = "21e477e0-c989-48db-82ff-4422172805e2";
-            
+
             executeJavaScript("window.stop();");
 
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {

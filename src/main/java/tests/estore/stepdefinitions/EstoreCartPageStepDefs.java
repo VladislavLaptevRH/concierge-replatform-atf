@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
@@ -108,7 +109,7 @@ public class EstoreCartPageStepDefs {
         estoreItemPage.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(80));
         estoreItemPage.getViewCartButton().should(visible, Duration.ofSeconds(60));
         estoreCartPage.getKeepShopping().should(visible, Duration.ofSeconds(15));
-        estoreItemPage.getViewCartButton().click();
+        estoreItemPage.getViewCartButton().click(ClickOptions.usingJavaScript());
     }
 
     @When("I choose estore order classification")
@@ -450,9 +451,10 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on add to wishlist button from cart")
     public void iClickOnAddToWishlistButtonFromCart() {
-
         estoreCartPage.getAddToWishlistButton().should(visible, Duration.ofSeconds(40));
-        estoreCartPage.getAddToWishlistButton().click();
+        estoreCartPage.getAddToWishlistButton().should(interactable, Duration.ofSeconds(40));
+        estoreCartPage.getAddToWishlistButton().should(appear, Duration.ofSeconds(40));
+        estoreCartPage.getAddToWishlistButton().click(ClickOptions.usingJavaScript());
     }
 
     @Then("I verify that contract price is used in cart")
@@ -762,7 +764,7 @@ public class EstoreCartPageStepDefs {
 
     @And("I verify that total price is correct for {string} and {string} with {string} for estore")
     public void iVerifyThatTotalPriceIsCorrectForAndWithForEstore(String prodId, String skuID, String skuOptions) {
-        $(By.xpath("(//*[text()='$94.00'])[3]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='$26.00'])[3]")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I change item quantity to {string} for {string} and {string} with {string} for estore")

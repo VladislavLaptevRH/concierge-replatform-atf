@@ -69,7 +69,7 @@ public class EstoreCartPage {
 
     private final SelenideElement selectQuantity = $(By.xpath("//select[contains(@id,'quantity')]"));
 
-    private final SelenideElement removeButton = $(By.xpath("//*[@data-testid='component-rh-line-item-card-actions_remove']"));
+    private final SelenideElement removeButton = $(By.xpath("//*[text()='Remove']"));
 
     private final SelenideElement estoreCartButton = $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']"));
 

@@ -156,7 +156,7 @@ Feature: Estore Cart Page
     Then I verify "NY" shipping restriction
 
   Scenario: eStore - Disable Continue as a Guest user option for guest user with membership
-    When I open product page with "prod2020027" and "17050043" with "CHAR" for estore
+    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on join now on estore cart page membership button
