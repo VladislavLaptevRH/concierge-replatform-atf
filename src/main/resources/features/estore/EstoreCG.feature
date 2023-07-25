@@ -1,5 +1,5 @@
-@estoreRegression
-@estoreCGPage
+@estoreTestRun
+
 Feature: Estore CG
 
   Scenario Outline: CG - Test CGS in all menu items (All brands)

@@ -1,5 +1,5 @@
-@estoreRegression
-@estoreOrderHistory
+@estoreTestRun
+
 Feature: Order history
 
   Scenario: Verify accessing order history - orders displayed for registered user

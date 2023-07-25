@@ -1,5 +1,5 @@
-@estoreRegression
-@estoreHomePage
+@estoreTestRun
+
 Feature: Estore Homepage
 
   Scenario Outline: Verify search functionality

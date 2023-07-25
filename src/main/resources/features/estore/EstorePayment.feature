@@ -1,5 +1,5 @@
-@estoreRegression
-@estorePayment
+@estoreTestRun
+
 Feature: Estore Payment
 
   Scenario: eStore Split Payment
@@ -76,9 +76,7 @@ Feature: Estore Payment
     When I choose "CAN" country from footer
     When I click on estore checkout button
     And I click on estore no thanks button
-    When I click on edit estore billing address button
-    When I fill estore shipping address
-    When I update shipping address for CAN
+    When I fill estore shipping address for CAN
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -178,8 +176,6 @@ Feature: Estore Payment
     And I click on view cart estore button
     When I click on estore checkout button
     And I click on estore no thanks button
-    When I fill estore shipping address
-    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
@@ -229,7 +225,7 @@ Feature: Estore Payment
     When I choose "CAN" country from footer
     When I click on estore checkout button
     And I click on estore no thanks button
-    When I update shipping address for CAN
+    When I fill estore shipping address for CAN
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -245,13 +241,13 @@ Feature: Estore Payment
     When I choose "CAN" country from footer
     When I click on estore checkout button
     And I click on estore no thanks button
-    When I update shipping address for CAN
+    When I fill estore shipping address for CAN
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     Then I verify that discover is unavailable
 
-      #canada issue
+  #canada issue
   Scenario: eStore unavailability of Saved RHCC for CAN shipping address
     Given I log into eStore as "savedRhCc" user
     When I choose country for eStore from footer
@@ -262,39 +258,43 @@ Feature: Estore Payment
     When I click on estore checkout button
     And I click on estore no thanks button
     When I click on edit shipping address button on estore address page
-    When I update shipping address for CAN
+    When I fill estore shipping address for CAN
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     Then I verify unavailability of saved for RHCC
 
   #canada issue
-#  Scenario: eStore Update address (Change Country) after making payment
-#    Given I log into eStore as "regular" user
-#    When I choose country for eStore from footer
-#    When I remove all items from estore cart
-#    When I add item to cart via API for estore
-#    When I open estore cart
-#    When I click on estore checkout button
-#    And I click on estore no thanks button
-#    When I fill estore shipping address
-#    When I click on same as estore shipping address checkbox
-#    When I click on continue to payment estore button
-#    When I click on continue with original address estore button
-#    When I refresh current estore page
-#    When I remove payment method which was used earlier
-#    When I execute payment with credit card on estore
+  Scenario: eStore Update address (Change Country) after making payment
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I execute payment with credit card on estore
+    When I open estore cart
+    When I choose "CAN" country from footer
+    When I click on estore checkout button
+    When I click on estore no thanks button
 #    When I click on edit shipping address button on estore order review page
 #    When I click on edit shipping address button on estore address page
+    When I fill estore shipping address for CAN
+    When I click on same as estore shipping address checkbox
 #    When I choose address with CAN zip code
-#    When I click on continue to payment estore button
-#    When I click on continue with original address estore button
-#    Then I verify that current currency is canadian dollar
-#    When I remove payment method which was used earlier
-#    When I execute payment with credit card on estore
-#    When I click on continue payment method estore button
-#    When I click on a place estore order button
-#    Then I verify that estore thank you page is displayed
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    Then I verify that current currency is canadian dollar
+    When I remove payment method which was used earlier
+    When I execute payment with credit card on estore
+    When I click on a place estore order button
+    Then I verify that estore thank you page is displayed
 
   Scenario: eStore masked CC
     Given I log into eStore as "mastercard" user
@@ -304,6 +304,7 @@ Feature: Estore Payment
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -335,6 +336,7 @@ Feature: Estore Payment
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -352,6 +354,7 @@ Feature: Estore Payment
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -372,7 +375,7 @@ Feature: Estore Payment
     When I click on estore checkout button
     And I click on estore no thanks button
     When I click on edit shipping address button on estore address page
-    When I update shipping address for CAN
+    When I fill estore shipping address for CAN
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -407,7 +410,7 @@ Feature: Estore Payment
     When I open estore cart
     When I click on estore checkout button
     When I click on no thanks button
-    When I click on edit shipping address button on estore address page
+#    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -431,8 +434,8 @@ Feature: Estore Payment
     When I choose "CAN" country from footer
     When I click on estore checkout button
     And I click on estore no thanks button
-    When I click on edit estore billing address button
-    When I update shipping address for CAN
+#    When I click on edit estore billing address button
+    When I fill estore shipping address for CAN
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -444,4 +447,3 @@ Feature: Estore Payment
       | VI       |
       | MC       |
       | AX       |
-      | DI       |

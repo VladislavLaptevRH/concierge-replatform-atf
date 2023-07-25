@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import tests.concierge.pageObject.*;
@@ -106,14 +107,15 @@ public class EstoreAbstractStepDefs {
     @When("I click on estore checkout button")
     public void iClickOnCheckoutButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
-
-        if (!$(By.xpath("//*[text()='Checkout']")).isDisplayed()) {
+        if (!$(By.id("component-cartheader_checkout-button")).isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-    
         }
-        $(By.xpath("//*[text()='Checkout']")).shouldHave(text("Checkout"), Duration.ofSeconds(30));
-        $(By.xpath("//*[text()='Checkout']")).should(interactable, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Checkout']")).should(visible, Duration.ofSeconds(20)).click();
+        $(By.id("component-cartheader_checkout-button")).shouldHave(text("Checkout"), Duration.ofSeconds(30));
+        $(By.id("component-cartheader_checkout-button")).should(appear, Duration.ofSeconds(20));
+        $(By.id("component-cartheader_checkout-button")).should(visible, Duration.ofSeconds(20));
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        $(By.id("component-cartheader_checkout-button")).should(interactable, Duration.ofSeconds(20));
+        $(By.id("component-cartheader_checkout-button")).click(ClickOptions.usingJavaScript());
     }
 
     @When("I introduces payment details for estore")
@@ -146,7 +148,7 @@ public class EstoreAbstractStepDefs {
 
     @When("I click on a place estore order button")
     public void iClickOnPlaceOrderButton() {
-        
+
         estoreReviewOrderPage.getPlaceOrderButton().should(enabled, Duration.ofMinutes(1));
         estoreReviewOrderPage.getPlaceOrderButton().should(interactable, Duration.ofMinutes(1)).click();
         try {
@@ -221,7 +223,7 @@ public class EstoreAbstractStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         if (conciergeUserAccountPage.getClientButton().getText().equals("CLIENT")) {
             conciergeUserAccountPage.getClientButton().shouldHave(text("CLIENT"), Duration.ofSeconds(15));
-            
+
             conciergeUserAccountPage.getClientButton().click();
             conciergeUserAccountPage.getClientLookupHeaderBtn().shouldHave(text("Client Lookup"), Duration.ofMinutes(1));
             conciergeUserAccountPage.getClientLookupHeaderBtn().click();

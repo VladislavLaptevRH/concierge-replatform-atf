@@ -1,5 +1,5 @@
-@estoreRegression
-@estoreFooterLinks
+@estoreTestRun
+
 Feature: Footer Links
 
   Scenario Outline: Verify footer resources section links
@@ -36,12 +36,12 @@ Feature: Footer Links
     When I choose country for eStore from footer
     Then I verify that I'm able to access "<link>"
     Examples:
-      | link    |
+      | link                 |
       | LETTERS FROM THE CEO |
       | LEADERSHIP TEAM      |
       | INVESTOR RELATIONS   |
       | PRESS                |
-      | CAREERS |
+      | CAREERS              |
 
   Scenario Outline: Verify legal links
     Given I log into eStore as "regular" user

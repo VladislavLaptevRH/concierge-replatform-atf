@@ -1,5 +1,5 @@
-@estoreRegression
-@estoreSearch
+@estoreTestRun
+
 Feature: Estore Search
 
   Scenario: Search after opening hamburger menu

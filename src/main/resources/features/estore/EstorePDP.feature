@@ -1,5 +1,5 @@
-@estoreRegression
-@estorepdp
+@estoreTestRun
+
 Feature: Estore PDP
 
   Scenario: Verify user can see the Product Details correctly mentioned for a product
@@ -37,6 +37,14 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     When I update "CAN" postal code on pdp page
     Then verify the product price as per the postal code
+
+  Scenario: Verify the zip code update on PDP
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I update "CAN" postal code on pdp page
+    Then verify that the "US" zip code was updated with the "CAN" zip code
 
   Scenario Outline: Verify Line Items functionality:
     Given I log into eStore as "regular" user

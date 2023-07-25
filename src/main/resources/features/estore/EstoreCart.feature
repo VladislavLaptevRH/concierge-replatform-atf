@@ -1,5 +1,5 @@
-@estoreRegression
-@estoreCart
+@estoreTestRun
+
 Feature: Estore Cart Page
 
   Scenario: Remove item from cart
@@ -134,7 +134,7 @@ Feature: Estore Cart Page
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
-    When I choose "CA" country from footer
+    When I choose "CAN" country from footer
     When I click on estore checkout button
     And I click on estore no thanks button
     When I update shipping address for CAN
@@ -156,7 +156,7 @@ Feature: Estore Cart Page
     Then I verify "NY" shipping restriction
 
   Scenario: eStore - Disable Continue as a Guest user option for guest user with membership
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on join now on estore cart page membership button

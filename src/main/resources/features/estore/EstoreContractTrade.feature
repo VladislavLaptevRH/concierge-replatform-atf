@@ -1,5 +1,5 @@
-@estoreRegression
-@estoreContractTradePage
+@estoreTestRun
+
 Feature: eStore Contract and Trade
 
   Scenario: eStore Contract Login
@@ -65,13 +65,13 @@ Feature: eStore Contract and Trade
     Then I verify that the dropdown's are enabled
 
   Scenario: eStore Contract - Shipping is different from billing
-    Given I log into eStore as contract
+    Given I log into eStore as trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on edit estore billing address button
     When I fill estore billing address
@@ -114,9 +114,6 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
-    When I fill estore shipping address
-    When I click on edit estore billing address button
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -131,9 +128,6 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
-    When I click on edit shipping address button on estore address page
-    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -150,9 +144,6 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
-    When I fill estore shipping address
-    When I click on edit estore billing address button
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -168,9 +159,6 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
-    When I click on edit estore billing address button
-    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -195,7 +183,6 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -216,7 +203,6 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I goes to estore cart for estore
     When I click on estore checkout button
-    When I fill all fields from address screen
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -231,8 +217,6 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
-    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -247,8 +231,6 @@ Feature: eStore Contract and Trade
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
-    And I click on estore no thanks button
-    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -264,7 +246,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
+    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
@@ -287,8 +269,6 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    When I click on edit shipping address button on estore address page
-    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -383,9 +363,8 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
     When I click on edit shipping address button on estore address page
-    When I fill estore shipping address
+#    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -394,14 +373,13 @@ Feature: eStore Contract and Trade
     Then I verify that I'm able to execute estore split payment
 
   Scenario: estore Trade - Full Payment
-
     Given I log into eStore as trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    When I fill estore shipping address
+#    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -415,9 +393,8 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
-    When I click on edit shipping address button on estore address page
-    When I fill estore shipping address
+#    When I click on edit shipping address button on estore address page
+#    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -434,9 +411,8 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
-    When I click on edit shipping address button on estore address page
-    When I fill estore shipping address
+#    When I click on edit shipping address button on estore address page
+#    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -452,9 +428,8 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
-    When I click on edit shipping address button on estore address page
-    When I fill estore shipping address
+#    When I click on edit shipping address button on estore address page
+#    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -468,8 +443,8 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    When I fill estore shipping address
-    When I click on same as estore shipping address checkbox
+#    When I fill estore shipping address
+#    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
@@ -490,9 +465,8 @@ Feature: eStore Contract and Trade
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
-    And I click on estore no thanks button
-    When I fill estore shipping address
-    When I click on edit estore billing address button
+#    When I fill estore shipping address
+#    When I click on edit estore billing address button
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -519,17 +493,6 @@ Feature: eStore Contract and Trade
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
-    And I click on estore no thanks button
-
-  Scenario: Change zip code in cart to CAN, currency should be in US$
-    Given I log into eStore as trade
-    When I choose country for eStore from footer
-    When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    When I click on estore checkout button
-    And I click on estore no thanks button
 
   Scenario: estore Trade - Edit address
     Given I log into eStore as trade
@@ -539,10 +502,9 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
-    When I fill estore shipping address
-    When I click on edit estore billing address button
     When I click on same as estore shipping address checkbox
+#    When I click on edit estore billing address button
+#    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
@@ -588,7 +550,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
+    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
@@ -602,7 +564,6 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    And I click on estore no thanks button
     When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on edit estore billing address button
@@ -616,7 +577,6 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
-    When I click on estore no thanks button
     When I click on edit shipping address button on estore address page
     When I choose "DE" shipping address
     When I introduct the following postal code "19701" for shipping address

@@ -57,7 +57,7 @@ public class EstoreCartPage {
 
     private final SelenideElement colorCloseButton = $(By.xpath("//div[@class='MuiDialogTitle-root']/button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit']"));
 
-    private final SelenideElement noThanksButton = $(By.xpath("//span[normalize-space()='NO, THANKS']"));
+    private final SelenideElement noThanksButton = $(By.xpath("//button[@id='dialog-rh-membership_no-thanks-button']"));
 
     private final SelenideElement becomeAmemberNow = $(By.xpath("//*[text()='BECOME A MEMBER NOW']"));
 
@@ -69,7 +69,7 @@ public class EstoreCartPage {
 
     private final SelenideElement selectQuantity = $(By.xpath("//select[contains(@id,'quantity')]"));
 
-    private final SelenideElement removeButton = $(By.xpath("//*[@data-testid='component-rh-line-item-card-actions_remove']"));
+    private final SelenideElement removeButton = $(By.xpath("//*[text()='Remove']"));
 
     private final SelenideElement estoreCartButton = $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']"));
 
@@ -168,6 +168,8 @@ public class EstoreCartPage {
     private final SelenideElement regularItemPrice = $(By.xpath("(//p[@id='price'])[1]"));
 
     private final SelenideElement removePromotionBtn = $(By.xpath("//div[@class='MuiGrid-root']//*[text()='Remove']"));
+
+    private final SelenideElement removePaymentBeforeText = $(By.xpath("//*[text()='Remove']"));
 
     private final SelenideElement totalAditionalProdDiscount = $(By.xpath("//*[text()='Total Additional Product Discount']"));
 

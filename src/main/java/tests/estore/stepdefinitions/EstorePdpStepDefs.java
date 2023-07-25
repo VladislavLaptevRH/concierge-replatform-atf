@@ -9,10 +9,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
-import tests.estore.pageObject.EstoreCartPage;
-import tests.estore.pageObject.EstoreHomePage;
-import tests.estore.pageObject.EstorePGScreen;
-import tests.estore.pageObject.EstorePdpPageScreen;
+import tests.estore.pageObject.*;
 
 import java.time.Duration;
 
@@ -29,6 +26,8 @@ public class EstorePdpStepDefs {
     EstoreHomePage estoreHomePage = new EstoreHomePage();
 
     EstorePGScreen estorePGScreen = new EstorePGScreen();
+
+    EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
 
     @Then("I verify that user can see product details correctly mentioned for a product")
     public void iVerifyThatUserCanSeeProductDetailsCorrectlyMentionedForAProduct() {
@@ -219,8 +218,8 @@ public class EstorePdpStepDefs {
     @And("I verify that price for {string} and {string} with {string} was updated for {string}")
     public void iVerifyThatPriceForAndWithWasUpdatedFor(String arg0, String arg1, String arg2, String arg3) {
         if (arg3.equals("CAN") && (arg0.equals("prod2020027"))) {
-            $(By.xpath("//*[text()='$55']")).should(visible, Duration.ofSeconds(20));
-            $(By.xpath("//*[text()='$41']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='$13']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='$9']")).should(visible, Duration.ofSeconds(20));
         }
     }
 
@@ -232,7 +231,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify availability , delivery and return messages in PDP")
     public void iVerifyAvailabilityDeliveryAndReturnMessagesInPDP() {
-        $(By.xpath("//*[text()='This item will be delivered on or before 01/26/24 ']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='This item will be delivered on or before 02/19/24 ']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Ships free of charge via Standard Delivery Shipping']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='This item can be returned within 30 days of delivery.']")).should(visible, Duration.ofSeconds(20));
     }
@@ -241,5 +240,28 @@ public class EstorePdpStepDefs {
     public void iVerifyLinkBellowIsDisplayed(String arg0) {
         $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("(//span[text()='View' and 'Sale' and 'items'])[3]")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("verify that the {string} zip code was updated with the {string} zip code")
+    public void verifyThatTheZipCodeWasUpdatedWithTheZipCode(String arg0, String arg1) {
+        $(By.xpath("(//*[text()='Y1A 9Z9.'])[1]")).should(visible, Duration.ofSeconds(30));
+    }
+
+    @When("I select size option on the PDP page")
+    public void iSelectSizeOptionOnThePDPPage() {
+        estorePDPScreen.selectSizeOption();
+    }
+
+    @When("I select finish option on the PDP page")
+    public void iSelectFinishOptionOnThePDPPage() {
+        estorePDPScreen.selectFinishOption();
+    }
+
+    @Then("I verify the product price for product {string} and {string} with {string} for the selected {string} country")
+    public void iVerifyTheProductPriceForProductAndWithForTheSelectedCountry(String productID, String arg1, String selectedOptions, String country) {
+        if (country.equals("CAN") && (productID.equals("prod13800635")) && (selectedOptions.equals("INDG"))) {
+            estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$13"), Duration.ofSeconds(30));
+            estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$9"), Duration.ofSeconds(30));
+        }
     }
 }
