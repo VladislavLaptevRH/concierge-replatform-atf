@@ -99,7 +99,7 @@ public class EstoreHomePageStepDefs {
 
     @When("I scroll down to Request a design consultation and click")
     public void iScrollDownToRequestADesignConsultationAndClick() {
-        
+
         executeJavaScript("window.scrollTo(0, 11000)");
         estoreHomePage.getRequestConsultationButton().scrollTo();
         estoreHomePage.getRequestConsultationButton().click();
@@ -113,7 +113,7 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getMessageInputField().click();
         estoreHomePage.getMessageInputField().setValue("Hi, This is automation tests, please ignore the request. Thank you ");
         estoreHomePage.getIframeRequestAConsultationButton().click();
-        
+
 
     }
 
@@ -141,35 +141,41 @@ public class EstoreHomePageStepDefs {
     public void iNavigateToTheMemberTab() {
         String URL = Hooks.eStoreBaseURL + "/my-account/membership.jsp";
         open(URL);
-        
+
     }
 
     @Then("I validate each cat and sub-cat for eStore")
     public void iValidateEachCatAndSubCatForEStore() {
-        
+
         for (int main = 0; main < estoreHomePage.getListOfNavigationBar().size(); main++) {
             System.out.println("Main Category: " + estoreHomePage.getListOfNavigationBar().get(main).getText());
             estoreHomePage.getListOfNavigationBar().get(main).click();
             for (int sub = 0; sub < estoreHomePage.getListOfSubCategories().size(); sub++) {
                 System.out.println("Sub Category: " + estoreHomePage.getListOfSubCategories().get(sub).getText());
                 estoreHomePage.getListOfSubCategories().get(sub).click();
-        
+
                 for (int collection = 0; collection < estoreHomePage.getListOfCollection().size(); collection++) {
                     estoreHomePage.getListOfCollection().get(collection).click();
-            
+
                     System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": " + Hooks.getCurrentUrl());
                     assertFalse((WebDriverRunner.getWebDriver().getTitle().contains("404")));
                     if (!Hooks.getCurrentUrl().contains("rhnonprod")) {
                         open(Hooks.eStoreURL);
-                
+
                     }
                     estoreHomePage.getListOfNavigationBar().get(main).click();
-            
+
                     estoreHomePage.getListOfSubCategories().get(sub).click();
-            
+
                 }
             }
         }
     }
 
+    @And("user verifies search button, account icon, cart button are displayed")
+    public void userVerifiesSearchButtonAccountIconCartButtonAreDisplayed() {
+        estoreHomePage.getAccountIcon().should(Condition.visible, Duration.ofSeconds(20));
+        estoreHomePage.getSearchIconHomePage().should(Condition.visible, Duration.ofSeconds(20));
+        estoreHomePage.getHeaderCartButton().should(Condition.visible, Duration.ofSeconds(20));
+    }
 }

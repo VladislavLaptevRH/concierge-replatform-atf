@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
@@ -248,7 +249,7 @@ public class EstorePaymentStepDefs {
     @When("I remove existing payment method on payment estore page")
     public void iRemoveExistingPaymentMethodOnPaymentEstorePage() {
         estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(40));
-        estoreCartPage.getRemoveButton().click();
+        estoreCartPage.getRemoveButton().click(ClickOptions.usingJavaScript());
     }
 
     @When("I choose address with CAN zip code")

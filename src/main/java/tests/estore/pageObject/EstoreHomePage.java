@@ -24,6 +24,8 @@ public class EstoreHomePage {
     private final SelenideElement searchIcon = $(By.xpath("//span[@class='MuiIconButton-label']"));
     private final SelenideElement hamburgerIcon = $(By.id("hamburgerIcon"));
 
+    private final SelenideElement searchIconHomePage = $(By.xpath("(//span[@class='MuiIconButton-label'])[1]"));
+
     private final SelenideElement categoryDropdown = $(By.xpath("//div[@id='hamburgerIcon']"));
     private final SelenideElement locationDropdown = $(By.id("gallery-select"));
 
@@ -43,7 +45,7 @@ public class EstoreHomePage {
     private final SelenideElement requestConsultationButton = $(By.xpath("(//button[@ctaname='Consultation']//span//span)[1]"));
     private final SelenideElement iframeRequestAConsultationButton = $(By.xpath("//*[text()='REQUEST A CONSULTATION']"));
     private final SelenideElement wishlist = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between'])[3]"));
-    private final SelenideElement accountIcon = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
+    private final SelenideElement accountIcon = $(By.xpath("//*[@data-analytics-nav='account-icon']"));
     private final SelenideElement member = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between'])[4]"));
 
     private final SelenideElement homePageLogo = $(By.xpath("//a[@href='https://stg2.rhnonprod.com']"));
@@ -53,6 +55,8 @@ public class EstoreHomePage {
     private final SelenideElement gbCountry = $(By.xpath("//li[@data-value='GB']"));
 
     private final SelenideElement caCountry = $(By.xpath("//li[@data-value='CA']"));
+
+    private final SelenideElement headerCartButton = $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']"));
 
 
     public void clickToAccountButtonForregisteredUser() {

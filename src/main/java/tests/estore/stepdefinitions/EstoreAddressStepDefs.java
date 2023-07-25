@@ -360,8 +360,8 @@ public class EstoreAddressStepDefs {
 //        if (!estoreItemPage.getAddToCartButtonNotDisabled().isDisplayed()) {
 //            iClickOnContinueToPayment();
 //        }
-        estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled, interactable), Duration.ofSeconds(10));
-        estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(10));
+        estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled, interactable), Duration.ofSeconds(30));
+        estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(30));
         estoreItemPage.getAddToCartButton().click();
 
 //            if (estoreItemPage.getAddToCartButton().isDisplayed()) {
@@ -608,8 +608,8 @@ public class EstoreAddressStepDefs {
     public void iVerifyBillingAndShippingAddressAreCorrect() {
         $(By.xpath("//*[text()='SHIPPING ADDRESS']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Bradford Drive']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Hilliard, OH, 43026']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='4524 Ocala Street']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Orlando, FL, 32801']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='BILLING ADDRESS']")).should(visible, Duration.ofSeconds(20));
     }

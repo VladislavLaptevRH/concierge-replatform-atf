@@ -25,7 +25,7 @@ public class EstoreContractTradeStepDefs {
 
     @Then("I verify that contract paragraph is displayed")
     public void iVerifyThatContractParagraphIsDisplayed() {
-        estoreUserAccountPage.getDashboardTitle().should(Condition.visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getDashboardTitle().should(Condition.visible, Duration.ofSeconds(35));
         estoreUserAccountPage.getDashboardTitle().shouldHave(Condition.text("CONTRACT ACCOUNT SIGN IN"), Duration.ofSeconds(20));
         estoreLoginPage.getParagraphContent().should(Condition.visible, Duration.ofSeconds(20));
     }

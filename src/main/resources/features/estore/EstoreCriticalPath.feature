@@ -1,21 +1,25 @@
-#@estoreCriticalPath
+#@estoreTestRun
 #Feature: Estore critical path
 #
 #  Scenario Outline: Verify top menu navigation
-#    Given I log into eStore as "regular" user
+#    Given I log into eStore as guest
 #    When I choose country for concierge from footer
 #    Then  I change the brand to "<brand>" for eStore
 #    Then User verifies that all items from menu are displayed for "<brand>"
+#    And user verifies search button, account icon, cart button are displayed
 #    Examples:
-#      | brand           |
-#      | RH              |
-#      | RH CONTEMPORARY |
-#      | RH INTERIORS    |
-#      | RH MODERN       |
-#      | RH OUTDOOR      |
-#      | RH BEACH HOUSE  |
-#      | RH TEEN         |
-
+#      | brand             |
+#      | RH                |
+#      | RH CONTEMPORARY   |
+#      | RH INTERIORS      |
+#      | RH MODERN         |
+#      | RH OUTDOOR        |
+#      | RH BEACH HOUSE    |
+#      | RH SKI HOUSE      |
+#      | RH TEEN           |
+#      | BABY & CHILD      |
+#      | VIEW SOURCE BOOKS |
+#
 #  Scenario Outline: CG - Test CGS in all menu items (All brands)
 #    Given I log into eStore as "guest" user
 #    When I choose country for eStore from footer
@@ -107,7 +111,7 @@
 #    Given I log into eStore as "regular" user
 #    When I choose country for eStore from footer
 #    When I remove all items from estore cart
-#    When I open product page with "prod2020027" and "17050043" with "CHAR" for estore
+#    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
 #    When I click on add to cart estore button
 #    And I click on view cart estore button
 #    When I click on estore checkout button
@@ -121,11 +125,11 @@
 #    When I click on a place estore order button
 #    Then I verify that estore thank you page is displayed
 #
-#  Scenario: Verify member user checkoutc in estore
+#  Scenario: Verify member user checkout in estore
 #    Given I log into eStore as "member" user
 #    When I choose country for eStore from footer
 #    When I remove all items from estore cart
-#    When I open product page with "prod2020027" and "17050043" with "CHAR" for estore
+#    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
 #    When I click on add to cart estore button
 #    And I click on view cart estore button
 #    When I click on estore checkout button
@@ -145,11 +149,9 @@
 #    When I remove all items from estore cart
 #    When I add item to cart via API for estore
 #    When I open estore cart
-#    When I choose "CAN" country from footer
 #    When I click on estore checkout button
 #    And I click on estore no thanks button
-#    When I click on edit estore billing address button
-#    When I update shipping address for CAN
+#    When I fill estore shipping address
 #    When I click on same as estore shipping address checkbox
 #    When I click on continue to payment estore button
 #    When I click on continue with original address estore button
@@ -205,8 +207,8 @@
 #    When I open estore cart
 #    When I click on estore checkout button
 #    And I click on estore no thanks button
-#    When I fill estore shipping address
-#    When I click on same as estore shipping address checkbox
+##    When I fill estore shipping address
+##    When I click on same as estore shipping address checkbox
 #    When I click on continue to payment estore button
 #    When I click on continue with original address estore button
 #    When I remove payment method which was used earlier
@@ -277,7 +279,7 @@
 #    When I unselect the size option for "prod2020027" and "17050043" with "FOG" for estore
 #    And I verify that add to cart button is inactive
 #
-##Verify the pricing based on country
+##Verify the pricing based on country  - ?
 #  Scenario: Configure this item to view delivery information for your Location, price update
 #    Given I log into eStore as "regular" user
 #    When I remove all items from estore cart
@@ -288,13 +290,13 @@
 #    And I verify that price for "prod2020027" and "17050043" with "FOG" was updated for "CAN"
 #
 ##Verify the Postal code updates incart, PDP
-#  Scenario: Verify the product price as per the selected country in the dropdown.
+#  Scenario: Verify the product price as per the selected country in the dropdown
 #    Given I log into eStore as "regular" user
 #    When I choose country for eStore from footer
 #    When I remove all items from estore cart
 #    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
 #    When I update "CAN" postal code on pdp page
-#    Then I verify the product price for the selected country
+#    Then I verify the product price for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 #
 #  Scenario: Verify the prices it is showing for regular user
 #    Given I log into eStore as "regular" user
@@ -501,13 +503,6 @@
 #  Scenario: Add an item from cart to wishlist
 #    Given I log into eStore as "regular" user
 #    When I choose country for eStore from footer
-#    When I open product page with "prod2020027" and "17050043" with "FOG" for estore
-#    When I click on add to wishlist button
-#    Then I validate items in wishlist
-#
-#  Scenario: Add an item from cart to wishlist
-#    Given I log into eStore as "regular" user
-#    When I choose country for eStore from footer
 #    When I remove all items from estore cart
 #    When I add item to cart via API for estore
 #    When I open estore cart
@@ -550,13 +545,38 @@
 #    When I go to estore item "white and blue corner leather sofa" from search field
 #    When I select high to low for estore
 #    When I navigate for the first product PDP
+#    When I select size option on the PDP page
+#    When I select finish option on the PDP page
+#    When I click on add to cart estore button
+#    When I click on view cart estore button
+#    When I click on estore checkout button
+#    When I click on estore no thanks button
+#    When I click on same as estore shipping address checkbox
+#    When I click on continue to payment estore button
+#    When I click on continue with original address estore button
+#    When I remove payment method which was used earlier
+#    When I execute payment with credit card on estore
+#    When I click on a place estore order button
+#    Then I verify that estore thank you page is displayed
 #
-#  Scenario: Scenario: Place order: search with any key term, select Low to High. navigate to first product PDP
+#  Scenario: Place order: search with any key term, select Low to High. navigate to first product PDP
 #    Given I log into eStore as "regular" user
 #    When I choose country for eStore from footer
 #    When I go to estore item "white" from search field
 #    When I select low to high for estore
 #    When I navigate for the first product PDP
+#    When I select size option on the PDP page
+#    When I click on add to cart estore button
+#    When I click on view cart estore button
+#    When I click on estore checkout button
+#    When I click on estore no thanks button
+#    When I click on same as estore shipping address checkbox
+#    When I click on continue to payment estore button
+#    When I click on continue with original address estore button
+#    When I remove payment method which was used earlier
+#    When I execute payment with credit card on estore
+#    When I click on a place estore order button
+#    Then I verify that estore thank you page is displayed
 #
 # #Trade
 #  Scenario: Verify the trade login and checkout
@@ -566,15 +586,11 @@
 #    When I add item to cart via API for estore
 #    When I open estore cart
 #    When I click on estore checkout button
-#    And I click on estore no thanks button
-#    When I click on edit shipping address button on estore address page
-#    When I fill estore shipping address
 #    When I click on same as estore shipping address checkbox
 #    When I click on continue to payment estore button
 #    When I click on continue with original address estore button
 #    When I remove payment method which was used earlier
 #    When I execute payment with credit card on estore
-#    When I click on estore continue button
 #    When I click on a place estore order button
 #    Then I verify that estore thank you page is displayed
 #
@@ -587,8 +603,6 @@
 #    When I click on add to cart estore button
 #    And I click on view cart estore button
 #    When I click on estore checkout button
-#    And I click on estore no thanks button
-#    When I fill estore shipping address
 #    When I click on same as estore shipping address checkbox
 #    When I click on continue to payment estore button
 #    When I click on continue with original address estore button

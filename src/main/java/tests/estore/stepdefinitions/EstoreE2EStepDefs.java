@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
@@ -79,10 +80,10 @@ public class EstoreE2EStepDefs {
 
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
-
         estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
+        estoreItemPage.getAddToCartButton().should(enabled);
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
-        estoreItemPage.getAddToCartButton().click();
+        estoreItemPage.getAddToCartButton().click(ClickOptions.usingJavaScript());
     }
 
     @When("I fill all estore fields from address with {string} zip code")
@@ -553,11 +554,11 @@ public class EstoreE2EStepDefs {
     @When("I click on same as estore shipping address checkbox")
     public void iClickOnSameAsShippingAddressCheckbox() {
         try {
-
-            if ($(By.xpath("//*[text()='Same as shipping address']")).isDisplayed()) {
-                $(By.xpath("//*[text()='Same as shipping address']")).click();
-            }
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            $(By.xpath("//span[text()='Same as shipping address']")).should(Condition.and("Exist ,appear, interactable",
+                    exist, appear, interactable), Duration.ofSeconds(15));
+            $(By.xpath("//span[text()='Same as shipping address']")).click(ClickOptions.usingJavaScript());
+        } catch (
+                com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Same as shipping address checkbox is not displayed");
         }
     }
