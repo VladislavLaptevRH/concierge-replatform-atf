@@ -69,7 +69,7 @@ public class Hooks {
 
 //        profile = "stg2";
 //        cookie = "userservice";
-//        country = "GB";
+//        country = "US";
 
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
