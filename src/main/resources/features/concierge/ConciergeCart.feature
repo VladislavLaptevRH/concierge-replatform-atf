@@ -22,12 +22,25 @@ Feature:Concierge Cart Page
     Then I click on no thanks button
     Then I verify membership popup for guest user
 
-  Scenario: Line Item : Quantity update
+  Scenario: Checkout membership banner for Guest user
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
+    When I open cart
+    When I save member price
+    When I choose order classification
+    When I click on checkout button
+    Then I click on become a member now button
+    Then I verify membership banner
+
+  Scenario: Line Item : Quantity update
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via UI
     When I open cart
     When I click on quantity line item button
     Then I verify that quantity was updated
