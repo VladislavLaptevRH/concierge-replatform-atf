@@ -15,13 +15,15 @@ public class ConciergeUserAccountPage {
 
     private final String orderDetailsButton = "//*[text()='%s']";
 
+    private final String brandButtonWithCurrentBoard = "//*[@alt='%s']";
+
     private final String firstResultOfClientLookupParameterized = "(//*[text() = 'MEMBERSHIP']/../../..//*[starts-with(text(), '%s')])[1]";
 
     public final String currentLocationGalleryItem = "//li[contains(text(),'%s')]";
 
     public final String galleryItem = "//input[@value = '%s']";
 
-    public final String brand = "//span[text()='%s']";
+    public final String brand = "//*[text()='%s']";
 
     public final String button = "//span[text()='%s']";
 
@@ -219,6 +221,11 @@ public class ConciergeUserAccountPage {
 
     public SelenideElement getOrderDetailsButtonByName(String name) {
         String path = String.format(orderDetailsButton, name);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getCurrentBrandByName(String brand) {
+        String path = String.format(brandButtonWithCurrentBoard, brand);
         return $(byXpath(path));
     }
 

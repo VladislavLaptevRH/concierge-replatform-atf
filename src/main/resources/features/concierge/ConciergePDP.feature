@@ -23,7 +23,6 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'has an item can be added to cart from modal'
     Then Verify that "In Stock modal" 'has an item can be added to project from modal'
 
-
   Scenario: Verify On Sale functionality
     Given I log into Concierge as "associate"
     When I go to item "60450996 BLNL" from search field
