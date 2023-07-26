@@ -7,7 +7,7 @@ Feature:Concierge Homepage
     When I choose country for concierge from footer
     Then  I expect that I am on the Concierge Dashboard page
 
-  Scenario Outline: Verify top menu navigation
+  Scenario Outline: Verify Top Nav is present, clickable and responsive in HPs of all brands
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then  I change the brand to "<brand>"
@@ -22,7 +22,7 @@ Feature:Concierge Homepage
       |RH BEACH HOUSE |
       |RH TEEN        |
 
-  Scenario Outline: Verify the logo on "<brand>" brand
+  Scenario Outline: Verify Logo is present in HPs of all brands
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then  I change the brand to "<brand>"
@@ -39,34 +39,39 @@ Feature:Concierge Homepage
       |RH BABY & CHILD|
       |RH TEEN        |
 
-  Scenario Outline: Verify brand dropdown
+  Scenario Outline: Verify Brand Dropdown is present and functional in HPs of all brands
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    Then  I change the brand to "<brand>"
+    Then I change the brand to "<brand>"
+    Then I verify that RH Brand dropdown is present in "<currentBrandName>" home page
     Examples:
-      |brand|
-      |RH|
+      |brand          |currentBrandName|
+      |RH             |RH              |
+      |RH CONTEMPORARY|CN              |
+      |RH INTERIORS   |IN              |
+      |RH MODERN      |MO              |
+      |RH OUTDOOR     |OD              |
+      |RH BEACH HOUSE |BH              |
+      |RH SKI HOUSE   |SH              |
+      |RH BABY & CHILD|BC              |
+      |RH TEEN        |TN              |
+
+  Scenario Outline: Verify the Footer links are present and clickable in HPs
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I change the brand to "<brand>"
+    Then I verify footer links for brand "<brand>"
+    Examples:
+      | brand |
+      | RH    |
       |RH CONTEMPORARY|
       |RH INTERIORS   |
       |RH MODERN      |
       |RH OUTDOOR     |
       |RH BEACH HOUSE |
-      |RH SKI HOUSE   |
-      |RH BABY & CHILD|
       |RH TEEN        |
 
-  Scenario Outline: Footer links
-    Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
-    Then I verify footer links for "<links>"
-    Examples:
-      | links     |
-      | RH.COM    |
-      | DASHBOARD |
-      | PROJECTS  |
-      | REGISTRY  |
-
-  Scenario: Verify homepage content
+  Scenario: Verify the content for the HP for Concierge
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then  I expect that I am on the Concierge Dashboard page
@@ -77,8 +82,9 @@ Feature:Concierge Homepage
     Then I Verify search leans
     Then I verify user icon
     Then I verify cart
-    Then I verify brand is button
-    Then I verify main menu
+    Then I verify flag icon for country selection
+    Then I verify top nav
+    Then I verify brand dropdown
     Then I verify page label
     Then I verify button "RH Orders" on homepage
     Then I verify button "Apply for RH Card" on homepage
