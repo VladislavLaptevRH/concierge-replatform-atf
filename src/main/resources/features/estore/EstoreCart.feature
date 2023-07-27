@@ -20,7 +20,7 @@ Feature: Estore Cart Page
     When I remove promotion from estore cart
     When I apply employee discount for estore
     Then I verify that I'm able to remove estore employee discount
-
+    
   Scenario: Apply/Remove promotion code
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -106,12 +106,11 @@ Feature: Estore Cart Page
     Then I verify gift box fee in estore cart
 
   Scenario: eStore - Membership price for US and CAN
-    Given I remove all items from estore cart
+    Given I log into eStore as "member" user
+    When I remove all items from estore cart
     When I choose country for eStore from footer
     When I add item to cart via API for estore
     When I goes to estore cart for estore
-    When I click on join the rh members program from footer
-    When I click on join now membership button
     When I click on zipcode estore button
     When I update "US" postal code in cart
     Then I verify order estimate section in cart
@@ -137,7 +136,7 @@ Feature: Estore Cart Page
     When I choose "CAN" country from footer
     When I click on estore checkout button
     And I click on estore no thanks button
-    When I update shipping address for CAN
+    When I fill estore shipping address for CAN
     Then I verify "CAN" shipping restriction
 
   Scenario: eStore - New York Shipping restriction

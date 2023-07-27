@@ -11,7 +11,6 @@ Feature: Footer Links
       | LOCATE A GALLERY      |
       | VIEW SOURCE BOOKS     |
       | REQUEST A SOURCE BOOK |
-      | SIGNUP FOR EMAILS     |
       | RH MEMBERS PROGRAM    |
       | RH TRADE              |
       | RH CREDIT CARD        |

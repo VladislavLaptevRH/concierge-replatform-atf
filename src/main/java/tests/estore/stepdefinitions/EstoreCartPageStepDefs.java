@@ -317,7 +317,8 @@ public class EstoreCartPageStepDefs {
         estoreCartPage.getJoinNow().should(visible, Duration.ofSeconds(10));
         estoreCartPage.getJoinNow().should(interactable, Duration.ofSeconds(10));
         estoreCartPage.getJoinNow().shouldHave(text("JOIN NOW"), Duration.ofSeconds(10));
-        estoreCartPage.getJoinNow().click();
+        estoreCartPage.getJoinNow().hover();
+        estoreCartPage.getJoinNow().click(ClickOptions.usingJavaScript());
     }
 
     @Then("I verify order estimate section in cart")
@@ -402,7 +403,7 @@ public class EstoreCartPageStepDefs {
             estoreUserAccountPage.getListOfBrands().get(i).click();
             iStopEStorePageLoad();
             open("https://" + brandUrl + "." + estoreUrlNoHttps);
-            estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(80));
+            estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(20));
         }
     }
 

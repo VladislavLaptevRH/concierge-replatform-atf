@@ -40,7 +40,7 @@ Feature: Estore Homepage
 
 #  Scenario: Validate Each Category And Sub-Category for eStore
 #    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
+#    When I choose country for eStore from footer
 #    Then I validate each cat and sub-cat for eStore
 
 

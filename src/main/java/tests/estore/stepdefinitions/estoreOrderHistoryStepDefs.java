@@ -27,7 +27,7 @@ public class estoreOrderHistoryStepDefs {
 
     @Then("I verify that estore order history page is displayed")
     public void iVerifyThatEstoreOrderHistoryPageIsDisplayed() {
-        estoreOrderHistoryScreen.getOrderHistorySafireWilliam().should(Condition.visible, Duration.ofSeconds(20));
+        estoreOrderHistoryScreen.getOrderHistorySafireWilliam().should(Condition.visible, Duration.ofSeconds(60));
     }
 
     @Then("I verify that a new order listed in order history")

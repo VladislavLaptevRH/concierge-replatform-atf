@@ -178,4 +178,5 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getSearchIconHomePage().should(Condition.visible, Duration.ofSeconds(20));
         estoreHomePage.getHeaderCartButton().should(Condition.visible, Duration.ofSeconds(20));
     }
+
 }
