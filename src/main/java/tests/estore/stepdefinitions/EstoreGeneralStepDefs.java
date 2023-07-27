@@ -641,24 +641,6 @@ public class EstoreGeneralStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
     }
 
-    public void getListofMenuElementsByBrandId(String brandId) {
-        setUserEnvironment();
-        RestAssured.baseURI = BASE_URL;
-        RequestSpecification request = RestAssured.given().relaxedHTTPSValidation();
-        request.headers("Content-Type", "application/json");
-        response = request.get("https://stg2.rhnonprod.com/rh-experience-layer-v1-releasethurs/graphql?query=query+GetUserForSession%28%24useCartBroker%3A+Boolean%21%2C+%24country%3A+String%2C+%24postalCode%3A+String%29+%7B+getUserForSession%28+useCartBroker%3A+%24useCartBroker+country%3A+%24country+postalCode%3A+%24postalCode+%29+%7B+sessionId+rhuid+currentCartId+validAssociate+rhUser+%7B+id+firstName+lastName+email+userType+gender+globalSfContactId+sfContactId+sfAccountType+company+shopperRef+createdDate+locale+defaultShippingAddressId+postalCode+akamaiCountryCode+__typename+%7D+membershipInfo+%7B+...MembershipInfo+__typename+%7D+cookiePreferences+%7B+userSavedCookiePreferences+countryAndCurrencyCookie+languageAndMeasurementCookie+analyticsCookie+userAcceptedAllCookies+cookieRules+__typename+%7D+__typename+%7D+%7D+fragment+MembershipInfo+on+MembershipInfoType+%7B+membershipSkuIsOnCart+userHasMembershipStatus+userHasActiveMembership+userHasCancelledMembership+userHasExpiredMembership+membershipStatusDescription+membershipSkuPrice+currencyCode+__typename+%7D+&operationName=GetUserForSession&variables=%7B%22useCartBroker%22%3Atrue%2C%22postalCode%22%3A%2294925%22%2C%22country%22%3A%22US%22%7D");
-
-//        String jsonString = response.asString();
-        response.getBody();
-//        id = JsonPath.from(jsonString).get("data");
-
-//        String jsonString = response.asString();
-//        id = JsonPath.from(jsonString).get("childCategories[1]");
-//        categories.add(id);
-//        WebDriverRunner.getWebDriver().navigate().refresh();
-//        generalStepDefs.waitForJSandJQueryToLoad();
-    }
-
     /**
      * @param paymentType
      * @param number
