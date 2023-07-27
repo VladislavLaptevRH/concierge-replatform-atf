@@ -85,7 +85,6 @@ Feature: Order history
     Then I verify the CW order number
 
   Scenario: Verify the status order processing while the order is still processing
-
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
@@ -93,7 +92,6 @@ Feature: Order history
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
-    And I click on estore no thanks button
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button

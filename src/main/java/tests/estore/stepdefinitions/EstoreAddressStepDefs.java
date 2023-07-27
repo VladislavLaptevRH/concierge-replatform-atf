@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
@@ -39,9 +40,8 @@ public class EstoreAddressStepDefs {
     @When("I click on edit estore billing address button")
     public void iClickOnEditEstoreBillingAddressButton() {
         try {
-
             estoreAddressScreen.getEditBillingAddress().should(Condition.and("Visible, interactable", visible, interactable), Duration.ofSeconds(20));
-            executeJavaScript("arguments[0].click();", estoreAddressScreen.getEditBillingAddress());
+            estoreAddressScreen.getEditBillingAddress().click(ClickOptions.usingJavaScript());
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Edit button is not displayed");
             if (estoreAddressScreen.getEditBillingAddress().isDisplayed()) {
@@ -503,57 +503,33 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore shipping address for {string}")
     public void iFillEstoreShippingAddressFor(String state) {
-        try {
 
-            estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
-            estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
+        estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
+        estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
 
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName());
-            estoreAddressScreen.getShippingAddressLastName().setValue("William");
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
+        estoreAddressScreen.getShippingAddressLastName1().setValue("William");
 
-            if (Hooks.eStoreURL.contains("stg4")) {
-                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
-                estoreAddressScreen.getShippingAddressStreetAddress().setValue("MetroTech Center, Brooklyn, NY 11201, USA");
-                estoreAddressScreen.getShippingAddressLastName().click();
-                try {
-                    $(By.xpath("//*[text()='Metrotech Center, Brooklyn, NY 11201, USA']")).should(visible, Duration.ofSeconds(5));
-                    $(By.xpath("//*[text()='Metrotech Center, Brooklyn, NY 11201, USA']")).click();
-                } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                    System.out.println("Dropdown list is not displayed");
-                }
-            } else {
+        $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).click();
+        generalStepDefs.clearField($(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")));
+        $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).setValue("Metrotech Center");
 
-                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
-                estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Metrotech Center, Brooklyn, NY 11201, USA");
-                try {
+        $(By.cssSelector("input[id=\"shippingAddress.city\"]")).click();
+        generalStepDefs.clearField($(By.cssSelector("input[id=\"shippingAddress.city\"]")));
+        $(By.cssSelector("input[id=\"shippingAddress.city\"]")).setValue("Brooklyn");
 
-                    $(By.xpath("//*[text()='MetroTech Center, Brooklyn, NY 11201, USA']")).should(visible, Duration.ofSeconds(5));
-                    $(By.xpath("//*[text()='MetroTech Center, Brooklyn, NY 11201, USA']")).click();
-                } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                    System.out.println("Dropdown list is not displayed");
-                }
+        $(By.cssSelector("select[id=\"shippingAddress.state\"]")).should(interactable, Duration.ofSeconds(20));
+        Select selectCaState = new Select($(By.cssSelector("select[id=\"shippingAddress.state\"]")));
+        selectCaState.selectByValue("NY");
 
-            }
+        $(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")).click();
+        generalStepDefs.clearField($(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")));
+        $(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")).setValue("10001");
 
-
-            estoreAddressScreen.getShippingAddressAptFloor().click();
-            estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
-            estoreAddressScreen.getShippingAddressCity().setValue("Brooklyn");
-
-            Select shippingAddressState = new Select(estoreAddressScreen.getShippingAddressState());
-            shippingAddressState.selectByValue("NY");
-
-            estoreAddressScreen.getPostalShippingCode().click();
-            generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-            estoreAddressScreen.getPostalShippingCode().setValue("11201");
-
-            estoreAddressScreen.getShippingAddressPhone().click();
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
-            estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Shipping address fields are not displayed");
-        }
+        estoreAddressScreen.getShippingAddressPhone().click();
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
+        estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
     }
 
     @When("I fill estore shipping address for CAN")
