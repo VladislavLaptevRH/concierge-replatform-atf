@@ -3,7 +3,6 @@
 #
 #  Scenario Outline: Verify top menu navigation
 #    Given I log into eStore as guest
-#    When I get the list of elements of menu from API
 #    When I choose country for concierge from footer
 #    Then  I change the brand to "<brand>" for eStore
 #    Then User verifies that all items from menu are displayed for "<brand>"
