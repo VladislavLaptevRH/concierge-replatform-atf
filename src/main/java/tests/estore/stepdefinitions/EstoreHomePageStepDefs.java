@@ -179,8 +179,4 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getHeaderCartButton().should(Condition.visible, Duration.ofSeconds(20));
     }
 
-    @When("I get the list of elements of menu from API")
-    public void iGetTheListOfElementsOfMenuFromAPI() {
-        estoreGeneralStepDefs.getListofMenuElementsByBrandId("cat25070005");
-    }
 }
