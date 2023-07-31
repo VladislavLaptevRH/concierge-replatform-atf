@@ -107,6 +107,7 @@ public class ConciergeAssociateStepDefs {
                 case "RH":
                     $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
                     switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
                     assertEquals(Hooks.getCurrentUrl(), "https://rh.com/us/en/");
                     switchTo().window(0);
                     $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
@@ -120,6 +121,7 @@ public class ConciergeAssociateStepDefs {
                 case "RH CONTEMPORARY":
                     $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
                     switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
                     assertEquals(Hooks.getCurrentUrl(), "https://rh.com/us/en/");
                     switchTo().window(0);
                     $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
@@ -130,6 +132,7 @@ public class ConciergeAssociateStepDefs {
                 case "RH INTERIORS":
                     $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
                     switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
                     assertEquals(Hooks.getCurrentUrl(), "https://rhinteriors.rh.com/us/en/");
                     switchTo().window(0);
                     $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
@@ -140,6 +143,7 @@ public class ConciergeAssociateStepDefs {
                 case "RH MODERN":
                     $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
                     switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
                     assertEquals(Hooks.getCurrentUrl(), "https://rhmodern.rh.com/us/en/");
                     switchTo().window(0);
                     $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
@@ -153,6 +157,7 @@ public class ConciergeAssociateStepDefs {
                 case "RH OUTDOOR":
                     $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
                     switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
                     assertEquals(Hooks.getCurrentUrl(), "https://rhoutdoor.rh.com/us/en/");
                     switchTo().window(0);
                     $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
@@ -163,6 +168,7 @@ public class ConciergeAssociateStepDefs {
                 case "RH BEACH HOUSE":
                     $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
                     switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
                     assertEquals(Hooks.getCurrentUrl(), "https://rhbeachhouse.rh.com/us/en/");
                     switchTo().window(0);
                     $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
@@ -173,6 +179,7 @@ public class ConciergeAssociateStepDefs {
                 case "RH SKI HOUSE":
                     $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
                     switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
                     assertEquals(Hooks.getCurrentUrl(), "https://rhskihouse.rh.com/us/en/");
                     switchTo().window(0);
                     $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
@@ -183,6 +190,7 @@ public class ConciergeAssociateStepDefs {
                 case "RH BABY & CHILD":
                     $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
                     switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
                     assertEquals(Hooks.getCurrentUrl(), "https://rhbabyandchild.rh.com/us/en/");
                     switchTo().window(0);
                     $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
@@ -196,6 +204,7 @@ public class ConciergeAssociateStepDefs {
                 case "RH TEEN":
                     $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
                     switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
                     assertEquals(Hooks.getCurrentUrl(), "https://rhteen.rh.com/us/en/");
                     switchTo().window(0);
                     $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();

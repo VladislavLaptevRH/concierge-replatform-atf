@@ -99,6 +99,7 @@ public class Pdp {
                $(By.xpath("//div/p[text()='French Contemporary Fabric Panel Bed']")).should(visible, Duration.ofSeconds(5));
                break;
            case  "has item#":
+               with().pollInterval(5, SECONDS).await().until(() -> true);
                $(By.xpath("//*[@id='listColumn1-Item#']")).shouldHave(text("Item#"), Duration.ofSeconds(5));
                $(By.xpath("//*[@id='listColumn2-Item#']")).shouldHave(text("60450998 BWMR"), Duration.ofSeconds(5));
                break;
@@ -145,6 +146,7 @@ public class Pdp {
                 $(By.xpath("//div/p[text()='French Contemporary Fabric Panel Bed']")).should(visible, Duration.ofSeconds(5));
                 break;
             case  "has item#":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 $(By.xpath("(//*[@id='listColumn1-Item#'])[4]")).shouldHave(text("Item#"), Duration.ofSeconds(5));
                 $(By.xpath("(//*[@id='listColumn2-Item#'])[4]")).shouldHave(text("60450996 BLNL"), Duration.ofSeconds(5));
                 break;
