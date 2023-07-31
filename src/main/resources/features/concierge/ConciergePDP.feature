@@ -2,7 +2,7 @@
 @concierge-PDP
 Feature: Concierge PDP
 
-  Scenario: Monogram
+  Scenario: Verify Monogram functionality
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I open product page with productId "prod19500002"
@@ -53,7 +53,7 @@ Feature: Concierge PDP
     When I click on windows from top menu
     Then I verify that custom windows are displayed
 
-  Scenario: YAML carousel
+  Scenario: Verify YAML Carousel
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I open product page with productId "prod14900056"
@@ -81,7 +81,7 @@ Feature: Concierge PDP
     Then I verify that check for replacements parts button is displayed
     And I verify that replacements parts modal pop up is displayed
 
-  Scenario: Colorization
+  Scenario: Verify Colorization options
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I go to item "10115451 BWMR" from search field

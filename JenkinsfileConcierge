@@ -3,6 +3,8 @@ import com.rh.rhapsody.*;
 
 Service s = Service.CONCIERGE_REPLATFORM_ATF;
 
+CRON_SETTINGS = '''* * * * * % ENVIRONMENT=stg2;ENDPOINT=releasetues''';
+
 def resultspath = "${env.JOB_NAME}/${env.BUILD_NUMBER}"
 println("resultspath=${resultspath}")
 

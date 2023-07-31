@@ -20,6 +20,8 @@ Feature:Concierge Homepage
       |RH MODERN      |
       |RH OUTDOOR     |
       |RH BEACH HOUSE |
+      |RH SKI HOUSE   |
+      |RH BABY & CHILD|
       |RH TEEN        |
 
   Scenario Outline: Verify Logo is present in HPs of all brands
@@ -69,6 +71,8 @@ Feature:Concierge Homepage
       |RH MODERN      |
       |RH OUTDOOR     |
       |RH BEACH HOUSE |
+      |RH SKI HOUSE   |
+      |RH BABY & CHILD|
       |RH TEEN        |
 
   Scenario: Verify the content for the HP for Concierge
