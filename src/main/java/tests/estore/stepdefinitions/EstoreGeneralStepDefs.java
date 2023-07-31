@@ -131,6 +131,34 @@ public class EstoreGeneralStepDefs {
         }
     }
 
+    public void removeLineItemFromCart() {
+        setUserEnvironment();
+        cartId = getEstoreCartId(USER_ID, USEREMAIL);
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given().relaxedHTTPSValidation();
+        request.headers("Content-Type", "application/json");
+        request.auth().oauth2(EstoreGeneralStepDefs.getAuthToken());
+        response = request.body("").delete("https://staging.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/" + cartId);
+    }
+
+    public void createNewCart() {
+        setUserEnvironment();
+        RequestSpecification request = RestAssured.given().relaxedHTTPSValidation();
+        request.headers("Content-Type", "application/json");
+        request.auth().oauth2(EstoreGeneralStepDefs.getAuthToken());
+        response = request.body("{\n" +
+                "    \"guest\": {\n" +
+                "        \"userId\": \"" + USER_ID + "\"\n" +
+                "    },\n" +
+                "    \"postalCode\": \"60601\",\n" +
+                "    \"country\": \"US\"\n" +
+                "}").post("https://staging.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/");
+
+        String jsonString = response.asString();
+        cartId = JsonPath.from(jsonString).get("id");
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        generalStepDefs.waitForJSandJQueryToLoad();
+    }
 
     /**
      * This method login in system with selected role

@@ -48,9 +48,9 @@ public class EstoreCGStepDefs {
     @When("I scroll on the page till back to top button is visible")
     public void iScrollOnThePageTillBackToTopButtonIsVisible() {
         iValidateTheCollectionNameIsNotEmpty();
-        
+
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-        
+
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
@@ -175,7 +175,7 @@ public class EstoreCGStepDefs {
     public void iGoesToEstoreCollectionPage() {
         String URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045";
         open(URL);
-        
+
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -220,7 +220,12 @@ public class EstoreCGStepDefs {
             URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045";
         }
         open(URL);
-        
+
         WebDriverRunner.getWebDriver().navigate().refresh();
+    }
+
+    @Then("I verify that CG page is displayed")
+    public void iVerifyThatCGPageIsDisplayed() {
+        iValidateTheCollectionNameIsNotEmpty();
     }
 }

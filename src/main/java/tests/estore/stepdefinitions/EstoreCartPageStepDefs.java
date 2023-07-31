@@ -48,58 +48,8 @@ public class EstoreCartPageStepDefs {
     @When("I remove all items from estore cart")
     public void iRemoveAllItemsFromEstoreCart() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        if (Hooks.cookie.contains("userservice")) {
-
-            int countOfCartItems = 0;
-
-            if (estoreUserAccountPage.getCartButtonUserService().isDisplayed()) {
-                Actions actions = new Actions(WebDriverRunner.getWebDriver());
-                actions.moveToElement(estoreUserAccountPage.getCartButtonUserService()).build().perform();
-
-                String countOfProducts = estoreUserAccountPage.getCartButtonUserService().getText();
-                countOfCartItems = Integer.valueOf(countOfProducts);
-            } else {
-                System.out.println("Cart is empty");
-            }
-
-            if (countOfCartItems > 0) {
-                estoreGeneralStepDefs.removeFromCart(countOfCartItems);
-            } else {
-                System.out.println("Cart is empty");
-            }
-
-        } else {
-            estoreUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(4));
-
-            int countOfCartItems = 0;
-
-            try {
-                String countOfProducts = estoreUserAccountPage.getCartButton().getText();
-                countOfCartItems = Integer.valueOf(countOfProducts);
-            } catch (Exception e) {
-                System.out.println("Cart is empty");
-            }
-            if (countOfCartItems > 0) {
-                estoreGeneralStepDefs.removeFromCart(countOfCartItems);
-            }
-        }
-
-        if (Hooks.profile.contains("stg4")) {
-            estoreUserAccountPage.getCartButtonStg4().should(visible, Duration.ofMinutes(3));
-
-            int countOfCartItems = 0;
-
-            try {
-                String countOfProducts = estoreUserAccountPage.getCartButtonStg4().getText();
-                countOfCartItems = Integer.valueOf(countOfProducts);
-            } catch (Exception e) {
-                System.out.println("Cart is empty");
-            }
-
-            if (countOfCartItems > 0) {
-                estoreGeneralStepDefs.removeFromCart(countOfCartItems);
-            }
-        }
+        estoreGeneralStepDefs.removeLineItemFromCart();
+        estoreGeneralStepDefs.createNewCart();
     }
 
     @When("I click on view cart estore button")

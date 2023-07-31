@@ -19,7 +19,7 @@
 #      | RH TEEN           |
 #      | BABY & CHILD      |
 #      | VIEW SOURCE BOOKS |
-
+#
 #  Scenario Outline: CG - Test CGS in all menu items (All brands)
 #    Given I log into eStore as "guest" user
 #    When I choose country for eStore from footer

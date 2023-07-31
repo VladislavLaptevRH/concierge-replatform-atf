@@ -71,3 +71,11 @@ Feature: Estore CG
     When user clicks on textile menu
     When user goes to bedding collections test
     Then I verify that Enjoy Free Shipping On All Textiles banner is displayed
+
+  Scenario: Browser back button from search to CG page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
+    When I navigate back from "PDP" page
+    Then I verify that CG page is displayed
