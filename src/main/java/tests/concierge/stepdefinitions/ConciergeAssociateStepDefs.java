@@ -5,6 +5,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.ex.ElementNotFound;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Keys;
+import tests.concierge.pageObject.ConciergeHomePage;
 import tests.concierge.pageObject.ConciergeLoginPage;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.Given;
@@ -36,6 +37,8 @@ public class ConciergeAssociateStepDefs {
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+
+    ConciergeHomePage conciergeHomePage = new ConciergeHomePage();
     private static final Logger Log = LoggerFactory.getLogger(ConciergeAssociateStepDefs.class);
 
 
@@ -98,28 +101,119 @@ public class ConciergeAssociateStepDefs {
         with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
-    @Then("I verify footer links for {string}")
-    public void iVerifyFooterLinks(String footer) {
-        $(By.xpath("//*[text()='"+footer+"']")).should(visible, Duration.ofSeconds(40)).click();
-        switch (footer) {
-            case "RH.COM":
-                switchTo().window(1);
-                try {
+    @Then("I verify footer links for brand {string}")
+    public void iVerifyFooterLinks(String brand) {
+            switch (brand){
+                case "RH":
+                    $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
                     assertEquals(Hooks.getCurrentUrl(), "https://rh.com/us/en/");
-                } catch (java.lang.AssertionError e){
-                    assertEquals(Hooks.getCurrentUrl(), "https://rh.com/");
-                }
-                break;
-            case "DASHBOARD":
-                conciergeLoginPage.getDashboard().should(visible, Duration.ofSeconds(40));
-                break;
-            case "PROJECTS":
-                conciergeLoginPage.getProjects().should(visible, Duration.ofSeconds(40));
-                break;
-            case "REGISTRY":
-                conciergeLoginPage.getRegistry().should(visible, Duration.ofSeconds(40));
-                break;
-        }
+                    switchTo().window(0);
+                    $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    $(By.xpath("//*[text() = 'Dashboard']")).should(visible, Duration.ofSeconds(40));
+                    $(By.xpath("//*[text() = 'PROJECTS']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    conciergeLoginPage.getProjects().should(visible, Duration.ofSeconds(40));
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40)).click();
+                    $(By.xpath("//*[text() = 'REGISTRY']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    conciergeLoginPage.getRegistry().should(visible, Duration.ofSeconds(40));
+                    break;
+                case "RH CONTEMPORARY":
+                    $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                    assertEquals(Hooks.getCurrentUrl(), "https://rh.com/us/en/");
+                    switchTo().window(0);
+                    $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    $(By.xpath("//*[text() = 'Dashboard']")).should(visible, Duration.ofSeconds(40));
+                    $(By.xpath("//*[text() = 'PROJECTS']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    conciergeLoginPage.getProjects().should(visible, Duration.ofSeconds(40));
+                    break;
+                case "RH INTERIORS":
+                    $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                    assertEquals(Hooks.getCurrentUrl(), "https://rhinteriors.rh.com/us/en/");
+                    switchTo().window(0);
+                    $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    $(By.xpath("//*[text() = 'Dashboard']")).should(visible, Duration.ofSeconds(40));
+                    $(By.xpath("//*[text() = 'PROJECTS']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    conciergeLoginPage.getProjects().should(visible, Duration.ofSeconds(40));
+                    break;
+                case "RH MODERN":
+                    $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                    assertEquals(Hooks.getCurrentUrl(), "https://rhmodern.rh.com/us/en/");
+                    switchTo().window(0);
+                    $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    $(By.xpath("//*[text() = 'Dashboard']")).should(visible, Duration.ofSeconds(40));
+                    $(By.xpath("//*[text() = 'PROJECTS']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    conciergeLoginPage.getProjects().should(visible, Duration.ofSeconds(40));
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40)).click();
+                    $(By.xpath("//*[text() = 'REGISTRY']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    conciergeLoginPage.getRegistry().should(visible, Duration.ofSeconds(40));
+                    break;
+                case "RH OUTDOOR":
+                    $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                    assertEquals(Hooks.getCurrentUrl(), "https://rhoutdoor.rh.com/us/en/");
+                    switchTo().window(0);
+                    $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    $(By.xpath("//*[text() = 'Dashboard']")).should(visible, Duration.ofSeconds(40));
+                    $(By.xpath("//*[text() = 'PROJECTS']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    conciergeLoginPage.getProjects().should(visible, Duration.ofSeconds(40));
+                    break;
+                case "RH BEACH HOUSE":
+                    $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                    assertEquals(Hooks.getCurrentUrl(), "https://rhbeachhouse.rh.com/us/en/");
+                    switchTo().window(0);
+                    $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    $(By.xpath("//*[text() = 'Dashboard']")).should(visible, Duration.ofSeconds(40));
+                    $(By.xpath("//*[text() = 'PROJECTS']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    conciergeLoginPage.getProjects().should(visible, Duration.ofSeconds(40));
+                    break;
+                case "RH SKI HOUSE":
+                    $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                    assertEquals(Hooks.getCurrentUrl(), "https://rhskihouse.rh.com/us/en/");
+                    switchTo().window(0);
+                    $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    $(By.xpath("//*[text() = 'Dashboard']")).should(visible, Duration.ofSeconds(40));
+                    $(By.xpath("//*[text() = 'PROJECTS']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    conciergeLoginPage.getProjects().should(visible, Duration.ofSeconds(40));
+                    break;
+                case "RH BABY & CHILD":
+                    $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                    assertEquals(Hooks.getCurrentUrl(), "https://rhbabyandchild.rh.com/us/en/");
+                    switchTo().window(0);
+                    $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    $(By.xpath("//*[text() = 'Dashboard']")).should(visible, Duration.ofSeconds(40));
+                    $(By.xpath("//*[text() = 'PROJECTS']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    conciergeLoginPage.getProjects().should(visible, Duration.ofSeconds(40));
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40)).click();
+                    $(By.xpath("//*[text() = 'REGISTRY']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    conciergeLoginPage.getRegistry().should(visible, Duration.ofSeconds(40));
+                    break;
+                case "RH TEEN":
+                    $(By.xpath("//*[text() = 'RH.COM']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    switchTo().window(1);
+                    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                    assertEquals(Hooks.getCurrentUrl(), "https://rhteen.rh.com/us/en/");
+                    switchTo().window(0);
+                    $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    $(By.xpath("//*[text() = 'Dashboard']")).should(visible, Duration.ofSeconds(40));
+                    $(By.xpath("//*[text() = 'PROJECTS']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
+                    conciergeLoginPage.getProjects().should(visible, Duration.ofSeconds(40));
+                    break;
+            }
+
     }
 
     @Then("I validate each cat and sub-cat")
@@ -214,6 +308,11 @@ public class ConciergeAssociateStepDefs {
     conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40)).click();
     }
 
+    @Then("I verify that RH Brand dropdown is present in {string} home page")
+    public void iVerifyThatRHBrandDropDownIsPresentInHomePage(String currentBrand){
+        conciergeUserAccountPage.getCurrentBrandByName(currentBrand).should(visible,Duration.ofSeconds(40));
+    }
+
     @Then("I verify the logo")
     public void iVerifyLogo(){
         conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40)).click();
@@ -244,12 +343,17 @@ public class ConciergeAssociateStepDefs {
         conciergeUserAccountPage.getCartButton().should(visible,Duration.ofSeconds(40));
     }
 
-    @Then("I verify brand is button")
+    @Then("I verify flag icon for country selection")
+    public void iVerifyFlagIconForCountrySelection(){
+        conciergeHomePage.countrySelection.should(visible,Duration.ofSeconds(40));
+    }
+
+    @Then("I verify brand dropdown")
     public void iVerifyBrand(){
         conciergeUserAccountPage.getBrandButton().should(visible,Duration.ofSeconds(40));
     }
 
-    @Then("I verify main menu")
+    @Then("I verify top nav")
     public void iVerifyMainMenu(){
         List<String> rhExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "BABY & CHILD", "TEEN", "SALE"));
         List<String> rhItems = new ArrayList<>();
