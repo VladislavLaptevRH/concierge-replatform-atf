@@ -190,13 +190,13 @@ public class EstoreE2EStepDefs {
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).click();
         estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
-        estoreUserAccountPage.getSearchItemField().click();
+        estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
         generalStepDefs.waitForJSandJQueryToLoad();
 
         estoreUserAccountPage.getSearchItemField().setValue(arg0);
 
         $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click();
+        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click(ClickOptions.usingJavaScript());
     }
 
 

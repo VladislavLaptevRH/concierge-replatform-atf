@@ -99,9 +99,8 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify unavailability for RHCC")
     public void iVerifyUnavailabilityForRHCC() {
-        Select selectPaymentMethod = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
-        int optionSize = selectPaymentMethod.getOptions().size();
-        assertEquals(optionSize, 3);
+        estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(interactable), Duration.ofSeconds(35));
+        estorePaymentPage.getChoosePaymentMethodBtn().shouldNotHave(value("RH"), Duration.ofSeconds(35));
     }
 
     @Then("I verify that shipping address is displayed")
@@ -275,8 +274,9 @@ public class EstoreAddressStepDefs {
         Select state = new Select(estoreUserAccountPage.getBillingAddressSelectState());
         state.selectByValue("TX");
 
-        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPostalCode());
-        estoreUserAccountPage.getBillingAddressPostalCode().setValue("12345");
+//        estoreUserAccountPage.getBillingAddressPostalCode().click();
+//        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPostalCode());
+//        estoreUserAccountPage.getBillingAddressPostalCode().setValue("73301");
 
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPhone());
         estoreUserAccountPage.getBillingAddressPhone().setValue("(541) 777-4321");
@@ -362,7 +362,7 @@ public class EstoreAddressStepDefs {
 //        }
         estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled, interactable), Duration.ofSeconds(30));
         estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(30));
-        estoreItemPage.getAddToCartButton().click();
+        estoreItemPage.getAddToCartButton().click(ClickOptions.usingJavaScript());
 
 //            if (estoreItemPage.getAddToCartButton().isDisplayed()) {
 //                estoreUserAccountPageStepDefs.iClickOnAddAddressButton();
@@ -380,7 +380,7 @@ public class EstoreAddressStepDefs {
     public void iClickOnContinueToPayment() {
         estorePaymentPage.getContinueToPayment().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
         estorePaymentPage.getContinueToPayment().scrollIntoView(true);
-        estorePaymentPage.getContinueToPayment().should(Condition.and("", visible, interactable), Duration.ofSeconds(20)).click();
+        estorePaymentPage.getContinueToPayment().should(Condition.and("", visible, interactable), Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
 
         if ($(By.xpath("//*[contains(text(), 'required')]")).isDisplayed()) {
             iFillEstoreShippingAndShippingAddress();

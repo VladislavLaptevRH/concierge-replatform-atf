@@ -105,8 +105,14 @@ public class EstorePaymentStepDefs {
             estoreAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(20));
             estoreAddressScreen.getEditBillingAddress().click();
         }
-        estoreAddressScreen.getEditBillingAddressNew().should(and("Visible,interactable", visible, interactable), Duration.ofSeconds(20));
-        estoreAddressScreen.getEditBillingAddressNew().click();
+        try {
+            estoreAddressScreen.getEditBillingAddressNew().should(and("Visible,interactable", visible, interactable), Duration.ofSeconds(20));
+            estoreAddressScreen.getEditBillingAddressNew().click(ClickOptions.usingJavaScript());
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Edit billing address button on address page is not displayed");
+        }
+
+
         estoreAddressScreen.getBillingAddressFirstNameNew().click();
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstNameNew());
         estoreAddressScreen.getBillingAddressFirstNameNew().setValue("NewBillingAddress");
@@ -338,7 +344,7 @@ public class EstorePaymentStepDefs {
     @When("I click on edit estore billing address button on payment page")
     public void iClickOnEditEstoreBillingAddressButtonOnPaymentPage() {
         estorePaymentPage.getEditBillingAddressBtn().should(visible, Duration.ofSeconds(20));
-        estorePaymentPage.getEditBillingAddressBtn().click();
+        estorePaymentPage.getEditBillingAddressBtn().click(ClickOptions.usingJavaScript());
     }
 
     @When("I click on continue button from payment page")

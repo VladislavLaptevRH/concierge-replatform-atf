@@ -66,6 +66,8 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement billingAddressStreetAddress = $(By.id("addressLine1"));
 
+    private final SelenideElement billingAddressStreetAddressNewCardPopUp = $(By.xpath("//*[@data-testid='addressLine1']"));
+
     private final SelenideElement billingAddressStreetAddressStg2 = $(By.xpath("//input[@data-testid='addressLine1']"));
 
     private final SelenideElement billingAddressAptFloor = $(By.xpath("//input[@id='addressLine2']"));

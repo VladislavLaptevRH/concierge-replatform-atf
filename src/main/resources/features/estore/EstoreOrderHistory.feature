@@ -16,7 +16,6 @@ Feature: Order history
     When I click on estore order history
     Then I verify that no orders for new registered user
 
-  Scenario: Verify placing a new order and see it listed in Order History  - logged user
     Given I log into eStore as "userWithSavedMasterCardVisa" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
@@ -99,4 +98,5 @@ Feature: Order history
     When I execute payment with credit card on estore
     When I click on a place estore order button
     When I open estore order history
+    When I click on estore my account icon for guest user
     Then I verify that status is order in progress while order is still in progress

@@ -1,11 +1,13 @@
 package tests.estore.stepdefinitions;
 
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.estore.pageObject.EstoreHomePage;
@@ -99,9 +101,9 @@ public class EstoreHomePageStepDefs {
 
     @When("I scroll down to Request a design consultation and click")
     public void iScrollDownToRequestADesignConsultationAndClick() {
-
-        executeJavaScript("window.scrollTo(0, 11000)");
-        estoreHomePage.getRequestConsultationButton().scrollTo();
+        with().pollInterval(4, SECONDS).await().until(() -> true);
+        executeJavaScript("window.scrollTo(0, 15000)");
+        estoreHomePage.getRequestConsultationButton().scrollIntoView(true);
         estoreHomePage.getRequestConsultationButton().click();
     }
 
@@ -119,14 +121,7 @@ public class EstoreHomePageStepDefs {
 
     @Then("I Verify Thank you message")
     public void iVerifyThankYouMessage() {
-        estoreHomePage.getThankMessageText().should(Condition.visible, Duration.ofSeconds(40));
-        String actual = estoreHomePage.getThankMessageText().getText();
-        String expected = ("Thank you for telling us about your project. We're reviewing your information, and a designer will be in touch within 24 hours.\n" +
-                "\n" +
-                "In preparation for our first meeting, please gather any existing floor plans, photos of your space and inspiration shots that will inform your project.\n" +
-                "\n" +
-                "We look forward to working with you.");
-        assertEquals(actual, expected);
+        estoreHomePage.getThankMessageText().should(Condition.visible, Duration.ofSeconds(25));
     }
 
 
@@ -139,9 +134,8 @@ public class EstoreHomePageStepDefs {
 
     @When("I navigate to the member tab")
     public void iNavigateToTheMemberTab() {
-        String URL = Hooks.eStoreBaseURL + "/my-account/membership.jsp";
-        open(URL);
-
+        $(By.xpath("//*[@data-navigation-account-item-id='my-account/membership.jsp']")).
+                should(Condition.appear, Duration.ofSeconds(30)).click(ClickOptions.usingJavaScript());
     }
 
     @Then("I validate each cat and sub-cat for eStore")

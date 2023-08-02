@@ -72,7 +72,7 @@ public class EstorePGScreen {
 
     private final SelenideElement sortFilter = $(By.xpath("//*[text()='sort']"));
 
-    private final SelenideElement saleFilterApplied = $(By.xpath("(//*[text()='Sale'])[2]"));
+    private final SelenideElement saleFilterApplied = $(By.xpath("(//*[text()='sale'])[2]"));
 
     private final List<SelenideElement> listOfPgFusionElements = $$(By.xpath("//*[@id='component-rh-image_wrapper']"));
 

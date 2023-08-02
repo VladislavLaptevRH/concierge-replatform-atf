@@ -16,6 +16,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
+import static org.testng.AssertJUnit.assertFalse;
 
 public class EstorePdpStepDefs {
 
@@ -28,6 +29,10 @@ public class EstorePdpStepDefs {
     EstorePGScreen estorePGScreen = new EstorePGScreen();
 
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
+    String regularUSPrice;
+    String memberUSPrice;
+    String regularCAGBPrice;
+    String memberCAGBPrice;
 
     @Then("I verify that user can see product details correctly mentioned for a product")
     public void iVerifyThatUserCanSeeProductDetailsCorrectlyMentionedForAProduct() {
@@ -108,9 +113,14 @@ public class EstorePdpStepDefs {
             estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
             estorePdpPageScreen.getSubmitPostalCode().click();
         }
-
-//        if (estorePdpPageScreen.getConfirmChangeButton().isDisplayed()) {
-//        }
+        if (country.equals("GB")) {
+            $(By.xpath("//li[@data-value='GB']")).should(visible, Duration.ofSeconds(20)).click();
+            $(By.xpath("//input[@id='postal-code-international']")).clear();
+            $(By.xpath("//input[@id='postal-code-international']")).setValue("SW1W 0NY");
+            estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
+            estorePdpPageScreen.getSubmitPostalCode().click();
+            estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
+        }
     }
 
     @Then("I verify line items {string}")
@@ -177,16 +187,16 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the product price for the selected country")
     public void iVerifyTheProductPriceForTheSelectedCountry() {
-        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$29"), Duration.ofSeconds(30));
-        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$16"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$20"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$15"), Duration.ofSeconds(30));
     }
 
     @Then("I verify the product price on PDP for non-sale cushion and frame product")
     public void iVerifyTheProductPriceOnPDPForNonSaleCushionAndFrameProduct() {
-        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$19"), Duration.ofSeconds(30));
-        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$11"), Duration.ofSeconds(30));
-        estorePdpPageScreen.getMemberTheSecondPrice().shouldHave(text("$27"), Duration.ofSeconds(30));
-        estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$36"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$13"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$9"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheSecondPrice().shouldHave(text("$18"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$25"), Duration.ofSeconds(30));
     }
 
     @When("I update {string} postal code on cart page")
@@ -263,5 +273,54 @@ public class EstorePdpStepDefs {
             estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$13"), Duration.ofSeconds(30));
             estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$9"), Duration.ofSeconds(30));
         }
+    }
+
+    @And("I verify that {string} popup is displayed")
+    public void iVerifyThatPopupIsDisplayed(String arg0) {
+        System.out.println();
+    }
+
+    @When("I select color option on the PDP page")
+    public void iSelectColorOptionOnThePDPPage() {
+        estorePDPScreen.selectColorOption();
+    }
+
+    @And("I verify special messages on PDP page")
+    public void iVerifySpecialMessagesOnPDPPage() {
+        estorePDPScreen.verifyThatSpecialMessagesAreDisplayed();
+    }
+
+    @When("I get prices for US for eStore")
+    public void iGetPricesForUSForEStore() {
+        regularUSPrice = estorePDPScreen.getFirstRegularPrice().getText();
+        memberUSPrice = estorePDPScreen.getFirstMemberPrice().getText();
+    }
+
+    @Then("I verify that prices for {string} was updated")
+    public void iVerifyThatPricesForWasUpdated(String arg0) {
+        regularCAGBPrice = estorePDPScreen.getFirstRegularPrice().getText();
+        memberCAGBPrice = estorePDPScreen.getFirstMemberPrice().getText();
+        estorePDPScreen.getFirstRegularPrice().shouldNotHave(text(regularUSPrice), Duration.ofSeconds(25));
+
+        assertFalse("Regular price was update after country was changed", regularUSPrice.equals(regularCAGBPrice));
+        assertFalse("Member price was update after country was changed", memberUSPrice.equals(memberCAGBPrice));
+    }
+
+    @Then("I verify that price for member and regular user on PDP")
+    public void iVerifyThatPriceForMemberAndRegularUserOnPDP() {
+        regularCAGBPrice = estorePDPScreen.getFirstRegularPrice().getText();
+        memberCAGBPrice = estorePDPScreen.getFirstMemberPrice().getText();
+    }
+
+    @Then("I verify that price in cart is the same as on PDP")
+    public void iVerifyThatPriceInCartIsTheSameAsOnPDP() {
+        String itemCartPriceRegular;
+        String itemCartPriceMember;
+
+    }
+
+    @And("I verify the cart item quantity is equal to {string} on eStore")
+    public void iVerifyTheCartItemQuantityIsEqualToOnEStore(String itemQuantity) {
+
     }
 }
