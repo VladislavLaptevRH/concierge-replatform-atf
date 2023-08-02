@@ -496,7 +496,7 @@ public class GeneralStepDefs {
         String country = Hooks.country;
         String SKU = "";
         if(Objects.equals(country, "US") || Objects.equals(country, "CA")){
-            SKU = "63780104 LOAK";
+            SKU = "10031801 WGRY";
         } else {
             SKU = "63780104 LOAK";
         }

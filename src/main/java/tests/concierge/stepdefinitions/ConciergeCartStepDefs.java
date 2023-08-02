@@ -61,6 +61,10 @@ public class ConciergeCartStepDefs {
     String totalAdditionalProductDiscount = "";
     String totalAdditionalProductDiscountMessage = "";
 
+    public String RegularPrice;
+
+    public String MemberPrice;
+
     @When("I navigate to the cart page")
     public void iNavigateToTheCartPage() {
         conciergeUserAccountPage.getCartButton().should(visible, Duration.ofSeconds(25));
@@ -867,6 +871,17 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getTotalAditionalProdDiscount().should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
     }
 
+    @Then("I verify membership banner")
+    public void iVerifyMembershipBanner() {
+        $(By.xpath("//*[text() = 'REMOVE MEMBERSHIP']")).shouldBe(visible, Duration.ofSeconds(15));
+        MemberPrice = $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "");
+        float regularPrice = Float.parseFloat(RegularPrice);
+        float memberPrice = Float.parseFloat(MemberPrice);
+        String savings = Float.toString(regularPrice - memberPrice).replaceAll(".0", "");
+        $(By.xpath("//h2[text() = ' RH MEMBERS PROGRAM']")).shouldBe(visible, Duration.ofSeconds(15));
+        assertEquals("You've elected to join the RH Members Program, and you'll save $" + savings + ".00 on this order.", $(By.xpath("//h2[text() = ' RH MEMBERS PROGRAM']/following-sibling::p")).getText());
+    }
+
     @When("I apply employee discount")
     public void iApplyEmployeeDiscount() {
         generalStepDefs.waitForJSandJQueryToLoad();
@@ -931,6 +946,12 @@ public class ConciergeCartStepDefs {
     public void iVerifyThatDesignedSoldBy() {
         $(By.xpath("//*[text()='Designed/Sold By:']")).shouldBe(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Automation Associate']")).shouldBe(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I save member price")
+    public void iSaveMemberPrice() {
+        $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).shouldBe(visible, Duration.ofSeconds(15));
+       RegularPrice = $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "");
     }
 
     @When("I choose order classification")
