@@ -1,12 +1,10 @@
 package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import tests.estore.pageObject.*;
@@ -16,7 +14,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
-import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.*;
 
 public class EstorePdpStepDefs {
 
@@ -33,6 +31,8 @@ public class EstorePdpStepDefs {
     String memberUSPrice;
     String regularCAGBPrice;
     String memberCAGBPrice;
+    String itemCartPriceRegular;
+    String itemCartPriceMember;
 
     @Then("I verify that user can see product details correctly mentioned for a product")
     public void iVerifyThatUserCanSeeProductDetailsCorrectlyMentionedForAProduct() {
@@ -306,7 +306,7 @@ public class EstorePdpStepDefs {
         assertFalse("Member price was update after country was changed", memberUSPrice.equals(memberCAGBPrice));
     }
 
-    @Then("I verify that price for member and regular user on PDP")
+    @Then("I verify price for member and regular user on PDP")
     public void iVerifyThatPriceForMemberAndRegularUserOnPDP() {
         regularCAGBPrice = estorePDPScreen.getFirstRegularPrice().getText();
         memberCAGBPrice = estorePDPScreen.getFirstMemberPrice().getText();
@@ -314,13 +314,14 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that price in cart is the same as on PDP")
     public void iVerifyThatPriceInCartIsTheSameAsOnPDP() {
-        String itemCartPriceRegular;
-        String itemCartPriceMember;
+        itemCartPriceRegular = estoreCartPage.getRegularProductPriceInCart();
+        itemCartPriceMember = estoreCartPage.getMemberProductPriceInCart();
 
+        assertEquals("Verify that regular price on the Cart is the same as on PDP",
+                itemCartPriceRegular, regularCAGBPrice);
+        assertEquals("Verify that member price on the Cart is the same as on PDP",
+                itemCartPriceMember, memberCAGBPrice);
     }
 
-    @And("I verify the cart item quantity is equal to {string} on eStore")
-    public void iVerifyTheCartItemQuantityIsEqualToOnEStore(String itemQuantity) {
 
-    }
 }

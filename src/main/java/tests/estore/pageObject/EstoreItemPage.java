@@ -39,7 +39,7 @@ public class EstoreItemPage {
     private final SelenideElement selectQTY = $(By.xpath("(//select[contains(@id, 'qty')])[1]"));
     private final SelenideElement selectColor = $(By.xpath("(//select[contains(@id, 'Color')])[1]"));
 
-    private final SelenideElement viewCartButton = $(By.cssSelector("#ajax-proceed-to-cart"));
+    private final SelenideElement viewCartButton = $(By.cssSelector("#addToCartDialog_viewCart-btn"));
 
     private final SelenideElement detailsSpan = $(By.xpath("//*[text()='DETAILS']"));
 

@@ -179,7 +179,6 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore shipping address")
     public void iFillEstoreShippingAndShippingAddress() {
-
         estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
         generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
         estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
@@ -197,7 +196,7 @@ public class EstoreAddressStepDefs {
 
         $(By.cssSelector("select[id=\"shippingAddress.state\"]")).should(interactable, Duration.ofSeconds(20));
         Select selectCaState = new Select($(By.cssSelector("select[id=\"shippingAddress.state\"]")));
-        selectCaState.selectByValue("FL");
+        selectCaState.selectByValue("AB");
 
         $(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")).click();
         generalStepDefs.clearField($(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")));

@@ -1,4 +1,4 @@
-@estoreCriticalPath
+@estoreTestRun
 Feature: Estore critical path
 
   Scenario Outline: Verify top menu navigation
@@ -382,16 +382,12 @@ Feature: Estore critical path
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050042" with "IRON" for estore
     When I update "CAN" postal code on pdp page
-    Then I verify that price for member and regular user on PDP
+    Then I verify price for member and regular user on PDP
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that price in cart is the same as on PDP
+    And I verify the total price for product in the cart
     And I verify the cart item quantity is equal to "1" on eStore
-    Then I verify total item quantity is equal to "1" on eStore
-    When I click on estore checkout button
-    And I click on estore no thanks button
-    When I fill estore shipping address
-    When I click on same as estore shipping address checkbox
 
 #Order review page
   Scenario: Edit payment
