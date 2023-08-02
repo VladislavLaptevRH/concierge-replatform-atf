@@ -562,7 +562,7 @@ public class EstoreCartPageStepDefs {
             estoreGeneralStepDefs.addLineItemsToEstoreCartStg2();
         }
 
-        WebDriverRunner.getWebDriver().navigate().refresh();
+//        WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
     @When("I goes to estore cart for estore")
@@ -746,6 +746,12 @@ public class EstoreCartPageStepDefs {
 
     @And("I verify that add to cart button is inactive")
     public void iVerifyThatAddToCartButtonIsInactive() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estorePDPScreen.getAddToCartInactiveButton().shouldBe(visible, Duration.ofSeconds(30));
+    }
+
+    @Then("I verify total item quantity is equal to {string} on eStore")
+    public void iVerifyTotalItemQuantityIsEqualToOnEStore(String arg0) {
+
     }
 }

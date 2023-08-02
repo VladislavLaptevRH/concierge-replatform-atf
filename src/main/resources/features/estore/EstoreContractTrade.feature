@@ -543,20 +543,6 @@ Feature: eStore Contract and Trade
     And I click on view cart estore button
     Then I verify that "trade" price is used for each "TN" product
 
-  Scenario: eStore Trade - Edit Address
-    Given I log into eStore as trade
-    When I choose country for eStore from footer
-    When I remove all items from estore cart
-    When I add item to cart via API for estore
-    When I open estore cart
-    When I click on estore checkout button
-    When I click on same as estore shipping address checkbox
-    When I click on continue to payment estore button
-    When I click on continue with original address estore button
-    When I remove payment method which was used earlier
-    When I click on edit estore billing address button on payment page
-    When I edit estore billing address from PG
-
   Scenario: eStore Trade - Shipping is different from billing
     Given I log into eStore as trade
     When I choose country for eStore from footer

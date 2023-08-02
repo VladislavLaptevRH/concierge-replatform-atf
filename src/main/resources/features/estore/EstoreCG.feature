@@ -75,7 +75,8 @@ Feature: Estore CG
   Scenario: Browser back button from search to CG page
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I remove all items from estore cart
-    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
+    When I go to "SEATING COLLECTIONS" on eStore
+    When I go to estore item "sofa" from search field
     When I navigate back from "PDP" page
     Then I verify that CG page is displayed
+    #go to cg->living-seating collections-search-navigate back-cg should displayed

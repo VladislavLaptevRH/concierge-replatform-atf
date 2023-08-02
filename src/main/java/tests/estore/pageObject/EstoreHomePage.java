@@ -1,5 +1,6 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -38,11 +39,13 @@ public class EstoreHomePage {
     private final SelenideElement emailInputField = $(By.id("customerEmail"));
     private final SelenideElement messageInputField = $(By.id("description"));
 
-    private final SelenideElement thankMessageText = $(By.xpath("//p[@class= 'MuiTypography-root MuiTypography-body1 MuiTypography-paragraph']"));
+    private final SelenideElement orderHistoryAccountMenuBtn = $(By.xpath("//*[@id='account-menu-link-/my-account/order-history.jsp']"));
+
+    private final SelenideElement thankMessageText = $(By.xpath("//*[contains(text(),'Thank you for telling us about your project.')]"));
 
     private final SelenideElement searchCloseButton = $(By.xpath("//button[@data-testid = 'dialog-title-close-button']"));
     private final SelenideElement seeAllResultButton = $(By.xpath("//*[text() = 'SEE ALL RESULTS']"));
-    private final SelenideElement requestConsultationButton = $(By.xpath("(//button[@ctaname='Consultation']//span//span)[1]"));
+    private final SelenideElement requestConsultationButton = $(By.xpath("(//div[@cqitemsorder='rh_request_consultat']//button)[1]"));
     private final SelenideElement iframeRequestAConsultationButton = $(By.xpath("//*[text()='REQUEST A CONSULTATION']"));
     private final SelenideElement wishlist = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between'])[3]"));
     private final SelenideElement accountIcon = $(By.xpath("//*[@data-analytics-nav='account-icon']"));
@@ -62,6 +65,11 @@ public class EstoreHomePage {
     public void clickToAccountButtonForregisteredUser() {
         accountIcon.should(interactable, Duration.ofSeconds(20));
         accountIcon.click();
+    }
+
+    public void clickToOrderHistoryAccountMenu() {
+        orderHistoryAccountMenuBtn.shouldBe(interactable, Duration.ofSeconds(20));
+        accountIcon.click(ClickOptions.usingJavaScript());
     }
 
     public void chooseGBCountry() {

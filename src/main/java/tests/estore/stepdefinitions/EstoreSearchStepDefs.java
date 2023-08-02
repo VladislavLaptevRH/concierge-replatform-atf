@@ -68,8 +68,10 @@ public class EstoreSearchStepDefs {
 
     @When("I click on estore back to top button")
     public void iClickOnEstoreBackToTopButton() {
+        sleep(3000);
         estoreCGScreen.getBackToTopButton().should(visible, Duration.ofSeconds(20));
         estoreCGScreen.getBackToTopButton().click();
+        sleep(3000);
     }
 
     @Then("I verify that search results for {string} is displayed")

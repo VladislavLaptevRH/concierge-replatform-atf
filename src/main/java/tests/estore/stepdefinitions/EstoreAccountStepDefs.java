@@ -16,7 +16,7 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
@@ -43,7 +43,7 @@ public class EstoreAccountStepDefs {
 
     @Then("I verify that by updating personal information, application should get saved the entered details")
     public void iVerifyThatByUpdatingPersonalInformationApplicationShouldGetSavedTheEnteredDetails() {
-        assertTrue(estoreUserAccountPage.getBillingAddressFirstName().getValue().equals(firstName));
+        estoreUserAccountPage.getBillingAddressFirstName().shouldHave(value(firstName), Duration.ofSeconds(20));
     }
 
     @When("I verify the max length for first name text field")
@@ -99,6 +99,7 @@ public class EstoreAccountStepDefs {
     @When("I update first name for estore account")
     public void iUpdateFirstNameForEstoreAccount() {
         firstName = generalStepDefs.getAlphaNumericString(4);
+        estoreUserAccountPage.getBillingAddressFirstName().click();
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressFirstName());
         estoreUserAccountPage.getBillingAddressFirstName().setValue(firstName);
     }
@@ -165,6 +166,7 @@ public class EstoreAccountStepDefs {
 
     @Given("I click on estore my account icon for guest user")
     public void iClickOnEstoreMyAccountIconForGuestUser() {
+        generalStepDefs.waitForJSandJQueryToLoad();
         estoreLoginPage.clickToAccountIcon();
     }
 

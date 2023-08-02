@@ -16,6 +16,9 @@ import static org.awaitility.Awaitility.with;
 
 @Getter
 public class EstorePDPScreen {
+    private final SelenideElement firstRegularPrice = $(By.xpath("(//p[@data-testid='price-for-regular'])[1]"));
+
+    private final SelenideElement firstMemberPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
 
     private final SelenideElement addToCartInactiveButton = $(By.xpath("(//*[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-10'])[1]//button[contains(@class,'disabled') and @id='component-related-product-card_add-to-cart-btn']"));
 
@@ -33,14 +36,42 @@ public class EstorePDPScreen {
 
     private final SelenideElement sizeOption = $(By.xpath("(//select[contains(@id,'Size')])[1]"));
 
+    private final SelenideElement colorOption = $(By.xpath("(//select[contains(@id,'Color')])[1]"));
+
     private final SelenideElement finishOption = $(By.xpath("(//select[contains(@id,'Finish')])[1]"));
 
+    private final SelenideElement sizeLabelUnselectedOption = $(By.xpath("//label[@id='optionSelect-prod2020027-Size-label' and @data-shrink='false']"));
+
+    private final SelenideElement thisItemWillBeDelieveredMsg = $(By.xpath("//*[contains(text(),'will be delivered on or before')]"));
+
+    private final SelenideElement shipsFreeOfChargeViaStandarShipMsg = $(By.xpath("//*[text()='Ships free of charge via Standard Delivery Shipping']"));
+
+    private final SelenideElement thisItemCanBeReturnedMsg = $(By.xpath("//*[text()='This item can be returned within 30 days of delivery.']"));
+
+    private final SelenideElement skuIdItemValue = $(By.xpath("(//*[contains(text(),'Item# ')])[1]"));
+
+
+    public void verifyThatSpecialMessagesAreDisplayed() {
+        thisItemWillBeDelieveredMsg.should(Condition.visible, Duration.ofSeconds(20));
+        thisItemCanBeReturnedMsg.should(Condition.visible, Duration.ofSeconds(20));
+        shipsFreeOfChargeViaStandarShipMsg.should(Condition.visible, Duration.ofSeconds(20));
+        skuIdItemValue.should(Condition.visible, Duration.ofSeconds(20));
+    }
 
     public void selectSizeOption() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         sizeOption.should(Condition.and("", Condition.interactable, Condition.visible,
                 Condition.appear), Duration.ofSeconds(40));
         Select selectSize = new Select(sizeOption);
+        selectSize.selectByIndex(1);
+    }
+
+
+    public void selectColorOption() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        sizeOption.should(Condition.and("", Condition.interactable, Condition.visible,
+                Condition.appear), Duration.ofSeconds(40));
+        Select selectSize = new Select(colorOption);
         selectSize.selectByIndex(1);
     }
 

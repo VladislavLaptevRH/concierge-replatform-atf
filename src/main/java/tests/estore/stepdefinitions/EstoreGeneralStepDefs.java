@@ -473,7 +473,6 @@ public class EstoreGeneralStepDefs {
 
     public void addLineItemsToEstoreCartStg2() {
         setUserEnvironment();
-
         cartId = getEstoreCartId(USER_ID, USEREMAIL);
         RestAssured.baseURI = BASE_URL;
         RequestSpecification request = RestAssured.given().relaxedHTTPSValidation();

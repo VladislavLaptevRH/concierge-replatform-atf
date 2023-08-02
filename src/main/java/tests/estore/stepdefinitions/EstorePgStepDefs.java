@@ -7,6 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.EstorePGScreen;
 import tests.estore.pageObject.EstoreSearchScreen;
 import tests.estore.pageObject.EstoreUserAccountPage;
@@ -24,23 +25,28 @@ public class EstorePgStepDefs {
     EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
     EstorePGScreen estorePGScreen = new EstorePGScreen();
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
+    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
     @Then("I validate {string},{string} and {string} grid view should work")
     public void iValidateAndGridViewShouldWork(String arg0, String arg1, String arg2) {
         if (arg0.equals("1")) {
+            estoreSearchScreen.getOneColumnInRowGridButton().should(visible, Duration.ofSeconds(20));
+            estoreSearchScreen.getOneColumnInRowGridButton().click();
+            $(By.xpath("//div[contains(@class, 'grid-item-12')]")).should(visible, Duration.ofSeconds(20));
+        }
+
+        if (arg1.equals("2")) {
+            estoreSearchScreen.getTwoColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
+            estoreSearchScreen.getTwoColumnsInRowGridElement().click();
+            $(By.xpath("//div[contains(@class, 'grid-item-6')]")).should(visible, Duration.ofSeconds(20));
+        }
+
+        if (arg2.equals("3")) {
             estoreSearchScreen.getThreeColumnsInRowGridButton().should(visible, Duration.ofSeconds(20));
             estoreSearchScreen.getThreeColumnsInRowGridButton().should(interactable, Duration.ofSeconds(20));
             estoreSearchScreen.getThreeColumnsInRowGridButton().click();
             estoreSearchScreen.getThreeColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
-        }
-        if (arg1.equals("2")) {
-            estoreSearchScreen.getTwoColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
-            estoreSearchScreen.getTwoColumnsInRowGridElement().click();
-        }
-
-        if (arg2.equals("3")) {
-            estoreSearchScreen.getOneColumnInRowGridButton().should(visible, Duration.ofSeconds(20));
-            estoreSearchScreen.getOneColumnInRowGridButton().click();
+            $(By.xpath("//div[contains(@class, 'grid-item-4')]")).should(visible, Duration.ofSeconds(20));
         }
 
     }
@@ -55,7 +61,7 @@ public class EstorePgStepDefs {
     public void iGoesToEstorePg() {
         String URL = Hooks.eStoreBaseURL + "/search/results.jsp?Ntt=tables&Ns=product.sale%7C1";
         open(URL);
-        
+
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -73,7 +79,7 @@ public class EstorePgStepDefs {
 
     @When("I scroll on the PG page till back to top button is visible")
     public void iScrollOnThePGPageTillBackToTopButtonIsVisible() {
-        
+
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
@@ -84,12 +90,13 @@ public class EstorePgStepDefs {
 
     @When("I navigate back from {string} page")
     public void iNavigateBackFromPage(String arg0) {
+        generalStepDefs.waitForJSandJQueryToLoad();
         WebDriverRunner.getWebDriver().navigate().back();
     }
 
     @When("I navigate to any estore fusion PG")
     public void iNavigateToAnyEstoreFusionPG() {
-        estorePGScreen.getListOfPgFusionElements().get(2).should(visible, Duration.ofSeconds(5));
+        estorePGScreen.getListOfPgFusionElements().get(2).should(visible, Duration.ofSeconds(20));
         estorePGScreen.getListOfPgFusionElements().get(2).click();
     }
 
@@ -163,5 +170,10 @@ public class EstorePgStepDefs {
     public void iGoesToEstoreBrand(String brand) {
         String url = Hooks.eStoreBaseURL.replaceAll("https://", "");
         open("https://" + brand + "." + url);
+    }
+
+    @Then("I verify the member price on PG page after selecting the specifications")
+    public void iVerifyTheMemberPriceOnPGPageAfterSelectingTheSpecifications() {
+        System.out.println();
     }
 }
