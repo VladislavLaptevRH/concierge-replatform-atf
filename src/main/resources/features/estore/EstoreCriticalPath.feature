@@ -255,8 +255,10 @@ Feature: Estore critical path
     When I click on add to cart estore button
     When I click on view cart estore button
     Then that was added "2" quantity of item in cart
-    And I verify that total price is correct for "prod13800635" and "17050042" with "IRON" for estore
+    And I verify the total price for product in the cart
     When I change item quantity to "1" for "prod13800635" and "17050042" with "IRON" for estore
+    And I verify the total price for product in the cart
+
 
   Scenario: Add Membership and verify order total in order estimate
     Given I log into eStore as "regularAddMembership" user
@@ -301,6 +303,7 @@ Feature: Estore critical path
     When I open product page with "prod2020027" and "17050043" with "FOG" for estore
     Then I verify link bellow "View In-Stock Items" is displayed
     And I verify that "View In-Stock" popup is displayed
+    #verify title, sku id, add to cart button,
     #click on view-instockitems/ click to viewsale item and verify
 
   Scenario: Verify the On sale functionality
@@ -309,7 +312,8 @@ Feature: Estore critical path
     When I open product page with "prod2020027" and "17050043" with "FOG" for estore
     Then I verify link bellow "View On Sale Items" is displayed
     And I verify that "View On Sale" popup is displayed
-#Verify the availability , delivery and return messages in PDP
+    #verify title, sku id, add to cart button
+   #Verify the availability , delivery and return messages in PDP
 
   Scenario: Verify the availability , delivery and return messages in PDP
     Given I log into eStore as "regular" user
@@ -382,16 +386,12 @@ Feature: Estore critical path
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050042" with "IRON" for estore
     When I update "CAN" postal code on pdp page
-    Then I verify that price for member and regular user on PDP
+    Then I verify price for member and regular user on PDP
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that price in cart is the same as on PDP
+    And I verify the total price for product in the cart
     And I verify the cart item quantity is equal to "1" on eStore
-    Then I verify total item quantity is equal to "1" on eStore
-    When I click on estore checkout button
-    And I click on estore no thanks button
-    When I fill estore shipping address
-    When I click on same as estore shipping address checkbox
 
 #Order review page
   Scenario: Edit payment
@@ -580,6 +580,7 @@ Feature: Estore critical path
     When I navigate to the wishlist
     Then I validate items in wishlist
 
+  #Add to wishlist
   Scenario: Add an item from cart to wishlist
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -683,6 +684,34 @@ Feature: Estore critical path
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I execute payment with credit card on estore
+    When I click on a place estore order button
+    Then I verify that estore thank you page is displayed
+
+  #Return & Exchange
+  Scenario: Return & Exchange
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
+    When user clicks on return policy link
+    Then user verifies that user is redirected to a return policy page
+
+  #Checkout in BC
+  Scenario: Checkout in BC
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When  I change the brand to "RH BABY & CHILD" for eStore
+    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button

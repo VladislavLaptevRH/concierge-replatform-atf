@@ -27,6 +27,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static io.netty.handler.codec.rtsp.RtspHeaders.Values.URL;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class EstoreCartPageStepDefs {
     EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
@@ -44,6 +45,7 @@ public class EstoreCartPageStepDefs {
     private static Response response;
     int itemQuantity;
     int lineItemPrice;
+    int totalProductPrice;
 
     @When("I remove all items from estore cart")
     public void iRemoveAllItemsFromEstoreCart() {
@@ -54,7 +56,6 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on view cart estore button")
     public void iClickOnViewCartButton() {
-
         generalStepDefs.waitForJSandJQueryToLoad();
         estoreItemPage.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(80));
         estoreItemPage.getViewCartButton().should(visible, Duration.ofSeconds(60));
@@ -709,7 +710,7 @@ public class EstoreCartPageStepDefs {
     @Then("that was added {string} quantity of item in cart")
     public void thatWasAddedQuantityOfItemInCart(String quantity) {
         if (quantity.equals("2")) {
-            $(By.xpath("//*[contains(@id,'quantity') and contains(@id,'_2')]")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[contains(@id,'quantity') and contains(@id,'_2')]")).should(visible, Duration.ofSeconds(30));
         }
     }
 
@@ -750,8 +751,18 @@ public class EstoreCartPageStepDefs {
         estorePDPScreen.getAddToCartInactiveButton().shouldBe(visible, Duration.ofSeconds(30));
     }
 
-    @Then("I verify total item quantity is equal to {string} on eStore")
-    public void iVerifyTotalItemQuantityIsEqualToOnEStore(String arg0) {
+    @And("I verify the total price for product in the cart")
+    public void iVerifyTheTotalPriceForProductInTheCart() {
+        totalProductPrice = estoreCartPage.getTotalProductPrice();
+        int regularPrice = estoreCartPage.getRegularProductPriceValueInt();
+        int quantity = estoreCartPage.getQuantityOfProductInCart();
 
+        assertEquals("Verify the total price", regularPrice * quantity
+                , totalProductPrice);
+    }
+
+    @And("I verify the cart item quantity is equal to {string} on eStore")
+    public void iVerifyTheCartItemQuantityIsEqualToOnEStore(String itemQuantity) {
+        $(By.xpath("//*[contains(@id,'quantity')]")).shouldHave(text(itemQuantity), Duration.ofSeconds(20));
     }
 }

@@ -26,7 +26,6 @@ public class EstoreWishlistStepDefs {
 
     @Then("I validate items in wishlist")
     public void iValidateItemsInWishlist() {
-
         estoreWishlistPage.getWhistItem().should(visible, Duration.ofSeconds(30));
     }
 

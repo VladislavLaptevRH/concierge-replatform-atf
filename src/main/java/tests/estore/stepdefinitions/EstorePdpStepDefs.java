@@ -1,12 +1,11 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import tests.estore.pageObject.*;
@@ -16,7 +15,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
-import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.*;
 
 public class EstorePdpStepDefs {
 
@@ -29,10 +28,14 @@ public class EstorePdpStepDefs {
     EstorePGScreen estorePGScreen = new EstorePGScreen();
 
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
+
+    EstoreReturnPolicyScreen estoreReturnPolicyScreen = new EstoreReturnPolicyScreen();
     String regularUSPrice;
     String memberUSPrice;
     String regularCAGBPrice;
     String memberCAGBPrice;
+    String itemCartPriceRegular;
+    String itemCartPriceMember;
 
     @Then("I verify that user can see product details correctly mentioned for a product")
     public void iVerifyThatUserCanSeeProductDetailsCorrectlyMentionedForAProduct() {
@@ -241,9 +244,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify availability , delivery and return messages in PDP")
     public void iVerifyAvailabilityDeliveryAndReturnMessagesInPDP() {
-        $(By.xpath("//*[text()='This item will be delivered on or before 02/19/24 ']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Ships free of charge via Standard Delivery Shipping']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='This item can be returned within 30 days of delivery.']")).should(visible, Duration.ofSeconds(20));
+        iVerifySpecialMessagesOnPDPPage();
     }
 
     @Then("I verify link bellow {string} is displayed")
@@ -276,8 +277,19 @@ public class EstorePdpStepDefs {
     }
 
     @And("I verify that {string} popup is displayed")
-    public void iVerifyThatPopupIsDisplayed(String arg0) {
-        System.out.println();
+    public void iVerifyThatPopupIsDisplayed(String modalPopUp) {
+        if (modalPopUp.equals("View In-Stock")) {
+            $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).click(ClickOptions.usingJavaScript());
+            $(By.xpath("//p[text()='IN STOCK']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
+            estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
+        }
+        if (modalPopUp.equals("View On Sale")) {
+            $(By.xpath("(//span[text()='View' and 'Sale' and 'items'])[3]")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
+            $(By.xpath("//span[text()='ON SALE']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
+            estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
+        }
     }
 
     @When("I select color option on the PDP page")
@@ -306,21 +318,32 @@ public class EstorePdpStepDefs {
         assertFalse("Member price was update after country was changed", memberUSPrice.equals(memberCAGBPrice));
     }
 
-    @Then("I verify that price for member and regular user on PDP")
+    @Then("I verify price for member and regular user on PDP")
     public void iVerifyThatPriceForMemberAndRegularUserOnPDP() {
         regularCAGBPrice = estorePDPScreen.getFirstRegularPrice().getText();
         memberCAGBPrice = estorePDPScreen.getFirstMemberPrice().getText();
+        System.out.println();
     }
 
     @Then("I verify that price in cart is the same as on PDP")
     public void iVerifyThatPriceInCartIsTheSameAsOnPDP() {
-        String itemCartPriceRegular;
-        String itemCartPriceMember;
+        itemCartPriceRegular = estoreCartPage.getRegularProductPriceInCart();
+        itemCartPriceMember = estoreCartPage.getMemberProductPriceInCart();
 
+        assertEquals("Verify that regular price on the Cart is the same as on PDP",
+                itemCartPriceRegular, regularCAGBPrice);
+        assertEquals("Verify that member price on the Cart is the same as on PDP",
+                itemCartPriceMember, memberCAGBPrice);
     }
 
-    @And("I verify the cart item quantity is equal to {string} on eStore")
-    public void iVerifyTheCartItemQuantityIsEqualToOnEStore(String itemQuantity) {
 
+    @When("user clicks on return policy link")
+    public void userClicksOnReturnPolicyLink() {
+        estorePDPScreen.clickToReturnPolicyButton();
+    }
+
+    @Then("user verifies that user is redirected to a return policy page")
+    public void userVerifiesThatUserIsRedirectedToAReturnPolicyPage() {
+        estoreReturnPolicyScreen.verifyThatReturnPolicyPageIsDisplayed();
     }
 }

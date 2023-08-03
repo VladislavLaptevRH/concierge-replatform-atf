@@ -179,7 +179,6 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore shipping address")
     public void iFillEstoreShippingAndShippingAddress() {
-
         estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
         generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
         estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
