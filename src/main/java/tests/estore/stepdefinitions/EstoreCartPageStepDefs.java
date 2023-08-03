@@ -710,7 +710,7 @@ public class EstoreCartPageStepDefs {
     @Then("that was added {string} quantity of item in cart")
     public void thatWasAddedQuantityOfItemInCart(String quantity) {
         if (quantity.equals("2")) {
-            $(By.xpath("//*[contains(@id,'quantity') and contains(@id,'_2')]")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[contains(@id,'quantity') and contains(@id,'_2')]")).should(visible, Duration.ofSeconds(30));
         }
     }
 

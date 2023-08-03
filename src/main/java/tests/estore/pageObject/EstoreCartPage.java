@@ -211,12 +211,12 @@ public class EstoreCartPage {
     }
 
     public String getMemberProductPriceInCart() {
-        String memberProductPriceCart = cartRegularPrice.getText().replaceAll(".00", "");
+        String memberProductPriceCart = cartMemberPrice.getText().replaceAll(".00", "");
         return memberProductPriceCart;
     }
 
     public String getRegularProductPriceInCart() {
-        String regulatProductPriceCart = cartMemberPrice.getText().replaceAll(".00", "");
+        String regulatProductPriceCart = cartRegularPrice.getText().replaceAll(".00", "");
         return regulatProductPriceCart;
     }
 

@@ -196,7 +196,7 @@ public class EstoreAddressStepDefs {
 
         $(By.cssSelector("select[id=\"shippingAddress.state\"]")).should(interactable, Duration.ofSeconds(20));
         Select selectCaState = new Select($(By.cssSelector("select[id=\"shippingAddress.state\"]")));
-        selectCaState.selectByValue("AB");
+        selectCaState.selectByValue("FL");
 
         $(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")).click();
         generalStepDefs.clearField($(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")));

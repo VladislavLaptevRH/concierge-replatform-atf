@@ -1,5 +1,6 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
@@ -16,6 +17,8 @@ import static org.awaitility.Awaitility.with;
 
 @Getter
 public class EstorePDPScreen {
+    private final SelenideElement addToCartButtonViewInStockPopUp = $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']"));
+
     private final SelenideElement firstRegularPrice = $(By.xpath("(//p[@data-testid='price-for-regular'])[1]"));
 
     private final SelenideElement firstMemberPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
@@ -50,6 +53,13 @@ public class EstorePDPScreen {
 
     private final SelenideElement skuIdItemValue = $(By.xpath("(//*[contains(text(),'Item# ')])[1]"));
 
+    private final SelenideElement returnPolicyButton = $(By.xpath("(//a[@href='/us/en/customer-service/return-policy.jsp'])[1]"));
+
+
+    public void clickToReturnPolicyButton() {
+        returnPolicyButton.should(Condition.and("", Condition.interactable, Condition.visible)
+                , Duration.ofSeconds(15)).click(ClickOptions.usingJavaScript());
+    }
 
     public void verifyThatSpecialMessagesAreDisplayed() {
         thisItemWillBeDelieveredMsg.should(Condition.visible, Duration.ofSeconds(20));

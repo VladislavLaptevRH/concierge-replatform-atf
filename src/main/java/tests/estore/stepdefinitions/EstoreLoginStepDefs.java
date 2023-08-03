@@ -180,7 +180,7 @@ public class EstoreLoginStepDefs {
             if (accountRole.equals("nonmember")) {
                 estoreLoginPage.getUsernameField().setValue("nonmember1@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Qwert1234");
-                USER_ID_STG2 = "2dddc45b-1949-41fa-8609-c156f793463e";
+                USER_ID_STG2 = "2c7767ea-4bb1-4273-b927-955120444807";
                 USER_ID_STG4 = "9c8d59b2-fee6-485d-adc3-78559483bc81";
             }
             if (accountRole.equals("regularAddMembership")) {

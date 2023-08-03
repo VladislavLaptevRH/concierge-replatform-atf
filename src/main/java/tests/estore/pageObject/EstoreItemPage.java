@@ -85,5 +85,5 @@ public class EstoreItemPage {
 
     private final SelenideElement addToWishListButton = $(By.xpath("(//div[@data-testid='add-to-wish-list'])[1]"));
 
-    private final SelenideElement viewWishlistButton = $(By.xpath("//*[text()='View Wishlist']"));
+    private final SelenideElement viewWishlistButton = $(By.id("addToWishlistDialog_viewWishList-btn"));
 }
