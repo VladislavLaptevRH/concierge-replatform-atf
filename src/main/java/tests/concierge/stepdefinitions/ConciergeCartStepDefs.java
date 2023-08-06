@@ -37,6 +37,8 @@ public class ConciergeCartStepDefs {
     AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
 
+    PdpScreen pdpScreen = new PdpScreen();
+
     EstoreCartPageStepDefs estoreCartPageStepDefs = new EstoreCartPageStepDefs();
     int randomQuantity;
     int priceFirstLineItem;
@@ -992,6 +994,27 @@ public class ConciergeCartStepDefs {
     @When("I add item to cart via API")
     public void iAddItemToCartViaAPI() {
         GeneralStepDefs.addLineItemsToConciergeCart();
+    }
+
+    @When("Verify that zip code was updated in the Cart to {string}")
+    public void verifyThatZipCodeWasUpdatedInTheCart(String zipCode) {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeCartPageScreen.getPdpScreenZipCode().should(visible, Duration.ofSeconds(10));
+        conciergeCartPageScreen.getPdpScreenZipCode().scrollIntoView(true);
+        assertEquals(zipCode, conciergeCartPageScreen.getPdpScreenZipCode().getText());
+    }
+
+    @Then("I change zip code in the cart to {string}")
+    public void changeTheZipCodeInTheCart(String zipCode) {
+        conciergeCartPageScreen.getPdpScreenZipCode().click();
+        generalStepDefs.clearField(pdpScreen.getPostalCode());
+        pdpScreen.getPostalCode().setValue(zipCode);
+        pdpScreen.getConfirmationPostalCode().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+    }
+    @When("I add item to cart via API with {string}")
+    public void iAddItemToCartViaAPI(String SKU) {
+        GeneralStepDefs.addLineItemsToConciergeCartWithSKU(SKU);
     }
 
     @When("I add item to cart via UI")

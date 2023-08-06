@@ -2,13 +2,19 @@
 @concierge-PDP
 Feature: Concierge PDP
 
-  Scenario: Verify Monogram functionality
+  Scenario: Verify the PDP title and pricing
     Given I log into Concierge as "associate"
-    When I remove all items from cart via UI
-    When I open product page with productId "prod19500002"
-    When I click on add monogram checkbox from pdp
-    When I choose monogram properties for pdp
-    Then I verify that monogram was added for pdp
+    When I choose country for concierge from footer
+    When I navigate to "sofas"
+    Then I remember the name of the first product and regular, member prices in PG and navigate to that PDP
+    Then I Verify that the PDP title is present and prices match those prices in PG
+
+  Scenario: Verify the content of PDP for Concierge
+    Given I log into Concierge as "associate"
+    When I go to item "37730826 LLCG" from search field
+    Then I Verify that "PDP title is present" is present
+
+  Scenario: Verify the PDP hero Image, zoom, line items
 
   Scenario: Verify In Stock functionality
     Given I log into Concierge as "associate"
@@ -36,28 +42,76 @@ Feature: Concierge PDP
     Then Verify that "Sale modal" 'has an item can be added to cart from modal'
     Then Verify that "Sale modal" 'has an item can be added to project from modal'
 
-  Scenario: Custom rugs
+  Scenario Outline: Availability, Delivery and Returns messaging for <items>
+    Given I log into Concierge as "associate"
+    When I remove all items from cart via UI
+    When I go to item "<skuID>" from search field
+    Then I verify that availability, Delivery and returns messaging is displayed for "<items>"
+    Examples:
+      | items | skuID         |
+      | SO    | 19970830 CTIC |
+      | BO    | 17050043 FOG  |
+
+  Scenario: Verify the dropdown selection and add to cart
+
+  Scenario: Verify Colorization options
+    Given I log into Concierge as "associate"
+    When I remove all items from cart via UI
+    When I go to item "10115451 BWMR" from search field
+    When I click on special order fabrics
+    When I choose color from special order fabrics
+    Then I verify that color has been chosen
+
+  Scenario: Verify Monogram functionality
+    Given I log into Concierge as "associate"
+    When I remove all items from cart via UI
+    When I open product page with productId "prod19500002"
+    When I click on add monogram checkbox from pdp
+    When I choose monogram properties for pdp
+    Then I verify that monogram was added for pdp
+
+  Scenario: Add To Cart (Instock, SPO, BO) functionality
+
+#  Scenario: ATC SPO - add to cart
+#    Given I log into Concierge as "associate"
+#    When I choose country for concierge from footer
+#    When I remove all items from cart via UI
+#    When I go to item "10105809 BWDV" from search field
+#    When I click on add to cart button
+#    When I click on agree&add button
+#    When I click on view cart button
+#    Then I verify that availability, Delivery and returns messaging is displayed for "SO"
+#
+#  Scenario: ATC BO - add to cart
+#    Given I log into Concierge as "associate"
+#    When I choose country for concierge from footer
+#    When I remove all items from cart via UI
+#    When I go to item "10060297 CLR" from search field
+#    When I click on add to cart button
+#    When I click on view cart button
+#    Then I verify that availability, Delivery and returns messaging is displayed for "BO"
+
+  Scenario: Verify Custom Drapery PDP
     Given I log into Concierge as "associate"
     When I choose "RH Teen" from brand menu
     When I go to custom rugs
     Then I verify that custom rugs are displayed
-
-  Scenario: Custom Jewelry
-    Given I log into Concierge as "associate"
-    When I choose "RH Teen" from brand menu
-    When I go to custom rugs
-    Then I verify that custom rugs are displayed
-
-  Scenario: Custom Windows
-    Given I log into Concierge as "associate"
-    When I click on windows from top menu
-    Then I verify that custom windows are displayed
 
   Scenario: Verify YAML Carousel
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I open product page with productId "prod14900056"
     Then I verify that YAML carousel is displayed
+
+  Scenario: SLP (Swatch Landing Page)
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to Swatch Landing Page
+    Then I verify that swatch landing page is displayed
+
+  Scenario: Verify the Postal code updates in PDP
+
+  Scenario: Sale PDP: Regular/Member/Final Price validation
 
   Scenario Outline: Verify Mattress Recycling Fee
     Given I log into Concierge as "associate"
@@ -74,61 +128,20 @@ Feature: Concierge PDP
       | RI    | 02860  |
       | CT    | 06902  |
 
+  Scenario: Custom Jewelry
+    Given I log into Concierge as "associate"
+    When I choose "RH Teen" from brand menu
+    When I go to custom rugs
+    Then I verify that custom rugs are displayed
+
+  Scenario: Custom Windows
+    Given I log into Concierge as "associate"
+    When I click on windows from top menu
+    Then I verify that custom windows are displayed
+
   Scenario: Replacement Items
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I go to item "10004670 NONE" from search field
     Then I verify that check for replacements parts button is displayed
     And I verify that replacements parts modal pop up is displayed
-
-  Scenario: Verify Colorization options
-    Given I log into Concierge as "associate"
-    When I remove all items from cart via UI
-    When I go to item "10115451 BWMR" from search field
-    When I click on special order fabrics
-    When I choose color from special order fabrics
-    Then I verify that color has been chosen
-
-  Scenario Outline: Availability, Delivery and Returns messaging for <items>
-    Given I log into Concierge as "associate"
-    When I remove all items from cart via UI
-    When I go to item "<skuID>" from search field
-    Then I verify that availability, Delivery and returns messaging is displayed for "<items>"
-    Examples:
-      | items | skuID         |
-      | SO    | 19970830 CTIC |
-      | BO    | 17050043 FOG  |
-
-  Scenario: ATC SPO - add to cart
-    Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
-    When I remove all items from cart via UI
-    When I go to item "10105809 BWDV" from search field
-    When I click on add to cart button
-    When I click on agree&add button
-    When I click on view cart button
-    Then I verify that availability, Delivery and returns messaging is displayed for "SO"
-
-  Scenario: ATC BO - add to cart
-    Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
-    When I remove all items from cart via UI
-    When I go to item "10060297 CLR" from search field
-    When I click on add to cart button
-    When I click on view cart button
-    Then I verify that availability, Delivery and returns messaging is displayed for "BO"
-
-  Scenario: Pricing - verify that price on PDP is the same as price from Cart page
-    Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
-    When I remove all items from cart via UI
-    When I open product page with "prod1617188" and "63130001"
-    When I click on add to cart button
-    When I click on view cart button
-    Then I verify price in cart is the same as price on PDP page
-
-  Scenario: SLP (Swatch Landing Page)
-    Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
-    When I go to Swatch Landing Page
-    Then I verify that swatch landing page is displayed

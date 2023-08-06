@@ -15,6 +15,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -29,6 +30,16 @@ public class Pdp {
     PdpScreen pdpScreen = new PdpScreen();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     SelectOption selectOption = new SelectOption();
+
+    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+
+
+    public String firstProductNameInPG;
+    public String regularPriceInPG;
+    public String memberPriceInPG;
+
+    public String zipCodeInTheCart;
+
     @When("I click on add monogram checkbox from pdp")
     public void iClickOnAddMonogramCheckboxFromPdp() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -74,8 +85,11 @@ public class Pdp {
 
     @When("I click on \"view select items on sale\" link")
     public void iClickOnViewSaleItems() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
-        //$(By.xpath("//*[text()='Sale']")).shouldHave(text("Sale"), Duration.ofSeconds(20));
+        try {
+            $(By.xpath("//*[text()='VIEW SELECT ITEMS ON SALE']")).should(visible, Duration.ofSeconds(10));
+        } catch (ElementNotFound e){
+            System.out.println("Element not found");
+        }
         if(!$(By.xpath("//*[text()='VIEW SELECT ITEMS ON SALE']")).isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -100,6 +114,10 @@ public class Pdp {
                break;
            case  "has item#":
                with().pollInterval(5, SECONDS).await().until(() -> true);
+               if(!$(By.xpath("(//*[@id='listColumn1-Item#'])[4]")).isDisplayed()){
+                   WebDriverRunner.getWebDriver().navigate().refresh();
+                   with().pollInterval(5, SECONDS).await().until(() -> true);
+               }
                $(By.xpath("//*[@id='listColumn1-Item#']")).shouldHave(text("Item#"), Duration.ofSeconds(5));
                $(By.xpath("//*[@id='listColumn2-Item#']")).shouldHave(text("60450998 BWMR"), Duration.ofSeconds(5));
                break;
@@ -135,6 +153,37 @@ public class Pdp {
        }
     }
 
+    @When("I Verify that {string} is present")
+    public void verifyTat(String data) {
+        switch (data){
+            case  "PDP title is present":
+                $(By.xpath("//h2[contains(@class, MuiTypography-h2)]")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "view select items on sale link":
+                $(By.xpath("//*[text() = 'VIEW SELECT ITEMS ON SALE']")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "wording also available in":
+                $(By.xpath("//a[contains(text(), 'ALSO AVAILABLE')]")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "wording shop the entire collection":
+                $(By.xpath("//a[contains(text(), 'SHOP THE ENTIRE COLLECTION')]")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "Verify that dynamic and static colorization options are present ":
+                $(By.xpath("//*[text() = 'SELECT FROM 157 SPECIAL ORDER FabricS']")).shouldBe(visible, Duration.ofSeconds(15));
+                $(By.xpath("//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/PDP_Fabric_Swatch')]")).shouldBe(visible, Duration.ofSeconds(15));
+                $(By.xpath("//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/GreyOak')]")).shouldBe(visible, Duration.ofSeconds(15));
+                $(By.xpath("//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/EspressoonWalnut')]")).shouldBe(visible, Duration.ofSeconds(15));
+                $(By.xpath("//p[text() = 'Grey ']")).shouldBe(visible, Duration.ofSeconds(15));
+                $(By.xpath("//p[text() = 'Espresso ']")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "Verify that the Hero Image is present":
+                $(By.xpath("//*[@data-testid = 'desktop-pdp-image']")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            default:
+                break;
+        }
+    }
+
     @When("Verify that \"In Stock modal\" {string}")
     public void verifyInStockModalData(String data) {
         switch (data){
@@ -147,6 +196,10 @@ public class Pdp {
                 break;
             case  "has item#":
                 with().pollInterval(5, SECONDS).await().until(() -> true);
+                if(!$(By.xpath("(//*[@id='listColumn1-Item#'])[4]")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                }
                 $(By.xpath("(//*[@id='listColumn1-Item#'])[4]")).shouldHave(text("Item#"), Duration.ofSeconds(5));
                 $(By.xpath("(//*[@id='listColumn2-Item#'])[4]")).shouldHave(text("60450996 BLNL"), Duration.ofSeconds(5));
                 break;
@@ -367,9 +420,29 @@ public class Pdp {
         with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
+
+
     @Then("I verify that color has been chosen")
     public void iVerifyThatColorHasBeenChosen() {
         selectOption.getColorOption().shouldHave(text("Fog"), Duration.ofSeconds(20));
+
+    }
+
+    @Then("I confirm that default zip code for country {string} is present in Cart")
+    public void confirmThatDefault(String country) {
+        if(Objects.equals(country, "US")){
+            zipCodeInTheCart = conciergeCartPageScreen.getPdpScreenZipCode().getText();
+            assertEquals(zipCodeInTheCart, "92660");
+        }
+        if(Objects.equals(country, "GB")){
+            zipCodeInTheCart = conciergeCartPageScreen.getPdpScreenZipCode().getText();
+            assertEquals(zipCodeInTheCart, "94925");
+        }
+        if(Objects.equals(country, "CA")){
+            zipCodeInTheCart = conciergeCartPageScreen.getPdpScreenZipCode().getText();
+            assertEquals(zipCodeInTheCart, "M6A 2T9");
+        }
+
     }
 
     @Then("I change state for {string} with zip code {string}")
@@ -425,9 +498,19 @@ public class Pdp {
         }
     }
 
-    @Then("I verify price in cart is the same as price on PDP page")
-    public void iVerifyPriceInCartIsTheSameAsPriceOnPDPPage() {
-        conciergeCartPageScreen.getTotalMemberPrice().isDisplayed();
+    @Then("I remember the name of the first product and regular, member prices in PG and navigate to that PDP")
+    public void iRememberTheNameOfTheFirstProductAndRegularMemberPriceInPG() {
+        firstProductNameInPG = conciergeCartPageScreen.getFirstProductNameInPG().getText();
+        regularPriceInPG = conciergeCartPageScreen.getRegularPriceInPG().getText();
+        memberPriceInPG = conciergeCartPageScreen.getMemberPriceInPG().getText().replaceAll("[^0-9_$]", "");
+        conciergeCartPageScreen.getFirstProductNameInPG().click();
+    }
+
+    @Then("I Verify that the PDP title is present and prices match those prices in PG")
+    public void iVerifyThatThePDPTitleIsPresentAndPricesMatchThosePricesInPG() {
+        assertEquals(firstProductNameInPG, $(By.xpath("//h2[contains(@class, MuiTypography-h2)]")).getText());
+        assertEquals(regularPriceInPG, $(By.xpath("(//*[@id= 'price'])[1]")).getText());
+        assertEquals(memberPriceInPG, $(By.xpath("(//*[@id= 'price'])[2]")).getText().replaceAll(",", ""));
     }
 
     @When("I go to Swatch Landing Page")

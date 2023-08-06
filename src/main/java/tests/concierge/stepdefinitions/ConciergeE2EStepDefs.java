@@ -434,6 +434,16 @@ public class ConciergeE2EStepDefs {
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         with().pollInterval(2, SECONDS).await().until(() -> true);
+        if (conciergeItemsScreen.getSelectSize().isDisplayed()) {
+            try {
+                Select depthList = new Select(conciergeItemsScreen.getSelectDepth());
+                depthList.selectByIndex(1);
+            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+                System.out.println("Element Size not found");
+            }
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if (conciergeItemsScreen.getSelectCanopyHeight().isDisplayed()) {
             try {
                 Select canopyHeight = new Select(conciergeItemsScreen.getSelectCanopyHeight());
@@ -1294,6 +1304,12 @@ public class ConciergeE2EStepDefs {
         String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+FOG";
         open(URL);
         with().pollInterval(5, SECONDS).await().until(() -> true);
+    }
+
+    @When("I navigate to {string}")
+    public void iNavigateTo(String value) {
+        String URL = Hooks.conciergeBaseURL + "/search/results.jsp?Ntt=" + value + "&Ns=product.sale%7C1&clientrender=true";
+        open(URL);
     }
 
     @When("I open product page with {string} and {string}")
