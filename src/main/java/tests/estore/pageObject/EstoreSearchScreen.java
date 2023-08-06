@@ -14,7 +14,7 @@ public class EstoreSearchScreen {
 
     private SelenideElement threeColumnsInRowGridButton = $(By.xpath("//*[@column='3']"));
 
-    private SelenideElement oneColumnInRowGridButton = $(By.xpath("(//*[contains(@class, 'MuiSvgIcon-root')])[5]"));
+    private SelenideElement oneColumnInRowGridButton = $(By.xpath("(//*[contains(@class, 'MuiSvgIcon-root')])[7]"));
 
     private SelenideElement threeColumnsInRowGridElement = $(By.xpath("//div[contains(@class,'MuiGrid-grid-xs-4')]"));
 

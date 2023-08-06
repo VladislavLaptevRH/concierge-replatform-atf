@@ -27,6 +27,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static io.netty.handler.codec.rtsp.RtspHeaders.Values.URL;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class EstoreCartPageStepDefs {
     EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
@@ -44,67 +45,17 @@ public class EstoreCartPageStepDefs {
     private static Response response;
     int itemQuantity;
     int lineItemPrice;
+    int totalProductPrice;
 
     @When("I remove all items from estore cart")
     public void iRemoveAllItemsFromEstoreCart() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        if (Hooks.cookie.contains("userservice")) {
-
-            int countOfCartItems = 0;
-
-            if (estoreUserAccountPage.getCartButtonUserService().isDisplayed()) {
-                Actions actions = new Actions(WebDriverRunner.getWebDriver());
-                actions.moveToElement(estoreUserAccountPage.getCartButtonUserService()).build().perform();
-
-                String countOfProducts = estoreUserAccountPage.getCartButtonUserService().getText();
-                countOfCartItems = Integer.valueOf(countOfProducts);
-            } else {
-                System.out.println("Cart is empty");
-            }
-
-            if (countOfCartItems > 0) {
-                estoreGeneralStepDefs.removeFromCart(countOfCartItems);
-            } else {
-                System.out.println("Cart is empty");
-            }
-
-        } else {
-            estoreUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(4));
-
-            int countOfCartItems = 0;
-
-            try {
-                String countOfProducts = estoreUserAccountPage.getCartButton().getText();
-                countOfCartItems = Integer.valueOf(countOfProducts);
-            } catch (Exception e) {
-                System.out.println("Cart is empty");
-            }
-            if (countOfCartItems > 0) {
-                estoreGeneralStepDefs.removeFromCart(countOfCartItems);
-            }
-        }
-
-        if (Hooks.profile.contains("stg4")) {
-            estoreUserAccountPage.getCartButtonStg4().should(visible, Duration.ofMinutes(3));
-
-            int countOfCartItems = 0;
-
-            try {
-                String countOfProducts = estoreUserAccountPage.getCartButtonStg4().getText();
-                countOfCartItems = Integer.valueOf(countOfProducts);
-            } catch (Exception e) {
-                System.out.println("Cart is empty");
-            }
-
-            if (countOfCartItems > 0) {
-                estoreGeneralStepDefs.removeFromCart(countOfCartItems);
-            }
-        }
+        estoreGeneralStepDefs.removeLineItemFromCart();
+        estoreGeneralStepDefs.createNewCart();
     }
 
     @When("I click on view cart estore button")
     public void iClickOnViewCartButton() {
-
         generalStepDefs.waitForJSandJQueryToLoad();
         estoreItemPage.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(80));
         estoreItemPage.getViewCartButton().should(visible, Duration.ofSeconds(60));
@@ -612,7 +563,7 @@ public class EstoreCartPageStepDefs {
             estoreGeneralStepDefs.addLineItemsToEstoreCartStg2();
         }
 
-        WebDriverRunner.getWebDriver().navigate().refresh();
+//        WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
     @When("I goes to estore cart for estore")
@@ -759,7 +710,7 @@ public class EstoreCartPageStepDefs {
     @Then("that was added {string} quantity of item in cart")
     public void thatWasAddedQuantityOfItemInCart(String quantity) {
         if (quantity.equals("2")) {
-            $(By.xpath("//*[contains(@id,'quantity') and contains(@id,'_2')]")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[contains(@id,'quantity') and contains(@id,'_2')]")).should(visible, Duration.ofSeconds(30));
         }
     }
 
@@ -796,6 +747,22 @@ public class EstoreCartPageStepDefs {
 
     @And("I verify that add to cart button is inactive")
     public void iVerifyThatAddToCartButtonIsInactive() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estorePDPScreen.getAddToCartInactiveButton().shouldBe(visible, Duration.ofSeconds(30));
+    }
+
+    @And("I verify the total price for product in the cart")
+    public void iVerifyTheTotalPriceForProductInTheCart() {
+        totalProductPrice = estoreCartPage.getTotalProductPrice();
+        int regularPrice = estoreCartPage.getRegularProductPriceValueInt();
+        int quantity = estoreCartPage.getQuantityOfProductInCart();
+
+        assertEquals("Verify the total price", regularPrice * quantity
+                , totalProductPrice);
+    }
+
+    @And("I verify the cart item quantity is equal to {string} on eStore")
+    public void iVerifyTheCartItemQuantityIsEqualToOnEStore(String itemQuantity) {
+        $(By.xpath("//*[contains(@id,'quantity')]")).shouldHave(text(itemQuantity), Duration.ofSeconds(20));
     }
 }

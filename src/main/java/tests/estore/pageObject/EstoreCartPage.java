@@ -195,12 +195,43 @@ public class EstoreCartPage {
 
     private final SelenideElement addToWishlistButton = $(By.xpath("//*[text() = 'ADD TO WISHLIST']"));
 
+    private final SelenideElement totalProductPrice = $(By.id("rh-line-item-card_total"));
+
     private final SelenideElement removeMembershipLink = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-center']/span"));
 
     private final List<SelenideElement> memberShipBannerList = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-center']/p"));
 
+    private final SelenideElement cartRegularPrice = $(By.xpath("(//p[@data-testid='price-for-regular'])[1]"));
+
+    private final SelenideElement cartMemberPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
+
     public SelenideElement getVariableJoinButtonByName(String name) {
         String path = String.format(variableJoinButton, name);
         return $(byXpath(path));
+    }
+
+    public String getMemberProductPriceInCart() {
+        String memberProductPriceCart = cartMemberPrice.getText().replaceAll(".00", "");
+        return memberProductPriceCart;
+    }
+
+    public String getRegularProductPriceInCart() {
+        String regulatProductPriceCart = cartRegularPrice.getText().replaceAll(".00", "");
+        return regulatProductPriceCart;
+    }
+
+    public int getTotalProductPrice() {
+        int totalProductPriceCart = Integer.parseInt(totalProductPrice.getText().replaceAll(".00", "").replaceAll("\\$", ""));
+        return totalProductPriceCart;
+    }
+
+    public int getRegularProductPriceValueInt() {
+        int regularProductPrice = Integer.parseInt(cartRegularPrice.getText().replaceAll(".00", "").replaceAll("\\$", ""));
+        return regularProductPrice;
+    }
+
+    public int getQuantityOfProductInCart() {
+        int quantityOfProduct = Integer.parseInt($(By.xpath("//*[contains(@id,'quantity')]")).getText());
+        return quantityOfProduct;
     }
 }

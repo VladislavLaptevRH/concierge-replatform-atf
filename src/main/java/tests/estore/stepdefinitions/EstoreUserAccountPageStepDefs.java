@@ -16,8 +16,7 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.interactable;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
@@ -57,30 +56,19 @@ public class EstoreUserAccountPageStepDefs {
         estorePaymentPage.getCvcField().setValue("737");
 
         switchTo().defaultContent();
-        estoreUserAccountPage.getBillingAddressFirstName().setValue("TestName");
+        estoreUserAccountPage.getBillingAddressFirstName().setValue("Safire");
         estoreUserAccountPage.getBillingAddressLastName().setValue("TestLastName");
-        if (Hooks.eStoreBaseURL.contains("stg2")) {
-            estoreUserAccountPage.getBillingAddressStreetAddressStg2().should(visible, Duration.ofSeconds(20));
-            estoreUserAccountPage.getBillingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
-            try {
-                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
-                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
-            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                System.out.println("Dropdown list is not displayed");
-            }
-        } else {
-            estoreUserAccountPage.getBillingAddressStreetAddress().setValue("Bradford Drive, Hilliard, OH, USA");
-            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
-            estoreUserAccountPage.getBillingAddressStreetAddress().setValue("2479 Deer Run");
+            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddressNewCardPopUp());
+            estoreUserAccountPage.getBillingAddressStreetAddressNewCardPopUp().setValue("4524 Ocala Street");
             estoreAddressScreen.getCityAddNewCard().setValue("Hilliard");
             Select selectCardState = new Select(estoreAddressScreen.getStateAddNewCard());
             selectCardState.selectByValue("OH");
             estoreAddressScreen.getPostalCodeAddNewCard().setValue("99950");
 
-        }
-        estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
+//        }
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
 
+        estoreUserAccountPage.getBillingAddressPhone().shouldHave(value("(555) 555-1234"));
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getSaveCardButton().click();
 
@@ -132,7 +120,6 @@ public class EstoreUserAccountPageStepDefs {
 
     @When("I click on estore my account button")
     public void iClickOnEstoreMyAccountButton() {
-//
         estoreUserAccountPage.getMyProfileButton().shouldHave(Condition.text("My Account"), Duration.ofSeconds(30));
         estoreUserAccountPage.getMyProfileButton().click();
     }

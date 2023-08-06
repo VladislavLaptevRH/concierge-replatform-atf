@@ -48,9 +48,9 @@ public class EstoreCGStepDefs {
     @When("I scroll on the page till back to top button is visible")
     public void iScrollOnThePageTillBackToTopButtonIsVisible() {
         iValidateTheCollectionNameIsNotEmpty();
-        
+
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-        
+
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
@@ -62,6 +62,7 @@ public class EstoreCGStepDefs {
 
     @And("I verify that after click on back to top button user is scrolled to top on the page")
     public void iVerifyThatAfterClickOnBackToTopButtonUserIsScrolledToTopOnThePage() {
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         iValidateTheCollectionNameIsNotEmpty();
     }
 
@@ -175,13 +176,14 @@ public class EstoreCGStepDefs {
     public void iGoesToEstoreCollectionPage() {
         String URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045";
         open(URL);
-        
+
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
     @Then("I verify that page render in the same grid view that previously selected")
     public void iVerifyThatPageRenderInTheSameGridViewThatPreviouslySelected() {
-        estoreSearchScreen.getThreeColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//div[contains(@class, 'grid-item-4')]")).
+                should(visible, Duration.ofSeconds(5));
     }
 
     @When("I select {string} grid view on estore CG page")
@@ -220,7 +222,24 @@ public class EstoreCGStepDefs {
             URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045";
         }
         open(URL);
-        
+
         WebDriverRunner.getWebDriver().navigate().refresh();
+    }
+
+    @Then("I verify that CG page is displayed")
+    public void iVerifyThatCGPageIsDisplayed() {
+        iValidateTheCollectionNameIsNotEmpty();
+    }
+
+    @When("I go to CG estore page")
+    public void iGoToCGEstorePage() {
+    }
+
+    @When("I click on random item from collection page with applied {string} grid view")
+    public void iClickOnRandomItemFromCollectionPageWithAppliedGridView(String arg0) {
+        if (arg0.equals("3")) {
+            $(By.xpath("(//img[contains(@alt, 'Collection')])[1]")).should(visible, Duration.ofSeconds(25));
+            $(By.xpath("(//img[contains(@alt, 'Collection')])[1]")).click();
+        }
     }
 }

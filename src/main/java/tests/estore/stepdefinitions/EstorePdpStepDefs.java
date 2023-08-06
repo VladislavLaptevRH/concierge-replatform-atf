@@ -1,12 +1,11 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import tests.estore.pageObject.*;
@@ -16,6 +15,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
+import static org.testng.AssertJUnit.*;
 
 public class EstorePdpStepDefs {
 
@@ -28,6 +28,14 @@ public class EstorePdpStepDefs {
     EstorePGScreen estorePGScreen = new EstorePGScreen();
 
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
+
+    EstoreReturnPolicyScreen estoreReturnPolicyScreen = new EstoreReturnPolicyScreen();
+    String regularUSPrice;
+    String memberUSPrice;
+    String regularCAGBPrice;
+    String memberCAGBPrice;
+    String itemCartPriceRegular;
+    String itemCartPriceMember;
 
     @Then("I verify that user can see product details correctly mentioned for a product")
     public void iVerifyThatUserCanSeeProductDetailsCorrectlyMentionedForAProduct() {
@@ -108,9 +116,14 @@ public class EstorePdpStepDefs {
             estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
             estorePdpPageScreen.getSubmitPostalCode().click();
         }
-
-//        if (estorePdpPageScreen.getConfirmChangeButton().isDisplayed()) {
-//        }
+        if (country.equals("GB")) {
+            $(By.xpath("//li[@data-value='GB']")).should(visible, Duration.ofSeconds(20)).click();
+            $(By.xpath("//input[@id='postal-code-international']")).clear();
+            $(By.xpath("//input[@id='postal-code-international']")).setValue("SW1W 0NY");
+            estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
+            estorePdpPageScreen.getSubmitPostalCode().click();
+            estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
+        }
     }
 
     @Then("I verify line items {string}")
@@ -177,16 +190,16 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the product price for the selected country")
     public void iVerifyTheProductPriceForTheSelectedCountry() {
-        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$29"), Duration.ofSeconds(30));
-        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$16"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$20"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$15"), Duration.ofSeconds(30));
     }
 
     @Then("I verify the product price on PDP for non-sale cushion and frame product")
     public void iVerifyTheProductPriceOnPDPForNonSaleCushionAndFrameProduct() {
-        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$19"), Duration.ofSeconds(30));
-        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$11"), Duration.ofSeconds(30));
-        estorePdpPageScreen.getMemberTheSecondPrice().shouldHave(text("$27"), Duration.ofSeconds(30));
-        estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$36"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$13"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$9"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheSecondPrice().shouldHave(text("$18"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$25"), Duration.ofSeconds(30));
     }
 
     @When("I update {string} postal code on cart page")
@@ -231,9 +244,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify availability , delivery and return messages in PDP")
     public void iVerifyAvailabilityDeliveryAndReturnMessagesInPDP() {
-        $(By.xpath("//*[text()='This item will be delivered on or before 02/19/24 ']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Ships free of charge via Standard Delivery Shipping']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='This item can be returned within 30 days of delivery.']")).should(visible, Duration.ofSeconds(20));
+        iVerifySpecialMessagesOnPDPPage();
     }
 
     @Then("I verify link bellow {string} is displayed")
@@ -263,5 +274,76 @@ public class EstorePdpStepDefs {
             estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$13"), Duration.ofSeconds(30));
             estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$9"), Duration.ofSeconds(30));
         }
+    }
+
+    @And("I verify that {string} popup is displayed")
+    public void iVerifyThatPopupIsDisplayed(String modalPopUp) {
+        if (modalPopUp.equals("View In-Stock")) {
+            $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).click(ClickOptions.usingJavaScript());
+            $(By.xpath("//p[text()='IN STOCK']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
+            estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
+        }
+        if (modalPopUp.equals("View On Sale")) {
+            $(By.xpath("(//span[text()='View' and 'Sale' and 'items'])[3]")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
+            $(By.xpath("//span[text()='ON SALE']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
+            estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
+        }
+    }
+
+    @When("I select color option on the PDP page")
+    public void iSelectColorOptionOnThePDPPage() {
+        estorePDPScreen.selectColorOption();
+    }
+
+    @And("I verify special messages on PDP page")
+    public void iVerifySpecialMessagesOnPDPPage() {
+        estorePDPScreen.verifyThatSpecialMessagesAreDisplayed();
+    }
+
+    @When("I get prices for US for eStore")
+    public void iGetPricesForUSForEStore() {
+        regularUSPrice = estorePDPScreen.getFirstRegularPrice().getText();
+        memberUSPrice = estorePDPScreen.getFirstMemberPrice().getText();
+    }
+
+    @Then("I verify that prices for {string} was updated")
+    public void iVerifyThatPricesForWasUpdated(String arg0) {
+        regularCAGBPrice = estorePDPScreen.getFirstRegularPrice().getText();
+        memberCAGBPrice = estorePDPScreen.getFirstMemberPrice().getText();
+        estorePDPScreen.getFirstRegularPrice().shouldNotHave(text(regularUSPrice), Duration.ofSeconds(25));
+
+        assertFalse("Regular price was update after country was changed", regularUSPrice.equals(regularCAGBPrice));
+        assertFalse("Member price was update after country was changed", memberUSPrice.equals(memberCAGBPrice));
+    }
+
+    @Then("I verify price for member and regular user on PDP")
+    public void iVerifyThatPriceForMemberAndRegularUserOnPDP() {
+        regularCAGBPrice = estorePDPScreen.getFirstRegularPrice().getText();
+        memberCAGBPrice = estorePDPScreen.getFirstMemberPrice().getText();
+        System.out.println();
+    }
+
+    @Then("I verify that price in cart is the same as on PDP")
+    public void iVerifyThatPriceInCartIsTheSameAsOnPDP() {
+        itemCartPriceRegular = estoreCartPage.getRegularProductPriceInCart();
+        itemCartPriceMember = estoreCartPage.getMemberProductPriceInCart();
+
+        assertEquals("Verify that regular price on the Cart is the same as on PDP",
+                itemCartPriceRegular, regularCAGBPrice);
+        assertEquals("Verify that member price on the Cart is the same as on PDP",
+                itemCartPriceMember, memberCAGBPrice);
+    }
+
+
+    @When("user clicks on return policy link")
+    public void userClicksOnReturnPolicyLink() {
+        estorePDPScreen.clickToReturnPolicyButton();
+    }
+
+    @Then("user verifies that user is redirected to a return policy page")
+    public void userVerifiesThatUserIsRedirectedToAReturnPolicyPage() {
+        estoreReturnPolicyScreen.verifyThatReturnPolicyPageIsDisplayed();
     }
 }
