@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class EstorePGScreen {
+    private final SelenideElement firstSearchElement = $(By.xpath("(//div[contains(@id,'RH_')])[1]"));
 
     private final SelenideElement sofa = $(By.xpath("//*[text()='sofa']"));
 

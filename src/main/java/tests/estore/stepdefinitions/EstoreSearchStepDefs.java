@@ -24,6 +24,7 @@ public class EstoreSearchStepDefs {
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
     EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
     EstoreItemPage estoreItemPage = new EstoreItemPage();
+    EstorePGScreen estorePGScreen = new EstorePGScreen();
 
     @Then("I verify that search result for search product via product name is displayed")
     public void iVerifyThatSearchResultForSearchProductViaProductNameIsDisplayed() {
@@ -55,6 +56,7 @@ public class EstoreSearchStepDefs {
 
     @Then("I verify count of search results")
     public void iVerifyCountOfSearchResults() {
+        estorePGScreen.getFirstSearchElement().should(visible, Duration.ofSeconds(20));
         estoreSearchScreen.getResults().should(visible, Duration.ofSeconds(20));
     }
 

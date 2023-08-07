@@ -765,4 +765,9 @@ public class EstoreCartPageStepDefs {
     public void iVerifyTheCartItemQuantityIsEqualToOnEStore(String itemQuantity) {
         $(By.xpath("//*[contains(@id,'quantity')]")).shouldHave(text(itemQuantity), Duration.ofSeconds(20));
     }
+
+    @When("I verify membership was added to cart")
+    public void iVerifyMembershipWasAddedToCart() {
+        $(By.xpath("//*[contains(text(),'Thank you for joining the RH Members Program.')]")).should(visible, Duration.ofSeconds(20));
+    }
 }
