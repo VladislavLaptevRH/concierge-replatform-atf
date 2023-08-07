@@ -1,0 +1,164 @@
+<html xmlns="http://www.w3.org/1999/xhtml" class="login-pf"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+
+            <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sign in | RH</title>
+    <link rel="icon" href="/auth/resources/tojme/login/rh2/img/favicon.ico">
+            <link href="/auth/resources/tojme/login/rh2/node_modules/patternfly/dist/css/patternfly.css" rel="stylesheet">
+            <link href="/auth/resources/tojme/login/rh2/node_modules/patternfly/dist/css/patternfly-additions.css" rel="stylesheet">
+            <link href="/auth/resources/tojme/login/rh2/lib/zocial/zocial.css" rel="stylesheet">
+            <link href="/auth/resources/tojme/login/rh2/css/login.css" rel="stylesheet">
+            <link href="/auth/resources/tojme/login/rh2/css/styles.css" rel="stylesheet">
+            <script src="/auth/resources/tojme/login/rh2/js/createReturnElement.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/alpinejs" defer=""></script>
+
+</head>
+
+<body>
+  <div class="login-pf-page">
+    <div id="kc-header" class="login-pf-page-header">
+      <div id="kc-header-wrapper" class="">staging</div>
+    </div>
+    <header class="login-pf-header padding-x-4 rh-top-row margin-bottom-3-important">
+        <a href="https://stg2.rhnonprod.com" id="rh-logo">
+            <img src="/auth/resources/tojme/login/rh2/img/rh-logo.svg" class="rh-top-logo">
+        </a>
+    <a aria-label="Return to Restoration Hardware" class="icon-a" href="https://stg2.rhnonprod.com/us/en/my-account/profile.jsp?cancel=true">
+  <svg class="svg-x-close" focusable="false" viewBox="0 0 20 20" aria-hidden="true" role="img">
+    <title>Return to Restoration Hardware</title>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Grommet/X-Close" transform="translate(-15.000000, -15.000000)">
+        <rect id="Rectangle" x="0" y="0" width="50" height="50"></rect>
+        <path d="M34.3548387,15 L35,15.6451613 L25.645,24.999 L35,34.3548387 L34.3548387,35 L25,25.645 L15.6451613,35 L15,34.3548387 L24.354,25 L15,15.6451613 L15.6451613,15 L25,24.354 L34.3548387,15 Z" id="Combined-Shape" fill="currentColor"></path>
+      </g>
+    </g>
+  </svg>
+  </a></header>
+    <div class="card-pf ">
+      <div id="kc-content">
+        <div id="kc-content-wrapper">
+
+        <div id="kc-form">
+            <div id="kc-form-wrapper">
+                    <main class="main-grid-container">
+                        <div class="main-container-item form-horizontal item-login">
+                            <form id="kc-form-login" onsubmit="return validateForm(this);" action="/auth/realms/staging/login-actions/authenticate?session_code=iNvDMko662HPSW5BgH0cWcuhyl4JrX6MCChBXKuxokw&amp;execution=03d3653e-0c4b-434d-aa31-21493a1caa38&amp;client_id=rh-mobile-frontend&amp;tab_id=SC1LurOj3Y0" method="post">
+                            <h3 class="margin-bottom-3 margin-top-3">Sign in</h3>
+                            <div class="form-container">
+                                <p>
+                                    <input placeholder="Email" tabindex="2" id="username" name="username" type="text" autocomplete="off" autofocus="">
+                                </p>
+                                <p>
+                                    <input placeholder="Password (8 to 20 Characters)" tabindex="2" id="login-password" name="password" type="password" autocomplete="off">
+                                    <span class="password-show" onclick="togglePassword(event, 'login-password')" style="cursor:pointer;">Show</span>
+                                </p>
+                                <div class="login-space">
+                                    <input class="login-text" tabindex="4" name="login" id="kc-login" type="submit" value="Sign In">
+                                </div>
+                                <div class="extra-input-spacing">
+                                    <div class="checkbox-outer field-size  margin-top-1">
+                                            <input tabindex="3" id="rememberMe" name="rememberMe" type="checkbox">
+                                        <label for="rememberMe">Remember Me</label>
+                                        <span>
+                                            <a tabindex="3" href="/auth/realms/staging/login-actions/reset-credentials?client_id=rh-mobile-frontend&amp;tab_id=SC1LurOj3Y0" class="forgot-password">
+                                                Forgot password?
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                            <div class="main-container-item item-register">
+                                <h3 class="margin-bottom-3 margin-top-3">Create an account</h3>
+                                <p class="text-center">
+                                    If you don't yet have an RH account, please create one now so you can easily access your RH Members
+                                    Program details and order information in My Account.
+                                </p>
+                                <div class="form-button-register margin-top-63">
+                                        <a tabindex="6" href="/auth/realms/staging/login-actions/registration?client_id=rh-mobile-frontend&amp;tab_id=SC1LurOj3Y0">
+                                            <input class="login-text" tabindex="4" name="register" id="kc-register" type="submit" value="Create Account">
+                                        </a>
+                                </div>
+                            </div>
+                    </main>
+            </div>
+        </div>
+        <script type="text/javascript">
+           window.togglePassword = (element, elementId) => {
+                event.preventDefault();
+                const input = document.getElementById(elementId);
+                const inputType = input.getAttribute('type');
+                input.setAttribute("type", inputType === "password" ? "text" : "password");
+                element.target.innerHTML = inputType === "password" ? "Hide" : "Show";
+            };
+            function handleTextOnLoad(){
+                const url = window.location.href;
+
+                // If the URL contains "address.jsp" we're dealing with the checkout flow
+                const text = (url.search("address.jsp") < 0) ? "Sign In" : "Sign In & Checkout"
+
+                const loginButton = document.querySelector('#kc-login');
+                loginButton.value = text
+            }
+            handleTextOnLoad();
+            function setFormValueOnLoad(){
+                var email = getCookie("userName");
+                if(email && email.length > 0){
+                    document.getElementById("username").value = email;
+                }
+            }
+            function validateForm(form){
+                var userName = form.username.value;
+                if(userName && userName.length > 0){
+                    // set cookie for 1 year
+                    document.cookie = "userName="+userName+"; expires="+new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()+"; path=/";
+                }
+                return true;
+            }
+            var getCookie = function (name) {
+                var value = "; " + document.cookie;
+                var parts = value.split("; " + name + "=");
+                if (parts.length == 2) return parts.pop().split(";").shift();
+            };
+            setFormValueOnLoad();
+        </script>
+
+
+              <div id="kc-info" class="login-pf-signup">
+                  <div id="kc-info-wrapper" class="">
+
+                  </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer" class="rh-footer padding-2">
+      <div class="footer-list">
+            <div class="footer-item">
+                <a href="https://stg2.rhnonprod.com/my-account/index.jsp">My Account</a>
+            </div>
+            <div class="footer-item">
+                <a href="https://stg2.rhnonprod.com/customer-service/shipping-and-delivery-info.jsp">Shipping &amp; Delivery</a>
+            </div>
+            <div class="footer-item">
+                <a href="https://stg2.rhnonprod.com/customer-service/return-policy.jsp">Return &amp; Exchanges</a>
+            </div>
+            <div class="footer-item">
+                <a href="https://stg2.rhnonprod.com/content/page.jsp?id=terms-of-use">Terms of Use</a>
+            </div>
+            <div class="footer-item">
+                <a href="https://stg2.rhnonprod.com/customer-service/privacy-policy.jsp">Privacy</a>
+            </div>
+            <div class="footer-item">
+                <a href="https://stg2.rhnonprod.com/customer-service/contact-us.jsp">Contact Us</a>
+            </div>
+        </div>
+      <p class="copyright-message padding-top-1">©&nbsp;<span id="copyright-message">2022</span>&nbsp;RH</p>
+  </div>
+
+
+</body></html>

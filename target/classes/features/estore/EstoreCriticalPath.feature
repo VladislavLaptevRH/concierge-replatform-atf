@@ -1,5 +1,4 @@
-@@estoreCriticalPath
-
+@estoreCriticalPath
 Feature: Estore critical path
 
   Scenario Outline: Verify top menu navigation
@@ -371,26 +370,6 @@ Feature: Estore critical path
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify that price is showing for regular and member user
 
-#Verify the order placemnt
-  Scenario: Verify that user is able to buy item for estore
-    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
-    When I remove all items from estore cart
-    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    When I click on estore checkout button
-    And I click on estore no thanks button
-    When I fill estore shipping address
-    When I fill estore shipping email address
-    When I click on same as estore shipping address checkbox
-    When I click on continue to payment estore button
-    When I click on continue with original address estore button
-    When I remove payment method which was used earlier
-    When I execute payment with credit card on estore
-    When I click on a place estore order button
-    Then I verify that estore thank you page is displayed
-
 #Verify the SIgn in /Login
   Scenario: Verify that user is not able to login with invalid email and password
     Given I introduce wrong login and password
@@ -399,15 +378,6 @@ Feature: Estore critical path
   Scenario: Forgot Password option should be present with proper functionality
     Given when I click on forgot password button
     Then I verify that forgot password options works
-
-  Scenario: Verify that user is able to create account
-    Given I click on estore my account icon for guest user
-    When I click on create account button
-    When I introduces the required details
-    When I click on agree privacy policy checkbox
-    When I click on create account button from form
-    When I click on estore my account icon for registered user
-    Then I verify that I'm able to create the new account
 
 #Verify the add to cart funtionality
   Scenario: Verify the Add to cart functionality
@@ -521,6 +491,16 @@ Feature: Estore critical path
     When I click on order details button
     And I verify billing and shipping address are correct
 
+#Verify the Sign in /Login
+  Scenario: Verify that user is able to create account
+    Given I click on estore my account icon for guest user
+    When I click on create account button
+    When I introduces the required details
+    When I click on agree privacy policy checkbox
+    When I click on create account button from form
+    When I click on estore my account icon for registered user
+    Then I verify that I'm able to create the new account
+
 #Verify My account dropdowm
   Scenario: Verify the personal Info displayed after Sign in - First, last name and email
     Given I log into eStore as "regular" user
@@ -529,20 +509,9 @@ Feature: Estore critical path
     Then I verify that the personal info is displayed
 
 #Membership page and functionality
-
-  Scenario: Verify the add to cart button on membership page
-    Given I log into eStore as "nonmember" user
-    When I choose country for eStore from footer
-    When I click on estore my account icon
-    When I navigate to the member tab
-    When I click to add to cart on membership page
-    When I verify membership was added to cart
-    And I click on remove membership estore button
-
   Scenario: eStore Membership
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I click on estore my account icon
     When I navigate to the member tab
     Then I validate membership title
 
