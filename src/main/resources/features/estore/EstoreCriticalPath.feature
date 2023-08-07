@@ -1,4 +1,4 @@
-@@estoreCriticalPath
+@estoreCriticalPath
 
 Feature: Estore critical path
 
