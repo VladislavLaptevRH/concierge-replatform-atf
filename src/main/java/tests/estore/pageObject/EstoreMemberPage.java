@@ -20,6 +20,7 @@ public class EstoreMemberPage {
     private final SelenideElement messageAlert = $(By.xpath("//div[@class='MuiAlert-message']"));
     private final SelenideElement cancelLink = $(By.xpath("//*[@data-analytics-id='link' and text() = 'Cancel Membership']"));
 
+    private final SelenideElement addToCartButton = $(By.id("addToCartMembershipDialog_becomeMember-btn"));
     //cancel membership page
     private List<SelenideElement> benefitsList = $$(By.xpath("//*[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-direction-xs-column']/ul/li"));
     private final SelenideElement continueMembershipButton = $(By.xpath("//span[@class='MuiButton-label' and text() = 'Continue Membership']"));

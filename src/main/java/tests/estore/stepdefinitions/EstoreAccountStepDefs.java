@@ -179,4 +179,18 @@ public class EstoreAccountStepDefs {
     public void iClickOnEstoreMyAccountIconForRegisteredUser() {
         estoreHomePage.clickToAccountButtonForregisteredUser();
     }
+
+    @Given("user click on create new account button")
+    public void userClickOnCreateNewAccountButton() {
+        System.out.println();
+    }
+
+    @When("user introduces data for new account form")
+    public void userIntroducesDataForNewAccountForm() {
+
+    }
+
+    @Then("user verifies that new account was created")
+    public void userVerifiesThatNewAccountWasCreated() {
+    }
 }
