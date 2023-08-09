@@ -4,7 +4,7 @@ Feature: Estore critical path
 
   Scenario Outline: Verify top menu navigation
     Given I log into eStore as guest
-    When I choose country for concierge from footer
+    When I choose country for eStore from footer
     Then  I change the brand to "<brand>" for eStore
     Then User verifies that all items from menu are displayed for "<brand>"
     And user verifies search button, account icon, cart button are displayed
