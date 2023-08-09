@@ -75,8 +75,12 @@ public class EstorePGScreen {
 
     private final SelenideElement saleFilterApplied = $(By.xpath("(//*[text()='sale'])[2]"));
 
+    private final SelenideElement thumbalImg = $(By.xpath("//img[contains(@alt,'prod')]"));
+
     private final List<SelenideElement> listOfPgFusionElements = $$(By.xpath("//*[@id='component-rh-image_wrapper']"));
 
     private final SelenideElement livingCategory = $(By.xpath("//*[@data-navigation-account-item-id='cat160024']"));
+
+    private final SelenideElement collectionTextTitle = $(By.xpath("//p[contains(text(),'Collection')]"));
 }
 

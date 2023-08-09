@@ -13,7 +13,6 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 public class EstoreCartPage {
 
-//    private SelenideElement quantitySelect = $(By.id("quantity-select"));
 
     private SelenideElement postalCodeButton = $(By.xpath("//*[@id='component-order-summary']//span"));
 

@@ -55,9 +55,16 @@ public class EstorePDPScreen {
 
     private final SelenideElement returnPolicyButton = $(By.xpath("(//a[@href='/us/en/customer-service/return-policy.jsp'])[1]"));
 
+    private final SelenideElement monogramCheckBox = $(By.xpath("//*[@data-testid='monogram-checkbox']"));
+
 
     public void clickToReturnPolicyButton() {
         returnPolicyButton.should(Condition.and("", Condition.interactable, Condition.visible)
+                , Duration.ofSeconds(15)).click(ClickOptions.usingJavaScript());
+    }
+
+    public void clickToMonogramCheckBox() {
+        monogramCheckBox.should(Condition.and("", Condition.appear, Condition.visible)
                 , Duration.ofSeconds(15)).click(ClickOptions.usingJavaScript());
     }
 

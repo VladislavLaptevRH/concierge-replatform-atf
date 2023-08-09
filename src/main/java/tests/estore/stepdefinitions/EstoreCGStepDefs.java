@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
@@ -21,6 +22,7 @@ import static io.netty.handler.codec.rtsp.RtspHeaders.Values.URL;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Awaitility.with;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class EstoreCGStepDefs {
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
@@ -242,4 +244,21 @@ public class EstoreCGStepDefs {
             $(By.xpath("(//img[contains(@alt, 'Collection')])[1]")).click();
         }
     }
+
+    @Then("user verifies that price range is displayed below the thumbnail")
+    public void userVerifiesThatPriceRangeIsDisplayedBelowTheThumbnail() {
+        $(By.xpath("//span[contains(text(),'From')]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//span[text()='Member']")).should(visible, Duration.ofSeconds(20));
+        int regularPrice = Integer.parseInt($(By.xpath("(//span[@class='priceSpan']//span)[1]")).getText().replaceAll("\\,", ""));
+        int memberPrice = Integer.parseInt($(By.xpath("(//span[@class='priceSpan'])[3]")).getText().replaceAll("\\$", "").replaceAll("Member", "").replaceAll("\\,", "").replaceAll(" ", ""));
+
+        assertTrue("Regular price is not equal to zero", regularPrice > 0);
+        assertTrue("Member price is not equal to zero", memberPrice > 0);
+    }
+
+    @When("I click on random product on collection page")
+    public void iClickOnRandomProductOnCollectionPage() {
+        $(By.xpath("(//div[@id='component-rh-image_wrapper'])[2]//div")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
+    }
+
 }
