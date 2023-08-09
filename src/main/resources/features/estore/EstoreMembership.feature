@@ -1,7 +1,6 @@
-@estoreTestRun
-
 Feature: Estore Membership
 
+  @estoreParallelTestRun
   Scenario: eStore Membership
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -9,6 +8,7 @@ Feature: Estore Membership
     When I navigate to the member tab
     Then I validate membership title
 
+  @estoreParallelTestRun
   Scenario: eStore Membership renewal details
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -16,6 +16,7 @@ Feature: Estore Membership
     When I navigate to the member tab
     Then I validate membership details
 
+  @estoreParallelTestRun
   Scenario: eStore Membership Add to Cart button
     Given I log into eStore as "nonmember" user
     When I choose country for eStore from footer
@@ -24,6 +25,7 @@ Feature: Estore Membership
     When I goes to click on cart button from header
     Then I validate cart
 
+  @estoreParallelTestRun
   Scenario: eStore Link to Membership
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -32,6 +34,7 @@ Feature: Estore Membership
     Then I validate membership details
     Then I validate email address field and link to membership button
 
+  @estoreParallelTestRun
   Scenario: eStore Membership details - Member User
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -39,6 +42,7 @@ Feature: Estore Membership
     When I navigate to the member tab
     Then I validate membership details for member user
 
+  @estoreParallelTestRun
   Scenario: eStore Cancel Membership
     Given I log into eStore as "cancelMembership" user
     When I choose country for eStore from footer
@@ -48,6 +52,7 @@ Feature: Estore Membership
     When I click on cancel membership link
     Then I validate cancel membership content
 
+  @estoreParallelTestRun
   Scenario: Verify the membership Terms and Conditions Link
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -56,6 +61,7 @@ Feature: Estore Membership
     When I click on terms & condition link
     Then I verify that rh members program terms & condition pop up is displayed
 
+  @estoreParallelTestRun
   Scenario: Verify the email address displayed in membership page
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -63,6 +69,7 @@ Feature: Estore Membership
     When I navigate to the member tab
     Then I verify that email address displayed in membership page
 
+  @estoreParallelTestRun
   Scenario: Verfiy membership FAQa link
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -71,6 +78,7 @@ Feature: Estore Membership
     When I click on FAQa link for estore
     Then I verfiy that frequently asked questions page is displayed
 
+  @estoreParallelTestRun
   Scenario: Verify the membership page when the membership is canceled
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -78,6 +86,7 @@ Feature: Estore Membership
     When I navigate to the member tab
     Then I verify that membership is cancelled
 
+  @estoreTestRun
   Scenario: User having membership on cart and navigates to Payment Page - "Save card to account" checkbox should be checked by default
     Given I log into eStore as "buymembership" user
     When I choose country for eStore from footer

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Regression">
-    <test name="Test Run">
+    <test name="Parallel test run">
+        <classes>
+            <class name="tests.runners.ParallelTestRun"></class>
+        </classes>
+    </test>
+    <test name="Window">
         <classes>
             <class name="tests.runners.RunTest"></class>
         </classes>

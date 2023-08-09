@@ -347,7 +347,6 @@ public class EstoreCartPageStepDefs {
                 estoreUserAccountPage.getBrandButton().click();
             }
 
-
             estoreUserAccountPage.getListOfBrands().get(i).should(visible, Duration.ofSeconds(20));
             String brandUrl = estoreUserAccountPage.getListOfBrands().get(i).getText().replaceAll(" ", "").toLowerCase();
             String estoreUrlNoHttps = Hooks.eStoreURL.replaceAll("https://", "");
@@ -360,9 +359,8 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that I'm able to add products from all brands to cart")
     public void iVerifyThatIMAbleToAddProductsFromAllBrandsToCart() {
-
         WebDriverRunner.getWebDriver().navigate().refresh();
-
+        
         estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getBrandButton().click();
     }
@@ -386,12 +384,11 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that I'm able to increase item quantity with success after payment")
     public void iVerifyThatItemQuantityWasIncreasedWithSuccess() {
-
         estoreItemPage.getSelectQuantityCartPage().should(visible, Duration.ofSeconds(40));
         estoreItemPage.getSelectQuantityCartPage().scrollIntoView(true);
         Select selectQuantity = new Select(estoreItemPage.getSelectQuantityCartPage());
         selectQuantity.selectByValue("2");
-
+        
     }
 
     @Then("I verify that I'm able to decrease item quantity with success")
@@ -434,7 +431,6 @@ public class EstoreCartPageStepDefs {
 
     @When("I introduces CAN zip code for estore cart")
     public void iIntroducesCANZipCodeForEstoreCart() {
-
         $(By.xpath("//div[@id='component-order-summary']//p//span")).scrollIntoView(true);
         $(By.xpath("//div[@id='component-order-summary']//p//span")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//div[@id='component-order-summary']//p//span")).click();
@@ -446,7 +442,6 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that the price for trade get increased in multiple of QTY")
     public void iVerifyThatThePriceForTradeGetIncreasedInMultipleOfQTY() {
-
         $(By.xpath("//*[contains(text(),'70.00')]")).should(visible, Duration.ofSeconds(40));
     }
 
@@ -459,7 +454,7 @@ public class EstoreCartPageStepDefs {
     public void iOpenCart() {
         String URL = Hooks.eStoreBaseURL + "/us/en/checkout/shopping_cart.jsp";
         open(URL);
-
+        
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -524,17 +519,16 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify state field empty dropdown issue for International billing address")
     public void iVerifyStateFieldEmptyDropdownIssueForInternationalBillingAddress() {
-
         $(By.xpath("//*[text()='State required.']")).should(visible, Duration.ofSeconds(30));
     }
 
     @When("I choose estore empty state")
     public void iChooseEstoreEmptyState() {
         estoreAddressScreen.getShippingAddressState().scrollIntoView(true);
-
+        
         Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
         selectState.selectByValue("");
-
+        
 
     }
 
@@ -571,7 +565,7 @@ public class EstoreCartPageStepDefs {
         if ((Hooks.cookie.contains("userservice")) && (Hooks.profile.equals("stg2"))) {
             open(Hooks.eStoreBaseURL + "/us/en/checkout/shopping_cart.jsp");
         }
-
+        
         if (Hooks.profile.equals("stg3")) {
             $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']")).click();
@@ -609,7 +603,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I verify for back button from cart page")
     public void iVerifyForBackButtonFromCartPage() {
-
+        
         WebDriverRunner.getWebDriver().navigate().back();
         estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(20));
     }
@@ -618,7 +612,7 @@ public class EstoreCartPageStepDefs {
     public void iIntroducesPaymentDetailsForEstoreGuestUserForCart() {
         if (!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-
+    
         }
 
         estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Credit Card"), Duration.ofSeconds(20));
@@ -645,7 +639,7 @@ public class EstoreCartPageStepDefs {
     public void iIntroducesPaymentDetailsForEstoreGuestUserForPayment() {
         if (!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()) {
             String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
-
+    
         }
 
 //        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Visa ####-7543"), Duration.ofMinutes(2));

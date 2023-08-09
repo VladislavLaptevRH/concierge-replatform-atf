@@ -264,7 +264,7 @@ public class EstoreUserAccountPageStepDefs {
         }
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
-
+        
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getSaveCardButton().click();
     }

@@ -1,4 +1,4 @@
-@estoreTestRun
+@estoreParallelTestRun
 Feature: Estore account
 
   Scenario: Verify the personal Info displayed after Sign in - First, last name and email

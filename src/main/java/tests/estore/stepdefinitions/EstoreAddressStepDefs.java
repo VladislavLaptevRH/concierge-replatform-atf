@@ -40,8 +40,9 @@ public class EstoreAddressStepDefs {
     @When("I click on edit estore billing address button")
     public void iClickOnEditEstoreBillingAddressButton() {
         try {
+            
             estoreAddressScreen.getEditBillingAddress().should(Condition.and("Visible, interactable", visible, interactable), Duration.ofSeconds(20));
-            estoreAddressScreen.getEditBillingAddress().click(ClickOptions.usingJavaScript());
+            executeJavaScript("arguments[0].click();", estoreAddressScreen.getEditBillingAddress());
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Edit button is not displayed");
             if (estoreAddressScreen.getEditBillingAddress().isDisplayed()) {
@@ -62,6 +63,7 @@ public class EstoreAddressStepDefs {
         generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
         estoreAddressScreen.getShippingAddressLastName1().setValue("William");
 
+        
 
         estoreAddressScreen.getShippingAddressStreetAddressStg2().should(interactable, Duration.ofSeconds(30));
         generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
@@ -110,7 +112,6 @@ public class EstoreAddressStepDefs {
 
     @When("I click on edit shipping address button on estore order review page")
     public void iClickOnEditShippingAddressButtonOnEstoreOrderReviewPage() {
-
         estoreAddressScreen.getEditShippinggAddress().shouldHave(text("Edit"), Duration.ofSeconds(20));
         estoreAddressScreen.getEditShippinggAddress().click();
     }
@@ -440,11 +441,11 @@ public class EstoreAddressStepDefs {
                 System.out.println("Dropdown list is not displayed");
             }
         } else {
-
+            
             generalStepDefs.clearField(estoreAddressScreen.getShippingAddressAddStreetField());
             estoreAddressScreen.getShippingAddressAddStreetField().setValue("Bradford Drive, Hilliard, OH, USA");
             try {
-
+        
                 $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
                 $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
             } catch (com.codeborne.selenide.ex.ElementNotFound e) {
