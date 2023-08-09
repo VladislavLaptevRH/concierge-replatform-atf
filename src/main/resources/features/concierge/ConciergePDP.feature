@@ -2,7 +2,7 @@
 @concierge-PDP
 Feature: Concierge PDP
 
-  Scenario: Monogram
+  Scenario: Verify Monogram functionality
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I open product page with productId "prod19500002"
@@ -10,17 +10,31 @@ Feature: Concierge PDP
     When I choose monogram properties for pdp
     Then I verify that monogram was added for pdp
 
-  Scenario: In stock
+  Scenario: Verify In Stock functionality
     Given I log into Concierge as "associate"
     When I go to item "60450996 BLNL" from search field
-    When I click on view in stock items
-    Then I verify that in stock modal pop up is displayed
+    When I click on "view in stock items" link
+    Then Verify that "In Stock modal" 'opens'
+    Then Verify that "In Stock modal" 'has title'
+    Then Verify that "In Stock modal" 'has item#'
+    Then Verify that "In Stock modal" 'has price and member price'
+    Then Verify that "In Stock modal" 'has qty dropdown'
+    Then Verify that "In Stock modal" 'has "add to cart" and "add to project" buttons'
+    Then Verify that "In Stock modal" 'has an item can be added to cart from modal'
+    Then Verify that "In Stock modal" 'has an item can be added to project from modal'
 
-  Scenario: On Sale
+  Scenario: Verify On Sale functionality
     Given I log into Concierge as "associate"
-    When I go to item "10024887 WGRY" from search field
-    When I click on view sale items
-    Then I verify that on sale modal pop up is displayed
+    When I go to item "60450996 BLNL" from search field
+    When I click on "view select items on sale" link
+    Then Verify that "Sale modal" 'opens'
+    Then Verify that "Sale modal" 'has title'
+    Then Verify that "Sale modal" 'has item#'
+    Then Verify that "Sale modal" 'has price, member and sale price'
+    Then Verify that "Sale modal" 'has qty dropdown'
+    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
+    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
+    Then Verify that "Sale modal" 'has an item can be added to project from modal'
 
   Scenario: Custom rugs
     Given I log into Concierge as "associate"
@@ -39,17 +53,26 @@ Feature: Concierge PDP
     When I click on windows from top menu
     Then I verify that custom windows are displayed
 
-  Scenario: YAML carousel
+  Scenario: Verify YAML Carousel
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I open product page with productId "prod14900056"
     Then I verify that YAML carousel is displayed
 
-  Scenario: Mattress Recycling Fee
+  Scenario Outline: Verify Mattress Recycling Fee
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I go to item "10004670 NONE" from search field
-    Then I verify mattress recycling fee
+    When I change state for "<state>" with zip code "<zipCode>"
+    Then I verify that text ""<state>" requires a mattress recycling fee to be collected at checkout state" is present in PDP
+    When I click on add to cart button
+    When I click on view cart button
+    Then I verify text "Mattress fee" and amount in checkout is present for state "<state>"
+    Examples:
+      | state | zipCode|
+      | CA    | 94925  |
+      | RI    | 02860  |
+      | CT    | 06902  |
 
   Scenario: Replacement Items
     Given I log into Concierge as "associate"
@@ -58,7 +81,7 @@ Feature: Concierge PDP
     Then I verify that check for replacements parts button is displayed
     And I verify that replacements parts modal pop up is displayed
 
-  Scenario: Colorization
+  Scenario: Verify Colorization options
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I go to item "10115451 BWMR" from search field

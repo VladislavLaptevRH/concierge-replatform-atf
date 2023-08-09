@@ -71,3 +71,12 @@ Feature: Estore CG
     When user clicks on textile menu
     When user goes to bedding collections test
     Then I verify that Enjoy Free Shipping On All Textiles banner is displayed
+
+  Scenario: Browser back button from search to CG page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to "SEATING COLLECTIONS" on eStore
+    When I go to estore item "sofa" from search field
+    When I navigate back from "PDP" page
+    Then I verify that CG page is displayed
+    #go to cg->living-seating collections-search-navigate back-cg should displayed

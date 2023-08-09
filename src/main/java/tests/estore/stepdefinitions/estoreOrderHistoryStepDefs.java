@@ -5,6 +5,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import tests.estore.pageObject.EstoreHomePage;
 import tests.estore.pageObject.EstoreOrderHistoryScreen;
 import tests.utility.Hooks;
 
@@ -15,19 +16,27 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 
 public class estoreOrderHistoryStepDefs {
+    EstoreAccountStepDefs estoreAccountStepDefs = new EstoreAccountStepDefs();
+    EstoreHomePage estoreHomePage = new EstoreHomePage();
     EstoreOrderHistoryScreen estoreOrderHistoryScreen = new EstoreOrderHistoryScreen();
+    EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
 
     @When("I open order history for estore")
     public void iOpenOrderHistoryForEstore() {
         String URL = Hooks.eStoreBaseURL + "/my-account/order-history.jsp";
         open(URL);
-        
+        estoreGeneralStepDefs.waitForJSandJQueryToLoad();
         WebDriverRunner.getWebDriver().navigate().refresh();
+        estoreGeneralStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        WebDriverRunner.getWebDriver().navigate().refresh();
+
     }
 
     @Then("I verify that estore order history page is displayed")
     public void iVerifyThatEstoreOrderHistoryPageIsDisplayed() {
-        estoreOrderHistoryScreen.getOrderHistorySafireWilliam().should(Condition.visible, Duration.ofSeconds(20));
+        estoreOrderHistoryScreen.getOrderHistoryOrderText().should(Condition.visible, Duration.ofSeconds(20));
+        estoreOrderHistoryScreen.getOrderHistorySafireWilliam().should(Condition.visible, Duration.ofSeconds(60));
     }
 
     @Then("I verify that a new order listed in order history")
@@ -79,20 +88,16 @@ public class estoreOrderHistoryStepDefs {
 
     @Then("I verify the billing summary link for order history")
     public void iVerifyTheBillingSummaryLinkForOrderHistory() {
-
+        estoreOrderHistoryScreen.getBillingSummaryButton().should(Condition.visible, Duration.ofSeconds(25));
+        estoreOrderHistoryScreen.getBillingSummaryButton().should(Condition.appear, Duration.ofSeconds(25));
         if (!estoreOrderHistoryScreen.getBillingSummaryButton().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-    
+
         }
         estoreOrderHistoryScreen.getBillingSummaryButton().should(Condition.visible, Duration.ofSeconds(20));
         estoreOrderHistoryScreen.getBillingSummaryButton().click();
-        if (!estoreOrderHistoryScreen.getBillingSummaryBrandTitle().isDisplayed()) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-    
-        }
-        if (estoreOrderHistoryScreen.getBillingSummaryBrandTitle().isDisplayed()) {
-            estoreOrderHistoryScreen.getBillingSummaryBrandTitle().shouldHave(Condition.text("Billing Summary"), Duration.ofSeconds(20));
-        }
+
+        $(By.xpath("//*[text()='There has been no billing activity for order #']")).should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify the details and tracking link for the order placed")
@@ -116,7 +121,7 @@ public class estoreOrderHistoryStepDefs {
     public void iGoToEstoreOrderHistory() {
         String URL = Hooks.eStoreBaseURL + "/my-account/order-history.jsp";
         open(URL);
-        
+
     }
 
     @Then("I verify that status is order in progress while order is still in progress")

@@ -92,7 +92,6 @@ Feature: Order history
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
-    And I click on estore no thanks button
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -100,4 +99,5 @@ Feature: Order history
     When I execute payment with credit card on estore
     When I click on a place estore order button
     When I open estore order history
+    When I click on estore my account icon for guest user
     Then I verify that status is order in progress while order is still in progress

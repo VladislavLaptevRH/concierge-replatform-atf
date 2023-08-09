@@ -32,6 +32,19 @@ Feature:Concierge Cart Page
     When I click on quantity line item button
     Then I verify that quantity was updated
 
+  Scenario: Checkout membership banner for Guest user
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I save member price
+    When I choose order classification
+    When I click on checkout button
+    Then I click on become a member now button
+    Then I verify membership banner
+
   Scenario: Remove line item - click on remove button and verify that line item is removed and subtotal and minicart value is updated
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -239,8 +252,8 @@ Feature:Concierge Cart Page
     Then I verify membership banner for "<businessClient>" client not displayed
     Examples:
       | businessClient |
-      | Trade |
-      | Unclassified |
+      | Trade          |
+      | Unclassified   |
 
   Scenario: Verify Membership Pop up while checkout for Trade - should not
     Given I log into Concierge as "associate"

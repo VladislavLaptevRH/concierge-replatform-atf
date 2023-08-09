@@ -1,5 +1,6 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -24,6 +25,8 @@ public class EstoreHomePage {
     private final SelenideElement searchIcon = $(By.xpath("//span[@class='MuiIconButton-label']"));
     private final SelenideElement hamburgerIcon = $(By.id("hamburgerIcon"));
 
+    private final SelenideElement searchIconHomePage = $(By.xpath("(//span[@class='MuiIconButton-label'])[1]"));
+
     private final SelenideElement categoryDropdown = $(By.xpath("//div[@id='hamburgerIcon']"));
     private final SelenideElement locationDropdown = $(By.id("gallery-select"));
 
@@ -36,14 +39,16 @@ public class EstoreHomePage {
     private final SelenideElement emailInputField = $(By.id("customerEmail"));
     private final SelenideElement messageInputField = $(By.id("description"));
 
-    private final SelenideElement thankMessageText = $(By.xpath("//p[@class= 'MuiTypography-root MuiTypography-body1 MuiTypography-paragraph']"));
+    private final SelenideElement orderHistoryAccountMenuBtn = $(By.xpath("//*[@id='account-menu-link-/my-account/order-history.jsp']"));
+
+    private final SelenideElement thankMessageText = $(By.xpath("//*[contains(text(),'Thank you for telling us about your project.')]"));
 
     private final SelenideElement searchCloseButton = $(By.xpath("//button[@data-testid = 'dialog-title-close-button']"));
     private final SelenideElement seeAllResultButton = $(By.xpath("//*[text() = 'SEE ALL RESULTS']"));
-    private final SelenideElement requestConsultationButton = $(By.xpath("(//button[@ctaname='Consultation']//span//span)[1]"));
+    private final SelenideElement requestConsultationButton = $(By.xpath("(//div[@cqitemsorder='rh_request_consultat']//button)[1]"));
     private final SelenideElement iframeRequestAConsultationButton = $(By.xpath("//*[text()='REQUEST A CONSULTATION']"));
     private final SelenideElement wishlist = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between'])[3]"));
-    private final SelenideElement accountIcon = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
+    private final SelenideElement accountIcon = $(By.xpath("//*[@data-analytics-nav='account-icon']"));
     private final SelenideElement member = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between'])[4]"));
 
     private final SelenideElement homePageLogo = $(By.xpath("//a[@href='https://stg2.rhnonprod.com']"));
@@ -54,10 +59,17 @@ public class EstoreHomePage {
 
     private final SelenideElement caCountry = $(By.xpath("//li[@data-value='CA']"));
 
+    private final SelenideElement headerCartButton = $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']"));
+
 
     public void clickToAccountButtonForregisteredUser() {
         accountIcon.should(interactable, Duration.ofSeconds(20));
         accountIcon.click();
+    }
+
+    public void clickToOrderHistoryAccountMenu() {
+        orderHistoryAccountMenuBtn.shouldBe(interactable, Duration.ofSeconds(20));
+        accountIcon.click(ClickOptions.usingJavaScript());
     }
 
     public void chooseGBCountry() {

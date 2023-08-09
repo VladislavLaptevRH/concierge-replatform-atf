@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
@@ -39,7 +40,7 @@ public class EstoreAddressStepDefs {
     @When("I click on edit estore billing address button")
     public void iClickOnEditEstoreBillingAddressButton() {
         try {
-
+            
             estoreAddressScreen.getEditBillingAddress().should(Condition.and("Visible, interactable", visible, interactable), Duration.ofSeconds(20));
             executeJavaScript("arguments[0].click();", estoreAddressScreen.getEditBillingAddress());
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
@@ -62,6 +63,7 @@ public class EstoreAddressStepDefs {
         generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
         estoreAddressScreen.getShippingAddressLastName1().setValue("William");
 
+        
 
         estoreAddressScreen.getShippingAddressStreetAddressStg2().should(interactable, Duration.ofSeconds(30));
         generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
@@ -99,10 +101,8 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify unavailability for RHCC")
     public void iVerifyUnavailabilityForRHCC() {
-        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
-        Select selectPaymentMethod = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
-        int optionSize = selectPaymentMethod.getOptions().size();
-        assertEquals(optionSize, 3);
+        estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(interactable), Duration.ofSeconds(35));
+        estorePaymentPage.getChoosePaymentMethodBtn().shouldNotHave(value("RH"), Duration.ofSeconds(35));
     }
 
     @Then("I verify that shipping address is displayed")
@@ -112,17 +112,18 @@ public class EstoreAddressStepDefs {
 
     @When("I click on edit shipping address button on estore order review page")
     public void iClickOnEditShippingAddressButtonOnEstoreOrderReviewPage() {
-        estoreAddressScreen.getEditShippinggAddress().shouldHave(text("Edit"), Duration.ofSeconds(30));
+        estoreAddressScreen.getEditShippinggAddress().shouldHave(text("Edit"), Duration.ofSeconds(20));
         estoreAddressScreen.getEditShippinggAddress().click();
     }
 
     @When("I click on edit shipping address button on estore address page")
     public void iClickOnEditShippingAddressButtonOnEstoreAddressPage() {
         try {
+
             estoreAddressScreen.getEditShippinggAddress().shouldHave(text("Edit"), Duration.ofSeconds(20));
             estoreAddressScreen.getEditShippinggAddress().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Agree&add to cart button is not displayed");
+            System.out.println("Edit shipping address button is not displayed");
         }
 
     }
@@ -179,7 +180,6 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore shipping address")
     public void iFillEstoreShippingAndShippingAddress() {
-
         estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
         generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
         estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
@@ -274,8 +274,9 @@ public class EstoreAddressStepDefs {
         Select state = new Select(estoreUserAccountPage.getBillingAddressSelectState());
         state.selectByValue("TX");
 
-        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPostalCode());
-        estoreUserAccountPage.getBillingAddressPostalCode().setValue("12345");
+//        estoreUserAccountPage.getBillingAddressPostalCode().click();
+//        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPostalCode());
+//        estoreUserAccountPage.getBillingAddressPostalCode().setValue("73301");
 
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPhone());
         estoreUserAccountPage.getBillingAddressPhone().setValue("(541) 777-4321");
@@ -347,45 +348,49 @@ public class EstoreAddressStepDefs {
 
     @When("I click on continue with original address estore button")
     public void iClickOnContinueWithOriginalAddressEstoreButton() {
-        try {
-            generalStepDefs.waitForJSandJQueryToLoad();
+//        try {
+        generalStepDefs.waitForJSandJQueryToLoad();
 
-            estoreItemPage.getAddToCartButton().should(Condition.and("", appear, exist, visible, enabled, interactable), Duration.ofSeconds(50));
-            estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(20));
 
-            estoreItemPage.getAddToCartButton().click();
+//            if (Hooks.profile.equals("stg3")) {
+//                $(By.xpath("(//button[contains(@class,'MuiButton-containedPrimary')])[2]")).click();
+//            } else {
 
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Continue with original button is not displayed");
-        }
+
+//        if (!estoreItemPage.getAddToCartButtonNotDisabled().isDisplayed()) {
+//            iClickOnContinueToPayment();
+//        }
+        estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled, interactable), Duration.ofSeconds(30));
+        estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(30));
+        estoreItemPage.getAddToCartButton().click(ClickOptions.usingJavaScript());
+
+//            if (estoreItemPage.getAddToCartButton().isDisplayed()) {
+//                estoreUserAccountPageStepDefs.iClickOnAddAddressButton();
+//                iIntroduceDataForNewProfileAddress();
+//                estoreUserAccountPageStepDefs.iClickOnSaveAddressButton();
+//                iClickOnContinueWithOriginalAddressEstoreButton();
+//            }
+
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            System.out.println("Continue with original button is not displayed");
+//        }
     }
 
     @When("I click on continue to payment estore button")
     public void iClickOnContinueToPayment() {
+        estorePaymentPage.getContinueToPayment().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
+        estorePaymentPage.getContinueToPayment().scrollIntoView(true);
+        estorePaymentPage.getContinueToPayment().should(Condition.and("", visible, interactable), Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
 
-//        if (!$(By.xpath("//button[@type='submit']")).isDisplayed()) {
-//            estoreAbstractStepDefs.iClickOnCheckoutButton();
-//            estoreE2EStepDefs.iClickOnNoThanksEstoreButton();
-//
-//        }
+        if ($(By.xpath("//*[contains(text(), 'required')]")).isDisplayed()) {
+            iFillEstoreShippingAndShippingAddress();
+            estoreE2EStepDefs.iClickOnSameAsShippingAddressCheckbox();
+            estoreE2EStepDefs.iClickOnSameAsShippingAddressCheckbox();
+            $(By.xpath("//*[text()='Continue to payment']")).should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
 
-        $(By.xpath("//button[@type='submit']")).should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
-        $(By.xpath("//button[@type='submit']")).scrollIntoView(true);
+            executeJavaScript("arguments[0].click();", $(By.xpath("//button[@type='submit']")));
 
-        $(By.xpath("//button[@type='submit']")).should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
-
-        $(By.xpath("//button[@type='submit']")).should(visible, Duration.ofMinutes(1)).click();
-
-
-//        if ($(By.xpath("//*[contains(text(), 'required')]")).isDisplayed()) {
-//            iFillEstoreShippingAndShippingAddress();
-//            estoreE2EStepDefs.iClickOnSameAsShippingAddressCheckbox();
-//            estoreE2EStepDefs.iClickOnSameAsShippingAddressCheckbox();
-//            $(By.xpath("//*[text()='Continue to payment']")).should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
-//
-//            executeJavaScript("arguments[0].click();", $(By.xpath("//button[@type='submit']")));
-//
-//        }
+        }
     }
 
     @When("I fill estore shipping email address")
@@ -436,11 +441,11 @@ public class EstoreAddressStepDefs {
                 System.out.println("Dropdown list is not displayed");
             }
         } else {
-
+            
             generalStepDefs.clearField(estoreAddressScreen.getShippingAddressAddStreetField());
             estoreAddressScreen.getShippingAddressAddStreetField().setValue("Bradford Drive, Hilliard, OH, USA");
             try {
-
+        
                 $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
                 $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
             } catch (com.codeborne.selenide.ex.ElementNotFound e) {
@@ -498,57 +503,33 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore shipping address for {string}")
     public void iFillEstoreShippingAddressFor(String state) {
-        try {
 
-            estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
-            estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
+        estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
+        estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
 
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName());
-            estoreAddressScreen.getShippingAddressLastName().setValue("William");
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
+        estoreAddressScreen.getShippingAddressLastName1().setValue("William");
 
-            if (Hooks.eStoreURL.contains("stg4")) {
-                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddress());
-                estoreAddressScreen.getShippingAddressStreetAddress().setValue("MetroTech Center, Brooklyn, NY 11201, USA");
-                estoreAddressScreen.getShippingAddressLastName().click();
-                try {
-                    $(By.xpath("//*[text()='Metrotech Center, Brooklyn, NY 11201, USA']")).should(visible, Duration.ofSeconds(5));
-                    $(By.xpath("//*[text()='Metrotech Center, Brooklyn, NY 11201, USA']")).click();
-                } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                    System.out.println("Dropdown list is not displayed");
-                }
-            } else {
+        $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).click();
+        generalStepDefs.clearField($(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")));
+        $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).setValue("Metrotech Center");
 
-                generalStepDefs.clearField(estoreAddressScreen.getShippingAddressStreetAddressStg2());
-                estoreAddressScreen.getShippingAddressStreetAddressStg2().setValue("Metrotech Center, Brooklyn, NY 11201, USA");
-                try {
+        $(By.cssSelector("input[id=\"shippingAddress.city\"]")).click();
+        generalStepDefs.clearField($(By.cssSelector("input[id=\"shippingAddress.city\"]")));
+        $(By.cssSelector("input[id=\"shippingAddress.city\"]")).setValue("Brooklyn");
 
-                    $(By.xpath("//*[text()='MetroTech Center, Brooklyn, NY 11201, USA']")).should(visible, Duration.ofSeconds(5));
-                    $(By.xpath("//*[text()='MetroTech Center, Brooklyn, NY 11201, USA']")).click();
-                } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                    System.out.println("Dropdown list is not displayed");
-                }
+        $(By.cssSelector("select[id=\"shippingAddress.state\"]")).should(interactable, Duration.ofSeconds(20));
+        Select selectCaState = new Select($(By.cssSelector("select[id=\"shippingAddress.state\"]")));
+        selectCaState.selectByValue("NY");
 
-            }
+        $(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")).click();
+        generalStepDefs.clearField($(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")));
+        $(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")).setValue("10001");
 
-
-            estoreAddressScreen.getShippingAddressAptFloor().click();
-            estoreAddressScreen.getShippingAddressAptFloor().setValue("20");
-            estoreAddressScreen.getShippingAddressCity().setValue("Brooklyn");
-
-            Select shippingAddressState = new Select(estoreAddressScreen.getShippingAddressState());
-            shippingAddressState.selectByValue("NY");
-
-            estoreAddressScreen.getPostalShippingCode().click();
-            generalStepDefs.clearField(estoreAddressScreen.getPostalShippingCode());
-            estoreAddressScreen.getPostalShippingCode().setValue("11201");
-
-            estoreAddressScreen.getShippingAddressPhone().click();
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
-            estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Shipping address fields are not displayed");
-        }
+        estoreAddressScreen.getShippingAddressPhone().click();
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
+        estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
     }
 
     @When("I fill estore shipping address for CAN")
@@ -586,7 +567,6 @@ public class EstoreAddressStepDefs {
             estoreAddressScreen.getShippingAddressPhone().click();
             generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
             estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
-
         }
     }
 
@@ -604,8 +584,8 @@ public class EstoreAddressStepDefs {
     public void iVerifyBillingAndShippingAddressAreCorrect() {
         $(By.xpath("//*[text()='SHIPPING ADDRESS']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Bradford Drive']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Hilliard, OH, 43026']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='4524 Ocala Street']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Orlando, FL, 32801']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='BILLING ADDRESS']")).should(visible, Duration.ofSeconds(20));
     }

@@ -126,7 +126,7 @@ public class EstoreAddressScreen {
 
     private final SelenideElement editPaymentOrderReview = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']/a)[2]"));
 
-    private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'BILLING ADDRESS']/following-sibling::div/*[text() = 'Edit']"));
+    private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'Edit']"));
 
     private final SelenideElement editBillingAddressNew = $(By.xpath("//*[text() = 'Billing Address']/..//*[text() = 'Edit']"));
 

@@ -6,20 +6,29 @@ import com.codeborne.selenide.WebDriverRunner;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
 import lombok.Getter;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.apache.commons.io.FileUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.concierge.pageObject.*;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -30,7 +39,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.with;
 
 @Getter
 public class EstoreGeneralStepDefs {
@@ -96,7 +107,7 @@ public class EstoreGeneralStepDefs {
 
     public void removeFromCart(int countOfCartItems) {
         if (Hooks.cookie.contains("userservice")) {
-
+            
             Actions actions = new Actions(WebDriverRunner.getWebDriver());
             actions.moveToElement(estoreUserAccountPage.getCartButtonUserService());
             estoreUserAccountPage.getCartButtonUserService().should(visible, Duration.ofSeconds(20));
@@ -109,7 +120,7 @@ public class EstoreGeneralStepDefs {
             for (int i = 0; i < countOfCartItems; i++) {
                 estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(30));
                 estoreCartPage.getRemoveButton().click();
-                estoreCartPage.getRemoveButton().should(Condition.and("", visible, interactable), Duration.ofSeconds(12));
+                
             }
             estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(15));
             estoreUserAccountPage.getRhEstoreLogo().click();
@@ -120,6 +131,34 @@ public class EstoreGeneralStepDefs {
         }
     }
 
+    public void removeLineItemFromCart() {
+        setUserEnvironment();
+        cartId = getEstoreCartId(USER_ID, USEREMAIL);
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given().relaxedHTTPSValidation();
+        request.headers("Content-Type", "application/json");
+        request.auth().oauth2(EstoreGeneralStepDefs.getAuthToken());
+        response = request.body("").delete("https://staging.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/" + cartId);
+    }
+
+    public void createNewCart() {
+        setUserEnvironment();
+        RequestSpecification request = RestAssured.given().relaxedHTTPSValidation();
+        request.headers("Content-Type", "application/json");
+        request.auth().oauth2(EstoreGeneralStepDefs.getAuthToken());
+        response = request.body("{\n" +
+                "    \"guest\": {\n" +
+                "        \"userId\": \"" + USER_ID + "\"\n" +
+                "    },\n" +
+                "    \"postalCode\": \"60601\",\n" +
+                "    \"country\": \"US\"\n" +
+                "}").post("https://staging.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/");
+
+        String jsonString = response.asString();
+        cartId = JsonPath.from(jsonString).get("id");
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        generalStepDefs.waitForJSandJQueryToLoad();
+    }
 
     /**
      * This method login in system with selected role
@@ -434,7 +473,7 @@ public class EstoreGeneralStepDefs {
 
     public void addLineItemsToEstoreCartStg2() {
         setUserEnvironment();
-
+        cartId = getEstoreCartId(USER_ID, USEREMAIL);
         RestAssured.baseURI = BASE_URL;
         RequestSpecification request = RestAssured.given().relaxedHTTPSValidation();
         request.headers("Content-Type", "application/json");
@@ -470,21 +509,11 @@ public class EstoreGeneralStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
     }
 
-    public void removeLineItemFromCart() {
-        setUserEnvironment();
-        cartId = getEstoreCartId(USER_ID, USEREMAIL);
-        RestAssured.baseURI = BASE_URL;
-        RequestSpecification request = RestAssured.given().relaxedHTTPSValidation();
-        request.headers("Content-Type", "application/json");
-        request.auth().oauth2(EstoreGeneralStepDefs.getAuthToken());
-        response = request.body("").delete("https://staging.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/" + cartId);
-    }
-
 
     public void addLineItemsToEstoreCartStg3() {
         setUserEnvironment();
 
-//        cartId = getEstoreCartId(USER_ID, USEREMAIL);
+        cartId = getEstoreCartId(USER_ID, USEREMAIL);
         RestAssured.baseURI = BASE_URL;
         RequestSpecification request = RestAssured.given().relaxedHTTPSValidation();
         request.headers("Content-Type", "application/json");
@@ -516,25 +545,6 @@ public class EstoreGeneralStepDefs {
 
         String jsonString = response.asString();
         id = JsonPath.from(jsonString).get("data.addLineItemsToCart.id");
-        WebDriverRunner.getWebDriver().navigate().refresh();
-        generalStepDefs.waitForJSandJQueryToLoad();
-    }
-
-    public void createNewCart() {
-        setUserEnvironment();
-        RequestSpecification request = RestAssured.given().relaxedHTTPSValidation();
-        request.headers("Content-Type", "application/json");
-        request.auth().oauth2(EstoreGeneralStepDefs.getAuthToken());
-        response = request.body("{\n" +
-                "    \"guest\": {\n" +
-                "        \"userId\": \"" + USER_ID + "\"\n" +
-                "    },\n" +
-                "    \"postalCode\": \"60601\",\n" +
-                "    \"country\": \"US\"\n" +
-                "}").post("https://staging.internal.rhapsodynonprod.com/rhdo-cart-broker-v1/carts/");
-
-        String jsonString = response.asString();
-        cartId = JsonPath.from(jsonString).get("id");
         WebDriverRunner.getWebDriver().navigate().refresh();
         generalStepDefs.waitForJSandJQueryToLoad();
     }
@@ -668,8 +678,9 @@ public class EstoreGeneralStepDefs {
 
         if (!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-
+    
         }
+        paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(appear), Duration.ofSeconds(60));
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(60));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPayment.selectByValue(paymentType);

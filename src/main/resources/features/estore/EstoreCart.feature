@@ -58,6 +58,24 @@ Feature: Estore Cart Page
     Then I verify that estore line item price should be update according to user selected qty
     And I verify that subtotal should be updated according to quantity selected
 
+  Scenario: Place order for guest user
+    Given I remove all items from estore cart
+    When I choose country for eStore from footer
+    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on estore checkout button
+    When I click on estore no thanks button
+    When I click on continue as guest estore button
+    When I fill estore shipping address
+    When I fill estore shipping email address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    And I introduces payment details for estore guest user for cart
+    When I click on a place estore order button
+    Then I verify that estore thank you page is displayed
+
   Scenario: eStore - Add UFD item to Cart
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -87,12 +105,11 @@ Feature: Estore Cart Page
     Then I verify gift box fee in estore cart
 
   Scenario: eStore - Membership price for US and CAN
-    Given I remove all items from estore cart
+    Given I log into eStore as "member" user
+    When I remove all items from estore cart
     When I choose country for eStore from footer
     When I add item to cart via API for estore
     When I goes to estore cart for estore
-    When I click on join the rh members program from footer
-    When I click on join now membership button
     When I click on zipcode estore button
     When I update "US" postal code in cart
     Then I verify order estimate section in cart
@@ -115,10 +132,10 @@ Feature: Estore Cart Page
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
-    When I choose "CA" country from footer
+    When I choose "CAN" country from footer
     When I click on estore checkout button
     And I click on estore no thanks button
-    When I update shipping address for CAN
+    When I fill estore shipping address for CAN
     Then I verify "CAN" shipping restriction
 
   Scenario: eStore - New York Shipping restriction
@@ -137,7 +154,7 @@ Feature: Estore Cart Page
     Then I verify "NY" shipping restriction
 
   Scenario: eStore - Disable Continue as a Guest user option for guest user with membership
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on join now on estore cart page membership button
@@ -224,21 +241,3 @@ Feature: Estore Cart Page
     When I add item to cart via API for estore
     When I goes to estore cart for estore
     Then I verify the standard delivery charges for estore
-
-  Scenario: Place order for guest user
-    Given I remove all items from estore cart
-    When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    When I click on estore checkout button
-    When I click on estore no thanks button
-    When I click on continue as guest estore button
-    When I fill estore shipping address
-    When I fill estore shipping email address
-    When I click on same as estore shipping address checkbox
-    When I click on continue to payment estore button
-    When I click on continue with original address estore button
-    And I introduces payment details for estore guest user for cart
-    When I click on a place estore order button
-    Then I verify that estore thank you page is displayed

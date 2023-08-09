@@ -1,24 +1,21 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
-import tests.estore.pageObject.EstoreCartPage;
-import tests.estore.pageObject.EstoreHomePage;
-import tests.estore.pageObject.EstorePGScreen;
-import tests.estore.pageObject.EstorePdpPageScreen;
+import tests.estore.pageObject.*;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
+import static org.testng.AssertJUnit.*;
 
 public class EstorePdpStepDefs {
 
@@ -29,6 +26,16 @@ public class EstorePdpStepDefs {
     EstoreHomePage estoreHomePage = new EstoreHomePage();
 
     EstorePGScreen estorePGScreen = new EstorePGScreen();
+
+    EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
+
+    EstoreReturnPolicyScreen estoreReturnPolicyScreen = new EstoreReturnPolicyScreen();
+    String regularUSPrice;
+    String memberUSPrice;
+    String regularCAGBPrice;
+    String memberCAGBPrice;
+    String itemCartPriceRegular;
+    String itemCartPriceMember;
 
     @Then("I verify that user can see product details correctly mentioned for a product")
     public void iVerifyThatUserCanSeeProductDetailsCorrectlyMentionedForAProduct() {
@@ -79,8 +86,8 @@ public class EstorePdpStepDefs {
 
     @Then("verify the product price as per the postal code")
     public void verifyTheProductPriceAsPerThePostalCode() {
-        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$29"), Duration.ofSeconds(60));
-        estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$55"), Duration.ofSeconds(60));
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$20"), Duration.ofSeconds(60));
+        estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$39"), Duration.ofSeconds(60));
     }
 
     @Then("I verify that price for product&line should be in US dollars on PDP page")
@@ -109,9 +116,14 @@ public class EstorePdpStepDefs {
             estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
             estorePdpPageScreen.getSubmitPostalCode().click();
         }
-
-//        if (estorePdpPageScreen.getConfirmChangeButton().isDisplayed()) {
-//        }
+        if (country.equals("GB")) {
+            $(By.xpath("//li[@data-value='GB']")).should(visible, Duration.ofSeconds(20)).click();
+            $(By.xpath("//input[@id='postal-code-international']")).clear();
+            $(By.xpath("//input[@id='postal-code-international']")).setValue("SW1W 0NY");
+            estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
+            estorePdpPageScreen.getSubmitPostalCode().click();
+            estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
+        }
     }
 
     @Then("I verify line items {string}")
@@ -178,16 +190,16 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the product price for the selected country")
     public void iVerifyTheProductPriceForTheSelectedCountry() {
-        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$29"), Duration.ofSeconds(30));
-        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$16"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$20"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$15"), Duration.ofSeconds(30));
     }
 
     @Then("I verify the product price on PDP for non-sale cushion and frame product")
     public void iVerifyTheProductPriceOnPDPForNonSaleCushionAndFrameProduct() {
-        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$19"), Duration.ofSeconds(30));
-        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$11"), Duration.ofSeconds(30));
-        estorePdpPageScreen.getMemberTheSecondPrice().shouldHave(text("$27"), Duration.ofSeconds(30));
-        estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$36"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$13"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$9"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getMemberTheSecondPrice().shouldHave(text("$18"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$25"), Duration.ofSeconds(30));
     }
 
     @When("I update {string} postal code on cart page")
@@ -219,8 +231,8 @@ public class EstorePdpStepDefs {
     @And("I verify that price for {string} and {string} with {string} was updated for {string}")
     public void iVerifyThatPriceForAndWithWasUpdatedFor(String arg0, String arg1, String arg2, String arg3) {
         if (arg3.equals("CAN") && (arg0.equals("prod2020027"))) {
-            $(By.xpath("//*[text()='$55']")).should(visible, Duration.ofSeconds(20));
-            $(By.xpath("//*[text()='$41']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='$13']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='$9']")).should(visible, Duration.ofSeconds(20));
         }
     }
 
@@ -232,14 +244,132 @@ public class EstorePdpStepDefs {
 
     @Then("I verify availability , delivery and return messages in PDP")
     public void iVerifyAvailabilityDeliveryAndReturnMessagesInPDP() {
-        $(By.xpath("//*[text()='This item will be delivered on or before 01/26/24 ']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Ships free of charge via Standard Delivery Shipping']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='This item can be returned within 30 days of delivery.']")).should(visible, Duration.ofSeconds(20));
+        iVerifySpecialMessagesOnPDPPage();
     }
 
     @Then("I verify link bellow {string} is displayed")
     public void iVerifyLinkBellowIsDisplayed(String arg0) {
         $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("(//span[text()='View' and 'Sale' and 'items'])[3]")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("verify that the {string} zip code was updated with the {string} zip code")
+    public void verifyThatTheZipCodeWasUpdatedWithTheZipCode(String arg0, String arg1) {
+        $(By.xpath("(//*[text()='Y1A 9Z9.'])[1]")).should(visible, Duration.ofSeconds(30));
+    }
+
+    @When("I select size option on the PDP page")
+    public void iSelectSizeOptionOnThePDPPage() {
+        estorePDPScreen.selectSizeOption();
+    }
+
+    @When("I select finish option on the PDP page")
+    public void iSelectFinishOptionOnThePDPPage() {
+        estorePDPScreen.selectFinishOption();
+    }
+
+    @Then("I verify the product price for product {string} and {string} with {string} for the selected {string} country")
+    public void iVerifyTheProductPriceForProductAndWithForTheSelectedCountry(String productID, String arg1, String selectedOptions, String country) {
+        if (country.equals("CAN") && (productID.equals("prod13800635")) && (selectedOptions.equals("INDG"))) {
+            estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$13"), Duration.ofSeconds(30));
+            estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$9"), Duration.ofSeconds(30));
+        }
+    }
+
+    @And("I verify that {string} popup is displayed")
+    public void iVerifyThatPopupIsDisplayed(String modalPopUp) {
+        if (modalPopUp.equals("View In-Stock")) {
+            $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).click(ClickOptions.usingJavaScript());
+            $(By.xpath("//p[text()='IN STOCK']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
+            estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
+        }
+        if (modalPopUp.equals("View On Sale")) {
+            $(By.xpath("(//span[text()='View' and 'Sale' and 'items'])[3]")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
+            $(By.xpath("//span[text()='ON SALE']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
+            estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
+        }
+    }
+
+    @When("I select color option on the PDP page")
+    public void iSelectColorOptionOnThePDPPage() {
+        estorePDPScreen.selectColorOption();
+    }
+
+    @And("I verify special messages on PDP page")
+    public void iVerifySpecialMessagesOnPDPPage() {
+        estorePDPScreen.verifyThatSpecialMessagesAreDisplayed();
+    }
+
+    @When("I get prices for US for eStore")
+    public void iGetPricesForUSForEStore() {
+        regularUSPrice = estorePDPScreen.getFirstRegularPrice().getText();
+        memberUSPrice = estorePDPScreen.getFirstMemberPrice().getText();
+    }
+
+    @Then("I verify that prices for {string} was updated")
+    public void iVerifyThatPricesForWasUpdated(String arg0) {
+        regularCAGBPrice = estorePDPScreen.getFirstRegularPrice().getText();
+        memberCAGBPrice = estorePDPScreen.getFirstMemberPrice().getText();
+        estorePDPScreen.getFirstRegularPrice().shouldNotHave(text(regularUSPrice), Duration.ofSeconds(25));
+
+        assertFalse("Regular price was update after country was changed", regularUSPrice.equals(regularCAGBPrice));
+        assertFalse("Member price was update after country was changed", memberUSPrice.equals(memberCAGBPrice));
+    }
+
+    @Then("I verify price for member and regular user on PDP")
+    public void iVerifyThatPriceForMemberAndRegularUserOnPDP() {
+        regularCAGBPrice = estorePDPScreen.getFirstRegularPrice().getText();
+        memberCAGBPrice = estorePDPScreen.getFirstMemberPrice().getText();
+        System.out.println();
+    }
+
+    @Then("I verify that price in cart is the same as on PDP")
+    public void iVerifyThatPriceInCartIsTheSameAsOnPDP() {
+        itemCartPriceRegular = estoreCartPage.getRegularProductPriceInCart();
+        itemCartPriceMember = estoreCartPage.getMemberProductPriceInCart();
+
+        assertEquals("Verify that regular price on the Cart is the same as on PDP",
+                itemCartPriceRegular, regularCAGBPrice);
+        assertEquals("Verify that member price on the Cart is the same as on PDP",
+                itemCartPriceMember, memberCAGBPrice);
+    }
+
+
+    @When("user clicks on return policy link")
+    public void userClicksOnReturnPolicyLink() {
+        estorePDPScreen.clickToReturnPolicyButton();
+    }
+
+    @Then("user verifies that user is redirected to a return policy page")
+    public void userVerifiesThatUserIsRedirectedToAReturnPolicyPage() {
+        estoreReturnPolicyScreen.verifyThatReturnPolicyPageIsDisplayed();
+    }
+
+    @When("I click on add monogram checkbox from pdp on eStore")
+    public void iClickOnAddMonogramCheckboxFromPdpOnEStore() {
+        estorePDPScreen.clickToMonogramCheckBox();
+    }
+
+    @When("I add monogram to product on eStore")
+    public void iVerfiyThatIMAbleToChooseMonogram() {
+        $(By.xpath("//*[text()='PERSONALIZE YOUR SELECTIONS']")).should(visible, Duration.ofSeconds(25));
+        $(By.xpath("//input[@name='checkboxBauer Bodoni 2 (BDNI-HD)']")).click();
+        $(By.xpath("//input[@name='checkboxTone-on-Tone (TOT)']")).click();
+        $(By.xpath("//input[@data-testid='monogram-input0']")).should(appear, Duration.ofSeconds(25)).setValue("tes");
+        $(By.xpath("//button[@data-testid='monogram-add-button']")).should(visible, Duration.ofSeconds(25)).click();
+    }
+    @Then("I verify that monogram was added for pdp on eStore")
+    public void iVerifyThatMonogramWasAddedForPdpOnEStore() {
+        $(By.xpath("//p[text()='PERSONALIZATION']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Style']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Bauer Bodoni 2 (BDNI-HD)']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Text']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='tes']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@id='listColumn1-Color']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Tone-on-Tone (TOT)']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Edit']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Remove']")).should(visible, Duration.ofSeconds(20));
     }
 }

@@ -43,6 +43,7 @@ Feature: Estore Address Page
     When I choose country for eStore from footer
     When I choose country for eStore from footer
     When I goes to my account for estore
+    When I click on estore my account icon for guest user
     When I click on estore my account button
     When I click on address book estore button
     When I click on add address button
@@ -53,6 +54,7 @@ Feature: Estore Address Page
     Given I log into eStore as "addresspage" user
     When I choose country for eStore from footer
     When I goes to my account for estore
+    When I click on estore my account icon for guest user
     When I click on estore my account button
     When I click on address book estore button
     When I remove added address before for address book
@@ -73,7 +75,7 @@ Feature: Estore Address Page
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I goes to my account for estore
-#    When I click on estore my account button
+    When I click on estore my account icon for guest user
     When I click on estore my account button
     When I click on address book estore button
     When I remove added address before for address book
@@ -93,6 +95,7 @@ Feature: Estore Address Page
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I goes to my account for estore
+    When I click on estore my account icon for guest user
     When I click on estore my account button
     When I click on address book estore button
     When I remove added address before for address book

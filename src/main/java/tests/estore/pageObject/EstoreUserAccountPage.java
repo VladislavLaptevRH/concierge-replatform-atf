@@ -9,11 +9,14 @@ import tests.concierge.stepdefinitions.GeneralStepDefs;
 import java.time.Duration;
 import java.util.List;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class EstoreUserAccountPage {
+
+//    private final SelenideElement brandButton = $(By.xpath(""));
 
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
@@ -62,6 +65,8 @@ public class EstoreUserAccountPage {
     private final SelenideElement billingAddressLastName = $(By.xpath("//input[@id='lastName']"));
 
     private final SelenideElement billingAddressStreetAddress = $(By.id("addressLine1"));
+
+    private final SelenideElement billingAddressStreetAddressNewCardPopUp = $(By.xpath("//*[@data-testid='addressLine1']"));
 
     private final SelenideElement billingAddressStreetAddressStg2 = $(By.xpath("//input[@data-testid='addressLine1']"));
 
@@ -271,9 +276,16 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement createTitle = $(By.xpath("//*[text()='MY ACCOUNT']"));
 
+    private final String brand = "//p[text()='%s']";
+
     String password;
 
     private final SelenideElement agreePrivacyPolicyCheckbox = $(By.xpath("//*[@for='termsAndConditions']"));
+
+    public SelenideElement getBrand(String brandname) {
+        String path = String.format(brand, brandname);
+        return $(byXpath(path));
+    }
 
     public void introduceFirstNameIntoCreateAccountForm() {
         firstNameField.should(Condition.visible, Duration.ofSeconds(30));

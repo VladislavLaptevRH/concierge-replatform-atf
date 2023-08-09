@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.EstoreAddressScreen;
 import tests.estore.pageObject.EstoreCartPage;
@@ -28,6 +29,7 @@ public class EstoreUserAccountPageStepDefs {
     EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     EstoreCartPage estoreCartPage = new EstoreCartPage();
+    ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     static String firstName;
 
     @When("I go to profile payment method")
@@ -54,32 +56,19 @@ public class EstoreUserAccountPageStepDefs {
         estorePaymentPage.getCvcField().setValue("737");
 
         switchTo().defaultContent();
-        estoreUserAccountPage.getBillingAddressFirstName().setValue("TestName");
+        estoreUserAccountPage.getBillingAddressFirstName().setValue("Safire");
         estoreUserAccountPage.getBillingAddressLastName().setValue("TestLastName");
-
-        if (Hooks.eStoreBaseURL.contains("stg2")) {
-            estoreUserAccountPage.getBillingAddressStreetAddressStg2().should(visible, Duration.ofSeconds(20));
-            estoreUserAccountPage.getBillingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
-            try {
-                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
-                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
-            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                System.out.println("Dropdown list is not displayed");
-            }
-        } else {
-            estoreUserAccountPage.getBillingAddressStreetAddress().setValue("Bradford Drive, Hilliard, OH, USA");
-            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
-            estoreUserAccountPage.getBillingAddressStreetAddress().setValue("2479 Deer Run");
+            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddressNewCardPopUp());
+            estoreUserAccountPage.getBillingAddressStreetAddressNewCardPopUp().setValue("4524 Ocala Street");
             estoreAddressScreen.getCityAddNewCard().setValue("Hilliard");
             Select selectCardState = new Select(estoreAddressScreen.getStateAddNewCard());
             selectCardState.selectByValue("OH");
             estoreAddressScreen.getPostalCodeAddNewCard().setValue("99950");
 
-        }
-        estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
+//        }
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
 
-        $(By.cssSelector("select[id='state']")).shouldHave(text("OH - Ohio"), Duration.ofSeconds(20));
+        estoreUserAccountPage.getBillingAddressPhone().shouldHave(value("(555) 555-1234"));
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getSaveCardButton().click();
 
@@ -131,7 +120,6 @@ public class EstoreUserAccountPageStepDefs {
 
     @When("I click on estore my account button")
     public void iClickOnEstoreMyAccountButton() {
-//
         estoreUserAccountPage.getMyProfileButton().shouldHave(Condition.text("My Account"), Duration.ofSeconds(30));
         estoreUserAccountPage.getMyProfileButton().click();
     }
@@ -276,9 +264,7 @@ public class EstoreUserAccountPageStepDefs {
         }
         estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
-
-        $(By.cssSelector("select[id='state']")).shouldHave(text("OH - Ohio"), Duration.ofSeconds(20));
-
+        
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getSaveCardButton().click();
     }
@@ -308,5 +294,12 @@ public class EstoreUserAccountPageStepDefs {
     @When("I verify the min length for last name text field")
     public void iVerifyTheMinLengthForLastNameTextField() {
         estoreUserAccountPage.getBillingAddressLastName().setValue("abc");
+    }
+
+
+    @Then("I change the brand to {string} for eStore")
+    public void iChangeTheBrandToForEStore(String brand) {
+        estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(40)).click();
+        estoreUserAccountPage.getBrand(brand).should(visible, Duration.ofSeconds(40)).click();
     }
 }

@@ -1,5 +1,6 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
@@ -7,6 +8,8 @@ import org.openqa.selenium.By;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.appear;
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Selenide.$;
 
 @Getter
@@ -20,12 +23,12 @@ public class EstoreLoginPage {
     private final SelenideElement usernameField = $(By.xpath("//input[@id='username']"));
     private final SelenideElement passwordField = $(By.xpath("//input[@id='login-password']"));
     private final SelenideElement signInButton = $(By.xpath("//input[@id='kc-login']"));
-    private final SelenideElement accountIcon = $(By.xpath("//a[@data-analytics-nav='account-icon']"));
+    private final SelenideElement accountIcon = $(By.xpath("//*[@data-analytics-nav='account-icon']"));
     private final SelenideElement accountIconStg4 = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
     private final SelenideElement forgotPasswordButton = $(By.xpath("//a[@class='forgot-password']"));
 
     public void clickToAccountIcon() {
-        accountIcon.should(Condition.interactable, Duration.ofSeconds(20));
-        accountIcon.click();
+        accountIcon.should(Condition.and("", interactable, Condition.visible, appear), Duration.ofSeconds(20));
+        accountIcon.click(ClickOptions.usingJavaScript());
     }
 }

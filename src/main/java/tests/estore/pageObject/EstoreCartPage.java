@@ -13,7 +13,6 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 public class EstoreCartPage {
 
-//    private SelenideElement quantitySelect = $(By.id("quantity-select"));
 
     private SelenideElement postalCodeButton = $(By.xpath("//*[@id='component-order-summary']//span"));
 
@@ -57,7 +56,7 @@ public class EstoreCartPage {
 
     private final SelenideElement colorCloseButton = $(By.xpath("//div[@class='MuiDialogTitle-root']/button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit']"));
 
-    private final SelenideElement noThanksButton = $(By.xpath("//span[normalize-space()='NO, THANKS']"));
+    private final SelenideElement noThanksButton = $(By.xpath("//button[@id='dialog-rh-membership_no-thanks-button']"));
 
     private final SelenideElement becomeAmemberNow = $(By.xpath("//*[text()='BECOME A MEMBER NOW']"));
 
@@ -69,7 +68,7 @@ public class EstoreCartPage {
 
     private final SelenideElement selectQuantity = $(By.xpath("//select[contains(@id,'quantity')]"));
 
-    private final SelenideElement removeButton = $(By.xpath("//*[@data-testid='component-rh-line-item-card-actions_remove']"));
+    private final SelenideElement removeButton = $(By.xpath("//*[text()='Remove']"));
 
     private final SelenideElement estoreCartButton = $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']"));
 
@@ -169,6 +168,8 @@ public class EstoreCartPage {
 
     private final SelenideElement removePromotionBtn = $(By.xpath("//div[@class='MuiGrid-root']//*[text()='Remove']"));
 
+    private final SelenideElement removePaymentBeforeText = $(By.xpath("//*[text()='Remove']"));
+
     private final SelenideElement totalAditionalProdDiscount = $(By.xpath("//*[text()='Total Additional Product Discount']"));
 
     private final SelenideElement applyToAllCheckbox = $(By.xpath("//input[@name='applyToCart']"));
@@ -193,12 +194,43 @@ public class EstoreCartPage {
 
     private final SelenideElement addToWishlistButton = $(By.xpath("//*[text() = 'ADD TO WISHLIST']"));
 
+    private final SelenideElement totalProductPrice = $(By.id("rh-line-item-card_total"));
+
     private final SelenideElement removeMembershipLink = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-center']/span"));
 
     private final List<SelenideElement> memberShipBannerList = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center MuiGrid-justify-xs-center']/p"));
 
+    private final SelenideElement cartRegularPrice = $(By.xpath("(//p[@data-testid='price-for-regular'])[1]"));
+
+    private final SelenideElement cartMemberPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
+
     public SelenideElement getVariableJoinButtonByName(String name) {
         String path = String.format(variableJoinButton, name);
         return $(byXpath(path));
+    }
+
+    public String getMemberProductPriceInCart() {
+        String memberProductPriceCart = cartMemberPrice.getText().replaceAll(".00", "");
+        return memberProductPriceCart;
+    }
+
+    public String getRegularProductPriceInCart() {
+        String regulatProductPriceCart = cartRegularPrice.getText().replaceAll(".00", "");
+        return regulatProductPriceCart;
+    }
+
+    public int getTotalProductPrice() {
+        int totalProductPriceCart = Integer.parseInt(totalProductPrice.getText().replaceAll(".00", "").replaceAll("\\$", ""));
+        return totalProductPriceCart;
+    }
+
+    public int getRegularProductPriceValueInt() {
+        int regularProductPrice = Integer.parseInt(cartRegularPrice.getText().replaceAll(".00", "").replaceAll("\\$", ""));
+        return regularProductPrice;
+    }
+
+    public int getQuantityOfProductInCart() {
+        int quantityOfProduct = Integer.parseInt($(By.xpath("//*[contains(@id,'quantity')]")).getText());
+        return quantityOfProduct;
     }
 }

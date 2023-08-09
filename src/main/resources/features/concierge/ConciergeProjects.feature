@@ -323,6 +323,7 @@ Feature: Concierge Project
 
  #10011392 SS
   Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
+
     Given I log into Concierge as "leader"
     When I choose country for concierge from footer
     When I click on projects button

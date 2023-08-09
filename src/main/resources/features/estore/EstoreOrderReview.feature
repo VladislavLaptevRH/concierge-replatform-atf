@@ -1,6 +1,7 @@
 @estoreTestRun
 
 Feature:Estore Order review
+
   Scenario: Verify address, price, payment information, total, subtotal tags
     Given I log into eStore as "orderreview" user
     When I choose country for eStore from footer
@@ -42,7 +43,7 @@ Feature:Estore Order review
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod13800635" and "17050043" with "IRON" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button

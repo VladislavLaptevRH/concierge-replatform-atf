@@ -1,6 +1,9 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.commands.Click;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
@@ -12,8 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.selected;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -67,7 +69,6 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate membership title")
     public void iValidateMembershipTitile() {
-
         $(By.xpath("//*[text()='RH MEMBERS PROGRAM PROFILE']")).should(visible, Duration.ofSeconds(20));
     }
 
@@ -94,14 +95,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate cart")
     public void iValidateCart() {
-
-        if ($(By.xpath("//*[text()='JOIN NOW']")).isDisplayed()) {
-            $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(10));
-        } else {
-            estoreCartPage.getRemoveMembershipButton().should(visible, Duration.ofSeconds(20));
-            estoreCartPage.getRemoveMembershipButton().click();
-            $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(10));
-        }
+        $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(10));
     }
 
     @Then("I validate email address field and link to membership button")
@@ -130,14 +124,14 @@ public class EstoreMemberStepDefs {
 
     @When("I click on cancel membership link")
     public void iClickOnCancelMembershipLink() {
-        
+
         assertTrue(estoreMemberPage.getCancelLink().isDisplayed());
         estoreMemberPage.getCancelLink().click();
     }
 
     @Then("I validate cancel membership content")
     public void iValidateCancelMembershipContent() {
-        
+
         $(By.xpath("//*[text()='25% savings on all full-priced items from RH, RH Modern, RH Baby & Child and RH TEEN']")).should(visible, Duration.ofSeconds(30));
         $(By.xpath("//*[text()='Additional 20% savings on all sale items']")).should(visible, Duration.ofSeconds(30));
         $(By.xpath("//*[text()='Complimentary services with RH Interior Design']")).should(visible, Duration.ofSeconds(30));
@@ -162,7 +156,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I verify that rh members program terms & condition pop up is displayed")
     public void iVerifyThatRhMembersProgramTermsCondition() {
-        $(By.xpath("//*[text()='RH MEMBERS PROGRAM TERMS & CONDITIONS']")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='RH Members Program Terms & Conditions']")).should(visible, Duration.ofSeconds(30));
     }
 
     @Then("I verify that email address displayed in membership page")
@@ -187,9 +181,21 @@ public class EstoreMemberStepDefs {
 
     @Then("I verify that save card to account checkbox should be checked by defaults")
     public void iVerifyThatSaveCardToAccountCheckboxShouldBeCheckedByDefaults() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         selectPayment.selectByValue("CC");
         $(By.xpath("//input[@type='checkbox']")).should(selected, Duration.ofSeconds(30));
     }
+
+    @When("I click to add to cart on membership page")
+    public void iClickToAddToCartOnMembershipPage() {
+        estoreMemberPage.getAddToCartButton().should(interactable, Duration.ofSeconds(25));
+        estoreMemberPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(25));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        estoreMemberPage.getAddToCartButton().should(visible, Duration.ofSeconds(25)).hover()
+                .click(ClickOptions.usingJavaScript());
+    }
+
+
 }

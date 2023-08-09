@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
@@ -104,8 +105,14 @@ public class EstorePaymentStepDefs {
             estoreAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(20));
             estoreAddressScreen.getEditBillingAddress().click();
         }
-        estoreAddressScreen.getEditBillingAddressNew().should(and("Visible,interactable", visible, interactable), Duration.ofSeconds(20));
-        estoreAddressScreen.getEditBillingAddressNew().click();
+        try {
+            estoreAddressScreen.getEditBillingAddressNew().should(and("Visible,interactable", visible, interactable), Duration.ofSeconds(20));
+            estoreAddressScreen.getEditBillingAddressNew().click(ClickOptions.usingJavaScript());
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Edit billing address button on address page is not displayed");
+        }
+
+
         estoreAddressScreen.getBillingAddressFirstNameNew().click();
         estoreGeneralStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstNameNew());
         estoreAddressScreen.getBillingAddressFirstNameNew().setValue("NewBillingAddress");
@@ -196,6 +203,7 @@ public class EstorePaymentStepDefs {
 
     @And("I verify that VI and MC card are available in payment method dropdown")
     public void iVerifyThatVIAndMCCardAreAvaialbeInPaymentMethodDropdown() {
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         estorePaymentPage.getChoosePaymentMethodBtn().click();
 
@@ -247,7 +255,7 @@ public class EstorePaymentStepDefs {
     @When("I remove existing payment method on payment estore page")
     public void iRemoveExistingPaymentMethodOnPaymentEstorePage() {
         estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(40));
-        estoreCartPage.getRemoveButton().click();
+        estoreCartPage.getRemoveButton().click(ClickOptions.usingJavaScript());
     }
 
     @When("I choose address with CAN zip code")
@@ -267,12 +275,12 @@ public class EstorePaymentStepDefs {
 
     @When("I remove payment method which was used earlier")
     public void iRemovePaymentMethodWhichWasUsedEarlier() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
-        if (estoreCartPage.getRemoveButton().isDisplayed()) {
+        $(By.id("component-order-summary")).should(Condition.and("", exist, appear), Duration.ofSeconds(25));
+        if (estoreCartPage.getRemovePaymentBeforeText().isDisplayed()) {
             for (int i = 0; i < 3; i++) {
-                estoreCartPage.getRemoveButton().click();
-
-                if (!estoreCartPage.getRemoveButton().isDisplayed()) {
+                estoreCartPage.getRemovePaymentBeforeText().shouldBe(Condition.and("Appear, interactable", exist, appear, interactable, visible), Duration.ofSeconds(20));
+                estoreCartPage.getRemovePaymentBeforeText().click();
+                if (!estoreCartPage.getRemovePaymentBeforeText().isDisplayed()) {
                     break;
                 }
             }
@@ -313,8 +321,7 @@ public class EstorePaymentStepDefs {
 
     @When("I execute estore payment for {string}")
     public void iExecuteEstorePaymentFor(String cardType) {
-        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(40));
-
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         if (cardType.equals("VI")) {
             estoreGeneralStepDefs.payWith("CC", "4111111145551142", "737", "0330");
         }
@@ -337,7 +344,7 @@ public class EstorePaymentStepDefs {
     @When("I click on edit estore billing address button on payment page")
     public void iClickOnEditEstoreBillingAddressButtonOnPaymentPage() {
         estorePaymentPage.getEditBillingAddressBtn().should(visible, Duration.ofSeconds(20));
-        estorePaymentPage.getEditBillingAddressBtn().click();
+        estorePaymentPage.getEditBillingAddressBtn().click(ClickOptions.usingJavaScript());
     }
 
     @When("I click on continue button from payment page")

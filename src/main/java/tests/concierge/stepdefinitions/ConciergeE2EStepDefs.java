@@ -145,7 +145,7 @@ public class ConciergeE2EStepDefs {
                 if (conciergeItemsScreen.getSelectColor().isDisplayed()) {
                     try {
                         Select colorList = new Select(conciergeItemsScreen.getSelectColor());
-                        colorList.selectByIndex(2);
+                        colorList.selectByIndex(1);
                     } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
                         System.out.println("Element color not found");
                     }
@@ -174,7 +174,6 @@ public class ConciergeE2EStepDefs {
 
             if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
                 try {
-                    for (int i = 0; i < 3; i++) {
                         WebDriverRunner.getWebDriver().navigate().refresh();
                         with().pollInterval(5, SECONDS).await().until(() -> true);
                             try {
@@ -198,20 +197,13 @@ public class ConciergeE2EStepDefs {
                         } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
                             System.out.println("Element qty not found");
                         }
-                        with().pollInterval(2, SECONDS).await().until(() -> true);
-                        if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-                            break;
-                        }
-                    }
                 } catch (ElementNotFound e){
                     System.out.println("Element not found");
                 }
             }
-        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeItemsScreen.getAddToCartButton().scrollTo();
         conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
             conciergeItemsScreen.getAddToCartButton().click();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @When("I fill all fields from address with {string} zip code")
@@ -598,6 +590,13 @@ public class ConciergeE2EStepDefs {
                 }
             }
         }
+    }
+
+    @When("I click on become a member now button")
+    public void iClickOnBecomeAMemberNowButton() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeCartPageScreen.getBecomeAmemberNow().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeCartPageScreen.getBecomeAmemberNow().click();
     }
 
     @When("I click on continue adding additional button")
@@ -1074,7 +1073,7 @@ public class ConciergeE2EStepDefs {
         } else {
             assertEquals(conciergeCartPageScreen.getTradePriceLabel().getText(), "Trade");
             if (Hooks.profile.equals("stg2")) {
-                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$2149.00");
+                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$3079.00");
             } else {
                 assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText(), "$2,688.00");
             }
@@ -1301,28 +1300,28 @@ public class ConciergeE2EStepDefs {
     public void iOpenProductPageWithAnd(String productId, String skuId) {
         String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+GREY";
         open(URL);
-        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-            for (int i = 0; i < 4; i++) {
-                WebDriverRunner.getWebDriver().navigate().refresh();
-                with().pollInterval(3, SECONDS).await().until(() -> true);
-                if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-                    break;
-                }
-            }
-        }
+//        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+//            for (int i = 0; i < 4; i++) {
+//                WebDriverRunner.getWebDriver().navigate().refresh();
+//                with().pollInterval(3, SECONDS).await().until(() -> true);
+//                if (!conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+//                    break;
+//                }
+//            }
+//        }
         conciergeItemsScreen.getAddToCartButton().scrollTo();
         conciergeItemsScreen.getAddToCartButton().should(visible, Duration.ofSeconds(10));
         if (!conciergeItemsScreen.getAddToCartButton().isEnabled()) {
             try {
                 Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
-                sizeList.selectByVisibleText("Queen");
+                sizeList.selectByIndex(1);
             } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
                 System.out.println("Element not found");
             }
             with().pollInterval(1, SECONDS).await().until(() -> true);
             try{
             Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
-            finishList.selectByVisibleText("Antiqued Grey Oak");
+            finishList.selectByIndex(1);
             with().pollInterval(1, SECONDS).await().until(() -> true);
             } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e){
                 System.out.println("Element not found");

@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
@@ -23,6 +24,7 @@ public class EstoreSearchStepDefs {
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
     EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
     EstoreItemPage estoreItemPage = new EstoreItemPage();
+    EstorePGScreen estorePGScreen = new EstorePGScreen();
 
     @Then("I verify that search result for search product via product name is displayed")
     public void iVerifyThatSearchResultForSearchProductViaProductNameIsDisplayed() {
@@ -40,7 +42,7 @@ public class EstoreSearchStepDefs {
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
         estoreUserAccountPage.getSearchItemField().click();
         generalStepDefs.waitForJSandJQueryToLoad();
-        
+
         estoreUserAccountPage.getSearchItemField().setValue(generalStepDefs.getAlphaNumericString(7));
 
         estoreSearchScreen.getSeeAllResultsButton().should(visible, Duration.ofSeconds(40));
@@ -54,20 +56,24 @@ public class EstoreSearchStepDefs {
 
     @Then("I verify count of search results")
     public void iVerifyCountOfSearchResults() {
+        estorePGScreen.getFirstSearchElement().should(visible, Duration.ofSeconds(20));
         estoreSearchScreen.getResults().should(visible, Duration.ofSeconds(20));
     }
 
     @When("I scroll to the bottom of the estore page")
     public void iScrollToTheBottomOfTheEstorePage() {
-        
-        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+        $(By.id("rh-header")).should(visible, Duration.ofSeconds(20));
+        generalStepDefs.waitForJSandJQueryToLoad();
+        executeJavaScript("window.scrollTo(0, 2000)");
 
     }
 
     @When("I click on estore back to top button")
     public void iClickOnEstoreBackToTopButton() {
+        sleep(3000);
         estoreCGScreen.getBackToTopButton().should(visible, Duration.ofSeconds(20));
         estoreCGScreen.getBackToTopButton().click();
+        sleep(3000);
     }
 
     @Then("I verify that search results for {string} is displayed")
@@ -77,38 +83,18 @@ public class EstoreSearchStepDefs {
 
     @When("I select low to high for estore")
     public void iSelectLowToHighForEstore() {
-        if (Hooks.cookie.equals("releasethurs")) {
-            estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
-            estorePDPScreen.getSortByButton().click();
-        }
-        if (Hooks.cookie.contains("userservice")) {
-            estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
-            estorePDPScreen.getSortByButton().click();
-        } else {
-            estorePDPScreen.getSortButton().should(visible, Duration.ofSeconds(20));
-            estorePDPScreen.getSortButton().click();
-        }
+        estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
+        estorePDPScreen.getSortByButton().click();
         estorePDPScreen.getPriceLowToHigh().should(visible, Duration.ofSeconds(20));
-        estorePDPScreen.getPriceLowToHigh().click();
+        estorePDPScreen.getPriceLowToHigh().click(ClickOptions.usingJavaScript());
     }
 
     @When("I select high to low for estore")
     public void iSelectHighToLowForEstore() {
-        if (Hooks.cookie.equals("releasethurs")) {
-            estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
-            estorePDPScreen.getSortByButton().click();
-        }
-        if (Hooks.cookie.contains("userservice")) {
-            estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
-            estorePDPScreen.getSortByButton().click();
-        }
-        if (Hooks.cookie.contains("FEATURE_SSR=true")) {
-            estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
-            estorePDPScreen.getSortByButton().click();
-        } else {
-            estorePDPScreen.getSortButton().should(visible, Duration.ofSeconds(20));
-            estorePDPScreen.getSortButton().click();
-        }
+
+        estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
+        estorePDPScreen.getSortByButton().click();
+
         estorePDPScreen.getPriceHighToLow().should(visible, Duration.ofSeconds(20));
         estorePDPScreen.getPriceHighToLow().click();
     }
@@ -127,7 +113,7 @@ public class EstoreSearchStepDefs {
 
     @Then("I verify that I'm able to use back button")
     public void iVerifyThatIMAbleToUseBackButton() {
-        
+
         WebDriverRunner.getWebDriver().navigate().back();
         estorePDPScreen.getFirstProduct().should(visible, Duration.ofSeconds(20));
 
@@ -135,7 +121,7 @@ public class EstoreSearchStepDefs {
 
     @Then("I verify that I'm able to use back button from CG")
     public void iVerifyThatIMAbleToUseBackButtonFromCG() {
-        
+
         WebDriverRunner.getWebDriver().navigate().back();
         estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(20));
     }

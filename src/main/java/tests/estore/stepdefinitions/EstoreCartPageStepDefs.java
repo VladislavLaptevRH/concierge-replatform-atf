@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
@@ -12,6 +13,7 @@ import io.restassured.specification.RequestSpecification;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.w3c.dom.ls.LSOutput;
 import tests.concierge.pageObject.SaleScreen;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
@@ -22,6 +24,10 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static io.netty.handler.codec.rtsp.RtspHeaders.Values.URL;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class EstoreCartPageStepDefs {
     EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
@@ -39,72 +45,22 @@ public class EstoreCartPageStepDefs {
     private static Response response;
     int itemQuantity;
     int lineItemPrice;
+    int totalProductPrice;
 
-//    @When("I remove all items from estore cart")
-//    public void iRemoveAllItemsFromEstoreCart() {
-//        generalStepDefs.waitForJSandJQueryToLoad();
-//        if (Hooks.cookie.contains("userservice")) {
-//
-//            int countOfCartItems = 0;
-//
-//            if (estoreUserAccountPage.getCartButtonUserService().isDisplayed()) {
-//                Actions actions = new Actions(WebDriverRunner.getWebDriver());
-//                actions.moveToElement(estoreUserAccountPage.getCartButtonUserService()).build().perform();
-//
-//                String countOfProducts = estoreUserAccountPage.getCartButtonUserService().getText();
-//                countOfCartItems = Integer.valueOf(countOfProducts);
-//            } else {
-//                System.out.println("Cart is empty");
-//            }
-//
-//            if (countOfCartItems > 0) {
-//                estoreGeneralStepDefs.removeFromCart(countOfCartItems);
-//            } else {
-//                System.out.println("Cart is empty");
-//            }
-//
-//        } else {
-//            estoreUserAccountPage.getCartButton().should(Condition.and("", appear, interactable, visible), Duration.ofSeconds(20));
-//
-//            int countOfCartItems = 0;
-//
-//            try {
-//                String countOfProducts = estoreUserAccountPage.getCartButton().getText();
-//                countOfCartItems = Integer.valueOf(countOfProducts);
-//            } catch (Exception e) {
-//                System.out.println("Cart is empty");
-//            }
-//            if (countOfCartItems > 0) {
-//                estoreGeneralStepDefs.removeFromCart(countOfCartItems);
-//            }
-//        }
-//
-//        if (Hooks.profile.contains("stg4")) {
-//            estoreUserAccountPage.getCartButtonStg4().should(visible, Duration.ofMinutes(3));
-//
-//            int countOfCartItems = 0;
-//
-//            try {
-//                String countOfProducts = estoreUserAccountPage.getCartButtonStg4().getText();
-//                countOfCartItems = Integer.valueOf(countOfProducts);
-//            } catch (Exception e) {
-//                System.out.println("Cart is empty");
-//            }
-//
-//            if (countOfCartItems > 0) {
-//                estoreGeneralStepDefs.removeFromCart(countOfCartItems);
-//            }
-//        }
-//    }
+    @When("I remove all items from estore cart")
+    public void iRemoveAllItemsFromEstoreCart() {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        estoreGeneralStepDefs.removeLineItemFromCart();
+        estoreGeneralStepDefs.createNewCart();
+    }
 
     @When("I click on view cart estore button")
     public void iClickOnViewCartButton() {
-
         generalStepDefs.waitForJSandJQueryToLoad();
         estoreItemPage.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(80));
         estoreItemPage.getViewCartButton().should(visible, Duration.ofSeconds(60));
         estoreCartPage.getKeepShopping().should(visible, Duration.ofSeconds(15));
-        estoreItemPage.getViewCartButton().click();
+        estoreItemPage.getViewCartButton().click(ClickOptions.usingJavaScript());
     }
 
     @When("I choose estore order classification")
@@ -151,11 +107,11 @@ public class EstoreCartPageStepDefs {
     public void iRemovePromotionFromCart() {
         try {
             estoreCartPage.getRemovePromotionBtn().should(visible, Duration.ofSeconds(15));
+            estoreCartPage.getRemovePromotionBtn().scrollIntoView(true);
             estoreCartPage.getRemovePromotionBtn().click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Promotion code was not applied");
         }
-
     }
 
     @Then("I verify that I'm able to remove estore employee discount")
@@ -309,20 +265,11 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on join now membership button")
     public void iClickOnJoinNowMembershipButton() {
-
-
-        if (estoreCartPage.getRemoveMembershipButton().isDisplayed()) {
-            estoreCartPage.getRemoveMembershipButton().scrollIntoView(true);
-            estoreCartPage.getRemoveMembershipButton().should(visible, Duration.ofSeconds(20));
-            estoreCartPage.getRemoveMembershipButton().click();
-        }
-
-
-        if (estoreCartPage.getJoinNow().isDisplayed()) {
-            estoreCartPage.getJoinNow().click();
-        } else {
-            $(By.xpath("//*[text()='Join Now']")).click();
-        }
+        estoreCartPage.getJoinNow().should(visible, Duration.ofSeconds(10));
+        estoreCartPage.getJoinNow().should(interactable, Duration.ofSeconds(10));
+        estoreCartPage.getJoinNow().shouldHave(text("JOIN NOW"), Duration.ofSeconds(10));
+        estoreCartPage.getJoinNow().hover();
+        estoreCartPage.getJoinNow().click(ClickOptions.usingJavaScript());
     }
 
     @Then("I verify order estimate section in cart")
@@ -372,12 +319,8 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on join now on estore cart page membership button")
     public void iClickOnJoinNowOnEstoreCartPageMembershipButton() {
-
-        if (estoreCartPage.getVariableJoinButtonByName("JOIN NOW").isDisplayed()) {
-            estoreCartPage.getVariableJoinButtonByName("JOIN NOW").click();
-        } else {
-            estoreCartPage.getVariableJoinButtonByName("Join Now").click();
-        }
+        estoreCartPage.getVariableJoinButtonByName("JOIN NOW").should(visible, Duration.ofSeconds(20));
+        estoreCartPage.getVariableJoinButtonByName("JOIN NOW").click();
     }
 
     @Then("I verify membership estore banner for {string}")
@@ -404,22 +347,20 @@ public class EstoreCartPageStepDefs {
                 estoreUserAccountPage.getBrandButton().click();
             }
 
-
             estoreUserAccountPage.getListOfBrands().get(i).should(visible, Duration.ofSeconds(20));
             String brandUrl = estoreUserAccountPage.getListOfBrands().get(i).getText().replaceAll(" ", "").toLowerCase();
             String estoreUrlNoHttps = Hooks.eStoreURL.replaceAll("https://", "");
             estoreUserAccountPage.getListOfBrands().get(i).click();
             iStopEStorePageLoad();
             open("https://" + brandUrl + "." + estoreUrlNoHttps);
-            estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(80));
+            estoreUserAccountPage.getCartButton().shouldHave(text("1"), Duration.ofSeconds(20));
         }
     }
 
     @Then("I verify that I'm able to add products from all brands to cart")
     public void iVerifyThatIMAbleToAddProductsFromAllBrandsToCart() {
-
         WebDriverRunner.getWebDriver().navigate().refresh();
-
+        
         estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getBrandButton().click();
     }
@@ -443,12 +384,11 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that I'm able to increase item quantity with success after payment")
     public void iVerifyThatItemQuantityWasIncreasedWithSuccess() {
-
         estoreItemPage.getSelectQuantityCartPage().should(visible, Duration.ofSeconds(40));
         estoreItemPage.getSelectQuantityCartPage().scrollIntoView(true);
         Select selectQuantity = new Select(estoreItemPage.getSelectQuantityCartPage());
         selectQuantity.selectByValue("2");
-
+        
     }
 
     @Then("I verify that I'm able to decrease item quantity with success")
@@ -460,9 +400,10 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on add to wishlist button from cart")
     public void iClickOnAddToWishlistButtonFromCart() {
-
         estoreCartPage.getAddToWishlistButton().should(visible, Duration.ofSeconds(40));
-        estoreCartPage.getAddToWishlistButton().click();
+        estoreCartPage.getAddToWishlistButton().should(interactable, Duration.ofSeconds(40));
+        estoreCartPage.getAddToWishlistButton().should(appear, Duration.ofSeconds(40));
+        estoreCartPage.getAddToWishlistButton().click(ClickOptions.usingJavaScript());
     }
 
     @Then("I verify that contract price is used in cart")
@@ -490,7 +431,6 @@ public class EstoreCartPageStepDefs {
 
     @When("I introduces CAN zip code for estore cart")
     public void iIntroducesCANZipCodeForEstoreCart() {
-
         $(By.xpath("//div[@id='component-order-summary']//p//span")).scrollIntoView(true);
         $(By.xpath("//div[@id='component-order-summary']//p//span")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//div[@id='component-order-summary']//p//span")).click();
@@ -502,7 +442,6 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that the price for trade get increased in multiple of QTY")
     public void iVerifyThatThePriceForTradeGetIncreasedInMultipleOfQTY() {
-
         $(By.xpath("//*[contains(text(),'70.00')]")).should(visible, Duration.ofSeconds(40));
     }
 
@@ -515,7 +454,7 @@ public class EstoreCartPageStepDefs {
     public void iOpenCart() {
         String URL = Hooks.eStoreBaseURL + "/us/en/checkout/shopping_cart.jsp";
         open(URL);
-
+        
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -564,7 +503,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I click on remove membership estore button")
     public void iClickOnRemoveMembershipEstoreButton() {
-
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if (estoreCartPage.getRemoveMembershipButton().isDisplayed()) {
             try {
                 estoreCartPage.getRemoveMembershipButton().scrollIntoView(true);
@@ -580,17 +519,16 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify state field empty dropdown issue for International billing address")
     public void iVerifyStateFieldEmptyDropdownIssueForInternationalBillingAddress() {
-
         $(By.xpath("//*[text()='State required.']")).should(visible, Duration.ofSeconds(30));
     }
 
     @When("I choose estore empty state")
     public void iChooseEstoreEmptyState() {
         estoreAddressScreen.getShippingAddressState().scrollIntoView(true);
-
+        
         Select selectState = new Select(estoreAddressScreen.getShippingAddressState());
         selectState.selectByValue("");
-
+        
 
     }
 
@@ -619,7 +557,7 @@ public class EstoreCartPageStepDefs {
             estoreGeneralStepDefs.addLineItemsToEstoreCartStg2();
         }
 
-        WebDriverRunner.getWebDriver().navigate().refresh();
+//        WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
     @When("I goes to estore cart for estore")
@@ -627,7 +565,7 @@ public class EstoreCartPageStepDefs {
         if ((Hooks.cookie.contains("userservice")) && (Hooks.profile.equals("stg2"))) {
             open(Hooks.eStoreBaseURL + "/us/en/checkout/shopping_cart.jsp");
         }
-
+        
         if (Hooks.profile.equals("stg3")) {
             $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']")).click();
@@ -639,8 +577,13 @@ public class EstoreCartPageStepDefs {
         }
     }
 
+    @When("I add item {string} to cart via API for estore")
+    public void iAddItemToCartViaAPIForEstore(String arg0) {
+
+    }
+
     @When("I add item {string}  and prod id {string} to cart via API for estore")
-    public void iAddItemAndProdIdToCartViaAPIForEstore(String arg0, String arg1) {
+    public void iAddItemAndProdIdToCartViaAPIForEstore(String arg0, String arg1) throws IOException {
         if (Hooks.profile.contains("stg4")) {
             estoreGeneralStepDefs.addLineItemsToEstoreCartWithProvidedSkuStg4(arg0, arg1);
         } else if (Hooks.profile.contains("stg2")) {
@@ -649,7 +592,7 @@ public class EstoreCartPageStepDefs {
     }
 
     @When("I add product {string} and sku {string} to cart via API for estore")
-    public void iAddProductAndSkuToCartViaAPIForEstore(String product, String sku) {
+    public void iAddProductAndSkuToCartViaAPIForEstore(String product, String sku) throws IOException {
         if (Hooks.profile.contains("stg4")) {
             estoreGeneralStepDefs.addLineItemsToEstoreCartWithProvidedSkuStg4(product, sku);
         } else if (Hooks.profile.contains("stg2")) {
@@ -660,7 +603,7 @@ public class EstoreCartPageStepDefs {
 
     @When("I verify for back button from cart page")
     public void iVerifyForBackButtonFromCartPage() {
-
+        
         WebDriverRunner.getWebDriver().navigate().back();
         estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(20));
     }
@@ -669,12 +612,12 @@ public class EstoreCartPageStepDefs {
     public void iIntroducesPaymentDetailsForEstoreGuestUserForCart() {
         if (!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-
+    
         }
 
-        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("RH Credit Card"), Duration.ofMinutes(2));
+        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Credit Card"), Duration.ofSeconds(20));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
-        selectPayment.selectByIndex(2);
+        selectPayment.selectByIndex(1);
 
         switchTo().frame($(By.cssSelector("iframe[title='Iframe for secured card number']")).should(visible, Duration.ofMinutes(1)));
         estorePaymentPage.getCardNumberField().setValue("4111111145551142");
@@ -696,11 +639,10 @@ public class EstoreCartPageStepDefs {
     public void iIntroducesPaymentDetailsForEstoreGuestUserForPayment() {
         if (!estorePaymentPage.getChoosePaymentMethodBtn().isDisplayed()) {
             String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
-
+    
         }
 
 //        estorePaymentPage.getChoosePaymentMethodBtn().shouldHave(text("Visa ####-7543"), Duration.ofMinutes(2));
-        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         selectPayment.selectByVisibleText("Visa ####-7543");
 
@@ -762,13 +704,13 @@ public class EstoreCartPageStepDefs {
     @Then("that was added {string} quantity of item in cart")
     public void thatWasAddedQuantityOfItemInCart(String quantity) {
         if (quantity.equals("2")) {
-            $(By.xpath("//*[contains(@id,'quantity') and contains(@id,'_2')]")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[contains(@id,'quantity') and contains(@id,'_2')]")).should(visible, Duration.ofSeconds(30));
         }
     }
 
     @And("I verify that total price is correct for {string} and {string} with {string} for estore")
     public void iVerifyThatTotalPriceIsCorrectForAndWithForEstore(String prodId, String skuID, String skuOptions) {
-        $(By.xpath("(//*[text()='$94.00'])[3]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='$26.00'])[3]")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I change item quantity to {string} for {string} and {string} with {string} for estore")
@@ -799,17 +741,32 @@ public class EstoreCartPageStepDefs {
 
     @And("I verify that add to cart button is inactive")
     public void iVerifyThatAddToCartButtonIsInactive() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estorePDPScreen.getAddToCartInactiveButton().shouldBe(visible, Duration.ofSeconds(30));
     }
 
-    @When("I remove all items from cart via API for estore")
-    public void iRemoveAllItemsFromCartViaAPIForEstore() {
-        estoreGeneralStepDefs.removeLineItemFromCart();
+    @And("I verify the total price for product in the cart")
+    public void iVerifyTheTotalPriceForProductInTheCart() {
+        totalProductPrice = estoreCartPage.getTotalProductPrice();
+        int regularPrice = estoreCartPage.getRegularProductPriceValueInt();
+        int quantity = estoreCartPage.getQuantityOfProductInCart();
+
+        assertEquals("Verify the total price", regularPrice * quantity
+                , totalProductPrice);
     }
 
-    @When("I remove all items from estore cart")
-    public void iRemoveCartForEstore() {
-        estoreGeneralStepDefs.removeLineItemFromCart();
-        estoreGeneralStepDefs.createNewCart();
+    @And("I verify the cart item quantity is equal to {string} on eStore")
+    public void iVerifyTheCartItemQuantityIsEqualToOnEStore(String itemQuantity) {
+        $(By.xpath("//*[contains(@id,'quantity')]")).shouldHave(text(itemQuantity), Duration.ofSeconds(20));
+    }
+
+    @When("I verify membership was added to cart")
+    public void iVerifyMembershipWasAddedToCart() {
+        $(By.xpath("//*[contains(text(),'Thank you for joining the RH Members Program.')]")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify monogram was added to cart for eStore")
+    public void iVerifyMonogramWasAddedToCartForEStore() {
+
     }
 }

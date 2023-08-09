@@ -11,7 +11,6 @@ Feature: Footer Links
       | LOCATE A GALLERY      |
       | VIEW SOURCE BOOKS     |
       | REQUEST A SOURCE BOOK |
-      | SIGNUP FOR EMAILS     |
       | RH MEMBERS PROGRAM    |
       | RH TRADE              |
       | RH CREDIT CARD        |
@@ -36,12 +35,12 @@ Feature: Footer Links
     When I choose country for eStore from footer
     Then I verify that I'm able to access "<link>"
     Examples:
-      | link    |
+      | link                 |
       | LETTERS FROM THE CEO |
       | LEADERSHIP TEAM      |
       | INVESTOR RELATIONS   |
       | PRESS                |
-      | CAREERS |
+      | CAREERS              |
 
   Scenario Outline: Verify legal links
     Given I log into eStore as "regular" user

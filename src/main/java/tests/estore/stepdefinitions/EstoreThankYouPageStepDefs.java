@@ -1,20 +1,18 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import tests.concierge.pageObject.ConciergeCartPageScreen;
-import tests.concierge.pageObject.ConfirmationOrderScreen;
 import tests.estore.pageObject.EstoreConfirmationOrderScreen;
-import tests.utility.Hooks;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.with;
 
 public class EstoreThankYouPageStepDefs {
     ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
@@ -43,9 +41,14 @@ public class EstoreThankYouPageStepDefs {
     public void iVerifyThatEstoreThankYouPageIsDisplayed() {
         if (!estoreConfirmationOrderScreen.getThankYouTitle().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-    
         }
         $(By.xpath("//*[text()='THANK YOU']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[contains(text(),'You will receive an order confirmation number shortly via email.')]")).should(visible, Duration.ofSeconds(40));
+    }
+
+    @When("I click on eStore logo from thank you page")
+    public void iClickOnEStoreLogoFromThankYouPage() {
+        $(By.xpath("//a[@href='/us/en/']")).should(visible,Duration.ofSeconds(20))
+                .click(ClickOptions.usingJavaScript());
     }
 }

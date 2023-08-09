@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
@@ -7,6 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -17,6 +19,7 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -77,10 +80,11 @@ public class EstoreE2EStepDefs {
 
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
-
+        
         estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
+        estoreItemPage.getAddToCartButton().should(enabled);
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
-        estoreItemPage.getAddToCartButton().click();
+        estoreItemPage.getAddToCartButton().click(ClickOptions.usingJavaScript());
     }
 
     @When("I fill all estore fields from address with {string} zip code")
@@ -187,13 +191,13 @@ public class EstoreE2EStepDefs {
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).click();
         estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
-        estoreUserAccountPage.getSearchItemField().click();
+        estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
         generalStepDefs.waitForJSandJQueryToLoad();
 
         estoreUserAccountPage.getSearchItemField().setValue(arg0);
 
         $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click();
+        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click(ClickOptions.usingJavaScript());
     }
 
 
@@ -233,26 +237,14 @@ public class EstoreE2EStepDefs {
 
     @When("I click on estore no thanks button")
     public void iClickOnNoThanksEstoreButton() {
-//        if(estoreCartPage.getNoThanksButton().isDisplayed()){
-//        generalStepDefs.waitForJSandJQueryToLoad();
-//        estoreCartPage.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
-//        wait.until(ExpectedConditions.elementToBeClickable(estoreCartPage.getNoThanksButton()));
-//        wait.until(ExpectedConditions.visibilityOf(estoreCartPage.getNoThanksButton()));
-//        Actions actions = new Actions(WebDriverRunner.getWebDriver());
-//        actions.moveToElement(estoreCartPage.getNoThanksButton());
-//        estoreCartPage.getNoThanksButton().scrollIntoView(true);
         generalStepDefs.waitForJSandJQueryToLoad();
         $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
         $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).should(appear, Duration.ofSeconds(10));
         $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).should(exist, Duration.ofSeconds(10));
         $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).should(interactable, Duration.ofSeconds(10));
-                with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).doubleClick();
 
-//        with().pollInterval(2, SECONDS).await().until(() -> true);
-//        if ($(By.cssSelector("#dialog-rh-membership_no-thanks-button")).isDisplayed()) {
-//            $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).click();
-//        }
     }
 
     @When("I choose estore client who is a non member")
@@ -481,7 +473,7 @@ public class EstoreE2EStepDefs {
         generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
-
+        
         $(By.cssSelector("body > div:nth-child(7) > div:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > label:nth-child(1) > span:nth-child(1) > span:nth-child(1) > input:nth-child(1)")).click();
     }
 
@@ -492,7 +484,7 @@ public class EstoreE2EStepDefs {
 
     @When("I edit estore shipping address from order review page")
     public void iEditShippingEstoreAddressFromOrderReviewPage() {
-
+        
         conciergeAddressScreen.getEditShippingAddress().should(visible, Duration.ofSeconds(15));
         conciergeAddressScreen.getEditShippingAddress().click();
         checkoutAddressScreen.getFirstNameInpt().should(visible, Duration.ofSeconds(15));
@@ -563,11 +555,11 @@ public class EstoreE2EStepDefs {
     @When("I click on same as estore shipping address checkbox")
     public void iClickOnSameAsShippingAddressCheckbox() {
         try {
-
-            if ($(By.xpath("//*[text()='Same as shipping address']")).isDisplayed()) {
-                $(By.xpath("//*[text()='Same as shipping address']")).click();
-            }
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            $(By.xpath("//span[text()='Same as shipping address']")).should(Condition.and("Exist ,appear, interactable",
+                    exist, appear, interactable), Duration.ofSeconds(15));
+            $(By.xpath("//span[text()='Same as shipping address']")).click(ClickOptions.usingJavaScript());
+        } catch (
+                com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Same as shipping address checkbox is not displayed");
         }
     }
@@ -580,12 +572,12 @@ public class EstoreE2EStepDefs {
                 estoreAddressScreen.getContinueToPayment().scrollIntoView(true);
                 estoreAddressScreen.getContinueToPayment().should(visible, Duration.ofSeconds(2));
                 estoreAddressScreen.getContinueToPayment().click();
-
+                
             } else {
                 estoreAddressScreen.getContinuePayment().scrollIntoView(true);
                 estoreAddressScreen.getContinuePayment().should(visible, Duration.ofSeconds(2));
                 estoreAddressScreen.getContinuePayment().click();
-
+                
             }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Continue button is not displayed");
@@ -611,7 +603,7 @@ public class EstoreE2EStepDefs {
 
     @When("I refresh current estore page")
     public void iRefreshCurrentEstorePage() {
-
+        
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -626,12 +618,12 @@ public class EstoreE2EStepDefs {
         }
 
         open(URL);
-
+        
         estoreItemPage.getAddToCartButton().scrollTo();
         if (!estoreItemPage.getAddToCartButton().isEnabled()) {
             for (int i = 0; i < 3; i++) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
-
+        
                 if (estoreItemPage.getAddToCartButton().isEnabled()) {
                     break;
                 }

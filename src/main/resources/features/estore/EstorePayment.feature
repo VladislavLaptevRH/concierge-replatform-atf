@@ -211,6 +211,7 @@ Feature: Estore Payment
     Given I log into eStore as "addnewpayment" user
     When I choose country for eStore from footer
     When I go to profile payment method
+    When I click on estore my account icon for guest user
     When I remove added before cart
     When I add new card for estore
     Then I verify that new payment was added

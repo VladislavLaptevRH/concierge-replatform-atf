@@ -7,6 +7,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.testng.AssertJUnit;
+import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.EstorePGScreen;
 import tests.estore.pageObject.EstoreSearchScreen;
 import tests.estore.pageObject.EstoreUserAccountPage;
@@ -18,29 +20,38 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
+import static org.testng.Assert.assertTrue;
 
 public class EstorePgStepDefs {
 
     EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
     EstorePGScreen estorePGScreen = new EstorePGScreen();
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
+    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+
+    int priceFromTheFirstProduct;
+    int priceFromTheSecondProduct;
 
     @Then("I validate {string},{string} and {string} grid view should work")
     public void iValidateAndGridViewShouldWork(String arg0, String arg1, String arg2) {
         if (arg0.equals("1")) {
+            estoreSearchScreen.getOneColumnInRowGridButton().should(visible, Duration.ofSeconds(20));
+            estoreSearchScreen.getOneColumnInRowGridButton().click();
+            $(By.xpath("//div[contains(@class, 'grid-item-12')]")).should(visible, Duration.ofSeconds(20));
+        }
+
+        if (arg1.equals("2")) {
+            estoreSearchScreen.getTwoColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
+            estoreSearchScreen.getTwoColumnsInRowGridElement().click();
+            $(By.xpath("//div[contains(@class, 'grid-item-6')]")).should(visible, Duration.ofSeconds(20));
+        }
+
+        if (arg2.equals("3")) {
             estoreSearchScreen.getThreeColumnsInRowGridButton().should(visible, Duration.ofSeconds(20));
             estoreSearchScreen.getThreeColumnsInRowGridButton().should(interactable, Duration.ofSeconds(20));
             estoreSearchScreen.getThreeColumnsInRowGridButton().click();
             estoreSearchScreen.getThreeColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
-        }
-        if (arg1.equals("2")) {
-            estoreSearchScreen.getTwoColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
-            estoreSearchScreen.getTwoColumnsInRowGridElement().click();
-        }
-
-        if (arg2.equals("3")) {
-            estoreSearchScreen.getOneColumnInRowGridButton().should(visible, Duration.ofSeconds(20));
-            estoreSearchScreen.getOneColumnInRowGridButton().click();
+            $(By.xpath("//div[contains(@class, 'grid-item-4')]")).should(visible, Duration.ofSeconds(20));
         }
 
     }
@@ -55,7 +66,7 @@ public class EstorePgStepDefs {
     public void iGoesToEstorePg() {
         String URL = Hooks.eStoreBaseURL + "/search/results.jsp?Ntt=tables&Ns=product.sale%7C1";
         open(URL);
-        
+
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -73,7 +84,7 @@ public class EstorePgStepDefs {
 
     @When("I scroll on the PG page till back to top button is visible")
     public void iScrollOnThePGPageTillBackToTopButtonIsVisible() {
-        
+
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
@@ -84,12 +95,13 @@ public class EstorePgStepDefs {
 
     @When("I navigate back from {string} page")
     public void iNavigateBackFromPage(String arg0) {
+        generalStepDefs.waitForJSandJQueryToLoad();
         WebDriverRunner.getWebDriver().navigate().back();
     }
 
     @When("I navigate to any estore fusion PG")
     public void iNavigateToAnyEstoreFusionPG() {
-        estorePGScreen.getListOfPgFusionElements().get(2).should(visible, Duration.ofSeconds(5));
+        estorePGScreen.getListOfPgFusionElements().get(2).should(visible, Duration.ofSeconds(20));
         estorePGScreen.getListOfPgFusionElements().get(2).click();
     }
 
@@ -163,5 +175,32 @@ public class EstorePgStepDefs {
     public void iGoesToEstoreBrand(String brand) {
         String url = Hooks.eStoreBaseURL.replaceAll("https://", "");
         open("https://" + brand + "." + url);
+    }
+
+    @Then("I verify the member price on PG page after selecting the specifications")
+    public void iVerifyTheMemberPriceOnPGPageAfterSelectingTheSpecifications() {
+        int memberPrice = Integer.parseInt($(By.xpath("(//span[@class='priceSpan'])[2]")).getText().replaceAll("\\$", "").replaceAll("Member", "").replaceAll("\\,", "").replaceAll(" ", ""));
+        AssertJUnit.assertTrue("Member price is not equal to zero", memberPrice > 0);
+
+    }
+
+    @Then("I verify that product thumbnail is correctly loaded")
+    public void iVerifyThatProductThumbnailIsCorrectlyLoaded() {
+        estorePGScreen.getThumbalImg().should(visible, Duration.ofSeconds(25));
+    }
+
+    @Then("I verify that sorting low to high is working as expected")
+    public void iVerifyThatSortingLowToHighIsWorkingAsExpected() {
+        priceFromTheFirstProduct = Integer.parseInt($(By.xpath("(//span[@class='priceSpan'])[2]//span")).getText().replaceAll("\\,", ""));
+        priceFromTheSecondProduct = Integer.parseInt($(By.xpath("(//span[@class='priceSpan'])[5]//span")).getText().replaceAll("\\,", ""));
+
+        assertTrue(priceFromTheFirstProduct > priceFromTheSecondProduct, "The price of the first product is less than the price for the second product");
+    }
+
+    @Then("I verify that PG page is displayed for eStore")
+    public void iVerifyThatPGPageIsDisplayedForEStore() {
+        estorePGScreen.getCollectionTextTitle().should(visible,Duration.ofSeconds(20));
+        estorePGScreen.getGridView3().should(visible, Duration.ofSeconds(10));
+
     }
 }

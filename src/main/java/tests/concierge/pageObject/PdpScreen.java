@@ -20,7 +20,17 @@ public class PdpScreen {
 
     private final SelenideElement specialOrdersButton = $(By.xpath("//div[contains(@data-testid,'SPECIAL ORDER FabricS')]"));
 
+    private final SelenideElement zipCode = $(By.xpath("(//*[@data-testid = 'postal-code-dialog-opener'])[1]"));
+
+    private final SelenideElement confirmationPostalCode = $(By.xpath("//*[@data-testid= 'submit-postal']"));
+
     private final SelenideElement fogSpecialOrderColor = $(By.xpath("//*[text() = 'Fog ']"));
+
+    private final SelenideElement postalCode = $(By.xpath("//*[@id= 'postal-code-international']"));
+
+    private final SelenideElement mattressFeeText = $(By.xpath("//*[text() = 'Mattress Fee']"));
+
+    private final SelenideElement mattressRecyclingFeeText = $(By.xpath("//*[@href= '/graphql/?group=general-modals&id=mattress-recycling']/.."));
 
     private final SelenideElement fogSelectedOption = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Color')])[1]//option[@data-option='selected']"));
 

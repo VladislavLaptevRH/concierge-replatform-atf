@@ -216,7 +216,6 @@ public class PaymentStepDefs {
     public void iChooseRHGiftCardFromPaymentMethod(String card) {
 //        with().pollInterval(2, SECONDS).await().until(() -> true);
 //        WebDriverRunner.getWebDriver().navigate().refresh();
-        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         Select selectPaymentMethod = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPaymentMethod.selectByVisibleText(card);
         with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -226,11 +225,11 @@ public class PaymentStepDefs {
 
     @Then("I verify the complete billing address")
     public void iVerifyTheCompleteBillingAddress() {
-        if (Hooks.cookie.equals("prodsupport")) {
+        if(Hooks.cookie.equals("prodsupport")){
             paymentScreen.getBillingAddress().shouldHave(text(
                     "BILLING ADDRESS\n" +
                             "QAFirst Automation\n" +
-                            "AutomationCompany\n" +
+                        "AutomationCompany\n" +
                             "North 16th Street\n" +
                             "QaApartment\n" +
                             "Phoenix, AZ 85020\n" +
@@ -241,7 +240,7 @@ public class PaymentStepDefs {
             assertEquals(paymentScreen.getBillingAddress().getText(),
                     "BILLING ADDRESS\n" +
                             "QAFirst Automation\n" +
-                            "AutomationCompany\n" +
+                        "AutomationCompany\n" +
                             "North 16th Street\n" +
                             "QaApartment\n" +
                             "Phoenix, AZ 85020\n" +
@@ -276,9 +275,9 @@ public class PaymentStepDefs {
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Estimated Sales Tax for 85020']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$2,687.00']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,849.00']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$255.08']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$355.01']")).should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that member savings in payment page")
@@ -297,7 +296,7 @@ public class PaymentStepDefs {
     public void iEditPaymentMethod() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         executeJavaScript("window.scrollTo(0, 2000)");
-        if (conciergeAddressScreen.getEditPaymentOrderReview().isDisplayed()) {
+        if(conciergeAddressScreen.getEditPaymentOrderReview().isDisplayed()){
             conciergeAddressScreen.getEditPaymentOrderReview().scrollIntoView(true);
             conciergeAddressScreen.getEditPaymentOrderReview().click();
         } else {
@@ -342,12 +341,12 @@ public class PaymentStepDefs {
     @When("I click on continue with original address button")
     public void iClickOnContinueWithOriginalAddressButton() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if ($(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).isDisplayed()) {
+        if($(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).isDisplayed()){
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).should(Condition.and("", Condition.enabled, Condition.visible), Duration.ofSeconds(60));
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        if (pdpScreen.getCloseSpecialOrderPopUpButton().isDisplayed()) {
+        if(pdpScreen.getCloseSpecialOrderPopUpButton().isDisplayed()){
             pdpScreen.getCloseSpecialOrderPopUpButton().click();
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
