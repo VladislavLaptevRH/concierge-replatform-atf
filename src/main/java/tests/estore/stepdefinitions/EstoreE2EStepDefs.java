@@ -80,7 +80,6 @@ public class EstoreE2EStepDefs {
 
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
-        
         estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
         estoreItemPage.getAddToCartButton().should(enabled);
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
@@ -473,7 +472,7 @@ public class EstoreE2EStepDefs {
         generalStepDefs.fillZipCodeStateCountry("12345", "US", "");
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).scrollIntoView(true);
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']//input[@type='checkbox'])[2]")).click();
-        
+
         $(By.cssSelector("body > div:nth-child(7) > div:nth-child(1) > main:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > form:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(4) > label:nth-child(1) > span:nth-child(1) > span:nth-child(1) > input:nth-child(1)")).click();
     }
 
@@ -484,7 +483,7 @@ public class EstoreE2EStepDefs {
 
     @When("I edit estore shipping address from order review page")
     public void iEditShippingEstoreAddressFromOrderReviewPage() {
-        
+
         conciergeAddressScreen.getEditShippingAddress().should(visible, Duration.ofSeconds(15));
         conciergeAddressScreen.getEditShippingAddress().click();
         checkoutAddressScreen.getFirstNameInpt().should(visible, Duration.ofSeconds(15));
@@ -572,12 +571,12 @@ public class EstoreE2EStepDefs {
                 estoreAddressScreen.getContinueToPayment().scrollIntoView(true);
                 estoreAddressScreen.getContinueToPayment().should(visible, Duration.ofSeconds(2));
                 estoreAddressScreen.getContinueToPayment().click();
-                
+
             } else {
                 estoreAddressScreen.getContinuePayment().scrollIntoView(true);
                 estoreAddressScreen.getContinuePayment().should(visible, Duration.ofSeconds(2));
                 estoreAddressScreen.getContinuePayment().click();
-                
+
             }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Continue button is not displayed");
@@ -603,7 +602,7 @@ public class EstoreE2EStepDefs {
 
     @When("I refresh current estore page")
     public void iRefreshCurrentEstorePage() {
-        
+
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -618,12 +617,12 @@ public class EstoreE2EStepDefs {
         }
 
         open(URL);
-        
+
         estoreItemPage.getAddToCartButton().scrollTo();
         if (!estoreItemPage.getAddToCartButton().isEnabled()) {
             for (int i = 0; i < 3; i++) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
-        
+
                 if (estoreItemPage.getAddToCartButton().isEnabled()) {
                     break;
                 }

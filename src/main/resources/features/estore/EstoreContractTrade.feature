@@ -2,7 +2,6 @@
 
 Feature: eStore Contract and Trade
 
-  @estoreParallelTestRun
   Scenario: eStore Contract Login
     Given I log into eStore as contract
     When I choose country for eStore from footer
@@ -25,7 +24,6 @@ Feature: eStore Contract and Trade
     When I choose qty for item from estore cart
     Then I verify that the price get increased in multiple of QTY
 
-  @estoreParallelTestRun
   Scenario: eStore Contract - Validate the currency for US-Zip on PDP
     Given I log into eStore as contract
     When I choose country for eStore from footer
@@ -33,7 +31,6 @@ Feature: eStore Contract and Trade
     When I update "US" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
-  @estoreParallelTestRun
   Scenario: eStore Contract - Validate the currency for CAN-Zip on PDP
     Given I log into eStore as contract
     When I choose country for eStore from footer
@@ -295,14 +292,12 @@ Feature: eStore Contract and Trade
     Then I verify the subtotal, shipping fee, taxes based on postal code
 
 #Trade
-  @estoreParallelTestRun
   Scenario: eStore Trade Login
     Given I log into eStore as trade
     When I choose country for eStore from footer
     Then I verify that trade paragraph is displayed
     And I verify that logout from trade user is displayed
 
-  @estoreParallelTestRun
   Scenario: eStore Trade - Validate the currency for US-Zip on PDP
     Given I log into eStore as trade
     When I choose country for eStore from footer
@@ -310,7 +305,6 @@ Feature: eStore Contract and Trade
     When I update "US" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
-  @estoreParallelTestRun
   Scenario: eStore Trade - Validate the currency for CAN-Zip on PDP
     Given I log into eStore as trade
     When I choose country for eStore from footer

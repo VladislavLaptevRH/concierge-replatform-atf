@@ -1,4 +1,5 @@
 @estoreTestRun
+
 Feature: Estore Cart Page
 
   Scenario: Remove item from cart
@@ -19,7 +20,7 @@ Feature: Estore Cart Page
     When I remove promotion from estore cart
     When I apply employee discount for estore
     Then I verify that I'm able to remove estore employee discount
-
+    
   Scenario: Apply/Remove promotion code
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
