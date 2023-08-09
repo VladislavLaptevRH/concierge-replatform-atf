@@ -144,7 +144,7 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for tests.concierge
      */
-    @Before("@estoreTestRun or @estoreParallelTestRun")
+    @Before("@estoreTestRun")
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
@@ -226,7 +226,7 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After("@concierge-All or @estoreTestRun or @target/rerun.txt or @estoreTestRun or @estoreParallelTestRun")
+    @After("@concierge-All or @estoreTestRun or @target/rerun.txt")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
 

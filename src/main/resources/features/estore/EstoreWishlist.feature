@@ -1,4 +1,5 @@
-@estoreParallelTestRun
+@estoreTestRun
+
 Feature: Estore Wishlist
 
   Scenario: Wishlist for registered users

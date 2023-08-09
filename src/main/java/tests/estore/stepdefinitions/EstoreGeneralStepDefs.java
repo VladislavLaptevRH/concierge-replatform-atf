@@ -107,7 +107,7 @@ public class EstoreGeneralStepDefs {
 
     public void removeFromCart(int countOfCartItems) {
         if (Hooks.cookie.contains("userservice")) {
-            
+
             Actions actions = new Actions(WebDriverRunner.getWebDriver());
             actions.moveToElement(estoreUserAccountPage.getCartButtonUserService());
             estoreUserAccountPage.getCartButtonUserService().should(visible, Duration.ofSeconds(20));
@@ -120,7 +120,7 @@ public class EstoreGeneralStepDefs {
             for (int i = 0; i < countOfCartItems; i++) {
                 estoreCartPage.getRemoveButton().should(visible, Duration.ofSeconds(30));
                 estoreCartPage.getRemoveButton().click();
-                
+
             }
             estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(15));
             estoreUserAccountPage.getRhEstoreLogo().click();
@@ -675,10 +675,9 @@ public class EstoreGeneralStepDefs {
      * @param expirationDate This method execute payment with provided method
      */
     public void payWith(String paymentType, String number, String cvc, String expirationDate) {
-
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         if (!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-    
         }
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(appear), Duration.ofSeconds(60));
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(60));

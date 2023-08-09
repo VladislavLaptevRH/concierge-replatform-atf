@@ -1,4 +1,5 @@
-@estoreParallelTestRun
+@estoreTestRun
+
 Feature: Estore PG
 
   Scenario: Grid view Mobile Only 1 and 2 grid view

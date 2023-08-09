@@ -1,4 +1,5 @@
-@estoreParallelTestRun
+@estoreTestRun
+
 Feature: Estore Homepage
 
   Scenario Outline: Verify search functionality

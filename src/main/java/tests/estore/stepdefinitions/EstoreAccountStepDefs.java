@@ -20,7 +20,8 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
-import static org.testng.AssertJUnit.*;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class EstoreAccountStepDefs {
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
@@ -35,8 +36,7 @@ public class EstoreAccountStepDefs {
 
     @Then("I verify that the personal info is displayed")
     public void iVerifyThatThePersonalInfoIsDisplayed() {
-//        assertEquals("1", "1", "2");
-        assertFalse(estoreUserAccountPage.getBillingAddressFirstName().getValue().equals("1"));
+        assertFalse(estoreUserAccountPage.getBillingAddressFirstName().getValue().isEmpty());
         assertFalse(estoreUserAccountPage.getBillingAddressLastName().getValue().isEmpty());
         assertTrue(estoreLoginPage.getContractTradeEmailField().getValue().equals("regularautomation@rh.com"));
     }
