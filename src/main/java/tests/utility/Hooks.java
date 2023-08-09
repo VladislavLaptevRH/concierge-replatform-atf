@@ -57,7 +57,6 @@ public class Hooks {
      * This method get properties from application.properties file
      */
     private void ConfigFileReader() {
-
         profile = System.getenv("ENVIRONMENT");
         cookie = System.getenv("ENDPOINT");
         country = System.getenv("COUNTRY");
@@ -141,7 +140,7 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for tests.concierge
      */
-    @Before("@estoreRegression")
+    @Before("@estoreTestRun or @estoreParallelTestRun")
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();

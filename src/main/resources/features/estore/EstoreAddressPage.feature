@@ -1,6 +1,6 @@
-@estoreTestRun
 Feature: Estore Address Page
 
+  @estoreTestRun
   Scenario: eStore Address for Guest user
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -20,6 +20,7 @@ Feature: Estore Address Page
     When I pay with RHCC for estore item
     Then I validate "billing address" which we have entered earlier
 
+  @estoreTestRun
   Scenario: eStore Address for Registered user - To verify Add a new shipping Address option is present
     Given I log into eStore as "savedaddress" user
     When I choose country for eStore from footer
@@ -30,6 +31,7 @@ Feature: Estore Address Page
     When I click on estore no thanks button
     Then I verify add a new shipping address option is present
 
+  @estoreParallelTestRun
   Scenario: eStore Address Page - To verify Add address button
     Given I log into eStore as "noaddresses" user
     When I choose country for eStore from footer
@@ -38,6 +40,7 @@ Feature: Estore Address Page
     When I click on address book estore button
     Then I verify that add address button is displayed
 
+  @estoreTestRun
   Scenario: eStore Address Page - To verify mandatory field in New address
     Given I log into eStore as "addresspage" user
     When I choose country for eStore from footer
@@ -50,6 +53,7 @@ Feature: Estore Address Page
     When I click on save address button
     Then I verify that error messages are displayed for each mandatory field
 
+  @estoreTestRun
   Scenario: eStore Address Page - To verify newly added address is present in shipping address list
     Given I log into eStore as "addresspage" user
     When I choose country for eStore from footer
@@ -70,6 +74,7 @@ Feature: Estore Address Page
     When I delete the first shipping address on address estore page
     When I click on delete address button from appeared pop up
 
+  @estoreTestRun
   Scenario: eStore Address Page - To verify the deleted address removed from the shipping address list
     Given I log into eStore as "addresspage" user
     When I choose country for eStore from footer
@@ -89,7 +94,8 @@ Feature: Estore Address Page
     When I click on estore checkout button
     When I click on estore no thanks button
     Then I verify that added address is not present in the grid
-#!
+
+  @estoreTestRun
   Scenario: eStore Address Page - To verify the edited address updated in the shipping address list
     Given I log into eStore as "addresspage" user
     When I choose country for eStore from footer
@@ -112,6 +118,7 @@ Feature: Estore Address Page
     When I click on estore no thanks button
     Then I verify that added address is displayed in the shipping address list
 
+  @estoreTestRun
   Scenario: eStore Address Page - Verify the scenario when saved address has missing required address fields - Missing phone number etc
     Given I log into eStore as "addresspage" user
     When I choose country for eStore from footer
@@ -125,6 +132,7 @@ Feature: Estore Address Page
     When I click on save address button
     Then user verify that field is required message is displayed
 
+  @estoreTestRun
   Scenario: eStore Address Page - Verify same as Billing address same as Shipping functionality - switch between the listed shipping addresses
     Given I log into eStore as "addresspage" user
     When I choose country for eStore from footer
@@ -138,8 +146,8 @@ Feature: Estore Address Page
     When I click on same as estore shipping address checkbox
     Then I verify that billing address the same as shipping functionality
 
+  @estoreTestRun
   Scenario: eStore Address Page - Verify the shipping and Billing address for registered User Order review and Order Confirmation page
-
     Given I log into eStore as "addresspage" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
@@ -158,6 +166,7 @@ Feature: Estore Address Page
     When I click on order details button
     Then I verify shipping and billing address on order confirmation page
 
+  @estoreTestRun
   Scenario: eStore Address Page - Verify Gift message and order description showing on the order review and TY page
     Given I log into eStore as "addresspage" user
     When I choose country for eStore from footer
