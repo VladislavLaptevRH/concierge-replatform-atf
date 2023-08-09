@@ -1,3 +1,17 @@
+@Library('jenkins-rhapsody-libraries@master') _ //Importing shared Libraries
+import com.rh.rhapsody.*;
+
+Service s = Service.ESTORE_REGRESSION_TESTS;
+
+CRON_SETTINGS = '''* * * * * % ENVIRONMENT=stg2;ENDPOINT=releasethurs''';
+
+
+def resultspath = "${env.JOB_NAME}/${env.BUILD_NUMBER}"
+println("resultspath=${resultspath}")
+
+Java11Pipeline pipeline = new Java11Pipeline(this, s, env);
+
+
 pipeline.standardTemplate { label ->
    properties([parameters([
          choice(choices: ['stg2', 'stg3', 'stg4', 'prod'], description: 'Select Environment to build', name: 'ENVIRONMENT'),
@@ -16,10 +30,24 @@ pipeline.standardTemplate { label ->
             }
 
             stage('Run Tests') {
-                pipeline.buildMvn("sudo clean test -Dsuite-xml='.../TestSuite/TestNG.xml'", true);
+                pipeline.buildMvn("clean test -Dcucumber.filter.tags='@estoreTestRun'", true);
             } // end stage
 
-            slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) 'Environment' (${params.ENVIRONMENT}) 'Endpoint' (${params.ENDPOINT})  " +
+            container("awscli") {
+                withAWS(region: "us-east-1", role: "devops-documentation", roleAccount: "487531406788") {
+                    dir(s.rootDirectory) {
+                        sh """
+                        apk --no-cache add tree
+                        pwd
+                        cd /home/jenkins/workspace/${env.JOB_NAME}/target
+                        tree -H '.' -L 3 --noreport --charset utf-8  -o index.html
+                        aws s3 sync . s3://docs.rhapsody.rh.com/public/${resultspath}
+                        """
+                    } // pipeline dir
+                }
+            }  // pipeline/container
+
+            slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) 'Environment' (${params.ENVIRONMENT}) 'Endpoint' (${params.ENDPOINT}) 'Country' (${params.COUNTRY})  " +
                     " : Test Results: http://docs.rhapsody.rh.com/public/${resultspath}/cucumber-html-report/Index.html",
                     channel: "#test-results")
         } catch (Exception exception) {

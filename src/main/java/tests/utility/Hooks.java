@@ -11,8 +11,9 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -22,6 +23,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -57,6 +60,7 @@ public class Hooks {
      * This method get properties from application.properties file
      */
     private void ConfigFileReader() {
+
         profile = System.getenv("ENVIRONMENT");
         cookie = System.getenv("ENDPOINT");
         country = System.getenv("COUNTRY");
@@ -165,12 +169,12 @@ public class Hooks {
     public void setUPWebDriver(String url) {
         System.out.println("Inside initDriver method");
         WebDriverManager.chromedriver().setup();
-        Configuration.driverManagerEnabled = true;
+        Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
         Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
-        Configuration.timeout = 30000;
+        Configuration.timeout = 25000;
         Configuration.reportsFolder = "target/screenshots";
         open(url);
         currentUrl = WebDriverRunner.url();
@@ -184,15 +188,22 @@ public class Hooks {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("--no-sandbox");
-        options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-gpu");
         options.addArguments("enable-automation");
         options.addArguments("--disable-infobars");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-browser-side-navigation");
-        Configuration.browserCapabilities = options;
-        WebDriver driver;
-        driver = new ChromeDriver(options);
+        options.addArguments("--window-size=1366,768");
+        options.addArguments("--force-device-scale-factor=1");
+        DesiredCapabilities dr = new DesiredCapabilities();
+        dr.setBrowserName("chrome");
+        dr.setCapability(ChromeOptions.CAPABILITY, options);
+        String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
+        RemoteWebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         WebDriverRunner.setWebDriver(driver);
     }
 
@@ -215,7 +226,7 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After("@concierge-All or @estoreTestRun or @estoreParallelTestRun or @target/rerun.txt")
+    @After("@concierge-All or @estoreTestRun or @target/rerun.txt or @estoreTestRun or @estoreParallelTestRun")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
 
