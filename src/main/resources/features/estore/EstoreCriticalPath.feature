@@ -1,4 +1,4 @@
-@estoreCriticalPath
+@estoreCriticalPathTestRun
 
 Feature: Estore critical path
 
@@ -822,6 +822,7 @@ Feature: Estore critical path
   Scenario: Verify Monogrammed products
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
+    When I remove all items from estore cart
     When I open product page with "prod20000465" and "17110485" with "EUCY" for estore
     When I click on add monogram checkbox from pdp on eStore
     When I add monogram to product on eStore

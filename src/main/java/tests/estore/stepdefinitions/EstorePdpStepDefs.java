@@ -360,6 +360,7 @@ public class EstorePdpStepDefs {
         $(By.xpath("//input[@data-testid='monogram-input0']")).should(appear, Duration.ofSeconds(25)).setValue("tes");
         $(By.xpath("//button[@data-testid='monogram-add-button']")).should(visible, Duration.ofSeconds(25)).click();
     }
+
     @Then("I verify that monogram was added for pdp on eStore")
     public void iVerifyThatMonogramWasAddedForPdpOnEStore() {
         $(By.xpath("//p[text()='PERSONALIZATION']")).should(visible, Duration.ofSeconds(20));
@@ -368,7 +369,7 @@ public class EstorePdpStepDefs {
         $(By.xpath("//p[text()='Text']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='tes']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[@id='listColumn1-Color']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//p[text()='Tone-on-Tone (TOT)']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='TOT']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Edit']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Remove']")).should(visible, Duration.ofSeconds(20));
     }

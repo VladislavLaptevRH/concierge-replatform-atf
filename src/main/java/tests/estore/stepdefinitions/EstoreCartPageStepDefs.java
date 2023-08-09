@@ -773,6 +773,14 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify monogram was added to cart for eStore")
     public void iVerifyMonogramWasAddedToCartForEStore() {
-
+        $(By.xpath("//p[text()='PERSONALIZATION']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Style']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Bauer Bodoni 2 (BDNI-HD)']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Text']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='tes']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@id='listColumn1-Color']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Tone-on-Tone (TOT)']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Edit']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Remove']")).should(visible, Duration.ofSeconds(20));
     }
 }
