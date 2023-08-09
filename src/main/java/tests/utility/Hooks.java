@@ -61,13 +61,9 @@ public class Hooks {
      */
     private void ConfigFileReader() {
 
-//        profile = System.getenv("ENVIRONMENT");
-//        cookie = System.getenv("ENDPOINT");
-//        country = System.getenv("COUNTRY");
-
-        profile = "stg2";
-        cookie = "tiger";
-        country = "US";
+        profile = System.getenv("ENVIRONMENT");
+        cookie = System.getenv("ENDPOINT");
+        country = System.getenv("COUNTRY");
 
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
@@ -152,7 +148,7 @@ public class Hooks {
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(eStoreURL);
     }
 
@@ -176,7 +172,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 25000;
         Configuration.reportsFolder = "target/screenshots";
