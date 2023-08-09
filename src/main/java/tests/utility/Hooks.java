@@ -169,7 +169,7 @@ public class Hooks {
     public void setUPWebDriver(String url) {
         System.out.println("Inside initDriver method");
         WebDriverManager.chromedriver().setup();
-        Configuration.driverManagerEnabled = true;
+        Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
         Configuration.headless = true;

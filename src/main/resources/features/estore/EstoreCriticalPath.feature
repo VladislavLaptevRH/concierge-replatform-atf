@@ -4,7 +4,7 @@ Feature: Estore critical path
 
   Scenario Outline: Verify top menu navigation
     Given I log into eStore as guest
-    When I choose country for concierge from footer
+    When I choose country for eStore from footer
     Then  I change the brand to "<brand>" for eStore
     Then User verifies that all items from menu are displayed for "<brand>"
     And user verifies search button, account icon, cart button are displayed
@@ -38,6 +38,59 @@ Feature: Estore critical path
       | rhbabyandchild |
       | rhteen         |
 
+#Verify the PGs IN all brands
+  Scenario Outline: Verify product thumbnail is correctly loaded
+    Given  I change the brand to "<brand>" for eStore
+    When I go to estore item "sofa" from search field
+    Then I verify that product thumbnail is correctly loaded
+    Examples:
+      | brand             |
+      | RH                |
+      | RH CONTEMPORARY   |
+      | RH MODERN         |
+      | RH OUTDOOR        |
+      | RH BEACH HOUSE    |
+      | RH SKI HOUSE      |
+      | RH TEEN           |
+      | BABY & CHILD      |
+      | VIEW SOURCE BOOKS |
+
+  Scenario: Verify it shows price range below the thumbnail
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "sofa" from search field
+    Then user verifies that price range is displayed below the thumbnail
+
+  Scenario: PG - Back to Top button
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I goes to estore collection page
+    When I scroll on the page till back to top button is visible
+    Then I verify that back to top button is clickable
+    And I verify that after click on back to top button user is scrolled to top on the page
+
+  Scenario: Verify the Sale Price on PG pages for Sale Items
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on sale
+    When I click on sale menu item
+    When I click on sub category and navigate PDP
+    Then I verify prices on product page
+    #navigate to PG->check sale price on pg, and check value for price
+
+  Scenario: Verify sorting - low to high - is working as expected
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "sofa" from search field
+    When I select low to high for estore
+    Then I verify that sorting low to high is working as expected
+
+  Scenario: Verify sorting - high to low - is working as expected
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "sofa" from search field
+    When I select high to low for estore
+    Then I verify that sorting low to high is working as expected
 
   Scenario: Verify collection name,image (regular,member,sale(applicable) on collection banner
     Given I log into eStore as "guest" user
@@ -78,19 +131,13 @@ Feature: Estore critical path
   Scenario: From home page goto a collection and click on any Product, It should redirect user to PG
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
-    When I navigate to PG page from top menu
-    Then I verify that PG page is displayed with all the related products
-
-  Scenario: Verify the Sale Price on PG pages for Sale Items
-    Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
-    When I click on sale
-    When I click on sale menu item
-    When I click on sub category and navigate PDP
-    Then I verify prices on product page
+    When I goes to estore collection page
+    When I click on random product on collection page
+    Then I verify that PG page is displayed for eStore
+    #use fabric seating - sofas: check title, grid view
 
   Scenario: Verify the Member Price Text On PG page after selecting the specifications
-    Given I log into eStore as "guest" user
+    Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I navigate to PG page from top menu
     Then I verify the member price on PG page after selecting the specifications
@@ -771,3 +818,16 @@ Feature: Estore critical path
     Given I go to estore guesthouse home page
     When I click on estore guesthouse rooftop pool page
     Then I verify that estore guesthouse rooftop pool page is displayed
+
+  Scenario: Verify Monogrammed products
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I open product page with "prod20000465" and "17110485" with "EUCY" for estore
+    When I click on add monogram checkbox from pdp on eStore
+    When I add monogram to product on eStore
+    Then I verify that monogram was added for pdp on eStore
+    When I click on add to cart estore button
+    When I click on view cart estore button
+    Then I verify monogram was added to cart for eStore
+    #verify mono on pdp -> add to cart-> verify the mono in cart
+

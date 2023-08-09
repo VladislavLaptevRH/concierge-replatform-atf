@@ -770,4 +770,9 @@ public class EstoreCartPageStepDefs {
     public void iVerifyMembershipWasAddedToCart() {
         $(By.xpath("//*[contains(text(),'Thank you for joining the RH Members Program.')]")).should(visible, Duration.ofSeconds(20));
     }
+
+    @Then("I verify monogram was added to cart for eStore")
+    public void iVerifyMonogramWasAddedToCartForEStore() {
+
+    }
 }

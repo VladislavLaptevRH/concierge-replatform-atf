@@ -346,4 +346,30 @@ public class EstorePdpStepDefs {
     public void userVerifiesThatUserIsRedirectedToAReturnPolicyPage() {
         estoreReturnPolicyScreen.verifyThatReturnPolicyPageIsDisplayed();
     }
+
+    @When("I click on add monogram checkbox from pdp on eStore")
+    public void iClickOnAddMonogramCheckboxFromPdpOnEStore() {
+        estorePDPScreen.clickToMonogramCheckBox();
+    }
+
+    @When("I add monogram to product on eStore")
+    public void iVerfiyThatIMAbleToChooseMonogram() {
+        $(By.xpath("//*[text()='PERSONALIZE YOUR SELECTIONS']")).should(visible, Duration.ofSeconds(25));
+        $(By.xpath("//input[@name='checkboxBauer Bodoni 2 (BDNI-HD)']")).click();
+        $(By.xpath("//input[@name='checkboxTone-on-Tone (TOT)']")).click();
+        $(By.xpath("//input[@data-testid='monogram-input0']")).should(appear, Duration.ofSeconds(25)).setValue("tes");
+        $(By.xpath("//button[@data-testid='monogram-add-button']")).should(visible, Duration.ofSeconds(25)).click();
+    }
+    @Then("I verify that monogram was added for pdp on eStore")
+    public void iVerifyThatMonogramWasAddedForPdpOnEStore() {
+        $(By.xpath("//p[text()='PERSONALIZATION']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Style']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Bauer Bodoni 2 (BDNI-HD)']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Text']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='tes']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@id='listColumn1-Color']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Tone-on-Tone (TOT)']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Edit']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='Remove']")).should(visible, Duration.ofSeconds(20));
+    }
 }
