@@ -114,7 +114,7 @@ public class EstoreAccountStepDefs {
 
     @Then("I verify that the updated last name is saved")
     public void iVerifyThatTheUpdatedLastNameIsSaved() {
-        assertTrue(estoreUserAccountPage.getBillingAddressLastName().getValue().equals(lastName));
+        estoreUserAccountPage.getBillingAddressLastName().shouldHave(value(lastName), Duration.ofSeconds(20));
     }
 
     @When("I update account email with the existing email")

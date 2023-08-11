@@ -58,12 +58,12 @@ public class EstoreUserAccountPageStepDefs {
         switchTo().defaultContent();
         estoreUserAccountPage.getBillingAddressFirstName().setValue("Safire");
         estoreUserAccountPage.getBillingAddressLastName().setValue("TestLastName");
-            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddressNewCardPopUp());
-            estoreUserAccountPage.getBillingAddressStreetAddressNewCardPopUp().setValue("4524 Ocala Street");
-            estoreAddressScreen.getCityAddNewCard().setValue("Hilliard");
-            Select selectCardState = new Select(estoreAddressScreen.getStateAddNewCard());
-            selectCardState.selectByValue("OH");
-            estoreAddressScreen.getPostalCodeAddNewCard().setValue("99950");
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddressNewCardPopUp());
+        estoreUserAccountPage.getBillingAddressStreetAddressNewCardPopUp().setValue("4524 Ocala Street");
+        estoreAddressScreen.getCityAddNewCard().setValue("Hilliard");
+        Select selectCardState = new Select(estoreAddressScreen.getStateAddNewCard());
+        selectCardState.selectByValue("OH");
+        estoreAddressScreen.getPostalCodeAddNewCard().setValue("99950");
 
 //        }
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
@@ -108,7 +108,6 @@ public class EstoreUserAccountPageStepDefs {
 
     @When("I click on address book estore button")
     public void iClickOnAddressBookEstoreButton() {
-//
         estoreUserAccountPage.getAddressBookButton().should(Condition.visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getAddressBookButton().click();
     }
@@ -133,8 +132,11 @@ public class EstoreUserAccountPageStepDefs {
 
     @When("I click on save address button")
     public void iClickOnSaveAddressButton() {
+        estoreUserAccountPage.getBillingAddressPhone().shouldHave(value("(541) 777-4321"), Duration.ofSeconds(15));
+        estoreUserAccountPage.getBillingAddressPostalCode().shouldHave(value("75067"), Duration.ofSeconds(15));
         estoreUserAccountPage.getSaveAddressButton().should(visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getSaveAddressButton().scrollIntoView(true);
+        estoreUserAccountPage.getBillingAddressSelectState().shouldNotBe(empty, Duration.ofSeconds(15));
         estoreUserAccountPage.getSaveAddressButton().click();
 
     }

@@ -47,6 +47,10 @@ public class EstoreCartPageStepDefs {
     int lineItemPrice;
     int totalProductPrice;
 
+    String memberPrice;
+
+    String totalPriceOrderEstimate;
+
     @When("I remove all items from estore cart")
     public void iRemoveAllItemsFromEstoreCart() {
         generalStepDefs.waitForJSandJQueryToLoad();
@@ -782,5 +786,18 @@ public class EstoreCartPageStepDefs {
         $(By.xpath("//p[text()='Tone-on-Tone (TOT)']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Edit']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Remove']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that order estimate is calculcated based on member prices")
+    public void iVerifyThatOrderEstimateIsCalculcatedBasedOnMemberPrices() {
+        memberPrice = estoreCartPage.getPriceForMember().getText();
+        totalPriceOrderEstimate = $(By.xpath("(//*[text()='" + memberPrice + "'])[2]")).getText();
+        $(By.xpath("(//*[text()='" + memberPrice + "'])[2]")).shouldHave(text(memberPrice));
+        $(By.xpath("//*[text()='Subtotal with Member Savings']")).should(visible, Duration.ofSeconds(40));
+    }
+
+    @Then("user verify that membership pop up is not displayed on eStore")
+    public void userVerifyThatMembershipPopUpIsNotDisplayed() {
+        estoreCartPage.verifyThatPurchasingMembershipPopIsNotDisplayed();
     }
 }
