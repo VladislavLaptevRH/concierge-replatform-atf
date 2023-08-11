@@ -347,32 +347,10 @@ public class EstoreAddressStepDefs {
 
     @When("I click on continue with original address estore button")
     public void iClickOnContinueWithOriginalAddressEstoreButton() {
-//        try {
         generalStepDefs.waitForJSandJQueryToLoad();
-
-
-//            if (Hooks.profile.equals("stg3")) {
-//                $(By.xpath("(//button[contains(@class,'MuiButton-containedPrimary')])[2]")).click();
-//            } else {
-
-
-//        if (!estoreItemPage.getAddToCartButtonNotDisabled().isDisplayed()) {
-//            iClickOnContinueToPayment();
-//        }
         estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled, interactable), Duration.ofSeconds(30));
         estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(30));
         estoreItemPage.getAddToCartButton().click(ClickOptions.usingJavaScript());
-
-//            if (estoreItemPage.getAddToCartButton().isDisplayed()) {
-//                estoreUserAccountPageStepDefs.iClickOnAddAddressButton();
-//                iIntroduceDataForNewProfileAddress();
-//                estoreUserAccountPageStepDefs.iClickOnSaveAddressButton();
-//                iClickOnContinueWithOriginalAddressEstoreButton();
-//            }
-
-//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-//            System.out.println("Continue with original button is not displayed");
-//        }
     }
 
     @When("I click on continue to payment estore button")

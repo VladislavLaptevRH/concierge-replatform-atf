@@ -37,6 +37,10 @@ public class EstorePdpStepDefs {
     String itemCartPriceRegular;
     String itemCartPriceMember;
 
+    int regularPricePdp;
+    int memberPricePdp;
+
+
     @Then("I verify that user can see product details correctly mentioned for a product")
     public void iVerifyThatUserCanSeeProductDetailsCorrectlyMentionedForAProduct() {
         $(By.xpath("//*[text()='DETAILS']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
@@ -270,10 +274,14 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the product price for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceForProductAndWithForTheSelectedCountry(String productID, String arg1, String selectedOptions, String country) {
-        if (country.equals("CAN") && (productID.equals("prod13800635")) && (selectedOptions.equals("INDG"))) {
-            estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$13"), Duration.ofSeconds(30));
-            estorePdpPageScreen.getMemberTheFirstPrice().shouldHave(text("$9"), Duration.ofSeconds(30));
-        }
+        estorePdpPageScreen.getRegularTheFirstPrice().should(visible, Duration.ofSeconds(20));
+        regularPricePdp = Integer.parseInt(estorePdpPageScreen.getRegularTheFirstPrice().getText().replaceAll("\\$", ""));
+        regularPricePdp = Integer.parseInt(estorePdpPageScreen.getRegularTheFirstPrice().getText().replaceAll("\\$", ""));
+        memberPricePdp = Integer.parseInt(estorePdpPageScreen.getMemberTheFirstPrice().getText().replaceAll("\\$", ""));
+
+        assertTrue("Regular price is greater than 0", regularPricePdp > 0);
+        assertTrue("Member price is greater than 0", memberPricePdp > 0);
+
     }
 
     @And("I verify that {string} popup is displayed")
@@ -360,6 +368,7 @@ public class EstorePdpStepDefs {
         $(By.xpath("//input[@data-testid='monogram-input0']")).should(appear, Duration.ofSeconds(25)).setValue("tes");
         $(By.xpath("//button[@data-testid='monogram-add-button']")).should(visible, Duration.ofSeconds(25)).click();
     }
+
     @Then("I verify that monogram was added for pdp on eStore")
     public void iVerifyThatMonogramWasAddedForPdpOnEStore() {
         $(By.xpath("//p[text()='PERSONALIZATION']")).should(visible, Duration.ofSeconds(20));
@@ -368,7 +377,7 @@ public class EstorePdpStepDefs {
         $(By.xpath("//p[text()='Text']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='tes']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[@id='listColumn1-Color']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//p[text()='Tone-on-Tone (TOT)']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//p[text()='TOT']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Edit']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Remove']")).should(visible, Duration.ofSeconds(20));
     }

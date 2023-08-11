@@ -194,6 +194,7 @@ public class Hooks {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--window-size=1366,768");
         options.addArguments("--force-device-scale-factor=1");
+        options.addArguments("enable-features=NetworkServiceInProcess");
         DesiredCapabilities dr = new DesiredCapabilities();
         dr.setBrowserName("chrome");
         dr.setCapability(ChromeOptions.CAPABILITY, options);

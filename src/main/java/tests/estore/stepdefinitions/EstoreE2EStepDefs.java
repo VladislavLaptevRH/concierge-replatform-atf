@@ -237,13 +237,7 @@ public class EstoreE2EStepDefs {
     @When("I click on estore no thanks button")
     public void iClickOnNoThanksEstoreButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
-        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).should(appear, Duration.ofSeconds(10));
-        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).should(exist, Duration.ofSeconds(10));
-        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).should(interactable, Duration.ofSeconds(10));
-        with().pollInterval(2, SECONDS).await().until(() -> true);
-        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).doubleClick();
-
+        estoreCartPage.clickOnNoThanksButton();
     }
 
     @When("I choose estore client who is a non member")
