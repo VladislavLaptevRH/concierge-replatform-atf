@@ -173,7 +173,7 @@ public class Hooks {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
         Configuration.headless = true;
-        Configuration.pageLoadStrategy = "normal";
+//        Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 25000;
         Configuration.reportsFolder = "target/screenshots";
         open(url);

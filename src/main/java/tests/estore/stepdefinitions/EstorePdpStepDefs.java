@@ -330,7 +330,6 @@ public class EstorePdpStepDefs {
     public void iVerifyThatPriceForMemberAndRegularUserOnPDP() {
         regularCAGBPrice = estorePDPScreen.getFirstRegularPrice().getText();
         memberCAGBPrice = estorePDPScreen.getFirstMemberPrice().getText();
-        System.out.println();
     }
 
     @Then("I verify that price in cart is the same as on PDP")

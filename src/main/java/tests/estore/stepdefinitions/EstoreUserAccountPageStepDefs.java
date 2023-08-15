@@ -130,6 +130,14 @@ public class EstoreUserAccountPageStepDefs {
 
     }
 
+    @When("I click on save address button for empty address")
+    public void iClickOnSaveAddressButtonEmptyAddress() {
+        estoreUserAccountPage.getSaveAddressButton().should(visible, Duration.ofSeconds(40));
+        estoreUserAccountPage.getSaveAddressButton().scrollIntoView(true);
+        estoreUserAccountPage.getSaveAddressButton().click();
+
+    }
+
     @When("I click on save address button")
     public void iClickOnSaveAddressButton() {
         estoreUserAccountPage.getBillingAddressPhone().shouldHave(value("(541) 777-4321"), Duration.ofSeconds(15));
@@ -182,7 +190,7 @@ public class EstoreUserAccountPageStepDefs {
     public void iAddedNewCardForEstore(String paymentMethod) {
         estoreUserAccountPage.getAddCardButton().should(Condition.visible, Duration.ofSeconds(30));
         estoreUserAccountPage.getAddCardButton().click();
-        estoreUserAccountPage.getSelectTypeOfCardNewCard().should(Condition.visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getSelectTypeOfCardNewCard().should(interactable, Duration.ofSeconds(20));
         Select selectCard = new Select(estoreUserAccountPage.getSelectTypeOfCardNewCard());
 
         if (paymentMethod.equals("AMEX")) {
@@ -195,6 +203,7 @@ public class EstoreUserAccountPageStepDefs {
             switchTo().defaultContent();
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
             estorePaymentPage.getCvcField().setValue("6765");
+            estorePaymentPage.getCvcField().shouldHave(value("6765"), Duration.ofSeconds(15));
         }
         if (paymentMethod.equals("VISA")) {
             selectCard.selectByValue("CC");
@@ -206,6 +215,8 @@ public class EstoreUserAccountPageStepDefs {
             switchTo().defaultContent();
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
             estorePaymentPage.getCvcField().setValue("737");
+            estorePaymentPage.getCvcField().shouldHave(value("737"), Duration.ofSeconds(15));
+
         }
         if (paymentMethod.equals("MC")) {
             selectCard.selectByValue("CC");
@@ -217,6 +228,7 @@ public class EstoreUserAccountPageStepDefs {
             switchTo().defaultContent();
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
             estorePaymentPage.getCvcField().setValue("737");
+            estorePaymentPage.getCvcField().shouldHave(value("737"), Duration.ofSeconds(15));
         }
         if (paymentMethod.equals("DISCOVER")) {
             if (Hooks.profile.contains("stg4")) {
@@ -229,6 +241,8 @@ public class EstoreUserAccountPageStepDefs {
                 switchTo().defaultContent();
                 switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
                 estorePaymentPage.getCvcField().setValue("238");
+                estorePaymentPage.getCvcField().shouldHave(value("238"), Duration.ofSeconds(15));
+
             }
             if (Hooks.profile.contains("stg2")) {
                 selectCard.selectByValue("CC");
@@ -240,33 +254,24 @@ public class EstoreUserAccountPageStepDefs {
                 switchTo().defaultContent();
                 switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
                 estorePaymentPage.getCvcField().setValue("737");
+                estorePaymentPage.getCvcField().shouldHave(value("737"), Duration.ofSeconds(15));
             }
 
         }
 
         switchTo().defaultContent();
-        estoreUserAccountPage.getBillingAddressFirstName().setValue("TestName");
+        estoreUserAccountPage.getBillingAddressFirstName().setValue("Safire");
         estoreUserAccountPage.getBillingAddressLastName().setValue("TestLastName");
-        if (Hooks.eStoreBaseURL.contains("stg2")) {
-            estoreUserAccountPage.getBillingAddressStreetAddressStg2().should(visible, Duration.ofSeconds(20));
-            estoreUserAccountPage.getBillingAddressStreetAddressStg2().setValue("Bradford Drive, Hilliard, OH, USA");
-            try {
-                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).should(visible, Duration.ofSeconds(5));
-                $(By.xpath("//*[text()='Bradford Drive, Hilliard, OH, USA']")).click();
-            } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-                System.out.println("Dropdown list is not displayed");
-            }
-        } else {
-            generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddress());
-            estoreUserAccountPage.getBillingAddressStreetAddress().setValue("2479 Deer Run");
-            estoreAddressScreen.getCityAddNewCard().setValue("Hilliard");
-            Select selectCardState = new Select(estoreAddressScreen.getStateAddNewCard());
-            selectCardState.selectByValue("OH");
-            estoreAddressScreen.getPostalCodeAddNewCard().setValue("99950");
-        }
-        estoreUserAccountPage.getBillingAddressAptFloor().setValue("2");
+        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddressNewCardPopUp());
+        estoreUserAccountPage.getBillingAddressStreetAddressNewCardPopUp().setValue("4524 Ocala Street");
+        estoreAddressScreen.getCityAddNewCard().setValue("Hilliard");
+        Select selectCardState = new Select(estoreAddressScreen.getStateAddNewCard());
+        selectCardState.selectByValue("OH");
+        estoreAddressScreen.getPostalCodeAddNewCard().setValue("99950");
+
         estoreUserAccountPage.getBillingAddressPhone().setValue("(555) 555-1234");
 
+        estoreUserAccountPage.getBillingAddressPhone().shouldHave(value("(555) 555-1234"));
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(20));
         estoreUserAccountPage.getSaveCardButton().click();
     }

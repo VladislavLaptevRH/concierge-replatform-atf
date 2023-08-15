@@ -156,7 +156,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I verify that rh members program terms & condition pop up is displayed")
     public void iVerifyThatRhMembersProgramTermsCondition() {
-        $(By.xpath("//*[text()='RH Members Program Terms & Conditions']")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='RH MEMBERS PROGRAM TERMS & CONDITIONS']")).should(visible, Duration.ofSeconds(30));
     }
 
     @Then("I verify that email address displayed in membership page")
@@ -181,6 +181,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I verify that save card to account checkbox should be checked by defaults")
     public void iVerifyThatSaveCardToAccountCheckboxShouldBeCheckedByDefaults() {
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         with().pollInterval(3, SECONDS).await().until(() -> true);
         estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());

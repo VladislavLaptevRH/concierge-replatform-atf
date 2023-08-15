@@ -89,12 +89,13 @@ Feature: Estore PDP
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     When I update "CAN" postal code on pdp page
-    Then I verify the product price for the selected country
+    Then I verify price for member and regular user on PDP
+    Then I verify the product price for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
   Scenario: Verify the product price on PDP for non-sale cushion and frame product
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
-    Then I verify the product price on PDP for non-sale cushion and frame product
+    Then I verify the product price for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
