@@ -49,7 +49,7 @@ Feature: Estore Address Page
     When I click on estore my account button
     When I click on address book estore button
     When I click on add address button
-    When I click on save address button
+    When I click on save address button for empty address
     Then I verify that error messages are displayed for each mandatory field
 
   Scenario: eStore Address Page - To verify newly added address is present in shipping address list
@@ -119,12 +119,13 @@ Feature: Estore Address Page
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I goes to my account for estore
+    When I click on estore my account icon for guest user
     When I click on estore my account button
     When I click on address book estore button
     When I remove added address before for address book
     When I click on add address button
     When I introduce data for new profile address without phone number
-    When I click on save address button
+    When I click on save address button for empty address
     Then user verify that field is required message is displayed
 
   Scenario: eStore Address Page - Verify same as Billing address same as Shipping functionality - switch between the listed shipping addresses

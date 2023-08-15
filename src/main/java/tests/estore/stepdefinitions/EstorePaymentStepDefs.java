@@ -29,23 +29,19 @@ public class EstorePaymentStepDefs {
 
     @Then("I verify that I'm able to execute estore split payment")
     public void iVerifyThatIMAbleToExecuteEstoreSplitPayment() {
-        try {
-            $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
-            estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
+        estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
 
-            $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
-            $(By.xpath("//input[@type='text']")).setValue("10");
-            estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
-
-
-            WebDriverRunner.getWebDriver().navigate().refresh();
+        $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
+        $(By.xpath("//input[@type='text']")).setValue("10");
+        estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
 
 
-            estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
-            estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
-        }
+        WebDriverRunner.getWebDriver().navigate().refresh();
+
+
+        estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
+        estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
 
     }
 
@@ -189,6 +185,7 @@ public class EstorePaymentStepDefs {
             $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofSeconds(20));
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
             estorePaymentPage.getCvcField().setValue("737");
+            estorePaymentPage.getCvcField().shouldHave(value("737"), Duration.ofSeconds(15));
 
             switchTo().defaultContent();
             $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();

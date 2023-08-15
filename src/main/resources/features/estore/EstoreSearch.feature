@@ -7,13 +7,13 @@ Feature: Estore Search
     When I choose country for eStore from footer
     When I click on hamburger menu for estore
     When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
-    Then I verify that search result for search product via product name is displayed
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
 
   Scenario: Search product via Product name
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
-    Then I verify that search result for search product via product name is displayed
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
 #
   Scenario: Search product from other category
     Given I log into eStore as "regular" user
@@ -108,7 +108,7 @@ Feature: Estore Search
   Scenario: Apply any facet and verify the count of product
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I go to estore item "sofa" from search field
+    When I go to estore item "OUTDOOR" from search field
     Then I apply new arrivals facet
 
   Scenario: Verify the in stock facet selection and in stock product

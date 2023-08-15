@@ -1,4 +1,4 @@
-@estoreCriticalPathTestRun
+@estoreTestRun
 Feature: Estore critical path
 
   Scenario Outline: Verify top menu navigation
@@ -258,7 +258,24 @@ Feature: Estore critical path
       | DI       |
 
 
-  Scenario: eStore Split Payment
+  Scenario: Verify combining different cards(MC+Visa) + split payment
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove split payment which was used earlier
+    When I refresh current estore page
+    Then I verify that I'm able to execute estore split payment
+
+#should be updated
+  Scenario: Verify combining different cards(RH Credit Card+Gift Card) + split payment
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
@@ -426,6 +443,15 @@ Feature: Estore critical path
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     When I update "CAN" postal code on pdp page
     Then I verify the product price for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
+    When I click on add to cart estore button
+    When I click on view cart estore button
+    Then I verify that price in cart is the same as on PDP
+    #qty on product, change zip code in order estimate section in cart, need to check that prices were updated
+  #Availability and delivery messages. in order estimate section
+  #This item will be delivered on or before 04/16/24
+  #Ships Free via Standard Delivery Shipping
+
+
 
 
   Scenario: Verify the prices it is showing for regular user

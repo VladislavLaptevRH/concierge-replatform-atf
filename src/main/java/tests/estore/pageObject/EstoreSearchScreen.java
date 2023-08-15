@@ -10,6 +10,14 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class EstoreSearchScreen {
 
+    private SelenideElement memberLabelPriceCollectionPage = $(By.xpath("//p[@data-testid='price-label-member']"));
+
+    private SelenideElement regularLabelPriceCollectionPage = $(By.xpath("//p[@data-testid='price-label-regular']"));
+
+    private SelenideElement regularPriceCollectionPage = $(By.xpath("(//p[@data-testid='price-for-regular'])[1]"));
+
+    private SelenideElement memberPriceCollectionPage = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
+
     private SelenideElement results = $(By.xpath("//*[contains(text(),'RESULTS')]"));
 
     private SelenideElement threeColumnsInRowGridButton = $(By.xpath("//*[@column='3']"));
