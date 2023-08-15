@@ -1,4 +1,4 @@
-@estoreTestRun
+@estoreCriticalPath
 Feature: Estore critical path
 
   Scenario Outline: Verify top menu navigation
