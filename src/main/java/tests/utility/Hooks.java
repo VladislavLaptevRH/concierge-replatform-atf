@@ -168,13 +168,12 @@ public class Hooks {
      */
     public void setUPWebDriver(String url) {
         System.out.println("Inside initDriver method");
-        WebDriverManager.chromedriver().setup();
         Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
         Configuration.headless = true;
-//        Configuration.pageLoadStrategy = "normal";
-        Configuration.timeout = 25000;
+        Configuration.pageLoadStrategy = "normal";
+        Configuration.pageLoadTimeout = 40000;
         Configuration.reportsFolder = "target/screenshots";
         open(url);
         currentUrl = WebDriverRunner.url();
@@ -187,14 +186,17 @@ public class Hooks {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
-        options.addArguments("--no-sandbox");
+        options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-gpu");
         options.addArguments("enable-automation");
         options.addArguments("--disable-infobars");
+        options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-browser-side-navigation");
         options.addArguments("--window-size=1366,768");
-        options.addArguments("--force-device-scale-factor=1");
-        options.addArguments("enable-features=NetworkServiceInProcess");
+        options.addArguments("--user-agent=robot-framework");
+        Configuration.browserCapabilities = options;
+
         DesiredCapabilities dr = new DesiredCapabilities();
         dr.setBrowserName("chrome");
         dr.setCapability(ChromeOptions.CAPABILITY, options);

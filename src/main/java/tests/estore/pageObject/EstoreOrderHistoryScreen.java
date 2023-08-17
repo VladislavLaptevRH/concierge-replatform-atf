@@ -1,8 +1,11 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -46,4 +49,8 @@ public class EstoreOrderHistoryScreen {
 
     private SelenideElement cwNumber = $(By.xpath("//*[text()='#']"));
 
+
+    public void verifyThatOrdersTitleIsDisplayed() {
+        orderHistoryOrderText.should(Condition.visible, Duration.ofSeconds(15));
+    }
 }
