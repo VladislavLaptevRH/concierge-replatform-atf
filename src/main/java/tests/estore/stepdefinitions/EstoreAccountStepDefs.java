@@ -6,20 +6,15 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.w3c.dom.ls.LSOutput;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
-import tests.estore.pageObject.EstoreCartPage;
-import tests.estore.pageObject.EstoreHomePage;
-import tests.estore.pageObject.EstoreLoginPage;
-import tests.estore.pageObject.EstoreUserAccountPage;
+import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.value;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -29,6 +24,13 @@ public class EstoreAccountStepDefs {
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     EstoreCartPage estoreCartPage = new EstoreCartPage();
     EstoreHomePage estoreHomePage = new EstoreHomePage();
+    EstoreWishlistPage estoreWishlistPage = new EstoreWishlistPage();
+
+    EstoreOrderHistoryScreen estoreOrderHistoryScreen = new EstoreOrderHistoryScreen();
+
+    EstoreMemberStepDefs estoreMemberStepDefs = new EstoreMemberStepDefs();
+
+    EstoreGiftRegistry estoreGiftRegistry = new EstoreGiftRegistry();
 
     String firstName;
     String lastName;
@@ -180,4 +182,30 @@ public class EstoreAccountStepDefs {
         estoreHomePage.clickToAccountButtonForregisteredUser();
     }
 
+    @When("I click on the {string} from my account dropdown")
+    public void iClickOnTheFromMyAccountDropdown(String option) {
+        $(By.xpath("//li[contains(@id,'" + option + "')]"))
+                .shouldBe(visible, Duration.ofSeconds(20)).click();
+    }
+
+    @Then("I verify that {string} is available for eStore")
+    public void iVerifyThatIsAvailableForEStore(String pageOption) {
+        if (pageOption.equals("order-history")) {
+            estoreOrderHistoryScreen.verifyThatOrdersTitleIsDisplayed();
+        }
+        if (pageOption.equals("wish-list")) {
+            estoreWishlistPage.verifyThatWishListTitleIsDisplayed();
+        }
+        if (pageOption.equals("membership")) {
+            estoreMemberStepDefs.iValidateMembershipTitile();
+        }
+        if (pageOption.equals("gift-registry")) {
+            estoreGiftRegistry.verifyThatGiftRegistrtyTitleIsDisplayed();
+        }
+    }
+
+    @And("I verify that required page for {string} is displayed")
+    public void iVerifyThatRequiredPageForIsDisplayed(String pageOption) {
+        assertTrue("Order history page is displayed", Hooks.getCurrentUrl().contains(pageOption));
+    }
 }

@@ -1,4 +1,4 @@
-@estoreCriticalPath
+@estoreRunCriticalPath
 Feature: Estore critical path
 
   Scenario Outline: Verify top menu navigation
@@ -499,8 +499,25 @@ Feature: Estore critical path
     When I click on estore my account icon for registered user
     Then I verify that I'm able to create the new account
 
-#Verify the add to cart funtionality
+# Verify my account dropdown
+  Scenario Outline: Verify My account dropdowm
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore my account icon for guest user
+    When I click on the "<option>" from my account dropdown
+    Then I verify that "<option>" is available for eStore
+    And I verify that required page for "<option>" is displayed
+    Examples:
+      | option        |
+      | order-history |
+      | wish-list     |
+      | membership    |
+      | gift-registry |
+      | profile       |
+      | signout       |
 
+
+#Verify the add to cart funtionality
   Scenario: Verify the Add to cart functionality
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
