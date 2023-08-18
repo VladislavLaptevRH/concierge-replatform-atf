@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class EstorePGScreen {
+    private final SelenideElement firstSearchElement = $(By.xpath("(//div[contains(@id,'RH_')])[1]"));
 
     private final SelenideElement sofa = $(By.xpath("//*[text()='sofa']"));
 
@@ -74,8 +75,12 @@ public class EstorePGScreen {
 
     private final SelenideElement saleFilterApplied = $(By.xpath("(//*[text()='sale'])[2]"));
 
+    private final SelenideElement thumbalImg = $(By.xpath("//img[contains(@alt,'prod')]"));
+
     private final List<SelenideElement> listOfPgFusionElements = $$(By.xpath("//*[@id='component-rh-image_wrapper']"));
 
     private final SelenideElement livingCategory = $(By.xpath("//*[@data-navigation-account-item-id='cat160024']"));
+
+    private final SelenideElement collectionTextTitle = $(By.xpath("//p[contains(text(),'Collection')]"));
 }
 

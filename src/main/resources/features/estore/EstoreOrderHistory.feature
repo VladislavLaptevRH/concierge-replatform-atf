@@ -16,6 +16,7 @@ Feature: Order history
     When I click on estore order history
     Then I verify that no orders for new registered user
 
+  Scenario: Verify placing a new order and see it listed in Order History - logged user
     Given I log into eStore as "userWithSavedMasterCardVisa" user
     When I choose country for eStore from footer
     When I remove all items from estore cart

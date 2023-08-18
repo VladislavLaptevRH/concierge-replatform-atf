@@ -1,7 +1,9 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.commands.Click;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
@@ -13,8 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.selected;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -68,7 +69,6 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate membership title")
     public void iValidateMembershipTitile() {
-
         $(By.xpath("//*[text()='RH MEMBERS PROGRAM PROFILE']")).should(visible, Duration.ofSeconds(20));
     }
 
@@ -181,10 +181,22 @@ public class EstoreMemberStepDefs {
 
     @Then("I verify that save card to account checkbox should be checked by defaults")
     public void iVerifyThatSaveCardToAccountCheckboxShouldBeCheckedByDefaults() {
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         with().pollInterval(3, SECONDS).await().until(() -> true);
         estorePaymentPage.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
         selectPayment.selectByValue("CC");
         $(By.xpath("//input[@type='checkbox']")).should(selected, Duration.ofSeconds(30));
     }
+
+    @When("I click to add to cart on membership page")
+    public void iClickToAddToCartOnMembershipPage() {
+        estoreMemberPage.getAddToCartButton().should(interactable, Duration.ofSeconds(25));
+        estoreMemberPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(25));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        estoreMemberPage.getAddToCartButton().should(visible, Duration.ofSeconds(25)).hover()
+                .click(ClickOptions.usingJavaScript());
+    }
+
+
 }

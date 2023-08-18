@@ -183,23 +183,6 @@ public class EstoreE2EStepDefs {
         }
     }
 
-    @When("I go to estore item {string} from search field")
-    public void iGoToItemFromEstoreSearchField(String arg0) {
-        generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).should(visible, Duration.ofSeconds(60));
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).click();
-        estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
-        estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
-        estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
-        generalStepDefs.waitForJSandJQueryToLoad();
-
-        estoreUserAccountPage.getSearchItemField().setValue(arg0);
-
-        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click(ClickOptions.usingJavaScript());
-    }
-
-
     @When("I choose estore {string} from brand menu")
     public void iChooseFromBrandEstoreMenu(String brand) {
         estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(12));
@@ -237,13 +220,7 @@ public class EstoreE2EStepDefs {
     @When("I click on estore no thanks button")
     public void iClickOnNoThanksEstoreButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
-        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).should(appear, Duration.ofSeconds(10));
-        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).should(exist, Duration.ofSeconds(10));
-        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).should(interactable, Duration.ofSeconds(10));
-        with().pollInterval(2, SECONDS).await().until(() -> true);
-        $(By.cssSelector("#dialog-rh-membership_no-thanks-button")).doubleClick();
-
+        estoreCartPage.clickOnNoThanksButton();
     }
 
     @When("I choose estore client who is a non member")

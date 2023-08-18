@@ -1,9 +1,11 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -18,4 +20,10 @@ public class EstoreWishlistPage {
     private final SelenideElement whistItem = $(By.id("rh-line-item-card"));
 
     private final SelenideElement memberPrice = $(By.xpath("//p[@data-testid='price-label-member']"));
+
+    private SelenideElement wishListTitle = $(By.xpath("//*[text()='WISHLIST']"));
+
+    public void verifyThatWishListTitleIsDisplayed() {
+        wishListTitle.should(Condition.visible, Duration.ofSeconds(15));
+    }
 }

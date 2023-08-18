@@ -15,7 +15,7 @@ Feature: Estore Payment
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove split payment which was used earlier
-    When I refresh current estore page
+#    When I refresh current estore page
     Then I verify that I'm able to execute estore split payment
 
   Scenario: eStore Saved Cards
@@ -324,6 +324,7 @@ Feature: Estore Payment
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I fill estore shipping address
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
@@ -389,6 +390,7 @@ Feature: Estore Payment
     Given I log into eStore as "addnewpayment" user
     When I choose country for eStore from footer
     When I go to profile payment method
+    When I click on estore my account icon for guest user
     When I remove added before cart
     When I added new card "AMEX" for estore
     Then I verify that I'm able to add "AMEX"
@@ -398,6 +400,7 @@ Feature: Estore Payment
     Given I log into eStore as "addnewpayment" user
     When I choose country for eStore from footer
     When I go to profile payment method
+    When I click on estore my account icon for guest user
     When I remove added before cart
     When I added new card "DISCOVER" for estore
     Then I verify that I'm able to add "DISCOVER"

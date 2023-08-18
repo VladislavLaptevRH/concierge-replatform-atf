@@ -16,6 +16,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class EstoreSearchStepDefs {
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
@@ -24,13 +25,29 @@ public class EstoreSearchStepDefs {
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
     EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
     EstoreItemPage estoreItemPage = new EstoreItemPage();
+    EstorePGScreen estorePGScreen = new EstorePGScreen();
 
-    @Then("I verify that search result for search product via product name is displayed")
-    public void iVerifyThatSearchResultForSearchProductViaProductNameIsDisplayed() {
-        estoreSearchScreen.getTurkish802towel().should(Condition.visible, Duration.ofSeconds(20));
-        $(By.xpath("//span[@class='priceBox']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//span[@class='priceBox']")).shouldHave(text("$"), Duration.ofSeconds(20));
+    @When("I go to estore item {string} from search field")
+    public void iGoToItemFromEstoreSearchField(String arg0) {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).should(visible, Duration.ofSeconds(60));
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).click();
+        estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
+        estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
+        estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
+        generalStepDefs.waitForJSandJQueryToLoad();
+
+        estoreUserAccountPage.getSearchItemField().setValue(arg0);
+
+        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click(ClickOptions.usingJavaScript());
     }
+
+    @Then("I verify that search result {string} for search product via product name is displayed")
+    public void iVerifyThatSearchResultForSearchProductViaProductNameIsDisplayed(String searchItem) {
+        $(By.xpath("//*[text()='" + searchItem + "']")).should(Condition.visible, Duration.ofSeconds(20));
+    }
+
 
     @When("I introduced random text for search field")
     public void iIntroducedRandomTextForSearchField() {
@@ -55,6 +72,7 @@ public class EstoreSearchStepDefs {
 
     @Then("I verify count of search results")
     public void iVerifyCountOfSearchResults() {
+        estorePGScreen.getFirstSearchElement().should(visible, Duration.ofSeconds(20));
         estoreSearchScreen.getResults().should(visible, Duration.ofSeconds(20));
     }
 
@@ -105,8 +123,15 @@ public class EstoreSearchStepDefs {
 
     @Then("I verify pricing on search result page")
     public void iVerifyPricingOnSearchResultPage() {
-        estorePDPScreen.getPriceBox().should(visible, Duration.ofSeconds(20));
-        estorePDPScreen.getPriceBox().shouldHave(text("$"), Duration.ofSeconds(20));
+        int memberPrice = Integer.parseInt(estoreSearchScreen.getMemberPriceCollectionPage().getText().replaceAll("\\$", ""));
+        int regularPrice = Integer.parseInt(estoreSearchScreen.getRegularPriceCollectionPage().getText().replaceAll("\\$", ""));
+
+        estoreSearchScreen.getMemberLabelPriceCollectionPage().should(visible, Duration.ofSeconds(20));
+        estoreSearchScreen.getRegularLabelPriceCollectionPage().should(visible, Duration.ofSeconds(20));
+
+        assertTrue("", memberPrice > 0);
+        assertTrue("", regularPrice > 0);
+
     }
 
     @Then("I verify that I'm able to use back button")

@@ -35,6 +35,7 @@ public class estoreOrderHistoryStepDefs {
 
     @Then("I verify that estore order history page is displayed")
     public void iVerifyThatEstoreOrderHistoryPageIsDisplayed() {
+        estoreOrderHistoryScreen.getOrderHistoryOrderText().should(Condition.visible, Duration.ofSeconds(20));
         estoreOrderHistoryScreen.getOrderHistorySafireWilliam().should(Condition.visible, Duration.ofSeconds(60));
     }
 
@@ -95,13 +96,8 @@ public class estoreOrderHistoryStepDefs {
         }
         estoreOrderHistoryScreen.getBillingSummaryButton().should(Condition.visible, Duration.ofSeconds(20));
         estoreOrderHistoryScreen.getBillingSummaryButton().click();
-        if (!estoreOrderHistoryScreen.getBillingSummaryBrandTitle().isDisplayed()) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
 
-        }
-        if (estoreOrderHistoryScreen.getBillingSummaryBrandTitle().isDisplayed()) {
-            estoreOrderHistoryScreen.getBillingSummaryBrandTitle().shouldHave(Condition.text("Billing Summary"), Duration.ofSeconds(20));
-        }
+        $(By.xpath("//*[text()='There has been no billing activity for order #']")).should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify the details and tracking link for the order placed")

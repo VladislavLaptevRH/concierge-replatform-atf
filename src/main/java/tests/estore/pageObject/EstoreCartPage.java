@@ -1,19 +1,27 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 @Getter
 public class EstoreCartPage {
 
-//    private SelenideElement quantitySelect = $(By.id("quantity-select"));
+    private SelenideElement rhMemberProgramTitle = $(By.xpath("//*[text()='Rh Members Program']"));
+
+    private final SelenideElement becomeAmemberButton = $(By.id("addToCartMembershipDialog_becomeMember-btn"));
 
     private SelenideElement postalCodeButton = $(By.xpath("//*[@id='component-order-summary']//span"));
 
@@ -57,7 +65,7 @@ public class EstoreCartPage {
 
     private final SelenideElement colorCloseButton = $(By.xpath("//div[@class='MuiDialogTitle-root']/button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit']"));
 
-    private final SelenideElement noThanksButton = $(By.xpath("//button[@id='dialog-rh-membership_no-thanks-button']"));
+    private final SelenideElement noThanksButton = $(By.cssSelector("#dialog-rh-membership_no-thanks-button"));
 
     private final SelenideElement becomeAmemberNow = $(By.xpath("//*[text()='BECOME A MEMBER NOW']"));
 
@@ -233,5 +241,21 @@ public class EstoreCartPage {
     public int getQuantityOfProductInCart() {
         int quantityOfProduct = Integer.parseInt($(By.xpath("//*[contains(@id,'quantity')]")).getText());
         return quantityOfProduct;
+    }
+
+    public void verifyThatPurchasingMembershipPopIsNotDisplayed() {
+        joinNowMembershipButton.shouldNotBe(Condition.visible, Duration.ofSeconds(20));
+        noThanksButton.shouldNotBe(Condition.visible, Duration.ofSeconds(20));
+        rhMemberProgramTitle.shouldNotBe(Condition.visible, Duration.ofSeconds(20));
+        rhMembershipImmediatlyPay.shouldNotBe(Condition.visible, Duration.ofSeconds(20));
+    }
+
+    public void clickOnNoThanksButton() {
+        noThanksButton.shouldHave(text("NO, THANKS"), Duration.ofSeconds(20));
+        noThanksButton.should(appear, Duration.ofSeconds(10));
+        noThanksButton.should(exist, Duration.ofSeconds(10));
+        noThanksButton.should(interactable, Duration.ofSeconds(10));
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        noThanksButton.doubleClick();
     }
 }
