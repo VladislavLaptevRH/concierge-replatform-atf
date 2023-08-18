@@ -347,7 +347,7 @@ public class EstoreAddressStepDefs {
 
     @When("I click on continue with original address estore button")
     public void iClickOnContinueWithOriginalAddressEstoreButton() {
-//        try {
+        try {
         generalStepDefs.waitForJSandJQueryToLoad();
 
 
@@ -370,9 +370,9 @@ public class EstoreAddressStepDefs {
 //                iClickOnContinueWithOriginalAddressEstoreButton();
 //            }
 
-//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-//            System.out.println("Continue with original button is not displayed");
-//        }
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Continue with original button is not displayed");
+        }
     }
 
     @When("I click on continue to payment estore button")

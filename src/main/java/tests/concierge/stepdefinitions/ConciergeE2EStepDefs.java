@@ -1,11 +1,13 @@
 package tests.concierge.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 
 import com.codeborne.selenide.ex.ElementNotFound;
 import org.openqa.selenium.Keys;
+import tests.estore.pageObject.EstoreUserAccountPage;
 import tests.utility.Hooks;
 import tests.concierge.pageObject.*;
 import io.cucumber.java.en.And;
@@ -45,10 +47,14 @@ public class ConciergeE2EStepDefs {
     PdpScreen pdpScreen = new PdpScreen();
     PaymentScreen paymentScreen = new PaymentScreen();
 
+    EstoreUserAccountPage estoreUserAccountPage= new EstoreUserAccountPage();
+
     String usState = "";
     String countOfItems = null;
     WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));
     String environment;
+
+    public static String SKU = "";
     public static String itemName = "";
 
     @When("I click on add to project button")
@@ -434,12 +440,12 @@ public class ConciergeE2EStepDefs {
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        if (conciergeItemsScreen.getSelectSize().isDisplayed()) {
+        if (conciergeItemsScreen.getSelectDepth().isDisplayed()) {
             try {
                 Select depthList = new Select(conciergeItemsScreen.getSelectDepth());
                 depthList.selectByIndex(1);
             } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
-                System.out.println("Element Size not found");
+                System.out.println("Element Depth not found");
             }
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
@@ -503,6 +509,20 @@ public class ConciergeE2EStepDefs {
                 System.out.println("Element qty not found");
             }
         }
+    }
+
+    @When("I go to concierge item {string} from search field")
+    public void iGoToItemFromConciergeSearchField(String arg0) {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[4]")).should(visible, Duration.ofSeconds(60));
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[4]")).click();
+        estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
+        estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
+        estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
+        generalStepDefs.waitForJSandJQueryToLoad();
+        estoreUserAccountPage.getSearchItemField().setValue(arg0);
+        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click(ClickOptions.usingJavaScript());
     }
 
     @When("I choose {string} from brand menu")
