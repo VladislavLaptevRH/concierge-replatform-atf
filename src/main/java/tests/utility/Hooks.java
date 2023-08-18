@@ -174,6 +174,7 @@ public class Hooks {
         Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.pageLoadTimeout = 40000;
+        Configuration.timeout = 40000;
         Configuration.reportsFolder = "target/screenshots";
         open(url);
         currentUrl = WebDriverRunner.url();
