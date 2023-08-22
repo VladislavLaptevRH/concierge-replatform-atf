@@ -2,20 +2,19 @@ package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
-import tests.concierge.pageObject.ConciergeUserAccountPage;
-import tests.concierge.pageObject.PdpScreen;
-import tests.concierge.pageObject.RegistryScreen;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import tests.concierge.pageObject.ConciergeUserAccountPage;
+import tests.concierge.pageObject.PdpScreen;
+import tests.concierge.pageObject.RegistryScreen;
 import tests.utility.Hooks;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 
@@ -248,4 +247,5 @@ public class RegistryStepDefs {
         registryScreen.getPaginationPages().shouldHave(Condition.text("1\n" +
                 "2"),Duration.ofSeconds(12));
     }
+
 }
