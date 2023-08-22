@@ -41,8 +41,6 @@ public class EstoreGiftRegistry {
     private SelenideElement createRegistryButton = $(By.xpath("//button[@type='submit']"));
 
     private SelenideElement selectedDate = $(By.xpath("//button[contains(@class,'MuiPickersDay-daySelected')]"));
-//    (//div[@class='MuiPickersCalendar-week']//div[@role='presentation'])[32]
-
     private SelenideElement deleteRegistryButton = $(By.xpath("//*[text()='DELETE']"));
     private SelenideElement confirmDeleteRegistryButton = $(By.xpath("//*[text()='Delete registry']"));
 
