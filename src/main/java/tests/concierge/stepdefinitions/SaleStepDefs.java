@@ -1,19 +1,19 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.WebDriverRunner;
-import tests.concierge.pageObject.SaleScreen;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.interactions.Actions;
-
-import static com.codeborne.selenide.Selenide.sleep;
+import org.openqa.selenium.By;
+import tests.concierge.pageObject.SaleScreen;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
@@ -29,11 +29,11 @@ public class SaleStepDefs {
         saleScreen.getSaleOption().click();
     }
 
-    @Then ("I verify sale navigation bars are displayed")
-    public void iVerifySaleNavigationBarsAreDisplayed () {
+    @Then("I verify sale navigation bars are displayed")
+    public void iVerifySaleNavigationBarsAreDisplayed() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         List<String> items = new ArrayList<>();
-        List<String> expectedItems = new ArrayList(Arrays.asList("Living", "Dining" , "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "Baby & Child", "Teen"));
+        List<String> expectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "Baby & Child", "Teen"));
         for (int i = 0; i < saleScreen.getListOfSaleMainCategory().size(); i++) {
             items.add(saleScreen.getListOfSaleMainCategory().get(i).getText());
         }
@@ -41,16 +41,11 @@ public class SaleStepDefs {
 
     }
 
-    @When ("I click on sale menu item")
-    public void iCLickOnSaleMenuItem () {
-        with().pollInterval(7, SECONDS).await().until(() -> true);
-        for (int i = 0; i < saleScreen.getListOfSaleMainCategory().size(); i++) {
-            if (i == 0) {
-                // click on Living
-                System.out.println(saleScreen.getListOfSaleMainCategory().get(i).getText());
-                    saleScreen.getListOfSaleMainCategory().get(i).click();
-            }
-        }
+    @When("I click on sale menu item")
+    public void iCLickOnSaleMenuItem() {
+        $(By.xpath("(//*[text()='Dining'])[2]")).should(interactable).click();
+        $(By.xpath("//*[text()='Tables']")).should(interactable).click();
+        $(By.xpath("//*[text()='Rectangular Tables']")).should(interactable).click();
     }
 
     @When("I click on sub category and navigate PDP")
@@ -59,7 +54,7 @@ public class SaleStepDefs {
         int randomSubCategory = generalStepDefs.getRandomNumber(1, saleScreen.getListOfSaleSubCategory().size());
         saleScreen.getListOfSaleSubCategory().get(randomSubCategory).click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
-        int randomCollection= generalStepDefs.getRandomNumber(1, saleScreen.getListOfSaleCollection().size());
+        int randomCollection = generalStepDefs.getRandomNumber(1, saleScreen.getListOfSaleCollection().size());
         saleScreen.getListOfSaleCollection().get(randomCollection).click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
         int randomProduct = generalStepDefs.getRandomNumber(1, saleScreen.getRandomProduct().size());
@@ -70,7 +65,7 @@ public class SaleStepDefs {
     @Then("I verify prices on product page")
     public void iVerifyPricesOnProductPage() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        if(!saleScreen.getPrice().isDisplayed()){
+        if (!saleScreen.getPrice().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }

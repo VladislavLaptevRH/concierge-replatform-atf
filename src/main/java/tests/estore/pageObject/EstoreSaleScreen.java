@@ -27,5 +27,9 @@ public class EstoreSaleScreen {
 
     private SelenideElement subSaleList = $(By.xpath("(//ul[@class='MuiList-root'])[2]//li[3]/span"));
 
+    private SelenideElement memberSalePrice = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
+
+    private SelenideElement regularSalePrice = $(By.xpath("(//p[@data-testid='price-for-sale'])[1]"));
+
 
 }

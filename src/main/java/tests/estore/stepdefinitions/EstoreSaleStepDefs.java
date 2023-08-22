@@ -4,19 +4,15 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.EstoreCGScreen;
 import tests.estore.pageObject.EstoreSaleScreen;
-import tests.utility.Hooks;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.with;
+import static com.codeborne.selenide.Selenide.open;
+import static org.testng.Assert.assertTrue;
 
 public class EstoreSaleStepDefs {
 
@@ -24,6 +20,10 @@ public class EstoreSaleStepDefs {
     EstoreSaleScreen estoreSaleScreen = new EstoreSaleScreen();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
     String URL;
+
+
+    int memberSalePrice;
+    int regularSalePrice;
 
     @When("I click on estore sale button")
     public void iClickOnEstoreSaleButton() {
@@ -54,5 +54,13 @@ public class EstoreSaleStepDefs {
     public void iGoToSaleEstoreCategory() {
         URL = "https://stg2.rhnonprod.com/catalog/category/products.jsp?categoryId=cat10240094&pgterm=RH+Dressers&sale=true&topCatId=cat3890154&parentCatId=cat780002";
         open(URL);
+    }
+
+    @Then("I verify sale prices on PG pages for sale items")
+    public void iVerifySalePricesOnPGPagesForSaleItems() {
+        regularSalePrice = Integer.parseInt(estoreSaleScreen.getRegularSalePrice().getText().replaceAll("\\$", "").replaceAll(",", ""));
+        memberSalePrice = Integer.parseInt(estoreSaleScreen.getMemberSalePrice().getText().replaceAll("\\$", "").replaceAll(",", ""));
+
+        assertTrue(regularSalePrice > memberSalePrice, "Regular sale price is lower than member sale price");
     }
 }
