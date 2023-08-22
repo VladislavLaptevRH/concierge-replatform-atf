@@ -1,4 +1,4 @@
-@estoreTestRun
+@estoreСriticalPathTestRun
 Feature: Estore critical path
 
   Scenario Outline: Verify top menu navigation
@@ -791,8 +791,6 @@ Feature: Estore critical path
     When I click on the "gift-registry" from my account dropdown
     Then I verify that "gift-registry" is available for eStore
     When I click on manage your registry button
-
-#  https://stg2.rhnonprod.com/us/en/gift-registry/manage-gift-lists.jsp
 
   Scenario: Verify that user is able to find the existing registry
     Given I log into eStore as "regular" user
