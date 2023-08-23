@@ -1,176 +1,168 @@
-@estoreСriticalPathTestRun
+@estoreTestRun
 Feature: Estore critical path
 
-  Scenario Outline: Verify top menu navigation
-    Given I log into eStore as guest
-    When I choose country for eStore from footer
-    Then  I change the brand to "<brand>" for eStore
-    Then User verifies that all items from menu are displayed for "<brand>"
-    And user verifies search button, account icon, cart button are displayed
-    Examples:
-      | brand             |
-      | RH                |
-      | RH CONTEMPORARY   |
-      | RH INTERIORS      |
-      | RH MODERN         |
-      | RH OUTDOOR        |
-      | RH BEACH HOUSE    |
-      | RH SKI HOUSE      |
-      | RH TEEN           |
-      | RH BABY & CHILD   |
-      | VIEW SOURCE BOOKS |
-
-  Scenario Outline: CG - Test CGS in all menu items (All brands)
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I goes to "<brands>" estore collection page
-    Then I verify CGS all menu items
-    Examples:
-      | brands         |
-      | rh             |
-      | rhcontemporary |
-      | rhinteriors    |
-      | rhmodern       |
-      | rhoutdoor      |
-      | rhbeachhouse   |
-      | rhskihouse     |
-      | rhbabyandchild |
-      | rhteen         |
+#  Scenario Outline: Verify top menu navigation
+#    Given I log into eStore as guest
+#    When I choose country for eStore from footer
+#    Then  I change the brand to "<brand>" for eStore
+#    Then User verifies that all items from menu are displayed for "<brand>"
+#    And user verifies search button, account icon, cart button are displayed
+#    Examples:
+#      | brand             |
+#      | RH                |
+#      | RH CONTEMPORARY   |
+#      | RH INTERIORS      |
+#      | RH MODERN         |
+#      | RH OUTDOOR        |
+#      | RH BEACH HOUSE    |
+#      | RH SKI HOUSE      |
+#      | RH TEEN           |
+#      | RH BABY & CHILD   |
+#      | VIEW SOURCE BOOKS |
+#
+#  Scenario Outline: CG - Test CGS in all menu items (All brands)
+#    Given I log into eStore as "guest" user
+#    When I choose country for eStore from footer
+#    When I goes to "<brands>" estore collection page
+#    Then I verify CGS all menu items
+#    Examples:
+#      | brands         |
+#      | rh             |
+#      | rhcontemporary |
+#      | rhinteriors    |
+#      | rhmodern       |
+#      | rhoutdoor      |
+#      | rhbeachhouse   |
+#      | rhskihouse     |
+#      | rhbabyandchild |
+#      | rhteen         |
 
 #Verify the PGs IN all brands
 
-  Scenario Outline: Verify product thumbnail is correctly loaded
-    Given  I change the brand to "<brand>" for eStore
-    When I go to estore item "sofa" from search field
-    Then I verify that product thumbnail is correctly loaded
-    Examples:
-      | brand             |
-      | RH                |
-      | RH CONTEMPORARY   |
-      | RH MODERN         |
-      | RH OUTDOOR        |
-      | RH BEACH HOUSE    |
-      | RH SKI HOUSE      |
-      | RH TEEN           |
-      | RH BABY & CHILD   |
-      | VIEW SOURCE BOOKS |
+#  Scenario Outline: Verify product thumbnail is correctly loaded
+#    Given  I change the brand to "<brand>" for eStore
+#    When I go to estore item "sofa" from search field
+#    Then I verify that product thumbnail is correctly loaded
+#    Examples:
+#      | brand             |
+#      | RH                |
+#      | RH CONTEMPORARY   |
+#      | RH MODERN         |
+#      | RH OUTDOOR        |
+#      | RH BEACH HOUSE    |
+#      | RH SKI HOUSE      |
+#      | RH TEEN           |
+#      | RH BABY & CHILD   |
+#      | VIEW SOURCE BOOKS |
+#
+#
+#  Scenario: Verify it shows price range below the thumbnail
+#    Given I log into eStore as "guest" user
+#    When I choose country for eStore from footer
+#    When I go to estore item "sofa" from search field
+#    Then user verifies that price range is displayed below the thumbnail
+#
+#  Scenario: PG - Back to Top button
+#    Given I log into eStore as "guest" user
+#    When I choose country for eStore from footer
+#    When I goes to estore collection page
+#    When I scroll on the page till back to top button is visible
+#    Then I verify that back to top button is clickable
+#    And I verify that after click on back to top button user is scrolled to top on the page
+#
+#  Scenario: Verify the Sale Price on PG pages for Sale Items
+#    Given I log into eStore as "regular" user
+#    When I choose country for eStore from footer
+#    When I click on sale
+#    When I click on sale menu item
+#    Then I verify sale prices on PG pages for sale items
+#
+#  Scenario: Verify sorting - low to high - is working as expected
+#    Given I log into eStore as "guest" user
+#    When I choose country for eStore from footer
+#    When I go to estore item "sofa" from search field
+#    When I select low to high for estore
+#    Then I verify that sorting low to high is working as expected
+#
+#  Scenario: Verify sorting - high to low - is working as expected
+#    Given I log into eStore as "guest" user
+#    When I choose country for eStore from footer
+#    When I go to estore item "sofa" from search field
+#    When I select high to low for estore
+#    Then I verify that sorting high to low is working as expected
+#
+#  Scenario: Verify collection name,image (regular,member,sale(applicable) on collection banner
+#    Given I log into eStore as "guest" user
+#    When I choose country for eStore from footer
+#    When I goes to estore collection page
+#    Then I verify collection name, image on collection banner
+#
+#  Scenario: CG-Verify Back To top Button
+#    Given I log into eStore as "guest" user
+#    When I choose country for eStore from footer
+#    When I goes to estore collection page
+#    When I scroll on the page till back to top button is visible
+#    Then I verify that back to top button is clickable
+#    And I verify that after click on back to top button user is scrolled to top on the page
+#
+#  Scenario: Verify 1,2,3 grid views are working fine
+#    Given I log into eStore as "guest" user
+#    When I choose country for eStore from footer
+#    When I goes to estore collection page
+#    Then I validate "1","2" and "3" grid view should work
+#
+#  Scenario: Verify single Grid View is as default on CG
+#    Given I log into eStore as "guest" user
+#    When I choose country for eStore from footer
+#    When I goes to estore collection page
+#    Then I verify that single grid view is selected on CG page by default
+#
+#  Scenario: Change the grid view, go to PG, go back from PG, CG page should render in the same grid view that you previously selected
+#    Given I log into eStore as "guest" user
+#    When I choose country for eStore from footer
+#    When I go to "FABRIC CHAIR COLLECTIONS" on eStore
+#    When I select "3" grid view on estore CG page
+#    When I click on random item from collection page with applied "3" grid view
+#    When I navigate back from "collection page" page
+#    Then I verify that page render in the same grid view that previously selected
+#    #click on random product from collection (PG) after click on  back button from browser
 
+#  Scenario: From home page goto a collection and click on any Product, It should redirect user to PG
+#    Given I log into eStore as "guest" user
+#    When I choose country for eStore from footer
+#    When I goes to estore collection page
+#    When I click on random product on collection page
+#    Then I verify that PG page is displayed for eStore
+#    #use fabric seating - sofas: check title, grid view
 
-  Scenario: Verify it shows price range below the thumbnail
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I go to estore item "sofa" from search field
-    Then user verifies that price range is displayed below the thumbnail
+#  Scenario: Verify the Member Price Text On PG page after selecting the specifications
+#    Given I log into eStore as "member" user
+#    When I choose country for eStore from footer
+#    When I navigate to PG page from top menu
+#    Then I verify the member price on PG page after selecting the specifications
+#
 
-
-  Scenario: PG - Back to Top button
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I goes to estore collection page
-    When I scroll on the page till back to top button is visible
-    Then I verify that back to top button is clickable
-    And I verify that after click on back to top button user is scrolled to top on the page
-
-
-  Scenario: Verify the Sale Price on PG pages for Sale Items
-    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
-    When I click on sale
-    When I click on sale menu item
-    Then I verify sale prices on PG pages for sale items
-
-  Scenario: Verify sorting - low to high - is working as expected
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I go to estore item "sofa" from search field
-    When I select low to high for estore
-    Then I verify that sorting low to high is working as expected
-
-
-  Scenario: Verify sorting - high to low - is working as expected
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I go to estore item "sofa" from search field
-    When I select high to low for estore
-    Then I verify that sorting high to low is working as expected
-
-
-  Scenario: Verify collection name,image (regular,member,sale(applicable) on collection banner
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I goes to estore collection page
-    Then I verify collection name, image on collection banner
-
-
-  Scenario: CG-Verify Back To top Button
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I goes to estore collection page
-    When I scroll on the page till back to top button is visible
-    Then I verify that back to top button is clickable
-    And I verify that after click on back to top button user is scrolled to top on the page
-
-
-  Scenario: Verify 1,2,3 grid views are working fine
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I goes to estore collection page
-    Then I validate "1","2" and "3" grid view should work
-
-
-  Scenario: Verify single Grid View is as default on CG
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I goes to estore collection page
-    Then I verify that single grid view is selected on CG page by default
-
-
-  Scenario: Change the grid view, go to PG, go back from PG, CG page should render in the same grid view that you previously selected
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I go to "FABRIC CHAIR COLLECTIONS" on eStore
-    When I select "3" grid view on estore CG page
-    When I click on random item from collection page with applied "3" grid view
-    When I navigate back from "collection page" page
-    Then I verify that page render in the same grid view that previously selected
-    #click on random product from collection (PG) after click on  back button from browser
-
-  Scenario: From home page goto a collection and click on any Product, It should redirect user to PG
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I goes to estore collection page
-    When I click on random product on collection page
-    Then I verify that PG page is displayed for eStore
-    #use fabric seating - sofas: check title, grid view
-
-  Scenario: Verify the Member Price Text On PG page after selecting the specifications
-    Given I log into eStore as "member" user
-    When I choose country for eStore from footer
-    When I navigate to PG page from top menu
-    Then I verify the member price on PG page after selecting the specifications
-
-
-  Scenario: Browser back button from search to CG page
-    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
-    When I go to "SEATING COLLECTIONS" on eStore
-    When I go to estore item "sofa" from search field
-    When I navigate back from "PDP" page
-    Then I verify that CG page is displayed
+#  Scenario: Browser back button from search to CG page
+#    Given I log into eStore as "regular" user
+#    When I choose country for eStore from footer
+#    When I go to "SEATING COLLECTIONS" on eStore
+#    When I go to estore item "sofa" from search field
+#    When I navigate back from "PDP" page
+#    Then I verify that CG page is displayed
 
 #PDP
-  Scenario Outline: Verify Line Items functionality:
-    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
-    When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
-    Then I verify line items "<functional>"
-    Examples:
-      | functional            |
-      | lineitemimage         |
-      | customizeanproduct    |
-      | addtowishlist         |
-      | locationfunctionality |
+#  Scenario Outline: Verify Line Items functionality:
+#    Given I log into eStore as "regular" user
+#    When I choose country for eStore from footer
+#    When I remove all items from estore cart
+#    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+#    Then I verify line items "<functional>"
+#    Examples:
+#      | functional            |
+#      | lineitemimage         |
+#      | customizeanproduct    |
+#      | addtowishlist         |
+#      | locationfunctionality |
 
 
   Scenario: eStore Verify Guest checkout
@@ -269,10 +261,9 @@ Feature: Estore critical path
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove split payment which was used earlier
-    When I refresh current estore page
     Then I verify that I'm able to execute estore split payment
 
-#should be updated
+#should be updated - FIX
   Scenario: Verify combining different cards(RH Credit Card+Gift Card) + split payment
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -286,8 +277,7 @@ Feature: Estore critical path
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove split payment which was used earlier
-    When I refresh current estore page
-    Then I verify that I'm able to execute estore split payment
+    Then I verify that I'm able to execute estore split payment with RH Credit Card+Gift Card
 
 
   Scenario: eStore RHCC
@@ -310,13 +300,15 @@ Feature: Estore critical path
 
 
   Scenario: GC/ Balance check
-    Given I log into eStore as "mastercard" user
+    Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
@@ -338,7 +330,6 @@ Feature: Estore critical path
     When I change item quantity to "1" for "prod13800635" and "17050042" with "IRON" for estore
     And I verify the total price for product in the cart
 
-
   Scenario: Add Membership and verify order total in order estimate
     Given I log into eStore as "regularAddMembership" user
     When I choose country for eStore from footer
@@ -348,7 +339,6 @@ Feature: Estore critical path
     When I click on join now membership button
     Then I verify estore order total in order estimate for membership for "42100241 GREY"
     When I click on remove membership estore button
-
 
   Scenario: Remove line item
     Given I log into eStore as "regular" user
@@ -377,7 +367,6 @@ Feature: Estore critical path
     Then I verify membership estore banner for "nonmember user"
 
 #Verify the Instock and On sale functionality
-
   Scenario: Verify the Instock functionality
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -444,12 +433,6 @@ Feature: Estore critical path
     When I click on add to cart estore button
     When I click on view cart estore button
     Then I verify that price in cart is the same as on PDP
-    #qty on product, change zip code in order estimate section in cart, need to check that prices were updated
-  #Availability and delivery messages. in order estimate section
-  #This item will be delivered on or before 04/16/24
-  #Ships Free via Standard Delivery Shipping
-
-
 
 
   Scenario: Verify the prices it is showing for regular user

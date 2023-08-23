@@ -14,6 +14,7 @@ import java.util.List;
 import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
@@ -43,9 +44,10 @@ public class SaleStepDefs {
 
     @When("I click on sale menu item")
     public void iCLickOnSaleMenuItem() {
-        $(By.xpath("(//*[text()='Dining'])[2]")).should(interactable).click();
-        $(By.xpath("//*[text()='Tables']")).should(interactable).click();
-        $(By.xpath("//*[text()='Rectangular Tables']")).should(interactable).click();
+        $(By.xpath("(//*[text()='Décor'])[2]")).should(interactable).click();
+        $(By.xpath("//*[text()='Throws']")).should(interactable).click();
+        sleep(2000);
+        $(By.xpath("(//*[text()='Throws'])[2]")).should(interactable).click();
     }
 
     @When("I click on sub category and navigate PDP")

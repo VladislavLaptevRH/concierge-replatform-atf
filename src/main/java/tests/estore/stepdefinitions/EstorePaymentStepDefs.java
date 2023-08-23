@@ -14,9 +14,8 @@ import tests.utility.Hooks;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.with;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 
 public class EstorePaymentStepDefs {
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
@@ -348,5 +347,22 @@ public class EstorePaymentStepDefs {
     public void iClickOnContinueButtonFromPaymentPage() {
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='CONTINUE']")).click();
+    }
+
+    @Then("I verify that I'm able to execute estore split payment with RH Credit Card+Gift Card")
+    public void iVerifyThatIMAbleToExecuteEstoreSplitPaymentWithRHCreditCardGiftCard() {
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
+        estoreGeneralStepDefs.payWith("RH", "5856373202133265", "737", "0330");
+
+        $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
+        $(By.xpath("//input[@type='text']")).setValue("10");
+        estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+
+
+        WebDriverRunner.getWebDriver().navigate().refresh();
+
+
+        estoreGeneralStepDefs.payWith("CC", "2222400010000008", "737", "0330");
+        estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
     }
 }
