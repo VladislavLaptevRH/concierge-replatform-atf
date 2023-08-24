@@ -32,6 +32,8 @@ public class EstoreAccountStepDefs {
 
     EstoreGiftRegistry estoreGiftRegistry = new EstoreGiftRegistry();
 
+    EstoreUserAccountPageStepDefs estoreUserAccountPageStepDefs = new EstoreUserAccountPageStepDefs();
+
     String firstName;
     String lastName;
     String email;
@@ -202,10 +204,23 @@ public class EstoreAccountStepDefs {
         if (pageOption.equals("gift-registry")) {
             estoreGiftRegistry.verifyThatGiftRegistrtyTitleIsDisplayed();
         }
+        if (pageOption.equals("PROFILE")) {
+            estoreUserAccountPage.verifyThatProfileTitleAreDisplayed();
+            estoreUserAccountPage.verifyThatEmailAddressFieldIsDisplayed();
+            estoreUserAccountPage.verifyThatBillingAddressLastNameFieldIsDisplayed();
+            estoreUserAccountPage.verifyThatBillingAddressFirstNameFieldIsDisplayed();
+        }
+        if (pageOption.equals("signout")) {
+            estoreUserAccountPage.verifyThatAreYouSureYouWantToSignoutMessageIsDisplayed();
+            estoreUserAccountPage.verifyThatSignoutButtonIsDisplayed();
+            estoreUserAccountPage.verifyThatCancelSignOutButtonPopUpIsDisplayed();
+        }
     }
 
     @And("I verify that required page for {string} is displayed")
     public void iVerifyThatRequiredPageForIsDisplayed(String pageOption) {
-        assertTrue("Order history page is displayed", Hooks.getCurrentUrl().contains(pageOption));
+        if (!(pageOption.equals("signout"))) {
+            assertTrue("Order history page is displayed", Hooks.getCurrentUrl().contains(pageOption));
+        }
     }
 }

@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class SaleScreen {
     private final SelenideElement saleOption = $(By.xpath("//div[@data-navigation-account-item-id= 'cat3890154']"));
-    private final List<SelenideElement> listOfSaleMainCategory = $$(By.xpath("(//ul[@class='MuiList-root'])[1]/li"));
+    private final List<SelenideElement> listOfSaleMainCategory = $$(By.cssSelector("div#sale-nav-dropdown li"));
     private final List<SelenideElement> listOfSaleSubCategory = $$(By.xpath("(//ul[@class='MuiList-root'])[2]/li"));
     private final List<SelenideElement> listOfSaleCollection = $$(By.xpath("(//ul[@class='MuiList-root'])[3]/li"));
     private final SelenideElement catLiving = $(By.xpath("(//div[@data-navigation-account-item-id = 'cat160024'])[2]"));

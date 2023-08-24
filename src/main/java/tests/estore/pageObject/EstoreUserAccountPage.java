@@ -278,13 +278,31 @@ public class EstoreUserAccountPage {
 
     private final String brand = "//p[text()='%s']";
 
+    private final SelenideElement areYouSureYouWantToSignout = $(By.xpath("//*[text()='ARE YOU SURE YOU WANT TO SIGN OUT?']"));
+
     String password;
 
     private final SelenideElement agreePrivacyPolicyCheckbox = $(By.xpath("//*[@for='termsAndConditions']"));
 
+    private final SelenideElement signOutButton = $(By.xpath("//*[text()='Sign Out']"));
+
+    private final SelenideElement cancelSignOutButtonPopUp = $(By.xpath("//*[text()='Cancel']"));
+
     public SelenideElement getBrand(String brandname) {
         String path = String.format(brand, brandname);
         return $(byXpath(path));
+    }
+
+    public void verifyThatCancelSignOutButtonPopUpIsDisplayed() {
+        cancelSignOutButtonPopUp.should(Condition.visible, Duration.ofSeconds(20));
+    }
+
+    public void verifyThatSignoutButtonIsDisplayed() {
+        signOutButton.should(Condition.visible, Duration.ofSeconds(15));
+    }
+
+    public void verifyThatAreYouSureYouWantToSignoutMessageIsDisplayed() {
+        areYouSureYouWantToSignout.should(Condition.visible, Duration.ofSeconds(20));
     }
 
     public void introduceFirstNameIntoCreateAccountForm() {
@@ -323,8 +341,24 @@ public class EstoreUserAccountPage {
         createAccountButton.click();
     }
 
+    public void verifyThatProfileTitleAreDisplayed() {
+        profileButton.should(Condition.visible, Duration.ofSeconds(20));
+    }
+
     public void clickToAgreePrivacyPolicyCheckbox() {
         agreePrivacyPolicyCheckbox.click();
+    }
+
+    public void verifyThatBillingAddressFirstNameFieldIsDisplayed() {
+        firstNameField.should(Condition.visible, Duration.ofSeconds(20));
+    }
+
+    public void verifyThatBillingAddressLastNameFieldIsDisplayed() {
+        firstNameField.should(Condition.visible, Duration.ofSeconds(20));
+    }
+
+    public void verifyThatEmailAddressFieldIsDisplayed() {
+        emailField.should(Condition.visible, Duration.ofSeconds(20));
     }
 
 }
