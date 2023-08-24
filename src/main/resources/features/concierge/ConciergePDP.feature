@@ -11,6 +11,7 @@ Feature: Concierge PDP
 
   Scenario Outline: Verify the content of PDP for Concierge
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I go to item "<skuID>" from search field
     Then I Verify that 'PDP title' is present
     Then I Verify that 'the "Hero" Image' is present
@@ -31,9 +32,9 @@ Feature: Concierge PDP
 
   Scenario: Verify the PDP hero Image, zoom, line items
     Given I log into Concierge as "associate"
-    When I remove all items from cart via UI
+    When I choose country for concierge from footer
     When I go to concierge item 'prod18890296' from search field
-    When I click on the first project search result
+    When I click on the first project search result with parameters 'prod18890296''10024796 WGRY'
     Then I Verify that 'PDP title' is present
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'the "Hero" Image' is present
@@ -47,6 +48,8 @@ Feature: Concierge PDP
     Then Verify that 'line item selections (Size, Finish and Qty) are present'
     Then Verify that 'smaller preview product picture is present on the left of line items'
     Then Verify that 'View in-stock Items and View Sale Items links are present'
+    Then I choose option 'Waxed Grey Oak/ Pewter'
+    Then I chose zero choose in line items
     Then Verify that 'text "Configure this item to view delivery information to" is present'
     Then Verify that 'text Swatch is present'
     Then Verify that 'Swatch image is present'
@@ -55,17 +58,19 @@ Feature: Concierge PDP
     Then Verify that 'text Furniture Touch-up Kit is present'
     Then Verify that 'button Check for Replacement parts is present'
     Then I Verify that '"footer" in PDP' is present
+    Then I chose the '1' line item selections one by one
     Then Verify that 'text "This item will be ready for delivery between" is present'
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
-    Then Verify that 'text item# is present and SKU is present'
+    Then I verify that text item# and SKU '10024796 WGRY' is present
     Then Verify that 'text "This item can be returned or exchanged within 30 days of delivery" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     Then Verify that 'confirm that Add to Cart slider is present'
-    Then Verify that 'Project modal appears and has all the data'
-    Then Verify that 'verify that another modal appears with all the data'
+    Then Project modal appears and has all the data for '10024796 WGRY'
+    Then verify that another modal appears with all the data for '10024796 WGRY'
 
   Scenario: Verify In Stock functionality
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I go to item "60450996 BLNL" from search field
     When I click on "view in stock items" link
     Then Verify that "In Stock modal" 'opens'
@@ -79,6 +84,7 @@ Feature: Concierge PDP
 
   Scenario: Verify On Sale functionality
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I go to item "17050043 FOG" from search field
     When I click on "view select items on sale" link
     Then Verify that "Sale modal" 'opens'
@@ -92,6 +98,7 @@ Feature: Concierge PDP
 
   Scenario Outline: Availability, Delivery and Returns messaging for <items>
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "<skuID>" from search field
     Then I verify that availability, Delivery and returns messaging is displayed for "<items>"
@@ -102,9 +109,10 @@ Feature: Concierge PDP
 
   Scenario: Verify the dropdown selection and add to cart
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to concierge item 'prod12640168' from search field
-    When I click on the first project search result with parameters 'prod12640168' '59810779 CTBZ'
+    When I click on the first project search result with parameters 'prod12640168''59810779 CTBZ'
     Then I Verify that 'PDP title' is present
     Then Verify that 'text "Components starting at" is present'
     Then I verify text 'Cloud Modular Leather Corner Chair'
@@ -112,12 +120,25 @@ Feature: Concierge PDP
     Then Verify that line item field 'Leather' is present
     Then Verify that line item field 'Depth' is present
     Then Verify that line item field 'Color' is present
-    Then Verify that 'text "Configure this item to view delivery information to" is present'
     Then I chose zero choose in line items
-
+    Then Verify that 'text "Configure this item to view delivery information to" is present'
+    Then Verify that 'Add to Cart and Add to Project buttons are inactive'
+    Then I chose the '1' line item selections one by one
+    Then I verify that text item# and SKU '59810779 CTBZ' is present
+    Then Verify that 'text "Unlimited Furniture Delivery" is present'
+    Then I verify that check for replacements parts button is displayed
+    Then Verify that 'Add to Cart and Add to Project buttons are active'
+    When I click on add to cart button
+    Then Verify that 'confirm that Add to Cart slider for SO is present'
+    Then Verify that 'verify data in the modal for SO'
+    Then Verify that 'click Agree and add to cart'
+    When I click on view cart button
+    Then Verify that 'cart page has item (SKU)'
+    Then Verify that 'price is matching PDP'
 
   Scenario: Verify Colorization options
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10115451 BWMR" from search field
     When I click on special order fabrics
@@ -126,41 +147,56 @@ Feature: Concierge PDP
 
   Scenario: Verify Monogram functionality
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I open product page with productId "prod19500002"
     When I click on add monogram checkbox from pdp
     When I choose monogram properties for pdp
     Then I verify that monogram was added for pdp
 
-  Scenario: Add To Cart (Instock, SPO, BO) functionality
+  Scenario Outline: Add To Cart (Instock, SPO, BO) functionality
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "<skuID>" from search field
+    When I click on "view in stock items" link
+    Then Verify that "In Stock modal" 'opens'
+    Then I click on 'Add an item to cart from pop-up modal' switch button
+    When I click on view cart button
+    Then Verify that 'sku is present in Cart'
+    Examples:
+      | skuID         |
+      | 60450996 BLNL |
 
-#  Scenario: ATC SPO - add to cart
-#    Given I log into Concierge as "associate"
-#    When I choose country for concierge from footer
-#    When I remove all items from cart via UI
-#    When I go to item "10105809 BWDV" from search field
-#    When I click on add to cart button
-#    When I click on agree&add button
-#    When I click on view cart button
-#    Then I verify that availability, Delivery and returns messaging is displayed for "SO"
-#
-#  Scenario: ATC BO - add to cart
-#    Given I log into Concierge as "associate"
-#    When I choose country for concierge from footer
-#    When I remove all items from cart via UI
-#    When I go to item "10060297 CLR" from search field
-#    When I click on add to cart button
-#    When I click on view cart button
-#    Then I verify that availability, Delivery and returns messaging is displayed for "BO"
+  Scenario: ATC SPO - add to cart
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "10105809 BWDV" from search field
+    When I click on add to cart button
+    When I click on agree&add button
+    When I click on view cart button
+    Then I verify that availability, Delivery and returns messaging is displayed for "SO"
+
+  Scenario: ATC BO - add to cart
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "10060297 CLR" from search field
+    When I click on add to cart button
+    When I click on view cart button
+    Then I verify that availability, Delivery and returns messaging is displayed for "BO"
 
   Scenario: Verify Custom Drapery PDP
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I choose "RH Teen" from brand menu
     When I go to custom rugs
     Then I verify that custom rugs are displayed
 
   Scenario: Verify YAML Carousel
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I open product page with productId "prod14900056"
     Then I verify that YAML carousel is displayed
@@ -172,13 +208,40 @@ Feature: Concierge PDP
     Then I verify that swatch landing page is displayed
 
   Scenario: Verify the Postal code updates in PDP
+    Given I log into Concierge as "associate"
+    When I choose 'US' country
+    When I go to item "prod28500462" from search field
+    When I click on the first project search result with parameters 'prod28500462''10097586 BWMR'
+    Then Verify that 'default US zip code is present in PDP'
+    Then I click on zip code and change it to '10001'
+    Then I verify that zip code in PDP is '10001'
+    When I choose 'CA' country
+    Then I click on zip code and change it to 'H1Y2B5'
+    Then I verify that zip code in PDP is 'H1Y 2B5'
+    Then Verify that 'price in PDP changed from US$ to CA$'
+    When I choose 'GB' country
+    Then I click on zip code and change it to 'SW1A1AA'
+    Then I verify that zip code in PDP is 'SW1A1AA'
+    Then Verify that 'Confirm that PDP has price in GBP'
+    When I click on rh concierge logo
+    When I navigate to "Coffee Tables"
+    Then I click on the first project search result
+    Then Verify that 'default US zip code is present in PDP'
 
   Scenario: Sale PDP: Regular/Member/Final Price validation
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I choose country for concierge from footer
+    When I navigate to "Sale"
+    Then I choose a random sale item
+    Then Verify that 'PDP has SALE and MEMBER prices'
 
   Scenario Outline: Verify Mattress Recycling Fee
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10004670 NONE" from search field
+    Then I chose the '1' line item selections one by one
     When I change state for "<state>" with zip code "<zipCode>"
     Then I verify that text ""<state>" requires a mattress recycling fee to be collected at checkout state" is present in PDP
     When I click on add to cart button
@@ -192,18 +255,23 @@ Feature: Concierge PDP
 
   Scenario: Custom Jewelry
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I choose "RH Teen" from brand menu
     When I go to custom rugs
     Then I verify that custom rugs are displayed
 
   Scenario: Custom Windows
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I click on windows from top menu
     Then I verify that custom windows are displayed
 
   Scenario: Replacement Items
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10004670 NONE" from search field
+    Then I chose the '1' line item selections one by one
     Then I verify that check for replacements parts button is displayed
+    Then I click on 'CHECK FOR REPLACEMENT PARTS' button
     And I verify that replacements parts modal pop up is displayed

@@ -108,6 +108,7 @@ Feature: Concierge Project
     When I click on create opportunity button
     When I click on rh concierge logo
     When I go to item "63130001" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I add item to created opportunity
     When I click on save button
@@ -149,6 +150,7 @@ Feature: Concierge Project
     When I choose country for concierge from footer
     When I remove all items from cart
     When I go to item "<skuid>" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -163,6 +165,7 @@ Feature: Concierge Project
     When I choose country for concierge from footer
     When I remove all items from cart
     When I go to item "63130001" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I click on add to cart button
     When I click on view cart button
@@ -173,6 +176,7 @@ Feature: Concierge Project
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I open product page with "prod1617188" and "63130001"
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     When I click on move to project button
@@ -203,6 +207,7 @@ Feature: Concierge Project
     When I choose country for concierge from footer
     When I remove all items from cart
     When I go to item "63130001" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I click on add to project button
     And I choose project by project name "removeitemsfromproject"
@@ -222,6 +227,7 @@ Feature: Concierge Project
     When I click on rh concierge logo
     And I remove client from header
     When I go to item "10072181 LOAK" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I click on add to project button
     And I choose project by project name "overridePrice"
@@ -266,6 +272,7 @@ Feature: Concierge Project
     When I click on rh concierge logo
     And I remove client from header
     When I go to item "10072181 LOAK" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I click on add to project button
     And I choose project by project name "subototalforecastupdatingqty"
@@ -311,6 +318,7 @@ Feature: Concierge Project
     When I click on rh concierge logo
     And I remove client from header
     When I go to item "10072181 BLK" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I click on add to project button
     And I choose project by project name "overridinglineitems"
@@ -334,6 +342,7 @@ Feature: Concierge Project
     When I click on rh concierge logo
     And I remove client from header
     When I go to item "10072181 LOAK" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I click on add to project button
     And I choose project by project name "verifyforecastbypricingtype"
@@ -378,6 +387,7 @@ Feature: Concierge Project
     When I click on rh concierge logo
     And I remove client from header
     When I go to item "12320938 CHR" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I click on add to project button
     And I choose project by project name "pricingunclassifiedbusiness"
@@ -442,6 +452,7 @@ Feature: Concierge Project
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I go to item "10010966" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I click on add to project button
     Then I verify that project list is displayed from add to project modal
@@ -450,6 +461,7 @@ Feature: Concierge Project
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I go to item "10010966" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I click on add to project button
     Then I verify that opportunities list in dropdown is displayed from add to project modal
@@ -458,6 +470,7 @@ Feature: Concierge Project
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I go to item "10010966" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I click on add to project button
     Then I verify that space list in dropdown is displayed from add to project modal
@@ -468,6 +481,7 @@ Feature: Concierge Project
     When I choose country for concierge from footer
     When I remove all items from cart
     When I go to item "10010966" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I click on add to project button
     When I click on add new space button
@@ -484,6 +498,7 @@ Feature: Concierge Project
     When I remove all items from cart via UI
     When I remove client from header
     When I go to item "10010966" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I click on add to project button
     When I click on add to cart button from project screen
@@ -502,6 +517,7 @@ Feature: Concierge Project
     When I choose country for concierge from footer
     When I remove all items from cart
     When I go to item "10010966 BRN" from search field
+    Then I chose the '1' line item selections one by one
     And I select count of product
     When I click on add to cart button
     When I click on view cart button

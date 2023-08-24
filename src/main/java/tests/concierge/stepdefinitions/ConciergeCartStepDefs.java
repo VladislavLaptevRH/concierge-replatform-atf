@@ -109,31 +109,31 @@ public class ConciergeCartStepDefs {
             $(By.xpath("//*[text() = 'Agree & Add To Cart']")).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        if (!conciergeCartPageScreen.getItemAddedToYourCart().isDisplayed()) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-            if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
-                String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
-                open(URL);
-                with().pollInterval(5, SECONDS).await().until(() -> true);
-            } else {
-                conciergeE2EStepDefs.iOpenProductPageWithAnd("prod1617188", "63130001");
-                conciergeE2EStepDefs.iClickOnAddToCartButton();
-                conciergeCartPageScreen.getItemAddedToYourCart().should(visible, Duration.ofMinutes(1));
-                conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
-                conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
-                conciergeItemsScreen.getViewCartButton().should(visible, Duration.ofSeconds(60));
-                conciergeCartPageScreen.getKeepShopping().should(visible, Duration.ofSeconds(15));
-                conciergeItemsScreen.getViewCartButton().click();
-            }
-        } else {
+//        if (!conciergeCartPageScreen.getItemAddedToYourCart().isDisplayed()) {
+//            WebDriverRunner.getWebDriver().navigate().refresh();
+//            with().pollInterval(5, SECONDS).await().until(() -> true);
+//            if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
+//                String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
+//                open(URL);
+//                with().pollInterval(5, SECONDS).await().until(() -> true);
+//            } else {
+//                conciergeE2EStepDefs.iOpenProductPageWithAnd("prod1617188", "63130001");
+//                conciergeE2EStepDefs.iClickOnAddToCartButton();
+//                conciergeCartPageScreen.getItemAddedToYourCart().should(visible, Duration.ofMinutes(1));
+//                conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
+//                conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
+//                conciergeItemsScreen.getViewCartButton().should(visible, Duration.ofSeconds(60));
+//                conciergeCartPageScreen.getKeepShopping().should(visible, Duration.ofSeconds(15));
+//                conciergeItemsScreen.getViewCartButton().click();
+//            }
+//        } else {
             conciergeCartPageScreen.getItemAddedToYourCart().should(visible, Duration.ofMinutes(1));
             conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
             conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
             conciergeItemsScreen.getViewCartButton().should(visible, Duration.ofSeconds(60));
             conciergeCartPageScreen.getKeepShopping().should(visible, Duration.ofSeconds(15));
             conciergeItemsScreen.getViewCartButton().click();
-        }
+//        }
     }
 
     @Then("I verify order classification")

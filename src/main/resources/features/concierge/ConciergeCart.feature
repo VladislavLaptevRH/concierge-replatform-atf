@@ -370,6 +370,7 @@ Feature:Concierge Cart Page
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with productId "prod19500002"
+    Then I chose the '1' line item selections one by one
     When I select size option 'Bath Sheet' for item
     When I select color option
     When I click on add to cart button

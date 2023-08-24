@@ -116,11 +116,11 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement firstProductNameInPG = $(By.xpath("(//*[contains(@id, 'RH')]//p/span)[1]"));
 
-    private final SelenideElement regularPriceInPG = $(By.xpath("(//*[contains(@id, 'RH')]//p/span)[3]"));
+    private final SelenideElement regularPriceInPG = $(By.xpath("(//*[@data-testid = 'price-for-regular'])[1]"));
 
     private final SelenideElement pdpScreenZipCode = $(By.xpath("//*[contains(text(), 'Shipping to')]/a"));
 
-    private final SelenideElement memberPriceInPG = $(By.xpath("(//*[contains(@id, 'RH')]//p/span)[5]"));
+    private final SelenideElement memberPriceInPG = $(By.xpath("(//*[@data-testid = 'price-for-member'])[1]"));
 
     private final SelenideElement totalRegularPrice = $(By.xpath("//*[@data-testid = 'price-for-regular']"));
 

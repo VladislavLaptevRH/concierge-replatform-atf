@@ -33,4 +33,29 @@ public class ConciergeHomePageStepDefs {
             System.out.println("Exception");
         }
     }
+
+    @When("I choose {string} country")
+    public void iChooseCountryFor(String country) {
+        try {
+            if (country.equals("GB")) {
+                conciergeHomePage.chooseGBCountry();
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Exception");
+        }
+        try {
+            if (country.equals("CA")) {
+                conciergeHomePage.chooseCACountry();
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Exception");
+        }
+        try {
+            if (country.equals("US")) {
+                conciergeHomePage.chooseUSCountry();
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Exception");
+        }
+    }
 }

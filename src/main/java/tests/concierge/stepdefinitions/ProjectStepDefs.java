@@ -225,7 +225,7 @@ public class ProjectStepDefs {
         }
     }
 
-    @When("I click on the first project search result with parameters {string} {string}")
+    @When("I click on the first project search result with parameters {string}{string}")
     public void iClickOnTheFirstProjectSearchResultWithParameters(String prodID, String SKU) {
         if(conciergeProjectScreen.getFirstSearchResultOfProjects().isDisplayed()) {
             conciergeProjectScreen.getFirstSearchResultOfProjects().should(visible, Duration.ofMinutes(5));
