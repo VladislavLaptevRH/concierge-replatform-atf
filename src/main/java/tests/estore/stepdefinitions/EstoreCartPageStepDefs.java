@@ -11,9 +11,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-import org.w3c.dom.ls.LSOutput;
 import tests.concierge.pageObject.SaleScreen;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
@@ -24,7 +22,6 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
-import static io.netty.handler.codec.rtsp.RtspHeaders.Values.URL;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertEquals;
@@ -272,8 +269,10 @@ public class EstoreCartPageStepDefs {
         estoreCartPage.getJoinNow().should(visible, Duration.ofSeconds(10));
         estoreCartPage.getJoinNow().should(interactable, Duration.ofSeconds(10));
         estoreCartPage.getJoinNow().shouldHave(text("JOIN NOW"), Duration.ofSeconds(10));
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreCartPage.getJoinNow().hover();
-        estoreCartPage.getJoinNow().click(ClickOptions.usingJavaScript());
+        estoreCartPage.getJoinNow().click();
+        $(By.xpath("//*[text()='REMOVE MEMBERSHIP']")).should(visible, Duration.ofMinutes(1));
     }
 
     @Then("I verify order estimate section in cart")

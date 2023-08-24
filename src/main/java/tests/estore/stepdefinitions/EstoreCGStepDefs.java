@@ -49,10 +49,10 @@ public class EstoreCGStepDefs {
     @When("I scroll on the page till back to top button is visible")
     public void iScrollOnThePageTillBackToTopButtonIsVisible() {
         iValidateTheCollectionNameIsNotEmpty();
-
-        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-
-        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        executeJavaScript("window.scrollTo(0, 2500)");
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+        executeJavaScript("window.scrollTo(0, 500)");
     }
 
     @Then("I verify that back to top button is clickable")
