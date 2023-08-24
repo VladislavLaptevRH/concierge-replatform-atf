@@ -78,7 +78,7 @@ Feature:Concierge Homepage
   Scenario: Verify the content for the HP for Concierge
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    Then  I expect that I am on the Concierge Dashboard page
+    Then I expect that I am on the Concierge Dashboard page
     Then I verify the username
     Then I verify the gallery
     Then I verify the logo

@@ -225,6 +225,16 @@ public class ProjectStepDefs {
         }
     }
 
+    @When("I click on the first project search result with parameters {string}{string}")
+    public void iClickOnTheFirstProjectSearchResultWithParameters(String prodID, String SKU) {
+        if(conciergeProjectScreen.getFirstSearchResultOfProjects().isDisplayed()) {
+            conciergeProjectScreen.getFirstSearchResultOfProjects().should(visible, Duration.ofMinutes(5));
+            conciergeProjectScreen.getFirstSearchResultOfProjects().click();
+        } else {
+            conciergeE2EStepDefs.iOpenProductPageWithAnd(prodID, SKU);
+        }
+    }
+
     @When("I click on the project search result")
     public void iClickOnTheProjectSearchResult() {
         if (conciergeProjectScreen.getPopUpErrorWhileLoadingProjects().isDisplayed()) {

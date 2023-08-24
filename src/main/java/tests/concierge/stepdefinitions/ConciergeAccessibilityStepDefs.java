@@ -97,7 +97,16 @@ public class ConciergeAccessibilityStepDefs {
                 checkMenu(rhExpectedItems);
                 for (String each : rhExpectedItems) {
                     if(each.equals("BABY & CHILD") || each.equals("TEEN")){
+                        if(each.equals("BABY & CHILD")){
+                            $(By.xpath("//*[text() = 'BABY & CHILD']")).click();
+                            $(By.xpath("//*[contains(@src, 'rhbabyandchild.com')]")).should(visible, Duration.ofSeconds(10));
+                        }
+                        if(each.equals("TEEN")) {
+                            $(By.xpath("//*[text() = 'TEEN']")).click();
+                            $(By.xpath("//*[contains(@src, 'rhteen.com')]")).should(visible, Duration.ofSeconds(10));
+                        } else {
                         continue;
+                       }
                     }
                     else{
                         accessSubMenu(each);
@@ -105,7 +114,7 @@ public class ConciergeAccessibilityStepDefs {
                 }
                 break;
             case "RH CONTEMPORARY":
-                List<String> rhConExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Art", "Outdoor", "SALE"));
+                List<String> rhConExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath","Lighting", "Textiles", "Rugs", "Windows", "Décor", "Art", "Outdoor", "SALE"));
                 checkMenu(rhConExpectedItems);
                 for (String each : rhConExpectedItems) {
                        accessSubMenu(each);
@@ -122,12 +131,14 @@ public class ConciergeAccessibilityStepDefs {
                 List<String> rhModExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "SALE"));
                 checkMenu(rhModExpectedItems);
                 for (String each : rhModExpectedItems) {
-                    if(each.equals("Outdoor")){
-                        continue;
-                    }
-                    else {
                         accessSubMenu(each);
-                    }
+                }
+                break;
+            case "RH OUTDOOR":
+                List<String> rhOutdoorExpectedItems = new ArrayList(Arrays.asList("Furniture", "Umbrellas", "Fire & Heat", "Lighting", "Textiles", "Planters", "Fountains & Décor", "Covers & Care","SALE"));
+                checkMenu(rhOutdoorExpectedItems);
+                for (String each : rhOutdoorExpectedItems) {
+                    accessSubMenu(each);
                 }
                 break;
             case "RH BEACH HOUSE":
@@ -149,7 +160,12 @@ public class ConciergeAccessibilityStepDefs {
                 checkMenu(rhBathExpectedItems);
                 for (String each : rhBathExpectedItems) {
                     if(each.equals("TEEN")){
-                        continue;
+                        if(each.equals("TEEN")) {
+                            $(By.xpath("//*[text() = 'TEEN']")).click();
+                            $(By.xpath("//*[contains(@src, 'rhteen.com')]")).should(visible, Duration.ofSeconds(10));
+                        } else {
+                            continue;
+                        }
                     }
                     else {
                          accessSubMenu(each);
@@ -160,10 +176,14 @@ public class ConciergeAccessibilityStepDefs {
                 List<String> rhTeenExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Décor", "Lighting", "Rugs", "Windows",  "Storage", "Study", "Gifts","BATH & CHILD","SALE"));
                 checkMenu(rhTeenExpectedItems);
                 for (String each : rhTeenExpectedItems) {
-                    if(each.equals("BATH & CHILD")){
-                        continue;
-                    }
-                    else {
+                    if(each.equals("BATH & CHILD")) {
+                        if (each.equals("BABY & CHILD")) {
+                            $(By.xpath("//*[text() = 'BABY & CHILD']")).click();
+                            $(By.xpath("//*[contains(@src, 'rhbabyandchild.com')]")).should(visible, Duration.ofSeconds(10));
+                        } else {
+                            continue;
+                        }
+                    } else {
                         accessSubMenu(each);
                     }
                 }

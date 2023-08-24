@@ -40,6 +40,7 @@ public class PdpScreen {
 
     private final SelenideElement productTitleGiftCard = $(By.xpath("//*[@class='MuiTypography-root MuiTypography-h2' and text()='RH GIFT CARD']"));
 
+
 //    private final List<SelenideElement> itemYAMLList = $$(By.xpath("//*[text() = 'YOU MIGHT ALSO LIKE']/..//span"));
 
 

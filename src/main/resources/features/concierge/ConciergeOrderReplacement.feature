@@ -9,6 +9,7 @@ Feature: Order replacement
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with "prod18510007" and "17050043" for stg3
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -28,6 +29,7 @@ Feature: Order replacement
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with "prod18510007" and "17050043" for stg3
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -48,6 +50,7 @@ Feature: Order replacement
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with "prod18510007" and "17050043" for stg3
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -68,6 +71,7 @@ Feature: Order replacement
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with "prod18510007" and "17050043" for stg3
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -88,6 +92,7 @@ Feature: Order replacement
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with "prod18510007" and "17050043" for stg3
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
