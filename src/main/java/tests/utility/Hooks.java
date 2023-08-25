@@ -61,13 +61,9 @@ public class Hooks {
      */
     private void ConfigFileReader() {
 
-//        profile = System.getenv("ENVIRONMENT");
-//        cookie = System.getenv("ENDPOINT");
-//        country = System.getenv("COUNTRY");
-
-        profile = "stg2";
-        cookie = "shark";
-        country = "US";
+        profile = System.getenv("ENVIRONMENT");
+        cookie = System.getenv("ENDPOINT");
+        country = System.getenv("COUNTRY");
 
 
         if (profile == null) {
@@ -149,11 +145,11 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for tests.concierge
      */
-    @Before("@estoreTestRun")
+    @Before("@estoreTestRun or @estoreCriticalPathTestRun")
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
-//        setupChromeArguments();
+        setupChromeArguments();
         setUPWebDriver(eStoreURL);
     }
 
@@ -176,7 +172,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.pageLoadTimeout = 40000;
         Configuration.timeout = 40000;
@@ -235,7 +231,7 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After("@concierge-All or @estoreTestRun or @target/rerun.txt")
+    @After("@concierge-All or @estoreTestRun or estoreCriticalPathTestRun or @target/rerun.txt")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
 

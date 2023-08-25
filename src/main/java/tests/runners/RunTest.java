@@ -2,7 +2,6 @@ package tests.runners;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
-import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
         monochrome = true,
@@ -11,7 +10,7 @@ import org.testng.annotations.DataProvider;
         , plugin = {"usage", "json:target/cucumber-reports/Cucumber.json",
         "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
 
-        tags = "@estoreTestRun or @estoreCriticalPath or @estoreWishlist or @estoreThankYouPage or @estorePayment or @estoreOrderReview " +
+        tags = "@estoreTestRun or @estoreCriticalPathTestRun or @estoreWishlist or @estoreThankYouPage or @estorePayment or @estoreOrderReview " +
                 "or @estoreMembership or @estoreHomePage or @estoreE2EFlow or @estoreContractTradePage or " +
                 "@estoreCGPage or @estoreCartPage or @estoreAddressPage or @estoreRegression or @concierge-All" +
                 " or @concierge-Cart or @concierge-Client or @concierge-Contract or @concierge-EndToEnd or " +
