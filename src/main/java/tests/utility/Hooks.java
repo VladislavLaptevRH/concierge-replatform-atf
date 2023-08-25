@@ -241,7 +241,7 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After("@concierge-All or @estoreTestRun or @estoreAccountRun or @target/rerun.txt")
+    @After("@concierge-All or @estoreTestRun or @estoreCriticalPathTestRun or @target/rerun.txt")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
 
