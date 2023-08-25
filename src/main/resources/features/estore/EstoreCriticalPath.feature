@@ -18,7 +18,6 @@ Feature: Estore critical path
       | RH SKI HOUSE      |
       | RH TEEN           |
       | RH BABY & CHILD   |
-      | VIEW SOURCE BOOKS |
 
   Scenario Outline: CG - Test CGS in all menu items (All brands)
     Given I log into eStore as "guest" user
