@@ -1,26 +1,24 @@
 package tests.concierge.stepdefinitions;
 
 //import jdk.internal.org.jline.utils.Display;
+
 import com.codeborne.selenide.WebDriverRunner;
-import com.codeborne.selenide.ex.ElementNotFound;
-import org.openqa.selenium.By;
-import tests.concierge.pageObject.ConciergeLoginPage;
-import tests.concierge.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tests.utility.Hooks;
+import tests.concierge.pageObject.ConciergeLoginPage;
+import tests.concierge.pageObject.ConciergeUserAccountPage;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import static com.codeborne.selenide.Selenide.$;
 
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 
@@ -76,6 +74,7 @@ public class ConciergeAccessibilityStepDefs {
             rhItems = new ArrayList(Arrays.asList(conciergeUserAccountPage.getMenuItems().get(i).getText()));
         }
         GeneralStepDefs.compareList(menuItem, rhItems);
+        System.out.println();
     }
 
     public void accessSubMenu(String each){
@@ -84,7 +83,7 @@ public class ConciergeAccessibilityStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//descendant::span[text()='" + each + "']")).should(visible, Duration.ofSeconds(120)).click();
+        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap MuiGrid-justify-xs-space-between']//descendant::span[text()='" + each + "']")).should(visible, Duration.ofSeconds(10)).click();
         conciergeUserAccountPage.getFirstSubMenu().should(visible, Duration.ofSeconds(40)).click();
 //        with().pollInterval(5, SECONDS).await().until(() -> true);
     }

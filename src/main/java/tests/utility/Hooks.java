@@ -65,7 +65,6 @@ public class Hooks {
         cookie = System.getenv("ENDPOINT");
         country = System.getenv("COUNTRY");
 
-
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
         } else {
@@ -181,7 +180,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = true;
+        Configuration.headless = false;
         Configuration.pageLoadStrategy = "normal";
         Configuration.pageLoadTimeout = 40000;
         Configuration.timeout = 40000;

@@ -323,12 +323,12 @@ public class EstoreUserAccountPage {
     public void introducePasswordIntoCreateAccountForm() {
         password = generalStepDefs.getAlphaNumericString(6);
         passwordField.should(Condition.visible, Duration.ofSeconds(30));
-        passwordField.setValue(password + "A1");
+        passwordField.setValue(password + "A1B");
     }
 
     public void introduceConfirmPasswordIntoCreateAccountForm() {
         passwordConfirmField.should(Condition.visible, Duration.ofSeconds(30));
-        passwordConfirmField.setValue(password + "A1");
+        passwordConfirmField.setValue(password + "A1B");
     }
 
     public void clickToCreateAccountButtonForm() {

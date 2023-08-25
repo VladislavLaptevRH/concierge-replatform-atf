@@ -116,6 +116,7 @@ public class EstorePdpStepDefs {
             estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
             estorePdpPageScreen.getSubmitPostalCode().click();
             estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
+            $(By.xpath("//*[text()='Y1A 9Z9.']")).should(visible, Duration.ofSeconds(40));
         }
         if (country.equals("US")) {
             $(By.xpath("//li[@data-value='US']")).should(visible, Duration.ofSeconds(20)).click();
@@ -282,10 +283,9 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the product price for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceForProductAndWithForTheSelectedCountry(String productID, String arg1, String selectedOptions, String country) {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estorePdpPageScreen.getRegularTheFirstPrice().should(visible, Duration.ofSeconds(20));
         regularPricePdp = Integer.parseInt(estorePdpPageScreen.getRegularPdpProductPrice().getText().replaceAll("\\$", ""));
-//        regularPricePdp = Integer.parseInt(estorePdpPageScreen.getRegularTheFirstPrice().getText().replaceAll("\\$", ""));
         memberPricePdp = Integer.parseInt(estorePdpPageScreen.getMemberPdpProductPrice().getText().replaceAll("\\$", ""));
 
         assertTrue("Regular price is greater than 0", regularPricePdp > 0);
@@ -296,7 +296,7 @@ public class EstorePdpStepDefs {
     @And("I verify that {string} popup is displayed")
     public void iVerifyThatPopupIsDisplayed(String modalPopUp) {
         if (modalPopUp.equals("View In-Stock")) {
-            $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).click(ClickOptions.usingJavaScript());
+            $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
             $(By.xpath("//p[text()='IN STOCK']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
