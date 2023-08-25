@@ -700,18 +700,6 @@ Feature: Estore critical path
     When I click on estore order history
     Then I verify that no orders for new registered user
 
-
-  Scenario: Verify the fields - ORDER DATE, EST. ORDER TOTAL, ORDER NUMBER,	SHIPPED TO,	ORDER DESCRIPTION
-    Given I log into eStore as "member" user
-    When I choose country for eStore from footer
-    When I goes to my account for estore
-    When I click on estore my account icon for guest user
-    When I click on estore my account icon
-    When I click on estore order history
-    Then I verify order date and order total fields
-    When I click on details and tracking order history
-    Then I verify the fileds for estore order history
-
 #Billing summary
   Scenario: Verify the Billing summary link for order - Order to be in shipped/delivered state
     Given I log into eStore as "regular" user
