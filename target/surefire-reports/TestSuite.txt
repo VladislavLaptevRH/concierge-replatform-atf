@@ -1,0 +1,670 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 111, Failures: 111, Errors: 0, Skipped: 0, Time elapsed: 27.886 sec <<< FAILURE! - in TestSuite
+runScenario(tests.runners.RunTest)  Time elapsed: 0.197 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.034 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.028 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.028 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.028 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.025 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.026 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.029 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.024 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.023 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.023 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.022 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.025 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.022 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.022 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.025 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.023 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.022 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.018 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.028 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.023 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.018 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.018 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.018 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.018 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.031 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.024 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.022 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.022 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.022 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.023 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.022 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.034 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.036 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.022 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.027 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.022 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.042 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.021 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.019 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+
+runScenario(tests.runners.RunTest)  Time elapsed: 0.02 sec  <<< FAILURE!
+java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+

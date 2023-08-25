@@ -1,0 +1,1063 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestSuite" time="0.197" tests="111" errors="0" skipped="0" failures="111">
+  <properties>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="java.vm.version" value="20.0.2+9-78"/>
+    <property name="sun.boot.library.path" value="/Users/mikedovbenco/Library/Java/JavaVirtualMachines/openjdk-20.0.2/Contents/Home/lib"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/mikedovbenco/Automation/concierge-replatform-atf"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="path.separator" value=":"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="user.country" value="MD"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/mikedovbenco/Automation/concierge-replatform-atf"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="java.runtime.version" value="20.0.2+9-78"/>
+    <property name="os.arch" value="aarch64"/>
+    <property name="java.io.tmpdir" value="/var/folders/qd/kj663cbj1ndgf59rt8_0y1l40000gn/T/"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="classworlds.conf" value="/Users/mikedovbenco/apache-maven-3.9.4/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/mikedovbenco/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="maven.conf" value="/Users/mikedovbenco/apache-maven-3.9.4/conf"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="64.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="13.5"/>
+    <property name="library.jansi.path" value="/Users/mikedovbenco/apache-maven-3.9.4/lib/jansi-native"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="user.home" value="/Users/mikedovbenco"/>
+    <property name="user.timezone" value="Europe/Chisinau"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="20"/>
+    <property name="cucumber.filter.tags" value="@estoreCriticalPathTestRun"/>
+    <property name="user.name" value="mikedovbenco"/>
+    <property name="java.class.path" value="/Users/mikedovbenco/apache-maven-3.9.4/boot/plexus-classworlds-2.7.0.jar"/>
+    <property name="java.vm.specification.version" value="20"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test -Dcucumber.filter.tags=@estoreCriticalPathTestRun"/>
+    <property name="java.home" value="/Users/mikedovbenco/Library/Java/JavaVirtualMachines/openjdk-20.0.2/Contents/Home"/>
+    <property name="apple.awt.application.name" value="Launcher"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="20.0.2"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="/Users/mikedovbenco/apache-maven-3.9.4"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.version.date" value="2023-07-18"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+  </properties>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.197">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify top menu navigation : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.034">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify top menu navigation : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.028">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify top menu navigation : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.028">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify top menu navigation : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.028">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify top menu navigation : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.025">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify top menu navigation : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.026">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify top menu navigation : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.029">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify top menu navigation : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.024">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify top menu navigation : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.023">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify top menu navigation : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.023">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[CG - Test CGS in all menu items (All brands) : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.022">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[CG - Test CGS in all menu items (All brands) : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.025">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[CG - Test CGS in all menu items (All brands) : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.022">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[CG - Test CGS in all menu items (All brands) : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[CG - Test CGS in all menu items (All brands) : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.022">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[CG - Test CGS in all menu items (All brands) : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[CG - Test CGS in all menu items (All brands) : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.025">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[CG - Test CGS in all menu items (All brands) : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[CG - Test CGS in all menu items (All brands) : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.023">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify product thumbnail is correctly loaded : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify product thumbnail is correctly loaded : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify product thumbnail is correctly loaded : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify product thumbnail is correctly loaded : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.022">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify product thumbnail is correctly loaded : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify product thumbnail is correctly loaded : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify product thumbnail is correctly loaded : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify product thumbnail is correctly loaded : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify product thumbnail is correctly loaded : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify it shows price range below the thumbnail : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[PG - Back to Top button : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the Sale Price on PG pages for Sale Items : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.018">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify sorting - low to high - is working as expected : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.028">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify sorting - high to low - is working as expected : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify collection name,image (regular,member,sale(applicable) on collection banner : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.023">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[CG-Verify Back To top Button : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify 1,2,3 grid views are working fine : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.018">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify single Grid View is as default on CG : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Change the grid view, go to PG, go back from PG, CG page should render in the same grid view that you previously selected : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.018">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[From home page goto a collection and click on any Product, It should redirect user to PG : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the Member Price Text On PG page after selecting the specifications : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Browser back button from search to CG page : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify Line Items functionality: : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify Line Items functionality: : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.018">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify Line Items functionality: : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.018">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify Line Items functionality: : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[eStore Verify Guest checkout : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify registered user checkout in estore : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.031">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify member user checkout in estore : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[eStore - Major CC - US : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.024">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[eStore - Major CC - US : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[eStore - Major CC - US : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[eStore - Major CC - US : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify combining different cards(MC+Visa) + split payment : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.022">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify combining different cards(RH Credit Card+Gift Card) + split payment : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.022">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[eStore RHCC : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.022">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[GC/ Balance check : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.023">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify that user is able to add multiple item to cart, total price is correct : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Add Membership and verify order total in order estimate : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.022">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Remove line item : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Remove item from wishlist : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[User is a non member user then it will show a banner to "Join Membership" click on link to join the membership : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the Instock functionality : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.034">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the On sale functionality : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the availability , delivery and return messages in PDP : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the dropdown selection and add to cart case 1 : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the dropdown selection and add to cart case 2 : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Configure this item to view delivery information for your Location, price update : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the product price as per the selected country in the dropdown : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the prices it is showing for regular user : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify that user is able to buy item for estore : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify that user is not able to login with invalid email and password : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Forgot Password option should be present with proper functionality : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify that user is able to create account : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify My account dropdowm : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify My account dropdowm : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify My account dropdowm : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.036">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify My account dropdowm : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify My account dropdowm : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify My account dropdowm : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the Add to cart functionality : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Edit payment : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.022">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Edit Shipping : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.027">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Edit Billing Address : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Order replacement : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.022">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the personal Info displayed after Sign in - First, last name and email : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the add to cart button on membership page : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[eStore Membership : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the membership Terms and Conditions Link : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the email address displayed in membership page : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verfiy membership FAQa link : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the membership page when the membership is canceled : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify accessing order history - orders displayed for registered user : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify no Orders display for new registered user - verify the copy provided : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the Billing summary link for order - Order to be in shipped/delivered state : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Wishlist for registered users : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.042">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Add an item from cart to wishlist : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Logout : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify count of search result and product : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the Back to top button : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the in stock facet selection and in stock product : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Place order: search with any key term, select high to low. navigate to first product PDP : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.021">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Place order: search with any key term, select Low to High. navigate to first product PDP : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the trade login and checkout : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify the contract login and checkout : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Return & Exchange : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Checkout in BC : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify dinning room page : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify Champagne Caviar bar page : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify Guest rooms Suites page : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.019">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify Rooftop pool page : FAILED
+]]></system-out>
+  </testcase>
+  <testcase name="runScenario" classname="tests.runners.RunTest" time="0.02">
+    <failure message="Environment Variable is NOT Set" type="java.lang.AssertionError">java.lang.AssertionError: Environment Variable is NOT Set
+	at org.testng.Assert.fail(Assert.java:110)
+	at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+	at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+</failure>
+    <system-out><![CDATA[Verify Monogrammed products : FAILED
+]]></system-out>
+  </testcase>
+</testsuite>

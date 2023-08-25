@@ -1,0 +1,3132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="111" passed="0" failed="111" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-08-25T11:34:15 EEST" name="Regression" finished-at="2023-08-25T11:34:42 EEST" duration-ms="27513">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test started-at="2023-08-25T11:34:15 EEST" name="Test Run" finished-at="2023-08-25T11:34:42 EEST" duration-ms="27513">
+      <class name="tests.runners.RunTest">
+        <test-method is-config="true" signature="setUpClass()[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:15 EEST" name="setUpClass" finished-at="2023-08-25T11:34:15 EEST" duration-ms="393" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:15 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:15 EEST" duration-ms="196" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify top menu navigation"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:15 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="33" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify top menu navigation"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="28" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify top menu navigation"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="28" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify top menu navigation"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="28" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify top menu navigation"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="25" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify top menu navigation"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="26" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify top menu navigation"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="30" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify top menu navigation"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="24" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify top menu navigation"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="23" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify top menu navigation"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="23" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["CG - Test CGS in all menu items (All brands)"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="22" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["CG - Test CGS in all menu items (All brands)"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="25" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["CG - Test CGS in all menu items (All brands)"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="22" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["CG - Test CGS in all menu items (All brands)"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["CG - Test CGS in all menu items (All brands)"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="22" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["CG - Test CGS in all menu items (All brands)"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["CG - Test CGS in all menu items (All brands)"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="25" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["CG - Test CGS in all menu items (All brands)"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["CG - Test CGS in all menu items (All brands)"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="23" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify product thumbnail is correctly loaded"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify product thumbnail is correctly loaded"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify product thumbnail is correctly loaded"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify product thumbnail is correctly loaded"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="22" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify product thumbnail is correctly loaded"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify product thumbnail is correctly loaded"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify product thumbnail is correctly loaded"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify product thumbnail is correctly loaded"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify product thumbnail is correctly loaded"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify it shows price range below the thumbnail"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["PG - Back to Top button"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the Sale Price on PG pages for Sale Items"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="18" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify sorting - low to high - is working as expected"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="28" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify sorting - high to low - is working as expected"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify collection name,image (regular,member,sale(applicable) on collection banner"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="23" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["CG-Verify Back To top Button"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="18" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify 1,2,3 grid views are working fine"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="18" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify single Grid View is as default on CG"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Change the grid view, go to PG, go back from PG, CG page should render in the same grid view that you previously selected"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["From home page goto a collection and click on any Product, It should redirect user to PG"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the Member Price Text On PG page after selecting the specifications"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Browser back button from search to CG page"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify Line Items functionality:"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify Line Items functionality:"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="18" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify Line Items functionality:"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="17" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify Line Items functionality:"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["eStore Verify Guest checkout"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:16 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify registered user checkout in estore"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:16 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="30" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify member user checkout in estore"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["eStore - Major CC - US"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="24" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["eStore - Major CC - US"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["eStore - Major CC - US"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["eStore - Major CC - US"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify combining different cards(MC+Visa) + split payment"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="22" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify combining different cards(RH Credit Card+Gift Card) + split payment"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="22" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["eStore RHCC"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="22" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["GC/ Balance check"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="23" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify that user is able to add multiple item to cart, total price is correct"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Add Membership and verify order total in order estimate"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="22" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Remove line item"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Remove item from wishlist"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["User is a non member user then it will show a banner to "Join Membership" click on link to join the membership"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the Instock functionality"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="34" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the On sale functionality"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the availability , delivery and return messages in PDP"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the dropdown selection and add to cart case 1"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the dropdown selection and add to cart case 2"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Configure this item to view delivery information for your Location, price update"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the product price as per the selected country in the dropdown"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the prices it is showing for regular user"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify that user is able to buy item for estore"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify that user is not able to login with invalid email and password"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Forgot Password option should be present with proper functionality"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify that user is able to create account"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify My account dropdowm"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify My account dropdowm"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify My account dropdowm"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="36" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify My account dropdowm"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify My account dropdowm"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify My account dropdowm"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the Add to cart functionality"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Edit payment"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="22" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Edit Shipping"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="26" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Edit Billing Address"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Order replacement"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="22" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the personal Info displayed after Sign in - First, last name and email"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the add to cart button on membership page"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["eStore Membership"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the membership Terms and Conditions Link"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the email address displayed in membership page"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verfiy membership FAQa link"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the membership page when the membership is canceled"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify accessing order history - orders displayed for registered user"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:17 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify no Orders display for new registered user - verify the copy provided"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:17 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the Billing summary link for order - Order to be in shipped/delivered state"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Wishlist for registered users"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="42" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Add an item from cart to wishlist"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Logout"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify count of search result and product"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the Back to top button"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the in stock facet selection and in stock product"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Place order: search with any key term, select high to low. navigate to first product PDP"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="21" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Place order: search with any key term, select Low to High. navigate to first product PDP"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the trade login and checkout"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify the contract login and checkout"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Return & Exchange"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Checkout in BC"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify dinning room page"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify Champagne Caviar bar page"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="19" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify Guest rooms Suites page"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify Rooftop pool page"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2023-08-25T11:34:18 EEST" duration-ms="20" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify Monogrammed products"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Estore critical path]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Environment Variable is NOT Set]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Environment Variable is NOT Set
+at org.testng.Assert.fail(Assert.java:110)
+at tests.utility.Hooks.ConfigFileReader(Hooks.java:70)
+at tests.utility.Hooks.initWebDrivereStore(Hooks.java:150)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:tests.runners.RunTest@5906ebcb]" started-at="2023-08-25T11:34:18 EEST" name="tearDownClass" finished-at="2023-08-25T11:34:42 EEST" duration-ms="24520" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- tests.runners.RunTest -->
+    </test> <!-- Test Run -->
+  </suite> <!-- Regression -->
+</testng-results>
