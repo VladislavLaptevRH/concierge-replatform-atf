@@ -1,10 +1,12 @@
 @concierge-All
 @concierge-PDP
+@conciergeCriticalPathTestRun
 Feature: Concierge PDP
 
   Scenario: Verify the PDP title and pricing
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
+    When I remove all items from cart via UI
     When I navigate to "sofas"
     Then I remember the name of the first product and regular, member prices in PG and navigate to that PDP
     Then I Verify that the PDP title is present and prices match those prices in PG
@@ -12,6 +14,7 @@ Feature: Concierge PDP
   Scenario Outline: Verify the content of PDP for Concierge
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
+    When I remove all items from cart via UI
     When I go to item "<skuID>" from search field
     Then I Verify that 'PDP title' is present
     Then I Verify that 'the "Hero" Image' is present
@@ -33,6 +36,7 @@ Feature: Concierge PDP
   Scenario: Verify the PDP hero Image, zoom, line items
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
+    When I remove all items from cart via UI
     When I go to concierge item 'prod18890296' from search field
     When I click on the first project search result with parameters 'prod18890296''10024796 WGRY'
     Then I Verify that 'PDP title' is present
@@ -71,6 +75,7 @@ Feature: Concierge PDP
   Scenario: Verify In Stock functionality
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
+    When I remove all items from cart via UI
     When I go to item "60450996 BLNL" from search field
     When I click on "view in stock items" link
     Then Verify that "In Stock modal" 'opens'
@@ -85,6 +90,7 @@ Feature: Concierge PDP
   Scenario: Verify On Sale functionality
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
+    When I remove all items from cart via UI
     When I go to item "17050043 FOG" from search field
     When I click on "view select items on sale" link
     Then Verify that "Sale modal" 'opens'
@@ -101,6 +107,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "<skuID>" from search field
+    Then I chose the '1' line item selections one by one
     Then I verify that availability, Delivery and returns messaging is displayed for "<items>"
     Examples:
       | items | skuID         |

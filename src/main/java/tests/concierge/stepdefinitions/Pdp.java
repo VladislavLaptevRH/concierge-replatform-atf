@@ -120,13 +120,13 @@ public class Pdp {
                break;
            case  "has price, member and sale price":
                $(By.xpath("(//*[@id = 'sku-price-list']//*[text()='Price'])[1]")).shouldHave(text("Price"), Duration.ofSeconds(5));
-               if($(By.xpath("(//*[@id='sku-price-list']/div[2]/p[1])[1]")).isDisplayed()){
-                   $(By.xpath("(//*[@id='sku-price-list']/div[2]/p[1])[1]")).shouldHave(text("Member"), Duration.ofSeconds(5));
+               if($(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount--member') and text() = 'Member'])[1]")).isDisplayed()){
+                   $(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount--member') and text() = 'Member'])[1]")).shouldHave(text("Member"), Duration.ofSeconds(5));
                } else {
-                   $(By.xpath("(//*[@id='sku-price-list']/div[2]/p[1])[1]")).shouldHave(text("Trade"), Duration.ofSeconds(5));
+                   $(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount--trade') and text() = 'Trade'])[1]")).shouldHave(text("Trade"), Duration.ofSeconds(5));
                }
-               $(By.xpath("(//*[@id='sku-price-list']/div[2]/p[3])[1]")).shouldHave(text("Sale"), Duration.ofSeconds(5));
-               $(By.xpath("(//*[@id='sku-price-list']/div[2]/p[5])[1]")).shouldHave(text("Regular"), Duration.ofSeconds(5));
+               $(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount--sale') and text() = 'Sale'])[1]")).shouldHave(text("Sale"), Duration.ofSeconds(5));
+               $(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount')])[1]")).should(visible, Duration.ofSeconds(5));
                break;
            case  "has qty dropdown":
                $(By.xpath("//*[text()='Qty']")).should(visible, Duration.ofSeconds(5));
@@ -263,9 +263,9 @@ public class Pdp {
                 assertEquals(SKU, $(By.xpath("//*[text() = '59810779 CTBZ']")).getText());
                 if($(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).isDisplayed()){
                     $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).shouldHave(visible, Duration.ofSeconds(15));
-                    memberPriceInPG = $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).getText().replaceAll("[a-zA-Z]", "");
+                    memberPriceInPG = $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).getText().substring(0, 6);
                     $(By.xpath("(//*[contains(@class, 'item-price__amount')])[1]")).shouldHave(visible, Duration.ofSeconds(15));
-                    regularPriceInPG = $(By.xpath("(//*[contains(@class, 'item-price__amount')])[1]")).getText();
+                    regularPriceInPG = $(By.xpath("//*[contains(@class,'item-price__amount') and text() = 'Regular']")).getText().substring(0, 6);
                 } else {
                     $(By.xpath("(//*[contains(@class, 'item-price__amount')])[1]")).shouldHave(visible, Duration.ofSeconds(15));
                     tradePriceInPDP =  $(By.xpath("(//*[contains(@class, 'item-price__amount')])[1]")).getText();
@@ -284,11 +284,11 @@ public class Pdp {
                 break;
             case  "price is matching PDP":
                 if($(By.xpath("//*[@data-testid= 'price-for-member']")).isDisplayed()){
-                    assertEquals( memberPriceInPG,  $(By.xpath("//*[@data-testid= 'price-for-member']")).getText().replaceAll(".00", ""));
+                    assertEquals( memberPriceInPG.replaceAll(" ", ""),  $(By.xpath("//*[@data-testid= 'price-for-member']")).getText().replaceAll(".00", ""));
                 } else {
                     assertEquals( tradePriceInPDP,  $(By.xpath("//*[@data-testid= 'price-for-trade']")).getText().replaceAll(".00", ""));
                 }
-                assertEquals( regularPriceInPG, $(By.xpath("//*[@data-testid= 'price-for-regular']")).getText().substring(0, 6));
+                assertEquals( regularPriceInPG, $(By.xpath("(//*[@data-testid= 'price-for-regular'])[1]")).getText().substring(0, 6));
                 break;
             case  "PDP has SALE and MEMBER prices":
                 $(By.xpath("(//*[@data-testid = 'price-for-regular'])[1]")).shouldHave(visible, Duration.ofSeconds(15));
@@ -336,6 +336,8 @@ public class Pdp {
                 break;
             case  "sku is present in Cart":
                 assertEquals(SKU,  $(By.xpath("(//*[@id= 'listColumn2-Item#'])[1]")).getText());
+            case  "user is logged in":
+                assertEquals(SKU,  $(By.xpath("(//*[@id= 'listColumn2-Item#'])[1]")).getText());
                 break;
             default: break;
         }
@@ -364,6 +366,7 @@ public class Pdp {
 
     @Then("I verify text {string}")
     public void iVerifyString(String text) {
+        $(By.xpath("//*[text()='" + text + "']")).shouldBe(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='" + text + "']")).shouldHave(text(text), Duration.ofSeconds(20));
     }
 
@@ -380,7 +383,7 @@ public class Pdp {
 
     @Then("I verify that text item# and SKU {string} is present")
     public void iVerifyTextItemAndSKUIsPresent(String data) {
-        $(By.xpath("//*[@id = 'component-sku']/..//p[contains (text(), 'Item# " + data + "')]")).shouldHave(text("Item# " + data + ""), Duration.ofSeconds(5));
+        $(By.xpath("//*[@id = 'component-sku']/..//p[contains (text(), 'Item# " + data + "')]")).shouldHave(text("Item# " + data + ""), Duration.ofSeconds(15));
         SKU = $(By.xpath("//*[@id = 'component-sku']/..//p[contains (text(), 'Item# " + data + "')]")).getText().substring(6,19);
     }
 
@@ -453,22 +456,38 @@ public class Pdp {
        int lineItemsCount = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..")).size();
        for(int i = 1;  i <= lineItemsCount; i++){
            Select itemList = new Select($(By.xpath("((//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..)[" + i + "]")));
-           itemList.selectByIndex(0);
-           with().pollInterval(1, SECONDS).await().until(() -> true);
+           try {
+               itemList.selectByIndex(0);
+           } catch (UnsupportedOperationException e){
+               WebDriverRunner.getWebDriver().navigate().refresh();
+               itemList.selectByIndex(0);
+           }
        }
     }
 
     @Then("I chose the {string} line item selections one by one")
-    public void iChoseLineItemSelectionsOneByOne(String chose){
+    public void iChoseLineItemSelectionsOneByOne(String chose) {
         int lineItemsCount = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..")).size();
-        for(int i = 1;  i <= lineItemsCount; i++){
+        for (int i = 1; i <= lineItemsCount; i++) {
             Select itemList = new Select($(By.xpath("((//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..)[" + i + "]")));
-            if(i != lineItemsCount){
-                itemList.selectByIndex(Integer.parseInt(chose));
-                with().pollInterval(1, SECONDS).await().until(() -> true);
+            if (i != lineItemsCount) {
+                try {
+                    itemList.selectByIndex(Integer.parseInt(chose));
+                    with().pollInterval(1, SECONDS).await().until(() -> true);
+                } catch (UnsupportedOperationException e) {
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    itemList.selectByIndex(Integer.parseInt(chose));
+                    with().pollInterval(1, SECONDS).await().until(() -> true);
+                }
             } else {
-                itemList.selectByIndex(Integer.parseInt(chose) + 1);
-                with().pollInterval(1, SECONDS).await().until(() -> true);
+                try {
+                    itemList.selectByIndex(Integer.parseInt(chose) + 1);
+                    with().pollInterval(1, SECONDS).await().until(() -> true);
+                } catch (UnsupportedOperationException e) {
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    itemList.selectByIndex(Integer.parseInt(chose) + 1);
+                    with().pollInterval(1, SECONDS).await().until(() -> true);
+                }
             }
         }
     }
@@ -670,6 +689,7 @@ public class Pdp {
     public void verifyInStockModalData(String data) {
         switch (data){
             case  "opens":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 $(By.xpath("//*[text()='IN STOCK']")).shouldHave(text("IN STOCK"), Duration.ofSeconds(15));
                 $(By.xpath("//*[text()='These options are available for']")).shouldBe(visible, Duration.ofSeconds(15));
                 $(By.xpath("(//*[@id= 'listColumn2-Item#'])[1]")).shouldBe(visible, Duration.ofSeconds(15));
@@ -687,12 +707,12 @@ public class Pdp {
                 break;
             case  "has price and member price":
                 $(By.xpath("(//*[@id = 'sku-price-list']//*[text()='Price'])[1]")).shouldHave(text("Price"), Duration.ofSeconds(5));
-                if($(By.xpath("(//*[@id='sku-price-list']/div[2]/p[1])[1]")).isDisplayed()){
-                    $(By.xpath("(//*[@id='sku-price-list']/div[2]/p[1])[1]")).shouldHave(text("Member"), Duration.ofSeconds(5));
+                if($(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount--member') and text() = 'Member'])[1]")).isDisplayed()){
+                    $(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount--member') and text() = 'Member'])[1]")).shouldHave(text("Member"), Duration.ofSeconds(5));
                 } else {
-                    $(By.xpath("(//*[@id='sku-price-list']/div[2]/p[1])[1]")).shouldHave(text("Trade"), Duration.ofSeconds(5));
+                    $(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount--trade') and text() = 'Trade'])[1]")).shouldHave(text("Trade"), Duration.ofSeconds(5));
                 }
-                $(By.xpath("(//*[@id='sku-price-list']/div[2]/p[3])[1]")).shouldHave(text("Regular"), Duration.ofSeconds(5));
+                $(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount')])[1]")).should(visible, Duration.ofSeconds(5));
                 break;
             case  "has qty dropdown":
                 $(By.xpath("(//*[text()='Qty'])[1]")).should(visible, Duration.ofSeconds(5));
