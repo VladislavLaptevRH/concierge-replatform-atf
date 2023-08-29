@@ -214,13 +214,11 @@ public class EstoreAddressStepDefs {
 
     @When("I click on estore my account icon")
     public void iClickOnEstoreMyAccountIcon() {
-        try {
-            estoreUserAccountPage.getProfileIconButton().should(Condition.visible, Duration.ofSeconds(5));
-            estoreUserAccountPage.getProfileIconButton().click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            estoreUserAccountPage.getProfileIconButtonDiv().should(Condition.visible, Duration.ofSeconds(5));
-            estoreUserAccountPage.getProfileIconButtonDiv().click();
-        }
+        estoreUserAccountPage.getProfileIconButton().should(interactable, Duration.ofSeconds(20));
+        estoreUserAccountPage.getProfileIconButton().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getProfileIconButton().hover();
+        estoreUserAccountPage.getProfileIconButton().should(appear, Duration.ofSeconds(20));
+        estoreUserAccountPage.getProfileIconButton().click(ClickOptions.usingJavaScript());
 
     }
 
@@ -348,9 +346,9 @@ public class EstoreAddressStepDefs {
     @When("I click on continue with original address estore button")
     public void iClickOnContinueWithOriginalAddressEstoreButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled, interactable), Duration.ofSeconds(30));
-        estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(30));
-        estoreItemPage.getAddToCartButton().click(ClickOptions.usingJavaScript());
+        estoreItemPage.getContinueWithOriginalAddressButton().should(Condition.and("", visible, enabled, interactable), Duration.ofSeconds(30));
+        estoreItemPage.getContinueWithOriginalAddressButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(30));
+        estoreItemPage.getContinueWithOriginalAddressButton().click(ClickOptions.usingJavaScript());
     }
 
     @When("I click on continue to payment estore button")

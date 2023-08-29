@@ -182,8 +182,8 @@ public class Hooks {
         Configuration.browserSize = "1366x768";
         Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
-        Configuration.pageLoadTimeout = 40000;
-        Configuration.timeout = 40000;
+        Configuration.pageLoadTimeout = 60000;
+        Configuration.timeout = 45000;
         Configuration.reportsFolder = "target/screenshots";
         Configuration.browserCapabilities = options;
         open(url);

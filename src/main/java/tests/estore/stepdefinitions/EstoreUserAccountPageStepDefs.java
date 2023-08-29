@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,9 +19,6 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.with;
-import static org.testng.AssertJUnit.assertTrue;
 
 public class EstoreUserAccountPageStepDefs {
     EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
@@ -306,7 +304,11 @@ public class EstoreUserAccountPageStepDefs {
 
     @Then("I change the brand to {string} for eStore")
     public void iChangeTheBrandToForEStore(String brand) {
-        estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(40)).click();
-        estoreUserAccountPage.getBrand(brand).should(visible, Duration.ofSeconds(40)).click();
+        estoreUserAccountPage.getBrandButton().should(interactable, Duration.ofSeconds(40));
+        estoreUserAccountPage.getBrandButton().should(appear, Duration.ofSeconds(40))
+                .click(ClickOptions.usingJavaScript());
+
+        estoreUserAccountPage.getBrand(brand).should(interactable, Duration.ofSeconds(40));
+        estoreUserAccountPage.getBrand(brand).click(ClickOptions.usingJavaScript());
     }
 }

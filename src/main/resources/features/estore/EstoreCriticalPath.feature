@@ -635,7 +635,6 @@ Feature: Estore critical path
     When I navigate to the member tab
     Then I validate membership title
 
-
   Scenario: Membership - Verify the membership Terms and Conditions Link
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -658,7 +657,6 @@ Feature: Estore critical path
   Scenario: Memberdship - Verfiy membership FAQa link
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
-    When I goes to my account for estore
     When I click on estore my account icon for guest user
     When I click on estore my account icon
     When I navigate to the member tab
@@ -730,8 +728,7 @@ Feature: Estore critical path
     When I choose country for eStore from footer
     When I click on estore account
     When I click on estore signout button
-    When I click on estore my account icon for not logged user
-    Then I verify that user is able to signout
+    Then I verify that can logout without any issue
 
 #Search
   Scenario: Search - Verify count of search result and product
@@ -740,14 +737,12 @@ Feature: Estore critical path
     When I go to estore item "towels" from search field
     Then I verify count of search results
 
-
   Scenario: Search - Verify the Back to top button
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
     When I scroll to the bottom of the estore page
     When I click on estore back to top button
-
 
   Scenario: Search - Verify the in stock facet selection and in stock product
     Given I log into eStore as "regular" user

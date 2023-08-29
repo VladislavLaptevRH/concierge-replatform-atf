@@ -694,6 +694,29 @@ public class EstoreGeneralStepDefs {
         switchTo().defaultContent();
     }
 
+    public void payWithRhCreditCard(String cardNumber) {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if (!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
+        paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(appear), Duration.ofSeconds(60));
+        paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(60));
+        Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
+        selectPayment.selectByValue("RH");
+
+        estorePaymentPage.getRhCreditCardNumberField().setValue("6011311276791204");
+        estorePaymentPage.selectRhCreditCardPaymentPlan();
+    }
+
+    public void payWithRhGiftCard() {
+        Select selectPaymentMethod = new Select(paymentScreen.getChoosePaymentMethodBtn());
+        selectPaymentMethod.selectByValue("GiftCard");
+
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        paymentScreen.getRhCardNumberField().setValue("6006493887999902229");
+        paymentScreen.getRhCardPin().setValue("1980");
+    }
 
     /**
      * @param ls1

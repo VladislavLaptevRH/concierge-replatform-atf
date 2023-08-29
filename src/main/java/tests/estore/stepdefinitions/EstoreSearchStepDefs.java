@@ -8,7 +8,6 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
-import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -78,18 +77,18 @@ public class EstoreSearchStepDefs {
 
     @When("I scroll to the bottom of the estore page")
     public void iScrollToTheBottomOfTheEstorePage() {
-        $(By.id("rh-header")).should(visible, Duration.ofSeconds(20));
+        $(By.id("rh-header")).should(visible, Duration.ofSeconds(40));
         generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         executeJavaScript("window.scrollTo(0, 2000)");
-
     }
 
     @When("I click on estore back to top button")
     public void iClickOnEstoreBackToTopButton() {
-        sleep(3000);
+        with().pollInterval(4, SECONDS).await().until(() -> true);
         estoreCGScreen.getBackToTopButton().should(visible, Duration.ofSeconds(20));
         estoreCGScreen.getBackToTopButton().click();
-        sleep(3000);
+        with().pollInterval(4, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that search results for {string} is displayed")

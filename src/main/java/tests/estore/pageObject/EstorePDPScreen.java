@@ -2,9 +2,7 @@ package tests.estore.pageObject;
 
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import io.cucumber.java.eo.Se;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
@@ -17,7 +15,7 @@ import static org.awaitility.Awaitility.with;
 
 @Getter
 public class EstorePDPScreen {
-    private final SelenideElement addToCartButtonViewInStockPopUp = $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']"));
+    private final SelenideElement addToCartButtonViewInStockPopUp = $(By.xpath("(//button[@id='inStockProductCardActions_addToCart-btn'])[1]"));
 
     private final SelenideElement firstRegularPrice = $(By.xpath("(//p[@data-testid='price-for-regular'])[1]"));
 

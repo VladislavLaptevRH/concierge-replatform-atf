@@ -23,7 +23,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 
 public class ConciergeAccessibilityStepDefs {
-    private static final Logger Log = LoggerFactory.getLogger(ConciergeAccessibilityStepDefs .class);
+    private static final Logger Log = LoggerFactory.getLogger(ConciergeAccessibilityStepDefs.class);
     ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
 
@@ -68,37 +68,46 @@ public class ConciergeAccessibilityStepDefs {
         conciergeLoginPage.getContinueButton().click();
     }
 
-    public void checkMenu(List menuItem){
-        List<String> rhItems = new ArrayList<>();
-        for (int i = 0; i < conciergeUserAccountPage.getMenuItems().size(); i++) {
-            rhItems = new ArrayList(Arrays.asList(conciergeUserAccountPage.getMenuItems().get(i).getText()));
+    public void checkMenu(List menuItem) {
+        try {
+            List<String> rhItems = new ArrayList<>();
+            conciergeUserAccountPage.getMenuItems().get(2).should(visible, Duration.ofSeconds(60));
+            for (int i = 0; i < conciergeUserAccountPage.getMenuItems().size(); i++) {
+                rhItems = new ArrayList(Arrays.asList(conciergeUserAccountPage.getMenuItems().get(i).getText()));
+            }
+            GeneralStepDefs.compareList(menuItem, rhItems);
+
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            checkMenu(menuItem);
         }
-        GeneralStepDefs.compareList(menuItem, rhItems);
-        System.out.println();
+
     }
 
-    public void accessSubMenu(String each){
-//        with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(!$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//descendant::span[text()='" + each + "']")).isDisplayed()){
+    public void accessSubMenu(String each) {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        try {
+            $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap MuiGrid-justify-xs-space-between']//descendant::span[text()='" + each + "']"))
+                    .should(visible, Duration.ofSeconds(30)).click();
+            conciergeUserAccountPage.getFirstSubMenu().should(visible, Duration.ofSeconds(40)).click();
+//            with().pollInterval(5, SECONDS).await().until(() -> true);
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
+            accessSubMenu(each);
         }
-        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap MuiGrid-justify-xs-space-between']//descendant::span[text()='" + each + "']")).should(visible, Duration.ofSeconds(10)).click();
-        conciergeUserAccountPage.getFirstSubMenu().should(visible, Duration.ofSeconds(40)).click();
-//        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("User verifies that all items from menu are displayed for {string}")
     public void userVerifiesThatAllItemsFromMenuAreDisplayed(String brand) {
-        switch (brand){
+        switch (brand) {
             case "RH":
                 List<String> rhExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "BABY & CHILD", "TEEN", "SALE"));
                 checkMenu(rhExpectedItems);
                 for (String each : rhExpectedItems) {
-                    if(each.equals("BABY & CHILD") || each.equals("TEEN")){
+                    if (each.equals("BABY & CHILD") || each.equals("TEEN")) {
                         continue;
-                    }
-                    else{
+                    } else {
                         accessSubMenu(each);
                     }
                 }
@@ -107,7 +116,7 @@ public class ConciergeAccessibilityStepDefs {
                 List<String> rhConExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Art", "Outdoor", "SALE"));
                 checkMenu(rhConExpectedItems);
                 for (String each : rhConExpectedItems) {
-                       accessSubMenu(each);
+                    accessSubMenu(each);
                 }
                 break;
             case "RH INTERIORS":
@@ -121,48 +130,45 @@ public class ConciergeAccessibilityStepDefs {
                 List<String> rhModExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "SALE"));
                 checkMenu(rhModExpectedItems);
                 for (String each : rhModExpectedItems) {
-                    if(each.equals("Outdoor")){
+                    if (each.equals("Outdoor")) {
                         continue;
-                    }
-                    else {
+                    } else {
                         accessSubMenu(each);
                     }
                 }
                 break;
             case "RH BEACH HOUSE":
-                List<String> rhBeachExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs",  "Décor", "Art", "Outdoor", "SALE"));
+                List<String> rhBeachExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Décor", "Art", "Outdoor", "SALE"));
                 checkMenu(rhBeachExpectedItems);
                 for (String each : rhBeachExpectedItems) {
-                        accessSubMenu(each);
+                    accessSubMenu(each);
                 }
                 break;
             case "RH SKI HOUSE":
-                List<String> rhSkiExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs",  "Décor", "Outdoor", "SALE"));
+                List<String> rhSkiExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Décor", "Outdoor", "SALE"));
                 checkMenu(rhSkiExpectedItems);
                 for (String each : rhSkiExpectedItems) {
                     accessSubMenu(each);
                 }
                 break;
             case "RH BABY & CHILD":
-                List<String> rhBathExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Nursery", "Décor", "Lighting", "Rugs", "Windows",  "Storage", "Playroom", "Gifts","TEEN","SALE"));
+                List<String> rhBathExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Nursery", "Décor", "Lighting", "Rugs", "Windows", "Storage", "Playroom", "Gifts", "TEEN", "SALE"));
                 checkMenu(rhBathExpectedItems);
                 for (String each : rhBathExpectedItems) {
-                    if(each.equals("TEEN")){
+                    if (each.equals("TEEN")) {
                         continue;
-                    }
-                    else {
-                         accessSubMenu(each);
+                    } else {
+                        accessSubMenu(each);
                     }
                 }
                 break;
             case "RH TEEN":
-                List<String> rhTeenExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Décor", "Lighting", "Rugs", "Windows",  "Storage", "Study", "Gifts","BATH & CHILD","SALE"));
+                List<String> rhTeenExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Décor", "Lighting", "Rugs", "Windows", "Storage", "Study", "Gifts", "BATH & CHILD", "SALE"));
                 checkMenu(rhTeenExpectedItems);
                 for (String each : rhTeenExpectedItems) {
-                    if(each.equals("BATH & CHILD")){
+                    if (each.equals("BATH & CHILD")) {
                         continue;
-                    }
-                    else {
+                    } else {
                         accessSubMenu(each);
                     }
                 }

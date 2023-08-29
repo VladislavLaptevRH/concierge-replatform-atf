@@ -19,6 +19,8 @@ import static org.awaitility.Awaitility.with;
 public class EstoreLoginStepDefs {
 
     EstoreLoginPage estoreLoginPage = new EstoreLoginPage();
+
+    EstoreAccountStepDefs estoreAccountStepDefs = new EstoreAccountStepDefs();
     public static String USER_ID_STG4;
     public static String USER_ID_STG2;
 
@@ -319,5 +321,12 @@ public class EstoreLoginStepDefs {
     public void iVerifyThatUserIsAbleToSignout() {
         estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(20));
         estoreLoginPage.getPasswordField().should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that can logout without any issue")
+    public void iVerifyThatCanLogoutWithoutAnyIssue() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        estoreAccountStepDefs.iClickOnEstoreMyAccountIconForGuestUser();
+        estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(60));
     }
 }
