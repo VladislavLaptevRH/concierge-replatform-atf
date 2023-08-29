@@ -1,5 +1,6 @@
 package tests.concierge.stepdefinitions;
 
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
 import tests.concierge.pageObject.ConciergePGScreen;
@@ -20,21 +21,27 @@ public class ConciergePGStepsDefs {
 
     @Then("I navigate to menu {string}")
     public void INavigateToMenu(String menu) {
-        conciergePGScreen.getTopNavManuByName(menu).click();
-
+        if(conciergePGScreen.getTopNavManuByName(menu).isDisplayed()){
+            conciergePGScreen.getTopNavManuByName(menu).click();
+        } else {
+            $(By.xpath("//*[text() = '" + menu + "']")).click();
+        }
     }
     @Then("I navigate to sub menu {string}")
     public void INavigateToSubMenu(String subMenu) {
-        conciergePGScreen.getTopNavSubManuByName(subMenu).click();
-
+        if(conciergePGScreen.getTopNavSubManuByName(subMenu).isDisplayed()){
+            conciergePGScreen.getTopNavSubManuByName(subMenu).hover();
+        } else {
+            $(By.xpath("//*[text() = '" + subMenu + " ']")).hover();
+        }
     }
     @Then("I navigate to gallery {string}")
     public void stepByStepINavigateTo(String collection) {
         conciergePGScreen.getTopNavGalleryByName(collection).click();
     }
 
-    @Then("I verify that {string}")
-    public void iClickOnSwitchButton(String data) {
+    @Then("I verify that {string} on PG screen")
+    public void iVerifyThatOnPGScreen(String data) {
         switch (data) {
             case "Grid View is present in top right":
                 with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -53,7 +60,7 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[@class = 'MuiButtonBase-root MuiFab-root' and contains(@style, 'hidden')]")).shouldBe(exist, Duration.ofSeconds(20));
                 break;
             case "Verify that all products have text From $ / $ Sale / $ Member":
-                $(By.xpath("(//*[text() = 'From'])[1]")).shouldBe(visible, Duration.ofSeconds(10));
+                $(By.xpath("(//*[text() = 'From'])[1]")).shouldBe(visible, Duration.ofSeconds(20));
                 assertTrue($$(By.xpath("//*[text() = 'From']")).size() > 10);
                 for(int i = 1; i < $$(By.xpath("//*[text() = 'From']")).size(); i++) {
                     $(By.xpath("(//*[text() = 'From'])[" + i + "]")).shouldHave(text("From"));
@@ -99,7 +106,7 @@ public class ConciergePGStepsDefs {
                 for(int i = 1; i < $$(By.xpath("//*[@data-testid = 'price-label-regular']")).size(); i++) {
                     $(By.xpath("(//*[@data-testid = 'price-label-regular'])[" + i + "]")).shouldHave(text("Regular"));;
                 }
-                $(By.xpath("(//*[text() = 'VIEW SELECT ITEMS ON SALE'])[1]")).shouldBe(visible, Duration.ofSeconds(10));
+                $(By.xpath("(//*[text() = 'VIEW SELECT ITEMS ON SALE'])[1]")).shouldBe(visible, Duration.ofSeconds(20));
                 assertTrue($$(By.xpath("//*[text() = 'VIEW SELECT ITEMS ON SALE']")).size() > 10);
                 for(int i = 1; i < $$(By.xpath("//*[text() = 'VIEW SELECT ITEMS ON SALE']")).size(); i++) {
                     $(By.xpath("(//*[text() = 'VIEW SELECT ITEMS ON SALE'])[" + i + "]")).shouldHave(text("VIEW SELECT ITEMS ON SALE"));;
@@ -133,8 +140,8 @@ public class ConciergePGStepsDefs {
         }
     }
 
-    @Then("I click {string}")
-    public void iClick(String button) {
+    @Then("I click {string} on PG screen")
+    public void iClickOnPGScreen(String button) {
         switch (button) {
             case "Back to Top button":
                 $(By.xpath("//*[@class = 'MuiButtonBase-root MuiFab-root' and not(contains(@style, 'hidden'))]")).shouldBe(visible, Duration.ofSeconds(20));
@@ -157,6 +164,9 @@ public class ConciergePGStepsDefs {
             case "on sign out button":
                 $(By.xpath("//*[text() = 'SIGN OUT']")).should(visible, Duration.ofSeconds(15));
                 $(By.xpath("//*[text() = 'SIGN OUT']")).click();
+                break;
+            case "Back Browser Button":
+                WebDriverRunner.getWebDriver().navigate().back();
                 break;
             default: break;
         }
