@@ -17,6 +17,8 @@ import static org.testng.AssertJUnit.assertTrue;
 
 public class ConciergePGStepsDefs {
 
+    public static String result;
+
     ConciergePGScreen conciergePGScreen = new ConciergePGScreen();
 
     @Then("I navigate to menu {string}")
@@ -24,7 +26,7 @@ public class ConciergePGStepsDefs {
         if(conciergePGScreen.getTopNavManuByName(menu).isDisplayed()){
             conciergePGScreen.getTopNavManuByName(menu).click();
         } else {
-            $(By.xpath("//*[text() = '" + menu + "']")).click();
+            $(By.xpath("//*[contains(text(), '" + menu + "')]")).click();
         }
     }
     @Then("I navigate to sub menu {string}")
@@ -32,12 +34,21 @@ public class ConciergePGStepsDefs {
         if(conciergePGScreen.getTopNavSubManuByName(subMenu).isDisplayed()){
             conciergePGScreen.getTopNavSubManuByName(subMenu).hover();
         } else {
-            $(By.xpath("//*[text() = '" + subMenu + " ']")).hover();
+            $(By.xpath("//*[contains(text(), '" + subMenu + "')]")).hover();
         }
+        result = subMenu;
     }
     @Then("I navigate to gallery {string}")
     public void stepByStepINavigateTo(String collection) {
-        conciergePGScreen.getTopNavGalleryByName(collection).click();
+        if(conciergePGScreen.getTopNavGalleryByName(collection).isDisplayed()){
+            conciergePGScreen.getTopNavGalleryByName(collection).click();
+        } else {
+            if(conciergePGScreen.getTopNavSubManuByName(result).isDisplayed()){
+                conciergePGScreen.getTopNavSubManuByName(result).click();
+            } else {
+                $(By.xpath("//*[contains(text(), '" + result + "')]")).click();
+            }
+        }
     }
 
     @Then("I verify that {string} on PG screen")

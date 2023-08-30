@@ -674,6 +674,7 @@ public class Pdp {
                  boolean memberOption = $$(By.xpath("//*[contains(text() ,'Trade')]")).size() > 1;
                  assertTrue(memberOption);
              }
+             $(By.xpath("(//*[contains(text() ,'SALE')])[3]")).shouldBe(visible, Duration.ofSeconds(15));
              boolean saleOption = $$(By.xpath("//*[contains(text() ,'SALE')]")).size() > 5;
              assertTrue(saleOption);
              $(By.xpath("//*[text() ='Color Options']")).shouldBe(visible, Duration.ofSeconds(15));

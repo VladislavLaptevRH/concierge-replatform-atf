@@ -9,7 +9,7 @@ Feature: Concierge PG Page
     When I click on search Icon
     When I Type product name 'table'
     Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
-    Then I verify that 'Grid View is present in top right'
+    Then I verify that 'Grid View is present in top right' search screen
     Then I verify that 'PG pictures of all items are visible' on search page
     Then I verify that 'page is loaded until footer' on search page
     Then I verify that relevant items are returned on search page 'Table'

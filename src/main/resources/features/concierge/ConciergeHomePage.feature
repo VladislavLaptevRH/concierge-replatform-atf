@@ -14,16 +14,16 @@ Feature:Concierge Homepage
     Then  I change the brand to "<brand>"
     Then User verifies that all items from menu are displayed for "<brand>"
     Examples:
-      | brand |
-      | RH    |
-      |RH CONTEMPORARY|
-      |RH INTERIORS   |
-      |RH MODERN      |
-      |RH OUTDOOR     |
-      |RH BEACH HOUSE |
-      |RH SKI HOUSE   |
-      |RH BABY & CHILD|
-      |RH TEEN        |
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH BABY & CHILD |
+      | RH TEEN         |
 
   Scenario Outline: Verify Logo is present in HPs of all brands
     Given I log into Concierge as "associate"
@@ -31,16 +31,16 @@ Feature:Concierge Homepage
     Then  I change the brand to "<brand>"
     Then I verify the logo
     Examples:
-      |brand|
-      |RH|
-      |RH CONTEMPORARY|
-      |RH INTERIORS   |
-      |RH MODERN      |
-      |RH OUTDOOR     |
-      |RH BEACH HOUSE |
-      |RH SKI HOUSE   |
-      |RH BABY & CHILD|
-      |RH TEEN        |
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH BABY & CHILD |
+      | RH TEEN         |
 
   Scenario Outline: Verify Brand Dropdown is present and functional in HPs of all brands
     Given I log into Concierge as "associate"
@@ -48,16 +48,16 @@ Feature:Concierge Homepage
     Then I change the brand to "<brand>"
     Then I verify that RH Brand dropdown is present in "<currentBrandName>" home page
     Examples:
-      |brand          |currentBrandName|
-      |RH             |RH              |
-      |RH CONTEMPORARY|CN              |
-      |RH INTERIORS   |IN              |
-      |RH MODERN      |MO              |
-      |RH OUTDOOR     |OD              |
-      |RH BEACH HOUSE |BH              |
-      |RH SKI HOUSE   |SH              |
-      |RH BABY & CHILD|BC              |
-      |RH TEEN        |TN              |
+      | brand           | currentBrandName |
+      | RH              | RH               |
+      | RH CONTEMPORARY | CN               |
+      | RH INTERIORS    | IN               |
+      | RH MODERN       | MO               |
+      | RH OUTDOOR      | OD               |
+      | RH BEACH HOUSE  | BH               |
+      | RH SKI HOUSE    | SH               |
+      | RH BABY & CHILD | BC               |
+      | RH TEEN         | TN               |
 
   Scenario Outline: Verify the Footer links are present and clickable in HPs
     Given I log into Concierge as "associate"
@@ -65,16 +65,16 @@ Feature:Concierge Homepage
     Then I change the brand to "<brand>"
     Then I verify footer links for brand "<brand>"
     Examples:
-      | brand |
-      | RH    |
-      |RH CONTEMPORARY|
-      |RH INTERIORS   |
-      |RH MODERN      |
-      |RH OUTDOOR     |
-      |RH BEACH HOUSE |
-      |RH SKI HOUSE   |
-      |RH BABY & CHILD|
-      |RH TEEN        |
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH BABY & CHILD |
+      | RH TEEN         |
 
   Scenario: Verify the content for the HP for Concierge
     Given I log into Concierge as "associate"
@@ -93,7 +93,7 @@ Feature:Concierge Homepage
     Then I verify page label
     Then I verify button "RH Orders" on homepage
     Then I verify button "Apply for RH Card" on homepage
-    Then I verify button "RH card lookup" on homepage
+    Then I verify button "RH Card lookup" on homepage
     Then I verify button "Gift card enquiry" on homepage
     Then I verify button "RH.COM Profile" on homepage
     Then I verify search item field and search button

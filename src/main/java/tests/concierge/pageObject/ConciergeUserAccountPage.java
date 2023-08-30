@@ -231,13 +231,13 @@ public class ConciergeUserAccountPage {
         return $(byXpath(path));
     }
 
-    public SelenideElement getBrand(String brandname){
-        String path = String.format(brand, brandname);
+    public SelenideElement getBrand(String brandName){
+        String path = String.format(brand, brandName);
         return $(byXpath(path));
     }
 
-    public SelenideElement getButton(String buttonname){
-        String path = String.format(button, buttonname);
+    public SelenideElement getButton(String buttonName){
+        String path = String.format(button, buttonName);
         return $(byXpath(path));
     }
 
