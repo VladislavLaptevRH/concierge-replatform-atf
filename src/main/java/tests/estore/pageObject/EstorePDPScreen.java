@@ -76,7 +76,7 @@ public class EstorePDPScreen {
     public void selectSizeOption() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         sizeOption.should(Condition.and("", Condition.interactable, Condition.visible,
-                Condition.appear), Duration.ofSeconds(40));
+                Condition.appear,Condition.enabled), Duration.ofSeconds(40));
         Select selectSize = new Select(sizeOption);
         selectSize.selectByIndex(1);
     }
@@ -93,7 +93,7 @@ public class EstorePDPScreen {
     public void selectFinishOption() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         finishOption.should(Condition.and("", Condition.interactable, Condition.visible,
-                Condition.appear), Duration.ofSeconds(40));
+                Condition.appear,Condition.enabled), Duration.ofSeconds(40));
         Select selectFinishOption = new Select(finishOption);
         selectFinishOption.selectByIndex(1);
     }

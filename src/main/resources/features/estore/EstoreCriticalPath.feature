@@ -69,8 +69,7 @@ Feature: Estore critical path
   Scenario: PG - Verify the Sale Price on PG pages for Sale Items
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I click on sale
-    When I click on sale menu item
+    When I go to Sale product page
     Then I verify sale prices on PG pages for sale items
 
   Scenario: PG - Verify sorting - low to high - is working as expected
@@ -335,7 +334,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I update item quantity in estore pdp
     When I click on add to cart estore button
     When I click on view cart estore button
@@ -543,7 +542,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "NOCT" for estore
+    When I open product page with "prod13800635" and "17050043" with "NOCT" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -565,7 +564,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod13800635" and "17050043" with "NOCT" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -717,7 +716,7 @@ Feature: Estore critical path
   Scenario: WishList - Remove item from wishlist
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod2020027" and "17050043" with "FOG" for estore
+    When I open product page with "prod13800635" and "17050045" with "TWLT" for estore
     When I click on estore my account icon for guest user
     When I click on add to wishlist button
     Then I verify that I'm able to remove wishlist from cart
