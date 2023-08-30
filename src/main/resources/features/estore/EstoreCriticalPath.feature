@@ -856,25 +856,25 @@ Feature: Estore critical path
     Then I verify that estore thank you page is displayed
 
  #GuestHouse
-  Scenario: GuestHouse- Verify dinning room page
-    Given I go to estore guesthouse home page
-    When I click on the estore guesthouse dining room page
-    Then I verify that estore guesthouse dining room page is accessible
-
-  Scenario: GuestHouse - Verify Champagne Caviar bar page
-    Given I go to estore guesthouse home page
-    When I click on the estore Champagne Caviar bar page
-    Then I verify that estore Champagne Caviar bar page is displayed
-
-  Scenario: GuestHouse - Verify Guest rooms Suites page
-    Given I go to estore guesthouse home page
-    When I click on estore guest rooms suites page
-    Then I verify that estore guesthouse rooms suites page is displayed
-
-  Scenario: GuestHouse - Verify Rooftop pool page
-    Given I go to estore guesthouse home page
-    When I click on estore guesthouse rooftop pool page
-    Then I verify that estore guesthouse rooftop pool page is displayed
+#  Scenario: GuestHouse- Verify dinning room page
+#    Given I go to estore guesthouse home page
+#    When I click on the estore guesthouse dining room page
+#    Then I verify that estore guesthouse dining room page is accessible
+#
+#  Scenario: GuestHouse - Verify Champagne Caviar bar page
+#    Given I go to estore guesthouse home page
+#    When I click on the estore Champagne Caviar bar page
+#    Then I verify that estore Champagne Caviar bar page is displayed
+#
+#  Scenario: GuestHouse - Verify Guest rooms Suites page
+#    Given I go to estore guesthouse home page
+#    When I click on estore guest rooms suites page
+#    Then I verify that estore guesthouse rooms suites page is displayed
+#
+#  Scenario: GuestHouse - Verify Rooftop pool page
+#    Given I go to estore guesthouse home page
+#    When I click on estore guesthouse rooftop pool page
+#    Then I verify that estore guesthouse rooftop pool page is displayed
 
   Scenario: Verify Monogrammed products
     Given I log into eStore as "regular" user

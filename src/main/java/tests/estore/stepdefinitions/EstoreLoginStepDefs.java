@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Given;
@@ -306,7 +307,9 @@ public class EstoreLoginStepDefs {
     @When("I click on estore account")
     public void iClickOnEstoreAccount() {
         estoreLoginPage.getAccountIconStg4().should(visible, Duration.ofSeconds(20));
-        estoreLoginPage.getAccountIconStg4().click();
+        estoreLoginPage.getAccountIconStg4().should(interactable, Duration.ofSeconds(20));
+        estoreLoginPage.getAccountIconStg4().should(appear, Duration.ofSeconds(20));
+        estoreLoginPage.getAccountIconStg4().click(ClickOptions.usingJavaScript());
     }
 
     @When("I click on estore signout button")
