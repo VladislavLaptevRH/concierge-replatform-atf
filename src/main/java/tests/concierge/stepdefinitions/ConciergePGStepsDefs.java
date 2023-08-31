@@ -2,20 +2,25 @@ package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import tests.concierge.pageObject.ConciergeItemsScreen;
 import tests.concierge.pageObject.ConciergePGScreen;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
+import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 
 public class ConciergePGStepsDefs {
+
+    ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
 
     public static String result;
 
@@ -49,6 +54,7 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[contains(text(), '" + result + "')]")).click();
             }
         }
+        $(By.xpath("(//*[contains(@class, 'MuiTypography-body1')])[1]")).shouldBe(visible, Duration.ofSeconds(30));
     }
 
     @Then("I verify that {string} on PG screen")
@@ -147,6 +153,20 @@ public class ConciergePGStepsDefs {
             case "user is able to sign out":
                 $(By.xpath("//button[@class = 'login-form__submit']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
+            case "grid view is set to 1-grid view":
+                $(By.xpath("//*[ local-name() = 'svg' and @column = '1' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));
+                break;
+            case "grid view is set to 2-grid view":
+                $(By.xpath("//*[ local-name() = 'svg' and @column = '2' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));
+                break;
+            case "grid view is set to 3-grid view":
+                $(By.xpath("//*[ local-name() = 'svg' and @column = '3' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));
+                break;
+            case "Dashboard is displayed":
+                $(By.xpath("//*[text() = 'Concierge']/following-sibling::h1[text() = 'Dashboard']")).shouldBe(visible, Duration.ofSeconds(20));
+                break;
+            case "CG is displayed":
+                $(By.xpath("(//*[@id = 'collection-gallery-grid'])[1]")).shouldBe(visible, Duration.ofSeconds(20));
             default: break;
         }
     }
@@ -179,7 +199,55 @@ public class ConciergePGStepsDefs {
             case "Back Browser Button":
                 WebDriverRunner.getWebDriver().navigate().back();
                 break;
+            case "first collection from the list":
+                $(By.xpath("(//*[@id = 'collection-gallery-grid'])[1]")).click();
+                break;
             default: break;
         }
+    }
+
+    @Then("I Change the PG Grid view to {string} - grid view and confirm changing")
+    public void iChangeThePGGridAndConfirmChanging(String view) {
+        $(By.xpath("//*[ local-name() = 'svg' and @column = '" + view + "']")).click();
+        $(By.xpath("//*[ local-name() = 'svg' and @column = '" + view + "' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));
+        if(view.equals("1")) {
+            int i = 1;
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+            while (!$(By.xpath("//*[@class = 'MuiButtonBase-root MuiFab-root' and not(contains(@style, 'hidden'))]")).isDisplayed()) {
+                with().pollInterval(1, SECONDS).await().until(() -> true);
+                $(By.xpath("(//*[@id='component-rh-image'])[" + i + "]")).scrollIntoView(true);
+                i++;
+                with().pollInterval(1, SECONDS).await().until(() -> true);
+            }
+            assertEquals(3, i);
+        }
+        if(view.equals("2")){
+            int i = 1;
+            while (!$(By.xpath("//*[@class = 'MuiButtonBase-root MuiFab-root' and not(contains(@style, 'hidden'))]")).isDisplayed()) {
+                $(By.xpath("(//*[@id='component-rh-image'])[" + i + "]")).scrollIntoView(true);
+                i++;
+                with().pollInterval(1, SECONDS).await().until(() -> true);
+            }
+            assertEquals(3, i);
+        }
+        if(view.equals("3")){
+            int i = 1;
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+            while (!$(By.xpath("//*[@class = 'MuiButtonBase-root MuiFab-root' and not(contains(@style, 'hidden'))]")).isDisplayed()) {
+                with().pollInterval(1, SECONDS).await().until(() -> true);
+                $(By.xpath("(//*[@id='component-rh-image'])[" + i + "]")).scrollIntoView(true);
+                i++;
+                with().pollInterval(1, SECONDS).await().until(() -> true);
+            }
+            assertEquals(3, i);
+        }
+    }
+
+    @When("I open product page with {string}")
+    public void iOpenProductPageWithAnd(String productId) {
+        String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "";
+        open(URL);
+        conciergeItemsScreen.getAddToCartButton().scrollTo();
+        conciergeItemsScreen.getAddToCartButton().should(visible, Duration.ofSeconds(10));
     }
 }
