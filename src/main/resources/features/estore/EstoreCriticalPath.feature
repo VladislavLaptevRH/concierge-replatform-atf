@@ -5,19 +5,19 @@ Feature: Estore critical path
     Given I log into eStore as guest
     When I choose country for eStore from footer
     Then  I change the brand to "<brand>" for eStore
-    Then User verifies that all items from menu are displayed for "<brand>"
+    Then User verifies that all items from menu are displayed for "<brand>" on eStore
     And user verifies search button, account icon, cart button are displayed
     Examples:
-      | brand             |
-      | RH                |
-      | RH CONTEMPORARY   |
-      | RH INTERIORS      |
-      | RH MODERN         |
-      | RH OUTDOOR        |
-      | RH BEACH HOUSE    |
-      | RH SKI HOUSE      |
-      | RH TEEN           |
-      | RH BABY & CHILD   |
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH TEEN         |
+      | RH BABY & CHILD |
 
   Scenario Outline: CG - Test CGS in all menu items (All brands)
     Given I log into eStore as "guest" user

@@ -102,7 +102,7 @@ public class ConciergeAccessibilityStepDefs {
     public void userVerifiesThatAllItemsFromMenuAreDisplayed(String brand) {
         switch (brand) {
             case "RH":
-                List<String> rhExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "BABY & CHILD", "TEEN", "SALE"));
+                List<String> rhExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Outdoor", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "BABY & CHILD", "TEEN", "SALE"));
                 checkMenu(rhExpectedItems);
                 for (String each : rhExpectedItems) {
                     if (each.equals("BABY & CHILD") || each.equals("TEEN")) {

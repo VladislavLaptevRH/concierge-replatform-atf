@@ -2,16 +2,21 @@ package tests.estore.pageObject;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 @Getter
 public class EstoreUserAccountPage {
@@ -19,6 +24,8 @@ public class EstoreUserAccountPage {
 //    private final SelenideElement brandButton = $(By.xpath(""));
 
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+
+    private final List<SelenideElement> menuItems = $$(By.xpath("//div[contains(@class,'MuiGrid-justify-xs-space-between')]//div[contains(@id,'container')]//span"));
 
     private final SelenideElement createAccountButton = $(By.xpath("//*[@id='kc-register']"));
 
@@ -194,8 +201,6 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement orderHistoryButton = $(By.xpath("//a[1]/button[contains(@class,'MuiButton-root')]"));
 
-    private final List<SelenideElement> menuItems = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//div"));
-
     private final List<SelenideElement> itemSubCategory = $$(By.xpath("//div[2]//ul[@class='MuiList-root']/li[@class='MuiListItem-root']"));
 
     private final SelenideElement clientButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][1]/div[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-align-items-xs-center']/h6"));
@@ -288,46 +293,49 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement cancelSignOutButtonPopUp = $(By.xpath("//*[text()='Cancel']"));
 
+    private final SelenideElement firstSubMenu = $(By.xpath("//div[@role='tooltip']//descendant::div[contains(@class,'MuiGrid-container')]//child::div[contains(@class,'MuiGrid-root')][1]/ul/li[1]"));
+
+
     public SelenideElement getBrand(String brandname) {
         String path = String.format(brand, brandname);
         return $(byXpath(path));
     }
 
     public void verifyThatCancelSignOutButtonPopUpIsDisplayed() {
-        cancelSignOutButtonPopUp.should(Condition.visible, Duration.ofSeconds(20));
+        cancelSignOutButtonPopUp.should(visible, Duration.ofSeconds(20));
     }
 
     public void verifyThatSignoutButtonIsDisplayed() {
-        signOutButton.should(Condition.visible, Duration.ofSeconds(15));
+        signOutButton.should(visible, Duration.ofSeconds(15));
     }
 
     public void verifyThatAreYouSureYouWantToSignoutMessageIsDisplayed() {
-        areYouSureYouWantToSignout.should(Condition.visible, Duration.ofSeconds(20));
+        areYouSureYouWantToSignout.should(visible, Duration.ofSeconds(20));
     }
 
     public void introduceFirstNameIntoCreateAccountForm() {
-        firstNameField.should(Condition.visible, Duration.ofSeconds(30));
+        firstNameField.should(visible, Duration.ofSeconds(30));
         firstNameField.setValue(generalStepDefs.getAlphaNumericString(5));
     }
 
     public void introduceLastNameIntoCreateAccountForm() {
-        lastNameField.should(Condition.visible, Duration.ofSeconds(30));
+        lastNameField.should(visible, Duration.ofSeconds(30));
         lastNameField.setValue(generalStepDefs.getAlphaNumericString(8));
     }
 
     public void introduceEmailIntoCreateAccountForm() {
-        emailField.should(Condition.visible, Duration.ofSeconds(30));
+        emailField.should(visible, Duration.ofSeconds(30));
         emailField.setValue(generalStepDefs.getAlphaNumericString(8) + "@mailinator.com");
     }
 
     public void introducePasswordIntoCreateAccountForm() {
         password = generalStepDefs.getAlphaNumericString(6);
-        passwordField.should(Condition.visible, Duration.ofSeconds(30));
+        passwordField.should(visible, Duration.ofSeconds(30));
         passwordField.setValue(password + "A1B");
     }
 
     public void introduceConfirmPasswordIntoCreateAccountForm() {
-        passwordConfirmField.should(Condition.visible, Duration.ofSeconds(30));
+        passwordConfirmField.should(visible, Duration.ofSeconds(30));
         passwordConfirmField.setValue(password + "A1B");
     }
 
@@ -342,7 +350,7 @@ public class EstoreUserAccountPage {
     }
 
     public void verifyThatProfileTitleAreDisplayed() {
-        profileButton.should(Condition.visible, Duration.ofSeconds(20));
+        profileButton.should(visible, Duration.ofSeconds(20));
     }
 
     public void clickToAgreePrivacyPolicyCheckbox() {
@@ -350,15 +358,43 @@ public class EstoreUserAccountPage {
     }
 
     public void verifyThatBillingAddressFirstNameFieldIsDisplayed() {
-        firstNameField.should(Condition.visible, Duration.ofSeconds(20));
+        firstNameField.should(visible, Duration.ofSeconds(20));
     }
 
     public void verifyThatBillingAddressLastNameFieldIsDisplayed() {
-        firstNameField.should(Condition.visible, Duration.ofSeconds(20));
+        firstNameField.should(visible, Duration.ofSeconds(20));
     }
 
     public void verifyThatEmailAddressFieldIsDisplayed() {
-        emailField.should(Condition.visible, Duration.ofSeconds(20));
+        emailField.should(visible, Duration.ofSeconds(20));
+    }
+
+    public void checkMenu(List menuItem) {
+        try {
+            List<String> rhItems = new ArrayList<>();
+            menuItems.get(2).should(visible, Duration.ofSeconds(60));
+            for (int i = 0; i < menuItems.size(); i++) {
+                rhItems.add(menuItems.get(i).getText());
+            }
+            GeneralStepDefs.compareList(menuItem, rhItems);
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            checkMenu(menuItem);
+        }
+
+    }
+
+    public void accessSubMenu(String each) {
+//        with().pollInterval(5, SECONDS).await().until(() -> true);
+        try {
+            $(By.xpath("//div[contains(@class,'MuiGrid-justify-xs-space-between')]//descendant::span[text()='" + each + "']"))
+                    .click();
+            firstSubMenu.should(visible, Duration.ofSeconds(40)).click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            accessSubMenu(each);
+        }
     }
 
 }
