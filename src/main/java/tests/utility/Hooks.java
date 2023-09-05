@@ -144,7 +144,7 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for tests.concierge
      */
-    @Before("@estoreAccountRun or @estoreCriticalPathTestRun")
+    @Before("@estoreTestRun or @estoreCriticalPathTestRun")
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
@@ -158,7 +158,6 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
         configureConciergeURL();
-        setupChromeArguments();
         setUPWebDriver(conciergeURL);
     }
 
