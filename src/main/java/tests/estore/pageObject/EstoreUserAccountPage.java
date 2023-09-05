@@ -141,7 +141,7 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement orderDetailsButton = $(By.xpath("//*[text()='Order details']"));
 
-    private final SelenideElement searchItemField = $(By.xpath("//input[@id='site-search-input']"));
+    private final SelenideElement searchItemField = $(By.xpath("//input[@type='text']"));
 
     private final SelenideElement searchButton = $(By.xpath("//*[text()='Search']"));
 

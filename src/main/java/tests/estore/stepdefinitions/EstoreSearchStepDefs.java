@@ -6,6 +6,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
 
@@ -36,10 +37,13 @@ public class EstoreSearchStepDefs {
         estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
         generalStepDefs.waitForJSandJQueryToLoad();
 
+
         estoreUserAccountPage.getSearchItemField().setValue(arg0);
 
-        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click(ClickOptions.usingJavaScript());
+        estoreUserAccountPage.getSearchItemField().sendKeys(Keys.ENTER);
+
+//        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
+//        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click(ClickOptions.usingJavaScript());
     }
 
     @Then("I verify that search result {string} for search product via product name is displayed")
