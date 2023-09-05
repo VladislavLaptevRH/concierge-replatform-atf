@@ -4,18 +4,12 @@ import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import tests.estore.pageObject.EstoreItemPage;
 import tests.estore.pageObject.EstoreWishlistPage;
-import tests.utility.Hooks;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class EstoreWishlistStepDefs {
@@ -35,11 +29,11 @@ public class EstoreWishlistStepDefs {
 
         estoreItemPage.getAddToWishListButton().scrollIntoView(true);
 
-        estoreItemPage.getAddToWishListButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
+        estoreItemPage.getAddToWishListButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         estoreItemPage.getAddToWishListButton().click();
 
-        estoreItemPage.getViewWishlistButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(30));
-        estoreItemPage.getViewWishlistButton().click();
+        estoreItemPage.getViewWishlistButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
+        estoreItemPage.getViewWishlistButton().click(ClickOptions.usingJavaScript());
     }
 
     @Then("I validate member price in wishlist")

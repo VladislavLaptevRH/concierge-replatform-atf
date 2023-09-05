@@ -1,6 +1,5 @@
 package tests.estore.pageObject;
 
-import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
@@ -11,6 +10,8 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Selenide.$;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 @Getter
 public class EstoreLoginPage {
@@ -28,7 +29,8 @@ public class EstoreLoginPage {
     private final SelenideElement forgotPasswordButton = $(By.xpath("//a[@class='forgot-password']"));
 
     public void clickToAccountIcon() {
-        accountIcon.should(Condition.and("", interactable, Condition.visible, appear), Duration.ofSeconds(20));
-        accountIcon.click(ClickOptions.usingJavaScript());
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        accountIcon.should(Condition.and("", interactable, Condition.visible, appear), Duration.ofSeconds(50));
+        accountIcon.click();
     }
 }

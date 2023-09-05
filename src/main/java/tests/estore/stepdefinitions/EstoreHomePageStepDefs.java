@@ -9,20 +9,21 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.estore.pageObject.EstoreHomePage;
 import tests.utility.Hooks;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.appear;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
-import static org.testng.AssertJUnit.*;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class EstoreHomePageStepDefs {
     EstoreHomePage estoreHomePage = new EstoreHomePage();
@@ -135,8 +136,13 @@ public class EstoreHomePageStepDefs {
 
     @When("I navigate to the member tab")
     public void iNavigateToTheMemberTab() {
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//*[@data-navigation-account-item-id='my-account/membership.jsp']")).
-                should(Condition.appear, Duration.ofSeconds(30)).click(ClickOptions.usingJavaScript());
+                should(Condition.and("", appear, Condition.interactable, visible), Duration.ofSeconds(40))
+                .hover();
+        $(By.xpath("//*[@data-navigation-account-item-id='my-account/membership.jsp']")).
+                should(Condition.and("", appear, Condition.interactable, visible), Duration.ofSeconds(40))
+                .click(ClickOptions.usingJavaScript());
     }
 
     @Then("I validate each cat and sub-cat for eStore")

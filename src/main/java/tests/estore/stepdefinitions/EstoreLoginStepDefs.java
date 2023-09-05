@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Given;
@@ -19,6 +20,8 @@ import static org.awaitility.Awaitility.with;
 public class EstoreLoginStepDefs {
 
     EstoreLoginPage estoreLoginPage = new EstoreLoginPage();
+
+    EstoreAccountStepDefs estoreAccountStepDefs = new EstoreAccountStepDefs();
     public static String USER_ID_STG4;
     public static String USER_ID_STG2;
 
@@ -304,7 +307,9 @@ public class EstoreLoginStepDefs {
     @When("I click on estore account")
     public void iClickOnEstoreAccount() {
         estoreLoginPage.getAccountIconStg4().should(visible, Duration.ofSeconds(20));
-        estoreLoginPage.getAccountIconStg4().click();
+        estoreLoginPage.getAccountIconStg4().should(interactable, Duration.ofSeconds(20));
+        estoreLoginPage.getAccountIconStg4().should(appear, Duration.ofSeconds(20));
+        estoreLoginPage.getAccountIconStg4().click(ClickOptions.usingJavaScript());
     }
 
     @When("I click on estore signout button")
@@ -319,5 +324,12 @@ public class EstoreLoginStepDefs {
     public void iVerifyThatUserIsAbleToSignout() {
         estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(20));
         estoreLoginPage.getPasswordField().should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that can logout without any issue")
+    public void iVerifyThatCanLogoutWithoutAnyIssue() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        estoreAccountStepDefs.iClickOnEstoreMyAccountIconForGuestUser();
+        estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(60));
     }
 }

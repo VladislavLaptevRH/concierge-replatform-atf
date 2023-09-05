@@ -1,9 +1,7 @@
 package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.WebDriverRunner;
-import io.cucumber.java.an.E;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
@@ -18,8 +16,6 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertTrue;
 
 public class EstorePgStepDefs {
@@ -179,7 +175,7 @@ public class EstorePgStepDefs {
 
     @Then("I verify the member price on PG page after selecting the specifications")
     public void iVerifyTheMemberPriceOnPGPageAfterSelectingTheSpecifications() {
-        int memberPrice = Integer.parseInt($(By.xpath("(//span[@class='priceSpan'])[2]")).getText().replaceAll("\\$", "").replaceAll("Member", "").replaceAll("\\,", "").replaceAll(" ", ""));
+        int memberPrice = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-member'])[1]")).getText().replaceAll("\\,", "").replaceAll("\\$", ""));
         AssertJUnit.assertTrue("Member price is not equal to zero", memberPrice > 0);
 
     }
@@ -191,16 +187,25 @@ public class EstorePgStepDefs {
 
     @Then("I verify that sorting low to high is working as expected")
     public void iVerifyThatSortingLowToHighIsWorkingAsExpected() {
-        priceFromTheFirstProduct = Integer.parseInt($(By.xpath("(//span[@class='priceSpan'])[2]//span")).getText().replaceAll("\\,", ""));
-        priceFromTheSecondProduct = Integer.parseInt($(By.xpath("(//span[@class='priceSpan'])[5]//span")).getText().replaceAll("\\,", ""));
+        priceFromTheFirstProduct = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[1]")).getText().replaceAll("\\,", "").replaceAll("\\$", ""));
+        priceFromTheSecondProduct = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[2]")).getText().replaceAll("\\,", "").replaceAll("\\$", ""));
 
-        assertTrue(priceFromTheFirstProduct > priceFromTheSecondProduct, "The price of the first product is less than the price for the second product");
+        assertTrue(priceFromTheFirstProduct < priceFromTheSecondProduct, "The price of the first product is less than the price for the second product");
     }
 
     @Then("I verify that PG page is displayed for eStore")
     public void iVerifyThatPGPageIsDisplayedForEStore() {
-        estorePGScreen.getCollectionTextTitle().should(visible,Duration.ofSeconds(20));
+        estorePGScreen.getCollectionTextTitle().should(visible, Duration.ofSeconds(20));
         estorePGScreen.getGridView3().should(visible, Duration.ofSeconds(10));
+
+    }
+
+    @Then("I verify that sorting high to low is working as expected")
+    public void iVerifyThatSortingHighToLowIsWorkingAsExpected() {
+        priceFromTheFirstProduct = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[1]")).getText().replaceAll("\\,", "").replaceAll("\\$", ""));
+        priceFromTheSecondProduct = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[2]")).getText().replaceAll("\\,", "").replaceAll("\\$", ""));
+
+        assertTrue(priceFromTheFirstProduct > priceFromTheSecondProduct, "The price of the first product is less than the price for the second product");
 
     }
 }

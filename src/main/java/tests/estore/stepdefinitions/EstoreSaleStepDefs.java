@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.EstoreCGScreen;
 import tests.estore.pageObject.EstoreSaleScreen;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -62,5 +63,12 @@ public class EstoreSaleStepDefs {
         memberSalePrice = Integer.parseInt(estoreSaleScreen.getMemberSalePrice().getText().replaceAll("\\$", "").replaceAll(",", ""));
 
         assertTrue(regularSalePrice > memberSalePrice, "Regular sale price is lower than member sale price");
+    }
+
+    @When("I go to Sale product page")
+    public void iGoToSaleProductPage() {
+        String saleUrl="https://stg2.rhnonprod.com/us/en/catalog/category/products.jsp?categoryId=cat25450027&pgterm=" +
+                "RH+Fabric+Sofas&sale=true&topCatId=cat3890154&parentCatId=cat160024?endpoint=" + Hooks.cookie;
+        open(saleUrl);
     }
 }

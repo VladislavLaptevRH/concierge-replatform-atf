@@ -14,7 +14,7 @@ Feature: Estore account
     When I goes to my account for estore
     When I click on estore my account icon for guest user
     When I verify the max length for first name text field
-
+#
   Scenario: Verify the min length for First Name text field
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -30,7 +30,7 @@ Feature: Estore account
     When I update personal information for account
     When I click on estore update personal information data button
     Then I verify that by updating personal information, application should get saved the entered details
-
+#
   Scenario: Verify that after updating account profile, application should display popup with 'your profile has been updated' message
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer

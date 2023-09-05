@@ -14,7 +14,8 @@ import tests.utility.Hooks;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 
@@ -348,5 +349,20 @@ public class EstorePaymentStepDefs {
     public void iClickOnContinueButtonFromPaymentPage() {
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='CONTINUE']")).click();
+    }
+
+    @Then("I verify that I'm able to execute estore split payment with RH Credit Card+Gift Card")
+    public void iVerifyThatIMAbleToExecuteEstoreSplitPaymentWithRHCreditCardGiftCard() {
+        $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
+        estoreGeneralStepDefs.payWithRhCreditCard("6006101002617089");
+        estorePaymentPage.clickToSplitPaymentCheckBox();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        $(By.xpath("//input[@type='text']")).setValue("10");
+        estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
+
+        estoreGeneralStepDefs.payWithRhGiftCard();
+
+
+
     }
 }

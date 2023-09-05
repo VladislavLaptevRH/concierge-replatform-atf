@@ -6,29 +6,20 @@ import com.codeborne.selenide.WebDriverRunner;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
 import lombok.Getter;
-import org.apache.commons.io.FileUtils;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.concierge.pageObject.*;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -703,6 +694,29 @@ public class EstoreGeneralStepDefs {
         switchTo().defaultContent();
     }
 
+    public void payWithRhCreditCard(String cardNumber) {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if (!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
+        paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(appear), Duration.ofSeconds(60));
+        paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(60));
+        Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
+        selectPayment.selectByValue("RH");
+
+        estorePaymentPage.getRhCreditCardNumberField().setValue("6011311276791204");
+        estorePaymentPage.selectRhCreditCardPaymentPlan();
+    }
+
+    public void payWithRhGiftCard() {
+        Select selectPaymentMethod = new Select(paymentScreen.getChoosePaymentMethodBtn());
+        selectPaymentMethod.selectByValue("GiftCard");
+
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        paymentScreen.getRhCardNumberField().setValue("6006493887999902229");
+        paymentScreen.getRhCardPin().setValue("1980");
+    }
 
     /**
      * @param ls1

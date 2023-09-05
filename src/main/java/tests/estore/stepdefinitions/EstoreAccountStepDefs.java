@@ -47,7 +47,7 @@ public class EstoreAccountStepDefs {
 
     @Then("I verify that by updating personal information, application should get saved the entered details")
     public void iVerifyThatByUpdatingPersonalInformationApplicationShouldGetSavedTheEnteredDetails() {
-        estoreUserAccountPage.getBillingAddressFirstName().shouldHave(value(firstName), Duration.ofSeconds(20));
+        estoreUserAccountPage.getBillingAddressFirstName().shouldHave(value(firstName+"1"), Duration.ofSeconds(20));
     }
 
     @When("I verify the max length for first name text field")

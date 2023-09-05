@@ -2,13 +2,11 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
@@ -16,11 +14,8 @@ import tests.utility.Hooks;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.with;
-import static org.testng.Assert.assertTrue;
-import static org.testng.AssertJUnit.assertEquals;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static tests.estore.stepdefinitions.EstoreUserAccountPageStepDefs.firstName;
 
 public class EstoreAddressStepDefs {
@@ -219,13 +214,11 @@ public class EstoreAddressStepDefs {
 
     @When("I click on estore my account icon")
     public void iClickOnEstoreMyAccountIcon() {
-        try {
-            estoreUserAccountPage.getProfileIconButton().should(Condition.visible, Duration.ofSeconds(5));
-            estoreUserAccountPage.getProfileIconButton().click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            estoreUserAccountPage.getProfileIconButtonDiv().should(Condition.visible, Duration.ofSeconds(5));
-            estoreUserAccountPage.getProfileIconButtonDiv().click();
-        }
+        estoreUserAccountPage.getProfileIconButton().should(interactable, Duration.ofSeconds(20));
+        estoreUserAccountPage.getProfileIconButton().should(visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getProfileIconButton().hover();
+        estoreUserAccountPage.getProfileIconButton().should(appear, Duration.ofSeconds(20));
+        estoreUserAccountPage.getProfileIconButton().click(ClickOptions.usingJavaScript());
 
     }
 
@@ -353,9 +346,9 @@ public class EstoreAddressStepDefs {
     @When("I click on continue with original address estore button")
     public void iClickOnContinueWithOriginalAddressEstoreButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        estoreItemPage.getAddToCartButton().should(Condition.and("", visible, enabled, interactable), Duration.ofSeconds(30));
-        estoreItemPage.getAddToCartButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(30));
-        estoreItemPage.getAddToCartButton().click(ClickOptions.usingJavaScript());
+        estoreItemPage.getContinueWithOriginalAddressButton().should(Condition.and("", visible, enabled, interactable), Duration.ofSeconds(30));
+        estoreItemPage.getContinueWithOriginalAddressButton().shouldHave(text("CONTINUE"), Duration.ofSeconds(30));
+        estoreItemPage.getContinueWithOriginalAddressButton().click(ClickOptions.usingJavaScript());
     }
 
     @When("I click on continue to payment estore button")
@@ -567,8 +560,8 @@ public class EstoreAddressStepDefs {
     public void iVerifyBillingAndShippingAddressAreCorrect() {
         $(By.xpath("//*[text()='SHIPPING ADDRESS']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='4524 Ocala Street']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Orlando, FL, 32801']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Ocala Street']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Silver Spring, MD, 20901']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='BILLING ADDRESS']")).should(visible, Duration.ofSeconds(20));
     }

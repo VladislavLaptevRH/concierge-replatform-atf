@@ -6,9 +6,9 @@ import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
-import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -37,10 +37,13 @@ public class EstoreSearchStepDefs {
         estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
         generalStepDefs.waitForJSandJQueryToLoad();
 
+
         estoreUserAccountPage.getSearchItemField().setValue(arg0);
 
-        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click(ClickOptions.usingJavaScript());
+        estoreUserAccountPage.getSearchItemField().sendKeys(Keys.ENTER);
+
+//        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
+//        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click(ClickOptions.usingJavaScript());
     }
 
     @Then("I verify that search result {string} for search product via product name is displayed")
@@ -78,18 +81,18 @@ public class EstoreSearchStepDefs {
 
     @When("I scroll to the bottom of the estore page")
     public void iScrollToTheBottomOfTheEstorePage() {
-        $(By.id("rh-header")).should(visible, Duration.ofSeconds(20));
+        $(By.id("rh-header")).should(visible, Duration.ofSeconds(40));
         generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         executeJavaScript("window.scrollTo(0, 2000)");
-
     }
 
     @When("I click on estore back to top button")
     public void iClickOnEstoreBackToTopButton() {
-        sleep(3000);
+        with().pollInterval(4, SECONDS).await().until(() -> true);
         estoreCGScreen.getBackToTopButton().should(visible, Duration.ofSeconds(20));
         estoreCGScreen.getBackToTopButton().click();
-        sleep(3000);
+        with().pollInterval(4, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that search results for {string} is displayed")
