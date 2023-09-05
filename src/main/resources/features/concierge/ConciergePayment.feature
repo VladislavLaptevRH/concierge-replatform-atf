@@ -1,5 +1,6 @@
 @concierge-All
 @concierge-Payment
+@conciergeCriticalPathTestRun
 Feature: Concierge Payment
 
   Scenario Outline: Major CCs

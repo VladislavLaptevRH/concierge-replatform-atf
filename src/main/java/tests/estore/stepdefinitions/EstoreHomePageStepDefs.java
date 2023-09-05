@@ -7,6 +7,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.estore.pageObject.EstoreHomePage;
@@ -29,7 +30,7 @@ public class EstoreHomePageStepDefs {
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
 
-    String result = "";
+    public static String result = "";
 
     @Then("I expect that I am on the eStore Dashboard page")
     public void iExpectThatIAmOnTheEStoreDashboardPage() {
@@ -49,7 +50,6 @@ public class EstoreHomePageStepDefs {
     public void iClickOnSearchIcon() {
         estoreHomePage.getSearchIcon().should(Condition.visible, Duration.ofSeconds(30));
         estoreHomePage.getSearchIcon().click();
-
     }
 
     @And("I Type product name {string}")
@@ -57,6 +57,7 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getSearchInputField().should(Condition.visible, Duration.ofSeconds(30));
         estoreHomePage.getSearchCloseButton().should(Condition.visible, Duration.ofSeconds(30));
         estoreHomePage.getSearchInputField().setValue(arg0);
+        $(By.xpath("(//*[@id = 'site-search-input']/..//button/span[@class='MuiIconButton-label'])[2]")).should(Condition.visible, Duration.ofSeconds(30));
         estoreHomePage.getSeeAllResultButton().click();
         result = arg0;
     }

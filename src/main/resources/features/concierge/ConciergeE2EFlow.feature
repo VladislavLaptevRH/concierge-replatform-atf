@@ -8,6 +8,7 @@ Feature: Concierge E2E flow
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with "prod1617188" and "63130001"
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -27,6 +28,7 @@ Feature: Concierge E2E flow
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with "prod1617188" and "63130001"
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -47,6 +49,7 @@ Feature: Concierge E2E flow
     When I remove client from header
     When I remove client from header
     When I open product page with "prod1617188" and "63130001"
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -60,6 +63,7 @@ Feature: Concierge E2E flow
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I open product page with "prod1617188" and "63130001"
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification
@@ -73,6 +77,7 @@ Feature: Concierge E2E flow
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
+    Then I chose the '1' line item selections one by one
     When I go to item "<skuID>" from search field
     And I select count of product
     When I click on add to cart button
@@ -102,7 +107,9 @@ Feature: Concierge E2E flow
     When I click on the project search result
     Then I click on remove button from project
     When I click on rh concierge logo
+    Then I chose the '1' line item selections one by one
     When I open product page with "prod1617188" and "63130001"
+    Then I chose the '1' line item selections one by one
     When I click on add to project button
     When I choose project from addToProject popup
     When I click on add to cart button from project screen

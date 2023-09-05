@@ -62,6 +62,8 @@ public class ConciergeUserAccountPage {
     private final List<SelenideElement> listOfBrands = $$(By.xpath("//ul[@class='MuiList-root MuiMenu-list MuiList-padding']/li"));
     private final List<SelenideElement> listOfMainCategories = $$(By.xpath("//div[@class=\"MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between\"]/div"));
 
+    private final SelenideElement saleMenu = $(By.xpath("(//div[@class=\"MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between\"]/div)[15]"));
+
     private final List<SelenideElement> listOfSubCategories = $$(By.xpath("(//ul[@class=\"MuiList-root\"])[1]/li/span"));
     private final List<SelenideElement> listOfCollections = $$(By.xpath("(//ul[@class=\"MuiList-root\"])[2]/li"));
 
@@ -229,13 +231,13 @@ public class ConciergeUserAccountPage {
         return $(byXpath(path));
     }
 
-    public SelenideElement getBrand(String brandname){
-        String path = String.format(brand, brandname);
+    public SelenideElement getBrand(String brandName){
+        String path = String.format(brand, brandName);
         return $(byXpath(path));
     }
 
-    public SelenideElement getButton(String buttonname){
-        String path = String.format(button, buttonname);
+    public SelenideElement getButton(String buttonName){
+        String path = String.format(button, buttonName);
         return $(byXpath(path));
     }
 

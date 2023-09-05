@@ -1,6 +1,17 @@
 @concierge-All
 @concierge-Cart
+@conciergeCriticalPathTestRun
 Feature:Concierge Cart Page
+
+  Scenario: Verify the Postal code updates in cart
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I add item to cart via API with "10024796 WGRY"
+    When I open cart
+    Then I confirm that default zip code for country "US" is present in Cart
+    And I change zip code in the cart to "10035"
+    And Verify that zip code was updated in the Cart to "10035"
 
   Scenario: Order Classification
     Given I log into Concierge as "associate"
@@ -360,6 +371,7 @@ Feature:Concierge Cart Page
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with productId "prod19500002"
+    Then I chose the '1' line item selections one by one
     When I select size option 'Bath Sheet' for item
     When I select color option
     When I click on add to cart button
