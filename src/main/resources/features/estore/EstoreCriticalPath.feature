@@ -774,7 +774,7 @@ Feature: Estore critical path
   Scenario: Search - Place order: search with any key term, select Low to High. navigate to first product PDP
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I go to estore item "white" from search field
+    When I go to estore item "white and blue corner leather sofa" from search field
     When I select low to high for estore
     When I navigate for the first product PDP
     When I select size option on the PDP page
