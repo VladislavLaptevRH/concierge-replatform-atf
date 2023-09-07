@@ -2,9 +2,7 @@ package tests.estore.pageObject;
 
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import io.cucumber.java.eo.Se;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
@@ -17,7 +15,7 @@ import static org.awaitility.Awaitility.with;
 
 @Getter
 public class EstorePDPScreen {
-    private final SelenideElement addToCartButtonViewInStockPopUp = $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']"));
+    private final SelenideElement addToCartButtonViewInStockPopUp = $(By.xpath("(//button[@id='inStockProductCardActions_addToCart-btn'])[1]"));
 
     private final SelenideElement firstRegularPrice = $(By.xpath("(//p[@data-testid='price-for-regular'])[1]"));
 
@@ -78,9 +76,9 @@ public class EstorePDPScreen {
     public void selectSizeOption() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         sizeOption.should(Condition.and("", Condition.interactable, Condition.visible,
-                Condition.appear), Duration.ofSeconds(40));
+                Condition.appear,Condition.enabled), Duration.ofSeconds(40));
         Select selectSize = new Select(sizeOption);
-        selectSize.selectByIndex(1);
+        selectSize.selectByIndex(2);
     }
 
 
@@ -89,13 +87,13 @@ public class EstorePDPScreen {
         sizeOption.should(Condition.and("", Condition.interactable, Condition.visible,
                 Condition.appear), Duration.ofSeconds(40));
         Select selectSize = new Select(colorOption);
-        selectSize.selectByIndex(1);
+        selectSize.selectByIndex(2);
     }
 
     public void selectFinishOption() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         finishOption.should(Condition.and("", Condition.interactable, Condition.visible,
-                Condition.appear), Duration.ofSeconds(40));
+                Condition.appear,Condition.enabled), Duration.ofSeconds(40));
         Select selectFinishOption = new Select(finishOption);
         selectFinishOption.selectByIndex(1);
     }

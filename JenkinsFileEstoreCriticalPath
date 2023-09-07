@@ -30,7 +30,7 @@ pipeline.standardTemplate { label ->
             }
 
             stage('Run Tests') {
-                pipeline.buildMvn("clean test -Dcucumber.filter.tags='@estoreTestRun'", true);
+                pipeline.buildMvn("clean test -Dcucumber.filter.tags='@estoreCriticalPathTestRun'", true);
             } // end stage
 
             container("awscli") {

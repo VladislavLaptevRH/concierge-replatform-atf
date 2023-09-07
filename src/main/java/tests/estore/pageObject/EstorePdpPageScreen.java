@@ -1,7 +1,6 @@
 package tests.estore.pageObject;
 
 import com.codeborne.selenide.SelenideElement;
-import io.cucumber.java.eo.Se;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
@@ -18,6 +17,8 @@ public class EstorePdpPageScreen {
 
     private final SelenideElement regularTheFirstPrice = $(By.xpath("(//p[@data-testid='price-for-regular'])[1]"));
 
+    private final SelenideElement regularPdpProductPrice = $(By.xpath("(//p[@data-testid='price-for-regular'])[2]"));
+
     private final SelenideElement regularTheSecondPrice = $(By.xpath("(//p[@data-testid='price-for-regular'])[3]"));
 
     private final SelenideElement confirmChangeButton = $(By.xpath("//*[text()='CONFIRM CHANGE']"));
@@ -25,6 +26,8 @@ public class EstorePdpPageScreen {
     private final SelenideElement memberPrice = $(By.xpath("//p[@data-testid='price-for-member']"));
 
     private final SelenideElement memberTheFirstPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
+
+    private final SelenideElement memberPdpProductPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[3]"));
 
     private final SelenideElement memberTheSecondPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[3]"));
 

@@ -1,14 +1,22 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.ClickOptions;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
-import org.apache.pdfbox.pdmodel.interactive.viewerpreferences.PDViewerPreferences;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class EstorePaymentPage {
+
+    private final SelenideElement rhCreditCardNumberField = $(By.xpath("//label[text()='Card Number']/..//input"));
+
+    private final SelenideElement selectAPaymentPlanRhCreditCard = $(By.xpath("//label[text()='Select a Payment Plan']/..//select"));
 
     private final SelenideElement editBillingAddressBtn = $(By.xpath("//*[@data-analytics-id='link' and text()='EDIT']"));
 
@@ -46,6 +54,21 @@ public class EstorePaymentPage {
 
     private final SelenideElement paymentMethodTitle = $(By.xpath("//div[contains(@class,'MuiGrid-container MuiGrid-item')]/h3[@class='MuiTypography-root MuiTypography-h3']"));
 
-    private final SelenideElement splitPaymentCheckBox = $(By.xpath("//label[2]/span[@class='MuiTypography-root MuiFormControlLabel-label MuiTypography-body1']"));
+    private final SelenideElement splitPaymentCheckBox = $(By.xpath("//input[@id='page-checkout-payment_split-payment']"));
+
+
+    public void selectRhCreditCardPaymentPlan() {
+        Select rhCreditCard = new Select(selectAPaymentPlanRhCreditCard);
+        rhCreditCard.selectByValue("41714");
+    }
+
+    public void clickToSplitPaymentCheckBox() {
+        $(By.xpath("//span[text()='Split Payment with Additional Cards']")).
+                should(Condition.visible, Duration.ofSeconds(45));
+
+        splitPaymentCheckBox.click(ClickOptions.usingJavaScript());
+    }
+
 }
+
 

@@ -157,7 +157,7 @@ public class EstoreCartPage {
 
     private final SelenideElement shippingAddressTitle = $(By.xpath("//*[text()='Shipping Address']"));
 
-    private final SelenideElement joinNow = $(By.xpath("//*[text()='JOIN NOW']"));
+    private final SelenideElement joinNow = $(By.xpath("(//*[@id='addToCartMembershipDialog_becomeMember-link'])[1]"));
 
     private final SelenideElement applyUpperCaseBtn = $(By.xpath("//*[text()='APPLY']"));
 
@@ -218,13 +218,13 @@ public class EstoreCartPage {
         return $(byXpath(path));
     }
 
-    public String getMemberProductPriceInCart() {
-        String memberProductPriceCart = cartMemberPrice.getText().replaceAll(".00", "");
+    public int getMemberProductPriceInCart() {
+        int memberProductPriceCart = Integer.parseInt(cartMemberPrice.getText().replaceAll(".00", "").replaceAll("\\$", ""));
         return memberProductPriceCart;
     }
 
-    public String getRegularProductPriceInCart() {
-        String regulatProductPriceCart = cartRegularPrice.getText().replaceAll(".00", "");
+    public int getRegularProductPriceInCart() {
+        int regulatProductPriceCart = Integer.parseInt(cartRegularPrice.getText().replaceAll(".00", "").replaceAll("\\$", ""));
         return regulatProductPriceCart;
     }
 

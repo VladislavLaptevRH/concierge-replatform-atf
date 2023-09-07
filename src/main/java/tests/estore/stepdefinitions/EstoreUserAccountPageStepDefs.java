@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,12 +16,12 @@ import tests.estore.pageObject.EstoreUserAccountPage;
 import tests.utility.Hooks;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.with;
-import static org.testng.AssertJUnit.assertTrue;
 
 public class EstoreUserAccountPageStepDefs {
     EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
@@ -306,7 +307,92 @@ public class EstoreUserAccountPageStepDefs {
 
     @Then("I change the brand to {string} for eStore")
     public void iChangeTheBrandToForEStore(String brand) {
-        estoreUserAccountPage.getBrandButton().should(visible, Duration.ofSeconds(40)).click();
-        estoreUserAccountPage.getBrand(brand).should(visible, Duration.ofSeconds(40)).click();
+        estoreUserAccountPage.getBrandButton().should(interactable, Duration.ofSeconds(40));
+        estoreUserAccountPage.getBrandButton().should(appear, Duration.ofSeconds(40))
+                .click(ClickOptions.usingJavaScript());
+
+        estoreUserAccountPage.getBrand(brand).should(interactable, Duration.ofSeconds(40));
+        estoreUserAccountPage.getBrand(brand).click(ClickOptions.usingJavaScript());
+    }
+
+
+    @Then("User verifies that all items from menu are displayed for {string} on eStore")
+    public void userVerifiesThatAllItemsFromMenuAreDisplayed(String brand) {
+        switch (brand) {
+            case "RH":
+                List<String> rhExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Outdoor", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "BABY & CHILD", "TEEN"));
+                estoreUserAccountPage.checkMenu(rhExpectedItems);
+                for (String each : rhExpectedItems) {
+                    if (each.equals("BABY & CHILD") || each.equals("TEEN")) {
+                        continue;
+                    } else {
+                        estoreUserAccountPage.accessSubMenu(each);
+                    }
+                }
+                break;
+            case "RH CONTEMPORARY":
+                List<String> rhConExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Art", "Outdoor", "SALE"));
+                estoreUserAccountPage.checkMenu(rhConExpectedItems);
+                for (String each : rhConExpectedItems) {
+                    estoreUserAccountPage.accessSubMenu(each);
+                }
+                break;
+            case "RH INTERIORS":
+                List<String> rhIntExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "SALE"));
+                estoreUserAccountPage.checkMenu(rhIntExpectedItems);
+                for (String each : rhIntExpectedItems) {
+                    estoreUserAccountPage.accessSubMenu(each);
+                }
+                break;
+            case "RH MODERN":
+                List<String> rhModExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "SALE"));
+                estoreUserAccountPage.checkMenu(rhModExpectedItems);
+                for (String each : rhModExpectedItems) {
+                    if (each.equals("Outdoor")) {
+                        continue;
+                    } else {
+                        estoreUserAccountPage.accessSubMenu(each);
+                    }
+                }
+                break;
+            case "RH BEACH HOUSE":
+                List<String> rhBeachExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Décor", "Art", "Outdoor", "SALE"));
+                estoreUserAccountPage.checkMenu(rhBeachExpectedItems);
+                for (String each : rhBeachExpectedItems) {
+                    estoreUserAccountPage.accessSubMenu(each);
+                }
+                break;
+            case "RH SKI HOUSE":
+                List<String> rhSkiExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Décor", "Outdoor", "SALE"));
+                estoreUserAccountPage.checkMenu(rhSkiExpectedItems);
+                for (String each : rhSkiExpectedItems) {
+                    estoreUserAccountPage.accessSubMenu(each);
+                }
+                break;
+            case "RH BABY & CHILD":
+                List<String> rhBathExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Nursery", "Décor", "Lighting", "Rugs", "Windows", "Storage", "Playroom", "Gifts", "TEEN", "SALE"));
+                estoreUserAccountPage.checkMenu(rhBathExpectedItems);
+                for (String each : rhBathExpectedItems) {
+                    if (each.equals("TEEN")) {
+                        continue;
+                    } else {
+                        estoreUserAccountPage.accessSubMenu(each);
+                    }
+                }
+                break;
+            case "RH TEEN":
+                List<String> rhTeenExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Décor", "Lighting", "Rugs", "Windows", "Storage", "Study", "Gifts", "BATH & CHILD", "SALE"));
+                estoreUserAccountPage.checkMenu(rhTeenExpectedItems);
+                for (String each : rhTeenExpectedItems) {
+                    if (each.equals("BATH & CHILD")) {
+                        continue;
+                    } else {
+                        estoreUserAccountPage.accessSubMenu(each);
+                    }
+                }
+                break;
+        }
+
+
     }
 }

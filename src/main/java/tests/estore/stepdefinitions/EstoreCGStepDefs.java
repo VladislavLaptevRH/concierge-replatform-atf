@@ -2,25 +2,24 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import tests.concierge.stepdefinitions.AbstractStepDefs;
-import tests.estore.pageObject.*;
+import tests.estore.pageObject.EstoreCGScreen;
+import tests.estore.pageObject.EstoreItemPage;
+import tests.estore.pageObject.EstoreSearchScreen;
+import tests.estore.pageObject.EstoreUserAccountPage;
 import tests.utility.Hooks;
 
 import java.time.Duration;
-import java.util.concurrent.Callable;
 
 import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static io.netty.handler.codec.rtsp.RtspHeaders.Values.URL;
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.await;
 import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -50,10 +49,10 @@ public class EstoreCGStepDefs {
     @When("I scroll on the page till back to top button is visible")
     public void iScrollOnThePageTillBackToTopButtonIsVisible() {
         iValidateTheCollectionNameIsNotEmpty();
-
-        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-
-        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        executeJavaScript("window.scrollTo(0, 2500)");
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+        executeJavaScript("window.scrollTo(0, 500)");
     }
 
     @Then("I verify that back to top button is clickable")
@@ -247,10 +246,10 @@ public class EstoreCGStepDefs {
 
     @Then("user verifies that price range is displayed below the thumbnail")
     public void userVerifiesThatPriceRangeIsDisplayedBelowTheThumbnail() {
-        $(By.xpath("//span[contains(text(),'From')]")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//span[text()='Member']")).should(visible, Duration.ofSeconds(20));
-        int regularPrice = Integer.parseInt($(By.xpath("(//span[@class='priceSpan']//span)[1]")).getText().replaceAll("\\,", ""));
-        int memberPrice = Integer.parseInt($(By.xpath("(//span[@class='priceSpan'])[3]")).getText().replaceAll("\\$", "").replaceAll("Member", "").replaceAll("\\,", "").replaceAll(" ", ""));
+        $(By.xpath("//*[contains(text(),'From')]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Member']")).should(visible, Duration.ofSeconds(20));
+        int regularPrice = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[1]")).getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+        int memberPrice = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-member'])[1]")).getText().replaceAll("\\$", "").replaceAll("\\,", ""));
 
         assertTrue("Regular price is not equal to zero", regularPrice > 0);
         assertTrue("Member price is not equal to zero", memberPrice > 0);

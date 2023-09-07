@@ -144,11 +144,10 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for tests.concierge
      */
-    @Before("@estoreTestRun")
+    @Before("@estoreTestRun or @estoreCriticalPathTestRun")
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
-        setupChromeArguments();
         setUPWebDriver(eStoreURL);
     }
 
@@ -159,7 +158,6 @@ public class Hooks {
     public void initWebDriver() {
         ConfigFileReader();
         configureConciergeURL();
-        setupChromeArguments();
         setUPWebDriver(conciergeURL);
     }
 
@@ -167,15 +165,26 @@ public class Hooks {
      * Initialize Web driver
      */
     public void setUPWebDriver(String url) {
-        System.out.println("Inside initDriver method");
+        ChromeOptions options = new ChromeOptions();
+        WebDriverManager.chromedriver().setup();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-gpu");
+        options.addArguments("enable-automation");
+        options.addArguments("--disable-infobars");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-browser-side-navigation");
+        options.addArguments("--window-size=1366,768");
+        options.addArguments("--user-agent=robot-framework");
         Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
         Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
-        Configuration.pageLoadTimeout = 40000;
-        Configuration.timeout = 40000;
+        Configuration.pageLoadTimeout = 60000;
+        Configuration.timeout = 45000;
         Configuration.reportsFolder = "target/screenshots";
+        Configuration.browserCapabilities = options;
         open(url);
         currentUrl = WebDriverRunner.url();
     }
@@ -230,7 +239,7 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After("@concierge-All or @estoreTestRun or @target/rerun.txt")
+    @After("@concierge-All or @estoreTestRun or @estoreCriticalPathTestRun or @target/rerun.txt")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
 

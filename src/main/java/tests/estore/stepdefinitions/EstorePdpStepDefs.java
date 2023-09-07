@@ -15,6 +15,8 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.*;
 
 public class EstorePdpStepDefs {
@@ -30,12 +32,14 @@ public class EstorePdpStepDefs {
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
 
     EstoreReturnPolicyScreen estoreReturnPolicyScreen = new EstoreReturnPolicyScreen();
+
+    EstoreAccountStepDefs estoreAccountStepDefs = new EstoreAccountStepDefs();
     String regularUSPrice;
     String memberUSPrice;
     String regularCAGBPrice;
     String memberCAGBPrice;
-    String itemCartPriceRegular;
-    String itemCartPriceMember;
+    int itemCartPriceRegular;
+    int itemCartPriceMember;
 
     int regularPricePdp;
     int memberPricePdp;
@@ -112,6 +116,7 @@ public class EstorePdpStepDefs {
             estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
             estorePdpPageScreen.getSubmitPostalCode().click();
             estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
+            $(By.xpath("//*[text()='Y1A 9Z9.']")).should(visible, Duration.ofSeconds(40));
         }
         if (country.equals("US")) {
             $(By.xpath("//li[@data-value='US']")).should(visible, Duration.ofSeconds(20)).click();
@@ -144,6 +149,7 @@ public class EstorePdpStepDefs {
             selectColor.selectByIndex(2);
         }
         if (functional.equals("addtowishlist")) {
+            estoreAccountStepDefs.iClickOnEstoreMyAccountIconForGuestUser();
             estoreCartPage.getAddToWishlistButton().should(visible, Duration.ofSeconds(20)).scrollIntoView(true);
             estoreCartPage.getAddToWishlistButton().should(interactable, Duration.ofSeconds(20)).click();
         }
@@ -264,7 +270,10 @@ public class EstorePdpStepDefs {
 
     @When("I select size option on the PDP page")
     public void iSelectSizeOptionOnThePDPPage() {
-        estorePDPScreen.selectSizeOption();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if (estorePDPScreen.getSizeOption().isDisplayed()) {
+            estorePDPScreen.selectSizeOption();
+        }
     }
 
     @When("I select finish option on the PDP page")
@@ -274,10 +283,10 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the product price for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceForProductAndWithForTheSelectedCountry(String productID, String arg1, String selectedOptions, String country) {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estorePdpPageScreen.getRegularTheFirstPrice().should(visible, Duration.ofSeconds(20));
-        regularPricePdp = Integer.parseInt(estorePdpPageScreen.getRegularTheFirstPrice().getText().replaceAll("\\$", ""));
-        regularPricePdp = Integer.parseInt(estorePdpPageScreen.getRegularTheFirstPrice().getText().replaceAll("\\$", ""));
-        memberPricePdp = Integer.parseInt(estorePdpPageScreen.getMemberTheFirstPrice().getText().replaceAll("\\$", ""));
+        regularPricePdp = Integer.parseInt(estorePdpPageScreen.getRegularPdpProductPrice().getText().replaceAll("\\$", ""));
+        memberPricePdp = Integer.parseInt(estorePdpPageScreen.getMemberPdpProductPrice().getText().replaceAll("\\$", ""));
 
         assertTrue("Regular price is greater than 0", regularPricePdp > 0);
         assertTrue("Member price is greater than 0", memberPricePdp > 0);
@@ -287,7 +296,7 @@ public class EstorePdpStepDefs {
     @And("I verify that {string} popup is displayed")
     public void iVerifyThatPopupIsDisplayed(String modalPopUp) {
         if (modalPopUp.equals("View In-Stock")) {
-            $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).click(ClickOptions.usingJavaScript());
+            $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
             $(By.xpath("//p[text()='IN STOCK']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
@@ -334,13 +343,14 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that price in cart is the same as on PDP")
     public void iVerifyThatPriceInCartIsTheSameAsOnPDP() {
+        estoreCartPage.getCartRegularPrice().should(visible, Duration.ofSeconds(20));
         itemCartPriceRegular = estoreCartPage.getRegularProductPriceInCart();
         itemCartPriceMember = estoreCartPage.getMemberProductPriceInCart();
 
         assertEquals("Verify that regular price on the Cart is the same as on PDP",
-                itemCartPriceRegular, regularCAGBPrice);
+                itemCartPriceRegular, regularPricePdp);
         assertEquals("Verify that member price on the Cart is the same as on PDP",
-                itemCartPriceMember, memberCAGBPrice);
+                itemCartPriceMember, memberPricePdp);
     }
 
 
