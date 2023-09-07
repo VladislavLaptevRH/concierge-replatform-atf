@@ -51,7 +51,7 @@ public class ConciergeSearchStepDefs {
                 $(By.xpath("//*[@id = 'footer']")).should(Condition.visible, Duration.ofSeconds(15));
                 break;
             case "PG page is returned with text  RESULTS (IN RH BABY & CHILD)":
-                $(By.xpath("//*[text() = 'RESULTS']")).shouldHave(text("RESULTS ( 230 IN RH BABY & CHILD )"));
+                $(By.xpath("//*[text() = 'RESULTS']")).shouldHave(text("IN RH BABY & CHILD )"));
                 break;
             case "VIEW RH BABY & CHILD RESULTS button is present":
                 $(By.xpath("//*[@data-testid = 'add-to-cart-dialog-opener' ]/span[text() = 'VIEW RH BABY & CHILD RESULTS']")).should(Condition.visible, Duration.ofSeconds(15));

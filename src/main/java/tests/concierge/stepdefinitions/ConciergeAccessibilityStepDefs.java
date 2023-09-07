@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tests.concierge.pageObject.ConciergeLoginPage;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -19,11 +20,13 @@ import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class ConciergeAccessibilityStepDefs {
-    private static final Logger Log = LoggerFactory.getLogger(ConciergeAccessibilityStepDefs.class);
+    private static final Logger Log = LoggerFactory.getLogger(ConciergeAccessibilityStepDefs .class);
     ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
 
@@ -68,51 +71,44 @@ public class ConciergeAccessibilityStepDefs {
         conciergeLoginPage.getContinueButton().click();
     }
 
-    public void checkMenu(List menuItem) {
-        try {
-            List<String> rhItems = new ArrayList<>();
-            conciergeUserAccountPage.getMenuItems().get(2).should(visible, Duration.ofSeconds(60));
-            for (int i = 0; i < conciergeUserAccountPage.getMenuItems().size(); i++) {
-                rhItems = new ArrayList(Arrays.asList(conciergeUserAccountPage.getMenuItems().get(i).getText()));
-            }
-            GeneralStepDefs.compareList(menuItem, rhItems);
-
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            checkMenu(menuItem);
+    public void checkMenu(List menuItem){
+        List<String> rhItems = new ArrayList<>();
+        for (int i = 0; i < conciergeUserAccountPage.getMenuItems().size(); i++) {
+            rhItems = new ArrayList(Arrays.asList(conciergeUserAccountPage.getMenuItems().get(i).getText()));
         }
-
+        GeneralStepDefs.compareList(menuItem, rhItems);
     }
 
-    public void accessSubMenu(String each) {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
-        try {
-            $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-wrap-xs-nowrap MuiGrid-justify-xs-space-between']//descendant::span[text()='" + each + "']"))
-                    .should(visible, Duration.ofSeconds(30)).click();
-            conciergeUserAccountPage.getFirstSubMenu().should(visible, Duration.ofSeconds(40)).click();
-//            with().pollInterval(5, SECONDS).await().until(() -> true);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+    public void accessSubMenu(String each){
+//        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//descendant::span[text()='" + each + "']")).isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
-            accessSubMenu(each);
         }
+        $(By.xpath("//div[contains(@id,'container-rhrheader-rhr-catalogNav_catalogNav')]//descendant::span[text()='" + each + "']")).should(visible, Duration.ofSeconds(120)).click();
+        conciergeUserAccountPage.getFirstSubMenu().should(visible, Duration.ofSeconds(40)).click();
+//        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("User verifies that all items from menu are displayed for {string}")
     public void userVerifiesThatAllItemsFromMenuAreDisplayed(String brand) {
-        switch (brand) {
+        switch (brand){
             case "RH":
-                List<String> rhExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Outdoor", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "BABY & CHILD", "TEEN", "SALE"));
+                List<String> rhExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "BABY & CHILD", "TEEN", "SALE"));
                 checkMenu(rhExpectedItems);
                 for (String each : rhExpectedItems) {
                     if(each.equals("BABY & CHILD") || each.equals("TEEN")){
                         if(each.equals("BABY & CHILD")){
                             $(By.xpath("//*[text() = 'BABY & CHILD']")).click();
-                            $(By.xpath("//*[contains(@src, 'rhbabyandchild.com')]")).should(visible, Duration.ofSeconds(10));
+                            switchTo().window(1);
+                            conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                            assertEquals(Hooks.getCurrentUrl(), "https://rhbabyandchild.rh.com/us/en/");
                         }
                         if(each.equals("TEEN")) {
                             $(By.xpath("//*[text() = 'TEEN']")).click();
-                            $(By.xpath("//*[contains(@src, 'rhteen.com')]")).should(visible, Duration.ofSeconds(10));
+                            switchTo().window(2);
+                            conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                            assertEquals(Hooks.getCurrentUrl(), "https://rhteen.rh.com/us/en/");
                         } else {
                         continue;
                        }
@@ -126,7 +122,7 @@ public class ConciergeAccessibilityStepDefs {
                 List<String> rhConExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath","Lighting", "Textiles", "Rugs", "Windows", "Décor", "Art", "Outdoor", "SALE"));
                 checkMenu(rhConExpectedItems);
                 for (String each : rhConExpectedItems) {
-                    accessSubMenu(each);
+                       accessSubMenu(each);
                 }
                 break;
             case "RH INTERIORS":
@@ -140,8 +136,19 @@ public class ConciergeAccessibilityStepDefs {
                 List<String> rhModExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "SALE"));
                 checkMenu(rhModExpectedItems);
                 for (String each : rhModExpectedItems) {
-
+                    if(each.equals("SALE")){
+                        if(each.equals("SALE")) {
+                            $(By.xpath("//*[text() = 'SALE']")).click();
+                            switchTo().window(1);
+                            conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                            assertEquals(Hooks.getCurrentUrl(), "https://stg2-concierge.restorationhardware.com/catalog/sale/index.jsp?sale=false");
+                        } else {
+                            continue;
+                        }
+                    }
+                    else {
                         accessSubMenu(each);
+                    }
                 }
                 break;
             case "RH OUTDOOR":
@@ -152,47 +159,48 @@ public class ConciergeAccessibilityStepDefs {
                 }
                 break;
             case "RH BEACH HOUSE":
-                List<String> rhBeachExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Décor", "Art", "Outdoor", "SALE"));
+                List<String> rhBeachExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs",  "Décor", "Art", "Outdoor", "SALE"));
                 checkMenu(rhBeachExpectedItems);
                 for (String each : rhBeachExpectedItems) {
-                    accessSubMenu(each);
+                        accessSubMenu(each);
                 }
                 break;
             case "RH SKI HOUSE":
-                List<String> rhSkiExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Décor", "Outdoor", "SALE"));
+                List<String> rhSkiExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs",  "Décor", "Outdoor", "SALE"));
                 checkMenu(rhSkiExpectedItems);
                 for (String each : rhSkiExpectedItems) {
                     accessSubMenu(each);
                 }
                 break;
             case "RH BABY & CHILD":
-                List<String> rhBathExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Nursery", "Décor", "Lighting", "Rugs", "Windows", "Storage", "Playroom", "Gifts", "TEEN", "SALE"));
+                List<String> rhBathExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Nursery", "Décor", "Lighting", "Rugs", "Windows",  "Storage", "Playroom", "Gifts","TEEN","SALE"));
                 checkMenu(rhBathExpectedItems);
                 for (String each : rhBathExpectedItems) {
-
                     if(each.equals("TEEN")){
                         if(each.equals("TEEN")) {
                             $(By.xpath("//*[text() = 'TEEN']")).click();
-                            $(By.xpath("//*[contains(@src, 'rhteen.com')]")).should(visible, Duration.ofSeconds(10));
+                            switchTo().window(1);
+                            conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                            assertEquals(Hooks.getCurrentUrl(), "https://rhteen.rh.com/us/en/");
                         } else {
                             continue;
                         }
                     }
                     else {
                          accessSubMenu(each);
-
                     }
                 }
                 break;
             case "RH TEEN":
-                List<String> rhTeenExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Décor", "Lighting", "Rugs", "Windows", "Storage", "Study", "Gifts", "BATH & CHILD", "SALE"));
+                List<String> rhTeenExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Décor", "Lighting", "Rugs", "Windows",  "Storage", "Study", "Gifts","BATH & CHILD","SALE"));
                 checkMenu(rhTeenExpectedItems);
                 for (String each : rhTeenExpectedItems) {
-
                     if(each.equals("BATH & CHILD")) {
                         if (each.equals("BABY & CHILD")) {
                             $(By.xpath("//*[text() = 'BABY & CHILD']")).click();
-                            $(By.xpath("//*[contains(@src, 'rhbabyandchild.com')]")).should(visible, Duration.ofSeconds(10));
+                            switchTo().window(1);
+                            conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                            assertEquals(Hooks.getCurrentUrl(), "https://rhbabyandchild.rh.com/us/en/");
                         } else {
                             continue;
                         }

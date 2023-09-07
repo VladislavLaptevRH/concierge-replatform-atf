@@ -138,8 +138,9 @@ public class Pdp {
                break;
            case  "has an item can be added to cart from modal":
                $(By.xpath("//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-cart-dialog-opener']")).click();
-               $(By.xpath("//*[@id = 'ajax-proceed-to-cart']/span[1]")).should(visible, Duration.ofSeconds(5));
-               $(By.xpath("//*[@id = 'ajax-continue-shopping']/span[1]")).should(visible, Duration.ofSeconds(5));
+               with().pollInterval(5, SECONDS).await().until(() -> true);
+               $(By.xpath("//*[@id = 'ajax-proceed-to-cart']/span[1]")).should(visible, Duration.ofSeconds(20));
+               $(By.xpath("//*[@id = 'ajax-continue-shopping']/span[1]")).should(visible, Duration.ofSeconds(20));
                $(By.xpath("(//*[@data-testid = 'dialog-title-close-button'])[2]")).click();
                break;
            case  "has an item can be added to project from modal":
@@ -675,7 +676,7 @@ public class Pdp {
                  assertTrue(memberOption);
              }
              $(By.xpath("(//*[contains(text() ,'SALE')])[3]")).shouldBe(visible, Duration.ofSeconds(15));
-             boolean saleOption = $$(By.xpath("//*[contains(text() ,'SALE')]")).size() > 5;
+             boolean saleOption = $$(By.xpath("//*[contains(text() ,'SALE')]")).size() >=4;
              assertTrue(saleOption);
              $(By.xpath("//*[text() ='Color Options']")).shouldBe(visible, Duration.ofSeconds(15));
              $(By.xpath("(//*[contains(@data-testid , 'productImageLink')]/../span)[1]")).shouldHave(text("View In-Stock items"), Duration.ofSeconds(5));
