@@ -25,6 +25,8 @@ Feature: Concierge PDP
     Then I Verify that '"add to cart" and "add to project" buttons' is present
     Then I Verify that 'text "Learn more about our Return Policy"' is present
     Then I Verify that '"footer" in PDP' is present
+    Then I chose zero choose in line items
+    Then I chose zero choose in line items
     Then I verify the rest of the checkings for "<skuID>"
     Examples:
       |skuID        |

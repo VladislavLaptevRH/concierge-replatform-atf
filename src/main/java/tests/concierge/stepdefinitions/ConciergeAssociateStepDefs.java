@@ -310,6 +310,9 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I verify that RH Brand dropdown is present in {string} home page")
     public void iVerifyThatRHBrandDropDownIsPresentInHomePage(String currentBrand){
+        if(!conciergeUserAccountPage.getCurrentBrandByName(currentBrand).isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
         conciergeUserAccountPage.getCurrentBrandByName(currentBrand).should(visible,Duration.ofSeconds(40));
     }
 

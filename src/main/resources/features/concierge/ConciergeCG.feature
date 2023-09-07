@@ -77,8 +77,8 @@ Feature: Concierge CG Page
       | Living    | Office                | Office Collections          | RH MODERN    | MO               |
       | Lighting  | RH Ski House Lighting | Lighting Collections        | RH SKI HOUSE | SH               |
       | Dining    | RH Ski House Dining   | Dining Table Collections    | RH SKI HOUSE | SH               |
-#      | Furniture | Furniture Collections |                             | RH OUTDOOR   | OD               |
-#      | Furniture | Bedroom               | Upholstered Bed Collections | RH TEEN      | TN               |
+      | Furniture | Furniture Collections |                             | RH OUTDOOR   | OD               |
+      | Furniture | Bedroom               | Upholstered Bed Collections | RH TEEN      | TN               |
 
   Scenario Outline: To check 1,2,3 grid view functionality within CG
     Given I log into Concierge as "associate"
@@ -94,11 +94,11 @@ Feature: Concierge CG Page
     Then I Change the CG Grid view to '3' - grid view and confirm changing
     Then I Change the CG Grid view to '1' - grid view and confirm changing
     Examples:
-      | menu      | subMenu            | gallery              | brand               | currentBrandName |
-      | Bath      | Furniture          | Bath Collections     | RH                  | RH               |
-      | Windows   | Drapery            | Drapery Collections  | RH INTERIORS        | IN               |
-#      | Bath      | Bathtubs           | Bathtub Collections  | RH MODERN           | MO               |
-      | Bed       | RH Beach House Bed | Bedroom Collections  | RH BEACH HOUSE      | BH               |
+      | menu      | subMenu             | gallery              | brand               | currentBrandName |
+      | Bath      | Furniture           | Bath Collections     | RH                  | RH               |
+      | Windows   | Drapery             | Drapery Collections  | RH INTERIORS        | IN               |
+      | Dining    | Shelving & Cabinets | Cabinet Collections  | RH MODERN           | MO               |
+      | Bed       | RH Beach House Bed  | Bedroom Collections  | RH BEACH HOUSE      | BH               |
 
   Scenario: 1-2-3 Grid View Functionality within CG/PG/Different Brands
     Given I log into Concierge as "associate"

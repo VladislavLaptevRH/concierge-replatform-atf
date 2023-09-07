@@ -1,28 +1,29 @@
 package tests.concierge.stepdefinitions;
 
 //import jdk.internal.org.jline.utils.Display;
+
 import com.codeborne.selenide.WebDriverRunner;
-import com.codeborne.selenide.ex.ElementNotFound;
-import org.openqa.selenium.By;
-import tests.concierge.pageObject.ConciergeLoginPage;
-import tests.concierge.pageObject.ConciergeUserAccountPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tests.concierge.pageObject.ConciergeLoginPage;
+import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.utility.Hooks;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import static com.codeborne.selenide.Selenide.$;
 
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class ConciergeAccessibilityStepDefs {
     private static final Logger Log = LoggerFactory.getLogger(ConciergeAccessibilityStepDefs .class);
@@ -84,7 +85,7 @@ public class ConciergeAccessibilityStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']//descendant::span[text()='" + each + "']")).should(visible, Duration.ofSeconds(120)).click();
+        $(By.xpath("//div[contains(@id,'container-rhrheader-rhr-catalogNav_catalogNav')]//descendant::span[text()='" + each + "']")).should(visible, Duration.ofSeconds(120)).click();
         conciergeUserAccountPage.getFirstSubMenu().should(visible, Duration.ofSeconds(40)).click();
 //        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
@@ -99,11 +100,15 @@ public class ConciergeAccessibilityStepDefs {
                     if(each.equals("BABY & CHILD") || each.equals("TEEN")){
                         if(each.equals("BABY & CHILD")){
                             $(By.xpath("//*[text() = 'BABY & CHILD']")).click();
-                            $(By.xpath("//*[contains(@src, 'rhbabyandchild.com')]")).should(visible, Duration.ofSeconds(10));
+                            switchTo().window(1);
+                            conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                            assertEquals(Hooks.getCurrentUrl(), "https://rhbabyandchild.rh.com/us/en/");
                         }
                         if(each.equals("TEEN")) {
                             $(By.xpath("//*[text() = 'TEEN']")).click();
-                            $(By.xpath("//*[contains(@src, 'rhteen.com')]")).should(visible, Duration.ofSeconds(10));
+                            switchTo().window(2);
+                            conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                            assertEquals(Hooks.getCurrentUrl(), "https://rhteen.rh.com/us/en/");
                         } else {
                         continue;
                        }
@@ -131,7 +136,19 @@ public class ConciergeAccessibilityStepDefs {
                 List<String> rhModExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "SALE"));
                 checkMenu(rhModExpectedItems);
                 for (String each : rhModExpectedItems) {
+                    if(each.equals("SALE")){
+                        if(each.equals("SALE")) {
+                            $(By.xpath("//*[text() = 'SALE']")).click();
+                            switchTo().window(1);
+                            conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                            assertEquals(Hooks.getCurrentUrl(), "https://stg2-concierge.restorationhardware.com/catalog/sale/index.jsp?sale=false");
+                        } else {
+                            continue;
+                        }
+                    }
+                    else {
                         accessSubMenu(each);
+                    }
                 }
                 break;
             case "RH OUTDOOR":
@@ -162,7 +179,9 @@ public class ConciergeAccessibilityStepDefs {
                     if(each.equals("TEEN")){
                         if(each.equals("TEEN")) {
                             $(By.xpath("//*[text() = 'TEEN']")).click();
-                            $(By.xpath("//*[contains(@src, 'rhteen.com')]")).should(visible, Duration.ofSeconds(10));
+                            switchTo().window(1);
+                            conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                            assertEquals(Hooks.getCurrentUrl(), "https://rhteen.rh.com/us/en/");
                         } else {
                             continue;
                         }
@@ -179,7 +198,9 @@ public class ConciergeAccessibilityStepDefs {
                     if(each.equals("BATH & CHILD")) {
                         if (each.equals("BABY & CHILD")) {
                             $(By.xpath("//*[text() = 'BABY & CHILD']")).click();
-                            $(By.xpath("//*[contains(@src, 'rhbabyandchild.com')]")).should(visible, Duration.ofSeconds(10));
+                            switchTo().window(1);
+                            conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+                            assertEquals(Hooks.getCurrentUrl(), "https://rhbabyandchild.rh.com/us/en/");
                         } else {
                             continue;
                         }
