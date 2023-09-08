@@ -537,7 +537,7 @@ public class GeneralStepDefs {
                 "}").post(addItemEndpoint);
     }
 
-        public static void addLineItemsToConciergeCartWithSKU(String SKU) {
+        public static void addLineItemsToConciergeCartWithSKU(String SKU,String quantity) {
             String endpoint = Hooks.cookie;
             String country = Hooks.country;
 
@@ -560,7 +560,7 @@ public class GeneralStepDefs {
                     "            \"items\": [\n" +
                     "                {\n" +
                     "                    \"sku\": \"" + SKU + "\",\n" +
-                    "                    \"quantity\": 1,\n" +
+                    "                    \"quantity\":" + quantity + ",\n" +
                     "                    \"brand\": \"RH\",\n" +
                     "                    \"giftTo\": \"\",\n" +
                     "                    \"giftFrom\": \"\",\n" +

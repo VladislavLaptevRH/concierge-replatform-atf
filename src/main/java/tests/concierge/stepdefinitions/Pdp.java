@@ -937,7 +937,7 @@ public class Pdp {
     public void confirmThatDefault(String country) {
         if(Objects.equals(country, "US")){
             zipCodeInTheCart = conciergeCartPageScreen.getPdpScreenZipCode().getText();
-            assertEquals(zipCodeInTheCart, "92660");
+            assertEquals(zipCodeInTheCart, "94925");
         }
         if(Objects.equals(country, "GB")){
             zipCodeInTheCart = conciergeCartPageScreen.getPdpScreenZipCode().getText();

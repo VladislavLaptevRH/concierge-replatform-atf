@@ -70,7 +70,7 @@ Feature: Concierge PG Page
     Then I navigate to sub menu 'Tables'
     Then I navigate to gallery 'All Dining Tables'
     Then I verify that 'PG has filters: IN-STOCK, SALE, SIZE, SHAPE, BRAND, RESULTS and SORT is present' on PG screen
-    Then I verify that PG loads
+    Then I verify that 'user can select SIZE -> Length -> 30 and respective products are returned' on PG screen
 
   Scenario: Checking Faucets in SALE PGs
     Given I log into Concierge as "associate"
