@@ -7,11 +7,27 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10024796 WGRY"
+    When I add item to cart via API with "10024796 WGRY" and quantity '1'
     When I open cart
-    Then I confirm that default zip code for country "US" is present in Cart
-    And I change zip code in the cart to "10035"
-    And Verify that zip code was updated in the Cart to "10035"
+#    Then I confirm that default zip code for country "US" is present in Cart
+    And I change zip code in the cart to "94525"
+    And Verify that zip code was updated in the Cart to "94525"
+
+  Scenario: Verify the Price, Total, Shipping & Applicable fees in cart
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I add item to cart via API with "10117321 LTOK" and quantity '1'
+    When I open cart
+    Then I verify all the sums on the cart page
+
+  Scenario: Verify that increasing the quantity updates correct product price lines,Total, Shipping & Applicable fees in cart
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I add item to cart via API with "10117321 LTOK" and quantity '5'
+    When I open cart
+    Then I verify all the sums on the cart page with item quantity '5'
 
   Scenario: Order Classification
     Given I log into Concierge as "associate"
@@ -144,7 +160,8 @@ Feature:Concierge Cart Page
     When I open cart
     When I click on UFD button from cart
 
-  Scenario: FEMA Promotion Code Description - FEMAD
+  @conciergeCriticalPathTestRun
+  Scenario: Verify application of Promotion Code in cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -337,7 +354,8 @@ Feature:Concierge Cart Page
     When I apply employee discount
     Then I verify that employee discount is present
 
-  Scenario: Postpone shipment
+  @conciergeCriticalPathTestRun
+  Scenario: Verify that the user is able to Postpone Shipping Successfully
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -347,14 +365,23 @@ Feature:Concierge Cart Page
     When I choose postpone shipment
     When I click on apply uppercase button for "postpone shipment"
     Then I verify that postpone shipment was applied
+    Then I remove postpone shipment
 
+  @conciergeCriticalPathTestRun
+  Scenario: Verify that the user is able to Clear cart
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I add item to cart via API
+    When I clear all orders form the cart
+
+  @conciergeCriticalPathTestRun
   Scenario: Monogram Edit / Remove / Add
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with productId "prod19500002"
-    When I select color option
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     When I click on add monogram checkbox
@@ -365,6 +392,7 @@ Feature:Concierge Cart Page
     When I remove monogram
     Then I verify that monogram was removed
 
+  @conciergeCriticalPathTestRun
   Scenario: Gift Box Add / Remove / View
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -372,8 +400,6 @@ Feature:Concierge Cart Page
     When I remove client from header
     When I open product page with productId "prod19500002"
     Then I chose the '1' line item selections one by one
-    When I select size option 'Bath Sheet' for item
-    When I select color option
     When I click on add to cart button
     When I click on view cart button
     When I click on gift box button

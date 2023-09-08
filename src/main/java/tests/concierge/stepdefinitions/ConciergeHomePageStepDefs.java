@@ -26,7 +26,7 @@ public class ConciergeHomePageStepDefs {
             System.out.println("Exception");
         }
         try {
-            if (Hooks.country == null) {
+            if (Hooks.country == null || Hooks.country.equals("US")) {
                 System.out.println("Country is US");
             }
         } catch (NullPointerException e){

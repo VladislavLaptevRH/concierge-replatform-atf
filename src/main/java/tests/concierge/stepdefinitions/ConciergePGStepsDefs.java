@@ -355,6 +355,14 @@ public class ConciergePGStepsDefs {
             case "Italian Travertine Plinth Rectangular Fire Table is returned":
                 $(By.xpath("//*[text() = 'Caprera Concrete Rectangular Coffee Table']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
+            case "user can select SIZE -> Length -> 30 and respective products are returned":
+                $(By.xpath("//*[text() = 'Size']")).click();
+                $(By.xpath("//*[text() = 'Length']")).click();
+                $(By.xpath("//*[text() = '30\" (45)']")).click();
+                $(By.xpath("(//*[text() = 'Size'])[2]")).click();
+                $(By.xpath("//*[text() = '30\"']")).shouldBe(visible, Duration.ofSeconds(20));
+                $(By.xpath("//*[text() = 'Length']")).shouldBe(visible, Duration.ofSeconds(20));
+                break;
             default: break;
         }
     }
