@@ -370,19 +370,22 @@ public class EstoreUserAccountPage {
     }
 
     public void checkMenu(List menuItem) {
-        try {
-            List<String> rhItems = new ArrayList<>();
-            menuItems.get(2).should(visible, Duration.ofSeconds(60));
-            for (int i = 0; i < menuItems.size(); i++) {
-                rhItems.add(menuItems.get(i).getText());
-            }
-            GeneralStepDefs.compareList(menuItem, rhItems);
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            checkMenu(menuItem);
-        }
+//        try {
+//            if (menuItems.get(2).isDisplayed()) {
+                List<String> rhItems = new ArrayList<>();
+                menuItems.get(2).should(visible, Duration.ofSeconds(10));
+                for (int i = 0; i < menuItems.size(); i++) {
+                    rhItems.add(menuItems.get(i).getText());
+                }
 
-    }
+                GeneralStepDefs.compareList(menuItem, rhItems);
+            }
+//        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+//            WebDriverRunner.getWebDriver().navigate().refresh();
+//            checkMenu(menuItem);
+//        }
+
+//    }
 
     public void accessSubMenu(String each) {
 //        with().pollInterval(5, SECONDS).await().until(() -> true);

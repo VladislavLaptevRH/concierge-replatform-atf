@@ -58,82 +58,216 @@ Feature: Estore critical path
     When I go to estore item "sofa" from search field
     Then user verifies that price range is displayed below the thumbnail
 
-  Scenario: PG - Back to Top button
+  Scenario Outline: PG - Back to Top button
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
+    Then  I change the brand to "<brand>" for eStore
     When I goes to estore collection page
     When I scroll on the page till back to top button is visible
     Then I verify that back to top button is clickable
     And I verify that after click on back to top button user is scrolled to top on the page
+    Examples:
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH TEEN         |
+      | RH BABY & CHILD |
 
-  Scenario: PG - Verify the Sale Price on PG pages for Sale Items
+
+  Scenario Outline: PG - Verify the Sale Price on PG pages for Sale Items
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
+    Then  I change the brand to "<brand>" for eStore
     When I go to Sale product page
     Then I verify sale prices on PG pages for sale items
+    Examples:
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH TEEN         |
+      | RH BABY & CHILD |
 
-  Scenario: PG - Verify sorting - low to high - is working as expected
+
+  Scenario Outline: PG - Verify sorting - low to high - is working as expected
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
+    Then  I change the brand to "<brand>" for eStore
     When I go to estore item "sofa" from search field
     When I select low to high for estore
     Then I verify that sorting low to high is working as expected
+    Examples:
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH TEEN         |
+      | RH BABY & CHILD |
 
-  Scenario: PG - Verify sorting - high to low - is working as expected
+  Scenario Outline: PG - Verify sorting - high to low - is working as expected
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
+    Then  I change the brand to "<brand>" for eStore
     When I go to estore item "sofa" from search field
     When I select high to low for estore
     Then I verify that sorting high to low is working as expected
+    Examples:
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH TEEN         |
+      | RH BABY & CHILD |
 
-  Scenario: PG - Verify the Member Price Text On PG page after selecting the specifications
+  Scenario Outline: PG - Verify the Member Price Text On PG page after selecting the specifications
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
+    Then  I change the brand to "<brand>" for eStore
     When I navigate to PG page from top menu
     Then I verify the member price on PG page after selecting the specifications
+    Examples:
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH TEEN         |
+      | RH BABY & CHILD |
 
-  Scenario: CG - Verify collection name,image (regular,member,sale(applicable) on collection banner
+  Scenario Outline: CG - Verify collection name,image (regular,member,sale(applicable) on collection banner
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
+    Then  I change the brand to "<brand>" for eStore
     When I goes to estore collection page
     Then I verify collection name, image on collection banner
+    Examples:
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH TEEN         |
+      | RH BABY & CHILD |
 
-  Scenario: CG-Verify Back To top Button
+  Scenario Outline: CG-Verify Back To top Button
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
+    Then  I change the brand to "<brand>" for eStore
     When I goes to estore collection page
     When I scroll on the page till back to top button is visible
     Then I verify that back to top button is clickable
     And I verify that after click on back to top button user is scrolled to top on the page
+    Examples:
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH TEEN         |
+      | RH BABY & CHILD |
 
-  Scenario: CG - Verify 1,2,3 grid views are working fine
+  Scenario Outline: CG - Verify 1,2,3 grid views are working fine
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
+    Then  I change the brand to "<brand>" for eStore
     When I goes to estore collection page
     Then I validate "1","2" and "3" grid view should work
+    Examples:
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH TEEN         |
+      | RH BABY & CHILD |
 
-  Scenario: CG - Verify single Grid View is as default on CG
+  Scenario Outline: CG - Verify single Grid View is as default on CG
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
+    Then  I change the brand to "<brand>" for eStore
     When I goes to estore collection page
     Then I verify that single grid view is selected on CG page by default
+    Examples:
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH TEEN         |
+      | RH BABY & CHILD |
 
-  Scenario: CG - Change the grid view, go to PG, go back from PG, CG page should render in the same grid view that you previously selected
+  Scenario Outline: CG - Change the grid view, go to PG, go back from PG, CG page should render in the same grid view that you previously selected
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
+    Then  I change the brand to "<brand>" for eStore
     When I go to "FABRIC CHAIR COLLECTIONS" on eStore
     When I select "3" grid view on estore CG page
     When I click on random item from collection page with applied "3" grid view
     When I navigate back from "collection page" page
     Then I verify that page render in the same grid view that previously selected
+    Examples:
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH TEEN         |
+      | RH BABY & CHILD |
     #click on random product from collection (PG) after click on  back button from browser
 
-  Scenario: CG - From home page goto a collection and click on any Product, It should redirect user to PG
+  Scenario Outline: CG - From home page goto a collection and click on any Product, It should redirect user to PG
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
+    Then  I change the brand to "<brand>" for eStore
     When I goes to estore collection page
     When I click on random product on collection page
     Then I verify that PG page is displayed for eStore
+    Examples:
+      | brand           |
+      | RH              |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH TEEN         |
+      | RH BABY & CHILD |
     #use fabric seating - sofas: check title, grid view
 
   Scenario: CG - Browser back button from search to CG page
@@ -698,9 +832,13 @@ Feature: Estore critical path
   Scenario: WishList - Wishlist for registered users
     Given I log into eStore as "wishlist-registered" user
     When I choose country for eStore from footer
-    When I navigate to the wishlist
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on add to wishlist button from cart
+    When I click on view wishlist button
+    When I click on estore my account icon for guest user
     Then I validate items in wishlist
-
   #Add to wishlist
   Scenario: WishList - Add an item from cart to wishlist
     Given I log into eStore as "regular" user
@@ -886,4 +1024,17 @@ Feature: Estore critical path
     When I click on view cart estore button
     Then I verify monogram was added to cart for eStore
     #verify mono on pdp -> add to cart-> verify the mono in cart
+
+  Scenario: Verify user is able to edit Monogram product incart
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I open product page with "prod20000465" and "17110459" with "CAML" for estore
+    When I click on add monogram checkbox from pdp on eStore
+    When I add monogram to product on eStore
+    Then I verify that monogram was added for pdp on eStore
+    When I click on add to cart estore button
+    When I click on view cart estore button
+    Then I verify monogram was added to cart for eStore
+    And I verify that I'm able to edit monogram product in cart
+
 

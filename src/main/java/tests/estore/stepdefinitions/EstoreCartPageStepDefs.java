@@ -12,6 +12,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import tests.concierge.pageObject.ConciergeCartPageScreen;
 import tests.concierge.pageObject.SaleScreen;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
@@ -38,6 +39,8 @@ public class EstoreCartPageStepDefs {
     SaleScreen saleScreen = new SaleScreen();
     EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
+
+    ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
 
     private static Response response;
     int itemQuantity;
@@ -798,5 +801,16 @@ public class EstoreCartPageStepDefs {
     @Then("user verify that membership pop up is not displayed on eStore")
     public void userVerifyThatMembershipPopUpIsNotDisplayed() {
         estoreCartPage.verifyThatPurchasingMembershipPopIsNotDisplayed();
+    }
+
+    @And("I verify that I'm able to edit monogram product in cart")
+    public void iVerifyThatIMAbleToEditMonogramProductInCart() {
+        estorePDPScreen.clickToEditMonogramButton();
+        conciergeCartPageScreen.getMonogramFonts().get(2).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        conciergeCartPageScreen.getMonogramFonts().get(2).doubleClick();
+        conciergeCartPageScreen.getMonogramColors().get(5).should(visible, Duration.ofMinutes(1));
+        conciergeCartPageScreen.getMonogramColors().get(5).doubleClick();
+        estoreCartPage.introduceMonogramText();
+        estorePDPScreen.clickToAddMonogramButton();
     }
 }

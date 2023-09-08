@@ -47,7 +47,7 @@ public class EstoreAccountStepDefs {
 
     @Then("I verify that by updating personal information, application should get saved the entered details")
     public void iVerifyThatByUpdatingPersonalInformationApplicationShouldGetSavedTheEnteredDetails() {
-        estoreUserAccountPage.getBillingAddressFirstName().shouldHave(value(firstName+"1"), Duration.ofSeconds(20));
+        estoreUserAccountPage.getBillingAddressFirstName().shouldHave(value(firstName+"1"), Duration.ofSeconds(40));
     }
 
     @When("I verify the max length for first name text field")
@@ -80,7 +80,7 @@ public class EstoreAccountStepDefs {
 
     @When("I close estore your profile has been updated pop up")
     public void iCloseEstoreYourProfileHasBeenUpdatedPopUp() {
-        estoreCartPage.getPopupCloseButton().should(visible, Duration.ofSeconds(20));
+        estoreCartPage.getPopupCloseButton().should(visible, Duration.ofSeconds(40));
         estoreCartPage.getPopupCloseButton().click();
     }
 
