@@ -65,6 +65,12 @@ Feature: Estore Address Page
     When I click on save address button
     When I click on continue with original address estore button
     When I add item to cart via API for estore
+    When I goes to my account for estore
+#    When I click on estore my account icon for guest user
+    When I goes to my account for estore
+    When I click on estore my account icon for guest user
+    When I click on estore my account button
+    When I click on address book estore button
     When I open estore cart
     When I click on estore checkout button
     When I click on estore no thanks button

@@ -237,7 +237,7 @@ public class EstoreAddressStepDefs {
     public void iIntroduceDataForNewProfileAddress() {
         estoreUserAccountPage.getBillingAddressFirstName().should(visible, Duration.ofSeconds(30));
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressFirstName());
-        estoreUserAccountPage.getBillingAddressFirstName().setValue("Petr");
+        estoreUserAccountPage.getBillingAddressFirstName().setValue("Ivan");
 
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressLastName());
         estoreUserAccountPage.getBillingAddressLastName().setValue(generalStepDefs.getAlphaNumericString(4));

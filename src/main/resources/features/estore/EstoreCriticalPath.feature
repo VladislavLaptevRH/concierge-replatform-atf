@@ -484,7 +484,7 @@ Feature: Estore critical path
     Then I verify membership estore banner for "nonmember user"
 
 #Verify the Instock and On sale functionality
-  Scenario: Verify the Instock functionality
+  Scenario: Verify the In stock functionality
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I open product page with "prod2020027" and "17050043" with "FOG" for estore

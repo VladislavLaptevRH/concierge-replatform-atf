@@ -278,6 +278,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -378,7 +379,6 @@ Feature: eStore Contract and Trade
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove split payment which was used earlier
-    When I refresh current estore page
     Then I verify that I'm able to execute estore split payment
 
   Scenario: estore Trade - Full Payment
@@ -388,6 +388,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -401,6 +402,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -433,6 +435,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -446,6 +449,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I fill estore shipping address
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
@@ -466,6 +470,7 @@ Feature: eStore Contract and Trade
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
+    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -501,9 +506,8 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I fill estore shipping address
     When I click on same as estore shipping address checkbox
-#    When I click on edit estore billing address button
-#    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
@@ -563,8 +567,8 @@ Feature: eStore Contract and Trade
     When I open estore cart
     When I click on estore checkout button
     When I click on edit shipping address button on estore address page
-    When I choose "DE" shipping address
-    When I introduct the following postal code "19701" for shipping address
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     Then I verify the subtotal, shipping fee, taxes based on postal code

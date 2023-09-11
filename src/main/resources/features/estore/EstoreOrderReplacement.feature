@@ -17,7 +17,6 @@ Feature:Estore Order replacement
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I execute estore payment for "VI"
-    When I click on estore continue button
 
   Scenario: estore - Order replacement - Mastercard payment
     Given I log into eStore as "regular" user
@@ -34,7 +33,6 @@ Feature:Estore Order replacement
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I execute estore payment for "MC"
-    When I click on estore continue button
 
   Scenario: estore - Order replacement - Amex payment
     Given I log into eStore as "regular" user
@@ -51,7 +49,6 @@ Feature:Estore Order replacement
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I execute estore payment for "AX"
-    When I click on estore continue button
 
   Scenario: estore - Order replacement - Discovery payment
     Given I log into eStore as "regular" user
@@ -68,7 +65,6 @@ Feature:Estore Order replacement
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I execute estore payment for "DI"
-    When I click on estore continue button
 
 
 

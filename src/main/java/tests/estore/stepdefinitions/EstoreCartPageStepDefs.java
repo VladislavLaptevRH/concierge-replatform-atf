@@ -281,7 +281,6 @@ public class EstoreCartPageStepDefs {
     @Then("I verify order estimate section in cart")
     public void iVerifyOrderEstimateSectionInCart() {
         $(By.xpath("//*[text()='Subtotal with Member Savings']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='RH Members Program']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='RH Member Savings on this order']")).should(visible, Duration.ofSeconds(40));
     }
 

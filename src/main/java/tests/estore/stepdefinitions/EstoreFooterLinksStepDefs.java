@@ -1,8 +1,11 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import tests.estore.pageObject.EstoreFooterScreen;
+import tests.estore.pageObject.EstoreUserAccountPage;
 import tests.utility.Hooks;
 
 import java.time.Duration;
@@ -10,7 +13,8 @@ import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static tests.utility.Hooks.getWindowsHandles;
@@ -18,13 +22,18 @@ import static tests.utility.Hooks.getWindowsHandles;
 public class EstoreFooterLinksStepDefs {
 
     EstoreFooterScreen estoreFooterScreen = new EstoreFooterScreen();
-
+    EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
     @Then("I verify that I'm able to access {string}")
     public void iVerifyThatIMAbleToAccess(String link) {
-        
+//        sleep(3000);
+//        executeJavaScript("window.scrollTo(0, 970)");
+        estoreUserAccountPage.getRhEstoreLogo().should(visible, Duration.ofSeconds(15));
         estoreFooterScreen.getLocateAGallery().scrollIntoView(true);
-        
-        estoreFooterScreen.getLocateAGallery().scrollIntoView(true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+
+        JavascriptExecutor js = (JavascriptExecutor) WebDriverRunner.getWebDriver();
+        js.executeScript("window.scrollBy(0,-250)", "");
+
         if (link.equals("LOCATE A GALLERY")) {
             estoreFooterScreen.getLocateAGallery().should(visible, Duration.ofSeconds(20));
             estoreFooterScreen.getLocateAGallery().click();

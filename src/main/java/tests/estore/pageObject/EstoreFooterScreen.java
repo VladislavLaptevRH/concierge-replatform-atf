@@ -11,7 +11,7 @@ public class EstoreFooterScreen {
 
     private final SelenideElement locateAGallery = $(By.xpath("//a[@href='/store-locations/stores.jsp']"));
 
-    private final SelenideElement viewSourceBooks = $(By.xpath("//a[@href='https://catalogs.rh.com/BookshelfView/']"));
+    private final SelenideElement viewSourceBooks = $(By.xpath("//span[text()='VIEW SOURCE BOOKS']"));
 
     private final SelenideElement requestASource = $(By.xpath("//a[@href='/customer-service/catalog-request.jsp']"));
 
