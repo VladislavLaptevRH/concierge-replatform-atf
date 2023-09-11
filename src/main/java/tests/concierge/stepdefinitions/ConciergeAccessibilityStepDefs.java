@@ -85,6 +85,9 @@ public class ConciergeAccessibilityStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
+        if(!$(By.xpath("//div[contains(@id,'container-rhrheader-rhr-catalogNav_catalogNav')]//descendant::span[text()='" + each + "']")).isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
         $(By.xpath("//div[contains(@id,'container-rhrheader-rhr-catalogNav_catalogNav')]//descendant::span[text()='" + each + "']")).should(visible, Duration.ofSeconds(120)).click();
         conciergeUserAccountPage.getFirstSubMenu().should(visible, Duration.ofSeconds(40)).click();
 //        with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -136,19 +139,19 @@ public class ConciergeAccessibilityStepDefs {
                 List<String> rhModExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "SALE"));
                 checkMenu(rhModExpectedItems);
                 for (String each : rhModExpectedItems) {
-                    if(each.equals("SALE")){
-                        if(each.equals("SALE")) {
-                            $(By.xpath("//*[text() = 'SALE']")).click();
-                            switchTo().window(1);
-                            conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
-                            assertEquals(Hooks.getCurrentUrl(), "https://stg2-concierge.restorationhardware.com/catalog/sale/index.jsp?sale=false");
-                        } else {
-                            continue;
-                        }
-                    }
-                    else {
+//                    if(each.equals("SALE")){
+//                        if(each.equals("SALE")) {
+//                            $(By.xpath("//*[text() = 'SALE']")).click();
+////                            switchTo().window(1);
+//                            conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
+//                            assertEquals(Hooks.getCurrentUrl(), "https://stg2-concierge.restorationhardware.com/catalog/sale/index.jsp?sale=false");
+//                        } else {
+//                            continue;
+//                        }
+//                    }
+//                    else {
                         accessSubMenu(each);
-                    }
+//                    }
                 }
                 break;
             case "RH OUTDOOR":

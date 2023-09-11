@@ -358,7 +358,7 @@ public class ConciergePGStepsDefs {
             case "user can select SIZE -> Length -> 30 and respective products are returned":
                 $(By.xpath("//*[text() = 'Size']")).click();
                 $(By.xpath("//*[text() = 'Length']")).click();
-                $(By.xpath("//*[text() = '30\" (45)']")).click();
+                $(By.xpath("(//*[contains(text(), '30\" ')])[1]")).click();
                 $(By.xpath("(//*[text() = 'Size'])[2]")).click();
                 $(By.xpath("//*[text() = '30\"']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Length']")).shouldBe(visible, Duration.ofSeconds(20));
@@ -386,14 +386,20 @@ public class ConciergePGStepsDefs {
                     $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
                     $(By.xpath("//*[@id = 'itemsPerPage']")).click();
                     $(By.xpath("//*[@data-value = 'load-all']")).click();
-                    with().pollInterval(5, SECONDS).await().until(() -> true);
                 } catch (ElementNotFound | ElementNotInteractableException e){
                     System.out.println("Element not found");
                 }
             }
+            if(!$(By.xpath("//*[@id = 'footer']")).isDisplayed()){
+                WebDriverRunner.getWebDriver().navigate().refresh();
+            }
             while(!$(By.xpath("(//*[@data-cmp = 'cardImages']//img)[" + results + "]")).isDisplayed()){
-                $$(By.xpath("//*[@data-cmp = 'cardImages']//img")).last().scrollIntoView(true);
-                with().pollInterval(5, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[@id = 'footer']")).scrollIntoView(true);
+                int size = $$(By.xpath("//*[@data-cmp = 'cardImages']//img")).size();
+                $(By.xpath("//*[@id = 'footer']")).scrollIntoView(true);
+                if(size == $$(By.xpath("//*[@data-cmp = 'cardImages']//img")).size() ){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
             }
             assertEquals($$(By.xpath("//*[@data-cmp = 'cardImages']//img")).size(), Integer.parseInt($(By.xpath("//*[@id = 'component-refine-menu-dropdown']//p[text() = 'RESULTS']")).getText().replaceAll("[^0-9]", "")));
             System.out.println($$(By.xpath("//*[@data-cmp = 'cardImages']//img")).size());
@@ -402,21 +408,19 @@ public class ConciergePGStepsDefs {
             $(By.xpath("//*[ local-name() = 'svg' and @column = '3']")).click();
             $(By.xpath("//*[ local-name() = 'svg' and @column = '3' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));
             $(By.xpath("(//*[@id = 'component-rh-image_wrapper']//img)[1]")).shouldBe(visible, Duration.ofSeconds(20));
-//            WebDriverRunner.getWebDriver().navigate().refresh();
-//            while(!$(By.xpath("//*[@id = 'itemsPerPage']")).getText().equals("Load All")) {
-//                try {
-//                    $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
-//                    $(By.xpath("//*[@id = 'itemsPerPage']")).click();
-//                    $(By.xpath("//*[@data-value = 'load-all']")).click();
-//                    with().pollInterval(5, SECONDS).await().until(() -> true);
-//                } catch (ElementNotFound e){
-//                    System.out.println("Element not found");
-//                }
-//            }
+            if(!$(By.xpath("//*[@id = 'footer']")).isDisplayed()){
+                WebDriverRunner.getWebDriver().navigate().refresh();
+            }
             do {
                  size = $$(By.xpath("//*[@id = 'component-rh-image_wrapper']//img")).size();
-                $$(By.xpath("//*[@id = 'component-rh-image_wrapper']//img")).last().scrollIntoView(true);
+                $(By.xpath("//*[@id = 'footer']")).scrollIntoView(true);
+                int size = $$(By.xpath("//*[@data-cmp = 'cardImages']//img")).size();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[@id = 'footer']")).scrollIntoView(true);
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                if(size == $$(By.xpath("//*[@data-cmp = 'cardImages']//img")).size() ){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
             }
             while (size < $$(By.xpath("//*[@id = 'component-rh-image_wrapper']//img")).size());
             assertTrue($(By.xpath("//*[@id = 'footer']")).isDisplayed());

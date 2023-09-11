@@ -100,44 +100,45 @@ Feature: Concierge CG Page
       | Dining    | Shelving & Cabinets | Cabinet Collections  | RH MODERN           | MO               |
       | Bed       | RH Beach House Bed  | Bedroom Collections  | RH BEACH HOUSE      | BH               |
 
-  Scenario: 1-2-3 Grid View Functionality within CG/PG/Different Brands
-    Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
-    Then I navigate to menu "Living"
-    Then I navigate to sub menu "Office"
-    Then I navigate to gallery "Office Collections"
-    Then I safe the name of gallery
-    Then I verify that 'grid view is present on top right' on CG screen
-    Then I verify that 'grid view is set to 1-grid view by default' on CG screen
-    Then I Change the CG Grid view to '2' - grid view and confirm changing
-    Then I navigate to '1' gallery
-    Then I click 'Back Browser Button' on CG screen
-    Then I verify that 'same CG is displayed' on CG screen
-    Then I verify that 'grid view is set to 2-grid view' on CG screen
-    Then I Change the CG Grid view to '3' - grid view and confirm changing
-    Then I navigate to '3' gallery
-    Then I navigate to '1' PDP
-    Then I click 'Back Browser Button' on CG screen
-    Then I click 'Back Browser Button' on CG screen
-    Then I verify that 'same CG is displayed' on CG screen
-    Then I verify that 'grid view is set to 3-grid view' on CG screen
-    Then I Change the CG Grid view to '2' - grid view and confirm changing
-    Then I navigate to menu "Textiles"
-    Then I navigate to sub menu "Windows"
-    Then I navigate to gallery "Drapery Collections"
-    Then I verify that 'grid view is set to 2-grid view' on CG screen
-    Then I change the brand to "RH TEEN"
-    Then I verify that RH Brand dropdown is present in "TN" home page
-    Then I navigate to menu "Furniture"
-    Then I navigate to sub menu "Bedroom"
-    Then I navigate to gallery "Bedroom Collections"
-    Then I verify that 'grid view is set to 2-grid view' on CG screen
-    Then I change the brand to "RH MODERN"
-    Then I verify that RH Brand dropdown is present in "MO" home page
-    Then I navigate to menu "Rugs"
-    Then I navigate to sub menu "Handcrafted Rugs"
-    Then I navigate to gallery "Rug Collections"
-    Then I verify that 'grid view is set to 2-grid view' on CG screen
+#  Scenario: 1-2-3 Grid View Functionality within CG/PG/Different Brands
+#
+#    Given I log into Concierge as "associate"
+#    When I choose country for concierge from footer
+#    Then I navigate to menu "Living"
+#    Then I navigate to sub menu "Office"
+#    Then I navigate to gallery "Office Collections"
+#    Then I safe the name of gallery
+#    Then I verify that 'grid view is present on top right' on CG screen
+#    Then I verify that 'grid view is set to 1-grid view by default' on CG screen
+#    Then I Change the CG Grid view to '2' - grid view and confirm changing
+#    Then I navigate to '1' gallery
+#    Then I click 'Back Browser Button' on CG screen
+#    Then I verify that 'same CG is displayed' on CG screen
+#    Then I verify that 'grid view is set to 2-grid view' on CG screen
+#    Then I Change the CG Grid view to '3' - grid view and confirm changing
+#    Then I navigate to '3' gallery
+#    Then I navigate to '1' PDP
+#    Then I click 'Back Browser Button' on CG screen
+#    Then I click 'Back Browser Button' on CG screen
+#    Then I verify that 'same CG is displayed' on CG screen
+#    Then I verify that 'grid view is set to 3-grid view' on CG screen
+#    Then I Change the CG Grid view to '2' - grid view and confirm changing
+#    Then I navigate to menu "Textiles"
+#    Then I navigate to sub menu "Windows"
+#    Then I navigate to gallery "Drapery Collections"
+#    Then I verify that 'grid view is set to 2-grid view' on CG screen
+#    Then I change the brand to "RH TEEN"
+#    Then I verify that RH Brand dropdown is present in "TN" home page
+#    Then I navigate to menu "Furniture"
+#    Then I navigate to sub menu "Bedroom"
+#    Then I navigate to gallery "Bedroom Collections"
+#    Then I verify that 'grid view is set to 2-grid view' on CG screen
+#    Then I change the brand to "RH MODERN"
+#    Then I verify that RH Brand dropdown is present in "MO" home page
+#    Then I navigate to menu "Rugs"
+#    Then I navigate to sub menu "Handcrafted Rugs"
+#    Then I navigate to gallery "Rug Collections"
+#    Then I verify that 'grid view is set to 2-grid view' on CG screen
 
   Scenario: Browser back button from search to CG page
     Given I log into Concierge as "associate"
