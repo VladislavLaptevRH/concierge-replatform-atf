@@ -260,8 +260,8 @@ public class Pdp {
                 with().pollInterval(9, SECONDS).await().until(() -> true);
                 $(By.xpath("//h3[text() = 'Cloud Modular Leather Corner Chair']")).shouldHave(text("Cloud Modular Leather Corner Chair"), Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Item #']")).shouldHave(text("Item #"), Duration.ofSeconds(20));
-                $(By.xpath("//*[text() = '59810779 CTBZ']")).shouldHave(visible, Duration.ofSeconds(15));
-                assertEquals(SKU, $(By.xpath("//*[text() = '59810779 CTBZ']")).getText());
+                $(By.xpath("//*[text() = '59810779 SECM']")).shouldHave(visible, Duration.ofSeconds(15));
+                assertEquals(SKU, $(By.xpath("//*[text() = '59810779 SECM']")).getText());
                 if($(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).isDisplayed()){
                     $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).shouldHave(visible, Duration.ofSeconds(15));
                     memberPriceInPG = $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).getText().substring(0, 6);
@@ -996,6 +996,7 @@ public class Pdp {
     public void iVerifyThatZipCodeIs(String zipCode) {
         $(By.xpath("(//*[@id = 'component-sku']//span)[1]")).shouldBe(visible, Duration.ofSeconds(20));
        String currentZipCode =  $(By.xpath("(//*[@id = 'component-sku']//span)[1]")).getText();
+        with().pollInterval(9, SECONDS).await().until(() -> true);
         assertEquals(currentZipCode, zipCode + ".");
     }
 

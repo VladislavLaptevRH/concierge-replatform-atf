@@ -84,6 +84,9 @@ public class GeneralStepDefs {
      * @param accountRole - account role
      */
     public void loginAsRole(String accountRole) {
+        if(!conciergeLoginPage.getPasswordField().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
         conciergeLoginPage.getPasswordField().should(visible, Duration.ofMinutes(5));
         conciergeLoginPage.getUsernameField().should(visible, Duration.ofSeconds(40));
         if (accountRole.equals("associate")) {
@@ -103,7 +106,6 @@ public class GeneralStepDefs {
 
         if(!conciergeLoginPage.getLocationDropDownList().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
         }
 
         conciergeLoginPage.getLocationDropDownList().click();
