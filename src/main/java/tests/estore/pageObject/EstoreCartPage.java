@@ -218,6 +218,10 @@ public class EstoreCartPage {
         return $(byXpath(path));
     }
 
+    public void introduceMonogramText() {
+        monogramText.should(visible, Duration.ofSeconds(15)).sendKeys("tes");
+    }
+
     public int getMemberProductPriceInCart() {
         int memberProductPriceCart = Integer.parseInt(cartMemberPrice.getText().replaceAll(".00", "").replaceAll("\\$", ""));
         return memberProductPriceCart;

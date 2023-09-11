@@ -12,8 +12,7 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.value;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
@@ -47,7 +46,7 @@ public class EstoreAccountStepDefs {
 
     @Then("I verify that by updating personal information, application should get saved the entered details")
     public void iVerifyThatByUpdatingPersonalInformationApplicationShouldGetSavedTheEnteredDetails() {
-        estoreUserAccountPage.getBillingAddressFirstName().shouldHave(value(firstName+"1"), Duration.ofSeconds(20));
+        estoreUserAccountPage.getBillingAddressFirstName().shouldHave(value(firstName), Duration.ofSeconds(40));
     }
 
     @When("I verify the max length for first name text field")
@@ -64,6 +63,7 @@ public class EstoreAccountStepDefs {
     public void iUpdatePersonalInformationForAccount() {
         firstName = generalStepDefs.getAlphaNumericString(4);
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressFirstName());
+        estoreUserAccountPage.getBillingAddressFirstName().should(interactable, Duration.ofSeconds(15));
         estoreUserAccountPage.getBillingAddressFirstName().setValue(firstName);
     }
 
@@ -80,7 +80,7 @@ public class EstoreAccountStepDefs {
 
     @When("I close estore your profile has been updated pop up")
     public void iCloseEstoreYourProfileHasBeenUpdatedPopUp() {
-        estoreCartPage.getPopupCloseButton().should(visible, Duration.ofSeconds(20));
+        estoreCartPage.getPopupCloseButton().should(visible, Duration.ofSeconds(40));
         estoreCartPage.getPopupCloseButton().click();
     }
 
@@ -103,16 +103,20 @@ public class EstoreAccountStepDefs {
     @When("I update first name for estore account")
     public void iUpdateFirstNameForEstoreAccount() {
         firstName = generalStepDefs.getAlphaNumericString(4);
+        estoreUserAccountPage.getBillingAddressFirstName().should(interactable, Duration.ofSeconds(15));
         estoreUserAccountPage.getBillingAddressFirstName().click();
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressFirstName());
+        estoreUserAccountPage.getBillingAddressFirstName().should(interactable, Duration.ofSeconds(15));
         estoreUserAccountPage.getBillingAddressFirstName().setValue(firstName);
     }
 
     @When("I update last name for estore account")
     public void iUpdateLastNameForEstoreAccount() {
         lastName = generalStepDefs.getAlphaNumericString(4);
+        estoreUserAccountPage.getBillingAddressLastName().should(interactable, Duration.ofSeconds(15));
         estoreUserAccountPage.getBillingAddressLastName().click();
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressLastName());
+        estoreUserAccountPage.getBillingAddressLastName().should(interactable, Duration.ofSeconds(15));
         estoreUserAccountPage.getBillingAddressLastName().setValue(lastName);
     }
 

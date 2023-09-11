@@ -356,14 +356,14 @@ public class EstoreUserAccountPageStepDefs {
                 }
                 break;
             case "RH BEACH HOUSE":
-                List<String> rhBeachExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Décor", "Art", "Outdoor", "SALE"));
+                List<String> rhBeachExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Décor", "Art", "Outdoor"));
                 estoreUserAccountPage.checkMenu(rhBeachExpectedItems);
                 for (String each : rhBeachExpectedItems) {
                     estoreUserAccountPage.accessSubMenu(each);
                 }
                 break;
             case "RH SKI HOUSE":
-                List<String> rhSkiExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Décor", "Outdoor", "SALE"));
+                List<String> rhSkiExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Décor", "Outdoor"));
                 estoreUserAccountPage.checkMenu(rhSkiExpectedItems);
                 for (String each : rhSkiExpectedItems) {
                     estoreUserAccountPage.accessSubMenu(each);

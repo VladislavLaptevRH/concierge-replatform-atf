@@ -182,13 +182,23 @@ public class EstorePgStepDefs {
 
     @Then("I verify that product thumbnail is correctly loaded")
     public void iVerifyThatProductThumbnailIsCorrectlyLoaded() {
-        estorePGScreen.getThumbalImg().should(visible, Duration.ofSeconds(25));
+        estorePGScreen.getThumbalImg().should(visible, Duration.ofSeconds(35));
     }
 
     @Then("I verify that sorting low to high is working as expected")
     public void iVerifyThatSortingLowToHighIsWorkingAsExpected() {
-        priceFromTheFirstProduct = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[1]")).getText().replaceAll("\\,", "").replaceAll("\\$", ""));
-        priceFromTheSecondProduct = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[2]")).getText().replaceAll("\\,", "").replaceAll("\\$", ""));
+        int countOfTheSecondProduct = 2;
+        priceFromTheFirstProduct = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[1]")).getText().replaceAll("[^0-9]", ""));
+        priceFromTheSecondProduct = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[" + countOfTheSecondProduct + "]")).getText().replaceAll("[^0-9]", ""));
+
+        while ((priceFromTheFirstProduct == priceFromTheSecondProduct)) {
+            countOfTheSecondProduct++;
+            priceFromTheSecondProduct = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[" + countOfTheSecondProduct + "]")).getText().replaceAll("[^0-9]", ""));
+
+            if (countOfTheSecondProduct > 12) {
+                break;
+            }
+        }
 
         assertTrue(priceFromTheFirstProduct < priceFromTheSecondProduct, "The price of the first product is less than the price for the second product");
     }

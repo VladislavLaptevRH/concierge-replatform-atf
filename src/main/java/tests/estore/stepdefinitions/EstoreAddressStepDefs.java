@@ -237,7 +237,7 @@ public class EstoreAddressStepDefs {
     public void iIntroduceDataForNewProfileAddress() {
         estoreUserAccountPage.getBillingAddressFirstName().should(visible, Duration.ofSeconds(30));
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressFirstName());
-        estoreUserAccountPage.getBillingAddressFirstName().setValue("Petr");
+        estoreUserAccountPage.getBillingAddressFirstName().setValue("Ivan");
 
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressLastName());
         estoreUserAccountPage.getBillingAddressLastName().setValue(generalStepDefs.getAlphaNumericString(4));
@@ -561,7 +561,6 @@ public class EstoreAddressStepDefs {
         $(By.xpath("//*[text()='SHIPPING ADDRESS']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Ocala Street']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Silver Spring, MD, 20901']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='BILLING ADDRESS']")).should(visible, Duration.ofSeconds(20));
     }

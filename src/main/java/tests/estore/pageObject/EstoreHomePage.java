@@ -30,7 +30,7 @@ public class EstoreHomePage {
     private final SelenideElement categoryDropdown = $(By.xpath("//div[@id='hamburgerIcon']"));
     private final SelenideElement locationDropdown = $(By.id("gallery-select"));
 
-    private final SelenideElement searchInputField = $(By.id("site-search-input"));
+    private final SelenideElement searchInputField = $(By.xpath("//input[@type='text']"));
     private final SelenideElement phoneNumberInputField = $(By.id("customerPhone"));
 
     private final SelenideElement phoneNumberField = $(By.id("phone"));
