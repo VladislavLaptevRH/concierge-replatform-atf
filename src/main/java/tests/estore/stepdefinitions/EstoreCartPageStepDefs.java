@@ -841,4 +841,18 @@ public class EstoreCartPageStepDefs {
         int totalLineItemPriceWithCharges = charges2to3DAys + totalLineItemPrice;
         $(By.xpath("//*[text()=\"" + "$" + totalLineItemPriceWithCharges + ".00" + "\"]")).should(visible, Duration.ofSeconds(12));
     }
+
+    @Then("I verify that Unlimited Furniture Delivery message is displayed")
+    public void iVerifyThatUnlimitedFurnitureDeliveryMessageIsDisplayed() {
+        estoreCartPage.getUfdCartButton().should(visible);
+    }
+
+    @And("I verify that amount for UFD was added to total price")
+    public void iVerifyThatAmountForUFDWasAddedToTotalPrice() {
+        int totalLineItemPrice = Integer.parseInt(estoreCartPage.getTotalLineItemPrice().getText().replaceAll("[^0-9]", "").replaceAll("00", ""));
+        int ufdAmount = 279;
+        int totalLineItemPriceWithCharges = ufdAmount + totalLineItemPrice;
+        $(By.xpath("//*[text()=\"" + "$" + totalLineItemPriceWithCharges + ".00" + "\"]")).should(visible, Duration.ofSeconds(12));
+        System.out.println();
+    }
 }

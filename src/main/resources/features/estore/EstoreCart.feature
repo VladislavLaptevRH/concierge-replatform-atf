@@ -252,6 +252,16 @@ Feature: Estore Cart Page
     When I goes to estore cart for estore
     Then I verify applicable charges 1 to 2 days for estore in cart
 
+  Scenario: Verify the UFD charges for furniture
+    Given I remove all items from estore cart
+    When I choose country for eStore from footer
+    When I open product page with "prod6490263" and "50400761" with "BWBK" for estore
+    When I click on add to cart estore button
+    When I click on aggree&add estore button
+    And I click on view cart estore button
+    Then I verify that Unlimited Furniture Delivery message is displayed
+    And I verify that amount for UFD was added to total price
+
 
 
 
