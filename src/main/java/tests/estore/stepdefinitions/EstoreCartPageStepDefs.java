@@ -868,13 +868,4 @@ public class EstoreCartPageStepDefs {
         assertTrue("Total line item price is equal to member price", totalLineItemPrice == estoreCartPage.getLineItemMemberPrice());
     }
 
-    @When("I select empty value for State dropdown field for International billing address")
-    public void iSelectEmptyValueForStateDropdownFieldForInternationalBillingAddress() {
-        System.out.println();
-    }
-
-    @Then("I verify that state required message must be displayed")
-    public void iVerifyThatStateRequiredMessageMustBeDisplayed() {
-        System.out.println();
-    }
 }
