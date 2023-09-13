@@ -15,11 +15,7 @@ public class EstoreProjectStepDefs {
 
     @When("I click on aggree&add estore button")
     public void iClickOnAggreeAddButton() {
-        try {
-            estoreItemPage.getAggreeeAndAddToCardButton().should(Condition.and("", visible, interactable), Duration.ofSeconds(5));
-            estoreItemPage.getAggreeeAndAddToCardButton().click();
-        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Agree&add to cart button is not displayed");
-        }
+        estoreItemPage.getAggreeeAndAddToCardButton().should(Condition.and("", visible, interactable), Duration.ofSeconds(12));
+        estoreItemPage.getAggreeeAndAddToCardButton().scrollIntoView(true).should(interactable).click();
     }
 }

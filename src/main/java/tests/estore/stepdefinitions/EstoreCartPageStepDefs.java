@@ -26,6 +26,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class EstoreCartPageStepDefs {
     EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
@@ -50,6 +51,8 @@ public class EstoreCartPageStepDefs {
     String memberPrice;
 
     String totalPriceOrderEstimate;
+
+    int rhMemberSavingsAmount;
 
     @When("I remove all items from estore cart")
     public void iRemoveAllItemsFromEstoreCart() {
@@ -529,7 +532,6 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify state field empty dropdown issue for International billing address")
     public void iVerifyStateFieldEmptyDropdownIssueForInternationalBillingAddress() {
-
         $(By.xpath("//*[text()='State required.']")).should(visible, Duration.ofSeconds(30));
     }
 
@@ -849,10 +851,21 @@ public class EstoreCartPageStepDefs {
 
     @And("I verify that amount for UFD was added to total price")
     public void iVerifyThatAmountForUFDWasAddedToTotalPrice() {
-        int totalLineItemPrice = Integer.parseInt(estoreCartPage.getTotalLineItemPrice().getText().replaceAll("[^0-9]", "").replaceAll("00", ""));
-        int ufdAmount = 279;
-        int totalLineItemPriceWithCharges = ufdAmount + totalLineItemPrice;
-        $(By.xpath("//*[text()=\"" + "$" + totalLineItemPriceWithCharges + ".00" + "\"]")).should(visible, Duration.ofSeconds(12));
-        System.out.println();
+        estoreCartPage.verifyUFDAmount();
     }
+
+    @Then("I verify that rh member savings on this order message and amount is displayed")
+    public void iVerifyThatRhMemberSavingsOnThisOrderMessageAndAmountIsDisplayed() {
+        $(By.xpath("//*[text()='Subtotal with Member Savings']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='RH Member Savings on this order']")).should(visible, Duration.ofSeconds(40));
+        rhMemberSavingsAmount = Integer.parseInt($(By.xpath("//*[@id='spa-root']/div/main/div[2]/div/div/div[2]/div[2]/div[2]/div[2]/span")).getText().replaceAll(".00", "xzl").replaceAll("[^0-9]", ""));
+        assertTrue("Amount for RH Member Savings on this order is displayed", rhMemberSavingsAmount > 0);
+    }
+
+    @And("I verify that total line price is equal to price for member")
+    public void iVerifyThatTotalLinePriceIsEqualToPriceForMember() {
+        int totalLineItemPrice = Integer.parseInt(estoreCartPage.getTotalLineItemPrice().getText().replaceAll("[^0-9]", "").replaceAll("00", ""));
+        assertTrue("Total line item price is equal to member price", totalLineItemPrice == estoreCartPage.getLineItemMemberPrice());
+    }
+
 }

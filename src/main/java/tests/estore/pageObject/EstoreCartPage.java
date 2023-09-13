@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.List;
 
@@ -219,6 +220,11 @@ public class EstoreCartPage {
 
     private final SelenideElement twoToThreeBusinessDaysText = $(By.xpath("//*[text()='2-day (2 to 3 business days) $50.00']"));
 
+
+    public int getLineItemMemberPrice() {
+        return Integer.parseInt(totalLineItemPrice.getText().replaceAll("[^0-9]", "").replaceAll("00", ""));
+    }
+
     public void veifyThatTwoToThreeBusinessDaysTextIsDisplayed() {
         twoToThreeBusinessDaysText.should(visible, Duration.ofSeconds(15));
     }
@@ -287,5 +293,16 @@ public class EstoreCartPage {
         noThanksButton.should(interactable, Duration.ofSeconds(10));
         with().pollInterval(2, SECONDS).await().until(() -> true);
         noThanksButton.doubleClick();
+    }
+
+    public void verifyUFDAmount() {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        String totalLineItemPriceValue = totalLineItemPrice.getText();
+        int totalLineItemPriceAmount = Integer.parseInt(totalLineItemPrice.getText().substring(0, totalLineItemPriceValue.indexOf(".00")).replaceAll("[^0-9]", ""));
+        int ufdAmount = 279;
+        int totalLineItemPriceWithCharges = ufdAmount + totalLineItemPriceAmount;
+        String totalPrice = decimalFormat.format(totalLineItemPriceWithCharges);
+
+        $(By.xpath("//*[text()=\"" + "$" + totalPrice + ".00" + "\"]")).should(visible, Duration.ofSeconds(12));
     }
 }

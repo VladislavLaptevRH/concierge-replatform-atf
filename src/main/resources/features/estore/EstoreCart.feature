@@ -262,29 +262,20 @@ Feature: Estore Cart Page
     Then I verify that Unlimited Furniture Delivery message is displayed
     And I verify that amount for UFD was added to total price
 
-
-
-
-#  Verify Membership Prices for Membership registered user for line items, - discount verbiage line in summary
-  #RH Member Savings on this order = regular price minus member price
-  #total line price should be equal to member price
-
+  Scenario: Verify Membership Prices for Membership registered user for line items - discount verbiage line in summary
+    Given I log into eStore as "member" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    Then I verify that rh member savings on this order message and amount is displayed
+    And I verify that total line price is equal to price for member
 
 #Verify Regular client address page - ship to and Bill to addresses - edit addresses functionality
  #fill address-> go to payment-> on payment page click on edit button for billing address -> edit billing address->
   #check that new address was saved on payment page
 
-#Verify state field Empty dropdown issue for International billing address
-  #select blank state for billing address on address page -> state required message must be displayed
-
 #Verify Promo code Discount applied for CART, order review and Order confirmation
 #apply promotion code-> go to order review page->verify that Total Additional Product Discount message is displayed
 #place a order after click on order details button-> verify that Total Additional Product Discount message is displayed
-
-
-#Verify the UFD charges for furniture
-#go to sofa-> add to cart-> verify that Unlimited Furniture Delivery message is displayed and amount for this was added to total price
-
-
-
-
