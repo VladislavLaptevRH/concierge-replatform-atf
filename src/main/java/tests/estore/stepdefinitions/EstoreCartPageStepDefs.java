@@ -313,7 +313,7 @@ public class EstoreCartPageStepDefs {
             $(By.xpath("//*[contains(text(),'New York')]")).should(visible, Duration.ofSeconds(20));
         }
         if (arg0.equals("CAN")) {
-
+            System.out.println();
         }
     }
 
@@ -811,5 +811,34 @@ public class EstoreCartPageStepDefs {
         conciergeCartPageScreen.getMonogramColors().get(5).doubleClick();
         estoreCartPage.introduceMonogramText();
         estorePDPScreen.clickToAddMonogramButton();
+    }
+
+    @Then("I verify free delivery charges for estore in cart")
+    public void iVerifyFreeDeliveryChargesForEstoreInCart() {
+        $(By.xpath("//*[text()='Standard Delivery Shipping']")).should(visible, Duration.ofSeconds(20));
+        String totalLineItemPrice = estoreCartPage.getTotalLineItemPrice().getText();
+        $(By.xpath("(//*[text()=\"" + totalLineItemPrice + "\"])[3]")).should(visible, Duration.ofSeconds(12));
+    }
+
+    @And("I verify applicable charges 2 to 3 days for estore in cart")
+    public void iVerifyApplicableCharges2To3DaysForEstoreInCart() {
+        estoreCartPage.selectApplicableCharges2to3Days();
+        estoreCartPage.veifyThatTwoToThreeBusinessDaysTextIsDisplayed();
+
+        int charges2to3DAys = 50;
+        int totalLineItemPrice = Integer.parseInt(estoreCartPage.getTotalLineItemPrice().getText().replaceAll("[^0-9]", "").replaceAll("00", ""));
+        int totalLineItemPriceWithCharges = charges2to3DAys + totalLineItemPrice;
+        $(By.xpath("//*[text()=\"" + "$" + totalLineItemPriceWithCharges + ".00" + "\"]")).should(visible, Duration.ofSeconds(12));
+    }
+
+    @And("I verify applicable charges 1 to 2 days for estore in cart")
+    public void iVerifyApplicableCharges1To2DaysForEstoreInCart() {
+        estoreCartPage.selectApplicableCharges1to2Days();
+        estoreCartPage.veifyThatTwoToThreeBusinessDaysTextIsDisplayed();
+
+        int charges2to3DAys = 75;
+        int totalLineItemPrice = Integer.parseInt(estoreCartPage.getTotalLineItemPrice().getText().replaceAll("[^0-9]", "").replaceAll("00", ""));
+        int totalLineItemPriceWithCharges = charges2to3DAys + totalLineItemPrice;
+        $(By.xpath("//*[text()=\"" + "$" + totalLineItemPriceWithCharges + ".00" + "\"]")).should(visible, Duration.ofSeconds(12));
     }
 }

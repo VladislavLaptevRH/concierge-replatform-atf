@@ -30,11 +30,11 @@ public class EstoreSearchStepDefs {
     @When("I go to estore item {string} from search field")
     public void iGoToItemFromEstoreSearchField(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).should(visible, Duration.ofSeconds(60));
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).click();
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]//input")).should(visible, Duration.ofSeconds(60));
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]//input")).click();
         estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
-        estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
+        estoreUserAccountPage.getSearchItemField().click();
         generalStepDefs.waitForJSandJQueryToLoad();
 
 
@@ -181,7 +181,7 @@ public class EstoreSearchStepDefs {
 
     @Then("I verify sale banner for estore")
     public void iVerifySaleBannerForEstore() {
-        estoreSearchScreen.getSaveText().should(visible, Duration.ofSeconds(20));
+        estoreSearchScreen.getSalePageBanner().should(visible, Duration.ofSeconds(20));
     }
 
     @When("I click on view results")

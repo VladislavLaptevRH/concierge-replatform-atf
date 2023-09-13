@@ -372,14 +372,17 @@ public class EstoreUserAccountPage {
     public void checkMenu(List menuItem) {
 //        try {
 //            if (menuItems.get(2).isDisplayed()) {
-                List<String> rhItems = new ArrayList<>();
-                menuItems.get(2).should(visible, Duration.ofSeconds(10));
-                for (int i = 0; i < menuItems.size(); i++) {
-                    rhItems.add(menuItems.get(i).getText());
-                }
+        String rhItemMenu;
+        List<String> rhItems = new ArrayList<>();
+        menuItems.get(2).should(visible, Duration.ofSeconds(10));
 
-                GeneralStepDefs.compareList(menuItem, rhItems);
-            }
+        for (int i = 0; i < menuItems.size(); i++) {
+            rhItemMenu = menuItems.get(i).getText().toLowerCase();
+            rhItems.add(rhItemMenu.substring(0, 1).toUpperCase() + rhItemMenu.substring(1));
+        }
+
+        GeneralStepDefs.compareList(menuItem, rhItems);
+    }
 //        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
 //            WebDriverRunner.getWebDriver().navigate().refresh();
 //            checkMenu(menuItem);

@@ -9,10 +9,8 @@ import java.time.Duration;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 
@@ -212,6 +210,34 @@ public class EstoreCartPage {
     private final SelenideElement cartRegularPrice = $(By.xpath("(//p[@data-testid='price-for-regular'])[1]"));
 
     private final SelenideElement cartMemberPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
+
+    private final SelenideElement selectChargesOption = $(By.xpath("(//div[@dropdowntype='true']//div//select)[2]"));
+
+    private final SelenideElement option2to3DaysCharges = $(By.xpath("//option[@value='second']"));
+
+    private final SelenideElement option1to2DaysCharges = $(By.xpath("//option[@value='next']"));
+
+    private final SelenideElement twoToThreeBusinessDaysText = $(By.xpath("//*[text()='2-day (2 to 3 business days) $50.00']"));
+
+    public void veifyThatTwoToThreeBusinessDaysTextIsDisplayed() {
+        twoToThreeBusinessDaysText.should(visible, Duration.ofSeconds(15));
+    }
+
+    public void selectApplicableCharges2to3Days() {
+        selectChargesOption.should(visible);
+        selectChargesOption.scrollIntoView(true);
+        selectChargesOption.should(interactable).click();
+        option2to3DaysCharges.should(interactable);
+        option2to3DaysCharges.click();
+    }
+
+    public void selectApplicableCharges1to2Days() {
+        selectChargesOption.should(visible);
+        selectChargesOption.scrollIntoView(true);
+        selectChargesOption.should(interactable).click();
+        option1to2DaysCharges.should(interactable);
+        option1to2DaysCharges.click();
+    }
 
     public SelenideElement getVariableJoinButtonByName(String name) {
         String path = String.format(variableJoinButton, name);
