@@ -55,7 +55,7 @@ public class EstoreItemPage {
 
     private final SelenideElement continueShoppingButton = $(By.xpath("//div[2]/button[contains(@class,'MuiButtonBase-root MuiButton-root')]"));
 
-    private final SelenideElement aggreeeAndAddToCardButton = $(By.cssSelector("#spo-auth-addToCart"));
+    private final SelenideElement aggreeeAndAddToCardButton = $(By.cssSelector("#specialOrderConfirmation_addToCart-btn"));
 
     private final SelenideElement collectionsText = $(By.xpath("//*[contains(text(),'collections')]"));
 

@@ -39,7 +39,7 @@ public class EstoreSearchStepDefs {
 
 
         estoreUserAccountPage.getSearchItemField().sendKeys(arg0);
-    sleep(2000);
+        sleep(2000);
         estoreUserAccountPage.getSearchItemField().click();
         estoreUserAccountPage.getSearchItemField().sendKeys(Keys.ENTER);
 
