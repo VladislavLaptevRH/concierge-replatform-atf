@@ -581,4 +581,25 @@ public class EstoreAddressStepDefs {
             iFillEstoreShippingAndShippingAddress();
         }
     }
+
+    @When("I introduce new billing address on address page")
+    public void iIntroduceNewBillingAddressOnAddressPage() {
+        estoreAddressScreen.getBillingAddressFirstName().should(visible, Duration.ofSeconds(40));
+        generalStepDefs.clearField(estoreAddressScreen.getBillingAddressFirstName());
+        estoreAddressScreen.getBillingAddressFirstName().setValue("John");
+        generalStepDefs.clearField(estoreAddressScreen.getBillingAddressLastName());
+        estoreAddressScreen.getBillingAddressLastName().setValue("Ivanov");
+        generalStepDefs.clearField(estoreAddressScreen.getBillingAddressStreetAddress());
+        estoreAddressScreen.getBillingAddressStreetAddress().setValue("66 Ceres St");
+        estoreAddressScreen.getBillingAddressPostlaCode().should(interactable).click();
+        generalStepDefs.clearField(estoreAddressScreen.getBillingAddressCity());
+        estoreAddressScreen.getBillingAddressCity().setValue("San Francisco");
+
+        Select billingAddressState = new Select(estoreAddressScreen.getBillingAddressState());
+        billingAddressState.selectByValue("CA");
+        generalStepDefs.clearField(estoreAddressScreen.getBillingAddressPostlaCode());
+        estoreAddressScreen.getBillingAddressPostlaCode().setValue("94124");
+        generalStepDefs.clearField(estoreAddressScreen.getBillingAddressPhone());
+        estoreAddressScreen.getBillingAddressPhone().setValue("415-822-4747");
+    }
 }

@@ -5,6 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
+import tests.estore.pageObject.EstoreCartPage;
 import tests.estore.pageObject.EstoreConfirmationOrderScreen;
 
 import java.time.Duration;
@@ -21,6 +22,8 @@ public class EstoreOrderReviewStepDefs {
     EstoreAddressStepDefs estoreAddressStepDefs = new EstoreAddressStepDefs();
 
     EstoreConfirmationOrderScreen estoreConfirmationOrderScreen = new EstoreConfirmationOrderScreen();
+
+    EstoreCartPage estoreCartPage = new EstoreCartPage();
 
     @When("I click on estore edit payment button on order review page")
     public void iClickOnEstoreEditPaymentButtonOnOrderReviewPage() {
@@ -72,5 +75,10 @@ public class EstoreOrderReviewStepDefs {
         $(By.id("billingAddress.firstName")).should(visible, Duration.ofSeconds(40)).click();
         $(By.id("billingAddress.firstName")).setValue("newBillingAddressName");
 
+    }
+
+    @Then("I verify that Total Additional Product Discount message is displayed on order review page")
+    public void iVerifyThatTotalAdditionalProductDiscountMessageIsDisplayedOnOrderReviewPage() {
+        estoreCartPage.verifyThatTotalAdditionalProductDiscountMessageIsDisplayed();
     }
 }

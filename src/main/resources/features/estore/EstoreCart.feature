@@ -272,10 +272,42 @@ Feature: Estore Cart Page
     Then I verify that rh member savings on this order message and amount is displayed
     And I verify that total line price is equal to price for member
 
-#Verify Regular client address page - ship to and Bill to addresses - edit addresses functionality
- #fill address-> go to payment-> on payment page click on edit button for billing address -> edit billing address->
-  #check that new address was saved on payment page
+  Scenario: Verify Promo code Discount applied for CART, order review and Order confirmation
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I goes to estore cart for estore
+    When I remove promotion from estore cart
+    Then I verify that I'm able to apply promotion code
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I execute payment with credit card on estore
+    Then I verify that Total Additional Product Discount message is displayed on order review page
+    When I click on a place estore order button
+    When I click on order details button
+    And I verify that Total Additional Product Discount message is displayed on order review page
 
-#Verify Promo code Discount applied for CART, order review and Order confirmation
-#apply promotion code-> go to order review page->verify that Total Additional Product Discount message is displayed
-#place a order after click on order details button-> verify that Total Additional Product Discount message is displayed
+  Scenario: Verify Regular client address page - ship to and Bill to addresses - edit addresses functionality
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I goes to estore cart for estore
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I click on edit estore billing address button on payment page
+    When I click on edit billing adress button on address page
+    When I introduce new billing address on address page
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    Then I verify that new billing address is displayed on payment page

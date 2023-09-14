@@ -220,6 +220,12 @@ public class EstoreCartPage {
 
     private final SelenideElement twoToThreeBusinessDaysText = $(By.xpath("//*[text()='2-day (2 to 3 business days) $50.00']"));
 
+    private final SelenideElement totalAdditionalProductDiscount = $(By.xpath("//*[text()='Total Additional Product Discount']"));
+
+
+    public void verifyThatTotalAdditionalProductDiscountMessageIsDisplayed() {
+        totalAdditionalProductDiscount.should(visible, Duration.ofSeconds(20));
+    }
 
     public int getLineItemMemberPrice() {
         return Integer.parseInt(totalLineItemPrice.getText().replaceAll("[^0-9]", "").replaceAll("00", ""));
