@@ -64,9 +64,9 @@ public class EstoreSearchStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
 
         estoreUserAccountPage.getSearchItemField().setValue(generalStepDefs.getAlphaNumericString(7));
-
-        estoreSearchScreen.getSeeAllResultsButton().should(visible, Duration.ofSeconds(40));
-        estoreSearchScreen.getSeeAllResultsButton().click();
+        sleep(2000);
+        estoreUserAccountPage.getSearchItemField().click();
+        estoreUserAccountPage.getSearchItemField().sendKeys(Keys.ENTER);
     }
 
     @Then("I verify that we cannot find what you are looking message is displayed")
@@ -187,8 +187,7 @@ public class EstoreSearchStepDefs {
 
     @When("I click on view results")
     public void iClickOnViewResults() {
-        estoreItemPage.getAddToCartButton().should(visible, Duration.ofSeconds(20));
-        estoreItemPage.getAddToCartButton().click();
+        estoreItemPage.clickToViewSearchResultsButton();
     }
 
     @Then("I verify cribs title for estore")

@@ -1,5 +1,6 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -27,6 +28,8 @@ public class EstoreItemPage {
     private final List<SelenideElement> collectionsItems = $$(By.xpath("//div[contains(@class,'MuiGrid-item MuiGrid-grid-xs-12')]/div/ul[contains(@class,'MuiGridList-root')]/li[@class='MuiGridListTile-root']"));
 
     private final SelenideElement addToCartButton = $(By.xpath("(//button[@id='component-related-product-card_add-to-cart-btn'])[1]"));
+
+    private final SelenideElement viewSearchResultsButton = $(By.xpath("//*[@data-testid='add-to-cart-dialog-opener']"));
 
     private final SelenideElement addToCartButtonNotDisabled = $(By.xpath("(//button[@data-testid='add-to-cart-dialog-opener'])[1][not(@disabled)]"));
 
@@ -83,9 +86,14 @@ public class EstoreItemPage {
 
     private final SelenideElement agreeAndAddToCartButton = $(By.xpath("//span[@class='MuiButton-label' and text() = 'Agree & Add To Cart']"));
 
-    private final SelenideElement addToWishListButton = $(By.xpath("(//div[@data-testid='add-to-wish-list'])[1]"));
+    private final SelenideElement addToWishListButton = $(By.xpath("(//div[@id='component-relatedProductActions_addToWishlist-btn'])[1]"));
 
     private final SelenideElement viewWishlistButton = $(By.id("addToWishlistDialog_viewWishList-btn"));
 
     private final SelenideElement continueWithOriginalAddressButton = $(By.xpath("(//button[@data-testid='add-to-cart-dialog-opener'])[1]"));
+
+
+    public void clickToViewSearchResultsButton() {
+        viewSearchResultsButton.should(Condition.interactable).click();
+    }
 }

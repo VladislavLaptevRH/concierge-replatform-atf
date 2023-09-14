@@ -361,8 +361,10 @@ public class EstorePaymentStepDefs {
         estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
 
         estoreGeneralStepDefs.payWithRhGiftCard();
+    }
 
-
-
+    @Then("I verify that new billing address is displayed on payment page")
+    public void iVerifyThatNewBillingAddressIsDisplayedOnAddressPage() {
+        estorePaymentPage.verifyThatNewBillingAddressisDisplayed();
     }
 }

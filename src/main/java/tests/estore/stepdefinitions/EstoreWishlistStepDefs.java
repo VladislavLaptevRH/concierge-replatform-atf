@@ -29,8 +29,8 @@ public class EstoreWishlistStepDefs {
 
         estoreItemPage.getAddToWishListButton().scrollIntoView(true);
 
-        estoreItemPage.getAddToWishListButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
-        estoreItemPage.getAddToWishListButton().click();
+        estoreItemPage.getAddToWishListButton().should(Condition.and("", visible, interactable), Duration.ofSeconds(40));
+        estoreItemPage.getAddToWishListButton().scrollIntoView(true).should(interactable).click(ClickOptions.usingJavaScript());
 
         estoreItemPage.getViewWishlistButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         estoreItemPage.getViewWishlistButton().click(ClickOptions.usingJavaScript());
