@@ -295,8 +295,23 @@ public class GeneralStepDefs {
                 conciergeUserAccountPage.getBusinessAcNumber().should(Condition.be(visible), Duration.ofSeconds(25));
                 conciergeUserAccountPage.getBusinessAcNumber().setValue("20211221164474");
             }
-            if (field.equals("phone number,postal code,company")) {
-
+            if (field.equals("phoneNumber")) {
+                conciergeUserAccountPage.getClientLookupPhoneNumber().should(Condition.be(visible), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getClientLookupPhoneNumber().setValue("37360424263");
+            }
+            if (field.equals("postalCode")){
+                conciergeUserAccountPage.getClientLookupEmailByName().should(Condition.be(visible), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getClientLookupEmailByName().setValue("test@mailinator.com");
+                conciergeUserAccountPage.getPostalCode().should(Condition.be(visible), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getPostalCode().setValue("12345");
+            }
+            if (field.equals("company")){
+                conciergeUserAccountPage.getCompany().should(Condition.be(visible), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getCompany().setValue("TestCompany");
+            }
+            if (field.equals("company")){
+                conciergeUserAccountPage.getCompany().should(Condition.be(visible), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getCompany().setValue("TestCompany");
             }
             conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(25));
 
