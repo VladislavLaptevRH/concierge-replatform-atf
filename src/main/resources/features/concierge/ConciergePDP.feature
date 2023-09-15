@@ -216,25 +216,25 @@ Feature: Concierge PDP
     When I go to Swatch Landing Page
     Then I verify that swatch landing page is displayed
 
-#  Scenario: Verify the Postal code updates in PDP
-#
-#    Given I log into Concierge as "associate"
-#    When I choose 'US' country
-#    When I go to item "prod28500462" from search field
-#    When I click on the first project search result with parameters 'prod28500462''10097586 BWMR'
-#    Then Verify that 'default US zip code is present in PDP'
-#    Then I click on zip code and change it to '10001'
-#    Then I verify that zip code in PDP is '10001'
-#    When I choose 'CA' country
-#    Then I click on zip code and change it to 'H1Y2B5'
-#    Then I verify that zip code in PDP is 'H1Y 2B5'
-#    Then Verify that 'price in PDP changed from US$ to CA$'
-#    When I choose 'GB' country
-#    Then I click on zip code and change it to 'SW1A1AA'
-#    Then I verify that zip code in PDP is 'SW1A1AA'
-#    Then Verify that 'Confirm that PDP has price in GBP'
+  Scenario: Verify the Postal code updates in PDP
+    Given I log into Concierge as "associate"
+    When I choose 'US' country
+    When I go to item "prod28500462" from search field
+    When I click on the first project search result with parameters 'prod28500462''10097586 BWMR'
+    Then Verify that 'default US zip code is present in PDP'
+    Then I click on zip code and change it to '10001'
+    Then I verify that zip code in PDP is '10001'
+    When I choose 'CA' country
+    Then I click on zip code and change it to 'H1Y2B5'
+    Then I verify that zip code in PDP is 'H1Y 2B5'
+    Then Verify that 'price in PDP changed from US$ to CA$'
+    When I choose 'GB' country
+    Then I click on zip code and change it to 'SW1A1AA'
+    Then I verify that zip code in PDP is 'SW1A1AA'
+    Then Verify that 'Confirm that PDP has price in GBP'
 #    When I click on rh concierge logo
-#    When I navigate to "Coffee Tables"
+#    When I click on search
+#    When I type item name 'Coffee Tables'
 #    Then I click on the first project search result
 #    Then Verify that 'default US zip code is present in PDP'
 

@@ -47,6 +47,7 @@ public class ConciergeE2EStepDefs {
     PdpScreen pdpScreen = new PdpScreen();
     PaymentScreen paymentScreen = new PaymentScreen();
 
+    public static String currentURL = "";
     EstoreUserAccountPage estoreUserAccountPage= new EstoreUserAccountPage();
 
     String usState = "";
@@ -1377,6 +1378,23 @@ public class ConciergeE2EStepDefs {
         String URL = Hooks.conciergeBaseURL + "/catalog/product/product.jsp?productId=" + productId + "";
         open(URL);
         with().pollInterval(6, SECONDS).await().until(() -> true);
+    }
+
+    @When("I click total excluding sales tax")
+    public void iClickTotal() {
+        $(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+    }
+
+    @When("select any reason code on SHIPPING OVERRIDE form & click apply button")
+    public void selectAnyReason() {
+        Select itemList = new Select($(By.xpath("//*[@id = 'data_override_reason']")));
+        itemList.selectByValue("Customer Delight");
+        $(By.xpath("//*[text() = 'APPLY']")).click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text() = 'Waived Shipping']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = '$279.00']")).should(visible, Duration.ofSeconds(15));
     }
 
     @When("I open cart")

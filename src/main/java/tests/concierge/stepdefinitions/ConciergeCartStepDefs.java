@@ -10,6 +10,8 @@ import io.cucumber.java.mn.Харин;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.AssertJUnit;
 import tests.concierge.pageObject.*;
@@ -19,10 +21,12 @@ import tests.utility.Hooks;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.Month;
+import java.util.concurrent.Callable;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.await;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -72,6 +76,12 @@ public class ConciergeCartStepDefs {
     public static String date;
     public static String year;
     public static String month;
+
+   public static float topTotalPriceAfterDecreasing;
+   public static float subtotalPriceAfterDecreasing;
+   public static float bottomTotalPriceAfterDecreasing;
+   public static float topMemberSavingsAfterDecreasing;
+   public static float bottomMemberSavingsAfterDecreasing;
 
     @When("I navigate to the cart page")
     public void iNavigateToTheCartPage() {
@@ -195,6 +205,13 @@ public class ConciergeCartStepDefs {
         $(By.xpath("//*[text()='Metal Box Frame Leaner Mirror']")).shouldNotBe(visible, Duration.ofMinutes(1));
     }
 
+    @Then("Close the Form")
+    public void iCloseForm() {
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[@data-testid = 'dialog-title-close-button']")).click();
+        $(By.xpath("//*[text() = 'Adjusted']")).shouldNotBe(visible, Duration.ofMinutes(1));
+    }
+
     @When("I click on total item line price")
     public void iClickOnTotalItemLinePrice() {
         int quantity = Integer.parseInt($(By.xpath("//*[contains(@id, 'quantity')]")).getText());
@@ -216,7 +233,6 @@ public class ConciergeCartStepDefs {
     public void iSelectPriceOverride(String arg0) {
         $(By.xpath("//option[@value='" + arg0 + "']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//option[@value='" + arg0 + "']")).click();
-
     }
 
     @When("I introduces value for override price")
@@ -890,7 +906,7 @@ public class ConciergeCartStepDefs {
         $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery')]")).should(visible, Duration.ofMinutes(1));
     }
 
-    @Then("I verify alternate addresses for client with multipel addresses")
+    @Then("I verify alternate addresses for client with multiple addresses")
     public void iVerifyAlternateAddressesForClientWithMultipelAddresses() {
         int addressesSize = conciergeUserAccountPage.getClientSearchResultAddresses().size();
         assertTrue(addressesSize > 1);
@@ -923,13 +939,14 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify membership banner")
     public void iVerifyMembershipBanner() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text() = 'REMOVE MEMBERSHIP']")).shouldBe(visible, Duration.ofSeconds(15));
-        MemberPrice = $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "");
+        MemberPrice = $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", "");
         float regularPrice = Float.parseFloat(RegularPrice);
         float memberPrice = Float.parseFloat(MemberPrice);
-        String savings = Float.toString(regularPrice - memberPrice).replaceAll(".0", "");
+        String savings = Float.toString(regularPrice - memberPrice);
         $(By.xpath("//h2[text() = ' RH MEMBERS PROGRAM']")).shouldBe(visible, Duration.ofSeconds(15));
-        assertEquals("You've elected to join the RH Members Program, and you'll save $" + savings + ".00 on this order.", $(By.xpath("//h2[text() = ' RH MEMBERS PROGRAM']/following-sibling::p")).getText());
+        assertEquals("You've elected to join the RH Members Program, and you'll save $" + Float.parseFloat(savings) + "0 on this order.", $(By.xpath("//h2[text() = ' RH MEMBERS PROGRAM']/following-sibling::p")).getText());
     }
 
     @When("I apply employee discount")
@@ -998,10 +1015,99 @@ public class ConciergeCartStepDefs {
         $(By.xpath("//*[text()='Automation Associate']")).shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    @Then("I save member price")
-    public void iSaveMemberPrice() {
+    @Then("I click {string} on cart screen")
+    public void iClickOnButtonOnCartScreen(String button) {
+        switch (button) {
+            case "join now button":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[text() = 'JOIN NOW']")).click();
+                with().pollInterval(9, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[text() = 'JOIN NOW']")).shouldNot(visible,  Duration.ofSeconds(15));
+                break;
+            case "remove membership button":
+                $(By.xpath("//*[text() = 'REMOVE MEMBERSHIP']")).click();
+                with().pollInterval(9, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[text() = 'JOIN NOW']")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case "Remove Link":
+                $(By.xpath("//*[text() = 'Remove']")).click();
+                with().pollInterval(9, SECONDS).await().until(() -> true);
+                if(!$(By.xpath("//*[text() = 'YOUR SHOPPING CART IS EMPTY']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
+                $(By.xpath("//*[text() = 'YOUR SHOPPING CART IS EMPTY']")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            default: break;
+        }
+    }
+
+    @Then("I verify that {string} on the cart page")
+    public void iVerifyThatOnTheCartPage(String data) {
+        switch (data) {
+            case "quantity and sum were decreased":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                assertEquals(topTotalPriceAfterDecreasing / 5, Float.parseFloat($(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", "")));
+                assertEquals(subtotalPriceAfterDecreasing / 5, Float.parseFloat($(By.xpath("//*[contains(text(), 'Subtotal')]/../following-sibling::div/span")).getText().replace("$", "").replace(".00","").replace(",", "")));
+//                assertEquals(bottomTotalPriceAfterDecreasing / 5, Float.parseFloat($(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).getText().replace("$", "").replace(",", "")));
+                assertEquals(topMemberSavingsAfterDecreasing / 5, Float.parseFloat( $(By.xpath("//h2/following-sibling::p")).getText().substring(51, 57).replace(",", "")));
+                assertEquals(bottomMemberSavingsAfterDecreasing / 5, Float.parseFloat($(By.xpath("(//*[contains(text(),'Join the RH Members Program')])[2]/..")).getText().replaceAll("[^0-9]", "").replace("00", "")));
+                break;
+            case "quantity and sum were increased":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                assertEquals(topTotalPriceAfterDecreasing * 4, Float.parseFloat($(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", "")));
+                assertEquals(subtotalPriceAfterDecreasing * 4, Float.parseFloat($(By.xpath("//*[contains(text(), 'Subtotal')]/../following-sibling::div/span")).getText().replace("$", "").replace(".00","").replace(",", "")));
+//                assertEquals(bottomTotalPriceAfterDecreasing * 4, Float.parseFloat($(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).getText().replace("$", "").replace(",", "")));
+                assertEquals(topMemberSavingsAfterDecreasing * 4, Float.parseFloat( $(By.xpath("//h2/following-sibling::p")).getText().substring(51, 57).replace(",", "")));
+                assertEquals(bottomMemberSavingsAfterDecreasing * 4, Float.parseFloat($(By.xpath("(//*[contains(text(),'Join the RH Members Program')])[2]/..")).getText().replaceAll("[^0-9]", "").replace("00", "")));
+                break;
+            default: break;
+        }
+    }
+
+    @Then("I change quantity in the car for {string}")
+    public void iChangeQuantityInTheCart(String quantity) {
+        Select itemList = new Select($(By.xpath("//*[contains(@id, 'quantity')]")));
+        itemList.selectByIndex(Integer.parseInt(quantity));
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!$(By.xpath("//*[contains(@id, 'quantity')]")).getText().equals(quantity)){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+    }
+
+    @Then("I save data for decreasing")
+    public void iSafeDataForDecreasing() {
+        topTotalPriceAfterDecreasing = Float.parseFloat($(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", ""));
+        subtotalPriceAfterDecreasing = Float.parseFloat($(By.xpath("//*[contains(text(), 'Subtotal')]/../following-sibling::div/span")).getText().replace("$", "").replace(".00","").replace(",", ""));
+        bottomTotalPriceAfterDecreasing = Float.parseFloat($(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).getText().replace("$", "").replace(",", ""));
+        topMemberSavingsAfterDecreasing = Float.parseFloat( $(By.xpath("//h2/following-sibling::p")).getText().substring(51, 59).replace(",", ""));
+        bottomMemberSavingsAfterDecreasing = Float.parseFloat($(By.xpath("(//*[contains(text(),'Join the RH Members Program')])[2]/..")).getText().replaceAll("[^0-9]", "").replace("00", ""));
+    }
+
+    @Then("I save data for increasing")
+    public void iSafeDataForIncreasing() {
+        topTotalPriceAfterDecreasing = Float.parseFloat($(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", ""));
+        subtotalPriceAfterDecreasing = Float.parseFloat($(By.xpath("//*[contains(text(), 'Subtotal')]/../following-sibling::div/span")).getText().replace("$", "").replace(".00","").replace(",", ""));
+        bottomTotalPriceAfterDecreasing = Float.parseFloat($(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).getText().replace("$", "").replace(",", ""));
+        topMemberSavingsAfterDecreasing = Float.parseFloat( $(By.xpath("//h2/following-sibling::p")).getText().substring(51, 57).replace(",", ""));
+        bottomMemberSavingsAfterDecreasing = Float.parseFloat($(By.xpath("(//*[contains(text(),'Join the RH Members Program')])[2]/..")).getText().replaceAll("[^0-9]", "").replace("00", ""));
+    }
+
+    @Then("I verify membership banner in PG")
+    public void iVerifyMembershipBannerInPG() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text() = 'REMOVE MEMBERSHIP']")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//h2/following-sibling::p")).shouldBe(text("You've elected to join the RH Members Program, and you'll save $526.00 on this order."), Duration.ofSeconds(15));
+    }
+
+    @Then("I verify that Membership Banner is present with all the data")
+    public void iVerifyThatMembershipBannerIsPresentWithAllTheData() {
         $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).shouldBe(visible, Duration.ofSeconds(15));
-       RegularPrice = $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "");
+       RegularPrice = $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", "");
+        $(By.xpath("//h2/i")).shouldBe(text("The"), Duration.ofSeconds(15));
+        $(By.xpath("//h2")).shouldBe(text(" RH MEMBERS PROGRAM"), Duration.ofSeconds(15));
+        $(By.xpath("//h2/following-sibling::p")).shouldBe(text("Join the RH Members Program for $175.00, and save  $526.00 on this order."), Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = 'JOIN NOW']")).shouldBe(visible, Duration.ofSeconds(15));
     }
 
     @When("I choose order classification")
