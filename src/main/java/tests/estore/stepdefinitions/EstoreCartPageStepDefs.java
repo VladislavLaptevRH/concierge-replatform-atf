@@ -12,6 +12,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import tests.concierge.pageObject.ConciergeCartPageScreen;
 import tests.concierge.pageObject.SaleScreen;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
@@ -25,6 +26,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 public class EstoreCartPageStepDefs {
     EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
@@ -39,6 +41,8 @@ public class EstoreCartPageStepDefs {
     EstorePaymentPage estorePaymentPage = new EstorePaymentPage();
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
 
+    ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
+
     private static Response response;
     int itemQuantity;
     int lineItemPrice;
@@ -47,6 +51,8 @@ public class EstoreCartPageStepDefs {
     String memberPrice;
 
     String totalPriceOrderEstimate;
+
+    int rhMemberSavingsAmount;
 
     @When("I remove all items from estore cart")
     public void iRemoveAllItemsFromEstoreCart() {
@@ -278,7 +284,6 @@ public class EstoreCartPageStepDefs {
     @Then("I verify order estimate section in cart")
     public void iVerifyOrderEstimateSectionInCart() {
         $(By.xpath("//*[text()='Subtotal with Member Savings']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='RH Members Program']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='RH Member Savings on this order']")).should(visible, Duration.ofSeconds(40));
     }
 
@@ -311,7 +316,7 @@ public class EstoreCartPageStepDefs {
             $(By.xpath("//*[contains(text(),'New York')]")).should(visible, Duration.ofSeconds(20));
         }
         if (arg0.equals("CAN")) {
-
+            System.out.println();
         }
     }
 
@@ -527,7 +532,6 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify state field empty dropdown issue for International billing address")
     public void iVerifyStateFieldEmptyDropdownIssueForInternationalBillingAddress() {
-
         $(By.xpath("//*[text()='State required.']")).should(visible, Duration.ofSeconds(30));
     }
 
@@ -799,4 +803,69 @@ public class EstoreCartPageStepDefs {
     public void userVerifyThatMembershipPopUpIsNotDisplayed() {
         estoreCartPage.verifyThatPurchasingMembershipPopIsNotDisplayed();
     }
+
+    @And("I verify that I'm able to edit monogram product in cart")
+    public void iVerifyThatIMAbleToEditMonogramProductInCart() {
+        estorePDPScreen.clickToEditMonogramButton();
+        conciergeCartPageScreen.getMonogramFonts().get(2).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        conciergeCartPageScreen.getMonogramFonts().get(2).doubleClick();
+        conciergeCartPageScreen.getMonogramColors().get(5).should(visible, Duration.ofMinutes(1));
+        conciergeCartPageScreen.getMonogramColors().get(5).doubleClick();
+        estoreCartPage.introduceMonogramText();
+        estorePDPScreen.clickToAddMonogramButton();
+    }
+
+    @Then("I verify free delivery charges for estore in cart")
+    public void iVerifyFreeDeliveryChargesForEstoreInCart() {
+        $(By.xpath("//*[text()='Standard Delivery Shipping']")).should(visible, Duration.ofSeconds(20));
+        String totalLineItemPrice = estoreCartPage.getTotalLineItemPrice().getText();
+        $(By.xpath("(//*[text()=\"" + totalLineItemPrice + "\"])[3]")).should(visible, Duration.ofSeconds(12));
+    }
+
+    @And("I verify applicable charges 2 to 3 days for estore in cart")
+    public void iVerifyApplicableCharges2To3DaysForEstoreInCart() {
+        estoreCartPage.selectApplicableCharges2to3Days();
+        estoreCartPage.veifyThatTwoToThreeBusinessDaysTextIsDisplayed();
+
+        int charges2to3DAys = 50;
+        int totalLineItemPrice = Integer.parseInt(estoreCartPage.getTotalLineItemPrice().getText().replaceAll("[^0-9]", "").replaceAll("00", ""));
+        int totalLineItemPriceWithCharges = charges2to3DAys + totalLineItemPrice;
+        $(By.xpath("//*[text()=\"" + "$" + totalLineItemPriceWithCharges + ".00" + "\"]")).should(visible, Duration.ofSeconds(12));
+    }
+
+    @And("I verify applicable charges 1 to 2 days for estore in cart")
+    public void iVerifyApplicableCharges1To2DaysForEstoreInCart() {
+        estoreCartPage.selectApplicableCharges1to2Days();
+        estoreCartPage.veifyThatTwoToThreeBusinessDaysTextIsDisplayed();
+
+        int charges2to3DAys = 75;
+        int totalLineItemPrice = Integer.parseInt(estoreCartPage.getTotalLineItemPrice().getText().replaceAll("[^0-9]", "").replaceAll("00", ""));
+        int totalLineItemPriceWithCharges = charges2to3DAys + totalLineItemPrice;
+        $(By.xpath("//*[text()=\"" + "$" + totalLineItemPriceWithCharges + ".00" + "\"]")).should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that Unlimited Furniture Delivery message is displayed")
+    public void iVerifyThatUnlimitedFurnitureDeliveryMessageIsDisplayed() {
+        estoreCartPage.getUfdCartButton().should(visible);
+    }
+
+    @And("I verify that amount for UFD was added to total price")
+    public void iVerifyThatAmountForUFDWasAddedToTotalPrice() {
+        estoreCartPage.verifyUFDAmount();
+    }
+
+    @Then("I verify that rh member savings on this order message and amount is displayed")
+    public void iVerifyThatRhMemberSavingsOnThisOrderMessageAndAmountIsDisplayed() {
+        $(By.xpath("//*[text()='Subtotal with Member Savings']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='RH Member Savings on this order']")).should(visible, Duration.ofSeconds(40));
+        rhMemberSavingsAmount = Integer.parseInt($(By.xpath("//*[@id='spa-root']/div/main/div[2]/div/div/div[2]/div[2]/div[2]/div[2]/span")).getText().replaceAll(".00", "xzl").replaceAll("[^0-9]", ""));
+        assertTrue("Amount for RH Member Savings on this order is displayed", rhMemberSavingsAmount > 0);
+    }
+
+    @And("I verify that total line price is equal to price for member")
+    public void iVerifyThatTotalLinePriceIsEqualToPriceForMember() {
+        int totalLineItemPrice = Integer.parseInt(estoreCartPage.getTotalLineItemPrice().getText().replaceAll("[^0-9]", "").replaceAll("00", ""));
+        assertTrue("Total line item price is equal to member price", totalLineItemPrice == estoreCartPage.getLineItemMemberPrice());
+    }
+
 }

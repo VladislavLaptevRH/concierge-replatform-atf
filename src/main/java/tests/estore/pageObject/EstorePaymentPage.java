@@ -56,6 +56,13 @@ public class EstorePaymentPage {
 
     private final SelenideElement splitPaymentCheckBox = $(By.xpath("//input[@id='page-checkout-payment_split-payment']"));
 
+    public void verifyThatNewBillingAddressisDisplayed() {
+        $(By.xpath("//*[text()='John Ivanov']")).should(Condition.visible);
+        $(By.xpath("//*[text()='66 Ceres St']")).should(Condition.visible);
+        $(By.xpath("//*[text()='San Francisco, CA, 94124']")).should(Condition.visible);
+        $(By.xpath("//*[text()='4158224747']")).should(Condition.visible);
+    }
+
 
     public void selectRhCreditCardPaymentPlan() {
         Select rhCreditCard = new Select(selectAPaymentPlanRhCreditCard);

@@ -12,6 +12,7 @@ Feature: Estore Wishlist
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I open product page with "prod2020027" and "17050043" with "FOG" for estore
+    When I click on estore my account icon for guest user
     When I click on add to wishlist button
     Then I validate items in wishlist
 
@@ -19,6 +20,7 @@ Feature: Estore Wishlist
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I open product page with "prod2020027" and "17050043" with "FOG" for estore
+    When I click on estore my account icon for guest user
     When I click on add to wishlist button
     Then I validate items in wishlist
     Then I validate member price in wishlist
@@ -31,6 +33,7 @@ Feature: Estore Wishlist
     When I open estore cart
     When I click on add to wishlist button from cart
     When I click on view wishlist button
+    When I click on estore my account icon for guest user
     Then I validate items in wishlist
 
 

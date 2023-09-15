@@ -30,16 +30,17 @@ public class EstoreSearchStepDefs {
     @When("I go to estore item {string} from search field")
     public void iGoToItemFromEstoreSearchField(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).should(visible, Duration.ofSeconds(60));
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]")).click();
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]//input")).should(visible, Duration.ofSeconds(60));
+        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]//input")).click();
         estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
         estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
         generalStepDefs.waitForJSandJQueryToLoad();
 
 
-        estoreUserAccountPage.getSearchItemField().setValue(arg0);
-
+        estoreUserAccountPage.getSearchItemField().sendKeys(arg0);
+        sleep(2000);
+        estoreUserAccountPage.getSearchItemField().click();
         estoreUserAccountPage.getSearchItemField().sendKeys(Keys.ENTER);
 
 //        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
@@ -63,9 +64,9 @@ public class EstoreSearchStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
 
         estoreUserAccountPage.getSearchItemField().setValue(generalStepDefs.getAlphaNumericString(7));
-
-        estoreSearchScreen.getSeeAllResultsButton().should(visible, Duration.ofSeconds(40));
-        estoreSearchScreen.getSeeAllResultsButton().click();
+        sleep(2000);
+        estoreUserAccountPage.getSearchItemField().click();
+        estoreUserAccountPage.getSearchItemField().sendKeys(Keys.ENTER);
     }
 
     @Then("I verify that we cannot find what you are looking message is displayed")
@@ -181,13 +182,12 @@ public class EstoreSearchStepDefs {
 
     @Then("I verify sale banner for estore")
     public void iVerifySaleBannerForEstore() {
-        estoreSearchScreen.getSaveText().should(visible, Duration.ofSeconds(20));
+        estoreSearchScreen.getSalePageBanner().should(visible, Duration.ofSeconds(20));
     }
 
     @When("I click on view results")
     public void iClickOnViewResults() {
-        estoreItemPage.getAddToCartButton().should(visible, Duration.ofSeconds(20));
-        estoreItemPage.getAddToCartButton().click();
+        estoreItemPage.clickToViewSearchResultsButton();
     }
 
     @Then("I verify cribs title for estore")

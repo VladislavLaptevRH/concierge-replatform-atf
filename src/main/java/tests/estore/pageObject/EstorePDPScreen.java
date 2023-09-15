@@ -55,10 +55,37 @@ public class EstorePDPScreen {
 
     private final SelenideElement monogramCheckBox = $(By.xpath("//*[@data-testid='monogram-checkbox']"));
 
+    private final SelenideElement editMonogramButton = $(By.xpath("//*[text()='Edit']"));
+
+    private final SelenideElement koutHdFontMonogram = $(By.xpath("//input[@value='Knockout 2 (KOUT-HD)']"));
+
+    private final SelenideElement goldMetallicColorMonogram = $(By.xpath("//input[@name='checkboxLight Gold Metallic (MLGD)']"));
+
+    private final SelenideElement addMonogram = $(By.xpath("//button[@data-testid='monogram-add-button']"));
 
     public void clickToReturnPolicyButton() {
         returnPolicyButton.should(Condition.and("", Condition.interactable, Condition.visible)
                 , Duration.ofSeconds(15)).click(ClickOptions.usingJavaScript());
+    }
+
+    public void clickToAddMonogramButton() {
+        addMonogram.should(Condition.and("", Condition.interactable, Condition.visible)
+                , Duration.ofSeconds(15)).click(ClickOptions.usingJavaScript());
+    }
+
+    public void clickToEditMonogramButton() {
+        editMonogramButton.should(Condition.and("", Condition.appear, Condition.visible)
+                , Duration.ofSeconds(15)).click(ClickOptions.usingJavaScript());
+    }
+
+    public void selectMonogramKoutHdFont(){
+        koutHdFontMonogram.should(Condition.visible).click();
+
+    }
+
+    public void selectGoldMetallicColorMonogram(){
+        goldMetallicColorMonogram.click();
+
     }
 
     public void clickToMonogramCheckBox() {
@@ -76,7 +103,7 @@ public class EstorePDPScreen {
     public void selectSizeOption() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         sizeOption.should(Condition.and("", Condition.interactable, Condition.visible,
-                Condition.appear,Condition.enabled), Duration.ofSeconds(40));
+                Condition.appear, Condition.enabled), Duration.ofSeconds(40));
         Select selectSize = new Select(sizeOption);
         selectSize.selectByIndex(2);
     }
@@ -93,7 +120,7 @@ public class EstorePDPScreen {
     public void selectFinishOption() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         finishOption.should(Condition.and("", Condition.interactable, Condition.visible,
-                Condition.appear,Condition.enabled), Duration.ofSeconds(40));
+                Condition.appear, Condition.enabled), Duration.ofSeconds(40));
         Select selectFinishOption = new Select(finishOption);
         selectFinishOption.selectByIndex(1);
     }

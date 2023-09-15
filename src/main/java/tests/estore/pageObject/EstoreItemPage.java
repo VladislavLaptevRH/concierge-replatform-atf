@@ -1,5 +1,6 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -28,6 +29,8 @@ public class EstoreItemPage {
 
     private final SelenideElement addToCartButton = $(By.xpath("(//button[@id='component-related-product-card_add-to-cart-btn'])[1]"));
 
+    private final SelenideElement viewSearchResultsButton = $(By.xpath("//*[@data-testid='add-to-cart-dialog-opener']"));
+
     private final SelenideElement addToCartButtonNotDisabled = $(By.xpath("(//button[@data-testid='add-to-cart-dialog-opener'])[1][not(@disabled)]"));
 
     private final SelenideElement addToCartDisabledButton = $(By.xpath("(//*[@data-testid= 'add-to-cart-dialog-opener'])[1][@disabled]"));
@@ -55,7 +58,7 @@ public class EstoreItemPage {
 
     private final SelenideElement continueShoppingButton = $(By.xpath("//div[2]/button[contains(@class,'MuiButtonBase-root MuiButton-root')]"));
 
-    private final SelenideElement aggreeeAndAddToCardButton = $(By.cssSelector("#spo-auth-addToCart"));
+    private final SelenideElement aggreeeAndAddToCardButton = $(By.cssSelector("#specialOrderConfirmation_addToCart-btn"));
 
     private final SelenideElement collectionsText = $(By.xpath("//*[contains(text(),'collections')]"));
 
@@ -83,9 +86,14 @@ public class EstoreItemPage {
 
     private final SelenideElement agreeAndAddToCartButton = $(By.xpath("//span[@class='MuiButton-label' and text() = 'Agree & Add To Cart']"));
 
-    private final SelenideElement addToWishListButton = $(By.xpath("(//div[@data-testid='add-to-wish-list'])[1]"));
+    private final SelenideElement addToWishListButton = $(By.xpath("(//div[@id='component-relatedProductActions_addToWishlist-btn'])[1]"));
 
     private final SelenideElement viewWishlistButton = $(By.id("addToWishlistDialog_viewWishList-btn"));
 
     private final SelenideElement continueWithOriginalAddressButton = $(By.xpath("(//button[@data-testid='add-to-cart-dialog-opener'])[1]"));
+
+
+    public void clickToViewSearchResultsButton() {
+        viewSearchResultsButton.should(Condition.interactable).click();
+    }
 }

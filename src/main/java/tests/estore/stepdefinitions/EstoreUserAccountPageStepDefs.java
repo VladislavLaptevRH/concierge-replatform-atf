@@ -331,21 +331,21 @@ public class EstoreUserAccountPageStepDefs {
                 }
                 break;
             case "RH CONTEMPORARY":
-                List<String> rhConExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Art", "Outdoor", "SALE"));
+                List<String> rhConExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Art", "Outdoor"));
                 estoreUserAccountPage.checkMenu(rhConExpectedItems);
                 for (String each : rhConExpectedItems) {
                     estoreUserAccountPage.accessSubMenu(each);
                 }
                 break;
             case "RH INTERIORS":
-                List<String> rhIntExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "SALE"));
+                List<String> rhIntExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor"));
                 estoreUserAccountPage.checkMenu(rhIntExpectedItems);
                 for (String each : rhIntExpectedItems) {
                     estoreUserAccountPage.accessSubMenu(each);
                 }
                 break;
             case "RH MODERN":
-                List<String> rhModExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "SALE"));
+                List<String> rhModExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor"));
                 estoreUserAccountPage.checkMenu(rhModExpectedItems);
                 for (String each : rhModExpectedItems) {
                     if (each.equals("Outdoor")) {
@@ -356,21 +356,21 @@ public class EstoreUserAccountPageStepDefs {
                 }
                 break;
             case "RH BEACH HOUSE":
-                List<String> rhBeachExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Décor", "Art", "Outdoor", "SALE"));
+                List<String> rhBeachExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Décor", "Art", "Outdoor"));
                 estoreUserAccountPage.checkMenu(rhBeachExpectedItems);
                 for (String each : rhBeachExpectedItems) {
                     estoreUserAccountPage.accessSubMenu(each);
                 }
                 break;
             case "RH SKI HOUSE":
-                List<String> rhSkiExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Décor", "Outdoor", "SALE"));
+                List<String> rhSkiExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Décor", "Outdoor"));
                 estoreUserAccountPage.checkMenu(rhSkiExpectedItems);
                 for (String each : rhSkiExpectedItems) {
                     estoreUserAccountPage.accessSubMenu(each);
                 }
                 break;
             case "RH BABY & CHILD":
-                List<String> rhBathExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Nursery", "Décor", "Lighting", "Rugs", "Windows", "Storage", "Playroom", "Gifts", "TEEN", "SALE"));
+                List<String> rhBathExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Nursery", "Décor", "Lighting", "Rugs", "Windows", "Storage", "Playroom", "Gifts", "TEEN"));
                 estoreUserAccountPage.checkMenu(rhBathExpectedItems);
                 for (String each : rhBathExpectedItems) {
                     if (each.equals("TEEN")) {
@@ -381,7 +381,7 @@ public class EstoreUserAccountPageStepDefs {
                 }
                 break;
             case "RH TEEN":
-                List<String> rhTeenExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Décor", "Lighting", "Rugs", "Windows", "Storage", "Study", "Gifts", "BATH & CHILD", "SALE"));
+                List<String> rhTeenExpectedItems = new ArrayList(Arrays.asList("Furniture", "Bedding", "Décor", "Lighting", "Rugs", "Windows", "Storage", "Study", "Gifts", "BATH & CHILD"));
                 estoreUserAccountPage.checkMenu(rhTeenExpectedItems);
                 for (String each : rhTeenExpectedItems) {
                     if (each.equals("BATH & CHILD")) {

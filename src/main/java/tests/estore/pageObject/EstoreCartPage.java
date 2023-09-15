@@ -5,14 +5,13 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 
@@ -213,9 +212,52 @@ public class EstoreCartPage {
 
     private final SelenideElement cartMemberPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
 
+    private final SelenideElement selectChargesOption = $(By.xpath("(//div[@dropdowntype='true']//div//select)[2]"));
+
+    private final SelenideElement option2to3DaysCharges = $(By.xpath("//option[@value='second']"));
+
+    private final SelenideElement option1to2DaysCharges = $(By.xpath("//option[@value='next']"));
+
+    private final SelenideElement twoToThreeBusinessDaysText = $(By.xpath("//*[text()='2-day (2 to 3 business days) $50.00']"));
+
+    private final SelenideElement totalAdditionalProductDiscount = $(By.xpath("//*[text()='Total Additional Product Discount']"));
+
+
+    public void verifyThatTotalAdditionalProductDiscountMessageIsDisplayed() {
+        totalAdditionalProductDiscount.should(visible, Duration.ofSeconds(20));
+    }
+
+    public int getLineItemMemberPrice() {
+        return Integer.parseInt(totalLineItemPrice.getText().replaceAll("[^0-9]", "").replaceAll("00", ""));
+    }
+
+    public void veifyThatTwoToThreeBusinessDaysTextIsDisplayed() {
+        twoToThreeBusinessDaysText.should(visible, Duration.ofSeconds(15));
+    }
+
+    public void selectApplicableCharges2to3Days() {
+        selectChargesOption.should(visible);
+        selectChargesOption.scrollIntoView(true);
+        selectChargesOption.should(interactable).click();
+        option2to3DaysCharges.should(interactable);
+        option2to3DaysCharges.click();
+    }
+
+    public void selectApplicableCharges1to2Days() {
+        selectChargesOption.should(visible);
+        selectChargesOption.scrollIntoView(true);
+        selectChargesOption.should(interactable).click();
+        option1to2DaysCharges.should(interactable);
+        option1to2DaysCharges.click();
+    }
+
     public SelenideElement getVariableJoinButtonByName(String name) {
         String path = String.format(variableJoinButton, name);
         return $(byXpath(path));
+    }
+
+    public void introduceMonogramText() {
+        monogramText.should(visible, Duration.ofSeconds(15)).sendKeys("tes");
     }
 
     public int getMemberProductPriceInCart() {
@@ -257,5 +299,16 @@ public class EstoreCartPage {
         noThanksButton.should(interactable, Duration.ofSeconds(10));
         with().pollInterval(2, SECONDS).await().until(() -> true);
         noThanksButton.doubleClick();
+    }
+
+    public void verifyUFDAmount() {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        String totalLineItemPriceValue = totalLineItemPrice.getText();
+        int totalLineItemPriceAmount = Integer.parseInt(totalLineItemPrice.getText().substring(0, totalLineItemPriceValue.indexOf(".00")).replaceAll("[^0-9]", ""));
+        int ufdAmount = 279;
+        int totalLineItemPriceWithCharges = ufdAmount + totalLineItemPriceAmount;
+        String totalPrice = decimalFormat.format(totalLineItemPriceWithCharges);
+
+        $(By.xpath("//*[text()=\"" + "$" + totalPrice + ".00" + "\"]")).should(visible, Duration.ofSeconds(12));
     }
 }

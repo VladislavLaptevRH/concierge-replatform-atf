@@ -14,9 +14,8 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.with;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class EstoreContractTradeStepDefs {
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
@@ -37,19 +36,19 @@ public class EstoreContractTradeStepDefs {
 
     @When("I click on bed")
     public void iClickOnBed() {
-        $(By.xpath("//*[text()='Bed']")).should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Bed']")).should(interactable, Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", $(By.xpath("//*[text()='Bed']")));
     }
 
     @When("I click on beds")
     public void iClickOnBeds() {
-        $(By.xpath("//*[text()='Beds']")).should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Beds']")).should(interactable, Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", $(By.xpath("//*[text()='Beds']")));
     }
 
     @Then("I verify that the dropdown's are enabled")
     public void iVerifyThatTheDropdownSAreEnabled() {
-        $(By.xpath("//*[text()='Bedroom Collections']")).should(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Bedroom Collections']")).should(interactable, Duration.ofSeconds(20));
     }
 
     @When("I go to TN brand")

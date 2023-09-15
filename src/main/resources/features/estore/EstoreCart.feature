@@ -235,10 +235,79 @@ Feature: Estore Cart Page
     Then I verify estore order total in order estimate for membership for "42100241 GREY"
     When I click on remove membership estore button
 
-  Scenario: Verify the standard delivery charges (Free & applicable charges)
+  Scenario: Verify the standard delivery charges (Free & applicable charges 2 to 3 applicable charges)
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I goes to estore cart for estore
-    Then I verify the standard delivery charges for estore
+    Then I verify free delivery charges for estore in cart
+    And I verify applicable charges 2 to 3 days for estore in cart
+
+  Scenario: Verify the standard delivery charges (Applicable charges 1 to 2 applicable charges)
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I goes to estore cart for estore
+    Then I verify applicable charges 1 to 2 days for estore in cart
+
+  Scenario: Verify the UFD charges for furniture
+    Given I remove all items from estore cart
+    When I choose country for eStore from footer
+    When I open product page with "prod6490263" and "50400761" with "BWBK" for estore
+    When I click on add to cart estore button
+    When I click on aggree&add estore button
+    And I click on view cart estore button
+    Then I verify that Unlimited Furniture Delivery message is displayed
+    And I verify that amount for UFD was added to total price
+
+  Scenario: Verify Membership Prices for Membership registered user for line items - discount verbiage line in summary
+    Given I log into eStore as "member" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    Then I verify that rh member savings on this order message and amount is displayed
+    And I verify that total line price is equal to price for member
+
+  Scenario: Verify Promo code Discount applied for CART, order review and Order confirmation
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I goes to estore cart for estore
+    When I remove promotion from estore cart
+    Then I verify that I'm able to apply promotion code
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I execute payment with credit card on estore
+    Then I verify that Total Additional Product Discount message is displayed on order review page
+    When I click on a place estore order button
+    When I click on order details button
+    And I verify that Total Additional Product Discount message is displayed on order review page
+
+  Scenario: Verify Regular client address page - ship to and Bill to addresses - edit addresses functionality
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I goes to estore cart for estore
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I click on edit estore billing address button on payment page
+    When I click on edit billing adress button on address page
+    When I introduce new billing address on address page
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    Then I verify that new billing address is displayed on payment page

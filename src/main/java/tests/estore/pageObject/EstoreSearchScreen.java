@@ -1,7 +1,6 @@
 package tests.estore.pageObject;
 
 import com.codeborne.selenide.SelenideElement;
-import io.cucumber.java.eo.Se;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
@@ -41,6 +40,8 @@ public class EstoreSearchScreen {
     private SelenideElement hamburgerIcon = $(By.xpath("//div[@id='hamburgerIcon']"));
 
     private SelenideElement saveText = $(By.xpath("//*[text()='SAVE UP TO 70% AS AN RH MEMBER*']"));
+
+    private SelenideElement salePageBanner = $(By.xpath("//img[@data-id='component-salepage-banner']"));
 
     private SelenideElement upToText = $(By.xpath("//*[text()='up to']"));
 
