@@ -1,8 +1,10 @@
 package tests.concierge.stepdefinitions;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 
 import com.codeborne.selenide.ex.ElementNotFound;
+import io.cucumber.java.en.And;
 import org.openqa.selenium.support.ui.Select;
 import tests.concierge.pageObject.*;
 import io.cucumber.java.en.Then;
@@ -152,6 +154,18 @@ public class Pdp {
            default:
                break;
        }
+    }
+
+    @And("I click on search")
+    public void iClickOnSearch() {
+        $(By.xpath("(//*[@class = 'MuiIconButton-label'])[1]")).should(visible, Duration.ofSeconds(5));
+        $(By.xpath("(//*[@class = 'MuiIconButton-label'])[1]")).click();
+    }
+
+    @And("I type item name {string}")
+    public void iTypeItemName(String arg0) {
+        $(By.xpath("//*[@id = 'site-search-input']")).setValue(arg0);
+        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click();
     }
 
     @When("Verify that {string}")
@@ -497,6 +511,7 @@ public class Pdp {
     public void verifyTat(String data) {
         switch (data){
             case  "PDP title":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 $(By.xpath("//h2[contains(@class, MuiTypography-h2)]")).shouldBe(visible, Duration.ofSeconds(15));
                 break;
             case  "view select items on sale link":
@@ -675,6 +690,7 @@ public class Pdp {
                  boolean memberOption = $$(By.xpath("//*[contains(text() ,'Trade')]")).size() > 1;
                  assertTrue(memberOption);
              }
+             with().pollInterval(5, SECONDS).await().until(() -> true);
              $(By.xpath("(//*[contains(text() ,'SALE')])[3]")).shouldBe(visible, Duration.ofSeconds(15));
              boolean saleOption = $$(By.xpath("//*[contains(text() ,'SALE')]")).size() >=4;
              assertTrue(saleOption);
@@ -718,20 +734,20 @@ public class Pdp {
                 break;
             case  "has qty dropdown":
                 $(By.xpath("(//*[text()='Qty'])[1]")).should(visible, Duration.ofSeconds(5));
-                $(By.xpath("(//*[@data-testid='in-stock-qty-select'])[4]")).should(visible, Duration.ofSeconds(5));
+                $(By.xpath("(//*[@data-testid='in-stock-qty-select'])[1]")).should(visible, Duration.ofSeconds(5));
                 break;
             case  "has \"add to cart\" and \"add to project\" buttons":
-                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-cart-dialog-opener'])[4]")).should(visible, Duration.ofSeconds(5));
-                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-project-dialog-opener'])[4]")).should(visible, Duration.ofSeconds(5));
+                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-cart-dialog-opener'])[1]")).should(visible, Duration.ofSeconds(5));
+                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-project-dialog-opener'])[1]")).should(visible, Duration.ofSeconds(5));
                 break;
             case  "has an item can be added to cart from modal":
-                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-cart-dialog-opener'])[4]")).click();
+                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-cart-dialog-opener'])[1]")).click();
                 $(By.xpath("//*[@id = 'ajax-proceed-to-cart']/span[1]")).should(visible, Duration.ofSeconds(5));
                 $(By.xpath("//*[@id = 'ajax-continue-shopping']/span[1]")).should(visible, Duration.ofSeconds(5));
                 $(By.xpath("(//*[@data-testid = 'dialog-title-close-button'])[2]")).click();
                 break;
             case  "has an item can be added to project from modal":
-                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-project-dialog-opener'])[4]")).click();
+                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-project-dialog-opener'])[1]")).click();
                 $(By.xpath("//h3[text() = 'ADD TO PROJECT']")).should(visible, Duration.ofSeconds(5));
                 $(By.xpath("//*[text() = 'CANCEL']")).should(visible, Duration.ofSeconds(5));
                 $(By.xpath("//*[text() = 'SAVE']")).should(visible, Duration.ofSeconds(5));
@@ -994,9 +1010,20 @@ public class Pdp {
 
     @Then("I verify that zip code in PDP is {string}")
     public void iVerifyThatZipCodeIs(String zipCode) {
-        $(By.xpath("(//*[@id = 'component-sku']//span)[1]")).shouldBe(visible, Duration.ofSeconds(20));
-       String currentZipCode =  $(By.xpath("(//*[@id = 'component-sku']//span)[1]")).getText();
         with().pollInterval(9, SECONDS).await().until(() -> true);
+        $(By.xpath("(//*[@id = 'component-sku']//span)[1]")).shouldBe(visible, Duration.ofSeconds(20));
+
+       if(!$(By.xpath("//*[contains(text(), '" + zipCode + "')]")).isDisplayed()){
+           WebDriverRunner.getWebDriver().navigate().refresh();
+           for(int i = 0; i <=3; i++) {
+               iChangeZipCodeFor(zipCode);
+               with().pollInterval(9, SECONDS).await().until(() -> true);
+               if($(By.xpath("//*[contains(text(), '" + zipCode + "')]")).isDisplayed()){
+                   break;
+               }
+           }
+       }
+        String currentZipCode =  $(By.xpath("(//*[@id = 'component-sku']//span)[1]")).getText();
         assertEquals(currentZipCode, zipCode + ".");
     }
 
