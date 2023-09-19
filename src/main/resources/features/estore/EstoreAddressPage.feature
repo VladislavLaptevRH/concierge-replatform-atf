@@ -176,7 +176,51 @@ Feature: Estore Address Page
     When I click on estore checkout button
     When I click on estore no thanks button
     When I fill estore shipping address
-    When I click on edit estore billing address button
     When I click on same as estore shipping address checkbox
-    When I add gift message
+    When I click on add gift message button for estore
+    When I fill the first gift message "The first gift message" on address page
+    When I click on add order description message for estore
+    When I fill the order description field message "Order description message" on address page
     When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I execute payment with credit card on estore
+    Then I verify that introduced gift message is displayed on "Order review" page
+    And I verify that introduced order description message is displayed on "Order review" page
+    When I click on a place estore order button
+    When I click on estore order details button
+    Then I verify that introduced gift message is displayed on "Thank you" page
+    And I verify that introduced order description message is displayed on "Thank you" page
+
+  Scenario: Edit Gift message and order description
+    Given I log into eStore as "addresspage" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    When I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on add gift message button for estore
+    When I fill the first gift message "The first gift message" on address page
+    When I click on add order description message for estore
+    When I fill the order description field message "Order description message" on address page
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I execute payment with credit card on estore
+    When I click on edit gift message on order review page
+    When I click on add gift message button for estore
+    When I fill the first gift message "The second gift message" on address page
+    When I click on add order description message for estore
+    When I fill the order description field message "New order description message" on address page
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I click on continue button from payment page
+    Then I verify that introduced gift message is displayed on "The second gift message" page
+    And I verify that introduced order description message is displayed on "New order description message" page
+    When I click on a place estore order button
+    When I click on estore order details button
+    Then I verify that introduced gift message is displayed on "The second gift message" page
+    And I verify that introduced order description message is displayed on "New order description message" page
+
+

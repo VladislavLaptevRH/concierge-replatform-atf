@@ -23,6 +23,8 @@ Feature: Estore Membership
     When I navigate to the member tab
     When I goes to click on cart button from header
     Then I validate cart
+    #check member price
+    #check RH Members Program
 
   Scenario: eStore Link to Membership
     Given I log into eStore as "member" user
@@ -96,3 +98,20 @@ Feature: Estore Membership
     Then I verify that save card to account checkbox should be checked by defaults
     When I goes to estore cart for estore
     When I click on remove membership estore button
+
+
+  #Verify the memberID, enrollment date, renewal date and price, MOP, for a Member User
+  #go to membership page and verify that memberID, enrollment date, renewal date and price, MOP, for a Member User are displayed
+
+  #Verify the email address displayed in membership page
+  #go to membership and verift that email is displayed on membership page Email: automationmember@rh.com
+
+  #Verify cancel membership link
+  #go to membership page from profile and verify cancel membership link
+
+  #Verfiy membership FAQa link
+  #click on faq link and verify that title is displayed
+
+  #Verify the Copy displayed in My Account - Membership page - Non Member
+  #login as regular user->go to membership page and verify that membership details are not displayed
+  #Verify the Link to membership functionality  (including copy)

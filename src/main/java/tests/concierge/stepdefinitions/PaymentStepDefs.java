@@ -1,7 +1,6 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
@@ -351,5 +350,15 @@ public class PaymentStepDefs {
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
+    }
+
+    @Then("I verify that on the payment page the same address as for the saved mastercard")
+    public void iVerifyThatOnThePaymentPageTheSameAddressAsForTheSavedMastercard() {
+        $(By.xpath("//*[text()='QAFirst Automation']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='North 16th Street']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='QaApartment']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Phoenix, AZ, 85020']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='US']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='1241312319']")).should(visible,Duration.ofSeconds(20));
     }
 }

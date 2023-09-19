@@ -453,3 +453,35 @@ Feature: Estore Payment
       | VI       |
       | MC       |
       | AX       |
+
+
+    #QUESTION
+  Scenario: Verify the billing address updated in payment page based on the saved payment selected
+    Given I log into eStore as "mastercard" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
+    When I fill estore shipping address
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    Then I verify that on the payment page the same address as for the saved mastercard
+
+    Scenario: Verify that for US ship to all the payment types saved are reflected in payment page
+    Given I log into eStore as "savedRhCc" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I choose "CAN" country from footer
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
+    When I fill estore shipping address for CAN
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    Then I verify unavailability of saved for RHCC
