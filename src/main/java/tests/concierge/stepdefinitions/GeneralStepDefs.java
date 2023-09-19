@@ -186,6 +186,49 @@ public class GeneralStepDefs {
         conciergeAddressScreen.getBillingAddressText().should(visible, Duration.ofSeconds(12));
     }
 
+    public void fillAddressFieldsWithoutCompanyName() {
+//        $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")).should(visible, Duration.ofSeconds(30));
+        conciergeAddressScreen.getShippingAddressText().shouldHave(text("Shipping Address"), Duration.ofSeconds(40));
+        conciergeAddressScreen.getBillingAddressText().shouldHave(text("Billing Address"), Duration.ofSeconds(40));
+
+        if(conciergeAddressScreen.getSoldToTaxExempt().isDisplayed()){
+            clearField(conciergeAddressScreen.getSoldToTaxExempt());
+            conciergeAddressScreen.getSoldToTaxExempt().setValue("111");
+        }
+
+        clearField(checkoutAddressScreen.getFirstNameInpt());
+        checkoutAddressScreen.getFirstNameInpt().setValue("QAFirst");
+
+        clearField(checkoutAddressScreen.getLastNameField());
+        checkoutAddressScreen.getLastNameField().setValue("Automation");
+
+        clearField(checkoutAddressScreen.getStreetAddressField());
+        checkoutAddressScreen.getStreetAddressField().setValue("North 16th Street");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        clearField(checkoutAddressScreen.getAptFloorSuiteField());
+        checkoutAddressScreen.getAptFloorSuiteField().setValue("QaApartment");
+        try {
+            executeJavaScript("window.scrollTo(0, 600)");
+//            executeJavaScript("arguments[0].click();", checkoutAddressScreen.getCityField());
+            clearField(checkoutAddressScreen.getCityField());
+            checkoutAddressScreen.getCityField().setValue("Phoenix");
+        } catch (ElementNotInteractableException e){
+            System.out.println("Element not interactable");
+            executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getCityField());
+            clearField(checkoutAddressScreen.getCityField());
+            checkoutAddressScreen.getCityField().setValue("Phoenix");
+        }
+
+        clearField(checkoutAddressScreen.getPhoneField());
+        checkoutAddressScreen.getPhoneField().setValue("1241312319");
+        if(checkoutAddressScreen.getBillingAddressAsShippingCheckBox().isDisplayed()){
+            executeJavaScript("arguments[0].click();", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
+        }
+
+        conciergeAddressScreen.getBillingAddressText().should(visible, Duration.ofSeconds(12));
+    }
+
 
     /**
      * Fill zip code, state, country for address checkout

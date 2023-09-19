@@ -238,6 +238,78 @@ public class AbstractStepDefs {
         }
     }
 
+    @When("I fill all fields from address screen for checking zip code")
+    public void iFillAllFieldsFromAddressScreenForBrandsForCheckingZipcode() {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()) {
+            $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
+            $(By.xpath("(//*[text()='Edit'])[10]")).click();
+        }
+        if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
+            generalStepDefs.fillAddressFields();
+            generalStepDefs.fillZipCodeStateCountry("11111", "US", "AZ");
+            if(checkoutAddressScreen.getEmailAddressField().isDisplayed()){
+                generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
+                checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
+            } else {
+                System.out.println("Email field is not available");
+            }
+            if(checkoutAddressScreen.getConfirmEmailAddressField().isDisplayed()){
+                checkoutAddressScreen.getConfirmEmailAddressField().setValue("test@mailinator.com");
+            } else {
+                System.out.println("Email confirm field is not available");
+            }
+
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+
+        } else {
+            System.out.println("Address fields are not available");
+        }
+        if(checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
+            if (!$(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
+                $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+            }
+        }
+    }
+
+    @When("I fill all fields from address screen without company name")
+    public void iFillAllFieldsFromAddressScreenForBrandsWithoutCompanyName() {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()) {
+            $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
+            $(By.xpath("(//*[text()='Edit'])[10]")).click();
+        }
+        if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
+            generalStepDefs.fillAddressFieldsWithoutCompanyName();
+            generalStepDefs.fillZipCodeStateCountry("85020", "US", "AZ");
+            if(checkoutAddressScreen.getEmailAddressField().isDisplayed()){
+                generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
+                checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
+            } else {
+                System.out.println("Email field is not available");
+            }
+            if(checkoutAddressScreen.getConfirmEmailAddressField().isDisplayed()){
+                checkoutAddressScreen.getConfirmEmailAddressField().setValue("test@mailinator.com");
+            } else {
+                System.out.println("Email confirm field is not available");
+            }
+
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+
+        } else {
+            System.out.println("Address fields are not available");
+        }
+        if(checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
+            if (!$(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
+                $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+            }
+        }
+    }
+
     @When("I clicks on a random menu item for brands")
     public void iClicksOnARandomMenuItemForBrands() {
         await().forever().until(() -> conciergeUserAccountPage.getMenuItems().get(0).isDisplayed());

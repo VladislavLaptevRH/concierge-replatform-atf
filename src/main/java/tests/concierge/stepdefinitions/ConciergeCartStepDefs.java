@@ -6,30 +6,28 @@ import com.codeborne.selenide.ex.ElementNotFound;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.mn.Харин;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.AssertJUnit;
 import tests.concierge.pageObject.*;
 import tests.estore.stepdefinitions.EstoreCartPageStepDefs;
 import tests.utility.Hooks;
 
 import java.text.DecimalFormat;
 import java.time.Duration;
-import java.time.Month;
-import java.util.concurrent.Callable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.await;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static tests.utility.Hooks.country;
 
 public class ConciergeCartStepDefs {
     WebDriver webDriver = Hooks.getWebDriver();
@@ -82,6 +80,9 @@ public class ConciergeCartStepDefs {
    public static float bottomTotalPriceAfterDecreasing;
    public static float topMemberSavingsAfterDecreasing;
    public static float bottomMemberSavingsAfterDecreasing;
+   ArrayList<Integer> quantityList = new ArrayList<>();
+
+   public int sumOfArray = 0;
 
     @When("I navigate to the cart page")
     public void iNavigateToTheCartPage() {
@@ -174,23 +175,62 @@ public class ConciergeCartStepDefs {
     public void iClickOnQuantityLineItemButton() {
         selectOption.getQuantitySelectBtn().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         selectOption.getQuantitySelectBtn().should(visible, Duration.ofMinutes(1));
-        selectOption.getQuantitySelectBtn().click();
-        randomQuantity = generalStepDefs.getRandomNumber(2, 5);
-        $(By.xpath("//option[@value='" + randomQuantity + "']")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        $(By.xpath("//option[@value='" + randomQuantity + "']")).shouldHave(text(Integer.toString(randomQuantity)), Duration.ofSeconds(10));
-        $(By.xpath("//option[@value='" + randomQuantity + "']")).scrollIntoView(true);
-        with().pollInterval(2, SECONDS).await().until(() -> true);
-        $(By.xpath("//option[@value='" + randomQuantity + "']")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        $(By.xpath("//option[@value='" + randomQuantity + "']")).click();
+        for(int i = 1; i <= $$(By.xpath(" //select[contains(@id,'quantity')]")).size(); i++) {
+            $(By.xpath(" (//select[contains(@id,'quantity')])[" + i + "]")).click();
+            randomQuantity = generalStepDefs.getRandomNumber(2, 40);
+            $(By.xpath("(//option[@value='" + randomQuantity + "'])[" + i + "]")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+            $(By.xpath("(//option[@value='" + randomQuantity + "'])[" + i + "]")).shouldHave(text(Integer.toString(randomQuantity)), Duration.ofSeconds(10));
+            $(By.xpath("(//option[@value='" + randomQuantity + "'])[" + i + "]")).scrollIntoView(true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            $(By.xpath("(//option[@value='" + randomQuantity + "'])[" + i + "]")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+            $(By.xpath("(//option[@value='" + randomQuantity + "'])[" + i + "]")).click();
+            quantityList.add(randomQuantity);
+        }
         WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that quantity was updated")
     public void iVerifyThatQuantityWasUpdated() {
-        assertEquals(randomQuantity, Integer.parseInt(conciergeUserAccountPage.getCartButtonItemSum().getText()));
+        for (Integer integer : quantityList) {
+            sumOfArray = integer + sumOfArray;
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+        }
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+        System.out.println(quantityList);
+        assertEquals(sumOfArray, Integer.parseInt(conciergeUserAccountPage.getCartButtonItemSum().getText()));
     }
 
+    @Then("I remove the line items one by one")
+    public void iRemoveAllItemsOneByOne() {
+       while($(By.xpath("//*[text() = 'Remove']")).isDisplayed()){
+           $$(By.xpath("//*[text() = 'Remove']")).last().scrollIntoView(true);
+           $$(By.xpath("//*[text() = 'Remove']")).last().click();
+           with().pollInterval(5, SECONDS).await().until(() -> true);
+       }
+        $(By.xpath("//*[text() = 'YOUR SHOPPING CART IS EMPTY']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify grouping")
+    public void iVerifyGrouping() {
+        $(By.xpath("//*[text() = 'How Would You Like to Receive Your Shipments?']")).scrollIntoView(true);
+        $(By.xpath("//*[text() = 'How Would You Like to Receive Your Shipments?']")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text() = 'Deliver items as they are available']")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text() = 'Deliver ASAP']")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text() = 'Consolidate into as few deliveries as possible']")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text() = 'Delivered on the latest quoted delivery date']")).shouldBe(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify order classification dropdown")
+    public void iVerifyOrderClassificationDropdown() {
+        $(By.xpath("//*[@id = 'element-orderclassification-label']")).should(text("Order Classification*"), Duration.ofSeconds(20));
+        $(By.xpath("//*[@id = 'element-orderclassification']/option[text() = 'Select an Option']")).shouldNotBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@id = 'element-orderclassification']")).click();
+        $(By.xpath("//*[@id = 'element-orderclassification']/option[text() = 'Select an Option']")).shouldNotBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@id = 'element-orderclassification']/option[text() = 'RH Gallery Order']")).shouldNotBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@id = 'element-orderclassification']/option[text() = 'RH Residential Trade']")).shouldNotBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@id = 'element-orderclassification']/option[text() = 'RH Interior Design']")).shouldNotBe(visible, Duration.ofSeconds(20));
+    }
     @When("I click on remove button from cart page")
     public void iClickOnRemoveButtonFromCartPage() {
         conciergeCartPageScreen.getRemoveButton().should(visible, Duration.ofMinutes(1));
@@ -1150,6 +1190,70 @@ public class ConciergeCartStepDefs {
         GeneralStepDefs.addLineItemsToConciergeCart();
     }
 
+    @When("I verify that mattress fee is showing in order estimate")
+    public void iVerifyThatMattressFeeIsShowing() {
+        if(Objects.equals(country, "US")){
+            assertEquals($(By.xpath("//*[text() = 'Mattress Fee']/../..//p")).getText(), "$10.50");
+        }
+        if(Objects.equals(country, "GB")){
+            assertEquals($(By.xpath("//*[text() = 'Mattress Fee']/../..//p")).getText(), "$11.75");
+        }
+        if(Objects.equals(country, "CA")){
+            assertEquals($(By.xpath("//*[text() = 'Mattress Fee']/../..//p")).getText(), "$16");
+        }
+    }
+
+    @When("I verify that company name is not mandatory on address page")
+    public void iVerifyThatCompanyIsNotMandatoryOnAddressPage() {
+        $(By.xpath("//*[text()='WE ARE UNABLE TO VERIFY THE ADDRESS PROVIDED']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I verify updated zip code in the cart")
+    public void iVerifyUpdatedZipCode() {
+        $(By.xpath("//*[contains(text(), 'Shipping to')]/a")).should(text("11111"), Duration.ofSeconds(20));
+    }
+
+    @When("I verify updated zip code in PDP")
+    public void iVerifyUpdatedZipCodeInPDP() {
+        $(By.xpath("//*[@data-testid = 'postal-code-dialog-opener']")).should(text("11111"), Duration.ofSeconds(20));
+    }
+
+    @When("Verify that after come back to address page from payment page ship to and bill to address is showing")
+    public void iVerifyShippingAndBillingAddresses() {
+        WebDriverRunner.getWebDriver().navigate().back();
+        $(By.xpath("//*[text() = 'Shipping Address']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text() = 'Billing Address']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("Verify that on address page state drop down field is not shown empty")
+    public void iVerifyThatStateDropDownIsNotEmpty() {
+        $(By.xpath("(//*[@id = 'address-state-field'])[1]")).click();
+        List<String> stateItems = new ArrayList(Arrays.asList("AL - Alabama", "AK - Alaska", "AZ - Arizona", "AR - Arkansas", "CA - California", "CO - Colorado", "CT - Connecticut", "DE - Delaware", "DC - District Of Columbia", "FL - Florida", "GA - Georgia", "HI - Hawaii", "ID - Idaho", "IL - Illinois", "IN - Indiana", "IA - Iowa", "KS - Kansas", "KY - Kentucky", "LA - Louisiana", "ME - Maine", "MD - Maryland", "MA - Massachusetts", "MI - Michigan", "MN - Minnesota", "MS - Mississippi", "MO - Missouri", "MT - Montana", "NE - Nebraska", "NV - Nevada", "NH - New Hampshire", "NJ - New Jersey", "NM - New Mexico", "NY - New York", "NC - North Carolina", "ND - North Dakota", "OH - Ohio", "OK - Oklahoma", "OR - Oregon", "PA - Pennsylvania", "RI - Rhode Island", "SC - South Carolina", "SD - South Dakota", "TN - Tennessee", "TX - Texas", "UT - Utah", "VT - Vermont", "VA - Virginia", "WA - Washington", "WV - West Virginia", "WI - Wisconsin", "WY - Wyoming"));
+        for (int i = 2; i <= stateItems.size(); i++) {
+            $(By.xpath("((//*[@id = 'address-state-field'])[1]/option)[" + i + "]")).scrollIntoView(true);
+            assertEquals( $(By.xpath("((//*[@id = 'address-state-field'])[1]/option)[" + i + "]")).getText(), stateItems.get(i-2));
+        }
+        $(By.xpath("(//*[@id = 'address-state-field'])[2]")).click();
+        for (int i = 2; i <= stateItems.size(); i++) {
+            $(By.xpath("((//*[@id = 'address-state-field'])[2]/option)[" + i + "]")).scrollIntoView(true);
+            assertEquals( $(By.xpath("((//*[@id = 'address-state-field'])[2]/option)[" + i + "]")).getText(), stateItems.get(i-2));
+        }
+    }
+
+    @When("I add line items to cart via API for grouping")
+    public void iAddLineItemsToCartViaAPIForGrouping() {
+        GeneralStepDefs.addLineItemsToConciergeCartWithSKU("10031801 WGRY", "1");
+        GeneralStepDefs.addLineItemsToConciergeCartWithSKU("22100257 LHST", "1");
+        GeneralStepDefs.addLineItemsToConciergeCartWithSKU("10106866 FGWT", "1");
+    }
+
+    @When("I add line items to cart via API")
+    public void iAddLineItemsToCartViaAPI() {
+        GeneralStepDefs.addLineItemsToConciergeCartWithSKU("10031801 WGRY", "1");
+        GeneralStepDefs.addLineItemsToConciergeCartWithSKU("10078584 ABRS", "1");
+        GeneralStepDefs.addLineItemsToConciergeCartWithSKU("10106866 FGWT", "1");
+    }
+
     @When("Verify that zip code was updated in the Cart to {string}")
     public void verifyThatZipCodeWasUpdatedInTheCart(String zipCode) {
         with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -1313,15 +1417,15 @@ public class ConciergeCartStepDefs {
 
     @When("I verify all the sums on the cart page")
     public void iVerifyAllTheSumsOnTheCartPage() {
-            if (Hooks.country.equals("GB")) {
+            if (country.equals("GB")) {
 
             }
 
-            if (Hooks.country.equals("CA")) {
+            if (country.equals("CA")) {
 
             }
 
-            if (Hooks.country == null || Hooks.country.equals("US")) {
+            if (country == null || country.equals("US")) {
                 $(By.xpath("//*[@data-testid = 'price-for-regular']")).shouldHave(text("$3,195.00"), Duration.ofSeconds(20));
                 $(By.xpath("//*[@data-testid = 'price-for-member']")).shouldHave(text("$2,395.00"), Duration.ofSeconds(20));
                 if($(By.xpath("//*[@data-testid = 'price-for-final-sale']")).isDisplayed()){
@@ -1336,15 +1440,15 @@ public class ConciergeCartStepDefs {
 
     @When("I verify all the sums on the cart page with item quantity {string}")
     public void iVerifyAllTheSumsOnTheCartPage(String quantity) {
-        if (Hooks.country.equals("GB")) {
+        if (country.equals("GB")) {
 
         }
 
-        if (Hooks.country.equals("CA")) {
+        if (country.equals("CA")) {
 
         }
 
-        if (Hooks.country == null || Hooks.country.equals("US")) {
+        if (country == null || country.equals("US")) {
             $(By.xpath("//*[@data-testid = 'price-for-regular']")).shouldHave(text("$3,195.00"), Duration.ofSeconds(20));
             $(By.xpath("//*[@data-testid = 'price-for-member']")).shouldHave(text("$2,395.00"), Duration.ofSeconds(20));
             if($(By.xpath("//*[@data-testid = 'price-for-final-sale']")).isDisplayed()){
