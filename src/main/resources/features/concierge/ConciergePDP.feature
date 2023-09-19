@@ -232,11 +232,11 @@ Feature: Concierge PDP
     Then I click on zip code and change it to 'SW1A1AA'
     Then I verify that zip code in PDP is 'SW1A1AA'
     Then Verify that 'Confirm that PDP has price in GBP'
-#    When I click on rh concierge logo
-#    When I click on search
-#    When I type item name 'Coffee Tables'
-#    Then I click on the first project search result
-#    Then Verify that 'default US zip code is present in PDP'
+    When I click on rh concierge logo
+    When I click on search
+    When I type item name 'Coffee Tables'
+    Then I click on the first project search result
+    Then Verify that 'default US zip code is present in PDP'
 
   Scenario: Sale PDP: Regular/Member/Final Price validation
     Given I log into Concierge as "associate"

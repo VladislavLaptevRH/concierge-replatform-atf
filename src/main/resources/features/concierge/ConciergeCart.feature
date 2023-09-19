@@ -57,15 +57,16 @@ Feature:Concierge Cart Page
     Then I verify membership popup for guest user
 
   @concierge-All
-  Scenario: Line Item : Quantity update
+  Scenario: Line Item : Quantity update, remove line items
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add line items to cart via API
     When I open cart
     When I click on quantity line item button
     Then I verify that quantity was updated
+    Then I remove the line items one by one
 
   @concierge-All
   @conciergeCriticalPathTestRun
@@ -439,7 +440,6 @@ Feature:Concierge Cart Page
 
   @concierge-All
   Scenario: Verify Employee discount checkout
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -639,3 +639,93 @@ Feature:Concierge Cart Page
     When I click on client button
     When I choose a Non-Member client and click on plus button from client lookup search results
     Then I verify alternate addresses for client with multiple addresses
+
+  @concierge-All
+  Scenario: Grouping
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I add line items to cart via API for grouping
+    When I open cart
+    Then I verify grouping
+
+  @concierge-All
+  Scenario: Company name not required in billing address
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Member"
+    When I click on checkout button
+    When I click on no thanks button
+    When I fill all fields from address screen without company name
+    And I continue to payment
+    And I verify that company name is not mandatory on address page
+
+  @concierge-All
+  Scenario: Verify state field Empty dropdown issue
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Member"
+    When I click on checkout button
+    When I click on no thanks button
+    Then Verify that on address page state drop down field is not shown empty
+
+  @concierge-All
+  Scenario: Verify mattress fee
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API with '10179361 NONE' and quantity '1'
+    When I open cart
+    Then I verify that mattress fee is showing in order estimate
+
+  @concierge-All
+  Scenario: Verify postal code update in address page and then in cart and pdp
+    Given I log into Concierge as "associate"
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Non-Member"
+    When I fill all fields from address screen for checking zip code
+    And I continue to payment
+    When I click on continue with original address button
+    When I open cart
+    Then I verify updated zip code in the cart
+    When I click on rh concierge logo
+    When I go to item "10031801 WGRY" from search field
+    Then I chose the '1' line item selections one by one
+    Then I verify updated zip code in PDP
+
+  @concierge-All
+  Scenario: Verify the address saved in the New client Flow - Shipping, billing address
+    Given I log into Concierge as "associate"
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Non-Member"
+    When I fill all fields from address screen for checking zip code
+    And I continue to payment
+    When I click on continue with original address button
+    Then Verify that after come back to address page from payment page ship to and bill to address is showing
