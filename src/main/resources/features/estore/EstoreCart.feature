@@ -293,6 +293,27 @@ Feature: Estore Cart Page
     When I click on order details button
     And I verify that Total Additional Product Discount message is displayed on order review page
 
+  Scenario: Verify Employee Discount applied for CART, order review and Order confirmation
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I goes to estore cart for estore
+    When I remove promotion from estore cart
+    When I apply employee discount for estore
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I execute payment with credit card on estore
+    Then I verify that Total Additional Product Discount message is displayed on order review page
+    When I click on a place estore order button
+    When I click on order details button
+    And I verify that Total Additional Product Discount message is displayed on order review page
+
   Scenario: Verify Regular client address page - ship to and Bill to addresses - edit addresses functionality
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer

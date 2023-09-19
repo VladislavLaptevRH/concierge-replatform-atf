@@ -602,4 +602,30 @@ public class EstoreAddressStepDefs {
         generalStepDefs.clearField(estoreAddressScreen.getBillingAddressPhone());
         estoreAddressScreen.getBillingAddressPhone().setValue("415-822-4747");
     }
+
+    @When("I click on add gift message button for estore")
+    public void iClickOnAddGiftMessageButtonForEstore() {
+        estoreAddressScreen.clickToAddGiftMessageButton();
+    }
+
+    @Then("I verify that introduced gift message is displayed on {string} page")
+    public void iVerifyThatIntrotucedGiftMessageIsDisplayedOnPage(String message) {
+        $(By.xpath("//*[text()='" + message + "']"))
+                .should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I fill the first gift message {string} on address page")
+    public void iFillTheFirstGiftMessageOnAddressPage(String message) {
+        estoreAddressScreen.introduceTheFirstGiftMessage(message);
+    }
+
+    @When("I click on add order description message for estore")
+    public void iClickOnAddOrderDescriptionMessageForEstore() {
+        estoreAddressScreen.clickToOrderDescriptionButton();
+    }
+
+    @When("I fill the order description field message {string} on address page")
+    public void iFillTheOrderDescriptionFieldMessageOnAddressPage(String message) {
+        estoreAddressScreen.introduceOrderDescriptionMessage(message);
+    }
 }

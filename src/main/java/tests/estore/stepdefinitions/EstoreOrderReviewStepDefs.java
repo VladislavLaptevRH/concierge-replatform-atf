@@ -5,8 +5,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
+import tests.estore.pageObject.EstoreAddressScreen;
 import tests.estore.pageObject.EstoreCartPage;
 import tests.estore.pageObject.EstoreConfirmationOrderScreen;
+import tests.estore.pageObject.EstoreReviewOrderPage;
 
 import java.time.Duration;
 
@@ -23,7 +25,11 @@ public class EstoreOrderReviewStepDefs {
 
     EstoreConfirmationOrderScreen estoreConfirmationOrderScreen = new EstoreConfirmationOrderScreen();
 
+    EstoreAddressScreen estoreAddressScreen = new EstoreAddressScreen();
+
     EstoreCartPage estoreCartPage = new EstoreCartPage();
+
+    EstoreReviewOrderPage estoreReviewOrderPage = new EstoreReviewOrderPage();
 
     @When("I click on estore edit payment button on order review page")
     public void iClickOnEstoreEditPaymentButtonOnOrderReviewPage() {
@@ -80,5 +86,16 @@ public class EstoreOrderReviewStepDefs {
     @Then("I verify that Total Additional Product Discount message is displayed on order review page")
     public void iVerifyThatTotalAdditionalProductDiscountMessageIsDisplayedOnOrderReviewPage() {
         estoreCartPage.verifyThatTotalAdditionalProductDiscountMessageIsDisplayed();
+    }
+
+    @And("I verify that introduced order description message is displayed on {string} page")
+    public void iVerifyThatIntrotucedOrderDescriptionMessageIsDisplayedOnPage(String message) {
+        $(By.xpath("//*[text()='" + message + "']"))
+                .should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I click on edit gift message on order review page")
+    public void iClickOnEditGiftMessageOnOrderReviewPage() {
+        estoreReviewOrderPage.clickToEditGiftMessageButton();
     }
 }

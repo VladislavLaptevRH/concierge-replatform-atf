@@ -10,6 +10,7 @@ import tests.concierge.stepdefinitions.GeneralStepDefs;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
 @Getter
 public class EstoreAddressScreen {
@@ -129,6 +130,43 @@ public class EstoreAddressScreen {
     private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'Edit']"));
 
     private final SelenideElement editBillingAddressNew = $(By.xpath("//*[text() = 'Billing Address']/..//*[text() = 'Edit']"));
+
+    private final SelenideElement addGiftMessageBtn = $(By.xpath("//*[@id='giftMessage']//div"));
+    private final SelenideElement orderDescriptionBtn = $(By.xpath("(//*[@id='giftMessage']//*[@class='MuiGrid-root MuiGrid-container MuiGrid-item'])[2]"));
+
+    private final SelenideElement inputForTheFirstGiftMessage = $(By.xpath("(//*[@class='MuiCollapse-container MuiCollapse-entered']//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[1]"));
+
+    private final SelenideElement inputForTheFirstOrderDescriptionMessage = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-item']//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[4]"));
+
+    public void clickToAddGiftMessageButton() {
+        addGiftMessageBtn.should(Condition.interactable,
+                Duration.ofSeconds(15)).click();
+    }
+
+    public void clickToOrderDescriptionButton() {
+        orderDescriptionBtn.should(Condition.interactable,
+                Duration.ofSeconds(15)).click();
+    }
+
+    public void introduceOrderDescriptionMessage(String message) {
+        inputForTheFirstOrderDescriptionMessage.should(Condition.interactable,
+                Duration.ofSeconds(15)).click();
+        generalStepDefs.clearField(inputForTheFirstOrderDescriptionMessage);
+        inputForTheFirstOrderDescriptionMessage.should(Condition.interactable,
+                Duration.ofSeconds(15)).setValue(message);
+    }
+
+    public void introduceTheFirstGiftMessage(String giftMessage) {
+        inputForTheFirstGiftMessage.should(Condition.interactable,
+                Duration.ofSeconds(15)).click();
+        generalStepDefs.clearField(inputForTheFirstGiftMessage);
+
+        sleep(1000);
+        inputForTheFirstGiftMessage.should(Condition.interactable,
+                Duration.ofSeconds(15)).click();
+        inputForTheFirstGiftMessage.should(Condition.interactable,
+                Duration.ofSeconds(15)).setValue(giftMessage);
+    }
 
     public void selectAddressState(String state) {
         shippingAddressState.should(Condition.and("Visible, interactable", Condition.visible, Condition.interactable), Duration.ofSeconds(25));

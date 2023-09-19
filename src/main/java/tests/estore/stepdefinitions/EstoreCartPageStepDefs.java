@@ -97,17 +97,16 @@ public class EstoreCartPageStepDefs {
 
     @When("I apply employee discount for estore")
     public void iApplyEmployeeDiscountForEstore() {
-//        sleep(3000);
-//        $(By.xpath("//*[text()='RH Employee Discount']")).scrollIntoView(true);
-//        estoreCartPage.getUserNameEmployeeDiscount().should(visible, Duration.ofSeconds(40));
-//        estoreCartPage.getUserNameEmployeeDiscount().click();
-//        estoreCartPage.getUserNameEmployeeDiscount().setValue("ediscount");
-//        estoreCartPage.getPasswordEmployeeDiscount().should(visible, Duration.ofSeconds(40));
-//        estoreCartPage.getPasswordEmployeeDiscount().click();
-//        estoreCartPage.getPasswordEmployeeDiscount().setValue("p6K6K6Mx");
-//        estoreCartPage.getApplyEmpDiscountBtn().should(visible, Duration.ofSeconds(15));
-//        estoreCartPage.getApplyEmpDiscountBtn().click();
-//        estoreCartPage.getTotalAditionalProdDiscount().should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='RH Employee Discount']")).scrollIntoView(true);
+        estoreCartPage.getUserNameEmployeeDiscount().should(visible, Duration.ofSeconds(40));
+        estoreCartPage.getUserNameEmployeeDiscount().click();
+        estoreCartPage.getUserNameEmployeeDiscount().setValue("ediscount");
+        estoreCartPage.getPasswordEmployeeDiscount().should(visible, Duration.ofSeconds(40));
+        estoreCartPage.getPasswordEmployeeDiscount().click();
+        estoreCartPage.getPasswordEmployeeDiscount().setValue("p6K6K6Mx");
+        estoreCartPage.getApplyEmpDiscountBtn().should(visible, Duration.ofSeconds(15));
+        estoreCartPage.getApplyEmpDiscountBtn().click();
+        estoreCartPage.getTotalAditionalProdDiscount().should(visible, Duration.ofSeconds(40));
     }
 
     @And("I remove promotion from estore cart")
