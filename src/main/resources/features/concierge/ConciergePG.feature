@@ -49,7 +49,7 @@ Feature: Concierge PG Page
     When I choose country for concierge from footer
     Then I navigate to menu 'Dining'
     Then I navigate to sub menu 'Tables'
-    Then I navigate to gallery 'Rectangular Table Collections'
+    Then I navigate to gallery 'Round & Oval Tables'
     Then I click 'first collection from the list' on PG screen
     Then I verify that PG loads
     Then I verify that 'PG has SALE and IN-STOCK filters, text RESULTS (n), faucet with text SORT' on PG screen
@@ -74,7 +74,6 @@ Feature: Concierge PG Page
     Then I verify that 'user can select SIZE -> Length -> 30 and respective products are returned' on PG screen
 
   Scenario: Checking Faucets in SALE PGs
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I navigate to menu 'SALE'
@@ -89,12 +88,12 @@ Feature: Concierge PG Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I click on search Icon
-    When I Type product name 'rectangular table'
+    When I type item name 'rectangular table'
     Then I verify that 'PG has filters: CONCEPTS, IN-STOCK, SALE, BRAND, RESULTS and SORT is present' on PG screen
     Then I verify that 'CONCEPT dropdown returns various RH Brands' on PG screen
     Then I click 'RH Outdoor' on PG screen
     Then I verify that 'Italian Travertine Plinth Rectangular Fire Table is returned' on PG screen
-#    Then I verify that PG loads
+    Then I verify that PG loads
 
   Scenario Outline: Verify that title is present in PG
     Given I log into Concierge as "associate"
@@ -149,7 +148,7 @@ Feature: Concierge PG Page
     Then I navigate to sub menu 'Furniture'
     Then I navigate to gallery 'Sofas'
     Then I click 'sale checkbox' on PG screen
-#    Then I verify that 'Verify that all products have text From $ / $ Sale / $ Member' on PG screen
+    Then I verify that 'Verify that all products have text From $ / $ Sale / $ Member' on PG screen
 
   Scenario: Verify that PG is defaulted to 3-grid view
     Given I log into Concierge as "associate"

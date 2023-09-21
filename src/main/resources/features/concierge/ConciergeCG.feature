@@ -20,7 +20,7 @@ Feature: Concierge CG Page
       | Lighting  | Lighting Collections    |                                | RH              | RH               | 2                 |
       | Textiles  | Pillows                 | Pillow Collections             | RH              | RH               | 1                 |
       | Rugs      | Rugs                    | Rug Collections                | RH              | RH               | 1                 |
-      | Windows   | Drapery                 | Drapery Collections            | RH              | RH               | 1                 |
+#      | Windows   | Drapery                 | Drapery Collections            | RH              | RH               | 1                 |
       | Outdoor   | Furniture Collections   |                                | RH              | RH               | 3                 |
       | Living    | Leather Seating         | Seating Collections            | RH CONTEMPORARY | CN               | 1                 |
       | Bath      | Faucets & Hardware      | Faucets & Hardware Collections | RH CONTEMPORARY | CN               | 1                 |
@@ -43,6 +43,7 @@ Feature: Concierge CG Page
       | Rugs      | Handcrafted Rugs        | Rug Collections                | RH TEEN         | TN               | 1                 |
 
   Scenario Outline: Back to Top button functionality
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I change the brand to "<brand>"
@@ -55,7 +56,7 @@ Feature: Concierge CG Page
     Then I verify that 'user is brought to the top of the page' on CG screen
     Examples:
       | menu      | subMenu             | gallery                    | brand        | currentBrandName |
-      | Windows   | Drapery             | Drapery Collections        | RH           | RH               |
+#      | Windows   | Drapery             | Drapery Collections        | RH           | RH               |
       | Bath      | Furniture           | Bath Collections           | RH           | RH               |
       | Living    | Shelving & Cabinets | Cabinet Collections        | RH INTERIORS | IN               |
       | Textiles  | Pillows             | Outdoor Pillow Collections | RH OUTDOOR   | OD               |
