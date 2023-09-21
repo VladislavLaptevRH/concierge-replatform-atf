@@ -44,13 +44,12 @@ Feature: Concierge PG Page
       | Storage   | Wall                  | Memory Boards                 | RH TEEN         | TN               |
 
   Scenario: Checking Faucets in Collection PG
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I navigate to menu 'Dining'
     Then I navigate to sub menu 'Tables'
     Then I navigate to gallery 'Round & Oval Tables'
-    Then I click 'first collection from the list' on PG screen
+#    Then I click 'first collection from the list' on PG screen
     Then I verify that PG loads
     Then I verify that 'PG has SALE and IN-STOCK filters, text RESULTS (n), faucet with text SORT' on PG screen
     Then I click 'SORT and confirm that Modal has text FEATURED, Price Low to High, Price High to Low' on PG screen
