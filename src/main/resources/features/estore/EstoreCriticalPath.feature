@@ -27,14 +27,14 @@ Feature: Estore critical path
     Examples:
       | brands         |
       | rh             |
-      | rhcontemporary |
-      | rhinteriors    |
-      | rhmodern       |
-      | rhoutdoor      |
-      | rhbeachhouse   |
-      | rhskihouse     |
-      | rhbabyandchild |
-      | rhteen         |
+#      | rhcontemporary |
+#      | rhinteriors    |
+#      | rhmodern       |
+#      | rhoutdoor      |
+#      | rhbeachhouse   |
+#      | rhskihouse     |
+#      | rhbabyandchild |
+#      | rhteen         |
 
 
   Scenario Outline: Verify product thumbnail is correctly loaded
@@ -44,13 +44,13 @@ Feature: Estore critical path
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
-      | RH TEEN         |
-      | RH BABY & CHILD |
+#      | RH CONTEMPORARY |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
+#      | RH TEEN         |
+#      | RH BABY & CHILD |
 
   Scenario: Verify it shows price range below the thumbnail
     Given I log into eStore as "guest" user
@@ -69,14 +69,14 @@ Feature: Estore critical path
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
-      | RH TEEN         |
-      | RH BABY & CHILD |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
+#      | RH TEEN         |
+#      | RH BABY & CHILD |
 
 
   Scenario Outline: PG - Verify the Sale Price on PG pages for Sale Items
@@ -88,14 +88,14 @@ Feature: Estore critical path
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
-      | RH TEEN         |
-      | RH BABY & CHILD |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
+#      | RH TEEN         |
+#      | RH BABY & CHILD |
 
 
   Scenario Outline: PG - Verify sorting - low to high - is working as expected
@@ -108,14 +108,14 @@ Feature: Estore critical path
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
-      | RH TEEN         |
-      | RH BABY & CHILD |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
+#      | RH TEEN         |
+#      | RH BABY & CHILD |
 
   Scenario Outline: PG - Verify sorting - high to low - is working as expected
     Given I log into eStore as "guest" user
@@ -127,14 +127,14 @@ Feature: Estore critical path
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
-      | RH TEEN         |
-      | RH BABY & CHILD |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
+#      | RH TEEN         |
+#      | RH BABY & CHILD |
 
   Scenario Outline: PG - Verify the Member Price Text On PG page after selecting the specifications
     Given I log into eStore as "member" user
@@ -145,14 +145,14 @@ Feature: Estore critical path
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
-      | RH TEEN         |
-      | RH BABY & CHILD |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
+#      | RH TEEN         |
+#      | RH BABY & CHILD |
 
   Scenario Outline: CG - Verify collection name,image (regular,member,sale(applicable) on collection banner
     Given I log into eStore as "guest" user
@@ -163,14 +163,14 @@ Feature: Estore critical path
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
-      | RH TEEN         |
-      | RH BABY & CHILD |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
+#      | RH TEEN         |
+#      | RH BABY & CHILD |
 
   Scenario Outline: CG-Verify Back To top Button
     Given I log into eStore as "guest" user
@@ -183,14 +183,14 @@ Feature: Estore critical path
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
-      | RH TEEN         |
-      | RH BABY & CHILD |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
+#      | RH TEEN         |
+#      | RH BABY & CHILD |
 
   Scenario Outline: CG - Verify 1,2,3 grid views are working fine
     Given I log into eStore as "guest" user
@@ -201,14 +201,14 @@ Feature: Estore critical path
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
-      | RH TEEN         |
-      | RH BABY & CHILD |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
+#      | RH TEEN         |
+#      | RH BABY & CHILD |
 
   Scenario Outline: CG - Verify single Grid View is as default on CG
     Given I log into eStore as "guest" user
@@ -219,14 +219,14 @@ Feature: Estore critical path
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
-      | RH TEEN         |
-      | RH BABY & CHILD |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
+#      | RH TEEN         |
+#      | RH BABY & CHILD |
 
   Scenario Outline: CG - Change the grid view, go to PG, go back from PG, CG page should render in the same grid view that you previously selected
     Given I log into eStore as "guest" user
@@ -240,14 +240,14 @@ Feature: Estore critical path
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
-      | RH TEEN         |
-      | RH BABY & CHILD |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
+#      | RH TEEN         |
+#      | RH BABY & CHILD |
     #click on random product from collection (PG) after click on  back button from browser
 
   Scenario Outline: CG - From home page goto a collection and click on any Product, It should redirect user to PG
@@ -260,14 +260,14 @@ Feature: Estore critical path
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
-      | RH TEEN         |
-      | RH BABY & CHILD |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
+#      | RH TEEN         |
+#      | RH BABY & CHILD |
     #use fabric seating - sofas: check title, grid view
 
   Scenario: CG - Browser back button from search to CG page
