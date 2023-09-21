@@ -4,7 +4,6 @@
 Feature: Concierge PDP
 
   Scenario: Verify the PDP title and pricing
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -68,7 +67,7 @@ Feature: Concierge PDP
     Then I chose the '1' line item selections one by one
     Then Verify that 'text "This item will be ready for delivery between" is present'
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
-    Then I verify that text item# and SKU '10024796 WGRY' is present
+    Then I verify that text item# and SKU is present
     Then Verify that 'text "This item can be returned or exchanged within 30 days of delivery" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     Then Verify that 'confirm that Add to Cart slider is present'
@@ -91,7 +90,6 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'has an item can be added to project from modal'
 
   Scenario: Verify On Sale functionality
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI

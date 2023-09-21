@@ -451,6 +451,7 @@ public class Pdp {
         $(By.xpath("(//*[@id = 'add-to-project-button'])[1]")).click();
         conciergeProjectScreen.getAddToProjectProjectName().should(visible, Duration.ofMinutes(1));
         conciergeProjectScreen.getAddToProjectProjectName().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getProjectNamePopUpDropDownListItem().scrollIntoView(true);
         conciergeProjectScreen.getProjectNamePopUpDropDownListItem().click();
         $(By.xpath("(//*[text() = 'T-Brace Rectangular Extension Dining Table'])[4]")).shouldHave(visible, Duration.ofSeconds(15));
@@ -500,25 +501,21 @@ public class Pdp {
                     itemList.selectByIndex(Integer.parseInt(chose));
                     with().pollInterval(1, SECONDS).await().until(() -> true);
                 } catch (UnsupportedOperationException e) {
-                    WebDriverRunner.getWebDriver().navigate().refresh();
-                    itemList.selectByIndex(Integer.parseInt(chose));
-                    with().pollInterval(1, SECONDS).await().until(() -> true);
+                    iChoseLineItemSelectionsOneByOne(chose);
                 }
             } else {
                 try {
                     itemList.selectByIndex(Integer.parseInt(chose) + 1);
                     with().pollInterval(1, SECONDS).await().until(() -> true);
                 } catch (UnsupportedOperationException e) {
-                    WebDriverRunner.getWebDriver().navigate().refresh();
-                    itemList.selectByIndex(Integer.parseInt(chose) + 1);
-                    with().pollInterval(1, SECONDS).await().until(() -> true);
+                    iChoseLineItemSelectionsOneByOne(chose);
                 }
             }
         }
     }
 
     @When("I Verify that {string} is present")
-    public void verifyTat(String data) {
+    public void verifyThat(String data) {
         switch (data){
             case  "PDP title":
                 with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -588,6 +585,10 @@ public class Pdp {
                 break;
             case  "\"footer\" in PDP":
                 $(By.xpath("//*[@id = 'footer']")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "text item# and SKU '10024796 WGRY'":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[text() = 'Item# 10024796 WGRY']")).shouldBe(visible, Duration.ofSeconds(15));
                 break;
             default:
                 break;
@@ -1077,6 +1078,10 @@ public class Pdp {
 
     @Then("I Verify that the PDP title is present and prices match those prices in PG")
     public void iVerifyThatThePDPTitleIsPresentAndPricesMatchThosePricesInPG() {
+        if(!$(By.xpath("//h2[contains(@class, MuiTypography-h2)]")).isDisplayed()){
+            String URL = Hooks.getCurrentUrl().replace("//", "/");
+            open(URL);
+        }
         assertEquals(firstProductNameInPG, $(By.xpath("//h2[contains(@class, MuiTypography-h2)]")).getText());
         assertEquals(regularPriceInPG, conciergeCartPageScreen.getRegularPriceInPG().getText());
         assertEquals(memberPriceInPG, conciergeCartPageScreen.getMemberPriceInPG().getText().replaceAll(",", ""));

@@ -107,8 +107,12 @@ public class GeneralStepDefs {
         if(!conciergeLoginPage.getLocationDropDownList().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
-
         conciergeLoginPage.getLocationDropDownList().click();
+
+        if(! $(By.xpath("//*[text() = '5: Newport Beach']")).isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            conciergeLoginPage.getLocationDropDownList().click();
+        }
         $(By.xpath("//*[text() = '5: Newport Beach']")).click();
         conciergeLoginPage.getContinueButton().should(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getContinueButton().click();
