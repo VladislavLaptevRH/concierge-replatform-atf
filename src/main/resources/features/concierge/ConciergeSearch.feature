@@ -7,7 +7,7 @@ Feature: Concierge PG Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I click on search Icon
-    When I Type product name 'table'
+    When I type item name 'table'
     Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
     Then I verify that 'Grid View is present in top right' search screen
     Then I verify that 'PG pictures of all items are visible' on search page
@@ -18,7 +18,7 @@ Feature: Concierge PG Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I click on search Icon
-    When I Type product name 'Crib'
+    When I type item name 'Crib'
     Then I verify that 'PG page is returned with text  RESULTS (IN RH BABY & CHILD)' on search page
     Then I verify that 'VIEW RH BABY & CHILD RESULTS button is present' on search page
     Then I verify that 'footer is present' on search page
@@ -32,7 +32,7 @@ Feature: Concierge PG Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I click on search Icon
-    When I Type product name '234adf'
+    When I type item name '234adf'
     Then I verify that 'PG page is returned with RESULTS(0) present and search text "234ADF" is present' on search page
     Then I verify text 'We’re sorry, we cannot find what you are looking for.'
     Then I verify text 'Please try a new search or contact '

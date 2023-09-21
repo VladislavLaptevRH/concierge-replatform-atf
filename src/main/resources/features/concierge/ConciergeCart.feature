@@ -20,7 +20,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10117321 LTOK" and quantity '1'
+    When I add item to cart via API with "10024796 WGRY" and quantity '1'
     When I open cart
     Then I verify all the sums on the cart page
 
@@ -30,7 +30,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10117321 LTOK" and quantity '5'
+    When I add item to cart via API with "10024796 WGRY" and quantity '5'
     When I open cart
     Then I verify all the sums on the cart page with item quantity '5'
 
@@ -350,8 +350,10 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I open product page with "prod1617188" and "63130001"
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
+    Then I open cart
     Then I verify that mini cart value is equal to 1
     When I click on quantity line item button
     Then I verify that mini cart value is equal to quantity of product
@@ -482,6 +484,7 @@ Feature:Concierge Cart Page
     Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
+    Then I open cart
     When I click on add monogram checkbox
     When I choose monogram properties
     Then I verify that monogram was added
@@ -501,6 +504,7 @@ Feature:Concierge Cart Page
     Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
+    Then I open cart
     When I click on gift box button
     Then I verify that gift box was added
     When I click on gift box button
@@ -627,6 +631,7 @@ Feature:Concierge Cart Page
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
+    When I add item to cart via API with "63130002 NATL" and quantity '1'
     When I open cart
     Then I verify that availability, Delivery and Returns messaging in cart
 
@@ -704,11 +709,11 @@ Feature:Concierge Cart Page
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
-    When I fill all fields from address screen for checking zip code
+    Then I fill all fields from address screen for checking zip code
     And I continue to payment
     When I click on continue with original address button
     When I open cart
-    Then I verify updated zip code in the cart
+    Then I verify updated zip code in the cart is '11111'
     When I click on rh concierge logo
     When I go to item "10031801 WGRY" from search field
     Then I chose the '1' line item selections one by one

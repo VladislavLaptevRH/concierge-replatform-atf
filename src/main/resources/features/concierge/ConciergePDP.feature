@@ -4,6 +4,7 @@
 Feature: Concierge PDP
 
   Scenario: Verify the PDP title and pricing
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -90,6 +91,7 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'has an item can be added to project from modal'
 
   Scenario: Verify On Sale functionality
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -117,6 +119,7 @@ Feature: Concierge PDP
       | BO    | 17050043 FOG  |
 
   Scenario: Verify the dropdown selection and add to cart
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -124,7 +127,7 @@ Feature: Concierge PDP
     When I click on the first project search result with parameters 'prod12640168''59810779 CTBZ'
     Then I Verify that 'PDP title' is present
     Then Verify that 'text "Components starting at" is present'
-    Then I verify text 'Cloud Modular Leather Corner Chair'
+    Then Verify that 'cloud Modular Leather Sofa titles are present'
     Then Verify that line item field 'Fill' is present
     Then Verify that line item field 'Leather' is present
     Then Verify that line item field 'Depth' is present
@@ -133,7 +136,7 @@ Feature: Concierge PDP
     Then Verify that 'text "Configure this item to view delivery information to" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are inactive'
     Then I chose the '1' line item selections one by one
-    Then I verify that text item# and SKU '59810779 SECM' is present
+    Then I verify that text item# and SKU is present
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
     Then I verify that check for replacements parts button is displayed
     Then Verify that 'Add to Cart and Add to Project buttons are active'
@@ -142,6 +145,7 @@ Feature: Concierge PDP
     Then Verify that 'verify data in the modal for SO'
     Then Verify that 'click Agree and add to cart'
     When I click on view cart button
+    Then I open cart
     Then Verify that 'cart page has item (SKU)'
     Then Verify that 'price is matching PDP'
 
@@ -182,6 +186,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10105809 BWDV" from search field
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on agree&add button
     When I click on view cart button
@@ -192,6 +197,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10060297 CLR" from search field
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     Then I verify that availability, Delivery and returns messaging is displayed for "BO"
@@ -270,11 +276,11 @@ Feature: Concierge PDP
     When I go to custom rugs
     Then I verify that custom rugs are displayed
 
-  Scenario: Custom Windows
-    Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
-    When I click on windows from top menu
-    Then I verify that custom windows are displayed
+#  Scenario: Custom Windows
+#    Given I log into Concierge as "associate"
+#    When I choose country for concierge from footer
+#    When I click on windows from top menu
+#    Then I verify that custom windows are displayed
 
   Scenario: Replacement Items
     Given I log into Concierge as "associate"

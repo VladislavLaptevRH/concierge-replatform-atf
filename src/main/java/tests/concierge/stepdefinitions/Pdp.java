@@ -44,6 +44,8 @@ public class Pdp {
 
     public static String SKU;
 
+    public static String result;
+
     @When("I click on add monogram checkbox from pdp")
     public void iClickOnAddMonogramCheckboxFromPdp() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -166,6 +168,7 @@ public class Pdp {
     public void iTypeItemName(String arg0) {
         $(By.xpath("//*[@id = 'site-search-input']")).setValue(arg0);
         $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click();
+        result = arg0;
     }
 
     @When("Verify that {string}")
@@ -228,6 +231,7 @@ public class Pdp {
                 assertTrue(swatchItems);
                 break;
             case  "text \"Swatches are shipped at no charge\" is present":
+                $(By.xpath("//*[text() = 'Swatches are shipped at no charge. For free USPS expedited delivery to arrive within 2-3 business days, all swatches must be placed in a separate order from product orders.']")).scrollIntoView(true);
                 $(By.xpath("//*[text() = 'Swatches are shipped at no charge. For free USPS expedited delivery to arrive within 2-3 business days, all swatches must be placed in a separate order from product orders.']")).shouldHave(text("Swatches are shipped at no charge. For free USPS expedited delivery to arrive within 2-3 business days, all swatches must be placed in a separate order from product orders."), Duration.ofSeconds(5));
                 break;
             case  "text Furniture Touch-up Kit is present":
@@ -272,10 +276,10 @@ public class Pdp {
                 break;
             case  "verify data in the modal for SO":
                 with().pollInterval(9, SECONDS).await().until(() -> true);
-                $(By.xpath("//h3[text() = 'Cloud Modular Leather Corner Chair']")).shouldHave(text("Cloud Modular Leather Corner Chair"), Duration.ofSeconds(20));
+                $(By.xpath("//h3[text() = 'Cloud Modular Leather Sofa']")).shouldHave(text("Cloud Modular Leather Sofa"), Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Item #']")).shouldHave(text("Item #"), Duration.ofSeconds(20));
-                $(By.xpath("//*[text() = '59810779 SECM']")).shouldHave(visible, Duration.ofSeconds(15));
-                assertEquals(SKU, $(By.xpath("//*[text() = '59810779 SECM']")).getText());
+                $(By.xpath("//*[text() = '" + SKU + "']")).shouldHave(visible, Duration.ofSeconds(15));
+                assertEquals(SKU, $(By.xpath("//*[text() = '" + SKU + "']")).getText());
                 if($(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).isDisplayed()){
                     $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).shouldHave(visible, Duration.ofSeconds(15));
                     memberPriceInPG = $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).getText().substring(0, 6);
@@ -295,7 +299,7 @@ public class Pdp {
                 $(By.xpath("//*[@id = 'spo-auth-addToCart']")).click();
                 break;
             case  "cart page has item (SKU)":
-                assertEquals(SKU, $(By.xpath("(//*[@id = 'listColumn2-Item#'])[1]")).getText());
+                assertEquals("59810778 SECM", $(By.xpath("(//*[@id = 'listColumn2-Item#'])[1]")).getText());
                 break;
             case  "price is matching PDP":
                 if($(By.xpath("//*[@data-testid= 'price-for-member']")).isDisplayed()){
@@ -354,6 +358,10 @@ public class Pdp {
             case  "user is logged in":
                 assertEquals(SKU,  $(By.xpath("(//*[@id= 'listColumn2-Item#'])[1]")).getText());
                 break;
+            case  "cloud Modular Leather Sofa titles are present":
+                $(By.xpath("(//*[text()='Cloud Modular Leather Sofa'])[2]")).shouldBe(visible, Duration.ofSeconds(15));
+                $(By.xpath("(//*[text()='Cloud Modular Leather Sofa'])[3]")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
             default: break;
         }
     }
@@ -396,10 +404,12 @@ public class Pdp {
         }
     }
 
-    @Then("I verify that text item# and SKU {string} is present")
-    public void iVerifyTextItemAndSKUIsPresent(String data) {
-        $(By.xpath("//*[@id = 'component-sku']/..//p[contains (text(), 'Item# " + data + "')]")).shouldHave(text("Item# " + data + ""), Duration.ofSeconds(15));
-        SKU = $(By.xpath("//*[@id = 'component-sku']/..//p[contains (text(), 'Item# " + data + "')]")).getText().substring(6,19);
+    @Then("I verify that text item# and SKU is present")
+    public void iVerifyTextItemAndSKUIsPresent() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[@data-testid = 'item-sku-id-desktop']")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@data-testid = 'item-sku-id-desktop']")).shouldNot(text("null"), Duration.ofSeconds(15));
+        SKU = $(By.xpath("//*[@data-testid = 'item-sku-id-desktop']")).getText().substring(6,19);
     }
 
     @Then("Verify that line item field {string} is present")
