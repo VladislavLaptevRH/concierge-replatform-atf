@@ -454,7 +454,6 @@ Feature: Estore Payment
       | MC       |
       | AX       |
 
-
     #QUESTION
   Scenario: Verify the billing address updated in payment page based on the saved payment selected
     Given I log into eStore as "mastercard" user
