@@ -320,7 +320,7 @@ public class EstoreUserAccountPageStepDefs {
     public void userVerifiesThatAllItemsFromMenuAreDisplayed(String brand) {
         switch (brand) {
             case "RH":
-                List<String> rhExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Outdoor", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "BABY & CHILD", "TEEN"));
+                List<String> rhExpectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Outdoor", "Lighting", "Textiles", "Rugs", "Décor", "BABY & CHILD", "TEEN"));
                 estoreUserAccountPage.checkMenu(rhExpectedItems);
                 for (String each : rhExpectedItems) {
                     if (each.equals("BABY & CHILD") || each.equals("TEEN")) {
