@@ -206,6 +206,7 @@ public class ConciergeUserAccountPage {
     private final SelenideElement existingGallery = $(By.xpath("//span[text()='NEWPORT BEACH']"));
     private final SelenideElement postalCode = $(By.xpath("//input[@name='postalCode']"));
     private final SelenideElement company = $(By.xpath("//input[@name='company']"));
+    private final SelenideElement signout = $(By.xpath("//p[text()='SIGN OUT']"));
 
 
     public SelenideElement getCurrentLocationGalleryItemByName(String name) {
