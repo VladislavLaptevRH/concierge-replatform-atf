@@ -99,12 +99,35 @@ Feature: Estore Membership
     When I goes to estore cart for estore
     When I click on remove membership estore button
 
+  Scenario: Verify the memberID, enrollment date, renewal date and price, MOP, for a Member User
+    Given I log into eStore as "member" user
+    When I choose country for eStore from footer
+    When I click on estore my account icon for guest user
+    When I navigate to the member tab
+    Then I verify that the memberID, enrollment date, renewal date and price, MOP are displayed
 
-  #Verify the memberID, enrollment date, renewal date and price, MOP, for a Member User
-  #go to membership page and verify that memberID, enrollment date, renewal date and price, MOP, for a Member User are displayed
+  Scenario: Verify the Copy displayed in My Account - Membership page - Non Member
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore my account icon for guest user
+    When I navigate to the member tab
+    Then I verify that the copy is displayed for non member user
+    And I verify that link to membership functionality is displayed
 
-  #Verify the email address displayed in membership page
-  #go to membership and verift that email is displayed on membership page Email: automationmember@rh.com
+  Scenario: Verify the membership Program Details Link
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore my account icon for guest user
+    When I navigate to the member tab
+    Then I verify that membership program details link
+
+  Scenario: Verify the email address to enter and link the membership
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore my account icon for guest user
+    When I navigate to the member tab
+    Then I verify that email address to enter and link the membership
+
 
   #Verify cancel membership link
   #go to membership page from profile and verify cancel membership link
@@ -112,6 +135,4 @@ Feature: Estore Membership
   #Verfiy membership FAQa link
   #click on faq link and verify that title is displayed
 
-  #Verify the Copy displayed in My Account - Membership page - Non Member
-  #login as regular user->go to membership page and verify that membership details are not displayed
-  #Verify the Link to membership functionality  (including copy)
+

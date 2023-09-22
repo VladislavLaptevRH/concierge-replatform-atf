@@ -2,8 +2,7 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.WebDriverRunner;
-import com.codeborne.selenide.commands.Click;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
@@ -11,16 +10,11 @@ import org.openqa.selenium.support.ui.Select;
 import tests.estore.pageObject.*;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class EstoreMemberStepDefs {
@@ -199,4 +193,29 @@ public class EstoreMemberStepDefs {
     }
 
 
+    @Then("I verify that the memberID, enrollment date, renewal date and price, MOP are displayed")
+    public void iVerifyThatTheMemberIDEnrollmentDateRenewalDateAndPriceMOPAreDisplayed() {
+        estoreMemberPage.membershipDataIsDisplayed();
+    }
+
+    @Then("I verify that the copy is displayed for non member user")
+    public void iVerifyThatTheCopyIsDisplayedForNonMemberUser() {
+        estoreMemberPage.membershipDataIsNotDisplayed();
+    }
+
+    @And("I verify that link to membership functionality is displayed")
+    public void iVerifyThatLinkToMembershipFunctionalityIsDisplayed() {
+        estoreMemberPage.linkToMembershipIsDisplayed();
+    }
+
+    @Then("I verify that membership program details link")
+    public void iVerifyThatMembershipProgramDetailsLink() {
+        estoreMemberPage.clickToProgramDetailsLink();
+        estoreMemberPage.programDetailsLinkDetails();
+    }
+
+    @Then("I verify that email address to enter and link the membership")
+    public void iVerifyThatEmailAddressToEnterAndLinkTheMembership() {
+        System.out.println();
+    }
 }
