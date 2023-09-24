@@ -25,8 +25,8 @@ Feature: Estore critical path
     When I goes to "<brands>" estore collection page
     Then I verify CGS all menu items
     Examples:
-      | brands         |
-      | rh             |
+      | brands |
+      | rh     |
 #      | rhcontemporary |
 #      | rhinteriors    |
 #      | rhmodern       |
@@ -42,8 +42,8 @@ Feature: Estore critical path
     When I go to estore item "sofa" from search field
     Then I verify that product thumbnail is correctly loaded
     Examples:
-      | brand           |
-      | RH              |
+      | brand |
+      | RH    |
 #      | RH CONTEMPORARY |
 #      | RH MODERN       |
 #      | RH OUTDOOR      |
@@ -67,8 +67,8 @@ Feature: Estore critical path
     Then I verify that back to top button is clickable
     And I verify that after click on back to top button user is scrolled to top on the page
     Examples:
-      | brand           |
-      | RH              |
+      | brand |
+      | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -86,8 +86,8 @@ Feature: Estore critical path
     When I go to Sale product page
     Then I verify sale prices on PG pages for sale items
     Examples:
-      | brand           |
-      | RH              |
+      | brand |
+      | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -106,8 +106,8 @@ Feature: Estore critical path
     When I select low to high for estore
     Then I verify that sorting low to high is working as expected
     Examples:
-      | brand           |
-      | RH              |
+      | brand |
+      | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -125,8 +125,8 @@ Feature: Estore critical path
     When I select high to low for estore
     Then I verify that sorting high to low is working as expected
     Examples:
-      | brand           |
-      | RH              |
+      | brand |
+      | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -143,8 +143,8 @@ Feature: Estore critical path
     When I navigate to PG page from top menu
     Then I verify the member price on PG page after selecting the specifications
     Examples:
-      | brand           |
-      | RH              |
+      | brand |
+      | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -161,8 +161,8 @@ Feature: Estore critical path
     When I goes to estore collection page
     Then I verify collection name, image on collection banner
     Examples:
-      | brand           |
-      | RH              |
+      | brand |
+      | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -181,8 +181,8 @@ Feature: Estore critical path
     Then I verify that back to top button is clickable
     And I verify that after click on back to top button user is scrolled to top on the page
     Examples:
-      | brand           |
-      | RH              |
+      | brand |
+      | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -199,8 +199,8 @@ Feature: Estore critical path
     When I goes to estore collection page
     Then I validate "1","2" and "3" grid view should work
     Examples:
-      | brand           |
-      | RH              |
+      | brand |
+      | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -217,8 +217,8 @@ Feature: Estore critical path
     When I goes to estore collection page
     Then I verify that single grid view is selected on CG page by default
     Examples:
-      | brand           |
-      | RH              |
+      | brand |
+      | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -238,8 +238,8 @@ Feature: Estore critical path
     When I navigate back from "collection page" page
     Then I verify that page render in the same grid view that previously selected
     Examples:
-      | brand           |
-      | RH              |
+      | brand |
+      | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -258,8 +258,8 @@ Feature: Estore critical path
     When I click on random product on collection page
     Then I verify that PG page is displayed for eStore
     Examples:
-      | brand           |
-      | RH              |
+      | brand |
+      | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -543,7 +543,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I open product page with "prod13800635" and "17050043" with "FOG" for estore
     When I update "CAN" postal code on pdp page
     Then I verify the product price for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
     When I click on add to cart estore button
@@ -553,7 +553,7 @@ Feature: Estore critical path
   Scenario: PDP - Verify the prices it is showing for regular user
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I open product page with "prod13800635" and "17050042" with "BLK" for estore
     Then I verify that price is showing for regular and member user
 
   Scenario: Cart - Zip code validation in cart
@@ -579,7 +579,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod13800635" and "17050042" with "BLK" for estore
     When I update "CAN" postal code on pdp page
     Then I verify price for member and regular user on PDP
     Then I verify the product price for product "prod13800635" and "17050042" with "IRON" for the selected "CAN" country
@@ -594,7 +594,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
+    When I open product page with "prod13800635" and "17050042" with "BLK" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -676,7 +676,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050043" with "NOCT" for estore
+    When I open product page with "prod13800635" and "17050042" with "BLK" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -854,7 +854,7 @@ Feature: Estore critical path
   Scenario: WishList - Remove item from wishlist
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050045" with "TWLT" for estore
+    When I open product page with "prod13800635" and "17050045" with "BLK" for estore
     When I click on estore my account icon for guest user
     When I click on add to wishlist button
     Then I verify that I'm able to remove wishlist from cart
@@ -951,7 +951,7 @@ Feature: Estore critical path
     Given I log into eStore as contract
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod13800635" and "17050042" with "BLK" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -1016,7 +1016,7 @@ Feature: Estore critical path
   Scenario: Verify Monogrammed products
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod20000465" and "17110459" with "CAML" for estore
+    When I open product page with "prod20000465" and "17110459" with "MIST" for estore
     When I click on add monogram checkbox from pdp on eStore
     When I add monogram to product on eStore
     Then I verify that monogram was added for pdp on eStore
@@ -1028,7 +1028,7 @@ Feature: Estore critical path
   Scenario: Verify user is able to edit Monogram product incart
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod20000465" and "17110459" with "CAML" for estore
+    When I open product page with "prod20000465" and "17110459" with "MIST" for estore
     When I click on add monogram checkbox from pdp on eStore
     When I add monogram to product on eStore
     Then I verify that monogram was added for pdp on eStore

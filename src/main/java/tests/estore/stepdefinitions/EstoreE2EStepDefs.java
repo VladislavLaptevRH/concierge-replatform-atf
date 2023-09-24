@@ -8,9 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.concierge.pageObject.*;
@@ -19,13 +17,10 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
-import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
-import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertTrue;
 
 public class EstoreE2EStepDefs {
@@ -586,6 +581,7 @@ public class EstoreE2EStepDefs {
     @When("I open product page with {string} and {string} with {string} for estore")
     public void iOpenProductPageWithAndForEstore(String productId, String skuId, String options) {
         String URL = null;
+        sleep(3000);
         if (Hooks.profile.equals("stg3")) {
             URL = Hooks.eStoreBaseURL + "/us/en/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
         }

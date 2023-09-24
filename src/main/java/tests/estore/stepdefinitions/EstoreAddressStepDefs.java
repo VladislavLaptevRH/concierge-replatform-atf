@@ -558,11 +558,11 @@ public class EstoreAddressStepDefs {
 
     @And("I verify billing and shipping address are correct")
     public void iVerifyBillingAndShippingAddressAreCorrect() {
-        $(By.xpath("//*[text()='SHIPPING ADDRESS']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Shipping Address']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Ocala Street']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='BILLING ADDRESS']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Billing Address']")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I click on edit billing adress button on address page")
