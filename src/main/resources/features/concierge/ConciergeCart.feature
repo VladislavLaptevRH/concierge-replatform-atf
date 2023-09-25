@@ -1,5 +1,4 @@
 @concierge-Cart
-@conciergeCriticalPathTestRun
 Feature:Concierge Cart Page
 
   @concierge-All
