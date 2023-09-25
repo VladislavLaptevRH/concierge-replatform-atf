@@ -1,5 +1,5 @@
-@concierge-All
-@concierge-Dashboard
+@conciergeTestRun
+
 Feature:Concierge Dashboard
 
   Scenario Outline: Brand dropdown for US and CAD

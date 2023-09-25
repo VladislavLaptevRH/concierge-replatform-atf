@@ -1,5 +1,4 @@
-@concierge-All
-@concierge-Contract
+@conciergeTestRun
 Feature:Concierge Contract
 
   Scenario: Verify that I'm not able to select Contract Client without contract gallery

@@ -1,5 +1,4 @@
-@concierge-All
-@concierge-EndToEnd
+@conciergeTestRun
 Feature: Concierge E2E flow
 
   Scenario: Verify that user is able to buy item

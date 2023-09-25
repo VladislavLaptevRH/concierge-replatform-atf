@@ -1,5 +1,4 @@
-#@concierge-All
-#@concierge-OrderHistory
+#@conciergeTestRun
 #Feature:Concierge Order history
 
 #  Scenario: Order history search is accessible from the dashboard

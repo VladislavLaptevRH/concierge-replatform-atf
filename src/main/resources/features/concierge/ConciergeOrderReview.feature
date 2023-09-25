@@ -1,5 +1,4 @@
-@concierge-All
-@concierge-OrderReview
+@conciergeTestRun
 Feature: Concierge Order review
 
   Scenario: Edit Shipping Address
