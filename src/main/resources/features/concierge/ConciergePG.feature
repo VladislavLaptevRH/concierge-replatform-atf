@@ -1,6 +1,4 @@
-@concierge-All
-@concierge-PG
-@conciergeCriticalPathTestRun
+@conciergeTestRun
 Feature: Concierge PG Page
 
   Scenario Outline:  Test PGs in all menu items

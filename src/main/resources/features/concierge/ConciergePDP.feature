@@ -1,6 +1,4 @@
-@concierge-All
-@concierge-PDP
-@conciergeCriticalPathTestRun
+@conciergeTestRun
 Feature: Concierge PDP
 
   Scenario: Verify the PDP title and pricing

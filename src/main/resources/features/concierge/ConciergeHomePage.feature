@@ -1,6 +1,4 @@
-@concierge-All
-@concierge-HomePage
-@conciergeCriticalPathTestRun
+@conciergeTestRun
 Feature:Concierge Homepage
 
   Scenario: Login as associate and Verify that home page is accessible

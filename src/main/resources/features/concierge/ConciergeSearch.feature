@@ -1,6 +1,4 @@
-@concierge-All
-@concierge-Search
-@conciergeCriticalPathTestRun
+@conciergeTestRun
 Feature: Concierge PG Page
 
   Scenario: Verify that Search for keyword is functioning as expected

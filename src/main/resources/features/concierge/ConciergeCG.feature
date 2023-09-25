@@ -1,6 +1,4 @@
-@concierge-All
-@concierge-CG
-@conciergeCriticalPathTestRun
+@conciergeTestRun
 Feature: Concierge CG Page
 
   Scenario Outline: Test CGS in all menu items

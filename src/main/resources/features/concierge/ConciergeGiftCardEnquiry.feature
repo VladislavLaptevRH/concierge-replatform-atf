@@ -1,5 +1,4 @@
-@concierge-All
-@concierge-GiftCard
+@conciergeTestRun
 Feature: Concierge GiftCardEnquiry
 
   Scenario: Gift Card Balance Enquiry

@@ -1,5 +1,4 @@
-@concierge-All
-@concierge-Client
+@conciergeTestRun
 Feature:Client
 
   Scenario Outline: Verify client search by <searchBy>
