@@ -118,9 +118,7 @@ public class EstoreMemberStepDefs {
 
     @When("I click on cancel membership link")
     public void iClickOnCancelMembershipLink() {
-
-        assertTrue(estoreMemberPage.getCancelLink().isDisplayed());
-        estoreMemberPage.getCancelLink().click();
+        estoreMemberPage.getCancelLink().should(visible).click();
     }
 
     @Then("I validate cancel membership content")
@@ -166,6 +164,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I verfiy that frequently asked questions page is displayed")
     public void iVerfiyThatFrequentlyAskedQuestionsPageIsDisplayed() {
+        estoreMemberPage.getFrequentlyAskedQuestionsMsg().should(visible);
     }
 
     @Then("I verify that membership is cancelled")
@@ -216,6 +215,33 @@ public class EstoreMemberStepDefs {
 
     @Then("I verify that email address to enter and link the membership")
     public void iVerifyThatEmailAddressToEnterAndLinkTheMembership() {
+        System.out.println();
+    }
+
+    @Then("I verify the membership cancel link")
+    public void iVerifyTheMembershipCancelLink() {
+        estoreMemberPage.getCancelMembershipButton().should(visible);
+        estoreMemberPage.getRhProgramProfile().should(visible);
+        estoreMemberPage.getAreYouSureYouWantToCancelMembershipMsg().should(visible);
+    }
+
+    @When("I introduce email address to link membership field")
+    public void iIntroduceEmailAddressToLinkMembershipField() {
+        estoreMemberPage.setValueForLinkMembershipEmail("automationmember@rh.com");
+    }
+
+    @Then("I verify that user is able to link membership")
+    public void iVerifyThatUserIsAbleToLinkMembership() {
+        System.out.println();
+    }
+
+    @When("I click on link membership buttom")
+    public void iClickOnLinkMembershipButtom() {
+        estoreMemberPage.clickToLinkToMembership();
+    }
+
+    @When("I click on add membership to cart button")
+    public void iClickOnAddMembershipToCartButton() {
         System.out.println();
     }
 }

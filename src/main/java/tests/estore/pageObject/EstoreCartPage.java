@@ -222,9 +222,18 @@ public class EstoreCartPage {
 
     private final SelenideElement totalAdditionalProductDiscount = $(By.xpath("//*[text()='Total Additional Product Discount']"));
 
+    private final SelenideElement thankYouForJoiningTheMemberProgram = $(By.xpath("//*[contains(text(),'Thank you for joining the RH Members Program.')]"));
 
     public void verifyThatTotalAdditionalProductDiscountMessageIsDisplayed() {
         totalAdditionalProductDiscount.should(visible, Duration.ofSeconds(20));
+    }
+
+    public void verifyThatRemoveMembershipButtonIsDisplayed() {
+        removeMembershipButton.should(visible);
+    }
+
+    public void verifyThatThankYouForJoiningTheMemberProgramMessageIsDisplayed() {
+        thankYouForJoiningTheMemberProgram.should(visible, Duration.ofSeconds(20));
     }
 
     public int getLineItemMemberPrice() {

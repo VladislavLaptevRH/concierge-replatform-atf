@@ -29,8 +29,12 @@ public class EstoreMemberPage {
     private final SelenideElement linkEmailButton = $(By.xpath("//span[@class='MuiButton-label' and text() = 'LINK TO MEMBERSHIP']"));
     private final SelenideElement messageAlert = $(By.xpath("//div[@class='MuiAlert-message']"));
     private final SelenideElement cancelLink = $(By.xpath("//*[@data-analytics-id='link' and text() = 'Cancel Membership']"));
-
+    private final SelenideElement confirmCncelMembershipButton = $(By.xpath("//*[text()='Cancel Membership']"));
+    private final SelenideElement rhProgramProfile = $(By.xpath("//*[text()='RH MEMBERS PROGRAM PROFILE']"));
+    private final SelenideElement areYouSureYouWantToCancelMembershipMsg = $(By.xpath("//*[text()='Are you sure you want to cancel your RH Members Program enrollment?']"));
     private final SelenideElement addToCartButton = $(By.id("addToCartMembershipDialog_becomeMember-btn"));
+    private final SelenideElement emailAddressField = $(By.xpath("(//input[@type='text'])[2]"));
+    private final SelenideElement frequentlyAskedQuestionsMsg = $(By.xpath("//*[text()='FREQUENTLY ASKED QUESTIONS']"));
     //cancel membership page
     private List<SelenideElement> benefitsList = $$(By.xpath("//*[@class='MuiGrid-root MuiGrid-container MuiGrid-item MuiGrid-direction-xs-column']/ul/li"));
 
@@ -54,11 +58,15 @@ public class EstoreMemberPage {
         $(By.xpath("//*[contains(text(),'25% savings on all full-priced items')] ")).should(Condition.visible);
     }
 
+    public void setValueForLinkMembershipEmail(String email) {
+        emailAddressField.should(Condition.visible).setValue(email);
+    }
+
     public void linkToMembershipIsDisplayed() {
         linkToMembership.should(Condition.visible);
     }
 
-    public void clickToLinkToMembershipIsDisplayed() {
+    public void clickToLinkToMembership() {
         linkToMembership.should(Condition.visible).click();
     }
 

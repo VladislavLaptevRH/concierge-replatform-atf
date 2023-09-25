@@ -121,18 +121,30 @@ Feature: Estore Membership
     When I navigate to the member tab
     Then I verify that membership program details link
 
+  Scenario: Verify cancel membership link
+    Given I log into eStore as "member" user
+    When I choose country for eStore from footer
+    When I click on estore my account icon for guest user
+    When I navigate to the member tab
+    When I click on cancel membership link
+    Then I verify the membership cancel link
+
   Scenario: Verify the email address to enter and link the membership
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I click on estore my account icon for guest user
     When I navigate to the member tab
-    Then I verify that email address to enter and link the membership
+    When I introduce email address to link membership field
+    When I click on link membership buttom
+    Then I verify that user is able to link membership
 
-
-  #Verify cancel membership link
-  #go to membership page from profile and verify cancel membership link
-
-  #Verfiy membership FAQa link
-  #click on faq link and verify that title is displayed
-
+  Scenario: Verify the Add to cart button
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore my account icon for guest user
+    When I navigate to the member tab
+    When I click to add to cart on membership page
+    When I open estore cart
+    Then I verify that membership was added to cart
+    When I click on remove membership estore button
 

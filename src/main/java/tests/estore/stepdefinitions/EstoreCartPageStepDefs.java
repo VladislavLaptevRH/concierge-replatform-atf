@@ -466,7 +466,6 @@ public class EstoreCartPageStepDefs {
     public void iOpenCart() {
         String URL = Hooks.eStoreBaseURL + "/us/en/checkout/shopping_cart.jsp";
         open(URL);
-
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -867,4 +866,9 @@ public class EstoreCartPageStepDefs {
         assertTrue("Total line item price is equal to member price", totalLineItemPrice == estoreCartPage.getLineItemMemberPrice());
     }
 
+    @Then("I verify that membership was added to cart")
+    public void iVerifyThatMembershipWasAddedToCart() {
+        estoreCartPage.verifyThatThankYouForJoiningTheMemberProgramMessageIsDisplayed();
+        estoreCartPage.verifyThatRemoveMembershipButtonIsDisplayed();
+    }
 }
