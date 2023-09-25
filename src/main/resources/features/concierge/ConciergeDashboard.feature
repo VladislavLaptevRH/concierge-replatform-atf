@@ -2,7 +2,6 @@
 @concierge-Dashboard
 Feature:Concierge Dashboard
 
-
   Scenario Outline: Brand dropdown for US and CAD
     Given I log into Concierge as "associate"
     When I choose "US" country
