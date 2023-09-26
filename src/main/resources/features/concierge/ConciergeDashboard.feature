@@ -98,6 +98,7 @@ Feature:Concierge Dashboard
     Then I verify top nav
     Then I verify brand dropdown
 
+
   Scenario: Verify user able to change gallery location
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
