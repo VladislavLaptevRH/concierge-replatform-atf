@@ -19,7 +19,6 @@ Feature: Estore Search
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to estore item "cribs" from search field
-    When I click on view results
     Then I verify cribs title for estore
 
   Scenario: Search product via SKU 17050044 EUCY

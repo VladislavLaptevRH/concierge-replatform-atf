@@ -1,5 +1,6 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
@@ -31,6 +32,6 @@ public class EstoreLoginPage {
     public void clickToAccountIcon() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         accountIcon.should(Condition.and("", interactable, Condition.visible, appear), Duration.ofSeconds(50));
-        accountIcon.click();
+        accountIcon.click(ClickOptions.usingJavaScript());
     }
 }

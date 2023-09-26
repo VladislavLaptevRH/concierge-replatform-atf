@@ -26,6 +26,7 @@ Feature: Estore Payment
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I fill estore shipping address
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
@@ -465,6 +466,7 @@ Feature: Estore Payment
     And I click on estore no thanks button
     When I click on edit shipping address button on estore address page
     When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     Then I verify that on the payment page the same address as for the saved mastercard

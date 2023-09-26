@@ -30,6 +30,7 @@ public class EstoreSearchStepDefs {
     @When("I go to estore item {string} from search field")
     public void iGoToItemFromEstoreSearchField(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]//input")).should(visible, Duration.ofSeconds(60));
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]//input")).click();
         estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));

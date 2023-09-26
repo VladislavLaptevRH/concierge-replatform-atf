@@ -27,14 +27,14 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Validate the currency for US-Zip on PDP
     Given I log into eStore as contract
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I open product page with "prod2020027" and "17050043" with "INDG" for estore
     When I update "US" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
   Scenario: eStore Contract - Validate the currency for CAN-Zip on PDP
     Given I log into eStore as contract
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I open product page with "prod2020027" and "17050043" with "INDG" for estore
     When I update "CAN" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
@@ -174,7 +174,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as contract
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
+    When I add product "prod7571021" and sku "63130001 NATL" to cart via API for estore
     When I open estore cart
     When I click on zipcode estore button
     When I update postal code in cart
@@ -234,7 +234,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as contract
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod2020027" and "17050042" with "SND" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -311,14 +311,14 @@ Feature: eStore Contract and Trade
   Scenario: eStore Trade - Validate the currency for US-Zip on PDP
     Given I log into eStore as trade
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I open product page with "prod2020027" and "17050043" with "INDG" for estore
     When I update "US" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
   Scenario: eStore Trade - Validate the currency for CAN-Zip on PDP
     Given I log into eStore as trade
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I open product page with "prod2020027" and "17050043" with "INDG" for estore
     When I update "CAN" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
@@ -466,7 +466,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod2020027" and "17050042" with "IRON" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -483,7 +483,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
+    When I add product "prod7571021" and sku "63130001 NATL" to cart via API for estore
     When I open estore cart
     When I click on zipcode estore button
     When I update postal code in cart

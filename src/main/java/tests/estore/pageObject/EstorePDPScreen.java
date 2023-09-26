@@ -15,6 +15,8 @@ import static org.awaitility.Awaitility.with;
 
 @Getter
 public class EstorePDPScreen {
+    private final SelenideElement canadaCountrySelected = $(By.xpath("//*[text()='Canada ($)']"));
+
     private final SelenideElement addToCartButtonViewInStockPopUp = $(By.xpath("(//button[@id='inStockProductCardActions_addToCart-btn'])[1]"));
 
     private final SelenideElement firstRegularPrice = $(By.xpath("(//p[@data-testid='price-for-regular'])[1]"));
@@ -78,12 +80,12 @@ public class EstorePDPScreen {
                 , Duration.ofSeconds(15)).click(ClickOptions.usingJavaScript());
     }
 
-    public void selectMonogramKoutHdFont(){
+    public void selectMonogramKoutHdFont() {
         koutHdFontMonogram.should(Condition.visible).click();
 
     }
 
-    public void selectGoldMetallicColorMonogram(){
+    public void selectGoldMetallicColorMonogram() {
         goldMetallicColorMonogram.click();
 
     }

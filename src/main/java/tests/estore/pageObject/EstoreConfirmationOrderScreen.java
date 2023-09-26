@@ -22,9 +22,9 @@ public class EstoreConfirmationOrderScreen {
 
     private final SelenideElement orderDetailsButton = $(By.xpath("//button[contains(@class,'MuiButtonBase-root MuiButton-root')]"));
 
-    private final SelenideElement thankYouTitle = $(By.xpath("//*[text()='THANK YOU']"));
+    private final SelenideElement thankYouTitle = $(By.xpath("//*[text()='Thank You']"));
 
-    private final SelenideElement yourOrderHasBeenPlaced = $(By.xpath("//*[text()='YOUR ORDER HAS BEEN PLACED']"));
+    private final SelenideElement yourOrderHasBeenPlaced = $(By.xpath("//*[text()='Your Order has been placed']"));
 
     public void clickToEstoreLogo() {
         estoreLogo.should(Condition.visible, Duration.ofSeconds(20));

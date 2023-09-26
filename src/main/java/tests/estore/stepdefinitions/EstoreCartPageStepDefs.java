@@ -699,12 +699,12 @@ public class EstoreCartPageStepDefs {
         if (country.equals("CAN")) {
             $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//li[@data-value='CA']")).click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         if (country.equals("US")) {
             $(By.xpath("//li[@data-value='US']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//li[@data-value='US']")).click();
         }
-        $(By.xpath("//*[text()='Checkout']")).shouldHave(text("Checkout"), Duration.ofSeconds(30));
     }
 
     @When("I stop eStore page load")

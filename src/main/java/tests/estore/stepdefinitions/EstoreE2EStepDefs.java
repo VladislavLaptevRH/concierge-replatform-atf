@@ -20,7 +20,9 @@ import java.util.Random;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertTrue;
 
 public class EstoreE2EStepDefs {
@@ -505,7 +507,7 @@ public class EstoreE2EStepDefs {
 
     @Then("I verify order details from estore thank you page")
     public void iVerifyEstoreOrderDetailsFromThankYouPage() {
-        $(By.xpath("//*[text()='Shipping Address']")).should(visible, Duration.ofSeconds(25));
+        estoreAddressScreen.getShippingAddressTitle().should(visible, Duration.ofSeconds(25));
         $(By.xpath("//*[text()='Billing Address']")).should(visible, Duration.ofSeconds(25));
         $(By.xpath("//*[text()='Important Information']")).should(visible, Duration.ofSeconds(25));
         conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
@@ -581,7 +583,8 @@ public class EstoreE2EStepDefs {
     @When("I open product page with {string} and {string} with {string} for estore")
     public void iOpenProductPageWithAndForEstore(String productId, String skuId, String options) {
         String URL = null;
-        sleep(3000);
+        with().pollInterval(4, SECONDS).await().until(() -> true);
+
         if (Hooks.profile.equals("stg3")) {
             URL = Hooks.eStoreBaseURL + "/us/en/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
         }

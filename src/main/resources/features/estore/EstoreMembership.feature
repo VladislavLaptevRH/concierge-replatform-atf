@@ -140,10 +140,13 @@ Feature: Estore Membership
   Scenario: Verify the Add to cart button
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
     When I click on estore my account icon for guest user
     When I navigate to the member tab
     When I click to add to cart on membership page
     When I open estore cart
     Then I verify that membership was added to cart
+    And I verify that total line price is equal to price for member
     When I click on remove membership estore button
 

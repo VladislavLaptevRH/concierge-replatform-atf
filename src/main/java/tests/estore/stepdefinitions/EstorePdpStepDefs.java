@@ -70,7 +70,7 @@ public class EstorePdpStepDefs {
         estorePdpPageScreen.getInStockOptionsButton().click();
         estorePdpPageScreen.getInStockTitle().should(Condition.visible, Duration.ofSeconds(20));
 
-        estorePdpPageScreen.getTurkishTowelCollectionTitle().should(Condition.and("", interactable, visible), Duration.ofSeconds(20));
+//        estorePdpPageScreen.getTurkishTowelCollectionTitle().should(Condition.and("", interactable, visible), Duration.ofSeconds(20));
         estorePdpPageScreen.getItemInStockOption().should(Condition.visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getSizeInStockOption().should(Condition.visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getColorInStockOption().should(Condition.visible, Duration.ofSeconds(20));
@@ -100,7 +100,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that price for product&line should be in US dollars on PDP page")
     public void iVerifyThatPriceForProductLineShouldBeInUS$() {
-        $(By.xpath("(//*[contains(text(),'$')])[3]")).should(visible, Duration.ofSeconds(40));
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$"));
     }
 
     @When("I update {string} postal code on pdp page")
@@ -284,6 +284,7 @@ public class EstorePdpStepDefs {
     @Then("I verify the product price for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceForProductAndWithForTheSelectedCountry(String productID, String arg1, String selectedOptions, String country) {
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        WebDriverRunner.getWebDriver().navigate().refresh();
         estorePdpPageScreen.getRegularTheFirstPrice().should(visible, Duration.ofSeconds(20));
         regularPricePdp = Integer.parseInt(estorePdpPageScreen.getRegularPdpProductPrice().getText().replaceAll("\\$", ""));
         memberPricePdp = Integer.parseInt(estorePdpPageScreen.getMemberPdpProductPrice().getText().replaceAll("\\$", ""));

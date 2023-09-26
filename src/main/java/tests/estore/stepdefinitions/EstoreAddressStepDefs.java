@@ -100,7 +100,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that shipping address is displayed")
     public void iVerifyThatShippingAddressIsDisplayed() {
-        $(By.xpath("//*[text()='SHIPPING ADDRESS']")).should(visible, Duration.ofSeconds(40));
+        estoreAddressScreen.getShippingAddressTitle().should(visible, Duration.ofSeconds(40));
     }
 
     @When("I click on edit shipping address button on estore order review page")
@@ -558,7 +558,7 @@ public class EstoreAddressStepDefs {
 
     @And("I verify billing and shipping address are correct")
     public void iVerifyBillingAndShippingAddressAreCorrect() {
-        $(By.xpath("//*[text()='Shipping Address']")).should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getShippingAddressTitle().should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Ocala Street']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
