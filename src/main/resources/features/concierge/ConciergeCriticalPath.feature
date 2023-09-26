@@ -87,6 +87,7 @@ Feature: Concierge Critical Path
     Then I verify that 'quantity and sum were increased' on the cart page
 
   Scenario Outline: Override Line item Prices - with <method> override price methods
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -159,6 +160,7 @@ Feature: Concierge Critical Path
     When I clear all orders form the cart
 
   Scenario: Monogram Edit / Remove / Add
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -177,6 +179,7 @@ Feature: Concierge Critical Path
     Then I verify that monogram was removed
 
   Scenario: Gift Box Add / Remove / View
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -499,6 +502,7 @@ Feature: Concierge Critical Path
     Then I verify that balance info is displayed
 
   Scenario: Verify the Complete Billing address
+
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
     When I remove client from header
@@ -514,6 +518,7 @@ Feature: Concierge Critical Path
     Then I verify the complete billing address
 
   Scenario: Verify the subtotal, shipping fee, taxes based on postal code
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -583,6 +588,7 @@ Feature: Concierge Critical Path
     Then I verify that I'm able to edit billing address
 
   Scenario: Verify the PDP title and pricing
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -591,6 +597,7 @@ Feature: Concierge Critical Path
     Then I Verify that the PDP title is present and prices match those prices in PG
 
   Scenario Outline: Verify the content of PDP for Concierge
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -615,6 +622,7 @@ Feature: Concierge Critical Path
       |17050044 CAML|
 
   Scenario: Verify the PDP hero Image, zoom, line items
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -684,6 +692,7 @@ Feature: Concierge Critical Path
     Then Verify that "Sale modal" 'has an item can be added to project from modal'
 
   Scenario Outline: Availability, Delivery and Returns messaging for <items>
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -727,6 +736,7 @@ Feature: Concierge Critical Path
     Then Verify that 'price is matching PDP'
 
   Scenario: Verify Colorization options
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -800,6 +810,7 @@ Feature: Concierge Critical Path
     Then I verify that swatch landing page is displayed
 
   Scenario: Verify the Postal code updates in PDP
+
     Given I log into Concierge as "associate"
     When I choose 'US' country
     When I go to item "prod28500462" from search field
@@ -822,6 +833,7 @@ Feature: Concierge Critical Path
     Then Verify that 'default US zip code is present in PDP'
 
   Scenario: Sale PDP: Regular/Member/Final Price validation
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I choose country for concierge from footer
@@ -870,6 +882,7 @@ Feature: Concierge Critical Path
     And I verify that replacements parts modal pop up is displayed
 
   Scenario Outline:  Test PGs in all menu items
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I change the brand to "<brand>"
@@ -910,6 +923,7 @@ Feature: Concierge Critical Path
       | Storage   | Wall                  | Memory Boards                 | RH TEEN         | TN               |
 
   Scenario: Checking Faucets in Collection PG
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I navigate to menu 'Dining'
@@ -930,6 +944,7 @@ Feature: Concierge Critical Path
     Then I verify that PG loads
 
   Scenario: Checking Faucets in General PG (All Tables)
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I navigate to menu 'Dining'
@@ -939,6 +954,7 @@ Feature: Concierge Critical Path
     Then I verify that 'user can select SIZE -> Length -> 30 and respective products are returned' on PG screen
 
   Scenario: Checking Faucets in SALE PGs
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I navigate to menu 'SALE'
@@ -950,6 +966,7 @@ Feature: Concierge Critical Path
     Then I verify that 'all products returned have $ SALE price in their descriptions' on PG screen
 
   Scenario: Checking Faucets in Search PG
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I click on search Icon
@@ -961,6 +978,7 @@ Feature: Concierge Critical Path
     Then I verify that PG loads
 
   Scenario Outline: Verify that title is present in PG
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I change the brand to "<brand>"
@@ -977,6 +995,7 @@ Feature: Concierge Critical Path
       | Furniture | Furniture           | Dining Chairs   | RH OUTDOOR      | OD               | Dining Chairs   |
 
   Scenario: Verify that Back to Top Button is present in PG and functioning
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I navigate to menu 'Bed'
@@ -1016,6 +1035,7 @@ Feature: Concierge Critical Path
     Then I verify that 'Verify that all products have text From $ / $ Sale / $ Member' on PG screen
 
   Scenario: Verify that PG is defaulted to 3-grid view
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I navigate to menu 'Bed'
@@ -1025,6 +1045,7 @@ Feature: Concierge Critical Path
     Then I verify that 'Grid View in PG is set to 3-grid view by default' on PG screen
 
   Scenario: Verify that PG Grid View is functional within PG
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I navigate to menu 'Dining'

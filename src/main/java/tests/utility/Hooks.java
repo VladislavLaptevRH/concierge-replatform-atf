@@ -144,7 +144,7 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for tests.concierge
      */
-    @Before("@estoreTestRun or @estoreCriticalPathTestRun or @conciergeTestRun or @conciergeCriticalPathTestRun")
+    @Before("@estoreTestRun or @estoreCriticalPathTestRun")
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
@@ -154,8 +154,8 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for tests.concierge
      */
-    @Before("@concierge-All or @target/rerun.txt")
-    public void initWebDriver() {
+    @Before("@conciergeTestRun or @conciergeCriticalPathTestRun")
+    public void initWebDriverConcierge() {
         ConfigFileReader();
         configureConciergeURL();
         setUPWebDriver(conciergeURL);
@@ -239,7 +239,7 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After("@conciergeTestRun or @estoreTestRun or @estoreCriticalPathTestRun or @conciergeCriticalPathTestRun or @target/rerun.txt")
+    @After("@conciergeTestRun or @conciergeCriticalPathTestRun or @estoreTestRun or @estoreCriticalPathTestRun or @target/rerun.txt")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
 
