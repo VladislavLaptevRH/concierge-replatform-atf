@@ -99,3 +99,30 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify the product price for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
+  Scenario: Verify the text displaying before price for Frame and cushion product
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    Then I verify the text displaying before price for frame and cushion product
+
+  Scenario: Verify the text displaying before price for Frame and cushion product
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    Then I verify the line item price for Combined Frame and Cushion
+
+  Scenario: Verify the text displaying before price for Frame and cushion product
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    Then I verify that user is able to add line item separately
+
+  Scenario: Verify the text displaying before price for Frame and cushion product
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    Then I verify the product price on PDP for sale cushion and frame product
