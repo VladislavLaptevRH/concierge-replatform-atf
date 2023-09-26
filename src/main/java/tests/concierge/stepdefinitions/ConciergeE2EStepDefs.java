@@ -677,6 +677,9 @@ public class ConciergeE2EStepDefs {
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!conciergeUserAccountPage.getClientButton().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
         conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(20));
         conciergeUserAccountPage.getClientButton().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);

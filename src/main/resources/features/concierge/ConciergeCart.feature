@@ -321,6 +321,7 @@ Feature:Concierge Cart Page
     Then I verify that mini cart value is equal to quantity of product
 
   Scenario Outline: Verify Membership banner for <businessClient> - should not be present
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
