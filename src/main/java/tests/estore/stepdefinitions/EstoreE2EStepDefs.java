@@ -583,7 +583,7 @@ public class EstoreE2EStepDefs {
     @When("I open product page with {string} and {string} with {string} for estore")
     public void iOpenProductPageWithAndForEstore(String productId, String skuId, String options) {
         String URL = null;
-        with().pollInterval(4, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
 
         if (Hooks.profile.equals("stg3")) {
             URL = Hooks.eStoreBaseURL + "/us/en/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
@@ -593,16 +593,20 @@ public class EstoreE2EStepDefs {
         }
 
         open(URL);
+        try {
+            estoreItemPage.getAddToCartButton().scrollTo();
+            if (!estoreItemPage.getAddToCartButton().isEnabled()) {
+                for (int i = 0; i < 3; i++) {
+                    WebDriverRunner.getWebDriver().navigate().refresh();
 
-        estoreItemPage.getAddToCartButton().scrollTo();
-        if (!estoreItemPage.getAddToCartButton().isEnabled()) {
-            for (int i = 0; i < 3; i++) {
-                WebDriverRunner.getWebDriver().navigate().refresh();
-
-                if (estoreItemPage.getAddToCartButton().isEnabled()) {
-                    break;
+                    if (estoreItemPage.getAddToCartButton().isEnabled()) {
+                        break;
+                    }
                 }
             }
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         }
     }
 }

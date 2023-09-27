@@ -61,9 +61,12 @@ public class Hooks {
      */
     private void ConfigFileReader() {
 
-        profile = System.getenv("ENVIRONMENT");
-        cookie = System.getenv("ENDPOINT");
-        country = System.getenv("COUNTRY");
+//        profile = System.getenv("ENVIRONMENT");
+//        cookie = System.getenv("ENDPOINT");
+//        country = System.getenv("COUNTRY");
+        profile = "stg2";
+        cookie = "tiger";
+        country = "US";
 
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
@@ -149,7 +152,7 @@ public class Hooks {
         ConfigFileReader();
         configureEstoreURL();
         setUPWebDriver(eStoreURL);
-        setupChromeArguments();
+//        setupChromeArguments();
     }
 
     /**
@@ -166,6 +169,17 @@ public class Hooks {
      * Initialize Web driver
      */
     public void setUPWebDriver(String url) {
+        ChromeOptions options = new ChromeOptions();
+        WebDriverManager.chromedriver().setup();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-gpu");
+        options.addArguments("enable-automation");
+        options.addArguments("--disable-infobars");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-browser-side-navigation");
+        options.addArguments("--window-size=1366,768");
+        options.addArguments("--user-agent=robot-framework");
         Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
@@ -174,6 +188,7 @@ public class Hooks {
         Configuration.pageLoadTimeout = 60000;
         Configuration.timeout = 45000;
         Configuration.reportsFolder = "target/screenshots";
+        Configuration.browserCapabilities = options;
         open(url);
         currentUrl = WebDriverRunner.url();
     }

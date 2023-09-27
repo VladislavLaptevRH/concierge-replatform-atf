@@ -82,7 +82,7 @@ Feature: eStore Contract and Trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "MO" brand
-    When I go to estore item "17050042 WHT" from search field
+    When I go to estore item "17050043 MIST" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that "contract" price is used for each "MO" product
@@ -92,7 +92,7 @@ Feature: eStore Contract and Trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "B&C" brand
-    When I go to estore item "17050042 WHT" from search field
+    When I go to estore item "17050043 MIST" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that "contract" price is used for each "B&C" product
@@ -102,7 +102,7 @@ Feature: eStore Contract and Trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "TN" brand
-    When I go to estore item "17050042 WHT" from search field
+    When I go to estore item "17050043 MIST" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that "contract" price is used for each "TN" product
@@ -521,7 +521,7 @@ Feature: eStore Contract and Trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "MO" brand
-    When I go to estore item "17050042 WHT" from search field
+    When I go to estore item "17050043 MIST" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that "trade" price is used for each "MO" product

@@ -3,7 +3,6 @@
 Feature: Estore Guest house
 
   Scenario: Verify dinning room page
-
     Given I go to estore guesthouse home page
     When I choose country for eStore from footer
     When I click on the estore guesthouse dining room page
