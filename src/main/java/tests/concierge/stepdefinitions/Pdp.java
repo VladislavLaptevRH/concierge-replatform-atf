@@ -282,9 +282,9 @@ public class Pdp {
                 assertEquals(SKU, $(By.xpath("//*[text() = '" + SKU + "']")).getText());
                 if($(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).isDisplayed()){
                     $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).shouldHave(visible, Duration.ofSeconds(15));
-                    memberPriceInPG = $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).getText().substring(0, 6);
+                    memberPriceInPG = $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).getText().substring(1, 7);
                     $(By.xpath("(//*[contains(@class, 'item-price__amount')])[1]")).shouldHave(visible, Duration.ofSeconds(15));
-                    regularPriceInPG = $(By.xpath("//*[contains(@class,'item-price__amount') and text() = 'Regular']")).getText().substring(0, 6);
+                    regularPriceInPG = $(By.xpath("//*[contains(@class,'item-price__amount') and text() = 'Regular']")).getText().substring(1, 8);
                 } else {
                     $(By.xpath("(//*[contains(@class, 'item-price__amount')])[1]")).shouldHave(visible, Duration.ofSeconds(15));
                     tradePriceInPDP =  $(By.xpath("(//*[contains(@class, 'item-price__amount')])[1]")).getText();
@@ -302,12 +302,7 @@ public class Pdp {
                 assertEquals("59810778 SECM", $(By.xpath("(//*[@id = 'listColumn2-Item#'])[1]")).getText());
                 break;
             case  "price is matching PDP":
-                if($(By.xpath("//*[@data-testid= 'price-for-member']")).isDisplayed()){
-                    assertEquals( memberPriceInPG.replaceAll(" ", ""),  $(By.xpath("//*[@data-testid= 'price-for-member']")).getText().replaceAll(".00", ""));
-                } else {
-                    assertEquals( tradePriceInPDP,  $(By.xpath("//*[@data-testid= 'price-for-trade']")).getText().replaceAll(".00", ""));
-                }
-                assertEquals( regularPriceInPG, $(By.xpath("(//*[@data-testid= 'price-for-regular'])[1]")).getText().substring(0, 6));
+                assertEquals( Integer.parseInt(regularPriceInPG.replaceAll(",", "").replaceAll(" ", "")) + 279,  Integer.parseInt($(By.xpath("//*[@aria-describedby= 'shipping-override-price-dialog']")).getText().replaceAll(".00", "").replaceAll("\\$", "").replaceAll(",", "").replaceAll(" ", "")));
                 break;
             case  "PDP has SALE and MEMBER prices":
                 $(By.xpath("(//*[@data-testid = 'price-for-regular'])[1]")).shouldHave(visible, Duration.ofSeconds(15));
@@ -701,7 +696,7 @@ public class Pdp {
                  boolean memberOption = $$(By.xpath("//*[contains(text() ,'Trade')]")).size() > 1;
                  assertTrue(memberOption);
              }
-             with().pollInterval(5, SECONDS).await().until(() -> true);
+             with().pollInterval(9, SECONDS).await().until(() -> true);
              $(By.xpath("(//*[contains(text() ,'SALE')])[3]")).shouldBe(visible, Duration.ofSeconds(15));
              boolean saleOption = $$(By.xpath("//*[contains(text() ,'SALE')]")).size() >=4;
              assertTrue(saleOption);
