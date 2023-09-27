@@ -269,6 +269,7 @@ public class EstoreUserAccountPageStepDefs {
         estoreUserAccountPage.getBillingAddressLastName().setValue("TestLastName");
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressStreetAddressNewCardPopUp());
         estoreUserAccountPage.getBillingAddressStreetAddressNewCardPopUp().setValue("4524 Ocala Street");
+        estoreUserAccountPage.getBillingAddressPhone().click();
         estoreAddressScreen.getCityAddNewCard().setValue("Hilliard");
         Select selectCardState = new Select(estoreAddressScreen.getStateAddNewCard());
         selectCardState.selectByValue("OH");
@@ -278,7 +279,7 @@ public class EstoreUserAccountPageStepDefs {
 
         estoreUserAccountPage.getBillingAddressPhone().shouldHave(value("(555) 555-1234"));
         estoreUserAccountPage.getSaveCardButton().should(visible, Duration.ofSeconds(20));
-        estoreUserAccountPage.getSaveCardButton().click();
+        estoreUserAccountPage.getSaveCardButton().click(ClickOptions.usingJavaScript());
     }
 
     @Then("I verify that I'm able to add {string}")

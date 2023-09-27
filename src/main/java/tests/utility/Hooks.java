@@ -149,6 +149,7 @@ public class Hooks {
         ConfigFileReader();
         configureEstoreURL();
         setUPWebDriver(eStoreURL);
+        setupChromeArguments();
     }
 
     /**
@@ -165,17 +166,6 @@ public class Hooks {
      * Initialize Web driver
      */
     public void setUPWebDriver(String url) {
-        ChromeOptions options = new ChromeOptions();
-        WebDriverManager.chromedriver().setup();
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--disable-gpu");
-        options.addArguments("enable-automation");
-        options.addArguments("--disable-infobars");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-browser-side-navigation");
-        options.addArguments("--window-size=1366,768");
-        options.addArguments("--user-agent=robot-framework");
         Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
@@ -184,7 +174,6 @@ public class Hooks {
         Configuration.pageLoadTimeout = 60000;
         Configuration.timeout = 45000;
         Configuration.reportsFolder = "target/screenshots";
-        Configuration.browserCapabilities = options;
         open(url);
         currentUrl = WebDriverRunner.url();
     }
@@ -193,9 +182,8 @@ public class Hooks {
      * Set up chrome arguments for Jenkins run
      */
     public void setupChromeArguments() {
-        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        WebDriverManager.chromedriver().setup();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-gpu");
         options.addArguments("enable-automation");
@@ -205,8 +193,6 @@ public class Hooks {
         options.addArguments("--disable-browser-side-navigation");
         options.addArguments("--window-size=1366,768");
         options.addArguments("--user-agent=robot-framework");
-        Configuration.browserCapabilities = options;
-
         DesiredCapabilities dr = new DesiredCapabilities();
         dr.setBrowserName("chrome");
         dr.setCapability(ChromeOptions.CAPABILITY, options);

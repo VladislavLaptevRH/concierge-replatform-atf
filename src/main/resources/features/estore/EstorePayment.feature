@@ -214,7 +214,6 @@ Feature: Estore Payment
     Given I log into eStore as "addnewpayment" user
     When I choose country for eStore from footer
     When I go to profile payment method
-    When I click on estore my account icon for guest user
     When I remove added before cart
     When I add new card for estore
     Then I verify that new payment was added
@@ -393,7 +392,7 @@ Feature: Estore Payment
     Given I log into eStore as "addnewpayment" user
     When I choose country for eStore from footer
     When I go to profile payment method
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     When I remove added before cart
     When I added new card "AMEX" for estore
     Then I verify that I'm able to add "AMEX"
@@ -403,7 +402,7 @@ Feature: Estore Payment
     Given I log into eStore as "addnewpayment" user
     When I choose country for eStore from footer
     When I go to profile payment method
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     When I remove added before cart
     When I added new card "DISCOVER" for estore
     Then I verify that I'm able to add "DISCOVER"
@@ -471,7 +470,7 @@ Feature: Estore Payment
     When I click on continue with original address estore button
     Then I verify that on the payment page the same address as for the saved mastercard
 
-    Scenario: Verify that for US ship to all the payment types saved are reflected in payment page
+  Scenario: Verify that for US ship to all the payment types saved are reflected in payment page
     Given I log into eStore as "savedRhCc" user
     When I choose country for eStore from footer
     When I remove all items from estore cart

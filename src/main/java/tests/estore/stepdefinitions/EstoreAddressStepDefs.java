@@ -355,8 +355,12 @@ public class EstoreAddressStepDefs {
     public void iClickOnContinueToPayment() {
         estorePaymentPage.getContinueToPayment().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
         estorePaymentPage.getContinueToPayment().scrollIntoView(true);
+
         estoreAddressScreen.getShippingAddressPhone().shouldNotBe(empty);
-        estorePaymentPage.getContinueToPayment().should(Condition.and("", visible, interactable), Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
+        estoreAddressScreen.getShippingAddressCity().shouldNotBe(empty);
+
+        estorePaymentPage.getContinueToPayment().should(Condition.and("", visible, interactable),
+                Duration.ofSeconds(20)).click();
 
         if ($(By.xpath("//*[contains(text(), 'required')]")).isDisplayed()) {
             iFillEstoreShippingAndShippingAddress();
