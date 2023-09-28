@@ -38,7 +38,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to concierge item 'prod18890296' from search field
-    When I click on the first project search result with parameters 'prod18890296''10024796 WGRY'
+    When I click on the first project search result with parameters 'prod18890296''10024793 BRNZ'
     Then I Verify that 'PDP title' is present
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'the "Hero" Image' is present
@@ -69,8 +69,8 @@ Feature: Concierge PDP
     Then Verify that 'text "This item can be returned or exchanged within 30 days of delivery" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     Then Verify that 'confirm that Add to Cart slider is present'
-    Then Project modal appears and has all the data for '10024796 WGRY'
-    Then verify that another modal appears with all the data for '10024796 WGRY'
+    Then Project modal appears and has all the data for '10024793 BRNZ'
+    Then verify that another modal appears with all the data for '10024793 BRNZ'
 
   Scenario: Verify In Stock functionality
     Given I log into Concierge as "associate"

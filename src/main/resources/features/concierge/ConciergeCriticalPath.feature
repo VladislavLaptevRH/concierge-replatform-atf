@@ -165,6 +165,7 @@ Feature: Concierge Critical Path
     When I remove client from header
     When I open product page with productId "prod19500002"
     Then I chose the '1' line item selections one by one
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     Then I open cart
@@ -618,7 +619,7 @@ Feature: Concierge Critical Path
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to concierge item 'prod18890296' from search field
-    When I click on the first project search result with parameters 'prod18890296''10024796 WGRY'
+    When I click on the first project search result with parameters 'prod18890296''10024793 BRNZ'
     Then I Verify that 'PDP title' is present
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'the "Hero" Image' is present
@@ -649,8 +650,8 @@ Feature: Concierge Critical Path
     Then Verify that 'text "This item can be returned or exchanged within 30 days of delivery" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     Then Verify that 'confirm that Add to Cart slider is present'
-    Then Project modal appears and has all the data for '10024796 WGRY'
-    Then verify that another modal appears with all the data for '10024796 WGRY'
+    Then Project modal appears and has all the data for '10024793 BRNZ'
+    Then verify that another modal appears with all the data for '10024793 BRNZ'
 
   Scenario: Verify In Stock functionality
     Given I log into Concierge as "associate"
@@ -711,6 +712,7 @@ Feature: Concierge Critical Path
     Then I chose zero choose in line items
     Then Verify that 'text "Configure this item to view delivery information to" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are inactive'
+    Then I chose the '1' line item selections one by one
     Then I chose the '1' line item selections one by one
     Then I verify that text item# and SKU is present
     Then Verify that 'text "Unlimited Furniture Delivery" is present'

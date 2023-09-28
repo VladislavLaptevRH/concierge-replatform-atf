@@ -101,9 +101,9 @@ public class ConciergePGStepsDefs {
             case "Verify that all products have text From $ / $ Sale / $ Member":
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 $(By.xpath("//*[@id = 'component-refine-menu-dropdown']//p[text() = 'RESULTS']")).shouldBe(visible, Duration.ofSeconds(20));
-                $(By.xpath("(//*[text() = 'From'])[1]")).shouldBe(visible, Duration.ofSeconds(20));
-                for(int i = 1; i < $$(By.xpath("//*[text() = 'From']")).size(); i++) {
-                    $(By.xpath("(//*[text() = 'From'])[" + i + "]")).shouldHave(text("From"));
+                $(By.xpath("(//*[text() = 'Starting at'])[1]")).shouldBe(visible, Duration.ofSeconds(20));
+                for(int i = 1; i < $$(By.xpath("//*[text() = 'Starting at']")).size(); i++) {
+                    $(By.xpath("(//*[text() = 'Starting at'])[" + i + "]")).shouldHave(text("Starting at"));
                 }
                 $(By.xpath("(//*[@id = 'price-label']/following-sibling::p[1])[1]")).shouldBe(visible, Duration.ofSeconds(10));
                 for(int i = 1; i < $$(By.xpath("//*[@id = 'price-label']/following-sibling::p[1]")).size(); i++) {
@@ -170,9 +170,9 @@ public class ConciergePGStepsDefs {
             case "Verify that all products have text Frame $ / $ Sale / $ Member":
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 $(By.xpath("//*[@id = 'component-refine-menu-dropdown']//p[text() = 'RESULTS']")).shouldBe(visible, Duration.ofSeconds(20));
-                $(By.xpath("(//*[contains(text(), 'Frame')])[1]")).shouldBe(visible, Duration.ofSeconds(20));
-                for(int i = 1; i < $$(By.xpath("//*[contains(text(), 'Frame')]")).size(); i++) {
-                    $(By.xpath("(//*[contains(text(), 'Frame')])[" + i + "]")).shouldHave(text("Frame"));
+                $(By.xpath("(//*[contains(text(), 'Starting at')])[1]")).shouldBe(visible, Duration.ofSeconds(20));
+                for(int i = 1; i < $$(By.xpath("//*[contains(text(), 'tarting at')]")).size(); i++) {
+                    $(By.xpath("(//*[contains(text(), 'tarting at')])[" + i + "]")).shouldHave(text("tarting at"));
                 }
                 $(By.xpath("(//*[@id = 'price-label']/following-sibling::p[1])[1]")).shouldBe(visible, Duration.ofSeconds(10));
                 for(int i = 1; i < $$(By.xpath("//*[@id = 'price-label']/following-sibling::p[1]")).size(); i++) {
@@ -266,13 +266,14 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[text() = 'Featured']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "IN-STOCK products are returned":
-                int size = Integer.parseInt($(By.xpath("//*[@id = 'component-refine-menu-dropdown']//p[text() = 'RESULTS']")).getText().replaceAll("[^0-9]", ""));
+                with().pollInterval(9, SECONDS).await().until(() -> true);
                 for(int i = 1; i <= 46; i++) {
                         $(By.xpath("(//*[@id = 'listColumn1-Finish'])[" + i + "]")).scrollIntoView(true);
                         $(By.xpath("(//*[@id = 'listColumn1-Finish'])[" + i + "]")).shouldHave(text("Finish"));
                         $(By.xpath("(//*[@id = 'listColumn2-Finish'])[" + i + "]")).shouldBe(visible, Duration.ofSeconds(20));
                         $(By.xpath("(//*[@id = 'listColumn1-Size'])[" + i + "]")).shouldHave(text("Size"));
                         $(By.xpath("(//*[@id = 'listColumn2-Size'])[" + i + "]")).shouldBe(visible, Duration.ofSeconds(20));
+
                 }
                 break;
             case "CLEAR ALL is present when filter(s) are selected":
@@ -281,9 +282,9 @@ public class ConciergePGStepsDefs {
             break;
             case "all products returned have $ SALE price in their descriptions":
                 $(By.xpath("//*[@id = 'component-refine-menu-dropdown']//p[text() = 'RESULTS']")).shouldBe(visible, Duration.ofSeconds(20));
-                $(By.xpath("(//*[text() = 'From'])[1]")).shouldBe(visible, Duration.ofSeconds(20));
-                for(int i = 1; i < $$(By.xpath("//*[text() = 'From']")).size(); i++) {
-                    $(By.xpath("(//*[text() = 'From'])[" + i + "]")).shouldHave(text("From"));
+                $(By.xpath("(//*[text() = 'Starting at'])[1]")).shouldBe(visible, Duration.ofSeconds(20));
+                for(int i = 1; i < $$(By.xpath("//*[text() = 'Starting at']")).size(); i++) {
+                    $(By.xpath("(//*[text() = 'Starting at'])[" + i + "]")).shouldHave(text("Starting at"));
                 }
                 $(By.xpath("(//*[@id = 'price-label']/following-sibling::p[1])[1]")).shouldBe(visible, Duration.ofSeconds(10));
                 for(int i = 1; i < $$(By.xpath("//*[@id = 'price-label']/following-sibling::p[1]")).size(); i++) {
@@ -457,7 +458,7 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[@class = 'MuiButtonBase-root MuiFab-root' and not(contains(@style, 'hidden'))]")).click();
                 break;
                 case "sale checkbox":
-                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                    with().pollInterval(9, SECONDS).await().until(() -> true);
                     $(By.xpath("//p[text() = 'sale']")).shouldBe(visible, Duration.ofSeconds(10));
                 if(!$(By.xpath("//*[@id = 'component-refine-menu-dropdown']//*[contains(@class, 'Mui-checked')]/following-sibling::span/p[text() = 'sale']")).isDisplayed()){
                     $(By.xpath("//*[@id = 'component-refine-menu-dropdown']//following-sibling::span/p[text() = 'sale']")).click();
