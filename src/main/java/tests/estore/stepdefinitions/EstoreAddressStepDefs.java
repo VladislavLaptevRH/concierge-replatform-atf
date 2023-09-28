@@ -360,7 +360,7 @@ public class EstoreAddressStepDefs {
         estoreAddressScreen.getShippingAddressCity().shouldNotBe(empty);
 
         estorePaymentPage.getContinueToPayment().should(Condition.and("", visible, interactable),
-                Duration.ofSeconds(20)).click();
+                Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
 
         if ($(By.xpath("//*[contains(text(), 'required')]")).isDisplayed()) {
             iFillEstoreShippingAndShippingAddress();

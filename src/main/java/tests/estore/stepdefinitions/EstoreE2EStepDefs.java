@@ -80,7 +80,8 @@ public class EstoreE2EStepDefs {
         estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
         estoreItemPage.getAddToCartButton().should(enabled);
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
-        estoreItemPage.getAddToCartButton().click(ClickOptions.usingJavaScript());
+        estoreItemPage.getAddToCartButton().shouldBe(visible);
+        estoreItemPage.getAddToCartButton().shouldBe(interactable).click(ClickOptions.usingJavaScript());
     }
 
     @When("I fill all estore fields from address with {string} zip code")
@@ -593,7 +594,10 @@ public class EstoreE2EStepDefs {
         }
 
         open(URL);
+
+
         try {
+            estoreItemPage.getAddToCartButton().should(visible);
             estoreItemPage.getAddToCartButton().scrollTo();
             if (!estoreItemPage.getAddToCartButton().isEnabled()) {
                 for (int i = 0; i < 3; i++) {

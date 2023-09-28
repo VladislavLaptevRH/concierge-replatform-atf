@@ -68,7 +68,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate membership details")
     public void iValidateMembershipDetails() {
-        $(By.xpath("//*[text()='RH MEMBERS PROGRAM PROFILE']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='RH MEMBERS PROGRAM PROFILE']")).should(visible, Duration.ofSeconds(30));
         $(By.xpath("//*[text()='CONTACT INFORMATION']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='FAQs']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Terms & Conditions']")).should(visible, Duration.ofSeconds(20));

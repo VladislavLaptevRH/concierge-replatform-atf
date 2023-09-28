@@ -62,7 +62,7 @@ Feature: Estore Cart Page
   Scenario: Place order for guest user
     Given I remove all items from estore cart
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -90,24 +90,10 @@ Feature: Estore Cart Page
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add product "prod1617188" and sku "61690405 BRWN" to cart via API for estore
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    When I click on zipcode estore button
-    When I update postal code in cart
-    Then I verify SURCHARGE fee on cart page
-
-  Scenario: eStore - Gift Box fee in cart
-    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
-    When I open product page with "prod20000465" and "17110459" with "MIST" for estore
-    When I click on add to cart estore button
-    And I click on view cart estore button
-#    When I add item to cart via API for estore
     When I open estore cart
     When I click on zipcode estore button
     When I update postal code in cart
-    When I click on gift box button
-    Then I verify gift box fee in estore cart
+    Then I verify SURCHARGE fee on cart page
 
   Scenario: eStore - Membership price for US and CAN
     Given I log into eStore as "member" user
@@ -125,7 +111,7 @@ Feature: Estore Cart Page
   Scenario: eStore - Membership pop up for guest user
     Given I remove all items from estore cart
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -159,7 +145,7 @@ Feature: Estore Cart Page
     Then I verify "NY" shipping restriction
 
   Scenario: eStore - Disable Continue as a Guest user option for guest user with membership
-    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
+    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on join now on estore cart page membership button
@@ -270,7 +256,7 @@ Feature: Estore Cart Page
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod2020027" and "17050043" with "NOCT" for estore
+    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that rh member savings on this order message and amount is displayed

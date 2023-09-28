@@ -82,7 +82,7 @@ Feature: eStore Contract and Trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "MO" brand
-    When I go to estore item "17050043 MIST" from search field
+    When I go to estore item "17050045 NCKL" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that "contract" price is used for each "MO" product
@@ -92,7 +92,7 @@ Feature: eStore Contract and Trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "B&C" brand
-    When I go to estore item "17050043 MIST" from search field
+    When I go to estore item "17050045 NCKL" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that "contract" price is used for each "B&C" product
@@ -102,7 +102,7 @@ Feature: eStore Contract and Trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "TN" brand
-    When I go to estore item "17050043 MIST" from search field
+    When I go to estore item "17050045 NCKL" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that "contract" price is used for each "TN" product
@@ -169,7 +169,6 @@ Feature: eStore Contract and Trade
     When I remove payment method which was used earlier
     Then I verify that I'm able to edit payment
 
-
   Scenario: eStore Contract - Verify UFD for different zip codes
     Given I log into eStore as contract
     When I choose country for eStore from footer
@@ -234,9 +233,11 @@ Feature: eStore Contract and Trade
     Given I log into eStore as contract
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod2020027" and "17050042" with "SND" for estore
-    When I click on add to cart estore button
-    And I click on view cart estore button
+    When I add item to cart via API for estore
+#    When I open product page with "prod2020027" and "17050042" with "SND" for estore
+#    When I click on add to cart estore button
+#    And I click on view cart estore button
+    When I open estore cart
     When I click on estore checkout button
     When I fill estore shipping address for contract&trade
     When I click on same as estore shipping address checkbox

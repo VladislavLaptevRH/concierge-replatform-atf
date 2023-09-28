@@ -4,7 +4,7 @@ Feature: Registry
   Scenario: Verify that user is able to create the registry/find the existing registry
   Given I log into eStore as "regular" user
   When I choose country for eStore from footer
-  When I click on estore my account icon for guest user
+  When I click on my account button if page is not loaded
   When I click on the "gift-registry" from my account dropdown
   Then I verify that "gift-registry" is available for eStore
   When I go to create the new registry page for eStore
@@ -22,7 +22,7 @@ Feature: Registry
   Scenario: Verify that user is able to manage the existing registry
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     When I click on the "gift-registry" from my account dropdown
     Then I verify that "gift-registry" is available for eStore
     When I click on manage your registry button
