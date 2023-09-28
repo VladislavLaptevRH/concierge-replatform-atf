@@ -293,6 +293,38 @@ public class EstorePdpStepDefs {
 
     }
 
+    @Then("I verify the text displaying before price at hero image level for product {string} and {string} with {string} for the selected {string} country")
+    public void iVerifyTheTextDisplayingBeforePriceAtHeroImageLevel(String productID, String arg1, String selectedOptions, String country) {
+        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']//p[text()='Starting at']")).should(visible, Duration.ofSeconds(30));
+    }
+
+
+    @Then("I verify the text displaying before price at line item level for product {string} and {string} with {string} for the selected {string} country")
+    public void iVerifyTheTextDisplayingBeforePriceAtLineItemLevel(String productID, String arg1, String selectedOptions, String country) {
+        $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container']//p[text()='Starting at']")).should(visible, Duration.ofSeconds(30));
+    }
+
+    @Then("I verify that user is able to add line item separately for product {string} and {string} with {string} for the selected {string} country")
+    public void iVerifyThatUserIsAbleToAddLineItemSeparatelyForProduct(String productID, String arg1, String selectedOptions, String country) {
+            String lineTimeId = estorePdpPageScreen.getLineItemId().getText();
+            String itemIt = lineTimeId.split("# ")[1];
+             estorePdpPageScreen.getAddToCartBtn().click();
+             estorePdpPageScreen.getItemAddedInCarMsg().should(visible, Duration.ofSeconds(20));
+             estorePdpPageScreen.getViewCartBtn().click();
+             $(By.xpath("//p[text()='"+itemIt+"']")).should(visible, Duration.ofSeconds(30));
+    }
+
+    @Then("I verify the line item price for Combined Frame and Cushion for product {string} and {string} with {string} for the selected {string} country")
+    public void iVerifyTheLineItemPriceForCombineAndCushionProduct(String productID, String arg1, String selectedOptions, String country) {
+        String heroImageMemberPrice = estorePdpPageScreen.getHeroImageMemberPrice().getText().trim();
+        String heroImageRegularPrice = estorePdpPageScreen.getHeroImageRegularPrice().getText().trim();
+        String lineItemMemberPrice = estorePdpPageScreen.getLineItemMemberPrice().getText().trim();
+        String lineItemRegularPrice = estorePdpPageScreen.getLineItemRegularPrice().getText().trim();
+
+        assertEquals("Hero image & line item member price is not equal",heroImageMemberPrice,lineItemMemberPrice);
+        assertEquals("Hero image & line item regular price is not equal",heroImageRegularPrice,lineItemRegularPrice);
+    }
+
     @And("I verify that {string} popup is displayed")
     public void iVerifyThatPopupIsDisplayed(String modalPopUp) {
         if (modalPopUp.equals("View In-Stock")) {
