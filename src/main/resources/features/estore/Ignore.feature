@@ -1,3 +1,5 @@
+Feature: Test cases which are not use
+
 
   Scenario: eStore - Gift Box fee in cart
     Given I log into eStore as "regular" user
