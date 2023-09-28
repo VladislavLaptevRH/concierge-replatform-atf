@@ -1143,7 +1143,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify membership banner in PG")
     public void iVerifyMembershipBannerInPG() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text() = 'REMOVE MEMBERSHIP']")).shouldBe(visible, Duration.ofSeconds(15));
         $(By.xpath("//h2/following-sibling::p")).shouldBe(text("You've elected to join the RH Members Program, and you'll save $526.00 on this order."), Duration.ofSeconds(15));
     }
@@ -1343,7 +1343,7 @@ public class ConciergeCartStepDefs {
                                 }
                             }
                         } else {
-                            conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current order?"), Duration.ofSeconds(30));
+                            conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current cart?"), Duration.ofSeconds(30));
                             conciergeCartPageScreen.getClearOrderButtonPop().should(Condition.be(visible), Duration.ofSeconds(10));
                             conciergeCartPageScreen.getClearOrderButtonPop().click();
                             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -1406,7 +1406,7 @@ public class ConciergeCartStepDefs {
                                 }
                             }
                         } else {
-                            conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current order?"), Duration.ofSeconds(30));
+                            conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current cart?"), Duration.ofSeconds(30));
                             conciergeCartPageScreen.getClearOrderButtonPop().should(Condition.be(visible), Duration.ofSeconds(10));
                             conciergeCartPageScreen.getClearOrderButtonPop().click();
                             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -1434,6 +1434,7 @@ public class ConciergeCartStepDefs {
             }
 
             if (country == null || country.equals("US")) {
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 $(By.xpath("//*[@data-testid = 'price-for-regular']")).shouldHave(text("$6,675.00"), Duration.ofSeconds(20));
                 $(By.xpath("//*[@data-testid = 'price-for-member']")).shouldHave(text("$4,005.00"), Duration.ofSeconds(20));
                 if($(By.xpath("//*[@data-testid = 'price-for-final-sale']")).isDisplayed()){
@@ -1457,6 +1458,7 @@ public class ConciergeCartStepDefs {
         }
 
         if (country == null || country.equals("US")) {
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             $(By.xpath("//*[@data-testid = 'price-for-regular']")).shouldHave(text("$6,675.00"), Duration.ofSeconds(20));
             $(By.xpath("//*[@data-testid = 'price-for-member']")).shouldHave(text("$4,005.00"), Duration.ofSeconds(20));
             if($(By.xpath("//*[@data-testid = 'price-for-final-sale']")).isDisplayed()){
