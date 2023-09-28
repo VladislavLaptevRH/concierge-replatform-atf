@@ -99,30 +99,30 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify the product price for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
-  Scenario: Verify the text displaying before price for Frame and cushion product
+  Scenario: Verify the text displaying before the price is "starting at" at hero image level
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
-    Then I verify the text displaying before price for frame and cushion product
+    Then I verify the text displaying before price at hero image level for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
-  Scenario: Verify the text displaying before price for Frame and cushion product
+  Scenario: Verify the text displaying before the price is "starting at" at line item level
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
-    Then I verify the line item price for Combined Frame and Cushion
+    Then I verify the text displaying before price at line item level for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
-  Scenario: Verify the text displaying before price for Frame and cushion product
+  Scenario: Verify the line item price for Combined Frame + Cushion
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
-    Then I verify that user is able to add line item separately
+    When I open product page with "prod7551915" and "97670" with "INDG" for estore
+    Then I verify the line item price for Combined Frame and Cushion for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
-  Scenario: Verify the text displaying before price for Frame and cushion product
+  Scenario: Verify that user is able to add line item separately
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
-    Then I verify the product price on PDP for sale cushion and frame product
+    Then I verify that user is able to add line item separately for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
