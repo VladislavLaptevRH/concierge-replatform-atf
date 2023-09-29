@@ -35,7 +35,7 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement emailField = $(By.xpath("//input[@id='email']"));
 
-    private final SelenideElement yourProfileHasBeenUpdate = $(By.xpath("//*[text()='YOUR PROFILE HAS BEEN UPDATED.']"));
+    private final SelenideElement yourProfileHasBeenUpdate = $(By.xpath("//*[text()='Your profile has been updated.']"));
 
     private final SelenideElement updatePersonalButton = $(By.xpath("//*[text()='UPDATE PERSONAL INFORMATION']"));
 

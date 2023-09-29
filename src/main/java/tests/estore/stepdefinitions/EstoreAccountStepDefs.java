@@ -240,8 +240,11 @@ public class EstoreAccountStepDefs {
 
     @When("I click on my account button if page is not loaded")
     public void iClickOnMyAccountButtonIfPageIsNotLoaded() {
-        if ($(By.xpath("//*[text()='You must be ']")).isDisplayed()) {
+        try {
+            $(By.xpath("//*[text()='You must be ']")).should(visible);
             iClickOnEstoreMyAccountIconForGuestUser();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Login was executed");
         }
     }
 }

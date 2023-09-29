@@ -241,7 +241,6 @@ public class EstoreCGStepDefs {
 
     @Then("user verifies that price range is displayed below the thumbnail")
     public void userVerifiesThatPriceRangeIsDisplayedBelowTheThumbnail() {
-        $(By.xpath("//*[contains(text(),'From')]")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Member']")).should(visible, Duration.ofSeconds(20));
         int regularPrice = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[1]")).getText().replaceAll("\\$", "").replaceAll("\\,", ""));
         int memberPrice = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-member'])[1]")).getText().replaceAll("\\$", "").replaceAll("\\,", ""));

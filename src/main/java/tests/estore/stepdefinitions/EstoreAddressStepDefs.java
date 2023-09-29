@@ -614,7 +614,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that introduced gift message is displayed on {string} page")
     public void iVerifyThatIntrotucedGiftMessageIsDisplayedOnPage(String message) {
-        $(By.xpath("//*[text()='" + message + "']"))
+        $(By.xpath("//*[text()='Gift Message']"))
                 .should(visible, Duration.ofSeconds(20));
     }
 

@@ -103,7 +103,7 @@ Feature: Estore Address Page
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I goes to my account for estore
-    When I click on my account button if page is not loaded
+#    When I click on my account button if page is not loaded
     When I click on estore my account button
     When I click on address book estore button
     When I remove added address before for address book
