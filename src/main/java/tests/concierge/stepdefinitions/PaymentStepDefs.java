@@ -1,9 +1,11 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.Select;
 import tests.concierge.pageObject.*;
 import tests.utility.Hooks;
@@ -184,7 +186,7 @@ public class PaymentStepDefs {
 //                        with().pollInterval(5, SECONDS).await().until(() -> true);
 //                    }
 //            }
-
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         if (cardType.equals("VI")) {
             generalStepDefs.payWith("VI", "4111 1111 4555 1142", "737", "0330");
@@ -194,7 +196,6 @@ public class PaymentStepDefs {
         }
         if (cardType.equals("AX")) {
             generalStepDefs.payWith("AX", "3700 0000 0000 002", "7373", "0330");
-
         }
         if (cardType.equals("DI")) {
             generalStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
@@ -211,6 +212,20 @@ public class PaymentStepDefs {
         paymentScreen.getContinueToReview().click();
     }
 
+    @When("I pay with RHCC method")
+    public void iPayWithRHCCMethod() {
+        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
+        paymentScreen.getChoosePaymentMethodBtn().click();
+        paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
+        Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
+        selectPayment.selectByValue("RH");
+        $(By.xpath("//*[text() = 'Card Number']/..//input")).setValue("6006101002587290");
+        Select paymentPlan = new Select($(By.xpath("//*[text() = 'Select a Payment Plan']/..//select")));
+        paymentPlan.selectByIndex(1);
+        paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
+        paymentScreen.getContinueToReview().click();
+    }
+
     @When("I choose {string} from payment method")
     public void iChooseRHGiftCardFromPaymentMethod(String card) {
 //        with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -220,6 +235,115 @@ public class PaymentStepDefs {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         paymentScreen.getRhCardNumberField().setValue("6006493887999902229");
         paymentScreen.getRhCardPin().setValue("1980");
+    }
+
+    @When("I verify that I can't pay by RHCC and Discover cards for Canada")
+    public void iVerifyThatICantPayByRHCCAndDiscoverCardsForCanada() {
+        $(By.xpath("//*[@id = 'payment-method-select']")).click();
+        $(By.xpath("//*[@id = 'payment-option-RH']")).shouldNotBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'payment-option-CC']")).click();
+        generalStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
+        $(By.xpath("//*[@id = 'payment-review-button-1'][@disabled]")).shouldBe(visible, Duration.ofSeconds(15));
+    }
+
+    @When("I execute split payment with {string}")
+    public void iExecuteSplitPayment(String cardType) {
+        if (cardType.equals("VI")) {
+            paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofSeconds(15));
+            generalStepDefs.payWith("VI", "4111 1111 4555 1142", "737", "0330");
+            $(By.xpath("//*[text()='Split Payment with Additional Cards']")).click();
+            $(By.xpath("//*[text()='Enter the amount you would like to put on this card:']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='Enter the amount you would like to put on this card:']/..//*[text() = '$']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//input[@value = '0.00']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//input[contains(@class, 'MuiOutlinedInput-inputAdornedStart')]")).doubleClick().sendKeys(Keys.BACK_SPACE);
+            $(By.xpath("//input[contains(@class, 'MuiOutlinedInput-inputAdornedStart')]")).setValue("10");
+            paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
+            paymentScreen.getContinueToReview().click();
+            $(By.xpath("//*[text()='Charge to Visa ending 1142:']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='Remove']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$10.00']")).should(visible, Duration.ofSeconds(15));
+        }
+        if (cardType.equals("MC")) {
+            Select paymentMethodList = new Select($(By.xpath("//select[@id = 'payment-method-select']")));
+            paymentMethodList.selectByValue("CC");
+            generalStepDefs.payWith("MC", "5555 3412 4444 1115", "737", "0330");
+            paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
+            paymentScreen.getContinueToReview().click();
+        }
+    }
+
+    @When("I verify that payment split is working and paid amount is visible on the review page")
+    public void iVerifyThatPaymentSplitIsWorkingAndPaidAmountIsVisibleOnReviewPage() {
+        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//*[contains(text(),'XXXXXXXX')])[1]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$10.00']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='MasterCard']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//*[contains(text(),'XXXXXXXX')])[2]")).shouldHave(text("XXXXXXXX 1115"), Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,143.74']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
+        $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
+    }
+
+    @When("I verify that payment split is working and paid amount is visible on the confirmation page")
+    public void iVerifyThatPaymentSplitIsWorkingAndPaidAmountIsVisibleOnConfirmationPage() {
+        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//*[contains(text(),'XXXXXXXX')])[1]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$10.00']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='MasterCard']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//*[contains(text(),'XXXXXXXX')])[2]")).shouldHave(text("XXXXXXXX 1115"), Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,143.74']")).should(visible, Duration.ofSeconds(15));
+    }
+
+    @When("I verify that payment POS is working and paid amount is visible on the review page")
+    public void iVerifyThatPaymentPOSIsWorkingAndPaidAmountIsVisibleOnReviewPage() {
+        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Cash/Check']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
+        $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
+    }
+
+    @When("I verify that payment POS is working and paid amount is visible on the confirmation page")
+    public void iVerifyThatPaymentPOSIsWorkingAndPaidAmountIsVisibleOnConfirmationPage() {
+        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Cash/Check']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+    }
+
+    @When("I verify that payment RHCC is working and paid amount is visible on the review page")
+    public void iVerifyThatPaymentRHCCIsWorkingAndPaidAmountIsVisibleOnReviewPage() {
+        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='RH Credit Card']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 7290"), Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[contains(text(),\"You've chosen 24.99% Standard Purchase APR and Payments.Standard Purchase APR and Payments: \")]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[contains(text(),\" Standard financing terms apply. Interest will be charged on the unpaid purchase balance at the APR for standard Purchases. New accounts: standard Purchase APR 24.99%. Minimum interest charge $1. Existing accounts, see your Cardholder Agreement for applicable terms. Subject to credit approval. RH financing account issued by TD Bank, N.A. \")]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
+        $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
+    }
+
+    @When("I verify that payment RHCC is working and paid amount is visible on the confirmation page")
+    public void iVerifyThatPaymentRHCCIsWorkingAndPaidAmountIsVisibleOnConfirmationPage() {
+        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='RH Credit Card']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 7290"), Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[contains(text(),\"You've chosen 24.99% Standard Purchase APR and Payments.Standard Purchase APR and Payments: \")]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[contains(text(),\" Standard financing terms apply. Interest will be charged on the unpaid purchase balance at the APR for standard Purchases. New accounts: standard Purchase APR 24.99%. Minimum interest charge $1. Existing accounts, see your Cardholder Agreement for applicable terms. Subject to credit approval. RH financing account issued by TD Bank, N.A. \")]")).should(visible, Duration.ofSeconds(15));
+    }
+
+    @When("I verify that payment CC is working and paid amount is visible on the review page")
+    public void iVerifyThatPaymentCCIsWorkingAndPaidAmountIsVisibleOnReviewPage() {
+        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
+        $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
     }
 
     @Then("I verify the complete billing address")

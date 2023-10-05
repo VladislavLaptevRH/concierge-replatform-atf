@@ -38,6 +38,8 @@ public class GeneralStepDefs {
     PaymentScreen paymentScreen = new PaymentScreen();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
+
+    ConciergeHomePageStepDefs conciergeHomePageStepDefs = new ConciergeHomePageStepDefs();
     static WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(30));
     public static String id;
     public static String error;
@@ -51,6 +53,8 @@ public class GeneralStepDefs {
     private static String addItemEndpoint;
     private static String cartId;
     private static Logger log = LoggerFactory.getLogger(FilterStepDefs.class);
+
+    public static String paymentTypeVar;
 
     public void waitForLoad(WebDriver driver) {
         ExpectedCondition<Boolean> pageLoadCondition = webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete");
@@ -249,13 +253,20 @@ public class GeneralStepDefs {
             countrySelect.selectByValue(country);
         }
         Select selectState = new Select(checkoutAddressScreen.getStateField());
-        selectState.selectByValue(state);
+        if(ConciergeHomePageStepDefs.countryTmp.equals("CA")){
+            selectState.selectByValue("AB");
+        } else {
+            selectState.selectByValue(state);
+        }
+        if(ConciergeHomePageStepDefs.countryTmp.equals("CA")){
+            clearField(checkoutAddressScreen.getZipPostalCodeField());
+            checkoutAddressScreen.getZipPostalCodeField().setValue("A1A 1A1");
+        } else {
         if(checkoutAddressScreen.getZipPostalCodeField().isDisplayed()){
             clearField(checkoutAddressScreen.getZipPostalCodeField());
             checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);
-        } else {
-            System.out.println("Zip code unavailable");
         }
+           }
 
         if (state.equals("NY")) {
             SelenideElement stateNyButton = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='" + state + "']"));
@@ -406,6 +417,7 @@ public class GeneralStepDefs {
         paymentScreen.getExpiryDateField().setValue(expirationDate);
         switchTo().defaultContent();
         with().pollInterval(2, SECONDS).await().until(() -> true);
+        paymentTypeVar = paymentType;
     }
 
 
@@ -560,10 +572,10 @@ public class GeneralStepDefs {
         String endpoint = Hooks.cookie;
         String country = Hooks.country;
         String SKU = "";
-        if (Objects.equals(country, "US") || Objects.equals(country, "CA")) {
+        if (Objects.equals(country, "US")) {
             SKU = "10031801 WGRY";
         } else {
-            SKU = "63780104 LOAK";
+            SKU = "10028870 LOAK";
         }
 
         setUserEnvironment();
@@ -573,7 +585,7 @@ public class GeneralStepDefs {
             cartId = getCurrentCartId(USER_ID);
         }
         RestAssured.baseURI = BASE_URL;
-        RequestSpecification request = RestAssured.given().relaxedHTTPSValidation();
+        RequestSpecification request = RestAssured.given().relaxedHTTPSValidation().log().all();
         request.headers("Content-Type", "application/json");
         request.headers("Cookie", "PF_AEM_PATHS=%5E%2F(%3F%3Aalison-berger(%3F%3A%2F(%3F%3Aaperture%7C(%3F%3A(%3F%3Afulcrum%7Cpearl%7Crain)%7Cice))~IN%7C~IN)%7C(%3F%3Aalison-berger(%3F%3A%2F(%3F%3Aaperture%7C(%3F%3A(%3F%3Afulcrum%7Cpearl%7Crain)%7Cice))~R%7C~R)%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)R)H%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)OD%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)IN%7C(%3F%3A(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)%7Cgift-registry~)MO%7Cinterior-design~BC%7Cgift-registry~RH%7Cstrada-ledoux~MO)%24; endpoint=" + endpoint + "; fusion_search=true; ui_asset_path=/concierge-ui-v1/");
         response = request.body("{\n" +
