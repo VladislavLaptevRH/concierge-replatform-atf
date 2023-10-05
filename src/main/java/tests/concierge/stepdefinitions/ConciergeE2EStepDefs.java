@@ -1266,12 +1266,11 @@ public class ConciergeE2EStepDefs {
     @Then("I verify the payment details and order estimate summary")
     public void iVerifyThePaymentDetailsAndOrderEstimateSummary() {
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Cash/Check']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
-
+        $(By.xpath("//*[text() = 'TOTAL']")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify spo order & terms review signature")

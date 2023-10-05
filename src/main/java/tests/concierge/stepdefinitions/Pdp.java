@@ -493,22 +493,24 @@ public class Pdp {
 
     @Then("I chose the {string} line item selections one by one")
     public void iChoseLineItemSelectionsOneByOne(String chose) {
-        int lineItemsCount = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..")).size();
-        for (int i = 1; i <= lineItemsCount; i++) {
-            Select itemList = new Select($(By.xpath("((//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..)[" + i + "]")));
-            if (i != lineItemsCount) {
-                try {
-                    itemList.selectByIndex(Integer.parseInt(chose));
-                    with().pollInterval(1, SECONDS).await().until(() -> true);
-                } catch (UnsupportedOperationException e) {
-                    iChoseLineItemSelectionsOneByOne(chose);
-                }
-            } else {
-                try {
-                    itemList.selectByIndex(Integer.parseInt(chose) + 1);
-                    with().pollInterval(1, SECONDS).await().until(() -> true);
-                } catch (UnsupportedOperationException e) {
-                    iChoseLineItemSelectionsOneByOne(chose);
+        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+            int lineItemsCount = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..")).size();
+            for (int i = 1; i <= lineItemsCount; i++) {
+                Select itemList = new Select($(By.xpath("((//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..)[" + i + "]")));
+                if (i != lineItemsCount) {
+                    try {
+                        itemList.selectByIndex(Integer.parseInt(chose));
+                        with().pollInterval(1, SECONDS).await().until(() -> true);
+                    } catch (UnsupportedOperationException e) {
+                        iChoseLineItemSelectionsOneByOne(chose);
+                    }
+                } else {
+                    try {
+                        itemList.selectByIndex(Integer.parseInt(chose) + 1);
+                        with().pollInterval(1, SECONDS).await().until(() -> true);
+                    } catch (UnsupportedOperationException e) {
+                        iChoseLineItemSelectionsOneByOne(chose);
+                    }
                 }
             }
         }
