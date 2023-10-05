@@ -1100,4 +1100,16 @@ public class Pdp {
         $(By.xpath("//*[text()='Premium Fabrics']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Premium Leathers']")).should(visible, Duration.ofSeconds(15));
     }
+
+    @Then("I verify presence of MultiSKU")
+    public void iVerifyMultiSKU(){
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()='Items#: 89630210 BWMR, 89720340 BWMR']")).should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify product name in cart page")
+    public void iVerifyProductNameinCartPage(){
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()='KENSINGTON LEFT-ARM L-SECTIONAL']")).should(visible, Duration.ofSeconds(15));
+    }
 }
