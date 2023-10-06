@@ -122,6 +122,7 @@ public class ConciergeCartStepDefs {
     @When("I click on view cart button")
     public void iClickOnViewCartButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if($(By.xpath("//*[text() = 'Agree & Add To Cart']")).isDisplayed()){
             $(By.xpath("//*[text() = 'Agree & Add To Cart']")).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -752,7 +753,7 @@ public class ConciergeCartStepDefs {
         Select postponeReasonCode = new Select(conciergeCartPageScreen.getPostponeSelectReasonCode());
         conciergeCartPageScreen.getPostponeSelectReasonCode().scrollIntoView(true);
         postponeReasonCode.selectByValue("Construction/Remodel");
-        $(By.xpath("(//button/span/p[text() = '30'])[2]")).click();
+        $(By.xpath("//button/span/p[text() = '30']")).click();
         date = $(By.xpath("//*[contains(@class, 'MuiPickersCalendarHeader-switchHeader')]//p")).getText();
 
     }
@@ -1154,7 +1155,7 @@ public class ConciergeCartStepDefs {
        RegularPrice = $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", "");
         $(By.xpath("//h2/i")).shouldBe(text("The"), Duration.ofSeconds(15));
         $(By.xpath("//h2")).shouldBe(text(" RH MEMBERS PROGRAM"), Duration.ofSeconds(15));
-        $(By.xpath("//h2/following-sibling::p")).shouldBe(text("Join the RH Members Program for $175.00, and save  $526.00 on this order."), Duration.ofSeconds(15));
+        $(By.xpath("//h2/following-sibling::p")).shouldBe(text("Join the RH Members Program for $200.00, and save  $526.00 on this order."), Duration.ofSeconds(15));
         $(By.xpath("//*[text() = 'JOIN NOW']")).shouldBe(visible, Duration.ofSeconds(15));
     }
 
@@ -1435,15 +1436,15 @@ public class ConciergeCartStepDefs {
 
             if (country == null || country.equals("US")) {
                 with().pollInterval(5, SECONDS).await().until(() -> true);
-                $(By.xpath("//*[@data-testid = 'price-for-regular']")).shouldHave(text("$6,675.00"), Duration.ofSeconds(20));
-                $(By.xpath("//*[@data-testid = 'price-for-member']")).shouldHave(text("$4,005.00"), Duration.ofSeconds(20));
+                $(By.xpath("//*[@data-testid = 'price-for-regular']")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
+                $(By.xpath("//*[@data-testid = 'price-for-member']")).shouldHave(text("$2,895.00"), Duration.ofSeconds(20));
                 if($(By.xpath("//*[@data-testid = 'price-for-final-sale']")).isDisplayed()){
                     $(By.xpath("//*[@data-testid = 'price-for-final-sale']")).shouldHave(text("$5,010.00"), Duration.ofSeconds(20));
                 }
-                $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).shouldHave(text("$5,010.00"), Duration.ofSeconds(20));
-                $(By.xpath("//*[text() = 'Subtotal' ]/../following-sibling::div/span")).shouldHave(text("$5,010.00"), Duration.ofSeconds(20));
+                $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
+                $(By.xpath("//*[text() = 'Subtotal' ]/../following-sibling::div/span")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Unlimited Furniture Delivery' ]/../following-sibling::div/p")).shouldHave(text("$279.00"), Duration.ofSeconds(20));
-                $(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).shouldHave(text("$5,289.00"), Duration.ofSeconds(20));
+                $(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).shouldHave(text("$4,139.00"), Duration.ofSeconds(20));
             }
     }
 
@@ -1459,17 +1460,17 @@ public class ConciergeCartStepDefs {
 
         if (country == null || country.equals("US")) {
             with().pollInterval(5, SECONDS).await().until(() -> true);
-            $(By.xpath("//*[@data-testid = 'price-for-regular']")).shouldHave(text("$6,675.00"), Duration.ofSeconds(20));
-            $(By.xpath("//*[@data-testid = 'price-for-member']")).shouldHave(text("$4,005.00"), Duration.ofSeconds(20));
+            $(By.xpath("//*[@data-testid = 'price-for-regular']")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
+            $(By.xpath("//*[@data-testid = 'price-for-member']")).shouldHave(text("$2,895.00"), Duration.ofSeconds(20));
             if($(By.xpath("//*[@data-testid = 'price-for-final-sale']")).isDisplayed()){
-                $(By.xpath("//*[@data-testid = 'price-for-final-sale']")).shouldHave(text("$5,010.00"), Duration.ofSeconds(20));
+                $(By.xpath("//*[@data-testid = 'price-for-final-sale']")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
             }
-             int totalWithoutTaxes = 5010 * Integer.parseInt(quantity);
+             int totalWithoutTaxes = 3860 * Integer.parseInt(quantity);
             assertEquals(totalWithoutTaxes, Integer.parseInt($(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
-             int subtotal = 5010 * Integer.parseInt(quantity);
+             int subtotal = 3860 * Integer.parseInt(quantity);
             assertEquals(subtotal, Integer.parseInt($(By.xpath("//*[text() = 'Subtotal' ]/../following-sibling::div/span")).getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
             $(By.xpath("//*[text() = 'Unlimited Furniture Delivery' ]/../following-sibling::div/p")).shouldHave(text("$279.00"), Duration.ofSeconds(20));
-            int totalWithTaxes = 5010 * Integer.parseInt(quantity) + Integer.parseInt($(By.xpath("//*[text() = 'Unlimited Furniture Delivery' ]/../following-sibling::div/p")).getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
+            int totalWithTaxes = 3860 * Integer.parseInt(quantity) + Integer.parseInt($(By.xpath("//*[text() = 'Unlimited Furniture Delivery' ]/../following-sibling::div/p")).getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
             assertEquals(totalWithTaxes, Integer.parseInt($(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
         }
     }

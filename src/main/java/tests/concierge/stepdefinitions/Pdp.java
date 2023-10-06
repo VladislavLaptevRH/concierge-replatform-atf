@@ -293,6 +293,7 @@ public class Pdp {
                 }
                 break;
             case  "text \"Components starting at\" is present":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 $(By.xpath("(//*[text() = 'Starting at'])[1]")).shouldHave(visible, Duration.ofSeconds(15));
                 break;
             case  "click Agree and add to cart":
@@ -1057,8 +1058,8 @@ public class Pdp {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
-            $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).scrollTo();
-            $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).should(visible, Duration.ofSeconds(30));
+            $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery. ')]")).scrollTo();
+            $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery. ')]")).should(visible, Duration.ofSeconds(30));
         }
     }
 

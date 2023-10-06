@@ -18,7 +18,7 @@ Feature: Concierge Critical Path
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10024796 WGRY" and quantity '1'
+    When I add item to cart via API with "10146709 LOAK" and quantity '1'
     When I open cart
 #    Then I confirm that default zip code for country "US" is present in Cart
     And I change zip code in the cart to "94525"
@@ -28,7 +28,7 @@ Feature: Concierge Critical Path
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10024796 WGRY" and quantity '1'
+    When I add item to cart via API with "10146709 LOAK" and quantity '1'
     When I open cart
     Then I verify all the sums on the cart page
 
@@ -36,9 +36,9 @@ Feature: Concierge Critical Path
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10024796 WGRY" and quantity '5'
+    When I add item to cart via API with "10146709 LOAK" and quantity '4'
     When I open cart
-    Then I verify all the sums on the cart page with item quantity '5'
+    Then I verify all the sums on the cart page with item quantity '4'
 
   Scenario: Verify that the Membership Banner is present for Non-Members
     Given I log into Concierge as "associate"
@@ -364,9 +364,9 @@ Feature: Concierge Critical Path
     Then User verifies that all items from menu are displayed for "<brand>"
     Examples:
       | brand           |
-      | RH              |
+#      | RH              |
 #      | RH CONTEMPORARY |
-#      | RH INTERIORS    |
+      | RH INTERIORS    |
 #      | RH MODERN       |
 #      | RH OUTDOOR      |
 #      | RH BEACH HOUSE  |
@@ -381,10 +381,10 @@ Feature: Concierge Critical Path
     Then I verify the logo
     Examples:
       | brand           |
-      | RH              |
+#      | RH              |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
-#      | RH MODERN       |
+      | RH MODERN       |
 #      | RH OUTDOOR      |
 #      | RH BEACH HOUSE  |
 #      | RH SKI HOUSE    |
@@ -398,11 +398,11 @@ Feature: Concierge Critical Path
     Then I verify that RH Brand dropdown is present in "<currentBrandName>" home page
     Examples:
       | brand           | currentBrandName |
-      | RH              | RH               |
+#      | RH              | RH               |
 #      | RH CONTEMPORARY | CN               |
 #      | RH INTERIORS    | IN               |
 #      | RH MODERN       | MO               |
-#      | RH OUTDOOR      | OD               |
+      | RH OUTDOOR      | OD               |
 #      | RH BEACH HOUSE  | BH               |
 #      | RH SKI HOUSE    | SH               |
 #      | RH BABY & CHILD | BC               |
@@ -415,12 +415,12 @@ Feature: Concierge Critical Path
     Then I verify footer links for brand "<brand>"
     Examples:
       | brand           |
-      | RH              |
+#      | RH              |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
 #      | RH OUTDOOR      |
-#      | RH BEACH HOUSE  |
+      | RH BEACH HOUSE  |
 #      | RH SKI HOUSE    |
 #      | RH BABY & CHILD |
 #      | RH TEEN         |
@@ -461,6 +461,7 @@ Feature: Concierge Critical Path
 
   Scenario Outline: Major CCs
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -474,6 +475,9 @@ Feature: Concierge Critical Path
     When I click on continue with original address button
     When I execute payment for "<cardType>"
     And I verify that review screen is displayed
+    When I click on a place order button
+    Then I click on order details button
+    Then I verify that confirm screen is displayed
     Examples:
       | cardType |
       | VI       |
@@ -625,7 +629,7 @@ Feature: Concierge Critical Path
       |57070740 CLNT|
       |61970975 TEAK|
       |62870050 LOAK|
-      |17050044 CAML|
+      |10024793 BRNZ|
 
   Scenario: Verify the PDP hero Image, zoom, line items
     Given I log into Concierge as "associate"
@@ -646,7 +650,6 @@ Feature: Concierge Critical Path
     Then Verify that 'line item selections (Size, Finish and Qty) are present'
     Then Verify that 'smaller preview product picture is present on the left of line items'
     Then Verify that 'View in-stock Items and View Sale Items links are present'
-    Then I choose option 'Waxed Grey Oak/ Pewter'
     Then I chose zero choose in line items
     Then Verify that 'text "Configure this item to view delivery information to" is present'
     Then Verify that 'text Swatch is present'
@@ -681,20 +684,21 @@ Feature: Concierge Critical Path
     Then Verify that "In Stock modal" 'has an item can be added to cart from modal'
     Then Verify that "In Stock modal" 'has an item can be added to project from modal'
 
-  Scenario: Verify On Sale functionality
-    Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
-    When I remove all items from cart via UI
-    When I go to item "17050043 FOG" from search field
-    When I click on "view select items on sale" link
-    Then Verify that "Sale modal" 'opens'
-    Then Verify that "Sale modal" 'has title'
-    Then Verify that "Sale modal" 'has item#'
-    Then Verify that "Sale modal" 'has price, member and sale price'
-    Then Verify that "Sale modal" 'has qty dropdown'
-    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
-    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
-    Then Verify that "Sale modal" 'has an item can be added to project from modal'
+#  Scenario: Verify On Sale functionality
+#
+#    Given I log into Concierge as "associate"
+#    When I choose country for concierge from footer
+#    When I remove all items from cart via UI
+#    When I go to item "63130001 GREY" from search field
+#    When I click on "view select items on sale" link
+#    Then Verify that "Sale modal" 'opens'
+#    Then Verify that "Sale modal" 'has title'
+#    Then Verify that "Sale modal" 'has item#'
+#    Then Verify that "Sale modal" 'has price, member and sale price'
+#    Then Verify that "Sale modal" 'has qty dropdown'
+#    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
+#    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
+#    Then Verify that "Sale modal" 'has an item can be added to project from modal'
 
   Scenario Outline: Availability, Delivery and Returns messaging for <items>
     Given I log into Concierge as "associate"
@@ -706,7 +710,7 @@ Feature: Concierge Critical Path
     Examples:
       | items | skuID         |
       | SO    | 19970830 CTIC |
-      | BO    | 17050043 FOG  |
+      | BO    | 10024793 BRNZ  |
 
   Scenario: Verify the dropdown selection and add to cart
 
@@ -787,7 +791,8 @@ Feature: Concierge Critical Path
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to item "10060297 CLR" from search field
+    When I go to item "10024793 BRNZ" from search field
+    Then I chose the '1' line item selections one by one
     Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button

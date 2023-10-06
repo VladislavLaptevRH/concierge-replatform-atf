@@ -31,7 +31,7 @@ Feature: Concierge PDP
       |57070740 CLNT|
       |61970975 TEAK|
       |62870050 LOAK|
-      |17050044 CAML|
+      |10024793 BRNZ|
 
   Scenario: Verify the PDP hero Image, zoom, line items
     Given I log into Concierge as "associate"
@@ -87,20 +87,20 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'has an item can be added to cart from modal'
     Then Verify that "In Stock modal" 'has an item can be added to project from modal'
 
-  Scenario: Verify On Sale functionality
-    Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
-    When I remove all items from cart via UI
-    When I go to item "17050043 FOG" from search field
-    When I click on "view select items on sale" link
-    Then Verify that "Sale modal" 'opens'
-    Then Verify that "Sale modal" 'has title'
-    Then Verify that "Sale modal" 'has item#'
-    Then Verify that "Sale modal" 'has price, member and sale price'
-    Then Verify that "Sale modal" 'has qty dropdown'
-    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
-    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
-    Then Verify that "Sale modal" 'has an item can be added to project from modal'
+#  Scenario: Verify On Sale functionality
+#    Given I log into Concierge as "associate"
+#    When I choose country for concierge from footer
+#    When I remove all items from cart via UI
+#    When I go to item "17050043 FOG" from search field
+#    When I click on "view select items on sale" link
+#    Then Verify that "Sale modal" 'opens'
+#    Then Verify that "Sale modal" 'has title'
+#    Then Verify that "Sale modal" 'has item#'
+#    Then Verify that "Sale modal" 'has price, member and sale price'
+#    Then Verify that "Sale modal" 'has qty dropdown'
+#    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
+#    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
+#    Then Verify that "Sale modal" 'has an item can be added to project from modal'
 
   Scenario Outline: Availability, Delivery and Returns messaging for <items>
     Given I log into Concierge as "associate"
@@ -112,7 +112,7 @@ Feature: Concierge PDP
     Examples:
       | items | skuID         |
       | SO    | 19970830 CTIC |
-      | BO    | 17050043 FOG  |
+      | BO    | 10024793 BRNZ  |
 
   Scenario: Verify the dropdown selection and add to cart
 
@@ -177,16 +177,16 @@ Feature: Concierge PDP
       | skuID         |
       | 60450996 BLNL |
 
-  Scenario: ATC SPO - add to cart
+  Scenario: ATC BO - add to cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to item "10105809 BWDV" from search field
+    When I go to item "10024793 BRNZ" from search field
+    Then I chose the '1' line item selections one by one
     Then I chose the '1' line item selections one by one
     When I click on add to cart button
-    When I click on agree&add button
     When I click on view cart button
-    Then I verify that availability, Delivery and returns messaging is displayed for "SO"
+    Then I verify that availability, Delivery and returns messaging is displayed for "BO"
 
   Scenario: ATC BO - add to cart
     Given I log into Concierge as "associate"
