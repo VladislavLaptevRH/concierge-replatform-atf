@@ -62,5 +62,51 @@ Feature: Multi SKU
   Then I verify that confirmation order screen is displayed
 
 
+ Scenario: Verify the interim copy "This item includes multiple components. Individual components will be listed in your cart" should show up above the lien item dropdowns and below the line item title
+  Given I log into Concierge as "associate"
+  When I choose country for concierge from footer
+  When I remove all items from cart via UI
+  When I go to concierge item 'prod9300694' from search field
+  When I click on the first project search result with parameters 'prod9300694''m000000113569'
+  Then I Verify that 'PDP title' is present
+  Then I chose the '1' line item selections one by one
+  Then I verify "This item includes multiple components. Individual components will be listed in your cart" is present
 
 
+ Scenario: Verify the user is able to add the multisku to project
+  Given I log into Concierge as "associate"
+  When I choose country for concierge from footer
+  When I remove all items from cart via UI
+  When I go to concierge item 'prod9300694' from search field
+  When I click on the first project search result with parameters 'prod9300694''m000000113569'
+  Then I Verify that 'PDP title' is present
+  Then I chose the '1' line item selections one by one
+  When I click on add to project button
+  When I click on go to project button
+  Then I verify trade prices for "project page"
+
+
+ Scenario: Verify the quantity added in PDP is matching with the quantity added on cart page
+  Given I log into Concierge as "associate"
+  When I choose country for concierge from footer
+  When I remove all items from cart via UI
+  When I go to concierge item 'prod9300694' from search field
+  When I click on the first project search result with parameters 'prod9300694''m000000113569'
+  Then I Verify that 'PDP title' is present
+  Then I chose the '1' line item selections one by one
+  When I click on add to cart button
+  When I click on view cart button
+  Then I verify product count in cart page
+
+
+ Scenario: Verify the quantity added in PDP is matching with the quantity added on project pop up and project page
+  Given I log into Concierge as "associate"
+  When I choose country for concierge from footer
+  When I remove all items from cart via UI
+  When I go to concierge item 'prod9300694' from search field
+  When I click on the first project search result with parameters 'prod9300694''m000000113569'
+  Then I Verify that 'PDP title' is present
+  Then I chose the '1' line item selections one by one
+  When I click on add to project button
+  When I click on go to project button
+  Then I verify product count in project page
