@@ -5,7 +5,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10024796 WGRY" and quantity '1'
+    When I add item to cart via API with "10146709 LOAK" and quantity '1'
     When I open cart
 #    Then I confirm that default zip code for country "US" is present in Cart
     And I change zip code in the cart to "94525"
@@ -15,7 +15,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10024796 WGRY" and quantity '1'
+    When I add item to cart via API with "10146709 LOAK" and quantity '1'
     When I open cart
     Then I verify all the sums on the cart page
 
@@ -23,9 +23,9 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10024796 WGRY" and quantity '5'
+    When I add item to cart via API with "10146709 LOAK" and quantity '4'
     When I open cart
-    Then I verify all the sums on the cart page with item quantity '5'
+    Then I verify all the sums on the cart page with item quantity '4'
 
   Scenario: Order Classification
     Given I log into Concierge as "associate"

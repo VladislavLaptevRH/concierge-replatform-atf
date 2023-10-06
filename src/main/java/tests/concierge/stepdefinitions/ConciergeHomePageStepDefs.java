@@ -38,7 +38,7 @@ public class ConciergeHomePageStepDefs {
 
     @When("I choose {string} country")
     public void iChooseCountryFor(String country) {
-        countryTmp = country;
+            countryTmp = country;
         try {
             if (country.equals("GB")) {
                 conciergeHomePage.chooseGBCountry();
