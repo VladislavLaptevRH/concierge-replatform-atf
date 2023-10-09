@@ -1426,4 +1426,10 @@ public class ConciergeE2EStepDefs {
             System.out.println();
         }
     }
+
+    @Then("I verify multiSKU added in project")
+    public void iVerifyMultiSKUinProject(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text() = 'prod9300694']")).should(visible, Duration.ofSeconds(15));
+    }
 }
