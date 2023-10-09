@@ -83,7 +83,8 @@ Feature: Multi SKU
   Then I chose the '1' line item selections one by one
   When I click on add to project button
   When I click on go to project button
-  Then I verify multiSKU added in project
+  Then I verify multiSKU added in project "prod9300694"
+  Then I verify multiSKU added in project "m000000113569"
 
 
  Scenario: Verify the quantity added in PDP is matching with the quantity added on cart page
