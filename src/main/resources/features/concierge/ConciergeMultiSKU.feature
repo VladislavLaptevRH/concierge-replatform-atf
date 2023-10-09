@@ -84,7 +84,6 @@ Feature: Multi SKU
   When I click on add to project button
   When I click on go to project button
   Then I verify multiSKU added in project
-  Then I verify trade prices for "project page"
 
 
  Scenario: Verify the quantity added in PDP is matching with the quantity added on cart page
