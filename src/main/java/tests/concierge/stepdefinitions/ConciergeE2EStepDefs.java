@@ -1425,4 +1425,10 @@ public class ConciergeE2EStepDefs {
             System.out.println();
         }
     }
+
+    @Then("I verify multiSKU added in project {string}")
+    public void iVerifyMultiSKUinProject(String multi){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text() = '"+multi+"']")).should(visible, Duration.ofSeconds(15));
+    }
 }
