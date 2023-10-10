@@ -60,7 +60,6 @@ public class Hooks {
      * This method get properties from application.properties file
      */
     private void ConfigFileReader() {
-
         profile = System.getenv("ENVIRONMENT");
         cookie = System.getenv("ENDPOINT");
         country = System.getenv("COUNTRY");
@@ -149,6 +148,7 @@ public class Hooks {
         ConfigFileReader();
         configureEstoreURL();
         setUPWebDriver(eStoreURL);
+//        setupChromeArguments();
     }
 
     /**
@@ -193,9 +193,8 @@ public class Hooks {
      * Set up chrome arguments for Jenkins run
      */
     public void setupChromeArguments() {
-        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        WebDriverManager.chromedriver().setup();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-gpu");
         options.addArguments("enable-automation");
@@ -205,8 +204,6 @@ public class Hooks {
         options.addArguments("--disable-browser-side-navigation");
         options.addArguments("--window-size=1366,768");
         options.addArguments("--user-agent=robot-framework");
-        Configuration.browserCapabilities = options;
-
         DesiredCapabilities dr = new DesiredCapabilities();
         dr.setBrowserName("chrome");
         dr.setCapability(ChromeOptions.CAPABILITY, options);

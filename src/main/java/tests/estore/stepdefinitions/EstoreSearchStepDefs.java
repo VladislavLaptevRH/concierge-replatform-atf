@@ -30,6 +30,7 @@ public class EstoreSearchStepDefs {
     @When("I go to estore item {string} from search field")
     public void iGoToItemFromEstoreSearchField(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]//input")).should(visible, Duration.ofSeconds(60));
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]//input")).click();
         estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
@@ -228,8 +229,9 @@ public class EstoreSearchStepDefs {
 
     @When("I apply multiple facet on estore search page")
     public void iApplyMultipleFacetOnEstoreSearchPage() {
-        $(By.xpath("//*[text()='sale']")).click();
-        $(By.xpath("//*[text()='in-stock']")).click();
-        $(By.xpath("//*[contains(text(),'RESULTS')]")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@id='refinementOptionData_checkbox-Sale']//span")).shouldBe(visible).click();
+        $(By.xpath("//*[@id='refinementOptionData_checkbox-In-Stock']//span")).shouldBe(visible).click();
+        $(By.xpath("//*[@id='refinementOptionData_checkbox-New Arrivals']//span")).shouldBe(visible).click();
+        $(By.xpath("(//*[contains(text(),'RESULTS')])[2]")).shouldBe(visible, Duration.ofSeconds(20));
     }
 }

@@ -46,7 +46,7 @@ public class EstorePaymentPage {
 
     private final SelenideElement continueToReview = $(By.xpath("//*[text()='CONTINUE TO REVIEW']"));
 
-    private final SelenideElement continueToPayment = $(By.xpath("//button[@id='page-checkout-address_continue-to-payment-btn']"));
+    private final SelenideElement continueToPayment = $(By.cssSelector("#page-checkout-address_continue-to-payment-btn"));
 
     private final SelenideElement continueToCheckout = $(By.xpath("//*[text()='CONTINUE']"));
 

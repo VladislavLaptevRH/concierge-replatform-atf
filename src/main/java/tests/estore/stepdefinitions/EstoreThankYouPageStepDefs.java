@@ -22,11 +22,11 @@ public class EstoreThankYouPageStepDefs {
     @Then("I verify all the line items in the estore cart on thank you page")
     public void iVerifyAllTheLineItemsInTheCartOnThankYouPage() {
         $(By.xpath("//*[text()='Qty 1']")).should(visible, Duration.ofSeconds(15));
-        conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
-        conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
+        conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(20));
+        conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofSeconds(15));
 
     }
 
@@ -42,7 +42,7 @@ public class EstoreThankYouPageStepDefs {
         if (!estoreConfirmationOrderScreen.getThankYouTitle().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
-        $(By.xpath("//*[text()='THANK YOU']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Thank You']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[contains(text(),'You will receive an order confirmation number shortly via email.')]")).should(visible, Duration.ofSeconds(40));
     }
 

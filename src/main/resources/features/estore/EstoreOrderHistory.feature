@@ -43,7 +43,7 @@ Feature: Order history
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I goes to my account for estore
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     When I click on estore my account icon
     When I click on estore order history
     Then I verify order date and order total fields
@@ -101,5 +101,5 @@ Feature: Order history
     When I execute payment with credit card on estore
     When I click on a place estore order button
     When I open estore order history
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     Then I verify that status is order in progress while order is still in progress

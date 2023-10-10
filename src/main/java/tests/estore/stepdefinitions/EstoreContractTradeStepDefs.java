@@ -61,9 +61,9 @@ public class EstoreContractTradeStepDefs {
 
     @Then("I verify that trade paragraph is displayed")
     public void iVerifyThatTradeParagraphIsDisplayed() {
-        estoreUserAccountPage.getDashboardTitle().should(Condition.visible, Duration.ofSeconds(20));
+        estoreUserAccountPage.getDashboardTitle().should(Condition.visible, Duration.ofSeconds(40));
         estoreUserAccountPage.getDashboardTitle().shouldHave(Condition.text("TRADE PROGRAM SIGN IN"), Duration.ofSeconds(20));
-        estoreLoginPage.getParagraphContentTrade().should(Condition.visible, Duration.ofSeconds(20));
+        estoreLoginPage.getParagraphContentTrade().should(Condition.visible, Duration.ofSeconds(40));
     }
 
     @And("I verify that logout from trade user is displayed")

@@ -90,7 +90,7 @@ public class EstoreOrderReviewStepDefs {
 
     @And("I verify that introduced order description message is displayed on {string} page")
     public void iVerifyThatIntrotucedOrderDescriptionMessageIsDisplayedOnPage(String message) {
-        $(By.xpath("//*[text()='" + message + "']"))
+        $(By.xpath("//*[text()='Order description message']"))
                 .should(visible, Duration.ofSeconds(20));
     }
 

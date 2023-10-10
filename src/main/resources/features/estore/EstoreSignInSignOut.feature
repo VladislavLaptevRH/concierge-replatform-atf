@@ -15,7 +15,7 @@ Feature: Estore Sign In/Signout
     When I choose country for eStore from footer
     When I click on estore account
     When I click on estore signout button
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     Then I verify that user is able to signout
 
   Scenario: Verify the signout functionaity
@@ -24,7 +24,7 @@ Feature: Estore Sign In/Signout
     When I click on estore my account icon
     When I click on estore sign out button
     When I click on confirm sign out button
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
 
   Scenario: Verify the user is completely signed out of all brands
     Given I log into eStore as "regular" user
@@ -32,5 +32,5 @@ Feature: Estore Sign In/Signout
     When I click on estore my account icon
     When I click on estore sign out button
     When I click on confirm sign out button
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     Then I verify that user is completely signed out of all brands

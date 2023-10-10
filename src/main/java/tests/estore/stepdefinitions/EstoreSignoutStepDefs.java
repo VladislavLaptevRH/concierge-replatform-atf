@@ -4,22 +4,23 @@ import com.codeborne.selenide.Condition;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import tests.estore.pageObject.EstoreUserAccountPage;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$;
 
 public class EstoreSignoutStepDefs {
+    EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
+
     @When("I click on estore sign out button")
     public void iClickOnEstoreSignOutButton() {
-        $(By.xpath("//*[text()='SIGN OUT']")).should(Condition.visible, Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='SIGN OUT']")).click();
+        estoreUserAccountPage.clickToSignOutButton();
     }
 
     @When("I click on confirm sign out button")
     public void iClickOnConfirmSignOutButton() {
-        $(By.xpath("//*[text()='Sign Out']")).should(Condition.visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Sign Out']")).click();
+        estoreUserAccountPage.clickToConfirmSignOutButton();
     }
 
     @When("I click on estore my account icon for not logged user")

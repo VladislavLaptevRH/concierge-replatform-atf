@@ -26,6 +26,7 @@ Feature: Estore Payment
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I fill estore shipping address
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
@@ -170,7 +171,7 @@ Feature: Estore Payment
     Given I log into eStore as "userWithSavedMasterCardVisa" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
     When I update item quantity in estore pdp
     When I click on add to cart estore button
     And I click on view cart estore button
@@ -183,7 +184,7 @@ Feature: Estore Payment
     And I introduces payment details for estore guest user for payment
     When I open estore cart
     Then I verify that I'm able to decrease item quantity with success
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -213,7 +214,6 @@ Feature: Estore Payment
     Given I log into eStore as "addnewpayment" user
     When I choose country for eStore from footer
     When I go to profile payment method
-    When I click on estore my account icon for guest user
     When I remove added before cart
     When I add new card for estore
     Then I verify that new payment was added
@@ -392,7 +392,7 @@ Feature: Estore Payment
     Given I log into eStore as "addnewpayment" user
     When I choose country for eStore from footer
     When I go to profile payment method
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     When I remove added before cart
     When I added new card "AMEX" for estore
     Then I verify that I'm able to add "AMEX"
@@ -402,7 +402,7 @@ Feature: Estore Payment
     Given I log into eStore as "addnewpayment" user
     When I choose country for eStore from footer
     When I go to profile payment method
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     When I remove added before cart
     When I added new card "DISCOVER" for estore
     Then I verify that I'm able to add "DISCOVER"
@@ -465,11 +465,12 @@ Feature: Estore Payment
     And I click on estore no thanks button
     When I click on edit shipping address button on estore address page
     When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     Then I verify that on the payment page the same address as for the saved mastercard
 
-    Scenario: Verify that for US ship to all the payment types saved are reflected in payment page
+  Scenario: Verify that for US ship to all the payment types saved are reflected in payment page
     Given I log into eStore as "savedRhCc" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
