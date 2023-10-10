@@ -1,5 +1,4 @@
-@concierge-All
-@concierge-Sale
+@conciergeTestRun
 Feature: Concierge Sale
 
   Scenario: Sale navigation bar is displayed and functional

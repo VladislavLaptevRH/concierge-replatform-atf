@@ -1,6 +1,4 @@
-@concierge-All
-@concierge-SignInSignOut
-@conciergeCriticalPathTestRun
+@conciergeTestRun
 Feature: Concierge Sign-in/Sign-out Page
 
   Scenario: User Sign-in

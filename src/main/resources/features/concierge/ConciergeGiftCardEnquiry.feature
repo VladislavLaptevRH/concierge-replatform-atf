@@ -1,5 +1,4 @@
-@concierge-All
-@concierge-GiftCard
+@conciergeTestRun
 Feature: Concierge GiftCardEnquiry
 
   Scenario: Gift Card Balance Enquiry
@@ -19,6 +18,7 @@ Feature: Concierge GiftCardEnquiry
     When I click on purchase gift card
     Then I verify gift card PDP page is loaded
     When I select options
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     When I choose order classification

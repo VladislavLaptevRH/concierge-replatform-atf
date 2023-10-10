@@ -310,6 +310,9 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I verify that RH Brand dropdown is present in {string} home page")
     public void iVerifyThatRHBrandDropDownIsPresentInHomePage(String currentBrand){
+        if(!conciergeUserAccountPage.getCurrentBrandByName(currentBrand).isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
         conciergeUserAccountPage.getCurrentBrandByName(currentBrand).should(visible,Duration.ofSeconds(40));
     }
 
@@ -391,5 +394,27 @@ public class ConciergeAssociateStepDefs {
     @Then("I verify the gallery")
     public void iVerifyGallery(){
         conciergeUserAccountPage.getExistingGallery().should(visible,Duration.ofSeconds(40));
+    }
+
+    @When("I sign out")
+    public void isignout() {
+        conciergeUserAccountPage.getNewPortBeachGallery().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getNewPortBeachGallery().click();
+        conciergeUserAccountPage.getSignout().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getGallerySelect().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+    }
+
+    @Then("I land in login page")
+    public void ilandloginpage(String arg0) {
+        if (!conciergeLoginPage.getUsernameField().exists()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        } else {
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+        }
+        Log.debug("I log into Concierge as " + arg0);
+        generalStepDefs.loginAsRole(arg0);
+        generalStepDefs.waitForJSandJQueryToLoad();
     }
 }

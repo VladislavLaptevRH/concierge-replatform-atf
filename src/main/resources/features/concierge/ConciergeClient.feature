@@ -1,5 +1,4 @@
-@concierge-All
-@concierge-Client
+@conciergeTestRun
 Feature:Client
 
   Scenario Outline: Verify client search by <searchBy>
@@ -15,6 +14,9 @@ Feature:Client
       | memberID                      |
       | businessAccountNumberTrade    |
       | businessAccountNumberContract |
+      | phoneNumber                   |
+      | postalCode                    |
+      | company                       |
 
   Scenario: Verify that user is able to create new client
     Given I log into Concierge as "associate"

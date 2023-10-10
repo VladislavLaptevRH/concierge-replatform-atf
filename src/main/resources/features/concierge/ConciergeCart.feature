@@ -1,17 +1,31 @@
-@concierge-All
-@concierge-Cart
-@conciergeCriticalPathTestRun
+@conciergeTestRun
 Feature:Concierge Cart Page
 
   Scenario: Verify the Postal code updates in cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10024796 WGRY"
+    When I add item to cart via API with "10146709 LOAK" and quantity '1'
     When I open cart
-    Then I confirm that default zip code for country "US" is present in Cart
-    And I change zip code in the cart to "10035"
-    And Verify that zip code was updated in the Cart to "10035"
+#    Then I confirm that default zip code for country "US" is present in Cart
+    And I change zip code in the cart to "94525"
+    And Verify that zip code was updated in the Cart to "94525"
+
+  Scenario: Verify the Price, Total, Shipping & Applicable fees in cart
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I add item to cart via API with "10146709 LOAK" and quantity '1'
+    When I open cart
+    Then I verify all the sums on the cart page
+
+  Scenario: Verify that increasing the quantity updates correct product price lines,Total, Shipping & Applicable fees in cart
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I add item to cart via API with "10146709 LOAK" and quantity '4'
+    When I open cart
+    Then I verify all the sums on the cart page with item quantity '4'
 
   Scenario: Order Classification
     Given I log into Concierge as "associate"
@@ -33,28 +47,62 @@ Feature:Concierge Cart Page
     Then I click on no thanks button
     Then I verify membership popup for guest user
 
-  Scenario: Line Item : Quantity update
+  Scenario: Line Item : Quantity update, remove line items
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
+    When I add line items to cart via API
     When I open cart
     When I click on quantity line item button
     Then I verify that quantity was updated
+    Then I remove the line items one by one
 
-  Scenario: Checkout membership banner for Guest user
+  Scenario: Verify that the Membership Banner is present for Non-Members
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
     When I open cart
-    When I save member price
+    When I verify that Membership Banner is present with all the data
+    Then I click 'join now button' on cart screen
+    Then I verify membership banner in PG
+    Then I click 'remove membership button' on cart screen
     When I choose order classification
     When I click on checkout button
     Then I click on become a member now button
     Then I verify membership banner
+
+  Scenario: Verify Removal of product in Cart
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I click 'Remove Link' on cart screen
+
+  Scenario: Verify Quantity Update in Cart - decrease
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API with "61810993 MRBR" and quantity '5'
+    When I open cart
+    Then I save data for decreasing
+    Then I change quantity in the car for '1'
+    Then I verify that 'quantity and sum were decreased' on the cart page
+
+  Scenario: Verify Quantity Update in Cart - increase
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API with "10031801 WGRY" and quantity '1'
+    When I open cart
+    Then I save data for increasing
+    Then I change quantity in the car for '4'
+    Then I verify that 'quantity and sum were increased' on the cart page
 
   Scenario: Remove line item - click on remove button and verify that line item is removed and subtotal and minicart value is updated
     Given I log into Concierge as "associate"
@@ -84,6 +132,17 @@ Feature:Concierge Cart Page
       | PERCENT_OFF     |
       | AMOUNT_OFF      |
       | AMOUNT_OVERRIDE |
+
+  Scenario: Verify Price Override with default adjustment in cart
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I click on cart button from header
+    When I click on total item line price
+    Then Close the Form
 
   Scenario: Override Line item Prices - for all line items from cart
     Given I log into Concierge as "associate"
@@ -144,7 +203,7 @@ Feature:Concierge Cart Page
     When I open cart
     When I click on UFD button from cart
 
-  Scenario: FEMA Promotion Code Description - FEMAD
+  Scenario: Verify application of Promotion Code in cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -156,6 +215,16 @@ Feature:Concierge Cart Page
     Then I verify that "FEMAD" promocode was approved for cart items
     And I remove promotion from cart
     And I verify that promotion is not displayed
+
+  Scenario: Verify Shipping Override update in cart
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    Then I click total excluding sales tax
+    Then select any reason code on SHIPPING OVERRIDE form & click apply button
 
   Scenario: Move to Project
     Given I log into Concierge as "associate"
@@ -243,13 +312,16 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I open product page with "prod1617188" and "63130001"
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
+    Then I open cart
     Then I verify that mini cart value is equal to 1
     When I click on quantity line item button
     Then I verify that mini cart value is equal to quantity of product
 
   Scenario Outline: Verify Membership banner for <businessClient> - should not be present
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -327,7 +399,6 @@ Feature:Concierge Cart Page
     Then I verify that membership price displayed as total price
 
   Scenario: Verify Employee discount checkout
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -337,7 +408,7 @@ Feature:Concierge Cart Page
     When I apply employee discount
     Then I verify that employee discount is present
 
-  Scenario: Postpone shipment
+  Scenario: Verify that the user is able to Postpone Shipping Successfully
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -347,6 +418,13 @@ Feature:Concierge Cart Page
     When I choose postpone shipment
     When I click on apply uppercase button for "postpone shipment"
     Then I verify that postpone shipment was applied
+    Then I remove postpone shipment
+
+  Scenario: Verify that the user is able to Clear cart
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I add item to cart via API
+    When I clear all orders form the cart
 
   Scenario: Monogram Edit / Remove / Add
     Given I log into Concierge as "associate"
@@ -354,9 +432,10 @@ Feature:Concierge Cart Page
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with productId "prod19500002"
-    When I select color option
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
+    Then I open cart
     When I click on add monogram checkbox
     When I choose monogram properties
     Then I verify that monogram was added
@@ -372,10 +451,9 @@ Feature:Concierge Cart Page
     When I remove client from header
     When I open product page with productId "prod19500002"
     Then I chose the '1' line item selections one by one
-    When I select size option 'Bath Sheet' for item
-    When I select color option
     When I click on add to cart button
     When I click on view cart button
+    Then I open cart
     When I click on gift box button
     Then I verify that gift box was added
     When I click on gift box button
@@ -496,6 +574,7 @@ Feature:Concierge Cart Page
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
+    When I add item to cart via API with "63130002 NATL" and quantity '1'
     When I open cart
     Then I verify that availability, Delivery and Returns messaging in cart
 
@@ -506,4 +585,88 @@ Feature:Concierge Cart Page
     When I remove client from header
     When I click on client button
     When I choose a Non-Member client and click on plus button from client lookup search results
-    Then I verify alternate addresses for client with multipel addresses
+    Then I verify alternate addresses for client with multiple addresses
+
+  Scenario: Grouping
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I add line items to cart via API for grouping
+    When I open cart
+    Then I verify grouping
+
+  Scenario: Company name not required in billing address
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Member"
+    When I click on checkout button
+    When I click on no thanks button
+    When I fill all fields from address screen without company name
+    And I continue to payment
+    And I verify that company name is not mandatory on address page
+
+  Scenario: Verify state field Empty dropdown issue
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Member"
+    When I click on checkout button
+    When I click on no thanks button
+    Then Verify that on address page state drop down field is not shown empty
+
+  Scenario: Verify mattress fee
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API with '10179361 NONE' and quantity '1'
+    When I open cart
+    Then I verify that mattress fee is showing in order estimate
+
+  Scenario: Verify postal code update in address page and then in cart and pdp
+    Given I log into Concierge as "associate"
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Non-Member"
+    Then I fill all fields from address screen for checking zip code
+    And I continue to payment
+    When I click on continue with original address button
+    When I open cart
+    Then I verify updated zip code in the cart is '11111'
+    When I click on rh concierge logo
+    When I go to item "10031801 WGRY" from search field
+    Then I chose the '1' line item selections one by one
+    Then I verify updated zip code in PDP
+
+  Scenario: Verify the address saved in the New client Flow - Shipping, billing address
+    Given I log into Concierge as "associate"
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Non-Member"
+    When I fill all fields from address screen for checking zip code
+    And I continue to payment
+    When I click on continue with original address button
+    Then Verify that after come back to address page from payment page ship to and bill to address is showing

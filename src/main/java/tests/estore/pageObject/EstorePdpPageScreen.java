@@ -1,5 +1,6 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -66,4 +67,22 @@ public class EstorePdpPageScreen {
     private SelenideElement postalCodeField = $(By.xpath("//*[@id='postal-code-international']"));
 
     private SelenideElement dollarSign = $(By.xpath("//*[contains(text(),'$')]"));
+
+    private SelenideElement textBeforePriceAtLineItem = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']//p[text()='Starting at']"));
+
+    private SelenideElement lineItemId =  $(By.xpath("(//p[@data-testid='item-sku-id-desktop'])[1]"));
+
+    private  SelenideElement addToCartBtn = $(By.xpath("(//span[text()='ADD TO CART'])[1]"));
+
+    private  SelenideElement itemAddedInCarMsg = $(By.xpath("//p[contains(text(),'1 Item Added To Your Cart')]"));
+
+    private SelenideElement viewCartBtn = $(By.xpath("//span[text()='View Cart']"));
+
+    private SelenideElement heroImageMemberPrice = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container']//p[@data-testid='price-for-member']"));
+
+    private SelenideElement heroImageRegularPrice = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container']//p[@data-testid='price-for-regular']"));
+
+    private SelenideElement lineItemMemberPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']//p[@data-testid='price-for-member'])[1]"));
+
+    private SelenideElement lineItemRegularPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']//p[@data-testid='price-for-regular'])[1]"));
 }

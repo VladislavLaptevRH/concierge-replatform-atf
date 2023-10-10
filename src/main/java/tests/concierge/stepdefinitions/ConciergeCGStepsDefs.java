@@ -34,8 +34,8 @@ public class ConciergeCGStepsDefs {
                 $(By.xpath("//*[text() = 'Concierge']/following-sibling::h1[text() = 'Dashboard']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "Navigate to third collection":
-                $(By.xpath("(//*[@id = 'component-collection-card'])[3]//*[text() = 'French Contemporary']/../following-sibling::div/p[text() = 'Washstand Collection']")).click();
-                $(By.xpath("//*[text() = 'French Contemporary Washstand Collection']")).shouldBe(visible, Duration.ofSeconds(20));
+                $(By.xpath("(//*[@id = 'component-collection-card'])[3]//*[text() = 'French Contemporary']")).click();
+                $(By.xpath("(//*[contains(text(),'French Contemporary')])[2]")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "Bath Collections are displayed":
                 $(By.xpath("(//*[@id = 'component-collection-card'])[3]//*[text() = 'French Contemporary']/../following-sibling::div/p[text() = 'Washstand Collection']")).click();

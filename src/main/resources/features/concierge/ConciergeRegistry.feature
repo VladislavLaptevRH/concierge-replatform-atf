@@ -1,5 +1,4 @@
-@concierge-All
-@concierge-Registry
+@conciergeTestRun
 Feature:Concierge Registry
 
   Scenario: Search by name

@@ -1,10 +1,9 @@
-@concierge-All
-@concierge-Payment
-@conciergeCriticalPathTestRun
+@conciergeTestRun
 Feature: Concierge Payment
 
   Scenario Outline: Major CCs
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -18,6 +17,9 @@ Feature: Concierge Payment
     When I click on continue with original address button
     When I execute payment for "<cardType>"
     And I verify that review screen is displayed
+    When I click on a place order button
+    Then I click on order details button
+    Then I verify that confirm screen is displayed
     Examples:
       | cardType |
       | VI       |
@@ -25,8 +27,127 @@ Feature: Concierge Payment
       | AX       |
       | DI       |
 
+  Scenario: Split Payment
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Non-Member"
+    When I fill all fields from address screen
+    And I continue to payment
+    When I click on continue with original address button
+    Then I execute split payment with 'VI'
+    Then I execute split payment with 'MC'
+    Then I verify that payment split is working and paid amount is visible on the review page
+    When I click on a place order button
+    Then I click on order details button
+    Then I verify that payment split is working and paid amount is visible on the confirmation page
+
+  Scenario: Full Payment
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Non-Member"
+    When I fill all fields from address screen
+    And I continue to payment
+    When I click on continue with original address button
+    When I execute payment for "VI"
+    When I click on a place order button
+    Then I click on order details button
+    Then I verify the payment details and order estimate summary
+
+  Scenario: RHCC Payment
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Non-Member"
+    When I fill all fields from address screen
+    And I continue to payment
+    When I click on continue with original address button
+    When I pay with RHCC method
+    Then I verify that payment RHCC is working and paid amount is visible on the review page
+    When I click on a place order button
+    Then I click on order details button
+    Then I verify that payment RHCC is working and paid amount is visible on the confirmation page
+    Then I verify the payment details and order estimate summary
+
+  Scenario: POS payment
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Non-Member"
+    When I fill all fields from address screen
+    When I continue to payment
+    When I click on continue with original address button
+    When I choose POS for payment method
+    Then I verify that payment POS is working and paid amount is visible on the review page
+    When I click on a place order button without signature
+    Then I verify that payment POS is working and paid amount is visible on the confirmation page
+    Then I verify the payment details and order estimate summary
+
+  Scenario: Edit payment
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Non-Member"
+    When I fill all fields from address screen
+    And I continue to payment
+    When I click on continue with original address button
+    When I execute payment for "VI"
+    Then I verify that payment CC is working and paid amount is visible on the review page
+    When I edit payment method
+    When I click on a place order button
+    Then I click on order details button
+    Then I verify that payment POS is working and paid amount is visible on the confirmation page
+    Then I verify the payment details and order estimate summary
+
+  Scenario: Verify that DI and RHCC payments not allowed for CAN checkout
+    Given I log into Concierge as "associate"
+    When I choose 'CA' country
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I add item to cart via API
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
+    When I choose client who is a "Non-Member"
+    When I fill all fields from address screen
+    And I continue to payment
+    When I click on continue with original address button
+    When I verify that I can't pay by RHCC and Discover cards for Canada
+
   Scenario: GC/ Balance check
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API
@@ -44,6 +165,7 @@ Feature: Concierge Payment
 
   Scenario: Verify the Complete Billing address
     Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
     When I add item to cart via API

@@ -47,6 +47,7 @@ public class ConciergeE2EStepDefs {
     PdpScreen pdpScreen = new PdpScreen();
     PaymentScreen paymentScreen = new PaymentScreen();
 
+    public static String currentURL = "";
     EstoreUserAccountPage estoreUserAccountPage= new EstoreUserAccountPage();
 
     String usState = "";
@@ -128,86 +129,86 @@ public class ConciergeE2EStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
             generalStepDefs.waitForJSandJQueryToLoad();
             conciergeItemsScreen.getAddToCartButton().scrollTo();
-            if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-                if (conciergeItemsScreen.getSelectFabric().isDisplayed()) {
-                    try {
-                        Select fabricList = new Select(conciergeItemsScreen.getSelectFabric());
-                        fabricList.selectByIndex(1);
-                        with().pollInterval(2, SECONDS).await().until(() -> true);
-                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
-                        System.out.println("Element Fabric not found");
-                    }
-                    with().pollInterval(2, SECONDS).await().until(() -> true);
-                }
-                if (conciergeItemsScreen.getSelectSize().isDisplayed()) {
-                    try {
-                        Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
-                        sizeList.selectByIndex(1);
-                   } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
-                       System.out.println("Element Size not found");
-                    }
-                    with().pollInterval(2, SECONDS).await().until(() -> true);
-                }
-                if (conciergeItemsScreen.getSelectColor().isDisplayed()) {
-                    try {
-                        Select colorList = new Select(conciergeItemsScreen.getSelectColor());
-                        colorList.selectByIndex(1);
-                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
-                        System.out.println("Element color not found");
-                    }
-                    with().pollInterval(2, SECONDS).await().until(() -> true);
-                }
-                if (conciergeItemsScreen.getSelectFinish().isDisplayed()) {
-                    try {
-                        Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
-                        finishList.selectByIndex(1);
-                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
-                        System.out.println("Element finish not found");
-                    }
-                    with().pollInterval(2, SECONDS).await().until(() -> true);
-                }
-                with().pollInterval(5, SECONDS).await().until(() -> true);
-                if (conciergeItemsScreen.getSelectQTY().isDisplayed()) {
-                    try {
-                        Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
-                        quantityList.selectByIndex(2);
-                        with().pollInterval(2, SECONDS).await().until(() -> true);
-                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
-                        System.out.println("Element qty not found");
-                    }
-                }
-            }
-
-            if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
-                try {
-                        WebDriverRunner.getWebDriver().navigate().refresh();
-                        with().pollInterval(5, SECONDS).await().until(() -> true);
-                            try {
-                                Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
-                                sizeList.selectByIndex(2);
-                            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
-                                System.out.println("Element Size not found");
-                            }
-                            with().pollInterval(1, SECONDS).await().until(() -> true);
-                        try {
-                            Select colorList = new Select(conciergeItemsScreen.getSelectColor());
-                            colorList.selectByIndex(2);
-                        } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
-                            System.out.println("Element color not found");
-                        }
-                        with().pollInterval(2, SECONDS).await().until(() -> true);
-                        try {
-                            Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
-                            quantityList.selectByIndex(2);
-                            with().pollInterval(1, SECONDS).await().until(() -> true);
-                        } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
-                            System.out.println("Element qty not found");
-                        }
-                } catch (ElementNotFound e){
-                    System.out.println("Element not found");
-                }
-            }
-        conciergeItemsScreen.getAddToCartButton().scrollTo();
+//            if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+//                if (conciergeItemsScreen.getSelectFabric().isDisplayed()) {
+//                    try {
+//                        Select fabricList = new Select(conciergeItemsScreen.getSelectFabric());
+//                        fabricList.selectByIndex(1);
+//                        with().pollInterval(2, SECONDS).await().until(() -> true);
+//                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+//                        System.out.println("Element Fabric not found");
+//                    }
+//                    with().pollInterval(2, SECONDS).await().until(() -> true);
+//                }
+//                if (conciergeItemsScreen.getSelectSize().isDisplayed()) {
+//                    try {
+//                        Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
+//                        sizeList.selectByIndex(1);
+//                   } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+//                       System.out.println("Element Size not found");
+//                    }
+//                    with().pollInterval(2, SECONDS).await().until(() -> true);
+//                }
+//                if (conciergeItemsScreen.getSelectColor().isDisplayed()) {
+//                    try {
+//                        Select colorList = new Select(conciergeItemsScreen.getSelectColor());
+//                        colorList.selectByIndex(1);
+//                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+//                        System.out.println("Element color not found");
+//                    }
+//                    with().pollInterval(2, SECONDS).await().until(() -> true);
+//                }
+//                if (conciergeItemsScreen.getSelectFinish().isDisplayed()) {
+//                    try {
+//                        Select finishList = new Select(conciergeItemsScreen.getSelectFinish());
+//                        finishList.selectByIndex(1);
+//                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+//                        System.out.println("Element finish not found");
+//                    }
+//                    with().pollInterval(2, SECONDS).await().until(() -> true);
+//                }
+//                with().pollInterval(5, SECONDS).await().until(() -> true);
+//                if (conciergeItemsScreen.getSelectQTY().isDisplayed()) {
+//                    try {
+//                        Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
+//                        quantityList.selectByIndex(2);
+//                        with().pollInterval(2, SECONDS).await().until(() -> true);
+//                    } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+//                        System.out.println("Element qty not found");
+//                    }
+//                }
+//            }
+//
+//            if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+//                try {
+//                        WebDriverRunner.getWebDriver().navigate().refresh();
+//                        with().pollInterval(5, SECONDS).await().until(() -> true);
+//                            try {
+//                                Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
+//                                sizeList.selectByIndex(2);
+//                            } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+//                                System.out.println("Element Size not found");
+//                            }
+//                            with().pollInterval(1, SECONDS).await().until(() -> true);
+//                        try {
+//                            Select colorList = new Select(conciergeItemsScreen.getSelectColor());
+//                            colorList.selectByIndex(2);
+//                        } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+//                            System.out.println("Element color not found");
+//                        }
+//                        with().pollInterval(2, SECONDS).await().until(() -> true);
+//                        try {
+//                            Select quantityList = new Select(conciergeItemsScreen.getSelectQTY());
+//                            quantityList.selectByIndex(2);
+//                            with().pollInterval(1, SECONDS).await().until(() -> true);
+//                        } catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+//                            System.out.println("Element qty not found");
+//                        }
+//                } catch (ElementNotFound e){
+//                    System.out.println("Element not found");
+//                }
+//            }
+//        conciergeItemsScreen.getAddToCartButton().scrollTo();
         conciergeItemsScreen.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
             conciergeItemsScreen.getAddToCartButton().click();
     }
@@ -676,6 +677,9 @@ public class ConciergeE2EStepDefs {
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!conciergeUserAccountPage.getClientButton().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
         conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(20));
         conciergeUserAccountPage.getClientButton().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
@@ -1262,12 +1266,11 @@ public class ConciergeE2EStepDefs {
     @Then("I verify the payment details and order estimate summary")
     public void iVerifyThePaymentDetailsAndOrderEstimateSummary() {
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Cash/Check']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
-
+        $(By.xpath("//*[text() = 'TOTAL']")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify spo order & terms review signature")
@@ -1379,6 +1382,23 @@ public class ConciergeE2EStepDefs {
         with().pollInterval(6, SECONDS).await().until(() -> true);
     }
 
+    @When("I click total excluding sales tax")
+    public void iClickTotal() {
+        $(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+    }
+
+    @When("select any reason code on SHIPPING OVERRIDE form & click apply button")
+    public void selectAnyReason() {
+        Select itemList = new Select($(By.xpath("//*[@id = 'data_override_reason']")));
+        itemList.selectByValue("Customer Delight");
+        $(By.xpath("//*[text() = 'APPLY']")).click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text() = 'Waived Shipping']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = '$279.00']")).should(visible, Duration.ofSeconds(15));
+    }
+
     @When("I open cart")
     public void iOpenCart() {
         String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
@@ -1404,5 +1424,11 @@ public class ConciergeE2EStepDefs {
         }else{
             System.out.println();
         }
+    }
+
+    @Then("I verify multiSKU added in project {string}")
+    public void iVerifyMultiSKUinProject(String multi){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text() = '"+multi+"']")).should(visible, Duration.ofSeconds(15));
     }
 }

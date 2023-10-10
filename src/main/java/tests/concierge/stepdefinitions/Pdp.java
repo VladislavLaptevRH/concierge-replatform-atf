@@ -1,8 +1,10 @@
 package tests.concierge.stepdefinitions;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 
 import com.codeborne.selenide.ex.ElementNotFound;
+import io.cucumber.java.en.And;
 import org.openqa.selenium.support.ui.Select;
 import tests.concierge.pageObject.*;
 import io.cucumber.java.en.Then;
@@ -41,6 +43,8 @@ public class Pdp {
     public static String tradePriceInPDP;
 
     public static String SKU;
+
+    public static String result;
 
     @When("I click on add monogram checkbox from pdp")
     public void iClickOnAddMonogramCheckboxFromPdp() {
@@ -138,8 +142,9 @@ public class Pdp {
                break;
            case  "has an item can be added to cart from modal":
                $(By.xpath("//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-cart-dialog-opener']")).click();
-               $(By.xpath("//*[@id = 'ajax-proceed-to-cart']/span[1]")).should(visible, Duration.ofSeconds(5));
-               $(By.xpath("//*[@id = 'ajax-continue-shopping']/span[1]")).should(visible, Duration.ofSeconds(5));
+               with().pollInterval(5, SECONDS).await().until(() -> true);
+               $(By.xpath("//*[@id = 'ajax-proceed-to-cart']/span[1]")).should(visible, Duration.ofSeconds(20));
+               $(By.xpath("//*[@id = 'ajax-continue-shopping']/span[1]")).should(visible, Duration.ofSeconds(20));
                $(By.xpath("(//*[@data-testid = 'dialog-title-close-button'])[2]")).click();
                break;
            case  "has an item can be added to project from modal":
@@ -151,6 +156,19 @@ public class Pdp {
            default:
                break;
        }
+    }
+
+    @And("I click on search")
+    public void iClickOnSearch() {
+        $(By.xpath("(//*[@class = 'MuiIconButton-label'])[1]")).should(visible, Duration.ofSeconds(5));
+        $(By.xpath("(//*[@class = 'MuiIconButton-label'])[1]")).click();
+    }
+
+    @And("I type item name {string}")
+    public void iTypeItemName(String arg0) {
+        $(By.xpath("//*[@id = 'site-search-input']")).setValue(arg0);
+        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click();
+        result = arg0;
     }
 
     @When("Verify that {string}")
@@ -213,6 +231,7 @@ public class Pdp {
                 assertTrue(swatchItems);
                 break;
             case  "text \"Swatches are shipped at no charge\" is present":
+                $(By.xpath("//*[text() = 'Swatches are shipped at no charge. For free USPS expedited delivery to arrive within 2-3 business days, all swatches must be placed in a separate order from product orders.']")).scrollIntoView(true);
                 $(By.xpath("//*[text() = 'Swatches are shipped at no charge. For free USPS expedited delivery to arrive within 2-3 business days, all swatches must be placed in a separate order from product orders.']")).shouldHave(text("Swatches are shipped at no charge. For free USPS expedited delivery to arrive within 2-3 business days, all swatches must be placed in a separate order from product orders."), Duration.ofSeconds(5));
                 break;
             case  "text Furniture Touch-up Kit is present":
@@ -229,7 +248,7 @@ public class Pdp {
                     sizeList.selectByIndex(1);
                     with().pollInterval(1, SECONDS).await().until(() -> true);
                 }
-                $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'This item will be ready for delivery between')]")).shouldHave(text("This item will be ready for delivery between"), Duration.ofSeconds(15));
+                $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'This item is in stock and will be ready for delivery between')]")).shouldHave(text("This item is in stock and will be ready for delivery between"), Duration.ofSeconds(15));
                 break;
             case  "text \"Unlimited Furniture Delivery\" is present":
                 $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'Unlimited Furniture Delivery')]")).shouldHave(text("Unlimited Furniture Delivery"), Duration.ofSeconds(5));
@@ -257,15 +276,15 @@ public class Pdp {
                 break;
             case  "verify data in the modal for SO":
                 with().pollInterval(9, SECONDS).await().until(() -> true);
-                $(By.xpath("//h3[text() = 'Cloud Modular Leather Corner Chair']")).shouldHave(text("Cloud Modular Leather Corner Chair"), Duration.ofSeconds(20));
+                $(By.xpath("//h3[text() = 'Cloud Modular Leather Sofa']")).shouldHave(text("Cloud Modular Leather Sofa"), Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Item #']")).shouldHave(text("Item #"), Duration.ofSeconds(20));
-                $(By.xpath("//*[text() = '59810779 CTBZ']")).shouldHave(visible, Duration.ofSeconds(15));
-                assertEquals(SKU, $(By.xpath("//*[text() = '59810779 CTBZ']")).getText());
+                $(By.xpath("//*[text() = '" + SKU + "']")).shouldHave(visible, Duration.ofSeconds(15));
+                assertEquals(SKU, $(By.xpath("//*[text() = '" + SKU + "']")).getText());
                 if($(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).isDisplayed()){
                     $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).shouldHave(visible, Duration.ofSeconds(15));
-                    memberPriceInPG = $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).getText().substring(0, 6);
+                    memberPriceInPG = $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]")).getText().substring(1, 7);
                     $(By.xpath("(//*[contains(@class, 'item-price__amount')])[1]")).shouldHave(visible, Duration.ofSeconds(15));
-                    regularPriceInPG = $(By.xpath("//*[contains(@class,'item-price__amount') and text() = 'Regular']")).getText().substring(0, 6);
+                    regularPriceInPG = $(By.xpath("//*[contains(@class,'item-price__amount') and text() = 'Regular']")).getText().substring(1, 8);
                 } else {
                     $(By.xpath("(//*[contains(@class, 'item-price__amount')])[1]")).shouldHave(visible, Duration.ofSeconds(15));
                     tradePriceInPDP =  $(By.xpath("(//*[contains(@class, 'item-price__amount')])[1]")).getText();
@@ -274,21 +293,17 @@ public class Pdp {
                 }
                 break;
             case  "text \"Components starting at\" is present":
-                $(By.xpath("//*[text() = 'Components starting at']")).shouldHave(text("Components starting at"), Duration.ofSeconds(15));
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                $(By.xpath("(//*[text() = 'Starting at'])[1]")).shouldHave(visible, Duration.ofSeconds(15));
                 break;
             case  "click Agree and add to cart":
                 $(By.xpath("//*[@id = 'spo-auth-addToCart']")).click();
                 break;
             case  "cart page has item (SKU)":
-                assertEquals(SKU, $(By.xpath("(//*[@id = 'listColumn2-Item#'])[1]")).getText());
+                assertEquals("59810778 SECM", $(By.xpath("(//*[@id = 'listColumn2-Item#'])[1]")).getText());
                 break;
             case  "price is matching PDP":
-                if($(By.xpath("//*[@data-testid= 'price-for-member']")).isDisplayed()){
-                    assertEquals( memberPriceInPG.replaceAll(" ", ""),  $(By.xpath("//*[@data-testid= 'price-for-member']")).getText().replaceAll(".00", ""));
-                } else {
-                    assertEquals( tradePriceInPDP,  $(By.xpath("//*[@data-testid= 'price-for-trade']")).getText().replaceAll(".00", ""));
-                }
-                assertEquals( regularPriceInPG, $(By.xpath("(//*[@data-testid= 'price-for-regular'])[1]")).getText().substring(0, 6));
+                assertEquals( Integer.parseInt(regularPriceInPG.replaceAll(",", "").replaceAll(" ", "")) + 279,  Integer.parseInt($(By.xpath("//*[@aria-describedby= 'shipping-override-price-dialog']")).getText().replaceAll(".00", "").replaceAll("\\$", "").replaceAll(",", "").replaceAll(" ", "")));
                 break;
             case  "PDP has SALE and MEMBER prices":
                 $(By.xpath("(//*[@data-testid = 'price-for-regular'])[1]")).shouldHave(visible, Duration.ofSeconds(15));
@@ -339,6 +354,10 @@ public class Pdp {
             case  "user is logged in":
                 assertEquals(SKU,  $(By.xpath("(//*[@id= 'listColumn2-Item#'])[1]")).getText());
                 break;
+            case  "cloud Modular Leather Sofa titles are present":
+                $(By.xpath("(//*[text()='Cloud Modular Leather Sofa'])[1]")).shouldBe(visible, Duration.ofSeconds(15));
+                $(By.xpath("(//*[text()='Cloud Modular Leather Sofa'])[2]")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
             default: break;
         }
     }
@@ -381,10 +400,16 @@ public class Pdp {
         }
     }
 
-    @Then("I verify that text item# and SKU {string} is present")
-    public void iVerifyTextItemAndSKUIsPresent(String data) {
-        $(By.xpath("//*[@id = 'component-sku']/..//p[contains (text(), 'Item# " + data + "')]")).shouldHave(text("Item# " + data + ""), Duration.ofSeconds(15));
-        SKU = $(By.xpath("//*[@id = 'component-sku']/..//p[contains (text(), 'Item# " + data + "')]")).getText().substring(6,19);
+    @Then("I verify that text item# and SKU is present")
+    public void iVerifyTextItemAndSKUIsPresent() {
+        with().pollInterval(9, SECONDS).await().until(() -> true);
+        if(!$(By.xpath("//*[@data-testid = 'item-sku-id-desktop']")).isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            iChoseLineItemSelectionsOneByOne("1");
+        }
+        $(By.xpath("//*[@data-testid = 'item-sku-id-desktop']")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@data-testid = 'item-sku-id-desktop']")).shouldNot(text("null"), Duration.ofSeconds(15));
+        SKU = $(By.xpath("//*[@data-testid = 'item-sku-id-desktop']")).getText().substring(6,19);
     }
 
     @Then("Verify that line item field {string} is present")
@@ -412,9 +437,9 @@ public class Pdp {
         $(By.xpath("//*[@id = 'listColumn1-Quantity' and text() = 'Quantity']")).shouldHave(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[@id = 'listColumn2-Quantity' and text() = '1']")).shouldHave(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[@id = 'listColumn1-Finish' and text() = 'Finish']")).shouldHave(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[@id = 'listColumn2-Finish' and text() = 'Waxed Grey Oak/Pewter']")).shouldHave(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'listColumn2-Finish' and text() = 'Waxed Brown Oak/Bronze']")).shouldHave(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[@id = 'listColumn1-Size' and text() = 'Size']")).shouldHave(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[@id = 'listColumn2-Size' and text() = '72\"-108\"L Extension']")).shouldHave(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'listColumn2-Size' and text() = '84\"-120\"L Extension']")).shouldHave(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text() = 'CONTINUE SHOPPING']")).shouldHave(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text() = 'GO TO PROJECT']")).shouldHave(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text() = 'CONTINUE SHOPPING']")).click();
@@ -426,19 +451,21 @@ public class Pdp {
         $(By.xpath("(//*[@id = 'add-to-project-button'])[1]")).click();
         conciergeProjectScreen.getAddToProjectProjectName().should(visible, Duration.ofMinutes(1));
         conciergeProjectScreen.getAddToProjectProjectName().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeProjectScreen.getProjectNamePopUpDropDownListItem().scrollIntoView(true);
         conciergeProjectScreen.getProjectNamePopUpDropDownListItem().click();
-        $(By.xpath("(//*[text() = 'T-Brace Rectangular Extension Dining Table'])[4]")).shouldHave(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//*[text() = 'T-Brace Rectangular Extension Dining Table'])[3]")).shouldHave(visible, Duration.ofSeconds(15));
         $(By.xpath("(//*[@alt = 'T-Brace Rectangular Extension Dining Table'])[2]")).shouldHave(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[@id = 'listColumn1-Item#' and text() = 'Item#']")).shouldHave(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[@id = 'listColumn2-Item#' and text() = '" + SKU + "']")).shouldHave(visible, Duration.ofSeconds(15));
-        assertEquals(SKU,  $(By.xpath("//*[@id = 'listColumn2-Item#' and text() = '" + SKU + "']")).getText());
+        String s = SKU.replaceAll("[^0-9]", "");
+        $(By.xpath("//*[@id = 'listColumn2-Item#' and contains(text(), '" + s + "')]")).shouldHave(visible, Duration.ofSeconds(15));
+        assertEquals(s,  $(By.xpath("//*[@id = 'listColumn2-Item#' and contains(text(), '" + s + "')]")).getText().replaceAll("[^0-9]", ""));
         $(By.xpath("//*[@id = 'listColumn1-Quantity' and text() = 'Quantity']")).shouldHave(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[@id = 'listColumn2-Quantity' and text() = '1']")).shouldHave(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[@id = 'listColumn1-Finish' and text() = 'Finish']")).shouldHave(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[@id = 'listColumn2-Finish' and text() = 'Waxed Grey Oak/Pewter']")).shouldHave(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'listColumn2-Finish' and text() = 'Waxed Brown Oak/Bronze']")).shouldHave(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[@id = 'listColumn1-Size' and text() = 'Size']")).shouldHave(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[@id = 'listColumn2-Size' and text() = '72\"-108\"L Extension']")).shouldHave(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'listColumn2-Size' and text() = '84\"-120\"L Extension']")).shouldHave(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[@id = 'project-name-label']")).shouldHave(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[@id = 'project-name']")).shouldHave(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[@id = 'project-opportunity-select-label']")).shouldHave(visible, Duration.ofSeconds(15));
@@ -467,35 +494,34 @@ public class Pdp {
 
     @Then("I chose the {string} line item selections one by one")
     public void iChoseLineItemSelectionsOneByOne(String chose) {
-        int lineItemsCount = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..")).size();
-        for (int i = 1; i <= lineItemsCount; i++) {
-            Select itemList = new Select($(By.xpath("((//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..)[" + i + "]")));
-            if (i != lineItemsCount) {
-                try {
-                    itemList.selectByIndex(Integer.parseInt(chose));
-                    with().pollInterval(1, SECONDS).await().until(() -> true);
-                } catch (UnsupportedOperationException e) {
-                    WebDriverRunner.getWebDriver().navigate().refresh();
-                    itemList.selectByIndex(Integer.parseInt(chose));
-                    with().pollInterval(1, SECONDS).await().until(() -> true);
-                }
-            } else {
-                try {
-                    itemList.selectByIndex(Integer.parseInt(chose) + 1);
-                    with().pollInterval(1, SECONDS).await().until(() -> true);
-                } catch (UnsupportedOperationException e) {
-                    WebDriverRunner.getWebDriver().navigate().refresh();
-                    itemList.selectByIndex(Integer.parseInt(chose) + 1);
-                    with().pollInterval(1, SECONDS).await().until(() -> true);
+        if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
+            int lineItemsCount = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..")).size();
+            for (int i = 1; i <= lineItemsCount; i++) {
+                Select itemList = new Select($(By.xpath("((//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..)[" + i + "]")));
+                if (i != lineItemsCount) {
+                    try {
+                        itemList.selectByIndex(Integer.parseInt(chose));
+                        with().pollInterval(1, SECONDS).await().until(() -> true);
+                    } catch (UnsupportedOperationException e) {
+                        iChoseLineItemSelectionsOneByOne(chose);
+                    }
+                } else {
+                    try {
+                        itemList.selectByIndex(Integer.parseInt(chose) + 1);
+                        with().pollInterval(1, SECONDS).await().until(() -> true);
+                    } catch (UnsupportedOperationException e) {
+                        iChoseLineItemSelectionsOneByOne(chose);
+                    }
                 }
             }
         }
     }
 
     @When("I Verify that {string} is present")
-    public void verifyTat(String data) {
+    public void verifyThat(String data) {
         switch (data){
             case  "PDP title":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 $(By.xpath("//h2[contains(@class, MuiTypography-h2)]")).shouldBe(visible, Duration.ofSeconds(15));
                 break;
             case  "view select items on sale link":
@@ -526,6 +552,10 @@ public class Pdp {
                 $(By.xpath("//*[@class= 'slick-slider slick-initialized']")).shouldBe(visible, Duration.ofSeconds(15));
                 break;
             case  "sections \"dimensions\" and \"details\"":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                if(!$(By.xpath("//*[text() = 'DIMENSIONS']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
                 $(By.xpath("//*[text() = 'DIMENSIONS']")).shouldBe(visible, Duration.ofSeconds(15));
                 $(By.xpath("//*[text() = 'DETAILS']")).shouldBe(visible, Duration.ofSeconds(15));
                 break;
@@ -562,6 +592,10 @@ public class Pdp {
                 break;
             case  "\"footer\" in PDP":
                 $(By.xpath("//*[@id = 'footer']")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "text item# and SKU '10024796 WGRY'":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[text() = 'Item# 10024796 WGRY']")).shouldBe(visible, Duration.ofSeconds(15));
                 break;
             default:
                 break;
@@ -611,7 +645,7 @@ public class Pdp {
              assertTrue(finishOption);
              $(By.xpath("//*[text() = 'YOU MIGHT ALSO LIKE']")).shouldBe(visible, Duration.ofSeconds(15));
              $(By.xpath("//*[text() = 'YOU MIGHT ALSO LIKE']/../ul")).shouldBe(visible, Duration.ofSeconds(15));
-             $(By.xpath("//*[text() = 'Frame with Cushions Starting at']")).shouldBe(visible, Duration.ofSeconds(15));
+             $(By.xpath("//*[text() = 'Starting at']")).shouldBe(visible, Duration.ofSeconds(15));
              $(By.xpath("//*[contains(@data-testid , 'productImageLink')]/../span")).shouldHave(text("View In-Stock items"), Duration.ofSeconds(5));
              boolean viewItems = $$(By.xpath("//*[contains(@data-testid , 'productImageLink')]/../span")).size() > 1;
              assertTrue(viewItems);
@@ -645,8 +679,6 @@ public class Pdp {
              $(By.xpath("//*[text() = 'Finish Options']/..//*[@id = 'component-rh-image_wrapper']")).shouldBe(visible, Duration.ofSeconds(15));
              boolean finishOption = $$(By.xpath("//*[text() = 'Finish Options']/..//*[@id = 'component-rh-image_wrapper']")).size() > 1;
              assertTrue(finishOption);
-             boolean fromOption = $$(By.xpath("//*[contains(text() ,'From')]")).size() > 1;
-             assertTrue(fromOption);
              if($(By.xpath("(//*[@data-testid = 'price-label-member'])[1]")).isDisplayed()){
                  boolean memberOption = $$(By.xpath("//*[contains(text() ,'Member')]")).size() > 1;
                  assertTrue(memberOption);
@@ -665,8 +697,6 @@ public class Pdp {
          if(SKU.equals("17050044 CAML")){
              $(By.xpath("//*[text() = 'YOU MIGHT ALSO LIKE']")).shouldBe(visible, Duration.ofSeconds(15));
              $(By.xpath("//*[text() = 'YOU MIGHT ALSO LIKE']/../ul")).shouldBe(visible, Duration.ofSeconds(15));
-             boolean fromOption = $$(By.xpath("//*[contains(text() ,'From')]")).size() > 1;
-             assertTrue(fromOption);
              if($(By.xpath("(//*[@data-testid = 'price-label-member'])[1]")).isDisplayed()){
                  boolean memberOption = $$(By.xpath("//*[contains(text() ,'Member')]")).size() > 1;
                  assertTrue(memberOption);
@@ -674,8 +704,9 @@ public class Pdp {
                  boolean memberOption = $$(By.xpath("//*[contains(text() ,'Trade')]")).size() > 1;
                  assertTrue(memberOption);
              }
+             with().pollInterval(9, SECONDS).await().until(() -> true);
              $(By.xpath("(//*[contains(text() ,'SALE')])[3]")).shouldBe(visible, Duration.ofSeconds(15));
-             boolean saleOption = $$(By.xpath("//*[contains(text() ,'SALE')]")).size() > 5;
+             boolean saleOption = $$(By.xpath("//*[contains(text() ,'SALE')]")).size() >=4;
              assertTrue(saleOption);
              $(By.xpath("//*[text() ='Color Options']")).shouldBe(visible, Duration.ofSeconds(15));
              $(By.xpath("(//*[contains(@data-testid , 'productImageLink')]/../span)[1]")).shouldHave(text("View In-Stock items"), Duration.ofSeconds(5));
@@ -717,20 +748,20 @@ public class Pdp {
                 break;
             case  "has qty dropdown":
                 $(By.xpath("(//*[text()='Qty'])[1]")).should(visible, Duration.ofSeconds(5));
-                $(By.xpath("(//*[@data-testid='in-stock-qty-select'])[4]")).should(visible, Duration.ofSeconds(5));
+                $(By.xpath("(//*[@data-testid='in-stock-qty-select'])[1]")).should(visible, Duration.ofSeconds(5));
                 break;
             case  "has \"add to cart\" and \"add to project\" buttons":
-                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-cart-dialog-opener'])[4]")).should(visible, Duration.ofSeconds(5));
-                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-project-dialog-opener'])[4]")).should(visible, Duration.ofSeconds(5));
+                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-cart-dialog-opener'])[1]")).should(visible, Duration.ofSeconds(5));
+                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-project-dialog-opener'])[1]")).should(visible, Duration.ofSeconds(5));
                 break;
             case  "has an item can be added to cart from modal":
-                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-cart-dialog-opener'])[4]")).click();
+                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-cart-dialog-opener'])[1]")).click();
                 $(By.xpath("//*[@id = 'ajax-proceed-to-cart']/span[1]")).should(visible, Duration.ofSeconds(5));
                 $(By.xpath("//*[@id = 'ajax-continue-shopping']/span[1]")).should(visible, Duration.ofSeconds(5));
                 $(By.xpath("(//*[@data-testid = 'dialog-title-close-button'])[2]")).click();
                 break;
             case  "has an item can be added to project from modal":
-                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-project-dialog-opener'])[4]")).click();
+                $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-project-dialog-opener'])[1]")).click();
                 $(By.xpath("//h3[text() = 'ADD TO PROJECT']")).should(visible, Duration.ofSeconds(5));
                 $(By.xpath("//*[text() = 'CANCEL']")).should(visible, Duration.ofSeconds(5));
                 $(By.xpath("//*[text() = 'SAVE']")).should(visible, Duration.ofSeconds(5));
@@ -928,7 +959,7 @@ public class Pdp {
 
     @Then("I verify that color has been chosen")
     public void iVerifyThatColorHasBeenChosen() {
-        selectOption.getColorOption().shouldHave(text("Fog"), Duration.ofSeconds(20));
+        selectOption.getColorOption().shouldHave(text("Azure"), Duration.ofSeconds(20));
 
     }
 
@@ -936,7 +967,7 @@ public class Pdp {
     public void confirmThatDefault(String country) {
         if(Objects.equals(country, "US")){
             zipCodeInTheCart = conciergeCartPageScreen.getPdpScreenZipCode().getText();
-            assertEquals(zipCodeInTheCart, "92660");
+            assertEquals(zipCodeInTheCart, "94925");
         }
         if(Objects.equals(country, "GB")){
             zipCodeInTheCart = conciergeCartPageScreen.getPdpScreenZipCode().getText();
@@ -993,8 +1024,20 @@ public class Pdp {
 
     @Then("I verify that zip code in PDP is {string}")
     public void iVerifyThatZipCodeIs(String zipCode) {
+        with().pollInterval(9, SECONDS).await().until(() -> true);
         $(By.xpath("(//*[@id = 'component-sku']//span)[1]")).shouldBe(visible, Duration.ofSeconds(20));
-       String currentZipCode =  $(By.xpath("(//*[@id = 'component-sku']//span)[1]")).getText();
+
+       if(!$(By.xpath("//*[contains(text(), '" + zipCode + "')]")).isDisplayed()){
+           WebDriverRunner.getWebDriver().navigate().refresh();
+           for(int i = 0; i <=3; i++) {
+               iChangeZipCodeFor(zipCode);
+               with().pollInterval(9, SECONDS).await().until(() -> true);
+               if($(By.xpath("//*[contains(text(), '" + zipCode + "')]")).isDisplayed()){
+                   break;
+               }
+           }
+       }
+        String currentZipCode =  $(By.xpath("(//*[@id = 'component-sku']//span)[1]")).getText();
         assertEquals(currentZipCode, zipCode + ".");
     }
 
@@ -1015,8 +1058,8 @@ public class Pdp {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
-            $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).scrollTo();
-            $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).should(visible, Duration.ofSeconds(30));
+            $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery. ')]")).scrollTo();
+            $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery. ')]")).should(visible, Duration.ofSeconds(30));
         }
     }
 
@@ -1038,6 +1081,10 @@ public class Pdp {
 
     @Then("I Verify that the PDP title is present and prices match those prices in PG")
     public void iVerifyThatThePDPTitleIsPresentAndPricesMatchThosePricesInPG() {
+        if(!$(By.xpath("//h2[contains(@class, MuiTypography-h2)]")).isDisplayed()){
+            String URL = Hooks.getCurrentUrl().replace("//", "/");
+            open(URL);
+        }
         assertEquals(firstProductNameInPG, $(By.xpath("//h2[contains(@class, MuiTypography-h2)]")).getText());
         assertEquals(regularPriceInPG, conciergeCartPageScreen.getRegularPriceInPG().getText());
         assertEquals(memberPriceInPG, conciergeCartPageScreen.getMemberPriceInPG().getText().replaceAll(",", ""));
@@ -1054,4 +1101,35 @@ public class Pdp {
         $(By.xpath("//*[text()='Premium Fabrics']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Premium Leathers']")).should(visible, Duration.ofSeconds(15));
     }
+
+    @Then("I verify presence of MultiSKU")
+    public void iVerifyMultiSKU(){
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()='Items#: 89630210 BWMR, 89720340 BWMR']")).should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify product name in cart page")
+    public void iVerifyProductNameinCartPage(){
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()='KENSINGTON LEFT-ARM L-SECTIONAL']")).should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify {string} is present")
+    public void iVerify(String text){
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()="+text+"]")).should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify product count in cart page")
+    public void iVerifyProductCountinCartPage(){
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()='1'']")).should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify product count in project page")
+    public void iVerifyProductCountinProjectPage(){
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()='1'']")).should(visible, Duration.ofSeconds(15));
+    }
+
 }

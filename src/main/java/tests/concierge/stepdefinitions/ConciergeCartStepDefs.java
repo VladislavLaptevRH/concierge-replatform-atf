@@ -6,7 +6,6 @@ import com.codeborne.selenide.ex.ElementNotFound;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.mn.Харин;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -17,6 +16,10 @@ import tests.utility.Hooks;
 
 import java.text.DecimalFormat;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -24,6 +27,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static tests.utility.Hooks.country;
 
 public class ConciergeCartStepDefs {
     WebDriver webDriver = Hooks.getWebDriver();
@@ -67,6 +71,19 @@ public class ConciergeCartStepDefs {
 
     public String MemberPrice;
 
+    public static String date;
+    public static String year;
+    public static String month;
+
+   public static float topTotalPriceAfterDecreasing;
+   public static float subtotalPriceAfterDecreasing;
+   public static float bottomTotalPriceAfterDecreasing;
+   public static float topMemberSavingsAfterDecreasing;
+   public static float bottomMemberSavingsAfterDecreasing;
+   ArrayList<Integer> quantityList = new ArrayList<>();
+
+   public int sumOfArray = 0;
+
     @When("I navigate to the cart page")
     public void iNavigateToTheCartPage() {
         conciergeUserAccountPage.getCartButton().should(visible, Duration.ofSeconds(25));
@@ -105,6 +122,7 @@ public class ConciergeCartStepDefs {
     @When("I click on view cart button")
     public void iClickOnViewCartButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if($(By.xpath("//*[text() = 'Agree & Add To Cart']")).isDisplayed()){
             $(By.xpath("//*[text() = 'Agree & Add To Cart']")).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -158,23 +176,62 @@ public class ConciergeCartStepDefs {
     public void iClickOnQuantityLineItemButton() {
         selectOption.getQuantitySelectBtn().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         selectOption.getQuantitySelectBtn().should(visible, Duration.ofMinutes(1));
-        selectOption.getQuantitySelectBtn().click();
-        randomQuantity = generalStepDefs.getRandomNumber(2, 5);
-        $(By.xpath("//option[@value='" + randomQuantity + "']")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        $(By.xpath("//option[@value='" + randomQuantity + "']")).shouldHave(text(Integer.toString(randomQuantity)), Duration.ofSeconds(10));
-        $(By.xpath("//option[@value='" + randomQuantity + "']")).scrollIntoView(true);
-        with().pollInterval(2, SECONDS).await().until(() -> true);
-        $(By.xpath("//option[@value='" + randomQuantity + "']")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        $(By.xpath("//option[@value='" + randomQuantity + "']")).click();
+        for(int i = 1; i <= $$(By.xpath(" //select[contains(@id,'quantity')]")).size(); i++) {
+            $(By.xpath(" (//select[contains(@id,'quantity')])[" + i + "]")).click();
+            randomQuantity = generalStepDefs.getRandomNumber(2, 40);
+            $(By.xpath("(//option[@value='" + randomQuantity + "'])[" + i + "]")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+            $(By.xpath("(//option[@value='" + randomQuantity + "'])[" + i + "]")).shouldHave(text(Integer.toString(randomQuantity)), Duration.ofSeconds(10));
+            $(By.xpath("(//option[@value='" + randomQuantity + "'])[" + i + "]")).scrollIntoView(true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            $(By.xpath("(//option[@value='" + randomQuantity + "'])[" + i + "]")).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+            $(By.xpath("(//option[@value='" + randomQuantity + "'])[" + i + "]")).click();
+            quantityList.add(randomQuantity);
+        }
         WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that quantity was updated")
     public void iVerifyThatQuantityWasUpdated() {
-        assertEquals(randomQuantity, Integer.parseInt(conciergeUserAccountPage.getCartButtonItemSum().getText()));
+        for (Integer integer : quantityList) {
+            sumOfArray = integer + sumOfArray;
+            with().pollInterval(1, SECONDS).await().until(() -> true);
+        }
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+        System.out.println(quantityList);
+        assertEquals(sumOfArray, Integer.parseInt(conciergeUserAccountPage.getCartButtonItemSum().getText()));
     }
 
+    @Then("I remove the line items one by one")
+    public void iRemoveAllItemsOneByOne() {
+       while($(By.xpath("//*[text() = 'Remove']")).isDisplayed()){
+           $$(By.xpath("//*[text() = 'Remove']")).last().scrollIntoView(true);
+           $$(By.xpath("//*[text() = 'Remove']")).last().click();
+           with().pollInterval(5, SECONDS).await().until(() -> true);
+       }
+        $(By.xpath("//*[text() = 'YOUR SHOPPING CART IS EMPTY']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify grouping")
+    public void iVerifyGrouping() {
+        $(By.xpath("//*[text() = 'How Would You Like to Receive Your Shipments?']")).scrollIntoView(true);
+        $(By.xpath("//*[text() = 'How Would You Like to Receive Your Shipments?']")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text() = 'Deliver items as they are available']")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text() = 'Deliver ASAP']")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text() = 'Consolidate into as few deliveries as possible']")).shouldBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text() = 'Delivered on the latest quoted delivery date']")).shouldBe(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify order classification dropdown")
+    public void iVerifyOrderClassificationDropdown() {
+        $(By.xpath("//*[@id = 'element-orderclassification-label']")).should(text("Order Classification*"), Duration.ofSeconds(20));
+        $(By.xpath("//*[@id = 'element-orderclassification']/option[text() = 'Select an Option']")).shouldNotBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@id = 'element-orderclassification']")).click();
+        $(By.xpath("//*[@id = 'element-orderclassification']/option[text() = 'Select an Option']")).shouldNotBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@id = 'element-orderclassification']/option[text() = 'RH Gallery Order']")).shouldNotBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@id = 'element-orderclassification']/option[text() = 'RH Residential Trade']")).shouldNotBe(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@id = 'element-orderclassification']/option[text() = 'RH Interior Design']")).shouldNotBe(visible, Duration.ofSeconds(20));
+    }
     @When("I click on remove button from cart page")
     public void iClickOnRemoveButtonFromCartPage() {
         conciergeCartPageScreen.getRemoveButton().should(visible, Duration.ofMinutes(1));
@@ -187,6 +244,13 @@ public class ConciergeCartStepDefs {
     public void iVerifyThatLineItemWasRemoved() {
         with().pollInterval(6, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Metal Box Frame Leaner Mirror']")).shouldNotBe(visible, Duration.ofMinutes(1));
+    }
+
+    @Then("Close the Form")
+    public void iCloseForm() {
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[@data-testid = 'dialog-title-close-button']")).click();
+        $(By.xpath("//*[text() = 'Adjusted']")).shouldNotBe(visible, Duration.ofMinutes(1));
     }
 
     @When("I click on total item line price")
@@ -210,7 +274,6 @@ public class ConciergeCartStepDefs {
     public void iSelectPriceOverride(String arg0) {
         $(By.xpath("//option[@value='" + arg0 + "']")).should(visible, Duration.ofMinutes(1));
         $(By.xpath("//option[@value='" + arg0 + "']")).click();
-
     }
 
     @When("I introduces value for override price")
@@ -690,17 +753,38 @@ public class ConciergeCartStepDefs {
         Select postponeReasonCode = new Select(conciergeCartPageScreen.getPostponeSelectReasonCode());
         conciergeCartPageScreen.getPostponeSelectReasonCode().scrollIntoView(true);
         postponeReasonCode.selectByValue("Construction/Remodel");
+        $(By.xpath("//button/span/p[text() = '30']")).click();
+        date = $(By.xpath("//*[contains(@class, 'MuiPickersCalendarHeader-switchHeader')]//p")).getText();
+
     }
 
     @Then("I verify that postpone shipment was applied")
     public void iVerifyThatPostponeShipmentWasApplied() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeCartPageScreen.getPostponeShipOnOrAfterDate().should(visible, Duration.ofSeconds(10));
+        month = date.substring(0,4);
+        String fistLetter = month.substring(0,1);
+        String lastPart = month.substring(1,3).toLowerCase();
+        month = fistLetter + lastPart;
+        year = date.replaceAll("[^0-9]", "");
+        $(By.xpath("//*[@id = 'reset-shipment']")).shouldHave(text("Reset Shipment"), Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'reason-code']")).shouldHave(text("Reason Code: Construction/Remodel"), Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'ship-on-or-after-date']")).shouldHave(text("Ship on or after: " + month + " 30, " + year + ""), Duration.ofSeconds(15));
+    }
+
+    @Then("I remove postpone shipment")
+    public void iRemovePostPhoneShipment() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[@id = 'reset-shipment']")).click();
+        $(By.xpath("//*[@id = 'reset-shipment']")).shouldNot(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'reason-code']")).shouldNot(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'ship-on-or-after-date']")).shouldNot(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that gift box was added")
     public void iVerifyThatGiftBoxWasAdded() {
         conciergeCartPageScreen.getGiftBoxFee().should(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='$5.95']")).shouldHave(text("$5.95"), Duration.ofSeconds(15));
+
     }
 
     @When("I click on gift box button")
@@ -713,6 +797,7 @@ public class ConciergeCartStepDefs {
     @Then("I verify that gift box was removed")
     public void iVerifyThatGiftBoxWasRemoved() {
         conciergeCartPageScreen.getGiftBoxFee().shouldNotBe(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text()='$5.95']")).shouldNot(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that member savings for a {string} user")
@@ -771,9 +856,13 @@ public class ConciergeCartStepDefs {
     @Then("I verify that monogram was added")
     public void iVerifyThatMonoramWasAdded() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        conciergeCartPageScreen.getPersonalizationText().should(visible, Duration.ofMinutes(1));
-        $(By.xpath("//*[text()='Bauer Bodoni 1 (BDNI-HC)']")).should(visible, Duration.ofMinutes(1));
-        $(By.xpath("//*[text()='Light Gold Metallic (MLGD)']")).should(visible, Duration.ofMinutes(1));
+        conciergeCartPageScreen.getPersonalizationText().should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Bauer Bodoni 1 (BDNI-HC)']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Light Gold Metallic (MLGD)']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='ABC']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'listColumn1-Style']")).shouldHave(text("Style"), Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'listColumn1-Text']")).shouldHave(text("Text"), Duration.ofSeconds(15));
+        $(By.xpath("(//*[@id = 'listColumn1-Color'])[2]")).shouldHave(text("Color"), Duration.ofSeconds(15));
     }
 
 
@@ -795,7 +884,8 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getMonogramColors().get(2).should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getMonogramColors().get(2).scrollIntoView(true);
         conciergeCartPageScreen.getMonogramColors().get(2).doubleClick();
-        conciergeCartPageScreen.getMonogramText().setValue("test");
+        conciergeCartPageScreen.getMonogramText().setValue("ABC");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getAddMonogramButton().click();
     }
 
@@ -805,8 +895,14 @@ public class ConciergeCartStepDefs {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getEditMonogramButton().click();
         with().pollInterval(2, SECONDS).await().until(() -> true);
+        conciergeCartPageScreen.getMonogramFonts().get(5).scrollIntoView(true);
+        conciergeCartPageScreen.getMonogramFonts().get(5).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        conciergeCartPageScreen.getMonogramFonts().get(5).doubleClick();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramColors().get(5).should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getMonogramColors().get(5).doubleClick();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        conciergeCartPageScreen.getMonogramText().setValue("DFG");
         conciergeCartPageScreen.getAddMonogramButton().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getAddMonogramButton().click();
     }
@@ -815,7 +911,12 @@ public class ConciergeCartStepDefs {
     public void iVerifyThatMonogramWasEdited() {
 //        WebDriverRunner.getWebDriver().navigate().refresh();
 //        with().pollInterval(5, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text() = 'Circle (CIR-H4)']")).shouldHave(text("Circle (CIR-H4)"), Duration.ofSeconds(30));
         $(By.xpath("//*[text()='Dark Silver Metallic (MDSL)']")).shouldHave(text("Dark Silver Metallic (MDSL)"), Duration.ofSeconds(30));
+        $(By.xpath("//*[text()='DFG']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'listColumn1-Style']")).shouldHave(text("Style"), Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'listColumn1-Text']")).shouldHave(text("Text"), Duration.ofSeconds(15));
+        $(By.xpath("(//*[@id = 'listColumn1-Color'])[2]")).shouldHave(text("Color"), Duration.ofSeconds(15));
     }
 
     @When("I remove monogram")
@@ -832,8 +933,12 @@ public class ConciergeCartStepDefs {
     public void iVerifyThatMonogramWasRemoved() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getPersonalizationText().shouldNotBe(visible, Duration.ofMinutes(1));
-        $(By.xpath("//*[text()='Bauer Bodoni 2 (BDNI-HD)']")).shouldNotBe(visible, Duration.ofMinutes(1));
-        $(By.xpath("//*[text()='Dark Silver Metallic (MDSL)']")).shouldNotBe(visible, Duration.ofMinutes(1));
+        $(By.xpath("//*[text() = 'Circle (CIR-H4)']")).shouldNotBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Dark Silver Metallic (MDSL)']")).shouldNotBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='DFG']")).shouldNotBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'listColumn1-Style']")).shouldNotBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@id = 'listColumn1-Text']")).shouldNotBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("(//*[@id = 'listColumn1-Color'])[2]")).shouldNotBe(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that availability, Delivery and Returns messaging in cart")
@@ -842,7 +947,7 @@ public class ConciergeCartStepDefs {
         $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery')]")).should(visible, Duration.ofMinutes(1));
     }
 
-    @Then("I verify alternate addresses for client with multipel addresses")
+    @Then("I verify alternate addresses for client with multiple addresses")
     public void iVerifyAlternateAddressesForClientWithMultipelAddresses() {
         int addressesSize = conciergeUserAccountPage.getClientSearchResultAddresses().size();
         assertTrue(addressesSize > 1);
@@ -875,13 +980,14 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify membership banner")
     public void iVerifyMembershipBanner() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text() = 'REMOVE MEMBERSHIP']")).shouldBe(visible, Duration.ofSeconds(15));
-        MemberPrice = $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "");
+        MemberPrice = $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", "");
         float regularPrice = Float.parseFloat(RegularPrice);
         float memberPrice = Float.parseFloat(MemberPrice);
-        String savings = Float.toString(regularPrice - memberPrice).replaceAll(".0", "");
+        String savings = Float.toString(regularPrice - memberPrice);
         $(By.xpath("//h2[text() = ' RH MEMBERS PROGRAM']")).shouldBe(visible, Duration.ofSeconds(15));
-        assertEquals("You've elected to join the RH Members Program, and you'll save $" + savings + ".00 on this order.", $(By.xpath("//h2[text() = ' RH MEMBERS PROGRAM']/following-sibling::p")).getText());
+        assertEquals("You've elected to join the RH Members Program, and you'll save $" + Float.parseFloat(savings) + "0 on this order.", $(By.xpath("//h2[text() = ' RH MEMBERS PROGRAM']/following-sibling::p")).getText());
     }
 
     @When("I apply employee discount")
@@ -950,10 +1056,107 @@ public class ConciergeCartStepDefs {
         $(By.xpath("//*[text()='Automation Associate']")).shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    @Then("I save member price")
-    public void iSaveMemberPrice() {
+    @Then("I click {string} on cart screen")
+    public void iClickOnButtonOnCartScreen(String button) {
+        switch (button) {
+            case "join now button":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[text() = 'JOIN NOW']")).click();
+                with().pollInterval(9, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[text() = 'JOIN NOW']")).shouldNot(visible,  Duration.ofSeconds(15));
+                break;
+            case "remove membership button":
+                $(By.xpath("//*[text() = 'REMOVE MEMBERSHIP']")).click();
+                with().pollInterval(9, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[text() = 'JOIN NOW']")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case "Remove Link":
+                for(int i = 0; i <= 3 ; i++) {
+                    $(By.xpath("//*[text() = 'Remove']")).click();
+                    with().pollInterval(9, SECONDS).await().until(() -> true);
+                   if(!$(By.xpath("//*[text() = 'Remove']")).isDisplayed()){
+                       break;
+                   }
+                }
+                if(!$(By.xpath("//*[text() = 'YOUR SHOPPING CART IS EMPTY']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
+                $(By.xpath("//*[text() = 'YOUR SHOPPING CART IS EMPTY']")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            default: break;
+        }
+    }
+
+    @Then("I verify that {string} on the cart page")
+    public void iVerifyThatOnTheCartPage(String data) {
+        switch (data) {
+            case "quantity and sum were decreased":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                assertEquals(topTotalPriceAfterDecreasing / 5, Float.parseFloat($(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", "")));
+                assertEquals(subtotalPriceAfterDecreasing / 5, Float.parseFloat($(By.xpath("//*[contains(text(), 'Subtotal')]/../following-sibling::div/span")).getText().replace("$", "").replace(".00","").replace(",", "")));
+//                assertEquals(bottomTotalPriceAfterDecreasing / 5, Float.parseFloat($(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).getText().replace("$", "").replace(",", "")));
+                assertEquals(topMemberSavingsAfterDecreasing / 5, Float.parseFloat( $(By.xpath("//h2/following-sibling::p")).getText().substring(51, 57).replace(",", "")));
+                assertEquals(bottomMemberSavingsAfterDecreasing / 5, Float.parseFloat($(By.xpath("(//*[contains(text(),'Join the RH Members Program')])[2]/..")).getText().replaceAll("[^0-9]", "").replace("00", "")));
+                break;
+            case "quantity and sum were increased":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                assertEquals(topTotalPriceAfterDecreasing * 4, Float.parseFloat($(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", "")));
+                assertEquals(subtotalPriceAfterDecreasing * 4, Float.parseFloat($(By.xpath("//*[contains(text(), 'Subtotal')]/../following-sibling::div/span")).getText().replace("$", "").replace(".00","").replace(",", "")));
+//                assertEquals(bottomTotalPriceAfterDecreasing * 4, Float.parseFloat($(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).getText().replace("$", "").replace(",", "")));
+                assertEquals(topMemberSavingsAfterDecreasing * 4, Float.parseFloat( $(By.xpath("//h2/following-sibling::p")).getText().substring(51, 57).replace(",", "")));
+                assertEquals(bottomMemberSavingsAfterDecreasing * 4, Float.parseFloat($(By.xpath("(//*[contains(text(),'Join the RH Members Program')])[2]/..")).getText().replaceAll("[^0-9]", "").replace("00", "")));
+                break;
+            default: break;
+        }
+    }
+
+    @Then("I change quantity in the car for {string}")
+    public void iChangeQuantityInTheCart(String quantity) {
+        Select itemList = new Select($(By.xpath("//*[contains(@id, 'quantity')]")));
+        itemList.selectByIndex(Integer.parseInt(quantity));
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!$(By.xpath("//*[contains(@id, 'quantity')]")).getText().equals(quantity)){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+    }
+
+    @Then("I save data for decreasing")
+    public void iSafeDataForDecreasing() {
+        topTotalPriceAfterDecreasing = Float.parseFloat($(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", ""));
+        subtotalPriceAfterDecreasing = Float.parseFloat($(By.xpath("//*[contains(text(), 'Subtotal')]/../following-sibling::div/span")).getText().replace("$", "").replace(".00","").replace(",", ""));
+        bottomTotalPriceAfterDecreasing = Float.parseFloat($(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).getText().replace("$", "").replace(",", ""));
+        topMemberSavingsAfterDecreasing = Float.parseFloat( $(By.xpath("//h2/following-sibling::p")).getText().substring(51, 59).replace(",", ""));
+        bottomMemberSavingsAfterDecreasing = Float.parseFloat($(By.xpath("(//*[contains(text(),'Join the RH Members Program')])[2]/..")).getText().replaceAll("[^0-9]", "").replace("00", ""));
+    }
+
+    @Then("I save data for increasing")
+    public void iSafeDataForIncreasing() {
+        if(!$(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
+        topTotalPriceAfterDecreasing = Float.parseFloat($(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", ""));
+        subtotalPriceAfterDecreasing = Float.parseFloat($(By.xpath("//*[contains(text(), 'Subtotal')]/../following-sibling::div/span")).getText().replace("$", "").replace(".00","").replace(",", ""));
+        bottomTotalPriceAfterDecreasing = Float.parseFloat($(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).getText().replace("$", "").replace(",", ""));
+        topMemberSavingsAfterDecreasing = Float.parseFloat( $(By.xpath("//h2/following-sibling::p")).getText().substring(51, 57).replace(",", ""));
+        bottomMemberSavingsAfterDecreasing = Float.parseFloat($(By.xpath("(//*[contains(text(),'Join the RH Members Program')])[2]/..")).getText().replaceAll("[^0-9]", "").replace("00", ""));
+    }
+
+    @Then("I verify membership banner in PG")
+    public void iVerifyMembershipBannerInPG() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text() = 'REMOVE MEMBERSHIP']")).shouldBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//h2/following-sibling::p")).shouldBe(text("You've elected to join the RH Members Program, and you'll save $526.00 on this order."), Duration.ofSeconds(15));
+    }
+
+    @Then("I verify that Membership Banner is present with all the data")
+    public void iVerifyThatMembershipBannerIsPresentWithAllTheData() {
         $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).shouldBe(visible, Duration.ofSeconds(15));
-       RegularPrice = $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "");
+       RegularPrice = $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", "");
+        $(By.xpath("//h2/i")).shouldBe(text("The"), Duration.ofSeconds(15));
+        $(By.xpath("//h2")).shouldBe(text(" RH MEMBERS PROGRAM"), Duration.ofSeconds(15));
+        $(By.xpath("//h2/following-sibling::p")).shouldBe(text("Join the RH Members Program for $200.00, and save  $526.00 on this order."), Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = 'JOIN NOW']")).shouldBe(visible, Duration.ofSeconds(15));
     }
 
     @When("I choose order classification")
@@ -996,6 +1199,70 @@ public class ConciergeCartStepDefs {
         GeneralStepDefs.addLineItemsToConciergeCart();
     }
 
+    @When("I verify that mattress fee is showing in order estimate")
+    public void iVerifyThatMattressFeeIsShowing() {
+        if(Objects.equals(country, "US")){
+            assertEquals($(By.xpath("//*[text() = 'Mattress Fee']/../..//p")).getText(), "$10.50");
+        }
+        if(Objects.equals(country, "GB")){
+            assertEquals($(By.xpath("//*[text() = 'Mattress Fee']/../..//p")).getText(), "$11.75");
+        }
+        if(Objects.equals(country, "CA")){
+            assertEquals($(By.xpath("//*[text() = 'Mattress Fee']/../..//p")).getText(), "$16");
+        }
+    }
+
+    @When("I verify that company name is not mandatory on address page")
+    public void iVerifyThatCompanyIsNotMandatoryOnAddressPage() {
+        $(By.xpath("//*[text()='WE ARE UNABLE TO VERIFY THE ADDRESS PROVIDED']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I verify updated zip code in the cart is {string}")
+    public void iVerifyUpdatedZipCode(String zipCode) {
+        $(By.xpath("//*[contains(text(), 'Shipping to')]/a")).should(text(zipCode), Duration.ofSeconds(20));
+    }
+
+    @When("I verify updated zip code in PDP")
+    public void iVerifyUpdatedZipCodeInPDP() {
+        $(By.xpath("//*[@data-testid = 'postal-code-dialog-opener']")).should(text("11111"), Duration.ofSeconds(20));
+    }
+
+    @When("Verify that after come back to address page from payment page ship to and bill to address is showing")
+    public void iVerifyShippingAndBillingAddresses() {
+        WebDriverRunner.getWebDriver().navigate().back();
+        $(By.xpath("//*[text() = 'Shipping Address']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text() = 'Billing Address']")).should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("Verify that on address page state drop down field is not shown empty")
+    public void iVerifyThatStateDropDownIsNotEmpty() {
+        $(By.xpath("(//*[@id = 'address-state-field'])[1]")).click();
+        List<String> stateItems = new ArrayList(Arrays.asList("AL - Alabama", "AK - Alaska", "AZ - Arizona", "AR - Arkansas", "CA - California", "CO - Colorado", "CT - Connecticut", "DE - Delaware", "DC - District Of Columbia", "FL - Florida", "GA - Georgia", "HI - Hawaii", "ID - Idaho", "IL - Illinois", "IN - Indiana", "IA - Iowa", "KS - Kansas", "KY - Kentucky", "LA - Louisiana", "ME - Maine", "MD - Maryland", "MA - Massachusetts", "MI - Michigan", "MN - Minnesota", "MS - Mississippi", "MO - Missouri", "MT - Montana", "NE - Nebraska", "NV - Nevada", "NH - New Hampshire", "NJ - New Jersey", "NM - New Mexico", "NY - New York", "NC - North Carolina", "ND - North Dakota", "OH - Ohio", "OK - Oklahoma", "OR - Oregon", "PA - Pennsylvania", "RI - Rhode Island", "SC - South Carolina", "SD - South Dakota", "TN - Tennessee", "TX - Texas", "UT - Utah", "VT - Vermont", "VA - Virginia", "WA - Washington", "WV - West Virginia", "WI - Wisconsin", "WY - Wyoming"));
+        for (int i = 2; i <= stateItems.size(); i++) {
+            $(By.xpath("((//*[@id = 'address-state-field'])[1]/option)[" + i + "]")).scrollIntoView(true);
+            assertEquals( $(By.xpath("((//*[@id = 'address-state-field'])[1]/option)[" + i + "]")).getText(), stateItems.get(i-2));
+        }
+        $(By.xpath("(//*[@id = 'address-state-field'])[2]")).click();
+        for (int i = 2; i <= stateItems.size(); i++) {
+            $(By.xpath("((//*[@id = 'address-state-field'])[2]/option)[" + i + "]")).scrollIntoView(true);
+            assertEquals( $(By.xpath("((//*[@id = 'address-state-field'])[2]/option)[" + i + "]")).getText(), stateItems.get(i-2));
+        }
+    }
+
+    @When("I add line items to cart via API for grouping")
+    public void iAddLineItemsToCartViaAPIForGrouping() {
+        GeneralStepDefs.addLineItemsToConciergeCartWithSKU("10031801 WGRY", "1");
+        GeneralStepDefs.addLineItemsToConciergeCartWithSKU("22100257 LHST", "1");
+        GeneralStepDefs.addLineItemsToConciergeCartWithSKU("10106866 FGWT", "1");
+    }
+
+    @When("I add line items to cart via API")
+    public void iAddLineItemsToCartViaAPI() {
+        GeneralStepDefs.addLineItemsToConciergeCartWithSKU("10031801 WGRY", "1");
+        GeneralStepDefs.addLineItemsToConciergeCartWithSKU("10078584 ABRS", "1");
+        GeneralStepDefs.addLineItemsToConciergeCartWithSKU("10106866 FGWT", "1");
+    }
+
     @When("Verify that zip code was updated in the Cart to {string}")
     public void verifyThatZipCodeWasUpdatedInTheCart(String zipCode) {
         with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -1012,9 +1279,9 @@ public class ConciergeCartStepDefs {
         pdpScreen.getConfirmationPostalCode().click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
     }
-    @When("I add item to cart via API with {string}")
-    public void iAddItemToCartViaAPI(String SKU) {
-        GeneralStepDefs.addLineItemsToConciergeCartWithSKU(SKU);
+    @When("I add item to cart via API with {string} and quantity {string}")
+    public void iAddItemToCartViaAPI(String SKU, String quantity) {
+        GeneralStepDefs.addLineItemsToConciergeCartWithSKU(SKU, quantity);
     }
 
     @When("I add item to cart via UI")
@@ -1033,6 +1300,65 @@ public class ConciergeCartStepDefs {
     public void iRemoveAllItemsFromCartViaAPI() {
         GeneralStepDefs.removeLineItemFromConciergeCart();
     }
+
+    @When("I clear all orders form the cart")
+    public void iClearAllItemsFromTheCart() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if (!conciergeUserAccountPage.getCartButtonItemSum().exists()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+            if(conciergeUserAccountPage.getCartButtonItemSum().isDisplayed()){
+                try{
+                    if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
+                        String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
+                        open(URL);
+                        with().pollInterval(3, SECONDS).await().until(() -> true);
+                        WebDriverRunner.getWebDriver().navigate().refresh();
+                        with().pollInterval(3, SECONDS).await().until(() -> true);
+                        if (!conciergeCartPageScreen.getClearOrderButton().exists()) {
+                            WebDriverRunner.getWebDriver().navigate().refresh();
+                            open(URL);
+                            with().pollInterval(5, SECONDS).await().until(() -> true);
+                        }
+                        if (!conciergeCartPageScreen.getClearOrderButton().exists()) {
+                            System.out.println("400, 503 error");
+                        }
+                        conciergeCartPageScreen.getClearOrderButton().should(Condition.be(visible), Duration.ofSeconds(10));
+                        conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
+                        conciergeCartPageScreen.getClearOrderButton().click();
+                        with().pollInterval(2, SECONDS).await().until(() -> true);
+                        if (!conciergeCartPageScreen.getClearOrderButtonPopUpHeader().isDisplayed()) {
+                            for (int i = 0; i < 3; i++) {
+                                WebDriverRunner.getWebDriver().navigate().refresh();
+                                with().pollInterval(4, SECONDS).await().until(() -> true);
+                                conciergeCartPageScreen.getClearOrderButton().scrollIntoView(true);
+                                conciergeCartPageScreen.getClearOrderButton().shouldHave(visible, Duration.ofSeconds(10));
+                                conciergeCartPageScreen.getClearOrderButton().click();
+                                with().pollInterval(2, SECONDS).await().until(() -> true);
+                                if (conciergeCartPageScreen.getClearOrderButtonPopUpHeader().isDisplayed()) {
+                                    conciergeCartPageScreen.getClearOrderButtonPop().click();
+                                    break;
+                                }
+                            }
+                        } else {
+                            conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current cart?"), Duration.ofSeconds(30));
+                            conciergeCartPageScreen.getClearOrderButtonPop().should(Condition.be(visible), Duration.ofSeconds(10));
+                            conciergeCartPageScreen.getClearOrderButtonPop().click();
+                            with().pollInterval(5, SECONDS).await().until(() -> true);
+                        }
+                        WebDriverRunner.getWebDriver().navigate().refresh();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                        conciergeUserAccountPage.getCartButton().should(visible, Duration.ofMinutes(5));
+
+                    }
+                } catch (ElementNotFound e){
+                    System.out.println("Element not found");
+                }
+            }
+        }
 
     @When("I remove all items from cart via UI")
     public void iRemoveAllItemsFromCartViaUI() {
@@ -1081,7 +1407,7 @@ public class ConciergeCartStepDefs {
                                 }
                             }
                         } else {
-                            conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current order?"), Duration.ofSeconds(30));
+                            conciergeCartPageScreen.getClearOrderButtonPopUpHeader().shouldHave(text("Are you sure you want to clear the current cart?"), Duration.ofSeconds(30));
                             conciergeCartPageScreen.getClearOrderButtonPop().should(Condition.be(visible), Duration.ofSeconds(10));
                             conciergeCartPageScreen.getClearOrderButtonPop().click();
                             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -1098,8 +1424,70 @@ public class ConciergeCartStepDefs {
         }
     }
 
+    @When("I verify all the sums on the cart page")
+    public void iVerifyAllTheSumsOnTheCartPage() {
+            if (country.equals("GB")) {
+
+            }
+
+            if (country.equals("CA")) {
+
+            }
+
+            if (country == null || country.equals("US")) {
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[@data-testid = 'price-for-regular']")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
+                $(By.xpath("//*[@data-testid = 'price-for-member']")).shouldHave(text("$2,895.00"), Duration.ofSeconds(20));
+                if($(By.xpath("//*[@data-testid = 'price-for-final-sale']")).isDisplayed()){
+                    $(By.xpath("//*[@data-testid = 'price-for-final-sale']")).shouldHave(text("$5,010.00"), Duration.ofSeconds(20));
+                }
+                $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
+                $(By.xpath("//*[text() = 'Subtotal' ]/../following-sibling::div/span")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
+                $(By.xpath("//*[text() = 'Unlimited Furniture Delivery' ]/../following-sibling::div/p")).shouldHave(text("$279.00"), Duration.ofSeconds(20));
+                $(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).shouldHave(text("$4,139.00"), Duration.ofSeconds(20));
+            }
+    }
+
+    @When("I verify all the sums on the cart page with item quantity {string}")
+    public void iVerifyAllTheSumsOnTheCartPage(String quantity) {
+        if (country.equals("GB")) {
+
+        }
+
+        if (country.equals("CA")) {
+
+        }
+
+        if (country == null || country.equals("US")) {
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            $(By.xpath("//*[@data-testid = 'price-for-regular']")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
+            $(By.xpath("//*[@data-testid = 'price-for-member']")).shouldHave(text("$2,895.00"), Duration.ofSeconds(20));
+            if($(By.xpath("//*[@data-testid = 'price-for-final-sale']")).isDisplayed()){
+                $(By.xpath("//*[@data-testid = 'price-for-final-sale']")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
+            }
+             int totalWithoutTaxes = 3860 * Integer.parseInt(quantity);
+            assertEquals(totalWithoutTaxes, Integer.parseInt($(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
+             int subtotal = 3860 * Integer.parseInt(quantity);
+            assertEquals(subtotal, Integer.parseInt($(By.xpath("//*[text() = 'Subtotal' ]/../following-sibling::div/span")).getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
+            $(By.xpath("//*[text() = 'Unlimited Furniture Delivery' ]/../following-sibling::div/p")).shouldHave(text("$279.00"), Duration.ofSeconds(20));
+            int totalWithTaxes = 3860 * Integer.parseInt(quantity) + Integer.parseInt($(By.xpath("//*[text() = 'Unlimited Furniture Delivery' ]/../following-sibling::div/p")).getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
+            assertEquals(totalWithTaxes, Integer.parseInt($(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
+        }
+    }
+
     @When("I clear order via API")
     public void iClearOrderViaAPI() {
         GeneralStepDefs.clearOrder();
+    }
+
+    @Then("I verify that {string} on Cart screen")
+    public void iVerifyThatOnCartScreen(String data) {
+        switch (data) {
+            case "Regular price & Total Price for the product":
+                $(By.xpath("//*[@class = 'MuiButtonBase-root MuiFab-root' and not(contains(@style, 'hidden'))]")).shouldBe(visible, Duration.ofSeconds(20));
+                break;
+
+            default: break;
+        }
     }
 }
