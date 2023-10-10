@@ -613,4 +613,29 @@ public class EstoreE2EStepDefs {
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
     }
+
+    @When("I open product page with {string} and {string} for estore")
+    public void iOpenProductPageAndForEstore(String productId, String skuId) {
+        String URL = null;
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "&clientrender=true";
+
+        open(URL);
+        try {
+            estoreItemPage.getAddToCartButton().should(visible);
+            estoreItemPage.getAddToCartButton().scrollTo();
+            if (!estoreItemPage.getAddToCartButton().isEnabled()) {
+                for (int i = 0; i < 3; i++) {
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+
+                    if (estoreItemPage.getAddToCartButton().isEnabled()) {
+                        break;
+                    }
+                }
+            }
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+    }
 }

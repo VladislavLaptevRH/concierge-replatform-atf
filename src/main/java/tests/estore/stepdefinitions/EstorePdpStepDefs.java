@@ -391,4 +391,23 @@ public class EstorePdpStepDefs {
         $(By.xpath("//p[text()='Edit']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Remove']")).should(visible, Duration.ofSeconds(20));
     }
+
+    @Then("I verify the multisku ID is showing up once the line item is configured")
+    public void iVerifyTheMultiskuIDIsShowingUpOnceTheLineItemIsConfigured() {
+        $(By.xpath("//*[text()='Item# m000001198111']")).should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that the ETA on PDP")
+    public void iVerifyThatTheETAOnPDP() {
+        $(By.xpath("//*[text()='This item is special order and will be ready for delivery between 01/05/24 and 01/11/24 ']")).should(visible);
+    }
+
+    @Then("I verify that {string} message is displayed {string} the lien item dropdown")
+    public void iVerifyThatMessageIsDisplayedTheLienItemDropdown(String message, String location) {
+        if (location.equals("above")) {
+            estorePDPScreen.verifyThatItemIncludeMultipleComponentsMsgIsDisplayedAboveLineItemDropDown();
+        } else {
+            estorePDPScreen.verifyThatItemIncludeMultipleComponentsMsgIsDisplayedBellowLineItemDropDown();
+        }
+    }
 }

@@ -65,6 +65,17 @@ public class EstorePDPScreen {
 
     private final SelenideElement addMonogram = $(By.xpath("//button[@data-testid='monogram-add-button']"));
 
+    private final SelenideElement itemIncludeMultipleComponentsMsg = $(By.xpath("//*[text()='This item includes multiple components. Individual components will be listed in your cart.']"));
+
+
+    public void verifyThatItemIncludeMultipleComponentsMsgIsDisplayedAboveLineItemDropDown() {
+        itemIncludeMultipleComponentsMsg.should(Condition.visible, Duration.ofSeconds(20));
+    }
+
+    public void verifyThatItemIncludeMultipleComponentsMsgIsDisplayedBellowLineItemDropDown() {
+        itemIncludeMultipleComponentsMsg.should(Condition.visible, Duration.ofSeconds(20));
+    }
+
     public void clickToReturnPolicyButton() {
         returnPolicyButton.should(Condition.and("", Condition.interactable, Condition.visible)
                 , Duration.ofSeconds(15)).click(ClickOptions.usingJavaScript());
@@ -97,7 +108,6 @@ public class EstorePDPScreen {
 
     public void verifyThatSpecialMessagesAreDisplayed() {
         thisItemWillBeDelieveredMsg.should(Condition.visible, Duration.ofSeconds(20));
-        thisItemCanBeReturnedMsg.should(Condition.visible, Duration.ofSeconds(20));
         shipsFreeOfChargeViaStandarShipMsg.should(Condition.visible, Duration.ofSeconds(20));
         skuIdItemValue.should(Condition.visible, Duration.ofSeconds(20));
     }

@@ -871,4 +871,15 @@ public class EstoreCartPageStepDefs {
         estoreCartPage.verifyThatThankYouForJoiningTheMemberProgramMessageIsDisplayed();
         estoreCartPage.verifyThatRemoveMembershipButtonIsDisplayed();
     }
+
+    @Then("I verify that the ETA on PDP and cart are matching")
+    public void iVerifyThatTheETAOnPDPAndCartAreMatching() {
+        $(By.xpath("//*[text()='This item is special order and will be ready for delivery between 01/05/24 and 01/11/24 ']"))
+                .should(visible);
+    }
+
+    @Then("I verify the message {string} should be shown on cart against every component of multisku")
+    public void iVerifyTheMessageShouldBeShownOnCartAgainstEveryComponentOfMultisku(String arg0) {
+        estoreCartPage.verifyThatComponentMessageIsDisplayedForAllLineItems();
+    }
 }

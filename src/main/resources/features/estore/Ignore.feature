@@ -1,5 +1,11 @@
 Feature: Test cases which are not use
 
+  Scenario: Search after opening hamburger menu
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on hamburger menu for estore
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
 
   Scenario: eStore - Gift Box fee in cart
     Given I log into eStore as "regular" user

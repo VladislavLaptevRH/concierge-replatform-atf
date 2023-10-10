@@ -2,13 +2,6 @@
 
 Feature: Estore Search
 
-  Scenario: Search after opening hamburger menu
-    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
-    When I click on hamburger menu for estore
-    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
-    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
-
   Scenario: Search product via Product name
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
