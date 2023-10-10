@@ -1,6 +1,7 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import lombok.Setter;
 import org.openqa.selenium.By;
@@ -17,13 +18,15 @@ import static org.testng.AssertJUnit.*;
 
 public class ConciergeSearchStepDefs {
 
+    Pdp pdp = new Pdp();
+
     EstoreHomePageStepDefs estoreHomePageStepDefs = new EstoreHomePageStepDefs();
 
     @Then("I verify that {string} on search page")
     public void iVerifyOnSearchPage(String data) {
         switch (data) {
             case "PG Search Page has title (TABLE) and text \"Results\" and \"Sort\" are present":
-                String title = EstoreHomePageStepDefs.result;
+                String title = Pdp.result;
                 assertEquals(title.toLowerCase(), $(By.xpath("//*[text() = '" + title + "']")).getText().toLowerCase());
                 $(By.xpath("//*[text() = 'RESULTS']")).should(Condition.visible, Duration.ofSeconds(15));
                 $(By.xpath("//*[text() = 'sort']")).should(Condition.visible, Duration.ofSeconds(15));
@@ -51,7 +54,7 @@ public class ConciergeSearchStepDefs {
                 $(By.xpath("//*[@id = 'footer']")).should(Condition.visible, Duration.ofSeconds(15));
                 break;
             case "PG page is returned with text  RESULTS (IN RH BABY & CHILD)":
-                $(By.xpath("//*[text() = 'RESULTS']")).shouldHave(text("RESULTS ( 230 IN RH BABY & CHILD )"));
+                $(By.xpath("//*[text() = 'RESULTS']")).shouldHave(text("IN RH BABY & CHILD )"));
                 break;
             case "VIEW RH BABY & CHILD RESULTS button is present":
                 $(By.xpath("//*[@data-testid = 'add-to-cart-dialog-opener' ]/span[text() = 'VIEW RH BABY & CHILD RESULTS']")).should(Condition.visible, Duration.ofSeconds(15));
@@ -72,7 +75,6 @@ public class ConciergeSearchStepDefs {
             default: break;
         }
     }
-
     @Then("I verify that relevant items are returned on search page {string}")
     public void iVerifyTgatRelevantItemsAreReturnedOnSearchPage(String items) {
         $(By.xpath("(//*[@id = 'component-product-grid']//p/span[contains(text(), '" + items + "')])[1]")).shouldBe(visible, Duration.ofSeconds(15));

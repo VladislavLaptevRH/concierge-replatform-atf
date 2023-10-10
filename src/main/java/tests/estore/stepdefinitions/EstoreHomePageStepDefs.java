@@ -65,7 +65,6 @@ public class EstoreHomePageStepDefs {
 
     @Then("verify users is taken to search result page")
     public void verifyUsersIsTakenToProductPage() {
-
         assertTrue(Hooks.getCurrentUrl().contains("/search/results"));
     }
 

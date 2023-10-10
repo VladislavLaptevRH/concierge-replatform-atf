@@ -62,7 +62,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement cartTitle = $(By.xpath("//*[text()='CART']"));
 
-    private final SelenideElement clearOrderButton = $(By.xpath("//*[text() = 'Clear Order']"));
+    private final SelenideElement clearOrderButton = $(By.xpath("//*[text() = 'Clear Cart']"));
 
     private final SelenideElement addMonogramButton = $(By.xpath("//*[text()='add monogram']"));
 
@@ -74,9 +74,9 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement memberSavingsText = $(By.xpath("//*[text()='Member Savings']"));
 
-    private final SelenideElement clearOrderButtonPop = $(By.xpath("//*[text()='CLEAR ORDER']"));
+    private final SelenideElement clearOrderButtonPop = $(By.xpath("//*[text()='CLEAR CART']"));
 
-    private final SelenideElement clearOrderButtonPopUpHeader = $(By.xpath("//*[text() = 'Are you sure you want to clear the current order?']"));
+    private final SelenideElement clearOrderButtonPopUpHeader = $(By.xpath("//*[text() = 'Are you sure you want to clear the current cart?']"));
 
     private final List<SelenideElement> monogramFonts = $$(By.xpath("(//ul[@class='MuiGridList-root'])[1]//li[@class='MuiGridListTile-root']"));
 
@@ -114,7 +114,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement totalMemberPrice = $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-alignRight']"));
 
-    private final SelenideElement firstProductNameInPG = $(By.xpath("(//*[contains(@id, 'RH')]//p/span)[1]"));
+    private final SelenideElement firstProductNameInPG = $(By.xpath("(//*[contains(@id, 'RH')]//p/span)[2]"));
 
     private final SelenideElement regularPriceInPG = $(By.xpath("(//*[@data-testid = 'price-for-regular'])[1]"));
 

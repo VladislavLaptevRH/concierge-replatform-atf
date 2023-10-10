@@ -1,5 +1,4 @@
-@concierge-All
-@concierge-OrderReview
+@conciergeTestRun
 Feature: Concierge Order review
 
   Scenario: Edit Shipping Address
@@ -82,10 +81,7 @@ Feature: Concierge Order review
     When I remove client from header
     When I clicks on a random menu item
     When I clicks on o random item
-    When I select depth option
-    When I select fabric option
-    When I select length option
-    When I select color option
+    Then I chose the '1' line item selections one by one
     And I select count of product
     And I click on add to cart button
     When I click on agree&add button

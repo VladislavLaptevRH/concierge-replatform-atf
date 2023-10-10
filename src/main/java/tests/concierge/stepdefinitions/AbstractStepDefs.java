@@ -21,6 +21,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertTrue;
+import static tests.concierge.stepdefinitions.GeneralStepDefs.paymentTypeVar;
 
 public class AbstractStepDefs {
     ConciergeOrderHistoryForm conciergeOrderHistoryForm = new ConciergeOrderHistoryForm();
@@ -158,12 +159,71 @@ public class AbstractStepDefs {
     @And("I verify that review screen is displayed")
     public void iVerifyThatReviewScreenIsDisplayed() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-//        if(!reviewOrderScreen.getBillingAddress().isDisplayed()){
-//            WebDriverRunner.getWebDriver().navigate().refresh();
-//            with().pollInterval(5, SECONDS).await().until(() -> true);
-//        }
         reviewOrderScreen.getBillingAddress().should(visible, Duration.ofMinutes(1));
         reviewOrderScreen.getShippingAddress().should(visible, Duration.ofMinutes(1));
+        if(paymentTypeVar.equals("VI")){
+            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
+            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
+        }
+        if(paymentTypeVar.equals("MC")){
+            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='MasterCard']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1115"), Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
+            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
+        }
+        if(paymentTypeVar.equals("AX")){
+            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='American Express']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 0002"), Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
+            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
+        }
+        if(paymentTypeVar.equals("DI")){
+            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='Discover']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 6611"), Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
+            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
+        }
+    }
+
+    @And("I verify that confirm screen is displayed")
+    public void iVerifyThatConfirmScreenIsDisplayed() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        reviewOrderScreen.getBillingAddress().should(visible, Duration.ofMinutes(1));
+        reviewOrderScreen.getShippingAddress().should(visible, Duration.ofMinutes(1));
+        if(paymentTypeVar.equals("VI")){
+            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+        }
+        if(paymentTypeVar.equals("MC")){
+            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='MasterCard']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1115"), Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+        }
+        if(paymentTypeVar.equals("AX")){
+            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='American Express']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 0002"), Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+        }
+        if(paymentTypeVar.equals("DI")){
+            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='Discover']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 6611"), Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+        }
     }
 
     @When("I click on a place order button")
@@ -212,6 +272,78 @@ public class AbstractStepDefs {
         }
         if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
             generalStepDefs.fillAddressFields();
+            generalStepDefs.fillZipCodeStateCountry("85020", "US", "AZ");
+            if(checkoutAddressScreen.getEmailAddressField().isDisplayed()){
+                generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
+                checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
+            } else {
+                System.out.println("Email field is not available");
+            }
+            if(checkoutAddressScreen.getConfirmEmailAddressField().isDisplayed()){
+                checkoutAddressScreen.getConfirmEmailAddressField().setValue("test@mailinator.com");
+            } else {
+                System.out.println("Email confirm field is not available");
+            }
+
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+
+        } else {
+            System.out.println("Address fields are not available");
+        }
+        if(checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
+            if (!$(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
+                $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+            }
+        }
+    }
+
+    @When("I fill all fields from address screen for checking zip code")
+    public void iFillAllFieldsFromAddressScreenForBrandsForCheckingZipcode() {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()) {
+            $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
+            $(By.xpath("(//*[text()='Edit'])[10]")).click();
+        }
+        if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
+            generalStepDefs.fillAddressFields();
+            generalStepDefs.fillZipCodeStateCountry("11111", "US", "AZ");
+            if(checkoutAddressScreen.getEmailAddressField().isDisplayed()){
+                generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
+                checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
+            } else {
+                System.out.println("Email field is not available");
+            }
+            if(checkoutAddressScreen.getConfirmEmailAddressField().isDisplayed()){
+                checkoutAddressScreen.getConfirmEmailAddressField().setValue("test@mailinator.com");
+            } else {
+                System.out.println("Email confirm field is not available");
+            }
+
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+
+        } else {
+            System.out.println("Address fields are not available");
+        }
+        if(checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
+            if (!$(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
+                $(By.xpath("//*[@id = 'billing-shipping-address-same-checkbox']")).click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+            }
+        }
+    }
+
+    @When("I fill all fields from address screen without company name")
+    public void iFillAllFieldsFromAddressScreenForBrandsWithoutCompanyName() {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()) {
+            $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
+            $(By.xpath("(//*[text()='Edit'])[10]")).click();
+        }
+        if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
+            generalStepDefs.fillAddressFieldsWithoutCompanyName();
             generalStepDefs.fillZipCodeStateCountry("85020", "US", "AZ");
             if(checkoutAddressScreen.getEmailAddressField().isDisplayed()){
                 generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());

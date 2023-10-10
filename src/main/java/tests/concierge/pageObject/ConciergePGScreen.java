@@ -12,7 +12,7 @@ public class ConciergePGScreen {
 
     private final String topNavMenu = "//*[contains(@id, 'container-rhrheader-rhr-catalogNav')]//span[text() = '%s']";
     private final String topNavSubMenu = "//li[contains(@id, 'rhrCtalogNavigationDetails_navigation')]/span[text() = '%s']";
-    private final String topNavGallery = "//li[contains(@id, 'rhrCtalogNavigationDetails_concepts-navigation')]/span[text() = '%s']";
+    private final String topNavGallery = "//li[contains(@id, 'rhrCtalogNavigationDetails_concepts-navigation')]/span[contains(text(), \"%s\")]";
     private final SelenideElement threeGridView = $(By.xpath("(//*[text() = 'sort']/../..//*[local-name() = 'svg'])[2]"));
     private final SelenideElement twoGridView = $(By.xpath("(//*[text() = 'sort']/../..//*[local-name() = 'svg'])[2]"));
     private final SelenideElement threeGridViewIsActive = $(By.xpath("//*[text() = 'sort']/../..//*[local-name() = 'svg' and @data-active = 'true']"));

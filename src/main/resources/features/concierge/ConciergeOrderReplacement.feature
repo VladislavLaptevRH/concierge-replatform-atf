@@ -1,5 +1,4 @@
-@concierge-All
-@concierge-Cart
+@conciergeTestRun
 Feature: Order replacement
 
   Scenario: concierge - Order replacement - Visa payment

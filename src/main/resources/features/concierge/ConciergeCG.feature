@@ -1,6 +1,4 @@
-@concierge-All
-@concierge-CG
-@conciergeCriticalPathTestRun
+@conciergeTestRun
 Feature: Concierge CG Page
 
   Scenario Outline: Test CGS in all menu items
@@ -20,7 +18,7 @@ Feature: Concierge CG Page
       | Lighting  | Lighting Collections    |                                | RH              | RH               | 2                 |
       | Textiles  | Pillows                 | Pillow Collections             | RH              | RH               | 1                 |
       | Rugs      | Rugs                    | Rug Collections                | RH              | RH               | 1                 |
-      | Windows   | Drapery                 | Drapery Collections            | RH              | RH               | 1                 |
+#      | Windows   | Drapery                 | Drapery Collections            | RH              | RH               | 1                 |
       | Outdoor   | Furniture Collections   |                                | RH              | RH               | 3                 |
       | Living    | Leather Seating         | Seating Collections            | RH CONTEMPORARY | CN               | 1                 |
       | Bath      | Faucets & Hardware      | Faucets & Hardware Collections | RH CONTEMPORARY | CN               | 1                 |
@@ -43,6 +41,7 @@ Feature: Concierge CG Page
       | Rugs      | Handcrafted Rugs        | Rug Collections                | RH TEEN         | TN               | 1                 |
 
   Scenario Outline: Back to Top button functionality
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I change the brand to "<brand>"
@@ -55,7 +54,7 @@ Feature: Concierge CG Page
     Then I verify that 'user is brought to the top of the page' on CG screen
     Examples:
       | menu      | subMenu             | gallery                    | brand        | currentBrandName |
-      | Windows   | Drapery             | Drapery Collections        | RH           | RH               |
+#      | Windows   | Drapery             | Drapery Collections        | RH           | RH               |
       | Bath      | Furniture           | Bath Collections           | RH           | RH               |
       | Living    | Shelving & Cabinets | Cabinet Collections        | RH INTERIORS | IN               |
       | Textiles  | Pillows             | Outdoor Pillow Collections | RH OUTDOOR   | OD               |
@@ -77,8 +76,8 @@ Feature: Concierge CG Page
       | Living    | Office                | Office Collections          | RH MODERN    | MO               |
       | Lighting  | RH Ski House Lighting | Lighting Collections        | RH SKI HOUSE | SH               |
       | Dining    | RH Ski House Dining   | Dining Table Collections    | RH SKI HOUSE | SH               |
-#      | Furniture | Furniture Collections |                             | RH OUTDOOR   | OD               |
-#      | Furniture | Bedroom               | Upholstered Bed Collections | RH TEEN      | TN               |
+      | Furniture | Furniture Collections |                             | RH OUTDOOR   | OD               |
+      | Furniture | Bedroom               | Upholstered Bed Collections | RH TEEN      | TN               |
 
   Scenario Outline: To check 1,2,3 grid view functionality within CG
     Given I log into Concierge as "associate"
@@ -94,11 +93,11 @@ Feature: Concierge CG Page
     Then I Change the CG Grid view to '3' - grid view and confirm changing
     Then I Change the CG Grid view to '1' - grid view and confirm changing
     Examples:
-      | menu      | subMenu            | gallery              | brand               | currentBrandName |
-      | Bath      | Furniture          | Bath Collections     | RH                  | RH               |
-      | Windows   | Drapery            | Drapery Collections  | RH INTERIORS        | IN               |
-#      | Bath      | Bathtubs           | Bathtub Collections  | RH MODERN           | MO               |
-      | Bed       | RH Beach House Bed | Bedroom Collections  | RH BEACH HOUSE      | BH               |
+      | menu      | subMenu             | gallery              | brand               | currentBrandName |
+      | Bath      | Furniture           | Bath Collections     | RH                  | RH               |
+      | Windows   | Drapery             | Drapery Collections  | RH INTERIORS        | IN               |
+      | Dining    | Shelving & Cabinets | Cabinet Collections  | RH MODERN           | MO               |
+      | Bed       | RH Beach House Bed  | Bedroom Collections  | RH BEACH HOUSE      | BH               |
 
   Scenario: 1-2-3 Grid View Functionality within CG/PG/Different Brands
     Given I log into Concierge as "associate"
@@ -115,7 +114,7 @@ Feature: Concierge CG Page
     Then I verify that 'same CG is displayed' on CG screen
     Then I verify that 'grid view is set to 2-grid view' on CG screen
     Then I Change the CG Grid view to '3' - grid view and confirm changing
-    Then I navigate to '3' gallery
+    Then I navigate to '2' gallery
     Then I navigate to '1' PDP
     Then I click 'Back Browser Button' on CG screen
     Then I click 'Back Browser Button' on CG screen

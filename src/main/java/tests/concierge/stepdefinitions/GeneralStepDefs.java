@@ -38,6 +38,8 @@ public class GeneralStepDefs {
     PaymentScreen paymentScreen = new PaymentScreen();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
+
+    ConciergeHomePageStepDefs conciergeHomePageStepDefs = new ConciergeHomePageStepDefs();
     static WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(30));
     public static String id;
     public static String error;
@@ -51,6 +53,8 @@ public class GeneralStepDefs {
     private static String addItemEndpoint;
     private static String cartId;
     private static Logger log = LoggerFactory.getLogger(FilterStepDefs.class);
+
+    public static String paymentTypeVar;
 
     public void waitForLoad(WebDriver driver) {
         ExpectedCondition<Boolean> pageLoadCondition = webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete");
@@ -84,6 +88,9 @@ public class GeneralStepDefs {
      * @param accountRole - account role
      */
     public void loginAsRole(String accountRole) {
+        if(!conciergeLoginPage.getPasswordField().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
         conciergeLoginPage.getPasswordField().should(visible, Duration.ofMinutes(5));
         conciergeLoginPage.getUsernameField().should(visible, Duration.ofSeconds(40));
         if (accountRole.equals("associate")) {
@@ -103,10 +110,13 @@ public class GeneralStepDefs {
 
         if(!conciergeLoginPage.getLocationDropDownList().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-
         conciergeLoginPage.getLocationDropDownList().click();
+
+        if(! $(By.xpath("//*[text() = '5: Newport Beach']")).isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            conciergeLoginPage.getLocationDropDownList().click();
+        }
         $(By.xpath("//*[text() = '5: Newport Beach']")).click();
         conciergeLoginPage.getContinueButton().should(visible, Duration.ofSeconds(30));
         conciergeLoginPage.getContinueButton().click();
@@ -184,6 +194,49 @@ public class GeneralStepDefs {
         conciergeAddressScreen.getBillingAddressText().should(visible, Duration.ofSeconds(12));
     }
 
+    public void fillAddressFieldsWithoutCompanyName() {
+//        $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")).should(visible, Duration.ofSeconds(30));
+        conciergeAddressScreen.getShippingAddressText().shouldHave(text("Shipping Address"), Duration.ofSeconds(40));
+        conciergeAddressScreen.getBillingAddressText().shouldHave(text("Billing Address"), Duration.ofSeconds(40));
+
+        if(conciergeAddressScreen.getSoldToTaxExempt().isDisplayed()){
+            clearField(conciergeAddressScreen.getSoldToTaxExempt());
+            conciergeAddressScreen.getSoldToTaxExempt().setValue("111");
+        }
+
+        clearField(checkoutAddressScreen.getFirstNameInpt());
+        checkoutAddressScreen.getFirstNameInpt().setValue("QAFirst");
+
+        clearField(checkoutAddressScreen.getLastNameField());
+        checkoutAddressScreen.getLastNameField().setValue("Automation");
+
+        clearField(checkoutAddressScreen.getStreetAddressField());
+        checkoutAddressScreen.getStreetAddressField().setValue("North 16th Street");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        clearField(checkoutAddressScreen.getAptFloorSuiteField());
+        checkoutAddressScreen.getAptFloorSuiteField().setValue("QaApartment");
+        try {
+            executeJavaScript("window.scrollTo(0, 600)");
+//            executeJavaScript("arguments[0].click();", checkoutAddressScreen.getCityField());
+            clearField(checkoutAddressScreen.getCityField());
+            checkoutAddressScreen.getCityField().setValue("Phoenix");
+        } catch (ElementNotInteractableException e){
+            System.out.println("Element not interactable");
+            executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getCityField());
+            clearField(checkoutAddressScreen.getCityField());
+            checkoutAddressScreen.getCityField().setValue("Phoenix");
+        }
+
+        clearField(checkoutAddressScreen.getPhoneField());
+        checkoutAddressScreen.getPhoneField().setValue("1241312319");
+        if(checkoutAddressScreen.getBillingAddressAsShippingCheckBox().isDisplayed()){
+            executeJavaScript("arguments[0].click();", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
+        }
+
+        conciergeAddressScreen.getBillingAddressText().should(visible, Duration.ofSeconds(12));
+    }
+
 
     /**
      * Fill zip code, state, country for address checkout
@@ -199,14 +252,24 @@ public class GeneralStepDefs {
             executeJavaScript("arguments[0].scrollIntoView(true);", countrySelect);
             countrySelect.selectByValue(country);
         }
+        if(ConciergeHomePageStepDefs.countryTmp == null){
+            ConciergeHomePageStepDefs.countryTmp = "US";
+        }
         Select selectState = new Select(checkoutAddressScreen.getStateField());
-        selectState.selectByValue(state);
+        if(ConciergeHomePageStepDefs.countryTmp.equals("CA")){
+            selectState.selectByValue("AB");
+        } else {
+            selectState.selectByValue(state);
+        }
+        if(ConciergeHomePageStepDefs.countryTmp.equals("CA")){
+            clearField(checkoutAddressScreen.getZipPostalCodeField());
+            checkoutAddressScreen.getZipPostalCodeField().setValue("A1A 1A1");
+        } else {
         if(checkoutAddressScreen.getZipPostalCodeField().isDisplayed()){
             clearField(checkoutAddressScreen.getZipPostalCodeField());
             checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);
-        } else {
-            System.out.println("Zip code unavailable");
         }
+           }
 
         if (state.equals("NY")) {
             SelenideElement stateNyButton = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='" + state + "']"));
@@ -293,8 +356,23 @@ public class GeneralStepDefs {
                 conciergeUserAccountPage.getBusinessAcNumber().should(Condition.be(visible), Duration.ofSeconds(25));
                 conciergeUserAccountPage.getBusinessAcNumber().setValue("20211221164474");
             }
-            if (field.equals("phone number,postal code,company")) {
-
+            if (field.equals("phoneNumber")) {
+                conciergeUserAccountPage.getClientLookupPhoneNumber().should(Condition.be(visible), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getClientLookupPhoneNumber().setValue("37360424263");
+            }
+            if (field.equals("postalCode")){
+                conciergeUserAccountPage.getClientLookupEmailByName().should(Condition.be(visible), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getClientLookupEmailByName().setValue("test@mailinator.com");
+                conciergeUserAccountPage.getPostalCode().should(Condition.be(visible), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getPostalCode().setValue("12345");
+            }
+            if (field.equals("company")){
+                conciergeUserAccountPage.getCompany().should(Condition.be(visible), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getCompany().setValue("TestCompany");
+            }
+            if (field.equals("company")){
+                conciergeUserAccountPage.getCompany().should(Condition.be(visible), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getCompany().setValue("TestCompany");
             }
             conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(25));
 
@@ -342,6 +420,7 @@ public class GeneralStepDefs {
         paymentScreen.getExpiryDateField().setValue(expirationDate);
         switchTo().defaultContent();
         with().pollInterval(2, SECONDS).await().until(() -> true);
+        paymentTypeVar = paymentType;
     }
 
 
@@ -496,10 +575,10 @@ public class GeneralStepDefs {
         String endpoint = Hooks.cookie;
         String country = Hooks.country;
         String SKU = "";
-        if (Objects.equals(country, "US") || Objects.equals(country, "CA")) {
+        if (Objects.equals(country, "US")) {
             SKU = "10031801 WGRY";
         } else {
-            SKU = "63780104 LOAK";
+            SKU = "10028870 LOAK";
         }
 
         setUserEnvironment();
@@ -537,7 +616,7 @@ public class GeneralStepDefs {
                 "}").post(addItemEndpoint);
     }
 
-        public static void addLineItemsToConciergeCartWithSKU(String SKU) {
+        public static void addLineItemsToConciergeCartWithSKU(String SKU,String quantity) {
             String endpoint = Hooks.cookie;
             String country = Hooks.country;
 
@@ -560,7 +639,7 @@ public class GeneralStepDefs {
                     "            \"items\": [\n" +
                     "                {\n" +
                     "                    \"sku\": \"" + SKU + "\",\n" +
-                    "                    \"quantity\": 1,\n" +
+                    "                    \"quantity\":" + quantity + ",\n" +
                     "                    \"brand\": \"RH\",\n" +
                     "                    \"giftTo\": \"\",\n" +
                     "                    \"giftFrom\": \"\",\n" +

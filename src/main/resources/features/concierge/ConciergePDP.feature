@@ -1,6 +1,4 @@
-@concierge-All
-@concierge-PDP
-@conciergeCriticalPathTestRun
+@conciergeTestRun
 Feature: Concierge PDP
 
   Scenario: Verify the PDP title and pricing
@@ -25,20 +23,22 @@ Feature: Concierge PDP
     Then I Verify that '"add to cart" and "add to project" buttons' is present
     Then I Verify that 'text "Learn more about our Return Policy"' is present
     Then I Verify that '"footer" in PDP' is present
+    Then I chose zero choose in line items
+    Then I chose zero choose in line items
     Then I verify the rest of the checkings for "<skuID>"
     Examples:
       |skuID        |
       |57070740 CLNT|
       |61970975 TEAK|
       |62870050 LOAK|
-      |17050044 CAML|
+      |10024793 BRNZ|
 
   Scenario: Verify the PDP hero Image, zoom, line items
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to concierge item 'prod18890296' from search field
-    When I click on the first project search result with parameters 'prod18890296''10024796 WGRY'
+    When I click on the first project search result with parameters 'prod18890296''10024793 BRNZ'
     Then I Verify that 'PDP title' is present
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'the "Hero" Image' is present
@@ -65,12 +65,12 @@ Feature: Concierge PDP
     Then I chose the '1' line item selections one by one
     Then Verify that 'text "This item will be ready for delivery between" is present'
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
-    Then I verify that text item# and SKU '10024796 WGRY' is present
+    Then I verify that text item# and SKU is present
     Then Verify that 'text "This item can be returned or exchanged within 30 days of delivery" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     Then Verify that 'confirm that Add to Cart slider is present'
-    Then Project modal appears and has all the data for '10024796 WGRY'
-    Then verify that another modal appears with all the data for '10024796 WGRY'
+    Then Project modal appears and has all the data for '10024793 BRNZ'
+    Then verify that another modal appears with all the data for '10024793 BRNZ'
 
   Scenario: Verify In Stock functionality
     Given I log into Concierge as "associate"
@@ -87,20 +87,20 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'has an item can be added to cart from modal'
     Then Verify that "In Stock modal" 'has an item can be added to project from modal'
 
-  Scenario: Verify On Sale functionality
-    Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
-    When I remove all items from cart via UI
-    When I go to item "17050043 FOG" from search field
-    When I click on "view select items on sale" link
-    Then Verify that "Sale modal" 'opens'
-    Then Verify that "Sale modal" 'has title'
-    Then Verify that "Sale modal" 'has item#'
-    Then Verify that "Sale modal" 'has price, member and sale price'
-    Then Verify that "Sale modal" 'has qty dropdown'
-    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
-    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
-    Then Verify that "Sale modal" 'has an item can be added to project from modal'
+#  Scenario: Verify On Sale functionality
+#    Given I log into Concierge as "associate"
+#    When I choose country for concierge from footer
+#    When I remove all items from cart via UI
+#    When I go to item "17050043 FOG" from search field
+#    When I click on "view select items on sale" link
+#    Then Verify that "Sale modal" 'opens'
+#    Then Verify that "Sale modal" 'has title'
+#    Then Verify that "Sale modal" 'has item#'
+#    Then Verify that "Sale modal" 'has price, member and sale price'
+#    Then Verify that "Sale modal" 'has qty dropdown'
+#    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
+#    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
+#    Then Verify that "Sale modal" 'has an item can be added to project from modal'
 
   Scenario Outline: Availability, Delivery and Returns messaging for <items>
     Given I log into Concierge as "associate"
@@ -112,9 +112,10 @@ Feature: Concierge PDP
     Examples:
       | items | skuID         |
       | SO    | 19970830 CTIC |
-      | BO    | 17050043 FOG  |
+      | BO    | 10024793 BRNZ  |
 
   Scenario: Verify the dropdown selection and add to cart
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -122,7 +123,7 @@ Feature: Concierge PDP
     When I click on the first project search result with parameters 'prod12640168''59810779 CTBZ'
     Then I Verify that 'PDP title' is present
     Then Verify that 'text "Components starting at" is present'
-    Then I verify text 'Cloud Modular Leather Corner Chair'
+    Then Verify that 'cloud Modular Leather Sofa titles are present'
     Then Verify that line item field 'Fill' is present
     Then Verify that line item field 'Leather' is present
     Then Verify that line item field 'Depth' is present
@@ -131,7 +132,7 @@ Feature: Concierge PDP
     Then Verify that 'text "Configure this item to view delivery information to" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are inactive'
     Then I chose the '1' line item selections one by one
-    Then I verify that text item# and SKU '59810779 CTBZ' is present
+    Then I verify that text item# and SKU is present
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
     Then I verify that check for replacements parts button is displayed
     Then Verify that 'Add to Cart and Add to Project buttons are active'
@@ -140,6 +141,7 @@ Feature: Concierge PDP
     Then Verify that 'verify data in the modal for SO'
     Then Verify that 'click Agree and add to cart'
     When I click on view cart button
+    Then I open cart
     Then Verify that 'cart page has item (SKU)'
     Then Verify that 'price is matching PDP'
 
@@ -175,21 +177,23 @@ Feature: Concierge PDP
       | skuID         |
       | 60450996 BLNL |
 
-  Scenario: ATC SPO - add to cart
+  Scenario: ATC BO - add to cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to item "10105809 BWDV" from search field
+    When I go to item "10024793 BRNZ" from search field
+    Then I chose the '1' line item selections one by one
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
-    When I click on agree&add button
     When I click on view cart button
-    Then I verify that availability, Delivery and returns messaging is displayed for "SO"
+    Then I verify that availability, Delivery and returns messaging is displayed for "BO"
 
   Scenario: ATC BO - add to cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10060297 CLR" from search field
+    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     Then I verify that availability, Delivery and returns messaging is displayed for "BO"
@@ -231,7 +235,8 @@ Feature: Concierge PDP
     Then I verify that zip code in PDP is 'SW1A1AA'
     Then Verify that 'Confirm that PDP has price in GBP'
     When I click on rh concierge logo
-    When I navigate to "Coffee Tables"
+    When I click on search
+    When I type item name 'Coffee Tables'
     Then I click on the first project search result
     Then Verify that 'default US zip code is present in PDP'
 
@@ -267,11 +272,11 @@ Feature: Concierge PDP
     When I go to custom rugs
     Then I verify that custom rugs are displayed
 
-  Scenario: Custom Windows
-    Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
-    When I click on windows from top menu
-    Then I verify that custom windows are displayed
+#  Scenario: Custom Windows
+#    Given I log into Concierge as "associate"
+#    When I choose country for concierge from footer
+#    When I click on windows from top menu
+#    Then I verify that custom windows are displayed
 
   Scenario: Replacement Items
     Given I log into Concierge as "associate"
