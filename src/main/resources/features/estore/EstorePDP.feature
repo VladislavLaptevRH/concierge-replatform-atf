@@ -126,3 +126,24 @@ Feature: Estore PDP
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify that user is able to add line item separately for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
+
+  Scenario: Verify availability delivery and return for product
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    Then I verify availability delivery and return for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
+
+  Scenario: Verify functionality for Hero Image on PDP
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    Then I verify functionality for Hero Image on PDP for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
+
+  Scenario: Verify the product price as per the Ship to selection
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    Then I verify the product price as per the Ship to selection for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
