@@ -1396,7 +1396,8 @@ public class ConciergeE2EStepDefs {
         $(By.xpath("//*[text() = 'APPLY']")).click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text() = 'Waived Shipping']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text() = '$279.00']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = '$299.00']")).shouldNotBe(text("$NaN"), Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = '$299.00']")).should(visible, Duration.ofSeconds(15));
     }
 
     @When("I open cart")

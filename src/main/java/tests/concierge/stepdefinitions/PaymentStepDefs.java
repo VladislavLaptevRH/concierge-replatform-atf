@@ -277,10 +277,11 @@ public class PaymentStepDefs {
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("(//*[contains(text(),'XXXXXXXX')])[1]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$10.00']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='MasterCard']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("(//*[contains(text(),'XXXXXXXX')])[2]")).shouldHave(text("XXXXXXXX 1115"), Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$3,143.74']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,165.46']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
         $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
     }
@@ -290,10 +291,11 @@ public class PaymentStepDefs {
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("(//*[contains(text(),'XXXXXXXX')])[1]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$10.00']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='MasterCard']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("(//*[contains(text(),'XXXXXXXX')])[2]")).shouldHave(text("XXXXXXXX 1115"), Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$3,143.74']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,165.46']")).should(visible, Duration.ofSeconds(15));
     }
 
     @When("I verify that payment POS is working and paid amount is visible on the review page")
@@ -301,7 +303,8 @@ public class PaymentStepDefs {
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Cash/Check']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
         $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
     }
@@ -311,7 +314,8 @@ public class PaymentStepDefs {
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Cash/Check']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
     }
 
     @When("I verify that payment RHCC is working and paid amount is visible on the review page")
@@ -319,6 +323,7 @@ public class PaymentStepDefs {
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='RH Credit Card']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 7290"), Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = ‘$NaN’]")).shouldNotBe(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),\"You've chosen 24.99% Standard Purchase APR and Payments.Standard Purchase APR and Payments: \")]")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),\" Standard financing terms apply. Interest will be charged on the unpaid purchase balance at the APR for standard Purchases. New accounts: standard Purchase APR 24.99%. Minimum interest charge $1. Existing accounts, see your Cardholder Agreement for applicable terms. Subject to credit approval. RH financing account issued by TD Bank, N.A. \")]")).should(visible, Duration.ofSeconds(15));
@@ -331,7 +336,8 @@ public class PaymentStepDefs {
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='RH Credit Card']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 7290"), Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),\"You've chosen 24.99% Standard Purchase APR and Payments.Standard Purchase APR and Payments: \")]")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),\" Standard financing terms apply. Interest will be charged on the unpaid purchase balance at the APR for standard Purchases. New accounts: standard Purchase APR 24.99%. Minimum interest charge $1. Existing accounts, see your Cardholder Agreement for applicable terms. Subject to credit approval. RH financing account issued by TD Bank, N.A. \")]")).should(visible, Duration.ofSeconds(15));
     }
@@ -341,7 +347,8 @@ public class PaymentStepDefs {
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
         $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
     }
@@ -376,6 +383,7 @@ public class PaymentStepDefs {
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Estimated Sales Tax for 85020']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = ‘$NaN’]")).shouldNotBe(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$2,625.00']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$249.74']")).should(visible, Duration.ofSeconds(15));

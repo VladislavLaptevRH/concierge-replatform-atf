@@ -480,6 +480,7 @@ public class Pdp {
 
     @Then("I chose zero choose in line items")
     public void iChoseZeroChooseInLineItems(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
        int lineItemsCount = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..")).size();
        for(int i = 1;  i <= lineItemsCount; i++){
            Select itemList = new Select($(By.xpath("((//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..)[" + i + "]")));
@@ -826,14 +827,17 @@ public class Pdp {
     public void iVerifyTextMattressFeeAndAmountInCheckout(String state) {
         if(state.equals("CA")) {
             assertEquals(pdpScreen.getMattressFeeText().getText(), "Mattress Fee");
+            $(By.xpath(" //*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
             assertEquals($(By.xpath("//*[text() = 'Mattress Fee']/../..//p")).getText(), "$10.50");
         }
         if(state.equals("RI")){
             assertEquals(pdpScreen.getMattressFeeText().getText(), "Mattress Fee");
+            $(By.xpath(" //*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
             assertEquals($(By.xpath("//*[text() = 'Mattress Fee']/../..//p")).getText(), "$16.00");
         }
         if(state.equals("CT")){
             assertEquals(pdpScreen.getMattressFeeText().getText(), "Mattress Fee");
+            $(By.xpath(" //*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
             assertEquals($(By.xpath("//*[text() = 'Mattress Fee']/../..//p")).getText(), "$11.75");
         }
 
@@ -1014,6 +1018,10 @@ public class Pdp {
 
     @Then("I click on zip code and change it to {string}")
     public void iChangeZipCodeFor(String zipCode) {
+        with().pollInterval(9, SECONDS).await().until(() -> true);
+        if(!pdpScreen.getZipCode().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
       pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
       pdpScreen.getZipCode().click();
       pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
