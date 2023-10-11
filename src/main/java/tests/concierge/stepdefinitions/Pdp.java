@@ -300,6 +300,7 @@ public class Pdp {
                 $(By.xpath("//*[@id = 'spo-auth-addToCart']")).click();
                 break;
             case  "cart page has item (SKU)":
+                $(By.xpath("//*[text() = 'Item# null")).shouldNotHave(visible, Duration.ofSeconds(15));
                 assertEquals("59810778 SECM", $(By.xpath("(//*[@id = 'listColumn2-Item#'])[1]")).getText());
                 break;
             case  "price is matching PDP":
@@ -486,9 +487,11 @@ public class Pdp {
            Select itemList = new Select($(By.xpath("((//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..)[" + i + "]")));
            try {
                itemList.selectByIndex(0);
-           } catch (UnsupportedOperationException e){
+               with().pollInterval(1, SECONDS).await().until(() -> true);
+           } catch (java.lang.UnsupportedOperationException e){
                WebDriverRunner.getWebDriver().navigate().refresh();
                itemList.selectByIndex(0);
+               with().pollInterval(5, SECONDS).await().until(() -> true);
            }
        }
     }

@@ -419,13 +419,26 @@ public class ConciergePGStepsDefs {
             if(!$(By.xpath("//*[@id = 'footer']")).isDisplayed()){
                 WebDriverRunner.getWebDriver().navigate().refresh();
             }
-            while (!$$(By.xpath("//*[@id = 'flip-carousel-div']//img")).last().isDisplayed()){
-                $$(By.xpath("//*[@id = 'flip-carousel-div']//img")).last().scrollIntoView(true);
-                with().pollInterval(2, SECONDS).await().until(() -> true);
+            if($(By.xpath("//*[@id = 'itemsPerPage']")).isDisplayed()){
+                while (!$(By.xpath("//*[@id = 'itemsPerPage']")).getText().equals("Load All")) {
+                    $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                        $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
+                        $(By.xpath("//*[@id = 'itemsPerPage']")).click();
+                        $(By.xpath("//*[text() = 'Load All']")).click();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                        $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
+                        $(By.xpath("//*[text() = 'Items per page']")).shouldBe(visible, Duration.ofSeconds(20));
+                    }
+                } else {
+                while (!$$(By.xpath("//*[@id = 'flip-carousel-div']//img")).last().isDisplayed()){
+                    $$(By.xpath("//*[@id = 'flip-carousel-div']//img")).last().scrollIntoView(true);
+                    with().pollInterval(2, SECONDS).await().until(() -> true);
+                }
             }
+
             $$(By.xpath("//*[@id = 'flip-carousel-div']//img")).last().shouldBe(visible, Duration.ofSeconds(20));
             $(By.xpath("//*[@id = 'footer']")).shouldBe(visible, Duration.ofSeconds(20));
-            $(By.xpath("//*[text() = 'Items per page']")).shouldBe(visible, Duration.ofSeconds(20));
         }
     }
 
@@ -438,9 +451,22 @@ public class ConciergePGStepsDefs {
             if (!$(By.xpath("//*[@id = 'footer']")).isDisplayed()) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
             }
-            while (!($$(By.xpath("//*[contains(@id, 'RH')]")).size() == Integer.parseInt($(By.xpath("//*[text() = 'RESULTS']")).getText().replaceAll("[^0-9]", "")))){
-                $$(By.xpath("//*[contains(@id, 'RH')]")).last().scrollIntoView(true);
-                with().pollInterval(5, SECONDS).await().until(() -> true);
+            if($(By.xpath("//*[@id = 'itemsPerPage']")).isDisplayed()){
+                while (!$(By.xpath("//*[@id = 'itemsPerPage']")).getText().equals("Load All")) {
+                    $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                    $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
+                    $(By.xpath("//*[@id = 'itemsPerPage']")).click();
+                    $(By.xpath("//*[text() = 'Load All']")).click();
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                    $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
+                    $(By.xpath("//*[text() = 'Items per page']")).shouldBe(visible, Duration.ofSeconds(20));
+                }
+            } else {
+                while (!$$(By.xpath("//*[@id = 'flip-carousel-div']//img")).last().isDisplayed()){
+                    $$(By.xpath("//*[@id = 'flip-carousel-div']//img")).last().scrollIntoView(true);
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                }
             }
         }
     }
