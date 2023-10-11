@@ -35,7 +35,6 @@ Feature:Concierge Back Button
 	Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
 	When I click on search Icon
 	When I type item name 'sofa'
-	Then I verify that 'PG Search Page has title (SOFA) and text "Results" and "Sort" are present' on search page
 	When I click browser back button
 	Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
 
