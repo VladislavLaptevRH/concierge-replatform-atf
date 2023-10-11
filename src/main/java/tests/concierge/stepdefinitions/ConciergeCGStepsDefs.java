@@ -41,16 +41,19 @@ public class ConciergeCGStepsDefs {
                 $(By.xpath("(//*[@id = 'component-collection-card'])[3]//*[text() = 'French Contemporary']/../following-sibling::div/p[text() = 'Washstand Collection']")).click();
                 $(By.xpath("//*[text() = 'Bath  collections']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
-            case "Navigate to fourth collection":
-                $(By.xpath("(//*[@id = 'component-collection-card'])[4]//*[text() = 'Nihal Wool Rug']")).click();
-                $(By.xpath("//*[text() = 'Nihal Wool Rug']")).shouldBe(visible, Duration.ofSeconds(20));
+            case "Navigate to second collection":
+                $(By.xpath("(//*[@id = 'component-collection-card'])[2]//*[text() = 'Kabir Wool Rug']")).click();
+                $(By.xpath("//*[text() = 'Kabir Wool Rug']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "Navigate to first product":
-                $(By.xpath("(//*[contains(@id , 'RH')])[1]//*[text() = 'Nihal Wool Rug']")).click();
-                $(By.xpath("//h2[text() = 'Nihal Wool Rug']")).shouldBe(visible, Duration.ofSeconds(20));
+                if(!$(By.xpath("(//*[@id = 'flip-carousel-div']//img)[1]")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
+                $(By.xpath("//*[@id = 'flip-carousel-div']")).click();
+                $(By.xpath("//h2[text() = 'Kabir Wool Rug']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "confirm that PG is displayed":
-                $(By.xpath("(//*[contains(@id , 'RH')])[1]//*[text() = 'Nihal Wool Rug']")).shouldBe(visible, Duration.ofSeconds(20));
+                $(By.xpath("//*[@id = 'flip-carousel-div']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "confirm that CG Rug Collections is displayed":
                 $(By.xpath("(//*[@id = 'component-collection-card'])[4]//*[text() = 'Nihal Wool Rug']")).shouldBe(visible, Duration.ofSeconds(20));
@@ -106,6 +109,7 @@ public class ConciergeCGStepsDefs {
     @Then("I Change the CG Grid view to {string} - grid view and confirm changing")
     public void iChangeTheCGGridAndConfirmChanging(String view) {
         $(By.xpath("//*[ local-name() = 'svg' and @column = '" + view + "']")).click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[ local-name() = 'svg' and @column = '" + view + "' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));
         if(view.equals("1")) {
             int i = 1;

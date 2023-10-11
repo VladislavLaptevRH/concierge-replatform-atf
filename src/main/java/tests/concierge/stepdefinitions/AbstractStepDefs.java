@@ -165,7 +165,8 @@ public class AbstractStepDefs {
             $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
             $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
         }
@@ -173,7 +174,8 @@ public class AbstractStepDefs {
             $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[text()='MasterCard']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1115"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
             $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
             $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
         }
@@ -181,7 +183,8 @@ public class AbstractStepDefs {
             $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[text()='American Express']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 0002"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
             $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
             $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
         }
@@ -189,7 +192,8 @@ public class AbstractStepDefs {
             $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[text()='Discover']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 6611"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
             $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
             $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
         }
@@ -204,25 +208,29 @@ public class AbstractStepDefs {
             $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
         }
         if(paymentTypeVar.equals("MC")){
             $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[text()='MasterCard']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1115"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
         }
         if(paymentTypeVar.equals("AX")){
             $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[text()='American Express']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 0002"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
         }
         if(paymentTypeVar.equals("DI")){
             $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[text()='Discover']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 6611"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
+            $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
         }
     }
 

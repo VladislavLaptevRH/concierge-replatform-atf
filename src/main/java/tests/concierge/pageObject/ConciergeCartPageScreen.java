@@ -114,7 +114,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement totalMemberPrice = $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-alignRight']"));
 
-    private final SelenideElement firstProductNameInPG = $(By.xpath("(//*[contains(@id, 'RH')]//p/span)[2]"));
+    private final SelenideElement firstProductNameInPG = $(By.xpath("(//*[contains(@id, 'RH')]//p/span)[1]"));
 
     private final SelenideElement regularPriceInPG = $(By.xpath("(//*[@data-testid = 'price-for-regular'])[1]"));
 
