@@ -8,9 +8,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.concierge.pageObject.*;
@@ -19,7 +17,6 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -83,7 +80,8 @@ public class EstoreE2EStepDefs {
         estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
         estoreItemPage.getAddToCartButton().should(enabled);
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
-        estoreItemPage.getAddToCartButton().click(ClickOptions.usingJavaScript());
+        estoreItemPage.getAddToCartButton().shouldBe(visible);
+        estoreItemPage.getAddToCartButton().shouldBe(interactable).click(ClickOptions.usingJavaScript());
     }
 
     @When("I fill all estore fields from address with {string} zip code")
@@ -510,7 +508,7 @@ public class EstoreE2EStepDefs {
 
     @Then("I verify order details from estore thank you page")
     public void iVerifyEstoreOrderDetailsFromThankYouPage() {
-        $(By.xpath("//*[text()='Shipping Address']")).should(visible, Duration.ofSeconds(25));
+        estoreAddressScreen.getShippingAddressTitle().should(visible, Duration.ofSeconds(25));
         $(By.xpath("//*[text()='Billing Address']")).should(visible, Duration.ofSeconds(25));
         $(By.xpath("//*[text()='Important Information']")).should(visible, Duration.ofSeconds(25));
         conciergeCartPageScreen.getTotalMemberPrice().shouldHave(text("$2,156.00"), Duration.ofMinutes(1));
@@ -586,6 +584,8 @@ public class EstoreE2EStepDefs {
     @When("I open product page with {string} and {string} with {string} for estore")
     public void iOpenProductPageWithAndForEstore(String productId, String skuId, String options) {
         String URL = null;
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+
         if (Hooks.profile.equals("stg3")) {
             URL = Hooks.eStoreBaseURL + "/us/en/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
         }
@@ -595,15 +595,47 @@ public class EstoreE2EStepDefs {
 
         open(URL);
 
-        estoreItemPage.getAddToCartButton().scrollTo();
-        if (!estoreItemPage.getAddToCartButton().isEnabled()) {
-            for (int i = 0; i < 3; i++) {
-                WebDriverRunner.getWebDriver().navigate().refresh();
 
-                if (estoreItemPage.getAddToCartButton().isEnabled()) {
-                    break;
+        try {
+            estoreItemPage.getAddToCartButton().should(visible);
+            estoreItemPage.getAddToCartButton().scrollTo();
+            if (!estoreItemPage.getAddToCartButton().isEnabled()) {
+                for (int i = 0; i < 3; i++) {
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+
+                    if (estoreItemPage.getAddToCartButton().isEnabled()) {
+                        break;
+                    }
                 }
             }
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+    }
+
+    @When("I open product page with {string} and {string} for estore")
+    public void iOpenProductPageAndForEstore(String productId, String skuId) {
+        String URL = null;
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "&clientrender=true";
+
+        open(URL);
+        try {
+            estoreItemPage.getAddToCartButton().should(visible);
+            estoreItemPage.getAddToCartButton().scrollTo();
+            if (!estoreItemPage.getAddToCartButton().isEnabled()) {
+                for (int i = 0; i < 3; i++) {
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+
+                    if (estoreItemPage.getAddToCartButton().isEnabled()) {
+                        break;
+                    }
+                }
+            }
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         }
     }
 }

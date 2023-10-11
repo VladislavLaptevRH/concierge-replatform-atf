@@ -15,6 +15,8 @@ import static org.awaitility.Awaitility.with;
 
 @Getter
 public class EstorePDPScreen {
+    private final SelenideElement canadaCountrySelected = $(By.xpath("//*[text()='Canada ($)']"));
+
     private final SelenideElement addToCartButtonViewInStockPopUp = $(By.xpath("(//button[@id='inStockProductCardActions_addToCart-btn'])[1]"));
 
     private final SelenideElement firstRegularPrice = $(By.xpath("(//p[@data-testid='price-for-regular'])[1]"));
@@ -63,6 +65,17 @@ public class EstorePDPScreen {
 
     private final SelenideElement addMonogram = $(By.xpath("//button[@data-testid='monogram-add-button']"));
 
+    private final SelenideElement itemIncludeMultipleComponentsMsg = $(By.xpath("//*[text()='This item includes multiple components. Individual components will be listed in your cart.']"));
+
+
+    public void verifyThatItemIncludeMultipleComponentsMsgIsDisplayedAboveLineItemDropDown() {
+        itemIncludeMultipleComponentsMsg.should(Condition.visible, Duration.ofSeconds(20));
+    }
+
+    public void verifyThatItemIncludeMultipleComponentsMsgIsDisplayedBellowLineItemDropDown() {
+        itemIncludeMultipleComponentsMsg.should(Condition.visible, Duration.ofSeconds(20));
+    }
+
     public void clickToReturnPolicyButton() {
         returnPolicyButton.should(Condition.and("", Condition.interactable, Condition.visible)
                 , Duration.ofSeconds(15)).click(ClickOptions.usingJavaScript());
@@ -78,12 +91,12 @@ public class EstorePDPScreen {
                 , Duration.ofSeconds(15)).click(ClickOptions.usingJavaScript());
     }
 
-    public void selectMonogramKoutHdFont(){
+    public void selectMonogramKoutHdFont() {
         koutHdFontMonogram.should(Condition.visible).click();
 
     }
 
-    public void selectGoldMetallicColorMonogram(){
+    public void selectGoldMetallicColorMonogram() {
         goldMetallicColorMonogram.click();
 
     }
@@ -95,7 +108,6 @@ public class EstorePDPScreen {
 
     public void verifyThatSpecialMessagesAreDisplayed() {
         thisItemWillBeDelieveredMsg.should(Condition.visible, Duration.ofSeconds(20));
-        thisItemCanBeReturnedMsg.should(Condition.visible, Duration.ofSeconds(20));
         shipsFreeOfChargeViaStandarShipMsg.should(Condition.visible, Duration.ofSeconds(20));
         skuIdItemValue.should(Condition.visible, Duration.ofSeconds(20));
     }

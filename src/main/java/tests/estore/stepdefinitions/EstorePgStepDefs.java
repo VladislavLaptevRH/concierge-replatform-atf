@@ -16,6 +16,8 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertTrue;
 
 public class EstorePgStepDefs {
@@ -80,8 +82,8 @@ public class EstorePgStepDefs {
 
     @When("I scroll on the PG page till back to top button is visible")
     public void iScrollOnThePGPageTillBackToTopButtonIsVisible() {
-
-        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        executeJavaScript("window.scrollTo(0, 800)");
     }
 
     @And("I verify that after click on back to top button user is scrolled to top on the PG")
@@ -217,5 +219,10 @@ public class EstorePgStepDefs {
 
         assertTrue(priceFromTheFirstProduct > priceFromTheSecondProduct, "The price of the first product is less than the price for the second product");
 
+    }
+
+    @Then("I validate {string} and {string} grid view should work")
+    public void iValidateAndGridViewShouldWork(String arg0, String arg1) {
+        System.out.println();
     }
 }

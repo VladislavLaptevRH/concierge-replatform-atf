@@ -1121,4 +1121,23 @@ public class Pdp {
         with().pollInterval(6, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='KENSINGTON LEFT-ARM L-SECTIONAL']")).should(visible, Duration.ofSeconds(15));
     }
+
+    @Then("I verify {string} is present")
+    public void iVerify(String text){
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()="+text+"]")).should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify product count in cart page")
+    public void iVerifyProductCountinCartPage(){
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()='1'']")).should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify product count in project page")
+    public void iVerifyProductCountinProjectPage(){
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()='1'']")).should(visible, Duration.ofSeconds(15));
+    }
+
 }

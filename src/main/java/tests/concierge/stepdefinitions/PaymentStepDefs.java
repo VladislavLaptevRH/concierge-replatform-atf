@@ -355,6 +355,30 @@ public class PaymentStepDefs {
 
     @Then("I verify the complete billing address")
     public void iVerifyTheCompleteBillingAddress() {
+      
+        if (Hooks.cookie.equals("prodsupport")) {
+            paymentScreen.getBillingAddress().shouldHave(text(
+                    "BILLING ADDRESS\n" +
+                            "QAFirst Automation\n" +
+                            "AutomationCompany\n" +
+                            "North 16th Street\n" +
+                            "QaApartment\n" +
+                            "Phoenix, AZ 85020\n" +
+                            "US\n" +
+                            "1241312319\n" +
+                            "Edit"));
+
+            assertEquals(paymentScreen.getBillingAddress().getText(),
+                    "BILLING ADDRESS\n" +
+                            "QAFirst Automation\n" +
+                            "AutomationCompany\n" +
+                            "North 16th Street\n" +
+                            "QaApartment\n" +
+                            "Phoenix, AZ 85020\n" +
+                            "US\n" +
+                            "1241312319\n" +
+                            "Edit");
+        } else {
             paymentScreen.getBillingAddress().shouldHave(text(
                             "BILLING ADDRESS\n" +
                             "QAFirst Automation\n" +
@@ -376,8 +400,9 @@ public class PaymentStepDefs {
                             "US\n" +
                             "1241312319\n" +
                             "EDIT");
+      }
     }
-
+  
     @Then("I verify subtotal, shipping fee, taxes based on postal code")
     public void iVerifySubtotalShippingFeeTaxesBasedOnPostalCode() {
         $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
@@ -405,7 +430,7 @@ public class PaymentStepDefs {
     public void iEditPaymentMethod() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         executeJavaScript("window.scrollTo(0, 2000)");
-        if(conciergeAddressScreen.getEditPaymentOrderReview().isDisplayed()){
+        if (conciergeAddressScreen.getEditPaymentOrderReview().isDisplayed()) {
             conciergeAddressScreen.getEditPaymentOrderReview().scrollIntoView(true);
             conciergeAddressScreen.getEditPaymentOrderReview().click();
         } else {
@@ -450,12 +475,12 @@ public class PaymentStepDefs {
     @When("I click on continue with original address button")
     public void iClickOnContinueWithOriginalAddressButton() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if($(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).isDisplayed()){
+        if ($(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).isDisplayed()) {
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).should(Condition.and("", Condition.enabled, Condition.visible), Duration.ofSeconds(60));
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        if(pdpScreen.getCloseSpecialOrderPopUpButton().isDisplayed()){
+        if (pdpScreen.getCloseSpecialOrderPopUpButton().isDisplayed()) {
             pdpScreen.getCloseSpecialOrderPopUpButton().click();
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -464,11 +489,10 @@ public class PaymentStepDefs {
 
     @Then("I verify that on the payment page the same address as for the saved mastercard")
     public void iVerifyThatOnThePaymentPageTheSameAddressAsForTheSavedMastercard() {
-        $(By.xpath("//*[text()='QAFirst Automation']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='North 16th Street']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='QaApartment']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='Phoenix, AZ, 85020']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='US']")).should(visible,Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='1241312319']")).should(visible,Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Ocala Street']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Silver Spring, MD, 20901']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='3097931846']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
     }
 }

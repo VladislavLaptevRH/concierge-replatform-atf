@@ -1,5 +1,6 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
@@ -11,6 +12,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
@@ -33,7 +35,7 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement emailField = $(By.xpath("//input[@id='email']"));
 
-    private final SelenideElement yourProfileHasBeenUpdate = $(By.xpath("//*[text()='YOUR PROFILE HAS BEEN UPDATED.']"));
+    private final SelenideElement yourProfileHasBeenUpdate = $(By.xpath("//*[text()='Your profile has been updated.']"));
 
     private final SelenideElement updatePersonalButton = $(By.xpath("//*[text()='UPDATE PERSONAL INFORMATION']"));
 
@@ -289,12 +291,23 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement agreePrivacyPolicyCheckbox = $(By.xpath("//*[@for='termsAndConditions']"));
 
-    private final SelenideElement signOutButton = $(By.xpath("//*[text()='Sign Out']"));
 
     private final SelenideElement cancelSignOutButtonPopUp = $(By.xpath("//*[text()='Cancel']"));
 
     private final SelenideElement firstSubMenu = $(By.xpath("//div[@role='tooltip']//descendant::div[contains(@class,'MuiGrid-container')]//child::div[contains(@class,'MuiGrid-root')][1]/ul/li[1]"));
 
+    private final SelenideElement signOutButton = $(By.xpath("//li[@id='account-menu-link-/signout']//div"));
+
+    private final SelenideElement confirmSignOutButton = $(By.xpath("//button[contains(@class,'MuiButton-containedPrimary')]"));
+
+
+    public void clickToSignOutButton() {
+        signOutButton.shouldBe(interactable).click(ClickOptions.usingJavaScript());
+    }
+
+    public void clickToConfirmSignOutButton() {
+        confirmSignOutButton.shouldBe(interactable).click(ClickOptions.usingJavaScript());
+    }
 
     public SelenideElement getBrand(String brandname) {
         String path = String.format(brand, brandname);

@@ -21,7 +21,7 @@ public class EstoreWishlistPage {
 
     private final SelenideElement memberPrice = $(By.xpath("//p[@data-testid='price-label-member']"));
 
-    private SelenideElement wishListTitle = $(By.xpath("//*[text()='WISHLIST']"));
+    private SelenideElement wishListTitle = $(By.xpath("//*[text()='Wishlist']"));
 
     public void verifyThatWishListTitleIsDisplayed() {
         wishListTitle.should(Condition.visible, Duration.ofSeconds(15));

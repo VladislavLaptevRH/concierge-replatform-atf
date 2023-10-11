@@ -1,12 +1,12 @@
 @estoreTestRun
 
 Feature: Estore Address Page
-
+#  m000001198111
   Scenario: eStore Address for Guest user
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -35,7 +35,7 @@ Feature: Estore Address Page
     Given I log into eStore as "noaddresses" user
     When I choose country for eStore from footer
     When I goes to my account for estore
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     When I click on estore my account button
     When I click on address book estore button
     Then I verify that add address button is displayed
@@ -45,7 +45,7 @@ Feature: Estore Address Page
     When I choose country for eStore from footer
     When I choose country for eStore from footer
     When I goes to my account for estore
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     When I click on estore my account button
     When I click on address book estore button
     When I click on add address button
@@ -56,7 +56,7 @@ Feature: Estore Address Page
     Given I log into eStore as "addresspage" user
     When I choose country for eStore from footer
     When I goes to my account for estore
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     When I click on estore my account button
     When I click on address book estore button
     When I remove added address before for address book
@@ -66,9 +66,9 @@ Feature: Estore Address Page
     When I click on continue with original address estore button
     When I add item to cart via API for estore
     When I goes to my account for estore
-#    When I click on estore my account icon for guest user
+#    When I click on my account button if page is not loaded
     When I goes to my account for estore
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     When I click on estore my account button
     When I click on address book estore button
     When I open estore cart
@@ -83,7 +83,7 @@ Feature: Estore Address Page
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I goes to my account for estore
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     When I click on estore my account button
     When I click on address book estore button
     When I remove added address before for address book
@@ -103,7 +103,7 @@ Feature: Estore Address Page
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I goes to my account for estore
-    When I click on estore my account icon for guest user
+#    When I click on my account button if page is not loaded
     When I click on estore my account button
     When I click on address book estore button
     When I remove added address before for address book
@@ -125,7 +125,7 @@ Feature: Estore Address Page
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I goes to my account for estore
-    When I click on estore my account icon for guest user
+    When I click on my account button if page is not loaded
     When I click on estore my account button
     When I click on address book estore button
     When I remove added address before for address book
