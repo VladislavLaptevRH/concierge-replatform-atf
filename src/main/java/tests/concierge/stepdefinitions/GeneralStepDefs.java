@@ -758,6 +758,7 @@ public class GeneralStepDefs {
     @Then("I click browser back button")
     public void iClickbackbutton(){
         WebDriverRunner.getWebDriver().navigate().back();
+        with().pollInterval(7, SECONDS).await().until(() -> true);
     }
 
 }
