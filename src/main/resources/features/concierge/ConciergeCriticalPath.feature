@@ -165,7 +165,6 @@ Feature: Concierge Critical Path
     When I remove client from header
     When I open product page with productId "prod19500002"
     Then I chose the '1' line item selections one by one
-    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     Then I open cart
@@ -623,7 +622,6 @@ Feature: Concierge Critical Path
     Then I Verify that 'text "Learn more about our Return Policy"' is present
     Then I Verify that '"footer" in PDP' is present
     Then I chose zero choose in line items
-    Then I chose zero choose in line items
     Then I verify the rest of the checkings for "<skuID>"
     Examples:
       |skuID        |
@@ -685,21 +683,20 @@ Feature: Concierge Critical Path
     Then Verify that "In Stock modal" 'has an item can be added to cart from modal'
     Then Verify that "In Stock modal" 'has an item can be added to project from modal'
 
-#  Scenario: Verify On Sale functionality
-#
-#    Given I log into Concierge as "associate"
-#    When I choose country for concierge from footer
-#    When I remove all items from cart via UI
-#    When I go to item "63130001 GREY" from search field
-#    When I click on "view select items on sale" link
-#    Then Verify that "Sale modal" 'opens'
-#    Then Verify that "Sale modal" 'has title'
-#    Then Verify that "Sale modal" 'has item#'
-#    Then Verify that "Sale modal" 'has price, member and sale price'
-#    Then Verify that "Sale modal" 'has qty dropdown'
-#    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
-#    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
-#    Then Verify that "Sale modal" 'has an item can be added to project from modal'
+  Scenario: Verify On Sale functionality
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "57070740 CLNT" from search field
+    When I click on "view select items on sale" link
+    Then Verify that "Sale modal" 'opens'
+    Then Verify that "Sale modal" 'has title'
+    Then Verify that "Sale modal" 'has item#'
+    Then Verify that "Sale modal" 'has price, member and sale price'
+    Then Verify that "Sale modal" 'has qty dropdown'
+    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
+    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
+    Then Verify that "Sale modal" 'has an item can be added to project from modal'
 
   Scenario Outline: Availability, Delivery and Returns messaging for <items>
     Given I log into Concierge as "associate"
