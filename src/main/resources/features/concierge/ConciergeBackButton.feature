@@ -36,7 +36,7 @@ Feature:Concierge Back Button
 	When I click on search Icon
 	When I type item name 'sofa'
 	When I click browser back button
-	Then I Verify i return to "TABLE" PG page
+	Then I Verify i return to "table" PG page
 
 
   Scenario: Verify that Search any product from PDP and verify for back button
