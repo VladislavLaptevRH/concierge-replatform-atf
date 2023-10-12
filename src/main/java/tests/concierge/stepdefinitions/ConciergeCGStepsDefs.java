@@ -170,7 +170,7 @@ public class ConciergeCGStepsDefs {
     @Then("I Verify the price is not displayed")
     public void iVerifynoPrice(){
         try{
-            $(By.xpath("//*[text()='$']")).isDisplayed();
+            $(By.xpath("//*[text()='$']"));
 //            ConciergeCGScreen.getPrice().isDisplayed();
 //            ConciergeCGScreen.getPrice().click();
         }
