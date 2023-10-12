@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.testng.Assert;
 import tests.concierge.pageObject.ConciergeItemsScreen;
 import tests.concierge.pageObject.ConciergePGScreen;
 import tests.utility.Hooks;
@@ -697,5 +698,13 @@ public class ConciergePGStepsDefs {
     @When("I verify that {string} title is present in PG top left")
     public void iVerifyThatTitleIsPresentInPGTopLeft(String title) {
         $(By.xpath("//*[contains(@class, 'MuiTypography-body1') and text() = '" + title + "']")).should(visible, Duration.ofSeconds(10));
+    }
+
+
+    @Then("I Verify i return to {string} PG page")
+    public void iVerifyireturntopgpage(String title){
+        Assert.assertEquals(title.toLowerCase(), $(By.xpath("//*[text() = '" + title + "']")).getText().toLowerCase());
+        conciergePGScreen.getResult().should(Condition.visible, Duration.ofSeconds(15));
+        conciergePGScreen.getSort().should(Condition.visible, Duration.ofSeconds(15));
     }
 }
