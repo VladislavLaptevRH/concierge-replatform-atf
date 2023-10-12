@@ -83,4 +83,5 @@ public class ConciergeSearchStepDefs {
             $(By.xpath("(//*[@id = 'component-product-grid']//p/span[contains(text(), '" + items + "')])[" + i + "]")).shouldHave(text("" + items + ""));
         }
     }
+
 }
