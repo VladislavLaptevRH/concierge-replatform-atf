@@ -1,7 +1,6 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Driver;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.ex.ElementNotFound;
@@ -23,7 +22,6 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
-import static tests.utility.Hooks.getWebDriver;
 
 
 public class ConciergePGStepsDefs {

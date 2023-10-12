@@ -185,7 +185,7 @@ Feature: Concierge PG Page
     Then I navigate to sub menu 'Sideboards'
     Then I navigate to gallery 'Glass Sideboards'
     Then I click 'first product from the list' on PG screen
-    Then I click 'Back Browser Button' on PG screen
+    Then I clic``k 'Back Browser Button' on PG screen
     Then I verify that 'grid view is set to 2-grid view' on PG screen
 
   Scenario: Verify that Back Button PG -> CG and PDP -> PG is functioning as expected
