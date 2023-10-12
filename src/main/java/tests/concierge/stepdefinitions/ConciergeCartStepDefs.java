@@ -1187,7 +1187,7 @@ public class ConciergeCartStepDefs {
     @When("I choose order classification")
     public void iChooseOrderClassification() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if (!conciergeCartPageScreen.getOrderClassificationSelect().exists()) {
+        if (!conciergeCartPageScreen.getOrderClassificationSelect().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
@@ -1205,13 +1205,11 @@ public class ConciergeCartStepDefs {
     @When("I click on order details button")
     public void iClickOnOrderDetailsButton() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if (conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed()) {
-            conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").click();
-        } else if (conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").isDisplayed()) {
-            conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").click();
-        } else {
-            with().pollInterval(1, SECONDS).await().until(() -> true);
+        if(!conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
         }
+        conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed();
+        conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").click();
     }
 
     @When("I remove all items from cart for minicart")
