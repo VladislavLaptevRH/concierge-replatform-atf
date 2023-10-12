@@ -180,4 +180,13 @@ public class ConciergeCGStepsDefs {
 
     }
 
+    @Then("I verify title is left aligned")
+    public void iVerifytitleleftaligned(){
+        ConciergeCGScreen.getSeatingCollectionTitle().shouldBe(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify RH MEMBERS PROGRAM is right aligned")
+    public void iVerifyRHMemberrightaligned(){
+        ConciergeCGScreen.getRHMemberProgram().shouldBe(visible, Duration.ofSeconds(20));
+    }
 }

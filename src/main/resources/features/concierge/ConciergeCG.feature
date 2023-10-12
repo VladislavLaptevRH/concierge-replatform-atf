@@ -192,3 +192,34 @@ Feature: Concierge CG Page
     Then I Verify "SALE" is present
     When I choose "GB" country
     Then I Verify "Sale" is present
+
+
+@mukthar
+  Scenario: Switch countries on the CG Pages
+    Given I log into Concierge as "associate"
+    Then I navigate to menu 'Living'
+    Then I navigate to sub menu 'Fabric Seating'
+    Then I navigate to gallery 'Seating Collections'
+    Then I verify that 'grid view is present on top right' on CG screen
+    When I choose "US" country
+    Then I verify that 'grid view is present on top right' on CG screen
+    When I choose "CA" country
+    Then I verify that 'grid view is present on top right' on CG screen
+    When I choose "GB" country
+    Then I verify that 'grid view is present on top right' on CG screen
+
+  @mukthar
+  Scenario: To verify Collection name should be left aligned
+    Given I log into Concierge as "associate"
+    Then I navigate to menu 'Living'
+    Then I navigate to sub menu 'Fabric Seating'
+    Then I navigate to gallery 'Seating Collections'
+    Then I verify title is left aligned
+
+ @mukthar
+ Scenario: Verify that RH MEMBERS PROGRAM. SAVE 25% ON EVERYTHING* on the top-right
+   Given I log into Concierge as "associate"
+   Then I navigate to menu 'Living'
+   Then I navigate to sub menu 'Fabric Seating'
+   Then I navigate to gallery 'Seating Collections'
+   Then I verify RH MEMBERS PROGRAM is right aligned
