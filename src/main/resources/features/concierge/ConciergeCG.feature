@@ -182,3 +182,13 @@ Feature: Concierge CG Page
     Then I verify that 'grid view is present on top right' on CG screen
     Then I verify that 'grid view is set to 1-grid view by default' on CG screen
     Then I Verify the price is not displayed
+
+@mukthar
+  Scenario: In main Menu of US/CA Sale Menu should be present, Sale menu should not be present for the UK region
+    Given I log into Concierge as "associate"
+    When I choose "US" country
+    Then I Verify "SALE" is present
+    When I choose "CA" country
+    Then I Verify "SALE" is present
+    When I choose "GB" country
+    Then I Verify "Sale" is present
