@@ -163,7 +163,7 @@ Feature: Concierge CG Page
     Then I click 'Back Browser Button' on CG screen
     Then I click 'confirm that CG Rug Collections is displayed' on CG screen
 
-@mukthar
+
   Scenario: To verify the top category nav
     Given I log into Concierge as "associate"
     Then I navigate to menu 'Living'
@@ -173,7 +173,7 @@ Feature: Concierge CG Page
     Then I verify that 'grid view is set to 1-grid view by default' on CG screen
     Then I verify top nav
 
-@mukthar
+
   Scenario: Verify Prices are not present in CGs
     Given I log into Concierge as "associate"
     Then I navigate to menu 'Living'
@@ -183,7 +183,7 @@ Feature: Concierge CG Page
     Then I verify that 'grid view is set to 1-grid view by default' on CG screen
     Then I Verify the price is not displayed
 
-@mukthar
+
   Scenario: In main Menu of US/CA Sale Menu should be present, Sale menu should not be present for the UK region
     Given I log into Concierge as "associate"
     When I choose "US" country
@@ -194,7 +194,7 @@ Feature: Concierge CG Page
     Then I Verify "Sale" is present
 
 
-@mukthar
+
   Scenario: Switch countries on the CG Pages
     Given I log into Concierge as "associate"
     Then I navigate to menu 'Living'
@@ -208,7 +208,7 @@ Feature: Concierge CG Page
     When I choose "GB" country
     Then I verify that 'grid view is present on top right' on CG screen
 
-  @mukthar
+
   Scenario: To verify Collection name should be left aligned
     Given I log into Concierge as "associate"
     Then I navigate to menu 'Living'
@@ -216,7 +216,7 @@ Feature: Concierge CG Page
     Then I navigate to gallery 'Seating Collections'
     Then I verify title is left aligned
 
- @mukthar
+
  Scenario: Verify that RH MEMBERS PROGRAM. SAVE 25% ON EVERYTHING* on the top-right
    Given I log into Concierge as "associate"
    Then I navigate to menu 'Living'
