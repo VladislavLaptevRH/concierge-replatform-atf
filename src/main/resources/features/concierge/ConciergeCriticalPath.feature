@@ -208,7 +208,7 @@ Feature: Concierge Critical Path
 #      | Bath      | Bath Towels & Linens    | Bath Towel Collections         | RH              | RH               | 1                 |
 #      | Lighting  | Lighting Collections    |                                | RH              | RH               | 2                 |
 #      | Textiles  | Pillows                 | Pillow Collections             | RH              | RH               | 1                 |
-#      | Rugs      | Rugs                    | Rug Collections                | RH              | RH               | 1             f    |
+#      | Rugs      | Rugs                    | Rug Collections                | RH              | RH               | 1                 |
 #      | Windows   | Drapery                 | Drapery Collections            | RH              | RH               | 1                 |
 #      | Outdoor   | Furniture Collections   |                                | RH              | RH               | 3                 |
 #      | Living    | Leather Seating         | Seating Collections            | RH CONTEMPORARY | CN               | 1                 |
@@ -708,7 +708,7 @@ Feature: Concierge Critical Path
     Examples:
       | items | skuID         |
       | SO    | 59810779 CTBZ |
-      | BO    | 10024793 BRNZ  |
+      | BO    | 10024793 BRNZ |
 
   Scenario: Verify the dropdown selection and add to cart
 

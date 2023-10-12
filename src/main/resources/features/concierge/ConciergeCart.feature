@@ -450,6 +450,7 @@ Feature:Concierge Cart Page
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with productId "prod19500002"
+    Then I chose zero choose in line items
     Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
