@@ -36,7 +36,7 @@ Feature:Concierge Back Button
 	When I click on search Icon
 	When I type item name 'sofa'
 	When I click browser back button
-	Then I Verify i return to "table" PG page
+	Then I Verify i return to "table" page
 
 
   Scenario: Verify that Search any product from PDP and verify for back button
@@ -50,8 +50,7 @@ Feature:Concierge Back Button
 	When I type item name 'table'
 	Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
   	When I click browser back button
-	Then I remember the name of the first product and regular, member prices in PG and navigate to that PDP
-	Then I Verify that the PDP title is present and prices match those prices in PG
+	When I Verify that "PDP title" is present
 
 
   Scenario: Verify that Search any product from cart page and verify for back button

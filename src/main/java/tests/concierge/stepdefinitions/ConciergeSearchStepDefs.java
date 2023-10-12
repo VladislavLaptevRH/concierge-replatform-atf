@@ -80,7 +80,7 @@ public class ConciergeSearchStepDefs {
         $(By.xpath("(//*[@id = 'component-product-grid']//p/span[contains(text(), '" + items + "')])[1]")).shouldBe(visible, Duration.ofSeconds(15));
         assertTrue($$(By.xpath("//*[@id = 'component-product-grid']//p/span[contains(text(), '" + items + "')]")).size() > 10);
         for(int i = 1; i < $$(By.xpath("//*[@id = 'component-product-grid']//p/span[contains(text(), '" + items + "')]")).size(); i++) {
-            $(By.xpath("(//*[@id = 'component-product-grid']//p/span[contains(text(), '" + items + "')])[" + i + "]")).shouldHave(text("" + items + ""));
+            $(By.xpath("(//*[@id = 'component-product-grid']//p/span[contains(text(), '" + items + "')sa])[" + i + "]")).shouldHave(text("" + items + ""));
         }
     }
 
