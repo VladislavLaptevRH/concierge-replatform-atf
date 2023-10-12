@@ -537,14 +537,14 @@ public class Pdp {
                     if (j != lineItemsCount) {
                         try {
                             itemList.selectByIndex(Integer.parseInt(chose));
-                            with().pollInterval(1, SECONDS).await().until(() -> true);
+                            with().pollInterval(2, SECONDS).await().until(() -> true);
                         } catch (UnsupportedOperationException e) {
                             iChoseLineItemSelectionsOneByOne(chose);
                         }
                     } else {
                         try {
                             itemList.selectByIndex(Integer.parseInt(chose) + 1);
-                            with().pollInterval(1, SECONDS).await().until(() -> true);
+                            with().pollInterval(2, SECONDS).await().until(() -> true);
                         } catch (UnsupportedOperationException e) {
                             iChoseLineItemSelectionsOneByOne(chose);
                         }

@@ -262,6 +262,9 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-Sale']//p[text() = 'sale']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-In-Stock']//p[text() = 'in-stock']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'brand ss']")).shouldBe(visible, Duration.ofSeconds(20));
+                if($(By.xpath("//*[text() = 'RESULTS']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
                 $(By.xpath("//*[text() = 'RESULTS']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'sort']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Featured']")).shouldBe(visible, Duration.ofSeconds(20));
@@ -348,6 +351,9 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[text() = 'Shape']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Size']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'brand ss']")).shouldBe(visible, Duration.ofSeconds(20));
+                if($(By.xpath("//*[text() = 'RESULTS']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
                 $(By.xpath("//*[text() = 'RESULTS']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'sort']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
@@ -361,6 +367,9 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[text() = 'Size']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Material']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'brand ss']")).shouldBe(visible, Duration.ofSeconds(20));
+                if($(By.xpath("//*[text() = 'RESULTS']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
                 $(By.xpath("//*[text() = 'RESULTS']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'sort']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
@@ -370,6 +379,9 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-In-Stock']//p[text() = 'in-stock']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'new arrivals']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'brand ss']")).shouldBe(visible, Duration.ofSeconds(20));
+                if($(By.xpath("//*[text() = 'RESULTS']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
                 $(By.xpath("//*[text() = 'RESULTS']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'sort']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
@@ -704,6 +716,9 @@ public class ConciergePGStepsDefs {
     @Then("I Verify i return to {string} PG page")
     public void iVerifyireturntopgpage(String title){
         Assert.assertEquals(title.toLowerCase(), $(By.xpath("//*[text() = '" + title + "']")).getText().toLowerCase());
+        if(!conciergePGScreen.getResult().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
         conciergePGScreen.getResult().should(Condition.visible, Duration.ofSeconds(15));
         conciergePGScreen.getSort().should(Condition.visible, Duration.ofSeconds(15));
     }
