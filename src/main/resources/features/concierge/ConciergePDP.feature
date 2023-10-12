@@ -37,7 +37,6 @@ Feature: Concierge PDP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to concierge item 'prod18890296' from search field
     When I click on the first project search result with parameters 'prod18890296''10024793 BRNZ'
     Then I Verify that 'PDP title' is present
     Then I Verify that '"Zoom" button' is present
@@ -317,3 +316,19 @@ Feature: Concierge PDP
     Then I verify that project modal is displayed
     Then I click on button "ADD ALL TO PROJECT" in the cart
     Then I verify that project modal is displayed
+
+  Scenario: Verify alt video: After clicking on play button video should be played
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I click on the first project search result with parameters 'prod18890296''10024793 BRNZ'
+    Then I Verify that 'PDP title' is present
+    Then I Verify that 'PDP title' is present
+    Then I Verify that '"Zoom" button' is present
+    Then I Verify that 'the "Hero" Image' is present
+    Then Verify that 'shop the entire collection'
+    Then Verify that 'is present view carousel is present on the right of the zoomed hero image and scrolling are present'
+    Then I Verify that 'images carousel is present below Hero image' is present
+    Then Verify that 'left and right arrows are present and number of alt images is 5'
+    Then Verify that 'zoom button is clickable and zoom module is opened'
+    Then Verify that 'plus and minus buttons are clickable and functioning'

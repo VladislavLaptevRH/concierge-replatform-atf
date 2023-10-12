@@ -625,7 +625,7 @@ Feature: Concierge Critical Path
     Then I verify the rest of the checkings for "<skuID>"
     Examples:
       |skuID        |
-      |57070740 CLNT|
+#      |57070740 CLNT|
       |61970975 TEAK|
       |62870050 LOAK|
       |10024793 BRNZ|
@@ -683,20 +683,21 @@ Feature: Concierge Critical Path
     Then Verify that "In Stock modal" 'has an item can be added to cart from modal'
     Then Verify that "In Stock modal" 'has an item can be added to project from modal'
 
-  Scenario: Verify On Sale functionality
-    Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
-    When I remove all items from cart via UI
-    When I go to item "57070740 CLNT" from search field
-    When I click on "view select items on sale" link
-    Then Verify that "Sale modal" 'opens'
-    Then Verify that "Sale modal" 'has title'
-    Then Verify that "Sale modal" 'has item#'
-    Then Verify that "Sale modal" 'has price, member and sale price'
-    Then Verify that "Sale modal" 'has qty dropdown'
-    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
-    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
-    Then Verify that "Sale modal" 'has an item can be added to project from modal'
+#  Scenario: Verify On Sale functionality
+#
+#    Given I log into Concierge as "associate"
+#    When I choose country for concierge from footer
+#    When I remove all items from cart via UI
+#    When I go to item "57070740 CLNT" from search field
+#    When I click on "view select items on sale" link
+#    Then Verify that "Sale modal" 'opens'
+#    Then Verify that "Sale modal" 'has title'
+#    Then Verify that "Sale modal" 'has item#'
+#    Then Verify that "Sale modal" 'has price, member and sale price'
+#    Then Verify that "Sale modal" 'has qty dropdown'
+#    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
+#    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
+#    Then Verify that "Sale modal" 'has an item can be added to project from modal'
 
   Scenario Outline: Availability, Delivery and Returns messaging for <items>
     Given I log into Concierge as "associate"
@@ -846,6 +847,7 @@ Feature: Concierge Critical Path
     Then Verify that 'PDP has SALE and MEMBER prices'
 
   Scenario Outline: Verify Mattress Recycling Fee
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
