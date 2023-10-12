@@ -677,4 +677,5 @@ public class ConciergePGStepsDefs {
     public void iVerifyThatTitleIsPresentInPGTopLeft(String title) {
         $(By.xpath("//*[contains(@class, 'MuiTypography-body1') and text() = '" + title + "']")).should(visible, Duration.ofSeconds(10));
     }
+
 }

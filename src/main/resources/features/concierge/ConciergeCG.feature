@@ -161,3 +161,27 @@ Feature: Concierge CG Page
     Then I verify that 'confirm that PG is displayed' on CG screen
     Then I click 'Back Browser Button' on CG screen
     Then I click 'confirm that CG Rug Collections is displayed' on CG screen
+
+    @Vimal
+  Scenario: Verify Prices are not present in CGs
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I navigate to menu 'Living'
+    Then I navigate to sub menu 'Fabric Seating'
+    Then I navigate to gallery 'Seating Collections'
+    Then I verify $$ values are not present in the CG Collections page
+
+  @Vimal
+  Scenario: In main Menu of US/CA Sale Menu should be present, Sale menu should not be present for the UK region
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I verify flag icon for country selection and select and validate
+
+  @Vimal
+  Scenario: CG loading time is expected to be less than 4-5 seconds
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I navigate to menu 'Living'
+    Then I navigate to sub menu 'Fabric Seating'
+    Then I navigate to gallery 'Seating Collections'
+    Then I verify loading time for CG page
