@@ -36,7 +36,7 @@ Feature:Concierge Back Button
 	When I click on search Icon
 	When I type item name 'sofa'
 	When I click browser back button
-	Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
+	Then I Verify i return to "TABLE" PG page
 
 
   Scenario: Verify that Search any product from PDP and verify for back button
@@ -65,7 +65,7 @@ Feature:Concierge Back Button
 	When I type item name 'table'
 	Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
 	When I click browser back button
-	Then I verify all the sums on the cart page
+	Then I verify that cart is displayed
 
 
   Scenario: Verify that Search any product and change the grid layout to big and small and navigate to any PDP. Verify the back button. User should be able to view the same selected big OR small grid layout

@@ -84,4 +84,11 @@ public class ConciergeSearchStepDefs {
         }
     }
 
+    @Then("I Verify i return to {string} PG page")
+    public void iVerifyireturntopgpage(String title){
+        assertEquals(title.toLowerCase(), $(By.xpath("//*[text() = '" + title + "']")).getText().toLowerCase());
+        $(By.xpath("//*[text() = 'RESULTS']")).should(Condition.visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = 'sort']")).should(Condition.visible, Duration.ofSeconds(15));
+    }
+
 }
