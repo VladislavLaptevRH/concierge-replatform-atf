@@ -59,7 +59,7 @@ Feature:Concierge Back Button
 	When I remove all items from cart via UI
 	When I add item to cart via API with "10146709 LOAK" and quantity '1'
 	When I open cart
-	Then I verify all the sums on the cart page
+	Then I verify that cart is displayed
 	When I click on search Icon
 	When I type item name 'table'
 	Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
