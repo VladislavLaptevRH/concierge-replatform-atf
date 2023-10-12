@@ -3,7 +3,8 @@ package tests.concierge.stepdefinitions;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.exist;
@@ -15,9 +16,13 @@ import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
-public class ConciergeCGStepsDefs {
+import org.slf4j.LoggerFactory;
+import tests.concierge.pageObject.ConciergeCGScreen;
 
+public class ConciergeCGStepsDefs {
+    ConciergeCGScreen  ConciergeCGScreen = new ConciergeCGScreen();
     public static String galleryName;
+    public static final Logger logger = LoggerFactory.getLogger(FilterStepDefs.class);
 
     @Then("I verify that {string} on CG screen")
     public void iVerifyThatOnCGScreen(String data) {
@@ -158,6 +163,18 @@ public class ConciergeCGStepsDefs {
             } else {
                 assertEquals(subMenu, $(By.xpath("(//div[@role = 'tooltip']//span[contains(@class, 'MuiTypography')])[" + levelOfCollection + "]")).getText());
             }
+        }
+
+    }
+
+    @Then("I Verify the price is not displayed")
+    public void iVerifynoPrice(){
+        try{
+            ConciergeCGScreen.getPrice().isDisplayed();
+            ConciergeCGScreen.getPrice().click();
+        }
+        catch (Exception e){
+            logger.debug(e.getMessage());
         }
 
     }

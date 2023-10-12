@@ -1,4 +1,5 @@
 @conciergeTestRun
+@conciergeCart
 Feature:Concierge Cart Page
 
   Scenario: Verify the Postal code updates in cart

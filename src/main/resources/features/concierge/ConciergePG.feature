@@ -1,4 +1,5 @@
 @conciergeTestRun
+@ConciergePG
 Feature: Concierge PG Page
 
   Scenario Outline:  Test PGs in all menu items

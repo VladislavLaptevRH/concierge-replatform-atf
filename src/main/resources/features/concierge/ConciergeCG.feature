@@ -1,3 +1,4 @@
+@conciergeCG
 @conciergeTestRun
 Feature: Concierge CG Page
 
@@ -161,3 +162,23 @@ Feature: Concierge CG Page
     Then I verify that 'confirm that PG is displayed' on CG screen
     Then I click 'Back Browser Button' on CG screen
     Then I click 'confirm that CG Rug Collections is displayed' on CG screen
+
+@mukthar
+  Scenario: To verify the top category nav
+    Given I log into Concierge as "associate"
+    Then I navigate to menu 'Living'
+    Then I navigate to sub menu 'Fabric Seating'
+    Then I navigate to gallery 'Seating Collections'
+    Then I verify that 'grid view is present on top right' on CG screen
+    Then I verify that 'grid view is set to 1-grid view by default' on CG screen
+    Then I verify top nav
+
+@mukthar
+  Scenario: Verify Prices are not present in CGs
+    Given I log into Concierge as "associate"
+    Then I navigate to menu 'Living'
+    Then I navigate to sub menu 'Fabric Seating'
+    Then I navigate to gallery 'Seating Collections'
+    Then I verify that 'grid view is present on top right' on CG screen
+    Then I verify that 'grid view is set to 1-grid view by default' on CG screen
+    Then I Verify the price is not displayed

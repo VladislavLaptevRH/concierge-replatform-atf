@@ -1,4 +1,5 @@
 @conciergeTestRun
+@conciergePayment
 Feature: Concierge Payment
 
   Scenario Outline: Major CCs

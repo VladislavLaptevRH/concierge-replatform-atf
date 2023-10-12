@@ -1,3 +1,4 @@
+@conciergeMultiSKU
 @conciergeTestRun
 Feature: Multi SKU
 

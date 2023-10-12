@@ -1,4 +1,5 @@
 @conciergeTestRun
+@conciergeProject
 Feature: Concierge Project
 
   Scenario Outline: Availability, Delivery and Returns messaging for Instock, BO, SPO, SPO Instock Items
