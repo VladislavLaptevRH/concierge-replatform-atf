@@ -96,8 +96,8 @@ public class EstorePdpStepDefs {
 
     @Then("verify the product price as per the postal code")
     public void verifyTheProductPriceAsPerThePostalCode() {
-        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$20"), Duration.ofSeconds(60));
-        estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$39"), Duration.ofSeconds(60));
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$29"), Duration.ofSeconds(60));
+        estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$155"), Duration.ofSeconds(60));
     }
 
     @Then("I verify that price for product&line should be in US dollars on PDP page")
@@ -118,6 +118,7 @@ public class EstorePdpStepDefs {
             estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
             estorePdpPageScreen.getSubmitPostalCode().click();
             estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
+            WebDriverRunner.getWebDriver().navigate().refresh();
             $(By.xpath("//*[text()='Y1A 9Z9.']")).should(visible, Duration.ofSeconds(40));
         }
         if (country.equals("US")) {
@@ -166,14 +167,13 @@ public class EstorePdpStepDefs {
         estorePdpPageScreen.getColorOption().scrollIntoView(true).should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getSizeOption().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
 
+        Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
+        selectSize.selectByIndex(3);
+        sleep(3000);
         Select selectColor = new Select(estorePdpPageScreen.getColorOption());
         selectColor.selectByIndex(3);
         estorePdpPageScreen.getColorOption().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
-        sleep(3000);
-        Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
-        selectSize.selectByIndex(3);
-
-        estorePdpPageScreen.getSkuIdValue().shouldHave(text("Item# 17050042 CAML"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getSkuIdValue().should(text("Item# 17050042 FOG"), Duration.ofSeconds(30));
     }
 
     @Then("I verify that PDP screen is displayed")
