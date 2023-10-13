@@ -55,6 +55,8 @@ public class ConciergeCartStepDefs {
     String totalPriceCart;
     DecimalFormat digitFormatDoubleZero = new DecimalFormat("0.00");
     PaymentScreen paymentScreen = new PaymentScreen();
+
+    Pdp pdp = new Pdp();
     SelectOption selectOption = new SelectOption();
     ProjectSettingsScreen projectSettingsScreen = new ProjectSettingsScreen();
     ConciergeProjectScreen conciergeProjectScreen = new ConciergeProjectScreen();
@@ -1297,6 +1299,20 @@ public class ConciergeCartStepDefs {
     @Then("I change zip code in the cart to {string}")
     public void changeTheZipCodeInTheCart(String zipCode) {
         conciergeCartPageScreen.getPdpScreenZipCode().click();
+        generalStepDefs.clearField(pdpScreen.getPostalCode());
+        pdpScreen.getPostalCode().setValue(zipCode);
+        pdpScreen.getConfirmationPostalCode().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+    }
+
+    @Then("I change zip code on PDP page to {string}")
+    public void changeTheZipCodeOnPDPPAge(String zipCode) {
+        with().pollInterval(9, SECONDS).await().until(() -> true);
+        if(!$(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'will be ready for delivery between')]/span")).isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            pdp.iChoseLineItemSelectionsOneByOne("1");
+        }
+        $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'will be ready for delivery between')]/span")).click();
         generalStepDefs.clearField(pdpScreen.getPostalCode());
         pdpScreen.getPostalCode().setValue(zipCode);
         pdpScreen.getConfirmationPostalCode().click();

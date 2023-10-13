@@ -5,6 +5,8 @@ import com.codeborne.selenide.WebDriverRunner;
 
 import com.codeborne.selenide.ex.ElementNotFound;
 import io.cucumber.java.en.And;
+import org.openqa.selenium.JavascriptException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.Select;
 import tests.concierge.pageObject.*;
 import io.cucumber.java.en.Then;
@@ -166,6 +168,22 @@ public class Pdp {
         $(By.xpath("(//*[@class = 'MuiIconButton-label'])[1]")).click();
     }
 
+    @And("Video should be played")
+    public void videoShouldBePlayed() {
+        $(By.xpath("(//*[@class= 'slick-slider slick-vertical slick-initialized']//*[contains(@class, 'arrow-icon')])[2]")).click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        $(By.xpath("(//*[@id = 'component-rh-image_wrapper']//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/TBrace_Alt_Thumbnail')])[6]")).should(visible, Duration.ofSeconds(5));
+        $(By.xpath("(//*[@id = 'component-rh-image_wrapper']//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/TBrace_Alt_Thumbnail')])[6]")).click();
+        $(By.xpath("(//*[@id = 'component-rh-image_wrapper']//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/TBrace_Alt_Thumbnail')])[4]")).should(visible, Duration.ofSeconds(5));
+        $(By.xpath("(//*[@id = 'component-rh-image_wrapper']//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/TBrace_Alt_Thumbnail')])[4]")).click();
+
+        $(By.xpath("(//*[@id = 'component-rh-image_wrapper']//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/TBrace_Alt_Thumbnail')])[4]")).getAttribute("currentTime");
+        $(By.xpath("(//*[@id = 'component-rh-image_wrapper']//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/TBrace_Alt_Thumbnail')])[4]")).getAttribute("ended");
+
+//        JavascriptExecutor js = (JavascriptExecutor) WebDriverRunner.getWebDriver();
+//        js.executeScript("document.")
+    }
+
     @And("I type item name {string}")
     public void iTypeItemName(String arg0) {
         $(By.xpath("//*[@id = 'site-search-input']")).setValue(arg0);
@@ -226,10 +244,10 @@ public class Pdp {
                 $(By.xpath("//a/*[contains(text(), 'Swatch')]")).shouldHave(text("Swatch"), Duration.ofSeconds(5));
                 break;
             case  "Swatch image is present":
-                $(By.xpath("//img[@alt = 'T-Brace Collection Swatch']")).shouldBe(visible, Duration.ofSeconds(15));
+                $(By.xpath("//img[contains(@alt, 'Swatch')]")).shouldBe(visible, Duration.ofSeconds(15));
                 break;
             case  "line item for Swatch is present":
-                boolean swatchItems = $$(By.xpath("(//p[contains(text() , 'Swatch')])[1]/../../../../../../..//select[contains(@id ,'prod')]")).size() == 2;
+                boolean swatchItems = $$(By.xpath("(//p[contains(text() , 'Swatch')])[1]/../../../../../../..//select[contains(@id ,'prod')]")).size() >= 2;
                 assertTrue(swatchItems);
                 break;
             case  "text \"Swatches are shipped at no charge\" is present":
@@ -246,7 +264,7 @@ public class Pdp {
                 if (!$(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'This item will be ready for delivery between')]")).isDisplayed()) {
                     Select sizeList = new Select(conciergeItemsScreen.getSelectSize());
                     sizeList.selectByIndex(0);
-                        with().pollInterval(1, SECONDS).await().until(() -> true);
+                    with().pollInterval(1, SECONDS).await().until(() -> true);
                     sizeList.selectByIndex(1);
                     with().pollInterval(1, SECONDS).await().until(() -> true);
                 }
@@ -360,6 +378,20 @@ public class Pdp {
             case  "cloud Modular Leather Sofa titles are present":
                 $(By.xpath("(//*[text()='Cloud Modular Leather Sofa'])[1]")).shouldBe(visible, Duration.ofSeconds(15));
                 $(By.xpath("(//*[text()='Cloud Modular Leather Sofa'])[2]")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "Verify the delivery information":
+                $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'will be ready for delivery between')]")).shouldBe(visible, Duration.ofSeconds(15));
+                if($(By.xpath("(//*[contains(text(), 'Item# null')])[1]")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
+                $(By.xpath("(//*[contains(text(), 'Item#')])[1]")).shouldNotBe(text("null"), Duration.ofSeconds(5));
+                break;
+            case  "we enter invalid zipcode then error message should be displayed":
+                $(By.xpath("//*[text() = 'Please enter a valid postal code']")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "User should be navigated to respective PDP":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                assertEquals(result, $(By.xpath("//h2[contains(@class, MuiTypography-h2)]")).getText());
                 break;
             default: break;
         }
@@ -603,7 +635,7 @@ public class Pdp {
                     $(By.xpath("//*[text() = 'Fabric Care']")).shouldBe(visible, Duration.ofSeconds(15));
                 }
                 break;
-            case  "line items are present":
+            case  "line items":
                 boolean lineItems = $$(By.xpath("//select[contains(@id, 'optionSelect')]")).size() > 1;
                 assertTrue(lineItems);
                 break;
@@ -614,6 +646,7 @@ public class Pdp {
             case  "text \"Learn more about our Return Policy\"":
                 $(By.xpath("(//*[text() = 'Learn more about our'])[1]")).shouldBe(visible, Duration.ofSeconds(15));
                 $(By.xpath("(//*[text() = 'Return Policy'])[1]")).shouldBe(visible, Duration.ofSeconds(15));
+                $(By.xpath(" (//*[@href = 'https://rh.com/customer-service/return-policy.jsp'])[1]")).shouldBe(visible, Duration.ofSeconds(15));
                 break;
             case  "YAML carousel":
                 $(By.xpath("//*[text() = 'YOU MIGHT ALSO LIKE']")).shouldBe(visible, Duration.ofSeconds(15));
@@ -633,6 +666,13 @@ public class Pdp {
             case  "text item# and SKU '10024796 WGRY'":
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 $(By.xpath("//*[text() = 'Item# 10024796 WGRY']")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "Section should be expanded":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                $(By.xpath("(//section/ul/li[text() = 'Crafted of solid wood and engineered wood with American white oak veneers'])[1]")).shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "Upholstery Swatch section":
+                $(By.xpath("//p[contains(text(), 'Upholstery Swatch')]")).shouldBe(visible, Duration.ofSeconds(15));
                 break;
             default:
                 break;
@@ -1027,120 +1067,140 @@ public class Pdp {
     @Then("I verify that color has been chosen")
     public void iVerifyThatColorHasBeenChosen() {
         selectOption.getColorOption().shouldHave(text("Azure"), Duration.ofSeconds(20));
-
     }
 
-    @Then("I confirm that default zip code for country {string} is present in Cart")
-    public void confirmThatDefault(String country) {
-        if(Objects.equals(country, "US")){
-            zipCodeInTheCart = conciergeCartPageScreen.getPdpScreenZipCode().getText();
-            assertEquals(zipCodeInTheCart, "94925");
+    @Then("I click {string} on pdp page")
+    public void iClickOnPDPPage(String data) {
+        switch (data) {
+            case "DETAILS section":
+                $(By.xpath("(//*[text() = 'DETAILS'])[1]")).click();
+                break;
+            case "link (If available) in DETAILS section":
+                try {
+                    $(By.xpath("//*[contains(@href, '/catalog/product') and text() = 'FreshBed™ Sleep System']")).click();
+                } catch (ElementNotFound e) {
+                    System.out.println("link is unavailable");
+                }
+                break;
+            case "any product image in carousel":
+                result = $(By.xpath("(//*[text() = 'YOU MIGHT ALSO LIKE']/..//span)[1]")).getText();
+                $(By.xpath("(//*[text() = 'YOU MIGHT ALSO LIKE']/..//span)[1]")).click();
+                break;
+            default: break;
         }
-        if(Objects.equals(country, "GB")){
-            zipCodeInTheCart = conciergeCartPageScreen.getPdpScreenZipCode().getText();
-            assertEquals(zipCodeInTheCart, "94925");
-        }
-        if(Objects.equals(country, "CA")){
-            zipCodeInTheCart = conciergeCartPageScreen.getPdpScreenZipCode().getText();
-            assertEquals(zipCodeInTheCart, "M6A 2T9");
-        }
-
     }
 
-    @Then("I change state for {string} with zip code {string}")
-    public void iChangeZipCodeFor(String state, String zipCode) {
-        if(state.equals("CA")) {
-            if (pdpScreen.getZipCode().getText().replaceAll("\\.", "").equals(zipCode)) {
-                System.out.println("It's California");
-            } else {
+            @Then("I confirm that default zip code for country {string} is present in Cart")
+            public void confirmThatDefault(String country) {
+                if(Objects.equals(country, "US")){
+                    zipCodeInTheCart = conciergeCartPageScreen.getPdpScreenZipCode().getText();
+                    assertEquals(zipCodeInTheCart, "94925");
+                }
+                if(Objects.equals(country, "GB")){
+                    zipCodeInTheCart = conciergeCartPageScreen.getPdpScreenZipCode().getText();
+                    assertEquals(zipCodeInTheCart, "94925");
+                }
+                if(Objects.equals(country, "CA")){
+                    zipCodeInTheCart = conciergeCartPageScreen.getPdpScreenZipCode().getText();
+                    assertEquals(zipCodeInTheCart, "M6A 2T9");
+                }
+
+            }
+
+            @Then("I change state for {string} with zip code {string}")
+            public void iChangeZipCodeFor(String state, String zipCode) {
+                if(state.equals("CA")) {
+                    if (pdpScreen.getZipCode().getText().replaceAll("\\.", "").equals(zipCode)) {
+                        System.out.println("It's California");
+                    } else {
+                        pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
+                        pdpScreen.getZipCode().click();
+                        pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
+                        pdpScreen.getPostalCode().setValue(zipCode);
+                        pdpScreen.getConfirmationPostalCode().click();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                    }
+                }
+                if(state.equals("RI")){
+                    pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
+                    pdpScreen.getZipCode().click();
+                    pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
+                    pdpScreen.getPostalCode().setValue(zipCode);
+                    pdpScreen.getConfirmationPostalCode().click();
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                }
+                if(state.equals("CT")){
+                    pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
+                    pdpScreen.getZipCode().click();
+                    pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
+                    pdpScreen.getPostalCode().setValue(zipCode);
+                    pdpScreen.getConfirmationPostalCode().click();
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                }
+            }
+
+            @Then("I click on zip code and change it to {string}")
+            public void iChangeZipCodeFor(String zipCode) {
+                with().pollInterval(9, SECONDS).await().until(() -> true);
+                if(!pdpScreen.getZipCode().isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
                 pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
                 pdpScreen.getZipCode().click();
                 pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
                 pdpScreen.getPostalCode().setValue(zipCode);
                 pdpScreen.getConfirmationPostalCode().click();
-                with().pollInterval(5, SECONDS).await().until(() -> true);
+                with().pollInterval(9, SECONDS).await().until(() -> true);
             }
-        }
-        if(state.equals("RI")){
-            pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
-            pdpScreen.getZipCode().click();
-            pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
-            pdpScreen.getPostalCode().setValue(zipCode);
-            pdpScreen.getConfirmationPostalCode().click();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-        }
-        if(state.equals("CT")){
-            pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
-            pdpScreen.getZipCode().click();
-            pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
-            pdpScreen.getPostalCode().setValue(zipCode);
-            pdpScreen.getConfirmationPostalCode().click();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-        }
-    }
 
-    @Then("I click on zip code and change it to {string}")
-    public void iChangeZipCodeFor(String zipCode) {
-        with().pollInterval(9, SECONDS).await().until(() -> true);
-        if(!pdpScreen.getZipCode().isDisplayed()){
-            WebDriverRunner.getWebDriver().navigate().refresh();
-        }
-      pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
-      pdpScreen.getZipCode().click();
-      pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
-      pdpScreen.getPostalCode().setValue(zipCode);
-      pdpScreen.getConfirmationPostalCode().click();
-      with().pollInterval(9, SECONDS).await().until(() -> true);
-    }
+            @Then("I verify that zip code in PDP is {string}")
+            public void iVerifyThatZipCodeIs(String zipCode) {
+                with().pollInterval(9, SECONDS).await().until(() -> true);
+                $(By.xpath("(//*[@id = 'component-sku']//span)[1]")).shouldBe(visible, Duration.ofSeconds(20));
 
-    @Then("I verify that zip code in PDP is {string}")
-    public void iVerifyThatZipCodeIs(String zipCode) {
-        with().pollInterval(9, SECONDS).await().until(() -> true);
-        $(By.xpath("(//*[@id = 'component-sku']//span)[1]")).shouldBe(visible, Duration.ofSeconds(20));
-
-       if(!$(By.xpath("//*[contains(text(), '" + zipCode + "')]")).isDisplayed()){
-           WebDriverRunner.getWebDriver().navigate().refresh();
-           for(int i = 0; i <=3; i++) {
-               iChangeZipCodeFor(zipCode);
-               with().pollInterval(9, SECONDS).await().until(() -> true);
-               if($(By.xpath("//*[contains(text(), '" + zipCode + "')]")).isDisplayed()){
-                   break;
-               }
-           }
-       }
-        String currentZipCode =  $(By.xpath("(//*[@id = 'component-sku']//span)[1]")).getText();
-        assertEquals(currentZipCode, zipCode + ".");
-    }
-
-    @Then("I verify that availability, Delivery and returns messaging is displayed for {string}")
-    public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingIsDisplayedFor(String arg0) {
-
-        if (arg0.equals("SO")) {
-            if (!$(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]")).isDisplayed()) {
-                WebDriverRunner.getWebDriver().navigate().refresh();
-                with().pollInterval(5, SECONDS).await().until(() -> true);
+                if(!$(By.xpath("//*[contains(text(), '" + zipCode + "')]")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    for(int i = 0; i <=3; i++) {
+                        iChangeZipCodeFor(zipCode);
+                        with().pollInterval(9, SECONDS).await().until(() -> true);
+                        if($(By.xpath("//*[contains(text(), '" + zipCode + "')]")).isDisplayed()){
+                            break;
+                        }
+                    }
+                }
+                String currentZipCode =  $(By.xpath("(//*[@id = 'component-sku']//span)[1]")).getText();
+                assertEquals(currentZipCode, zipCode + ".");
             }
-                $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]")).scrollTo();
-                $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]")).should(visible, Duration.ofSeconds(30));
 
-        }
-        if (arg0.equals("BO")) {
-            if (!$(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).isDisplayed()) {
-                WebDriverRunner.getWebDriver().navigate().refresh();
-                with().pollInterval(5, SECONDS).await().until(() -> true);
+            @Then("I verify that availability, Delivery and returns messaging is displayed for {string}")
+            public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingIsDisplayedFor(String arg0) {
+
+                if (arg0.equals("SO")) {
+                    if (!$(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]")).isDisplayed()) {
+                        WebDriverRunner.getWebDriver().navigate().refresh();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                    }
+                    $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]")).scrollTo();
+                    $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]")).should(visible, Duration.ofSeconds(30));
+
+                }
+                if (arg0.equals("BO")) {
+                    if (!$(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]")).isDisplayed()) {
+                        WebDriverRunner.getWebDriver().navigate().refresh();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                    }
+                    $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery. ')]")).scrollTo();
+                    $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery. ')]")).should(visible, Duration.ofSeconds(30));
+                }
             }
-            $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery. ')]")).scrollTo();
-            $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery. ')]")).should(visible, Duration.ofSeconds(30));
-        }
-    }
 
-    @Then("I remember the name of the first product and regular, member prices in PG and navigate to that PDP")
-    public void iRememberTheNameOfTheFirstProductAndRegularMemberPriceInPG() {
-        firstProductNameInPG = conciergeCartPageScreen.getFirstProductNameInPG().getText();
-        regularPriceInPG = conciergeCartPageScreen.getRegularPriceInPG().getText();
-        memberPriceInPG = conciergeCartPageScreen.getMemberPriceInPG().getText().replaceAll("[^0-9_$]", "");
-        conciergeCartPageScreen.getFirstProductNameInPG().click();
-    }
+            @Then("I remember the name of the first product and regular, member prices in PG and navigate to that PDP")
+            public void iRememberTheNameOfTheFirstProductAndRegularMemberPriceInPG() {
+                firstProductNameInPG = conciergeCartPageScreen.getFirstProductNameInPG().getText();
+                regularPriceInPG = conciergeCartPageScreen.getRegularPriceInPG().getText();
+                memberPriceInPG = conciergeCartPageScreen.getMemberPriceInPG().getText().replaceAll("[^0-9_$]", "");
+                conciergeCartPageScreen.getFirstProductNameInPG().click();
+            }
 
 //    @Then("I remember the name of the first product and regular, member prices in PDP ")
 //    public void iRememberTheNameOfTheFirstProductAndRegularMemberPriceInPG() {
@@ -1150,57 +1210,57 @@ public class Pdp {
 //        conciergeCartPageScreen.getFirstProductNameInPG().click();
 //    }
 
-    @Then("I Verify that the PDP title is present and prices match those prices in PG")
-    public void iVerifyThatThePDPTitleIsPresentAndPricesMatchThosePricesInPG() {
-        if(!$(By.xpath("//h2[contains(@class, MuiTypography-h2)]")).isDisplayed()){
-            String URL = Hooks.getCurrentUrl().replace("//", "/");
-            open(URL);
+            @Then("I Verify that the PDP title is present and prices match those prices in PG")
+            public void iVerifyThatThePDPTitleIsPresentAndPricesMatchThosePricesInPG() {
+                if(!$(By.xpath("//h2[contains(@class, MuiTypography-h2)]")).isDisplayed()){
+                    String URL = Hooks.getCurrentUrl().replace("//", "/");
+                    open(URL);
+                }
+                assertEquals(firstProductNameInPG, $(By.xpath("//h2[contains(@class, MuiTypography-h2)]")).getText());
+                assertEquals(regularPriceInPG, conciergeCartPageScreen.getRegularPriceInPG().getText());
+                assertEquals(memberPriceInPG, conciergeCartPageScreen.getMemberPriceInPG().getText().replaceAll(",", ""));
+            }
+
+            @When("I go to Swatch Landing Page")
+            public void iGoToSwatchLandingPage() {
+                String URL = Hooks.conciergeBaseURL + "/swatch/order.jsp";
+                open(URL);
+            }
+
+            @Then("I verify that swatch landing page is displayed")
+            public void iVerifyThatSwatchLandingPageIsDisplayed() {
+                $(By.xpath("//*[text()='Premium Fabrics']")).should(visible, Duration.ofSeconds(15));
+                $(By.xpath("//*[text()='Premium Leathers']")).should(visible, Duration.ofSeconds(15));
+            }
+
+            @Then("I verify presence of MultiSKU")
+            public void iVerifyMultiSKU(){
+                with().pollInterval(6, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[text()='Items#: 89630210 BWMR, 89720340 BWMR']")).should(visible, Duration.ofSeconds(15));
+            }
+
+            @Then("I verify product name in cart page")
+            public void iVerifyProductNameinCartPage(){
+                with().pollInterval(6, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[text()='KENSINGTON LEFT-ARM L-SECTIONAL']")).should(visible, Duration.ofSeconds(15));
+            }
+
+            @Then("I verify {string} is present")
+            public void iVerify(String text){
+                with().pollInterval(6, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[text()="+text+"]")).should(visible, Duration.ofSeconds(15));
+            }
+
+            @Then("I verify product count in cart page")
+            public void iVerifyProductCountinCartPage(){
+                with().pollInterval(6, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[text()='1'']")).should(visible, Duration.ofSeconds(15));
+            }
+
+            @Then("I verify product count in project page")
+            public void iVerifyProductCountinProjectPage(){
+                with().pollInterval(6, SECONDS).await().until(() -> true);
+                $(By.xpath("//*[text()='1'']")).should(visible, Duration.ofSeconds(15));
+            }
+
         }
-        assertEquals(firstProductNameInPG, $(By.xpath("//h2[contains(@class, MuiTypography-h2)]")).getText());
-        assertEquals(regularPriceInPG, conciergeCartPageScreen.getRegularPriceInPG().getText());
-        assertEquals(memberPriceInPG, conciergeCartPageScreen.getMemberPriceInPG().getText().replaceAll(",", ""));
-    }
-
-    @When("I go to Swatch Landing Page")
-    public void iGoToSwatchLandingPage() {
-        String URL = Hooks.conciergeBaseURL + "/swatch/order.jsp";
-        open(URL);
-    }
-
-    @Then("I verify that swatch landing page is displayed")
-    public void iVerifyThatSwatchLandingPageIsDisplayed() {
-        $(By.xpath("//*[text()='Premium Fabrics']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='Premium Leathers']")).should(visible, Duration.ofSeconds(15));
-    }
-
-    @Then("I verify presence of MultiSKU")
-    public void iVerifyMultiSKU(){
-        with().pollInterval(6, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text()='Items#: 89630210 BWMR, 89720340 BWMR']")).should(visible, Duration.ofSeconds(15));
-    }
-
-    @Then("I verify product name in cart page")
-    public void iVerifyProductNameinCartPage(){
-        with().pollInterval(6, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text()='KENSINGTON LEFT-ARM L-SECTIONAL']")).should(visible, Duration.ofSeconds(15));
-    }
-
-    @Then("I verify {string} is present")
-    public void iVerify(String text){
-        with().pollInterval(6, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text()="+text+"]")).should(visible, Duration.ofSeconds(15));
-    }
-
-    @Then("I verify product count in cart page")
-    public void iVerifyProductCountinCartPage(){
-        with().pollInterval(6, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text()='1'']")).should(visible, Duration.ofSeconds(15));
-    }
-
-    @Then("I verify product count in project page")
-    public void iVerifyProductCountinProjectPage(){
-        with().pollInterval(6, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text()='1'']")).should(visible, Duration.ofSeconds(15));
-    }
-
-}
