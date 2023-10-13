@@ -1,4 +1,5 @@
 @conciergeTestRun
+@ConciergeTrade
 Feature: Concierge Trade
 
   Scenario: Trade Client - Non Exempt

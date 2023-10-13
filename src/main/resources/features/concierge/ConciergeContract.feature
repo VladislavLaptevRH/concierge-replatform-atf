@@ -1,3 +1,4 @@
+@conciergeContract
 @conciergeTestRun
 Feature:Concierge Contract
 
