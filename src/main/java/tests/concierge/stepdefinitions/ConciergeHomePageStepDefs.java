@@ -1,8 +1,12 @@
 package tests.concierge.stepdefinitions;
 
 import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
+import org.openqa.selenium.By;
 import tests.concierge.pageObject.ConciergeHomePage;
 import tests.utility.Hooks;
+
+import static com.codeborne.selenide.Selenide.$;
 
 
 public class ConciergeHomePageStepDefs {
@@ -60,5 +64,10 @@ public class ConciergeHomePageStepDefs {
         } catch (NullPointerException e) {
             System.out.println("Exception");
         }
+    }
+
+    @Then("I Verify {string} is present")
+    public void iVerifySale(String value){
+        $(By.xpath("//*[text()='"+value+"']")).isDisplayed();
     }
 }

@@ -46,6 +46,8 @@ public class Pdp {
 
     public static String result;
 
+
+
     @When("I click on add monogram checkbox from pdp")
     public void iClickOnAddMonogramCheckboxFromPdp() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -300,6 +302,7 @@ public class Pdp {
                 $(By.xpath("//*[@id = 'spo-auth-addToCart']")).click();
                 break;
             case  "cart page has item (SKU)":
+                $(By.xpath("//*[text() = 'Item# null")).shouldNotHave(visible, Duration.ofSeconds(15));
                 assertEquals("59810778 SECM", $(By.xpath("(//*[@id = 'listColumn2-Item#'])[1]")).getText());
                 break;
             case  "price is matching PDP":
@@ -422,6 +425,11 @@ public class Pdp {
         $(By.xpath("//*[@alt = '" + option + "']")).click();
     }
 
+    @Then("I click on button {string} in the cart")
+    public void iClickOnTheButtonInTheCart(String button) {
+        $(By.xpath("(//*[text() = '" + button + "'])[1]")).click();
+    }
+
     @Then("verify that another modal appears with all the data for {string}")
     public void iVerifyAnotherModalAppearsWithAllTheData(String data) {
         with().pollInterval(9, SECONDS).await().until(() -> true);
@@ -480,14 +488,17 @@ public class Pdp {
 
     @Then("I chose zero choose in line items")
     public void iChoseZeroChooseInLineItems(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
        int lineItemsCount = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..")).size();
        for(int i = 1;  i <= lineItemsCount; i++){
            Select itemList = new Select($(By.xpath("((//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..)[" + i + "]")));
            try {
                itemList.selectByIndex(0);
-           } catch (UnsupportedOperationException e){
+               with().pollInterval(1, SECONDS).await().until(() -> true);
+           } catch (java.lang.UnsupportedOperationException e){
                WebDriverRunner.getWebDriver().navigate().refresh();
                itemList.selectByIndex(0);
+               with().pollInterval(5, SECONDS).await().until(() -> true);
            }
        }
     }
@@ -516,6 +527,32 @@ public class Pdp {
             }
         }
     }
+
+    @Then("I chose the {string} line item selections one by one for {string} items")
+    public void iChoseLineItemSelectionsOneByOneWithItems(String chose, String quantityOfItems) {
+            for (int i = 1; i <= Integer.parseInt(quantityOfItems); i++) {
+                int lineItemsCount = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[" + i + "]/../../../../../..//select[contains(@id, 'prod')]/option/..")).size();
+                for (int j = 1; j <= lineItemsCount; j++) {
+                    Select itemList = new Select($(By.xpath("((//a[contains(@data-testid, 'productTitleLink')])[" + i + "]/../../../../../..//select[contains(@id, 'prod')]/option/..)[" + j + "]")));
+                    if (j != lineItemsCount) {
+                        try {
+                            itemList.selectByIndex(Integer.parseInt(chose));
+                            with().pollInterval(2, SECONDS).await().until(() -> true);
+                        } catch (UnsupportedOperationException e) {
+                            iChoseLineItemSelectionsOneByOne(chose);
+                        }
+                    } else {
+                        try {
+                            itemList.selectByIndex(Integer.parseInt(chose) + 1);
+                            with().pollInterval(2, SECONDS).await().until(() -> true);
+                        } catch (UnsupportedOperationException e) {
+                            iChoseLineItemSelectionsOneByOne(chose);
+                        }
+                    }
+                }
+            }
+        result = chose;
+        }
 
     @When("I Verify that {string} is present")
     public void verifyThat(String data) {
@@ -784,6 +821,11 @@ public class Pdp {
         $(By.xpath("//*[text()='Performance Fiber Rugs']")).should(visible, Duration.ofSeconds(25));
     }
 
+    @Then("I chose {string} product on the page")
+    public void iChoseProductOnThePage(String arg) {
+        $(By.xpath("(//*[@id = 'flip-carousel-div'])[" + arg + "]/../../..")).click();
+    }
+
     @When("I click on windows from top menu")
     public void iClickOnWindowsFromTopMenu() {
         $(By.xpath("//div[@data-navigation-account-item-id='cat160095']")).should(visible, Duration.ofSeconds(40));
@@ -826,14 +868,17 @@ public class Pdp {
     public void iVerifyTextMattressFeeAndAmountInCheckout(String state) {
         if(state.equals("CA")) {
             assertEquals(pdpScreen.getMattressFeeText().getText(), "Mattress Fee");
+            $(By.xpath(" //*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
             assertEquals($(By.xpath("//*[text() = 'Mattress Fee']/../..//p")).getText(), "$10.50");
         }
         if(state.equals("RI")){
             assertEquals(pdpScreen.getMattressFeeText().getText(), "Mattress Fee");
+            $(By.xpath(" //*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
             assertEquals($(By.xpath("//*[text() = 'Mattress Fee']/../..//p")).getText(), "$16.00");
         }
         if(state.equals("CT")){
             assertEquals(pdpScreen.getMattressFeeText().getText(), "Mattress Fee");
+            $(By.xpath(" //*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
             assertEquals($(By.xpath("//*[text() = 'Mattress Fee']/../..//p")).getText(), "$11.75");
         }
 
@@ -912,6 +957,28 @@ public class Pdp {
     @Then("I verify that replacements parts modal pop up is displayed")
     public void iVerifyThatReplacementsPartsModalPopUpIsDisplayed() {
         $(By.xpath("//*[text()='REPLACEMENT PARTS']")).should(visible, Duration.ofSeconds(40));
+    }
+
+    @Then("I verify that cart modal is displayed")
+    public void iVerifyThatCartModalIsDisplayed() {
+        $(By.xpath("//*[text()='1 Item  Added To Your Cart']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='View Cart']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Keep Shopping']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@data-testid ='dialog-title-close-button']")).click();
+    }
+
+    @Then("I verify that cart modal is displayed for more than one item")
+    public void iVerifyThatCartModalIsDisplayedForMoreThanOneItem() {
+        $(By.xpath("//*[text()='Special Order']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Agree & Add To Cart']")).should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify that project modal is displayed")
+    public void iVerifyThatProjectModalIsDisplayed() {
+        $(By.xpath("//*[text()='ADD TO PROJECT']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='CANCEL']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='SAVE']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[@data-testid ='form-dialog-close-button']")).click();
     }
 
     @Then("I verify that check for replacements parts button is displayed")
@@ -1014,6 +1081,10 @@ public class Pdp {
 
     @Then("I click on zip code and change it to {string}")
     public void iChangeZipCodeFor(String zipCode) {
+        with().pollInterval(9, SECONDS).await().until(() -> true);
+        if(!pdpScreen.getZipCode().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
       pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
       pdpScreen.getZipCode().click();
       pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));

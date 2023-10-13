@@ -19,7 +19,8 @@ public class ConciergePGScreen {
     private final SelenideElement twoGridViewIsActive = $(By.xpath("//*[text() = 'sort']/../..//*[local-name() = 'svg' and @data-active = 'true']"));
     private final SelenideElement threeGridViewIsInactive= $(By.xpath("//*[text() = 'sort']/../..//*[local-name() = 'svg' and @data-active = 'false']"));
     private final SelenideElement twoGridViewIsInactive = $(By.xpath("//*[text() = 'sort']/../..//*[local-name() = 'svg' @data-active = 'false']"));
-
+    private final SelenideElement result = $(By.xpath("//*[text() = 'RESULTS']"));
+    private final SelenideElement sort = $(By.xpath("//*[text() = 'sort']"));
     public SelenideElement getTopNavManuByName(String name) {
         String path = String.format(topNavMenu, name);
         return $(byXpath(path));

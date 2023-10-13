@@ -1,3 +1,4 @@
+@conciergeDashboard
 @conciergeTestRun
 
 Feature:Concierge Dashboard

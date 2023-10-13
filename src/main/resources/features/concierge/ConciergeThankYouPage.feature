@@ -1,4 +1,5 @@
 @conciergeTestRun
+@conciergeThankYou
 Feature: Concierge ThankYouPage
 
   Scenario: Verify order details

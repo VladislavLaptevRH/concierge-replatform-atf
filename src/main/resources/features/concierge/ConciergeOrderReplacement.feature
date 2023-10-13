@@ -1,3 +1,4 @@
+@conciergeOrderReplacement
 @conciergeTestRun
 Feature: Order replacement
 
