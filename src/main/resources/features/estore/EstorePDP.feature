@@ -128,7 +128,7 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify that user is able to add line item separately for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
-  @vimal
+
     #Author: Vimalan
     #Date: 09 Oct
   Scenario: Verify View On Sale Options
@@ -139,7 +139,6 @@ Feature: Estore PDP
     And I verify view sale
     Then I add quantity and add to cart In-stock options
 
-  @vimal
     #Author: Vimalan
     #Date: 09 Oct
   Scenario: Verify the Add to Wishlist
@@ -150,7 +149,6 @@ Feature: Estore PDP
     And I click Add to Wishlist
     Then I verify the items present in the wishlist
 
-  @vimal
    #Author: Vimalan
    #Date: 10 Oct
   Scenario: Verify Add to Cart functionality button on PDP.
@@ -160,7 +158,6 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     And I click Add to Cart and validate the added items in the cart
 
-  @vimal
      #Author: Vimalan
      #Date: 10 Oct
   Scenario: Verify the text displaying befor price for Frame and cushion product
@@ -170,7 +167,6 @@ Feature: Estore PDP
     When I open product page with "prod7551915" and "97670" with "INDG" for estore
     Then I get prices for US for eStore
 
-  @vimal
     #Author: Vimalan
      #Date: 11 Oct
   Scenario: Verify the product price on PDP for sale cushion and frame product
@@ -180,7 +176,6 @@ Feature: Estore PDP
     When I open product page with "prod9460026" and "46680991" with "INDG" for estore
     Then Sale price validated before and after customizing
 
-  @vimal
     #Author: Vimalan
      #Date: 11 Oct
   Scenario: Verify the product price on PDP for sale cushion and frame product with sale==true
@@ -190,7 +185,6 @@ Feature: Estore PDP
     When Product with Sale URL is opened
     Then Sale price validated and URL sale==true
 
-  @vimal
       #Author: Vimalan
      #Date: 11 Oct
   Scenario: Verify the product price on PDP for sale cushion and frame product with sale link available
