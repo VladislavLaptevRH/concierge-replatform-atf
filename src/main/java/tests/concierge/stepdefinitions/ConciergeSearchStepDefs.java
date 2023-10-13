@@ -1,6 +1,7 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import lombok.Setter;
@@ -28,6 +29,9 @@ public class ConciergeSearchStepDefs {
             case "PG Search Page has title (TABLE) and text \"Results\" and \"Sort\" are present":
                 String title = Pdp.result;
                 assertEquals(title.toLowerCase(), $(By.xpath("//*[text() = '" + title + "']")).getText().toLowerCase());
+                if(!$(By.xpath("//*[text() = 'RESULTS']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
                 $(By.xpath("//*[text() = 'RESULTS']")).should(Condition.visible, Duration.ofSeconds(15));
                 $(By.xpath("//*[text() = 'sort']")).should(Condition.visible, Duration.ofSeconds(15));
                 break;

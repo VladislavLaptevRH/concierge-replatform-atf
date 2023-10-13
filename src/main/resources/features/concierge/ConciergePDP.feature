@@ -1,4 +1,5 @@
 @conciergeTestRun
+@conciergePDP
 Feature: Concierge PDP
 
   Scenario: Verify the PDP title and pricing
@@ -37,7 +38,6 @@ Feature: Concierge PDP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to concierge item 'prod18890296' from search field
     When I click on the first project search result with parameters 'prod18890296''10024793 BRNZ'
     Then I Verify that 'PDP title' is present
     Then I Verify that '"Zoom" button' is present
@@ -87,20 +87,20 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'has an item can be added to cart from modal'
     Then Verify that "In Stock modal" 'has an item can be added to project from modal'
 
-#  Scenario: Verify On Sale functionality
-#    Given I log into Concierge as "associate"
-#    When I choose country for concierge from footer
-#    When I remove all items from cart via UI
-#    When I go to item "17050043 FOG" from search field
-#    When I click on "view select items on sale" link
-#    Then Verify that "Sale modal" 'opens'
-#    Then Verify that "Sale modal" 'has title'
-#    Then Verify that "Sale modal" 'has item#'
-#    Then Verify that "Sale modal" 'has price, member and sale price'
-#    Then Verify that "Sale modal" 'has qty dropdown'
-#    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
-#    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
-#    Then Verify that "Sale modal" 'has an item can be added to project from modal'
+  Scenario: Verify On Sale functionality
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "57070740 CLNT" from search field
+    When I click on "view select items on sale" link
+    Then Verify that "Sale modal" 'opens'
+    Then Verify that "Sale modal" 'has title'
+    Then Verify that "Sale modal" 'has item#'
+    Then Verify that "Sale modal" 'has price, member and sale price'
+    Then Verify that "Sale modal" 'has qty dropdown'
+    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
+    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
+    Then Verify that "Sale modal" 'has an item can be added to project from modal'
 
   Scenario Outline: Availability, Delivery and Returns messaging for <items>
     Given I log into Concierge as "associate"
@@ -111,8 +111,8 @@ Feature: Concierge PDP
     Then I verify that availability, Delivery and returns messaging is displayed for "<items>"
     Examples:
       | items | skuID         |
-      | SO    | 19970830 CTIC |
-      | BO    | 10024793 BRNZ  |
+      | SO    | 59810779 CTBZ |
+      | BO    | 10024793 BRNZ |
 
   Scenario: Verify the dropdown selection and add to cart
 
@@ -221,8 +221,7 @@ Feature: Concierge PDP
   Scenario: Verify the Postal code updates in PDP
     Given I log into Concierge as "associate"
     When I choose 'US' country
-    When I go to item "prod28500462" from search field
-    When I click on the first project search result with parameters 'prod28500462''10097586 BWMR'
+    When I go to item "10115451 BWMR" from search field
     Then Verify that 'default US zip code is present in PDP'
     Then I click on zip code and change it to '10001'
     Then I verify that zip code in PDP is '10001'
@@ -253,6 +252,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10004670 NONE" from search field
+    Then I chose the '1' line item selections one by one
     Then I chose the '1' line item selections one by one
     When I change state for "<state>" with zip code "<zipCode>"
     Then I verify that text ""<state>" requires a mattress recycling fee to be collected at checkout state" is present in PDP
@@ -287,3 +287,49 @@ Feature: Concierge PDP
     Then I verify that check for replacements parts button is displayed
     Then I click on 'CHECK FOR REPLACEMENT PARTS' button
     And I verify that replacements parts modal pop up is displayed
+
+  Scenario: Add to Cart, Add All to Cart
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I chose '6' product on the page
+    Then I Verify that 'PDP title' is present
+    Then I chose the '1' line item selections one by one for '5' items
+    Then I click on button "ADD TO CART" in the cart
+    Then I verify that cart modal is displayed
+    Then I click on button "ADD ALL TO CART" in the cart
+    Then I verify that cart modal is displayed for more than one item
+
+  Scenario: Add to Project, Add All to Project
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I chose '6' product on the page
+    Then I Verify that 'PDP title' is present
+    Then I chose the '1' line item selections one by one for '5' items
+    Then I click on button "ADD TO PROJECT" in the cart
+    Then I verify that project modal is displayed
+    Then I click on button "ADD ALL TO PROJECT" in the cart
+    Then I verify that project modal is displayed
+
+  Scenario: Verify alt video: After clicking on play button video should be played
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I click on the first project search result with parameters 'prod18890296''10024793 BRNZ'
+    Then I Verify that 'PDP title' is present
+    Then I Verify that 'PDP title' is present
+    Then I Verify that '"Zoom" button' is present
+    Then I Verify that 'the "Hero" Image' is present
+    Then Verify that 'shop the entire collection'
+    Then Verify that 'is present view carousel is present on the right of the zoomed hero image and scrolling are present'
+    Then I Verify that 'images carousel is present below Hero image' is present
+    Then Verify that 'left and right arrows are present and number of alt images is 5'
+    Then Verify that 'zoom button is clickable and zoom module is opened'
+    Then Verify that 'plus and minus buttons are clickable and functioning'

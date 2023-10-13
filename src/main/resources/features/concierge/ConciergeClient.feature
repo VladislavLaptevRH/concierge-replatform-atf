@@ -1,3 +1,4 @@
+@conciergeClient
 @conciergeTestRun
 Feature:Client
 

@@ -100,7 +100,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that shipping address is displayed")
     public void iVerifyThatShippingAddressIsDisplayed() {
-        $(By.xpath("//*[text()='SHIPPING ADDRESS']")).should(visible, Duration.ofSeconds(40));
+        estoreAddressScreen.getShippingAddressTitle().should(visible, Duration.ofSeconds(40));
     }
 
     @When("I click on edit shipping address button on estore order review page")
@@ -355,8 +355,12 @@ public class EstoreAddressStepDefs {
     public void iClickOnContinueToPayment() {
         estorePaymentPage.getContinueToPayment().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
         estorePaymentPage.getContinueToPayment().scrollIntoView(true);
+
         estoreAddressScreen.getShippingAddressPhone().shouldNotBe(empty);
-        estorePaymentPage.getContinueToPayment().should(Condition.and("", visible, interactable), Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
+        estoreAddressScreen.getShippingAddressCity().shouldNotBe(empty);
+
+        estorePaymentPage.getContinueToPayment().should(Condition.and("", visible, interactable),
+                Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
 
         if ($(By.xpath("//*[contains(text(), 'required')]")).isDisplayed()) {
             iFillEstoreShippingAndShippingAddress();
@@ -558,11 +562,11 @@ public class EstoreAddressStepDefs {
 
     @And("I verify billing and shipping address are correct")
     public void iVerifyBillingAndShippingAddressAreCorrect() {
-        $(By.xpath("//*[text()='SHIPPING ADDRESS']")).should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getShippingAddressTitle().should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Ocala Street']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='US']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='BILLING ADDRESS']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Billing Address']")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I click on edit billing adress button on address page")
@@ -610,7 +614,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that introduced gift message is displayed on {string} page")
     public void iVerifyThatIntrotucedGiftMessageIsDisplayedOnPage(String message) {
-        $(By.xpath("//*[text()='" + message + "']"))
+        $(By.xpath("//*[text()='Gift Message']"))
                 .should(visible, Duration.ofSeconds(20));
     }
 

@@ -1,5 +1,6 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
@@ -13,23 +14,16 @@ import static com.codeborne.selenide.Selenide.$;
 public class EstoreGiftRegistry {
 
     private SelenideElement giftRegistrtyTitle = $(By.xpath("//*[text()='rh gift']"));
-
     private SelenideElement createARegistryButton = $(By.xpath("//span[text()='Create a Registry']"));
     private SelenideElement manageYourRegistryButton = $(By.xpath("//span[text()='Manage Your Registry']"));
     private SelenideElement selectEventyType = $(By.xpath("//select[@id='eventType']"));
-
     private SelenideElement eventTypeWedding = $(By.xpath("//option[@value='wedding']"));
     private SelenideElement eventDateTimeField = $(By.xpath("//input[@id='eventDateTime']"));
-
     private SelenideElement registrantFirstName = $(By.id("registrantAddress.firstName"));
-
     private SelenideElement registrantLastName = $(By.id("registrantAddress.lastName"));
-
     private SelenideElement registrantCountry = $(By.id("registrantAddress.country"));
     private SelenideElement registrantAddressLine = $(By.id("registrantAddress.addressLine1"));
-
     private SelenideElement registrantAddressLine2 = $(By.id("registrantAddress.addressLine2"));
-
     private SelenideElement registrantCity = $(By.id("registrantAddress.city"));
 
     private SelenideElement registrantState = $(By.id("registrantAddress.state"));
@@ -39,19 +33,15 @@ public class EstoreGiftRegistry {
     private SelenideElement registrantAddressPhone = $(By.id("registrantAddress.phone"));
 
     private SelenideElement createRegistryButton = $(By.xpath("//button[@type='submit']"));
-
     private SelenideElement selectedDate = $(By.xpath("//button[contains(@class,'MuiPickersDay-daySelected')]"));
     private SelenideElement deleteRegistryButton = $(By.xpath("//*[text()='DELETE']"));
-    private SelenideElement confirmDeleteRegistryButton = $(By.xpath("//*[text()='Delete registry']"));
-
+    private SelenideElement confirmDeleteRegistryButton = $(By.xpath("//button[contains(@class,'MuiButton-containedPrimary')]"));
     private SelenideElement giftRegistryButton = $(By.xpath("//h6[text()='Gift Registry']"));
-    private SelenideElement findARegistryButton = $(By.xpath("//a[@href='/us/en/gift-registry/search.jsp']"));
-
+    private SelenideElement findARegistryButtonGiftRegistryMenu = $(By.xpath("//a[contains(@href,'/gift-registry/search')]"));
+    private SelenideElement findARegistryButton = $(By.xpath("//a[contains(@href,'/gift-registry')]//span[text()='Find a Registry']"));
     private SelenideElement searchRegistryFirstName = $(By.xpath("//input[@id='firstName']"));
     private SelenideElement searchRegistryLastName = $(By.xpath("//input[@id='lastName']"));
-
     private SelenideElement youDoNotHaveRegistry = $(By.xpath("//*[text()='You do not have a registry at this time. You may create one using the Create A Registry menu item on the left.']"));
-
     private SelenideElement registrantFirstNameSearchResult = $(By.xpath("//*[text()='REGISTRANT NAME']"));
     private SelenideElement registrantEventDateSearchResult = $(By.xpath("//*[text()='EVENT DATE']"));
     private SelenideElement registrantEventLocationSearchResult = $(By.xpath("//*[text()='EVENT LOCATION']"));
@@ -144,13 +134,18 @@ public class EstoreGiftRegistry {
     }
 
     public void clickToFindARegistryButton() {
-        findARegistryButton.should(Condition.interactable, Duration.ofSeconds(15))
-                .click();
+        findARegistryButton.should(Condition.interactable, Duration.ofSeconds(20))
+                .click(ClickOptions.usingJavaScript());
+    }
+
+    public void clickToFindARegistryButtonGiftRegistryMenu() {
+        findARegistryButtonGiftRegistryMenu.should(Condition.interactable, Duration.ofSeconds(20))
+                .click(ClickOptions.usingJavaScript());
     }
 
     public void clickToDeleteRegistryButton() {
         deleteRegistryButton.should(Condition.visible).click();
-        confirmDeleteRegistryButton.should(Condition.visible).click();
+        confirmDeleteRegistryButton.should(Condition.interactable).click();
     }
 
     public void clickToGiftRegistryButton() {

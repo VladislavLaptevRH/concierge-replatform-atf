@@ -39,7 +39,7 @@ public class RegistryStepDefs {
         open(Hooks.eStoreBaseURL + "/gift-registry/create-a-registry.jsp");
     }
 
-    @When("I fill all required fileds to create the new registry")
+    @When("I fill all required fields to create the new registry")
     public void iFillAllRequiredFiledsToCreateTheNewRegistry() {
         estoreGiftRegistry.selectRegistryEventType("wedding");
         estoreGiftRegistry.selectEventTimeDate();
@@ -55,7 +55,7 @@ public class RegistryStepDefs {
 
     }
 
-    @When("I click to crate registry button on eStore")
+    @When("I click to create registry button on eStore")
     public void iClickToCrateRegistryButtonOnEStore() {
         estoreGiftRegistry.clickToCreateRegistryButton();
     }
@@ -76,7 +76,7 @@ public class RegistryStepDefs {
     @When("I go to find a registry")
     public void iGoToFindARegistry() {
         estoreGiftRegistry.clickToGiftRegistryButton();
-        estoreGiftRegistry.clickToFindARegistryButton();
+        estoreGiftRegistry.clickToFindARegistryButtonGiftRegistryMenu();
     }
 
     @When("I introduce the first and last name to search for registry")

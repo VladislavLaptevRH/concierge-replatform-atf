@@ -222,9 +222,31 @@ public class EstoreCartPage {
 
     private final SelenideElement totalAdditionalProductDiscount = $(By.xpath("//*[text()='Total Additional Product Discount']"));
 
+    private final SelenideElement thankYouForJoiningTheMemberProgram = $(By.xpath("//*[contains(text(),'Thank you for joining the RH Members Program.')]"));
+
+    private final SelenideElement componentMessageTheFirstItem = $(By.xpath("(//*[text()='ORIGINAL LANCASTER THREE-SEAT-CUSHION U-CHAISE SECTIONAL'])[1]"));
+
+    private final SelenideElement componentMessageTheSecondItem = $(By.xpath("(//*[text()='ORIGINAL LANCASTER THREE-SEAT-CUSHION U-CHAISE SECTIONAL'])[2]"));
+
+    private final SelenideElement componentMessageTheThirdItem = $(By.xpath("(//*[text()='ORIGINAL LANCASTER THREE-SEAT-CUSHION U-CHAISE SECTIONAL'])[3]"));
+
+
+    public void verifyThatComponentMessageIsDisplayedForAllLineItems() {
+        componentMessageTheFirstItem.should(visible, Duration.ofSeconds(12));
+        componentMessageTheSecondItem.should(visible, Duration.ofSeconds(12));
+        componentMessageTheThirdItem.should(visible, Duration.ofSeconds(12));
+    }
 
     public void verifyThatTotalAdditionalProductDiscountMessageIsDisplayed() {
         totalAdditionalProductDiscount.should(visible, Duration.ofSeconds(20));
+    }
+
+    public void verifyThatRemoveMembershipButtonIsDisplayed() {
+        removeMembershipButton.should(visible);
+    }
+
+    public void verifyThatThankYouForJoiningTheMemberProgramMessageIsDisplayed() {
+        thankYouForJoiningTheMemberProgram.should(visible, Duration.ofSeconds(20));
     }
 
     public int getLineItemMemberPrice() {

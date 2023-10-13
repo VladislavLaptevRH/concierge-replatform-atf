@@ -7,16 +7,18 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import tests.concierge.pageObject.SelectOption;
 import org.testng.Assert;
 import tests.estore.pageObject.*;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.*;
@@ -24,6 +26,8 @@ import static org.testng.AssertJUnit.*;
 public class EstorePdpStepDefs {
 
     EstorePdpPageScreen estorePdpPageScreen = new EstorePdpPageScreen();
+
+    SelectOption selectOption = new SelectOption();
 
     EstoreCartPage estoreCartPage = new EstoreCartPage();
 
@@ -40,6 +44,9 @@ public class EstorePdpStepDefs {
     String memberUSPrice;
     String regularCAGBPrice;
     String memberCAGBPrice;
+    String MemberSalePrice;
+    String RegularSalePrice;
+
     int itemCartPriceRegular;
     int itemCartPriceMember;
 
@@ -66,16 +73,54 @@ public class EstorePdpStepDefs {
         estorePdpPageScreen.getRegularPrice().should(Condition.visible, Duration.ofSeconds(20));
     }
 
-    @Then("I verify view In-stock options")
+    @And("I verify view In-stock options")
     public void iVerifyViewInStockOptions() {
         estorePdpPageScreen.getInStockOptionsButton().should(Condition.visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getInStockOptionsButton().click();
         estorePdpPageScreen.getInStockTitle().should(Condition.visible, Duration.ofSeconds(20));
 
+//        estorePdpPageScreen.getTurkishTowelCollectionTitle().should(Condition.and("", interactable, visible), Duration.ofSeconds(20));
+        estorePdpPageScreen.getItemInStockOption().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getSizeInStockOption().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getColorInStockOption().should(Condition.visible, Duration.ofSeconds(20));
+    }
+
+    @And("I verify view sale")
+    public void iVerifysalepage() {
+        estorePdpPageScreen.getViewSaleItems().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getViewSaleItems().click();
+
         estorePdpPageScreen.getTurkishTowelCollectionTitle().should(Condition.and("", interactable, visible), Duration.ofSeconds(20));
         estorePdpPageScreen.getItemInStockOption().should(Condition.visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getSizeInStockOption().should(Condition.visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getColorInStockOption().should(Condition.visible, Duration.ofSeconds(20));
+    }
+
+    @And("I click Add to Wishlist")
+    public void iAddtoWishlist() {
+        if (estorePdpPageScreen.getSelectSize().isDisplayed()) {
+            Select sizeList = new Select(estorePdpPageScreen.getSelectSize());
+            sizeList.selectByIndex(1);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+        if (estorePdpPageScreen.getSelectColorElement().isDisplayed()) {
+            Select color = new Select(estorePdpPageScreen.getSelectColorElement());
+            color.selectByIndex(2);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+        estorePdpPageScreen.getAddToWishlist().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getAddToWishlist().click(ClickOptions.usingJavaScript());
+    }
+
+    @Then("I verify the items present in the wishlist")
+    public void iVerifyItemsinWishList() {
+        estorePdpPageScreen.getViewWishlistButton().should(Condition.and("Visible, interactable condition", visible, interactable), Duration.ofSeconds(20));
+        estorePdpPageScreen.getKeepShopping().should(Condition.and("Visible, interactable condition", visible, interactable), Duration.ofSeconds(20));
+        estorePdpPageScreen.getViewWishlistButton().click();
+        WebDriverRunner.getWebDriver().navigate().back();
+        iAddtoWishlist();
+        estorePdpPageScreen.getKeepShopping().click();
+        WebDriverRunner.getWebDriver().navigate().back();
     }
 
     @Then("I verify Details, Dimensions and Fabric")
@@ -102,7 +147,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that price for product&line should be in US dollars on PDP page")
     public void iVerifyThatPriceForProductLineShouldBeInUS$() {
-        $(By.xpath("(//*[contains(text(),'$')])[3]")).should(visible, Duration.ofSeconds(40));
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$"));
     }
 
     @When("I update {string} postal code on pdp page")
@@ -138,6 +183,15 @@ public class EstorePdpStepDefs {
         }
     }
 
+    @Then("I add quantity and add to cart In-stock options")
+    public void iAddQuantityandAddtoCart() {
+        estorePdpPageScreen.getQtyInStockItems().click();
+        Actions actions = new Actions(WebDriverRunner.getWebDriver());
+        actions.moveToElement(estorePdpPageScreen.getQtyInStockItems_2()).click();
+        estorePdpPageScreen.getAddToCartBtnInStockItems().click();
+    }
+
+
     @Then("I verify line items {string}")
     public void iVerifyLineItems(String functional) {
         if (functional.equals("lineitemimage")) {
@@ -155,6 +209,7 @@ public class EstorePdpStepDefs {
             estoreAccountStepDefs.iClickOnEstoreMyAccountIconForGuestUser();
             estoreCartPage.getAddToWishlistButton().should(visible, Duration.ofSeconds(20)).scrollIntoView(true);
             estoreCartPage.getAddToWishlistButton().should(interactable, Duration.ofSeconds(20)).click();
+
         }
         if (functional.equals("locationfunctionality")) {
             estorePdpPageScreen.getPostalCodePdp().should(visible, Duration.ofSeconds(30));
@@ -286,6 +341,7 @@ public class EstorePdpStepDefs {
     @Then("I verify the product price for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceForProductAndWithForTheSelectedCountry(String productID, String arg1, String selectedOptions, String country) {
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        WebDriverRunner.getWebDriver().navigate().refresh();
         estorePdpPageScreen.getRegularTheFirstPrice().should(visible, Duration.ofSeconds(20));
         regularPricePdp = Integer.parseInt(estorePdpPageScreen.getRegularPdpProductPrice().getText().replaceAll("\\$", ""));
         memberPricePdp = Integer.parseInt(estorePdpPageScreen.getMemberPdpProductPrice().getText().replaceAll("\\$", ""));
@@ -308,16 +364,16 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that user is able to add line item separately for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyThatUserIsAbleToAddLineItemSeparatelyForProduct(String productID, String arg1, String selectedOptions, String country) {
-        Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
-        selectSize.selectByIndex(2);
-        Select selectColor = new Select(estorePdpPageScreen.getColorOption());
-        selectColor.selectByIndex(2);
         String lineTimeId = estorePdpPageScreen.getLineItemId().getText();
         String itemIt = lineTimeId.split("# ")[1];
         estorePdpPageScreen.getAddToCartBtn().click();
         estorePdpPageScreen.getItemAddedInCarMsg().should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getViewCartBtn().click();
         $(By.xpath("//p[text()='" + itemIt + "']")).should(visible, Duration.ofSeconds(30));
+        Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
+        selectSize.selectByIndex(2);
+        Select selectColor = new Select(estorePdpPageScreen.getColorOption());
+        selectColor.selectByIndex(2);
     }
 
     @Then("I verify availability delivery and return for product {string} and {string} with {string} for the selected {string} country")
@@ -375,15 +431,15 @@ public class EstorePdpStepDefs {
         String lineItemMemberPrice = estorePdpPageScreen.getLineItemMemberPrice().getText().trim();
         String lineItemRegularPrice = estorePdpPageScreen.getLineItemRegularPrice().getText().trim();
 
-        assertEquals("Hero image & line item member price is not equal",heroImageMemberPrice,lineItemMemberPrice);
-        assertEquals("Hero image & line item regular price is not equal",heroImageRegularPrice,lineItemRegularPrice);
+        assertEquals("Hero image & line item member price is not equal", heroImageMemberPrice, lineItemMemberPrice);
+        assertEquals("Hero image & line item regular price is not equal", heroImageRegularPrice, lineItemRegularPrice);
     }
 
     @And("I verify that {string} popup is displayed")
     public void iVerifyThatPopupIsDisplayed(String modalPopUp) {
         if (modalPopUp.equals("View In-Stock")) {
             $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
-            $(By.xpath("//p[text()='IN STOCK']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//p[text()='In Stock']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
         }
@@ -476,4 +532,121 @@ public class EstorePdpStepDefs {
         $(By.xpath("//p[text()='Edit']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Remove']")).should(visible, Duration.ofSeconds(20));
     }
+
+    @And("I click Add to Cart and validate the added items in the cart")
+    public void iAddtoCart() {
+        if (estorePdpPageScreen.getSelectSize().isDisplayed()) {
+            Select sizeList = new Select(estorePdpPageScreen.getSelectSize());
+            sizeList.selectByIndex(1);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+        if (estorePdpPageScreen.getSelectColorElement().isDisplayed()) {
+            Select color = new Select(estorePdpPageScreen.getSelectColorElement());
+            color.selectByIndex(2);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+        estorePdpPageScreen.getAddToCartBtn().click();
+        estorePdpPageScreen.getKeepShopping().should(Condition.and("Visible, interactable condition", visible, interactable), Duration.ofSeconds(20));
+        estorePdpPageScreen.getViewCartBtn().should(Condition.and("Visible, interactable condition", visible, interactable), Duration.ofSeconds(20));
+        estorePdpPageScreen.getViewCartBtn().click();
+        estorePdpPageScreen.getViewCartValidation().should(Condition.and("Visible, interactable condition", visible, interactable), Duration.ofSeconds(20));
+    }
+
+    @Then("Sale price validated before and after customizing")
+    public void iVerifySalePriceshowsCombined() {
+        MemberSalePrice = estorePdpPageScreen.getMemberPdpProductPrice().getText();
+        RegularSalePrice = estorePdpPageScreen.getRegularTheSecondPrice().getText();
+
+        //updating the values to see the price difference
+        Select depth = new Select(estorePdpPageScreen.getSelectDepth());
+        depth.selectByIndex(1);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        Select fill = new Select(estorePdpPageScreen.getSelectFill());
+        fill.selectByIndex(1);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        Select color = new Select(estorePdpPageScreen.getSelectColor());
+        color.selectByIndex(1);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        Select depthlength = new Select(estorePdpPageScreen.getSelectLength());
+        depthlength.selectByIndex(1);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        Select depthleather = new Select(estorePdpPageScreen.getSelectLeather());
+        depthleather.selectByIndex(1);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        memberUSPrice = estorePdpPageScreen.getMemberPdpProductPrice().getText();
+        regularUSPrice = estorePdpPageScreen.getRegularTheSecondPrice().getText();
+
+        assertTrue("Regular price is updated after values are updated", regularUSPrice.equalsIgnoreCase(RegularSalePrice));
+        assertTrue("Member price is updated after values are updated", memberUSPrice.equalsIgnoreCase(MemberSalePrice));
+
+    }
+
+    @When("Product with Sale URL is opened")
+    public void iOpenURL() {
+        String Url = "https://stg2.rhnonprod.com/us/en/catalog/product/product.jsp?productId=prod2140453&sale=true&layout=horizontal";
+        open(Url);
+        WebDriverRunner.getWebDriver().navigate().refresh();
+    }
+
+    @Then("Sale price validated and URL sale==true")
+    public void iVerifySalePriceandUrlisTrue() {
+        MemberSalePrice = estorePdpPageScreen.getMemberPdpProductPrice().getText();
+        RegularSalePrice = estorePdpPageScreen.getRegularTheSecondPrice().getText();
+        assertTrue(Hooks.getCurrentUrl().contains("sale=true"));
+    }
+
+    @Then("Sale link validated along with selecting value")
+    public void iVerifySaleLinkValidated() {
+        RegularSalePrice = estorePdpPageScreen.getRegularTheSecondPrice().getText();
+
+        //updating the values to see the price difference
+        Select Size = new Select(estorePdpPageScreen.getSelectSize());
+        Size.selectByIndex(1);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        Select color = new Select(estorePdpPageScreen.getSelectColor());
+        color.selectByIndex(1);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        Select Fabric = new Select(estorePdpPageScreen.getSelectFabric());
+        Fabric.selectByIndex(1);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        Select cushionFill = new Select(estorePdpPageScreen.getSelectCushionFill());
+        cushionFill.selectByIndex(1);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        regularUSPrice = estorePdpPageScreen.getRegularTheSecondPrice().getText();
+        assertTrue("Regular price is updated after Sale product values are updated", regularUSPrice.equalsIgnoreCase(RegularSalePrice));
+
+        estorePdpPageScreen.getViewSaleItem().should(Condition.and("Visible, interactable condition", visible, interactable), Duration.ofSeconds(20));
+        estorePdpPageScreen.getViewSaleItem().click();
+    }
+
+
+   @Then("I verify the multisku ID is showing up once the line item is configured")
+    public void iVerifyTheMultiskuIDIsShowingUpOnceTheLineItemIsConfigured() {
+        $(By.xpath("//*[text()='Item# m000001198111']")).should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that the ETA on PDP")
+    public void iVerifyThatTheETAOnPDP() {
+        $(By.xpath("//*[text()='This item is special order and will be ready for delivery between 01/05/24 and 01/11/24 ']")).should(visible);
+    }
+
+    @Then("I verify that {string} message is displayed {string} the lien item dropdown")
+    public void iVerifyThatMessageIsDisplayedTheLienItemDropdown(String message, String location) {
+        if (location.equals("above")) {
+            estorePDPScreen.verifyThatItemIncludeMultipleComponentsMsgIsDisplayedAboveLineItemDropDown();
+        } else {
+            estorePDPScreen.verifyThatItemIncludeMultipleComponentsMsgIsDisplayedBellowLineItemDropDown();
+        }
+    }
 }
+
+

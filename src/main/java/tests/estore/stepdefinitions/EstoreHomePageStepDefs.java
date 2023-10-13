@@ -8,8 +8,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.estore.pageObject.EstoreHomePage;
+import tests.estore.pageObject.EstoreUserAccountPage;
 import tests.utility.Hooks;
 
 import java.time.Duration;
@@ -28,6 +30,8 @@ public class EstoreHomePageStepDefs {
     EstoreHomePage estoreHomePage = new EstoreHomePage();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
+
+    EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
 
     public static String result = "";
 
@@ -55,9 +59,8 @@ public class EstoreHomePageStepDefs {
     public void iTypeProductName(String arg0) {
         estoreHomePage.getSearchInputField().should(Condition.visible, Duration.ofSeconds(30));
         estoreHomePage.getSearchInputField().setValue(arg0);
-        $(By.id("container-rhrSearchField_search-btn")).should(Condition.visible, Duration.ofSeconds(30));
-        estoreHomePage.getSeeAllResultButton().click();
-        result = arg0;
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        estoreUserAccountPage.getSearchItemField().sendKeys(Keys.ENTER);
     }
 
     @Then("verify users is taken to search result page")
@@ -103,6 +106,7 @@ public class EstoreHomePageStepDefs {
         with().pollInterval(4, SECONDS).await().until(() -> true);
         executeJavaScript("window.scrollTo(0, 15000)");
         estoreHomePage.getRequestConsultationButton().scrollIntoView(true);
+        estoreHomePage.getRequestConsultationButton().should(visible);
         estoreHomePage.getRequestConsultationButton().click();
     }
 

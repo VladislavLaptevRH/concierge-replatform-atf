@@ -33,6 +33,7 @@ public class ConciergeItemsScreen {
     private final SelenideElement selectFill = $(By.xpath("(//select[contains(@id, 'Fill')])[1]"));
 
     private final SelenideElement selectLeather = $(By.xpath("(//select[contains(@id, 'Leather')])[1]"));
+
     private final List<SelenideElement> items = $$(By.xpath("//div[@class= 'MuiGrid-root MuiGrid-container']/div"));
 
     private final List<SelenideElement> twoItemsSection = $$(By.xpath("//ul[contains(@class,'MuiGridList-root')]/li[@class='MuiGridListTile-root']"));
@@ -92,4 +93,29 @@ public class ConciergeItemsScreen {
     private final SelenideElement agreeAndAddToCartButton = $(By.xpath("//span[@class='MuiButton-label' and text() = 'Agree & Add To Cart']"));
 
     private final SelenideElement choseFinishOption = $(By.xpath("//*[text() = 'Finish Options']/../ul/li[1]"));
+
+    private final SelenideElement countrySelection = $(By.xpath("(//*[@class = 'MuiGrid-root MuiGrid-item']//div)[3]"));
+
+    private final SelenideElement gbCountry = $(By.xpath("//*[text() = 'UNITED KINGDOM (£)']"));
+
+    private final SelenideElement caCountry = $(By.xpath("//*[text() = 'CANADA ($)']"));
+
+    private final SelenideElement usCountry = $(By.xpath("//*[text() = 'UNITED STATES ($)']"));
+
+    private final SelenideElement selectCountrySaveButton = $(By.xpath("//*[text() = 'SAVE']"));
+
+    private SelenideElement saleButtonMenu = $(By.xpath("//*[text()='SALE']"));
+
+    private SelenideElement saleButtonMenuForUK = $(By.xpath("//*[text()='Sale']"));
+
+    private final SelenideElement livingSaleMenuBar = $(By.xpath("(//*[contains(text(),'Living')])[2]"));
+
+    private SelenideElement footerValidation = $(By.xpath("//*[@id = 'footer']"));
+
+    private SelenideElement fabricChairInSale = $(By.xpath("//*[text()='Fabric Chairs']"));
+
+    private SelenideElement freeShippingMessage = $(By.xpath("//*[text()='ENJOY FREE SHIPPING ON ALL TEXTILES']"));
+
+    private SelenideElement moInCGPage = $(By.xpath("(//*[contains(text(),'Modular')])[1]"));
 }
+

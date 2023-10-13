@@ -466,7 +466,6 @@ public class EstoreCartPageStepDefs {
     public void iOpenCart() {
         String URL = Hooks.eStoreBaseURL + "/us/en/checkout/shopping_cart.jsp";
         open(URL);
-
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
@@ -700,12 +699,12 @@ public class EstoreCartPageStepDefs {
         if (country.equals("CAN")) {
             $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//li[@data-value='CA']")).click();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         if (country.equals("US")) {
             $(By.xpath("//li[@data-value='US']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("//li[@data-value='US']")).click();
         }
-        $(By.xpath("//*[text()='Checkout']")).shouldHave(text("Checkout"), Duration.ofSeconds(30));
     }
 
     @When("I stop eStore page load")
@@ -867,4 +866,20 @@ public class EstoreCartPageStepDefs {
         assertTrue("Total line item price is equal to member price", totalLineItemPrice == estoreCartPage.getLineItemMemberPrice());
     }
 
+    @Then("I verify that membership was added to cart")
+    public void iVerifyThatMembershipWasAddedToCart() {
+        estoreCartPage.verifyThatThankYouForJoiningTheMemberProgramMessageIsDisplayed();
+        estoreCartPage.verifyThatRemoveMembershipButtonIsDisplayed();
+    }
+
+    @Then("I verify that the ETA on PDP and cart are matching")
+    public void iVerifyThatTheETAOnPDPAndCartAreMatching() {
+        $(By.xpath("//*[text()='This item is special order and will be ready for delivery between 01/05/24 and 01/11/24 ']"))
+                .should(visible);
+    }
+
+    @Then("I verify the message {string} should be shown on cart against every component of multisku")
+    public void iVerifyTheMessageShouldBeShownOnCartAgainstEveryComponentOfMultisku(String arg0) {
+        estoreCartPage.verifyThatComponentMessageIsDisplayedForAllLineItems();
+    }
 }

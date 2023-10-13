@@ -1,6 +1,8 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,6 +16,8 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -175,7 +179,13 @@ public class EstoreAccountStepDefs {
     @Given("I click on estore my account icon for guest user")
     public void iClickOnEstoreMyAccountIconForGuestUser() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        estoreLoginPage.clickToAccountIcon();
+        try {
+            estoreLoginPage.clickToAccountIcon();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            estoreLoginPage.clickToAccountIcon();
+        }
     }
 
     @When("I click on agree privacy policy checkbox")
@@ -191,7 +201,7 @@ public class EstoreAccountStepDefs {
     @When("I click on the {string} from my account dropdown")
     public void iClickOnTheFromMyAccountDropdown(String option) {
         $(By.xpath("//li[contains(@id,'" + option + "')]"))
-                .shouldBe(visible, Duration.ofSeconds(20)).click();
+                .shouldBe(interactable, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
     }
 
     @Then("I verify that {string} is available for eStore")
@@ -225,6 +235,16 @@ public class EstoreAccountStepDefs {
     public void iVerifyThatRequiredPageForIsDisplayed(String pageOption) {
         if (!(pageOption.equals("signout"))) {
             assertTrue("Order history page is displayed", Hooks.getCurrentUrl().contains(pageOption));
+        }
+    }
+
+    @When("I click on my account button if page is not loaded")
+    public void iClickOnMyAccountButtonIfPageIsNotLoaded() {
+        try {
+            $(By.xpath("//*[text()='You must be ']")).should(visible);
+            iClickOnEstoreMyAccountIconForGuestUser();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Login was executed");
         }
     }
 }
