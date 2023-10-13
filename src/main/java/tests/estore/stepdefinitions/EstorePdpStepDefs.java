@@ -308,12 +308,16 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that user is able to add line item separately for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyThatUserIsAbleToAddLineItemSeparatelyForProduct(String productID, String arg1, String selectedOptions, String country) {
-            String lineTimeId = estorePdpPageScreen.getLineItemId().getText();
-            String itemIt = lineTimeId.split("# ")[1];
-             estorePdpPageScreen.getAddToCartBtn().click();
-             estorePdpPageScreen.getItemAddedInCarMsg().should(visible, Duration.ofSeconds(20));
-             estorePdpPageScreen.getViewCartBtn().click();
-             $(By.xpath("//p[text()='"+itemIt+"']")).should(visible, Duration.ofSeconds(30));
+        Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
+        selectSize.selectByIndex(2);
+        Select selectColor = new Select(estorePdpPageScreen.getColorOption());
+        selectColor.selectByIndex(2);
+        String lineTimeId = estorePdpPageScreen.getLineItemId().getText();
+        String itemIt = lineTimeId.split("# ")[1];
+        estorePdpPageScreen.getAddToCartBtn().click();
+        estorePdpPageScreen.getItemAddedInCarMsg().should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getViewCartBtn().click();
+        $(By.xpath("//p[text()='" + itemIt + "']")).should(visible, Duration.ofSeconds(30));
     }
 
     @Then("I verify availability delivery and return for product {string} and {string} with {string} for the selected {string} country")
