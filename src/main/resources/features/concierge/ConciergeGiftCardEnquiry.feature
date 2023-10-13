@@ -1,3 +1,4 @@
+@conciergeGiftCard
 @conciergeTestRun
 Feature: Concierge GiftCardEnquiry
 
