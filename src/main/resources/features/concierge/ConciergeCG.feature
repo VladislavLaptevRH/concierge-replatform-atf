@@ -155,7 +155,7 @@ Feature: Concierge CG Page
     Then I navigate to menu 'Rugs'
     Then I navigate to sub menu 'Rugs'
     Then I navigate to gallery 'Rug Collections'
-    Then I verify that 'Navigate to fourth collection' on CG screen
+    Then I verify that 'Navigate to second collection' on CG screen
     Then I verify that 'Navigate to first product' on CG screen
     Then I click 'Back Browser Button' on CG screen
     Then I verify that 'confirm that PG is displayed' on CG screen

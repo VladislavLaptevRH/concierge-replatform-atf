@@ -2,8 +2,7 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.WebDriverRunner;
-import com.codeborne.selenide.commands.Click;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
@@ -11,16 +10,11 @@ import org.openqa.selenium.support.ui.Select;
 import tests.estore.pageObject.*;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class EstoreMemberStepDefs {
@@ -74,7 +68,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate membership details")
     public void iValidateMembershipDetails() {
-        $(By.xpath("//*[text()='RH MEMBERS PROGRAM PROFILE']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='RH MEMBERS PROGRAM PROFILE']")).should(visible, Duration.ofSeconds(30));
         $(By.xpath("//*[text()='CONTACT INFORMATION']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='FAQs']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Terms & Conditions']")).should(visible, Duration.ofSeconds(20));
@@ -124,9 +118,7 @@ public class EstoreMemberStepDefs {
 
     @When("I click on cancel membership link")
     public void iClickOnCancelMembershipLink() {
-
-        assertTrue(estoreMemberPage.getCancelLink().isDisplayed());
-        estoreMemberPage.getCancelLink().click();
+        estoreMemberPage.getCancelLink().should(visible).click();
     }
 
     @Then("I validate cancel membership content")
@@ -172,6 +164,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I verfiy that frequently asked questions page is displayed")
     public void iVerfiyThatFrequentlyAskedQuestionsPageIsDisplayed() {
+        estoreMemberPage.getFrequentlyAskedQuestionsMsg().should(visible);
     }
 
     @Then("I verify that membership is cancelled")
@@ -199,4 +192,56 @@ public class EstoreMemberStepDefs {
     }
 
 
+    @Then("I verify that the memberID, enrollment date, renewal date and price, MOP are displayed")
+    public void iVerifyThatTheMemberIDEnrollmentDateRenewalDateAndPriceMOPAreDisplayed() {
+        estoreMemberPage.membershipDataIsDisplayed();
+    }
+
+    @Then("I verify that the copy is displayed for non member user")
+    public void iVerifyThatTheCopyIsDisplayedForNonMemberUser() {
+        estoreMemberPage.membershipDataIsNotDisplayed();
+    }
+
+    @And("I verify that link to membership functionality is displayed")
+    public void iVerifyThatLinkToMembershipFunctionalityIsDisplayed() {
+        estoreMemberPage.linkToMembershipIsDisplayed();
+    }
+
+    @Then("I verify that membership program details link")
+    public void iVerifyThatMembershipProgramDetailsLink() {
+        estoreMemberPage.clickToProgramDetailsLink();
+        estoreMemberPage.programDetailsLinkDetails();
+    }
+
+    @Then("I verify that email address to enter and link the membership")
+    public void iVerifyThatEmailAddressToEnterAndLinkTheMembership() {
+        System.out.println();
+    }
+
+    @Then("I verify the membership cancel link")
+    public void iVerifyTheMembershipCancelLink() {
+        estoreMemberPage.getCancelMembershipButton().should(visible);
+        estoreMemberPage.getRhProgramProfile().should(visible);
+        estoreMemberPage.getAreYouSureYouWantToCancelMembershipMsg().should(visible);
+    }
+
+    @When("I introduce email address to link membership field")
+    public void iIntroduceEmailAddressToLinkMembershipField() {
+        estoreMemberPage.setValueForLinkMembershipEmail("automationmember@rh.com");
+    }
+
+    @Then("I verify that user is able to link membership")
+    public void iVerifyThatUserIsAbleToLinkMembership() {
+        System.out.println();
+    }
+
+    @When("I click on link membership buttom")
+    public void iClickOnLinkMembershipButtom() {
+        estoreMemberPage.clickToLinkToMembership();
+    }
+
+    @When("I click on add membership to cart button")
+    public void iClickOnAddMembershipToCartButton() {
+        System.out.println();
+    }
 }

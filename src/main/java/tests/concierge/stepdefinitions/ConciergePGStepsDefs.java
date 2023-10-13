@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.testng.Assert;
 import tests.concierge.pageObject.ConciergeItemsScreen;
 import tests.concierge.pageObject.ConciergePGScreen;
 import tests.utility.Hooks;
@@ -260,7 +261,10 @@ public class ConciergePGStepsDefs {
             case "PG has SALE and IN-STOCK filters, text RESULTS (n), faucet with text SORT":
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-Sale']//p[text() = 'sale']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-In-Stock']//p[text() = 'in-stock']")).shouldBe(visible, Duration.ofSeconds(20));
-                $(By.xpath("//*[text() = 'Brand']")).shouldBe(visible, Duration.ofSeconds(20));
+                $(By.xpath("//*[text() = 'brand ss']")).shouldBe(visible, Duration.ofSeconds(20));
+                if($(By.xpath("//*[text() = 'RESULTS']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
                 $(By.xpath("//*[text() = 'RESULTS']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'sort']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Featured']")).shouldBe(visible, Duration.ofSeconds(20));
@@ -346,7 +350,10 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-In-Stock']//p[text() = 'in-stock']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Shape']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Size']")).shouldBe(visible, Duration.ofSeconds(20));
-                $(By.xpath("//*[text() = 'Brand']")).shouldBe(visible, Duration.ofSeconds(20));
+                $(By.xpath("//*[text() = 'brand ss']")).shouldBe(visible, Duration.ofSeconds(20));
+                if($(By.xpath("//*[text() = 'RESULTS']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
                 $(By.xpath("//*[text() = 'RESULTS']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'sort']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
@@ -359,7 +366,10 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-In-Stock']//p[text() = 'in-stock']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Size']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Material']")).shouldBe(visible, Duration.ofSeconds(20));
-                $(By.xpath("//*[text() = 'Brand']")).shouldBe(visible, Duration.ofSeconds(20));
+                $(By.xpath("//*[text() = 'brand ss']")).shouldBe(visible, Duration.ofSeconds(20));
+                if($(By.xpath("//*[text() = 'RESULTS']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
                 $(By.xpath("//*[text() = 'RESULTS']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'sort']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
@@ -368,7 +378,10 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-Sale']//p[text() = 'sale']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-In-Stock']//p[text() = 'in-stock']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'new arrivals']")).shouldBe(visible, Duration.ofSeconds(20));
-                $(By.xpath("//*[text() = 'Brand']")).shouldBe(visible, Duration.ofSeconds(20));
+                $(By.xpath("//*[text() = 'brand ss']")).shouldBe(visible, Duration.ofSeconds(20));
+                if($(By.xpath("//*[text() = 'RESULTS']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
                 $(By.xpath("//*[text() = 'RESULTS']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'sort']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
@@ -419,13 +432,26 @@ public class ConciergePGStepsDefs {
             if(!$(By.xpath("//*[@id = 'footer']")).isDisplayed()){
                 WebDriverRunner.getWebDriver().navigate().refresh();
             }
-            while (!$$(By.xpath("//*[@id = 'flip-carousel-div']//img")).last().isDisplayed()){
-                $$(By.xpath("//*[@id = 'flip-carousel-div']//img")).last().scrollIntoView(true);
-                with().pollInterval(2, SECONDS).await().until(() -> true);
+            if($(By.xpath("//*[@id = 'itemsPerPage']")).isDisplayed()){
+                while (!$(By.xpath("//*[@id = 'itemsPerPage']")).getText().equals("Load All")) {
+                    $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                        $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
+                        $(By.xpath("//*[@id = 'itemsPerPage']")).click();
+                        $(By.xpath("//*[text() = 'Load All']")).click();
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
+                        $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
+                        $(By.xpath("//*[text() = 'Items per page']")).shouldBe(visible, Duration.ofSeconds(20));
+                    }
+                } else {
+                while (!$$(By.xpath("//*[@id = 'flip-carousel-div']//img")).last().isDisplayed()){
+                    $$(By.xpath("//*[@id = 'flip-carousel-div']//img")).last().scrollIntoView(true);
+                    with().pollInterval(2, SECONDS).await().until(() -> true);
+                }
             }
+
             $$(By.xpath("//*[@id = 'flip-carousel-div']//img")).last().shouldBe(visible, Duration.ofSeconds(20));
             $(By.xpath("//*[@id = 'footer']")).shouldBe(visible, Duration.ofSeconds(20));
-            $(By.xpath("//*[text() = 'Items per page']")).shouldBe(visible, Duration.ofSeconds(20));
         }
     }
 
@@ -438,14 +464,22 @@ public class ConciergePGStepsDefs {
             if (!$(By.xpath("//*[@id = 'footer']")).isDisplayed()) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
             }
-            while (!$(By.xpath("//*[@id = 'itemsPerPage']")).getText().equals("Load All")) {
-                $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
-                with().pollInterval(5, SECONDS).await().until(() -> true);
-                $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
-                $(By.xpath("//*[@id = 'itemsPerPage']")).click();
-                $(By.xpath("//*[text() = 'Load All']")).click();
-                with().pollInterval(5, SECONDS).await().until(() -> true);
-                $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
+            if($(By.xpath("//*[@id = 'itemsPerPage']")).isDisplayed()){
+                while (!$(By.xpath("//*[@id = 'itemsPerPage']")).getText().equals("Load All")) {
+                    $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                    $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
+                    $(By.xpath("//*[@id = 'itemsPerPage']")).click();
+                    $(By.xpath("//*[text() = 'Load All']")).click();
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                    $(By.xpath("//*[@id = 'itemsPerPage']")).scrollIntoView(true);
+                    $(By.xpath("//*[text() = 'Items per page']")).shouldBe(visible, Duration.ofSeconds(20));
+                }
+            } else {
+                while (!$$(By.xpath("//*[@id = 'flip-carousel-div']//img")).last().isDisplayed()){
+                    $$(By.xpath("//*[@id = 'flip-carousel-div']//img")).last().scrollIntoView(true);
+                    with().pollInterval(5, SECONDS).await().until(() -> true);
+                }
             }
         }
     }
@@ -678,4 +712,13 @@ public class ConciergePGStepsDefs {
         $(By.xpath("//*[contains(@class, 'MuiTypography-body1') and text() = '" + title + "']")).should(visible, Duration.ofSeconds(10));
     }
 
+   @Then("I Verify i return to {string} PG page")
+    public void iVerifyireturntopgpage(String title){
+        Assert.assertEquals(title.toLowerCase(), $(By.xpath("//*[text() = '" + title + "']")).getText().toLowerCase());
+        if(!conciergePGScreen.getResult().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
+        conciergePGScreen.getResult().should(Condition.visible, Duration.ofSeconds(15));
+        conciergePGScreen.getSort().should(Condition.visible, Duration.ofSeconds(15));
+    }
 }

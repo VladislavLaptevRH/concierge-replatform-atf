@@ -172,8 +172,9 @@ public class EstorePaymentStepDefs {
             }
             $(By.xpath("//iframe[@title='Iframe for secured card security code']")).should(Condition.be(visible), Duration.ofSeconds(20));
             switchTo().frame($(By.xpath("//iframe[@title='Iframe for secured card security code']")));
-            estorePaymentPage.getCvcField().setValue("321");
+            estorePaymentPage.getCvcField().setValue("737");
             switchTo().defaultContent();
+
             $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
             $(By.xpath("//input[@type='text']")).setValue("10");
             estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
@@ -192,8 +193,6 @@ public class EstorePaymentStepDefs {
             $(By.xpath("//span[@data-testid='split_payment_checkbox']")).click();
             $(By.xpath("//input[@type='text']")).setValue("10");
             estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
-
-
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             estoreE2EStepDefs.iClickOnContinuePaymentMethodEstoreButton();
         }

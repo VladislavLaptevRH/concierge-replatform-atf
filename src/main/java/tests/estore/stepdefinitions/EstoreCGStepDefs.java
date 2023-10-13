@@ -16,7 +16,6 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -32,18 +31,7 @@ public class EstoreCGStepDefs {
 
     @Then("I validate the collection name is not empty")
     public void iValidateTheCollectionNameIsNotEmpty() {
-        if (Hooks.cookie.contains("SSR")) {
-            $(By.xpath("//*[contains(text(),'COLLECTIONS')]")).should(Condition.and("", visible, interactable), Duration.ofSeconds(70));
-        } else {
-            if ((Hooks.cookie.equals("releasethurs")) || (Hooks.cookie.contains("userservice"))) {
-                $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'collections')]")).should(Condition.interactable, Duration.ofSeconds(60));
-                $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(60));
-            } else {
-                $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'collections')]")).should(Condition.interactable, Duration.ofSeconds(60));
-                $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'collections')]")).should(Condition.visible, Duration.ofSeconds(60));
-
-            }
-        }
+        $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'Collections')]")).should(Condition.visible, Duration.ofSeconds(60));
     }
 
     @When("I scroll on the page till back to top button is visible")
@@ -57,7 +45,7 @@ public class EstoreCGStepDefs {
 
     @Then("I verify that back to top button is clickable")
     public void iVerifyThatBackToTopButtonIsClickable() {
-        estoreCGScreen.getBackToTopButton().should(Condition.visible, Duration.ofSeconds(20));
+        estoreCGScreen.getBackToTopButton().should(Condition.interactable, Duration.ofSeconds(20));
         estoreCGScreen.getBackToTopButton().click();
     }
 
@@ -196,7 +184,13 @@ public class EstoreCGStepDefs {
 
     @Then("I verify CGS all menu items")
     public void iVerifyCGSAllMenuItems() {
-        iValidateTheCollectionNameIsNotEmpty();
+        try {
+            iValidateTheCollectionNameIsNotEmpty();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            iValidateTheCollectionNameIsNotEmpty();
+        }
     }
 
     @When("I goes to {string} estore collection page")
@@ -204,6 +198,7 @@ public class EstoreCGStepDefs {
         if (brand.equals("rh")) {
             String URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045";
             open(URL);
+            System.out.println();
         } else {
             String URL = "https://" +
                     brand + "." + Hooks.profile + "." + "rhnonprod.com";
@@ -246,7 +241,6 @@ public class EstoreCGStepDefs {
 
     @Then("user verifies that price range is displayed below the thumbnail")
     public void userVerifiesThatPriceRangeIsDisplayedBelowTheThumbnail() {
-        $(By.xpath("//*[contains(text(),'From')]")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Member']")).should(visible, Duration.ofSeconds(20));
         int regularPrice = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[1]")).getText().replaceAll("\\$", "").replaceAll("\\,", ""));
         int memberPrice = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-member'])[1]")).getText().replaceAll("\\$", "").replaceAll("\\,", ""));

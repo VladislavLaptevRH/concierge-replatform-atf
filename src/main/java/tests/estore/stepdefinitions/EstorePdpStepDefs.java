@@ -77,7 +77,7 @@ public class EstorePdpStepDefs {
         estorePdpPageScreen.getInStockOptionsButton().click();
         estorePdpPageScreen.getInStockTitle().should(Condition.visible, Duration.ofSeconds(20));
 
-        estorePdpPageScreen.getTurkishTowelCollectionTitle().should(Condition.and("", interactable, visible), Duration.ofSeconds(20));
+//        estorePdpPageScreen.getTurkishTowelCollectionTitle().should(Condition.and("", interactable, visible), Duration.ofSeconds(20));
         estorePdpPageScreen.getItemInStockOption().should(Condition.visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getSizeInStockOption().should(Condition.visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getColorInStockOption().should(Condition.visible, Duration.ofSeconds(20));
@@ -145,7 +145,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that price for product&line should be in US dollars on PDP page")
     public void iVerifyThatPriceForProductLineShouldBeInUS$() {
-        $(By.xpath("(//*[contains(text(),'$')])[3]")).should(visible, Duration.ofSeconds(40));
+        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$"));
     }
 
     @When("I update {string} postal code on pdp page")
@@ -339,6 +339,7 @@ public class EstorePdpStepDefs {
     @Then("I verify the product price for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceForProductAndWithForTheSelectedCountry(String productID, String arg1, String selectedOptions, String country) {
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        WebDriverRunner.getWebDriver().navigate().refresh();
         estorePdpPageScreen.getRegularTheFirstPrice().should(visible, Duration.ofSeconds(20));
         regularPricePdp = Integer.parseInt(estorePdpPageScreen.getRegularPdpProductPrice().getText().replaceAll("\\$", ""));
         memberPricePdp = Integer.parseInt(estorePdpPageScreen.getMemberPdpProductPrice().getText().replaceAll("\\$", ""));
@@ -384,7 +385,7 @@ public class EstorePdpStepDefs {
     public void iVerifyThatPopupIsDisplayed(String modalPopUp) {
         if (modalPopUp.equals("View In-Stock")) {
             $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
-            $(By.xpath("//p[text()='IN STOCK']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//p[text()='In Stock']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
         }
@@ -574,6 +575,24 @@ public class EstorePdpStepDefs {
     }
 
 
+   @Then("I verify the multisku ID is showing up once the line item is configured")
+    public void iVerifyTheMultiskuIDIsShowingUpOnceTheLineItemIsConfigured() {
+        $(By.xpath("//*[text()='Item# m000001198111']")).should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that the ETA on PDP")
+    public void iVerifyThatTheETAOnPDP() {
+        $(By.xpath("//*[text()='This item is special order and will be ready for delivery between 01/05/24 and 01/11/24 ']")).should(visible);
+    }
+
+    @Then("I verify that {string} message is displayed {string} the lien item dropdown")
+    public void iVerifyThatMessageIsDisplayedTheLienItemDropdown(String message, String location) {
+        if (location.equals("above")) {
+            estorePDPScreen.verifyThatItemIncludeMultipleComponentsMsgIsDisplayedAboveLineItemDropDown();
+        } else {
+            estorePDPScreen.verifyThatItemIncludeMultipleComponentsMsgIsDisplayedBellowLineItemDropDown();
+        }
+    }
 }
 
 

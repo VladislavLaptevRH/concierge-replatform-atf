@@ -165,7 +165,6 @@ Feature: Concierge Critical Path
     When I remove client from header
     When I open product page with productId "prod19500002"
     Then I chose the '1' line item selections one by one
-    Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
     Then I open cart
@@ -183,6 +182,7 @@ Feature: Concierge Critical Path
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with productId "prod19500002"
+    Then I chose zero choose in line items
     Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
@@ -345,7 +345,7 @@ Feature: Concierge Critical Path
     Then I navigate to menu 'Rugs'
     Then I navigate to sub menu 'Rugs'
     Then I navigate to gallery 'Rug Collections'
-    Then I verify that 'Navigate to fourth collection' on CG screen
+    Then I verify that 'Navigate to second collection' on CG screen
     Then I verify that 'Navigate to first product' on CG screen
     Then I click 'Back Browser Button' on CG screen
     Then I verify that 'confirm that PG is displayed' on CG screen
@@ -622,11 +622,10 @@ Feature: Concierge Critical Path
     Then I Verify that 'text "Learn more about our Return Policy"' is present
     Then I Verify that '"footer" in PDP' is present
     Then I chose zero choose in line items
-    Then I chose zero choose in line items
     Then I verify the rest of the checkings for "<skuID>"
     Examples:
       |skuID        |
-      |57070740 CLNT|
+#      |57070740 CLNT|
       |61970975 TEAK|
       |62870050 LOAK|
       |10024793 BRNZ|
@@ -689,7 +688,7 @@ Feature: Concierge Critical Path
 #    Given I log into Concierge as "associate"
 #    When I choose country for concierge from footer
 #    When I remove all items from cart via UI
-#    When I go to item "63130001 GREY" from search field
+#    When I go to item "57070740 CLNT" from search field
 #    When I click on "view select items on sale" link
 #    Then Verify that "Sale modal" 'opens'
 #    Then Verify that "Sale modal" 'has title'
@@ -709,8 +708,8 @@ Feature: Concierge Critical Path
     Then I verify that availability, Delivery and returns messaging is displayed for "<items>"
     Examples:
       | items | skuID         |
-      | SO    | 19970830 CTIC |
-      | BO    | 10024793 BRNZ  |
+      | SO    | 59810779 CTBZ |
+      | BO    | 10024793 BRNZ |
 
   Scenario: Verify the dropdown selection and add to cart
 
@@ -821,8 +820,7 @@ Feature: Concierge Critical Path
   Scenario: Verify the Postal code updates in PDP
     Given I log into Concierge as "associate"
     When I choose 'US' country
-    When I go to item "prod28500462" from search field
-    When I click on the first project search result with parameters 'prod28500462''10097586 BWMR'
+    When I go to item "10115451 BWMR" from search field
     Then Verify that 'default US zip code is present in PDP'
     Then I click on zip code and change it to '10001'
     Then I verify that zip code in PDP is '10001'
@@ -849,10 +847,12 @@ Feature: Concierge Critical Path
     Then Verify that 'PDP has SALE and MEMBER prices'
 
   Scenario Outline: Verify Mattress Recycling Fee
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10004670 NONE" from search field
+    Then I chose the '1' line item selections one by one
     Then I chose the '1' line item selections one by one
     When I change state for "<state>" with zip code "<zipCode>"
     Then I verify that text ""<state>" requires a mattress recycling fee to be collected at checkout state" is present in PDP

@@ -27,14 +27,14 @@ Feature: eStore Contract and Trade
   Scenario: eStore Contract - Validate the currency for US-Zip on PDP
     Given I log into eStore as contract
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I open product page with "prod2020027" and "17050043" with "INDG" for estore
     When I update "US" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
   Scenario: eStore Contract - Validate the currency for CAN-Zip on PDP
     Given I log into eStore as contract
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I open product page with "prod2020027" and "17050043" with "INDG" for estore
     When I update "CAN" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
@@ -82,7 +82,7 @@ Feature: eStore Contract and Trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "MO" brand
-    When I go to estore item "17050042 WHT" from search field
+    When I go to estore item "17050045 NCKL" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that "contract" price is used for each "MO" product
@@ -92,7 +92,7 @@ Feature: eStore Contract and Trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "B&C" brand
-    When I go to estore item "17050042 WHT" from search field
+    When I go to estore item "17050045 NCKL" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that "contract" price is used for each "B&C" product
@@ -102,7 +102,7 @@ Feature: eStore Contract and Trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "TN" brand
-    When I go to estore item "17050042 WHT" from search field
+    When I go to estore item "17050045 NCKL" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that "contract" price is used for each "TN" product
@@ -169,12 +169,11 @@ Feature: eStore Contract and Trade
     When I remove payment method which was used earlier
     Then I verify that I'm able to edit payment
 
-
   Scenario: eStore Contract - Verify UFD for different zip codes
     Given I log into eStore as contract
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
+    When I add product "prod7571021" and sku "63130001 NATL" to cart via API for estore
     When I open estore cart
     When I click on zipcode estore button
     When I update postal code in cart
@@ -234,9 +233,11 @@ Feature: eStore Contract and Trade
     Given I log into eStore as contract
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
-    When I click on add to cart estore button
-    And I click on view cart estore button
+    When I add item to cart via API for estore
+#    When I open product page with "prod2020027" and "17050042" with "SND" for estore
+#    When I click on add to cart estore button
+#    And I click on view cart estore button
+    When I open estore cart
     When I click on estore checkout button
     When I fill estore shipping address for contract&trade
     When I click on same as estore shipping address checkbox
@@ -311,14 +312,14 @@ Feature: eStore Contract and Trade
   Scenario: eStore Trade - Validate the currency for US-Zip on PDP
     Given I log into eStore as trade
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I open product page with "prod2020027" and "17050043" with "INDG" for estore
     When I update "US" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
   Scenario: eStore Trade - Validate the currency for CAN-Zip on PDP
     Given I log into eStore as trade
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    When I open product page with "prod2020027" and "17050043" with "INDG" for estore
     When I update "CAN" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
@@ -466,7 +467,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod2020027" and "17050042" with "IRON" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -483,7 +484,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I add product "prod1617188" and sku "63130001 NATL" to cart via API for estore
+    When I add product "prod7571021" and sku "63130001 NATL" to cart via API for estore
     When I open estore cart
     When I click on zipcode estore button
     When I update postal code in cart
@@ -521,7 +522,7 @@ Feature: eStore Contract and Trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I go to "MO" brand
-    When I go to estore item "17050042 WHT" from search field
+    When I go to estore item "17050043 MIST" from search field
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that "trade" price is used for each "MO" product

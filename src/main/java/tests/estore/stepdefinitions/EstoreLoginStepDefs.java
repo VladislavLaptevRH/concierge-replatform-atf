@@ -314,10 +314,10 @@ public class EstoreLoginStepDefs {
 
     @When("I click on estore signout button")
     public void iClickOnEstoreSignoutButton() {
-        $(By.xpath("//*[text()='SIGN OUT']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='SIGN OUT']")).click();
         $(By.xpath("//*[text()='Sign Out']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Sign Out']")).click();
+        $(By.xpath("(//*[text()='Sign Out'])[2]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='Sign Out'])[2]")).click();
     }
 
     @Then("I verify that user is able to signout")

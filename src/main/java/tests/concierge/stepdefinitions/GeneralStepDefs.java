@@ -3,6 +3,7 @@ package tests.concierge.stepdefinitions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
@@ -31,6 +32,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.with;
 import static tests.estore.stepdefinitions.EstoreGeneralStepDefs.setUserEnvironment;
+import static tests.utility.Hooks.getWebDriver;
 
 public class GeneralStepDefs {
     ConciergeLoginPage conciergeLoginPage = new ConciergeLoginPage();
@@ -751,6 +753,12 @@ public class GeneralStepDefs {
             addItemEndpoint = "/concierge-bff-v1/graphql";
             USER_ID = "6192a475-4d00-4d61-aa0c-3e25c7000151";
         }
+    }
+
+    @Then("I click browser back button")
+    public void iClickbackbutton(){
+        WebDriverRunner.getWebDriver().navigate().back();
+        with().pollInterval(7, SECONDS).await().until(() -> true);
     }
 
 }
