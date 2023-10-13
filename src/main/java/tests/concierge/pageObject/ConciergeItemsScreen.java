@@ -109,5 +109,12 @@ public class ConciergeItemsScreen {
     private SelenideElement saleButtonMenuForUK = $(By.xpath("//*[text()='Sale']"));
 
     private final SelenideElement livingSaleMenuBar = $(By.xpath("(//*[contains(text(),'Living')])[2]"));
+
+    private SelenideElement footerValidation = $(By.xpath("//*[@id = 'footer']"));
+
+    private SelenideElement fabricChairInSale = $(By.xpath("//*[text()='Fabric Chairs']"));
+
+    private SelenideElement freeShippingMessage = $(By.xpath("//*[text()='ENJOY FREE SHIPPING ON ALL TEXTILES']"));
+
 }
 

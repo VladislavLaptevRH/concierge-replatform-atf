@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import tests.concierge.pageObject.ConciergeItemsScreen;
+import tests.concierge.pageObject.ConciergeCGScreen;
 import tests.utility.Hooks;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -29,12 +30,9 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class ConciergeCGStepsDefs {
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
-
-
-public class ConciergeCGStepsDefs {
-    ConciergeCGScreen  ConciergeCGScreen = new ConciergeCGScreen();
+    ConciergeCGScreen ConciergeCGScreen = new ConciergeCGScreen();
     public static String galleryName;
-    public static final Logger logger = LoggerFactory.getLogger(FilterStepDefs.class);
+    //public static final Logger logger = (Logger) LoggerFactory.getLogger(FilterStepDefs.class);
 
     @Then("I verify that {string} on CG screen")
     public void iVerifyThatOnCGScreen(String data) {
@@ -63,7 +61,7 @@ public class ConciergeCGStepsDefs {
                 $(By.xpath("//*[text() = 'Kabir Wool Rug']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "Navigate to first product":
-                if(!$(By.xpath("(//*[@id = 'flip-carousel-div']//img)[1]")).isDisplayed()){
+                if (!$(By.xpath("(//*[@id = 'flip-carousel-div']//img)[1]")).isDisplayed()) {
                     WebDriverRunner.getWebDriver().navigate().refresh();
                 }
                 $(By.xpath("//*[@id = 'flip-carousel-div']")).click();
@@ -76,15 +74,15 @@ public class ConciergeCGStepsDefs {
                 $(By.xpath("(//*[@id = 'component-collection-card'])[4]//*[text() = 'Nihal Wool Rug']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "grid view is present on top right":
-                for(int i = 1; i <= 3; i++) {
+                for (int i = 1; i <= 3; i++) {
                     $(By.xpath("//*[ local-name() = 'svg' and @column = '" + i + "']")).shouldBe(visible, Duration.ofSeconds(20));
                 }
                 break;
             case "grid view is set to 1-grid view by default":
-                    $(By.xpath("//*[ local-name() = 'svg' and @column = '1' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));
+                $(By.xpath("//*[ local-name() = 'svg' and @column = '1' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "same CG is displayed":
-            assertEquals(galleryName, $(By.xpath("(//div/p[contains(@class, 'MuiTypography-body1')])[1]")).getText());
+                assertEquals(galleryName, $(By.xpath("(//div/p[contains(@class, 'MuiTypography-body1')])[1]")).getText());
                 break;
             case "grid view is set to 2-grid view":
                 $(By.xpath("//*[ local-name() = 'svg' and @column = '2' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));
@@ -92,7 +90,8 @@ public class ConciergeCGStepsDefs {
             case "grid view is set to 3-grid view":
                 $(By.xpath("//*[ local-name() = 'svg' and @column = '3' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
-            default: break;
+            default:
+                break;
         }
     }
 
@@ -102,7 +101,8 @@ public class ConciergeCGStepsDefs {
             case "Back Browser Button":
                 WebDriverRunner.getWebDriver().navigate().back();
                 break;
-            default: break;
+            default:
+                break;
         }
     }
 
@@ -128,7 +128,7 @@ public class ConciergeCGStepsDefs {
         $(By.xpath("//*[ local-name() = 'svg' and @column = '" + view + "']")).click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[ local-name() = 'svg' and @column = '" + view + "' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));
-        if(view.equals("1")) {
+        if (view.equals("1")) {
             int i = 1;
             with().pollInterval(1, SECONDS).await().until(() -> true);
             while (!$(By.xpath("//*[@class = 'MuiButtonBase-root MuiFab-root' and not(contains(@style, 'hidden'))]")).isDisplayed()) {
@@ -139,7 +139,7 @@ public class ConciergeCGStepsDefs {
             }
             assertEquals(3, i);
         }
-        if(view.equals("2")){
+        if (view.equals("2")) {
             int i = 1;
             while (!$(By.xpath("//*[@class = 'MuiButtonBase-root MuiFab-root' and not(contains(@style, 'hidden'))]")).isDisplayed()) {
                 $(By.xpath("(//*[@id = 'collection-gallery-grid'])[" + i + "]")).scrollIntoView(true);
@@ -148,7 +148,7 @@ public class ConciergeCGStepsDefs {
             }
             assertEquals(4, i);
         }
-        if(view.equals("3")){
+        if (view.equals("3")) {
             int i = 1;
             with().pollInterval(1, SECONDS).await().until(() -> true);
             while (!$(By.xpath("//*[@class = 'MuiButtonBase-root MuiFab-root' and not(contains(@style, 'hidden'))]")).isDisplayed()) {
@@ -160,17 +160,18 @@ public class ConciergeCGStepsDefs {
             assertEquals(5, i);
         }
     }
+
     @Then("confirm that Seating {string} is present in {string} of {string}")
     public void iConfirmThatSearchingCollectionsIsPresentInLevelOfMenu(String gallery, String levelOfCollection, String subMenu) {
-        if(!gallery.equals("")){
-            if($(By.xpath("(//li[contains(@id, 'rhrCtalogNavigationDetails_concepts')])[" + levelOfCollection + "]/span")).isDisplayed()){
+        if (!gallery.equals("")) {
+            if ($(By.xpath("(//li[contains(@id, 'rhrCtalogNavigationDetails_concepts')])[" + levelOfCollection + "]/span")).isDisplayed()) {
                 assertEquals(gallery, $(By.xpath("(//li[contains(@id, 'rhrCtalogNavigationDetails_concepts')])[" + levelOfCollection + "]/span")).getText());
             } else {
                 assertEquals(gallery, $(By.xpath("(//*[@role = 'tooltip']//*[contains(@class, 'MuiTypography')])[" + levelOfCollection + "]")).getText());
             }
 
         } else {
-            if($(By.xpath("(//li[contains(@id, 'rhrCtalogNavigationDetails_navigation')])[" + levelOfCollection + "]/span")).isDisplayed()){
+            if ($(By.xpath("(//li[contains(@id, 'rhrCtalogNavigationDetails_navigation')])[" + levelOfCollection + "]/span")).isDisplayed()) {
                 assertEquals(subMenu, $(By.xpath("(//li[contains(@id, 'rhrCtalogNavigationDetails_navigation')])[" + levelOfCollection + "]/span")).getText());
             } else {
                 assertEquals(subMenu, $(By.xpath("(//div[@role = 'tooltip']//span[contains(@class, 'MuiTypography')])[" + levelOfCollection + "]")).getText());
@@ -179,21 +180,21 @@ public class ConciergeCGStepsDefs {
     }
 
     @Then("I verify $$ values are not present in the CG Collections page")
-    public void iVerifyDollarValuesAreNotPresent(){
+    public void iVerifyDollarValuesAreNotPresent() {
         String URL = Hooks.getCurrentUrl();
         assertFalse(URL.contains("$"));
-        String i= WebDriverRunner.getWebDriver().findElement(By.tagName("body")).getText();
+        String i = WebDriverRunner.getWebDriver().findElement(By.tagName("body")).getText();
 
-        if(i.contains("$")){
+        if (i.contains("$")) {
             System.out.println("CG page must not have the cost-error in the page");
-        }
-        else {
+        } else {
             System.out.println("CG page looks correct by not displaying the cost");
         }
     }
+
     @Then("I verify flag icon for country selection and select and validate")
-    public void iVerifyFlagIconForCountrySelection(){
-        conciergeItemsScreen.getCountrySelection().should(visible,Duration.ofSeconds(40));
+    public void iVerifyFlagIconForCountrySelection() {
+        conciergeItemsScreen.getCountrySelection().should(visible, Duration.ofSeconds(40));
 
         // Verifying the USA validation of sale
         conciergeItemsScreen.getCountrySelection().click();
@@ -243,43 +244,75 @@ public class ConciergeCGStepsDefs {
     }
 
     @Then("I verify loading time for CG page")
-    public void iVerifyLoadingTimeForCgPage(){
+    public void iVerifyLoadingTimeForCgPage() {
         long start = System.currentTimeMillis();
         WebDriverRunner.getWebDriver().navigate().refresh();
         long finish = System.currentTimeMillis();
         long totalTime = finish - start;
-        System.out.println("Total Time for page load - "+totalTime);
+        System.out.println("Total Time for page load - " + totalTime);
         //5000 represents milliseconds ~ 5 seconds as per scenario
-        if(totalTime<5000){
-            System.out.println("Total Time for page load is less than 5 seconds- "+totalTime);
-        }
-        else{
-            System.out.println("Total Time for page load is more than 5 seconds- "+totalTime);
+        if (totalTime < 5000) {
+            System.out.println("Total Time for page load is less than 5 seconds- " + totalTime);
+        } else {
+            System.out.println("Total Time for page load is more than 5 seconds- " + totalTime);
         }
 
     }
 
     @Then("I Verify the price is not displayed")
-    public void iVerifynoPrice(){
-        try{
+    public void iVerifynoPrice() {
+        try {
             $(By.xpath("//*[text()='$']"));
 //            ConciergeCGScreen.getPrice().isDisplayed();
 //            ConciergeCGScreen.getPrice().click();
-        }
-        catch (Exception e){
-            logger.debug(e.getMessage());
+        } catch (Exception e) {
+            //logger.debug(e.getMessage());
         }
 
     }
 
     @Then("I verify title is left aligned")
-    public void iVerifytitleleftaligned(){
+    public void iVerifytitleleftaligned() {
         ConciergeCGScreen.getSeatingCollectionTitle().shouldBe(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify RH MEMBERS PROGRAM is right aligned")
-    public void iVerifyRHMemberrightaligned(){
+    public void iVerifyRHMemberrightaligned() {
         ConciergeCGScreen.getRHMemberProgram().shouldBe(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify page is loaded till footer")
+    public void iVerifyPageLoadedTillFooter() {
+        conciergeItemsScreen.getFooterValidation().scrollIntoView(true);
+        conciergeItemsScreen.getFooterValidation().shouldBe(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify Sale is clicked and taken to PG page")
+    public void iVerifySalePageClickedAndTakenToPG() {
+        conciergeItemsScreen.getSaleButtonMenu().should(visible, Duration.ofSeconds(20));
+        conciergeItemsScreen.getSaleButtonMenu().click();
+        //validating the sale link is present
+        conciergeItemsScreen.getLivingSaleMenuBar().click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getFabricChairInSale().click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+    }
+    @Then("I verify $$ values are present in the PG Collections page")
+    public void iVerifyPGLoaded() {
+        String URL = Hooks.getCurrentUrl();
+        assertTrue(URL.contains("sku_showOnly"));
+        String i = WebDriverRunner.getWebDriver().findElement(By.tagName("body")).getText();
+
+        if (i.contains("$")) {
+            System.out.println("PG page must have the cost in the page");
+        } else {
+            System.out.println("PG page must not have the cost in the page");
+        }
+    }
+
+    @Then("I verify Free shipping message in textiles")
+    public void iVerifyFreeShippingInTextiles() {
+        conciergeItemsScreen.getFreeShippingMessage().should(visible, Duration.ofSeconds(20));
     }
 }
 
