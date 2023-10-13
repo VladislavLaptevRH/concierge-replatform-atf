@@ -249,7 +249,6 @@ Feature: Concierge CG Page
    Then I navigate to gallery 'Seating Collections'
    Then I verify RH MEMBERS PROGRAM is right aligned
 
-   @vimal
    Scenario: To verify that all CGs are loading till footer
      Given I log into Concierge as "associate"
      When I choose country for concierge from footer
@@ -274,12 +273,14 @@ Feature: Concierge CG Page
     Then I navigate to gallery 'Seating Collections'
     Then I Verify "SALE" is present
 
+    @vimal
   Scenario: To verify that MO CGs are present for applicable CG pages below RH CGs
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I navigate to menu 'Living'
     Then I navigate to sub menu 'Fabric Seating'
     Then I navigate to gallery 'Seating Collections'
+    Then I verify MO in CG page
 
   Scenario: Verify that click on View Sale verbiage should open the sale PG with collections related sale SKUs
     Given I log into Concierge as "associate"

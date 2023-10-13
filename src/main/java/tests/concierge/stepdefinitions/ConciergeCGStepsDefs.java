@@ -314,5 +314,10 @@ public class ConciergeCGStepsDefs {
     public void iVerifyFreeShippingInTextiles() {
         conciergeItemsScreen.getFreeShippingMessage().should(visible, Duration.ofSeconds(20));
     }
+
+    @Then("I verify MO in CG page")
+    public void iVerifyMOinCGPage() {
+        conciergeItemsScreen.getMoInCGPage().should(visible, Duration.ofSeconds(20));
+    }
 }
 
