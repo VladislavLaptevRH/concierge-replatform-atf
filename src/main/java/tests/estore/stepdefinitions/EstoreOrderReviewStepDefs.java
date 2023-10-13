@@ -98,4 +98,8 @@ public class EstoreOrderReviewStepDefs {
     public void iClickOnEditGiftMessageOnOrderReviewPage() {
         estoreReviewOrderPage.clickToEditGiftMessageButton();
     }
+    @Then("I verify the message {string} should be shown on {string} page")
+    public void iVerifyTheMessageShouldBeShownOnPage(String arg0, String arg1) {
+        estoreCartPage.verifyThatComponentMessageIsDisplayedForAllLineItems();
+    }
 }

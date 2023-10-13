@@ -20,7 +20,7 @@ public class EstoreMemberPage {
     private final SelenideElement membershipEmailText = $(By.xpath("//*[text()='Email: ']"));
     private final SelenideElement membershipEmailValue = $(By.xpath("//*[text()='automationmember@rh.com']"));
     private final SelenideElement membershipRenewalText = $(By.xpath("//*[text()='You will be charged ']"));
-    private final SelenideElement membershipRenewalAmount = $(By.xpath("//*[text()='$175.00']"));
+    private final SelenideElement membershipRenewalAmount = $(By.xpath("//*[text()='$200.00']"));
 
     private final SelenideElement memberTitle = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[6]/p"));
     private final List<SelenideElement> membershipDetails = $$(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-direction-xs-column'])[2]/div/p"));

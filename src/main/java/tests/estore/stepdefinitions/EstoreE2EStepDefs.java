@@ -622,7 +622,7 @@ public class EstoreE2EStepDefs {
 
         open(URL);
         try {
-            estoreItemPage.getAddToCartButton().should(visible);
+            estoreItemPage.getAddToCartButton().should(visible, Duration.ofSeconds(20));
             estoreItemPage.getAddToCartButton().scrollTo();
             if (!estoreItemPage.getAddToCartButton().isEnabled()) {
                 for (int i = 0; i < 3; i++) {

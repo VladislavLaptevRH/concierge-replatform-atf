@@ -1,5 +1,6 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -27,6 +28,8 @@ public class EstoreSearchScreen {
 
     private SelenideElement twoColumnsInRowGridElement = $(By.xpath("(//*[contains(@class, 'MuiSvgIcon-root')])[6]"));
 
+    private SelenideElement defaultGridElement = $(By.id("component-product-grid"));
+
     private SelenideElement turkish802towel = $(By.xpath("//*[text()='802-GRAM TURKISH TOWEL COLLECTION']"));
 
     private SelenideElement searchIcon = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]"));
@@ -46,6 +49,10 @@ public class EstoreSearchScreen {
     private SelenideElement upToText = $(By.xpath("//*[text()='up to']"));
 
     private SelenideElement save70 = $(By.xpath("//*[text()=' 70%']"));
+
+    public void verifyThatDefaultGridIsDisplayed() {
+        defaultGridElement.should(Condition.visible);
+    }
 
 
 }

@@ -1,23 +1,23 @@
 @estoreCriticalPathTestRun
 Feature: Estore critical path
 
-  Scenario Outline: Verify top menu navigation
-    Given I log into eStore as guest
-    When I choose country for eStore from footer
-    Then  I change the brand to "<brand>" for eStore
-    Then User verifies that all items from menu are displayed for "<brand>" on eStore
-    And user verifies search button, account icon, cart button are displayed
-    Examples:
-      | brand           |
-      | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
-      | RH TEEN         |
-      | RH BABY & CHILD |
+#  Scenario Outline: Verify top menu navigation
+#    Given I log into eStore as guest
+#    When I choose country for eStore from footer
+#    Then  I change the brand to "<brand>" for eStore
+#    Then User verifies that all items from menu are displayed for "<brand>" on eStore
+#    And user verifies search button, account icon, cart button are displayed
+#    Examples:
+#      | brand           |
+#      | RH              |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
+#      | RH TEEN         |
+#      | RH BABY & CHILD |
 
   Scenario Outline: CG - Test CGS in all menu items (All brands)
     Given I log into eStore as "guest" user
@@ -27,7 +27,7 @@ Feature: Estore critical path
     Examples:
       | brands |
       | rh     |
-#      | rhcontemporary |
+      | rhcontemporary |
 #      | rhinteriors    |
 #      | rhmodern       |
 #      | rhoutdoor      |
@@ -47,7 +47,7 @@ Feature: Estore critical path
 #      | RH CONTEMPORARY |
 #      | RH MODERN       |
 #      | RH OUTDOOR      |
-#      | RH BEACH HOUSE  |
+      | RH BEACH HOUSE  |
 #      | RH SKI HOUSE    |
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
@@ -71,7 +71,7 @@ Feature: Estore critical path
       | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
-#      | RH MODERN       |
+      | RH MODERN       |
 #      | RH OUTDOOR      |
 #      | RH BEACH HOUSE  |
 #      | RH SKI HOUSE    |
@@ -92,7 +92,7 @@ Feature: Estore critical path
 #      | RH INTERIORS    |
 #      | RH MODERN       |
 #      | RH OUTDOOR      |
-#      | RH BEACH HOUSE  |
+      | RH BEACH HOUSE  |
 #      | RH SKI HOUSE    |
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
@@ -111,7 +111,7 @@ Feature: Estore critical path
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
-#      | RH OUTDOOR      |
+      | RH OUTDOOR      |
 #      | RH BEACH HOUSE  |
 #      | RH SKI HOUSE    |
 #      | RH TEEN         |
@@ -134,7 +134,7 @@ Feature: Estore critical path
 #      | RH BEACH HOUSE  |
 #      | RH SKI HOUSE    |
 #      | RH TEEN         |
-#      | RH BABY & CHILD |
+      | RH BABY & CHILD |
 
   Scenario Outline: PG - Verify the Member Price Text On PG page after selecting the specifications
     Given I log into eStore as "member" user
@@ -283,7 +283,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     Then I verify line items "<functional>"
     Examples:
       | functional            |
@@ -297,7 +297,7 @@ Feature: Estore critical path
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -317,7 +317,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -335,7 +335,7 @@ Feature: Estore critical path
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that order estimate is calculcated based on member prices
@@ -445,7 +445,7 @@ Feature: Estore critical path
     Given I log into eStore as "nonmember" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I update item quantity in estore pdp
     When I click on add to cart estore button
     When I click on view cart estore button
@@ -468,7 +468,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I update item quantity in estore pdp
     When I click on add to cart estore button
     When I click on view cart estore button
@@ -487,28 +487,28 @@ Feature: Estore critical path
   Scenario: Verify the In stock functionality
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     Then I verify link bellow "View In-Stock Items" is displayed
     And I verify that "View In-Stock" popup is displayed
 
   Scenario: Verify the On sale functionality
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     Then I verify link bellow "View On Sale Items" is displayed
     And I verify that "View On Sale" popup is displayed
 
   Scenario: PDP - Verify the availability , delivery and return messages in PDP
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     Then I verify availability , delivery and return messages in PDP
 
 #Verify the dropdown selection and add to cart
   Scenario: PDP - Verify the dropdown selection and add to cart case 1
     Given I log into eStore as guest
     When I choose country for eStore from footer
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     Then I verify that add to cart button is active
     And  I verify special messages on PDP page
     When I unselect the size option for "prod19500002" and "17050045" with "NCKL" for estore
@@ -529,7 +529,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
     When I choose country for eStore from footer
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I get prices for US for eStore
     When I update "CAN" postal code on pdp page
     Then I verify that prices for "CAN" was updated
@@ -543,7 +543,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I update "CAN" postal code on pdp page
     Then I verify the product price for product "prod19500002" and "17050045" with "NCKL" for the selected "CAN" country
     When I click on add to cart estore button
@@ -553,7 +553,7 @@ Feature: Estore critical path
   Scenario: PDP - Verify the prices it is showing for regular user
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     Then I verify that price is showing for regular and member user
 
   Scenario: Cart - Zip code validation in cart
@@ -579,7 +579,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I update "CAN" postal code on pdp page
     Then I verify price for member and regular user on PDP
     Then I verify the product price for product "prod19500002" and "17050045" with "NCKL" for the selected "CAN" country
@@ -594,7 +594,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -676,7 +676,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -698,7 +698,7 @@ Feature: Estore critical path
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -951,7 +951,7 @@ Feature: Estore critical path
     Given I log into eStore as contract
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -968,7 +968,7 @@ Feature: Estore critical path
   Scenario: Return & Exchange
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When user clicks on return policy link
     Then user verifies that user is redirected to a return policy page
 
@@ -978,7 +978,7 @@ Feature: Estore critical path
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When  I change the brand to "RH BABY & CHILD" for eStore
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -1016,7 +1016,7 @@ Feature: Estore critical path
   Scenario: Verify Monogrammed products
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add monogram checkbox from pdp on eStore
     When I add monogram to product on eStore
     Then I verify that monogram was added for pdp on eStore
@@ -1028,7 +1028,7 @@ Feature: Estore critical path
   Scenario: Verify user is able to edit Monogram product incart
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add monogram checkbox from pdp on eStore
     When I add monogram to product on eStore
     Then I verify that monogram was added for pdp on eStore

@@ -171,7 +171,7 @@ Feature: Estore Payment
     Given I log into eStore as "userWithSavedMasterCardVisa" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I update item quantity in estore pdp
     When I click on add to cart estore button
     And I click on view cart estore button
@@ -184,7 +184,7 @@ Feature: Estore Payment
     And I introduces payment details for estore guest user for payment
     When I open estore cart
     Then I verify that I'm able to decrease item quantity with success
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
