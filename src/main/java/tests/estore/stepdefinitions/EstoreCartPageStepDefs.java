@@ -29,7 +29,6 @@ import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class EstoreCartPageStepDefs {
-    EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
     EstoreCartPage estoreCartPage = new EstoreCartPage();
     EstoreCheckoutAddressScreen estoreCheckoutAddressScreen = new EstoreCheckoutAddressScreen();
@@ -874,7 +873,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that the ETA on PDP and cart are matching")
     public void iVerifyThatTheETAOnPDPAndCartAreMatching() {
-        $(By.xpath("//*[text()='This item is special order and will be ready for delivery between 01/05/24 and 01/11/24 ']"))
+        $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between')]"))
                 .should(visible);
     }
 

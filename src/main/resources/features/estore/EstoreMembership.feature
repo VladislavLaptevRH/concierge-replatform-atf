@@ -112,6 +112,7 @@ Feature: Estore Membership
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I goes to my account for estore
+    When I click on my account button if page is not loaded
     When I click on estore my account icon for guest user
     When I navigate to the member tab
     Then I verify that the memberID, enrollment date, renewal date and price, MOP are displayed
@@ -136,6 +137,7 @@ Feature: Estore Membership
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I click on my account button if page is not loaded
+    When I click on estore my account icon for guest user
     When I navigate to the member tab
     When I click on cancel membership link
     Then I verify the membership cancel link
@@ -145,6 +147,7 @@ Feature: Estore Membership
     When I choose country for eStore from footer
     When I goes to my account for estore
     When I click on my account button if page is not loaded
+    When I click on estore my account icon for guest user
     When I navigate to the member tab
     When I introduce email address to link membership field
     When I click on link membership buttom

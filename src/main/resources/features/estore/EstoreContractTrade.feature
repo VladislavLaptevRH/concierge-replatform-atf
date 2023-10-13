@@ -119,7 +119,6 @@ Feature: eStore Contract and Trade
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove split payment which was used earlier
-    When I refresh current estore page
     Then I verify that I'm able to execute estore split payment
 
   Scenario: estore Contract - RHCC
@@ -467,7 +466,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod2020027" and "17050042" with "IRON" for estore
+    When I open product page with "prod2020027" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -494,7 +493,7 @@ Feature: eStore Contract and Trade
     Given I log into eStore as trade
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button

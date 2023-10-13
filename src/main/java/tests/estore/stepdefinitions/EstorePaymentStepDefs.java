@@ -223,7 +223,7 @@ public class EstorePaymentStepDefs {
 
     @When("I update item quantity in estore pdp")
     public void iUpdateItemQuantityInEstorePdp() {
-
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreItemPage.getSelectQuantity().scrollIntoView(true);
         estoreItemPage.getSelectQuantity().should(visible, Duration.ofSeconds(40));
         Select selectQuantity = new Select(estoreItemPage.getSelectQuantity());
