@@ -103,4 +103,16 @@ public class EstorePdpPageScreen {
     private SelenideElement heroImageDownwardBtn = $(By.xpath("(//*[contains(@class,'arrow-icon')])[7]"));
 
     private SelenideElement heroImageCloseIcon = $(By.xpath("//*[@id ='Combined-Shape' and @fill='currentColor']"));
+
+    private SelenideElement countrySelectionBtn = $(By.xpath("//div[@id='country-selection']"));
+
+    private  SelenideElement countyCode = $(By.xpath("//li[@data-value='GB']"));
+
+    private  SelenideElement postalCodeInput = $(By.xpath("//input[@id='postal-code-international']"));
+
+    private SelenideElement postalCodeSubmitBtn = $(By.xpath("//button[@data-testid='submit-postal']"));
+
+    private SelenideElement viewStockMsg = $(By.xpath("//*[text()='These options are available for']"));
+
+    private SelenideElement availableItemMsg= $(By.xpath("(//p[contains(text(),'This item is in stock and will be delivered on or before')])[2]"));
 }

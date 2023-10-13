@@ -346,21 +346,21 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the product price as per the Ship to selection for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceAsPerTheShipToSelectionForProduct(String productID, String arg1, String selectedOptions, String country) {
-        $(By.xpath("//div[@id='country-selection']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//div[@id='country-selection']")).scrollIntoView(true);
-        $(By.xpath("//div[@id='country-selection']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//div[@id='country-selection']")).click();
-        $(By.xpath("//li[@data-value='GB']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//li[@data-value='GB']")).click();
+        estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getCountrySelectionBtn().scrollIntoView(true);
+        estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getCountrySelectionBtn().click();
+        estorePdpPageScreen.getCountyCode().should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getCountyCode().click();
         WebDriverRunner.getWebDriver().navigate().refresh();
         estorePdpPageScreen.getHeroImageMemberPrice().should(visible, Duration.ofSeconds(20));
         Assert.assertTrue(estorePdpPageScreen.getHeroImageMemberPrice().shouldBe(visible, Duration.ofSeconds(15)).isDisplayed());
         Assert.assertTrue(estorePdpPageScreen.getHeroImageRegularPrice().shouldBe(visible, Duration.ofSeconds(15)).isDisplayed());
         estorePdpPageScreen.getInStockOptionsButton().click();
-        $(By.xpath("//input[@id='postal-code-international']")).sendKeys("W1S 3ES");
-        $(By.xpath("//button[@data-testid='submit-postal']")).click();
-        $(By.xpath("//*[text()='These options are available for']")).shouldBe(visible, Duration.ofSeconds(15));
-        $(By.xpath("(//p[contains(text(),'This item is in stock and will be delivered on or before')])[2]")).shouldBe(visible, Duration.ofSeconds(15));
+        estorePdpPageScreen.getPostalCodeInput().sendKeys("W1S 3ES");
+        estorePdpPageScreen.getPostalCodeSubmitBtn().click();
+        estorePdpPageScreen.getViewStockMsg().shouldBe(visible, Duration.ofSeconds(15));
+        estorePdpPageScreen.getAvailableItemMsg().shouldBe(visible, Duration.ofSeconds(15));
         estorePdpPageScreen.getHeroImageCloseIcon().click();
     }
 
