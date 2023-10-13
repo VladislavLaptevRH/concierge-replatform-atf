@@ -1,4 +1,5 @@
 @conciergeTestRun
+@conciergePDP
 Feature: Concierge PDP
 
   Scenario: Verify the PDP title and pricing

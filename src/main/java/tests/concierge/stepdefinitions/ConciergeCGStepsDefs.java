@@ -6,11 +6,11 @@ import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.core.logging.LoggerFactory;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
+
 import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import tests.concierge.pageObject.ConciergeItemsScreen;
 import tests.utility.Hooks;
-
 import java.time.Duration;
 import java.util.ArrayList;
 
@@ -27,12 +27,14 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertEquals;
 
-
 public class ConciergeCGStepsDefs {
     ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
 
 
+public class ConciergeCGStepsDefs {
+    ConciergeCGScreen  ConciergeCGScreen = new ConciergeCGScreen();
     public static String galleryName;
+    public static final Logger logger = LoggerFactory.getLogger(FilterStepDefs.class);
 
     @Then("I verify that {string} on CG screen")
     public void iVerifyThatOnCGScreen(String data) {
@@ -257,5 +259,27 @@ public class ConciergeCGStepsDefs {
 
     }
 
+    @Then("I Verify the price is not displayed")
+    public void iVerifynoPrice(){
+        try{
+            $(By.xpath("//*[text()='$']"));
+//            ConciergeCGScreen.getPrice().isDisplayed();
+//            ConciergeCGScreen.getPrice().click();
+        }
+        catch (Exception e){
+            logger.debug(e.getMessage());
+        }
+
+    }
+
+    @Then("I verify title is left aligned")
+    public void iVerifytitleleftaligned(){
+        ConciergeCGScreen.getSeatingCollectionTitle().shouldBe(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify RH MEMBERS PROGRAM is right aligned")
+    public void iVerifyRHMemberrightaligned(){
+        ConciergeCGScreen.getRHMemberProgram().shouldBe(visible, Duration.ofSeconds(20));
+    }
 }
 

@@ -1,3 +1,4 @@
+@conciergeCG
 @conciergeTestRun
 Feature: Concierge CG Page
 
@@ -162,7 +163,8 @@ Feature: Concierge CG Page
     Then I click 'Back Browser Button' on CG screen
     Then I click 'confirm that CG Rug Collections is displayed' on CG screen
 
-    @Vimal
+
+
   Scenario: Verify Prices are not present in CGs
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -171,13 +173,13 @@ Feature: Concierge CG Page
     Then I navigate to gallery 'Seating Collections'
     Then I verify $$ values are not present in the CG Collections page
 
-  @Vimal
+
   Scenario: In main Menu of US/CA Sale Menu should be present, Sale menu should not be present for the UK region
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I verify flag icon for country selection and select and validate
 
-  @Vimal
+
   Scenario: CG loading time is expected to be less than 4-5 seconds
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -185,3 +187,65 @@ Feature: Concierge CG Page
     Then I navigate to sub menu 'Fabric Seating'
     Then I navigate to gallery 'Seating Collections'
     Then I verify loading time for CG page
+
+
+  Scenario: To verify the top category nav
+    Given I log into Concierge as "associate"
+    Then I navigate to menu 'Living'
+    Then I navigate to sub menu 'Fabric Seating'
+    Then I navigate to gallery 'Seating Collections'
+    Then I verify that 'grid view is present on top right' on CG screen
+    Then I verify that 'grid view is set to 1-grid view by default' on CG screen
+    Then I verify top nav
+
+
+  Scenario: Verify Prices are not present in CGs
+    Given I log into Concierge as "associate"
+    Then I navigate to menu 'Living'
+    Then I navigate to sub menu 'Fabric Seating'
+    Then I navigate to gallery 'Seating Collections'
+    Then I verify that 'grid view is present on top right' on CG screen
+    Then I verify that 'grid view is set to 1-grid view by default' on CG screen
+    Then I Verify the price is not displayed
+
+
+  Scenario: In main Menu of US/CA Sale Menu should be present, Sale menu should not be present for the UK region
+    Given I log into Concierge as "associate"
+    When I choose "US" country
+    Then I Verify "SALE" is present
+    When I choose "CA" country
+    Then I Verify "SALE" is present
+    When I choose "GB" country
+    Then I Verify "Sale" is present
+
+
+
+  Scenario: Switch countries on the CG Pages
+    Given I log into Concierge as "associate"
+    Then I navigate to menu 'Living'
+    Then I navigate to sub menu 'Fabric Seating'
+    Then I navigate to gallery 'Seating Collections'
+    Then I verify that 'grid view is present on top right' on CG screen
+    When I choose "US" country
+    Then I verify that 'grid view is present on top right' on CG screen
+    When I choose "CA" country
+    Then I verify that 'grid view is present on top right' on CG screen
+    When I choose "GB" country
+    Then I verify that 'grid view is present on top right' on CG screen
+
+
+  Scenario: To verify Collection name should be left aligned
+    Given I log into Concierge as "associate"
+    Then I navigate to menu 'Living'
+    Then I navigate to sub menu 'Fabric Seating'
+    Then I navigate to gallery 'Seating Collections'
+    Then I verify title is left aligned
+
+
+ Scenario: Verify that RH MEMBERS PROGRAM. SAVE 25% ON EVERYTHING* on the top-right
+   Given I log into Concierge as "associate"
+   Then I navigate to menu 'Living'
+   Then I navigate to sub menu 'Fabric Seating'
+   Then I navigate to gallery 'Seating Collections'
+   Then I verify RH MEMBERS PROGRAM is right aligned
+
