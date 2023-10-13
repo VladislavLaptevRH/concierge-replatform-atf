@@ -19,8 +19,10 @@ Feature: Estore PDP
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
-    Then I verify view In-stock options
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    And I verify view In-stock options
+    Then I add quantity and add to cart In-stock options
+    
 
   Scenario: Verify Details, Dimensions and Fabric
     Given I log into eStore as "regular" user
@@ -125,3 +127,75 @@ Feature: Estore PDP
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify that user is able to add line item separately for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
+
+  @vimal
+    #Author: Vimalan
+    #Date: 09 Oct
+  Scenario: Verify View On Sale Options
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    And I verify view sale
+    Then I add quantity and add to cart In-stock options
+
+  @vimal
+    #Author: Vimalan
+    #Date: 09 Oct
+  Scenario: Verify the Add to Wishlist
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    And I click Add to Wishlist
+    Then I verify the items present in the wishlist
+
+  @vimal
+   #Author: Vimalan
+   #Date: 10 Oct
+  Scenario: Verify Add to Cart functionality button on PDP.
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    And I click Add to Cart and validate the added items in the cart
+
+  @vimal
+     #Author: Vimalan
+     #Date: 10 Oct
+  Scenario: Verify the text displaying befor price for Frame and cushion product
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod7551915" and "97670" with "INDG" for estore
+    Then I get prices for US for eStore
+
+  @vimal
+    #Author: Vimalan
+     #Date: 11 Oct
+  Scenario: Verify the product price on PDP for sale cushion and frame product
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod9460026" and "46680991" with "INDG" for estore
+    Then Sale price validated before and after customizing
+
+  @vimal
+    #Author: Vimalan
+     #Date: 11 Oct
+  Scenario: Verify the product price on PDP for sale cushion and frame product with sale==true
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When Product with Sale URL is opened
+    Then Sale price validated and URL sale==true
+
+  @vimal
+      #Author: Vimalan
+     #Date: 11 Oct
+  Scenario: Verify the product price on PDP for sale cushion and frame product with sale link available
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod10720085" and "46680991" with "INDG" for estore
+    Then Sale link validated along with selecting value

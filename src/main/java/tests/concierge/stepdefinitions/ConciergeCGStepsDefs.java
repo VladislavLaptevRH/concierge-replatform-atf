@@ -1,21 +1,35 @@
 package tests.concierge.stepdefinitions;
 
+import com.aventstack.extentreports.App;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
+import io.cucumber.core.logging.LoggerFactory;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
+
+import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import tests.concierge.pageObject.ConciergeItemsScreen;
+import tests.utility.Hooks;
 import java.time.Duration;
+import java.util.ArrayList;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.switchTo;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
+import static org.slf4j.Logger.*;
+import static org.testng.AssertJUnit.*;
+import static tests.utility.Hooks.getWindowsHandles;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertEquals;
 
-import org.slf4j.LoggerFactory;
-import tests.concierge.pageObject.ConciergeCGScreen;
+public class ConciergeCGStepsDefs {
+    ConciergeItemsScreen conciergeItemsScreen = new ConciergeItemsScreen();
+
 
 public class ConciergeCGStepsDefs {
     ConciergeCGScreen  ConciergeCGScreen = new ConciergeCGScreen();
@@ -162,6 +176,86 @@ public class ConciergeCGStepsDefs {
                 assertEquals(subMenu, $(By.xpath("(//div[@role = 'tooltip']//span[contains(@class, 'MuiTypography')])[" + levelOfCollection + "]")).getText());
             }
         }
+    }
+
+    @Then("I verify $$ values are not present in the CG Collections page")
+    public void iVerifyDollarValuesAreNotPresent(){
+        String URL = Hooks.getCurrentUrl();
+        assertFalse(URL.contains("$"));
+        String i= WebDriverRunner.getWebDriver().findElement(By.tagName("body")).getText();
+
+        if(i.contains("$")){
+            System.out.println("CG page must not have the cost-error in the page");
+        }
+        else {
+            System.out.println("CG page looks correct by not displaying the cost");
+        }
+    }
+    @Then("I verify flag icon for country selection and select and validate")
+    public void iVerifyFlagIconForCountrySelection(){
+        conciergeItemsScreen.getCountrySelection().should(visible,Duration.ofSeconds(40));
+
+        // Verifying the USA validation of sale
+        conciergeItemsScreen.getCountrySelection().click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+
+        conciergeItemsScreen.getCaCountry().click();
+        conciergeItemsScreen.getSelectCountrySaveButton().click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+
+        conciergeItemsScreen.getCountrySelection().click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+
+        conciergeItemsScreen.getUsCountry().click();
+        conciergeItemsScreen.getSelectCountrySaveButton().click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+        // Sale Link is clicked
+        conciergeItemsScreen.getSaleButtonMenu().should(visible, Duration.ofSeconds(20));
+        conciergeItemsScreen.getSaleButtonMenu().click();
+        //validating the sale link is present
+        conciergeItemsScreen.getLivingSaleMenuBar().should(Condition.visible);
+
+        // Verifying the Canada validation of sale
+        conciergeItemsScreen.getCountrySelection().click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+
+        conciergeItemsScreen.getCaCountry().click();
+        conciergeItemsScreen.getSelectCountrySaveButton().click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+
+        // Sale Link is clicked
+        conciergeItemsScreen.getSaleButtonMenu().should(visible, Duration.ofSeconds(20));
+        conciergeItemsScreen.getSaleButtonMenu().click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+
+        // Verifying the UK validation of sale
+        conciergeItemsScreen.getCountrySelection().click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+
+        conciergeItemsScreen.getGbCountry().click();
+        conciergeItemsScreen.getSelectCountrySaveButton().click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
+        // Sale Link is clicked
+        conciergeItemsScreen.getSaleButtonMenuForUK().should(visible, Duration.ofSeconds(20));
+        conciergeItemsScreen.getSaleButtonMenuForUK().click();
+        //validating the sale link is not present for UK
+        assertFalse(conciergeItemsScreen.getLivingSaleMenuBar().isDisplayed());
+    }
+
+    @Then("I verify loading time for CG page")
+    public void iVerifyLoadingTimeForCgPage(){
+        long start = System.currentTimeMillis();
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        long finish = System.currentTimeMillis();
+        long totalTime = finish - start;
+        System.out.println("Total Time for page load - "+totalTime);
+        //5000 represents milliseconds ~ 5 seconds as per scenario
+        if(totalTime<5000){
+            System.out.println("Total Time for page load is less than 5 seconds- "+totalTime);
+        }
+        else{
+            System.out.println("Total Time for page load is more than 5 seconds- "+totalTime);
+        }
 
     }
 
@@ -188,3 +282,4 @@ public class ConciergeCGStepsDefs {
         ConciergeCGScreen.getRHMemberProgram().shouldBe(visible, Duration.ofSeconds(20));
     }
 }
+

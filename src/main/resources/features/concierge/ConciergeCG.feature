@@ -164,6 +164,31 @@ Feature: Concierge CG Page
     Then I click 'confirm that CG Rug Collections is displayed' on CG screen
 
 
+
+  Scenario: Verify Prices are not present in CGs
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I navigate to menu 'Living'
+    Then I navigate to sub menu 'Fabric Seating'
+    Then I navigate to gallery 'Seating Collections'
+    Then I verify $$ values are not present in the CG Collections page
+
+
+  Scenario: In main Menu of US/CA Sale Menu should be present, Sale menu should not be present for the UK region
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I verify flag icon for country selection and select and validate
+
+
+  Scenario: CG loading time is expected to be less than 4-5 seconds
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I navigate to menu 'Living'
+    Then I navigate to sub menu 'Fabric Seating'
+    Then I navigate to gallery 'Seating Collections'
+    Then I verify loading time for CG page
+
+
   Scenario: To verify the top category nav
     Given I log into Concierge as "associate"
     Then I navigate to menu 'Living'
@@ -223,3 +248,4 @@ Feature: Concierge CG Page
    Then I navigate to sub menu 'Fabric Seating'
    Then I navigate to gallery 'Seating Collections'
    Then I verify RH MEMBERS PROGRAM is right aligned
+
