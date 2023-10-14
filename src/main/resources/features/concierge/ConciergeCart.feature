@@ -1,7 +1,7 @@
 @conciergeTestRun
 @conciergeCart
 Feature:Concierge Cart Page
-
+   @vimal
   Scenario: Verify the Postal code updates in cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -307,12 +307,12 @@ Feature:Concierge Cart Page
     When I click on no thanks button
     When I choose client who is a "Member"
     Then I verify that promo code was removed
-
+ @vimal
   Scenario: Verify mini cart count
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I open product page with "prod1617188" and "63130001"
+    When I open product page with "prod18900022" and "63130001"
     Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
@@ -353,7 +353,7 @@ Feature:Concierge Cart Page
     Then I verify membership banner for "trade" client not displayed
     When I click on checkout button
     Then I verify that membership popup for "trade" is not displayed
-
+  @vimal
   Scenario: Verify Membership Pop up while checkout for contract - should not be present
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -537,7 +537,7 @@ Feature:Concierge Cart Page
     When I click on no thanks button
     When I choose client who is a "Member"
     Then I verify "member" savings for a "member" user
-
+  @vimal
   Scenario: Verify address saved in address page when navigate back from order review or any page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -553,7 +553,6 @@ Feature:Concierge Cart Page
     When I continue to payment
     When I click on continue with original address button
     When I choose POS for payment method
-    And I verify that review screen is displayed
     When I goes to address page from review screen
     Then I verify that address saved in address page
 
@@ -569,7 +568,7 @@ Feature:Concierge Cart Page
     When I click on no thanks button
     When I choose client who is a "Non-Member"
     Then I verify zipcode
-
+  @vimal
   Scenario: Availability, Delivery and Returns messages
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

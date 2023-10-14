@@ -505,6 +505,7 @@ public class Pdp {
 
     @Then("I chose the {string} line item selections one by one")
     public void iChoseLineItemSelectionsOneByOne(String chose) {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
             int lineItemsCount = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..")).size();
             for (int i = 1; i <= lineItemsCount; i++) {

@@ -363,8 +363,8 @@ public class GeneralStepDefs {
                 conciergeUserAccountPage.getClientLookupPhoneNumber().setValue("37360424263");
             }
             if (field.equals("postalCode")){
-                conciergeUserAccountPage.getClientLookupEmailByName().should(Condition.be(visible), Duration.ofSeconds(25));
-                conciergeUserAccountPage.getClientLookupEmailByName().setValue("test@mailinator.com");
+                conciergeUserAccountPage.getClientLookupEmail().should(Condition.be(visible), Duration.ofSeconds(25));
+                conciergeUserAccountPage.getClientLookupEmail().setValue("test@mailinator.com");
                 conciergeUserAccountPage.getPostalCode().should(Condition.be(visible), Duration.ofSeconds(25));
                 conciergeUserAccountPage.getPostalCode().setValue("12345");
             }

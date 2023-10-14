@@ -66,7 +66,7 @@ Feature:Concierge Back Button
 	When I click browser back button
 	Then I verify that cart is displayed
 
-
+@vimal
   Scenario: Verify that Search any product and change the grid layout to big and small and navigate to any PDP. Verify the back button. User should be able to view the same selected big OR small grid layout
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
