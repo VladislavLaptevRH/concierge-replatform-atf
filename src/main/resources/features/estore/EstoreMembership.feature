@@ -158,7 +158,7 @@ Feature: Estore Membership
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
-    When I click on my account button if page is not loaded
+    When I click on estore my account icon for guest user
     When I navigate to the member tab
     When I click to add to cart on membership page
     When I open estore cart

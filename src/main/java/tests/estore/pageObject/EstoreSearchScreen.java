@@ -18,7 +18,7 @@ public class EstoreSearchScreen {
 
     private SelenideElement memberPriceCollectionPage = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
 
-    private SelenideElement results = $(By.xpath("//*[contains(text(),'Results')]"));
+    private SelenideElement results = $(By.xpath("(//*[contains(text(),'RESULTS')])[2]"));
 
     private SelenideElement threeColumnsInRowGridButton = $(By.xpath("//*[@column='3']"));
 

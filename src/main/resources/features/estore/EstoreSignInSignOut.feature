@@ -15,7 +15,7 @@ Feature: Estore Sign In/Signout
     When I choose country for eStore from footer
     When I click on estore account
     When I click on estore signout button
-    When I click on my account button if page is not loaded
+    When I click on estore my account icon for guest user
     Then I verify that user is able to signout
 
   Scenario: Verify the signout functionaity
