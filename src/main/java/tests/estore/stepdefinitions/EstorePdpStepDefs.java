@@ -224,7 +224,7 @@ public class EstorePdpStepDefs {
 
         Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
         selectSize.selectByIndex(3);
-        sleep(3000);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         Select selectColor = new Select(estorePdpPageScreen.getColorOption());
         selectColor.selectByIndex(3);
         estorePdpPageScreen.getColorOption().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
