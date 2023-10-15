@@ -73,7 +73,7 @@ public class EstorePGScreen {
 
     private final SelenideElement sortFilter = $(By.xpath("//*[text()='sort']"));
 
-    private final SelenideElement saleFilterApplied = $(By.xpath("(//*[text()='sale'])[2]"));
+    private final SelenideElement saleFilterApplied = $(By.xpath("(//*[text()='sale'])[1]"));
 
     private final SelenideElement thumbalImg = $(By.xpath("//img[contains(@alt,'prod')]"));
 

@@ -31,7 +31,7 @@ public class EstoreSignoutStepDefs {
 
     @Then("I verify that user is completely signed out of all brands")
     public void iVerifyThatUserIsCompletelySignedOutOfAllBrands() {
-        $(By.xpath("//img[@src='/auth/resources/tojme/login/rh2/img/rh-logo.svg']")).should(Condition.visible, Duration.ofSeconds(20));
+        $(By.id("container-rhr-header_logo-rhr")).should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @When("I click on estore account after signout")

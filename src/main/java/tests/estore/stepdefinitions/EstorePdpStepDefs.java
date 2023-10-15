@@ -434,7 +434,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that the ETA on PDP")
     public void iVerifyThatTheETAOnPDP() {
-        $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between')]")).should(visible);
+        $(By.xpath("(//*[contains(text(),'This item is special order and will be ready for delivery between')])[2]")).should(visible);
     }
 
     @Then("I verify that {string} message is displayed {string} the line item dropdown")

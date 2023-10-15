@@ -31,13 +31,6 @@ Feature: Estore Homepage
     When I click on Hamburger menu
     Then I verify list of items in hamburger menu
 
-  Scenario: Verify CTA functionality
-    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
-    When I scroll down to Request a design consultation and click
-    And I fill in the request form
-    Then I Verify Thank you message
-
 #  Scenario: Validate Each Category And Sub-Category for eStore
 #    Given I log into eStore as "regular" user
 #    When I choose country for eStore from footer

@@ -114,6 +114,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address for contract&trade
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -128,6 +129,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address for contract&trade
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -145,6 +147,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address for contract&trade
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -161,6 +164,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address for contract&trade
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -178,13 +182,14 @@ Feature: eStore Contract and Trade
     When I update postal code in cart
     Then I verify UFD in cart
 
-  Scenario Outline: Verify different payment types on payment page
+  Scenario Outline: eStore Contract - Verify different payment types on payment page
     Given I log into eStore as contract
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address for contract&trade
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -206,6 +211,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I goes to estore cart for estore
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address for contract&trade
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -221,6 +227,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address for contract&trade
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -238,6 +245,7 @@ Feature: eStore Contract and Trade
 #    And I click on view cart estore button
     When I open estore cart
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address for contract&trade
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -254,6 +262,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address for contract&trade
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -278,6 +287,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -387,7 +397,8 @@ Feature: eStore Contract and Trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
-    When I click on estore checkout button
+    When I click on estore checkout butto
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -402,6 +413,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -419,6 +431,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address for contract&trade
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -435,6 +448,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -449,6 +463,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -470,6 +485,7 @@ Feature: eStore Contract and Trade
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -506,6 +522,7 @@ Feature: eStore Contract and Trade
     When I add item to cart via API for estore
     When I open estore cart
     When I click on estore checkout button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button

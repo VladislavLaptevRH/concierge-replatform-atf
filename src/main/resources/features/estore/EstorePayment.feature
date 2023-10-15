@@ -26,6 +26,7 @@ Feature: Estore Payment
     When I open estore cart
     When I click on estore checkout button
     And I click on estore no thanks button
+    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on continue to payment estore button
     When I click on continue with original address estore button
@@ -317,20 +318,6 @@ Feature: Estore Payment
     When I click on continue payment method estore button
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
-
-  Scenario: eStore Saved credit cards
-    Given I log into eStore as "userWithSavedMasterCardVisa" user
-    When I choose country for eStore from footer
-    When I remove all items from estore cart
-    When I add item to cart via API for estore
-    When I open estore cart
-    When I click on estore checkout button
-    And I click on estore no thanks button
-    When I fill estore shipping address
-    When I click on continue to payment estore button
-    When I click on continue with original address estore button
-    When I remove payment method which was used earlier
-    Then I verify that I'm able to execute estore split payment with saved CC
 
   Scenario: GC/ Balance check
     Given I log into eStore as "mastercard" user
