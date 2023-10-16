@@ -172,14 +172,6 @@ Feature: Concierge CG Page
     Then I navigate to gallery 'Seating Collections'
     Then I verify $$ values are not present in the CG Collections page
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 57a504e77e53e44cd37b18270bdcc0064e492f57
-=======
-
->>>>>>> 1bf808d8900f80441d34f801e01e8c7c73fdd358
   Scenario: In Main Menu of US/CA Sale Menu should be present, Sale menu should not be present for the UK region
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
