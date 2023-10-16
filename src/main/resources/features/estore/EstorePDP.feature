@@ -100,7 +100,6 @@ Feature: Estore PDP
     When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
     Then I verify the product price for product "prod19500002" and "17050045" with "NCKL" for the selected "CAN" country
 
-  @Alok
   Scenario: Verify the text displaying before the price is "starting at" at hero image level
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -108,7 +107,6 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify the text displaying before price at hero image level for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
-  @Alok
   Scenario: Verify the text displaying before the price is "starting at" at line item level
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -116,7 +114,6 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify the text displaying before price at line item level for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
-  @Alok
   Scenario: Verify the line item price for Combined Frame + Cushion
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -124,7 +121,6 @@ Feature: Estore PDP
     When I open product page with "prod7551915" and "97670" with "INDG" for estore
     Then I verify the line item price for Combined Frame and Cushion for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
-  @Alok
   Scenario: Verify that user is able to add line item separately
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -132,7 +128,6 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify that user is able to add line item separately for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
-  @Alok
   Scenario: Verify availability delivery and return for product
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -140,7 +135,6 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify availability delivery and return for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
-  @Alok
   Scenario: Verify functionality for Hero Image on PDP
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -148,7 +142,6 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify functionality for Hero Image on PDP for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
-  @Alok
   Scenario: Verify the product price as per the Ship to selection
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
