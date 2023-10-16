@@ -142,6 +142,7 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify functionality for Hero Image on PDP for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
+    @Alok
   Scenario: Verify the product price as per the Ship to selection
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
