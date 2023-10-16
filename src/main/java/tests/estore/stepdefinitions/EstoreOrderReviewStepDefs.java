@@ -90,7 +90,7 @@ public class EstoreOrderReviewStepDefs {
 
     @And("I verify that introduced order description message is displayed on {string} page")
     public void iVerifyThatIntrotucedOrderDescriptionMessageIsDisplayedOnPage(String message) {
-        $(By.xpath("//*[text()='Order description message']"))
+        $(By.xpath("//*[text()='" + message + "']"))
                 .should(visible, Duration.ofSeconds(20));
     }
 
@@ -98,6 +98,7 @@ public class EstoreOrderReviewStepDefs {
     public void iClickOnEditGiftMessageOnOrderReviewPage() {
         estoreReviewOrderPage.clickToEditGiftMessageButton();
     }
+
     @Then("I verify the message {string} should be shown on {string} page")
     public void iVerifyTheMessageShouldBeShownOnPage(String arg0, String arg1) {
         estoreCartPage.verifyThatComponentMessageIsDisplayedForAllLineItems();
