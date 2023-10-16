@@ -3,15 +3,14 @@ package tests.estore.stepdefinitions;
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
-import tests.concierge.pageObject.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import tests.concierge.pageObject.*;
 import tests.estore.pageObject.*;
-import tests.utility.Hooks;
 
 import java.time.Duration;
 

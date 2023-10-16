@@ -28,13 +28,14 @@ public class SaleStepDefs {
     public void iClickOnSale() {
         saleScreen.getSaleOption().should(visible, Duration.ofMinutes(1));
         saleScreen.getSaleOption().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify sale navigation bars are displayed")
     public void iVerifySaleNavigationBarsAreDisplayed() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         List<String> items = new ArrayList<>();
-        List<String> expectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Lighting", "Textiles", "Rugs", "Windows", "Décor", "Outdoor", "Baby & Child", "Teen"));
+        List<String> expectedItems = new ArrayList(Arrays.asList("Living", "Dining", "Bed", "Bath", "Outdoor" , "Lighting", "Textiles", "Rugs", "Décor", "Baby & Child", "Teen"));
         for (int i = 0; i < saleScreen.getListOfSaleMainCategory().size(); i++) {
             items.add(saleScreen.getListOfSaleMainCategory().get(i).getText());
         }
@@ -45,8 +46,6 @@ public class SaleStepDefs {
     @When("I click on sale menu item")
     public void iCLickOnSaleMenuItem() {
         $(By.xpath("(//*[text()='Décor'])[2]")).should(interactable).click();
-        sleep(2000);
-        $(By.xpath("Throws & Blankets")).should(interactable).click();
     }
 
     @When("I click on sub category and navigate PDP")
@@ -55,9 +54,10 @@ public class SaleStepDefs {
         int randomSubCategory = generalStepDefs.getRandomNumber(1, saleScreen.getListOfSaleSubCategory().size());
         saleScreen.getListOfSaleSubCategory().get(randomSubCategory).click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
-        int randomCollection = generalStepDefs.getRandomNumber(1, saleScreen.getListOfSaleCollection().size());
+        /*int randomCollection = generalStepDefs.getRandomNumber(1, saleScreen.getListOfSaleCollection().size());
         saleScreen.getListOfSaleCollection().get(randomCollection).click();
-        with().pollInterval(1, SECONDS).await().until(() -> true);
+        with().pollInterval(1, SECONDS).await().until(() -> true);*/
+
         int randomProduct = generalStepDefs.getRandomNumber(1, saleScreen.getRandomProduct().size());
         saleScreen.getRandomProduct().get(randomProduct).click();
         with().pollInterval(1, SECONDS).await().until(() -> true);

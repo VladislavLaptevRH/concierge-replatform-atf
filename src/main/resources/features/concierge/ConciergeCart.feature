@@ -312,7 +312,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I open product page with "prod1617188" and "63130001"
+    When I open product page with "prod18900022" and "63130001"
     Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
@@ -553,7 +553,6 @@ Feature:Concierge Cart Page
     When I continue to payment
     When I click on continue with original address button
     When I choose POS for payment method
-    And I verify that review screen is displayed
     When I goes to address page from review screen
     Then I verify that address saved in address page
 

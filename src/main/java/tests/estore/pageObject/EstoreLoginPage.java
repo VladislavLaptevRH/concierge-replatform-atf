@@ -30,7 +30,7 @@ public class EstoreLoginPage {
     private final SelenideElement forgotPasswordButton = $(By.xpath("//a[@class='forgot-password']"));
 
     public void clickToAccountIcon() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(4, SECONDS).await().until(() -> true);
         accountIcon.should(Condition.and("", interactable, Condition.visible, appear), Duration.ofSeconds(50));
         accountIcon.click(ClickOptions.usingJavaScript());
     }

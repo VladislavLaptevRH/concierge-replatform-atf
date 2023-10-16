@@ -57,7 +57,7 @@ public class EstorePgStepDefs {
 
     @Then("I verify that two grids are default view in PG")
     public void iVerifyThatTwoGridsAreDefaultViewInPG() {
-        estoreSearchScreen.getTwoColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
+        estoreSearchScreen.verifyThatDefaultGridIsDisplayed();
     }
 
     @When("I goes to estore product sale page")

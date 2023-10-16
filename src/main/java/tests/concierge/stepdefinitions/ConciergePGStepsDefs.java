@@ -684,7 +684,7 @@ public class ConciergePGStepsDefs {
                 i++;
                 with().pollInterval(1, SECONDS).await().until(() -> true);
             }
-            assertEquals(2, i);
+            assertEquals(3, i);
         }
         if(view.equals("3")){
             int i = 1;
@@ -720,5 +720,10 @@ public class ConciergePGStepsDefs {
         }
         conciergePGScreen.getResult().should(Condition.visible, Duration.ofSeconds(15));
         conciergePGScreen.getSort().should(Condition.visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify Verify Enjoy free shipping banner for textile category")
+    public void iVerifyEnjoyFreeShipping(){
+        conciergePGScreen.getEnjoyFreeShipping().should(Condition.visible, Duration.ofSeconds(20));
     }
 }

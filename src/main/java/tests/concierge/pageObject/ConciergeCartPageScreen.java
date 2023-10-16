@@ -172,4 +172,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement joinRhMemberProgramTitle = $(By.xpath("(//*[contains(text(),'Join the RH Members Program for ')])[2]"));
 
+    private final SelenideElement tradeInViewPage = $(By.xpath("(//*[text()='TRADE'])[1]"));
+
+
 }

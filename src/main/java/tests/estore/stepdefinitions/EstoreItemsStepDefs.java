@@ -10,9 +10,6 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static com.codeborne.selenide.Selenide.sleep;
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.awaitility.Awaitility.with;
 
 
 public class EstoreItemsStepDefs {
@@ -29,7 +26,7 @@ public class EstoreItemsStepDefs {
             selectOption.getDepthProperty().should(Condition.be(Condition.visible), Duration.ofSeconds(45));
             Select selectDepth = new Select(selectOption.getDepthProperty());
 
-            selectDepth.selectByIndex(2);
+            selectDepth.selectByIndex(3);
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");
         }
