@@ -319,5 +319,10 @@ public class ConciergeCGStepsDefs {
     public void iVerifyMOinCGPage() {
         conciergeItemsScreen.getMoInCGPage().should(visible, Duration.ofSeconds(20));
     }
+
+    @Then("I verify Available in multiple sizes & finishes text on page")
+    public void iVerifyTextOnPage() {
+        ConciergeCGScreen.getAvailableText().shouldBe(visible, Duration.ofSeconds(20));
+    }
 }
 

@@ -138,7 +138,7 @@ Feature: Concierge CG Page
     Then I navigate to sub menu "Handcrafted Rugs"
     Then I navigate to gallery "Rug Collections"
     Then I verify that 'grid view is set to 2-grid view' on CG screen
-@vimal
+
   Scenario: Browser back button from search to CG page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -172,7 +172,8 @@ Feature: Concierge CG Page
     Then I navigate to sub menu 'Fabric Seating'
     Then I navigate to gallery 'Seating Collections'
     Then I verify $$ values are not present in the CG Collections page
-    @vimal
+
+
   Scenario: In Main Menu of US/CA Sale Menu should be present, Sale menu should not be present for the UK region
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -289,3 +290,16 @@ Feature: Concierge CG Page
     Then I verify Sale is clicked and taken to PG page
     Then I verify $$ values are present in the PG Collections page
 
+    @mukthar
+  Scenario Outline: Verify that "Available in multiple sizes & finishes" verbiage is shown along with collection text for collections like Dining Tables. Bed Collections.
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I navigate to menu "<menu>"
+    Then I navigate to sub menu "<subMenu>"
+    Then I navigate to gallery "<gallery>"
+    Then I verify Available in multiple sizes & finishes text on page
+    Examples:
+      | menu      | subMenu               | gallery                     |
+      | Dining    | Tables                | Rectangular Table Collections|
+      | Bath      | Furniture             | Bath Towel Collections       |
+      | Outdoor   | In Stock              | Furniture Collections        |
