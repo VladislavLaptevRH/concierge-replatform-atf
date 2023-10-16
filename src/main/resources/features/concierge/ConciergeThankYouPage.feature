@@ -1,7 +1,8 @@
 @conciergeTestRun
 @conciergeThankYou
-Feature: Concierge ThankYouPage
 
+Feature: Concierge ThankYouPage
+  @Vimal
   Scenario: Verify order details
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -20,7 +21,7 @@ Feature: Concierge ThankYouPage
     When I click on a place order button
     When I click on order details button
     Then I verify order details from thank you page
-
+  @vimal
   Scenario: Verify the payment details and Order estimate summary
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -39,7 +40,7 @@ Feature: Concierge ThankYouPage
     When I click on a place order button
     When I click on order details button
     Then I verify the payment details and order estimate summary
-
+  @vimal
   Scenario: Verify all the line items in the cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -58,7 +59,7 @@ Feature: Concierge ThankYouPage
     When I click on a place order button
     When I click on order details button
     Then I verify all the line items in the cart on thank you page
-
+  @vimal
   Scenario: Verify the order number and email address verbiage
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

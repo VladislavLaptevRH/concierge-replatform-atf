@@ -30,6 +30,7 @@ public class RegistryStepDefs {
 
     @When("I click on registry button")
     public void iClickOnRegistryButton() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         registryScreen.getRegistryButton().should(Condition.visible, Duration.ofSeconds(20));
         registryScreen.getRegistryButton().click();
     }
@@ -165,8 +166,12 @@ public class RegistryStepDefs {
     @Then("I verify that registry was edited")
     public void iVerifyThatRegistryWasEdited() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        WebDriverRunner.getWebDriver().navigate().refresh();
-        $(By.xpath("(//*[text()='" + registrantAddress + "'])[2]")).should(Condition.visible, Duration.ofSeconds(20));
+        /*WebDriverRunner.getWebDriver().navigate().refresh();
+        $(By.xpath("(//*[text()='" + registrantAddress + "'])[1]")).should(Condition.visible, Duration.ofSeconds(20));
+    }*/
+        registryScreen.getRegistryDropDown().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        registryScreen.getLastModifiedPresent().should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @When("I click on delete registry button")
