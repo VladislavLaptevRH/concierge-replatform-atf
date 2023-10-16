@@ -1,7 +1,7 @@
 @conciergeTestRun
 @conciergeCart
 Feature:Concierge Cart Page
-   @vimal
+
   Scenario: Verify the Postal code updates in cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -307,7 +307,7 @@ Feature:Concierge Cart Page
     When I click on no thanks button
     When I choose client who is a "Member"
     Then I verify that promo code was removed
- @vimal
+
   Scenario: Verify mini cart count
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -353,7 +353,7 @@ Feature:Concierge Cart Page
     Then I verify membership banner for "trade" client not displayed
     When I click on checkout button
     Then I verify that membership popup for "trade" is not displayed
-  @vimal
+
   Scenario: Verify Membership Pop up while checkout for contract - should not be present
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -537,7 +537,7 @@ Feature:Concierge Cart Page
     When I click on no thanks button
     When I choose client who is a "Member"
     Then I verify "member" savings for a "member" user
-  @vimal
+
   Scenario: Verify address saved in address page when navigate back from order review or any page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -568,7 +568,7 @@ Feature:Concierge Cart Page
     When I click on no thanks button
     When I choose client who is a "Non-Member"
     Then I verify zipcode
-  @vimal
+
   Scenario: Availability, Delivery and Returns messages
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
