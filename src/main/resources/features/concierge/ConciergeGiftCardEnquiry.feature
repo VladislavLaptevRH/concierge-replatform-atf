@@ -9,6 +9,7 @@ Feature: Concierge GiftCardEnquiry
     When I enter gift card information
     Then I verify transaction details
 
+    @vimal
   Scenario: Purchase Gift Card
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -29,7 +30,8 @@ Feature: Concierge GiftCardEnquiry
     When I fill all fields from address screen
     When I continue to payment
     When I click on continue with original address button
-    When I choose POS for payment method
+    #When I choose POS for payment method
+    When I execute payment for "AX"
     And I verify that review screen is displayed
     When I click on a place order button
     Then I verify that confirmation order screen is displayed

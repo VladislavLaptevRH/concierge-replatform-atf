@@ -117,5 +117,7 @@ public class ConciergeItemsScreen {
     private SelenideElement freeShippingMessage = $(By.xpath("//*[text()='ENJOY FREE SHIPPING ON ALL TEXTILES']"));
 
     private SelenideElement moInCGPage = $(By.xpath("(//*[contains(text(),'Modular')])[1]"));
+
+    private SelenideElement viewCartImage = $(By.xpath("//*[@id=\"header-cart-button\"]/div"));
 }
 

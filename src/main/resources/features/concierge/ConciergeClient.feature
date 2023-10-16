@@ -1,7 +1,7 @@
 @conciergeClient
 @conciergeTestRun
 Feature:Client
-
+  @vimal
   Scenario Outline: Verify client search by <searchBy>
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -10,13 +10,13 @@ Feature:Client
     Then I verify that client results is displayed
     Examples:
       | searchBy                      |
+      | postalCode                    |
       | email                         |
       | lastName                      |
       | memberID                      |
       | businessAccountNumberTrade    |
       | businessAccountNumberContract |
       | phoneNumber                   |
-      | postalCode                    |
       | company                       |
 
   Scenario: Verify that user is able to create new client

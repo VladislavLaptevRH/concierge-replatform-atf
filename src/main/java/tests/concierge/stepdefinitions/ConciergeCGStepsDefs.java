@@ -61,14 +61,14 @@ public class ConciergeCGStepsDefs {
                 $(By.xpath("//*[text() = 'Kabir Wool Rug']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "Navigate to first product":
-                if (!$(By.xpath("(//*[@id = 'flip-carousel-div']//img)[1]")).isDisplayed()) {
+                if (!$(By.xpath("(//*[text() = 'Kabir Wool Rug'])[2]")).isDisplayed()) {
                     WebDriverRunner.getWebDriver().navigate().refresh();
                 }
-                $(By.xpath("//*[@id = 'flip-carousel-div']")).click();
+                $(By.xpath("(//*[text() = 'Kabir Wool Rug'])[2]")).click();
                 $(By.xpath("//h2[text() = 'Kabir Wool Rug']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "confirm that PG is displayed":
-                $(By.xpath("//*[@id = 'flip-carousel-div']")).shouldBe(visible, Duration.ofSeconds(20));
+                $(By.xpath("//*[text() = 'new arrivals']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "confirm that CG Rug Collections is displayed":
                 $(By.xpath("(//*[@id = 'component-collection-card'])[4]//*[text() = 'Nihal Wool Rug']")).shouldBe(visible, Duration.ofSeconds(20));

@@ -138,7 +138,7 @@ Feature: Concierge CG Page
     Then I navigate to sub menu "Handcrafted Rugs"
     Then I navigate to gallery "Rug Collections"
     Then I verify that 'grid view is set to 2-grid view' on CG screen
-
+@vimal
   Scenario: Browser back button from search to CG page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -172,9 +172,8 @@ Feature: Concierge CG Page
     Then I navigate to sub menu 'Fabric Seating'
     Then I navigate to gallery 'Seating Collections'
     Then I verify $$ values are not present in the CG Collections page
-
-
-  Scenario: In main Menu of US/CA Sale Menu should be present, Sale menu should not be present for the UK region
+    @vimal
+  Scenario: In Main Menu of US/CA Sale Menu should be present, Sale menu should not be present for the UK region
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I verify flag icon for country selection and select and validate
@@ -273,7 +272,6 @@ Feature: Concierge CG Page
     Then I navigate to gallery 'Seating Collections'
     Then I Verify "SALE" is present
 
-    @vimal
   Scenario: To verify that MO CGs are present for applicable CG pages below RH CGs
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
