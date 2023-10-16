@@ -213,7 +213,7 @@ Feature: Concierge PG Page
     Then I click 'Back Browser Button' on PG screen
     Then I verify that 'PG is displayed' on PG screen
 
-  @mukthar
+
   Scenario: To verify after navigating to PG, Brand name, categories, RH Logo, Search icon, Hamburger menu, Cart icon, My account image is present
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -231,7 +231,7 @@ Feature: Concierge PG Page
     Then I verify top nav
     Then I verify brand dropdown
 
-  @mukthar
+
   Scenario: To verify sort option is present at the right side and its working
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -241,7 +241,7 @@ Feature: Concierge PG Page
     Then I verify that 'PG has SALE and IN-STOCK filters, text RESULTS (n), faucet with text SORT' on PG screen
     Then I click 'SORT and confirm that Modal has text FEATURED, Price Low to High, Price High to Low' on PG screen
 
-  @mukthar
+
   Scenario: To verify all options from sort dropdown are working
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -256,7 +256,7 @@ Feature: Concierge PG Page
     Then I click 'Price High to Low and verify price is sorted' on PG screen
 
 
-  @mukthar
+
   Scenario: To verify PG page is loading till footer
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -265,7 +265,7 @@ Feature: Concierge PG Page
     Then I navigate to gallery 'Round & Oval Tables'
     Then I verify page is loaded till footer
 
-  @mukthar
+
   Scenario: Verify that PG is defaulted to 3-grid view
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -278,7 +278,7 @@ Feature: Concierge PG Page
     When I choose "GB" country
     Then I verify that 'Grid View in PG is set to 3-grid view by default' on PG screen
 
-  @mukthar
+
   Scenario: Verify Enjoy free shipping banner for textile category
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
