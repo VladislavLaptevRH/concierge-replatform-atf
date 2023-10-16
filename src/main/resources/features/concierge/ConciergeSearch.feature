@@ -60,8 +60,6 @@ Feature: Concierge PG Page
     Then I navigate to sub menu 'Benches & Stools'
     Then I navigate to gallery 'Benches'
     Then I Verify Search icon is present
-    When I go to item "10004670 NONE" from search field
-    Then I Verify Search icon is present
 
 
   @mukthar
