@@ -117,10 +117,39 @@ public class EstorePdpPageScreen {
 
     private final SelenideElement selectLeather = $(By.xpath("(//select[contains(@id, 'Leather')])[1]"));
 
+    private SelenideElement heroImageForwardBtn = $(By.xpath("(//*[contains(@class,'arrow-icon')])[2]"));
+
+    private SelenideElement heroImageBackBtn = $(By.xpath("(//*[contains(@class,'arrow-icon')])[1]"));
+
+    private SelenideElement heroImagePlusIconZoomInBtn =  $(By.xpath("//*[text()='Grommet/ZoomIn']/.."));
+
+    private SelenideElement heroImagePlusIconZoomOutBtn =  $(By.xpath("//*[text()='Grommet/ZoomOut']/.."));
+
+    private  SelenideElement heroImageZoomInBtn =  $(By.xpath("(//*[text()='Grommet/ZoomIn']/..)[2]"));
+
+    private  SelenideElement heroImageZoomOutBtn =  $(By.xpath("//*[text()='Grommet/ZoomOut']/.."));
+
+    private SelenideElement heroImageUpwardBtn = $(By.xpath("(//*[contains(@class,'arrow-icon')])[6]"));
+
+    private SelenideElement heroImageDownwardBtn = $(By.xpath("(//*[contains(@class,'arrow-icon')])[7]"));
+
+    private SelenideElement heroImageCloseIcon = $(By.xpath("//*[@id ='Combined-Shape' and @fill='currentColor']"));
+
+    private SelenideElement countrySelectionBtn = $(By.xpath("//div[@id='country-selection']"));
+
+    private  SelenideElement countyCode = $(By.xpath("//li[@data-value='GB']"));
+
+    private  SelenideElement postalCodeInput = $(By.xpath("//input[@id='postal-code-international']"));
+
+    private SelenideElement postalCodeSubmitBtn = $(By.xpath("//button[@data-testid='submit-postal']"));
+
+    private SelenideElement viewStockMsg = $(By.xpath("//*[text()='These options are available for']"));
+
+    private SelenideElement availableItemMsg= $(By.xpath("(//p[contains(text(),'This item is in stock and will be delivered on or before')])[2]"));
+
     private final SelenideElement selectFabric = $(By.xpath("(//select[contains(@id, 'Fabric')])[1]"));
 
     private final SelenideElement selectCushionFill = $(By.xpath("(//select[contains(@id, 'Cushion Fill')])[1]"));
 
     private final SelenideElement viewSaleItem = $(By.xpath("(//*[@id=\"component-relatedProductCartd_view-sale-btn\"])[1]"));
-
 }
