@@ -40,7 +40,7 @@ Feature: Concierge PG Page
     Then I verify that 'customer experience page is opened' on search page
     Then I verify that 'footer is present' on search page
 
-  @mukthar
+
   Scenario: Search after opening hamburger menu
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -48,7 +48,7 @@ Feature: Concierge PG Page
     When I type item name 'table'
     Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
 
-  @mukthar
+
   Scenario: Search Icon should display on all the pages.
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -62,7 +62,7 @@ Feature: Concierge PG Page
     Then I Verify Search icon is present
 
 
-  @mukthar
+
   Scenario: By clicking on search icon, user should be able to enter and search the product from any of the page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -83,7 +83,7 @@ Feature: Concierge PG Page
     Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
 
 
-  @mukthar
+
   Scenario: After entering search term user can see SEE ALL RESULTS
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -91,14 +91,14 @@ Feature: Concierge PG Page
     When I type 'table'
     Then I verify SEE ALL RESULTS button is present
 
-  @mukthar
+
   Scenario: Search product via SKU
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I go to item "57070740 CLNT" from search field
     Then I Verify that 'PDP title' is present
 
-  @mukthar
+
   Scenario: Search product via Product name
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
