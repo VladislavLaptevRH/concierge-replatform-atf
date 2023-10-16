@@ -250,6 +250,39 @@ Feature: Concierge PG Page
     Then I navigate to gallery 'Round & Oval Tables'
     Then I verify that 'PG has SALE and IN-STOCK filters, text RESULTS (n), faucet with text SORT' on PG screen
     Then I click 'SORT and confirm that Modal has text FEATURED, Price Low to High, Price High to Low' on PG screen
+    Then I verify that 'Back to top Button is present' on PG screen
+    Then I click 'Back to Top button' on PG screen
     Then I click 'Price Low to High and verify price is sorted' on PG screen
     Then I click 'Price High to Low and verify price is sorted' on PG screen
 
+
+  @mukthar
+  Scenario: To verify PG page is loading till footer
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I navigate to menu 'Dining'
+    Then I navigate to sub menu 'Tables'
+    Then I navigate to gallery 'Round & Oval Tables'
+    Then I verify page is loaded till footer
+
+  @mukthar
+  Scenario: Verify that PG is defaulted to 3-grid view
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Benches & Stools'
+    Then I navigate to gallery 'Benches'
+    Then I verify that 'Grid View in PG is set to 3-grid view by default' on PG screen
+    When I choose "CA" country
+    Then I verify that 'Grid View in PG is set to 3-grid view by default' on PG screen
+    When I choose "GB" country
+    Then I verify that 'Grid View in PG is set to 3-grid view by default' on PG screen
+
+  @mukthar
+  Scenario: Verify Enjoy free shipping banner for textile category
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I navigate to menu 'Textiles'
+    Then I navigate to sub menu 'Bedding by Type'
+    Then I navigate to gallery 'Cotton Bedding'
+    Then I verify Verify Enjoy free shipping banner for textile category

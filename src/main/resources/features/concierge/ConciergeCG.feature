@@ -301,5 +301,5 @@ Feature: Concierge CG Page
     Examples:
       | menu      | subMenu               | gallery                     |
       | Dining    | Tables                | Rectangular Table Collections|
-      | Bath      | Furniture             | Bath Towel Collections       |
+      | Bath      | Furniture             | Bath Collections       |
       | Outdoor   | In Stock              | Furniture Collections        |
