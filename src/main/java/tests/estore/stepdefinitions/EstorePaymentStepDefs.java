@@ -306,7 +306,7 @@ public class EstorePaymentStepDefs {
     public void iExecutePaymentWithCreditCardOnEstore() {
         $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
-
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='CONTINUE']")).click();
     }
