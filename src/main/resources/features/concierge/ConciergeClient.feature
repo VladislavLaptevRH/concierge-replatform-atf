@@ -1,7 +1,7 @@
 @conciergeClient
 @conciergeTestRun
 Feature:Client
-  @vimal
+
   Scenario Outline: Verify client search by <searchBy>
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
