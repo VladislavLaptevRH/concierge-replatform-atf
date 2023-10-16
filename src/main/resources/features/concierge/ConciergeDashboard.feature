@@ -106,7 +106,7 @@ Feature:Concierge Dashboard
     When I change my store to number "10"
     Then I verify I see store Palo Alto in the header
 
-    @vimal
+
   Scenario: Verify Associate Signout button :User should be able to view the last accessed page after Signing again
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

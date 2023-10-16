@@ -9,7 +9,6 @@ Feature: Concierge GiftCardEnquiry
     When I enter gift card information
     Then I verify transaction details
 
-    @vimal
   Scenario: Purchase Gift Card
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
