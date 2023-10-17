@@ -179,7 +179,7 @@ public class Hooks {
         Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.pageLoadTimeout = 60000;
         Configuration.timeout = 45000;
