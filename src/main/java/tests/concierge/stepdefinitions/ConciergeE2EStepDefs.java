@@ -1358,4 +1358,10 @@ public class ConciergeE2EStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text() = '"+multi+"']")).should(visible, Duration.ofSeconds(15));
     }
+
+    @Then("I verify sofa search page is displayed")
+    public void iVerifySearchPage(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getSearchResultHeader().should(visible, Duration.ofSeconds(15));
+    }
 }

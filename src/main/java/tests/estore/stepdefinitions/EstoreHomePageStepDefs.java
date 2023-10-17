@@ -55,6 +55,10 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getSearchIcon().click();
     }
 
+    @Then("I Verify Search icon is present")
+    public void iVerifyOnSearchIcon() {
+        estoreHomePage.getSearchIcon().should(Condition.visible, Duration.ofSeconds(30));
+    }
     @And("I Type product name {string}")
     public void iTypeProductName(String arg0) {
         estoreHomePage.getSearchInputField().should(Condition.visible, Duration.ofSeconds(30));

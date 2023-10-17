@@ -173,6 +173,17 @@ public class Pdp {
         result = arg0;
     }
 
+    @And("I type {string}")
+    public void iType(String arg0) {
+        conciergeItemsScreen.getSearchField().setValue(arg0);
+        result = arg0;
+    }
+
+    @Then("I verify SEE ALL RESULTS button is present")
+    public void iSEEALLRESULTS() {
+        conciergeItemsScreen.getSeeAllResult().shouldBe(visible, Duration.ofSeconds(15));
+    }
+
     @When("Verify that {string}")
     public void verifyData(String data) {
         switch (data){
