@@ -132,7 +132,7 @@ Feature: Concierge PG Page
   Scenario: Verify the search results with multiple terms search: white and blue corner leather sofa
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I search item "white and blue corner leather sofa"
+    When I go to item "white and blue corner leather sofa" from search field
     Then I verify multi search result is displayed
 
   @mukthar
