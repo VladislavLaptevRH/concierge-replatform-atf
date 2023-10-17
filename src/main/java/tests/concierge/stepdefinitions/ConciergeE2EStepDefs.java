@@ -1391,7 +1391,7 @@ public class ConciergeE2EStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getSearchLens().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getSearchLens().click();
-        conciergeUserAccountPage.getSearchLens().setValue(arg0);
+        conciergeItemsScreen.getSearchIconField().setValue(arg0);
     }
 
     @When("I clear search")

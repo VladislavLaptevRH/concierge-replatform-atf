@@ -128,6 +128,7 @@ public class ConciergeItemsScreen {
     private final SelenideElement multiSearchHeader = $(By.xpath("//*[text()='white and blue corner leather sofa']"));
     private final SelenideElement searchClearButton = $(By.xpath("//input[@placeholder='SEARCH']//parent::div//descendant::*[@id='Grommet/X-Close']"));
     private final SelenideElement clearAll = $(By.xpath("//*[text()='Clear All']"));
+    private final SelenideElement searchIconField = $(By.xpath("//input[@placeholder='SEARCH']"));
 
 }
 
