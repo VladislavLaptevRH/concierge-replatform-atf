@@ -103,7 +103,7 @@ Feature: Concierge PG Page
     When I go to item "sofa" from search field
     Then I verify sofa search page is displayed
 
-  @mukthar
+
   Scenario: Instock
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -111,7 +111,7 @@ Feature: Concierge PG Page
     Then I verify sofa search page is displayed
     Then I select IN-STOCK box
 
-  @mukthar
+
   Scenario: Search with Keywords - Art or swivels
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -120,7 +120,7 @@ Feature: Concierge PG Page
     When I go to item "swivels" from search field
     Then I verify swivels search page is displayed
 
-  @mukthar
+
   Scenario: Clicking on cross icon search item should clear from search box
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -128,14 +128,14 @@ Feature: Concierge PG Page
     When I clear search
     Then I confirm search item is clear
 
-  @mukthar
+
   Scenario: Verify the search results with multiple terms search: white and blue corner leather sofa
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I go to item "white and blue corner leather sofa" from search field
     Then I verify multi search result is displayed
 
-  @mukthar
+
   Scenario: Verify the results with multiple term search and facet selections
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -144,7 +144,7 @@ Feature: Concierge PG Page
     Then I select IN-STOCK box
     Then I verify multi search result is displayed
 
-  @mukthar
+
   Scenario: Verify that by clicking on 'clear all', all the applied options should get removed
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
