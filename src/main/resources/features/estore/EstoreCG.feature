@@ -61,8 +61,8 @@ Feature: Estore CG
     When I choose country for eStore from footer
     When I go to "FABRIC CHAIR COLLECTIONS" on eStore
     When I select "3" grid view on estore CG page
-    When I go to estore item "white and blue corner leather sofa" from search field
-    When I go to "SEATING COLLECTIONS" on eStore
+    When I click on random item from collection page with applied "3" grid view
+    When I navigate back from "collection page" page
     Then I verify that page render in the same grid view that previously selected
 
   Scenario: Verify Textile CG having "Enjoy Free Shipping On All Textiles" banner

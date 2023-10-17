@@ -270,11 +270,6 @@ public class EstoreAddressStepDefs {
 
         Select state = new Select(estoreUserAccountPage.getBillingAddressSelectState());
         state.selectByValue("TX");
-
-//        estoreUserAccountPage.getBillingAddressPostalCode().click();
-//        generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPostalCode());
-//        estoreUserAccountPage.getBillingAddressPostalCode().setValue("73301");
-
         generalStepDefs.clearField(estoreUserAccountPage.getBillingAddressPhone());
         estoreUserAccountPage.getBillingAddressPhone().setValue("(541) 777-4321");
 
@@ -614,7 +609,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that introduced gift message is displayed on {string} page")
     public void iVerifyThatIntrotucedGiftMessageIsDisplayedOnPage(String message) {
-        $(By.xpath("//*[text()='Gift Message']"))
+        $(By.xpath("//*[text()='" + message + "']"))
                 .should(visible, Duration.ofSeconds(20));
     }
 

@@ -4,6 +4,7 @@ import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -40,13 +41,13 @@ public class EstorePdpPageScreen {
 
     private final SelenideElement inStockTitle = $(By.xpath("//*[text()='IN STOCK']"));
 
-    private SelenideElement turkishTowelCollectionTitle = $(By.xpath("(//*[text()='802-Gram Turkish Towel Collection'])[4]"));
+    private SelenideElement turkishTowelCollectionTitle = $(By.xpath("(//*[text()='802-Gram Turkish Towel Collection'])[3]"));
 
     private SelenideElement itemInStockOption = $(By.xpath("//*[text()='Item#']"));
 
-    private SelenideElement sizeInStockOption = $(By.xpath("//*[text()='Size']"));
+    private SelenideElement sizeInStockOption = $(By.xpath("(//*[text()='Size'])[5]"));
 
-    private SelenideElement colorInStockOption = $(By.xpath("//*[text()='Color']"));
+    private SelenideElement colorInStockOption = $(By.xpath("(//*[text()='Color'])[7]"));
 
     private SelenideElement detailsButton = $(By.xpath("//*[text()='DETAILS']"));
 
@@ -70,11 +71,11 @@ public class EstorePdpPageScreen {
 
     private SelenideElement textBeforePriceAtLineItem = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']//p[text()='Starting at']"));
 
-    private SelenideElement lineItemId =  $(By.xpath("(//p[@data-testid='item-sku-id-desktop'])[1]"));
+    private SelenideElement lineItemId = $(By.xpath("(//p[@data-testid='item-sku-id-desktop'])[1]"));
 
-    private  SelenideElement addToCartBtn = $(By.xpath("(//span[text()='ADD TO CART'])[1]"));
+    private SelenideElement addToCartBtn = $(By.xpath("(//span[text()='ADD TO CART'])[1]"));
 
-    private  SelenideElement itemAddedInCarMsg = $(By.xpath("//p[contains(text(),'1 Item Added To Your Cart')]"));
+    private SelenideElement itemAddedInCarMsg = $(By.xpath("//p[contains(text(),'1 Item Added To Your Cart')]"));
 
     private SelenideElement viewCartBtn = $(By.xpath("//span[text()='View Cart']"));
 
@@ -85,4 +86,70 @@ public class EstorePdpPageScreen {
     private SelenideElement lineItemMemberPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']//p[@data-testid='price-for-member'])[1]"));
 
     private SelenideElement lineItemRegularPrice = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']//p[@data-testid='price-for-regular'])[1]"));
+
+    private SelenideElement QtyInStockItems = $(By.xpath("(//div[@data-testid='in-stock-qty-select'])[1]"));
+
+    private SelenideElement QtyInStockItems_2 = $(By.xpath("(//div[@data-testid='in-stock-qty-select'])[2]"));
+
+    private SelenideElement addToCartBtnInStockItems = $(By.xpath("(//*[@id=\"inStockProductCardActions_addToCart-btn\"]/span[1])[1]"));
+
+    private SelenideElement viewSaleItems = $(By.xpath("(//*[text()='Sale'])[1]"));
+
+    private SelenideElement addToWishlist = $(By.xpath("(//*[@id=\"component-relatedProductActions_addToWishlist-btn\"])[1]"));
+
+    private SelenideElement viewWishlistButton = $(By.xpath("(//*[@id=\"addToWishlistDialog_viewWishList-btn\"]/span[1])"));
+
+    private SelenideElement keepShopping = $(By.xpath("(//*[@id=\"ajax-continue-shopping\"]/span[1])"));
+
+    private final SelenideElement selectColorElement = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Color')])[1]"));
+
+    private final SelenideElement selectSize = $(By.xpath("(//select[contains(@id, 'Size')])[1]"));
+
+    private final SelenideElement viewCartValidation = $(By.xpath("//p[text()='802-Gram Turkish Towel Collection']"));
+
+    private final SelenideElement selectDepth = $(By.xpath("(//select[contains(@id, 'Depth')])[1]"));
+
+    private final SelenideElement selectFill = $(By.xpath("(//select[contains(@id, 'Fill')])[1]"));
+
+    private final SelenideElement selectColor = $(By.xpath("(//select[contains(@id, 'Color')])[1]"));
+
+    private final SelenideElement selectLength = $(By.xpath("(//select[contains(@id, 'Length')])[1]"));
+
+    private final SelenideElement selectLeather = $(By.xpath("(//select[contains(@id, 'Leather')])[1]"));
+
+    private SelenideElement heroImageForwardBtn = $(By.xpath("(//*[contains(@class,'arrow-icon')])[2]"));
+
+    private SelenideElement heroImageBackBtn = $(By.xpath("(//*[contains(@class,'arrow-icon')])[1]"));
+
+    private SelenideElement heroImagePlusIconZoomInBtn =  $(By.xpath("//*[text()='Grommet/ZoomIn']/.."));
+
+    private SelenideElement heroImagePlusIconZoomOutBtn =  $(By.xpath("//*[text()='Grommet/ZoomOut']/.."));
+
+    private  SelenideElement heroImageZoomInBtn =  $(By.xpath("(//*[text()='Grommet/ZoomIn']/..)[2]"));
+
+    private  SelenideElement heroImageZoomOutBtn =  $(By.xpath("//*[text()='Grommet/ZoomOut']/.."));
+
+    private SelenideElement heroImageUpwardBtn = $(By.xpath("(//*[contains(@class,'arrow-icon')])[6]"));
+
+    private SelenideElement heroImageDownwardBtn = $(By.xpath("(//*[contains(@class,'arrow-icon')])[7]"));
+
+    private SelenideElement heroImageCloseIcon = $(By.xpath("//*[@id ='Combined-Shape' and @fill='currentColor']"));
+
+    private SelenideElement countrySelectionBtn = $(By.xpath("//div[@id='country-selection']"));
+
+    private  SelenideElement countyCode = $(By.xpath("//li[@data-value='GB']"));
+
+    private  SelenideElement postalCodeInput = $(By.xpath("//input[@id='postal-code-international']"));
+
+    private SelenideElement postalCodeSubmitBtn = $(By.xpath("//button[@data-testid='submit-postal']"));
+
+    private SelenideElement viewStockMsg = $(By.xpath("//*[text()='These options are available for']"));
+
+    private SelenideElement availableItemMsg= $(By.xpath("(//p[contains(text(),'This item is in stock and will be delivered on or before')])[2]"));
+
+    private final SelenideElement selectFabric = $(By.xpath("(//select[contains(@id, 'Fabric')])[1]"));
+
+    private final SelenideElement selectCushionFill = $(By.xpath("(//select[contains(@id, 'Cushion Fill')])[1]"));
+
+    private final SelenideElement viewSaleItem = $(By.xpath("(//*[@id=\"component-relatedProductCartd_view-sale-btn\"])[1]"));
 }

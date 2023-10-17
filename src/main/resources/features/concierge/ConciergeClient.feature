@@ -10,13 +10,13 @@ Feature:Client
     Then I verify that client results is displayed
     Examples:
       | searchBy                      |
+      | postalCode                    |
       | email                         |
       | lastName                      |
       | memberID                      |
       | businessAccountNumberTrade    |
       | businessAccountNumberContract |
       | phoneNumber                   |
-      | postalCode                    |
       | company                       |
 
   Scenario: Verify that user is able to create new client

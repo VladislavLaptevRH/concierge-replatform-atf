@@ -90,7 +90,7 @@ Feature: Order history
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "IRON" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button

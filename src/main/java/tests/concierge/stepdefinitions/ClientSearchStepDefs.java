@@ -57,6 +57,7 @@ public class ClientSearchStepDefs {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getClientButton().click();
         conciergeUserAccountPage.getClientLookupHeaderBtn().shouldHave(text("Client Lookup"), Duration.ofSeconds(10));
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getClientLookupHeaderBtn().click();
     }
 

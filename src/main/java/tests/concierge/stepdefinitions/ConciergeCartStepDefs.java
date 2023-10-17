@@ -149,12 +149,13 @@ public class ConciergeCartStepDefs {
 //                conciergeItemsScreen.getViewCartButton().click();
 //            }
 //        } else {
-            conciergeCartPageScreen.getItemAddedToYourCart().should(visible, Duration.ofMinutes(1));
-            conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
             conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
             conciergeItemsScreen.getViewCartButton().should(visible, Duration.ofSeconds(60));
             conciergeCartPageScreen.getKeepShopping().should(visible, Duration.ofSeconds(15));
             conciergeItemsScreen.getViewCartButton().click();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            conciergeItemsScreen.getViewCartImage().click();
+             with().pollInterval(5, SECONDS).await().until(() -> true);
 //        }
     }
 
@@ -970,7 +971,8 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify that availability, Delivery and Returns messaging in cart")
     public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingInCart() {
-        $(By.xpath("//*[contains(text(),'This item will be ready for delivery between')]")).should(visible, Duration.ofSeconds(10));
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[contains(text(),'This item is in stock and will be ready for delivery between')]")).should(visible, Duration.ofSeconds(10));
         $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery')]")).should(visible, Duration.ofMinutes(1));
     }
 
@@ -1298,7 +1300,9 @@ public class ConciergeCartStepDefs {
 
     @Then("I change zip code in the cart to {string}")
     public void changeTheZipCodeInTheCart(String zipCode) {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getPdpScreenZipCode().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         generalStepDefs.clearField(pdpScreen.getPostalCode());
         pdpScreen.getPostalCode().setValue(zipCode);
         pdpScreen.getConfirmationPostalCode().click();

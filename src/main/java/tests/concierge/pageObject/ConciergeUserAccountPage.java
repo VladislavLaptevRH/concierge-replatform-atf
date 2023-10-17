@@ -47,6 +47,7 @@ public class ConciergeUserAccountPage {
     private final SelenideElement businessAcNumber = $(By.xpath("//*[contains(text(), 'Business Account Number')]/../..//input"));
 
     private final SelenideElement clientLookupEmail = $(By.cssSelector("input[id='email']"));
+
     private final SelenideElement clientLookupEmailByName = $(By.cssSelector("input[name='email']"));
 
     private final SelenideElement dashboardTitle = $(By.xpath("//h1[@class='MuiTypography-root MuiTypography-h1']"));
@@ -147,7 +148,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement clientLookupLastName = $(By.xpath("//*[text() = 'Last Name']/../..//input"));
 
-    private final SelenideElement clientLookupPhoneNumber = $(By.xpath("//input[@name='phoneNumber']"));
+    private final SelenideElement clientLookupPhoneNumber = $(By.xpath("//input[@id='phone']"));
 
     private final SelenideElement clientLookupSearchButton = $(By.xpath("//button[@type='submit']"));
 

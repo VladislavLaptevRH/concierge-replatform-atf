@@ -189,6 +189,17 @@ public class Pdp {
         result = arg0;
     }
 
+    @And("I type {string}")
+    public void iType(String arg0) {
+        conciergeItemsScreen.getSearchField().setValue(arg0);
+        result = arg0;
+    }
+
+    @Then("I verify SEE ALL RESULTS button is present")
+    public void iSEEALLRESULTS() {
+        conciergeItemsScreen.getSeeAllResult().shouldBe(visible, Duration.ofSeconds(15));
+    }
+
     @When("Verify that {string}")
     public void verifyData(String data) {
         switch (data){
@@ -542,6 +553,7 @@ public class Pdp {
 
     @Then("I chose the {string} line item selections one by one")
     public void iChoseLineItemSelectionsOneByOne(String chose) {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if (conciergeItemsScreen.getAddToCartButtonDisabled().isDisplayed()) {
             int lineItemsCount = pdpScreen.getLineItemsCount().size();
             for (int i = 1; i <= lineItemsCount; i++) {

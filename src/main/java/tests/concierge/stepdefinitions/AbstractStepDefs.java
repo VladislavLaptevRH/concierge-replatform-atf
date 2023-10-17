@@ -288,6 +288,7 @@ public class AbstractStepDefs {
         }
         if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
             generalStepDefs.fillAddressFields();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             generalStepDefs.fillZipCodeStateCountry("85020", "US", "AZ");
             if(checkoutAddressScreen.getEmailAddressField().isDisplayed()){
                 generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());

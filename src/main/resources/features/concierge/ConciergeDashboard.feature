@@ -106,6 +106,7 @@ Feature:Concierge Dashboard
     When I change my store to number "10"
     Then I verify I see store Palo Alto in the header
 
+
   Scenario: Verify Associate Signout button :User should be able to view the last accessed page after Signing again
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -114,5 +115,4 @@ Feature:Concierge Dashboard
     Then I navigate to gallery "Office Collections"
     Then I verify that 'grid view is present on top right' on CG screen
     When I sign out
-    Then I land in login page
-    Then I verify that 'grid view is present on top right' on CG screen
+

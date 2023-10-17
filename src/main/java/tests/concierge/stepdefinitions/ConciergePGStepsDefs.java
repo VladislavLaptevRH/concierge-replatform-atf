@@ -712,8 +712,7 @@ public class ConciergePGStepsDefs {
         $(By.xpath("//*[contains(@class, 'MuiTypography-body1') and text() = '" + title + "']")).should(visible, Duration.ofSeconds(10));
     }
 
-
-    @Then("I Verify i return to {string} PG page")
+   @Then("I Verify i return to {string} PG page")
     public void iVerifyireturntopgpage(String title){
         Assert.assertEquals(title.toLowerCase(), $(By.xpath("//*[text() = '" + title + "']")).getText().toLowerCase());
         if(!conciergePGScreen.getResult().isDisplayed()){
@@ -721,5 +720,10 @@ public class ConciergePGStepsDefs {
         }
         conciergePGScreen.getResult().should(Condition.visible, Duration.ofSeconds(15));
         conciergePGScreen.getSort().should(Condition.visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify Verify Enjoy free shipping banner for textile category")
+    public void iVerifyEnjoyFreeShipping(){
+        conciergePGScreen.getEnjoyFreeShipping().should(Condition.visible, Duration.ofSeconds(20));
     }
 }

@@ -16,6 +16,7 @@ import tests.utility.Hooks;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -31,7 +32,8 @@ public class EstoreCGStepDefs {
 
     @Then("I validate the collection name is not empty")
     public void iValidateTheCollectionNameIsNotEmpty() {
-        $(By.xpath("//*[contains(@class, 'MuiGrid-item')]//*[contains(text(),'Collections')]")).should(Condition.visible, Duration.ofSeconds(60));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        $(By.xpath("(//h1//span)[1]")).shouldHave(text("Collections"), Duration.ofSeconds(60));
     }
 
     @When("I scroll on the page till back to top button is visible")
