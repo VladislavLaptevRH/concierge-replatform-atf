@@ -202,3 +202,38 @@ Feature: Estore PDP
     When I remove all items from estore cart
     When I open product page with "prod10720085" and "46680991" with "INDG" for estore
     Then Sale link validated along with selecting value
+
+  Scenario: Verify the PDP title and pricing
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open the product category "cat25450027"
+    Then I verify the PDP title and pricing for product
+
+  Scenario: Verify the content of PDP for eStore - verifying SOFA PDP
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod30390106" and "" with "INDG" for estore
+    Then I verify the content of PDP for eStore - verifying SOFA PDP
+
+  Scenario: Verifying another PDP - Chaise
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod14020058" and "17050043" with "INDG" for estore
+    Then I verify another PDP - Chaise
+
+  Scenario: Verifying PDP content - Bench
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod20850154" and "" with "INDG" for estore
+    Then I verify another PDP - Bench
+
+  Scenario: Verifying PDP content - Towel
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    Then I verify another PDP - Towel

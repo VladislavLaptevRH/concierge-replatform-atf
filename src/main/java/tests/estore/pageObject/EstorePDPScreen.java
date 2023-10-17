@@ -67,7 +67,9 @@ public class EstorePDPScreen {
 
     private final SelenideElement itemIncludeMultipleComponentsMsg = $(By.xpath("//*[text()='This item includes multiple components. Individual components will be listed in your cart.']"));
 
+    private  final SelenideElement fistItemTitle = $(By.xpath("(//a[@id='product-option-grid']//p//span)[2]"));
 
+    private final SelenideElement fistItemProductId = $(By.xpath("(//div[@data-cmp='cardImages'])[1]//img"));
     public void verifyThatItemIncludeMultipleComponentsMsgIsDisplayedAboveLineItemDropDown() {
         itemIncludeMultipleComponentsMsg.should(Condition.visible, Duration.ofSeconds(20));
     }
