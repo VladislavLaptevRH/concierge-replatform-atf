@@ -52,7 +52,7 @@ Feature: Concierge PDP
     Then Verify that 'line item selections (Size, Finish and Qty) are present'
     Then Verify that 'smaller preview product picture is present on the left of line items'
     Then Verify that 'View in-stock Items and View Sale Items links are present'
-    Then I choose option 'Waxed Grey Oak/ Pewter'
+    Then I choose option 'Waxed Brown Oak/ Brass'
     Then I chose zero choose in line items
     Then Verify that 'text "Configure this item to view delivery information to" is present'
     Then Verify that 'text Swatch is present'

@@ -1509,8 +1509,13 @@ public class ConciergeCartStepDefs {
             with().pollInterval(5, SECONDS).await().until(() -> true);
             $(By.xpath("//*[@data-testid = 'price-for-regular']")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
             $(By.xpath("//*[@data-testid = 'price-for-regular']")).shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
-            $(By.xpath("//*[@data-testid = 'price-for-member']")).shouldHave(text("$2,895.00"), Duration.ofSeconds(20));
-            $(By.xpath("//*[@data-testid = 'price-for-member']")).shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
+            if($(By.xpath("//*[@data-testid = 'price-for-trade']")).isDisplayed()){
+                $(By.xpath("//*[@data-testid = 'price-for-trade']")).shouldHave(text("$2,895.00"), Duration.ofSeconds(20));
+                $(By.xpath("//*[@data-testid = 'price-for-trade']")).shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
+            } else {
+                $(By.xpath("//*[@data-testid = 'price-for-member']")).shouldHave(text("$2,895.00"), Duration.ofSeconds(20));
+                $(By.xpath("//*[@data-testid = 'price-for-member']")).shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
+            }
             if($(By.xpath("//*[@data-testid = 'price-for-final-sale']")).isDisplayed()){
                 $(By.xpath("//*[@data-testid = 'price-for-final-sale']")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
                 $(By.xpath("//*[@data-testid = 'price-for-final-sale']")).shouldNotHave(text("$NaN"), Duration.ofSeconds(20));

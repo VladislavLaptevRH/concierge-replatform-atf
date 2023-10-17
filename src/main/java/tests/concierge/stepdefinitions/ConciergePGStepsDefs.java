@@ -684,7 +684,7 @@ public class ConciergePGStepsDefs {
                 i++;
                 with().pollInterval(1, SECONDS).await().until(() -> true);
             }
-            assertEquals(2, i);
+            assertEquals(3, i);
         }
         if(view.equals("3")){
             int i = 1;
@@ -695,7 +695,7 @@ public class ConciergePGStepsDefs {
                 i++;
                 with().pollInterval(1, SECONDS).await().until(() -> true);
             }
-            assertEquals(2, i);
+            assertEquals(3, i);
         }
     }
 
