@@ -1358,4 +1358,66 @@ public class ConciergeE2EStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeItemsScreen.getSearchResultHeader().should(visible, Duration.ofSeconds(15));
     }
+
+    @Then("I select IN-STOCK box")
+    public void iSelectinstockbox(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getInStock().should(visible, Duration.ofSeconds(15));
+        conciergeItemsScreen.getInStock().click();
+    }
+
+    @Then("I clear all and confirm the applied option is removed")
+    public void iClearAll(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getClearAll().should(visible, Duration.ofSeconds(15));
+        conciergeItemsScreen.getClearAll().click();
+    }
+
+    @Then("I verify art search page is displayed")
+    public void iVerifyArtSearchPage(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getArtResultHeader().should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify swivels search page is displayed")
+    public void iVerifySwivelsSearchPage(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getSwivelsResultHeader().should(visible, Duration.ofSeconds(15));
+    }
+
+    @When("I search item {string}")
+    public void iSearchField(String arg0) {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        if (!conciergeUserAccountPage.getSearchItemField().isDisplayed()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+        conciergeUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+        conciergeUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
+        conciergeUserAccountPage.getSearchItemField().click();
+        conciergeUserAccountPage.getSearchItemField().setValue(arg0);
+    }
+
+    @When("I clear search")
+    public void iClearSearch(){
+        conciergeItemsScreen.getSearchClearButton().should(visible, Duration.ofSeconds(15));
+        conciergeItemsScreen.getSearchClearButton().click();
+    }
+
+    @Then("I confirm search item is clear")
+    public void iConfirmSearchField() {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        if (!conciergeUserAccountPage.getSearchItemField().isDisplayed()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+        conciergeUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+        conciergeUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
+    }
+
+    @Then("I verify multi search result is displayed")
+    public void iVerifyMultiSearchPage(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getMultiSearchHeader().should(visible, Duration.ofSeconds(15));
+    }
 }
