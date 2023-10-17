@@ -1388,14 +1388,10 @@ public class ConciergeE2EStepDefs {
     @When("I search item {string}")
     public void iSearchField(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
-        if (!conciergeUserAccountPage.getSearchItemField().isDisplayed()) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-        }
-        conciergeUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
-        conciergeUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
-        conciergeUserAccountPage.getSearchItemField().click();
-        conciergeUserAccountPage.getSearchItemField().setValue(arg0);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeUserAccountPage.getSearchLens().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getSearchLens().click();
+        conciergeUserAccountPage.getSearchLens().setValue(arg0);
     }
 
     @When("I clear search")
@@ -1406,13 +1402,8 @@ public class ConciergeE2EStepDefs {
 
     @Then("I confirm search item is clear")
     public void iConfirmSearchField() {
-        generalStepDefs.waitForJSandJQueryToLoad();
-        if (!conciergeUserAccountPage.getSearchItemField().isDisplayed()) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-        }
-        conciergeUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
-        conciergeUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeUserAccountPage.getSearchLens().should(empty, Duration.ofMinutes(1));
     }
 
     @Then("I verify multi search result is displayed")
