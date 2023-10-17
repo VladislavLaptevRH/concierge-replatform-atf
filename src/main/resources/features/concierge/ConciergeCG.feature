@@ -162,8 +162,6 @@ Feature: Concierge CG Page
     Then I click 'Back Browser Button' on CG screen
     Then I click 'confirm that CG Rug Collections is displayed' on CG screen
 
-
-
   Scenario: Verify Prices are not present in CGs
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -184,7 +182,6 @@ Feature: Concierge CG Page
     Then I navigate to sub menu 'Fabric Seating'
     Then I navigate to gallery 'Seating Collections'
     Then I verify loading time for CG page
-
 
   Scenario: To verify the top category nav
     Given I log into Concierge as "associate"

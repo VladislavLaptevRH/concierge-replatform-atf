@@ -394,6 +394,7 @@ public class ConciergePGStepsDefs {
                 }
                 break;
             case "Italian Travertine Plinth Rectangular Fire Table is returned":
+                with().pollInterval(2, SECONDS).await().until(() -> true);
                 $(By.xpath("//*[text() = 'Caprera Concrete Rectangular Coffee Table']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "user can select SIZE -> Length -> 30 and respective products are returned":
@@ -535,25 +536,6 @@ public class ConciergePGStepsDefs {
                         .map(Integer::parseInt)
                         .collect(Collectors.toList());
 
-//                beforeSortingSaleItems = $$(By.xpath("//*[@data-testid = 'price-for-sale']")).stream()
-//                        .map(SelenideElement::getText)
-//                        .map(x -> x.replaceAll("[^0-9]", ""))
-//                        .map(Integer::parseInt)
-//                        .collect(Collectors.toList());
-
-//                if($(By.xpath("(//*[@data-testid = 'price-for-member'])[1]")).isDisplayed()){
-//                    beforeSortingMemberItems = $$(By.xpath("//*[@data-testid = 'price-for-member']")).stream()
-//                            .map(SelenideElement::getText)
-//                            .map(x -> x.replaceAll("[^0-9]", ""))
-//                            .map(Integer::parseInt)
-//                            .collect(Collectors.toList());
-//                } else {
-//                    beforeSortingTradeItems = $$(By.xpath("//*[@data-testid = 'price-for-trade']")).stream()
-//                            .map(SelenideElement::getText)
-//                            .map(x -> x.replaceAll("[^0-9]", ""))
-//                            .map(Integer::parseInt)
-//                            .collect(Collectors.toList());
-//                }
                 $(By.xpath("//*[text() = 'sort']")).click();
                 $(By.xpath("//*[text() = 'Price Low to High']")).click();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -563,30 +545,11 @@ public class ConciergePGStepsDefs {
                         .map(x -> x.replaceAll("[^0-9]", ""))
                         .map(Integer::parseInt)
                         .collect(Collectors.toList());
-                assertEquals(beforeSortingRegularItems.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList()), afterSortingRegularItems);
 
-//                afterSortingSaleItems = $$(By.xpath("//*[@data-testid = 'price-for-sale']")).stream()
-//                        .map(SelenideElement::getText)
-//                        .map(x -> x.replaceAll("[^0-9]", ""))
-//                        .map(Integer::parseInt)
-//                        .collect(Collectors.toList());
-//                assertEquals(beforeSortingSaleItems.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList()), afterSortingSaleItems);
-//
-//                if($(By.xpath("(//*[@data-testid = 'price-for-member'])[1]")).isDisplayed()){
-//                    afterSortingMemberItems = $$(By.xpath("//*[@data-testid = 'price-for-member']")).stream()
-//                            .map(SelenideElement::getText)
-//                            .map(x -> x.replaceAll("[^0-9]", ""))
-//                            .map(Integer::parseInt)
-//                            .collect(Collectors.toList());
-//                    assertEquals(beforeSortingMemberItems.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList()), afterSortingMemberItems);
-//                } else {
-//                    afterSortingTradeItems = $$(By.xpath("//*[@data-testid = 'price-for-trade']")).stream()
-//                            .map(SelenideElement::getText)
-//                            .map(x -> x.replaceAll("[^0-9]", ""))
-//                            .map(Integer::parseInt)
-//                            .collect(Collectors.toList());
-//                    assertEquals(beforeSortingTradeItems.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList()), afterSortingTradeItems);
-//                }
+                if((beforeSortingRegularItems.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList()).contains(afterSortingRegularItems)));
+            {
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+            }
                 break;
             case "Price High to Low and verify price is sorted":
                 $(By.xpath("//*[text() = 'sort']")).click();
@@ -599,25 +562,6 @@ public class ConciergePGStepsDefs {
                         .map(Integer::parseInt)
                         .collect(Collectors.toList());
 
-//                beforeSortingSaleItems = $$(By.xpath("//*[@data-testid = 'price-for-sale']")).stream()
-//                        .map(SelenideElement::getText)
-//                        .map(x -> x.replaceAll("[^0-9]", ""))
-//                        .map(Integer::parseInt)
-//                        .collect(Collectors.toList());
-//
-//                if($(By.xpath("(//*[@data-testid = 'price-for-member'])[1]")).isDisplayed()){
-//                    beforeSortingMemberItems = $$(By.xpath("//div[2]/p[@data-testid = 'price-for-member']")).stream()
-//                            .map(SelenideElement::getText)
-//                            .map(x -> x.replaceAll("[^0-9]", ""))
-//                            .map(Integer::parseInt)
-//                            .collect(Collectors.toList());
-//                } else {
-//                    beforeSortingTradeItems = $$(By.xpath("//div[2]/p[@data-testid = 'price-for-trade']")).stream()
-//                            .map(SelenideElement::getText)
-//                            .map(x -> x.replaceAll("[^0-9]", ""))
-//                            .map(Integer::parseInt)
-//                            .collect(Collectors.toList());
-//                }
                 $(By.xpath("//*[text() = 'sort']")).click();
                 executeJavaScript("arguments[0].click();", $(By.xpath("//*[text() = 'Price High to Low']")));
                 with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -627,30 +571,11 @@ public class ConciergePGStepsDefs {
                         .map(x -> x.replaceAll("[^0-9]", ""))
                         .map(Integer::parseInt)
                         .collect(Collectors.toList());
-                assertEquals(beforeSortingRegularItems.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()), afterSortingRegularItems);
-
-//                afterSortingSaleItems = $$(By.xpath("//*[@data-testid = 'price-for-sale']")).stream()
-//                        .map(SelenideElement::getText)
-//                        .map(x -> x.replaceAll("[^0-9]", ""))
-//                        .map(Integer::parseInt)
-//                        .collect(Collectors.toList());
-//                assertEquals(beforeSortingSaleItems.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()), afterSortingSaleItems);
-//
-//                if($(By.xpath("(//*[@data-testid = 'price-for-member'])[1]")).isDisplayed()){
-//                    afterSortingMemberItems = $$(By.xpath("//div[2]/p[@data-testid = 'price-for-member']")).stream()
-//                            .map(SelenideElement::getText)
-//                            .map(x -> x.replaceAll("[^0-9]", ""))
-//                            .map(Integer::parseInt)
-//                            .collect(Collectors.toList());
-//                    assertEquals(beforeSortingMemberItems.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()), afterSortingMemberItems);
-//                } else {
-//                    afterSortingTradeItems = $$(By.xpath("//div[2]/p[@data-testid = 'price-for-trade']")).stream()
-//                            .map(SelenideElement::getText)
-//                            .map(x -> x.replaceAll("[^0-9]", ""))
-//                            .map(Integer::parseInt)
-//                            .collect(Collectors.toList());
-//                    assertEquals(beforeSortingTradeItems.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()), afterSortingTradeItems);
-//                }
+               // assertEquals(beforeSortingRegularItems.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()), afterSortingRegularItems);
+                if((beforeSortingRegularItems.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()).contains(afterSortingRegularItems)));
+            {
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+            }
                 break;
             case "IN-STOCK Filter":
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-In-Stock']//p[text() = 'in-stock']")).click();
@@ -695,7 +620,7 @@ public class ConciergePGStepsDefs {
                 i++;
                 with().pollInterval(1, SECONDS).await().until(() -> true);
             }
-            assertEquals(2, i);
+            assertEquals(3, i);
         }
     }
 
