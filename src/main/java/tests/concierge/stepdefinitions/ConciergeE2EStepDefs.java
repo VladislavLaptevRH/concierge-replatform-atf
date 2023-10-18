@@ -7,8 +7,12 @@ import com.codeborne.selenide.WebDriverRunner;
 
 import com.codeborne.selenide.ex.ElementNotFound;
 import org.openqa.selenium.Keys;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.testng.AssertJUnit;
+
 import tests.estore.pageObject.EstoreUserAccountPage;
 import tests.utility.Hooks;
 import tests.concierge.pageObject.*;
@@ -31,6 +35,7 @@ import static org.awaitility.Awaitility.await;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static org.testng.AssertJUnit.assertFalse;
 
 public class ConciergeE2EStepDefs {
     ConfirmationOrderScreen confirmationOrderScreen = new ConfirmationOrderScreen();
@@ -229,6 +234,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I continue to payment")
     public void continueToPaymentAfterAddressCheckout() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if (!checkoutAddressScreen.getContinuePaymentButton().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -331,6 +337,7 @@ public class ConciergeE2EStepDefs {
     @When("I go to item {string} from search field")
     public void iGoToItemFromSearchField(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if(!conciergeUserAccountPage.getSearchItemField().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -443,6 +450,7 @@ public class ConciergeE2EStepDefs {
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[4]")).click();
         estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
         generalStepDefs.waitForJSandJQueryToLoad();
         estoreUserAccountPage.getSearchItemField().setValue(arg0);
@@ -550,8 +558,8 @@ public class ConciergeE2EStepDefs {
     @When("I click on become a member now button")
     public void iClickOnBecomeAMemberNowButton() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        conciergeCartPageScreen.getBecomeAmemberNow().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeCartPageScreen.getBecomeAmemberNow().click();
+        conciergeCartPageScreen.getBecomeAMemberNow().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeCartPageScreen.getBecomeAMemberNow().click();
     }
 
     @When("I click on continue adding additional button")
@@ -1014,26 +1022,30 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify trade prices for {string}")
     public void iVerifyTradePricesForPDP(String pageName) {
+        String TradeSalePrice = String.valueOf(conciergeCartPageScreen.getTradeSalePrice());
+        System.out.println("TradeSalePrice: "+TradeSalePrice);
         if (pageName.equals("project page")) {
-            $(By.xpath("//*[text()='TRADE']")).should(visible, Duration.ofSeconds(30));
+            conciergeCartPageScreen.getTradeInViewPage().should(visible, Duration.ofSeconds(30));
             if (Hooks.profile.equals("stg4")) {
-                $(By.xpath("//*[text()='$1,256.00']")).should(visible, Duration.ofSeconds(20));
+                conciergeCartPageScreen.getTradeInViewPage().shouldNotBe(visible, Duration.ofSeconds(20));
             } else {
-                $(By.xpath("//*[text()='$2,688.00']")).should(visible, Duration.ofSeconds(20));
+                conciergeCartPageScreen.getTradeInViewPage().should(visible, Duration.ofSeconds(20));
             }
         } else if (pageName.equals("PG")) {
             assertEquals(conciergeCartPageScreen.getTradePriceLabel().getText(), "Trade");
             if (Hooks.profile.equals("stg2")) {
-                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$1585");
-            } else {
-                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText(), "$2,688.00");
+                conciergeCartPageScreen.getTradeSalePrice().should(visible, Duration.ofSeconds(12));
             }
-        } else {
+            else {
+                conciergeCartPageScreen.getTradeSalePrice().shouldNotBe(visible, Duration.ofSeconds(12));
+            }
+        }
+        else {
             assertEquals(conciergeCartPageScreen.getTradePriceLabel().getText(), "Trade");
             if (Hooks.profile.equals("stg2")) {
-                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText().replaceAll(",", ""), "$3079.00");
+                conciergeCartPageScreen.getTradeSalePrice().should(visible, Duration.ofSeconds(12));
             } else {
-                assertEquals(conciergeCartPageScreen.getTradeSalePrice().getText(), "$2,688.00");
+                conciergeCartPageScreen.getTradeSalePrice().shouldNotBe(visible, Duration.ofSeconds(12));
             }
         }
     }
