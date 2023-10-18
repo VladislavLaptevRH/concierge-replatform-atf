@@ -30,7 +30,7 @@ public class ConciergeLoginPage {
     private final SelenideElement locationWestHolywood = $(By.xpath("//*[@id='location']/option[36]"));
 
     private final SelenideElement signInButton = $(By.xpath("//button[@class='login-form__submit']"));
-    private final SelenideElement RHIcon = $(By.xpath("//*[@alt='RH']"));
+    private final SelenideElement RHIcon = $(By.xpath("//*[@alt='BC']"));
     private final SelenideElement locationInput = $(By.xpath("//select[@id = 'location']"));
     private final SelenideElement dashboard = $(By.xpath("//h1[text()='Dashboard']"));
     private final SelenideElement projects = $(By.xpath("//h3[text()='Projects']"));

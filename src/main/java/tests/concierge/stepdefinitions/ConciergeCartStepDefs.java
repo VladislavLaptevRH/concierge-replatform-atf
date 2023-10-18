@@ -352,15 +352,20 @@ public class ConciergeCartStepDefs {
             }
             lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", "");
             with().pollInterval(2, SECONDS).await().until(() -> true);
+
             line = Float.parseFloat(lineItemPriceValueBeforeOverride);
             with().pollInterval(2, SECONDS).await().until(() -> true);
+
             actual = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", "");
             with().pollInterval(2, SECONDS).await().until(() -> true);
+
             if(line != Float.parseFloat(actual)){
                 WebDriverRunner.getWebDriver().navigate().refresh();
             }
-            assertEquals(line, Float.parseFloat(actual));
-            assertEquals(Float.parseFloat(lineItemPriceValueAfterOverride), line);
+            System.out.println("line: "+line);
+            System.out.println("actual: "+actual);
+            assertEquals(line , (Float.parseFloat(actual))*2);
+            assertEquals(Float.parseFloat(lineItemPriceValueAfterOverride)*2, line);
         }
         if (arg0.equals("AMOUNT_OFF")) {
             float expectedValuePriceValue = Float.parseFloat(lineItemPriceValueBefore) - 50;

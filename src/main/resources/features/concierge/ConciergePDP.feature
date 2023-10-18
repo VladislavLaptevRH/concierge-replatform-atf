@@ -255,9 +255,9 @@ Feature: Concierge PDP
     Then I verify text "Mattress fee" and amount in checkout is present for state "<state>"
     Examples:
       | state | zipCode|
-      | CA    | 94925  |
       | RI    | 02860  |
       | CT    | 06902  |
+      | CA    | 94925  |
 
   Scenario: Custom Jewelry
     Given I log into Concierge as "associate"

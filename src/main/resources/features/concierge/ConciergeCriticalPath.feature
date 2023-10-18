@@ -36,9 +36,9 @@ Feature: Concierge Critical Path
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10146709 LOAK" and quantity '4'
+    When I add item to cart via API with "10146709 LOAK" and quantity '2'
     When I open cart
-    Then I verify all the sums on the cart page with item quantity '4'
+    Then I verify all the sums on the cart page with item quantity '2'
 
   Scenario: Verify that the Membership Banner is present for Non-Members
     Given I log into Concierge as "associate"
@@ -817,6 +817,7 @@ Feature: Concierge Critical Path
     When I go to Swatch Landing Page
     Then I verify that swatch landing page is displayed
 
+  @vimal
   Scenario: Verify the Postal code updates in PDP
     Given I log into Concierge as "associate"
     When I choose 'US' country
@@ -841,8 +842,8 @@ Feature: Concierge Critical Path
     Then I choose a random sale item
     Then Verify that 'PDP has SALE and MEMBER prices'
 
+  @vimal
   Scenario Outline: Verify Mattress Recycling Fee
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -856,9 +857,9 @@ Feature: Concierge Critical Path
     Then I verify text "Mattress fee" and amount in checkout is present for state "<state>"
     Examples:
       | state | zipCode|
-      | CA    | 94925  |
       | RI    | 02860  |
       | CT    | 06902  |
+      | CA    | 94925  |
 
   Scenario: Custom Jewelry
     Given I log into Concierge as "associate"
