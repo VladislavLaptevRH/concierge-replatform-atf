@@ -1542,7 +1542,7 @@ public class ConciergeCartStepDefs {
             $(By.xpath("//*[text() = 'Unlimited Furniture Delivery' ]/../following-sibling::div/p")).shouldHave(text("$279.00"), Duration.ofSeconds(20));
             $(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).shouldHave(text("$4,139.00"), Duration.ofSeconds(20));
         }
-    }
+
 
     @When("I verify all the sums on the cart page with item quantity {string}")
     public void iVerifyAllTheSumsOnTheCartPage(String quantity) {
