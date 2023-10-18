@@ -18,6 +18,14 @@ import static org.awaitility.Awaitility.with;
 @Getter
 public class EstoreCartPage {
 
+    private SelenideElement confirmChangeCaZipCode = $(By.xpath("//button//span[text()='CONFIRM CHANGE']"));
+
+    private SelenideElement postalCodeCountrySelection = $(By.xpath("//div[@id='country-zipcode-selection']"));
+
+    private SelenideElement postalCodeCASelection = $(By.xpath("//li[@data-value='CA']"));
+
+    private SelenideElement acceptDiscountReminders = $(By.xpath("//button//span[text()='Accept']"));
+
     private SelenideElement rhMemberProgramTitle = $(By.xpath("//*[text()='Rh Members Program']"));
 
     private final SelenideElement becomeAmemberButton = $(By.id("addToCartMembershipDialog_becomeMember-btn"));
