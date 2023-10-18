@@ -35,8 +35,6 @@ public class EstoreAccountStepDefs {
 
     EstoreGiftRegistry estoreGiftRegistry = new EstoreGiftRegistry();
 
-    EstoreUserAccountPageStepDefs estoreUserAccountPageStepDefs = new EstoreUserAccountPageStepDefs();
-
     String firstName;
     String lastName;
     String email;

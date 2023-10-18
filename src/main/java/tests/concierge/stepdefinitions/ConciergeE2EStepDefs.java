@@ -551,8 +551,8 @@ public class ConciergeE2EStepDefs {
     @When("I click on become a member now button")
     public void iClickOnBecomeAMemberNowButton() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        conciergeCartPageScreen.getBecomeAmemberNow().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeCartPageScreen.getBecomeAmemberNow().click();
+        conciergeCartPageScreen.getBecomeAMemberNow().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeCartPageScreen.getBecomeAMemberNow().click();
     }
 
     @When("I click on continue adding additional button")
@@ -1360,5 +1360,11 @@ public class ConciergeE2EStepDefs {
     public void iVerifyMultiSKUinProject(String multi){
         with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text() = '"+multi+"']")).should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify sofa search page is displayed")
+    public void iVerifySearchPage(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getSearchResultHeader().should(visible, Duration.ofSeconds(15));
     }
 }

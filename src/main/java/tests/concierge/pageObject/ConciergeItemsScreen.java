@@ -119,5 +119,8 @@ public class ConciergeItemsScreen {
     private SelenideElement moInCGPage = $(By.xpath("(//*[contains(text(),'Modular')])[1]"));
 
     private SelenideElement viewCartImage = $(By.xpath("//*[@id=\"header-cart-button\"]/div"));
+    private final SelenideElement searchField = $(By.xpath("//*[@id = 'site-search-input']"));
+    private final SelenideElement seeAllResult = $(By.xpath("//*[text() = 'SEE ALL RESULTS']"));
+    private final SelenideElement searchResultHeader = $(By.xpath("//*[text()='sofa']"));
 }
 

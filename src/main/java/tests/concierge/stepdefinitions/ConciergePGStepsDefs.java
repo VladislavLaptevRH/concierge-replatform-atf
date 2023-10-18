@@ -646,4 +646,9 @@ public class ConciergePGStepsDefs {
         conciergePGScreen.getResult().should(Condition.visible, Duration.ofSeconds(15));
         conciergePGScreen.getSort().should(Condition.visible, Duration.ofSeconds(15));
     }
+
+    @Then("I verify Verify Enjoy free shipping banner for textile category")
+    public void iVerifyEnjoyFreeShipping(){
+        conciergePGScreen.getEnjoyFreeShipping().should(Condition.visible, Duration.ofSeconds(20));
+    }
 }

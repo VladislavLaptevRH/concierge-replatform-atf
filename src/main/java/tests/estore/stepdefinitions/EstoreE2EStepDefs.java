@@ -581,6 +581,15 @@ public class EstoreE2EStepDefs {
         WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
+    @When("I open the product category {string}")
+    public void IOpenProductCategory(String categoryId){
+        String URL = null;
+        if (Hooks.profile.equals("stg2")) {
+            URL = Hooks.eStoreBaseURL + "/catalog/category/products.jsp?categoryId="+ categoryId;
+        }
+        open(URL);
+    }
+
     @When("I open product page with {string} and {string} with {string} for estore")
     public void iOpenProductPageWithAndForEstore(String productId, String skuId, String options) {
         String URL = null;
@@ -622,7 +631,7 @@ public class EstoreE2EStepDefs {
 
         open(URL);
         try {
-            estoreItemPage.getAddToCartButton().should(visible);
+            estoreItemPage.getAddToCartButton().should(visible, Duration.ofSeconds(20));
             estoreItemPage.getAddToCartButton().scrollTo();
             if (!estoreItemPage.getAddToCartButton().isEnabled()) {
                 for (int i = 0; i < 3; i++) {

@@ -19,3 +19,10 @@ Feature: Test cases which are not use
     When I update postal code in cart
     When I click on gift box button
     Then I verify gift box fee in estore cart
+
+  Scenario: Verify CTA functionality
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I scroll down to Request a design consultation and click
+    And I fill in the request form
+    Then I Verify Thank you message

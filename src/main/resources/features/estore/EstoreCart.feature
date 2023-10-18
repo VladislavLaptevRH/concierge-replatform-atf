@@ -62,7 +62,7 @@ Feature: Estore Cart Page
   Scenario: Place order for guest user
     Given I remove all items from estore cart
     When I choose country for eStore from footer
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -111,7 +111,7 @@ Feature: Estore Cart Page
   Scenario: eStore - Membership pop up for guest user
     Given I remove all items from estore cart
     When I choose country for eStore from footer
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -145,7 +145,7 @@ Feature: Estore Cart Page
     Then I verify "NY" shipping restriction
 
   Scenario: eStore - Disable Continue as a Guest user option for guest user with membership
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on join now on estore cart page membership button
@@ -256,7 +256,7 @@ Feature: Estore Cart Page
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "NCKL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that rh member savings on this order message and amount is displayed

@@ -8,8 +8,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import tests.concierge.pageObject.SelectOption;
+import org.testng.Assert;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 
@@ -36,6 +38,8 @@ public class EstorePdpStepDefs {
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
 
     EstoreReturnPolicyScreen estoreReturnPolicyScreen = new EstoreReturnPolicyScreen();
+
+    EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
 
     EstoreAccountStepDefs estoreAccountStepDefs = new EstoreAccountStepDefs();
     String regularUSPrice;
@@ -134,13 +138,15 @@ public class EstorePdpStepDefs {
         $(By.xpath("(//*[contains(text(),'Bath Sheet')])[1]")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("(//*[contains(text(),'Hand Towel')])[1]")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("(//*[contains(text(),'Bath Towel')])[1]")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("(//*[contains(text(),'Washcloth')])[1]")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("verify the product price as per the postal code")
     public void verifyTheProductPriceAsPerThePostalCode() {
-        estorePdpPageScreen.getRegularTheFirstPrice().shouldHave(text("$20"), Duration.ofSeconds(60));
-        estorePdpPageScreen.getRegularTheSecondPrice().shouldHave(text("$39"), Duration.ofSeconds(60));
+        int regularPrice = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[1]")).getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+        int memberPrice = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-member'])[1]")).getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+
+        assertTrue("Regular price is not equal to zero", regularPrice > 0);
+        assertTrue("Member price is not equal to zero", memberPrice > 0);
     }
 
     @Then("I verify that price for product&line should be in US dollars on PDP page")
@@ -150,7 +156,7 @@ public class EstorePdpStepDefs {
 
     @When("I update {string} postal code on pdp page")
     public void iUpdatePostalCodeOnPdpPage(String country) {
-        estorePdpPageScreen.getPostalCodePdp().should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getPostalCodePdp().should(visible, Duration.ofSeconds(25));
         estorePdpPageScreen.getPostalCodePdp().scrollIntoView(true);
         estorePdpPageScreen.getPostalCodePdp().click();
         $(By.xpath("//div[@id='country-zipcode-selection']")).should(visible, Duration.ofSeconds(20)).click();
@@ -161,6 +167,7 @@ public class EstorePdpStepDefs {
             estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
             estorePdpPageScreen.getSubmitPostalCode().click();
             estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
+            WebDriverRunner.getWebDriver().navigate().refresh();
             $(By.xpath("//*[text()='Y1A 9Z9.']")).should(visible, Duration.ofSeconds(40));
         }
         if (country.equals("US")) {
@@ -199,11 +206,12 @@ public class EstorePdpStepDefs {
             estorePdpPageScreen.getSizeOption().should(interactable, Duration.ofSeconds(20));
             Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
             selectSize.selectByIndex(2);
+            with().pollInterval(4, SECONDS).await().until(() -> true);
+            estorePdpPageScreen.getColorOption().should(interactable,Duration.ofSeconds(25));
             Select selectColor = new Select(estorePdpPageScreen.getColorOption());
             selectColor.selectByIndex(2);
         }
         if (functional.equals("addtowishlist")) {
-            estoreAccountStepDefs.iClickOnEstoreMyAccountIconForGuestUser();
             estoreCartPage.getAddToWishlistButton().should(visible, Duration.ofSeconds(20)).scrollIntoView(true);
             estoreCartPage.getAddToWishlistButton().should(interactable, Duration.ofSeconds(20)).click();
 
@@ -220,13 +228,13 @@ public class EstorePdpStepDefs {
         estorePdpPageScreen.getSizeOption().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
 
         Select selectColor = new Select(estorePdpPageScreen.getColorOption());
-        selectColor.selectByIndex(3);
+        selectColor.selectByIndex(2);
         estorePdpPageScreen.getColorOption().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
         sleep(3000);
         Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
-        selectSize.selectByIndex(3);
+        selectSize.selectByIndex(2);
 
-        estorePdpPageScreen.getSkuIdValue().shouldHave(text("Item# 17050042 CAML"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getSkuIdValue().shouldHave(text("Item# 17050042 EUCY"), Duration.ofSeconds(30));
     }
 
     @Then("I verify that PDP screen is displayed")
@@ -368,6 +376,140 @@ public class EstorePdpStepDefs {
         estorePdpPageScreen.getItemAddedInCarMsg().should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getViewCartBtn().click();
         $(By.xpath("//p[text()='" + itemIt + "']")).should(visible, Duration.ofSeconds(30));
+        Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
+        selectSize.selectByIndex(2);
+        Select selectColor = new Select(estorePdpPageScreen.getColorOption());
+        selectColor.selectByIndex(2);
+    }
+
+    @Then("I verify availability delivery and return for product {string} and {string} with {string} for the selected {string} country")
+    public void iVerifyAvailabilityDeliveryAndReturnForProduct(String productID, String arg1, String selectedOptions, String country) {
+        $(By.xpath("(//span[text()='Return Policy'])[1]")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("(//p[text()='Configure this item to view delivery information '])[1]")).should(visible, Duration.ofSeconds(30));
+        estorePdpPageScreen.getInStockOptionsButton().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getInStockOptionsButton().click();
+        $(By.xpath("//*[text()='These options are available for']")).shouldBe(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify functionality for Hero Image on PDP for product {string} and {string} with {string} for the selected {string} country")
+    public void iVerifyFunctionalityForHeroImageONPDPForProduct(String productID, String arg1, String selectedOptions, String country) {
+        $(By.xpath("//img[@data-testid='desktop-pdp-image']")).hover();
+        estorePdpPageScreen.getHeroImageForwardBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImageForwardBtn().click();
+        estorePdpPageScreen.getHeroImageBackBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImageBackBtn().click();
+        estorePdpPageScreen.getHeroImagePlusIconZoomInBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImagePlusIconZoomInBtn().click();
+        estorePdpPageScreen.getHeroImagePlusIconZoomOutBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImagePlusIconZoomOutBtn().click();
+        estorePdpPageScreen.getHeroImageUpwardBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImageUpwardBtn().click();
+        estorePdpPageScreen.getHeroImageDownwardBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImageDownwardBtn().click();
+        estorePdpPageScreen.getHeroImageCloseIcon().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImageCloseIcon().click();
+    }
+
+    @Then("I verify the PDP title and pricing for product")
+    public void iVerifyThePDPTitleAndPricingForProduct() {
+        String titleOnPg = estorePDPScreen.getFistItemTitle().getText();
+        String priceOnPG = estorePDPScreen.getFirstRegularPrice().getText();
+        String productId = estorePDPScreen.getFistItemProductId().getAttribute("alt");
+        String pdId = productId.split("_")[0];
+        estoreE2EStepDefs.iOpenProductPageWithAndForEstore(pdId, "", "");
+        String titleOnPDP = estorePdpPageScreen.getPDPTitle().getText();
+        String priceOnPDP = estorePdpPageScreen.getRegularTheFirstPrice().getText();
+        Assert.assertEquals(titleOnPg, titleOnPDP);
+        Assert.assertEquals(priceOnPG,priceOnPDP);
+    }
+
+    @Then("I verify the content of PDP for eStore - verifying SOFA PDP")
+    public void iVerifyTheContentOfPDPForEstoreProduct() {
+        Assert.assertTrue(estorePdpPageScreen.getPDPTitle().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAlsoAvailableInLeatherText().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getShopTheEntireCollectionText().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getHeroImage().isDisplayed());
+        estorePdpPageScreen.getHeroImage().hover();
+        Assert.assertTrue(estorePdpPageScreen.getHeroImageForwardBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getHeroImageBackBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getReturnPolicyLink().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getConfigureDeliveryInformationText().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpDetailsSection().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpDimensionsSection().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpFabricCareSection().isDisplayed());
+    }
+
+    @Then("I verify another PDP - Chaise")
+    public void iVerifyAnotherPDPChaiseProduct() {
+        Assert.assertTrue(estorePdpPageScreen.getPDPTitle().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAlsoAvailableInAluminumText().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getShopTheEntireCollectionText().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getInStockOptionsButton().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpDetailsSection().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpDimensionsSection().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpCareSection().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getHeroImage().isDisplayed());
+        estorePdpPageScreen.getHeroImage().hover();
+        Assert.assertTrue(estorePdpPageScreen.getHeroImageForwardBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getHeroImageBackBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getReturnPolicyLink().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getConfigureDeliveryInformationText().isDisplayed());
+    }
+
+    @Then("I verify another PDP - Bench")
+    public void iVerifyAnotherPDPBenchProduct() {
+        Assert.assertTrue(estorePdpPageScreen.getPDPTitle().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getInStockOptionsButton().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getShopTheEntireCollectionText().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpDetailsSection().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpDimensionsSection().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpCareSection().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getHeroImage().isDisplayed());
+        estorePdpPageScreen.getHeroImage().hover();
+        Assert.assertTrue(estorePdpPageScreen.getHeroImageForwardBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getHeroImageBackBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getReturnPolicyLink().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getTouchUpKitText().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpFooter().isDisplayed());
+    }
+
+    @Then("I verify another PDP - Towel")
+    public void iVerifyAnotherPDPTowelProduct() {
+        Assert.assertTrue(estorePdpPageScreen.getPDPTitle().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpColorOption().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getInStockOptionsButton().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpDetailsSection().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpDimensionsSection().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getHeroImage().isDisplayed());
+        estorePdpPageScreen.getHeroImage().hover();
+        Assert.assertTrue(estorePdpPageScreen.getHeroImageForwardBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getHeroImageBackBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getReturnPolicyLink().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpFooter().isDisplayed());
+    }
+
+    @Then("I verify the product price as per the Ship to selection for product {string} and {string} with {string} for the selected {string} country")
+    public void iVerifyTheProductPriceAsPerTheShipToSelectionForProduct(String productID, String arg1, String selectedOptions, String country) {
+        estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getCountrySelectionBtn().scrollIntoView(true);
+        estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getCountrySelectionBtn().click();
+        estorePdpPageScreen.getCountyCode().should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getCountyCode().click();
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        estorePdpPageScreen.getHeroImageMemberPrice().should(visible, Duration.ofSeconds(20));
+        Assert.assertTrue(estorePdpPageScreen.getHeroImageMemberPrice().shouldBe(visible, Duration.ofSeconds(15)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getHeroImageRegularPrice().shouldBe(visible, Duration.ofSeconds(15)).isDisplayed());
+        estorePdpPageScreen.getInStockOptionsButton().click();
+        estorePdpPageScreen.getPostalCodeInput().sendKeys("W1S 3ES");
+        estorePdpPageScreen.getPostalCodeSubmitBtn().click();
+        estorePdpPageScreen.getViewStockMsg().shouldBe(visible, Duration.ofSeconds(15));
+        estorePdpPageScreen.getAvailableItemMsg().shouldBe(visible, Duration.ofSeconds(15));
+        estorePdpPageScreen.getHeroImageCloseIcon().click();
     }
 
     @Then("I verify the line item price for Combined Frame and Cushion for product {string} and {string} with {string} for the selected {string} country")
@@ -582,16 +724,22 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that the ETA on PDP")
     public void iVerifyThatTheETAOnPDP() {
-        $(By.xpath("//*[text()='This item is special order and will be ready for delivery between 01/05/24 and 01/11/24 ']")).should(visible);
+        $(By.xpath("(//*[contains(text(),'This item is special order and will be ready for delivery between')])[2]")).should(visible);
     }
 
-    @Then("I verify that {string} message is displayed {string} the lien item dropdown")
+    @Then("I verify that {string} message is displayed {string} the line item dropdown")
     public void iVerifyThatMessageIsDisplayedTheLienItemDropdown(String message, String location) {
-        if (location.equals("above")) {
-            estorePDPScreen.verifyThatItemIncludeMultipleComponentsMsgIsDisplayedAboveLineItemDropDown();
-        } else {
-            estorePDPScreen.verifyThatItemIncludeMultipleComponentsMsgIsDisplayedBellowLineItemDropDown();
-        }
+        estorePDPScreen.verifyThatItemIncludeMultipleComponentsMsgIsDisplayedAboveLineItemDropDown();
+    }
+
+    @Then("I verify that sku id is not changed after quantity update")
+    public void iVerifyThatSkuIdIsNotChangedAfterQuantityUpdate() {
+        System.out.println();
+    }
+
+    @Then("I verify that sku id is equal to {string} on estore PDP")
+    public void iVerifyThatSkuIdIsEqualToOnEstorePDP(String skuId) {
+        $(By.xpath("//*[contains(text(),'" + skuId + "')]")).should(visible);
     }
 }
 

@@ -278,3 +278,16 @@ Feature: Concierge CG Page
     Then I verify Sale is clicked and taken to PG page
     Then I verify $$ values are present in the PG Collections page
 
+
+  Scenario Outline: Verify that "Available in multiple sizes & finishes" verbiage is shown along with collection text for collections like Dining Tables. Bed Collections.
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I navigate to menu "<menu>"
+    Then I navigate to sub menu "<subMenu>"
+    Then I navigate to gallery "<gallery>"
+    Then I verify Available in multiple sizes & finishes text on page
+    Examples:
+      | menu      | subMenu               | gallery                     |
+      | Dining    | Tables                | Rectangular Table Collections|
+      | Bath      | Furniture             | Bath Collections       |
+      | Outdoor   | In Stock              | Furniture Collections        |

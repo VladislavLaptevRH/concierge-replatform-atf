@@ -630,7 +630,7 @@ Feature: Concierge Critical Path
       |62870050 LOAK|
       |10024793 BRNZ|
 
-  Scenario: Verify the PDP hero Image, zoom, line items
+  Scenario: Verify the PDP hero Image, zoom, line itemsVerify the PDP hero Image, zoom, line items
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI

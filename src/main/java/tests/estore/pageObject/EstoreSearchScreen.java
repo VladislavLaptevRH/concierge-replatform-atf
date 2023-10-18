@@ -1,5 +1,6 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -17,7 +18,7 @@ public class EstoreSearchScreen {
 
     private SelenideElement memberPriceCollectionPage = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
 
-    private SelenideElement results = $(By.xpath("//*[contains(text(),'Results')]"));
+    private SelenideElement results = $(By.xpath("(//*[contains(text(),'RESULTS')])[2]"));
 
     private SelenideElement threeColumnsInRowGridButton = $(By.xpath("//*[@column='3']"));
 
@@ -26,6 +27,8 @@ public class EstoreSearchScreen {
     private SelenideElement threeColumnsInRowGridElement = $(By.xpath("//div[contains(@class,'MuiGrid-grid-xs-4')]"));
 
     private SelenideElement twoColumnsInRowGridElement = $(By.xpath("(//*[contains(@class, 'MuiSvgIcon-root')])[6]"));
+
+    private SelenideElement defaultGridElement = $(By.id("component-product-grid"));
 
     private SelenideElement turkish802towel = $(By.xpath("//*[text()='802-GRAM TURKISH TOWEL COLLECTION']"));
 
@@ -46,6 +49,10 @@ public class EstoreSearchScreen {
     private SelenideElement upToText = $(By.xpath("//*[text()='up to']"));
 
     private SelenideElement save70 = $(By.xpath("//*[text()=' 70%']"));
+
+    public void verifyThatDefaultGridIsDisplayed() {
+        defaultGridElement.should(Condition.visible);
+    }
 
 
 }
