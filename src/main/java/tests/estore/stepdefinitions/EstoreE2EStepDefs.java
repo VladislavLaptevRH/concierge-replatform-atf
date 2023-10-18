@@ -599,7 +599,6 @@ public class EstoreE2EStepDefs {
             URL = Hooks.eStoreBaseURL + "/us/en/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
         }
         if (Hooks.profile.equals("stg2")) {
-//            productId=prod12300102&sale=false&src=rel
             URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options + "&categoryId=search";
         }
 
