@@ -10,7 +10,7 @@ import io.cucumber.testng.CucumberOptions;
         , plugin = {"usage", "json:target/cucumber-reports/Cucumber.json",
         "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
 
-        tags = "@estoreTestRun or @estoreCriticalPathTestRun or @conciergeTestRun or @conciergeCriticalPathTestRun"
+        tags = "@estoreTestRun or @estoreCriticalPathTestRun or @estoreMultiSku or @conciergeTestRun or @conciergeCriticalPathTestRun"
 )
 
 public class RunTest extends AbstractTestNGCucumberTests {

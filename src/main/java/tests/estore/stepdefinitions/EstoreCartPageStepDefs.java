@@ -896,4 +896,13 @@ public class EstoreCartPageStepDefs {
         estoreCartPage.verifyThatComponentMessageIsDisplayedForAllLineItems();
     }
 
+    @Then("I verify that SPO panel is triggered with all the details for all the dropsku multiskus")
+    public void iVerifyThatSPOPanelIsTriggeredWithAllTheDetailsForAllTheDropskuMultiskus() {
+        estoreCartPage.verifyThatSpoPanelIsDisplayed();
+    }
+
+    @Then("I verify that all the components of the bundle are added to cart")
+    public void iVerifyThatAllTheComponentsOfTheBundleAreAddedToCart() {
+        estoreCartPage.verifyThatAllTheComponentsOfTheBundleAreAddedToCart();
+    }
 }

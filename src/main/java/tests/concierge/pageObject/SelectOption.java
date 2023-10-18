@@ -1,9 +1,12 @@
 package tests.concierge.pageObject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 
+import java.time.Duration;
 import java.util.List;
 
 import static com.codeborne.selenide.Selectors.byXpath;
@@ -32,6 +35,12 @@ public class SelectOption {
 
     private final SelenideElement fabricProperty = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Fabric')])[1]"));
 
+    private final SelenideElement fabricPropertyLineItem = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Fabric')])[2]"));
+
+    private final SelenideElement itemPropertyLineItem = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Item')])"));
+
+    private final SelenideElement colorPropertyLineItem = $(By.xpath("((//select[contains(@id,'prod') and contains(@id,'Color')]))[2]"));
+
     private final SelenideElement depthProperty = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Depth')])[1]"));
 
     private final SelenideElement finishOption = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Finish')])[1]"));
@@ -55,6 +64,24 @@ public class SelectOption {
     private final SelenideElement toInputField = $(By.xpath("//input[@id='pdp-gift-card-to']"));
 
     private final SelenideElement fromInputField = $(By.xpath("//input[@id='pdp-gift-card-from']"));
+
+
+    public void selectFabricPropertyLineItem() {
+        Select selectFabricPropertyLineItem = new Select(fabricPropertyLineItem);
+        selectFabricPropertyLineItem.selectByIndex(2);
+    }
+
+    public void selectItemPropertyLineItem(){
+        itemPropertyLineItem.should(Condition.interactable, Duration.ofSeconds(12));
+        Select selectItemPropertyLineItems = new Select(itemPropertyLineItem);
+        selectItemPropertyLineItems.selectByIndex(1);
+    }
+
+    public void selectColorOptionLineItem() {
+        colorPropertyLineItem.should(Condition.interactable);
+        Select selectColorOptionLineItem = new Select(colorPropertyLineItem);
+        selectColorOptionLineItem.selectByIndex(2);
+    }
 
     public SelenideElement getTtemColorListByNumber(int number) {
         String path = String.format(itemColorLList, number);

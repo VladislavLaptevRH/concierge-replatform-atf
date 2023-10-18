@@ -1,4 +1,5 @@
 @estoreTestRun
+@estoreMultiSku
 
 Feature: MultiSKU
 
@@ -134,6 +135,56 @@ Feature: MultiSKU
     When I click on view cart estore button
     Then I verify the message "This is a component of the ORIGINAL LANCASTER THREE-SEAT-CUSHION LEFT-ARM L-SECTIONAL" should be shown on "cart" page
 
+  Scenario: Verfiy the multisku line item is configurable
+    Given I log into eStore as "regular" user
+    When I choose country for concierge from footer
+    When I remove all items from estore cart
+    When I open product page with productID "prod12300102" for estore
+    When I select estore debth option
+    When I select estore fill option
+    When I select estore color option
+    When I select armless sofa option
+    When I select estore fabric option
+    Then I verify that add to cart button is active
 
+  Scenario: Verify the multisku line item is showing all the ETA and return messages after line item is configured
+    Given I log into eStore as "regular" user
+    When I choose country for concierge from footer
+    When I remove all items from estore cart
+    When I open product page with "prod12300102" and "m000001198111" for estore
+    When I select item option for line item
+    When I select color option for line item
+    When I select fabric option for line item
+    Then I verify the multisku line item is showing all the ETA and return messages after line item is configured
+
+  Scenario: Verify the "Interim copy" for multisku is showing up at line item once the item is configured in all devices
+    Given I log into eStore as "regular" user
+    When I choose country for concierge from footer
+    When I remove all items from estore cart
+    When I open product page with productID "prod12300102" for estore
+    When I select estore debth option
+    When I select estore fill option
+    When I select estore color option
+    When I select armless sofa option
+    When I select estore fabric option
+    Then I verify that "This item includes multiple components. Individual components will be listed in your cart" message is displayed "above" the line item dropdown
+
+  Scenario: Verify that SPO panel is triggered with all the details in it when a dropship multisku is added to cart
+    Given I log into eStore as "regular" user
+    When I choose country for concierge from footer
+    When I remove all items from estore cart
+    When I open product page with "prod12300102" and "m000001198111" for estore
+    When I click on add to cart estore button
+    Then I verify that SPO panel is triggered with all the details for all the dropsku multiskus
+
+  Scenario: Verify that all the components of the bundle are added to cart
+    Given I log into eStore as "regular" user
+    When I choose country for concierge from footer
+    When I remove all items from estore cart
+    When I open product page with "prod12300102" and "m000001198111" for estore
+    When I click on add to cart estore button
+    When I click on aggree&add estore button
+    When I click on view cart estore button
+    Then I verify that all the components of the bundle are added to cart
 
 

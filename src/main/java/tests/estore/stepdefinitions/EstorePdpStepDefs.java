@@ -8,10 +8,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
-import tests.concierge.pageObject.SelectOption;
 import org.testng.Assert;
+import tests.concierge.pageObject.SelectOption;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 
@@ -207,7 +206,7 @@ public class EstorePdpStepDefs {
             Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
             selectSize.selectByIndex(2);
             with().pollInterval(4, SECONDS).await().until(() -> true);
-            estorePdpPageScreen.getColorOption().should(interactable,Duration.ofSeconds(25));
+            estorePdpPageScreen.getColorOption().should(interactable, Duration.ofSeconds(25));
             Select selectColor = new Select(estorePdpPageScreen.getColorOption());
             selectColor.selectByIndex(2);
         }
@@ -420,7 +419,7 @@ public class EstorePdpStepDefs {
         String titleOnPDP = estorePdpPageScreen.getPDPTitle().getText();
         String priceOnPDP = estorePdpPageScreen.getRegularTheFirstPrice().getText();
         Assert.assertEquals(titleOnPg, titleOnPDP);
-        Assert.assertEquals(priceOnPG,priceOnPDP);
+        Assert.assertEquals(priceOnPG, priceOnPDP);
     }
 
     @Then("I verify the content of PDP for eStore - verifying SOFA PDP")
@@ -717,7 +716,7 @@ public class EstorePdpStepDefs {
     }
 
 
-   @Then("I verify the multisku ID is showing up once the line item is configured")
+    @Then("I verify the multisku ID is showing up once the line item is configured")
     public void iVerifyTheMultiskuIDIsShowingUpOnceTheLineItemIsConfigured() {
         $(By.xpath("//*[text()='Item# m000001198111']")).should(visible, Duration.ofSeconds(12));
     }
@@ -740,6 +739,47 @@ public class EstorePdpStepDefs {
     @Then("I verify that sku id is equal to {string} on estore PDP")
     public void iVerifyThatSkuIdIsEqualToOnEstorePDP(String skuId) {
         $(By.xpath("//*[contains(text(),'" + skuId + "')]")).should(visible);
+    }
+
+    @When("I choose option for")
+    public void iChooseOptionFor() {
+        System.out.println();
+    }
+
+    @When("I select estore fill option")
+    public void iSelectEstoreFillOption() {
+        estorePDPScreen.selectFillOption();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+    }
+
+    @When("I select armless sofa option")
+    public void iSelectArmlessSofaOption() {
+        estorePDPScreen.selectArmlessSofaOption();
+    }
+
+    @Then("I verify the multisku line item is showing all the ETA and return messages after line item is configured")
+    public void iVerifyTheMultiskuLineItemIsShowingAllTheETAAndReturnMessagesAfterLineItemIsConfigured() {
+        estorePDPScreen.verifyThatEtaLineMessageIsDisplayed();
+        estorePDPScreen.verifyThatReturnMessageIsDisplayed();
+    }
+
+    @When("I select item option for line item")
+    public void iSelectItemOptionForLineItem() {
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        selectOption.selectItemPropertyLineItem();
+    }
+
+    @When("I select color option for line item")
+    public void iSelectColorOptionForLineItem() {
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        selectOption.selectColorOptionLineItem();
+    }
+
+    @When("I select fabric option for line item")
+    public void iSelectFabricOptionForLineItem() {
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        selectOption.selectFabricPropertyLineItem();
+
     }
 }
 

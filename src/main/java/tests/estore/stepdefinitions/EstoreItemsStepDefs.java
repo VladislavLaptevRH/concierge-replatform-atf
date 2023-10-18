@@ -10,6 +10,8 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 
 public class EstoreItemsStepDefs {
@@ -23,18 +25,20 @@ public class EstoreItemsStepDefs {
         try {
             executeJavaScript("window.scrollTo(0, 970)");
             selectOption.getDepthProperty().should(Condition.and("", appear, enabled), Duration.ofSeconds(60));
-            selectOption.getDepthProperty().should(Condition.be(Condition.visible), Duration.ofSeconds(45));
+            selectOption.getDepthProperty().should(Condition.be(interactable), Duration.ofSeconds(45));
             Select selectDepth = new Select(selectOption.getDepthProperty());
 
             selectDepth.selectByIndex(3);
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");
         }
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
     }
 
     @When("I select estore fabric option")
     public void iSelectFabricProperty() {
-
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         generalStepDefs.waitForJSandJQueryToLoad();
         try {
             selectOption.getFabricProperty().should(appear, Duration.ofSeconds(15));
@@ -51,13 +55,15 @@ public class EstoreItemsStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
 
         try {
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             selectOption.getColorOption().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
-            selectOption.getColorOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
+            selectOption.getColorOption().should(Condition.be(interactable), Duration.ofSeconds(5));
             Select selectFabric = new Select(selectOption.getColorOption());
             selectFabric.selectByIndex(1);
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Close button is not displayed");
         }
+        with().pollInterval(4, SECONDS).await().until(() -> true);
     }
 
     @When("I click on estore collections item")
