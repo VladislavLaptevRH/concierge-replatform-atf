@@ -7,6 +7,8 @@ import com.codeborne.selenide.WebDriverRunner;
 
 import com.codeborne.selenide.ex.ElementNotFound;
 import org.openqa.selenium.Keys;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import tests.estore.pageObject.EstoreUserAccountPage;
 import tests.utility.Hooks;
 import tests.concierge.pageObject.*;
@@ -57,6 +59,8 @@ public class ConciergeE2EStepDefs {
 
     public static String SKU = "";
     public static String itemName = "";
+
+    public static final Logger logger = LoggerFactory.getLogger(FilterStepDefs.class);
 
     @When("I click on add to project button")
     public void userClickOnAddToProjectButton() {
@@ -1366,11 +1370,23 @@ public class ConciergeE2EStepDefs {
         conciergeItemsScreen.getInStock().click();
     }
 
+    @Then("I verify IN-STOCK filter is applied")
+    public void iverifyFilter(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getClearAll().should(visible, Duration.ofSeconds(15));
+    }
+
     @Then("I clear all and confirm the applied option is removed")
     public void iClearAll(){
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeItemsScreen.getClearAll().should(visible, Duration.ofSeconds(15));
         conciergeItemsScreen.getClearAll().click();
+        try{
+            $(By.xpath("//*[text()='Clear All']"));
+        }
+        catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+                logger.debug("Element Fabric not found");
+            }
     }
 
     @Then("I verify art search page is displayed")

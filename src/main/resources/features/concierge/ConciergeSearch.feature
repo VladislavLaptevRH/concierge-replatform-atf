@@ -110,6 +110,7 @@ Feature: Concierge PG Page
     When I go to item "sofa" from search field
     Then I verify sofa search page is displayed
     Then I select IN-STOCK box
+    Then I verify IN-STOCK filter is applied
 
 
   Scenario: Search with Keywords - Art or swivels
