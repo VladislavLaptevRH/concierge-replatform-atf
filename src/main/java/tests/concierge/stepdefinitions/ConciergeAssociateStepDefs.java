@@ -392,10 +392,85 @@ public class ConciergeAssociateStepDefs {
         }
     }
 
+    @When("I click {string} button on homepage")
+    public void iClickbutton(String button){
+        conciergeUserAccountPage.getButton(button).click();
+    }
+
     @Then("I verify search item field and search button")
     public void iVerifySearchItem(){
         conciergeUserAccountPage.getSearchItemField().should(visible,Duration.ofSeconds(40));
         conciergeUserAccountPage.getSearchButton().should(visible,Duration.ofSeconds(40));
+    }
+
+    @Then("I verify order history page is displayed")
+    public void iVerifyOrderHistory(){
+        conciergeUserAccountPage.getOrderHistoryTitle().should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getOrderUser().should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getOrderSearch().should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getOrderTable().should(visible,Duration.ofSeconds(40));
+    }
+
+    @When("I search by {string}")
+    public void iSearch(String field){
+        conciergeUserAccountPage.getOrderSearch().click();
+        switch (field){
+            case "name":{
+                conciergeUserAccountPage.getFirstName().should(visible,Duration.ofSeconds(40));
+                conciergeUserAccountPage.getFirstName().setValue("Automation");
+                conciergeUserAccountPage.getLastName().should(visible,Duration.ofSeconds(40));
+                conciergeUserAccountPage.getLastName().setValue("Trade");
+                conciergeUserAccountPage.getOrderSearchButton().click();
+                break;
+            }
+            case "contact":{
+                conciergeUserAccountPage.getPhoneNumber().should(visible,Duration.ofSeconds(40));
+                conciergeUserAccountPage.getPhoneNumber().setValue("1234567890");
+                conciergeUserAccountPage.getOrderSearchButton().click();
+                break;
+            }
+            case "First Name":{
+                conciergeUserAccountPage.getFirstName().should(visible,Duration.ofSeconds(40));
+                conciergeUserAccountPage.getFirstName().setValue("Automation");
+                conciergeUserAccountPage.getOrderSearchButton().click();
+                break;
+            }
+            case "Last Name":{
+                conciergeUserAccountPage.getLastName().should(visible,Duration.ofSeconds(40));
+                conciergeUserAccountPage.getLastName().setValue("Trade");
+                conciergeUserAccountPage.getOrderSearchButton().click();
+                break;
+            }
+        }
+    }
+    @Then("I confirm user is not able to search only with first name")
+    public void iNotAbletoSearch(){
+        conciergeUserAccountPage.getFirstNameOnly().should(visible,Duration.ofSeconds(40));
+    }
+
+    @Then("I confirm table header {string}")
+    public void iConfirmth(String header){
+        conciergeUserAccountPage.getTableHeader(header).should(visible,Duration.ofSeconds(40));
+    }
+
+
+    @Then("I confirm order is shown for search filter {string}")
+    public void iconfirmResult(String value){
+        switch (value){
+            case "name":{
+                conciergeUserAccountPage.getResultName().should(visible,Duration.ofSeconds(40));
+                break;
+            }
+            case "contact":{
+                conciergeUserAccountPage.getResultPhoneNumber().should(visible,Duration.ofSeconds(40));
+                break;
+            }
+            case "Last Name":{
+                conciergeUserAccountPage.getLastNameOnly().should(visible,Duration.ofSeconds(40));
+                break;
+            }
+
+        }
     }
 
     @Then("I verify the gallery")
