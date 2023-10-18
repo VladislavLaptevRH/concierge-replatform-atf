@@ -64,7 +64,9 @@ public class Pdp {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeItemsScreen.getMonogramColorChampagne().scrollIntoView(true);
         conciergeItemsScreen.getMonogramColorChampagne().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramText().setValue("test");
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getAddMonogramButton().click();
     }
 
@@ -79,7 +81,7 @@ public class Pdp {
 
     @When("I click on \"view in stock items\" link")
     public void iClickOnViewInStockItems() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         pdpScreen.getViewOnStockItemLink().shouldHave(text("In-Stock"), Duration.ofSeconds(15));
         pdpScreen.getViewOnStockItemLink().scrollIntoView(true);
         pdpScreen.getViewOnStockItemLink().click();

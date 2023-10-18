@@ -228,7 +228,7 @@ public class PaymentStepDefs {
 
     @When("I choose {string} from payment method")
     public void iChooseRHGiftCardFromPaymentMethod(String card) {
-//        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
 //        WebDriverRunner.getWebDriver().navigate().refresh();
         Select selectPaymentMethod = new Select(paymentScreen.getChoosePaymentMethodBtn());
         selectPaymentMethod.selectByVisibleText(card);
@@ -484,6 +484,7 @@ public class PaymentStepDefs {
             $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that on the payment page the same address as for the saved mastercard")

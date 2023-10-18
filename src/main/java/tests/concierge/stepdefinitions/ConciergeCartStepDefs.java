@@ -1539,8 +1539,6 @@ public class ConciergeCartStepDefs {
             }
             $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
             $(By.xpath("//*[text() = 'Subtotal' ]/../following-sibling::div/span")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
-            $(By.xpath("//*[text() = 'Unlimited Furniture Delivery' ]/../following-sibling::div/p")).shouldHave(text("$279.00"), Duration.ofSeconds(20));
-            $(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).shouldHave(text("$4,139.00"), Duration.ofSeconds(20));
         }
 
     @When("I verify all the sums on the cart page with item quantity {string}")

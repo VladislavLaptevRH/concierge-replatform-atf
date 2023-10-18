@@ -54,7 +54,7 @@ public class ConciergeCartPageScreen {
     private final SelenideElement monogramColorValue = $(By.xpath("//*[text()='Light Gold Metallic (MLGD)']"));
     private final SelenideElement monogramColor = $(By.xpath("(//*[@id = 'listColumn1-Color'])[2]"));
     private final SelenideElement monogramTextValue = $(By.xpath("//*[text()='ABC']"));
-    private final SelenideElement monogramText = $(By.xpath("//*[@id = 'listColumn1-Text']"));
+    private final SelenideElement monogramText = $(By.xpath("//*[@type = 'text']"));
     private final SelenideElement designedSoldByText = $(By.xpath("//*[text()='Designed/Sold By:']"));
     private final SelenideElement automationAssociateText = $(By.xpath("//*[text()='Automation Associate']"));
     private final SelenideElement editedMonogramStyleValue = $(By.xpath("//*[text() = 'Circle (CIR-H4)']"));
