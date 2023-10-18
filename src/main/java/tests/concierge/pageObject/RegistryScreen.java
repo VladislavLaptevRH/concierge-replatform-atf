@@ -102,4 +102,9 @@ public class RegistryScreen {
 
     private SelenideElement coRegistrantDayPhone = $(By.id("coRegistrantAddress.phone"));
 
+    private SelenideElement registryDropDown = $(By.xpath("(//*[text() = 'REGISTRY DETAILS'])[1]"));
+
+    private SelenideElement lastModifiedPresent = $(By.xpath("(//*[text() = 'LAST MODIFIED'])[1]"));
+
+
 }

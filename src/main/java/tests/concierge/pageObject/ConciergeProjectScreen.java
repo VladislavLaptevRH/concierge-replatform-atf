@@ -132,7 +132,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement projectResultsFirstRow = $(By.xpath("(//*[contains(text(), 'Member')])[1]"));
 
-    private final SelenideElement firstSearchResultOfProjects = $(By.xpath("(//*[@id = 'component-rh-image'])[1]"));
+    private final SelenideElement firstSearchResultOfProjects = $(By.xpath("(//*[contains(text(), 'Current')])[1]"));
 
     private final SelenideElement thirtySixSearchResultOfProjects = $(By.xpath("//div[contains(@class,'MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-flex-start')][1]/div[contains(@class,'MuiGrid-root MuiGrid-item')]/div[36]"));
 

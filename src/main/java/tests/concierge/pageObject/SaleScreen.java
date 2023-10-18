@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 
 public class SaleScreen {
-    private final SelenideElement saleOption = $(By.xpath("//div[@data-navigation-account-item-id= 'cat3890154']"));
+    private final SelenideElement saleOption = $(By.xpath("//*[text()='SALE']"));
     private final List<SelenideElement> listOfSaleMainCategory = $$(By.cssSelector("div#sale-nav-dropdown li"));
     private final List<SelenideElement> listOfSaleSubCategory = $$(By.xpath("(//ul[@class='MuiList-root'])[2]/li"));
     private final List<SelenideElement> listOfSaleCollection = $$(By.xpath("(//ul[@class='MuiList-root'])[3]/li"));

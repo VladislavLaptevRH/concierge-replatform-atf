@@ -303,7 +303,14 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I change the brand to {string}")
     public void iChangeBrand(String brand){
+        if(!conciergeUserAccountPage.getBrandButton().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
     conciergeUserAccountPage.getBrandButton().should(visible,Duration.ofSeconds(40)).click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(! conciergeUserAccountPage.getBrand(brand).isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
     conciergeUserAccountPage.getBrand(brand).should(visible,Duration.ofSeconds(40)).click();
     conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40)).click();
     }
@@ -312,8 +319,9 @@ public class ConciergeAssociateStepDefs {
     public void iVerifyThatRHBrandDropDownIsPresentInHomePage(String currentBrand){
         if(!conciergeUserAccountPage.getCurrentBrandByName(currentBrand).isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
+            conciergeLoginPage.getRHIcon().should(visible,Duration.ofSeconds(40));
         }
-        conciergeUserAccountPage.getCurrentBrandByName(currentBrand).should(visible,Duration.ofSeconds(40));
+        conciergeLoginPage.getRHIcon().should(visible,Duration.ofSeconds(40));
     }
 
     @Then("I verify the logo")

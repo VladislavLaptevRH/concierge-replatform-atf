@@ -1,6 +1,7 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import lombok.Setter;
@@ -13,6 +14,8 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
 import static org.testng.AssertJUnit.*;
 
@@ -28,6 +31,9 @@ public class ConciergeSearchStepDefs {
             case "PG Search Page has title (TABLE) and text \"Results\" and \"Sort\" are present":
                 String title = Pdp.result;
                 assertEquals(title.toLowerCase(), $(By.xpath("//*[text() = '" + title + "']")).getText().toLowerCase());
+                if(!$(By.xpath("//*[text() = 'RESULTS']")).isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
                 $(By.xpath("//*[text() = 'RESULTS']")).should(Condition.visible, Duration.ofSeconds(15));
                 $(By.xpath("//*[text() = 'sort']")).should(Condition.visible, Duration.ofSeconds(15));
                 break;
@@ -77,6 +83,7 @@ public class ConciergeSearchStepDefs {
     }
     @Then("I verify that relevant items are returned on search page {string}")
     public void iVerifyTgatRelevantItemsAreReturnedOnSearchPage(String items) {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("(//*[@id = 'component-product-grid']//p/span[contains(text(), '" + items + "')])[1]")).shouldBe(visible, Duration.ofSeconds(15));
         assertTrue($$(By.xpath("//*[@id = 'component-product-grid']//p/span[contains(text(), '" + items + "')]")).size() > 10);
         for(int i = 1; i < $$(By.xpath("//*[@id = 'component-product-grid']//p/span[contains(text(), '" + items + "')]")).size(); i++) {

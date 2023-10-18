@@ -1,25 +1,92 @@
 package tests.concierge.pageObject;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class ConciergeCartPageScreen {
+    public final String QuantityItemLineNumber = "(//select[contains(@id,'quantity')])[%s]";
+    public final String OptionItemLineNumber = "(//option[@value='%s'])[%s]";
+    public final String selectPrice = "//option[@value='%s']";
+    public final String shippingAddressStateItem = "//*[@id = 'address-state-field'])[1]/option)[%s]";
+    public final String billingAddressStateItem = "//*[@id = 'address-state-field'])[2]/option)[%s]";
 
     private final SelenideElement continueAddingAdditionalButton = $(By.xpath("//*[text() = 'CONTINUE']"));
-
     private final SelenideElement orderClassificationGalleryOrder = $(By.xpath("//option[@value='RH Gallery Order']"));
+    private final SelenideElement correctSpaceText = $(By.xpath("//*[text()='correctspace']"));
+    private final SelenideElement wrongSpaceText = $(By.xpath("//*[text()='wrongspace']"));
+
+    private final SelenideElement promoCodeText = $(By.xpath("//*[text()='Members have the privilege of receiving 25% off full priced items or 20% off sale items, whichever is the best price. Tax, shipping and surcharges are not included in calculating discount. Not valid for gift cards, personalization and gift boxes.']"));
 
     private final SelenideElement orderClassificationResidentialTrade = $(By.xpath("//option[@value='RH Residential Trade']"));
-
+    private final ElementsCollection removeButtonList = $$(By.xpath("//*[text() = 'Remove']"));
+    private final SelenideElement removeLinkButton = $(By.xpath("//*[text() = 'Remove']"));
     private final SelenideElement orderClassificationInteriorDesign = $(By.xpath("//option[@value='RH Interior Design']"));
 
+    private final SelenideElement yourShoppingCartIsEmptyText = $(By.xpath("//*[text() = 'YOUR SHOPPING CART IS EMPTY']"));
+    private final SelenideElement nanPrice = $(By.xpath("//*[text() = '$NaN']"));
+    private final SelenideElement howWouldYouLikeToReceiveYourShipmentsText = $(By.xpath("//*[text() = 'How Would You Like to Receive Your Shipments?']"));
+    private final SelenideElement totalPriceCurrentResult = $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5"));
+    private final SelenideElement subtotalPriceCurrentResult = $(By.xpath("//*[contains(text(), 'Subtotal')]/../following-sibling::div/span"));
+    private final SelenideElement topMemberSavingsCurrentResult = $(By.xpath("//h2/following-sibling::p"));
+    private final SelenideElement priceForFinalSale = $(By.xpath("//*[@data-testid = 'price-for-final-sale']"));
+    private final SelenideElement bottomMemberSavingsCurrentResult = $(By.xpath("(//*[contains(text(),'Join the RH Members Program')])[2]/.."));
+    private final SelenideElement deliverItemsAsTheyAreAvailableText = $(By.xpath("//*[text() = 'Deliver items as they are available']"));
+    private final SelenideElement deliveryASAPText = $(By.xpath("//*[text() = 'Deliver ASAP']"));
+    private final SelenideElement rhMembersProgramTitleText = $(By.xpath("//h2[text() = ' RH MEMBERS PROGRAM']"));
+    private final SelenideElement willBeReadyForDeliveryBetweenText = $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'will be ready for delivery between')]/span"));
+    private final SelenideElement rhMembersProgramText = $(By.xpath("//h2[text() = ' RH MEMBERS PROGRAM']/following-sibling::p"));
+    private final SelenideElement billingAddressEditButton = $(By.xpath("(//*[text()='Edit'])[10]"));
+    private final SelenideElement itemInSockText = $(By.xpath("//*[contains(text(),'This item is in stock and will be ready for delivery between')]"));
+    private final SelenideElement itemCanBeReturned = $(By.xpath(" //*[contains(text(),'This item can be returned or exchanged within 30 days of delivery')]"));
+    private final SelenideElement shippingAddressEditButton = $(By.xpath("(//*[text()='Edit'])[1]"));
+    private final SelenideElement availabilityText = $(By.xpath("//*[text()='Availability']"));
+    private final SelenideElement monogramStyleValue = $(By.xpath("//*[text()='Bauer Bodoni 1 (BDNI-HC)']"));
+    private final SelenideElement monogramStyle = $(By.xpath("//*[@id = 'listColumn1-Style']"));
+    private final SelenideElement monogramColorValue = $(By.xpath("//*[text()='Light Gold Metallic (MLGD)']"));
+    private final SelenideElement monogramColor = $(By.xpath("(//*[@id = 'listColumn1-Color'])[2]"));
+    private final SelenideElement monogramTextValue = $(By.xpath("//*[text()='ABC']"));
+    private final SelenideElement monogramText = $(By.xpath("//*[@id = 'listColumn1-Text']"));
+    private final SelenideElement designedSoldByText = $(By.xpath("//*[text()='Designed/Sold By:']"));
+    private final SelenideElement automationAssociateText = $(By.xpath("//*[text()='Automation Associate']"));
+    private final SelenideElement editedMonogramStyleValue = $(By.xpath("//*[text() = 'Circle (CIR-H4)']"));
+    private final SelenideElement joinNowButton = $(By.xpath("//*[text() = 'JOIN NOW']"));
+    private final SelenideElement contractSavingsValue = $(By.xpath("//*[text()='$897.00']"));
+    private final SelenideElement orderEstimate = $(By.xpath("//*[text() = 'Mattress Fee']/../..//p"));
+    private final SelenideElement removeMembershipButton = $(By.xpath("//*[text() = 'REMOVE MEMBERSHIP']"));
+    private final SelenideElement editedMonogramStyle = $(By.xpath("//*[@id = 'listColumn1-Style']"));
+    private final SelenideElement weAreUnableToVerifyTheAddressProvidedText = $(By.xpath("//*[text()='WE ARE UNABLE TO VERIFY THE ADDRESS PROVIDED']"));
+    private final SelenideElement editedMonogramColorValue = $(By.xpath("//*[text()='Dark Silver Metallic (MDSL)']"));
+    private final SelenideElement editedMonogramColor = $(By.xpath("(//*[@id = 'listColumn1-Color'])[2]"));
+    private final SelenideElement editedMonogramTextValue = $(By.xpath("//*[text()='DFG']"));
+    private final SelenideElement editedMonogramText = $(By.xpath("//*[@id = 'listColumn1-Text']"));
+    private final SelenideElement lastMonthDay = $(By.xpath("//button/span/p[text() = '30']"));
+    private final SelenideElement currentMonth = $(By.xpath("//*[contains(@class, 'MuiPickersCalendarHeader-switchHeader')]//p"));
+    private final SelenideElement restShipmentText = $(By.xpath("//*[@id = 'reset-shipment']"));
+    private final SelenideElement reasonCodeText = $(By.xpath("//*[@id = 'reason-code']"));
+    private final SelenideElement shipOnOrAfterDate = $(By.xpath("//*[@id = 'ship-on-or-after-date']"));
+    private final SelenideElement giftBoxPrice = $(By.xpath("//*[text()='$5.95']"));
+    private final SelenideElement billingAddressCompanyNameInput = $(By.xpath("(//div[3]/div[contains(@class,'MuiOutlinedInput-root')]/input)[3]"));
+    private final SelenideElement consolidateInfoAsFewDeliveriesAsPossible = $(By.xpath("//*[text() = 'Consolidate into as few deliveries as possible']"));
+    private final SelenideElement deliveredOnTheLatestQuotedDeliveryDate = $(By.xpath("//*[text() = 'Delivered on the latest quoted delivery date']"));
+    private final SelenideElement orderClassificationLabel = $(By.xpath("//*[@id = 'element-orderclassification-label']"));
+
+    private final SelenideElement orderClassification = $(By.xpath("//*[@id = 'element-orderclassification']"));
+    private final SelenideElement rhGalleryOrder = $(By.xpath("//*[@id = 'element-orderclassification']/option[text() = 'RH Gallery Order']"));
+    private final SelenideElement rhResidentialTrade = $(By.xpath("//*[@id = 'element-orderclassification']/option[text() = 'RH Residential Trade']"));
+    private final SelenideElement rhInteriorDesign = $(By.xpath("//*[@id = 'element-orderclassification']/option[text() = 'RH Interior Design']"));
+    private final SelenideElement metalBoxFrameLeanerMirrorText = $(By.xpath("//*[text()='Metal Box Frame Leaner Mirror']"));
+    private final SelenideElement dialogTitleCloseButton = $(By.xpath("//*[@data-testid = 'dialog-title-close-button']"));
+    private final SelenideElement adjustedText = $(By.xpath("//*[text() = 'Adjusted']"));
+    private final SelenideElement selectAnOption = $(By.xpath("//*[@id = 'element-orderclassification']/option[text() = 'Select an Option']"));
     private final SelenideElement closePopUp = $(By.xpath("//button[@data-testid='dialog-title-close-button']"));
 
     private final SelenideElement orderClassificationError = $(By.xpath("//*[text() = 'Please select an option for Order Classification.']"));
@@ -36,13 +103,11 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement gramTurkishTitle = $(By.xpath("//h3[normalize-space()='802-Gram Turkish Towel Collection']"));
 
-    private final SelenideElement quantityButton = $(By.xpath("//select[contains(@id,'quantity')]"));
+    private final SelenideElement quantityButton = $(By.xpath("//*[contains(@id,'quantity')]"));
 
     private final SelenideElement orderClassificationSelect = $(By.xpath("//*[@name = 'orderClassification']"));
 
     private final SelenideElement membersProgramTitle = $(By.xpath("//h2[@class='MuiTypography-root MuiTypography-h2 MuiTypography-noWrap']"));
-
-    private final SelenideElement updateButton = $(By.xpath("//*[text()='UPDATE']"));
 
     private final SelenideElement agreeTermsForSaleCheckbox = $(By.xpath("//*[text()='I agree to the Terms of Sale for Special Orders.']"));
 
@@ -50,7 +115,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement noThanksButton = $(By.xpath("//span[normalize-space()='NO, THANKS']"));
 
-    private final SelenideElement becomeAmemberNow = $(By.xpath("//*[text()='BECOME A MEMBER NOW']"));
+    private final SelenideElement becomeAMemberNow = $(By.xpath("//*[text()='BECOME A MEMBER NOW']"));
 
     private final SelenideElement orderEstimateTitle = $(By.xpath("//*[text()='Order Estimate']"));
 
@@ -62,15 +127,31 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement cartTitle = $(By.xpath("//*[text()='CART']"));
 
+    private final SelenideElement updateButton = $(By.xpath("//*[text() = 'UPDATE']"));
+
     private final SelenideElement clearOrderButton = $(By.xpath("//*[text() = 'Clear Cart']"));
 
     private final SelenideElement addMonogramButton = $(By.xpath("//*[text()='add monogram']"));
 
-    private final SelenideElement monogramText = $(By.xpath("//input[@data-testid='monogram-input0']"));
+    private final SelenideElement saleItem = $(By.xpath(" //*[text() = 'Sale']"));
+
+    private final SelenideElement monogramTextInput = $(By.xpath("//input[@data-testid='monogram-input0']"));
+    private final SelenideElement priceFirstLineItem = $(By.xpath("(//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-alignRight'])[1]"));
+    private final SelenideElement priceSecondLineItem = $(By.xpath("(//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-alignRight'])[2]"));
+    private final SelenideElement totalPrice = $(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']"));
+    private final SelenideElement totalAdditionalProductDiscountMessage = $(By.xpath("(//*[contains(@class,'MuiGrid-root MuiGrid-container')]/span)[7]"));
+    private final SelenideElement totalAdditionalProductDiscount = $(By.xpath("(//*[contains(@class,'MuiGrid-root MuiGrid-container')]/span)[8]"));
+    private final SelenideElement totalPriceAfterStateTax = $(By.xpath("//h5[contains(@class, 'MuiTypography-h5')]"));
+    private final SelenideElement stateTax = $(By.xpath("//p[contains(@class, 'MuiTypography-body1 MuiTypography-alignRight')]"));
+    private final SelenideElement totalAdditionalProductDiscountOnPaymentPage = $(By.xpath("(//div[contains(@class, 'MuiGrid-root MuiGrid-container MuiGrid-item')]/span)[5]"));
+    private final SelenideElement billingShippingAddressSameCheckbox = $(By.xpath("//*[contains(@class, 'Mui-checked')]//*[@id = 'billing-shipping-address-same-checkbox']"));
 
     private final SelenideElement checkBalanceButton = $(By.xpath("//*[text()='Check balance']"));
+    private final SelenideElement totalWithTaxesCurrentPrice = $(By.xpath("//*[text() = 'Unlimited Furniture Delivery' ]/../following-sibling::div/p"));
 
     private final SelenideElement tradeSavingsText = $(By.xpath("//*[text()='Trade savings']"));
+
+    private final SelenideElement subtotalCurrentValue = $(By.xpath("//*[text() = 'Subtotal' ]/../following-sibling::div/span"));
 
     private final SelenideElement memberSavingsText = $(By.xpath("//*[text()='Member Savings']"));
 
@@ -114,15 +195,24 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement totalMemberPrice = $(By.xpath("//h5[@class='MuiTypography-root MuiTypography-h5 MuiTypography-alignRight']"));
 
-    private final SelenideElement firstProductNameInPG = $(By.xpath("(//*[contains(@id, 'RH')]//p/span)[2]"));
+    private final SelenideElement firstProductNameInPG = $(By.xpath("(//*[contains(@id, 'RH')]//p/span)[1]"));
 
     private final SelenideElement regularPriceInPG = $(By.xpath("(//*[@data-testid = 'price-for-regular'])[1]"));
 
     private final SelenideElement pdpScreenZipCode = $(By.xpath("//*[contains(text(), 'Shipping to')]/a"));
 
+    private final SelenideElement agreeAndAddToCart = $(By.xpath("//*[text() = 'Agree & Add To Cart']"));
+    private final SelenideElement updatedZipCodeInPDP = $(By.xpath("//*[@data-testid = 'postal-code-dialog-opener']"));
     private final SelenideElement memberPriceInPG = $(By.xpath("(//*[@data-testid = 'price-for-member'])[1]"));
+    private final ElementsCollection quantityItemLineList = $$(By.xpath("//select[contains(@id,'quantity')]"));
+    private final SelenideElement shippingAddress = $(By.xpath("//*[text() = 'Shipping Address']"));
+    private final SelenideElement billingAddress = $(By.xpath("//*[text() = 'Billing Address']"));
+    private final SelenideElement shippingAddressStateField = $(By.xpath("(//*[@id = 'address-state-field'])[1]"));
+    private final SelenideElement billingAddressStateField = $(By.xpath("(//*[@id = 'address-state-field'])[2]"));
+    private final SelenideElement regularAndTotalPriceForTheProduct = $(By.xpath(" //*[@class = 'MuiButtonBase-root MuiFab-root' and not(contains(@style, 'hidden'))]"));
 
     private final SelenideElement totalRegularPrice = $(By.xpath("//*[@data-testid = 'price-for-regular']"));
+    private final SelenideElement totalTradePrice = $(By.xpath("//*[@data-testid = 'price-for-trade']"));
 
     private final SelenideElement priceForMember = $(By.xpath("//p[@data-testid='price-for-member']"));
 
@@ -166,10 +256,47 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement addressButton = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][1]/a"));
 
-    private final SelenideElement contractSavings = $(By.xpath("//*[text()='Contract savings']"));
+    private final SelenideElement contractSavingsText = $(By.xpath("//*[text()='Contract savings']"));
 
-    private final SelenideElement rhMembershipImmediatlyPay = $(By.xpath("//*[text()='Your RH Membership immediately pays for itself.']"));
+    private final SelenideElement rhMembershipImmediatelyPay = $(By.xpath("//*[text()='Your RH Membership immediately pays for itself.']"));
 
     private final SelenideElement joinRhMemberProgramTitle = $(By.xpath("(//*[contains(text(),'Join the RH Members Program for ')])[2]"));
+
+    private final SelenideElement tradeInViewPage = $(By.xpath("(//*[text()='TRADE'])[1]"));
+
+    private final SelenideElement priceInViewPage = $(By.xpath("(//*[@id=\"price\"])[1]"));
+
+    private final SelenideElement totalWithoutTaxes = $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5"));
+
+    private final SelenideElement subtotal = $(By.xpath("//*[text() = 'Subtotal' ]/../following-sibling::div/span"));
+
+    private final SelenideElement totalWithTaxes = $(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']"));
+
+    private final SelenideElement unlimitedDeliverySectionInTotal = $(By.xpath("//*[text() = 'Unlimited Furniture Delivery' ]/../following-sibling::div/p"));
+
+    public SelenideElement getQuantityByNumber(Integer number) {
+        String path = String.format(QuantityItemLineNumber, number);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getOptionLineItemByNumber(Integer lineItem1, Integer lineItem2) {
+        String path = String.format(OptionItemLineNumber, lineItem1, lineItem2);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getPriceByName(String price) {
+        String path = String.format(selectPrice, price);
+        return $(byXpath(path));
+    }
+    public SelenideElement getShippingAddressStateByNumber(Integer number) {
+        String path = String.format(shippingAddressStateItem, number);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getBillingAddressStateByNumber(Integer number) {
+        String path = String.format(billingAddressStateItem, number);
+        return $(byXpath(path));
+    }
+
 
 }

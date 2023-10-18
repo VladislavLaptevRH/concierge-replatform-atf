@@ -1,4 +1,5 @@
 @conciergeTestRun
+@conciergeCart
 Feature:Concierge Cart Page
 
   Scenario: Verify the Postal code updates in cart
@@ -18,14 +19,14 @@ Feature:Concierge Cart Page
     When I add item to cart via API with "10146709 LOAK" and quantity '1'
     When I open cart
     Then I verify all the sums on the cart page
-
+  @vimal
   Scenario: Verify that increasing the quantity updates correct product price lines,Total, Shipping & Applicable fees in cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10146709 LOAK" and quantity '4'
+    When I add item to cart via API with "10146709 LOAK" and quantity '2'
     When I open cart
-    Then I verify all the sums on the cart page with item quantity '4'
+    Then I verify all the sums on the cart page with item quantity '2'
 
   Scenario: Order Classification
     Given I log into Concierge as "associate"
@@ -311,7 +312,7 @@ Feature:Concierge Cart Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I open product page with "prod1617188" and "63130001"
+    When I open product page with "prod18900022" and "63130001"
     Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
@@ -450,6 +451,7 @@ Feature:Concierge Cart Page
     When I remove all items from cart via UI
     When I remove client from header
     When I open product page with productId "prod19500002"
+    Then I chose zero choose in line items
     Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
@@ -551,7 +553,6 @@ Feature:Concierge Cart Page
     When I continue to payment
     When I click on continue with original address button
     When I choose POS for payment method
-    And I verify that review screen is displayed
     When I goes to address page from review screen
     Then I verify that address saved in address page
 

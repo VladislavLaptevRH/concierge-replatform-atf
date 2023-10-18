@@ -1,4 +1,5 @@
 @conciergeTestRun
+@conciergeSignInSignOut
 Feature: Concierge Sign-in/Sign-out Page
 
   Scenario: User Sign-in

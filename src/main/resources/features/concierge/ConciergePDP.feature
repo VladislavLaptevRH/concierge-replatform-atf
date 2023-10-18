@@ -1,4 +1,5 @@
 @conciergeTestRun
+@conciergePDP
 Feature: Concierge PDP
 
   Scenario: Verify the PDP title and pricing
@@ -37,7 +38,6 @@ Feature: Concierge PDP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to concierge item 'prod18890296' from search field
     When I click on the first project search result with parameters 'prod18890296''10024793 BRNZ'
     Then I Verify that 'PDP title' is present
     Then I Verify that '"Zoom" button' is present
@@ -52,7 +52,7 @@ Feature: Concierge PDP
     Then Verify that 'line item selections (Size, Finish and Qty) are present'
     Then Verify that 'smaller preview product picture is present on the left of line items'
     Then Verify that 'View in-stock Items and View Sale Items links are present'
-    Then I choose option 'Waxed Grey Oak/ Pewter'
+    Then I choose option 'Waxed Brown Oak/ Brass'
     Then I chose zero choose in line items
     Then Verify that 'text "Configure this item to view delivery information to" is present'
     Then Verify that 'text Swatch is present'
@@ -87,20 +87,20 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'has an item can be added to cart from modal'
     Then Verify that "In Stock modal" 'has an item can be added to project from modal'
 
-#  Scenario: Verify On Sale functionality
-#    Given I log into Concierge as "associate"
-#    When I choose country for concierge from footer
-#    When I remove all items from cart via UI
-#    When I go to item "17050043 FOG" from search field
-#    When I click on "view select items on sale" link
-#    Then Verify that "Sale modal" 'opens'
-#    Then Verify that "Sale modal" 'has title'
-#    Then Verify that "Sale modal" 'has item#'
-#    Then Verify that "Sale modal" 'has price, member and sale price'
-#    Then Verify that "Sale modal" 'has qty dropdown'
-#    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
-#    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
-#    Then Verify that "Sale modal" 'has an item can be added to project from modal'
+  Scenario: Verify On Sale functionality
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "57070740 CLNT" from search field
+    When I click on "view select items on sale" link
+    Then Verify that "Sale modal" 'opens'
+    Then Verify that "Sale modal" 'has title'
+    Then Verify that "Sale modal" 'has item#'
+    Then Verify that "Sale modal" 'has price, member and sale price'
+    Then Verify that "Sale modal" 'has qty dropdown'
+    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
+    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
+    Then Verify that "Sale modal" 'has an item can be added to project from modal'
 
   Scenario Outline: Availability, Delivery and Returns messaging for <items>
     Given I log into Concierge as "associate"
@@ -111,11 +111,10 @@ Feature: Concierge PDP
     Then I verify that availability, Delivery and returns messaging is displayed for "<items>"
     Examples:
       | items | skuID         |
-      | SO    | 19970830 CTIC |
-      | BO    | 10024793 BRNZ  |
-
+      | SO    | 59810779 CTBZ |
+      | BO    | 10024793 BRNZ |
+  @vimal
   Scenario: Verify the dropdown selection and add to cart
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -217,12 +216,11 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I go to Swatch Landing Page
     Then I verify that swatch landing page is displayed
-
+  @vimal
   Scenario: Verify the Postal code updates in PDP
     Given I log into Concierge as "associate"
     When I choose 'US' country
-    When I go to item "prod28500462" from search field
-    When I click on the first project search result with parameters 'prod28500462''10097586 BWMR'
+    When I go to item "10115451 BWMR" from search field
     Then Verify that 'default US zip code is present in PDP'
     Then I click on zip code and change it to '10001'
     Then I verify that zip code in PDP is '10001'
@@ -234,11 +232,6 @@ Feature: Concierge PDP
     Then I click on zip code and change it to 'SW1A1AA'
     Then I verify that zip code in PDP is 'SW1A1AA'
     Then Verify that 'Confirm that PDP has price in GBP'
-    When I click on rh concierge logo
-    When I click on search
-    When I type item name 'Coffee Tables'
-    Then I click on the first project search result
-    Then Verify that 'default US zip code is present in PDP'
 
   Scenario: Sale PDP: Regular/Member/Final Price validation
     Given I log into Concierge as "associate"
@@ -247,12 +240,13 @@ Feature: Concierge PDP
     When I navigate to "Sale"
     Then I choose a random sale item
     Then Verify that 'PDP has SALE and MEMBER prices'
-
+  @vimal
   Scenario Outline: Verify Mattress Recycling Fee
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10004670 NONE" from search field
+    Then I chose the '1' line item selections one by one
     Then I chose the '1' line item selections one by one
     When I change state for "<state>" with zip code "<zipCode>"
     Then I verify that text ""<state>" requires a mattress recycling fee to be collected at checkout state" is present in PDP
@@ -287,3 +281,183 @@ Feature: Concierge PDP
     Then I verify that check for replacements parts button is displayed
     Then I click on 'CHECK FOR REPLACEMENT PARTS' button
     And I verify that replacements parts modal pop up is displayed
+
+  Scenario: Add to Cart, Add All to Cart
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I chose '6' product on the page
+    Then I Verify that 'PDP title' is present
+    Then I chose the '1' line item selections one by one for '5' items
+    Then I click on button "ADD TO CART" in the cart
+    Then I verify that cart modal is displayed
+    Then I click on button "ADD ALL TO CART" in the cart
+    Then I verify that cart modal is displayed for more than one item
+
+  Scenario: Add to Project, Add All to Project
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I chose '6' product on the page
+    Then I Verify that 'PDP title' is present
+    Then I chose the '1' line item selections one by one for '5' items
+    Then I click on button "ADD TO PROJECT" in the cart
+    Then I verify that project modal is displayed
+    Then I click on button "ADD ALL TO PROJECT" in the cart
+    Then I verify that project modal is displayed
+  @vlad
+  Scenario: After clicking on Detail section it should be expanded with - symbol
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I chose '6' product on the page
+    Then I Verify that 'PDP title' is present
+    Then I Verify that 'the "Hero" Image' is present
+    Then I Verify that '"Zoom" button' is present
+    Then I Verify that 'images carousel is present below Hero image' is present
+    Then I Verify that 'sections "dimensions" and "details"' is present
+    Then I Verify that 'line items' is present
+    Then I Verify that 'sections "dimensions" and "details"' is present
+    Then I click 'DETAILS section' on pdp page
+    Then I Verify that 'Section should be expanded' is present
+  @vlad
+  Scenario: If links are present inside the Details section, then it should be opened with resp pop up modal
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I chose '6' product on the page
+    Then I Verify that 'PDP title' is present
+    Then I Verify that 'the "Hero" Image' is present
+    Then I Verify that '"Zoom" button' is present
+    Then I Verify that 'images carousel is present below Hero image' is present
+    Then I Verify that 'line items' is present
+    Then I Verify that 'sections "dimensions" and "details"' is present
+    Then I click 'DETAILS section' on pdp page
+    Then I Verify that 'Section should be expanded' is present
+    Then I click 'link (If available) in DETAILS section' on pdp page
+  @vlad
+  Scenario: Learn more about our Return Policy should be displayed by default which has Link for Return Policy
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I chose '6' product on the page
+    Then I Verify that 'PDP title' is present
+    Then I Verify that 'the "Hero" Image' is present
+    Then I Verify that '"Zoom" button' is present
+    Then I Verify that 'images carousel is present below Hero image' is present
+    Then I Verify that 'sections "dimensions" and "details"' is present
+    Then I Verify that 'line items' is present
+    Then I Verify that 'text "Learn more about our Return Policy"' is present
+  @vlad
+  Scenario: If we enter invalid zipcode then error message should be displayed
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I chose '6' product on the page
+    Then I Verify that 'PDP title' is present
+    Then I Verify that 'the "Hero" Image' is present
+    Then I Verify that '"Zoom" button' is present
+    Then I Verify that 'images carousel is present below Hero image' is present
+    Then I Verify that 'sections "dimensions" and "details"' is present
+    Then I Verify that 'line items' is present
+    Then I chose the '1' line item selections one by one
+    Then Verify that 'Verify the delivery information'
+    And I change zip code on PDP page to "111"
+    Then Verify that 'we enter invalid zipcode then error message should be displayed'
+  @vlad
+  Scenario: After clicking on any image, redirected to PDP page
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I chose '6' product on the page
+    Then I Verify that 'PDP title' is present
+    Then I click 'any product image in carousel' on pdp page
+    Then Verify that 'User should be navigated to respective PDP'
+  @vlad
+  Scenario: Yaml carousel update as per country selection
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I open product page with productId "prod14900056"
+    Then I Verify that 'PDP title' is present
+    Then I Verify that 'line items' is present
+    Then I chose the '1' line item selections one by one
+    Then Verify that 'Verify the delivery information'
+    When I choose 'CA' country
+    And I change zip code on PDP page to "H1Y2B5"
+    Then I verify that YAML carousel is displayed
+  @vlad
+  Scenario: Related products : YML
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I open product page with productId "prod14900056"
+    Then I Verify that 'PDP title' is present
+    Then I Verify that 'line items' is present
+    Then I verify that YAML carousel is displayed
+  @vlad
+  Scenario: Uphostry, Material, and/or Finish Swatches
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I open product page with productId "prod14900056"
+    Then I Verify that 'PDP title' is present
+    Then I Verify that 'line items' is present
+    Then I Verify that 'Upholstery Swatch section' is present
+    Then Verify that 'text Swatch is present'
+    Then Verify that 'Swatch image is present'
+    Then Verify that 'line item for Swatch is present'
+    Then Verify that 'text "Swatches are shipped at no charge" is present'
+  @vlad
+  Scenario: Hero image, Line level product images
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I chose '6' product on the page
+    Then I Verify that 'PDP title' is present
+    Then I Verify that 'the "Hero" Image' is present
+    Then I Verify that '"Zoom" button' is present
+    Then I Verify that 'images carousel is present below Hero image' is present
+
+@vlad
+  Scenario: Product details
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I chose '6' product on the page
+    Then I Verify that 'PDP title' is present
+    Then I Verify that 'the "Hero" Image' is present
+    Then I Verify that '"Zoom" button' is present
+    Then I Verify that 'images carousel is present below Hero image' is present
+    Then I Verify that 'sections "dimensions" and "details"' is present
+    Then I Verify that 'line items' is present
+    Then I Verify that '"add to cart" and "add to project" buttons' is present
+    Then I Verify that 'text "Learn more about our Return Policy"' is present
+    Then I Verify that '"footer" in PDP' is present

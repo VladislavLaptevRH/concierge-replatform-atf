@@ -1,3 +1,4 @@
+@conciergeE2E
 @conciergeTestRun
 Feature: Concierge E2E flow
 

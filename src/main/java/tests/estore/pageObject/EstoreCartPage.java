@@ -208,7 +208,7 @@ public class EstoreCartPage {
 
     private final SelenideElement joinRhMemberProgramTitle = $(By.xpath("//*[contains(text(),'Join the RH Members Program for ')]"));
 
-    private final SelenideElement addToWishlistButton = $(By.xpath("//*[text() = 'ADD TO WISHLIST']"));
+    private final SelenideElement addToWishlistButton = $(By.xpath("//span[text()='WishList']"));
 
     private final SelenideElement totalProductPrice = $(By.id("rh-line-item-card_total"));
 
