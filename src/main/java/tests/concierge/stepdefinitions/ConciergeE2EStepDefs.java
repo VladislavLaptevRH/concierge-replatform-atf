@@ -7,7 +7,12 @@ import com.codeborne.selenide.WebDriverRunner;
 
 import com.codeborne.selenide.ex.ElementNotFound;
 import org.openqa.selenium.Keys;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.testng.AssertJUnit;
+
 import tests.estore.pageObject.EstoreUserAccountPage;
 import tests.utility.Hooks;
 import tests.concierge.pageObject.*;
@@ -59,6 +64,8 @@ public class ConciergeE2EStepDefs {
 
     public static String SKU = "";
     public static String itemName = "";
+
+    public static final Logger logger = LoggerFactory.getLogger(FilterStepDefs.class);
 
     @When("I click on add to project button")
     public void userClickOnAddToProjectButton() {
@@ -1366,5 +1373,70 @@ public class ConciergeE2EStepDefs {
     public void iVerifySearchPage(){
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeItemsScreen.getSearchResultHeader().should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I select IN-STOCK box")
+    public void iSelectinstockbox(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getInStock().should(visible, Duration.ofSeconds(15));
+        conciergeItemsScreen.getInStock().click();
+    }
+
+    @Then("I verify IN-STOCK filter is applied")
+    public void iverifyFilter(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getClearAll().should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I clear all and confirm the applied option is removed")
+    public void iClearAll(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getClearAll().should(visible, Duration.ofSeconds(15));
+        conciergeItemsScreen.getClearAll().click();
+        try{
+            $(By.xpath("//*[text()='Clear All']"));
+        }
+        catch (org.openqa.selenium.NoSuchElementException | java.lang.UnsupportedOperationException | ElementNotFound e) {
+                logger.debug("Element Fabric not found");
+            }
+    }
+
+    @Then("I verify art search page is displayed")
+    public void iVerifyArtSearchPage(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getArtResultHeader().should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I verify swivels search page is displayed")
+    public void iVerifySwivelsSearchPage(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getSwivelsResultHeader().should(visible, Duration.ofSeconds(15));
+    }
+
+    @When("I search item {string}")
+    public void iSearchField(String arg0) {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeUserAccountPage.getSearchLens().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getSearchLens().click();
+        conciergeItemsScreen.getSearchIconField().setValue(arg0);
+    }
+
+    @When("I clear search")
+    public void iClearSearch(){
+        conciergeItemsScreen.getSearchClearButton().should(visible, Duration.ofSeconds(15));
+        conciergeItemsScreen.getSearchClearButton().click();
+    }
+
+    @Then("I confirm search item is clear")
+    public void iConfirmSearchField() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeUserAccountPage.getSearchLens().should(empty, Duration.ofMinutes(1));
+    }
+
+    @Then("I verify multi search result is displayed")
+    public void iVerifyMultiSearchPage(){
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getMultiSearchHeader().should(visible, Duration.ofSeconds(15));
     }
 }

@@ -62,7 +62,6 @@ Feature: Concierge PG Page
     Then I Verify Search icon is present
 
 
-
   Scenario: By clicking on search icon, user should be able to enter and search the product from any of the page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -81,7 +80,6 @@ Feature: Concierge PG Page
     When I click on search Icon
     When I type item name 'table'
     Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
-
 
 
   Scenario: After entering search term user can see SEE ALL RESULTS
@@ -104,6 +102,59 @@ Feature: Concierge PG Page
     When I choose country for concierge from footer
     When I go to item "sofa" from search field
     Then I verify sofa search page is displayed
+
+
+  Scenario: Instock
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "sofa" from search field
+    Then I verify sofa search page is displayed
+    Then I select IN-STOCK box
+    Then I verify IN-STOCK filter is applied
+
+
+  Scenario: Search with Keywords - Art or swivels
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "Art" from search field
+    Then I verify art search page is displayed
+    When I go to item "swivels" from search field
+    Then I verify swivels search page is displayed
+
+
+  Scenario: Clicking on cross icon search item should clear from search box
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I search item "sofa"
+    When I clear search
+    Then I confirm search item is clear
+
+
+  Scenario: Verify the search results with multiple terms search: white and blue corner leather sofa
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "white and blue corner leather sofa" from search field
+    Then I verify multi search result is displayed
+
+
+  Scenario: Verify the results with multiple term search and facet selections
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "white and blue corner leather sofa" from search field
+    Then I verify multi search result is displayed
+    Then I select IN-STOCK box
+    Then I verify multi search result is displayed
+
+
+  Scenario: Verify that by clicking on 'clear all', all the applied options should get removed
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "sofa" from search field
+    Then I verify sofa search page is displayed
+    Then I select IN-STOCK box
+    Then I clear all and confirm the applied option is removed
+
+
 
 
 
