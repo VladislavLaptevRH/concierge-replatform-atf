@@ -1543,7 +1543,6 @@ public class ConciergeCartStepDefs {
             $(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).shouldHave(text("$4,139.00"), Duration.ofSeconds(20));
         }
 
-
     @When("I verify all the sums on the cart page with item quantity {string}")
     public void iVerifyAllTheSumsOnTheCartPage(String quantity) {
         if (country.equals("GB")) {
