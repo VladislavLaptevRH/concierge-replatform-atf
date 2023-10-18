@@ -83,7 +83,7 @@ public class ConciergeSearchStepDefs {
     }
     @Then("I verify that relevant items are returned on search page {string}")
     public void iVerifyTgatRelevantItemsAreReturnedOnSearchPage(String items) {
-        with().pollInterval(1, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("(//*[@id = 'component-product-grid']//p/span[contains(text(), '" + items + "')])[1]")).shouldBe(visible, Duration.ofSeconds(15));
         assertTrue($$(By.xpath("//*[@id = 'component-product-grid']//p/span[contains(text(), '" + items + "')]")).size() > 10);
         for(int i = 1; i < $$(By.xpath("//*[@id = 'component-product-grid']//p/span[contains(text(), '" + items + "')]")).size(); i++) {
