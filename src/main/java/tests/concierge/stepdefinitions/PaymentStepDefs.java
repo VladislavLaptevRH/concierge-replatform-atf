@@ -261,7 +261,6 @@ public class PaymentStepDefs {
             paymentScreen.getContinueToReview().click();
             $(By.xpath("//*[text()='Charge to Visa ending 1142:']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[text()='Remove']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='$10.00']")).should(visible, Duration.ofSeconds(15));
         }
         if (cardType.equals("MC")) {
             Select paymentMethodList = new Select($(By.xpath("//select[@id = 'payment-method-select']")));

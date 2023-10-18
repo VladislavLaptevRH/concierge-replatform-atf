@@ -152,4 +152,32 @@ public class EstorePdpPageScreen {
     private final SelenideElement selectCushionFill = $(By.xpath("(//select[contains(@id, 'Cushion Fill')])[1]"));
 
     private final SelenideElement viewSaleItem = $(By.xpath("(//*[@id=\"component-relatedProductCartd_view-sale-btn\"])[1]"));
+
+    private final SelenideElement PDPTitle =  $(By.xpath("//h2[@class='MuiTypography-root MuiTypography-h2']"));
+
+    private final SelenideElement heroImage = $(By.xpath("//*[@data-testid='desktop-pdp-image']"));
+
+    private final SelenideElement returnPolicyLink =$(By.xpath("//span[text()='Return Policy']"));
+
+    private final SelenideElement configureDeliveryInformationText = $(By.xpath("//p[text()='Configure this item to view delivery information ']"));
+
+    private final SelenideElement pdpDetailsSection = $(By.xpath("//span[text()='DETAILS']"));
+
+    private final SelenideElement pdpDimensionsSection = $(By.xpath("//span[text()='DIMENSIONS']"));
+
+    private final SelenideElement pdpFabricCareSection = $(By.xpath("//span[text()='Fabric Care']"));
+
+    private final SelenideElement pdpCareSection = $(By.xpath("//span[text()='Care']"));
+
+    private final SelenideElement alsoAvailableInLeatherText = $(By.xpath("//a[text()='ALSO AVAILABLE IN LEATHER']"));
+
+    private final SelenideElement alsoAvailableInAluminumText = $(By.xpath("//a[text()='ALSO AVAILABLE IN ALUMINUM']"));
+
+    private final SelenideElement shopTheEntireCollectionText = $(By.xpath("//a[text()='SHOP THE ENTIRE COLLECTION']"));
+
+    private final SelenideElement touchUpKitText = $(By.xpath("//*[contains(text(),'Touch-Up Kit')]"));
+
+    private final SelenideElement pdpFooter = $(By.xpath("//div[@class='MuiContainer-root']/footer"));
+
+    private final SelenideElement pdpColorOption = $(By.xpath("//p[text()='Color Options']"));
 }

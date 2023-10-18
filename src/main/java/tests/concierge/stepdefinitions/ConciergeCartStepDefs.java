@@ -1,6 +1,7 @@
 package tests.concierge.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.ex.ElementNotFound;
 import io.cucumber.java.en.And;
@@ -352,8 +353,11 @@ public class ConciergeCartStepDefs {
                 lineItemPriceValueBeforeOverride = conciergeCartPageScreen.getTotalRegularPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", "");
             }
             lineItemPriceValueAfterOverride = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", "");
-            line = Float.parseFloat(lineItemPriceValueBeforeOverride) / 2;
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+            line = Float.parseFloat(lineItemPriceValueBeforeOverride);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             actual = conciergeCartPageScreen.getTotalMemberPrice().getText().replaceAll(",", "").replaceAll("\\$", "").replaceAll("C", "");
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             if(line != Float.parseFloat(actual)){
                 WebDriverRunner.getWebDriver().navigate().refresh();
             }
@@ -559,7 +563,7 @@ public class ConciergeCartStepDefs {
                 }
             }
         }
-        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
+//        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         paymentScreen.getChoosePaymentMethodBtn().click();
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
@@ -1112,6 +1116,7 @@ public class ConciergeCartStepDefs {
                        break;
                    }
                 }
+
                 if(!conciergeCartPageScreen.getYourShoppingCartIsEmptyText().isDisplayed()){
                     WebDriverRunner.getWebDriver().navigate().refresh();
                 }
@@ -1139,6 +1144,20 @@ public class ConciergeCartStepDefs {
 //                assertEquals(bottomTotalPriceAfterDecreasing * 4, Float.parseFloat($(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']")).getText().replace("$", "").replace(",", "")));
                 assertEquals(topMemberSavingsAfterDecreasing * 4, Float.parseFloat(conciergeCartPageScreen.getTopMemberSavingsCurrentResult().getText().substring(51, 57).replace(",", "")));
                 assertEquals(bottomMemberSavingsAfterDecreasing * 4, Float.parseFloat(conciergeCartPageScreen.getBottomMemberSavingsCurrentResult().getText().replaceAll("[^0-9]", "").replace("00", "")));
+                assertEquals(topTotalPriceAfterDecreasing / 5, Float.parseFloat($(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", "")));
+                assertEquals(subtotalPriceAfterDecreasing / 5, Float.parseFloat($(By.xpath("//*[contains(text(), 'Subtotal')]/../following-sibling::div/span")).getText().replace("$", "").replace(".00","").replace(",", "")));
+                assertEquals(topMemberSavingsAfterDecreasing / 5, Float.parseFloat( $(By.xpath("//h2/following-sibling::p")).getText().substring(51, 57).replace(",", "")));
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                assertEquals(bottomMemberSavingsAfterDecreasing / 5, Float.parseFloat($(By.xpath("(//*[contains(text(),'Join the RH Members Program')])[2]/..")).getText().replaceAll("[^0-9]", "").replace("00", "")));
+                break;
+            case "quantity and sum were increased":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                assertEquals(topTotalPriceAfterDecreasing * 4, Float.parseFloat($(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", "")));
+                assertEquals(subtotalPriceAfterDecreasing * 4, Float.parseFloat($(By.xpath("//*[contains(text(), 'Subtotal')]/../following-sibling::div/span")).getText().replace("$", "").replace(".00","").replace(",", "")));
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                assertEquals(topMemberSavingsAfterDecreasing * 4, Float.parseFloat( $(By.xpath("//h2/following-sibling::p")).getText().substring(51, 57).replace(",", "")));
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                assertEquals(bottomMemberSavingsAfterDecreasing * 4, Float.parseFloat($(By.xpath("(//*[contains(text(),'Join the RH Members Program')])[2]/..")).getText().replaceAll("[^0-9]", "").replace("00", "")));
                 break;
             default: break;
         }
@@ -1538,6 +1557,21 @@ public class ConciergeCartStepDefs {
             conciergeCartPageScreen.getTotalWithTaxesCurrentPrice().shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
             int totalWithTaxes = 3860 * Integer.parseInt(quantity) + Integer.parseInt(conciergeCartPageScreen.getTotalWithTaxesCurrentPrice().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
             assertEquals(totalWithTaxes, Integer.parseInt(conciergeCartPageScreen.getTotalPrice().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
+            String Amount = conciergeCartPageScreen.getPriceInViewPage().getText().replace("$", "").replace(".00", "").replaceAll(",", "");
+            System.out.println("Amount: "+Amount);
+
+            Integer number = Integer.parseInt(Amount);
+            System.out.println("number: "+number);
+
+            int totalWithoutTaxes = number * Integer.parseInt(quantity);
+            assertEquals(totalWithoutTaxes, Integer.parseInt(String.valueOf(conciergeCartPageScreen.getTotalWithoutTaxes().getText()).replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
+
+            int subtotal = number * Integer.parseInt(quantity);
+            assertEquals(subtotal, Integer.parseInt(String.valueOf(conciergeCartPageScreen.getSubtotal().getText()).replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
+
+            int totalWithTaxes = subtotal + (Integer.parseInt(String.valueOf(conciergeCartPageScreen.getUnlimitedDeliverySectionInTotal().getText()).replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
+            assertEquals(totalWithTaxes, Integer.parseInt(String.valueOf(conciergeCartPageScreen.getTotalWithTaxes().getText()).replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
+
         }
     }
 

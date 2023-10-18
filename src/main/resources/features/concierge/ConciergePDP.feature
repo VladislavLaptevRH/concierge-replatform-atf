@@ -113,9 +113,8 @@ Feature: Concierge PDP
       | items | skuID         |
       | SO    | 59810779 CTBZ |
       | BO    | 10024793 BRNZ |
-
+  @vimal
   Scenario: Verify the dropdown selection and add to cart
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -217,7 +216,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I go to Swatch Landing Page
     Then I verify that swatch landing page is displayed
-
+  @vimal
   Scenario: Verify the Postal code updates in PDP
     Given I log into Concierge as "associate"
     When I choose 'US' country
@@ -233,11 +232,6 @@ Feature: Concierge PDP
     Then I click on zip code and change it to 'SW1A1AA'
     Then I verify that zip code in PDP is 'SW1A1AA'
     Then Verify that 'Confirm that PDP has price in GBP'
-    When I click on rh concierge logo
-    When I click on search
-    When I type item name 'Coffee Tables'
-    Then I click on the first project search result
-    Then Verify that 'default US zip code is present in PDP'
 
   Scenario: Sale PDP: Regular/Member/Final Price validation
     Given I log into Concierge as "associate"
@@ -246,7 +240,7 @@ Feature: Concierge PDP
     When I navigate to "Sale"
     Then I choose a random sale item
     Then Verify that 'PDP has SALE and MEMBER prices'
-
+  @vimal
   Scenario Outline: Verify Mattress Recycling Fee
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

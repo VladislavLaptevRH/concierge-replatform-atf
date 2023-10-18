@@ -341,6 +341,12 @@ public class Pdp {
                 break;
             case  "price is matching PDP":
                 assertEquals( Integer.parseInt(regularPriceInPG.replaceAll(",", "").replaceAll(" ", "")) + 279,  Integer.parseInt(pdpScreen.getShippingOverridePrice().getText().replaceAll(".00", "").replaceAll("\\$", "").replaceAll(",", "").replaceAll(" ", "")));
+               // $(By.xpath("//*[text() = 'Item# null")).shouldNotHave(visible, Duration.ofSeconds(15));
+                assertEquals("59810778 SECM", $(By.xpath("(//*[@id = 'listColumn2-Item#'])[1]")).getText());
+                break;
+            case  "price is matching PDP":
+                System.out.println("regularPriceInPG: "+regularPriceInPG);
+                assertEquals( Integer.parseInt(regularPriceInPG.replaceAll(",", "").replaceAll(" ", "")) + 289,  Integer.parseInt($(By.xpath("//*[@aria-describedby= 'shipping-override-price-dialog']")).getText().replaceAll(".00", "").replaceAll("\\$", "").replaceAll(",", "").replaceAll(" ", "")));
                 break;
             case  "PDP has SALE and MEMBER prices":
                 pdpScreen.getPriceForRegular().shouldHave(visible, Duration.ofSeconds(15));
