@@ -59,7 +59,6 @@ Feature: Estore CG
   Scenario: Change the grid view, go to PG, go back from PG, CG page should render in the same grid view that you previously selected
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
-    Then  I change the brand to "<brand>" for eStore
     When I go to "FABRIC CHAIR COLLECTIONS" on eStore
     When I select "3" grid view on estore CG page
     When I click on random item from collection page with applied "3" grid view

@@ -319,8 +319,9 @@ public class ConciergeAssociateStepDefs {
     public void iVerifyThatRHBrandDropDownIsPresentInHomePage(String currentBrand){
         if(!conciergeUserAccountPage.getCurrentBrandByName(currentBrand).isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
+            conciergeLoginPage.getRHIcon().should(visible,Duration.ofSeconds(40));
         }
-        conciergeUserAccountPage.getCurrentBrandByName(currentBrand).should(visible,Duration.ofSeconds(40));
+        conciergeLoginPage.getRHIcon().should(visible,Duration.ofSeconds(40));
     }
 
     @Then("I verify the logo")
