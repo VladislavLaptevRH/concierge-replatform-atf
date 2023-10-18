@@ -12,7 +12,7 @@ Feature: Concierge PG Page
     Then I verify that 'PG pictures of all items are visible' on search page
     Then I verify that 'page is loaded until footer' on search page
     Then I verify that relevant items are returned on search page 'Table'
-
+  @vimal
   Scenario: Verify that cross brand search is functioning as expected
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

@@ -174,5 +174,14 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement tradeInViewPage = $(By.xpath("(//*[text()='TRADE'])[1]"));
 
+    private final SelenideElement priceInViewPage = $(By.xpath("(//*[@id=\"price\"])[1]"));
+
+    private final SelenideElement totalWithoutTaxes = $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5"));
+
+    private final SelenideElement subtotal = $(By.xpath("//*[text() = 'Subtotal' ]/../following-sibling::div/span"));
+
+    private final SelenideElement totalWithTaxes = $(By.xpath("//h5[@aria-describedby = 'shipping-override-price-dialog']"));
+
+    private final SelenideElement unlimitedDeliverySectionInTotal = $(By.xpath("//*[text() = 'Unlimited Furniture Delivery' ]/../following-sibling::div/p"));
 
 }

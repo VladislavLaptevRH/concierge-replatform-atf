@@ -227,6 +227,7 @@ public class ConciergeE2EStepDefs {
 
     @When("I continue to payment")
     public void continueToPaymentAfterAddressCheckout() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if (!checkoutAddressScreen.getContinuePaymentButton().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -329,6 +330,7 @@ public class ConciergeE2EStepDefs {
     @When("I go to item {string} from search field")
     public void iGoToItemFromSearchField(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if(!conciergeUserAccountPage.getSearchItemField().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -441,6 +443,7 @@ public class ConciergeE2EStepDefs {
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[4]")).click();
         estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
         generalStepDefs.waitForJSandJQueryToLoad();
         estoreUserAccountPage.getSearchItemField().setValue(arg0);

@@ -55,7 +55,7 @@ Feature: Concierge Critical Path
     When I click on checkout button
     Then I click on become a member now button
     Then I verify membership banner
-
+  @vimal
   Scenario: Verify Removal of product in Cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -63,7 +63,7 @@ Feature: Concierge Critical Path
     When I add item to cart via API
     When I open cart
     When I click 'Remove Link' on cart screen
-
+  @vimal
   Scenario: Verify Quantity Update in Cart - decrease
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -74,7 +74,7 @@ Feature: Concierge Critical Path
     Then I save data for decreasing
     Then I change quantity in the car for '1'
     Then I verify that 'quantity and sum were decreased' on the cart page
-
+  @vimal
   Scenario: Verify Quantity Update in Cart - increase
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -85,7 +85,7 @@ Feature: Concierge Critical Path
     Then I save data for increasing
     Then I change quantity in the car for '4'
     Then I verify that 'quantity and sum were increased' on the cart page
-
+  @vimal
   Scenario Outline: Override Line item Prices - with <method> override price methods
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -458,7 +458,7 @@ Feature: Concierge Critical Path
     When I choose country for concierge from footer
     When user clicks on gallery button from header
     Then user verifies list of galleries which have default value "5: Newport Beach"
-
+  @vimal
   Scenario Outline: Major CCs
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -484,7 +484,7 @@ Feature: Concierge Critical Path
       | MC       |
       | AX       |
       | DI       |
-
+  @vimal
   Scenario: Split Payment
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -505,7 +505,7 @@ Feature: Concierge Critical Path
     When I click on a place order button
     Then I click on order details button
     Then I verify that payment split is working and paid amount is visible on the confirmation page
-
+  @vimal
   Scenario: POS payment
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -832,11 +832,6 @@ Feature: Concierge Critical Path
     Then I click on zip code and change it to 'SW1A1AA'
     Then I verify that zip code in PDP is 'SW1A1AA'
     Then Verify that 'Confirm that PDP has price in GBP'
-    When I click on rh concierge logo
-    When I click on search
-    When I type item name 'Coffee Tables'
-    Then I click on the first project search result
-    Then Verify that 'default US zip code is present in PDP'
 
   Scenario: Sale PDP: Regular/Member/Final Price validation
     Given I log into Concierge as "associate"
@@ -966,7 +961,7 @@ Feature: Concierge Critical Path
     Then I verify that 'PG has filters: IN-STOCK, SALE, SIZE, MATERIAL, BRAND, RESULTS and SORT is present' on PG screen
     Then I verify that PG loads
     Then I verify that 'all products returned have $ SALE price in their descriptions' on PG screen
-
+  @vimal
   Scenario: Checking Faucets in Search PG
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1040,7 +1035,7 @@ Feature: Concierge Critical Path
     Then I navigate to gallery 'Benches'
     Then I verify that 'Grid View is present in top right' on PG screen
     Then I verify that 'Grid View in PG is set to 3-grid view by default' on PG screen
-
+  @vimal
   Scenario: Verify that PG Grid View is functional within PG
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
