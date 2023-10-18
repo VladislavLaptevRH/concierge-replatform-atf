@@ -548,8 +548,8 @@ public class ConciergeE2EStepDefs {
     @When("I click on become a member now button")
     public void iClickOnBecomeAMemberNowButton() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        conciergeCartPageScreen.getBecomeAmemberNow().shouldBe(visible, Duration.ofSeconds(10));
-        conciergeCartPageScreen.getBecomeAmemberNow().click();
+        conciergeCartPageScreen.getBecomeAMemberNow().shouldBe(visible, Duration.ofSeconds(10));
+        conciergeCartPageScreen.getBecomeAMemberNow().click();
     }
 
     @When("I click on continue adding additional button")

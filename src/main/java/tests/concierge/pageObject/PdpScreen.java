@@ -142,7 +142,7 @@ public class PdpScreen {
     private final SelenideElement searchFieldInput = $(By.xpath("//*[@id = 'site-search-input']"));
     private final SelenideElement keepShoppingText = $(By.xpath("//*[text()='Keep Shopping']"));
     private final SelenideElement dialogTitleCloseButton = $(By.xpath("//*[@data-testid ='dialog-title-close-button']"));
-    private final SelenideElement agreeAndAddToCart = $(By.xpath("//*[text()='Agree & Add To Cart']"));
+    private final SelenideElement agreeAndAddToCart = $(By.xpath("//*[text() = 'Agree & Add To Cart']"));
     private final SelenideElement addToProjectButton = $(By.xpath("//*[text()='ADD TO PROJECT']"));
     private final SelenideElement seeAllResultButton = $(By.xpath("//*[text() = 'SEE ALL RESULTS']"));
     private final SelenideElement shopTheEntireCollectionTitle = $(By.xpath("//a[contains(text(), 'SHOP THE ENTIRE COLLECTION')]"));
