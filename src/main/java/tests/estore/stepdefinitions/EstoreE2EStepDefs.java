@@ -669,4 +669,10 @@ public class EstoreE2EStepDefs {
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
     }
+
+    @When("I click on {string} for estore")
+    public void iClickOnForEstore(String arg0) {
+        $(By.xpath("//*[contains(text(),'" + arg0 + "')]")).should(Condition.and("", interactable, visible),
+                Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
 }
