@@ -290,6 +290,7 @@ public class AbstractStepDefs {
             generalStepDefs.fillAddressFields();
             with().pollInterval(5, SECONDS).await().until(() -> true);
             generalStepDefs.fillZipCodeStateCountry("85020", "US", "AZ");
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             if(checkoutAddressScreen.getEmailAddressField().isDisplayed()){
                 generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
                 checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
@@ -298,6 +299,7 @@ public class AbstractStepDefs {
             }
             if(checkoutAddressScreen.getConfirmEmailAddressField().isDisplayed()){
                 checkoutAddressScreen.getConfirmEmailAddressField().setValue("test@mailinator.com");
+                with().pollInterval(5, SECONDS).await().until(() -> true);
             } else {
                 System.out.println("Email confirm field is not available");
             }

@@ -105,7 +105,15 @@ public class EstoreCartPageStepDefs {
         estoreCartPage.getPasswordEmployeeDiscount().setValue("p6K6K6Mx");
         estoreCartPage.getApplyEmpDiscountBtn().should(visible, Duration.ofSeconds(15));
         estoreCartPage.getApplyEmpDiscountBtn().click();
+
+        try {
+            estoreCartPage.getAcceptDiscountReminders().should(visible, Duration.ofSeconds(12)).click();
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Accept button is not displayed");
+        }
+
         estoreCartPage.getTotalAditionalProdDiscount().should(visible, Duration.ofSeconds(40));
+
     }
 
     @And("I remove promotion from estore cart")
@@ -291,11 +299,17 @@ public class EstoreCartPageStepDefs {
         estoreCartPage.getZipCodeField().clear();
         if (arg0.equals("US")) {
             estoreCartPage.getZipCodeField().setValue("10007");
+            estoreAddressScreen.getSubmitZipCode().click();
         }
         if (arg0.equals("CA")) {
+            estoreCartPage.getPostalCodeCountrySelection().should(visible, Duration.ofSeconds(20)).click();
+            estoreCartPage.getPostalCodeCASelection().should(visible, Duration.ofSeconds(20)).click();
             estoreCartPage.getZipCodeField().setValue("A1A1A1");
+            estoreAddressScreen.getSubmitZipCode().click();
+
+            estoreCartPage.getConfirmChangeCaZipCode().should(interactable, Duration.ofSeconds(18)).click();
+
         }
-        estoreAddressScreen.getSubmitZipCode().click();
     }
 
     @When("I click on {string} postal code in cart")
@@ -880,5 +894,15 @@ public class EstoreCartPageStepDefs {
     @Then("I verify the message {string} should be shown on cart against every component of multisku")
     public void iVerifyTheMessageShouldBeShownOnCartAgainstEveryComponentOfMultisku(String arg0) {
         estoreCartPage.verifyThatComponentMessageIsDisplayedForAllLineItems();
+    }
+
+    @Then("I verify that SPO panel is triggered with all the details for all the dropsku multiskus")
+    public void iVerifyThatSPOPanelIsTriggeredWithAllTheDetailsForAllTheDropskuMultiskus() {
+        estoreCartPage.verifyThatSpoPanelIsDisplayed();
+    }
+
+    @Then("I verify that all the components of the bundle are added to cart")
+    public void iVerifyThatAllTheComponentsOfTheBundleAreAddedToCart() {
+        estoreCartPage.verifyThatAllTheComponentsOfTheBundleAreAddedToCart();
     }
 }

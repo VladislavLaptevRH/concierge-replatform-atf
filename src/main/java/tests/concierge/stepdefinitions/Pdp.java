@@ -64,7 +64,9 @@ public class Pdp {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeItemsScreen.getMonogramColorChampagne().scrollIntoView(true);
         conciergeItemsScreen.getMonogramColorChampagne().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramText().setValue("test");
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getAddMonogramButton().click();
     }
 
@@ -79,7 +81,7 @@ public class Pdp {
 
     @When("I click on \"view in stock items\" link")
     public void iClickOnViewInStockItems() {
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         pdpScreen.getViewOnStockItemLink().shouldHave(text("In-Stock"), Duration.ofSeconds(15));
         pdpScreen.getViewOnStockItemLink().scrollIntoView(true);
         pdpScreen.getViewOnStockItemLink().click();
@@ -340,13 +342,8 @@ public class Pdp {
                 assertEquals("59810778 SECM", pdpScreen.getSKUValue().getText());
                 break;
             case  "price is matching PDP":
-                assertEquals( Integer.parseInt(regularPriceInPG.replaceAll(",", "").replaceAll(" ", "")) + 279,  Integer.parseInt(pdpScreen.getShippingOverridePrice().getText().replaceAll(".00", "").replaceAll("\\$", "").replaceAll(",", "").replaceAll(" ", "")));
-               // $(By.xpath("//*[text() = 'Item# null")).shouldNotHave(visible, Duration.ofSeconds(15));
-                assertEquals("59810778 SECM", $(By.xpath("(//*[@id = 'listColumn2-Item#'])[1]")).getText());
-                break;
-            case  "price is matching PDP":
                 System.out.println("regularPriceInPG: "+regularPriceInPG);
-                assertEquals( Integer.parseInt(regularPriceInPG.replaceAll(",", "").replaceAll(" ", "")) + 289,  Integer.parseInt($(By.xpath("//*[@aria-describedby= 'shipping-override-price-dialog']")).getText().replaceAll(".00", "").replaceAll("\\$", "").replaceAll(",", "").replaceAll(" ", "")));
+                assertEquals( Integer.parseInt(regularPriceInPG.replaceAll(",", "").replaceAll(" ", "")) + 289,  Integer.parseInt(pdpScreen.getShippingOverridePrice().getText().replaceAll(".00", "").replaceAll("\\$", "").replaceAll(",", "").replaceAll(" ", "")));
                 break;
             case  "PDP has SALE and MEMBER prices":
                 pdpScreen.getPriceForRegular().shouldHave(visible, Duration.ofSeconds(15));
@@ -414,6 +411,70 @@ public class Pdp {
             case  "User should be navigated to respective PDP":
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 assertEquals(result, pdpScreen.getPdpTitle().getText());
+                break;
+            case  "the page is loading":
+                pdpScreen.getPublicSwatchHeroPageTitle().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getPublicSwatchHeroPageTitle().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "CARE INSTRUCTIONS link is present":
+                pdpScreen.getCareInstructionLink().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "COMPLIMENTARY SWATCHES floater is present and moving as user scrolls down":
+                pdpScreen.getComplimentarySwatchesFloater().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getFooter().scrollIntoView(true);
+                pdpScreen.getComplimentarySwatchesFloater().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "after selecting color ORDER SWATCHES button is activated":
+               pdpScreen.getDisabledOrderSwatchesButton().shouldBe(visible, Duration.ofSeconds(15));
+               pdpScreen.getOrderSwatchesColor().scrollIntoView(true);
+               pdpScreen.getOrderSwatchesColor().click();
+               pdpScreen.getEnabledOrderSwatchesButton().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "after clicking ORDER SWATCHES user sees DELIVERY pop up":
+                pdpScreen.getEnabledOrderSwatchesButton().click();
+                pdpScreen.getDeliveryPopUp().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "form has the fields: First Name, Last Name, Email, Phone, Address,Apt, suite etc, City, State, Zip, Country Dropdown, Place Order Button":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                pdpScreen.getDeliveryInformationPopUpFirstName().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getDeliveryInformationPopUpLastName().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getDeliveryInformationPopUpEmail().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getDeliveryInformationPopUpPhone().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getDeliveryInformationPopUpAptSuiteFloor().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getDeliveryInformationPopUpAddress().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getDeliveryInformationPopUpCity().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getDeliveryInformationPopUpStateDropDown().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getDeliveryInformationPopUpZip().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getDeliveryInformationPopUpCountryDropDown().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getDeliveryInformationPopUpPlaceOrderButton().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "fill in all fields":
+                pdpScreen.getDeliveryInformationPopUpFirstName().setValue("FirstName");
+                pdpScreen.getDeliveryInformationPopUpLastName().setValue("LastName");
+                pdpScreen.getDeliveryInformationPopUpEmail().setValue("test@test.com");
+                pdpScreen.getDeliveryInformationPopUpPhone().setValue("+11111111111");
+                pdpScreen.getDeliveryInformationPopUpAptSuiteFloor().setValue("5");
+                pdpScreen.getDeliveryInformationPopUpAddress().setValue("Rio Robles");
+                pdpScreen.getDeliveryInformationPopUpCity().setValue("San Jose");
+                Select stateList = new Select(pdpScreen.getDeliveryInformationPopUpStateDropDown());
+                stateList.selectByIndex(1);
+                pdpScreen.getDeliveryInformationPopUpZip().setValue("11111");
+                Select countryList = new Select(pdpScreen.getDeliveryInformationPopUpCountryDropDown());
+                countryList.selectByIndex(0);
+                pdpScreen.getDeliveryInformationPopUpPlaceOrderButton().click();
+                break;
+            case  "after placing order Thank You Message is displayed with text Your order has been placed..":
+                pdpScreen.getThankYouMessageTitle().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getThankYouMessage().shouldHave(text("Your order has been placed, and you’ll receive a confirmation number shortly via email."), Duration.ofSeconds(20));
+                break;
+            case  "Keep Shopping button is present":
+                pdpScreen.getSwatchesModalKeepShoppingButton().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "clicking Keep Shopping button closes the Thank you modal and user stays on the Swatches page":
+                pdpScreen.getSwatchesModalKeepShoppingButton().click();
+                pdpScreen.getPublicSwatchHeroPageTitle().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getPublicSwatchHeroPageTitle().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getCareInstructionLink().shouldBe(visible, Duration.ofSeconds(15));
                 break;
             default: break;
         }
@@ -1083,8 +1144,6 @@ public class Pdp {
         pdpScreen.getCloseSpecialOrderPopUpButton().click();
         with().pollInterval(2, SECONDS).await().until(() -> true);
     }
-
-
 
     @Then("I verify that color has been chosen")
     public void iVerifyThatColorHasBeenChosen() {
