@@ -67,9 +67,38 @@ public class EstorePDPScreen {
 
     private final SelenideElement itemIncludeMultipleComponentsMsg = $(By.xpath("//*[text()='This item includes multiple components. Individual components will be listed in your cart.']"));
 
-    private  final SelenideElement fistItemTitle = $(By.xpath("(//a[@id='product-option-grid']//p//span)[2]"));
+    private final SelenideElement fistItemTitle = $(By.xpath("(//a[@id='product-option-grid']//p//span)[2]"));
 
     private final SelenideElement fistItemProductId = $(By.xpath("(//div[@data-cmp='cardImages'])[1]//img"));
+
+    private final SelenideElement fillSelectOption = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Fill')])[1]"));
+
+    private final SelenideElement armlessSofaSelectOption = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Armless Sofa')])[1]"));
+
+    private final SelenideElement etaLineItemMessage = $(By.xpath("//*[contains(text(),'This item is in stock and will be delivered on or before')]"));
+
+    private final SelenideElement returnLineItemMessage = $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]"));
+
+    public void verifyThatReturnMessageIsDisplayed() {
+        returnLineItemMessage.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatEtaLineMessageIsDisplayed() {
+        etaLineItemMessage.should(Condition.visible, Duration.ofSeconds(15));
+    }
+
+    public void selectArmlessSofaOption() {
+        Select selectFillOption = new Select(armlessSofaSelectOption);
+        selectFillOption.selectByIndex(1);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+    }
+
+    public void selectFillOption() {
+        fillSelectOption.should(Condition.interactable, Duration.ofSeconds(12));
+        Select selectFillOption = new Select(fillSelectOption);
+        selectFillOption.selectByIndex(1);
+    }
+
     public void verifyThatItemIncludeMultipleComponentsMsgIsDisplayedAboveLineItemDropDown() {
         itemIncludeMultipleComponentsMsg.should(Condition.visible, Duration.ofSeconds(20));
     }
@@ -127,8 +156,8 @@ public class EstorePDPScreen {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         sizeOption.should(Condition.and("", Condition.interactable, Condition.visible,
                 Condition.appear), Duration.ofSeconds(40));
-        Select selectSize = new Select(colorOption);
-        selectSize.selectByIndex(2);
+        Select selectColor = new Select(colorOption);
+        selectColor.selectByIndex(3);
     }
 
     public void selectFinishOption() {

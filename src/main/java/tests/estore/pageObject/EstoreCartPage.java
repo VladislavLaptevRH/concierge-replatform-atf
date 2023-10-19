@@ -18,6 +18,16 @@ import static org.awaitility.Awaitility.with;
 @Getter
 public class EstoreCartPage {
 
+    EstoreItemPage estoreItemPage = new EstoreItemPage();
+
+    private SelenideElement specialOrdertext = $(By.xpath("//*[text()='Special Order']"));
+
+    private SelenideElement termsOfSaletext = $(By.xpath("//*[text()='Terms of Sale']"));
+
+    private SelenideElement spoPanelTermsOfUseLink = $(By.xpath("//a[@href='/OUR-COMPANY/TERMS-OF-USE']"));
+
+    private SelenideElement spoPanelItemName = $(By.xpath("//*[text()='ORIGINAL LANCASTER THREE-SEAT-CUSHION U-CHAISE SECTIONAL']"));
+
     private SelenideElement confirmChangeCaZipCode = $(By.xpath("//button//span[text()='CONFIRM CHANGE']"));
 
     private SelenideElement postalCodeCountrySelection = $(By.xpath("//div[@id='country-zipcode-selection']"));
@@ -238,6 +248,25 @@ public class EstoreCartPage {
 
     private final SelenideElement componentMessageTheThirdItem = $(By.xpath("(//*[text()='ORIGINAL LANCASTER THREE-SEAT-CUSHION U-CHAISE SECTIONAL'])[3]"));
 
+    private final SelenideElement theFirstSkusBundle = $(By.xpath("//*[text()='57670938 WHCK']"));
+
+    private final SelenideElement theSecondSkusBundle = $(By.xpath("//*[text()='57680681 WHCK']"));
+
+    private final SelenideElement theThirdSkusBundle = $(By.xpath("//*[text()='70290760 WHCK']"));
+
+    public void verifyThatAllTheComponentsOfTheBundleAreAddedToCart() {
+        theFirstSkusBundle.should(visible, Duration.ofSeconds(12));
+        theSecondSkusBundle.should(visible, Duration.ofSeconds(12));
+        theThirdSkusBundle.should(visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatSpoPanelIsDisplayed() {
+        specialOrdertext.should(visible, Duration.ofSeconds(12));
+        termsOfSaletext.should(visible, Duration.ofSeconds(12));
+        spoPanelTermsOfUseLink.should(visible, Duration.ofSeconds(12));
+        spoPanelItemName.should(visible, Duration.ofSeconds(12));
+        estoreItemPage.getAggreeeAndAddToCardButton().should(Condition.and("", visible, interactable), Duration.ofSeconds(12));
+    }
 
     public void verifyThatComponentMessageIsDisplayedForAllLineItems() {
         componentMessageTheFirstItem.should(visible, Duration.ofSeconds(12));

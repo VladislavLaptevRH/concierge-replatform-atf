@@ -582,10 +582,10 @@ public class EstoreE2EStepDefs {
     }
 
     @When("I open the product category {string}")
-    public void IOpenProductCategory(String categoryId){
+    public void IOpenProductCategory(String categoryId) {
         String URL = null;
         if (Hooks.profile.equals("stg2")) {
-            URL = Hooks.eStoreBaseURL + "/catalog/category/products.jsp?categoryId="+ categoryId;
+            URL = Hooks.eStoreBaseURL + "/catalog/category/products.jsp?categoryId=" + categoryId;
         }
         open(URL);
     }
@@ -637,6 +637,28 @@ public class EstoreE2EStepDefs {
                 for (int i = 0; i < 3; i++) {
                     WebDriverRunner.getWebDriver().navigate().refresh();
 
+                    if (estoreItemPage.getAddToCartButton().isEnabled()) {
+                        break;
+                    }
+                }
+            }
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+    }
+
+    @When("I open product page with productID {string} for estore")
+    public void iOpenProductPageWithProductIDForEstore(String productId) {
+        String URL = null;
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&sale=false&src=rel";
+        open(URL);
+        try {
+            estoreItemPage.getAddToCartButton().should(visible);
+            estoreItemPage.getAddToCartButton().scrollTo();
+            if (!estoreItemPage.getAddToCartButton().isEnabled()) {
+                for (int i = 0; i < 3; i++) {
                     if (estoreItemPage.getAddToCartButton().isEnabled()) {
                         break;
                     }
