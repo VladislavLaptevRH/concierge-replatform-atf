@@ -1596,9 +1596,7 @@ public class ConciergeCartStepDefs {
             case "Regular price & Total Price for the product":
                 conciergeCartPageScreen.getRegularAndTotalPriceForTheProduct().shouldBe(visible, Duration.ofSeconds(20));
                 break;
-
-            default:
-                break;
+            default: break;
         }
     }
 }

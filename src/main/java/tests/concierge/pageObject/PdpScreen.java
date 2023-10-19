@@ -74,13 +74,33 @@ public class PdpScreen {
 
     private final SelenideElement shippingOverridePrice = $(By.xpath("//*[@aria-describedby= 'shipping-override-price-dialog']"));
 
+    private final SelenideElement publicSwatchHeroPageImage = $(By.xpath("//*[@alt = 'Fabric Swatch Hero']"));
+    private final SelenideElement publicSwatchHeroPageTitle = $(By.xpath("//h1[text() = 'PREMIUM FABRICS']"));
+    private final SelenideElement careInstructionLink = $(By.xpath("(//a[@href='http://images.restorationhardware.com/content/catalog/tearsheets/Fabric_Care_Instructions.pdf'])[1]"));
+    private final SelenideElement complimentarySwatchesFloater = $(By.xpath("//*[@id = 'order-panel']"));
     private final SelenideElement clickAgreeAndAddToCartButton = $(By.xpath("//*[@id = 'spo-auth-addToCart']"));
-
+    private final SelenideElement disabledOrderSwatchesButton = $(By.xpath("//*[@data-testid = 'order-swatches-button'][@disabled]"));
+    private final SelenideElement enabledOrderSwatchesButton = $(By.xpath("//*[@data-testid = 'order-swatches-button']"));
+    private final SelenideElement deliveryPopUp = $(By.xpath("//*[@class = 'swatch-shipping-container']/h2[text() = 'Delivery Information']"));
+    private final SelenideElement orderSwatchesColor = $(By.xpath("(//input[contains(@name, 'checkboxsku')])[1]"));
     private final SelenideElement priceForRegular = $(By.xpath("(//*[@data-testid = 'price-for-regular'])[1]"));
-
+    private final SelenideElement deliveryInformationPopUpFirstName = $(By.xpath("//label[text() = 'First name']/..//input[@name = 'firstName']"));
+    private final SelenideElement deliveryInformationPopUpLastName = $(By.xpath("//label[text() = 'Last name']/..//input[@name = 'lastName']"));
+    private final SelenideElement deliveryInformationPopUpEmail = $(By.xpath("//label[text() = 'Email']/..//input[@name = 'email']"));
+    private final SelenideElement deliveryInformationPopUpPhone = $(By.xpath("//label[text() = 'Phone']/..//input[@name = 'phone']"));
+    private final SelenideElement deliveryInformationPopUpAddress = $(By.xpath("//label[text() = 'Address']/..//input[@name = 'address']"));
+    private final SelenideElement deliveryInformationPopUpAptSuiteFloor = $(By.xpath("//label[text() = 'Apt, Suite, Floor, etc']/..//input[@name = 'address2']"));
+    private final SelenideElement deliveryInformationPopUpCity = $(By.xpath("//label[text() = 'City']/..//input[@name = 'city']"));
+    private final SelenideElement deliveryInformationPopUpStateDropDown = $(By.xpath("//label[text() = 'State']/..//select[@name = 'state']"));
+    private final SelenideElement deliveryInformationPopUpCountryDropDown = $(By.xpath("//label[text() = 'Country']/..//select[@name = 'country']"));
+    private final SelenideElement deliveryInformationPopUpZip = $(By.xpath("//label[text() = 'Zip']/..//input[@name = 'zip']"));
+    private final SelenideElement deliveryInformationPopUpPlaceOrderButton = $(By.xpath("//*[text() = 'PLACE ORDER']"));
     private final SelenideElement priceForTrade = $(By.xpath("(//*[@data-testid= 'price-for-trade'])[1]"));
-
+    private final SelenideElement thankYouMessageTitle = $(By.xpath("//h2[text() = 'THANK YOU']"));
+    private final SelenideElement thankYouMessage = $(By.xpath("//h2[text() = 'THANK YOU']/../p"));
     private final SelenideElement priceForSale = $(By.xpath("(//*[@data-testid = 'price-for-sale'])[1]"));
+
+    private final SelenideElement swatchesModalKeepShoppingButton = $(By.xpath("//button[@data-testid = 'swatch-thank-you-keep-shopping']"));
 
     private final SelenideElement priceLabelSale = $(By.xpath("(//*[@data-testid = 'price-label-sale'])[1]"));
 
