@@ -34,10 +34,11 @@ Feature: Concierge PDP
       |62870050 LOAK|
       |10024793 BRNZ|
 
-  Scenario: Verify the PDP hero Image, zoom, line items
+  Scenario: Verify the PDP hero Image, zoom, line itemsVerify the PDP hero Image, zoom, line items
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
+    When I open product page with productId "prod18890296"
     When I click on the first project search result with parameters 'prod18890296''10024793 BRNZ'
     Then I Verify that 'PDP title' is present
     Then I Verify that '"Zoom" button' is present
@@ -52,7 +53,6 @@ Feature: Concierge PDP
     Then Verify that 'line item selections (Size, Finish and Qty) are present'
     Then Verify that 'smaller preview product picture is present on the left of line items'
     Then Verify that 'View in-stock Items and View Sale Items links are present'
-    Then I choose option 'Waxed Brown Oak/ Brass'
     Then I chose zero choose in line items
     Then Verify that 'text "Configure this item to view delivery information to" is present'
     Then Verify that 'text Swatch is present'
@@ -69,8 +69,8 @@ Feature: Concierge PDP
     Then Verify that 'text "This item can be returned or exchanged within 30 days of delivery" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     Then Verify that 'confirm that Add to Cart slider is present'
-    Then Project modal appears and has all the data for '10024793 BRNZ'
-    Then verify that another modal appears with all the data for '10024793 BRNZ'
+    Then Project modal appears and has all the data for '10024796'
+    Then verify that another modal appears with all the data for '10024796'
 
   Scenario: Verify In Stock functionality
     Given I log into Concierge as "associate"
@@ -113,7 +113,7 @@ Feature: Concierge PDP
       | items | skuID         |
       | SO    | 59810779 CTBZ |
       | BO    | 10024793 BRNZ |
-  @vimal
+
   Scenario: Verify the dropdown selection and add to cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -216,7 +216,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I go to Swatch Landing Page
     Then I verify that swatch landing page is displayed
-  @vimal
+
   Scenario: Verify the Postal code updates in PDP
     Given I log into Concierge as "associate"
     When I choose 'US' country
@@ -240,7 +240,7 @@ Feature: Concierge PDP
     When I navigate to "Sale"
     Then I choose a random sale item
     Then Verify that 'PDP has SALE and MEMBER prices'
-  @vimal
+
   Scenario Outline: Verify Mattress Recycling Fee
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

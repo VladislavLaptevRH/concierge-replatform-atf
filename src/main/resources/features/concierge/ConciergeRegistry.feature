@@ -28,7 +28,7 @@ Feature:Concierge Registry
     When I search registry by event type
     When I click on "SEARCH" registry button
     Then I verify that search result for registry search by "event type" is displayed
-  @vimal
+
   Scenario: Create A New Registry
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -42,7 +42,7 @@ Feature:Concierge Registry
     When I go to the created registry
     When I click on "SEARCH" registry button
     Then I verify that registry was created
-  @vimal
+
   Scenario: Edit registry
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -57,7 +57,7 @@ Feature:Concierge Registry
     When I click on continue registrant button
     When I click on "SAVE CHANGES" registry button
     Then I verify that registry was edited
-  @vimal
+
   Scenario: Delete registry
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

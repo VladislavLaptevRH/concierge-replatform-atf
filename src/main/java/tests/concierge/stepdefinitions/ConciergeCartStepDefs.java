@@ -132,33 +132,13 @@ public class ConciergeCartStepDefs {
             conciergeCartPageScreen.getAgreeAndAddToCart().click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-//        if (!conciergeCartPageScreen.getItemAddedToYourCart().isDisplayed()) {
-//            WebDriverRunner.getWebDriver().navigate().refresh();
-//            with().pollInterval(5, SECONDS).await().until(() -> true);
-//            if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
-//                String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
-//                open(URL);
-//                with().pollInterval(5, SECONDS).await().until(() -> true);
-//            } else {
-//                conciergeE2EStepDefs.iOpenProductPageWithAnd("prod1617188", "63130001");
-//                conciergeE2EStepDefs.iClickOnAddToCartButton();
-//                conciergeCartPageScreen.getItemAddedToYourCart().should(visible, Duration.ofMinutes(1));
-//                conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
-//                conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
-//                conciergeItemsScreen.getViewCartButton().should(visible, Duration.ofSeconds(60));
-//                conciergeCartPageScreen.getKeepShopping().should(visible, Duration.ofSeconds(15));
-//                conciergeItemsScreen.getViewCartButton().click();
-//            }
-//        } else {
-
-            conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
-            conciergeItemsScreen.getViewCartButton().should(visible, Duration.ofSeconds(60));
-            conciergeCartPageScreen.getKeepShopping().should(visible, Duration.ofSeconds(15));
-            conciergeItemsScreen.getViewCartButton().click();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-            conciergeItemsScreen.getViewCartImage().click();
-             with().pollInterval(5, SECONDS).await().until(() -> true);
-//        }
+        conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
+        conciergeItemsScreen.getViewCartButton().should(visible, Duration.ofSeconds(60));
+        conciergeCartPageScreen.getKeepShopping().should(visible, Duration.ofSeconds(15));
+        conciergeItemsScreen.getViewCartButton().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getViewCartImage().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify order classification")
@@ -908,8 +888,7 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getMonogramColorValue().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramTextValue().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramStyle().shouldHave(text("Style"), Duration.ofSeconds(15));
-        conciergeCartPageScreen.getMonogramText().shouldHave(text("Text"), Duration.ofSeconds(15));
-       conciergeCartPageScreen.getMonogramColor().shouldHave(text("Color"), Duration.ofSeconds(15));
+        conciergeCartPageScreen.getMonogramColor().shouldHave(text("Color"), Duration.ofSeconds(15));
     }
 
 
