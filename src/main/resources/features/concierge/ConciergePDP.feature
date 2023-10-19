@@ -113,7 +113,7 @@ Feature: Concierge PDP
       | items | skuID         |
       | SO    | 59810779 CTBZ |
       | BO    | 10024793 BRNZ |
-  @vimal
+
   Scenario: Verify the dropdown selection and add to cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -216,7 +216,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I go to Swatch Landing Page
     Then I verify that swatch landing page is displayed
-  @vimal
+
   Scenario: Verify the Postal code updates in PDP
     Given I log into Concierge as "associate"
     When I choose 'US' country
@@ -240,7 +240,7 @@ Feature: Concierge PDP
     When I navigate to "Sale"
     Then I choose a random sale item
     Then Verify that 'PDP has SALE and MEMBER prices'
-  @vimal
+
   Scenario Outline: Verify Mattress Recycling Fee
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -311,7 +311,7 @@ Feature: Concierge PDP
     Then I verify that project modal is displayed
     Then I click on button "ADD ALL TO PROJECT" in the cart
     Then I verify that project modal is displayed
-  @vlad
+
   Scenario: After clicking on Detail section it should be expanded with - symbol
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -329,7 +329,7 @@ Feature: Concierge PDP
     Then I Verify that 'sections "dimensions" and "details"' is present
     Then I click 'DETAILS section' on pdp page
     Then I Verify that 'Section should be expanded' is present
-  @vlad
+
   Scenario: If links are present inside the Details section, then it should be opened with resp pop up modal
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -347,7 +347,7 @@ Feature: Concierge PDP
     Then I click 'DETAILS section' on pdp page
     Then I Verify that 'Section should be expanded' is present
     Then I click 'link (If available) in DETAILS section' on pdp page
-  @vlad
+
   Scenario: Learn more about our Return Policy should be displayed by default which has Link for Return Policy
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -363,7 +363,7 @@ Feature: Concierge PDP
     Then I Verify that 'sections "dimensions" and "details"' is present
     Then I Verify that 'line items' is present
     Then I Verify that 'text "Learn more about our Return Policy"' is present
-  @vlad
+
   Scenario: If we enter invalid zipcode then error message should be displayed
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -382,7 +382,7 @@ Feature: Concierge PDP
     Then Verify that 'Verify the delivery information'
     And I change zip code on PDP page to "111"
     Then Verify that 'we enter invalid zipcode then error message should be displayed'
-  @vlad
+
   Scenario: After clicking on any image, redirected to PDP page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -394,7 +394,7 @@ Feature: Concierge PDP
     Then I Verify that 'PDP title' is present
     Then I click 'any product image in carousel' on pdp page
     Then Verify that 'User should be navigated to respective PDP'
-  @vlad
+
   Scenario: Yaml carousel update as per country selection
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -407,7 +407,7 @@ Feature: Concierge PDP
     When I choose 'CA' country
     And I change zip code on PDP page to "H1Y2B5"
     Then I verify that YAML carousel is displayed
-  @vlad
+
   Scenario: Related products : YML
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -416,7 +416,7 @@ Feature: Concierge PDP
     Then I Verify that 'PDP title' is present
     Then I Verify that 'line items' is present
     Then I verify that YAML carousel is displayed
-  @vlad
+
   Scenario: Uphostry, Material, and/or Finish Swatches
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -429,7 +429,7 @@ Feature: Concierge PDP
     Then Verify that 'Swatch image is present'
     Then Verify that 'line item for Swatch is present'
     Then Verify that 'text "Swatches are shipped at no charge" is present'
-  @vlad
+
   Scenario: Hero image, Line level product images
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -443,7 +443,6 @@ Feature: Concierge PDP
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'images carousel is present below Hero image' is present
 
-@vlad
   Scenario: Product details
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -461,3 +460,105 @@ Feature: Concierge PDP
     Then I Verify that '"add to cart" and "add to project" buttons' is present
     Then I Verify that 'text "Learn more about our Return Policy"' is present
     Then I Verify that '"footer" in PDP' is present
+
+  @vlad
+  Scenario: PDP Swatch Landing Page
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Living'
+    Then I navigate to sub menu 'Fabric Seating'
+    Then I navigate to gallery 'Upholstery Swatches'
+    Then Verify that 'the page is loading'
+    Then Verify that 'CARE INSTRUCTIONS link is present'
+    Then Verify that 'COMPLIMENTARY SWATCHES floater is present and moving as user scrolls down'
+    Then Verify that 'after selecting color ORDER SWATCHES button is activated'
+    Then Verify that 'after clicking ORDER SWATCHES user sees DELIVERY pop up'
+    Then Verify that 'form has the fields: First Name, Last Name, Email, Phone, Address,Apt, suite etc, City, State, Zip, Country Dropdown, Place Order Button'
+    Then Verify that 'fill in all fields'
+    Then Verify that 'after placing order Thank You Message is displayed with text Your order has been placed..'
+    Then Verify that 'Keep Shopping button is present'
+    Then Verify that 'clicking Keep Shopping button closes the Thank you modal and user stays on the Swatches page'
+
+  @vlad
+  Scenario: Unlimited furniture items
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "Unlimited furniture items" from search field
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'PDP title' is present
+    Then I chose the '1' line item selections one by one
+    Then Verify that 'text "Unlimited Furniture Delivery" is present'
+
+  @vlad
+  Scenario: Product name should be displayed on top of the section
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'PDP title' is present
+
+  @vlad
+  Scenario: After clicking on the link istock modal should be opened
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "60450996 BLNL" from search field
+    When I click on "view in stock items" link
+    Then Verify that "In Stock modal" 'opens'
+
+  @vlad
+  Scenario: Also available/Explore links should be dispalyed as per the product with > symbol
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'PDP title' is present
+    Then I Verify that 'the "Hero" Image' is present
+    Then I Verify that '"Zoom" button' is present
+    Then I Verify that 'images carousel is present below Hero image' is present
+    Then I Verify that 'line items' is present
+    Then I Verify that '"add to cart" and "add to project" buttons' is present
+    Then I Verify that 'text "Learn more about our Return Policy"' is present
+    Then I Verify that '"footer" in PDP' is present
+    Then I Verify that 'wording also available in' is present
+
+  @vlad
+  Scenario: Details/Dimension sction should be displayed as per product with + symbol
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'PDP title' is present
+    Then I Verify that 'the "Hero" Image' is present
+    Then I Verify that '"Zoom" button' is present
+    Then I Verify that 'images carousel is present below Hero image' is present
+    Then I Verify that 'line items' is present
+    Then I Verify that '"add to cart" and "add to project" buttons' is present
+    Then I Verify that 'text "Learn more about our Return Policy"' is present
+    Then I Verify that '"footer" in PDP' is present
+    Then I Verify that 'wording also available in' is present
+    Then I Verify that 'sections "dimensions" and "details"' is present
+
+  @vlad
+  Scenario: After configuring the options SKU ID should be disaplayed with ITEM #
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'PDP title' is present
+    Then I chose the '1' line item selections one by one
+    Then I verify that text item# and SKU is present
