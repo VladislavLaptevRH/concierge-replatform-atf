@@ -119,7 +119,7 @@
                     <properties>
                         <property>
                             <name>dataproviderthreadcount</name>
-                            <value>3</value>
+                            <value>4</value>
                         </property>
                     </properties>
                     <suiteXmlFiles>TestSuite/TestNG.xml</suiteXmlFiles>
