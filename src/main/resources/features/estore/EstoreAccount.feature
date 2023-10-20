@@ -1,4 +1,4 @@
-@estoreTestRun
+@estoreParallelTestRun
 Feature: Estore account
 
   Scenario: Verify the personal Info displayed after Sign in - First, last name and email
@@ -30,7 +30,7 @@ Feature: Estore account
     When I update personal information for account
     When I click on estore update personal information data button
     Then I verify that by updating personal information, application should get saved the entered details
-#
+
   Scenario: Verify that after updating account profile, application should display popup with 'your profile has been updated' message
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer

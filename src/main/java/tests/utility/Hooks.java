@@ -60,9 +60,13 @@ public class Hooks {
      * This method get properties from application.properties file
      */
     private void ConfigFileReader() {
-        profile = System.getenv("ENVIRONMENT");
-        cookie = System.getenv("ENDPOINT");
-        country = System.getenv("COUNTRY");
+//        profile = System.getenv("ENVIRONMENT");
+//        cookie = System.getenv("ENDPOINT");
+//        country = System.getenv("COUNTRY");
+
+        profile = "stg2";
+        country = "US";
+        cookie = "contentfix";
 
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
@@ -143,12 +147,12 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for tests.concierge
      */
-    @Before("@estoreTestRun or @estoreCriticalPathTestRun")
+    @Before("@estoreTestRun or @estoreCriticalPathTestRun or @estoreParallelTestRun")
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
         setUPWebDriver(eStoreURL);
-//        setupChromeArguments();
+        setupChromeArguments(eStoreURL);
     }
 
     /**
@@ -185,14 +189,12 @@ public class Hooks {
         Configuration.timeout = 45000;
         Configuration.reportsFolder = "target/screenshots";
         Configuration.browserCapabilities = options;
-        open(url);
-        currentUrl = WebDriverRunner.url();
     }
 
     /**
      * Set up chrome arguments for Jenkins run
      */
-    public void setupChromeArguments() {
+    public void setupChromeArguments(String url) {
         ChromeOptions options = new ChromeOptions();
         WebDriverManager.chromedriver().setup();
         options.addArguments("--remote-allow-origins=*");
@@ -215,6 +217,9 @@ public class Hooks {
             e.printStackTrace();
         }
         WebDriverRunner.setWebDriver(driver);
+
+        open(url);
+        currentUrl = WebDriverRunner.url();
     }
 
     /**
@@ -236,7 +241,7 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After("@conciergeTestRun or @conciergeCriticalPathTestRun or @estoreTestRun or @estoreCriticalPathTestRun or @target/rerun.txt")
+    @After("@conciergeTestRun or @conciergeCriticalPathTestRun or @estoreTestRun or @estoreCriticalPathTestRun or @estoreParallelTestRun or @target/rerun.txt")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
 
