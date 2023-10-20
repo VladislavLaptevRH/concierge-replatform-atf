@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import tests.concierge.stepdefinitions.AbstractStepDefs;
+import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 
@@ -25,6 +26,8 @@ public class EstoreCGStepDefs {
     EstoreCGScreen estoreCGScreen = new EstoreCGScreen();
     EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
     AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
+
+    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
     EstoreHomePage estoreHomePage = new EstoreHomePage();
 
@@ -277,6 +280,7 @@ public class EstoreCGStepDefs {
 
     @Then("I verify that PG title, description text, member discount message is displayed")
     public void iVerifyThatPGTitleDescriptionTextMemberDiscountMessageIsDisplayed() {
+        generalStepDefs.waitForJSandJQueryToLoad();
         estoreCGScreen.verifyThatSeatinCollectionTitleIsDisplayedOnCG();
         estoreCGScreen.verifyThatMemberDiscountMessageIsDisplayedOnCG();
         estoreCGScreen.verifyThatCGDescriptionIsDisplayed();

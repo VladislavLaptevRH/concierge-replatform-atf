@@ -43,7 +43,7 @@ public class EstoreCGScreen {
 
     private SelenideElement collectionModalProductImage = $(By.xpath("//div[@data-cmp='cardImages']//div[@id='component-rh-image_wrapper']"));
 
-    private SelenideElement seatingCollectionTitle = $(By.xpath("//span[text()='Seating Collections']"));
+    private SelenideElement seatingCollectionTitle = $(By.xpath("//span[text()='Seating  collections']"));
 
     private SelenideElement singleGridView = $(By.xpath("//div[contains(@class,'cg-slide-12 MuiGrid-item MuiGrid-grid-xs-12')]"));
 
@@ -97,7 +97,7 @@ public class EstoreCGScreen {
     }
 
     public void verifyThatSeatinCollectionTitleIsDisplayedOnCG() {
-        seatingCollectionTitle.should(Condition.visible, Duration.ofSeconds(12));
+        seatingCollectionTitle.should(Condition.visible, Duration.ofSeconds(18));
     }
 
     public void verifyThatMemberDiscountMessageIsDisplayedOnCG() {
