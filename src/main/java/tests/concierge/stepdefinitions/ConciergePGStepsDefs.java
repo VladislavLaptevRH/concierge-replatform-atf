@@ -63,18 +63,22 @@ public class ConciergePGStepsDefs {
     public void stepByStepINavigateTo(String collection) {
         if(conciergePGScreen.getTopNavGalleryByName(collection).isDisplayed()){
             conciergePGScreen.getTopNavGalleryByName(collection).click();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
         } else {
             if(conciergePGScreen.getTopNavSubManuByName(result).isDisplayed()){
                 conciergePGScreen.getTopNavSubManuByName(result).click();
+                with().pollInterval(5, SECONDS).await().until(() -> true);
             } else {
                 $(By.xpath("//span[text() = '" + collection + "']")).click();
             }
         }
         with().pollInterval(5, SECONDS).await().until(() -> true);
         if(!$(By.xpath("(//*[contains(@class, 'MuiTypography-body1')])[1]")).isDisplayed()){
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
         if(!$(By.xpath("(//*[contains(@class, 'MuiTypography-body1')])[1]")).isDisplayed()){
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
         $(By.xpath("(//*[contains(@class, 'MuiTypography-body1')])[1]")).shouldBe(visible, Duration.ofSeconds(30));
@@ -550,8 +554,10 @@ public class ConciergePGStepsDefs {
             {
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
+            with().pollInterval(7, SECONDS).await().until(() -> true);
                 break;
             case "Price High to Low and verify price is sorted":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 $(By.xpath("//*[text() = 'sort']")).click();
                 $(By.xpath("//*[text() = 'Featured']")).click();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -634,7 +640,7 @@ public class ConciergePGStepsDefs {
 
     @When("I verify that {string} title is present in PG top left")
     public void iVerifyThatTitleIsPresentInPGTopLeft(String title) {
-        $(By.xpath("//*[contains(@class, 'MuiTypography-body1') and text() = '" + title + "']")).should(visible, Duration.ofSeconds(10));
+        $(By.xpath("//*[contains(@class, 'MuiTypography') and text() = '" + title + "']")).should(visible, Duration.ofSeconds(10));
     }
 
    @Then("I Verify i return to {string} PG page")

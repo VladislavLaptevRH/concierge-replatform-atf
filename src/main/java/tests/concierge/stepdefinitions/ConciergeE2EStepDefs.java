@@ -1269,6 +1269,8 @@ public class ConciergeE2EStepDefs {
     public void iNavigateTo(String value) {
         String URL = Hooks.conciergeBaseURL + "/search/results.jsp?Ntt=" + value + "&Ns=product.sale%7C1&clientrender=true";
         open(URL);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @When("I open product page with {string} and {string}")

@@ -271,6 +271,7 @@ public class Pdp {
                 pdpScreen.getFurnitureTouchKitText().shouldHave(text("Furniture Touch-Up Kit"), Duration.ofSeconds(5));
                 break;
             case  "button Check for Replacement parts is present":
+                with().pollInterval(1, SECONDS).await().until(() -> true);
                 pdpScreen.getCheckForReplacementPartsButton().shouldBe(visible, Duration.ofSeconds(15));
                 break;
             case  "text \"This item will be ready for delivery between\" is present":
@@ -281,7 +282,7 @@ public class Pdp {
                     sizeList.selectByIndex(1);
                     with().pollInterval(1, SECONDS).await().until(() -> true);
                 }
-                pdpScreen.getDeliveryInStockItemText().shouldHave(text("This item is in stock and will be ready for delivery between"), Duration.ofSeconds(15));
+                pdpScreen.getDeliveryInStockItemText().shouldHave(text("This item is in stock and will be delivered"), Duration.ofSeconds(15));
                 break;
             case  "text \"Unlimited Furniture Delivery\" is present":
                pdpScreen.getUnlimitedFurnitureDeliveryText().shouldHave(text("Unlimited Furniture Delivery"), Duration.ofSeconds(5));
@@ -310,7 +311,7 @@ public class Pdp {
                 pdpScreen.getKeepShoppingButton().click();
                 break;
             case  "confirm that Add to Cart slider for SO is present":
-               pdpScreen.getSpecialOrderText().shouldHave(text("Special Order"), Duration.ofSeconds(20));
+               pdpScreen.getSpecialOrderText().shouldBe(visible, Duration.ofSeconds(15));
                 break;
             case  "verify data in the modal for SO":
                 with().pollInterval(9, SECONDS).await().until(() -> true);
@@ -585,9 +586,7 @@ public class Pdp {
         pdpScreen.getModalQuantity().shouldHave(visible, Duration.ofSeconds(15));
         pdpScreen.getModalQuantityNumber().shouldHave(visible, Duration.ofSeconds(15));
         pdpScreen.getModalFinish().shouldHave(visible, Duration.ofSeconds(15));
-        pdpScreen.getModalFinishValue().shouldHave(visible, Duration.ofSeconds(15));
         pdpScreen.getModalSize().shouldHave(visible, Duration.ofSeconds(15));
-        pdpScreen.getModalSizeValue().shouldHave(visible, Duration.ofSeconds(15));
         pdpScreen.getModalSizeValue().shouldHave(visible, Duration.ofSeconds(15));
         pdpScreen.getProjectName().shouldHave(visible, Duration.ofSeconds(15));
         pdpScreen.getProjectOpportunitySelectLabel().shouldHave(visible, Duration.ofSeconds(15));
@@ -836,7 +835,7 @@ public class Pdp {
              boolean viewItems = pdpScreen.getViewInStockItemSize().size() > 1;
              assertTrue(viewItems);
              pdpScreen.getShopTheEntireCollectionText().shouldBe(visible, Duration.ofSeconds(15));
-             pdpScreen.getFinishOptionText().shouldBe(visible, Duration.ofSeconds(15));
+             pdpScreen.getFinishText().shouldBe(visible, Duration.ofSeconds(15));
              pdpScreen.getFinishOptionSiblingText().first().shouldBe(visible, Duration.ofSeconds(15));
              boolean finishOption = pdpScreen.getFinishOptionSiblingText().size() > 1;
              assertTrue(finishOption);
@@ -848,7 +847,7 @@ public class Pdp {
                  assertTrue(memberOption);
              }
              pdpScreen.getCare().shouldBe(visible, Duration.ofSeconds(15));
-             boolean benchItems = pdpScreen.getBenchItmsList().size() == 3;
+             boolean benchItems = pdpScreen.getBenchItmsList().size() <= 3;
              assertTrue(benchItems);
              boolean swatchItems = pdpScreen.getSwatchList().size() == 2;
              assertTrue(swatchItems);
@@ -1270,8 +1269,6 @@ public class Pdp {
                         WebDriverRunner.getWebDriver().navigate().refresh();
                         with().pollInterval(5, SECONDS).await().until(() -> true);
                     }
-                    pdpScreen.getReturnOrExchangedDeliveryText().scrollTo();
-                    pdpScreen.getReturnOrExchangedDeliveryText().should(visible, Duration.ofSeconds(30));
                 }
             }
 

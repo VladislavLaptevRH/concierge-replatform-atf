@@ -15,7 +15,7 @@ Feature: Concierge Trade
     When I choose client who is a "Trade"
     When I click on checkout button
     Then I verify that tax exempt checkbox is unchecked by default for trade client
-  @vimal
+
   Scenario: Verify Trade Prices for PDP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -28,7 +28,7 @@ Feature: Concierge Trade
     And I click on no thanks button
     When I choose client who is a "Trade"
     Then I verify trade prices for "PDP"
-  @vimal
+
   Scenario: Verify Trade Prices for CP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -41,7 +41,7 @@ Feature: Concierge Trade
     And I click on no thanks button
     And I choose client who is a "Trade"
     Then I verify trade prices for "PDP"
-  @vimal
+
   Scenario: Verify Trade Prices for PG
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -52,7 +52,7 @@ Feature: Concierge Trade
     When I choose client who is a "Trade"
     When I open product page with "prod1617188" and "63130001"
     Then I verify trade prices for "PG"
-  @vimal
+
   Scenario: Verify trade prices for project page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
