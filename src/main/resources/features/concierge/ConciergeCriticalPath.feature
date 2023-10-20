@@ -157,7 +157,7 @@ Feature: Concierge Critical Path
     When I choose country for concierge from footer
     When I add item to cart via API
     When I clear all orders form the cart
-  @vimal
+ 
   Scenario: Monogram Edit / Remove / Add
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -458,7 +458,7 @@ Feature: Concierge Critical Path
     When I choose country for concierge from footer
     When user clicks on gallery button from header
     Then user verifies list of galleries which have default value "5: Newport Beach"
-  @vimal
+
   Scenario Outline: Major CCs
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -629,7 +629,7 @@ Feature: Concierge Critical Path
       | 61970975 TEAK |
       | 62870050 LOAK |
      | 10024793 BRNZ |
-  @vimal
+
   Scenario: Verify the PDP hero Image, zoom, line itemsVerify the PDP hero Image, zoom, line items
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -698,7 +698,7 @@ Feature: Concierge Critical Path
 #    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
 #    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
 #    Then Verify that "Sale modal" 'has an item can be added to project from modal'
-  @vimal
+
   Scenario Outline: Availability, Delivery and Returns messaging for <items>
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -831,13 +831,14 @@ Feature: Concierge Critical Path
     Then I click on zip code and change it to 'SW1A1AA'
     Then I verify that zip code in PDP is 'SW1A1AA'
     Then Verify that 'Confirm that PDP has price in GBP'
-  @Vimal
+  
   Scenario: Sale PDP: Regular/Member/Final Price validation
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I choose country for concierge from footer
-    When I navigate to "Sale"
-    Then I choose a random sale item
+    Then I navigate to menu 'SALE'
+    Then I navigate to sub menu 'Bed'
+    Then I navigate to gallery 'Beds'
     Then Verify that 'PDP has SALE and MEMBER prices'
 
   Scenario Outline: Verify Mattress Recycling Fee
@@ -920,7 +921,7 @@ Feature: Concierge Critical Path
 #      | Furniture | Study                 | Desk Chairs                   | RH BABY & CHILD | BC               |
 #      | Lighting  | Table                 | Shades                        | RH TEEN         | TN               |
       | Storage | Wall    | Memory Boards | RH TEEN | TN               |
-  @vimal
+
   Scenario: Checking Faucets in Collection PG
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

@@ -148,9 +148,6 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify the product price as per the Ship to selection for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
-
-    #Author: Vimalan
-    #Date: 09 Oct
   Scenario: Verify View On Sale Options
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer

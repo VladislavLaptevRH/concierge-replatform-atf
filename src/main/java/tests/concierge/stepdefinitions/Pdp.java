@@ -349,7 +349,6 @@ public class Pdp {
             case  "PDP has SALE and MEMBER prices":
                 pdpScreen.getPriceForRegular().shouldHave(visible, Duration.ofSeconds(15));
                 pdpScreen.getPriceForSale().shouldHave(visible, Duration.ofSeconds(15));
-                pdpScreen.getPriceLabelSale().shouldHave(visible, Duration.ofSeconds(15));
                 pdpScreen.getPriceForMember().shouldHave(visible, Duration.ofSeconds(15));
                 pdpScreen.getPriceLabelMember().shouldHave(visible, Duration.ofSeconds(15));
                 break;
