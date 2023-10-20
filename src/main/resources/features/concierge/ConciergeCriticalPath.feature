@@ -157,7 +157,7 @@ Feature: Concierge Critical Path
     When I choose country for concierge from footer
     When I add item to cart via API
     When I clear all orders form the cart
-  @vimal
+ 
   Scenario: Monogram Edit / Remove / Add
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -831,7 +831,7 @@ Feature: Concierge Critical Path
     Then I click on zip code and change it to 'SW1A1AA'
     Then I verify that zip code in PDP is 'SW1A1AA'
     Then Verify that 'Confirm that PDP has price in GBP'
-  @vimal
+  
   Scenario: Sale PDP: Regular/Member/Final Price validation
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
