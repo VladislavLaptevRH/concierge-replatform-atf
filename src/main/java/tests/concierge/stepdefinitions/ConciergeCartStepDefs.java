@@ -959,12 +959,12 @@ public class ConciergeCartStepDefs {
     public void iVerifyThatMonogramWasRemoved() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getPersonalizationText().shouldNotBe(visible, Duration.ofMinutes(1));
-        conciergeCartPageScreen.getEditedMonogramStyleValue().should(visible, Duration.ofSeconds(15));
-        conciergeCartPageScreen.getEditedMonogramColorValue().should(visible, Duration.ofSeconds(15));
-        conciergeCartPageScreen.getEditedMonogramTextValue().should(visible, Duration.ofSeconds(15));
-        conciergeCartPageScreen.getEditedMonogramStyle().shouldHave(text("Style"), Duration.ofSeconds(15));
-        conciergeCartPageScreen.getEditedMonogramText().shouldHave(text("Text"), Duration.ofSeconds(15));
-        conciergeCartPageScreen.getEditedMonogramColor().shouldHave(text("Color"), Duration.ofSeconds(15));
+        conciergeCartPageScreen.getEditedMonogramStyleValue().shouldNotBe(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getEditedMonogramColorValue().shouldNotBe(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getEditedMonogramTextValue().shouldNotBe(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getEditedMonogramStyle().shouldNotBe(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getEditedMonogramText().shouldNotBe(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getEditedMonogramColor().shouldNotBe(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that availability, Delivery and Returns messaging in cart")
