@@ -2,6 +2,7 @@
 
 Feature: Order history
 
+  @estoreParallelTestRun
   Scenario: Verify accessing order history - orders displayed for registered user
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -9,6 +10,7 @@ Feature: Order history
     When I click on estore order history
     Then I verify that estore order history page is displayed
 
+  @estoreParallelTestRun
   Scenario: Verify no Orders display for new registered user - verify the copy provided
     Given I log into eStore as "notregistered" user
     When I choose country for eStore from footer
@@ -16,6 +18,7 @@ Feature: Order history
     When I click on estore order history
     Then I verify that no orders for new registered user
 
+  @estoreTestRun
   Scenario: Verify placing a new order and see it listed in Order History - logged user
     Given I log into eStore as "userWithSavedMasterCardVisa" user
     When I choose country for eStore from footer
@@ -39,6 +42,7 @@ Feature: Order history
     When I click on details and tracking order history
     Then I verify that a new order listed in order history
 
+  @estoreParallelTestRun
   Scenario: Verify the fields - ORDER DATE, EST. ORDER TOTAL, ORDER NUMBER,	SHIPPED TO,	ORDER DESCRIPTION
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -50,6 +54,7 @@ Feature: Order history
     When I click on details and tracking order history
     Then I verify the fileds for estore order history
 
+  @estoreParallelTestRun
   Scenario: Verify the total order count displayed at the bottom of the list
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -57,6 +62,7 @@ Feature: Order history
     When I click on estore order history
     Then I verify the estore total order count displayed at the bottom of the list
 
+  @estoreParallelTestRun
   Scenario: Verify the pagination for the order history
     Given I log into eStore as "userWithSavedMasterCardVisa" user
     When I choose country for eStore from footer
@@ -64,6 +70,7 @@ Feature: Order history
     When I click on estore order history
     Then I verify that the pagination for the order history is displayed
 
+  @estoreParallelTestRun
   Scenario: Verify the Billing summary link for order - Order to be in shipped/delivered state
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -71,14 +78,15 @@ Feature: Order history
     When I click on estore order history
     Then I verify the billing summary link for order history
 
+  @estoreParallelTestRun
   Scenario: Verify the Details and Tracking link for the order placed
-
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I click on estore my account icon
     When I click on estore order history
     Then I verify the details and tracking link for the order placed
 
+  @estoreParallelTestRun
   Scenario: Verify the CW order number displayed once the order is Available
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -86,6 +94,7 @@ Feature: Order history
     When I click on estore order history
     Then I verify the CW order number
 
+  @estoreTestRun
   Scenario: Verify the status order processing while the order is still processing
     Given I log into eStore as "member" user
     When I choose country for eStore from footer

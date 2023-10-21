@@ -218,6 +218,9 @@ public class Hooks {
         }
         WebDriverRunner.setWebDriver(driver);
 
+        Configuration.pageLoadTimeout = 60000;
+        Configuration.timeout = 45000;
+
         open(url);
         currentUrl = WebDriverRunner.url();
     }
