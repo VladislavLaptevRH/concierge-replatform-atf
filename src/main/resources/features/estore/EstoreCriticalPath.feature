@@ -718,6 +718,7 @@ Feature: Estore critical path
     Then I verify that billing address was edited
 
 #Order replacement
+  @vimal
   Scenario: Order replacement
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -748,7 +749,6 @@ Feature: Estore critical path
     When I execute payment with credit card on estore
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
-    When I click on order details button
     And I verify billing and shipping address are correct
 
 #Membership page and functionality
@@ -786,8 +786,8 @@ Feature: Estore critical path
     When I click on estore my account icon
     When I navigate to the member tab
     Then I verify that email address displayed in membership page
-
-  Scenario: Memberdship - Verfiy membership FAQa link
+  @vimal
+  Scenario: Membership - Verfiy membership FAQa link
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I click on my account button if page is not loaded
@@ -868,6 +868,7 @@ Feature: Estore critical path
     Then I verify that can logout without any issue
 
 #Search
+  @vimal
   Scenario: Search - Verify count of search result and product
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -886,8 +887,7 @@ Feature: Estore critical path
     When I choose country for eStore from footer
     When I go to estore item "sofa" from search field
     Then I verify in stock facet selection
-
-
+    @vimal
   Scenario: Search - Place order: search with any key term, select high to low. navigate to first product PDP
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -929,7 +929,7 @@ Feature: Estore critical path
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
 
- #Trade
+  @vimal
   Scenario: Verify the trade login and checkout
     Given I log into eStore as trade
     When I choose country for eStore from footer
@@ -947,6 +947,7 @@ Feature: Estore critical path
     Then I verify that estore thank you page is displayed
 
 #Contract
+  @vimal
   Scenario: Verify the contract login and checkout
     Given I log into eStore as contract
     When I choose country for eStore from footer
@@ -1012,19 +1013,22 @@ Feature: Estore critical path
 #    Given I go to estore guesthouse home page
 #    When I click on estore guesthouse rooftop pool page
 #    Then I verify that estore guesthouse rooftop pool page is displayed
-
+  @vimal
   Scenario: Verify Monogrammed products
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
-    When I click on add monogram checkbox from pdp on eStore
-    When I add monogram to product on eStore
-    Then I verify that monogram was added for pdp on eStore
+    When I open product page with "prod19500002" and "17050042" with "WHEA" for estore
+    Then I chose the '1' line item selections one by one
+    When I click on add monogram checkbox
+    When I choose monogram properties
     When I click on add to cart estore button
     When I click on view cart estore button
-    Then I verify monogram was added to cart for eStore
-    #verify mono on pdp -> add to cart-> verify the mono in cart
-
+    Then I verify that monogram was added
+    When I edit monogram
+    Then I verify that monogram was edited
+    When I remove monogram
+    Then I verify that monogram was removed
+  @vimal
   Scenario: Verify user is able to edit Monogram product incart
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer

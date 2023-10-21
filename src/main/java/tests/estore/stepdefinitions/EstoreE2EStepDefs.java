@@ -528,13 +528,13 @@ public class EstoreE2EStepDefs {
 
     @When("I click on same as estore shipping address checkbox")
     public void iClickOnSameAsShippingAddressCheckbox() {
-        try {
-            $(By.xpath("//span[text()='Same as shipping address']")).should(Condition.and("Exist ,appear, interactable",
-                    exist, appear, interactable), Duration.ofSeconds(15));
-            $(By.xpath("//span[text()='Same as shipping address']")).click(ClickOptions.usingJavaScript());
-        } catch (
-                com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Same as shipping address checkbox is not displayed");
+        if(estoreAddressScreen.getSameAsShippingAddress().is(visible)) {
+                estoreAddressScreen.getSameAsShippingAddress().should(Condition.and("Exist ,appear, interactable",
+                        exist, appear, interactable), Duration.ofSeconds(15));
+                estoreAddressScreen.getSameAsShippingAddress().click(ClickOptions.usingJavaScript());
+        }
+        else{
+            estoreAddressScreen.getSameAsShippingAddress().shouldNotBe(interactable);
         }
     }
 

@@ -63,10 +63,13 @@ public class EstoreCartPageStepDefs {
     @When("I click on view cart estore button")
     public void iClickOnViewCartButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(6, SECONDS).await().until(() -> true);
         estoreItemPage.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(80));
+        with().pollInterval(6, SECONDS).await().until(() -> true);
         estoreItemPage.getViewCartButton().should(visible, Duration.ofSeconds(60));
         estoreCartPage.getKeepShopping().should(visible, Duration.ofSeconds(15));
         estoreItemPage.getViewCartButton().click(ClickOptions.usingJavaScript());
+        with().pollInterval(6, SECONDS).await().until(() -> true);
     }
 
     @When("I choose estore order classification")
