@@ -34,10 +34,6 @@ public class EstoreLoginStepDefs {
     public boolean iLogIntoEStoreAs(String arg0) {
         try {
             loginAsRole(arg0);
-//            if (Hooks.profile.equals("stg3")) {
-//                
-//                $(By.xpath("//*[text()='ACCEPT ALL']")).click();
-//            }
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             return true;
         }
@@ -126,6 +122,14 @@ public class EstoreLoginStepDefs {
                 USER_ID_STG4 = "eb0c0066-ef64-4218-bb73-23753fe2fc2d";
                 USER_ID_STG2 = "7bb560b2-cda2-4b2e-9ab5-5788a88e34da";
                 userEmail = "mastercard@rh.com";
+            }
+
+            if (accountRole.equals("cartIconOnTheHomePage")) {
+                estoreLoginPage.getUsernameField().setValue("carticonhomepage@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty@123");
+                USER_ID_STG4 = "eb0c0066-ef64-4218-bb73-23753fe2fc2d";
+                USER_ID_STG2 = "1b816371-2099-428f-b28c-4b2fcf18590b";
+                userEmail = "carticonhomepage@rh.com";
             }
 
             if (accountRole.equals("regular")) {

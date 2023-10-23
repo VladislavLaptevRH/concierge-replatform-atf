@@ -59,6 +59,7 @@ public class EstoreHomePageStepDefs {
     public void iVerifyOnSearchIcon() {
         estoreHomePage.getSearchIcon().should(Condition.visible, Duration.ofSeconds(30));
     }
+
     @And("I Type product name {string}")
     public void iTypeProductName(String arg0) {
         estoreHomePage.getSearchInputField().should(Condition.visible, Duration.ofSeconds(30));
@@ -185,4 +186,24 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getHeaderCartButton().should(Condition.visible, Duration.ofSeconds(20));
     }
 
+    @Then("I verify that hamburger icon is displayed for the main menu")
+    public void iVerifyThatHamburgerIconIsDisplayedForTheMainMenu() {
+        estoreHomePage.verifyThatHamburgerIconIsDisplayed();
+    }
+
+    @Then("I verify that cart page icon is displayed")
+    public void iVerifyThatCartPageIconIsDisplayed() {
+        estoreHomePage.verifyThatCartButtonIconIsDisplayed();
+    }
+
+    @And("I verify that cart page icon have the item count next to the mini cart icon")
+    public void iVerifyThatCartPageIconHaveTheItemCountNextToTheMiniCartIcon() {
+        assertTrue("Verify that cart page icon have the item count next to the mini cart icon",
+                estoreHomePage.getCountOfItemFromCart() > 0);
+    }
+
+    @Then("I verify that my account icon is displayed")
+    public void iVerifyThatMyAccountIconIsDisplayed() {
+        estoreHomePage.verifyThatAccountIconIsDisplayed();
+    }
 }
