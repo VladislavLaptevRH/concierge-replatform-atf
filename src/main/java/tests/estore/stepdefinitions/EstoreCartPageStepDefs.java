@@ -349,14 +349,12 @@ public class EstoreCartPageStepDefs {
     @Then("I verify membership estore banner for {string}")
     public void iVerifyMembershipEstoreBannerFor(String arg0) {
         if (arg0.equals("nonmember user")) {
-
-            $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(interactable, Duration.ofSeconds(40));
-            $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible, Duration.ofSeconds(40));
+            $(By.xpath("//*[text()='JOIN NOW']")).should(interactable, Duration.ofSeconds(40));
+            $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(40));
             $(By.xpath("//*[contains(text(),'Join the RH Members Program for')]")).should(visible, Duration.ofSeconds(40));
         }
         if (arg0.equals("member user")) {
-
-            $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible, Duration.ofSeconds(40));
+            $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(40));
             $(By.xpath("//*[contains(text(),'Automation, ')]")).should(visible, Duration.ofSeconds(30));
         }
     }

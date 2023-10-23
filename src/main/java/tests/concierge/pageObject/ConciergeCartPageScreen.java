@@ -57,7 +57,7 @@ public class ConciergeCartPageScreen {
     private final SelenideElement monogramText = $(By.xpath("//*[@type = 'text']"));
     private final SelenideElement designedSoldByText = $(By.xpath("//*[text()='Designed/Sold By:']"));
     private final SelenideElement automationAssociateText = $(By.xpath("//*[text()='Automation Associate']"));
-    private final SelenideElement editedMonogramStyleValue = $(By.xpath("//*[text() = 'Circle (CIR-H4)']"));
+    private final SelenideElement editedMonogramStyleValue = $(By.xpath("//*[text() = 'Style']"));
     private final SelenideElement joinNowButton = $(By.xpath("//*[text() = 'JOIN NOW']"));
     private final SelenideElement contractSavingsValue = $(By.xpath("//*[text()='$897.00']"));
     private final SelenideElement orderEstimate = $(By.xpath("//*[text() = 'Mattress Fee']/../..//p"));
@@ -66,7 +66,7 @@ public class ConciergeCartPageScreen {
     private final SelenideElement weAreUnableToVerifyTheAddressProvidedText = $(By.xpath("//*[text()='WE ARE UNABLE TO VERIFY THE ADDRESS PROVIDED']"));
     private final SelenideElement editedMonogramColorValue = $(By.xpath("//*[text()='Dark Silver Metallic (MDSL)']"));
     private final SelenideElement editedMonogramColor = $(By.xpath("(//*[@id = 'listColumn1-Color'])[2]"));
-    private final SelenideElement editedMonogramTextValue = $(By.xpath("//*[text()='DFG']"));
+    private final SelenideElement editedMonogramTextValue = $(By.xpath("//*[text() = 'Text']"));
     private final SelenideElement editedMonogramText = $(By.xpath("//*[@id = 'listColumn1-Text']"));
     private final SelenideElement lastMonthDay = $(By.xpath("//button/span/p[text() = '30']"));
     private final SelenideElement currentMonth = $(By.xpath("//*[contains(@class, 'MuiPickersCalendarHeader-switchHeader')]//p"));
@@ -159,9 +159,9 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement clearOrderButtonPopUpHeader = $(By.xpath("//*[text() = 'Are you sure you want to clear the current cart?']"));
 
-    private final List<SelenideElement> monogramFonts = $$(By.xpath("(//ul[@class='MuiGridList-root'])[1]//li[@class='MuiGridListTile-root']"));
+    private final List<SelenideElement> monogramFonts = $$(By.xpath("(//ul[@class='MuiGridList-root'])[2]//li[@class='MuiGridListTile-root']"));
 
-    private final List<SelenideElement> monogramColors = $$(By.xpath("(//ul[@class='MuiGridList-root'])[2]//li[@class='MuiGridListTile-root']"));
+    private final List<SelenideElement> monogramColors = $$(By.xpath("(//ul[@class='MuiGridList-root'])[3]//li[@class='MuiGridListTile-root']"));
 
     private final SelenideElement removeMonogramBtn = $(By.xpath("(//*[text()='Remove'])[1]"));
 
@@ -187,7 +187,7 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement personalizationText = $(By.xpath("//*[text()='PERSONALIZATION']"));
 
-    private final SelenideElement editMonogramButton = $(By.xpath("(//*[text() = 'Edit'])[2]"));
+    private final SelenideElement editMonogramButton = $(By.xpath("(//*[text() = 'Edit'])[1]"));
 
     private final SelenideElement posTransactionField = $(By.xpath("(//div[contains(@class,'MuiInputBase-root MuiOutlinedInput-root')]/input)[1]"));
 

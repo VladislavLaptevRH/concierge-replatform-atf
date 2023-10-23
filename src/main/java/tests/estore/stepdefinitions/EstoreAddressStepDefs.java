@@ -552,6 +552,9 @@ public class EstoreAddressStepDefs {
 
     @And("I verify billing and shipping address are correct")
     public void iVerifyBillingAndShippingAddressAreCorrect() {
+        if(estoreAddressScreen.getOrderDetails().isDisplayed()){
+            estoreAddressScreen.getOrderDetails().click();
+        }
         estoreAddressScreen.getShippingAddressTitle().should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Ocala Street']")).should(visible, Duration.ofSeconds(20));

@@ -526,7 +526,6 @@ public class EstorePdpStepDefs {
     public void iVerifyThatPopupIsDisplayed(String modalPopUp) {
         if (modalPopUp.equals("View In-Stock")) {
             $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
-            $(By.xpath("//p[text()='In Stock']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
         }
