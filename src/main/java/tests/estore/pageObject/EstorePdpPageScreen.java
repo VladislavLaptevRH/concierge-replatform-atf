@@ -3,6 +3,7 @@ package tests.estore.pageObject;
 import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
+import org.apache.groovy.xml.tools.DomToGroovy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -180,4 +181,16 @@ public class EstorePdpPageScreen {
     private final SelenideElement pdpFooter = $(By.xpath("//div[@class='MuiContainer-root']/footer"));
 
     private final SelenideElement pdpColorOption = $(By.xpath("//p[text()='Color Options']"));
+
+    private final SelenideElement swatchText = $(By.xpath("//*[contains(text(),'Swatch')]"));
+
+    private final SelenideElement viewTouchUpKitText = $(By.xpath("//*[contains(text(),'Touch-Up Kit')]"));
+
+    private final SelenideElement unlimitedFurnitureDeliveryText = $(By.xpath("Unlimited Furniture Delivery"));
+
+    private final  SelenideElement inStockMemberPrice = $(By.xpath("//p[contains(@class,'product-price__amount--member') and contains(text(),'Member')]"));
+
+    private final SelenideElement inStockRegularPrice = $(By.xpath("//p[contains(@class,'product-price__amount') and contains(text(),'Regular')]"));
+
+
 }

@@ -491,6 +491,47 @@ public class EstorePdpStepDefs {
         Assert.assertTrue(estorePdpPageScreen.getPdpFooter().isDisplayed());
     }
 
+    @Then("I verify the PDP hero Image Zoom line items")
+    public void
+    iVerifyThePDPHroImageZoomLineItem(){
+        estorePdpPageScreen.getHeroImage().hover();
+        estorePdpPageScreen.getHeroImageForwardBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImageForwardBtn().click();
+        estorePdpPageScreen.getHeroImageBackBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImageBackBtn().click();
+        estorePdpPageScreen.getHeroImagePlusIconZoomInBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImagePlusIconZoomInBtn().click();
+        estorePdpPageScreen.getHeroImagePlusIconZoomOutBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImagePlusIconZoomOutBtn().click();
+        estorePdpPageScreen.getHeroImageUpwardBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImageUpwardBtn().click();
+//        estorePdpPageScreen.getHeroImageDownwardBtn().should(Condition.visible, Duration.ofSeconds(20));
+//        estorePdpPageScreen.getHeroImageDownwardBtn().click();
+        estorePdpPageScreen.getHeroImageCloseIcon().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImageCloseIcon().click();
+        Assert.assertTrue(estorePdpPageScreen.getShopTheEntireCollectionText().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getSwatchText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getInStockOptionsButton().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getViewTouchUpKitText().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getUnlimitedFurnitureDeliveryText().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().isDisplayed());
+    }
+
+    @Then("I verify IN STOCK functionality")
+    public void iVerifyINStockFunctionality() {
+        Assert.assertTrue(estorePdpPageScreen.getInStockTitle().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getInStockOptionsButton().isDisplayed());
+        estorePdpPageScreen.getInStockOptionsButton().click();
+        Assert.assertTrue(estorePdpPageScreen.getInStockTitle().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getItemInStockOption().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getInStockMemberPrice().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getInStockRegularPrice().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getQtyInStockItems().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtnInStockItems().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estorePdpPageScreen.getAddToCartBtnInStockItems().click();
+        Assert.assertTrue(estorePdpPageScreen.getViewCartBtn().isDisplayed());
+    }
+
     @Then("I verify the product price as per the Ship to selection for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceAsPerTheShipToSelectionForProduct(String productID, String arg1, String selectedOptions, String country) {
         estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));

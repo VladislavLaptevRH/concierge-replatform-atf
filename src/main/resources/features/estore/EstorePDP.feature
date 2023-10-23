@@ -202,7 +202,6 @@ Feature: Estore PDP
     When I open product page with "prod10720085" and "46680991" with "INDG" for estore
     Then Sale link validated along with selecting value
 
-  @Alok
   Scenario: Verify the PDP title and pricing
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -210,7 +209,6 @@ Feature: Estore PDP
     When I open the product category "cat25450027"
     Then I verify the PDP title and pricing for product
 
-  @Alok
   Scenario: Verify the content of PDP for eStore - verifying SOFA PDP
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -218,7 +216,6 @@ Feature: Estore PDP
     When I open product page with "prod30390106" and "" with "INDG" for estore
     Then I verify the content of PDP for eStore - verifying SOFA PDP
 
-  @Alok
   Scenario: Verifying another PDP - Chaise
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -226,7 +223,6 @@ Feature: Estore PDP
     When I open product page with "prod14020058" and "17050043" with "INDG" for estore
     Then I verify another PDP - Chaise
 
-  @Alok
   Scenario: Verifying PDP content - Bench
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -234,10 +230,30 @@ Feature: Estore PDP
     When I open product page with "prod20850154" and "" with "INDG" for estore
     Then I verify another PDP - Bench
 
-  @Alok
   Scenario: Verifying PDP content - Towel
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify another PDP - Towel
+
+  Scenario: Verify the PDP hero Image Zoom line items
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod18890296" and "" with "INDG" for estore
+    Then I verify the PDP hero Image Zoom line items
+
+  Scenario: Verify IN STOCK functionality
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "" with "INDG" for estore
+    Then I verify IN STOCK functionality
+
+  Scenario: Verify IN STOCK functionality
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+    Then I verify availability delivery and return for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
