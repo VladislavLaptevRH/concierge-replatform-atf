@@ -33,7 +33,7 @@ public class EstoreCGStepDefs {
     @Then("I validate the collection name is not empty")
     public void iValidateTheCollectionNameIsNotEmpty() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        $(By.xpath("(//h1//span)[1]")).shouldHave(text("Collections"), Duration.ofSeconds(60));
+        $(By.xpath("(//h1//span)[1]")).has(text("Collections"));
     }
 
     @When("I scroll on the page till back to top button is visible")

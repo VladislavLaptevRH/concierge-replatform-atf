@@ -16,6 +16,8 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static tests.estore.stepdefinitions.EstoreUserAccountPageStepDefs.firstName;
 
 public class EstoreAddressStepDefs {
@@ -174,37 +176,31 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore shipping address")
     public void iFillEstoreShippingAndShippingAddress() {
-        estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
-        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
-        estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
+        with().pollInterval(4, SECONDS).await().until(() -> true);
+        if(estoreAddressScreen.getShippingAddressFirstName().isDisplayed()) {
+            estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
+            estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
+            with().pollInterval(4, SECONDS).await().until(() -> true);
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
+            estoreAddressScreen.getShippingAddressLastName1().setValue("William");
 
-        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
-        estoreAddressScreen.getShippingAddressLastName1().setValue("William");
-
-        $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).click();
-        generalStepDefs.clearField($(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")));
-        $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).setValue("4524 Ocala Street");
-
-        $(By.xpath("//ul[@role='menu']//li[1]")).should(visible, Duration.ofSeconds(10))
-                .click(ClickOptions.usingJavaScript());
-
-//        $(By.cssSelector("input[id=\"shippingAddress.city\"]")).click();
-//        generalStepDefs.clearField($(By.cssSelector("input[id=\"shippingAddress.city\"]")));
-//        $(By.cssSelector("input[id=\"shippingAddress.city\"]")).setValue("Orlando");
-//
-//        $(By.cssSelector("select[id=\"shippingAddress.state\"]")).should(interactable, Duration.ofSeconds(20));
-//        Select selectCaState = new Select($(By.cssSelector("select[id=\"shippingAddress.state\"]")));
-//        selectCaState.selectByValue("FL");
-//
-//        $(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")).click();
-//        generalStepDefs.clearField($(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")));
-//        $(By.cssSelector("input[id=\"shippingAddress.postalCode\"]")).setValue("32801");
-
-        estoreAddressScreen.getShippingAddressPhone().click();
-        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
-        estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
-        estoreAddressScreen.getShippingAddressPhone().shouldHave(value("309-793-1846"), Duration.ofSeconds(15));
-
+            $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).click();
+            generalStepDefs.clearField($(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")));
+            $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).setValue("4524 Ocala Street");
+            with().pollInterval(4, SECONDS).await().until(() -> true);
+            $(By.xpath("//ul[@role='menu']//li[1]")).should(visible, Duration.ofSeconds(10))
+                    .click(ClickOptions.usingJavaScript());
+            estoreAddressScreen.getShippingAddressPhone().click();
+            with().pollInterval(4, SECONDS).await().until(() -> true);
+            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
+            estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
+            estoreAddressScreen.getShippingAddressPhone().shouldHave(value("309-793-1846"), Duration.ofSeconds(15));
+            with().pollInterval(4, SECONDS).await().until(() -> true);
+        }
+        else{
+            with().pollInterval(4, SECONDS).await().until(() -> true);
+        }
     }
 
     @Then("I verify add a new shipping address option is present")
@@ -350,7 +346,7 @@ public class EstoreAddressStepDefs {
     public void iClickOnContinueToPayment() {
         estorePaymentPage.getContinueToPayment().should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
         estorePaymentPage.getContinueToPayment().scrollIntoView(true);
-
+        with().pollInterval(4, SECONDS).await().until(() -> true);
         estoreAddressScreen.getShippingAddressPhone().shouldNotBe(empty);
         estoreAddressScreen.getShippingAddressCity().shouldNotBe(empty);
 
@@ -360,11 +356,10 @@ public class EstoreAddressStepDefs {
         if ($(By.xpath("//*[contains(text(), 'required')]")).isDisplayed()) {
             iFillEstoreShippingAndShippingAddress();
             estoreE2EStepDefs.iClickOnSameAsShippingAddressCheckbox();
+            with().pollInterval(4, SECONDS).await().until(() -> true);
             estoreE2EStepDefs.iClickOnSameAsShippingAddressCheckbox();
             $(By.xpath("//*[text()='Continue to payment']")).should(Condition.and("", visible, interactable), Duration.ofSeconds(20));
-
             executeJavaScript("arguments[0].click();", $(By.xpath("//button[@type='submit']")));
-
         }
     }
 
@@ -557,6 +552,9 @@ public class EstoreAddressStepDefs {
 
     @And("I verify billing and shipping address are correct")
     public void iVerifyBillingAndShippingAddressAreCorrect() {
+        if(estoreAddressScreen.getOrderDetails().isDisplayed()){
+            estoreAddressScreen.getOrderDetails().click();
+        }
         estoreAddressScreen.getShippingAddressTitle().should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Safire William']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Ocala Street']")).should(visible, Duration.ofSeconds(20));

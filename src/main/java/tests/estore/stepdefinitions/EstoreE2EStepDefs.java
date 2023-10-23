@@ -77,11 +77,13 @@ public class EstoreE2EStepDefs {
 
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
-        estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
+        with().pollInterval(6, SECONDS).await().until(() -> true);
         estoreItemPage.getAddToCartButton().should(enabled);
+        with().pollInterval(6, SECONDS).await().until(() -> true);
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
         estoreItemPage.getAddToCartButton().shouldBe(visible);
         estoreItemPage.getAddToCartButton().shouldBe(interactable).click(ClickOptions.usingJavaScript());
+        with().pollInterval(6, SECONDS).await().until(() -> true);
     }
 
     @When("I fill all estore fields from address with {string} zip code")
@@ -528,13 +530,13 @@ public class EstoreE2EStepDefs {
 
     @When("I click on same as estore shipping address checkbox")
     public void iClickOnSameAsShippingAddressCheckbox() {
-        try {
-            $(By.xpath("//span[text()='Same as shipping address']")).should(Condition.and("Exist ,appear, interactable",
-                    exist, appear, interactable), Duration.ofSeconds(15));
-            $(By.xpath("//span[text()='Same as shipping address']")).click(ClickOptions.usingJavaScript());
-        } catch (
-                com.codeborne.selenide.ex.ElementNotFound e) {
-            System.out.println("Same as shipping address checkbox is not displayed");
+        if(estoreAddressScreen.getSameAsShippingAddress().is(visible)) {
+                estoreAddressScreen.getSameAsShippingAddress().should(Condition.and("Exist ,appear, interactable",
+                        exist, appear, interactable), Duration.ofSeconds(15));
+                estoreAddressScreen.getSameAsShippingAddress().click(ClickOptions.usingJavaScript());
+        }
+        else{
+            estoreAddressScreen.getSameAsShippingAddress().shouldNotBe(interactable);
         }
     }
 

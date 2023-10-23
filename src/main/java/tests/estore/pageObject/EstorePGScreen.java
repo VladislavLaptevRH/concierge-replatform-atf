@@ -15,7 +15,7 @@ public class EstorePGScreen {
 
     private final SelenideElement sofa = $(By.xpath("//*[text()='sofa']"));
 
-    private final SelenideElement gridView3 = $(By.xpath("(//div[contains(@class,'MuiGrid-grid-xs-4')])[4]"));
+    private final SelenideElement gridView3 = $(By.xpath("(//div[contains(@class,'MuiGrid-grid-xs-4')])[1]"));
 
     private final SelenideElement gridView2 = $(By.xpath("(//div[contains(@class,'MuiGrid-grid-xs-6')])[4]"));
 
@@ -81,6 +81,6 @@ public class EstorePGScreen {
 
     private final SelenideElement livingCategory = $(By.xpath("//*[@data-navigation-account-item-id='cat160024']"));
 
-    private final SelenideElement collectionTextTitle = $(By.xpath("//p[contains(text(),'Collection')]"));
+    private final SelenideElement collectionTextTitle = $(By.xpath("//*[contains(text(),'new arrivals')]"));
 }
 
