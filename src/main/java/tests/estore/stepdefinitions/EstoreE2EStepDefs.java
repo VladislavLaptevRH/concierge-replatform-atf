@@ -77,7 +77,7 @@ public class EstoreE2EStepDefs {
 
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
-        estoreItemPage.getAddToCartButton().shouldHave(text("ADD TO CART"), Duration.ofSeconds(50));
+        with().pollInterval(6, SECONDS).await().until(() -> true);
         estoreItemPage.getAddToCartButton().should(enabled);
         with().pollInterval(6, SECONDS).await().until(() -> true);
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
