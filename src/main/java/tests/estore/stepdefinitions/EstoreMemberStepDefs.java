@@ -158,8 +158,8 @@ public class EstoreMemberStepDefs {
 
     @When("I click on FAQa link for estore")
     public void iClickOnFAQaLinkForEstore() {
-        $(By.xpath("(//a[@href='/customer-experience/frequently-asked-questions'])[1]")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("(//a[@href='/customer-experience/frequently-asked-questions'])[1]")).click();
+        $(By.xpath("//*[text()='FAQs']")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='FAQs']")).click();
     }
 
     @Then("I verfiy that frequently asked questions page is displayed")

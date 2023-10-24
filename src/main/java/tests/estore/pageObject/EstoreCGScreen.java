@@ -1,12 +1,13 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import io.cucumber.java.eo.Se;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$x;
 
 @Getter
 public class EstoreCGScreen {
@@ -42,4 +43,68 @@ public class EstoreCGScreen {
 
     private SelenideElement collectionModalProductImage = $(By.xpath("//div[@data-cmp='cardImages']//div[@id='component-rh-image_wrapper']"));
 
+    private SelenideElement seatingCollectionTitle = $(By.xpath("//span[text()='Seating  collections']"));
+
+    private SelenideElement singleGridView = $(By.xpath("//div[contains(@class,'cg-slide-12 MuiGrid-item MuiGrid-grid-xs-12')]"));
+
+    private SelenideElement memberDiscountText = $(By.xpath("//*[text()='MEMBERS SAVE 25% OFF REGULAR PRICE']"));
+
+    private SelenideElement descriptionBella = $(By.xpath("//*[text()='Bella']"));
+
+    private SelenideElement descriptionBellaModular = $(By.xpath("//*[text()='Bella Modular']"));
+
+    private SelenideElement inStockMessageText = $(By.xpath("//*[text()='In-stock items delivered in 3-7 days']"));
+
+    private SelenideElement twoGridViewCg = $(By.xpath("//div[contains(@class, 'grid-item-6')]"));
+
+    private SelenideElement threeGridViewCg = $(By.xpath("//div[contains(@class, 'grid-item-4')]"));
+
+    private SelenideElement swatches1upGridView = $(By.xpath("//*[@data-id='component-collection-card-details_swatches_col12']"));
+
+    private SelenideElement swatches2upGridView = $(By.xpath("//*[@data-id='component-collection-card-details_swatches_col6']"));
+
+    private SelenideElement swatches3upGridView = $(By.xpath("//*[@data-id='component-collection-card-details_swatches_col6']"));
+
+
+    public void verifyThatSwatches1upGridViewIsDisplayed() {
+        swatches1upGridView.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatSwatches2upGridViewIsDisplayed() {
+        swatches2upGridView.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatSwatches3upGridViewIsDisplayed() {
+        swatches3upGridView.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatThreeGridViewIsDisplayed() {
+        threeGridViewCg.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatTwoGridViewIsDisplayed() {
+        twoGridViewCg.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatinStockMessageTextIsDisplayed() {
+        inStockMessageText.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatCGDescriptionIsDisplayed() {
+        descriptionBella.should(Condition.visible, Duration.ofSeconds(12));
+        descriptionBellaModular.should(Condition.visible, Duration.ofSeconds(12));
+
+    }
+
+    public void verifyThatSeatinCollectionTitleIsDisplayedOnCG() {
+        seatingCollectionTitle.should(Condition.visible, Duration.ofSeconds(18));
+    }
+
+    public void verifyThatMemberDiscountMessageIsDisplayedOnCG() {
+        memberDiscountText.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatSingleGridViewIsDisplayed() {
+        singleGridView.should(Condition.visible, Duration.ofSeconds(12));
+    }
 }

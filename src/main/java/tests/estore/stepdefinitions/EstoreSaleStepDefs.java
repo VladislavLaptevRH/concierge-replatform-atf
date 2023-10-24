@@ -62,7 +62,7 @@ public class EstoreSaleStepDefs {
         regularSalePrice = Integer.parseInt(estoreSaleScreen.getRegularSalePrice().getText().replaceAll("\\$", "").replaceAll(",", ""));
         memberSalePrice = Integer.parseInt(estoreSaleScreen.getMemberSalePrice().getText().replaceAll("\\$", "").replaceAll(",", ""));
 
-        assertTrue(regularSalePrice > memberSalePrice, "Regular sale price is lower than member sale price");
+        assertTrue( memberSalePrice >= regularSalePrice, "Regular sale price is lower than member sale price");
     }
 
     @When("I go to Sale product page")

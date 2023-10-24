@@ -209,7 +209,6 @@ public class EstorePgStepDefs {
     public void iVerifyThatPGPageIsDisplayedForEStore() {
         estorePGScreen.getCollectionTextTitle().should(visible, Duration.ofSeconds(20));
         estorePGScreen.getGridView3().should(visible, Duration.ofSeconds(10));
-
     }
 
     @Then("I verify that sorting high to low is working as expected")

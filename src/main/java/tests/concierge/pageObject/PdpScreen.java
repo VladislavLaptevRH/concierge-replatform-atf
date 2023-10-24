@@ -49,6 +49,7 @@ public class PdpScreen {
     private final ElementsCollection benchItmsList = $$(By.xpath("//*[contains(text() ,'Trade')]"));
 
     private final ElementsCollection lineItemsCount = $$(By.xpath(" (//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/.."));
+    private final SelenideElement quantitySelect = $(By.xpath("(//*[text() = 'QTY'])[1]/..//select"));
 
     private final SelenideElement memberPrice = $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]"));
 
@@ -112,7 +113,7 @@ public class PdpScreen {
 
     private final SelenideElement startingAtText = $(By.xpath("(//*[text() = 'Starting at'])[1]"));
     private final SelenideElement specialOrderText = $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between ')]"));
-    private final SelenideElement returnDeliveryText = $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]"));
+    private final SelenideElement returnDeliveryText = $(By.xpath("(//*[contains(text(),'This item can be returned within 30 days of delivery.')])[1]"));
     private final SelenideElement returnOrExchangedDeliveryText = $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery. ')]"));
 
     private final SelenideElement monogramsStyleValue = $(By.xpath("//*[text()='Bauer Bodoni 1 (BDNI-HC)']"));
@@ -125,6 +126,8 @@ public class PdpScreen {
     private final SelenideElement pdpPopUpOnSaleItem = $(By.xpath("(//*[@id='listColumn1-Item#'])[1]"));
     private final SelenideElement pdpPopUpOnSalePrice = $(By.xpath("(//*[@id = 'sku-price-list']//*[text()='Price'])[1]"));
     private final SelenideElement pdpPopUpOnSaleMemberPrice = $(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount--member') and text() = 'Member'])[1]"));
+    private final SelenideElement pdpOnSaleMemberPrice = $(By.xpath(" //*[text() = 'VIEW SELECT ITEMS ON SALE']/../../../following-sibling::div//*[@data-testid = 'price-for-member']"));
+    private final SelenideElement pdpOnSaleTradePrice = $(By.xpath(" //*[text() = 'VIEW SELECT ITEMS ON SALE']/../../../following-sibling::div//*[@data-testid = 'price-for-trade']"));
     private final SelenideElement pdpPopUpOnSaleTradePrice = $(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount--trade') and text() = 'Trade'])[1]"));
     private final SelenideElement pdpPopUpOnSaleSalePrice = $(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount--sale') and text() = 'Sale'])[1]"));
     private final SelenideElement pdpPopUpOnSaleSalePriceAmount = $(By.xpath(" (//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount')])[1]"));
@@ -140,8 +143,10 @@ public class PdpScreen {
     private final SelenideElement pdpPopUpOnSaleContinueShoppingButton = $(By.xpath("//*[@id = 'ajax-continue-shopping']/span[1]"));
     private final SelenideElement pdpPopUpOnSaleCloseButton = $(By.xpath("(//*[@data-testid = 'dialog-title-close-button'])[2]"));
     private final SelenideElement pdpPopUpOnSaleTitle = $(By.xpath("//div/p[text()='French Contemporary Fabric Panel Bed']"));
+    private final SelenideElement pdpPopUpOnSaleProductName = $(By.xpath("(//div/p[contains(@class, 'MuiTypography-paragraph')])[1]"));
+    private final SelenideElement pdpPopUpInStockZipCode = $(By.xpath("//*[text() = 'These options are available for']/*[@data-testid = 'in-stock-link']"));
     private final SelenideElement inStockPopUpOptionText = $(By.xpath("//*[text()='These options are available for']"));
-
+    private final ElementsCollection modalOnSaleItemsList = $$(By.xpath("//*[@data-testid = 'dialog-title-close-button']/../..//*[@id = 'component-rh-image']"));
     private final SelenideElement firstItem = $(By.xpath("(//*[@id= 'listColumn2-Item#'])[1]"));
     private final SelenideElement inStockPopUpProjectTitle = $(By.xpath("//h3[text() = 'ADD TO PROJECT']"));
     private final SelenideElement dataNavigationAccountItemRHBC = $(By.xpath("//div[@data-navigation-account-item-id='rhbc_cat479005']"));
@@ -214,7 +219,7 @@ public class PdpScreen {
 
     private final SelenideElement swatchImage = $(By.xpath("//img[contains(@alt, 'Swatch')]"));
 
-    private final SelenideElement deliveryInStockItemText = $(By.xpath(" //*[@id = 'component-sku']//p[contains (text(), 'This item is in stock and will be ready for delivery between')]"));
+    private final SelenideElement deliveryInStockItemText = $(By.xpath(" (//*[contains (text(), 'This item is in stock and will be delivered')])[1]"));
 
     private final ElementsCollection swatchItemsLine = $$(By.xpath("(//p[contains(text() , 'Swatch')])[1]/../../../../../../..//select[contains(@id ,'prod')]"));
 
@@ -255,6 +260,9 @@ public class PdpScreen {
 
     private final SelenideElement enabledAddToCartButton = $(By.xpath("(//*[@id = 'add-to-cart-button'])[1]"));
 
+    private final SelenideElement pdpModalEnabledAddToCartButton = $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-cart-dialog-opener'])[1]"));
+    private final SelenideElement pdpModalDisabledAddToCartButton = $(By.xpath("(//*[contains(@class, 'MuiDialogContent-root')]//*[@data-testid = 'add-to-cart-dialog-opener'])[1][@disabled]"));
+
     private final SelenideElement enabledAddToProjectButton = $(By.xpath("(//*[@id = 'add-to-project-button'])[1]"));
     private final SelenideElement addToCartButton = $(By.xpath("(//*[@id = 'add-to-cart-button'])[1]"));
     private final SelenideElement learnMoreAboutText = $(By.xpath("(//*[text() = 'Learn more about our'])[1]"));
@@ -292,6 +300,13 @@ public class PdpScreen {
 
     private final SelenideElement itemNumber = $(By.xpath("//*[text() = 'Item #']"));
 
+    private final SelenideElement lineItemSectionImage = $(By.xpath("(//*[contains(@class, 'MuiGrid-spacing-xs-4')])[4]//img"));
+    private final SelenideElement salePrice = $(By.xpath("//*[@data-testid = 'price-for-sale']"));
+
+    private final SelenideElement pdpModelOnSaleName = $(By.xpath("//*[text() = 'ON SALE']"));
+
+    private final SelenideElement pdpModelLoadMoreButton = $(By.xpath("//*[text() = 'LOAD MORE']"));
+
     private final ElementsCollection collectionList = $$(By.xpath("//a/img[@class = 'desktop-img']"));
 
     private final ElementsCollection productIteList = $$(By.xpath("//p/span"));
@@ -302,9 +317,9 @@ public class PdpScreen {
     private final SelenideElement modalQuantityNumber = $(By.xpath("//*[@id = 'listColumn2-Quantity' and text() = '1']"));
     private final SelenideElement modalFinish= $(By.xpath("//*[@id = 'listColumn1-Finish' and text() = 'Finish']"));
 
-    private final SelenideElement modalFinishValue= $(By.xpath("//*[@id = 'listColumn2-Finish' and text() = 'Waxed Brown Oak/Bronze']"));
+    private final SelenideElement modalFinishValue= $(By.xpath("//*[@id = 'listColumn2-Finish']"));
     private final SelenideElement modalSize= $(By.xpath("//*[@id = 'listColumn1-Size' and text() = 'Size']"));
-    private final SelenideElement modalSizeValue= $(By.xpath("//*[@id = 'listColumn2-Size' and text() = '84\"-120\"L Extension']"));
+    private final SelenideElement modalSizeValue= $(By.xpath("//*[@id = 'listColumn2-Size']"));
     private final SelenideElement itemAddedToCompany = $(By.xpath("(//h3)[2]"));
 
     private final SelenideElement projectName = $(By.xpath("//*[@id = 'project-name']"));
@@ -337,6 +352,7 @@ public class PdpScreen {
     private final SelenideElement modalItemNumber = $(By.xpath("//*[@id = 'listColumn1-Item#' and text() = 'Item#']"));
 
     private final SelenideElement viewSelectItemsOnSaleText = $(By.xpath("//*[text() = 'VIEW SELECT ITEMS ON SALE']"));
+    private final SelenideElement viewSelectItemsOnSaleTextBelowLineItem = $(By.xpath("(//*[contains(@data-testid, 'productImageLink')]/../..//span)[1]"));
 
     private final SelenideElement alsoAvailableText = $(By.xpath("//a[contains(text(), 'ALSO AVAILABLE')]"));
 
@@ -349,7 +365,7 @@ public class PdpScreen {
     private final SelenideElement specialOrderFabricsText = $(By.xpath("//*[contains(@data-testid, 'SPECIAL ORDER FabricS')]"));
 
     private final SelenideElement finishOptionText = $(By.xpath("//*[text() = 'Finish Options']"));
-
+    private final SelenideElement finishText = $(By.xpath("(//*[text() = 'Finish'])[1]"));
     private final SelenideElement imageCarousel = $(By.xpath("//*[@class= 'slick-slider slick-initialized']"));
     private final SelenideElement dimensionSection = $(By.xpath("//*[text() = 'DIMENSIONS']"));
 
@@ -376,6 +392,8 @@ public class PdpScreen {
     private final SelenideElement fogSpecialOrderColor = $(By.xpath("//*[text() = 'Fog ']"));
 
     private final SelenideElement postalCode = $(By.xpath("//*[@id= 'postal-code-international']"));
+
+    private final SelenideElement postalCodeModal = $(By.xpath("//*[text() = 'PLEASE ENTER YOUR POSTAL CODE']"));
 
     private final SelenideElement mattressFeeText = $(By.xpath("//*[text() = 'Mattress Fee']"));
 

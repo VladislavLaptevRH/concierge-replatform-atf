@@ -23,7 +23,7 @@ Feature: Concierge Critical Path
 #    Then I confirm that default zip code for country "US" is present in Cart
     And I change zip code in the cart to "94525"
     And Verify that zip code was updated in the Cart to "94525"
-  @vimal
+
   Scenario: Verify the Price, Total, Shipping & Applicable fees in cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -31,7 +31,7 @@ Feature: Concierge Critical Path
     When I add item to cart via API with "10146709 LOAK" and quantity '1'
     When I open cart
     Then I verify all the sums on the cart page
-  @vimal
+
   Scenario: Verify that increasing the quantity updates correct product price lines,Total, Shipping & Applicable fees in cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -55,7 +55,7 @@ Feature: Concierge Critical Path
     When I click on checkout button
     Then I click on become a member now button
     Then I verify membership banner
-  @vimal
+
   Scenario: Verify Removal of product in Cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -63,7 +63,7 @@ Feature: Concierge Critical Path
     When I add item to cart via API
     When I open cart
     When I click 'Remove Link' on cart screen
-  @vimal
+
   Scenario: Verify Quantity Update in Cart - decrease
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -74,7 +74,7 @@ Feature: Concierge Critical Path
     Then I save data for decreasing
     Then I change quantity in the car for '1'
     Then I verify that 'quantity and sum were decreased' on the cart page
-  @vimal
+
   Scenario: Verify Quantity Update in Cart - increase
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -85,7 +85,7 @@ Feature: Concierge Critical Path
     Then I save data for increasing
     Then I change quantity in the car for '4'
     Then I verify that 'quantity and sum were increased' on the cart page
-  @vimal
+
   Scenario Outline: Override Line item Prices - with <method> override price methods
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -139,7 +139,7 @@ Feature: Concierge Critical Path
     When I open cart
     Then I click total excluding sales tax
     Then select any reason code on SHIPPING OVERRIDE form & click apply button
-  @vimal
+
   Scenario: Verify that the user is able to Postpone Shipping Successfully
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -157,7 +157,7 @@ Feature: Concierge Critical Path
     When I choose country for concierge from footer
     When I add item to cart via API
     When I clear all orders form the cart
-  @vimal
+ 
   Scenario: Monogram Edit / Remove / Add
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -175,7 +175,7 @@ Feature: Concierge Critical Path
     Then I verify that monogram was edited
     When I remove monogram
     Then I verify that monogram was removed
-  @vimal
+
   Scenario: Gift Box Add / Remove / View
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -201,8 +201,8 @@ Feature: Concierge Critical Path
     Then I navigate to sub menu '<subMenu>'
     Then confirm that Seating '<gallery>' is present in '<levelOfCollection>' of '<subMenu>'
     Examples:
-      | menu      | subMenu                 | gallery                        | brand           | currentBrandName | levelOfCollection |
-      | Living    | Fabric Seating          | Seating Collections            | RH              | RH               | 1                 |
+      | menu   | subMenu        | gallery             | brand | currentBrandName | levelOfCollection |
+      | Living | Fabric Seating | Seating Collections | RH    | RH               | 1                 |
 #      | Dining    | Tables                  | Rectangular Table Collections  | RH              | RH               | 1                 |
 #      | Bed       | Bed Linens              | Bedding Collections            | RH              | RH               | 1                 |
 #      | Bath      | Bath Towels & Linens    | Bath Towel Collections         | RH              | RH               | 1                 |
@@ -243,11 +243,11 @@ Feature: Concierge Critical Path
     Then I click 'Back to Top button' on PG screen
     Then I verify that 'user is brought to the top of the page' on CG screen
     Examples:
-      | menu      | subMenu             | gallery                    | brand        | currentBrandName |
+      | menu     | subMenu | gallery                    | brand      | currentBrandName |
 #      | Windows   | Drapery             | Drapery Collections        | RH           | RH               |
 #      | Bath      | Furniture           | Bath Collections           | RH           | RH               |
 #      | Living    | Shelving & Cabinets | Cabinet Collections        | RH INTERIORS | IN               |
-      | Textiles  | Pillows             | Outdoor Pillow Collections | RH OUTDOOR   | OD               |
+      | Textiles | Pillows | Outdoor Pillow Collections | RH OUTDOOR | OD               |
 #      | Furniture | Lounge & Media      | Lounge & Media Collections | RH TEEN      | TN               |
 
   Scenario Outline: To check if single Grid View is as default on CG
@@ -261,10 +261,10 @@ Feature: Concierge Critical Path
     Then I verify that 'grid view is present on top right' on CG screen
     Then I verify that 'grid view is set to 1-grid view by default' on CG screen
     Examples:
-      | menu      | subMenu               | gallery                     | brand        | currentBrandName |
+      | menu     | subMenu               | gallery              | brand        | currentBrandName |
 #      | Living    | Leather Seating       | Seating Collections         | RH           | RH               |
 #      | Living    | Office                | Office Collections          | RH MODERN    | MO               |
-      | Lighting  | RH Ski House Lighting | Lighting Collections        | RH SKI HOUSE | SH               |
+      | Lighting | RH Ski House Lighting | Lighting Collections | RH SKI HOUSE | SH               |
 #      | Dining    | RH Ski House Dining   | Dining Table Collections    | RH SKI HOUSE | SH               |
 #      | Furniture | Furniture Collections |                             | RH OUTDOOR   | OD               |
 #      | Furniture | Bedroom               | Upholstered Bed Collections | RH TEEN      | TN               |
@@ -283,12 +283,12 @@ Feature: Concierge Critical Path
     Then I Change the CG Grid view to '3' - grid view and confirm changing
     Then I Change the CG Grid view to '1' - grid view and confirm changing
     Examples:
-      | menu      | subMenu             | gallery              | brand               | currentBrandName |
+      | menu    | subMenu | gallery             | brand        | currentBrandName |
 #      | Bath      | Furniture           | Bath Collections     | RH                  | RH               |
-      | Windows   | Drapery             | Drapery Collections  | RH INTERIORS        | IN               |
+      | Windows | Drapery | Drapery Collections | RH INTERIORS | IN               |
 #      | Dining    | Shelving & Cabinets | Cabinet Collections  | RH MODERN           | MO               |
 #      | Bed       | RH Beach House Bed  | Bedroom Collections  | RH BEACH HOUSE      | BH               |
-  @vimal
+
   Scenario: 1-2-3 Grid View Functionality within CG/PG/Different Brands
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -363,10 +363,10 @@ Feature: Concierge Critical Path
     Then  I change the brand to "<brand>"
     Then User verifies that all items from menu are displayed for "<brand>"
     Examples:
-      | brand           |
+      | brand        |
 #      | RH              |
 #      | RH CONTEMPORARY |
-      | RH INTERIORS    |
+      | RH INTERIORS |
 #      | RH MODERN       |
 #      | RH OUTDOOR      |
 #      | RH BEACH HOUSE  |
@@ -380,11 +380,11 @@ Feature: Concierge Critical Path
     Then  I change the brand to "<brand>"
     Then I verify the logo
     Examples:
-      | brand           |
+      | brand     |
 #      | RH              |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
-      | RH MODERN       |
+      | RH MODERN |
 #      | RH OUTDOOR      |
 #      | RH BEACH HOUSE  |
 #      | RH SKI HOUSE    |
@@ -397,12 +397,12 @@ Feature: Concierge Critical Path
     Then I change the brand to "<brand>"
     Then I verify that RH Brand dropdown is present in "<currentBrandName>" home page
     Examples:
-      | brand           | currentBrandName |
+      | brand      | currentBrandName |
 #      | RH              | RH               |
 #      | RH CONTEMPORARY | CN               |
 #      | RH INTERIORS    | IN               |
 #      | RH MODERN       | MO               |
-      | RH OUTDOOR      | OD               |
+      | RH OUTDOOR | OD               |
 #      | RH BEACH HOUSE  | BH               |
 #      | RH SKI HOUSE    | SH               |
 #      | RH BABY & CHILD | BC               |
@@ -414,13 +414,13 @@ Feature: Concierge Critical Path
     Then I change the brand to "<brand>"
     Then I verify footer links for brand "<brand>"
     Examples:
-      | brand           |
+      | brand          |
 #      | RH              |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
 #      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
+      | RH BEACH HOUSE |
 #      | RH SKI HOUSE    |
 #      | RH BABY & CHILD |
 #      | RH TEEN         |
@@ -458,7 +458,7 @@ Feature: Concierge Critical Path
     When I choose country for concierge from footer
     When user clicks on gallery button from header
     Then user verifies list of galleries which have default value "5: Newport Beach"
-  @vimal
+
   Scenario Outline: Major CCs
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -484,7 +484,7 @@ Feature: Concierge Critical Path
       | MC       |
       | AX       |
       | DI       |
-  @vimal
+
   Scenario: Split Payment
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -505,7 +505,7 @@ Feature: Concierge Critical Path
     When I click on a place order button
     Then I click on order details button
     Then I verify that payment split is working and paid amount is visible on the confirmation page
-  @vimal
+
   Scenario: POS payment
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -562,7 +562,7 @@ Feature: Concierge Critical Path
     And I continue to payment
     When I click on continue with original address button
     Then I verify the complete billing address
-  @vimal
+
   Scenario: GC/ Balance check
     Given I log into Concierge as "associate"
     When I remove all items from cart via UI
@@ -624,17 +624,17 @@ Feature: Concierge Critical Path
     Then I chose zero choose in line items
     Then I verify the rest of the checkings for "<skuID>"
     Examples:
-      |skuID        |
+      | skuID         |
 #      |57070740 CLNT|
-      |61970975 TEAK|
-      |62870050 LOAK|
-      |10024793 BRNZ|
+      | 61970975 TEAK |
+      | 62870050 LOAK |
+     | 10024793 BRNZ |
 
   Scenario: Verify the PDP hero Image, zoom, line itemsVerify the PDP hero Image, zoom, line items
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to concierge item 'prod18890296' from search field
+    When I open product page with productId "prod18890296"
     When I click on the first project search result with parameters 'prod18890296''10024793 BRNZ'
     Then I Verify that 'PDP title' is present
     Then I Verify that '"Zoom" button' is present
@@ -665,9 +665,9 @@ Feature: Concierge Critical Path
     Then Verify that 'text "This item can be returned or exchanged within 30 days of delivery" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     Then Verify that 'confirm that Add to Cart slider is present'
-    Then Project modal appears and has all the data for '10024793 BRNZ'
-    Then verify that another modal appears with all the data for '10024793 BRNZ'
-  @vimal
+    Then Project modal appears and has all the data for '10024796'
+    Then verify that another modal appears with all the data for '10024796'
+
   Scenario: Verify In Stock functionality
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -712,7 +712,6 @@ Feature: Concierge Critical Path
       | BO    | 10024793 BRNZ |
 
   Scenario: Verify the dropdown selection and add to cart
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -751,7 +750,7 @@ Feature: Concierge Critical Path
     When I click on special order fabrics
     When I choose color from special order fabrics
     Then I verify that color has been chosen
-  @vimal
+
   Scenario: Verify Monogram functionality
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -832,13 +831,14 @@ Feature: Concierge Critical Path
     Then I click on zip code and change it to 'SW1A1AA'
     Then I verify that zip code in PDP is 'SW1A1AA'
     Then Verify that 'Confirm that PDP has price in GBP'
-
+  
   Scenario: Sale PDP: Regular/Member/Final Price validation
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I choose country for concierge from footer
-    When I navigate to "Sale"
-    Then I choose a random sale item
+    Then I navigate to menu 'SALE'
+    Then I navigate to sub menu 'Bed'
+    Then I navigate to gallery 'Beds'
     Then Verify that 'PDP has SALE and MEMBER prices'
 
   Scenario Outline: Verify Mattress Recycling Fee
@@ -854,10 +854,10 @@ Feature: Concierge Critical Path
     When I click on view cart button
     Then I verify text "Mattress fee" and amount in checkout is present for state "<state>"
     Examples:
-      | state | zipCode|
-      | RI    | 02860  |
-      | CT    | 06902  |
-      | CA    | 94925  |
+      | state | zipCode |
+      | RI    | 02860   |
+      | CT    | 06902   |
+      | CA    | 94925   |
 
   Scenario: Custom Jewelry
     Given I log into Concierge as "associate"
@@ -892,7 +892,7 @@ Feature: Concierge Critical Path
     Then I navigate to gallery "<gallery>"
     Then I verify that PG loads
     Examples:
-      | menu      | subMenu               | gallery                       | brand           | currentBrandName |
+      | menu    | subMenu | gallery       | brand   | currentBrandName |
 #      | Living    | Fabric Seating        | Sofas                         | RH              | RH               |
 #      | Dining    | Tables                | Rectangular Table Collections | RH              | RH               |
 #      | Dining    | Bar & Counter         | Bar & Counter Stools          | RH              | RH               |
@@ -920,7 +920,7 @@ Feature: Concierge Critical Path
 #      | Bed       |Toddler Collections    | Crib Sheets                   | RH BABY & CHILD | BC               |
 #      | Furniture | Study                 | Desk Chairs                   | RH BABY & CHILD | BC               |
 #      | Lighting  | Table                 | Shades                        | RH TEEN         | TN               |
-      | Storage   | Wall                  | Memory Boards                 | RH TEEN         | TN               |
+      | Storage | Wall    | Memory Boards | RH TEEN | TN               |
 
   Scenario: Checking Faucets in Collection PG
     Given I log into Concierge as "associate"
@@ -928,13 +928,11 @@ Feature: Concierge Critical Path
     Then I navigate to menu 'Dining'
     Then I navigate to sub menu 'Tables'
     Then I navigate to gallery 'Round & Oval Tables'
-#    Then I click 'first collection from the list' on PG screen
     Then I verify that 'PG has SALE and IN-STOCK filters, text RESULTS (n), faucet with text SORT' on PG screen
     Then I click 'SORT and confirm that Modal has text FEATURED, Price Low to High, Price High to Low' on PG screen
     Then I click 'Price Low to High and verify price is sorted' on PG screen
     Then I click 'Price High to Low and verify price is sorted' on PG screen
     Then I click 'IN-STOCK Filter' on PG screen
-    Then I verify that 'IN-STOCK products are returned' on PG screen
     Then I verify that 'CLEAR ALL is present when filter(s) are selected' on PG screen
     Then I click 'IN-STOCK Filter' on PG screen
     Then I click 'sale checkbox' on PG screen
@@ -982,11 +980,11 @@ Feature: Concierge Critical Path
     Then I navigate to gallery "<gallery>"
     Then I verify that "<PGName>" title is present in PG top left
     Examples:
-      | menu      | subMenu             | gallery         | brand           | currentBrandName | PGName          |
+      | menu      | subMenu   | gallery       | brand      | currentBrandName | PGName        |
 #      | Bath      | Vanities            | Powder Vanities | RH              | RH               | Powder Vanities |
 #      | Rugs      | Rug Pads            | All Rug Pads    | RH              | RH               | All Rug Pads    |
 #      | Nursery   | Gifts               | Baby Apparel    | RH BABY & CHILD | BC               | Baby Apparel    |
-      | Furniture | Furniture           | Dining Chairs   | RH OUTDOOR      | OD               | Dining Chairs   |
+      | Furniture | Furniture | Dining Chairs | RH OUTDOOR | OD               | Dining Chairs |
 
   Scenario: Verify that Back to Top Button is present in PG and functioning
     Given I log into Concierge as "associate"

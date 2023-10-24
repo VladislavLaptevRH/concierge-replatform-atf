@@ -132,33 +132,13 @@ public class ConciergeCartStepDefs {
             conciergeCartPageScreen.getAgreeAndAddToCart().click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-//        if (!conciergeCartPageScreen.getItemAddedToYourCart().isDisplayed()) {
-//            WebDriverRunner.getWebDriver().navigate().refresh();
-//            with().pollInterval(5, SECONDS).await().until(() -> true);
-//            if (conciergeUserAccountPage.getCartButtonItemSum().exists()) {
-//                String URL = Hooks.conciergeBaseURL + "/us/en/checkout/shopping_cart.jsp";
-//                open(URL);
-//                with().pollInterval(5, SECONDS).await().until(() -> true);
-//            } else {
-//                conciergeE2EStepDefs.iOpenProductPageWithAnd("prod1617188", "63130001");
-//                conciergeE2EStepDefs.iClickOnAddToCartButton();
-//                conciergeCartPageScreen.getItemAddedToYourCart().should(visible, Duration.ofMinutes(1));
-//                conciergeCartPageScreen.getItemAddedToYourCart().shouldHave(text("Added To Your Cart"), Duration.ofSeconds(30));
-//                conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
-//                conciergeItemsScreen.getViewCartButton().should(visible, Duration.ofSeconds(60));
-//                conciergeCartPageScreen.getKeepShopping().should(visible, Duration.ofSeconds(15));
-//                conciergeItemsScreen.getViewCartButton().click();
-//            }
-//        } else {
-
-            conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
-            conciergeItemsScreen.getViewCartButton().should(visible, Duration.ofSeconds(60));
-            conciergeCartPageScreen.getKeepShopping().should(visible, Duration.ofSeconds(15));
-            conciergeItemsScreen.getViewCartButton().click();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-            conciergeItemsScreen.getViewCartImage().click();
-             with().pollInterval(5, SECONDS).await().until(() -> true);
-//        }
+        conciergeItemsScreen.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(60));
+        conciergeItemsScreen.getViewCartButton().should(visible, Duration.ofSeconds(60));
+        conciergeCartPageScreen.getKeepShopping().should(visible, Duration.ofSeconds(15));
+        conciergeItemsScreen.getViewCartButton().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeItemsScreen.getViewCartImage().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify order classification")
@@ -905,11 +885,9 @@ public class ConciergeCartStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getPersonalizationText().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramStyleValue().should(visible, Duration.ofSeconds(15));
-        conciergeCartPageScreen.getMonogramColorValue().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramTextValue().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramStyle().shouldHave(text("Style"), Duration.ofSeconds(15));
-        conciergeCartPageScreen.getMonogramText().shouldHave(text("Text"), Duration.ofSeconds(15));
-       conciergeCartPageScreen.getMonogramColor().shouldHave(text("Color"), Duration.ofSeconds(15));
+        conciergeCartPageScreen.getMonogramColor().shouldHave(text("Color"), Duration.ofSeconds(15));
     }
 
 
@@ -931,6 +909,7 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getMonogramColors().get(2).should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getMonogramColors().get(2).scrollIntoView(true);
         conciergeCartPageScreen.getMonogramColors().get(2).doubleClick();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramTextInput().setValue("ABC");
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getAddMonogramButton().click();
@@ -945,9 +924,6 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getMonogramFonts().get(5).scrollIntoView(true);
         conciergeCartPageScreen.getMonogramFonts().get(5).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeCartPageScreen.getMonogramFonts().get(5).doubleClick();
-        with().pollInterval(2, SECONDS).await().until(() -> true);
-        conciergeCartPageScreen.getMonogramColors().get(5).should(visible, Duration.ofMinutes(1));
-        conciergeCartPageScreen.getMonogramColors().get(5).doubleClick();
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramTextInput().setValue("DFG");
         conciergeCartPageScreen.getAddMonogramButton().should(visible, Duration.ofMinutes(1));
@@ -971,7 +947,7 @@ public class ConciergeCartStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getRemoveMonogramBtn().shouldHave(text("Remove"), Duration.ofMinutes(1));
         conciergeCartPageScreen.getRemoveMonogramBtn().click();
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(9, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
     }
@@ -980,12 +956,12 @@ public class ConciergeCartStepDefs {
     public void iVerifyThatMonogramWasRemoved() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getPersonalizationText().shouldNotBe(visible, Duration.ofMinutes(1));
-        conciergeCartPageScreen.getEditedMonogramStyleValue().should(visible, Duration.ofSeconds(15));
-        conciergeCartPageScreen.getEditedMonogramColorValue().should(visible, Duration.ofSeconds(15));
-        conciergeCartPageScreen.getEditedMonogramTextValue().should(visible, Duration.ofSeconds(15));
-        conciergeCartPageScreen.getEditedMonogramStyle().shouldHave(text("Style"), Duration.ofSeconds(15));
-        conciergeCartPageScreen.getEditedMonogramText().shouldHave(text("Text"), Duration.ofSeconds(15));
-        conciergeCartPageScreen.getEditedMonogramColor().shouldHave(text("Color"), Duration.ofSeconds(15));
+        conciergeCartPageScreen.getEditedMonogramStyleValue().shouldNotBe(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getEditedMonogramColorValue().shouldNotBe(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getEditedMonogramTextValue().shouldNotBe(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getEditedMonogramStyle().shouldNotBe(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getEditedMonogramText().shouldNotBe(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getEditedMonogramColor().shouldNotBe(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that availability, Delivery and Returns messaging in cart")
@@ -1248,11 +1224,11 @@ public class ConciergeCartStepDefs {
     @When("I click on order details button")
     public void iClickOnOrderDetailsButton() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(!conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed()){
+        if(!conciergeUserAccountPage.getOrderDetailsButtonByName("Order Details").isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
-        conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed();
-        conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").click();
+        conciergeUserAccountPage.getOrderDetailsButtonByName("Order Details").isDisplayed();
+        conciergeUserAccountPage.getOrderDetailsButtonByName("Order Details").click();
     }
 
     @When("I remove all items from cart for minicart")

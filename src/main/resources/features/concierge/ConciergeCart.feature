@@ -19,7 +19,7 @@ Feature:Concierge Cart Page
     When I add item to cart via API with "10146709 LOAK" and quantity '1'
     When I open cart
     Then I verify all the sums on the cart page
-  @vimal
+
   Scenario: Verify that increasing the quantity updates correct product price lines,Total, Shipping & Applicable fees in cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

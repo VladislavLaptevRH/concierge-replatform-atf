@@ -59,6 +59,7 @@ public class EstoreHomePageStepDefs {
     public void iVerifyOnSearchIcon() {
         estoreHomePage.getSearchIcon().should(Condition.visible, Duration.ofSeconds(30));
     }
+
     @And("I Type product name {string}")
     public void iTypeProductName(String arg0) {
         estoreHomePage.getSearchInputField().should(Condition.visible, Duration.ofSeconds(30));
@@ -185,4 +186,9 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getHeaderCartButton().should(Condition.visible, Duration.ofSeconds(20));
     }
 
+    @And("I verify that cart and my account icons should be displayed")
+    public void iVerifyThatCartAndMyAccountIconsShouldBeDisplayed() {
+        estoreHomePage.verifyThatCartIconIsDisplayed();
+        estoreHomePage.verifyThatMyAccountIconIsDisplayed();
+    }
 }
