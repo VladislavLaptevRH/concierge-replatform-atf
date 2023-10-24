@@ -1,5 +1,4 @@
-@conciergeTestRun
-@Smoke @SmokeTest @Smoketest
+@Smoke @SmokeTest @Smoketest @conciergeTestRun
 Feature: Smoke test for concierge
 
 

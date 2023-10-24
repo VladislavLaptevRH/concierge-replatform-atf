@@ -18,7 +18,7 @@ Feature: Estore critical path
 #      | RH SKI HOUSE    |
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
-
+  @vimal
   Scenario Outline: CG - Test CGS in all menu items (All brands)
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -57,7 +57,7 @@ Feature: Estore critical path
     When I choose country for eStore from footer
     When I go to estore item "sofa" from search field
     Then user verifies that price range is displayed below the thumbnail
-
+  @vimal
   Scenario Outline: PG - Back to Top button
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -78,7 +78,7 @@ Feature: Estore critical path
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
 
-
+  @vimal
   Scenario Outline: PG - Verify the Sale Price on PG pages for Sale Items
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -153,7 +153,7 @@ Feature: Estore critical path
 #      | RH SKI HOUSE    |
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
-
+  @vimal
   Scenario Outline: CG - Verify collection name,image (regular,member,sale(applicable) on collection banner
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -171,7 +171,7 @@ Feature: Estore critical path
 #      | RH SKI HOUSE    |
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
-
+  @vimal
   Scenario Outline: CG-Verify Back To top Button
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -249,7 +249,7 @@ Feature: Estore critical path
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
     #click on random product from collection (PG) after click on  back button from browser
-
+  @vimal
   Scenario Outline: CG - From home page goto a collection and click on any Product, It should redirect user to PG
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -269,8 +269,8 @@ Feature: Estore critical path
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
     #use fabric seating - sofas: check title, grid view
-
-  Scenario: CG - Browser back button from search to CG page
+    @vimal
+    Scenario: CG - Browser back button from search to CG page
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to "SEATING COLLECTIONS" on eStore
@@ -330,7 +330,7 @@ Feature: Estore critical path
     When I execute payment with credit card on estore
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
-
+  @vimal
   Scenario: Member - Verify member user checkout in estore
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -404,7 +404,7 @@ Feature: Estore critical path
     When I click on continue with original address estore button
     When I remove split payment which was used earlier
     Then I verify that I'm able to execute estore split payment with RH Credit Card+Gift Card
-
+  @vimal
   Scenario: Payment - eStore RHCC
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -441,6 +441,7 @@ Feature: Estore critical path
     Then I verify that gift card balance info is displayed for estore
 
 #Verify the cart updates, remove line, add to wish lsit, update qty, add membership
+  @vimal
   Scenario: Cart - Verify that user is able to add multiple item to cart, total price is correct
     Given I log into eStore as "nonmember" user
     When I choose country for eStore from footer
@@ -474,7 +475,7 @@ Feature: Estore critical path
     When I click on view cart estore button
     When I click on remove button from estore cart page
     Then I verify that shopping cart is empty for estore
-
+  @vimal
   Scenario: Cart - User is a non member user then it will show a banner to "Join Membership" click on link to join the membership
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -482,7 +483,7 @@ Feature: Estore critical path
     When I add item to cart via API for estore
     When I open estore cart
     Then I verify membership estore banner for "nonmember user"
-
+  @vimal
 #Verify the Instock and On sale functionality
   Scenario: Verify the In stock functionality
     Given I log into eStore as "regular" user
@@ -718,6 +719,7 @@ Feature: Estore critical path
     Then I verify that billing address was edited
 
 #Order replacement
+  @vimal
   Scenario: Order replacement
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -748,7 +750,6 @@ Feature: Estore critical path
     When I execute payment with credit card on estore
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
-    When I click on order details button
     And I verify billing and shipping address are correct
 
 #Membership page and functionality
@@ -786,8 +787,8 @@ Feature: Estore critical path
     When I click on estore my account icon
     When I navigate to the member tab
     Then I verify that email address displayed in membership page
-
-  Scenario: Memberdship - Verfiy membership FAQa link
+  @vimal
+  Scenario: Membership - Verfiy membership FAQa link
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I click on my account button if page is not loaded
@@ -868,6 +869,7 @@ Feature: Estore critical path
     Then I verify that can logout without any issue
 
 #Search
+  @vimal
   Scenario: Search - Verify count of search result and product
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -886,8 +888,7 @@ Feature: Estore critical path
     When I choose country for eStore from footer
     When I go to estore item "sofa" from search field
     Then I verify in stock facet selection
-
-
+    @vimal
   Scenario: Search - Place order: search with any key term, select high to low. navigate to first product PDP
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -929,7 +930,7 @@ Feature: Estore critical path
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
 
- #Trade
+  @vimal
   Scenario: Verify the trade login and checkout
     Given I log into eStore as trade
     When I choose country for eStore from footer
@@ -947,6 +948,7 @@ Feature: Estore critical path
     Then I verify that estore thank you page is displayed
 
 #Contract
+  @vimal
   Scenario: Verify the contract login and checkout
     Given I log into eStore as contract
     When I choose country for eStore from footer
@@ -1012,26 +1014,30 @@ Feature: Estore critical path
 #    Given I go to estore guesthouse home page
 #    When I click on estore guesthouse rooftop pool page
 #    Then I verify that estore guesthouse rooftop pool page is displayed
-
+  @vimal
   Scenario: Verify Monogrammed products
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
-    When I click on add monogram checkbox from pdp on eStore
-    When I add monogram to product on eStore
-    Then I verify that monogram was added for pdp on eStore
+    When I open product page with "prod19500002" and "17050042" with "WHEA" for estore
+    Then I chose the '1' line item selections one by one
+    When I click on add monogram checkbox
+    When I choose monogram properties
     When I click on add to cart estore button
     When I click on view cart estore button
-    Then I verify monogram was added to cart for eStore
-    #verify mono on pdp -> add to cart-> verify the mono in cart
-
+    Then I verify that monogram was added
+    When I edit monogram
+    Then I verify that monogram was edited
+    When I remove monogram
+    Then I verify that monogram was removed
+  @vimal
   Scenario: Verify user is able to edit Monogram product incart
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add monogram checkbox from pdp on eStore
     When I add monogram to product on eStore
-    Then I verify that monogram was added for pdp on eStore
+    #Then I verify that monogram was added for pdp on eStore
+    Then I verify that monogram was added
     When I click on add to cart estore button
     When I click on view cart estore button
     Then I verify monogram was added to cart for eStore
