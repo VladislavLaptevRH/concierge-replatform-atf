@@ -117,6 +117,12 @@ public class Pdp {
            case  "has a title":
                pdpScreen.getPdpPopUpOnSaleTitle().should(visible, Duration.ofSeconds(5));
                break;
+           case  "zip code is present":
+               pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
+               break;
+           case  "Modal should displayed the list of ON SALE items":
+               assertTrue(pdpScreen.getModalOnSaleItemsList().size() > 1);
+               break;
            case  "has item#":
                with().pollInterval(5, SECONDS).await().until(() -> true);
                if(!pdpScreen.getPdpPopUpOnSaleItem().isDisplayed()){
@@ -189,6 +195,12 @@ public class Pdp {
        pdpScreen.getSearchFieldInput().setValue(arg0);
        pdpScreen.getSeeAllResultButton().click();
         result = arg0;
+    }
+
+    @Then("Product name should be displayed on left top")
+    public void visabilityOfProductName() {
+        pdpScreen.getPdpPopUpOnSaleProductName().shouldBe(visible, Duration.ofSeconds(15));
+
     }
 
     @And("I type {string}")
@@ -476,6 +488,35 @@ public class Pdp {
                 pdpScreen.getPublicSwatchHeroPageTitle().shouldBe(visible, Duration.ofSeconds(15));
                 pdpScreen.getCareInstructionLink().shouldBe(visible, Duration.ofSeconds(15));
                 break;
+            case  "line Item section image is present":
+                pdpScreen.getLineItemSectionImage().scrollIntoView(true);
+                pdpScreen.getLineItemSectionImage().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "Verify the Starting at price or configured price message":
+                pdpScreen.getSalePrice().scrollIntoView(true);
+                pdpScreen.getSalePrice().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "Verify the Sale/Final Sale price":
+                if(pdpScreen.getPdpOnSaleMemberPrice().isDisplayed()){
+                    pdpScreen.getPdpOnSaleMemberPrice().shouldBe(visible, Duration.ofSeconds(15));
+                } else {
+                    pdpScreen.getPdpOnSaleTradePrice().shouldBe(visible, Duration.ofSeconds(15));
+                }
+                break;
+            case  "ON SALE name in the left with close button right":
+                pdpScreen.getPdpModelOnSaleName().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "scrollable functionality":
+                pdpScreen.getPdpModelLoadMoreButton().scrollIntoView(true);
+                pdpScreen.getPdpModelLoadMoreButton().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "Add to cart button should be enabled":
+                pdpScreen.getPdpModalEnabledAddToCartButton().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getPdpModalDisabledAddToCartButton().shouldNotBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "By default qty dropdown should be displayed one":
+                assertEquals(pdpScreen.getQuantitySelect().getAttribute("value"), "1");
+                break;
             default: break;
         }
     }
@@ -677,6 +718,10 @@ public class Pdp {
                 break;
             case  "view select items on sale link":
                 pdpScreen.getViewSelectItemsOnSaleText().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "\"VIEW SALE ITEMS\" link below line item image":
+                pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().scrollIntoView(true);
+                pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().shouldHave(text("View\n" + "Sale\n" + "items"));
                 break;
             case  "wording also available in":
                 pdpScreen.getAlsoAvailableText().shouldBe(visible, Duration.ofSeconds(15));
@@ -888,6 +933,9 @@ public class Pdp {
                 break;
             case  "has a title":
                pdpScreen.getPdpPopUpOnSaleTitle().should(visible, Duration.ofSeconds(5));
+                break;
+            case  "zip code is present":
+                pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
                 break;
             case  "has item#":
                 with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -1164,6 +1212,14 @@ public class Pdp {
             case "any product image in carousel":
                 result = pdpScreen.getFirstProductItemInTheYAMLCarousel().getText();
                 pdpScreen.getFirstProductItemInTheYAMLCarousel().click();
+                break;
+            case  "\"VIEW SALE ITEMS\" link below line item image":
+                pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().scrollIntoView(true);
+                pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().click();
+                break;
+            case "postal code link":
+                pdpScreen.getPdpPopUpInStockZipCode().click();
+                pdpScreen.getPostalCodeModal().should(visible, Duration.ofSeconds(15));
                 break;
             default: break;
         }
