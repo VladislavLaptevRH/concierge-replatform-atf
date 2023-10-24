@@ -573,9 +573,9 @@ Feature: Concierge PDP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to item "60450996 BLNL" from search field
-    When I click on "view in stock items" link
-    Then Verify that "In Stock modal" 'opens'
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
     Then I click 'first product from the list' on PG screen
     Then I Verify that 'PDP title' is present
     Then Verify that 'line Item section image is present'
@@ -599,7 +599,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'Beds'
-    Then I navigate to gallery 'Leather Beds'
+    Then I navigate to gallery 'Wood Beds'
     Then I click 'first product from the list' on PG screen
     Then I Verify that 'PDP title' is present
     Then Verify that 'line Item section image is present'
