@@ -54,7 +54,7 @@ public class EstoreHomePage {
     private final SelenideElement accountIcon = $(By.xpath("//*[@data-analytics-nav='account-icon']"));
     private final SelenideElement member = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between'])[4]"));
 
-    private final SelenideElement homePageLogo = $(By.xpath("//a[@href='https://stg2.rhnonprod.com']"));
+    private final SelenideElement homePageLogo = $(By.xpath("//*[@data-analytics-worhlogo='worh-logo']"));
 
     private final SelenideElement countrySelection = $(By.id("country-selection"));
 
@@ -76,9 +76,11 @@ public class EstoreHomePage {
     public void verifyThatMyAccountIconIsDisplayed() {
         myAccountIconHomePage.should(visible, Duration.ofSeconds(12));
     }
+
     public void verifyThatCartIconIsDisplayed() {
         cartIconHomePage.should(visible, Duration.ofSeconds(12));
     }
+
     public void verifyThatNavigationMenuIsDisplayed() {
         appNavigationBar.should(visible, Duration.ofSeconds(12));
     }
@@ -94,6 +96,7 @@ public class EstoreHomePage {
     public void verifyThatHamburgerIconIsDisplayed() {
         hamburgerIcon.should(visible, Duration.ofSeconds(12));
     }
+
     private final SelenideElement homePageMenu = $(By.xpath("//div[contains(@data-navigation-account-item-id,'cat')]"));
 
     private final SelenideElement copyRightSymbol = $(By.xpath("//*[text()='© ']"));
@@ -103,11 +106,12 @@ public class EstoreHomePage {
     private final SelenideElement footerRhCompanyName = $(By.xpath("//*[text()=' RH']"));
 
 
-    public void verifyThatAllItemsFromFooterAreDisplayed(){
-        copyRightSymbol.should(visible,Duration.ofSeconds(12));
-        footerYearValue.should(visible,Duration.ofSeconds(12));
-        footerRhCompanyName.should(visible,Duration.ofSeconds(12));
+    public void verifyThatAllItemsFromFooterAreDisplayed() {
+        copyRightSymbol.should(visible, Duration.ofSeconds(12));
+        footerYearValue.should(visible, Duration.ofSeconds(12));
+        footerRhCompanyName.should(visible, Duration.ofSeconds(12));
     }
+
     public void verifyThatHomePageLogoIsDisplayed() {
         homePageLogo.should(visible, Duration.ofSeconds(30));
     }
