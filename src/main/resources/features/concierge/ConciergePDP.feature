@@ -714,3 +714,80 @@ Feature: Concierge PDP
     Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
     Then Verify that "Sale modal" 'zip code is present'
     Then Verify that "Sale modal" 'Modal should displayed the list of ON SALE items'
+
+  Scenario: Modal has dropdown which should contain the country list with resp flag and textbox to enter zipcode and confirm button
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'PDP title' is present
+    Then Verify that 'line Item section image is present'
+    Then Verify that 'line item selections (Size, Finish and Qty) are present'
+    Then I chose the '1' line item selections one by one
+    Then I verify that text item# and SKU is present
+    Then I Verify that 'text "Learn more about our Return Policy"' is present
+    Then Verify that 'text "Unlimited Furniture Delivery" is present'
+    Then I click 'postal code link' on pdp page
+    Then Verify that 'postal code model is present'
+
+  Scenario: The zipcode should be displayed on modal which has link
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "57070740 CLNT" from search field
+    Then I Verify that 'PDP title' is present
+    Then I Verify that '"VIEW SALE ITEMS" link below line item image' is present
+    Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
+    Then Verify that "Sale modal" 'zip code is present'
+
+  Scenario: Configure this item for delivery information for your location. should be displayed by default
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'PDP title' is present
+    Then Verify that 'line Item section image is present'
+    Then Verify that 'line item selections (Size, Finish and Qty) are present'
+    Then I chose the '1' line item selections one by one
+    Then Verify that 'text "Unlimited Furniture Delivery" is present'
+    Then Verify that 'delivery information message should be displayed'
+
+  Scenario: The country should always default to the Ship to country selected in the user preferences.
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'PDP title' is present
+    Then Verify that 'line Item section image is present'
+    Then Verify that 'line item selections (Size, Finish and Qty) are present'
+    Then I chose the '1' line item selections one by one
+    Then I verify that text item# and SKU is present
+    Then I Verify that 'text "Learn more about our Return Policy"' is present
+    Then Verify that 'text "Unlimited Furniture Delivery" is present'
+    Then I click 'postal code link' on pdp page
+    Then Verify that 'country should always default to the Ship to country selected in the user preferences'
+
+  Scenario: Modal should displayed the list of Instock item
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "60450996 BLNL" from search field
+    When I click on "view in stock items" link
+    Then Verify that "In Stock modal" 'opens'
+    Then Verify that "In Stock modal" 'modal should displayed the list of Instock item'
+
+  Scenario: View In stock Items link should be displayed below the applicable line item image with > symbol for applicable Instock products
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "60450996 BLNL" from search field
+    Then I Verify that '"VIEW IN STOCK ITEMS" link below line item image' is present
