@@ -147,6 +147,7 @@ public class PdpScreen {
     private final SelenideElement pdpPopUpInStockZipCode = $(By.xpath("//*[text() = 'These options are available for']/*[@data-testid = 'in-stock-link']"));
     private final SelenideElement inStockPopUpOptionText = $(By.xpath("//*[text()='These options are available for']"));
     private final ElementsCollection modalOnSaleItemsList = $$(By.xpath("//*[@data-testid = 'dialog-title-close-button']/../..//*[@id = 'component-rh-image']"));
+    private final ElementsCollection modalInStockItemsList = $$(By.xpath("//*[@data-testid = 'dialog-title-close-button']/../..//*[@id = 'component-rh-image']"));
     private final SelenideElement firstItem = $(By.xpath("(//*[@id= 'listColumn2-Item#'])[1]"));
     private final SelenideElement inStockPopUpProjectTitle = $(By.xpath("//h3[text() = 'ADD TO PROJECT']"));
     private final SelenideElement dataNavigationAccountItemRHBC = $(By.xpath("//div[@data-navigation-account-item-id='rhbc_cat479005']"));
@@ -286,7 +287,7 @@ public class PdpScreen {
 
     private final SelenideElement firstProductImage = $(By.xpath("(//*[@class = 'slick-slider slick-vertical slick-initialized']//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/prod18890296')])[1]"));
 
-    private final SelenideElement pdpTitle = $(By.xpath("//h2[contains(@class, MuiTypography-h2)]"));
+    private final SelenideElement pdpTitle = $(By.xpath("//h1[contains(@class, MuiTypography-h1)]"));
 
     private final SelenideElement cloudModularLeatherSofaText = $(By.xpath("//h3[text() = 'Cloud Modular Leather Sofa']"));
     private final SelenideElement premiumFabrics = $(By.xpath("//*[text()='Premium Fabrics']"));
@@ -389,9 +390,15 @@ public class PdpScreen {
 
     private final SelenideElement confirmationPostalCode = $(By.xpath("//*[@data-testid= 'submit-postal']"));
 
+    private final SelenideElement pdpZipCodeModalShippingCountry = $(By.xpath("//*[@id = 'country-zipcode-selection']"));
+
+    private final SelenideElement pdpZipCodeModalDefpultCountry = $(By.xpath("//*[text() = 'United States']"));
+
     private final SelenideElement fogSpecialOrderColor = $(By.xpath("//*[text() = 'Fog ']"));
 
     private final SelenideElement postalCode = $(By.xpath("//*[@id= 'postal-code-international']"));
+
+    private final SelenideElement availabilityDeliveryInformation = $(By.xpath("//*[contains(text() , 'This item will be ready for delivery between')]"));
 
     private final SelenideElement postalCodeModal = $(By.xpath("//*[text() = 'PLEASE ENTER YOUR POSTAL CODE']"));
 
