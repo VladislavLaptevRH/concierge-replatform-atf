@@ -20,6 +20,8 @@ public class EstoreSaleStepDefs {
     EstoreCGScreen estoreCGScreen = new EstoreCGScreen();
     EstoreSaleScreen estoreSaleScreen = new EstoreSaleScreen();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+
+    EstorePgStepDefs estorePgStepDefs = new EstorePgStepDefs();
     String URL;
 
 
@@ -62,13 +64,23 @@ public class EstoreSaleStepDefs {
         regularSalePrice = Integer.parseInt(estoreSaleScreen.getRegularSalePrice().getText().replaceAll("\\$", "").replaceAll(",", ""));
         memberSalePrice = Integer.parseInt(estoreSaleScreen.getMemberSalePrice().getText().replaceAll("\\$", "").replaceAll(",", ""));
 
-        assertTrue( memberSalePrice >= regularSalePrice, "Regular sale price is lower than member sale price");
+        assertTrue(memberSalePrice >= regularSalePrice, "Regular sale price is lower than member sale price");
     }
 
     @When("I go to Sale product page")
     public void iGoToSaleProductPage() {
-        String saleUrl="https://stg2.rhnonprod.com/us/en/catalog/category/products.jsp?categoryId=cat25450027&pgterm=" +
+        String saleUrl = "https://stg2.rhnonprod.com/us/en/catalog/category/products.jsp?categoryId=cat25450027&pgterm=" +
                 "RH+Fabric+Sofas&sale=true&topCatId=cat3890154&parentCatId=cat160024?endpoint=" + Hooks.cookie;
+        open(saleUrl);
+    }
+
+    @When("I go to the sale page with {string} on estore")
+    public void iGoToTheSalePageWithOnEstore(String arg0) {
+        String saleUrl = "";
+
+        if (arg0.equals("sofas")) {
+            saleUrl = Hooks.eStoreBaseURL + "/us/en/catalog/category/products.jsp?pgterm=RH+Fabric+Sofas&N=%7B%21tag%3Dsku_showOnly%7Dsku_showOnly%3A%28\"Sale\"%29&Ns=product.sale%7C1&categoryId=cat25450027" + Hooks.cookie;
+        }
         open(saleUrl);
     }
 }
