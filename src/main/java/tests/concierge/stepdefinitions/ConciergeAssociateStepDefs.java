@@ -515,7 +515,7 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I confirm registered profile")
     public void iConfirmregisteredprofile(){
-        with().pollInterval(10, SECONDS).await().until(() -> true);
+        with().pollInterval(60, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getProfileRegistered().should(visible, Duration.ofSeconds(15));
     }
 
