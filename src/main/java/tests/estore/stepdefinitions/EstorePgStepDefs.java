@@ -261,6 +261,14 @@ public class EstorePgStepDefs {
 
         AssertJUnit.assertEquals("Regular price is not equal to zero", regularSalePagePrice, regularSalePrice);
         AssertJUnit.assertEquals("Member price is not equal to zero", memberSalePagePrice, memberSalePrice);
+    }
 
+    @Then("I verify that the price mentioned on PG page")
+    public void iVerifyThatThePriceMentionedOnPGPage() {
+        int regularPrice = estorePGScreen.getRegularPriceOnPg();
+        int memberPrice = estorePGScreen.getMemberPriceOnPg();
+
+        AssertJUnit.assertTrue("Regular price is not equal to zero", regularPrice > 0);
+        AssertJUnit.assertTrue("Member price is not equal to zero", memberPrice > 0);
     }
 }

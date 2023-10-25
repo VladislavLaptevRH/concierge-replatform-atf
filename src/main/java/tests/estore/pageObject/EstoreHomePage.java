@@ -16,6 +16,9 @@ import static com.codeborne.selenide.Selenide.$$;
 @Getter
 
 public class EstoreHomePage {
+
+    private final SelenideElement appNavigationBar = $(By.id("app-navigation-bar"));
+
     private final List<SelenideElement> listOfNavigationBar = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']/div"));
     private final List<SelenideElement> listOfBrandNames = $$(By.xpath("//div[@id= 'brand-links-container']/ul/li"));
     private final List<SelenideElement> listOfSubCategories = $$(By.xpath("(//ul[@class=\"MuiList-root\"])[1]/li"));
@@ -61,6 +64,36 @@ public class EstoreHomePage {
 
     private final SelenideElement headerCartButton = $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']"));
 
+    private final SelenideElement rhLogo = $(By.id("container-rhr-header_logo-rhr"));
+
+    private final SelenideElement searchField = $(By.id("container-rhrSearchField_search-btn"));
+
+    private final SelenideElement cartIconHomePage = $(By.id("container-rhrHeader_cart-btn"));
+
+    private final SelenideElement myAccountIconHomePage = $(By.id("container-accountNavMenu_account-btn"));
+
+
+    public void verifyThatMyAccountIconIsDisplayed() {
+        myAccountIconHomePage.should(visible, Duration.ofSeconds(12));
+    }
+    public void verifyThatCartIconIsDisplayed() {
+        cartIconHomePage.should(visible, Duration.ofSeconds(12));
+    }
+    public void verifyThatNavigationMenuIsDisplayed() {
+        appNavigationBar.should(visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatSearchFieldIsDisplayed() {
+        searchField.should(visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatRhLogoIsDisplayed() {
+        rhLogo.should(visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatHamburgerIconIsDisplayed() {
+        hamburgerIcon.should(visible, Duration.ofSeconds(12));
+    }
     private final SelenideElement homePageMenu = $(By.xpath("//div[contains(@data-navigation-account-item-id,'cat')]"));
 
     private final SelenideElement copyRightSymbol = $(By.xpath("//*[text()='© ']"));

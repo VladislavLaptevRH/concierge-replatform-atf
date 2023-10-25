@@ -189,6 +189,11 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getHeaderCartButton().should(Condition.visible, Duration.ofSeconds(20));
     }
 
+    @And("I verify that cart and my account icons should be displayed")
+    public void iVerifyThatCartAndMyAccountIconsShouldBeDisplayed() {
+        estoreHomePage.verifyThatCartIconIsDisplayed();
+        estoreHomePage.verifyThatMyAccountIconIsDisplayed();
+    }
     @Then("I verify that home page load will all sections and links")
     public void iVerifyThatHomePageLoadWillAllSectionsAndLinks() {
         estoreHomePage.getAccountIcon().should(Condition.visible, Duration.ofSeconds(20));

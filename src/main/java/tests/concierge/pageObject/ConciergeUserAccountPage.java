@@ -26,6 +26,7 @@ public class ConciergeUserAccountPage {
     public final String brand = "//*[text()='%s']";
 
     public final String button = "//span[text()='%s']";
+    public final String th = "//th[text()='%s']";
 
     private final SelenideElement galleryButton = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1 MuiGrid-item MuiGrid-align-items-xs-center']/div[@class='MuiGrid-root MuiGrid-item'][2]"));
 
@@ -208,6 +209,18 @@ public class ConciergeUserAccountPage {
     private final SelenideElement postalCode = $(By.xpath("//input[@name='postalCode']"));
     private final SelenideElement company = $(By.xpath("//input[@name='company']"));
     private final SelenideElement signout = $(By.xpath("//p[text()='SIGN OUT']"));
+    private final SelenideElement orderHistoryTitle = $(By.xpath("//*[text()='RH Orders']"));
+    private final SelenideElement orderUser = $(By.xpath("//*[text()='automation trade']"));
+    private final SelenideElement orderSearch = $(By.xpath("//*[text()='Order Search']"));
+    private final SelenideElement orderTable = $(By.xpath("//table"));
+    private final SelenideElement firstName = $(By.xpath("//input[@name='firstName']"));
+    private final SelenideElement lastName = $(By.xpath("//input[@name='lastName']"));
+    private final SelenideElement orderSearchButton = $(By.xpath("//button[@type='submit']"));
+    private final SelenideElement resultName = $(By.xpath("//td[text()='Automation Trade']"));
+    private final SelenideElement phoneNumber = $(By.xpath("//input[@name='phoneNumber']"));
+    private final SelenideElement resultPhoneNumber = $(By.xpath("//td[text()='(123) 456-7890']"));
+    private final SelenideElement firstNameOnly = $(By.xpath("//*[text()='First name must be combined with another search field.']"));
+    private final SelenideElement lastNameOnly = $(By.xpath("//td[contains(text(),'Trade')]"));
 
 
     public SelenideElement getCurrentLocationGalleryItemByName(String name) {
@@ -242,6 +255,11 @@ public class ConciergeUserAccountPage {
 
     public SelenideElement getButton(String buttonName){
         String path = String.format(button, buttonName);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getTableHeader(String header){
+        String path = String.format(th, header);
         return $(byXpath(path));
     }
 
