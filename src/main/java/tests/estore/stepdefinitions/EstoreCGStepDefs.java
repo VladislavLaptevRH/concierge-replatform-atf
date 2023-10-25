@@ -320,4 +320,6 @@ public class EstoreCGStepDefs {
             estoreCGScreen.verifyThatSwatches3upGridViewIsDisplayed();
         }
     }
+
+
 }
