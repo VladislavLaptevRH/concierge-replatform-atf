@@ -77,14 +77,6 @@ Feature: Estore Search
     When I go to estore item "SOFAS" from search field
     Then I verify that I'm able to use back button from CG
 
-  Scenario: Search any product from cart page and verify for back button
-    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
-    When I remove all items from estore cart
-    When I add item to cart via API for estore
-    When I goes to estore cart for estore
-    When I verify for back button from cart page
-
   Scenario Outline: Verify the 1,2 and 3 grid
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer

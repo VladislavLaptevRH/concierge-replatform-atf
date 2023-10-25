@@ -24,11 +24,6 @@ Feature: Estore CG
     When I goes to estore collection page
     Then I validate the collection name is not empty
 
-  Scenario: CG-Verify Shop In Stock Link
-    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
-    When I remove all items from estore cart
-
   Scenario: CG-Verify Back To top Button
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer

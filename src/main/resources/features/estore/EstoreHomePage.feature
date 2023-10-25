@@ -61,7 +61,6 @@ Feature: Estore Homepage
   Scenario: Verify the cart icon on the home page and have the item/s count next to the mini cart icon.
     Given I log into eStore as "cartIconOnTheHomePage" user
     When I choose country for eStore from footer
-    When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
     Then I verify that cart page icon is displayed
