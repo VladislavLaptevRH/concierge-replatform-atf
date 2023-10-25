@@ -256,4 +256,13 @@ public class EstoreCGStepDefs {
         $(By.xpath("(//div[@id='component-rh-image_wrapper'])[2]//div")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
     }
 
+    @Then("I verify that the price mentioned on PG page")
+    public void iVerifyThatThePriceMentionedOnPGPage() {
+        int regularPrice = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[1]")).getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+        int memberPrice = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-member'])[1]")).getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+
+        assertTrue("Regular price is not equal to zero", regularPrice > 0);
+        assertTrue("Member price is not equal to zero", memberPrice > 0);
+    }
+
 }

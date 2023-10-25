@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.AssertJUnit;
 import tests.concierge.pageObject.SelectOption;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
@@ -41,6 +42,8 @@ public class EstorePdpStepDefs {
     EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
 
     EstoreAccountStepDefs estoreAccountStepDefs = new EstoreAccountStepDefs();
+
+    EstorePgStepDefs estorePgStepDefs = new EstorePgStepDefs();
     String regularUSPrice;
     String memberUSPrice;
     String regularCAGBPrice;
@@ -778,6 +781,12 @@ public class EstorePdpStepDefs {
     public void iSelectFabricOptionForLineItem() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         selectOption.selectFabricPropertyLineItem();
+    }
+
+    @Then("I verify that prices for the VIEW SELECT ITEMS ON SALE on PDP and the sale page")
+    public void iVerifyThatPricesForTheVIEWSELECTITEMSONSALEOnPDPAndTheSalePage() {
+        AssertJUnit.assertEquals("Regular price is not equal to zero", estorePGScreen.getRegularSaleOnPgPrice(), estorePDPScreen.getRegularSalePricePDP());
+        AssertJUnit.assertEquals("Member price is not equal to zero", estorePGScreen.getMemberSaleOnPgPrice(), estorePDPScreen.getMemberSalePricePDP());
 
     }
 }

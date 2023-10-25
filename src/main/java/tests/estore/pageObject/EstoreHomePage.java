@@ -61,6 +61,27 @@ public class EstoreHomePage {
 
     private final SelenideElement headerCartButton = $(By.xpath("//a[@href='/us/en/checkout/shopping_cart.jsp']"));
 
+    private final SelenideElement homePageMenu = $(By.xpath("//div[contains(@data-navigation-account-item-id,'cat')]"));
+
+    private final SelenideElement copyRightSymbol = $(By.xpath("//*[text()='© ']"));
+
+    private final SelenideElement footerYearValue = $(By.xpath("//*[text()='2023']"));
+
+    private final SelenideElement footerRhCompanyName = $(By.xpath("//*[text()=' RH']"));
+
+
+    public void verifyThatAllItemsFromFooterAreDisplayed(){
+        copyRightSymbol.should(visible,Duration.ofSeconds(12));
+        footerYearValue.should(visible,Duration.ofSeconds(12));
+        footerRhCompanyName.should(visible,Duration.ofSeconds(12));
+    }
+    public void verifyThatHomePageLogoIsDisplayed() {
+        homePageLogo.should(visible, Duration.ofSeconds(30));
+    }
+
+    public void homePageMenuIsDisplayed() {
+        homePageMenu.should(visible, Duration.ofSeconds(12));
+    }
 
     public void clickToAccountButtonForregisteredUser() {
         accountIcon.should(interactable, Duration.ofSeconds(20));
