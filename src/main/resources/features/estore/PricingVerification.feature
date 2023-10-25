@@ -1,4 +1,5 @@
 @estoreTestRun
+@estorePricingValidation
 
 Feature: Pricing Verification
 
