@@ -714,7 +714,7 @@ Feature: Concierge PDP
     Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
     Then Verify that "Sale modal" 'zip code is present'
     Then Verify that "Sale modal" 'Modal should displayed the list of ON SALE items'
-  @vlad
+
   Scenario: Modal has dropdown which should contain the country list with resp flag and textbox to enter zipcode and confirm button
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -732,7 +732,7 @@ Feature: Concierge PDP
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
     Then I click 'postal code link' on pdp page
     Then Verify that 'postal code model is present'
-@vlad
+
   Scenario: The zipcode should be displayed on modal which has link
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -742,7 +742,7 @@ Feature: Concierge PDP
     Then I Verify that '"VIEW SALE ITEMS" link below line item image' is present
     Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
     Then Verify that "Sale modal" 'zip code is present'
-@vlad
+
   Scenario: Configure this item for delivery information for your location. should be displayed by default
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -757,7 +757,7 @@ Feature: Concierge PDP
     Then I chose the '1' line item selections one by one
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
     Then Verify that 'delivery information message should be displayed'
-  @vlad
+
   Scenario: The country should always default to the Ship to country selected in the user preferences.
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -775,7 +775,7 @@ Feature: Concierge PDP
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
     Then I click 'postal code link' on pdp page
     Then Verify that 'country should always default to the Ship to country selected in the user preferences'
-  @vlad
+
   Scenario: Modal should displayed the list of Instock item
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -785,7 +785,6 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'opens'
     Then Verify that "In Stock modal" 'modal should displayed the list of Instock item'
 
-  @vlad
   Scenario: View In stock Items link should be displayed below the applicable line item image with > symbol for applicable Instock products
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
