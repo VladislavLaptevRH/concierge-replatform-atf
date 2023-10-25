@@ -517,6 +517,17 @@ public class Pdp {
             case  "By default qty dropdown should be displayed one":
                 assertEquals(pdpScreen.getQuantitySelect().getAttribute("value"), "1");
                 break;
+            case  "postal code model is present":
+                pdpScreen.getPostalCode().shouldHave(visible, Duration.ofSeconds(15));
+                pdpScreen.getConfirmationPostalCode().shouldHave(visible, Duration.ofSeconds(15));
+                pdpScreen.getPdpZipCodeModalShippingCountry().shouldHave(visible, Duration.ofSeconds(15));
+                break;
+            case  "delivery information message should be displayed":
+                pdpScreen.getAvailabilityDeliveryInformation().shouldHave(visible, Duration.ofSeconds(15));
+                break;
+            case  "country should always default to the Ship to country selected in the user preferences":
+                pdpScreen.getPdpZipCodeModalDefpultCountry().shouldHave(visible, Duration.ofSeconds(15));
+                break;
             default: break;
         }
     }
@@ -722,6 +733,10 @@ public class Pdp {
             case  "\"VIEW SALE ITEMS\" link below line item image":
                 pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().scrollIntoView(true);
                 pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().shouldHave(text("View\n" + "Sale\n" + "items"));
+                break;
+            case  "\"VIEW IN STOCK ITEMS\" link below line item image":
+                pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().scrollIntoView(true);
+                pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().shouldHave(text("View\n" + "In-Stock\n" + "items"));
                 break;
             case  "wording also available in":
                 pdpScreen.getAlsoAvailableText().shouldBe(visible, Duration.ofSeconds(15));
@@ -1218,7 +1233,8 @@ public class Pdp {
                 pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().click();
                 break;
             case "postal code link":
-                pdpScreen.getPdpPopUpInStockZipCode().click();
+                pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
+                pdpScreen.getZipCode().click();
                 pdpScreen.getPostalCodeModal().should(visible, Duration.ofSeconds(15));
                 break;
             default: break;
