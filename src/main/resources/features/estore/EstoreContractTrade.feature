@@ -1,4 +1,5 @@
-  @estoreTestRun @estoreContractTrade
+  @estoreTestRun
+  @estoreContractTrade
 
 Feature: eStore Contract and Trade
 
