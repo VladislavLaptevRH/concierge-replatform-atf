@@ -1,5 +1,5 @@
 @estoreTestRun
-
+@estoreMembership
 Feature: Estore Membership
 
   Scenario: eStore Membership

@@ -502,4 +502,71 @@ public class ConciergeAssociateStepDefs {
         generalStepDefs.loginAsRole(arg0);
         generalStepDefs.waitForJSandJQueryToLoad();
     }
+
+    @Then("I search by Name")
+    public void iSearchbyName(){
+        conciergeUserAccountPage.getProfileFirstName().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileFirstName().setValue("test");
+        conciergeUserAccountPage.getProfileLastName().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileLastName().setValue("test");
+        conciergeUserAccountPage.getProfileSearchButton().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileSearchButton().click();
+    }
+
+    @Then("I confirm registered profile")
+    public void iConfirmregisteredprofile(){
+        conciergeUserAccountPage.getProfileRegistered().should(visible, Duration.ofSeconds(120));
+    }
+
+    @Then("I search by email")
+    public void iSearchbyemail(){
+        conciergeUserAccountPage.getProfileemailormemberid().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileemailormemberid().setValue("test@test.com");
+        conciergeUserAccountPage.getProfileSearchButton().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileSearchButton().click();
+    }
+
+    @Then("I confirm registered profile fields")
+    public void iConfirmFields(){
+        conciergeUserAccountPage.getProfileRegisteredEmail().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileRegisteredName().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileRegisteredRHMember().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileRegisteredMemberID().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileRegisteredCart().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileRegisteredDetails().should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I click cart button")
+    public void iclickcart(){
+        conciergeUserAccountPage.getProfileRegisteredCart().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileRegisteredCart().click();
+    }
+
+    @Then("I click details button")
+    public void iclickdetails(){
+        conciergeUserAccountPage.getProfileRegisteredDetails().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileRegisteredDetails().click();
+    }
+
+    @Then("I confirm user cart page")
+    public void iUserCartpage(){
+        conciergeUserAccountPage.getProfileCartPage().should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I confirm user details page")
+    public void iUserDetailspage(){
+        conciergeUserAccountPage.getProfileDetailsPage().should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I click on wishlist link")
+    public void iclickWishlist(){
+        conciergeUserAccountPage.getProfileWishlistLink().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileWishlistLink().click();
+    }
+
+    @Then("I confirm user wishlist page")
+    public void iwishlist(){
+        conciergeUserAccountPage.getProfileWishlistPage().should(visible, Duration.ofSeconds(15));
+    }
+
 }

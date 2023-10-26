@@ -1,3 +1,4 @@
+@estoreGuestHouse
 Feature: Estore Guest house
 
   Scenario: Verify dinning room page
