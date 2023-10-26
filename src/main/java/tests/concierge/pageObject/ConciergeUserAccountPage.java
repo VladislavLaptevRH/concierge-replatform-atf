@@ -236,6 +236,9 @@ public class ConciergeUserAccountPage {
     private final SelenideElement profileDetailsPage = $(By.xpath("//*[text()='SALESFORCE CONTACT ID']"));
     private final SelenideElement profileWishlistLink = $(By.xpath("//*[text()='Wishlist']"));
     private final SelenideElement profileWishlistPage = $(By.xpath("//*[text()='Your wish list is currently empty.']"));
+    private final SelenideElement profileOrderHistory = $(By.xpath("//*[text()='Order History']"));
+    private final SelenideElement profileOrderHistoryRegistry = $(By.xpath("//*[text()='ORDER HISTORY']"));
+    private final SelenideElement profileCheckbox = $(By.xpath("//input[@type='checkbox']"));
 
     public SelenideElement getCurrentLocationGalleryItemByName(String name) {
         String path = String.format(currentLocationGalleryItem, name);
