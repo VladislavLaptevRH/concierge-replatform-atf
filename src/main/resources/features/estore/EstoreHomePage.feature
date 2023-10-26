@@ -1,5 +1,5 @@
 @estoreTestRun
-
+@estoreHomePage
 Feature: Estore Homepage
 
   Scenario Outline: Verify search functionality
@@ -31,11 +31,13 @@ Feature: Estore Homepage
     When I click on Hamburger menu
     Then I verify list of items in hamburger menu
 
-#  Scenario: Validate Each Category And Sub-Category for eStore
-#    Given I log into eStore as "regular" user
-#    When I choose country for eStore from footer
-#    Then I validate each cat and sub-cat for eStore
+  Scenario: Verify that home page loads properly
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    Then I verify that home page load will all sections and links
 
-
-
+  Scenario: Verify the footer section.
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    Then I verify that footer section should show at the bottom of the page along with copy right and year
 

@@ -30,6 +30,12 @@ public class EstorePgStepDefs {
     int priceFromTheFirstProduct;
     int priceFromTheSecondProduct;
 
+    int regularSalePrice;
+
+    int memberSalePrice;
+
+    int memberPrice;
+
     @Then("I validate {string},{string} and {string} grid view should work")
     public void iValidateAndGridViewShouldWork(String arg0, String arg1, String arg2) {
         if (arg0.equals("1")) {
@@ -71,6 +77,7 @@ public class EstorePgStepDefs {
     @When("I apply In stock to Sale filter")
     public void iApplyInStockToSaleFilter() {
         WebDriverRunner.getWebDriver().navigate().refresh();
+        with().pollInterval(4, SECONDS).await().until(() -> true);
         estorePGScreen.getSaleButtonFilter().shouldHave(text("SALE"), Duration.ofSeconds(20));
         executeJavaScript("arguments[0].click();", estorePGScreen.getSaleButtonFilter());
     }
@@ -99,8 +106,8 @@ public class EstorePgStepDefs {
 
     @When("I navigate to any estore fusion PG")
     public void iNavigateToAnyEstoreFusionPG() {
-        estorePGScreen.getListOfPgFusionElements().get(2).should(visible, Duration.ofSeconds(20));
-        estorePGScreen.getListOfPgFusionElements().get(2).click();
+        estorePGScreen.getListOfPgFusionElements().get(0).should(visible, Duration.ofSeconds(20));
+        estorePGScreen.getListOfPgFusionElements().get(0).click();
     }
 
     @Then("I verify page with previous filter applied")
@@ -223,5 +230,45 @@ public class EstorePgStepDefs {
     @Then("I validate {string} and {string} grid view should work")
     public void iValidateAndGridViewShouldWork(String arg0, String arg1) {
         System.out.println();
+    }
+
+    @When("I check price for {string} on PG page for estore")
+    public void iCheckPriceForOnPGPageForEstore(String arg0) {
+        priceFromTheFirstProduct = estorePGScreen.getRegularPriceOnPg();
+        memberPrice = estorePGScreen.getMemberPriceOnPg();
+        with().pollInterval(4, SECONDS).await().until(() -> true);
+    }
+
+    @Then("I verify that prices are matching between PG nad PDP pages")
+    public void iVerifyThatPricesAreMatchingBetweenPGNadPDPPages() {
+        int regularPrice = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[1]")).getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+        int memberPrice = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-member'])[1]")).getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+
+        AssertJUnit.assertEquals("Regular price is not equal to zero", regularPrice, priceFromTheFirstProduct);
+        AssertJUnit.assertEquals("Member price is not equal to zero", memberPrice, memberPrice);
+    }
+
+    @When("I check sale price for {string} on PG page for estore")
+    public void iCheckSalePriceForOnPGPageForEstore(String arg0) {
+        regularSalePrice = estorePGScreen.getRegularSaleOnPgPrice();
+        memberSalePrice = estorePGScreen.getMemberSaleOnPgPrice();
+    }
+
+    @Then("I verify that prices for the VIEW SELECT ITEMS ON SALE on PG and the sale page")
+    public void iVerifyThatPricesForTheVIEWSELECTITEMSONSALEOnPGAndTheSalePage() {
+        int regularSalePagePrice = estorePGScreen.getRegularSaleOnPgPrice();
+        int memberSalePagePrice = estorePGScreen.getMemberSaleOnPgPrice();
+
+        AssertJUnit.assertEquals("Regular price is not equal to zero", regularSalePagePrice, regularSalePrice);
+        AssertJUnit.assertEquals("Member price is not equal to zero", memberSalePagePrice, memberSalePrice);
+    }
+
+    @Then("I verify that the price mentioned on PG page")
+    public void iVerifyThatThePriceMentionedOnPGPage() {
+        int regularPrice = estorePGScreen.getRegularPriceOnPg();
+        int memberPrice = estorePGScreen.getMemberPriceOnPg();
+
+        AssertJUnit.assertTrue("Regular price is not equal to zero", regularPrice > 0);
+        AssertJUnit.assertTrue("Member price is not equal to zero", memberPrice > 0);
     }
 }
