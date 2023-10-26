@@ -114,3 +114,54 @@ Feature: Estore PG
     When I choose country for eStore from footer
     When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
     Then I verify that search results page is displayed with newly searched products
+
+  Scenario: PG - Verify the product details on PG
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "FABRIC CHAIR COLLECTION" from search field
+    When I apply In stock to Sale filter
+    Then I verify that the swatches should show below the image with correct padding
+    And I verify that the product name and price should correct
+    Then I verify that the VIEW SELECT ITEMS ON SALE link should show in red color
+    And I verify that the underline should appear on the link VIEW SELECT ITEMS ON SALE.
+
+  Scenario: Verify that user is able to see combined price on frame and cushion on PG
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that combined price on frame and cushion on PG
+    When I navigate to any estore fusion PG
+    And I verify that price on PG is the same as on PDP
+
+  Scenario: Verify the prices shown against instock products on PG page when instock is selected and the prices at line item level on PDP are same
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    When I apply In stock filter on PG for estore
+    Then I verify that the prices shown against instock products on PG page
+    And I verify that combined price on frame and cushion on PG
+    When I navigate to any estore fusion PG
+    And I verify that price on PG is the same as on PDP for In stock filter applied
+
+  Scenario: Verify the products are shown with relevant colorized images on PG page when instock filter is selected
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    When I apply In stock filter on PG for estore
+    Then I verify that the products are shown with relevant colorized images on PG page
+
+  Scenario: Verify the user can see Pagination carousel
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    When I scroll to the bottom of the estore page
+    Then I verify that the Pagination carousel is displayed on PG for estore
+
+  Scenario: Verify the Pagination carousel content
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    When I scroll to the bottom of the estore page
+    Then I verify that the Pagination carousel content is displayed on PG for estore
+
+

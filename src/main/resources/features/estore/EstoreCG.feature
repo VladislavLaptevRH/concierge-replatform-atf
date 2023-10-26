@@ -126,3 +126,4 @@ Feature: Estore CG
     Then I verify that swatches are displayed for 2up grid view
     When I select 3up grid view on CG for estore
     Then I verify that swatches are displayed for 3up grid view
+

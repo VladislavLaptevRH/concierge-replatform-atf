@@ -1,9 +1,12 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.ClickOptions;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -88,6 +91,29 @@ public class EstorePGScreen {
     private final SelenideElement regularPrice = $(By.xpath("(//*[@data-testid='price-for-regular'])[1]"));
 
     private final SelenideElement memberPrice = $(By.xpath("(//*[@data-testid='price-for-member'])[1]"));
+
+    private final SelenideElement inStockFilterPG = $(By.xpath("//input[@name='In-Stock' and @type='checkbox']"));
+
+    private final SelenideElement inStockTextFilterPG = $(By.xpath("//*[text()='in-stock']"));
+
+    private final SelenideElement inStockColorText = $(By.xpath("(//p[@id='listColumn1-Color'])[1]"));
+
+    private final SelenideElement inStockFilterColorizedImage = $(By.xpath("(//img[contains(@alt,'prod')])[1]"));
+
+    private final SelenideElement PgCarousel = $(By.xpath("//*[@data-analytics-id='link']"));
+
+    private final SelenideElement PgCarouselContent = $(By.id("component-product-grid"));
+
+
+    public void verifyThatColorizedImagesAreDisplayed() {
+        inStockColorText.should(Condition.visible, Duration.ofSeconds(12));
+        inStockFilterColorizedImage.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void clickToInStockFilterPG() {
+        inStockTextFilterPG.should(Condition.visible, Duration.ofSeconds(12));
+        inStockFilterPG.click(ClickOptions.usingJavaScript());
+    }
 
     public int getRegularPriceOnPg() {
         return Integer.parseInt(regularPrice.getText().replaceAll("[^0-9]", ""));

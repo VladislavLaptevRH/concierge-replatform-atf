@@ -7,9 +7,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.testng.AssertJUnit;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
-import tests.estore.pageObject.EstorePGScreen;
-import tests.estore.pageObject.EstoreSearchScreen;
-import tests.estore.pageObject.EstoreUserAccountPage;
+import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 
 import java.time.Duration;
@@ -19,6 +17,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertTrue;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class EstorePgStepDefs {
 
@@ -26,6 +25,11 @@ public class EstorePgStepDefs {
     EstorePGScreen estorePGScreen = new EstorePGScreen();
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+
+    EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
+    EstoreCGScreen estoreCGScreen = new EstoreCGScreen();
+
+    EstoreItemPage estoreItemPage = new EstoreItemPage();
 
     int priceFromTheFirstProduct;
     int priceFromTheSecondProduct;
@@ -35,6 +39,7 @@ public class EstorePgStepDefs {
     int memberSalePrice;
 
     int memberPrice;
+    int regularPrice;
 
     @Then("I validate {string},{string} and {string} grid view should work")
     public void iValidateAndGridViewShouldWork(String arg0, String arg1, String arg2) {
@@ -270,5 +275,65 @@ public class EstorePgStepDefs {
 
         AssertJUnit.assertTrue("Regular price is not equal to zero", regularPrice > 0);
         AssertJUnit.assertTrue("Member price is not equal to zero", memberPrice > 0);
+    }
+
+    @Then("I verify that combined price on frame and cushion on PG")
+    public void iVerifyThatCombinedPriceOnFrameAndCushionOnPG() {
+        estorePGScreen.getRegularPrice().should(visible, Duration.ofSeconds(12));
+        estorePGScreen.getMemberPrice().should(visible, Duration.ofSeconds(12));
+
+        regularPrice = estorePGScreen.getRegularPriceOnPg();
+        memberPrice = estorePGScreen.getMemberPriceOnPg();
+        AssertJUnit.assertTrue("Verify that member proudct price is correct", regularPrice > 0);
+        AssertJUnit.assertTrue("Verify that regular proudct price is correct", memberPrice > 0);
+    }
+
+    @And("I verify that price on PG is the same as on PDP")
+    public void iVerifyThatPriceOnPGISTheSameAsOnPDP() {
+        estorePDPScreen.getFirstMemberPrice().should(visible, Duration.ofSeconds(12));
+        assertEquals("Verify that member price on PG is the same as on PDP", estorePDPScreen.getMemberPricePDP(), memberPrice);
+        assertEquals("Verify that regular price on PG is the same as on PDP", estorePDPScreen.getRegularPricePDP(), regularPrice);
+    }
+
+    @When("I apply In stock filter on PG for estore")
+    public void iApplyInStockFilterOnPGForEstore() {
+        estorePGScreen.clickToInStockFilterPG();
+    }
+
+    @Then("I verify that the prices shown against instock products on PG page")
+    public void iVerifyThatThePricesShownAgainstInstockProductsOnPGPage() {
+        estorePGScreen.getRegularPrice().should(visible, Duration.ofSeconds(12));
+        estorePGScreen.getMemberPrice().should(visible, Duration.ofSeconds(12));
+
+        regularPrice = estorePGScreen.getRegularPriceOnPg();
+        memberPrice = estorePGScreen.getMemberPriceOnPg();
+        AssertJUnit.assertTrue("Verify that member proudct price is correct", regularPrice > 0);
+        AssertJUnit.assertTrue("Verify that regular proudct price is correct", memberPrice > 0);
+
+    }
+
+    @And("I verify that price on PG is the same as on PDP for In stock filter applied")
+    public void iVerifyThatPriceOnPGIsTheSameAsOnPDPForInStockFilterApplied() {
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        estoreItemPage.getAddToCartButton().scrollIntoView(true);
+        estorePDPScreen.getLineItemRegularPrice().should(visible, Duration.ofSeconds(12));
+        assertEquals("Verify that member price on PG is the same as on PDP", estorePDPScreen.getMemberLineItemPricePDP(), memberPrice);
+        assertEquals("Verify that regular price on PG is the same as on PDP", estorePDPScreen.getRegularLineItemPricePDP(), regularPrice);
+
+    }
+
+    @Then("I verify that the products are shown with relevant colorized images on PG page")
+    public void iVerifyThatTheProductsAreShownWithRelevantColorizedImagesOnPGPage() {
+        estorePGScreen.verifyThatColorizedImagesAreDisplayed();
+    }
+
+    @Then("I verify that the Pagination carousel is displayed on PG for estore")
+    public void iVerifyThatThePaginationCarouselIsDisplayedOnPGForEstore() {
+        estorePGScreen.getPgCarousel().should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that the Pagination carousel content is displayed on PG for estore")
+    public void iVerifyThatThePaginationCarouselContentIsDisplayedOnPGForEstore() {
+        System.out.println();
     }
 }
