@@ -6,12 +6,14 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 
 public class ConciergeItemsScreen {
+    public final String numberOfProduct = "(//*[@id = 'component-rh-image']/../../..)[%s]";
     private final SelenideElement firstItem = $(By.xpath("(//div[contains(@class,'cols-6')]//div[contains(@class,'MuiGrid-grid-xs-6')])[1]"));
 
     private final SelenideElement error = $(By.xpath("//*[text() = 'Error while adding items to project']"));
@@ -130,5 +132,10 @@ public class ConciergeItemsScreen {
     private final SelenideElement clearAll = $(By.xpath("//*[text()='Clear All']"));
     private final SelenideElement searchIconField = $(By.xpath("//input[@placeholder='SEARCH']"));
 
+
+    public SelenideElement getProductByNumber(String number) {
+        String path = String.format(numberOfProduct, number);
+        return $(byXpath(path));
+    }
 }
 
