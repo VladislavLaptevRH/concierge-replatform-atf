@@ -79,6 +79,17 @@ public class EstorePDPScreen {
 
     private final SelenideElement returnLineItemMessage = $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]"));
 
+    private final SelenideElement regularSalePricePdp = $(By.xpath("(//*[@data-testid='price-for-sale'])[1]"));
+    private final SelenideElement memberSalePricePdp = $(By.xpath("(//*[@data-testid='price-for-member'])[1]"));
+
+    public int getRegularSalePricePDP() {
+        return Integer.parseInt(regularSalePricePdp.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+    }
+
+    public int getMemberSalePricePDP() {
+        return Integer.parseInt(memberSalePricePdp.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+    }
+
     public void verifyThatReturnMessageIsDisplayed() {
         returnLineItemMessage.should(Condition.visible, Duration.ofSeconds(12));
     }

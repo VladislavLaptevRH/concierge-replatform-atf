@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.estore.pageObject.EstoreHomePage;
+import tests.estore.pageObject.EstoreSearchScreen;
 import tests.estore.pageObject.EstoreUserAccountPage;
 import tests.utility.Hooks;
 
@@ -30,6 +31,8 @@ public class EstoreHomePageStepDefs {
     EstoreHomePage estoreHomePage = new EstoreHomePage();
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
+
+    EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
 
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
 
@@ -190,5 +193,17 @@ public class EstoreHomePageStepDefs {
     public void iVerifyThatCartAndMyAccountIconsShouldBeDisplayed() {
         estoreHomePage.verifyThatCartIconIsDisplayed();
         estoreHomePage.verifyThatMyAccountIconIsDisplayed();
+    }
+    @Then("I verify that home page load will all sections and links")
+    public void iVerifyThatHomePageLoadWillAllSectionsAndLinks() {
+        estoreHomePage.getAccountIcon().should(Condition.visible, Duration.ofSeconds(20));
+        estoreHomePage.getSearchIconHomePage().should(Condition.visible, Duration.ofSeconds(20));
+        estoreHomePage.getHeaderCartButton().should(Condition.visible, Duration.ofSeconds(20));
+        estoreHomePage.verifyThatHomePageLogoIsDisplayed();
+    }
+
+    @Then("I verify that footer section should show at the bottom of the page along with copy right and year")
+    public void iVerifyThatFooterSectionShouldShowAtTheBottomOfThePageAlongWithCopyRightAndYear() {
+        estoreHomePage.verifyThatAllItemsFromFooterAreDisplayed();
     }
 }

@@ -39,8 +39,6 @@ public class EstorePGScreen {
 
     private final SelenideElement memberLabel = $(By.xpath("//p[@data-testid='price-label-member']"));
 
-    private final SelenideElement memberPrice = $(By.xpath("//p[@data-testid='price-for-member']"));
-
     private final SelenideElement zipCodeField = $(By.xpath("//input[@name='newPostalCode']"));
 
     private final SelenideElement regularItemPrice = $(By.xpath("(//p[@id='price'])[1]"));
@@ -82,5 +80,30 @@ public class EstorePGScreen {
     private final SelenideElement livingCategory = $(By.xpath("//*[@data-navigation-account-item-id='cat160024']"));
 
     private final SelenideElement collectionTextTitle = $(By.xpath("//*[contains(text(),'new arrivals')]"));
+
+    private final SelenideElement regularSalePrice = $(By.xpath("(//*[@data-testid='price-for-sale'])[1]"));
+
+    private final SelenideElement memberSalePrice = $(By.xpath("(//*[@data-testid='price-for-member'])[1]"));
+
+    private final SelenideElement regularPrice = $(By.xpath("(//*[@data-testid='price-for-regular'])[1]"));
+
+    private final SelenideElement memberPrice = $(By.xpath("(//*[@data-testid='price-for-member'])[1]"));
+
+    public int getRegularPriceOnPg() {
+        return Integer.parseInt(regularPrice.getText().replaceAll("[^0-9]", ""));
+    }
+
+    public int getMemberPriceOnPg() {
+        return Integer.parseInt(memberPrice.getText().replaceAll("[^0-9]", ""));
+    }
+
+    public int getRegularSaleOnPgPrice() {
+        return Integer.parseInt(regularSalePrice.getText().replaceAll("[^0-9]", ""));
+    }
+
+    public int getMemberSaleOnPgPrice() {
+        return Integer.parseInt(memberSalePrice.getText().replaceAll("[^0-9]", ""));
+    }
 }
+
 
