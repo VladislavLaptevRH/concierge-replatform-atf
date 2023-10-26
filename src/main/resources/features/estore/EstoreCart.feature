@@ -1,4 +1,4 @@
-@estoreTestRun
+@estoreTestRun @estoreCart
 
 Feature: Estore Cart Page
 

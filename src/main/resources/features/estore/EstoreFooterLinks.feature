@@ -1,4 +1,4 @@
-@estoreTestRun
+@estoreTestRun @estoreFooterLinks
 
 Feature: Footer Links
 

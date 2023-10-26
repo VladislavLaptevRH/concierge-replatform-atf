@@ -1,4 +1,4 @@
-@estoreTestRun
+@estoreTestRun @estoreE2EFlow
 
 Feature: Estore E2E flow
 

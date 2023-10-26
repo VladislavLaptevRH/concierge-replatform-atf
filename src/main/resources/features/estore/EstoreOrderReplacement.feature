@@ -1,5 +1,5 @@
 @estoreTestRun
-
+@estoreOrderReplacement
 Feature:Estore Order replacement
 
   Scenario: estore - Order replacement - Visa payment

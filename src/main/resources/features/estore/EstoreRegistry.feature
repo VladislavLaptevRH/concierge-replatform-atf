@@ -1,4 +1,5 @@
 @@estoreTestRun
+@estoreRegistry
 Feature: Registry
 
   Scenario: Verify that user is able to create the registry/find the existing registry
