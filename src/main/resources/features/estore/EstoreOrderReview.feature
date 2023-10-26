@@ -1,5 +1,5 @@
 @estoreTestRun
-
+@estoreOrderReview
 Feature:Estore Order review
 
   Scenario: Verify address, price, payment information, total, subtotal tags

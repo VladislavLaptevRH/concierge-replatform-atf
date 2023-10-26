@@ -1,4 +1,5 @@
 @estoreTestRun
+@estorePDP
 Feature: Estore PDP
 
   Scenario: Verify user can see the Product Details correctly mentioned for a product
