@@ -238,3 +238,19 @@ Feature: Estore PDP
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify another PDP - Towel
+
+  Scenario: PDP Content - Verify on the PDP pages prices are changing with the country zip
+    Given I log into eStore as "regular" user
+    When I remove all items from estore cart
+    When I choose country for eStore from footer
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    When I get prices for US for eStore
+    When I update "CAN" postal code on pdp page
+    Then I verify that prices for "CAN" was updated
+    When I update "US" postal code on pdp page
+    Then I verify that prices for "US" was updated
+
+
+
+
+

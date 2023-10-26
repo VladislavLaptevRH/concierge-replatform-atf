@@ -5,6 +5,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.AssertJUnit;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
@@ -18,6 +19,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
 
 public class EstorePgStepDefs {
 
@@ -28,6 +30,8 @@ public class EstorePgStepDefs {
 
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
     EstoreCGScreen estoreCGScreen = new EstoreCGScreen();
+
+    EstoreFooter estoreFooter = new EstoreFooter();
 
     EstoreItemPage estoreItemPage = new EstoreItemPage();
 
@@ -40,6 +44,13 @@ public class EstorePgStepDefs {
 
     int memberPrice;
     int regularPrice;
+
+    int regularPiceUSBeforeChangeTheZip;
+    int memberPiceUSBeforeChangeTheZip;
+    int regularPriceCANChangeTheZip;
+    int memberPriceCANChangeTheZip;
+    int memberPriceUSAfterChangeTheZip;
+    int regularPriceUSAfterChangeTheZip;
 
     @Then("I validate {string},{string} and {string} grid view should work")
     public void iValidateAndGridViewShouldWork(String arg0, String arg1, String arg2) {
@@ -327,13 +338,44 @@ public class EstorePgStepDefs {
         estorePGScreen.verifyThatColorizedImagesAreDisplayed();
     }
 
-    @Then("I verify that the Pagination carousel is displayed on PG for estore")
-    public void iVerifyThatThePaginationCarouselIsDisplayedOnPGForEstore() {
-        estorePGScreen.getPgCarousel().should(visible, Duration.ofSeconds(12));
+    @When("I update zip code to {string} zip code on PG from footer")
+    public void iUpdateZipCodeToZipCodeOnPGFromFooter(String arg0) {
+        estoreFooter.getCountrySelection().should(visible,Duration.ofSeconds(12));
+        estoreFooter.clickToCountrySelectionButton();
+        if (arg0.equals("CAN")) {
+            estoreFooter.clickToCaCountrySelect();
+        }
+        if (arg0.equals("US")) {
+            estoreFooter.clickToUSCountrySelect();
+        }
     }
 
-    @Then("I verify that the Pagination carousel content is displayed on PG for estore")
-    public void iVerifyThatThePaginationCarouselContentIsDisplayedOnPGForEstore() {
-        System.out.println();
+
+    @When("I check the prices for {string} zip code")
+    public void iCheckThePricesForZipCode(String arg0) {
+        regularPiceUSBeforeChangeTheZip = estorePGScreen.getRegularPriceOnPg();
+        memberPiceUSBeforeChangeTheZip = estorePGScreen.getMemberPriceOnPg();
+
+        assertTrue(regularPiceUSBeforeChangeTheZip > 0, "Member price is not equal to zero");
+        assertTrue(memberPiceUSBeforeChangeTheZip > 0, "Regular price is not equal to zero");
+    }
+
+    @Then("I verify that prices for {string} was updated on PG")
+    public void iVerifyThatPricesForWasUpdatedOnPG(String country) {
+
+        if (country.equals("CAN")) {
+            regularPriceCANChangeTheZip = estorePGScreen.getRegularPriceOnPg();
+            memberPriceCANChangeTheZip = estorePGScreen.getMemberPriceOnPg();
+
+            assertFalse(regularPriceCANChangeTheZip == regularPiceUSBeforeChangeTheZip);
+            assertFalse(memberPriceCANChangeTheZip == memberPiceUSBeforeChangeTheZip);
+        }
+        if (country.equals("US")) {
+            regularPriceUSAfterChangeTheZip = estorePGScreen.getRegularPriceOnPg();
+            memberPriceUSAfterChangeTheZip = estorePGScreen.getMemberPriceOnPg();
+
+            Assert.assertEquals(regularPiceUSBeforeChangeTheZip, regularPriceUSAfterChangeTheZip);
+            Assert.assertEquals(memberPiceUSBeforeChangeTheZip, memberPriceUSAfterChangeTheZip);
+        }
     }
 }

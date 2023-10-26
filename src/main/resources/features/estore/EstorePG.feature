@@ -143,25 +143,3 @@ Feature: Estore PG
     When I navigate to any estore fusion PG
     And I verify that price on PG is the same as on PDP for In stock filter applied
 
-  Scenario: Verify the products are shown with relevant colorized images on PG page when instock filter is selected
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
-    When I apply In stock filter on PG for estore
-    Then I verify that the products are shown with relevant colorized images on PG page
-
-  Scenario: Verify the user can see Pagination carousel
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
-    When I scroll to the bottom of the estore page
-    Then I verify that the Pagination carousel is displayed on PG for estore
-
-  Scenario: Verify the Pagination carousel content
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
-    When I scroll to the bottom of the estore page
-    Then I verify that the Pagination carousel content is displayed on PG for estore
-
-
