@@ -221,7 +221,21 @@ public class ConciergeUserAccountPage {
     private final SelenideElement resultPhoneNumber = $(By.xpath("//td[text()='(123) 456-7890']"));
     private final SelenideElement firstNameOnly = $(By.xpath("//*[text()='First name must be combined with another search field.']"));
     private final SelenideElement lastNameOnly = $(By.xpath("//td[contains(text(),'Trade')]"));
-
+    private final SelenideElement profileFirstName = $(By.xpath("//input[@name='firstName']"));
+    private final SelenideElement profileLastName = $(By.xpath("//input[@name='lastName']"));
+    private final SelenideElement profileSearchButton = $(By.xpath("//button[@type='submit']"));
+    private final SelenideElement profileemailormemberid = $(By.xpath("//input[@name='emailOrMembershipId']"));
+    private final SelenideElement profileRegistered = $(By.xpath("//*[text()='REGISTERED PROFILE']"));
+    private final SelenideElement profileRegisteredEmail = $(By.xpath("//*[text()='EMAIL']"));
+    private final SelenideElement profileRegisteredName = $(By.xpath("//*[text()='NAME']"));
+    private final SelenideElement profileRegisteredRHMember = $(By.xpath("//*[text()='RH MEMBERSHIP']"));
+    private final SelenideElement profileRegisteredMemberID = $(By.xpath("//*[text()='MEMBERSHIP ID']"));
+    private final SelenideElement profileRegisteredCart = $(By.xpath("//*[text()='CART']"));
+    private final SelenideElement profileRegisteredDetails = $(By.xpath("//*[text()='Details']"));
+    private final SelenideElement profileCartPage = $(By.xpath("//h1[text()='YOUR SHOPPING CART IS EMPTY']"));
+    private final SelenideElement profileDetailsPage = $(By.xpath("//*[text()='SALESFORCE CONTACT ID']"));
+    private final SelenideElement profileWishlistLink = $(By.xpath("//*[text()='Wishlist']"));
+    private final SelenideElement profileWishlistPage = $(By.xpath("//*[text()='Your wish list is currently empty.']"));
 
     public SelenideElement getCurrentLocationGalleryItemByName(String name) {
         String path = String.format(currentLocationGalleryItem, name);

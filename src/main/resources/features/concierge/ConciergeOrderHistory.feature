@@ -73,7 +73,6 @@ Feature:Concierge Order history
 	Then I confirm table header " TRADE ID / TAX EXEMPT"
 	Then I confirm order is shown for search filter "Last Name"
 
-  @mukthar
   Scenario: US Region: Enter values in the order search modal and click on the Clear search button, the entered data should be cleared
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
