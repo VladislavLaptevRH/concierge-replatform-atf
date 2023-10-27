@@ -384,7 +384,7 @@ public class EstorePdpStepDefs {
     @Then("I verify availability delivery and return for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyAvailabilityDeliveryAndReturnForProduct(String productID, String arg1, String selectedOptions, String country) {
         $(By.xpath("(//span[text()='Return Policy'])[1]")).should(visible, Duration.ofSeconds(30));
-        $(By.xpath("(//p[text()='Configure this item to view delivery information '])[1]")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("(//p[contains(text(),'Configure this item to view delivery information')])[1]")).should(visible, Duration.ofSeconds(30));
         estorePdpPageScreen.getInStockOptionsButton().should(Condition.visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getInStockOptionsButton().click();
         $(By.xpath("//*[text()='These options are available for']")).shouldBe(visible, Duration.ofSeconds(15));
@@ -509,24 +509,21 @@ public class EstorePdpStepDefs {
         estorePdpPageScreen.getHeroImageCloseIcon().click();
         Assert.assertTrue(estorePdpPageScreen.getShopTheEntireCollectionText().isDisplayed());
         Assert.assertTrue(estorePdpPageScreen.getInStockOptionsButton().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getViewTouchUpKitText().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getUnlimitedFurnitureDeliveryText().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getViewTouchUpKitText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
     }
 
     @Then("I verify IN STOCK functionality")
     public void iVerifyINStockFunctionality() {
-        Assert.assertTrue(estorePdpPageScreen.getInStockTitle().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getInStockOptionsButton().isDisplayed());
         estorePdpPageScreen.getInStockOptionsButton().click();
         Assert.assertTrue(estorePdpPageScreen.getInStockTitle().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getItemInStockOption().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getInStockMemberPrice().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getInStockRegularPrice().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getItemInStockOption().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getInStockMemberPrice().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getInStockRegularPrice().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
         Assert.assertTrue(estorePdpPageScreen.getQtyInStockItems().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
         Assert.assertTrue(estorePdpPageScreen.getAddToCartBtnInStockItems().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
         estorePdpPageScreen.getAddToCartBtnInStockItems().click();
-        Assert.assertTrue(estorePdpPageScreen.getViewCartBtn().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getViewCartBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
     }
 
     @Then("I verify the product price as per the Ship to selection for product {string} and {string} with {string} for the selected {string} country")

@@ -44,7 +44,7 @@ public class EstorePdpPageScreen {
 
     private SelenideElement turkishTowelCollectionTitle = $(By.xpath("(//*[text()='802-Gram Turkish Towel Collection'])[3]"));
 
-    private SelenideElement itemInStockOption = $(By.xpath("//*[text()='Item#']"));
+    private SelenideElement itemInStockOption = $(By.xpath("//*[text()='Item']"));
 
     private SelenideElement sizeInStockOption = $(By.xpath("(//*[text()='Size'])[5]"));
 
@@ -74,7 +74,7 @@ public class EstorePdpPageScreen {
 
     private SelenideElement lineItemId = $(By.xpath("(//p[@data-testid='item-sku-id-desktop'])[1]"));
 
-    private SelenideElement addToCartBtn = $(By.xpath("(//span[text()='ADD TO CART'])[1]"));
+    private SelenideElement addToCartBtn = $(By.xpath("(//span[text()='Add To Cart'])[1]"));
 
     private SelenideElement itemAddedInCarMsg = $(By.xpath("//p[contains(text(),'1 Item Added To Your Cart')]"));
 
@@ -186,7 +186,7 @@ public class EstorePdpPageScreen {
 
     private final SelenideElement viewTouchUpKitText = $(By.xpath("//*[contains(text(),'Touch-Up Kit')]"));
 
-    private final SelenideElement unlimitedFurnitureDeliveryText = $(By.xpath("Unlimited Furniture Delivery"));
+    private final SelenideElement unlimitedFurnitureDeliveryText = $(By.xpath("//*[contains(text(),'Unlimited Furniture Delivery')]"));
 
     private final  SelenideElement inStockMemberPrice = $(By.xpath("//p[contains(@class,'product-price__amount--member') and contains(text(),'Member')]"));
 
