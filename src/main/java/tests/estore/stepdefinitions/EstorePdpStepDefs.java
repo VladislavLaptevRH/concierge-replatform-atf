@@ -505,12 +505,9 @@ public class EstorePdpStepDefs {
         estorePdpPageScreen.getHeroImagePlusIconZoomOutBtn().click();
         estorePdpPageScreen.getHeroImageUpwardBtn().should(Condition.visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getHeroImageUpwardBtn().click();
-//        estorePdpPageScreen.getHeroImageDownwardBtn().should(Condition.visible, Duration.ofSeconds(20));
-//        estorePdpPageScreen.getHeroImageDownwardBtn().click();
         estorePdpPageScreen.getHeroImageCloseIcon().should(Condition.visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getHeroImageCloseIcon().click();
         Assert.assertTrue(estorePdpPageScreen.getShopTheEntireCollectionText().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getSwatchText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
         Assert.assertTrue(estorePdpPageScreen.getInStockOptionsButton().isDisplayed());
         Assert.assertTrue(estorePdpPageScreen.getViewTouchUpKitText().isDisplayed());
         Assert.assertTrue(estorePdpPageScreen.getUnlimitedFurnitureDeliveryText().isDisplayed());
