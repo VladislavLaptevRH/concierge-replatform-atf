@@ -883,7 +883,6 @@ Feature: Concierge PDP
     Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
     Then Verify that "Sale modal" 'availability and delivery message should be displayed for each onsale product'
 
-  @vlad
   Scenario: Availability and delivery message should be displayed for each instock product
   Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -897,7 +896,6 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'opens'
     Then Verify that "In Stock modal" 'availability and delivery message should be displayed for each instock product'
 
-  @vlad
   Scenario: After clicking on that link Enter your postal code modal should be opened
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -913,7 +911,6 @@ Feature: Concierge PDP
     Then I click 'postal code link' on pdp page
     Then Verify that 'postal code model is present'
 
-  @vlad
   Scenario: The same entered zipcode should be displayed on cart page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -929,7 +926,6 @@ Feature: Concierge PDP
     Then I click on zip code and change it to '10001'
     Then I verify that zip code in PDP is '10001'
 
-  @vlad
   Scenario: For CAN loc user, If User clicks on Shiping Link then Shipping & Delivery Modal Should be opened with Shipments to Canada tab which has CAN currency for shipping charges
     Given I log into Concierge as "associate"
     When I choose 'CA' country
@@ -944,7 +940,6 @@ Feature: Concierge PDP
     Then I click 'text "Unlimited Furniture Delivery" is present' on pdp page
     Then I click 'Shipping & Delivery Modal Should be opened with Shipments to Canada tab which has CAN currency for shipping charges' on pdp page
 
-  @vlad
   Scenario: Verify whether user able to view confirmation message post changing the shipping country
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -966,7 +961,6 @@ Feature: Concierge PDP
 #    Then I click on zip code and change it to '10001' in modal opener
 #    Then Verify that "Sale modal" 'has changed zip code'
 
-  @vlad
   Scenario: Starting at price lable with Regular and member price shold be displayed
     Given I log into Concierge as "associate"
     When I choose 'CA' country
