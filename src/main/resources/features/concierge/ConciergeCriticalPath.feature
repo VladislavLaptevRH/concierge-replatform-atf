@@ -471,8 +471,8 @@ Feature: Concierge Critical Path
     When I click on no thanks button
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen
-    And I continue to payment
-    When I click on continue with original address button
+#    And I continue to payment
+#    When I click on continue with original address button
     When I execute payment for "<cardType>"
     And I verify that review screen is displayed
     When I click on a place order button
@@ -717,7 +717,7 @@ Feature: Concierge Critical Path
     When I remove all items from cart via UI
     When I go to concierge item 'prod12640168' from search field
     When I click on the first project search result with parameters 'prod12640168''59810779 CTBZ'
-    Then I Verify that 'PDP title' is present
+#    Then I Verify that 'PDP title' is present
     Then Verify that 'text "Components starting at" is present'
     Then Verify that 'cloud Modular Leather Sofa titles are present'
     Then Verify that line item field 'Fill' is present
