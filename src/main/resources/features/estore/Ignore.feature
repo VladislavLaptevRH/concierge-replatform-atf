@@ -26,3 +26,10 @@ Feature: Test cases which are not use
     When I scroll down to Request a design consultation and click
     And I fill in the request form
     Then I Verify Thank you message
+
+  Scenario: To Verify Sale banner
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "FABRIC CHAIR COLLECTION" from search field
+    When I apply In stock to Sale filter
+    Then I verify sale banner for estore
