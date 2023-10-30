@@ -242,6 +242,8 @@ public class PdpScreen {
 
     private final SelenideElement upholsterySwatch = $(By.xpath("//p[contains(text(), 'Upholstery Swatch')]"));
 
+    private final SelenideElement itemTitle = $(By.xpath("(//*[contains(@class, 'MuiTypography-root MuiTypography')]/..)[1]"));
+
     private final SelenideElement deliveryInformation = $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'will be ready for delivery between')]"));
 
     private final SelenideElement unlimitedFurnitureDeliveryText = $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'Unlimited Furniture Delivery')]"));
@@ -388,13 +390,18 @@ public class PdpScreen {
 
     private final SelenideElement zipCode = $(By.xpath("(//*[@data-testid = 'postal-code-dialog-opener'])[1]"));
 
+    private final ElementsCollection inStockModalItemsList = $$(By.xpath("//*[@id = 'component-in-stock-product-card']"));
+
     private final SelenideElement confirmationPostalCode = $(By.xpath("//*[@data-testid= 'submit-postal']"));
+
+    private final SelenideElement inStockModalDeliveryInformationList = $(By.xpath("//*[@id = 'component-in-stock-product-card']//*[contains(text(), 'This item is in stock and will be ready for delivery between')]"));
 
     private final SelenideElement pdpZipCodeModalShippingCountry = $(By.xpath("//*[@id = 'country-zipcode-selection']"));
 
     private final SelenideElement pdpZipCodeModalDefpultCountry = $(By.xpath("//*[text() = 'United States']"));
 
     private final SelenideElement fogSpecialOrderColor = $(By.xpath("//*[text() = 'Fog ']"));
+    private final SelenideElement inStockModalQuantityDropDownList = $(By.xpath("(//*[@data-testid = 'in-stock-qty-select'])[1]//select"));
 
     private final SelenideElement postalCode = $(By.xpath("//*[@id= 'postal-code-international']"));
 

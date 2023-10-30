@@ -1,6 +1,6 @@
 @estoreTestRun
 @Smoke @SmokeTest
-
+@estoreSmokeTest
 Feature: SmokeTest for eStore
 
   Scenario: Top Nav Check in RH

@@ -1,4 +1,5 @@
 @estoreTestRun
+@estoreAddressPage
 
 Feature: Estore Address Page
 #  m000001198111

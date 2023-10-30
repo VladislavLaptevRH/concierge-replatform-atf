@@ -40,7 +40,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     When I open product page with productId "prod18890296"
     When I click on the first project search result with parameters 'prod18890296''10024793 BRNZ'
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'the "Hero" Image' is present
     Then Verify that 'shop the entire collection'
@@ -76,7 +76,10 @@ Feature: Concierge PDP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to item "60450996 BLNL" from search field
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I click 'first product from the list' on PG screen
     When I click on "view in stock items" link
     Then Verify that "In Stock modal" 'opens'
     Then Verify that "In Stock modal" 'has title'
@@ -120,7 +123,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     When I go to concierge item 'prod12640168' from search field
     When I click on the first project search result with parameters 'prod12640168''59810779 CTBZ'
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then Verify that 'text "Components starting at" is present'
     Then Verify that 'cloud Modular Leather Sofa titles are present'
     Then Verify that line item field 'Fill' is present
@@ -290,7 +293,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Wood Beds'
     Then I chose '6' product on the page
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I chose the '1' line item selections one by one for '5' items
     Then I click on button "ADD TO CART" in the cart
     Then I verify that cart modal is displayed
@@ -305,7 +308,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Wood Beds'
     Then I chose '6' product on the page
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I chose the '1' line item selections one by one for '5' items
     Then I click on button "ADD TO PROJECT" in the cart
     Then I verify that project modal is displayed
@@ -320,7 +323,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Wood Beds'
     Then I chose '6' product on the page
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that 'the "Hero" Image' is present
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'images carousel is present below Hero image' is present
@@ -338,7 +341,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Wood Beds'
     Then I chose '6' product on the page
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that 'the "Hero" Image' is present
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'images carousel is present below Hero image' is present
@@ -356,7 +359,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Wood Beds'
     Then I chose '6' product on the page
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that 'the "Hero" Image' is present
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'images carousel is present below Hero image' is present
@@ -372,7 +375,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Wood Beds'
     Then I chose '6' product on the page
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that 'the "Hero" Image' is present
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'images carousel is present below Hero image' is present
@@ -391,7 +394,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Leather Beds'
     Then I chose '6' product on the page
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I click 'any product image in carousel' on pdp page
     Then Verify that 'User should be navigated to respective PDP'
 
@@ -400,7 +403,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I open product page with productId "prod14900056"
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that 'line items' is present
     Then I chose the '1' line item selections one by one
     Then Verify that 'Verify the delivery information'
@@ -413,7 +416,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I open product page with productId "prod14900056"
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that 'line items' is present
     Then I verify that YAML carousel is displayed
 
@@ -422,7 +425,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I open product page with productId "prod14900056"
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that 'line items' is present
     Then I Verify that 'Upholstery Swatch section' is present
     Then Verify that 'text Swatch is present'
@@ -438,7 +441,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Leather Beds'
     Then I chose '6' product on the page
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that 'the "Hero" Image' is present
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'images carousel is present below Hero image' is present
@@ -451,7 +454,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Leather Beds'
     Then I chose '6' product on the page
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that 'the "Hero" Image' is present
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'images carousel is present below Hero image' is present
@@ -485,7 +488,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     When I go to item "Unlimited furniture items" from search field
     Then I click 'first product from the list' on PG screen
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I chose the '1' line item selections one by one
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
 
@@ -497,13 +500,17 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Leather Beds'
     Then I click 'first product from the list' on PG screen
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
 
   Scenario: After clicking on the link istock modal should be opened
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to item "60450996 BLNL" from search field
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'item title' is present
     When I click on "view in stock items" link
     Then Verify that "In Stock modal" 'opens'
 
@@ -515,7 +522,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Leather Beds'
     Then I click 'first product from the list' on PG screen
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that 'the "Hero" Image' is present
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'images carousel is present below Hero image' is present
@@ -533,7 +540,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Leather Beds'
     Then I click 'first product from the list' on PG screen
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that 'the "Hero" Image' is present
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'images carousel is present below Hero image' is present
@@ -552,7 +559,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Leather Beds'
     Then I click 'first product from the list' on PG screen
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I chose the '1' line item selections one by one
     Then I verify that text item# and SKU is present
 
@@ -564,7 +571,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Leather Beds'
     Then I click 'first product from the list' on PG screen
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then Verify that 'line Item section image is present'
 
   Scenario: Return policy message should be displayed after entering the zipcode and configuring the dropdown options
@@ -575,7 +582,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Wood Beds'
     Then I click 'first product from the list' on PG screen
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then Verify that 'line Item section image is present'
     Then I chose the '1' line item selections one by one
     Then I Verify that 'text "Learn more about our Return Policy"' is present
@@ -584,7 +591,11 @@ Feature: Concierge PDP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to item "60450996 BLNL" from search field
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'item title' is present
     When I click on "view in stock items" link
     Then Verify that "In Stock modal" 'opens'
     Then Verify that "In Stock modal" 'zip code is present'
@@ -597,7 +608,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Wood Beds'
     Then I click 'first product from the list' on PG screen
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then Verify that 'line Item section image is present'
     Then Verify that 'line item selections (Size, Finish and Qty) are present'
     Then I chose the '1' line item selections one by one
@@ -608,6 +619,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "57070740 CLNT" from search field
+    Then I Verify that 'item title' is present
     When I click on "view select items on sale" link
     Then Verify that "Sale modal" 'opens'
     Then Product name should be displayed on left top
@@ -617,7 +629,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "57070740 CLNT" from search field
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then Verify that 'Verify the Sale/Final Sale price'
 
   Scenario: For sale product Sale/Final Sale price should be displayed
@@ -625,7 +637,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "57070740 CLNT" from search field
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then Verify that 'Verify the Starting at price or configured price message'
 
   Scenario: Final sale items
@@ -633,7 +645,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "57070740 CLNT" from search field
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I verify that availability, Delivery and returns messaging is displayed for "SO"
 
   Scenario: View Sale Items link should be displayed below the applicable line item image with > symbol for applicable Sale products
@@ -641,7 +653,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "57070740 CLNT" from search field
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that '"VIEW SALE ITEMS" link below line item image' is present
 
   Scenario: After clicking on link, OnSale modal should be opened as zipcode is already present
@@ -649,7 +661,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "57070740 CLNT" from search field
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that '"VIEW SALE ITEMS" link below line item image' is present
     Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
     Then Verify that "Sale modal" 'zip code is present'
@@ -659,7 +671,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "57070740 CLNT" from search field
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that '"VIEW SALE ITEMS" link below line item image' is present
     Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
     Then Verify that 'ON SALE name in the left with close button right'
@@ -669,28 +681,28 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "57070740 CLNT" from search field
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that '"VIEW SALE ITEMS" link below line item image' is present
     Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
     Then Verify that 'scrollable functionality'
 
-  Scenario: Add to cart button should be enabled
+  Scenario: Add to cart button should be enabled (VIEW SALE ITEMS)
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "57070740 CLNT" from search field
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that '"VIEW SALE ITEMS" link below line item image' is present
     Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
     Then Verify that "Sale modal" 'zip code is present'
     Then Verify that "Sale modal" 'Add to cart button should be enabled'
 
-  Scenario: By default qty dropdown should be displayed 1, and user should be able to chanage the qty as per that qty limit
+  Scenario: By default qty dropdown should be displayed 1, and user should be able to change the qty as per that qty limit
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "57070740 CLNT" from search field
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then Verify that 'By default qty dropdown should be displayed one'
 
   Scenario: If we click on zipcode link, postal code modal should be opened to change zipcode
@@ -698,7 +710,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "57070740 CLNT" from search field
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that '"VIEW SALE ITEMS" link below line item image' is present
     Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
     Then Verify that "Sale modal" 'zip code is present'
@@ -709,7 +721,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "57070740 CLNT" from search field
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that '"VIEW SALE ITEMS" link below line item image' is present
     Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
     Then Verify that "Sale modal" 'zip code is present'
@@ -723,7 +735,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Wood Beds'
     Then I click 'first product from the list' on PG screen
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then Verify that 'line Item section image is present'
     Then Verify that 'line item selections (Size, Finish and Qty) are present'
     Then I chose the '1' line item selections one by one
@@ -738,7 +750,7 @@ Feature: Concierge PDP
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "57070740 CLNT" from search field
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then I Verify that '"VIEW SALE ITEMS" link below line item image' is present
     Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
     Then Verify that "Sale modal" 'zip code is present'
@@ -751,7 +763,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Wood Beds'
     Then I click 'first product from the list' on PG screen
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then Verify that 'line Item section image is present'
     Then Verify that 'line item selections (Size, Finish and Qty) are present'
     Then I chose the '1' line item selections one by one
@@ -766,7 +778,7 @@ Feature: Concierge PDP
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Wood Beds'
     Then I click 'first product from the list' on PG screen
-    Then I Verify that 'PDP title' is present
+    Then I Verify that 'item title' is present
     Then Verify that 'line Item section image is present'
     Then Verify that 'line item selections (Size, Finish and Qty) are present'
     Then I chose the '1' line item selections one by one
@@ -780,7 +792,11 @@ Feature: Concierge PDP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to item "60450996 BLNL" from search field
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I chose '2' product from the list
+    Then I Verify that 'item title' is present
     When I click on "view in stock items" link
     Then Verify that "In Stock modal" 'opens'
     Then Verify that "In Stock modal" 'modal should displayed the list of Instock item'
@@ -789,5 +805,85 @@ Feature: Concierge PDP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to item "60450996 BLNL" from search field
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I chose '2' product from the list
+    Then I Verify that 'item title' is present
     Then I Verify that '"VIEW IN STOCK ITEMS" link below line item image' is present
+
+  @vlad
+  Scenario: View in Stock items
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I chose '2' product from the list
+    Then I Verify that 'item title' is present
+    When I click on "view in stock items" link
+    Then Verify that "In Stock modal" 'opens'
+
+  @vlad
+  Scenario: The Instock modal should be scrollable, if we have more Instock products
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I chose '2' product from the list
+    Then I Verify that 'item title' is present
+    When I click on "view in stock items" link
+    Then Verify that "In Stock modal" 'opens'
+    Then Verify that 'scrollable functionality'
+
+  @vlad
+  Scenario: Add to cart button should be enabled (view in stock items)
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I chose '2' product from the list
+    Then I Verify that 'item title' is present
+    When I click on "view in stock items" link
+    Then Verify that "In Stock modal" 'opens'
+    Then Verify that "In Stock modal" 'Add to cart button should be enabled'
+
+  @vlad
+  Scenario: Each item has in stock attributes(options) with price and qty field. We can change the qty by selecting value from dropdown
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I chose '2' product from the list
+    Then I Verify that 'item title' is present
+    When I click on "view in stock items" link
+    Then Verify that "In Stock modal" 'opens'
+    Then Verify that "In Stock modal" 'we can change the qty by selecting value from dropdown'
+
+  @vlad
+  Scenario: Verify the same country, postal code is displayed as per Header preference
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "57070740 CLNT" from search field
+    Then I Verify that 'item title' is present
+    Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
+    Then Verify that "Sale modal" 'click on the postal link present in message below product name'
+    Then Verify that "Sale modal" 'postal code should be displayed as per the Header preferences'
+
+  @vlad
+  Scenario: Availability and delivery message should be displayed for each onsale product
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "57070740 CLNT" from search field
+    Then I Verify that 'item title' is present
+    Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
+    Then Verify that "Sale modal" 'availability and delivery message should be displayed for each onsale product'

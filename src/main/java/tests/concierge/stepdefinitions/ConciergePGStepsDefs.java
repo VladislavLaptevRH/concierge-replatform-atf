@@ -638,6 +638,11 @@ public class ConciergePGStepsDefs {
         conciergeItemsScreen.getAddToCartButton().should(visible, Duration.ofSeconds(10));
     }
 
+    @When("I chose {string} product from the list")
+    public void iChoseProductFromTheList(String productId) {
+        conciergeItemsScreen.getProductByNumber(productId).click();
+    }
+
     @When("I verify that {string} title is present in PG top left")
     public void iVerifyThatTitleIsPresentInPGTopLeft(String title) {
         $(By.xpath("//*[contains(@class, 'MuiTypography') and text() = '" + title + "']")).should(visible, Duration.ofSeconds(10));

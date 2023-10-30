@@ -120,6 +120,9 @@ public class Pdp {
            case  "zip code is present":
                pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
                break;
+           case  "click on the postal link present in message below product name":
+               pdpScreen.getPdpPopUpInStockZipCode().click();
+               break;
            case  "Modal should displayed the list of ON SALE items":
                assertTrue(pdpScreen.getModalOnSaleItemsList().size() > 1);
                break;
@@ -162,6 +165,18 @@ public class Pdp {
                pdpScreen.getInStockPopUpProjectTitle().should(visible, Duration.ofSeconds(5));
                pdpScreen.getCancelButton().should(visible, Duration.ofSeconds(5));
                pdpScreen.getSaveButton().should(visible, Duration.ofSeconds(5));
+               break;
+           case  "Add to cart button should be enabled":
+               pdpScreen.getPdpModalEnabledAddToCartButton().shouldBe(visible, Duration.ofSeconds(15));
+               pdpScreen.getPdpModalDisabledAddToCartButton().shouldNotBe(visible, Duration.ofSeconds(15));
+               break;
+           case  "postal code should be displayed as per the Header preferences":
+               pdpScreen.getPostalCode().shouldBe(visible, Duration.ofSeconds(15));
+               break;
+           case  "availability and delivery message should be displayed for each onsale product":
+               for(int i = 1; i <= pdpScreen.getInStockModalItemsList().size(); i++){
+                   pdpScreen.getInStockModalDeliveryInformationList().shouldNotBe(visible, Duration.ofSeconds(15));
+               }
                break;
            default:
                break;
@@ -507,12 +522,8 @@ public class Pdp {
                 pdpScreen.getPdpModelOnSaleName().shouldBe(visible, Duration.ofSeconds(15));
                 break;
             case  "scrollable functionality":
-                pdpScreen.getPdpModelLoadMoreButton().scrollIntoView(true);
-                pdpScreen.getPdpModelLoadMoreButton().shouldBe(visible, Duration.ofSeconds(15));
-                break;
-            case  "Add to cart button should be enabled":
-                pdpScreen.getPdpModalEnabledAddToCartButton().shouldBe(visible, Duration.ofSeconds(15));
-                pdpScreen.getPdpModalDisabledAddToCartButton().shouldNotBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getInStockModalItemsList().last().scrollIntoView(true);
+                pdpScreen.getInStockModalItemsList().last().should(visible, Duration.ofSeconds(5));
                 break;
             case  "By default qty dropdown should be displayed one":
                 assertEquals(pdpScreen.getQuantitySelect().getAttribute("value"), "1");
@@ -816,6 +827,9 @@ public class Pdp {
             case  "Upholstery Swatch section":
                 pdpScreen.getUpholsterySwatch().shouldBe(visible, Duration.ofSeconds(15));
                 break;
+            case  "item title":
+                pdpScreen.getItemTitle().shouldBe(visible, Duration.ofSeconds(15));
+                break;
             default:
                 break;
         }
@@ -988,8 +1002,17 @@ public class Pdp {
                 pdpScreen.getCancelButton().should(visible, Duration.ofSeconds(5));
                 pdpScreen.getSaveButton().should(visible, Duration.ofSeconds(5));
                 break;
-            default:
+            case  "Add to cart button should be enabled":
+                pdpScreen.getPdpModalEnabledAddToCartButton().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getPdpModalDisabledAddToCartButton().shouldNotBe(visible, Duration.ofSeconds(15));
                 break;
+            case  "we can change the qty by selecting value from dropdown":
+                result = pdpScreen.getInStockModalQuantityDropDownList().getAttribute("value");
+                Select itemList = new Select(pdpScreen.getInStockModalQuantityDropDownList());
+                itemList.selectByIndex(5);
+                assertNotEquals(result, pdpScreen.getInStockModalQuantityDropDownList().getAttribute("value"));
+                break;
+            default: break;
         }
     }
 
