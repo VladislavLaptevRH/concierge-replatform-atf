@@ -89,6 +89,14 @@ public class EstoreSearchStepDefs {
         executeJavaScript("window.scrollTo(0, 2000)");
     }
 
+    @When("I scroll to the bottom of the PG estore page")
+    public void iScrollToTheBottomOfTheEstorePGpage() {
+        $(By.id("rh-header")).should(visible, Duration.ofSeconds(40));
+        generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        executeJavaScript("window.scrollTo(0, 5000)");
+    }
+
     @When("I click on estore back to top button")
     public void iClickOnEstoreBackToTopButton() {
         with().pollInterval(4, SECONDS).await().until(() -> true);

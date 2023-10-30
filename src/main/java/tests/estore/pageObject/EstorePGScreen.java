@@ -104,6 +104,12 @@ public class EstorePGScreen {
 
     private final SelenideElement PgCarouselContent = $(By.id("component-product-grid"));
 
+    private final List<SelenideElement> pgItems = $$(By.xpath("//div[@id='component-rh-image_wrapper']"));
+
+
+    public int verifyCountOfPgItemsonThePage() {
+        return pgItems.size();
+    }
 
     public void verifyThatColorizedImagesAreDisplayed() {
         inStockColorText.should(Condition.visible, Duration.ofSeconds(12));

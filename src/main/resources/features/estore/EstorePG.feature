@@ -143,3 +143,11 @@ Feature: Estore PG
     When I navigate to any estore fusion PG
     And I verify that price on PG is the same as on PDP for In stock filter applied
 
+  Scenario: Verify that when the number of items in PG is increased scroll-to-top does not happen and the user stays is in place and additional products are loaded
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "sofa" from search field
+    Then I verify the count of displayed PG item in grid
+    When I scroll to the bottom of the PG estore page
+    Then I verify that the number of items in PG was increased after scroll
+

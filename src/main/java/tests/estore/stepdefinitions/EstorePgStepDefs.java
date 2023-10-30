@@ -52,6 +52,10 @@ public class EstorePgStepDefs {
     int memberPriceUSAfterChangeTheZip;
     int regularPriceUSAfterChangeTheZip;
 
+    int countOfPgBeforeScroll;
+
+    int countOfPgAfterScroll;
+
     @Then("I validate {string},{string} and {string} grid view should work")
     public void iValidateAndGridViewShouldWork(String arg0, String arg1, String arg2) {
         if (arg0.equals("1")) {
@@ -340,7 +344,7 @@ public class EstorePgStepDefs {
 
     @When("I update zip code to {string} zip code on PG from footer")
     public void iUpdateZipCodeToZipCodeOnPGFromFooter(String arg0) {
-        estoreFooter.getCountrySelection().should(visible,Duration.ofSeconds(12));
+        estoreFooter.getCountrySelection().should(visible, Duration.ofSeconds(12));
         estoreFooter.clickToCountrySelectionButton();
         if (arg0.equals("CAN")) {
             estoreFooter.clickToCaCountrySelect();
@@ -377,5 +381,25 @@ public class EstorePgStepDefs {
             Assert.assertEquals(regularPiceUSBeforeChangeTheZip, regularPriceUSAfterChangeTheZip);
             Assert.assertEquals(memberPiceUSBeforeChangeTheZip, memberPriceUSAfterChangeTheZip);
         }
+    }
+
+    @When("I open CG page with sale message")
+    public void iOpenCGPageWithSaleMessage() {
+        String saleMessageUrl = Hooks.eStoreBaseURL + "/us/en/catalog/category/products.jsp?pgterm=RH+Fabric+Chairs&N=%7B%21tag%3Dsku_showOnly%7Dsku_showOnly%3A%28\"Sale\"%29&Ns=product.sale%7C1&categoryId=cat10210007";
+        open(saleMessageUrl);
+    }
+
+
+    @Then("I verify the count of displayed PG item in grid")
+    public void iVerifyTheCountOfDisplayedPGItemInGrid() {
+        countOfPgBeforeScroll = estorePGScreen.verifyCountOfPgItemsonThePage();
+    }
+
+    @Then("I verify that the number of items in PG was increased after scroll")
+    public void iVerifyThatTheNumberOfItemsInPGWasIncreasedAfterScroll() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        countOfPgAfterScroll = estorePGScreen.verifyCountOfPgItemsonThePage();
+
+        assertTrue(countOfPgBeforeScroll < countOfPgAfterScroll);
     }
 }

@@ -72,9 +72,21 @@ public class EstoreCGScreen {
 
     private SelenideElement chairCgName = $(By.xpath("(//*[contains(text(),'Chair')])[1]"));
 
-
     private SelenideElement viewSelectItemsOnSale = $(By.xpath("(//button[@class='MuiButtonBase-root'])[1]"));
 
+    private SelenideElement saveUpSaleMessage = $(By.xpath("//*[text()='SAVE UP TO 50% OFF SELECT ITEMS']"));
+
+    private SelenideElement withRhMembershipSaleMessage = $(By.xpath("//*[text()='WITH RH MEMBERSHIP']"));
+
+    private SelenideElement cgChairs = $(By.xpath("(//*[contains(text(),'Chairs')])[2]"));
+
+    public void verifyThatSaveUpSaleMessageIsDisplayed() {
+        saveUpSaleMessage.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatWithRhMembershipSaleMessageIsDisplayed() {
+        withRhMembershipSaleMessage.should(Condition.visible, Duration.ofSeconds(12));
+    }
 
     public void verifyColorForViewSelectItemsForSaleMessage() {
         String viewSelectItemsOnSaleColor = $(By.xpath("(//button[@class='MuiButtonBase-root'])[1]")).getAttribute("class");
