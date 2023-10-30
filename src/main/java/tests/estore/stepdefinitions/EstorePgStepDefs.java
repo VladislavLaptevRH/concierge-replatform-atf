@@ -5,11 +5,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.AssertJUnit;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
-import tests.estore.pageObject.EstorePGScreen;
-import tests.estore.pageObject.EstoreSearchScreen;
-import tests.estore.pageObject.EstoreUserAccountPage;
+import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 
 import java.time.Duration;
@@ -19,6 +18,8 @@ import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertTrue;
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
 
 public class EstorePgStepDefs {
 
@@ -26,6 +27,13 @@ public class EstorePgStepDefs {
     EstorePGScreen estorePGScreen = new EstorePGScreen();
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+
+    EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
+    EstoreCGScreen estoreCGScreen = new EstoreCGScreen();
+
+    EstoreFooter estoreFooter = new EstoreFooter();
+
+    EstoreItemPage estoreItemPage = new EstoreItemPage();
 
     int priceFromTheFirstProduct;
     int priceFromTheSecondProduct;
@@ -35,6 +43,18 @@ public class EstorePgStepDefs {
     int memberSalePrice;
 
     int memberPrice;
+    int regularPrice;
+
+    int regularPiceUSBeforeChangeTheZip;
+    int memberPiceUSBeforeChangeTheZip;
+    int regularPriceCANChangeTheZip;
+    int memberPriceCANChangeTheZip;
+    int memberPriceUSAfterChangeTheZip;
+    int regularPriceUSAfterChangeTheZip;
+
+    int countOfPgBeforeScroll;
+
+    int countOfPgAfterScroll;
 
     @Then("I validate {string},{string} and {string} grid view should work")
     public void iValidateAndGridViewShouldWork(String arg0, String arg1, String arg2) {
@@ -270,5 +290,116 @@ public class EstorePgStepDefs {
 
         AssertJUnit.assertTrue("Regular price is not equal to zero", regularPrice > 0);
         AssertJUnit.assertTrue("Member price is not equal to zero", memberPrice > 0);
+    }
+
+    @Then("I verify that combined price on frame and cushion on PG")
+    public void iVerifyThatCombinedPriceOnFrameAndCushionOnPG() {
+        estorePGScreen.getRegularPrice().should(visible, Duration.ofSeconds(12));
+        estorePGScreen.getMemberPrice().should(visible, Duration.ofSeconds(12));
+
+        regularPrice = estorePGScreen.getRegularPriceOnPg();
+        memberPrice = estorePGScreen.getMemberPriceOnPg();
+        AssertJUnit.assertTrue("Verify that member proudct price is correct", regularPrice > 0);
+        AssertJUnit.assertTrue("Verify that regular proudct price is correct", memberPrice > 0);
+    }
+
+    @And("I verify that price on PG is the same as on PDP")
+    public void iVerifyThatPriceOnPGISTheSameAsOnPDP() {
+        estorePDPScreen.getFirstMemberPrice().should(visible, Duration.ofSeconds(12));
+        assertEquals("Verify that member price on PG is the same as on PDP", estorePDPScreen.getMemberPricePDP(), memberPrice);
+        assertEquals("Verify that regular price on PG is the same as on PDP", estorePDPScreen.getRegularPricePDP(), regularPrice);
+    }
+
+    @When("I apply In stock filter on PG for estore")
+    public void iApplyInStockFilterOnPGForEstore() {
+        estorePGScreen.clickToInStockFilterPG();
+    }
+
+    @Then("I verify that the prices shown against instock products on PG page")
+    public void iVerifyThatThePricesShownAgainstInstockProductsOnPGPage() {
+        estorePGScreen.getRegularPrice().should(visible, Duration.ofSeconds(12));
+        estorePGScreen.getMemberPrice().should(visible, Duration.ofSeconds(12));
+
+        regularPrice = estorePGScreen.getRegularPriceOnPg();
+        memberPrice = estorePGScreen.getMemberPriceOnPg();
+        AssertJUnit.assertTrue("Verify that member proudct price is correct", regularPrice > 0);
+        AssertJUnit.assertTrue("Verify that regular proudct price is correct", memberPrice > 0);
+
+    }
+
+    @And("I verify that price on PG is the same as on PDP for In stock filter applied")
+    public void iVerifyThatPriceOnPGIsTheSameAsOnPDPForInStockFilterApplied() {
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        estoreItemPage.getAddToCartButton().scrollIntoView(true);
+        estorePDPScreen.getLineItemRegularPrice().should(visible, Duration.ofSeconds(12));
+        assertEquals("Verify that member price on PG is the same as on PDP", estorePDPScreen.getMemberLineItemPricePDP(), memberPrice);
+        assertEquals("Verify that regular price on PG is the same as on PDP", estorePDPScreen.getRegularLineItemPricePDP(), regularPrice);
+
+    }
+
+    @Then("I verify that the products are shown with relevant colorized images on PG page")
+    public void iVerifyThatTheProductsAreShownWithRelevantColorizedImagesOnPGPage() {
+        estorePGScreen.verifyThatColorizedImagesAreDisplayed();
+    }
+
+    @When("I update zip code to {string} zip code on PG from footer")
+    public void iUpdateZipCodeToZipCodeOnPGFromFooter(String arg0) {
+        estoreFooter.getCountrySelection().should(visible, Duration.ofSeconds(12));
+        estoreFooter.clickToCountrySelectionButton();
+        if (arg0.equals("CAN")) {
+            estoreFooter.clickToCaCountrySelect();
+        }
+        if (arg0.equals("US")) {
+            estoreFooter.clickToUSCountrySelect();
+        }
+    }
+
+
+    @When("I check the prices for {string} zip code")
+    public void iCheckThePricesForZipCode(String arg0) {
+        regularPiceUSBeforeChangeTheZip = estorePGScreen.getRegularPriceOnPg();
+        memberPiceUSBeforeChangeTheZip = estorePGScreen.getMemberPriceOnPg();
+
+        assertTrue(regularPiceUSBeforeChangeTheZip > 0, "Member price is not equal to zero");
+        assertTrue(memberPiceUSBeforeChangeTheZip > 0, "Regular price is not equal to zero");
+    }
+
+    @Then("I verify that prices for {string} was updated on PG")
+    public void iVerifyThatPricesForWasUpdatedOnPG(String country) {
+
+        if (country.equals("CAN")) {
+            regularPriceCANChangeTheZip = estorePGScreen.getRegularPriceOnPg();
+            memberPriceCANChangeTheZip = estorePGScreen.getMemberPriceOnPg();
+
+            assertFalse(regularPriceCANChangeTheZip == regularPiceUSBeforeChangeTheZip);
+            assertFalse(memberPriceCANChangeTheZip == memberPiceUSBeforeChangeTheZip);
+        }
+        if (country.equals("US")) {
+            regularPriceUSAfterChangeTheZip = estorePGScreen.getRegularPriceOnPg();
+            memberPriceUSAfterChangeTheZip = estorePGScreen.getMemberPriceOnPg();
+
+            Assert.assertEquals(regularPiceUSBeforeChangeTheZip, regularPriceUSAfterChangeTheZip);
+            Assert.assertEquals(memberPiceUSBeforeChangeTheZip, memberPriceUSAfterChangeTheZip);
+        }
+    }
+
+    @When("I open CG page with sale message")
+    public void iOpenCGPageWithSaleMessage() {
+        String saleMessageUrl = Hooks.eStoreBaseURL + "/us/en/catalog/category/products.jsp?pgterm=RH+Fabric+Chairs&N=%7B%21tag%3Dsku_showOnly%7Dsku_showOnly%3A%28\"Sale\"%29&Ns=product.sale%7C1&categoryId=cat10210007";
+        open(saleMessageUrl);
+    }
+
+
+    @Then("I verify the count of displayed PG item in grid")
+    public void iVerifyTheCountOfDisplayedPGItemInGrid() {
+        countOfPgBeforeScroll = estorePGScreen.verifyCountOfPgItemsonThePage();
+    }
+
+    @Then("I verify that the number of items in PG was increased after scroll")
+    public void iVerifyThatTheNumberOfItemsInPGWasIncreasedAfterScroll() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        countOfPgAfterScroll = estorePGScreen.verifyCountOfPgItemsonThePage();
+
+        assertTrue(countOfPgBeforeScroll < countOfPgAfterScroll);
     }
 }

@@ -83,4 +83,5 @@ public class EstoreSaleStepDefs {
         }
         open(saleUrl);
     }
+
 }

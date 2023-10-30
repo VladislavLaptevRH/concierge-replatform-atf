@@ -6,8 +6,11 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 
 import java.time.Duration;
+import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
+import static org.testng.Assert.assertTrue;
 
 @Getter
 public class EstoreCGScreen {
@@ -35,9 +38,9 @@ public class EstoreCGScreen {
 
     private SelenideElement cortonaSofa = $(By.xpath("//*[text()='Cortona Sofaa']"));
 
-    private SelenideElement priceForRegular = $(By.xpath("//p[@data-testid='price-for-regular']"));
+    private List<SelenideElement> priceForRegular = $$(By.xpath("//p[@data-testid='price-for-regular']"));
 
-    private SelenideElement priceForMember = $(By.xpath("//p[@data-testid='price-for-member']"));
+    private List<SelenideElement> priceForMember = $$(By.xpath("//p[@data-testid='price-for-member']"));
 
     private SelenideElement cortonaSofaCollectionUppercase = $(By.xpath("//*[text()='CORTONA SOFA COLLECTION']"));
 
@@ -64,6 +67,53 @@ public class EstoreCGScreen {
     private SelenideElement swatches2upGridView = $(By.xpath("//*[@data-id='component-collection-card-details_swatches_col6']"));
 
     private SelenideElement swatches3upGridView = $(By.xpath("//*[@data-id='component-collection-card-details_swatches_col6']"));
+
+    private SelenideElement swatchesCg = $(By.xpath("(//*[@alt='swatchImage'])[1]"));
+
+    private SelenideElement chairCgName = $(By.xpath("(//*[contains(text(),'Chair')])[1]"));
+
+    private SelenideElement viewSelectItemsOnSale = $(By.xpath("(//button[@class='MuiButtonBase-root'])[1]"));
+
+    private SelenideElement saveUpSaleMessage = $(By.xpath("//*[text()='SAVE UP TO 50% OFF SELECT ITEMS']"));
+
+    private SelenideElement withRhMembershipSaleMessage = $(By.xpath("//*[text()='WITH RH MEMBERSHIP']"));
+
+    private SelenideElement cgChairs = $(By.xpath("(//*[contains(text(),'Chairs')])[2]"));
+
+    public void verifyThatSaveUpSaleMessageIsDisplayed() {
+        saveUpSaleMessage.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatWithRhMembershipSaleMessageIsDisplayed() {
+        withRhMembershipSaleMessage.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyColorForViewSelectItemsForSaleMessage() {
+        String viewSelectItemsOnSaleColor = $(By.xpath("(//button[@class='MuiButtonBase-root'])[1]")).getAttribute("class");
+        String[] colorText = viewSelectItemsOnSaleColor.split("#");
+        assertTrue(colorText[1].equals("CA2022 !important"));
+    }
+
+    public String verifyTextDecoration() {
+        String cssValueTextDecoration = viewSelectItemsOnSale.getCssValue("text-decoration");
+        return cssValueTextDecoration;
+    }
+
+    public int getProductRegularPriceOnCg() {
+        return Integer.parseInt(priceForRegular.get(0).getText().replaceAll("[^0-9]", ""));
+    }
+
+    public int getProductMemberPriceOnCg() {
+        return Integer.parseInt(priceForMember.get(0).getText().replaceAll("[^0-9]", ""));
+    }
+
+    public void verifyThatSwathcesOnCgAreDisplayed() {
+        swatchesCg.shouldBe(Condition.visible, Duration.ofSeconds(15));
+    }
+
+    public void verifyThatChairCGNameIsDisplayed() {
+        chairCgName.should(Condition.visible, Duration.ofSeconds(12));
+    }
 
 
     public void verifyThatSwatches1upGridViewIsDisplayed() {
