@@ -714,7 +714,8 @@ Feature: Concierge PDP
     Then I Verify that '"VIEW SALE ITEMS" link below line item image' is present
     Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
     Then Verify that "Sale modal" 'zip code is present'
-    Then I click 'postal code link' on pdp page
+    Then Verify that "Sale modal" 'click on the postal link present in message below product name'
+    Then Verify that 'postal code model is present'
 
   Scenario: Modal should displayed the list of OnSale item
     Given I log into Concierge as "associate"
@@ -812,7 +813,6 @@ Feature: Concierge PDP
     Then I Verify that 'item title' is present
     Then I Verify that '"VIEW IN STOCK ITEMS" link below line item image' is present
 
-  @vlad
   Scenario: View in Stock items
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -825,7 +825,6 @@ Feature: Concierge PDP
     When I click on "view in stock items" link
     Then Verify that "In Stock modal" 'opens'
 
-  @vlad
   Scenario: The Instock modal should be scrollable, if we have more Instock products
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -839,7 +838,6 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'opens'
     Then Verify that 'scrollable functionality'
 
-  @vlad
   Scenario: Add to cart button should be enabled (view in stock items)
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -853,7 +851,6 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'opens'
     Then Verify that "In Stock modal" 'Add to cart button should be enabled'
 
-  @vlad
   Scenario: Each item has in stock attributes(options) with price and qty field. We can change the qty by selecting value from dropdown
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -867,7 +864,6 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'opens'
     Then Verify that "In Stock modal" 'we can change the qty by selecting value from dropdown'
 
-  @vlad
   Scenario: Verify the same country, postal code is displayed as per Header preference
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -878,7 +874,6 @@ Feature: Concierge PDP
     Then Verify that "Sale modal" 'click on the postal link present in message below product name'
     Then Verify that "Sale modal" 'postal code should be displayed as per the Header preferences'
 
-  @vlad
   Scenario: Availability and delivery message should be displayed for each onsale product
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -887,3 +882,93 @@ Feature: Concierge PDP
     Then I Verify that 'item title' is present
     Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
     Then Verify that "Sale modal" 'availability and delivery message should be displayed for each onsale product'
+
+  Scenario: Availability and delivery message should be displayed for each instock product
+  Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I chose '2' product from the list
+    Then I Verify that 'item title' is present
+    When I click on "view in stock items" link
+    Then Verify that "In Stock modal" 'opens'
+    Then Verify that "In Stock modal" 'availability and delivery message should be displayed for each instock product'
+
+  Scenario: After clicking on that link Enter your postal code modal should be opened
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'item title' is present
+    Then I chose the '1' line item selections one by one
+    Then Verify that 'text "Unlimited Furniture Delivery" is present'
+    Then I verify that text item# and SKU is present
+    Then I click 'postal code link' on pdp page
+    Then Verify that 'postal code model is present'
+
+  Scenario: The same entered zipcode should be displayed on cart page
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'item title' is present
+    Then I chose the '1' line item selections one by one
+    Then Verify that 'text "Unlimited Furniture Delivery" is present'
+    Then I verify that text item# and SKU is present
+    Then I click on zip code and change it to '10001'
+    Then I verify that zip code in PDP is '10001'
+
+  Scenario: For CAN loc user, If User clicks on Shiping Link then Shipping & Delivery Modal Should be opened with Shipments to Canada tab which has CAN currency for shipping charges
+    Given I log into Concierge as "associate"
+    When I choose 'CA' country
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'item title' is present
+    Then I chose the '1' line item selections one by one
+    Then Verify that 'text "Unlimited Furniture Delivery" is present'
+    Then I click 'text "Unlimited Furniture Delivery" is present' on pdp page
+    Then I click 'Shipping & Delivery Modal Should be opened with Shipments to Canada tab which has CAN currency for shipping charges' on pdp page
+
+  Scenario: Verify whether user able to view confirmation message post changing the shipping country
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "57070740 CLNT" from search field
+    Then I Verify that 'item title' is present
+    Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
+    Then Verify that "Sale modal" 'zip code is present'
+    Then Verify that "Sale modal" 'click on the postal link present in message below product name'
+    Then Verify that 'postal code model is present'
+
+#  Scenario: Validate the results based on Shipping country and Zip code selection
+#    Given I log into Concierge as "associate"
+#    When I choose country for concierge from footer
+#    When I remove all items from cart via UI
+#    When I go to item "57070740 CLNT" from search field
+#    Then I Verify that 'item title' is present
+#    Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
+#    Then I click on zip code and change it to '10001' in modal opener
+#    Then Verify that "Sale modal" 'has changed zip code'
+
+  Scenario: Starting at price lable with Regular and member price shold be displayed
+    Given I log into Concierge as "associate"
+    When I choose 'CA' country
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'item title' is present
+    Then Verify that 'text "Components starting at" is present'
+    Then Verify that 'PDP has Regular and Member prices'

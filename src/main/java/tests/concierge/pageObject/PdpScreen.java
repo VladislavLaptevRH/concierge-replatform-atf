@@ -248,6 +248,9 @@ public class PdpScreen {
 
     private final SelenideElement unlimitedFurnitureDeliveryText = $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'Unlimited Furniture Delivery')]"));
 
+    private final SelenideElement shippingAndDeliveryModalTab = $(By.xpath("//*[text() = 'Shipments to Canada']"));
+    private final SelenideElement shippingAndDeliveryModalDeliveryAreaText = $(By.xpath("//*[text() = 'CANADIAN DELIVERY AREA']"));
+
     private final SelenideElement returnPolicyText = $(By.xpath("//*[@id = 'component-sku']/..//p[contains (text(), 'This item can be returned or exchanged within 30 days of delivery.')]"));
 
     private final SelenideElement furnitureTouchKitText = $(By.xpath("//*[contains(text(), 'Furniture Touch-Up Kit')]"));
@@ -394,7 +397,7 @@ public class PdpScreen {
 
     private final SelenideElement confirmationPostalCode = $(By.xpath("//*[@data-testid= 'submit-postal']"));
 
-    private final SelenideElement inStockModalDeliveryInformationList = $(By.xpath("//*[@id = 'component-in-stock-product-card']//*[contains(text(), 'This item is in stock and will be ready for delivery between')]"));
+    private final SelenideElement inStockModalDeliveryInformationList = $(By.xpath("//*[@id = 'component-in-stock-product-card']//*[contains(text(), 'will be ready for delivery between')]"));
 
     private final SelenideElement pdpZipCodeModalShippingCountry = $(By.xpath("//*[@id = 'country-zipcode-selection']"));
 
