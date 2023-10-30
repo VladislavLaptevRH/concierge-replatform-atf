@@ -65,7 +65,6 @@ Feature: Estore Sale
     When I click on Bath from sale nav menu
     Then I verify that Bath in Secondary NAV should expand tertiary NAV
 
-
   Scenario: Verify that user is able to navigate to tertiary NAV of SALE - Outdoor
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer

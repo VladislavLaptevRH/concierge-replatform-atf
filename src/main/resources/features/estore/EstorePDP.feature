@@ -235,21 +235,20 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify another PDP - Towel
 
-  @Alok
   Scenario: Verify the PDP hero Image Zoom line items
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod18890296" and "" with "INDG" for estore
     Then I verify the PDP hero Image Zoom line items
-  @Alok
+
   Scenario: Verify IN STOCK functionality
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "" with "INDG" for estore
     Then I verify IN STOCK functionality
-  @Alok
+
   Scenario: Verify the availability , delivery and return messages in PDP
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
