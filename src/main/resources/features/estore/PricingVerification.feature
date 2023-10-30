@@ -35,5 +35,31 @@ Feature: Pricing Verification
     When I navigate to any estore fusion PG
     Then I verify that prices for the VIEW SELECT ITEMS ON SALE on PDP and the sale page
 
+  Scenario: Verify the products are shown with relevant colorized images on PG page when instock filter is selected
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    When I apply In stock filter on PG for estore
+    Then I verify that the products are shown with relevant colorized images on PG page
+
+  Scenario: PDP Content-Verify on the PG pages prices are changing with the country zip
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    When I check the prices for "US" zip code
+    When I update zip code to "CAN" zip code on PG from footer
+    Then I verify that prices for "CAN" was updated on PG
+    When I update zip code to "US" zip code on PG from footer
+    Then I verify that prices for "US" was updated on PG
+
+  Scenario: PDP Content- Verify the prices are mentioned correctly where the filters are applied and the PDP page
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    When I apply In stock filter on PG for estore
+    Then I verify that the prices shown against instock products on PG page
+    When I navigate to any estore fusion PG
+    And I verify that price on PG is the same as on PDP for In stock filter applied
+
 
 

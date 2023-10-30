@@ -126,3 +126,27 @@ Feature: Estore CG
     Then I verify that swatches are displayed for 2up grid view
     When I select 3up grid view on CG for estore
     Then I verify that swatches are displayed for 3up grid view
+
+  Scenario: Verify Sale messages on CG
+    Given I log into eStore as "guest" user
+    When I open CG page with sale message
+    Then I verify that sale message is displayed in Red for CGs with Sale items
+
+  Scenario: Verify the back button feature
+    Given I log into eStore as "guest" user
+    When I open CG page with sale message
+    When I go to estore item "sofa" from search field
+    When I navigate back from "fusion PG" page
+    Then I verify that user back to the CG from PG or search result page.
+
+  Scenario: Verify back to top button
+    Given I log into eStore as "guest" user
+    When I click on "Living" for estore
+    When I click on "Fabric Seating" for estore
+    When I click on "Seating Collections" for estore
+    When I scroll to the bottom of the estore page
+    When I click on estore back to top button
+    Then I verify that page moved to the top on clicking the bottom to top button on CG
+
+
+

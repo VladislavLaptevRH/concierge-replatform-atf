@@ -322,4 +322,42 @@ public class EstoreCGStepDefs {
     }
 
 
+    @Then("I verify that the swatches should show below the image with correct padding")
+    public void iVerifyThatTheSwatchesShouldShowBelowTheImageWithCorrectPadding() {
+        estoreCGScreen.verifyThatSwathcesOnCgAreDisplayed();
+    }
+
+    @And("I verify that the product name and price should correct")
+    public void iVerifyThatTheProductNameAndPriceShouldCorrect() {
+        estoreCGScreen.verifyThatChairCGNameIsDisplayed();
+        assertTrue("Verify that member proudct price is correct", estoreCGScreen.getProductMemberPriceOnCg() > 0);
+        assertTrue("Verify that regular proudct price is correct", estoreCGScreen.getProductRegularPriceOnCg() > 0);
+
+    }
+
+    @Then("I verify that the VIEW SELECT ITEMS ON SALE link should show in red color")
+    public void iVerifyThatTheVIEWSELECTITEMSONSALELinkShouldShowInRedColor() {
+        estoreCGScreen.verifyColorForViewSelectItemsForSaleMessage();
+    }
+
+    @And("I verify that the underline should appear on the link VIEW SELECT ITEMS ON SALE.")
+    public void iVerifyThatTheUnderlineShouldAppearOnTheLinkVIEWSELECTITEMSONSALE() {
+        assertTrue("", estoreCGScreen.verifyTextDecoration().equals("underline"));
+    }
+
+    @Then("I verify that sale message is displayed in Red for CGs with Sale items")
+    public void iVerifyThatSaleMessageIsDisplayedInRedForCGsWithSaleItems() {
+        estoreCGScreen.verifyThatSaveUpSaleMessageIsDisplayed();
+        estoreCGScreen.verifyThatWithRhMembershipSaleMessageIsDisplayed();
+    }
+
+    @Then("I verify that user back to the CG from PG or search result page.")
+    public void iVerifyThatUserBackToTheCGFromPGOrSearchResultPage() {
+        estoreCGScreen.getCgChairs().should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that page moved to the top on clicking the bottom to top button on CG")
+    public void iVerifyThatPageMovedToTheTopOnClickingTheBottomToTopButtonOnCG() {
+        estoreHomePage.getHomePageLogo().should(visible, Duration.ofSeconds(12));
+    }
 }
