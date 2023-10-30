@@ -100,7 +100,7 @@ public class EstoreSaleStepDefs {
     }
 
     @When("I click on Living from sale nav menu")
-    public void iClickOnFromSaleNavMenu(String arg0) {
+    public void iClickOnFromSaleNavMenu() {
         estoreSaleScreen.clickToSaleLivingNav();
     }
 
