@@ -150,4 +150,3 @@ Feature: Estore PG
     Then I verify the count of displayed PG item in grid
     When I scroll to the bottom of the PG estore page
     Then I verify that the number of items in PG was increased after scroll
-
