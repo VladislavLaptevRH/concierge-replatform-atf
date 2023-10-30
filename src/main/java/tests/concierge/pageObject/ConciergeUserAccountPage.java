@@ -226,6 +226,7 @@ public class ConciergeUserAccountPage {
     private final SelenideElement profileSearchButton = $(By.xpath("//button[@type='submit']"));
     private final SelenideElement profileemailormemberid = $(By.xpath("//input[@name='emailOrMembershipId']"));
     private final SelenideElement profileRegistered = $(By.xpath("//*[text()='REGISTERED PROFILE']"));
+    private final SelenideElement profileonetimeConciergeUser = $(By.xpath("//*[text()='ONE-TIME CONCIERGE USER']"));
     private final SelenideElement profileRegisteredEmail = $(By.xpath("//*[text()='EMAIL']"));
     private final SelenideElement profileRegisteredName = $(By.xpath("//*[text()='NAME']"));
     private final SelenideElement profileRegisteredRHMember = $(By.xpath("//*[text()='RH MEMBERSHIP']"));
@@ -239,6 +240,19 @@ public class ConciergeUserAccountPage {
     private final SelenideElement profileOrderHistory = $(By.xpath("//*[text()='Order History']"));
     private final SelenideElement profileOrderHistoryRegistry = $(By.xpath("//*[text()='ORDER HISTORY']"));
     private final SelenideElement profileCheckbox = $(By.xpath("//input[@type='checkbox']"));
+    private final SelenideElement detailsClientName = $(By.xpath("//*[text()='CLIENT NAME']"));
+    private final SelenideElement detailsClientEmail = $(By.xpath("//*[text()='CLIENT EMAIL']"));
+    private final SelenideElement detailsRHMembership = $(By.xpath("//*[text()='RH MEMBERSHIP']"));
+    private final SelenideElement detailsSFContactID = $(By.xpath("//*[text()='SALESFORCE CONTACT ID']"));
+    private final SelenideElement detailsSFCustomerID = $(By.xpath("//*[text()='SALESFORCE CUSTOMER ID']"));
+    private final SelenideElement detailsPasswordReset = $(By.xpath("//*[text()='PASSWORD RESET SENT']"));
+    private final SelenideElement detailsCreatedDate = $(By.xpath("//*[text()='CREATED DATE']"));
+    private final SelenideElement detailsLastActivity = $(By.xpath("//*[text()='LAST ACTIVITY']"));
+    private final SelenideElement detailsViewCart = $(By.xpath("//*[text()='View Cart']"));
+    private final SelenideElement backButton = $(By.xpath("//*[text()='Back']"));
+    private final SelenideElement profileProvideEmail = $(By.xpath("//*[text()='Please provide either email or membership ID']"));
+    private final SelenideElement profileProvideFName = $(By.xpath("//*[text()='First name must be combined with last name']"));
+    private final SelenideElement profileProvideLName = $(By.xpath("//*[text()='Last name must be combined with at least a first initial']"));
 
     public SelenideElement getCurrentLocationGalleryItemByName(String name) {
         String path = String.format(currentLocationGalleryItem, name);

@@ -513,15 +513,55 @@ public class ConciergeAssociateStepDefs {
         conciergeUserAccountPage.getProfileSearchButton().click();
     }
 
+    @Then("I search by No Details")
+    public void iSearchbyNoDetails(){
+        conciergeUserAccountPage.getProfileSearchButton().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileSearchButton().click();
+    }
+
+    @Then("I confirm error message")
+    public void iConirmerrormessage(){
+        conciergeUserAccountPage.getProfileProvideEmail().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileProvideLName().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileProvideLName().should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I search by Initial of First name and Full last name")
+    public void iSearchbyInitial(){
+        conciergeUserAccountPage.getProfileFirstName().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileFirstName().setValue("t");
+        conciergeUserAccountPage.getProfileLastName().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileLastName().setValue("test");
+        conciergeUserAccountPage.getProfileSearchButton().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileSearchButton().click();
+    }
+
     @Then("I confirm registered profile")
     public void iConfirmregisteredprofile(){
         conciergeUserAccountPage.getProfileRegistered().should(visible, Duration.ofSeconds(120));
+    }
+
+    @Then("I confirm one time concierge user profile")
+    public void iConfirmonetimeconcierge(){
+        conciergeUserAccountPage.getProfileonetimeConciergeUser().should(visible, Duration.ofSeconds(120));
     }
 
     @Then("I search by email")
     public void iSearchbyemail(){
         conciergeUserAccountPage.getProfileemailormemberid().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getProfileemailormemberid().setValue("test@test.com");
+        conciergeUserAccountPage.getProfileSearchButton().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileSearchButton().click();
+    }
+
+    @Then("I search by email and incorrect name")
+    public void iSearchbyemailincorrectname(){
+        conciergeUserAccountPage.getProfileemailormemberid().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileemailormemberid().setValue("test@test.com");
+        conciergeUserAccountPage.getProfileFirstName().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileFirstName().setValue("a");
+        conciergeUserAccountPage.getProfileLastName().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileLastName().setValue("a");
         conciergeUserAccountPage.getProfileSearchButton().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getProfileSearchButton().click();
     }
@@ -536,6 +576,16 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I confirm registered profile fields")
     public void iConfirmFields(){
+        conciergeUserAccountPage.getProfileRegisteredEmail().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileRegisteredName().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileRegisteredRHMember().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileRegisteredMemberID().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileRegisteredCart().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileRegisteredDetails().should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("I confirm one time concierge user fields")
+    public void iConfirmCOnciergeFields(){
         conciergeUserAccountPage.getProfileRegisteredEmail().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getProfileRegisteredName().should(visible, Duration.ofSeconds(15));
         conciergeUserAccountPage.getProfileRegisteredRHMember().should(visible, Duration.ofSeconds(15));
@@ -566,6 +616,22 @@ public class ConciergeAssociateStepDefs {
         conciergeUserAccountPage.getProfileDetailsPage().should(visible, Duration.ofSeconds(15));
     }
 
+    @Then("I confirm fields of user details page")
+    public void iConfirmFieldpage(){
+        conciergeUserAccountPage.getDetailsClientName().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getDetailsClientEmail().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getDetailsRHMembership().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getDetailsSFContactID().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getDetailsSFCustomerID().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getDetailsPasswordReset().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getDetailsCreatedDate().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getDetailsLastActivity().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getDetailsViewCart().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileWishlistLink().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getProfileOrderHistory().should(visible, Duration.ofSeconds(15));
+        conciergeUserAccountPage.getBackButton().should(visible, Duration.ofSeconds(15));
+    }
+
     @Then("I click on wishlist link")
     public void iclickWishlist(){
         conciergeUserAccountPage.getProfileWishlistLink().should(visible, Duration.ofSeconds(15));
@@ -592,16 +658,27 @@ public class ConciergeAssociateStepDefs {
         conciergeUserAccountPage.getProfileOrderHistoryRegistry().should(visible, Duration.ofSeconds(15));
     }
 
-    @Then("I search by registry only")
-    public void iClickregistryonly(){
-        conciergeUserAccountPage.getProfileFirstName().should(visible, Duration.ofSeconds(15));
-        conciergeUserAccountPage.getProfileFirstName().setValue("test");
-        conciergeUserAccountPage.getProfileLastName().should(visible, Duration.ofSeconds(15));
-        conciergeUserAccountPage.getProfileLastName().setValue("test");
-        conciergeUserAccountPage.getProfileSearchButton().should(visible, Duration.ofSeconds(15));
-        conciergeUserAccountPage.getProfileSearchButton().click();
-        conciergeUserAccountPage.getProfileCheckbox().should(visible, Duration.ofSeconds(15));
-        conciergeUserAccountPage.getProfileCheckbox().click();
+    @Then("I search by registry only {string}")
+    public void iClickregistryonly(String val){
+        switch (val){
+            case "Name":
+                conciergeUserAccountPage.getProfileFirstName().should(visible, Duration.ofSeconds(15));
+                conciergeUserAccountPage.getProfileFirstName().setValue("test");
+                conciergeUserAccountPage.getProfileLastName().should(visible, Duration.ofSeconds(15));
+                conciergeUserAccountPage.getProfileLastName().setValue("test");
+                conciergeUserAccountPage.getProfileCheckbox().should(visible, Duration.ofSeconds(15));
+                conciergeUserAccountPage.getProfileCheckbox().click();
+                conciergeUserAccountPage.getProfileSearchButton().should(visible, Duration.ofSeconds(15));
+                conciergeUserAccountPage.getProfileSearchButton().click();
+
+            case "email":
+                conciergeUserAccountPage.getProfileemailormemberid().should(visible, Duration.ofSeconds(15));
+                conciergeUserAccountPage.getProfileemailormemberid().setValue("test@test.com");
+                conciergeUserAccountPage.getProfileCheckbox().should(visible, Duration.ofSeconds(15));
+                conciergeUserAccountPage.getProfileCheckbox().click();
+                conciergeUserAccountPage.getProfileSearchButton().should(visible, Duration.ofSeconds(15));
+                conciergeUserAccountPage.getProfileSearchButton().click();
+        }
     }
 
 
