@@ -568,6 +568,10 @@ public class Pdp {
                 switchTo().window(1);
                 assertEquals(Hooks.getCurrentUrl(),"https://rh.com/us/en/customer-service/return-policy.jsp");
                 break;
+            case  "Shipping & Delivery Modal Should be opened with UFD tab which has US currency for shipping charges":
+                pdpScreen.getUnlimitedFurnitureDeliveryModalText().shouldHave(visible, Duration.ofSeconds(15));
+                pdpScreen.getUnlimitedFurnitureDeliveryModalUSCurrency().shouldHave(visible, Duration.ofSeconds(15));
+                break;
             default: break;
         }
     }

@@ -990,7 +990,7 @@ Feature: Concierge PDP
 
   Scenario: Select From Stocked and Special Order Fabrics link should be displayed below View In-stock Options link
     Given I log into Concierge as "associate"
-    When I choose 'CA' country
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10115451 BWMR" from search field
     Then I Verify that 'item title' is present
@@ -998,7 +998,7 @@ Feature: Concierge PDP
 
   Scenario: After clicking on the link we should get the modal with the details of the fabrics
     Given I log into Concierge as "associate"
-    When I choose 'CA' country
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10115451 BWMR" from search field
     Then I Verify that 'item title' is present
@@ -1008,7 +1008,7 @@ Feature: Concierge PDP
 
   Scenario: After clicking on any swatch from Stocked/Special order section line items should get updated.
     Given I log into Concierge as "associate"
-    When I choose 'CA' country
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10115451 BWMR" from search field
     Then I Verify that 'item title' is present
@@ -1020,7 +1020,7 @@ Feature: Concierge PDP
 
   Scenario: Return policy link should be clickable and should navigate user to the Return policy page.
     Given I log into Concierge as "associate"
-    When I choose 'CA' country
+    When I choose country for concierge from footer
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'Beds'
