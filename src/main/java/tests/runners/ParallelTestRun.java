@@ -10,7 +10,7 @@ import org.testng.annotations.DataProvider;
         , glue = {"tests"}
         , plugin = {"usage", "json:target/cucumber-reports/Cucumber.json",
         "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
-        tags = "@estoreParallelTestRun"
+        tags = "@estoreParallelTestRun or @estoreCriticalPathParallelTestRun"
 )
 
 public class ParallelTestRun extends AbstractTestNGCucumberTests {

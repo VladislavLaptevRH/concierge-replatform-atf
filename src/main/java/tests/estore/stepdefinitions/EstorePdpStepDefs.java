@@ -644,19 +644,6 @@ public class EstorePdpStepDefs {
         $(By.xpath("//button[@data-testid='monogram-add-button']")).should(visible, Duration.ofSeconds(25)).click();
     }
 
-    @Then("I verify that monogram was added for pdp on eStore")
-    public void iVerifyThatMonogramWasAddedForPdpOnEStore() {
-        $(By.xpath("//p[text()='PERSONALIZATION']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//p[text()='Style']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//p[text()='Bauer Bodoni 2 (BDNI-HD)']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//p[text()='Text']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//p[text()='tes']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[@id='listColumn1-Color']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//p[text()='TOT']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//p[text()='Edit']")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("//p[text()='Remove']")).should(visible, Duration.ofSeconds(20));
-    }
-
     @And("I click Add to Cart and validate the added items in the cart")
     public void iAddtoCart() {
         if (estorePdpPageScreen.getSelectSize().isDisplayed()) {

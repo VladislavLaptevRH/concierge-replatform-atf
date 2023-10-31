@@ -52,6 +52,131 @@ public class EstoreLoginStepDefs {
             estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(15));
             estoreLoginPage.getPasswordField().should(visible, Duration.ofMinutes(15));
 
+            if (accountRole.equals("joinmembershipbanner")) {
+                estoreLoginPage.getUsernameField().setValue("joinmembershipbanner@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "ea491599-207e-4bde-8026-95c69489c3c3";
+            }
+
+            if (accountRole.equals("cartremoveitem")) {
+                estoreLoginPage.getUsernameField().setValue("cartremoveitem@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "5ff0fbca-e9c6-4325-b89c-6c2b344c501e";
+            }
+
+            if (accountRole.equals("pdpconfigurepdpthisitemtoview")) {
+                estoreLoginPage.getUsernameField().setValue("pdpconfigurepdpthisitemtoview@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "a951d46a-7d7b-4726-b7ac-f3a644298112";
+            }
+
+            if (accountRole.equals("verifythedropdowncartcase2@rh.com")) {
+                estoreLoginPage.getUsernameField().setValue("verifythedropdowncartcase2@rh.com@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "c5ade360-7dbe-470a-80c1-016a55d38bec";
+            }
+
+            if (accountRole.equals("verifytheproductpriceasperselectedcountry")) {
+                estoreLoginPage.getUsernameField().setValue("verifytheproductpriceasperselectedcountry@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "c21c59c1-1d12-4216-854a-9353f0eff666";
+            }
+
+            if (accountRole.equals("cartverifyaddtocartfunctionality")) {
+                estoreLoginPage.getUsernameField().setValue("cartverifyaddtocartfunctionality@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "5e727f95-01ca-4f15-8a43-bc4a6e26545a";
+            }
+
+            if (accountRole.equals("e2eflowcriticalpath")) {
+                estoreLoginPage.getUsernameField().setValue("e2eflowcriticalpath@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "243dcdd7-5c29-45ca-9a67-12902bc03708";
+            }
+
+            if (accountRole.equals("orderrevieweditpayment")) {
+                estoreLoginPage.getUsernameField().setValue("orderrevieweditpayment@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "9a3bde23-b46b-4909-b712-48cf652d0ed0";
+            }
+
+            if (accountRole.equals("orderrevieweditshipping")) {
+                estoreLoginPage.getUsernameField().setValue("orderrevieweditshipping@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "78e5717d-8569-49fa-9e73-4e4ae7ef4a69";
+            }
+
+            if (accountRole.equals("orderrevieweditbillingaddress")) {
+                estoreLoginPage.getUsernameField().setValue("orderrevieweditbillingaddress@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "91838222-c355-4e17-bb13-594c1d1c886a";
+            }
+
+            if (accountRole.equals("orderreplacement")) {
+                estoreLoginPage.getUsernameField().setValue("orderreplacement@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "4c69c2a0-5bab-4b95-b4b2-0fd2f9edca4c";
+            }
+
+            if (accountRole.equals("addanitemfromcarttowishlist")) {
+                estoreLoginPage.getUsernameField().setValue("addanitemfromcarttowishlist@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "47ea6c50-a48a-4866-b96a-0e21ab6155e0";
+            }
+
+
+            if (accountRole.equals("removeitemfromwishlist")) {
+                estoreLoginPage.getUsernameField().setValue("removeitemfromwishlist@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+            }
+
+            if (accountRole.equals("checklogoutuser")) {
+                estoreLoginPage.getUsernameField().setValue("checklogoutuser@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+            }
+
+
+            if (accountRole.equals("placeorderselecthightolow")) {
+                estoreLoginPage.getUsernameField().setValue("placeorderselecthightolow@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "bd6a880c-5c50-4872-bb27-3d7e4131adb3";
+            }
+
+            if (accountRole.equals("placeordersearchwithanykey")) {
+                estoreLoginPage.getUsernameField().setValue("placeordersearchwithanykey@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "209f74a8-2f5a-4849-8eee-87eebb05f4d5";
+            }
+
+            if (accountRole.equals("checkoutbc")) {
+                estoreLoginPage.getUsernameField().setValue("checkoutbc@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "8649ad0f-89b7-454f-9c87-ee6b3efc7091";
+            }
+
+            if (accountRole.equals("verifymonogramproducts")) {
+                estoreLoginPage.getUsernameField().setValue("verifymonogramproducts@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "525ee63e-bf81-4cc6-b1d6-e5c80005ed45";
+            }
+
+
+            if (accountRole.equals("monogramproductincart")) {
+                estoreLoginPage.getUsernameField().setValue("monogramproductincart@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Qwerty123!");
+                USER_ID_STG2 = "00be1e8a-51e0-46cf-914e-33c268dcbd96";
+            }
+
+
+
+            if (accountRole.equals("savedRhCcDiscover")) {
+                estoreLoginPage.getUsernameField().setValue("bnamdeo+0010@rh.com");
+                estoreLoginPage.getPasswordField().setValue("Resto123");
+                USER_ID_STG2 = "589c669f-02ee-4e0a-aa21-8e674c6c7469";
+            }
+
+
+
             if (accountRole.equals("orderreview")) {
                 estoreLoginPage.getUsernameField().setValue("orderreview@rh.com");
                 estoreLoginPage.getPasswordField().setValue("Orderreview1234");
