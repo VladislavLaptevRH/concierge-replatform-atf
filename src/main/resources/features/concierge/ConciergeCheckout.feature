@@ -1,5 +1,5 @@
-@conciergeCheckout
 @conciergeTestRun
+@conciergeCheckout
 Feature: Concierge Checkout flow
 
   Scenario: Verify checkout with non member client
