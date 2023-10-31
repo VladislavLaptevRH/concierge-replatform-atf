@@ -1276,6 +1276,13 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getBillingAddress().should(visible, Duration.ofSeconds(20));
     }
 
+    @Then("Verify Checkout page should get opened with Shipping and Billing address option")
+    public void iVerifyCheckoutShippingAndBillingAddresses() {
+        WebDriverRunner.getWebDriver().navigate().back();
+        conciergeCartPageScreen.getShippingAddress().should(visible, Duration.ofSeconds(20));
+        conciergeCartPageScreen.getBillingAddress().should(visible, Duration.ofSeconds(20));
+    }
+
     @When("Verify that on address page state drop down field is not shown empty")
     public void iVerifyThatStateDropDownIsNotEmpty() {
         conciergeCartPageScreen.getShippingAddressStateField().click();
