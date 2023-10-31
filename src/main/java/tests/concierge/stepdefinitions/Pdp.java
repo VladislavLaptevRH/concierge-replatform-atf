@@ -7,6 +7,7 @@ import com.codeborne.selenide.ex.ElementNotFound;
 import io.cucumber.java.en.And;
 import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import tests.concierge.pageObject.*;
 import io.cucumber.java.en.Then;
@@ -553,6 +554,19 @@ public class Pdp {
                 break;
             case  "country should always default to the Ship to country selected in the user preferences":
                 pdpScreen.getPdpZipCodeModalDefpultCountry().shouldHave(visible, Duration.ofSeconds(15));
+                break;
+            case  "SELECT FROM STOCKED AND SPECIAL ORDER FABRICS is displayed":
+                pdpScreen.getSpecialOrderLink().shouldHave(visible, Duration.ofSeconds(15));
+                break;
+            case  "SELECT FROM STOCKED AND SPECIAL ORDER model should be open":
+                pdpScreen.getSpecialOrderPopUpModal().shouldHave(visible, Duration.ofSeconds(15));
+                break;
+            case  "Hero image should get updated and Shown in text below hero image should be suppressed":
+                assertEquals(result,  pdpScreen.getColorLineItem().getText());
+                break;
+            case  "Return policy link should navigate user to the Return policy page":
+                switchTo().window(1);
+                assertEquals(Hooks.getCurrentUrl(),"https://rh.com/us/en/customer-service/return-policy.jsp");
                 break;
             default: break;
         }
@@ -1112,6 +1126,23 @@ public class Pdp {
 
     }
 
+    @Then("Mattress Recycling Fees message should be displayed below line item for state {string}")
+    public void mattressRecyclingFeesMessageShouldBeDisplayedBelowLineItem(String state) {
+        if(state.equals("CA")) {
+            assertEquals(pdpScreen.getPdpMattressFeeText().getText(), "California requires a mattress recycling fee to be collected at checkout.");
+            pdpScreen.getPdpMattressFeeLink().shouldBe(visible, Duration.ofSeconds(15));
+        }
+        if(state.equals("RI")){
+            assertEquals(pdpScreen.getPdpMattressFeeText().getText(), "Rhode Island requires a mattress recycling fee to be collected at checkout.");
+            pdpScreen.getPdpMattressFeeLink().shouldBe(visible, Duration.ofSeconds(15));
+        }
+        if(state.equals("CT")){
+            assertEquals(pdpScreen.getPdpMattressFeeText().getText(), "Connecticut requires a mattress recycling fee to be collected at checkout.");
+            pdpScreen.getPdpMattressFeeLink().shouldBe(visible, Duration.ofSeconds(15));
+        }
+
+    }
+
     @Then("I verify that text \"{string} requires a mattress recycling fee to be collected at checkout state\" is present in PDP")
     public void iVerifyMattressRecyclingFee(String state) {
         if(state.equals("CA")) {
@@ -1250,6 +1281,19 @@ public class Pdp {
         with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
+    @When("I choose color {string} from special order fabrics")
+    public void iChooseSpecificColorFromSpecialOrderFabrics(String color) {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        pdpScreen.getColorByName(color).should(visible, Duration.ofSeconds(40));
+        pdpScreen.getColorByName(color).hover();
+        pdpScreen.getColorByName(color).click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getCloseSpecialOrderPopUpButton().hover();
+        pdpScreen.getCloseSpecialOrderPopUpButton().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        result = color;
+    }
+
     @Then("I verify that color has been chosen")
     public void iVerifyThatColorHasBeenChosen() {
         selectOption.getColorOption().shouldHave(text("Azure"), Duration.ofSeconds(20));
@@ -1288,6 +1332,12 @@ public class Pdp {
                 pdpScreen.getShippingAndDeliveryModalTab().should(visible, Duration.ofSeconds(15));
                 pdpScreen.getShippingAndDeliveryModalTab().click();
                 pdpScreen.getShippingAndDeliveryModalDeliveryAreaText().should(visible, Duration.ofSeconds(15));
+                break;
+            case  "SELECT FROM STOCKED AND SPECIAL ORDER":
+                pdpScreen.getSpecialOrderLink().click();
+                break;
+            case  "return policy link":
+                pdpScreen.getReturnPolicy().click();
                 break;
             default: break;
         }

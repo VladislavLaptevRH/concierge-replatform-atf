@@ -951,16 +951,6 @@ Feature: Concierge PDP
     Then Verify that "Sale modal" 'click on the postal link present in message below product name'
     Then Verify that 'postal code model is present'
 
-#  Scenario: Validate the results based on Shipping country and Zip code selection
-#    Given I log into Concierge as "associate"
-#    When I choose country for concierge from footer
-#    When I remove all items from cart via UI
-#    When I go to item "57070740 CLNT" from search field
-#    Then I Verify that 'item title' is present
-#    Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
-#    Then I click on zip code and change it to '10001' in modal opener
-#    Then Verify that "Sale modal" 'has changed zip code'
-
   Scenario: Starting at price lable with Regular and member price shold be displayed
     Given I log into Concierge as "associate"
     When I choose 'CA' country
@@ -972,3 +962,78 @@ Feature: Concierge PDP
     Then I Verify that 'item title' is present
     Then Verify that 'text "Components starting at" is present'
     Then Verify that 'PDP has Regular and Member prices'
+
+  @vlad
+  Scenario: Validate the results based on Shipping country and Zip code selection
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "57070740 CLNT" from search field
+    Then I Verify that 'item title' is present
+    Then I click '"VIEW SALE ITEMS" link below line item image' on pdp page
+    Then I click on zip code and change it to '10001' in modal opener
+    Then Verify that "Sale modal" 'has changed zip code'
+
+  @vlad
+  Scenario Outline: Mattress charge applicable items - CA, RI, CT postal codes
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "10004670 NONE" from search field
+    When I change state for "<state>" with zip code "<zipCode>"
+    Then I verify that text ""<state>" requires a mattress recycling fee to be collected at checkout state" is present in PDP
+    Then I chose the '1' line item selections one by one
+    Then Mattress Recycling Fees message should be displayed below line item for state "<state>"
+    Examples:
+      | state | zipCode|
+      | RI    | 02860  |
+      | CT    | 06902  |
+      | CA    | 94925  |
+
+  @vlad
+  Scenario: Select From Stocked and Special Order Fabrics link should be displayed below View In-stock Options link
+    Given I log into Concierge as "associate"
+    When I choose 'CA' country
+    When I remove all items from cart via UI
+    When I go to item "10115451 BWMR" from search field
+    Then I Verify that 'item title' is present
+    Then Verify that 'SELECT FROM STOCKED AND SPECIAL ORDER FABRICS is displayed" link'
+
+  @vlad
+  Scenario: After clicking on the link we should get the modal with the details of the fabrics
+    Given I log into Concierge as "associate"
+    When I choose 'CA' country
+    When I remove all items from cart via UI
+    When I go to item "10115451 BWMR" from search field
+    Then I Verify that 'item title' is present
+    Then Verify that 'SELECT FROM STOCKED AND SPECIAL ORDER FABRICS is displayed" link'
+    Then I click 'SELECT FROM STOCKED AND SPECIAL ORDER' on pdp page
+    Then Verify that 'SELECT FROM STOCKED AND SPECIAL ORDER model should be open'
+
+  @vlad
+  Scenario: After clicking on any swatch from Stocked/Special order section line items should get updated.
+    Given I log into Concierge as "associate"
+    When I choose 'CA' country
+    When I remove all items from cart via UI
+    When I go to item "10115451 BWMR" from search field
+    Then I Verify that 'item title' is present
+    Then Verify that 'SELECT FROM STOCKED AND SPECIAL ORDER FABRICS is displayed" link'
+    Then I click 'SELECT FROM STOCKED AND SPECIAL ORDER' on pdp page
+    Then Verify that 'SELECT FROM STOCKED AND SPECIAL ORDER model should be open'
+    When I choose color 'Azure' from special order fabrics
+    Then Verify that 'Hero image should get updated and Shown in text below hero image should be suppressed'
+
+  @vlad
+  Scenario: Return policy link should be clickable and should navigate user to the Return policy page.
+    Given I log into Concierge as "associate"
+    When I choose 'CA' country
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'item title' is present
+    Then Verify that 'line item selections (Size, Finish and Qty) are present'
+    Then I Verify that 'text "Learn more about our Return Policy"' is present
+    Then I click 'return policy link' on pdp page
+    Then Verify that 'Return policy link should navigate user to the Return policy page'
