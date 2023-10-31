@@ -963,7 +963,6 @@ Feature: Concierge PDP
     Then Verify that 'text "Components starting at" is present'
     Then Verify that 'PDP has Regular and Member prices'
 
-  @vlad
   Scenario: Validate the results based on Shipping country and Zip code selection
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -974,7 +973,6 @@ Feature: Concierge PDP
     Then I click on zip code and change it to '10001' in modal opener
     Then Verify that "Sale modal" 'has changed zip code'
 
-  @vlad
   Scenario Outline: Mattress charge applicable items - CA, RI, CT postal codes
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -990,7 +988,6 @@ Feature: Concierge PDP
       | CT    | 06902  |
       | CA    | 94925  |
 
-  @vlad
   Scenario: Select From Stocked and Special Order Fabrics link should be displayed below View In-stock Options link
     Given I log into Concierge as "associate"
     When I choose 'CA' country
@@ -999,7 +996,6 @@ Feature: Concierge PDP
     Then I Verify that 'item title' is present
     Then Verify that 'SELECT FROM STOCKED AND SPECIAL ORDER FABRICS is displayed" link'
 
-  @vlad
   Scenario: After clicking on the link we should get the modal with the details of the fabrics
     Given I log into Concierge as "associate"
     When I choose 'CA' country
@@ -1010,7 +1006,6 @@ Feature: Concierge PDP
     Then I click 'SELECT FROM STOCKED AND SPECIAL ORDER' on pdp page
     Then Verify that 'SELECT FROM STOCKED AND SPECIAL ORDER model should be open'
 
-  @vlad
   Scenario: After clicking on any swatch from Stocked/Special order section line items should get updated.
     Given I log into Concierge as "associate"
     When I choose 'CA' country
@@ -1023,7 +1018,6 @@ Feature: Concierge PDP
     When I choose color 'Azure' from special order fabrics
     Then Verify that 'Hero image should get updated and Shown in text below hero image should be suppressed'
 
-  @vlad
   Scenario: Return policy link should be clickable and should navigate user to the Return policy page.
     Given I log into Concierge as "associate"
     When I choose 'CA' country
