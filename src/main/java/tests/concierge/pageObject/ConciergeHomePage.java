@@ -13,15 +13,15 @@ public class ConciergeHomePage {
     public final SelenideElement closeCountrySideBar = $(By.xpath("//*[@data-testid= 'dialog-title-close-button']"));
     public final SelenideElement countrySelection = $(By.xpath("(//*[@class = 'MuiGrid-root MuiGrid-item']//div)[3]"));
 
-    private final SelenideElement gbCountry = $(By.xpath("//*[text() = 'UNITED KINGDOM (£)']"));
+    private final SelenideElement gbCountry = $(By.xpath("//*[text() = 'United Kingdom (£)']"));
 
-    private final SelenideElement caCountry = $(By.xpath("//*[text() = 'CANADA ($)']"));
+    private final SelenideElement caCountry = $(By.xpath("//*[text() = 'Canada ($)']"));
 
-    private final SelenideElement usCountry = $(By.xpath("//*[text() = 'UNITED STATES ($)']"));
+    private final SelenideElement usCountry = $(By.xpath("//*[text() = 'United States ($)']"));
 
-    private final SelenideElement selectCountrySaveButton = $(By.xpath("//*[text() = 'SAVE']"));
+    private final SelenideElement selectCountrySaveButton = $(By.xpath("//*[text() = 'CONFIRM']"));
 
-    private final SelenideElement selectCountryHeadline = $(By.xpath("//*[text() = 'SHIP TO THE COUNTRY']"));
+    private final SelenideElement selectCountryHeadline = $(By.xpath("//*[text() = 'PLEASE SELECT COUNTRY & LANGUAGE']"));
 
     public void chooseGBCountry() {
         countrySelection.should(visible).scrollIntoView(true).click();

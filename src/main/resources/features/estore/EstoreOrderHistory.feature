@@ -1,5 +1,5 @@
 @estoreTestRun
-
+@estoreOrderHistory
 Feature: Order history
 
   

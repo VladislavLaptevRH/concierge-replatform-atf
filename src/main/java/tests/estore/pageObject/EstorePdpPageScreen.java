@@ -3,6 +3,7 @@ package tests.estore.pageObject;
 import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
+import org.apache.groovy.xml.tools.DomToGroovy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -43,7 +44,7 @@ public class EstorePdpPageScreen {
 
     private SelenideElement turkishTowelCollectionTitle = $(By.xpath("(//*[text()='802-Gram Turkish Towel Collection'])[3]"));
 
-    private SelenideElement itemInStockOption = $(By.xpath("//*[text()='Item#']"));
+    private SelenideElement itemInStockOption = $(By.xpath("//*[text()='Item']"));
 
     private SelenideElement sizeInStockOption = $(By.xpath("(//*[text()='Size'])[5]"));
 
@@ -73,7 +74,7 @@ public class EstorePdpPageScreen {
 
     private SelenideElement lineItemId = $(By.xpath("(//p[@data-testid='item-sku-id-desktop'])[1]"));
 
-    private SelenideElement addToCartBtn = $(By.xpath("(//span[text()='ADD TO CART'])[1]"));
+    private SelenideElement addToCartBtn = $(By.xpath("(//span[text()='Add To Cart'])[1]"));
 
     private SelenideElement itemAddedInCarMsg = $(By.xpath("//p[contains(text(),'1 Item Added To Your Cart')]"));
 
@@ -180,4 +181,16 @@ public class EstorePdpPageScreen {
     private final SelenideElement pdpFooter = $(By.xpath("//div[@class='MuiContainer-root']/footer"));
 
     private final SelenideElement pdpColorOption = $(By.xpath("//p[text()='Color Options']"));
+
+    private final SelenideElement swatchText = $(By.xpath("//*[contains(text(),'Swatch')]"));
+
+    private final SelenideElement viewTouchUpKitText = $(By.xpath("//*[contains(text(),'Touch-Up Kit')]"));
+
+    private final SelenideElement unlimitedFurnitureDeliveryText = $(By.xpath("//*[contains(text(),'Unlimited Furniture Delivery')]"));
+
+    private final  SelenideElement inStockMemberPrice = $(By.xpath("//p[contains(@class,'product-price__amount--member') and contains(text(),'Member')]"));
+
+    private final SelenideElement inStockRegularPrice = $(By.xpath("//p[contains(@class,'product-price__amount') and contains(text(),'Regular')]"));
+
+
 }

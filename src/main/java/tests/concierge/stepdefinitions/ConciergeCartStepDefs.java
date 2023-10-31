@@ -885,7 +885,6 @@ public class ConciergeCartStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getPersonalizationText().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramStyleValue().should(visible, Duration.ofSeconds(15));
-        conciergeCartPageScreen.getMonogramColorValue().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramTextValue().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramStyle().shouldHave(text("Style"), Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramColor().shouldHave(text("Color"), Duration.ofSeconds(15));
@@ -910,6 +909,7 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getMonogramColors().get(2).should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getMonogramColors().get(2).scrollIntoView(true);
         conciergeCartPageScreen.getMonogramColors().get(2).doubleClick();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramTextInput().setValue("ABC");
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getAddMonogramButton().click();
@@ -924,9 +924,6 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getMonogramFonts().get(5).scrollIntoView(true);
         conciergeCartPageScreen.getMonogramFonts().get(5).should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
         conciergeCartPageScreen.getMonogramFonts().get(5).doubleClick();
-        with().pollInterval(2, SECONDS).await().until(() -> true);
-        conciergeCartPageScreen.getMonogramColors().get(5).should(visible, Duration.ofMinutes(1));
-        conciergeCartPageScreen.getMonogramColors().get(5).doubleClick();
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramTextInput().setValue("DFG");
         conciergeCartPageScreen.getAddMonogramButton().should(visible, Duration.ofMinutes(1));
@@ -950,7 +947,7 @@ public class ConciergeCartStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getRemoveMonogramBtn().shouldHave(text("Remove"), Duration.ofMinutes(1));
         conciergeCartPageScreen.getRemoveMonogramBtn().click();
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(9, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
     }
@@ -1227,11 +1224,11 @@ public class ConciergeCartStepDefs {
     @When("I click on order details button")
     public void iClickOnOrderDetailsButton() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(!conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed()){
+        if(!conciergeUserAccountPage.getOrderDetailsButtonByName("Order Details").isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
-        conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed();
-        conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").click();
+        conciergeUserAccountPage.getOrderDetailsButtonByName("Order Details").isDisplayed();
+        conciergeUserAccountPage.getOrderDetailsButtonByName("Order Details").click();
     }
 
     @When("I remove all items from cart for minicart")

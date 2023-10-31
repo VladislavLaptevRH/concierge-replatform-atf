@@ -1,9 +1,12 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.ClickOptions;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -15,7 +18,7 @@ public class EstorePGScreen {
 
     private final SelenideElement sofa = $(By.xpath("//*[text()='sofa']"));
 
-    private final SelenideElement gridView3 = $(By.xpath("(//div[contains(@class,'MuiGrid-grid-xs-4')])[4]"));
+    private final SelenideElement gridView3 = $(By.xpath("(//div[contains(@class,'MuiGrid-grid-xs-4')])[1]"));
 
     private final SelenideElement gridView2 = $(By.xpath("(//div[contains(@class,'MuiGrid-grid-xs-6')])[4]"));
 
@@ -38,8 +41,6 @@ public class EstorePGScreen {
     private final SelenideElement giftBoxFee = $(By.xpath("//*[text()='Gift Box Fee']"));
 
     private final SelenideElement memberLabel = $(By.xpath("//p[@data-testid='price-label-member']"));
-
-    private final SelenideElement memberPrice = $(By.xpath("//p[@data-testid='price-for-member']"));
 
     private final SelenideElement zipCodeField = $(By.xpath("//input[@name='newPostalCode']"));
 
@@ -81,6 +82,60 @@ public class EstorePGScreen {
 
     private final SelenideElement livingCategory = $(By.xpath("//*[@data-navigation-account-item-id='cat160024']"));
 
-    private final SelenideElement collectionTextTitle = $(By.xpath("//p[contains(text(),'Collection')]"));
+    private final SelenideElement collectionTextTitle = $(By.xpath("//*[contains(text(),'new arrivals')]"));
+
+    private final SelenideElement regularSalePrice = $(By.xpath("(//*[@data-testid='price-for-sale'])[1]"));
+
+    private final SelenideElement memberSalePrice = $(By.xpath("(//*[@data-testid='price-for-member'])[1]"));
+
+    private final SelenideElement regularPrice = $(By.xpath("(//*[@data-testid='price-for-regular'])[1]"));
+
+    private final SelenideElement memberPrice = $(By.xpath("(//*[@data-testid='price-for-member'])[1]"));
+
+    private final SelenideElement inStockFilterPG = $(By.xpath("//input[@name='In-Stock' and @type='checkbox']"));
+
+    private final SelenideElement inStockTextFilterPG = $(By.xpath("//*[text()='in-stock']"));
+
+    private final SelenideElement inStockColorText = $(By.xpath("(//p[@id='listColumn1-Color'])[1]"));
+
+    private final SelenideElement inStockFilterColorizedImage = $(By.xpath("(//img[contains(@alt,'prod')])[1]"));
+
+    private final SelenideElement PgCarousel = $(By.xpath("//*[@data-analytics-id='link']"));
+
+    private final SelenideElement PgCarouselContent = $(By.id("component-product-grid"));
+
+    private final List<SelenideElement> pgItems = $$(By.xpath("//div[@id='component-rh-image_wrapper']"));
+
+
+    public int verifyCountOfPgItemsonThePage() {
+        return pgItems.size();
+    }
+
+    public void verifyThatColorizedImagesAreDisplayed() {
+        inStockColorText.should(Condition.visible, Duration.ofSeconds(12));
+        inStockFilterColorizedImage.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void clickToInStockFilterPG() {
+        inStockTextFilterPG.should(Condition.visible, Duration.ofSeconds(12));
+        inStockFilterPG.click(ClickOptions.usingJavaScript());
+    }
+
+    public int getRegularPriceOnPg() {
+        return Integer.parseInt(regularPrice.getText().replaceAll("[^0-9]", ""));
+    }
+
+    public int getMemberPriceOnPg() {
+        return Integer.parseInt(memberPrice.getText().replaceAll("[^0-9]", ""));
+    }
+
+    public int getRegularSaleOnPgPrice() {
+        return Integer.parseInt(regularSalePrice.getText().replaceAll("[^0-9]", ""));
+    }
+
+    public int getMemberSaleOnPgPrice() {
+        return Integer.parseInt(memberSalePrice.getText().replaceAll("[^0-9]", ""));
+    }
 }
+
 

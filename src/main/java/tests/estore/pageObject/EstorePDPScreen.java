@@ -79,6 +79,41 @@ public class EstorePDPScreen {
 
     private final SelenideElement returnLineItemMessage = $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]"));
 
+    private final SelenideElement regularSalePricePdp = $(By.xpath("(//*[@data-testid='price-for-sale'])[1]"));
+    private final SelenideElement memberSalePricePdp = $(By.xpath("(//*[@data-testid='price-for-member'])[1]"));
+
+    private final SelenideElement regularPricePdp = $(By.xpath("(//*[@data-testid='price-for-regular'])[1]"));
+    private final SelenideElement memberPricePdp = $(By.xpath("(//*[@data-testid='price-for-member'])[1]"));
+
+    private final SelenideElement lineItemMemberPrice = $(By.xpath("(//*[@id='rh-price-range-display']//*[@data-testid='price-for-member'])[3]"));
+
+    private final SelenideElement lineItemRegularPrice = $(By.xpath("(//*[@id='rh-price-range-display']//*[@data-testid='price-for-regular'])[2]"));
+
+
+    public int getRegularLineItemPricePDP() {
+        return Integer.parseInt(lineItemRegularPrice.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+    }
+
+    public int getMemberLineItemPricePDP() {
+        return Integer.parseInt(lineItemMemberPrice.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+    }
+
+    public int getRegularSalePricePDP() {
+        return Integer.parseInt(regularSalePricePdp.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+    }
+
+    public int getMemberPricePDP() {
+        return Integer.parseInt(memberPricePdp.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+    }
+
+    public int getRegularPricePDP() {
+        return Integer.parseInt(regularPricePdp.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+    }
+
+    public int getMemberSalePricePDP() {
+        return Integer.parseInt(memberSalePricePdp.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+    }
+
     public void verifyThatReturnMessageIsDisplayed() {
         returnLineItemMessage.should(Condition.visible, Duration.ofSeconds(12));
     }

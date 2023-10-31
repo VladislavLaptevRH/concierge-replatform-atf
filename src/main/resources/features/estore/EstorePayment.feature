@@ -1,5 +1,5 @@
 @estoreTestRun
-
+@estorePayment
 Feature: Estore Payment
 
   Scenario: eStore Split Payment

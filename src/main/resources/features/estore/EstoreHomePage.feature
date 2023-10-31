@@ -1,4 +1,5 @@
 @estoreParallelTestRun
+@estoreHomePage
 Feature: Estore Homepage
 
   Scenario Outline: Verify search functionality
@@ -76,6 +77,13 @@ Feature: Estore Homepage
 #    When I choose country for eStore from footer
 #    Then I validate each cat and sub-cat for eStore
 
+  Scenario: Verify that home page loads properly
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    Then I verify that home page load will all sections and links
 
-
+  Scenario: Verify the footer section.
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    Then I verify that footer section should show at the bottom of the page along with copy right and year
 

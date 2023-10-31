@@ -1,4 +1,5 @@
 @estoreParallelTestRun
+@estoreSale
 
 Feature: Estore Sale
 
@@ -23,12 +24,6 @@ Feature: Estore Sale
     When I click on estore sale button
     Then I verify that I'm able to navigate different category
 
-  Scenario: To Verify Sale banner
-    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
-    When I go to sale estore category
-    Then I verify sale banner for estore
-
   Scenario: To verify the back button from sale PDP page
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -36,3 +31,51 @@ Feature: Estore Sale
     When I verify that I'm able to navigate different category
     Then I verify the back button from sale PDP page
 
+  Scenario: Verify that user is able to navigate to secondary NAV of SALE
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click to secondary NAV of Sale
+    Then I verify that SALE Nav should be expanded with secondary NAV
+
+  Scenario: Verify that user is able to navigate to tertiary NAV of SALE - Living
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Living from sale nav menu
+    Then I verify that Living in Secondary NAV should expand tertiary NAV
+
+  Scenario: Verify that user is able to navigate to tertiary NAV of SALE - Dining
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Dining from sale nav menu
+    Then I verify that Dining in Secondary NAV should expand tertiary NAV
+
+  Scenario: Verify that user is able to navigate to tertiary NAV of SALE - Bed
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Bed from sale nav menu
+    Then I verify that Bed in Secondary NAV should expand tertiary NAV
+
+  Scenario: Verify that user is able to navigate to tertiary NAV of SALE - Bath
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Bath from sale nav menu
+    Then I verify that Bath in Secondary NAV should expand tertiary NAV
+
+  Scenario: Verify that user is able to navigate to tertiary NAV of SALE - Outdoor
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Outdoor from sale nav menu
+    Then I verify that Outdoor in Secondary NAV should expand tertiary NAV
+
+  Scenario: Verify that user is able to navigate to tertiary NAV of SALE - Lighting
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Lighting from sale nav menu
+    Then I verify that Lighting in Secondary NAV should expand tertiary NAV

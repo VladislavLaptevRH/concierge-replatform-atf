@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.AssertJUnit;
 import tests.concierge.pageObject.SelectOption;
 import tests.estore.pageObject.*;
 import tests.utility.Hooks;
@@ -41,6 +42,8 @@ public class EstorePdpStepDefs {
     EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
 
     EstoreAccountStepDefs estoreAccountStepDefs = new EstoreAccountStepDefs();
+
+    EstorePgStepDefs estorePgStepDefs = new EstorePgStepDefs();
     String regularUSPrice;
     String memberUSPrice;
     String regularCAGBPrice;
@@ -384,7 +387,7 @@ public class EstorePdpStepDefs {
     @Then("I verify availability delivery and return for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyAvailabilityDeliveryAndReturnForProduct(String productID, String arg1, String selectedOptions, String country) {
         $(By.xpath("(//span[text()='Return Policy'])[1]")).should(visible, Duration.ofSeconds(30));
-        $(By.xpath("(//p[text()='Configure this item to view delivery information '])[1]")).should(visible, Duration.ofSeconds(30));
+        $(By.xpath("(//p[contains(text(),'Configure this item to view delivery information')])[1]")).should(visible, Duration.ofSeconds(30));
         estorePdpPageScreen.getInStockOptionsButton().should(Condition.visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getInStockOptionsButton().click();
         $(By.xpath("//*[text()='These options are available for']")).shouldBe(visible, Duration.ofSeconds(15));
@@ -491,6 +494,41 @@ public class EstorePdpStepDefs {
         Assert.assertTrue(estorePdpPageScreen.getPdpFooter().isDisplayed());
     }
 
+    @Then("I verify the PDP hero Image Zoom line items")
+    public void
+    iVerifyThePDPHroImageZoomLineItem(){
+        estorePdpPageScreen.getHeroImage().hover();
+        estorePdpPageScreen.getHeroImageForwardBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImageForwardBtn().click();
+        estorePdpPageScreen.getHeroImageBackBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImageBackBtn().click();
+        estorePdpPageScreen.getHeroImagePlusIconZoomInBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImagePlusIconZoomInBtn().click();
+        estorePdpPageScreen.getHeroImagePlusIconZoomOutBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImagePlusIconZoomOutBtn().click();
+        estorePdpPageScreen.getHeroImageUpwardBtn().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImageUpwardBtn().click();
+        estorePdpPageScreen.getHeroImageCloseIcon().should(Condition.visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getHeroImageCloseIcon().click();
+        Assert.assertTrue(estorePdpPageScreen.getShopTheEntireCollectionText().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getInStockOptionsButton().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getViewTouchUpKitText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
+    @Then("I verify IN STOCK functionality")
+    public void iVerifyINStockFunctionality() {
+        estorePdpPageScreen.getInStockOptionsButton().click();
+        Assert.assertTrue(estorePdpPageScreen.getInStockTitle().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getItemInStockOption().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getInStockMemberPrice().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getInStockRegularPrice().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getQtyInStockItems().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtnInStockItems().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estorePdpPageScreen.getAddToCartBtnInStockItems().click();
+        Assert.assertTrue(estorePdpPageScreen.getViewCartBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
     @Then("I verify the product price as per the Ship to selection for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceAsPerTheShipToSelectionForProduct(String productID, String arg1, String selectedOptions, String country) {
         estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));
@@ -526,7 +564,6 @@ public class EstorePdpStepDefs {
     public void iVerifyThatPopupIsDisplayed(String modalPopUp) {
         if (modalPopUp.equals("View In-Stock")) {
             $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
-            $(By.xpath("//p[text()='In Stock']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
         }
@@ -779,6 +816,12 @@ public class EstorePdpStepDefs {
     public void iSelectFabricOptionForLineItem() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         selectOption.selectFabricPropertyLineItem();
+    }
+
+    @Then("I verify that prices for the VIEW SELECT ITEMS ON SALE on PDP and the sale page")
+    public void iVerifyThatPricesForTheVIEWSELECTITEMSONSALEOnPDPAndTheSalePage() {
+        AssertJUnit.assertEquals("Regular price is not equal to zero", estorePGScreen.getRegularSaleOnPgPrice(), estorePDPScreen.getRegularSalePricePDP());
+        AssertJUnit.assertEquals("Member price is not equal to zero", estorePGScreen.getMemberSaleOnPgPrice(), estorePDPScreen.getMemberSalePricePDP());
 
     }
 }

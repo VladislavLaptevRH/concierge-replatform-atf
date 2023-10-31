@@ -117,6 +117,15 @@ public class Pdp {
            case  "has a title":
                pdpScreen.getPdpPopUpOnSaleTitle().should(visible, Duration.ofSeconds(5));
                break;
+           case  "zip code is present":
+               pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
+               break;
+           case  "click on the postal link present in message below product name":
+               pdpScreen.getPdpPopUpInStockZipCode().click();
+               break;
+           case  "Modal should displayed the list of ON SALE items":
+               assertTrue(pdpScreen.getModalOnSaleItemsList().size() > 1);
+               break;
            case  "has item#":
                with().pollInterval(5, SECONDS).await().until(() -> true);
                if(!pdpScreen.getPdpPopUpOnSaleItem().isDisplayed()){
@@ -157,6 +166,28 @@ public class Pdp {
                pdpScreen.getCancelButton().should(visible, Duration.ofSeconds(5));
                pdpScreen.getSaveButton().should(visible, Duration.ofSeconds(5));
                break;
+           case  "Add to cart button should be enabled":
+               pdpScreen.getPdpModalEnabledAddToCartButton().shouldBe(visible, Duration.ofSeconds(15));
+               pdpScreen.getPdpModalDisabledAddToCartButton().shouldNotBe(visible, Duration.ofSeconds(15));
+               break;
+           case  "postal code should be displayed as per the Header preferences":
+               pdpScreen.getPostalCode().shouldBe(visible, Duration.ofSeconds(15));
+               break;
+           case  "availability and delivery message should be displayed for each onsale product":
+               with().pollInterval(5, SECONDS).await().until(() -> true);
+               for(int i = 1; i <= pdpScreen.getInStockModalItemsList().size(); i++){
+                   pdpScreen.getInStockModalDeliveryInformationList().shouldBe(visible, Duration.ofSeconds(15));
+               }
+               break;
+           case  "has changed zip code":
+               if(pdpScreen.getPostalCodeModal().isDisplayed()){
+                   WebDriverRunner.getWebDriver().navigate().refresh();
+                   pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().click();
+                   assertEquals(result, pdpScreen.getPdpPopUpInStockZipCode().getText());
+               } else {
+                   assertEquals(result, pdpScreen.getPdpPopUpInStockZipCode().getText());
+               }
+               break;
            default:
                break;
        }
@@ -189,6 +220,12 @@ public class Pdp {
        pdpScreen.getSearchFieldInput().setValue(arg0);
        pdpScreen.getSeeAllResultButton().click();
         result = arg0;
+    }
+
+    @Then("Product name should be displayed on left top")
+    public void visabilityOfProductName() {
+        pdpScreen.getPdpPopUpOnSaleProductName().shouldBe(visible, Duration.ofSeconds(15));
+
     }
 
     @And("I type {string}")
@@ -352,6 +389,10 @@ public class Pdp {
                 pdpScreen.getPriceForMember().shouldHave(visible, Duration.ofSeconds(15));
                 pdpScreen.getPriceLabelMember().shouldHave(visible, Duration.ofSeconds(15));
                 break;
+            case  "PDP has Regular and Member prices":
+                pdpScreen.getPriceForRegular().shouldHave(visible, Duration.ofSeconds(15));
+                pdpScreen.getPriceForMember().shouldHave(visible, Duration.ofSeconds(15));
+                break;
             case  "default US zip code is present in PDP":
                 pdpScreen.getComponentSKU().shouldBe(visible, Duration.ofSeconds(20));
                 if(pdpScreen.getComponentSKU().isDisplayed()){
@@ -475,6 +516,43 @@ public class Pdp {
                 pdpScreen.getPublicSwatchHeroPageTitle().shouldBe(visible, Duration.ofSeconds(15));
                 pdpScreen.getPublicSwatchHeroPageTitle().shouldBe(visible, Duration.ofSeconds(15));
                 pdpScreen.getCareInstructionLink().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "line Item section image is present":
+                pdpScreen.getLineItemSectionImage().scrollIntoView(true);
+                pdpScreen.getLineItemSectionImage().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "Verify the Starting at price or configured price message":
+                pdpScreen.getSalePrice().scrollIntoView(true);
+                pdpScreen.getSalePrice().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "Verify the Sale/Final Sale price":
+                if(pdpScreen.getPdpOnSaleMemberPrice().isDisplayed()){
+                    pdpScreen.getPdpOnSaleMemberPrice().shouldBe(visible, Duration.ofSeconds(15));
+                } else {
+                    pdpScreen.getPdpOnSaleTradePrice().shouldBe(visible, Duration.ofSeconds(15));
+                }
+                break;
+            case  "ON SALE name in the left with close button right":
+                pdpScreen.getPdpModelOnSaleName().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "scrollable functionality":
+                pdpScreen.getInStockModalItemsList().last().scrollIntoView(true);
+                pdpScreen.getInStockModalItemsList().last().should(visible, Duration.ofSeconds(5));
+                break;
+            case  "By default qty dropdown should be displayed one":
+                assertEquals(pdpScreen.getQuantitySelect().getAttribute("value"), "1");
+                break;
+            case  "postal code model is present":
+                pdpScreen.getPostalCode().shouldHave(visible, Duration.ofSeconds(15));
+                pdpScreen.getConfirmationPostalCode().shouldHave(visible, Duration.ofSeconds(15));
+                pdpScreen.getPdpZipCodeModalShippingCountry().shouldHave(visible, Duration.ofSeconds(15));
+                pdpScreen.getPostalCodeModal().shouldHave(visible, Duration.ofSeconds(15));
+                break;
+            case  "delivery information message should be displayed":
+                pdpScreen.getAvailabilityDeliveryInformation().shouldHave(visible, Duration.ofSeconds(15));
+                break;
+            case  "country should always default to the Ship to country selected in the user preferences":
+                pdpScreen.getPdpZipCodeModalDefpultCountry().shouldHave(visible, Duration.ofSeconds(15));
                 break;
             default: break;
         }
@@ -678,6 +756,14 @@ public class Pdp {
             case  "view select items on sale link":
                 pdpScreen.getViewSelectItemsOnSaleText().shouldBe(visible, Duration.ofSeconds(15));
                 break;
+            case  "\"VIEW SALE ITEMS\" link below line item image":
+                pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().scrollIntoView(true);
+                pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().shouldHave(text("View\n" + "Sale\n" + "items"));
+                break;
+            case  "\"VIEW IN STOCK ITEMS\" link below line item image":
+                pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().scrollIntoView(true);
+                pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().shouldHave(text("View\n" + "In-Stock\n" + "items"));
+                break;
             case  "wording also available in":
                 pdpScreen.getAlsoAvailableText().shouldBe(visible, Duration.ofSeconds(15));
                 break;
@@ -755,6 +841,9 @@ public class Pdp {
                 break;
             case  "Upholstery Swatch section":
                 pdpScreen.getUpholsterySwatch().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "item title":
+                pdpScreen.getItemTitle().shouldBe(visible, Duration.ofSeconds(15));
                 break;
             default:
                 break;
@@ -889,6 +978,9 @@ public class Pdp {
             case  "has a title":
                pdpScreen.getPdpPopUpOnSaleTitle().should(visible, Duration.ofSeconds(5));
                 break;
+            case  "zip code is present":
+                pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
+                break;
             case  "has item#":
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 if(!pdpScreen.getPdpPopUpOnSaleItem().isDisplayed()){
@@ -925,8 +1017,23 @@ public class Pdp {
                 pdpScreen.getCancelButton().should(visible, Duration.ofSeconds(5));
                 pdpScreen.getSaveButton().should(visible, Duration.ofSeconds(5));
                 break;
-            default:
+            case  "Add to cart button should be enabled":
+                pdpScreen.getPdpModalEnabledAddToCartButton().shouldBe(visible, Duration.ofSeconds(15));
+                pdpScreen.getPdpModalDisabledAddToCartButton().shouldNotBe(visible, Duration.ofSeconds(15));
                 break;
+            case  "we can change the qty by selecting value from dropdown":
+                result = pdpScreen.getInStockModalQuantityDropDownList().getAttribute("value");
+                Select itemList = new Select(pdpScreen.getInStockModalQuantityDropDownList());
+                itemList.selectByIndex(5);
+                assertNotEquals(result, pdpScreen.getInStockModalQuantityDropDownList().getAttribute("value"));
+                break;
+            case  "availability and delivery message should be displayed for each instock product":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
+                for(int i = 1; i <= pdpScreen.getInStockModalItemsList().size(); i++){
+                    pdpScreen.getInStockModalDeliveryInformationList().shouldBe(visible, Duration.ofSeconds(15));
+                }
+                break;
+            default: break;
         }
     }
 
@@ -1165,6 +1272,23 @@ public class Pdp {
                 result = pdpScreen.getFirstProductItemInTheYAMLCarousel().getText();
                 pdpScreen.getFirstProductItemInTheYAMLCarousel().click();
                 break;
+            case  "\"VIEW SALE ITEMS\" link below line item image":
+                pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().scrollIntoView(true);
+                pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().click();
+                break;
+            case "postal code link":
+                pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
+                pdpScreen.getZipCode().click();
+                pdpScreen.getPostalCodeModal().should(visible, Duration.ofSeconds(15));
+                break;
+            case  "text \"Unlimited Furniture Delivery\" is present":
+                pdpScreen.getUnlimitedFurnitureDeliveryText().click();
+                break;
+            case  "Shipping & Delivery Modal Should be opened with Shipments to Canada tab which has CAN currency for shipping charges":
+                pdpScreen.getShippingAndDeliveryModalTab().should(visible, Duration.ofSeconds(15));
+                pdpScreen.getShippingAndDeliveryModalTab().click();
+                pdpScreen.getShippingAndDeliveryModalDeliveryAreaText().should(visible, Duration.ofSeconds(15));
+                break;
             default: break;
         }
     }
@@ -1231,6 +1355,17 @@ public class Pdp {
                 pdpScreen.getConfirmationPostalCode().click();
                 with().pollInterval(9, SECONDS).await().until(() -> true);
             }
+
+    @Then("I click on zip code and change it to {string} in modal opener")
+    public void iChangeZipCodeForInModalOpener(String zipCode) {
+        pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(40));
+        pdpScreen.getPdpPopUpInStockZipCode().click();
+        pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
+        pdpScreen.getPostalCode().setValue(zipCode);
+        pdpScreen.getConfirmationPostalCode().click();
+        result = zipCode;
+        with().pollInterval(9, SECONDS).await().until(() -> true);
+    }
 
             @Then("I verify that zip code in PDP is {string}")
             public void iVerifyThatZipCodeIs(String zipCode) {
