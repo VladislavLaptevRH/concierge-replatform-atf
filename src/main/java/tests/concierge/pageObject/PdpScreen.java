@@ -30,7 +30,7 @@ public class PdpScreen {
 
     public final String modalItemValue = "//*[@id = 'listColumn2-Item#' and contains(text(), '%s')]";
 
-    public final String itemListNumber = "((//a[contains(@data-testid, 'productTitleLink')])[2]/../../../../../..//select[contains(@id, 'prod')]/option/..)[%s]";
+    public final String itemListNumber = "((//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..)[%s]";
     public final String zipCodeValue = "//*[contains(text(), '%s')]";
 
     public final String stockedColor = "//*[text() = '%s ']";
@@ -249,6 +249,10 @@ public class PdpScreen {
     private final SelenideElement deliveryInformation = $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'will be ready for delivery between')]"));
 
     private final SelenideElement unlimitedFurnitureDeliveryText = $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'Unlimited Furniture Delivery')]"));
+
+    private final SelenideElement unlimitedFurnitureDeliveryModalText = $(By.xpath("//*[text() = 'Unlimited Furniture Delivery']"));
+
+    private final SelenideElement unlimitedFurnitureDeliveryModalUSCurrency = $(By.xpath("(//*[text() = 'Unlimited Furniture Delivery']/..//*[contains(text() , '$')])[1]"));
 
     private final SelenideElement shippingAndDeliveryModalTab = $(By.xpath("//*[text() = 'Shipments to Canada']"));
     private final SelenideElement shippingAndDeliveryModalDeliveryAreaText = $(By.xpath("//*[text() = 'CANADIAN DELIVERY AREA']"));
