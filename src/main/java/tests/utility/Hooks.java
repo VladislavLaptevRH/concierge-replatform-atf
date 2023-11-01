@@ -152,7 +152,7 @@ public class Hooks {
         ConfigFileReader();
         configureEstoreURL();
         setUPWebDriver(eStoreURL);
-//        setupChromeArguments(eStoreURL);
+        setupChromeArguments(eStoreURL);
     }
 
     /**
