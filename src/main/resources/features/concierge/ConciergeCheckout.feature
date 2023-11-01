@@ -26,6 +26,13 @@ Feature: Concierge Checkout flow
 	When I choose client who is a "Member"
 	Then I verify that cart is displayed
 	Then I verify that membership price displayed as total price
+	When I click on checkout button
+	Then I verify that ship to, bill to, sold to addresses are displayed
+	When I continue to payment
+	When I click on continue with original address button
+	When I execute payment for "VI"
+	Then I verify that review screen is displayed
+	When I click on a place order button
 
   Scenario: Verify checkout with trade client - verify the trade discount applied
 	Given I log into Concierge as "associate"
