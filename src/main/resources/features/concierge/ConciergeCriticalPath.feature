@@ -23,7 +23,7 @@ Feature: Concierge Critical Path
 #    Then I confirm that default zip code for country "US" is present in Cart
     And I change zip code in the cart to "94525"
     And Verify that zip code was updated in the Cart to "94525"
-  @vimal
+  
   Scenario: Verify the Price, Total, Shipping & Applicable fees in cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -938,7 +938,7 @@ Feature: Concierge Critical Path
     Then I click 'sale checkbox' on PG screen
     Then I verify that 'all products returned have $ SALE price in their descriptions' on PG screen
     Then I verify that PG loads
-  @vimal
+  
   Scenario: Checking Faucets in General PG (All Tables)
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -947,7 +947,7 @@ Feature: Concierge Critical Path
     Then I navigate to gallery 'All Dining Tables'
     #Then I verify that 'PG has filters: IN-STOCK, SALE, SIZE, SHAPE, BRAND, RESULTS and SORT is present' on PG screen
     Then I verify that 'user can select SIZE -> Length -> 30 and respective products are returned' on PG screen
-  @vimal
+ 
   Scenario: Checking Faucets in SALE PGs
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -985,7 +985,7 @@ Feature: Concierge Critical Path
 #      | Rugs      | Rug Pads            | All Rug Pads    | RH              | RH               | All Rug Pads    |
 #      | Nursery   | Gifts               | Baby Apparel    | RH BABY & CHILD | BC               | Baby Apparel    |
       | Furniture | Furniture | Dining Chairs | RH OUTDOOR | OD               | Dining Chairs |
-  @vimal
+  
   Scenario: Verify that Back to Top Button is present in PG and functioning
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1009,7 +1009,7 @@ Feature: Concierge Critical Path
     Then I verify that 'Back to top Button is present' on PG screen
     Then I click 'Back to Top button' on PG screen
     Then I verify that 'user is brought to the top of the page' on PG screen
-  @vimal
+  
   Scenario: Verify that Sale Price is present in Sale PGs
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1023,7 +1023,7 @@ Feature: Concierge Critical Path
     Then I navigate to gallery 'Sofas'
     Then I click 'sale checkbox' on PG screen
     Then I verify that 'Verify that all products have text Frame $ / $ Sale / $ Member' on PG screen
-  @vimal
+  
   Scenario: Verify that PG is defaulted to 3-grid view
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1043,7 +1043,7 @@ Feature: Concierge Critical Path
     Then I verify that 'grid view is set to 3-grid view' on PG screen
     Then I Change the PG Grid view to '2' - grid view and confirm changing
     Then I Change the PG Grid view to '3' - grid view and confirm changing
-  @vimal
+ 
   Scenario: Verify that PG Grid View is kept as selected  as user browses through site -PG/CG/PDP and back
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
