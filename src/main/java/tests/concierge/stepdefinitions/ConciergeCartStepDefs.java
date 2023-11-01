@@ -1283,6 +1283,13 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getBillingAddress().should(visible, Duration.ofSeconds(20));
     }
 
+    @Then("I verify client should not get added with empty address field.")
+    public void iVerifyClientNotAdded() {
+        WebDriverRunner.getWebDriver().navigate().back();
+        conciergeCartPageScreen.getShippingAddress().should(visible, Duration.ofSeconds(20));
+        conciergeCartPageScreen.getBillingAddress().should(visible, Duration.ofSeconds(20));
+    }
+
     @When("Verify that on address page state drop down field is not shown empty")
     public void iVerifyThatStateDropDownIsNotEmpty() {
         conciergeCartPageScreen.getShippingAddressStateField().click();

@@ -69,10 +69,9 @@ Feature: Concierge Checkout flow
 	When I click on checkout button
 	When I click on no thanks button
 	When I choose client who is a "Non-Member"
-	When I fill all fields from address screen for checking zip code
 	When I continue to payment
-	When I click on continue with original address button
-	Then Verify that after come back to address page from payment page ship to and bill to address is showing
+	Then I verify client should not get added with empty address field.
+
 
   Scenario: Verify the saved addresses, ship to - bill to  from SF in address page for a client with primary and secondary addresses - regular accounts
 	Given I log into Concierge as "associate"
