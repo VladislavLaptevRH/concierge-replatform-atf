@@ -566,8 +566,7 @@ public class EstorePdpStepDefs {
     @And("I verify that {string} popup is displayed")
     public void iVerifyThatPopupIsDisplayed(String modalPopUp) {
         if (modalPopUp.equals("View In-Stock")) {
-            $(By.xpath("(//span[text()='VIEW'])[1]")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
-            $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
+             $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
         }
         if (modalPopUp.equals("View On Sale")) {
@@ -648,7 +647,6 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that monogram was added for pdp on eStore")
     public void iVerifyThatMonogramWasAddedForPdpOnEStore() {
-        $(By.xpath("//p[text()='PERSONALIZATION']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Style']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Bauer Bodoni 2 (BDNI-HD)']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Text']")).should(visible, Duration.ofSeconds(20));

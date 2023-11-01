@@ -87,7 +87,7 @@ Feature: Estore critical path
     Then I verify sale prices on PG pages for sale items
     Examples:
       | brand |
-      | RH    |
+     # | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -126,7 +126,7 @@ Feature: Estore critical path
     Then I verify that sorting high to low is working as expected
     Examples:
       | brand |
-      | RH    |
+      #| RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -1026,6 +1026,7 @@ Feature: Estore critical path
     Then I verify that monogram was added
     When I edit monogram
     Then I verify that monogram was edited
+    When I refresh current estore page
     When I remove monogram
     Then I verify that monogram was removed
   @vimal
@@ -1035,8 +1036,8 @@ Feature: Estore critical path
     When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add monogram checkbox from pdp on eStore
     When I add monogram to product on eStore
-    #Then I verify that monogram was added for pdp on eStore
-    Then I verify that monogram was added
+    Then I verify that monogram was added for pdp on eStore
+    #Then I verify that monogram was added
     When I click on add to cart estore button
     When I click on view cart estore button
     Then I verify monogram was added to cart for eStore

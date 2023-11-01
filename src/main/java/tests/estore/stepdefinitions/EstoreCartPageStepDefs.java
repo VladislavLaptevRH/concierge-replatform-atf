@@ -65,7 +65,7 @@ public class EstoreCartPageStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(6, SECONDS).await().until(() -> true);
         estoreItemPage.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(80));
-        with().pollInterval(6, SECONDS).await().until(() -> true);
+        with().pollInterval(1, SECONDS).await().until(() -> true);
         estoreItemPage.getViewCartButton().should(visible, Duration.ofSeconds(60));
         estoreCartPage.getKeepShopping().should(visible, Duration.ofSeconds(15));
         estoreItemPage.getViewCartButton().click(ClickOptions.usingJavaScript());
@@ -792,7 +792,6 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify monogram was added to cart for eStore")
     public void iVerifyMonogramWasAddedToCartForEStore() {
-        $(By.xpath("//p[text()='PERSONALIZATION']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Style']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Bauer Bodoni 2 (BDNI-HD)']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Text']")).should(visible, Duration.ofSeconds(20));

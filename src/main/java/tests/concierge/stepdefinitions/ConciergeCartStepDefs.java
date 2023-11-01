@@ -909,9 +909,9 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getMonogramColors().get(2).should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getMonogramColors().get(2).scrollIntoView(true);
         conciergeCartPageScreen.getMonogramColors().get(2).doubleClick();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramTextInput().setValue("ABC");
-        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getAddMonogramButton().click();
     }
 
@@ -948,7 +948,7 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getRemoveMonogramBtn().shouldHave(text("Remove"), Duration.ofMinutes(1));
         conciergeCartPageScreen.getRemoveMonogramBtn().click();
         with().pollInterval(9, SECONDS).await().until(() -> true);
-        WebDriverRunner.getWebDriver().navigate().refresh();
+        //WebDriverRunner.getWebDriver().navigate().refresh();
         with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 

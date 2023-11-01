@@ -15,7 +15,6 @@ Feature: Estore Payment
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I remove split payment which was used earlier
-#    When I refresh current estore page
     Then I verify that I'm able to execute estore split payment
 
   Scenario: eStore Saved Cards
