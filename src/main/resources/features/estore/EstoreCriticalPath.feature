@@ -290,7 +290,7 @@ Feature: Estore critical path
     Then I verify that CG page is displayed
 
 #PDP - Add to wishList
-  @estoreCriticalPathParallelTestRun
+  @estoreTestRun
   Scenario Outline: PDP - Verify Line Items functionality:
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -344,7 +344,7 @@ Feature: Estore critical path
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
 
-  @estoreCriticalPathParallelTestRun
+  @estoreCriticalPathTestRun
   Scenario: Member - Verify member user checkout in estore
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -365,7 +365,7 @@ Feature: Estore critical path
     Then I verify that estore thank you page is displayed
 
 #Verify the Payment flow
-  @estoreCriticalPathTestRun
+  @estoreCriticalTestRun
   Scenario Outline: Payment - eStore - Major CC - US
     Given I log into eStore as "noaddresses" user
     When I choose country for eStore from footer
@@ -597,7 +597,7 @@ Feature: Estore critical path
     Then I verify US zip code validation in estore cart
     And I verify CA zip code validation in estore cart
 
-  @estoreCriticalPathParallelTestRun
+  @estoreCriticalPathTestRun
   Scenario: Cart - eStore - Membership price in cart
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -607,7 +607,7 @@ Feature: Estore critical path
     Then I verify membership price in banner
 
   #Verify the add to cart funtionality
-  @estoreCriticalPathParallelTestRun
+  @estoreCriticalPathTestRun
   Scenario: Cart - Verify the Add to cart functionality
     Given I log into eStore as "cartverifyaddtocartfunctionality" user
     When I choose country for eStore from footer
@@ -986,7 +986,7 @@ Feature: Estore critical path
     Then I verify that estore thank you page is displayed
 
 #Contract
-  @estoreTestRun
+  @estoreCriticalPathTestRun
   Scenario: Verify the contract login and checkout
     Given I log into eStore as contract
     When I choose country for eStore from footer
