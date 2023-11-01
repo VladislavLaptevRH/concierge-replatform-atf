@@ -1437,6 +1437,7 @@ public class Pdp {
                     }
                 }
                 String currentZipCode =  pdpScreen.getComponentSKU().getText();
+                with().pollInterval(9, SECONDS).await().until(() -> true);
                 assertEquals(currentZipCode, zipCode + ".");
             }
 
