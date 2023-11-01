@@ -300,7 +300,7 @@ public class PdpScreen {
 
     private final SelenideElement firstProductImage = $(By.xpath("(//*[@class = 'slick-slider slick-vertical slick-initialized']//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/prod18890296')])[1]"));
 
-    private final SelenideElement pdpTitle = $(By.xpath("//h2[contains(@class, MuiTypography-h2)]"));
+    private final SelenideElement pdpTitle = $(By.xpath("(//h1[contains(@class, MuiTypography)])[1]"));
 
     private final SelenideElement cloudModularLeatherSofaText = $(By.xpath("//h3[text() = 'Cloud Modular Leather Sofa']"));
     private final SelenideElement premiumFabrics = $(By.xpath("//*[text()='Premium Fabrics']"));

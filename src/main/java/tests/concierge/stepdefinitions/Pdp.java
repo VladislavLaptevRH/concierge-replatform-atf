@@ -404,6 +404,7 @@ public class Pdp {
                 regularPriceInPG = pdpScreen.getPriceForRegular().getText().replaceAll(".00", "").replaceAll("\\$", "").replaceAll(",", "");
                 break;
             case  "price in PDP changed from US$ to CA$":
+                with().pollInterval(9, SECONDS).await().until(() -> true);
                 pdpScreen.getConfirmationPostalCode().shouldNot(visible, Duration.ofSeconds(20));
                 pdpScreen.getComponentSKU().shouldBe(visible, Duration.ofSeconds(20));
                 if(pdpScreen.getPriceForMember().isDisplayed()){
@@ -1443,7 +1444,9 @@ public class Pdp {
                     }
                 }
                 String currentZipCode =  pdpScreen.getComponentSKU().getText();
+                with().pollInterval(9, SECONDS).await().until(() -> true);
                 assertEquals(currentZipCode, zipCode + ".");
+                with().pollInterval(9, SECONDS).await().until(() -> true);
             }
 
             @Then("I verify that availability, Delivery and returns messaging is displayed for {string}")
