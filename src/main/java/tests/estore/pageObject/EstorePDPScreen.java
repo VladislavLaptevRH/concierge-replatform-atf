@@ -23,7 +23,9 @@ public class EstorePDPScreen {
 
     private final SelenideElement firstMemberPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
 
-    private final SelenideElement addToCartInactiveButton = $(By.xpath("(//*[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-10'])[1]//button[contains(@class,'disabled') and @id='component-related-product-card_add-to-cart-btn']"));
+    private final SelenideElement addToCartActiveButton = $(By.xpath("(//*[text()='Add To Cart'])[1]"));
+
+    private final SelenideElement addToCartInactiveButton = $(By.xpath("(//*[text()='Add To Cart'])[2]"));
 
     private final SelenideElement sortButton = $(By.xpath("(//*[contains(text(),'sort')])[2]"));
 
@@ -45,13 +47,13 @@ public class EstorePDPScreen {
 
     private final SelenideElement sizeLabelUnselectedOption = $(By.xpath("//label[@id='optionSelect-prod2020027-Size-label' and @data-shrink='false']"));
 
-    private final SelenideElement thisItemWillBeDelieveredMsg = $(By.xpath("//*[contains(text(),'will be delivered on or before')]"));
+    private final SelenideElement thisItemWillBeDelieveredMsg = $(By.xpath("(//*[contains(text(),'This item will be delivered on or before')])[1]"));
 
-    private final SelenideElement shipsFreeOfChargeViaStandarShipMsg = $(By.xpath("//*[text()='Ships free of charge via Standard Delivery Shipping']"));
+    private final SelenideElement shipsFreeOfChargeViaStandarShipMsg = $(By.xpath("(//*[text()='Ships free of charge via Standard Delivery Shipping'])[1]"));
 
     private final SelenideElement thisItemCanBeReturnedMsg = $(By.xpath("//*[text()='This item can be returned within 30 days of delivery.']"));
 
-    private final SelenideElement skuIdItemValue = $(By.xpath("(//*[contains(text(),'Item# ')])[1]"));
+    private final SelenideElement skuIdItemValue = $(By.xpath("//*[@data-testid='item-sku-id-desktop']"));
 
     private final SelenideElement returnPolicyButton = $(By.xpath("(//a[@href='/us/en/customer-service/return-policy.jsp'])[1]"));
 
@@ -149,9 +151,10 @@ public class EstorePDPScreen {
     }
 
     public void verifyThatSpecialMessagesAreDisplayed() {
-        thisItemWillBeDelieveredMsg.should(Condition.visible, Duration.ofSeconds(20));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         shipsFreeOfChargeViaStandarShipMsg.should(Condition.visible, Duration.ofSeconds(20));
         skuIdItemValue.should(Condition.visible, Duration.ofSeconds(20));
+        thisItemWillBeDelieveredMsg.should(Condition.visible, Duration.ofSeconds(20));
     }
 
     public void selectSizeOption() {

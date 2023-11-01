@@ -315,6 +315,7 @@ public class EstorePdpStepDefs {
     public void iUnselectTheSizeOptionForAndWithForEstore(String prodId, String arg1, String arg2) {
         Select sizeOption = new Select($(By.xpath("//select[@id='optionSelect-" + prodId + "-Size']")));
         sizeOption.selectByValue("");
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify availability , delivery and return messages in PDP")
@@ -324,8 +325,10 @@ public class EstorePdpStepDefs {
 
     @Then("I verify link bellow {string} is displayed")
     public void iVerifyLinkBellowIsDisplayed(String arg0) {
-        $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).should(visible, Duration.ofSeconds(20));
-        $(By.xpath("(//span[text()='View' and 'Sale' and 'items'])[3]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='In Stock'])[1]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='Sale'])[1]")).should(visible, Duration.ofSeconds(20));
+        $(By.xpath("(//*[text()='Sale'])[1]")).click();
+        with().pollInterval(8, SECONDS).await().until(() -> true);
     }
 
     @Then("verify that the {string} zip code was updated with the {string} zip code")
@@ -563,13 +566,12 @@ public class EstorePdpStepDefs {
     @And("I verify that {string} popup is displayed")
     public void iVerifyThatPopupIsDisplayed(String modalPopUp) {
         if (modalPopUp.equals("View In-Stock")) {
-            $(By.xpath("(//span[text()='In-Stock' and text()='View' and 'items'])[1]")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
+            $(By.xpath("(//span[text()='VIEW'])[1]")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
             $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
         }
         if (modalPopUp.equals("View On Sale")) {
-            $(By.xpath("(//span[text()='View' and 'Sale' and 'items'])[3]")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
-            $(By.xpath("//span[text()='ON SALE']")).should(visible, Duration.ofSeconds(20));
+             $(By.xpath("//span[text()='ON SALE']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
         }

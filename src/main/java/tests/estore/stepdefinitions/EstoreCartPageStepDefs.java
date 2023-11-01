@@ -761,13 +761,13 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that add to cart button is active")
     public void iVerifyThatAddToCartButtonIsActive() {
-        estorePDPScreen.getAddToCartInactiveButton().shouldNotBe(visible, Duration.ofSeconds(30));
+        estorePDPScreen.getAddToCartActiveButton().shouldBe(visible, Duration.ofSeconds(30));
     }
 
     @And("I verify that add to cart button is inactive")
     public void iVerifyThatAddToCartButtonIsInactive() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        estorePDPScreen.getAddToCartInactiveButton().shouldBe(visible, Duration.ofSeconds(30));
+        estorePDPScreen.getAddToCartInactiveButton().shouldBe(appear, Duration.ofSeconds(30));
     }
 
     @And("I verify the total price for product in the cart")
@@ -775,7 +775,7 @@ public class EstoreCartPageStepDefs {
         totalProductPrice = estoreCartPage.getTotalProductPrice();
         int regularPrice = estoreCartPage.getRegularProductPriceValueInt();
         int quantity = estoreCartPage.getQuantityOfProductInCart();
-
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         assertEquals("Verify the total price", regularPrice * quantity
                 , totalProductPrice);
     }

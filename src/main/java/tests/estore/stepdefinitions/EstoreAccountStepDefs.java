@@ -2,6 +2,7 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -34,6 +35,7 @@ public class EstoreAccountStepDefs {
     EstoreMemberStepDefs estoreMemberStepDefs = new EstoreMemberStepDefs();
 
     EstoreGiftRegistry estoreGiftRegistry = new EstoreGiftRegistry();
+    private final SelenideElement accountIcon = $(By.xpath("//*[@data-analytics-nav='account-icon']"));
 
     String firstName;
     String lastName;
@@ -184,6 +186,13 @@ public class EstoreAccountStepDefs {
             with().pollInterval(2, SECONDS).await().until(() -> true);
             estoreLoginPage.clickToAccountIcon();
         }
+    }
+
+    @Given("I click on my account button")
+    public void clickToAccountIcon() {
+        with().pollInterval(4, SECONDS).await().until(() -> true);
+        accountIcon.should(visible,Duration.ofSeconds(30));
+        accountIcon.click(ClickOptions.usingJavaScript());
     }
 
     @When("I click on agree privacy policy checkbox")
