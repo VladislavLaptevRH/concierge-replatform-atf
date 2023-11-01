@@ -139,7 +139,7 @@ Feature: Concierge Critical Path
     When I open cart
     Then I click total excluding sales tax
     Then select any reason code on SHIPPING OVERRIDE form & click apply button
-  @vimal
+
   Scenario: Verify that the user is able to Postpone Shipping Successfully
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -327,7 +327,7 @@ Feature: Concierge Critical Path
     Then I navigate to sub menu "Handcrafted Rugs"
     Then I navigate to gallery "Rug Collections"
     Then I verify that 'grid view is set to 2-grid view' on CG screen
-  @vimal
+
   Scenario: Browser back button from search to CG page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -484,7 +484,7 @@ Feature: Concierge Critical Path
       | MC       |
       | AX       |
       | DI       |
-  @vimal
+
   Scenario: Split Payment
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -922,7 +922,7 @@ Feature: Concierge Critical Path
 #      | Furniture | Study                 | Desk Chairs                   | RH BABY & CHILD | BC               |
 #      | Lighting  | Table                 | Shades                        | RH TEEN         | TN               |
       | Storage | Wall    | Memory Boards | RH TEEN | TN               |
-  @vimal
+
   Scenario: Checking Faucets in Collection PG
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
