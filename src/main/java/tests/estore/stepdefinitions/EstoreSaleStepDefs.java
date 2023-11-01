@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.EstoreCGScreen;
+import tests.estore.pageObject.EstorePGScreen;
 import tests.estore.pageObject.EstoreSaleScreen;
 import tests.utility.Hooks;
 
@@ -23,6 +24,7 @@ public class EstoreSaleStepDefs {
     EstoreSaleScreen estoreSaleScreen = new EstoreSaleScreen();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
+    EstorePGScreen estorePGScreen = new EstorePGScreen();
     EstorePgStepDefs estorePgStepDefs = new EstorePgStepDefs();
     String URL;
 
@@ -177,5 +179,65 @@ public class EstoreSaleStepDefs {
         estoreSaleScreen.getWallLightingSale().should(visible, Duration.ofSeconds(12));
         estoreSaleScreen.getTableLightigSale().should(visible, Duration.ofSeconds(12));
         estoreSaleScreen.getFloorLightingSale().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Textiles from sale nav menu")
+    public void iClickOnTextilesFromSaleNavMenu() {
+        estoreSaleScreen.clickToSaleTextsilesNav();
+    }
+
+    @Then("I verify that Textiles in Secondary NAV should expand tertiary NAV")
+    public void iVerifyThatTextilesInSecondaryNAVShouldExpandTertiaryNAV() {
+        estoreSaleScreen.getTextilesBathTowels().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getTextilesSheetsPilloecases().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getTextilesBeddingCollections().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getTextilesTHrowsBlankets().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Rugs from sale nav menu")
+    public void iClickOnRugsFromSaleNavMenu() {
+        estoreSaleScreen.clickToSaleRugsNav();
+    }
+
+    @Then("I verify that Rugs in Secondary NAV should expand tertiary NAV")
+    public void iVerifyThatRugsInSecondaryNAVShouldExpandTertiaryNAV() {
+        estoreSaleScreen.getRugsAllRugs().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getRugsIvoryRugs().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getRugsNeutralRugs().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getRugsBlueRugs().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Decor from sale nav menu")
+    public void iClickOnDecorFromSaleNavMenu() {
+        estoreSaleScreen.clickToSaleDecorNav();
+    }
+
+    @Then("I verify that Decor in Secondary NAV should expand tertiary NAV")
+    public void iVerifyThatDecorInSecondaryNAVShouldExpandTertiaryNAV() {
+        estoreSaleScreen.getDecorMirrors().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getDecorBarCabinets().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getDecorCabinetHardware().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getDecorThrowsBlankets().should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that user is able to navigate to Sale PG")
+    public void iVerifyThatUserIsAbleToNavigateToSalePG() {
+        estoreSaleScreen.verifyThatDecorAllMirrorsTextSalePgIsDisplayed();
+        estorePGScreen.getSaleButtonFilter().should(visible, Duration.ofSeconds(12));
+        estorePGScreen.getInStockTextFilterPG().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Decor Mirrors from nav of Sale")
+    public void iClickOnDecorMirrorsFromNavOfSale() {
+        estoreSaleScreen.getDecorMirrors().click();
+    }
+
+    @Then("I verify that In stock filter was applied")
+    public void iVerifyThatInStockFilterWasApplied() {
+        estorePGScreen.getInStockFilter().should(visible, Duration.ofSeconds(20));
+        estorePGScreen.getClearAll().should(visible, Duration.ofSeconds(20));
+        estorePGScreen.getResultsText().should(visible, Duration.ofSeconds(20));
+        estorePGScreen.getFinishText().should(visible, Duration.ofSeconds(20));
+        estorePGScreen.getSizeText().should(visible, Duration.ofSeconds(20));
     }
 }

@@ -78,3 +78,43 @@ Feature: Estore Sale
     When I click on estore sale button
     When I click on Lighting from sale nav menu
     Then I verify that Lighting in Secondary NAV should expand tertiary NAV
+
+  Scenario: Verify that user is able to navigate to tertiary NAV of SALE - Textiles
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Textiles from sale nav menu
+    Then I verify that Textiles in Secondary NAV should expand tertiary NAV
+
+  Scenario: Verify that user is able to navigate to tertiary NAV of SALE - Rugs
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Rugs from sale nav menu
+    Then I verify that Rugs in Secondary NAV should expand tertiary NAV
+
+  Scenario: Verify that user is able to navigate to tertiary NAV of SALE - Rugs
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Decor from sale nav menu
+    Then I verify that Decor in Secondary NAV should expand tertiary NAV
+
+  Scenario: Verify that user is able to navigate to Sale PG on clicking on any Tertiary NAV of SALE
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Decor from sale nav menu
+    When I click on Decor Mirrors from nav of Sale
+    Then I verify that user is able to navigate to Sale PG
+
+  Scenario: Verify In-stock filter on Sale PG
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Decor from sale nav menu
+    When I click on Decor Mirrors from nav of Sale
+    When I apply In stock filter on PG for estore
+    Then I verify that In stock filter was applied
+
+
