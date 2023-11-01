@@ -252,6 +252,8 @@ public class PdpScreen {
 
     private final SelenideElement unlimitedFurnitureDeliveryModalText = $(By.xpath("//*[text() = 'Unlimited Furniture Delivery']"));
 
+    private final SelenideElement unlimitedFurnitureDeliveryModalStandartShippingTabText = $(By.xpath("//*[text() = 'Standard Shipping']"));
+
     private final SelenideElement unlimitedFurnitureDeliveryModalUSCurrency = $(By.xpath("(//*[text() = 'Unlimited Furniture Delivery']/..//*[contains(text() , '$')])[1]"));
 
     private final SelenideElement shippingAndDeliveryModalTab = $(By.xpath("//*[text() = 'Shipments to Canada']"));

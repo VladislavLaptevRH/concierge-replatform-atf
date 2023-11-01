@@ -1031,3 +1031,62 @@ Feature: Concierge PDP
     Then I Verify that 'text "Learn more about our Return Policy"' is present
     Then I click 'return policy link' on pdp page
     Then Verify that 'Return policy link should navigate user to the Return policy page'
+
+    @vlad
+  Scenario: For US user, If User clicks on Shiping Link with type UFD then Shipping & Delivery Modal Should be opened with UFD tab which has US currency for shipping charges
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'item title' is present
+    Then Verify that 'line item selections (Size, Finish and Qty) are present'
+    Then I chose the '1' line item selections one by one
+    Then Verify that 'text "Unlimited Furniture Delivery" is present'
+    Then I click 'text "Unlimited Furniture Delivery" is present' on pdp page
+    Then Verify that 'Shipping & Delivery Modal Should be opened with UFD tab which has US currency for shipping charges'
+
+  @vlad
+  Scenario: For US user, If User clicks on Shiping Link with type Standard Shipping then Shipping & Delivery Modal Should be opened with Standard Shipping tab which has US currency for shipping charges
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I chose '6' product from the list
+    Then I Verify that 'item title' is present
+    Then Verify that 'line item selections (Size, Finish and Qty) are present'
+    Then I chose the '1' line item selections one by one
+    Then Verify that 'text "Unlimited Furniture Delivery" is present'
+    Then I click 'text "Unlimited Furniture Delivery" is present' on pdp page
+    Then Verify that 'Shipping & Delivery Modal Should be opened with Standard Shipping tab which has US currency for shipping charges'
+
+  @vlad
+  Scenario: For UK loc user, If User clicks on Shiping Link then Shipping & Delivery Modal Should be opened with Shipments to UK tab which has UK(GBP) currency for shipping charges
+    Given I log into Concierge as "associate"
+    When I choose 'GB' country
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'item title' is present
+    Then Verify that 'line item selections (Size, Finish and Qty) are present'
+    Then I chose the '1' line item selections one by one
+    Then Verify that 'text "Unlimited Furniture Delivery" is present'
+    Then I click 'text "Unlimited Furniture Delivery" is present' on pdp page
+    Then Verify that 'Shipping & Delivery Modal Should be opened with Standard Shipping tab which has US currency for shipping charges'
+
+  @vlad
+  Scenario: If Delivery type is UFD, postal code should be present in the delivery message.
+
+  @vlad
+  Scenario: If Delivery type is Standard Shipping, postal code should not be present in the delivery message.
+
+  @vlad
+  Scenario: For Contract User(US/CAN), If User clicks on Shiping Link then Shipping & Delivery Modal Should be opened with Contract tab
+
+

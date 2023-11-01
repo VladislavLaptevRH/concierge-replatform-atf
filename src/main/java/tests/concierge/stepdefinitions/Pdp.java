@@ -572,6 +572,12 @@ public class Pdp {
                 pdpScreen.getUnlimitedFurnitureDeliveryModalText().shouldHave(visible, Duration.ofSeconds(15));
                 pdpScreen.getUnlimitedFurnitureDeliveryModalUSCurrency().shouldHave(visible, Duration.ofSeconds(15));
                 break;
+            case  "Shipping & Delivery Modal Should be opened with Standard Shipping tab which has US currency for shipping charges":
+                pdpScreen.getUnlimitedFurnitureDeliveryModalText().shouldHave(visible, Duration.ofSeconds(15));
+                pdpScreen.getUnlimitedFurnitureDeliveryModalStandartShippingTabText().shouldHave(visible, Duration.ofSeconds(15));
+                pdpScreen.getUnlimitedFurnitureDeliveryModalStandartShippingTabText().click();
+                pdpScreen.getUnlimitedFurnitureDeliveryModalUSCurrency().shouldHave(visible, Duration.ofSeconds(15));
+                break;
             default: break;
         }
     }
