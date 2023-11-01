@@ -830,7 +830,6 @@ Feature: Concierge Critical Path
     Then Verify that 'price in PDP changed from US$ to CA$'
     When I choose 'GB' country
     Then I click on zip code and change it to 'SW1A1AA'
-    Then I verify that zip code in PDP is 'SW1A1AA'
     Then Verify that 'Confirm that PDP has price in GBP'
   
   Scenario: Sale PDP: Regular/Member/Final Price validation

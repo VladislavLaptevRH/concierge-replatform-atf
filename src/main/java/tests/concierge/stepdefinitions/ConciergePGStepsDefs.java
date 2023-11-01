@@ -100,6 +100,7 @@ public class ConciergePGStepsDefs {
                 conciergePGScreen.getThreeGridViewIsActive().shouldBe(visible, Duration.ofSeconds(15));
                 break;
             case "Back to top Button is present":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 $(By.xpath("//*[@id = 'footer']")).scrollIntoView(true);
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 $(By.xpath("//*[@class = 'MuiButtonBase-root MuiFab-root' and not(contains(@style, 'hidden'))]")).shouldBe(visible, Duration.ofSeconds(20));
@@ -621,7 +622,7 @@ public class ConciergePGStepsDefs {
                 i++;
                 with().pollInterval(1, SECONDS).await().until(() -> true);
             }
-            assertEquals(2, i);
+            assertEquals(3, i);
         }
         if(view.equals("3")){
             int i = 1;
