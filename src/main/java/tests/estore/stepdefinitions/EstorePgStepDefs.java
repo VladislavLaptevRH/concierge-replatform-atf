@@ -398,4 +398,24 @@ public class EstorePgStepDefs {
 
         assertTrue(countOfPgBeforeScroll < countOfPgAfterScroll);
     }
+
+    @Then("I verify price on PG after In-stock filter was applied")
+    public void iVerifyPriceOnPGAfterInStockFilterWasApplied() {
+        estorePGScreen.getRegularPrice().should(visible, Duration.ofSeconds(12));
+        estorePGScreen.getMemberPrice().should(visible, Duration.ofSeconds(12));
+
+        regularPrice = estorePGScreen.getRegularPriceOnPg();
+        memberPrice = estorePGScreen.getMemberPriceOnPg();
+    }
+
+    @And("I verify that price on Sale PG is the same as on PDP after In stock filter was applied")
+    public void iVerifyThatPriceOnPGISTheSameAsOnPDPWithInStockFilter() {
+        estorePDPScreen.getFirstLineItemMemberPrice().should(visible, Duration.ofSeconds(12));
+        estorePDPScreen.getFirstLineItemMemberPrice().scrollIntoView(true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        assertEquals("Verify that member price on PG is the same as on PDP", estorePDPScreen.getMemberFirstLineItemPricePDP(), memberPrice);
+        assertEquals("Verify that regular price on PG is the same as on PDP", estorePDPScreen.getRegularFirstLineItemPricePDP(), regularPrice);
+    }
+
+
 }

@@ -31,6 +31,8 @@ public class EstoreSaleScreen {
 
     private SelenideElement decorSaleNav = $(By.xpath("//li[@id='container-rhr-saleNavigation_sale-navigation-cat1630014']//span"));
 
+    private SelenideElement allDiningTablesNav = $(By.xpath("//li[@id='container-rhr-saleNavigation_sale-navigation-category-cat28650054']//span"));
+
     private SelenideElement saleButtonMenu = $(By.xpath("//*[text()='SALE']"));
 
     private SelenideElement sofasButton = $(By.xpath("//*[text()='Living']"));
@@ -127,6 +129,32 @@ public class EstoreSaleScreen {
 
     private SelenideElement decorAllMirrorsTextSalePg = $(By.xpath("//*[text()='All Mirrors']"));
 
+    private SelenideElement clearAllLink = $(By.xpath("//*[@id='refineMenuDropdown_clearAll-btn']"));
+
+    private SelenideElement saleAppliedFilter = $(By.xpath("//*[@id='refineMenuDropdown_clear-Sale-btn']"));
+
+    private SelenideElement inStockAppliedFilter = $(By.xpath("//*[@id='refineMenuDropdown_clear-In-Stock-btn']"));
+
+    private SelenideElement gridView1 = $(By.xpath("//*[contains(@class,'cols-4')]"));
+
+    private SelenideElement collectionImage = $(By.xpath("(//img[contains(@alt,'prod')])[1]"));
+
+    private SelenideElement collectionTitle = $(By.xpath("(//span[text()='802-Gram Turkish Towel Collection'])[1]"));
+
+    private SelenideElement saleVerbiageMessage = $(By.xpath("//*[text()='VIEW SELECT ITEMS ON SALE']"));
+
+    public void verifyThatSaleAppliedFilterWasRemoved() {
+        saleAppliedFilter.shouldNotBe(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatStockAppliedFilterWasRemoved() {
+        inStockAppliedFilter.shouldNotBe(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void clickToClearAllLink() {
+        clearAllLink.should(Condition.visible, Duration.ofSeconds(12))
+                .click(ClickOptions.usingJavaScript());
+    }
 
     public void verifyThatDecorAllMirrorsTextSalePgIsDisplayed() {
         decorAllMirrorsTextSalePg.should(Condition.visible, Duration.ofSeconds(12));
@@ -164,6 +192,11 @@ public class EstoreSaleScreen {
 
     public void clickToSaleBedNav() {
         saleBedNav.should(Condition.visible, Duration.ofSeconds(12)).hover()
+                .click(ClickOptions.usingJavaScript());
+    }
+
+    public void clickToAllDiningTablesNav() {
+        allDiningTablesNav.should(Condition.visible, Duration.ofSeconds(12)).hover()
                 .click(ClickOptions.usingJavaScript());
     }
 

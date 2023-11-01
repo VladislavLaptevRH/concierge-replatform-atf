@@ -109,8 +109,14 @@ public class EstorePGScreen {
     private final List<SelenideElement> pgItems = $$(By.xpath("//div[@id='component-rh-image_wrapper']"));
 
     private SelenideElement resultsText = $(By.xpath("//*[text()='RESULTS']"));
+
     private SelenideElement finishText = $(By.xpath("//*[text()='Finish']"));
+
     private SelenideElement sizeText = $(By.xpath("//*[text()='Size']"));
+
+    private SelenideElement colorOpionPG = $(By.xpath("(//*[@id='listColumn2-Color'])[1]"));
+
+    private SelenideElement sizeOptionPG = $(By.xpath("(//*[@id='listColumn2-Size'])[1]"));
 
 
     public int verifyCountOfPgItemsonThePage() {

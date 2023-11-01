@@ -2,16 +2,19 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.EstoreCGScreen;
 import tests.estore.pageObject.EstorePGScreen;
+import tests.estore.pageObject.EstorePdpPageScreen;
 import tests.estore.pageObject.EstoreSaleScreen;
 import tests.utility.Hooks;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -26,9 +29,9 @@ public class EstoreSaleStepDefs {
 
     EstorePGScreen estorePGScreen = new EstorePGScreen();
     EstorePgStepDefs estorePgStepDefs = new EstorePgStepDefs();
+
+    EstorePdpPageScreen estorePdpPageScreen = new EstorePdpPageScreen();
     String URL;
-
-
     int memberSalePrice;
     int regularSalePrice;
 
@@ -239,5 +242,42 @@ public class EstoreSaleStepDefs {
         estorePGScreen.getResultsText().should(visible, Duration.ofSeconds(20));
         estorePGScreen.getFinishText().should(visible, Duration.ofSeconds(20));
         estorePGScreen.getSizeText().should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I click on All Dining Tables in tertiary nav")
+    public void iClickOnAllDiningTablesInTertiaryNav() {
+        estoreSaleScreen.clickToAllDiningTablesNav();
+    }
+
+    @When("I click on clear all link in applied section filter")
+    public void iClickOnClearAllLinkInAppliedSectionFilter() {
+        estoreSaleScreen.clickToClearAllLink();
+    }
+
+    @Then("I verify that the applied filters have been removed")
+    public void iVerifyThatTheAppliedFiltersHaveBeenRemoved() {
+        estoreSaleScreen.verifyThatSaleAppliedFilterWasRemoved();
+    }
+
+    @Then("I verify that the applied In stock filters have been removed")
+    public void iVerifyThatTheAppliedInStockFiltersHaveBeenRemoved() {
+        estoreSaleScreen.verifyThatStockAppliedFilterWasRemoved();
+    }
+
+    @Then("I verify that CG title is displayed on eStore")
+    public void iVerifyThatCGTitleIsDisplayedOnEStore() {
+        estorePdpPageScreen.getTurkishTowelCollectionTitle().should(Condition.and("", interactable, visible), Duration.ofSeconds(20));
+    }
+
+    @And("I verify that {int} grid view should be selected state by default")
+    public void iVerifyThatGridViewShouldBeSelectedStateByDefault(int arg0) {
+        estoreSaleScreen.getGridView1().should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that each collection have image, title")
+    public void iVerifyThatEachCollectionHaveImageTitle() {
+        estoreSaleScreen.getCollectionTitle().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getCollectionImage().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getSaleVerbiageMessage().should(visible, Duration.ofSeconds(12));
     }
 }

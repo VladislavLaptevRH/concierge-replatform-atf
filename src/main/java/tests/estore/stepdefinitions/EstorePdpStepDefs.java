@@ -32,17 +32,12 @@ public class EstorePdpStepDefs {
     EstoreCartPage estoreCartPage = new EstoreCartPage();
 
     EstoreHomePage estoreHomePage = new EstoreHomePage();
-
     EstorePGScreen estorePGScreen = new EstorePGScreen();
-
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
-
     EstoreReturnPolicyScreen estoreReturnPolicyScreen = new EstoreReturnPolicyScreen();
-
     EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
-
+    EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
     EstoreAccountStepDefs estoreAccountStepDefs = new EstoreAccountStepDefs();
-
     EstorePgStepDefs estorePgStepDefs = new EstorePgStepDefs();
     String regularUSPrice;
     String memberUSPrice;
@@ -57,6 +52,9 @@ public class EstorePdpStepDefs {
     int regularPricePdp;
     int memberPricePdp;
 
+    String colorOption;
+
+    String sizeOption;
 
     @Then("I verify that user can see product details correctly mentioned for a product")
     public void iVerifyThatUserCanSeeProductDetailsCorrectlyMentionedForAProduct() {
@@ -499,7 +497,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the PDP hero Image Zoom line items")
     public void
-    iVerifyThePDPHroImageZoomLineItem(){
+    iVerifyThePDPHroImageZoomLineItem() {
         estorePdpPageScreen.getHeroImage().hover();
         estorePdpPageScreen.getHeroImageForwardBtn().should(Condition.visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getHeroImageForwardBtn().click();
@@ -566,11 +564,11 @@ public class EstorePdpStepDefs {
     @And("I verify that {string} popup is displayed")
     public void iVerifyThatPopupIsDisplayed(String modalPopUp) {
         if (modalPopUp.equals("View In-Stock")) {
-             $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
         }
         if (modalPopUp.equals("View On Sale")) {
-             $(By.xpath("//span[text()='ON SALE']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//span[text()='ON SALE']")).should(visible, Duration.ofSeconds(20));
             $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
         }
@@ -823,6 +821,18 @@ public class EstorePdpStepDefs {
         AssertJUnit.assertEquals("Regular price is not equal to zero", estorePGScreen.getRegularSaleOnPgPrice(), estorePDPScreen.getRegularSalePricePDP());
         AssertJUnit.assertEquals("Member price is not equal to zero", estorePGScreen.getMemberSaleOnPgPrice(), estorePDPScreen.getMemberSalePricePDP());
 
+    }
+
+    @Then("I verify configurations of sku from Sale PG")
+    public void iVerifyConfigurationsOfSkuFromSalePG() {
+        colorOption = estoreGeneralStepDefs.firstLetterCapital(estorePGScreen.getColorOpionPG().getText().toLowerCase());
+        sizeOption = estoreGeneralStepDefs.firstLetterCapital(estorePGScreen.getSizeOptionPG().getText().toLowerCase());
+    }
+
+    @Then("I verify that configurations of PDP line item is matching the selected sku from Sale PG")
+    public void iVerifyThatConfigurationsOfPDPLineItemIsMatchingTheSelectedSkuFromSalePG() {
+        $(By.xpath("//*[contains(text(),'" + colorOption + "')]")).should(visible, Duration.ofSeconds(12));
+        $(By.xpath("//*[contains(text(),'" + sizeOption + "')]")).should(visible, Duration.ofSeconds(12));
     }
 }
 
