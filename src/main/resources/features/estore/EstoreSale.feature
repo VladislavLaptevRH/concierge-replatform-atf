@@ -160,5 +160,19 @@ Feature: Estore Sale
     And I verify that 1 grid view should be selected state by default
     Then I verify that each collection have image, title
 
+  Scenario: Verify that price in PDP is matching the selected product from Sale PG
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    When I apply In stock filter on PG for estore
+    Then I verify price on PG after In-stock filter was applied
+    When I navigate to any estore fusion PG
+    Then I verify that price on Sale PG is the same as on PDP after In stock filter was applied
 
-
+  Scenario: Verify that user is able to see the combined price of frame and cushion on Sale PG
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Decor from sale nav menu
+    When I click on Decor Mirrors from nav of Sale
+    Then I verify that combined price on frame and cushion on PG
