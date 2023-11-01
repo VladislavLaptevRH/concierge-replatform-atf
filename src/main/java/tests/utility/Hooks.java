@@ -189,9 +189,6 @@ public class Hooks {
         Configuration.timeout = 45000;
         Configuration.reportsFolder = "target/screenshots";
         Configuration.browserCapabilities = options;
-
-        open(url);
-        currentUrl = WebDriverRunner.url();
     }
 
     /**
@@ -223,6 +220,9 @@ public class Hooks {
 
         Configuration.pageLoadTimeout = 60000;
         Configuration.timeout = 45000;
+
+        open(url);
+        currentUrl = WebDriverRunner.url();
 
     }
 
