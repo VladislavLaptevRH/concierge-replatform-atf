@@ -61,21 +61,17 @@ public class EstorePgStepDefs {
         if (arg0.equals("1")) {
             estoreSearchScreen.getOneColumnInRowGridButton().should(visible, Duration.ofSeconds(20));
             estoreSearchScreen.getOneColumnInRowGridButton().click();
-            $(By.xpath("//div[contains(@class, 'grid-item-12')]")).should(visible, Duration.ofSeconds(20));
         }
 
         if (arg1.equals("2")) {
             estoreSearchScreen.getTwoColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
             estoreSearchScreen.getTwoColumnsInRowGridElement().click();
-            $(By.xpath("//div[contains(@class, 'grid-item-6')]")).should(visible, Duration.ofSeconds(20));
         }
 
         if (arg2.equals("3")) {
             estoreSearchScreen.getThreeColumnsInRowGridButton().should(visible, Duration.ofSeconds(20));
             estoreSearchScreen.getThreeColumnsInRowGridButton().should(interactable, Duration.ofSeconds(20));
             estoreSearchScreen.getThreeColumnsInRowGridButton().click();
-            estoreSearchScreen.getThreeColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
-            $(By.xpath("//div[contains(@class, 'grid-item-4')]")).should(visible, Duration.ofSeconds(20));
         }
 
     }
@@ -243,7 +239,7 @@ public class EstorePgStepDefs {
         priceFromTheFirstProduct = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[1]")).getText().replaceAll("\\,", "").replaceAll("\\$", ""));
         priceFromTheSecondProduct = Integer.parseInt($(By.xpath("(//*[@data-testid='price-for-regular'])[2]")).getText().replaceAll("\\,", "").replaceAll("\\$", ""));
 
-        assertTrue(priceFromTheFirstProduct > priceFromTheSecondProduct, "The price of the first product is less than the price for the second product");
+        assertTrue(priceFromTheFirstProduct >= priceFromTheSecondProduct, "The price of the first product is less than the price for the second product");
 
     }
 

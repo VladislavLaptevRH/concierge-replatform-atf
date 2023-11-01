@@ -33,6 +33,8 @@ public class PdpScreen {
     public final String itemListNumber = "((//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..)[%s]";
     public final String zipCodeValue = "//*[contains(text(), '%s')]";
 
+    public final String stockedColor = "//*[text() = '%s ']";
+
 
     private final SelenideElement manageRegistryButton = $(By.xpath("//*[text()='MANAGE REGISTRY']"));
 
@@ -248,6 +250,10 @@ public class PdpScreen {
 
     private final SelenideElement unlimitedFurnitureDeliveryText = $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'Unlimited Furniture Delivery')]"));
 
+    private final SelenideElement unlimitedFurnitureDeliveryModalText = $(By.xpath("//*[text() = 'Unlimited Furniture Delivery']"));
+
+    private final SelenideElement unlimitedFurnitureDeliveryModalUSCurrency = $(By.xpath("(//*[text() = 'Unlimited Furniture Delivery']/..//*[contains(text() , '$')])[1]"));
+
     private final SelenideElement shippingAndDeliveryModalTab = $(By.xpath("//*[text() = 'Shipments to Canada']"));
     private final SelenideElement shippingAndDeliveryModalDeliveryAreaText = $(By.xpath("//*[text() = 'CANADIAN DELIVERY AREA']"));
 
@@ -414,11 +420,21 @@ public class PdpScreen {
 
     private final SelenideElement mattressFeeText = $(By.xpath("//*[text() = 'Mattress Fee']"));
 
+    private final SelenideElement pdpMattressFeeText = $(By.xpath("//*[@data-testid = 'delivery-message-0']"));
+
+    private final SelenideElement pdpMattressFeeLink = $(By.xpath("//*[@href = '/graphql/?group=general-modals&id=mattress-recycling']"));
+    private final SelenideElement specialOrderLink = $(By.xpath("//*[contains(@data-testid, 'SPECIAL ORDER')]"));
+
     private final SelenideElement mattressRecyclingFeeText = $(By.xpath("//*[@href= '/graphql/?group=general-modals&id=mattress-recycling']/.."));
 
     private final SelenideElement fogSelectedOption = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Color')])[1]//option[@data-option='selected']"));
 
     private final SelenideElement closeSpecialOrderPopUpButton = $(By.xpath("//button[@data-testid = 'dialog-title-close-button']"));
+
+    private final SelenideElement specialOrderPopUpModal = $(By.xpath("//*[@data-testid = 'dialog-title-close-button']/../.."));
+
+
+    private final SelenideElement colorLineItem = $(By.xpath("(//label[text() = 'Color']/..//option[@data-option='selected'])[1]"));
 
     private final SelenideElement specialOrderPopUpHeaderHeader = $(By.xpath("//p[@data-testid = 'swatch-panel-dialog-delivery-message']"));
 
@@ -474,5 +490,9 @@ public class PdpScreen {
         return $(byXpath(path));
     }
 
+    public SelenideElement getColorByName(String color) {
+        String path = String.format(stockedColor, color);
+        return $(byXpath(path));
+    }
 
 }

@@ -1,3 +1,4 @@
+@estoreCriticalPathTestRun
 Feature: Estore critical path
 
   @estoreCriticalPathParallelTestRun
@@ -109,12 +110,12 @@ Feature: Estore critical path
     When I select low to high for estore
     Then I verify that sorting low to high is working as expected
     Examples:
-      | brand      |
-      | RH         |
+      | brand |
+      | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
-      | RH OUTDOOR |
+      | RH OUTDOOR      |
 #      | RH BEACH HOUSE  |
 #      | RH SKI HOUSE    |
 #      | RH TEEN         |
@@ -158,6 +159,7 @@ Feature: Estore critical path
 #      | RH SKI HOUSE    |
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
+
   @estoreCriticalPathParallelTestRun
   Scenario Outline: CG - Verify collection name,image (regular,member,sale(applicable) on collection banner
     Given I log into eStore as "guest" user
@@ -277,7 +279,6 @@ Feature: Estore critical path
 #      | RH SKI HOUSE    |
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
-
     #use fabric seating - sofas: check title, grid view
   @estoreCriticalPathParallelTestRun
   Scenario: CG - Browser back button from search to CG page
@@ -648,7 +649,7 @@ Feature: Estore critical path
   Scenario Outline: Account - Verify My account dropdowm
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I click on my account button if page is not loaded
+    When I click on my account button
     When I click on the "<option>" from my account dropdown
     Then I verify that "<option>" is available for eStore
     And I verify that required page for "<option>" is displayed
@@ -1067,6 +1068,7 @@ Feature: Estore critical path
     Then I verify that monogram was added
     When I edit monogram
     Then I verify that monogram was edited
+    When I refresh current estore page
     When I remove monogram
     Then I verify that monogram was removed
 
@@ -1078,6 +1080,8 @@ Feature: Estore critical path
     When I click on add monogram checkbox from pdp on eStore
     When I add monogram to product on eStore
     Then I verify that monogram was added
+    Then I verify that monogram was added for pdp on eStore
+    #Then I verify that monogram was added
     When I click on add to cart estore button
     When I click on view cart estore button
     Then I verify monogram was added to cart for eStore
