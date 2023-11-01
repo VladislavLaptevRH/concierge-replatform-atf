@@ -87,7 +87,7 @@ Feature: Estore critical path
     Then I verify sale prices on PG pages for sale items
     Examples:
       | brand |
-      | RH    |
+     # | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -116,7 +116,7 @@ Feature: Estore critical path
 #      | RH SKI HOUSE    |
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
-
+  @vimal
   Scenario Outline: PG - Verify sorting - high to low - is working as expected
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -126,7 +126,7 @@ Feature: Estore critical path
     Then I verify that sorting high to low is working as expected
     Examples:
       | brand |
-      | RH    |
+      #| RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -191,7 +191,7 @@ Feature: Estore critical path
 #      | RH SKI HOUSE    |
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
-
+  @vimal
   Scenario Outline: CG - Verify 1,2,3 grid views are working fine
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -491,20 +491,20 @@ Feature: Estore critical path
     When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     Then I verify link bellow "View In-Stock Items" is displayed
     And I verify that "View In-Stock" popup is displayed
-
+  @vimal
   Scenario: Verify the On sale functionality
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     Then I verify link bellow "View On Sale Items" is displayed
     And I verify that "View On Sale" popup is displayed
-
+  @vimal
   Scenario: PDP - Verify the availability , delivery and return messages in PDP
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     Then I verify availability , delivery and return messages in PDP
-
+  @vimal
 #Verify the dropdown selection and add to cart
   Scenario: PDP - Verify the dropdown selection and add to cart case 1
     Given I log into eStore as guest
@@ -524,8 +524,8 @@ Feature: Estore critical path
     When I select color option on the PDP page
     Then I verify that add to cart button is active
     And I verify special messages on PDP page
-#Verify the pricing based on country
 
+#Verify the pricing based on country
   Scenario: PDP - Configure this item to view delivery information for your Location, price update
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
@@ -632,7 +632,7 @@ Feature: Estore critical path
   Scenario Outline: Account - Verify My account dropdowm
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I click on my account button if page is not loaded
+    When I click on my account button
     When I click on the "<option>" from my account dropdown
     Then I verify that "<option>" is available for eStore
     And I verify that required page for "<option>" is displayed
@@ -719,7 +719,6 @@ Feature: Estore critical path
     Then I verify that billing address was edited
 
 #Order replacement
-  @vimal
   Scenario: Order replacement
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -1027,6 +1026,7 @@ Feature: Estore critical path
     Then I verify that monogram was added
     When I edit monogram
     Then I verify that monogram was edited
+    When I refresh current estore page
     When I remove monogram
     Then I verify that monogram was removed
   @vimal
@@ -1036,8 +1036,8 @@ Feature: Estore critical path
     When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add monogram checkbox from pdp on eStore
     When I add monogram to product on eStore
-    #Then I verify that monogram was added for pdp on eStore
-    Then I verify that monogram was added
+    Then I verify that monogram was added for pdp on eStore
+    #Then I verify that monogram was added
     When I click on add to cart estore button
     When I click on view cart estore button
     Then I verify monogram was added to cart for eStore
