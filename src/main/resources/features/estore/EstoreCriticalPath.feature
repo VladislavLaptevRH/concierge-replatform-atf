@@ -309,7 +309,8 @@ Feature: Estore critical path
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "STWL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    Then I chose the '1' line item selections one by one
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -330,6 +331,8 @@ Feature: Estore critical path
     Given I log into eStore as "e2eflowcriticalpath" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    Then I chose the '1' line item selections one by one
     When I open product page with "prod19500002" and "17050045" with "STWL" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
@@ -552,7 +555,6 @@ Feature: Estore critical path
     Then I verify that add to cart button is active
     And I verify special messages on PDP page
 #Verify the pricing based on country
-
   @estoreCriticalPathParallelTestRun
   Scenario: PDP - Configure this item to view delivery information for your Location, price update
     Given I log into eStore as "pdpconfigurepdpthisitemtoview" user

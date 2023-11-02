@@ -22,6 +22,8 @@ import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 
 public class EstoreUserAccountPageStepDefs {
     EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
@@ -312,6 +314,7 @@ public class EstoreUserAccountPageStepDefs {
 
     @Then("I change the brand to {string} for eStore")
     public void iChangeTheBrandToForEStore(String brand) {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getBrandButton().should(interactable, Duration.ofSeconds(40));
         estoreUserAccountPage.getBrandButton().should(appear, Duration.ofSeconds(40))
                 .click(ClickOptions.usingJavaScript());

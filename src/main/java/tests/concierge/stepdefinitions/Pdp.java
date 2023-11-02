@@ -73,6 +73,7 @@ public class Pdp {
 
     @Then("I verify that monogram was added for pdp")
     public void iVerifyThatMonogramWasAddedForPdp() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         pdpScreen.getMonogramsStyleValue().should(visible, Duration.ofMinutes(1));
         pdpScreen.getMonogramsText().should(visible, Duration.ofSeconds(15));
         pdpScreen.getMonogramsStyle().should(visible, Duration.ofSeconds(15));
@@ -80,9 +81,18 @@ public class Pdp {
         pdpScreen.getMonogramsColorsValue().should(visible, Duration.ofSeconds(15));
     }
 
+    @When("I add monogram to product on concierge")
+    public void iVerfiyThatIMAbleToChooseMonogramConcierge() {
+        $(By.xpath("//*[text()='PERSONALIZE YOUR SELECTIONS']")).should(visible, Duration.ofSeconds(25));
+        $(By.xpath("//input[@name='checkboxBauer Bodoni 2 (BDNI-HD)']")).click();
+        $(By.xpath("//input[@name='checkboxTone-on-Tone (TOT)']")).click();
+        $(By.xpath("//input[@data-testid='monogram-input0']")).should(appear, Duration.ofSeconds(25)).setValue("Text");
+        $(By.xpath("//button[@data-testid='monogram-add-button']")).should(visible, Duration.ofSeconds(25)).click();
+    }
+
     @When("I click on \"view in stock items\" link")
     public void iClickOnViewInStockItems() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(9, SECONDS).await().until(() -> true);
         pdpScreen.getViewOnStockItemLink().shouldHave(text("In-Stock"), Duration.ofSeconds(15));
         pdpScreen.getViewOnStockItemLink().scrollIntoView(true);
         pdpScreen.getViewOnStockItemLink().click();
@@ -404,6 +414,7 @@ public class Pdp {
                 regularPriceInPG = pdpScreen.getPriceForRegular().getText().replaceAll(".00", "").replaceAll("\\$", "").replaceAll(",", "");
                 break;
             case  "price in PDP changed from US$ to CA$":
+                with().pollInterval(9, SECONDS).await().until(() -> true);
                 pdpScreen.getConfirmationPostalCode().shouldNot(visible, Duration.ofSeconds(20));
                 pdpScreen.getComponentSKU().shouldBe(visible, Duration.ofSeconds(20));
                 if(pdpScreen.getPriceForMember().isDisplayed()){
@@ -1437,7 +1448,9 @@ public class Pdp {
                     }
                 }
                 String currentZipCode =  pdpScreen.getComponentSKU().getText();
+                with().pollInterval(9, SECONDS).await().until(() -> true);
                 assertEquals(currentZipCode, zipCode + ".");
+                with().pollInterval(9, SECONDS).await().until(() -> true);
             }
 
             @Then("I verify that availability, Delivery and returns messaging is displayed for {string}")

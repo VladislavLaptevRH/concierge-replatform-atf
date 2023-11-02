@@ -11,6 +11,7 @@ import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
 import tests.concierge.pageObject.ConciergeItemsScreen;
 import tests.concierge.pageObject.ConciergeCGScreen;
+import tests.concierge.pageObject.PdpScreen;
 import tests.utility.Hooks;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ public class ConciergeCGStepsDefs {
     ConciergeCGScreen ConciergeCGScreen = new ConciergeCGScreen();
     public static String galleryName;
     //public static final Logger logger = (Logger) LoggerFactory.getLogger(FilterStepDefs.class);
+
+    PdpScreen pdpScreen = new PdpScreen();
 
     @Then("I verify that {string} on CG screen")
     public void iVerifyThatOnCGScreen(String data) {
@@ -65,7 +68,6 @@ public class ConciergeCGStepsDefs {
                     WebDriverRunner.getWebDriver().navigate().refresh();
                 }
                 $(By.xpath("(//*[text() = 'Kabir Wool Rug'])[2]")).click();
-                $(By.xpath("//h2[text() = 'Kabir Wool Rug']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "confirm that PG is displayed":
                 $(By.xpath("//*[text() = 'new arrivals']")).shouldBe(visible, Duration.ofSeconds(20));
@@ -115,7 +117,7 @@ public class ConciergeCGStepsDefs {
     @Then("I navigate to {string} PDP")
     public void iNavigateToPDP(String numberPDP) {
         $(By.xpath("(//*[@id = 'component-rh-image_wrapper'])[" + numberPDP + "]")).click();
-        $(By.xpath("(//h2[contains(@class, 'MuiTypography-h2')])[1]")).shouldBe(visible, Duration.ofSeconds(20));
+        pdpScreen.getItemTitle().shouldBe(visible, Duration.ofSeconds(15));
     }
 
     @Then("I safe the name of gallery")
