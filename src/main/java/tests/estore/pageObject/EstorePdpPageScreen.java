@@ -1,11 +1,8 @@
 package tests.estore.pageObject;
 
-import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
-import org.apache.groovy.xml.tools.DomToGroovy;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -58,7 +55,7 @@ public class EstorePdpPageScreen {
 
     private SelenideElement submitPostalCode = $(By.xpath("//button[@data-testid='submit-postal']"));
 
-    private SelenideElement lineItemImage = $(By.xpath("//img[@alt='802-Gram Turkish Towel Collection']"));
+    private SelenideElement lineItemImage = $(By.xpath("//img[@alt='802-Gram Turkish Towel Set']"));
 
     private SelenideElement sizeOption = $(By.xpath("(//select[contains(@id,'option') and contains(@id,'Size')])[1]"));
 

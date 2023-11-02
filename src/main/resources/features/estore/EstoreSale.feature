@@ -1,5 +1,6 @@
-@estoreTestRun
+@estoreParallelTestRun
 @estoreSale
+
 Feature: Estore Sale
 
   Scenario: Sale Nav verification
