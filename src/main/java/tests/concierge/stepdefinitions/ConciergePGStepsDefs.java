@@ -533,6 +533,7 @@ public class ConciergePGStepsDefs {
                 break;
             case "SORT and confirm that Modal has text FEATURED, Price Low to High, Price High to Low":
                 $(By.xpath("//*[text() = 'sort']")).click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
                 $(By.xpath("(//*[text() = 'Featured'])[2]")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Price Low to High']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Price High to Low']")).shouldBe(visible, Duration.ofSeconds(20));

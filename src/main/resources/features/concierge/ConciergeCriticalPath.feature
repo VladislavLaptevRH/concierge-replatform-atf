@@ -568,8 +568,8 @@ Feature: Concierge Critical Path
     Then I verify that payment POS is working and paid amount is visible on the confirmation page
     Then I verify the payment details and order estimate summary
 
+    @vlad
   Scenario: Verify the Complete Billing address
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -615,8 +615,13 @@ Feature: Concierge Critical Path
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
-    When I open cart
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I chose '6' product from the list
+    Then I chose the '1' line item selections one by one
+    When I click on add to cart button
+    When I click on view cart button
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
@@ -662,10 +667,10 @@ Feature: Concierge Critical Path
 #      |57070740 CLNT|
       | 61970975 TEAK |
       | 62870050 LOAK |
-     | 10024793 BRNZ |
+      | 10024793 BRNZ |
 
+     @vlad
   Scenario: Verify the PDP hero Image, zoom, line itemsVerify the PDP hero Image, zoom, line items
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -704,7 +709,6 @@ Feature: Concierge Critical Path
     Then verify that another modal appears with all the data for '10024796'
 
   Scenario: Verify In Stock functionality
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -749,7 +753,6 @@ Feature: Concierge Critical Path
       | BO    | 10024793 BRNZ |
 
   Scenario: Verify the dropdown selection and add to cart
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -801,20 +804,20 @@ Feature: Concierge Critical Path
     When I add monogram to product on concierge
     Then I verify that monogram was added for pdp
 
-  Scenario Outline: Add To Cart (Instock, SPO, BO) functionality
-
+  Scenario: Add To Cart (Instock, SPO, BO) functionality
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to item "<skuID>" from search field
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I chose '2' product from the list
+    Then I Verify that 'item title' is present
     When I click on "view in stock items" link
     Then Verify that "In Stock modal" 'opens'
     Then I click on 'Add an item to cart from pop-up modal' switch button
     When I click on view cart button
     Then Verify that 'sku is present in Cart'
-    Examples:
-      | skuID         |
-      | 60450996 BLNL |
 
   @vlad
   Scenario: ATC SPO - add to cart
@@ -965,23 +968,24 @@ Feature: Concierge Critical Path
 #      | Lighting  | Table                 | Shades                        | RH TEEN         | TN               |
       | Storage | Wall    | Memory Boards | RH TEEN | TN               |
 
-  Scenario: Checking Faucets in Collection PG
-
-    Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
-    Then I navigate to menu 'Dining'
-    Then I navigate to sub menu 'Tables'
-    Then I navigate to gallery 'Round & Oval Tables'
-    #Then I verify that 'PG has SALE and IN-STOCK filters, text RESULTS (n), faucet with text SORT' on PG screen
-    Then I click 'SORT and confirm that Modal has text FEATURED, Price Low to High, Price High to Low' on PG screen
-    Then I click 'Price Low to High and verify price is sorted' on PG screen
-    Then I click 'Price High to Low and verify price is sorted' on PG screen
-    Then I click 'IN-STOCK Filter' on PG screen
-    Then I verify that 'CLEAR ALL is present when filter(s) are selected' on PG screen
-    Then I click 'IN-STOCK Filter' on PG screen
-    Then I click 'sale checkbox' on PG screen
-    Then I verify that 'all products returned have $ SALE price in their descriptions' on PG screen
-    Then I verify that PG loads
+# Don't have test data
+#  Scenario: Checking Faucets in Collection PG
+#
+#    Given I log into Concierge as "associate"
+#    When I choose country for concierge from footer
+#    Then I navigate to menu 'Dining'
+#    Then I navigate to sub menu 'Tables'
+#    Then I navigate to gallery 'Round & Oval Tables'
+#    #Then I verify that 'PG has SALE and IN-STOCK filters, text RESULTS (n), faucet with text SORT' on PG screen
+#    Then I click 'SORT and confirm that Modal has text FEATURED, Price Low to High, Price High to Low' on PG screen
+#    Then I click 'Price Low to High and verify price is sorted' on PG screen
+#    Then I click 'Price High to Low and verify price is sorted' on PG screen
+#    Then I click 'IN-STOCK Filter' on PG screen
+#    Then I verify that 'CLEAR ALL is present when filter(s) are selected' on PG screen
+#    Then I click 'IN-STOCK Filter' on PG screen
+#    Then I click 'sale checkbox' on PG screen
+#    Then I verify that 'all products returned have $ SALE price in their descriptions' on PG screen
+#    Then I verify that PG loads
   
   Scenario: Checking Faucets in General PG (All Tables)
     Given I log into Concierge as "associate"
