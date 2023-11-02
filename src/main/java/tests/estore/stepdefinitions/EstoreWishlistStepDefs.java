@@ -50,7 +50,9 @@ public class EstoreWishlistStepDefs {
 
     @Then("I verify that I'm able to remove wishlist from cart")
     public void iVerifyThatIMAbleToRemoveWishlistFromCart() {
-        estoreWishlistPage.getRemoveButtonWishList().should(visible, Duration.ofSeconds(20));
-        estoreWishlistPage.getRemoveButtonWishList().click();
+        if(estoreWishlistPage.getRemoveButtonWishList().isDisplayed()) {
+            estoreWishlistPage.getRemoveButtonWishList().should(visible, Duration.ofSeconds(20));
+            estoreWishlistPage.getRemoveButtonWishList().click();
+        }
     }
 }

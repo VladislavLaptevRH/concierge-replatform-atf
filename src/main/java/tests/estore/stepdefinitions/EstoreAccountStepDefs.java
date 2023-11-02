@@ -145,10 +145,12 @@ public class EstoreAccountStepDefs {
     public void iChooseCountryForEStoreFromFooter() {
         if (Hooks.country.equals("GB")) {
             estoreHomePage.chooseGBCountry();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
         }
 
         if (Hooks.country.equals("CA")) {
             estoreHomePage.chooseCACountry();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
         }
     }
 

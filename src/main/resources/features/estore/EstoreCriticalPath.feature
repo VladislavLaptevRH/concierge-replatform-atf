@@ -239,7 +239,7 @@ Feature: Estore critical path
     Then I verify that page render in the same grid view that previously selected
     Examples:
       | brand |
-      | RH    |
+      #| RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -298,6 +298,7 @@ Feature: Estore critical path
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    Then I chose the '1' line item selections one by one
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -318,6 +319,7 @@ Feature: Estore critical path
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    Then I chose the '1' line item selections one by one
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button

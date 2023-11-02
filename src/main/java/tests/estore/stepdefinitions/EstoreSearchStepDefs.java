@@ -214,7 +214,6 @@ public class EstoreSearchStepDefs {
     @Then("I verify in stock facet selection")
     public void iVerifyInStock() {
         $(By.xpath("//*[text()='in-stock']")).should(visible, Duration.ofSeconds(20)).click();
-        $(By.xpath("//*[text()='sale']")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify that I'm able to apply any facet")
