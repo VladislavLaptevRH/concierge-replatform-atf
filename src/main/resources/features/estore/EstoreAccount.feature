@@ -1,3 +1,4 @@
+@estoreAccount
 @estoreTestRun
 Feature: Estore account
 

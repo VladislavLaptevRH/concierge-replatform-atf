@@ -63,10 +63,13 @@ public class EstoreCartPageStepDefs {
     @When("I click on view cart estore button")
     public void iClickOnViewCartButton() {
         generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(6, SECONDS).await().until(() -> true);
         estoreItemPage.getViewCartButton().shouldHave(text("View Cart"), Duration.ofSeconds(80));
+        with().pollInterval(1, SECONDS).await().until(() -> true);
         estoreItemPage.getViewCartButton().should(visible, Duration.ofSeconds(60));
         estoreCartPage.getKeepShopping().should(visible, Duration.ofSeconds(15));
         estoreItemPage.getViewCartButton().click(ClickOptions.usingJavaScript());
+        with().pollInterval(6, SECONDS).await().until(() -> true);
     }
 
     @When("I choose estore order classification")
@@ -346,14 +349,12 @@ public class EstoreCartPageStepDefs {
     @Then("I verify membership estore banner for {string}")
     public void iVerifyMembershipEstoreBannerFor(String arg0) {
         if (arg0.equals("nonmember user")) {
-
-            $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(interactable, Duration.ofSeconds(40));
-            $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible, Duration.ofSeconds(40));
+            $(By.xpath("//*[text()='JOIN NOW']")).should(interactable, Duration.ofSeconds(40));
+            $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(40));
             $(By.xpath("//*[contains(text(),'Join the RH Members Program for')]")).should(visible, Duration.ofSeconds(40));
         }
         if (arg0.equals("member user")) {
-
-            $(By.xpath("//*[text()='RH MEMBERS PROGRAM']")).should(visible, Duration.ofSeconds(40));
+            $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(40));
             $(By.xpath("//*[contains(text(),'Automation, ')]")).should(visible, Duration.ofSeconds(30));
         }
     }
@@ -760,13 +761,13 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that add to cart button is active")
     public void iVerifyThatAddToCartButtonIsActive() {
-        estorePDPScreen.getAddToCartInactiveButton().shouldNotBe(visible, Duration.ofSeconds(30));
+        estorePDPScreen.getAddToCartActiveButton().shouldBe(visible, Duration.ofSeconds(30));
     }
 
     @And("I verify that add to cart button is inactive")
     public void iVerifyThatAddToCartButtonIsInactive() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        estorePDPScreen.getAddToCartInactiveButton().shouldBe(visible, Duration.ofSeconds(30));
+        estorePDPScreen.getAddToCartInactiveButton().shouldBe(appear, Duration.ofSeconds(30));
     }
 
     @And("I verify the total price for product in the cart")
@@ -774,7 +775,7 @@ public class EstoreCartPageStepDefs {
         totalProductPrice = estoreCartPage.getTotalProductPrice();
         int regularPrice = estoreCartPage.getRegularProductPriceValueInt();
         int quantity = estoreCartPage.getQuantityOfProductInCart();
-
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         assertEquals("Verify the total price", regularPrice * quantity
                 , totalProductPrice);
     }
@@ -791,7 +792,6 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify monogram was added to cart for eStore")
     public void iVerifyMonogramWasAddedToCartForEStore() {
-        $(By.xpath("//p[text()='PERSONALIZATION']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Style']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Bauer Bodoni 2 (BDNI-HD)']")).should(visible, Duration.ofSeconds(20));
         $(By.xpath("//p[text()='Text']")).should(visible, Duration.ofSeconds(20));

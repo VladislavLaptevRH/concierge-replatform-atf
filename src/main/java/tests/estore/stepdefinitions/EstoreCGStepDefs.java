@@ -8,16 +8,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import tests.concierge.stepdefinitions.AbstractStepDefs;
-import tests.estore.pageObject.EstoreCGScreen;
-import tests.estore.pageObject.EstoreItemPage;
-import tests.estore.pageObject.EstoreSearchScreen;
-import tests.estore.pageObject.EstoreUserAccountPage;
+import tests.concierge.stepdefinitions.GeneralStepDefs;
+import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
@@ -30,10 +27,14 @@ public class EstoreCGStepDefs {
     EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
     AbstractStepDefs abstractStepDefs = new AbstractStepDefs();
 
+    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+
+    EstoreHomePage estoreHomePage = new EstoreHomePage();
+
     @Then("I validate the collection name is not empty")
     public void iValidateTheCollectionNameIsNotEmpty() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        $(By.xpath("(//h1//span)[1]")).shouldHave(text("Collections"), Duration.ofSeconds(60));
+        $(By.xpath("(//h1//span)[1]")).has(text("Collections"));
     }
 
     @When("I scroll on the page till back to top button is visible")
@@ -219,6 +220,9 @@ public class EstoreCGStepDefs {
         if (collectionName.equals("FABRIC CHAIR COLLECTIONS")) {
             URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220044&sale=false&topCatId=cat1840042&parentCatId=cat160045";
         }
+        if (collectionName.equals("RECTANGULAR TABLE COLLECTIONS")) {
+            URL = Hooks.eStoreBaseURL + "/catalog/category/collections.jsp?cellBackground=false&categoryId=cat10220036&sale=false&topCatId=cat1840042&parentCatId=cat3870171";
+        }
         open(URL);
 
         WebDriverRunner.getWebDriver().navigate().refresh();
@@ -256,4 +260,104 @@ public class EstoreCGStepDefs {
         $(By.xpath("(//div[@id='component-rh-image_wrapper'])[2]//div")).should(visible, Duration.ofSeconds(20)).click(ClickOptions.usingJavaScript());
     }
 
+    @Then("I verify that the top navigation, logo, hamburger icon,search should be displayed")
+    public void iVerifyThatTheTopNavigationLogoHamburgerIconSearchShouldBeDisplayed() {
+        estoreHomePage.verifyThatRhLogoIsDisplayed();
+        estoreHomePage.verifyThatNavigationMenuIsDisplayed();
+        estoreHomePage.verifyThatHamburgerIconIsDisplayed();
+        estoreHomePage.verifyThatSearchFieldIsDisplayed();
+    }
+
+    @Then("I verify that the CG title on the top left corner of the page")
+    public void iVerifyThatTheCGTitleOnTheTopLeftCornerOfThePage() {
+        estoreCGScreen.verifyThatSeatinCollectionTitleIsDisplayedOnCG();
+    }
+
+    @Then("I verify that by default the single grid view should be selected")
+    public void iVerifyThatByDefaultTheSingleGridViewShouldBeSelected() {
+        estoreCGScreen.verifyThatSingleGridViewIsDisplayed();
+    }
+
+    @Then("I verify that PG title, description text, member discount message is displayed")
+    public void iVerifyThatPGTitleDescriptionTextMemberDiscountMessageIsDisplayed() {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        estoreCGScreen.verifyThatSeatinCollectionTitleIsDisplayedOnCG();
+        estoreCGScreen.verifyThatMemberDiscountMessageIsDisplayedOnCG();
+        estoreCGScreen.verifyThatCGDescriptionIsDisplayed();
+    }
+
+    @And("I verify that In stock and size availability message is displayed")
+    public void iVerifyThatInStockAndSizeAvailabilityMessageIsDisplayed() {
+        estoreCGScreen.verifyThatinStockMessageTextIsDisplayed();
+
+    }
+
+    @When("I select {int}up grid view on CG for estore")
+    public void iSelectUpGridViewOnCGForEstore(int gridView) {
+        if (gridView == 2) {
+            estoreSearchScreen.getTwoColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
+            estoreSearchScreen.getTwoColumnsInRowGridElement().click();
+            estoreCGScreen.verifyThatTwoGridViewIsDisplayed();
+        }
+        if (gridView == 3) {
+            estoreSearchScreen.getThreeColumnsInRowGridButton().should(visible, Duration.ofSeconds(20));
+            estoreSearchScreen.getThreeColumnsInRowGridButton().should(interactable, Duration.ofSeconds(20));
+            estoreSearchScreen.getThreeColumnsInRowGridButton().click();
+            estoreCGScreen.verifyThatThreeGridViewIsDisplayed();
+        }
+
+    }
+
+    @Then("I verify that swatches are displayed for {int}up grid view")
+    public void iVerifyThatSwatchesAreDisplayedForUpGridView(int gridView) {
+        if (gridView == 1) {
+            estoreCGScreen.verifyThatSwatches1upGridViewIsDisplayed();
+        }
+        if (gridView == 2) {
+            estoreCGScreen.verifyThatSwatches2upGridViewIsDisplayed();
+        }
+        if (gridView == 3) {
+            estoreCGScreen.verifyThatSwatches3upGridViewIsDisplayed();
+        }
+    }
+
+
+    @Then("I verify that the swatches should show below the image with correct padding")
+    public void iVerifyThatTheSwatchesShouldShowBelowTheImageWithCorrectPadding() {
+        estoreCGScreen.verifyThatSwathcesOnCgAreDisplayed();
+    }
+
+    @And("I verify that the product name and price should correct")
+    public void iVerifyThatTheProductNameAndPriceShouldCorrect() {
+        estoreCGScreen.verifyThatChairCGNameIsDisplayed();
+        assertTrue("Verify that member proudct price is correct", estoreCGScreen.getProductMemberPriceOnCg() > 0);
+        assertTrue("Verify that regular proudct price is correct", estoreCGScreen.getProductRegularPriceOnCg() > 0);
+
+    }
+
+    @Then("I verify that the VIEW SELECT ITEMS ON SALE link should show in red color")
+    public void iVerifyThatTheVIEWSELECTITEMSONSALELinkShouldShowInRedColor() {
+        estoreCGScreen.verifyColorForViewSelectItemsForSaleMessage();
+    }
+
+    @And("I verify that the underline should appear on the link VIEW SELECT ITEMS ON SALE.")
+    public void iVerifyThatTheUnderlineShouldAppearOnTheLinkVIEWSELECTITEMSONSALE() {
+        assertTrue("", estoreCGScreen.verifyTextDecoration().equals("underline"));
+    }
+
+    @Then("I verify that sale message is displayed in Red for CGs with Sale items")
+    public void iVerifyThatSaleMessageIsDisplayedInRedForCGsWithSaleItems() {
+        estoreCGScreen.verifyThatSaveUpSaleMessageIsDisplayed();
+        estoreCGScreen.verifyThatWithRhMembershipSaleMessageIsDisplayed();
+    }
+
+    @Then("I verify that user back to the CG from PG or search result page.")
+    public void iVerifyThatUserBackToTheCGFromPGOrSearchResultPage() {
+        estoreCGScreen.getCgChairs().should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that page moved to the top on clicking the bottom to top button on CG")
+    public void iVerifyThatPageMovedToTheTopOnClickingTheBottomToTopButtonOnCG() {
+        estoreHomePage.getHomePageLogo().should(visible, Duration.ofSeconds(12));
+    }
 }

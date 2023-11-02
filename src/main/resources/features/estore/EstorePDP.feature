@@ -1,4 +1,5 @@
 @estoreTestRun
+@estorePDP
 Feature: Estore PDP
 
   Scenario: Verify user can see the Product Details correctly mentioned for a product
@@ -148,9 +149,6 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify the product price as per the Ship to selection for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
 
-
-    #Author: Vimalan
-    #Date: 09 Oct
   Scenario: Verify View On Sale Options
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -257,6 +255,17 @@ Feature: Estore PDP
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify availability delivery and return for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
+
+  Scenario: PDP Content - Verify on the PDP pages prices are changing with the country zip
+    Given I log into eStore as "regular" user
+    When I remove all items from estore cart
+    When I choose country for eStore from footer
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    When I get prices for US for eStore
+    When I update "CAN" postal code on pdp page
+    Then I verify that prices for "CAN" was updated
+    When I update "US" postal code on pdp page
+    Then I verify that prices for "US" was updated
 
   @Alok
   Scenario: Verify the dropdown selection and add to cart

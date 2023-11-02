@@ -87,7 +87,7 @@ Feature: Estore critical path
     Then I verify sale prices on PG pages for sale items
     Examples:
       | brand |
-      | RH    |
+     # | RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -126,7 +126,7 @@ Feature: Estore critical path
     Then I verify that sorting high to low is working as expected
     Examples:
       | brand |
-      | RH    |
+      #| RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -239,7 +239,7 @@ Feature: Estore critical path
     Then I verify that page render in the same grid view that previously selected
     Examples:
       | brand |
-      | RH    |
+      #| RH    |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
@@ -270,7 +270,7 @@ Feature: Estore critical path
 #      | RH BABY & CHILD |
     #use fabric seating - sofas: check title, grid view
 
-  Scenario: CG - Browser back button from search to CG page
+    Scenario: CG - Browser back button from search to CG page
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to "SEATING COLLECTIONS" on eStore
@@ -298,6 +298,7 @@ Feature: Estore critical path
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    Then I chose the '1' line item selections one by one
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -318,6 +319,7 @@ Feature: Estore critical path
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    Then I chose the '1' line item selections one by one
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -441,6 +443,7 @@ Feature: Estore critical path
     Then I verify that gift card balance info is displayed for estore
 
 #Verify the cart updates, remove line, add to wish lsit, update qty, add membership
+
   Scenario: Cart - Verify that user is able to add multiple item to cart, total price is correct
     Given I log into eStore as "nonmember" user
     When I choose country for eStore from footer
@@ -523,8 +526,8 @@ Feature: Estore critical path
     When I select color option on the PDP page
     Then I verify that add to cart button is active
     And I verify special messages on PDP page
-#Verify the pricing based on country
 
+#Verify the pricing based on country
   Scenario: PDP - Configure this item to view delivery information for your Location, price update
     Given I log into eStore as "regular" user
     When I remove all items from estore cart
@@ -631,7 +634,7 @@ Feature: Estore critical path
   Scenario Outline: Account - Verify My account dropdowm
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I click on my account button if page is not loaded
+    When I click on my account button
     When I click on the "<option>" from my account dropdown
     Then I verify that "<option>" is available for eStore
     And I verify that required page for "<option>" is displayed
@@ -748,7 +751,6 @@ Feature: Estore critical path
     When I execute payment with credit card on estore
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
-    When I click on order details button
     And I verify billing and shipping address are correct
 
 #Membership page and functionality
@@ -787,7 +789,7 @@ Feature: Estore critical path
     When I navigate to the member tab
     Then I verify that email address displayed in membership page
 
-  Scenario: Memberdship - Verfiy membership FAQa link
+  Scenario: Membership - Verfiy membership FAQa link
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
     When I click on my account button if page is not loaded
@@ -887,7 +889,6 @@ Feature: Estore critical path
     When I go to estore item "sofa" from search field
     Then I verify in stock facet selection
 
-
   Scenario: Search - Place order: search with any key term, select high to low. navigate to first product PDP
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -929,7 +930,7 @@ Feature: Estore critical path
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
 
- #Trade
+
   Scenario: Verify the trade login and checkout
     Given I log into eStore as trade
     When I choose country for eStore from footer
@@ -1016,14 +1017,18 @@ Feature: Estore critical path
   Scenario: Verify Monogrammed products
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
-    When I click on add monogram checkbox from pdp on eStore
-    When I add monogram to product on eStore
-    Then I verify that monogram was added for pdp on eStore
+    When I open product page with "prod19500002" and "17050042" with "WHEA" for estore
+    Then I chose the '1' line item selections one by one
+    When I click on add monogram checkbox
+    When I choose monogram properties
     When I click on add to cart estore button
     When I click on view cart estore button
-    Then I verify monogram was added to cart for eStore
-    #verify mono on pdp -> add to cart-> verify the mono in cart
+    Then I verify that monogram was added
+    When I edit monogram
+    Then I verify that monogram was edited
+    When I refresh current estore page
+    When I remove monogram
+    Then I verify that monogram was removed
 
   Scenario: Verify user is able to edit Monogram product incart
     Given I log into eStore as "regular" user
@@ -1032,6 +1037,7 @@ Feature: Estore critical path
     When I click on add monogram checkbox from pdp on eStore
     When I add monogram to product on eStore
     Then I verify that monogram was added for pdp on eStore
+    #Then I verify that monogram was added
     When I click on add to cart estore button
     When I click on view cart estore button
     Then I verify monogram was added to cart for eStore

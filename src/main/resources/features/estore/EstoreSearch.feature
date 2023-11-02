@@ -1,5 +1,5 @@
 @estoreTestRun
-
+@estoreSearch
 Feature: Estore Search
 
   Scenario: Search product via Product name

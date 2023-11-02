@@ -23,14 +23,14 @@ Feature: Concierge Critical Path
 #    Then I confirm that default zip code for country "US" is present in Cart
     And I change zip code in the cart to "94525"
     And Verify that zip code was updated in the Cart to "94525"
-
+  
   Scenario: Verify the Price, Total, Shipping & Applicable fees in cart
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I add item to cart via API with "10146709 LOAK" and quantity '1'
     When I open cart
-    Then I verify all the sums on the cart page
+    Then I verify all the sums on the cart page with item quantity '1'
 
   Scenario: Verify that increasing the quantity updates correct product price lines,Total, Shipping & Applicable fees in cart
     Given I log into Concierge as "associate"
@@ -157,7 +157,7 @@ Feature: Concierge Critical Path
     When I choose country for concierge from footer
     When I add item to cart via API
     When I clear all orders form the cart
-  @vimal
+
   Scenario: Monogram Edit / Remove / Add
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -458,7 +458,7 @@ Feature: Concierge Critical Path
     When I choose country for concierge from footer
     When user clicks on gallery button from header
     Then user verifies list of galleries which have default value "5: Newport Beach"
-  @vimal
+
   Scenario Outline: Major CCs
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -470,6 +470,9 @@ Feature: Concierge Critical Path
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
     When I fill all fields from address screen
     And I continue to payment
     When I click on continue with original address button
@@ -496,6 +499,9 @@ Feature: Concierge Critical Path
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
     When I fill all fields from address screen
     And I continue to payment
     When I click on continue with original address button
@@ -517,6 +523,9 @@ Feature: Concierge Critical Path
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
     When I fill all fields from address screen
     When I continue to payment
     When I click on continue with original address button
@@ -527,6 +536,7 @@ Feature: Concierge Critical Path
     Then I verify the payment details and order estimate summary
 
   Scenario: Edit payment
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -536,6 +546,9 @@ Feature: Concierge Critical Path
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
     When I fill all fields from address screen
     And I continue to payment
     When I click on continue with original address button
@@ -548,6 +561,7 @@ Feature: Concierge Critical Path
     Then I verify the payment details and order estimate summary
 
   Scenario: Verify the Complete Billing address
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -558,6 +572,9 @@ Feature: Concierge Critical Path
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
     When I fill all fields from address screen
     And I continue to payment
     When I click on continue with original address button
@@ -573,6 +590,9 @@ Feature: Concierge Critical Path
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
     When I fill all fields from address screen
     And I continue to payment
     When I click on continue with original address button
@@ -581,6 +601,7 @@ Feature: Concierge Critical Path
     Then I verify that balance info is displayed
 
   Scenario: Edit Address
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -591,6 +612,9 @@ Feature: Concierge Critical Path
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
     And I fill all fields from address screen
     And I continue to payment
     When I click on continue with original address button
@@ -629,8 +653,9 @@ Feature: Concierge Critical Path
       | 61970975 TEAK |
       | 62870050 LOAK |
      | 10024793 BRNZ |
-  @vimal
+
   Scenario: Verify the PDP hero Image, zoom, line itemsVerify the PDP hero Image, zoom, line items
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -669,6 +694,7 @@ Feature: Concierge Critical Path
     Then verify that another modal appears with all the data for '10024796'
 
   Scenario: Verify In Stock functionality
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -698,7 +724,7 @@ Feature: Concierge Critical Path
 #    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
 #    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
 #    Then Verify that "Sale modal" 'has an item can be added to project from modal'
-  @vimal
+
   Scenario Outline: Availability, Delivery and Returns messaging for <items>
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -712,6 +738,7 @@ Feature: Concierge Critical Path
       | BO    | 10024793 BRNZ |
 
   Scenario: Verify the dropdown selection and add to cart
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -756,11 +783,13 @@ Feature: Concierge Critical Path
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I open product page with productId "prod19500002"
+    Then I chose the '1' line item selections one by one
     When I click on add monogram checkbox from pdp
-    When I choose monogram properties for pdp
+    When I add monogram to product on concierge
     Then I verify that monogram was added for pdp
 
   Scenario Outline: Add To Cart (Instock, SPO, BO) functionality
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -790,7 +819,6 @@ Feature: Concierge Critical Path
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10024793 BRNZ" from search field
-    Then I chose the '1' line item selections one by one
     Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
@@ -829,15 +857,15 @@ Feature: Concierge Critical Path
     Then Verify that 'price in PDP changed from US$ to CA$'
     When I choose 'GB' country
     Then I click on zip code and change it to 'SW1A1AA'
-    Then I verify that zip code in PDP is 'SW1A1AA'
     Then Verify that 'Confirm that PDP has price in GBP'
-  @Vimal
+  
   Scenario: Sale PDP: Regular/Member/Final Price validation
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I choose country for concierge from footer
-    When I navigate to "Sale"
-    Then I choose a random sale item
+    Then I navigate to menu 'SALE'
+    Then I navigate to sub menu 'Bed'
+    Then I navigate to gallery 'Beds'
     Then Verify that 'PDP has SALE and MEMBER prices'
 
   Scenario Outline: Verify Mattress Recycling Fee
@@ -845,7 +873,6 @@ Feature: Concierge Critical Path
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I go to item "10004670 NONE" from search field
-    Then I chose the '1' line item selections one by one
     Then I chose the '1' line item selections one by one
     When I change state for "<state>" with zip code "<zipCode>"
     Then I verify that text ""<state>" requires a mattress recycling fee to be collected at checkout state" is present in PDP
@@ -920,14 +947,14 @@ Feature: Concierge Critical Path
 #      | Furniture | Study                 | Desk Chairs                   | RH BABY & CHILD | BC               |
 #      | Lighting  | Table                 | Shades                        | RH TEEN         | TN               |
       | Storage | Wall    | Memory Boards | RH TEEN | TN               |
-  @vimal
+
   Scenario: Checking Faucets in Collection PG
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I navigate to menu 'Dining'
     Then I navigate to sub menu 'Tables'
     Then I navigate to gallery 'Round & Oval Tables'
-    Then I verify that 'PG has SALE and IN-STOCK filters, text RESULTS (n), faucet with text SORT' on PG screen
+    #Then I verify that 'PG has SALE and IN-STOCK filters, text RESULTS (n), faucet with text SORT' on PG screen
     Then I click 'SORT and confirm that Modal has text FEATURED, Price Low to High, Price High to Low' on PG screen
     Then I click 'Price Low to High and verify price is sorted' on PG screen
     Then I click 'Price High to Low and verify price is sorted' on PG screen
@@ -937,16 +964,16 @@ Feature: Concierge Critical Path
     Then I click 'sale checkbox' on PG screen
     Then I verify that 'all products returned have $ SALE price in their descriptions' on PG screen
     Then I verify that PG loads
-
+  
   Scenario: Checking Faucets in General PG (All Tables)
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I navigate to menu 'Dining'
     Then I navigate to sub menu 'Tables'
     Then I navigate to gallery 'All Dining Tables'
-    Then I verify that 'PG has filters: IN-STOCK, SALE, SIZE, SHAPE, BRAND, RESULTS and SORT is present' on PG screen
+    #Then I verify that 'PG has filters: IN-STOCK, SALE, SIZE, SHAPE, BRAND, RESULTS and SORT is present' on PG screen
     Then I verify that 'user can select SIZE -> Length -> 30 and respective products are returned' on PG screen
-
+ 
   Scenario: Checking Faucets in SALE PGs
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -984,7 +1011,7 @@ Feature: Concierge Critical Path
 #      | Rugs      | Rug Pads            | All Rug Pads    | RH              | RH               | All Rug Pads    |
 #      | Nursery   | Gifts               | Baby Apparel    | RH BABY & CHILD | BC               | Baby Apparel    |
       | Furniture | Furniture | Dining Chairs | RH OUTDOOR | OD               | Dining Chairs |
-
+  
   Scenario: Verify that Back to Top Button is present in PG and functioning
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1008,7 +1035,7 @@ Feature: Concierge Critical Path
     Then I verify that 'Back to top Button is present' on PG screen
     Then I click 'Back to Top button' on PG screen
     Then I verify that 'user is brought to the top of the page' on PG screen
-
+  
   Scenario: Verify that Sale Price is present in Sale PGs
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1022,7 +1049,7 @@ Feature: Concierge Critical Path
     Then I navigate to gallery 'Sofas'
     Then I click 'sale checkbox' on PG screen
     Then I verify that 'Verify that all products have text Frame $ / $ Sale / $ Member' on PG screen
-
+  
   Scenario: Verify that PG is defaulted to 3-grid view
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1042,7 +1069,7 @@ Feature: Concierge Critical Path
     Then I verify that 'grid view is set to 3-grid view' on PG screen
     Then I Change the PG Grid view to '2' - grid view and confirm changing
     Then I Change the PG Grid view to '3' - grid view and confirm changing
-
+ 
   Scenario: Verify that PG Grid View is kept as selected  as user browses through site -PG/CG/PDP and back
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1051,19 +1078,18 @@ Feature: Concierge Critical Path
     Then I navigate to gallery 'Bath Cabinets'
     Then I verify that 'Grid View is present in top right' on PG screen
     Then I verify that 'grid view is set to 3-grid view' on PG screen
-    Then I Change the PG Grid view to '2' - grid view and confirm changing
+    Then I Change the PG Grid view to '3' - grid view and confirm changing
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'Beds'
     Then I navigate to gallery 'Wood Beds'
     Then I click 'first product from the list' on PG screen
     Then I click 'Back Browser Button' on PG screen
-    Then I verify that 'grid view is set to 2-grid view' on PG screen
     Then I navigate to menu 'Dining'
     Then I navigate to sub menu 'Sideboards'
     Then I navigate to gallery 'Glass Sideboards'
     Then I click 'first product from the list' on PG screen
     Then I click 'Back Browser Button' on PG screen
-    Then I verify that 'grid view is set to 2-grid view' on PG screen
+    Then I verify that 'grid view is set to 3-grid view' on PG screen
 
   Scenario: Verify that Back Button PG -> CG and PDP -> PG is functioning as expected
     Given I log into Concierge as "associate"

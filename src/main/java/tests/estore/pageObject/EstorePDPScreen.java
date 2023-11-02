@@ -23,7 +23,9 @@ public class EstorePDPScreen {
 
     private final SelenideElement firstMemberPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
 
-    private final SelenideElement addToCartInactiveButton = $(By.xpath("(//*[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-10'])[1]//button[contains(@class,'disabled') and @id='component-related-product-card_add-to-cart-btn']"));
+    private final SelenideElement addToCartActiveButton = $(By.xpath("(//*[text()='Add To Cart'])[1]"));
+
+    private final SelenideElement addToCartInactiveButton = $(By.xpath("(//*[text()='Add To Cart'])[2]"));
 
     private final SelenideElement sortButton = $(By.xpath("(//*[contains(text(),'sort')])[2]"));
 
@@ -45,13 +47,13 @@ public class EstorePDPScreen {
 
     private final SelenideElement sizeLabelUnselectedOption = $(By.xpath("//label[@id='optionSelect-prod2020027-Size-label' and @data-shrink='false']"));
 
-    private final SelenideElement thisItemWillBeDelieveredMsg = $(By.xpath("//*[contains(text(),'will be delivered on or before')]"));
+    private final SelenideElement thisItemWillBeDelieveredMsg = $(By.xpath("(//*[contains(text(),'This item will be delivered on or before')])[1]"));
 
-    private final SelenideElement shipsFreeOfChargeViaStandarShipMsg = $(By.xpath("//*[text()='Ships free of charge via Standard Delivery Shipping']"));
+    private final SelenideElement shipsFreeOfChargeViaStandarShipMsg = $(By.xpath("(//*[text()='Ships free of charge via Standard Delivery Shipping'])[1]"));
 
     private final SelenideElement thisItemCanBeReturnedMsg = $(By.xpath("//*[text()='This item can be returned within 30 days of delivery.']"));
 
-    private final SelenideElement skuIdItemValue = $(By.xpath("(//*[contains(text(),'Item# ')])[1]"));
+    private final SelenideElement skuIdItemValue = $(By.xpath("//*[@data-testid='item-sku-id-desktop']"));
 
     private final SelenideElement returnPolicyButton = $(By.xpath("(//a[@href='/us/en/customer-service/return-policy.jsp'])[1]"));
 
@@ -78,6 +80,41 @@ public class EstorePDPScreen {
     private final SelenideElement etaLineItemMessage = $(By.xpath("//*[contains(text(),'This item is in stock and will be delivered on or before')]"));
 
     private final SelenideElement returnLineItemMessage = $(By.xpath("//*[contains(text(),'This item can be returned within 30 days of delivery.')]"));
+
+    private final SelenideElement regularSalePricePdp = $(By.xpath("(//*[@data-testid='price-for-sale'])[1]"));
+    private final SelenideElement memberSalePricePdp = $(By.xpath("(//*[@data-testid='price-for-member'])[1]"));
+
+    private final SelenideElement regularPricePdp = $(By.xpath("(//*[@data-testid='price-for-regular'])[1]"));
+    private final SelenideElement memberPricePdp = $(By.xpath("(//*[@data-testid='price-for-member'])[1]"));
+
+    private final SelenideElement lineItemMemberPrice = $(By.xpath("(//*[@id='rh-price-range-display']//*[@data-testid='price-for-member'])[3]"));
+
+    private final SelenideElement lineItemRegularPrice = $(By.xpath("(//*[@id='rh-price-range-display']//*[@data-testid='price-for-regular'])[2]"));
+
+
+    public int getRegularLineItemPricePDP() {
+        return Integer.parseInt(lineItemRegularPrice.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+    }
+
+    public int getMemberLineItemPricePDP() {
+        return Integer.parseInt(lineItemMemberPrice.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+    }
+
+    public int getRegularSalePricePDP() {
+        return Integer.parseInt(regularSalePricePdp.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+    }
+
+    public int getMemberPricePDP() {
+        return Integer.parseInt(memberPricePdp.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+    }
+
+    public int getRegularPricePDP() {
+        return Integer.parseInt(regularPricePdp.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+    }
+
+    public int getMemberSalePricePDP() {
+        return Integer.parseInt(memberSalePricePdp.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
+    }
 
     public void verifyThatReturnMessageIsDisplayed() {
         returnLineItemMessage.should(Condition.visible, Duration.ofSeconds(12));
@@ -138,9 +175,10 @@ public class EstorePDPScreen {
     }
 
     public void verifyThatSpecialMessagesAreDisplayed() {
-        thisItemWillBeDelieveredMsg.should(Condition.visible, Duration.ofSeconds(20));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         shipsFreeOfChargeViaStandarShipMsg.should(Condition.visible, Duration.ofSeconds(20));
         skuIdItemValue.should(Condition.visible, Duration.ofSeconds(20));
+        thisItemWillBeDelieveredMsg.should(Condition.visible, Duration.ofSeconds(20));
     }
 
     public void selectSizeOption() {

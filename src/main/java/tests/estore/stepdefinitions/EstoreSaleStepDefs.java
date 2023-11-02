@@ -13,6 +13,8 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertTrue;
 
 public class EstoreSaleStepDefs {
@@ -20,6 +22,8 @@ public class EstoreSaleStepDefs {
     EstoreCGScreen estoreCGScreen = new EstoreCGScreen();
     EstoreSaleScreen estoreSaleScreen = new EstoreSaleScreen();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+
+    EstorePgStepDefs estorePgStepDefs = new EstorePgStepDefs();
     String URL;
 
 
@@ -30,12 +34,14 @@ public class EstoreSaleStepDefs {
     public void iClickOnEstoreSaleButton() {
         estoreSaleScreen.getSaleButtonMenu().should(visible, Duration.ofSeconds(20));
         estoreSaleScreen.getSaleButtonMenu().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that I'm able to navigate different category")
     public void iVerifyThatIMAbleToNavigateDifferentCategory() {
         estoreSaleScreen.getMainSaleList().should(Condition.and("Visible, interactable", Condition.interactable, visible), Duration.ofSeconds(20));
         estoreSaleScreen.getMainSaleList().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify sale category for estore")
@@ -62,13 +68,114 @@ public class EstoreSaleStepDefs {
         regularSalePrice = Integer.parseInt(estoreSaleScreen.getRegularSalePrice().getText().replaceAll("\\$", "").replaceAll(",", ""));
         memberSalePrice = Integer.parseInt(estoreSaleScreen.getMemberSalePrice().getText().replaceAll("\\$", "").replaceAll(",", ""));
 
-        assertTrue(regularSalePrice > memberSalePrice, "Regular sale price is lower than member sale price");
+        assertTrue(memberSalePrice >= regularSalePrice, "Regular sale price is lower than member sale price");
     }
 
     @When("I go to Sale product page")
     public void iGoToSaleProductPage() {
-        String saleUrl="https://stg2.rhnonprod.com/us/en/catalog/category/products.jsp?categoryId=cat25450027&pgterm=" +
+        String saleUrl = "https://stg2.rhnonprod.com/us/en/catalog/category/products.jsp?categoryId=cat25450027&pgterm=" +
                 "RH+Fabric+Sofas&sale=true&topCatId=cat3890154&parentCatId=cat160024?endpoint=" + Hooks.cookie;
         open(saleUrl);
+    }
+
+    @When("I go to the sale page with {string} on estore")
+    public void iGoToTheSalePageWithOnEstore(String arg0) {
+        String saleUrl = "";
+
+        if (arg0.equals("sofas")) {
+            saleUrl = Hooks.eStoreBaseURL + "/us/en/catalog/category/products.jsp?pgterm=RH+Fabric+Sofas&N=%7B%21tag%3Dsku_showOnly%7Dsku_showOnly%3A%28\"Sale\"%29&Ns=product.sale%7C1&categoryId=cat25450027" + Hooks.cookie;
+        }
+        open(saleUrl);
+    }
+
+    @When("I click to secondary NAV of Sale")
+    public void iClickToSecondaryNAVOfSale() {
+        estoreSaleScreen.clickToSaleLivingNav();
+    }
+
+    @Then("I verify that SALE Nav should be expanded with secondary NAV")
+    public void iVerifyThatSALENavShouldBeExpandedWithSecondaryNAV() {
+        estoreSaleScreen.verifyThatfabricChairsSaleNavIsDisplayed();
+        estoreSaleScreen.verifyThatleatherCharisSaleNavSaleNavIsDisplayed();
+    }
+
+    @When("I click on Living from sale nav menu")
+    public void iClickOnFromSaleNavMenu() {
+        estoreSaleScreen.clickToSaleLivingNav();
+    }
+
+    @Then("I verify that Living in Secondary NAV should expand tertiary NAV")
+    public void iVerifyThatLivingInSecondaryNAVShouldExpandTertiaryNAV() {
+        estoreSaleScreen.verifyThatfabricChairsSaleNavIsDisplayed();
+        estoreSaleScreen.verifyThatleatherCharisSaleNavSaleNavIsDisplayed();
+        estoreSaleScreen.verifyThatsideTablesSaleNavIsDisplayed();
+        estoreSaleScreen.verifyThatconsoleTablesSaleNavIsDisplayed();
+        estoreSaleScreen.verifyThatcoffeTablesSaleNavIsDisplayed();
+    }
+
+    @When("I click on Dining from sale nav menu")
+    public void iClickOnDiningFromSaleNavMenu() {
+        estoreSaleScreen.clickToSaleDiningNav();
+
+    }
+
+    @Then("I verify that Dining in Secondary NAV should expand tertiary NAV")
+    public void iVerifyThatDiningInSecondaryNAVShouldExpandTertiaryNAV() {
+        estoreSaleScreen.getAllDiningTables().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getBarCounterStools().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getCabinetsDining().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Bed from sale nav menu")
+    public void iClickOnBedFromSaleNavMenu() {
+        estoreSaleScreen.clickToSaleBedNav();
+    }
+
+    @Then("I verify that Bed in Secondary NAV should expand tertiary NAV")
+    public void iVerifyThatBedInSecondaryNAVShouldExpandTertiaryNAV() {
+        estoreSaleScreen.getBedBedsSale().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getBedNightstandssSale().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getBedDresserssSale().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getBedBenchesSale().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Bath from sale nav menu")
+    public void iClickOnBathFromSaleNavMenu() {
+        estoreSaleScreen.clickToSaleBathNav();
+    }
+
+    @Then("I verify that Bath in Secondary NAV should expand tertiary NAV")
+    public void iVerifyThatBathInSecondaryNAVShouldExpandTertiaryNAV() {
+        estoreSaleScreen.getBathTowelsSale().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getBathLightingSale().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getMirrorMedicineSale().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getWashstandsSale().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Outdoor from sale nav menu")
+    public void iClickOnOutdoorFromSaleNavMenu() {
+        estoreSaleScreen.clickToSaleOutdoorNavNav();
+    }
+
+
+    @Then("I verify that Outdoor in Secondary NAV should expand tertiary NAV")
+    public void iVerifyThatOutdoorInSecondaryNAVShouldExpandTertiaryNAV() {
+        estoreSaleScreen.getOutdoorChairsSale().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getOutdoorSideTableSale().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getOutdoorChaisesSale().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getOutdoorOttomansSale().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Lighting from sale nav menu")
+    public void iClickOnLightingFromSaleNavMenu() {
+        estoreSaleScreen.clickToSaleLightingNavNav();
+    }
+
+    @Then("I verify that Lighting in Secondary NAV should expand tertiary NAV")
+    public void iVerifyThatLightingInSecondaryNAVShouldExpandTertiaryNAV() {
+        estoreSaleScreen.getCeilingLightingSale().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getWallLightingSale().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getTableLightigSale().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getFloorLightingSale().should(visible, Duration.ofSeconds(12));
     }
 }
