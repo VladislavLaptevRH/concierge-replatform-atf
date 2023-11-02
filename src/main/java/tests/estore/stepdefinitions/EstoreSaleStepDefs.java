@@ -280,4 +280,9 @@ public class EstoreSaleStepDefs {
         estoreSaleScreen.getCollectionImage().should(visible, Duration.ofSeconds(12));
         estoreSaleScreen.getSaleVerbiageMessage().should(visible, Duration.ofSeconds(12));
     }
+
+    @When("I click on Bedding collection from tertiary NAV")
+    public void iClickOnBeddingCollectionFromTertiaryNAV() {
+        estoreSaleScreen.clickToBeddingCollectionNav();
+    }
 }

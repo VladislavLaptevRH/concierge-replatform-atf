@@ -23,6 +23,8 @@ public class EstoreSaleScreen {
 
     private SelenideElement saleOutdoorNav = $(By.xpath("//li[@id='container-rhr-saleNavigation_sale-navigation-cat180003']//span"));
 
+    private SelenideElement beddingCollectionNav = $(By.xpath("//li[@id='container-rhr-saleNavigation_sale-navigation-category-cat28660046']//span"));
+
     private SelenideElement lightingNav = $(By.xpath("//li[@id='container-rhr-saleNavigation_sale-navigation-cat160075']//span"));
 
     private SelenideElement textilesSaleNav = $(By.xpath("//li[@id='container-rhr-saleNavigation_sale-navigation-cat9750013']//span"));
@@ -142,6 +144,17 @@ public class EstoreSaleScreen {
     private SelenideElement collectionTitle = $(By.xpath("(//span[text()='802-Gram Turkish Towel Collection'])[1]"));
 
     private SelenideElement saleVerbiageMessage = $(By.xpath("//*[text()='VIEW SELECT ITEMS ON SALE']"));
+
+    private SelenideElement beddingCollectionTitle = $(By.xpath("//*[text()='Bedding  collections']"));
+
+    public void verifyThatBeddingCollectionTitleIsDisplayedOnCG() {
+        beddingCollectionTitle.should(Condition.visible, Duration.ofSeconds(18));
+    }
+
+    public void clickToBeddingCollectionNav() {
+        beddingCollectionNav.should(Condition.visible,
+                Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
 
     public void verifyThatSaleAppliedFilterWasRemoved() {
         saleAppliedFilter.shouldNotBe(Condition.visible, Duration.ofSeconds(12));

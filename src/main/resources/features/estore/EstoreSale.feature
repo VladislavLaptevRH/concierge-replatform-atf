@@ -176,3 +176,35 @@ Feature: Estore Sale
     When I click on Decor from sale nav menu
     When I click on Decor Mirrors from nav of Sale
     Then I verify that combined price on frame and cushion on PG
+
+  Scenario: Verify PG Sale page via CG Sale
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Bed from sale nav menu
+    When I click on Bedding collection from tertiary NAV
+    When I navigate to any estore fusion PG
+    Then I verify that PG title, description text, member discount message is displayed for Bedding Collection
+
+  Scenario: Verify that user is able to change grid on sale PG
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Dining from sale nav menu
+    When I click on All Dining Tables in tertiary nav
+    Then I validate "1","2" and "3" grid view should work
+
+  Scenario: Verify user is able to change the sort option - Price: Low to High
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "sofa" from search field
+    When I select low to high for estore
+    Then I verify that sorting low to high is working as expected
+
+  Scenario:Verify user is able to change the sort option - Price: High to Low
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    Then  I change the brand to "<brand>" for eStore
+    When I go to estore item "sofa" from search field
+    When I select high to low for estore
+    Then I verify that sorting high to low is working as expected

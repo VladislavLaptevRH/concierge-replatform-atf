@@ -31,6 +31,8 @@ public class EstoreCGStepDefs {
 
     EstoreHomePage estoreHomePage = new EstoreHomePage();
 
+    EstoreSaleScreen estoreSaleScreen = new EstoreSaleScreen();
+
     @Then("I validate the collection name is not empty")
     public void iValidateTheCollectionNameIsNotEmpty() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -284,6 +286,12 @@ public class EstoreCGStepDefs {
         estoreCGScreen.verifyThatSeatinCollectionTitleIsDisplayedOnCG();
         estoreCGScreen.verifyThatMemberDiscountMessageIsDisplayedOnCG();
         estoreCGScreen.verifyThatCGDescriptionIsDisplayed();
+    }
+
+    @Then("I verify that PG title, description text, member discount message is displayed for Bedding Collection")
+    public void iVerifyThatPGTitleDescriptionTextMemberDiscountMessageIsDisplayedforBedding() {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        estoreSaleScreen.verifyThatBeddingCollectionTitleIsDisplayedOnCG();
     }
 
     @And("I verify that In stock and size availability message is displayed")
