@@ -237,24 +237,70 @@ Feature: Estore PDP
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify another PDP - Towel
 
-  @Alok
   Scenario: Verify the PDP hero Image Zoom line items
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod18890296" and "" with "INDG" for estore
     Then I verify the PDP hero Image Zoom line items
-  @Alok
+
   Scenario: Verify IN STOCK functionality
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "" with "INDG" for estore
     Then I verify IN STOCK functionality
-  @Alok
+
   Scenario: Verify the availability , delivery and return messages in PDP
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050043" with "INDG" for estore
     Then I verify availability delivery and return for product "prod13800635" and "17050043" with "INDG" for the selected "CAN" country
+
+  @Alok
+  Scenario: Verify the dropdown selection and add to cart
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod12640168" and "" with "INDG" for estore
+    Then I verify the dropdown selection and add to cart
+
+  @Alok
+  Scenario: Verify Colorization options
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod6371042" and "10115451" with "INDG" for estore
+    Then I verify Colorization options
+
+  @Alok
+  Scenario: Verify Monogram functionality
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod18200047" and "10131159" with "INDG" for estore
+    Then I verify Monogram functionality
+
+  @Alok
+  Scenario: Add To Cart (Instock, SPO, BO) functionality
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod17450517" and "60450996" with "INDG" for estore
+    Then I verify add To Cart Instock, SPO, BO functionality
+
+  @Alok
+  Scenario: Verify Custom Drapery PDP
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "" and "" with "INDG" for estore
+    Then I verify Custom Drapery PDP
+
+  @Alok
+  Scenario: Verify SLP (Swatch Landing Page)
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Swatches" from search field
+    Then I verify swatch Landing Page

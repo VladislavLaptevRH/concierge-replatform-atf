@@ -1,11 +1,8 @@
 package tests.estore.pageObject;
 
-import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
-import org.apache.groovy.xml.tools.DomToGroovy;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -40,7 +37,7 @@ public class EstorePdpPageScreen {
 
     private final SelenideElement inStockOptionsButton = $(By.xpath("//*[text()='In-Stock Options']"));
 
-    private final SelenideElement inStockTitle = $(By.xpath("//*[text()='IN STOCK']"));
+    private final SelenideElement inStockTitle = $(By.xpath("//p[text()='In Stock']"));
 
     private SelenideElement turkishTowelCollectionTitle = $(By.xpath("(//*[text()='802-Gram Turkish Towel Collection'])[3]"));
 
@@ -64,6 +61,14 @@ public class EstorePdpPageScreen {
 
     private SelenideElement colorOption = $(By.xpath("(//select[contains(@id,'option') and contains(@id,'Color')])[1]"));
 
+    private SelenideElement depthOption = $(By.xpath("(//select[contains(@id,'option') and contains(@id,'Depth')])[1]"));
+
+    private SelenideElement fillOption = $(By.xpath("(//select[contains(@id,'option') and contains(@id,'Fill')])[1]"));
+
+    private SelenideElement qtyOption = $(By.xpath("(//select[ contains(@id,'qty')])[1]"));
+
+    private SelenideElement leatherOption = $(By.xpath("(//select[contains(@id,'option') and contains(@id,'Leather')])[1]"));
+
     private SelenideElement skuIdValue = $(By.xpath("(//p[@data-testid='item-sku-id-desktop'])[1]"));
 
     private SelenideElement postalCodeField = $(By.xpath("//*[@id='postal-code-international']"));
@@ -72,6 +77,8 @@ public class EstorePdpPageScreen {
 
     private SelenideElement textBeforePriceAtLineItem = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']//p[text()='Starting at']"));
 
+    private SelenideElement textComponentStartingAt = $(By.xpath("//p[contains(text(),'Components starting at')]"));
+
     private SelenideElement lineItemId = $(By.xpath("(//p[@data-testid='item-sku-id-desktop'])[1]"));
 
     private SelenideElement addToCartBtn = $(By.xpath("(//span[text()='Add To Cart'])[1]"));
@@ -79,6 +86,8 @@ public class EstorePdpPageScreen {
     private SelenideElement itemAddedInCarMsg = $(By.xpath("//p[contains(text(),'1 Item Added To Your Cart')]"));
 
     private SelenideElement viewCartBtn = $(By.xpath("//span[text()='View Cart']"));
+
+    private SelenideElement addAndAgreeBtn = $(By.xpath("//span[text()='Agree & Add To Cart']"));
 
     private SelenideElement heroImageMemberPrice = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container']//p[@data-testid='price-for-member']"));
 
@@ -156,11 +165,13 @@ public class EstorePdpPageScreen {
 
     private final SelenideElement PDPTitle =  $(By.xpath("//h2[@class='MuiTypography-root MuiTypography-h2']"));
 
+    private final SelenideElement PDPTitleLeatherSofa = $(By.xpath("//h1[contains(@class,'MuiTypography-h1')]"));
+
     private final SelenideElement heroImage = $(By.xpath("//*[@data-testid='desktop-pdp-image']"));
 
     private final SelenideElement returnPolicyLink =$(By.xpath("//span[text()='Return Policy']"));
 
-    private final SelenideElement configureDeliveryInformationText = $(By.xpath("//p[text()='Configure this item to view delivery information ']"));
+    private final SelenideElement configureDeliveryInformationText = $(By.xpath("//p[contains(text(),'Configure this item to view delivery information')]"));
 
     private final SelenideElement pdpDetailsSection = $(By.xpath("//span[text()='DETAILS']"));
 
@@ -192,5 +203,59 @@ public class EstorePdpPageScreen {
 
     private final SelenideElement inStockRegularPrice = $(By.xpath("//p[contains(@class,'product-price__amount') and contains(text(),'Regular')]"));
 
+    private final SelenideElement cloudModuleText = $(By.xpath("//p[contains(text(),'Cloud Modular Leather Sofa')]"));
 
+    private final SelenideElement fabricColorBar = $(By.xpath("//div[contains(@data-testid,'SPECIAL ORDER FabricS')]"));
+
+    private final SelenideElement colorFromColorOption = $(By.xpath("(//img[@alt='Bisque'])[1]"));
+
+    private final SelenideElement addedItemInViewCart = $(By.id("listColumn1-ITEM"));
+
+    private final SelenideElement fabricPanelTitle = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container']//h1"));
+
+    private final SelenideElement addMonoGramCheckBox = $(By.xpath("(//span[@data-testid='monogram-checkbox'])[1]"));
+
+    private final SelenideElement monoGramFont = $(By.xpath("(//p[text()='Select Font']/..//span)[1]"));
+
+    private final SelenideElement monoGramColor = $(By.xpath("(//p[text()='Select Color']/..//span)[1]"));
+
+    private final SelenideElement monoGramText = $(By.xpath("//input[@data-testid='monogram-input0']"));
+
+    private final SelenideElement monogramAddButton = $(By.xpath("//button[@data-testid='monogram-add-button']"));
+
+    private final SelenideElement personalizationText = $(By.xpath("//p[text()='PERSONALIZATION']"));
+
+    private final SelenideElement editLinkText = $(By.xpath("//p[text()='Edit']"));
+
+    private final SelenideElement removeLinkText = $(By.xpath("//p[text()='Remove']"));
+
+    private final SelenideElement complimentarySwatchesText = $(By.xpath("//h5[text() = 'Complimentary Swatches']"));
+
+    private final SelenideElement selectSwatchColor = $(By.xpath("(//div[@class='MuiGridListTile-tile'])[1]"));
+
+    private final SelenideElement orderSwatchButton = $(By.xpath("//button[@data-testid='order-swatches-button']"));
+
+    private final SelenideElement deliveryInformationText = $(By.xpath("//div[@class='swatch-shipping-container']"));
+
+    private final SelenideElement swatchFirstName = $(By.xpath("//input[@name='firstName']"));
+
+    private final SelenideElement swatchLastName = $(By.xpath("//input[@name='lastName']"));
+
+    private final SelenideElement swatchEmail = $(By.xpath("//input[@name='email']"));
+
+    private final SelenideElement swatchPhone = $(By.xpath("//input[@name='phone']"));
+
+    private final SelenideElement swatchAddress = $(By.xpath("//input[@name='address']"));
+
+    private final SelenideElement swatchCity = $(By.xpath("//input[@name='city']"));
+
+    private final SelenideElement swatchZip = $(By.xpath("//input[@name='zip']"));
+
+    private final SelenideElement swatchState = $(By.xpath("(//select[@class='MuiSelect-root MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input'])[1]"));
+
+    private final SelenideElement placeOrderBtn = $(By.xpath("//span[text()='PLACE ORDER']"));
+
+    private final SelenideElement thankYouMessage = $(By.xpath("//h2[text()='THANK YOU']"));
+
+    private final SelenideElement orderPlacedMessage = $(By.xpath("//p[contains(text(),'Your order has been placed')]"));
 }

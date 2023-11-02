@@ -6,6 +6,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
@@ -524,6 +525,95 @@ public class EstorePdpStepDefs {
         Assert.assertTrue(estorePdpPageScreen.getAddToCartBtnInStockItems().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
         estorePdpPageScreen.getAddToCartBtnInStockItems().click();
         Assert.assertTrue(estorePdpPageScreen.getViewCartBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
+    @Then("I verify the dropdown selection and add to cart")
+    public void iVerifyTheDropdownSelectionAndAddToCartForProduct() {
+        Assert.assertTrue(estorePdpPageScreen.getPDPTitleLeatherSofa().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getTextComponentStartingAt().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getCloudModuleText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getConfigureDeliveryInformationText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        Select selectDept = new Select(estorePdpPageScreen.getDepthOption());
+        selectDept.selectByIndex(2);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        Select selectFill = new Select(estorePdpPageScreen.getFillOption());
+        selectFill.selectByIndex(1);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        Select selectLeather = new Select(estorePdpPageScreen.getLeatherOption());
+        selectLeather.selectByIndex(0);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        Select selectColor = new Select(estorePdpPageScreen.getColorOption());
+        selectColor.selectByIndex(2);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estorePdpPageScreen.getAddToCartBtn().click();
+        estorePdpPageScreen.getAddAndAgreeBtn().click();
+        Assert.assertTrue(estorePdpPageScreen.getViewCartBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
+    @Then("I verify Colorization options")
+    public void iVerifyColorizationOptions() {
+        estorePdpPageScreen.getFabricColorBar().isDisplayed();
+        estorePdpPageScreen.getFabricColorBar().click();
+        estorePdpPageScreen.getColorFromColorOption().isDisplayed();
+        String selectedColorFromOptions = estorePdpPageScreen.getColorFromColorOption().getAttribute("style");
+        estorePdpPageScreen.getColorFromColorOption().click();
+        estorePdpPageScreen.getHeroImageCloseIcon().click();
+        String heroImageUpdatedColor = estorePdpPageScreen.getHeroImage().getAttribute("style");
+        Assert.assertTrue(heroImageUpdatedColor.contains(selectedColorFromOptions));
+    }
+
+    @Then("I verify Monogram functionality")
+    public void iVerifyMonogramFunctionality() {
+        Assert.assertTrue(estorePdpPageScreen.getAddMonoGramCheckBox().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estorePdpPageScreen.getAddMonoGramCheckBox().click();
+        estorePdpPageScreen.getMonoGramFont().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed();
+        estorePdpPageScreen.getMonoGramFont().click();
+        estorePdpPageScreen.getMonoGramColor().click();
+        estorePdpPageScreen.getMonoGramText().sendKeys("mon");
+        estorePdpPageScreen.getMonogramAddButton().click();
+        Assert.assertTrue(estorePdpPageScreen.getEditLinkText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getRemoveLinkText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
+    @Then("I verify add To Cart Instock, SPO, BO functionality")
+    public void iVerifyAddToCartInstockSPBoFunctionality(){
+        estorePdpPageScreen.getInStockOptionsButton().isDisplayed();
+        estorePdpPageScreen.getInStockOptionsButton().click();
+        Assert.assertTrue(estorePdpPageScreen.getInStockTitle().isDisplayed());
+        estorePdpPageScreen.getAddToCartBtnInStockItems().isDisplayed();
+        estorePdpPageScreen.getAddToCartBtnInStockItems().click();
+        Assert.assertTrue(estorePdpPageScreen.getViewCartBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estorePdpPageScreen.getViewCartBtn().click();
+        Assert.assertTrue(estorePdpPageScreen.getAddedItemInViewCart().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
+    @Then("I verify Custom Drapery PDP")
+    public void iVerifyCustomDraperyPDP(){
+
+    }
+
+    @Then("I verify swatch Landing Page")
+    public void iVerifySwatchLandingPage() {
+        Assert.assertTrue(estorePdpPageScreen.getComplimentarySwatchesText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estorePdpPageScreen.getSelectSwatchColor().click();
+        Assert.assertTrue(estorePdpPageScreen.getOrderSwatchButton().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estorePdpPageScreen.getOrderSwatchButton().click();
+        Assert.assertTrue(estorePdpPageScreen.getDeliveryInformationText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estorePdpPageScreen.getSwatchFirstName().sendKeys("FirstName");
+        estorePdpPageScreen.getSwatchLastName().sendKeys("LastName");
+        estorePdpPageScreen.getSwatchEmail().sendKeys("test@gmail.com");
+        estorePdpPageScreen.getSwatchPhone().sendKeys("6767676767");
+        estorePdpPageScreen.getSwatchAddress().sendKeys("Test Address");
+        estorePdpPageScreen.getSwatchCity().sendKeys("Test City");
+        Select selectDept = new Select(estorePdpPageScreen.getSwatchState());
+        selectDept.selectByIndex(2);
+        estorePdpPageScreen.getSwatchZip().sendKeys("88989");
+        estorePdpPageScreen.getPlaceOrderBtn().click();
+        Assert.assertTrue(estorePdpPageScreen.getThankYouMessage().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getOrderPlacedMessage().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
     }
 
     @Then("I verify the product price as per the Ship to selection for product {string} and {string} with {string} for the selected {string} country")
