@@ -171,6 +171,7 @@ public class ConciergeAssociateStepDefs {
                     conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40));
                     assertEquals(Hooks.getCurrentUrl(), "https://rhbeachhouse.rh.com/us/en/");
                     switchTo().window(0);
+                    WebDriverRunner.getWebDriver().navigate().refresh();
                     $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
                     $(By.xpath("//*[text() = 'Dashboard']")).should(visible, Duration.ofSeconds(40));
                     $(By.xpath("//*[text() = 'PROJECTS']")).should(Condition.and("",visible, enabled), Duration.ofSeconds(40)).click();
