@@ -388,6 +388,7 @@ public class PaymentStepDefs {
                             "Phoenix, AZ, 85020\n" +
                             "US\n" +
                             "1241312319\n" +
+                            "test@mailinator.com\n" +
                             "EDIT"));
 
             assertEquals(paymentScreen.getBillingAddress().getText(),
@@ -399,6 +400,7 @@ public class PaymentStepDefs {
                             "Phoenix, AZ, 85020\n" +
                             "US\n" +
                             "1241312319\n" +
+                            "test@mailinator.com\n" +
                             "EDIT");
       }
     }

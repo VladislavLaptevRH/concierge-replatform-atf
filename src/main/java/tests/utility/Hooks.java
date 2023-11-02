@@ -144,12 +144,12 @@ public class Hooks {
     /**
      * Init web driver for regression and smoke  for tests.concierge
      */
-    @Before("@estoreTestRun or @estoreCriticalPathTestRun or @estoreParallelTestRun or @estoreCriticalPathParallelTestRun")
+    @Before("@estoreTestRun or @estoreCriticalPathTestRun")
     public void initWebDrivereStore() {
         ConfigFileReader();
         configureEstoreURL();
         setUPWebDriver(eStoreURL);
-        setupChromeArguments(eStoreURL);
+//        setupChromeArguments();
     }
 
     /**
@@ -186,12 +186,14 @@ public class Hooks {
         Configuration.timeout = 45000;
         Configuration.reportsFolder = "target/screenshots";
         Configuration.browserCapabilities = options;
+        open(url);
+        currentUrl = WebDriverRunner.url();
     }
 
     /**
      * Set up chrome arguments for Jenkins run
      */
-    public void setupChromeArguments(String url) {
+    public void setupChromeArguments() {
         ChromeOptions options = new ChromeOptions();
         WebDriverManager.chromedriver().setup();
         options.addArguments("--remote-allow-origins=*");
@@ -214,13 +216,6 @@ public class Hooks {
             e.printStackTrace();
         }
         WebDriverRunner.setWebDriver(driver);
-
-        Configuration.pageLoadTimeout = 60000;
-        Configuration.timeout = 45000;
-
-        open(url);
-        currentUrl = WebDriverRunner.url();
-
     }
 
     /**
@@ -242,7 +237,7 @@ public class Hooks {
     /**
      * Quit web driver.
      */
-    @After("@conciergeTestRun or @conciergeCriticalPathTestRun or @estoreTestRun or @estoreCriticalPathTestRun or @estoreParallelTestRun or @estoreCriticalPathParallelTestRun or @target/rerun.txt")
+    @After("@conciergeTestRun or @conciergeCriticalPathTestRun or @estoreTestRun or @estoreCriticalPathTestRun or @target/rerun.txt")
     public void tearDownWebDriver(Scenario scenario) {
         System.out.println(scenario.getName() + " : " + scenario.getStatus());
 
