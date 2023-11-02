@@ -831,8 +831,11 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that configurations of PDP line item is matching the selected sku from Sale PG")
     public void iVerifyThatConfigurationsOfPDPLineItemIsMatchingTheSelectedSkuFromSalePG() {
+        estorePDPScreen.getFirstLineItemMemberPrice().should(visible, Duration.ofSeconds(12));
+        estorePDPScreen.getFirstLineItemMemberPrice().scrollIntoView(true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//*[contains(text(),'" + colorOption + "')]")).should(visible, Duration.ofSeconds(12));
-        $(By.xpath("//*[contains(text(),'" + sizeOption + "')]")).should(visible, Duration.ofSeconds(12));
+        $(By.xpath("//*[@id='optionSelect-prod18510007-Size']//*[contains(text(),'" + sizeOption + "')]")).should(visible, Duration.ofSeconds(12));
     }
 }
 
