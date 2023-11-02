@@ -112,7 +112,7 @@ public class AbstractStepDefs {
 
     @When("I click on checkout button")
     public void iClickOnCheckoutButton() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         if(!conciergeItemsScreen.getCheckoutButton().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);

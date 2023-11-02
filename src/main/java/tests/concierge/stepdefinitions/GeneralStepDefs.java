@@ -402,7 +402,7 @@ public class GeneralStepDefs {
 
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
-        selectPayment.selectByValue("CC");
+        selectPayment.selectByValue("card");
 
         $(By.cssSelector("iframe[title='Iframe for secured card number']")).should(Condition.be(visible), Duration.ofMinutes(2));
         SelenideElement selenideElement = $(By.cssSelector("iframe[title='Iframe for secured card number']"));

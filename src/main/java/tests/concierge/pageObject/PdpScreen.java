@@ -118,7 +118,7 @@ public class PdpScreen {
     private final SelenideElement returnDeliveryText = $(By.xpath("(//*[contains(text(),'This item can be returned within 30 days of delivery.')])[1]"));
     private final SelenideElement returnOrExchangedDeliveryText = $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery. ')]"));
 
-    private final SelenideElement monogramsStyleValue = $(By.xpath("//*[text()='Bauer Bodoni 1 (BDNI-HC)']"));
+    private final SelenideElement monogramsStyleValue = $(By.xpath("//*[text()='Bauer Bodoni 2 (BDNI-HD)']"));
     private final SelenideElement monogramsText = $(By.xpath("//*[text()='Text']"));
     private final SelenideElement viewOnStockItemLink = $(By.xpath("//*[text()='In-Stock']"));
     private final SelenideElement monogramsStyle = $(By.xpath("//*[text()='Style']"));
@@ -127,7 +127,7 @@ public class PdpScreen {
     private final SelenideElement pdpPopUpOnSaleText = $(By.xpath("//*[text()='ON SALE']"));
     private final SelenideElement pdpPopUpOnSaleItem = $(By.xpath("(//*[@id='listColumn1-Item#'])[1]"));
     private final SelenideElement pdpPopUpOnSalePrice = $(By.xpath("(//*[@id = 'sku-price-list']//*[text()='Price'])[1]"));
-    private final SelenideElement pdpPopUpOnSaleMemberPrice = $(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount--member') and text() = 'Member'])[1]"));
+    private final SelenideElement pdpPopUpOnSaleMemberPrice = $(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount--member') and contains(text() , 'Member')])[1]"));
     private final SelenideElement pdpOnSaleMemberPrice = $(By.xpath(" //*[text() = 'VIEW SELECT ITEMS ON SALE']/../../../following-sibling::div//*[@data-testid = 'price-for-member']"));
     private final SelenideElement pdpOnSaleTradePrice = $(By.xpath(" //*[text() = 'VIEW SELECT ITEMS ON SALE']/../../../following-sibling::div//*[@data-testid = 'price-for-trade']"));
     private final SelenideElement pdpPopUpOnSaleTradePrice = $(By.xpath("(//*[@id='sku-price-list']//p[contains(@class, 'product-price__amount--trade') and text() = 'Trade'])[1]"));
@@ -186,7 +186,7 @@ public class PdpScreen {
     private final SelenideElement rightArrow = $(By.xpath("(//*[contains(@class, 'arrow-container')])[4]"));
     private final SelenideElement monogramsColor = $(By.xpath("//*[text()='Color']"));
     private final SelenideElement rightSideImageCarousel = $(By.xpath("//*[@class= 'slick-slider slick-vertical slick-initialized']"));
-    private final SelenideElement monogramsColorsValue = $(By.xpath("//*[text()='MCHA']"));
+    private final SelenideElement monogramsColorsValue = $(By.xpath("//*[text()='TOT']"));
 
     private final SelenideElement yamlCarouselMenu = $(By.xpath("//*[text()='YOU MIGHT ALSO LIKE']"));
 
