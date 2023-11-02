@@ -206,4 +206,24 @@ public class EstoreHomePageStepDefs {
     public void iVerifyThatFooterSectionShouldShowAtTheBottomOfThePageAlongWithCopyRightAndYear() {
         estoreHomePage.verifyThatAllItemsFromFooterAreDisplayed();
     }
+    @Then("I verify that hamburger icon is displayed for the main menu")
+    public void iVerifyThatHamburgerIconIsDisplayedForTheMainMenu() {
+        estoreHomePage.verifyThatHamburgerIconIsDisplayed();
+    }
+
+    @Then("I verify that cart page icon is displayed")
+    public void iVerifyThatCartPageIconIsDisplayed() {
+        estoreHomePage.verifyThatCartButtonIconIsDisplayed();
+    }
+
+    @And("I verify that cart page icon have the item count next to the mini cart icon")
+    public void iVerifyThatCartPageIconHaveTheItemCountNextToTheMiniCartIcon() {
+        assertTrue("Verify that cart page icon have the item count next to the mini cart icon",
+                estoreHomePage.getCountOfItemFromCart() > 0);
+    }
+
+    @Then("I verify that my account icon is displayed")
+    public void iVerifyThatMyAccountIconIsDisplayed() {
+        estoreHomePage.verifyThatAccountIconIsDisplayed();
+    }
 }

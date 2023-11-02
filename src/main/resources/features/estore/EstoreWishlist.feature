@@ -1,4 +1,4 @@
-@estoreTestRun
+@estoreParallelTestRun
 @estoreWishList
 Feature: Estore Wishlist
 
@@ -28,7 +28,6 @@ Feature: Estore Wishlist
   Scenario: Add an item from cart to wishlist
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
     When I click on add to wishlist button from cart

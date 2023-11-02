@@ -72,6 +72,8 @@ public class EstorePGScreen {
 
     private final SelenideElement sizeFilter = $(By.xpath("//*[text()='Size']"));
 
+    private final SelenideElement clearAll = $(By.xpath("//*[text()='Clear All']"));
+
     private final SelenideElement sortFilter = $(By.xpath("//*[text()='sort']"));
 
     private final SelenideElement saleFilterApplied = $(By.xpath("(//*[text()='sale'])[1]"));
@@ -105,6 +107,16 @@ public class EstorePGScreen {
     private final SelenideElement PgCarouselContent = $(By.id("component-product-grid"));
 
     private final List<SelenideElement> pgItems = $$(By.xpath("//div[@id='component-rh-image_wrapper']"));
+
+    private SelenideElement resultsText = $(By.xpath("//*[text()='RESULTS']"));
+
+    private SelenideElement finishText = $(By.xpath("//*[text()='Finish']"));
+
+    private SelenideElement sizeText = $(By.xpath("//*[text()='Size']"));
+
+    private SelenideElement colorOpionPG = $(By.xpath("(//*[@id='listColumn2-Color'])[1]"));
+
+    private SelenideElement sizeOptionPG = $(By.xpath("(//*[@id='listColumn2-Size'])[1]"));
 
 
     public int verifyCountOfPgItemsonThePage() {
