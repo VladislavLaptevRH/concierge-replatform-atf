@@ -149,7 +149,7 @@ public class Hooks {
         ConfigFileReader();
         configureEstoreURL();
         setUPWebDriver(eStoreURL);
-//        setupChromeArguments();
+        setupChromeArguments(eStoreURL);
     }
 
     /**
@@ -183,7 +183,7 @@ public class Hooks {
     /**
      * Set up chrome arguments for Jenkins run
      */
-    public void setupChromeArguments() {
+    public void setupChromeArguments(String url) {
         ChromeOptions options = new ChromeOptions();
         WebDriverManager.chromedriver().setup();
         options.addArguments("--remote-allow-origins=*");
