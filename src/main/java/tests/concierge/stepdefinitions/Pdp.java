@@ -577,7 +577,11 @@ public class Pdp {
                 pdpScreen.getUnlimitedFurnitureDeliveryModalText().shouldHave(visible, Duration.ofSeconds(15));
                 pdpScreen.getUnlimitedFurnitureDeliveryModalStandartShippingTabText().shouldHave(visible, Duration.ofSeconds(15));
                 pdpScreen.getUnlimitedFurnitureDeliveryModalStandartShippingTabText().click();
-                pdpScreen.getUnlimitedFurnitureDeliveryModalUSCurrency().shouldHave(visible, Duration.ofSeconds(15));
+                pdpScreen.getUnlimitedFurnitureDeliveryModalUSStandartShippingCurrency().shouldHave(visible, Duration.ofSeconds(15));
+                break;
+            case  "Shipping & Delivery Modal Should be opened with Shipments to UK tab which has UK(GBP) currency for shipping charges":
+                pdpScreen.getUnlimitedFurnitureDeliveryModalStandartShippingTabText().click();
+                pdpScreen.getUnlimitedFurnitureDeliveryModalGBStandartShippingCurrency().shouldHave(visible, Duration.ofSeconds(15));
                 break;
             default: break;
         }
@@ -608,6 +612,11 @@ public class Pdp {
     public void iVerifyString(String text) {
         pdpScreen.getItemByText(text).shouldBe(visible, Duration.ofSeconds(15));
         pdpScreen.getItemByText(text).shouldHave(text(text), Duration.ofSeconds(20));
+    }
+
+    @Then("postal code {string} should be present in the delivery message")
+    public void postalCodeShouldBePresentInDeliveryMessage(String postalCode) {
+        pdpScreen.getUnlimitedFurnitureDeliveryText().shouldHave(text(postalCode), Duration.ofSeconds(15));
     }
 
     @Then("I click on {string} switch button")
@@ -1332,7 +1341,7 @@ public class Pdp {
                 pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().click();
                 break;
             case "postal code link":
-                pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
+                pdpScreen.getZipCode().should(visible, Duration.ofSeconds(15));
                 pdpScreen.getZipCode().click();
                 pdpScreen.getPostalCodeModal().should(visible, Duration.ofSeconds(15));
                 break;

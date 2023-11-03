@@ -256,6 +256,10 @@ public class PdpScreen {
 
     private final SelenideElement unlimitedFurnitureDeliveryModalUSCurrency = $(By.xpath("(//*[text() = 'Unlimited Furniture Delivery']/..//*[contains(text() , '$')])[1]"));
 
+    private final SelenideElement unlimitedFurnitureDeliveryModalUSStandartShippingCurrency = $(By.xpath("(//*[text() = 'U.S. Standard Shipping']/..//*[contains(text() , '$')])[1]"));
+
+    private final SelenideElement unlimitedFurnitureDeliveryModalGBStandartShippingCurrency = $(By.xpath("(//*[text() = 'U.S. Standard Shipping']/..//*[contains(text() , '£')])[1]"));
+
     private final SelenideElement shippingAndDeliveryModalTab = $(By.xpath("//*[text() = 'Shipments to Canada']"));
     private final SelenideElement shippingAndDeliveryModalDeliveryAreaText = $(By.xpath("//*[text() = 'CANADIAN DELIVERY AREA']"));
 

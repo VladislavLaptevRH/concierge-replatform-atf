@@ -1071,20 +1071,33 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'Beds'
-    Then I navigate to gallery 'Leather Beds'
-    Then I click 'first product from the list' on PG screen
+    Then I navigate to gallery 'Wood Beds'
+    Then I chose '4' product from the list
     Then I Verify that 'item title' is present
     Then Verify that 'line item selections (Size, Finish and Qty) are present'
     Then I chose the '1' line item selections one by one
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
     Then I click 'text "Unlimited Furniture Delivery" is present' on pdp page
-    Then Verify that 'Shipping & Delivery Modal Should be opened with Standard Shipping tab which has US currency for shipping charges'
+    Then Verify that 'Shipping & Delivery Modal Should be opened with Shipments to UK tab which has UK(GBP) currency for shipping charges'
 
   @vlad
-  Scenario: If Delivery type is UFD, postal code should be present in the delivery message.
+  Scenario: If Delivery type is UFD, postal code should be present in the delivery message
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'item title' is present
+    Then Verify that 'line item selections (Size, Finish and Qty) are present'
+    Then I chose the '1' line item selections one by one
+    Then I verify that text item# and SKU is present
+    Then postal code '94925' should be present in the delivery message
+
 
   @vlad
-  Scenario: If Delivery type is Standard Shipping, postal code should not be present in the delivery message.
+  Scenario: If Delivery type is Standard Shipping, postal code should not be present in the delivery message
 
   @vlad
   Scenario: For Contract User(US/CAN), If User clicks on Shiping Link then Shipping & Delivery Modal Should be opened with Contract tab
