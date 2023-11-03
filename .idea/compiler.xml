@@ -11,5 +11,8 @@
         <module name="concierge-replatform-atf" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="cucumber" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
