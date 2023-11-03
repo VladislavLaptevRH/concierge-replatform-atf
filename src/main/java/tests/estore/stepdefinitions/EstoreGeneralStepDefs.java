@@ -47,6 +47,7 @@ public class EstoreGeneralStepDefs {
     EstoreCheckoutAddressScreen estoreCheckoutAddressScreen = new EstoreCheckoutAddressScreen();
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+    EstorePGScreen estorePGScreen = new EstorePGScreen();
 
     private static final Random RANDOM = new SecureRandom();
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -783,5 +784,11 @@ public class EstoreGeneralStepDefs {
      */
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
+    }
+
+    public String firstLetterCapital(String row) {
+        String word = row.toLowerCase();
+        String result = word.substring(0, 1).toUpperCase() + word.substring(1).substring(0, 4).replaceAll(" ", "");
+        return result;
     }
 }

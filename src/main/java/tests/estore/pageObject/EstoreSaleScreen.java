@@ -25,6 +25,14 @@ public class EstoreSaleScreen {
 
     private SelenideElement lightingNav = $(By.xpath("//li[@id='container-rhr-saleNavigation_sale-navigation-cat160075']//span"));
 
+    private SelenideElement textilesSaleNav = $(By.xpath("//li[@id='container-rhr-saleNavigation_sale-navigation-cat9750013']//span"));
+
+    private SelenideElement rugsSaleNav = $(By.xpath("//li[@id='container-rhr-saleNavigation_sale-navigation-cat1535014']//span"));
+
+    private SelenideElement decorSaleNav = $(By.xpath("//li[@id='container-rhr-saleNavigation_sale-navigation-cat1630014']//span"));
+
+    private SelenideElement allDiningTablesNav = $(By.xpath("//li[@id='container-rhr-saleNavigation_sale-navigation-category-cat28650054']//span"));
+
     private SelenideElement saleButtonMenu = $(By.xpath("//*[text()='SALE']"));
 
     private SelenideElement sofasButton = $(By.xpath("//*[text()='Living']"));
@@ -95,6 +103,62 @@ public class EstoreSaleScreen {
 
     private SelenideElement cabinetsDining = $(By.xpath("//*[text()='Cabinets']"));
 
+    private SelenideElement textilesBeddingCollections = $(By.xpath("//*[text()='Bedding Collections']"));
+
+    private SelenideElement textilesSheetsPilloecases = $(By.xpath("//*[text()='Sheets & Pillowcases']"));
+
+    private SelenideElement textilesTHrowsBlankets = $(By.xpath("//*[text()='Throws & Blankets']"));
+
+    private SelenideElement textilesBathTowels = $(By.xpath("//*[text()='Bath Towels']"));
+
+    private SelenideElement rugsAllRugs = $(By.xpath("//*[text()='All Rugs']"));
+
+    private SelenideElement rugsNeutralRugs = $(By.xpath("//*[text()='Neutral Rugs']"));
+
+    private SelenideElement rugsIvoryRugs = $(By.xpath("//*[text()='Ivory Rugs']"));
+
+    private SelenideElement rugsBlueRugs = $(By.xpath("//*[text()='Blue Rugs']"));
+
+    private SelenideElement decorMirrors = $(By.xpath("//*[text()='Mirrors']"));
+
+    private SelenideElement decorBarCabinets = $(By.xpath("//*[text()='Bar Cabinets & Carts']"));
+
+    private SelenideElement decorCabinetHardware = $(By.xpath("//*[text()='Cabinet Hardware']"));
+
+    private SelenideElement decorThrowsBlankets = $(By.xpath("//*[text()='Throws & Blankets']"));
+
+    private SelenideElement decorAllMirrorsTextSalePg = $(By.xpath("//*[text()='All Mirrors']"));
+
+    private SelenideElement clearAllLink = $(By.xpath("//*[@id='refineMenuDropdown_clearAll-btn']"));
+
+    private SelenideElement saleAppliedFilter = $(By.xpath("//*[@id='refineMenuDropdown_clear-Sale-btn']"));
+
+    private SelenideElement inStockAppliedFilter = $(By.xpath("//*[@id='refineMenuDropdown_clear-In-Stock-btn']"));
+
+    private SelenideElement gridView1 = $(By.xpath("//*[contains(@class,'cols-4')]"));
+
+    private SelenideElement collectionImage = $(By.xpath("(//img[contains(@alt,'prod')])[1]"));
+
+    private SelenideElement collectionTitle = $(By.xpath("(//span[text()='802-Gram Turkish Towel Collection'])[1]"));
+
+    private SelenideElement saleVerbiageMessage = $(By.xpath("//*[text()='VIEW SELECT ITEMS ON SALE']"));
+
+    public void verifyThatSaleAppliedFilterWasRemoved() {
+        saleAppliedFilter.shouldNotBe(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatStockAppliedFilterWasRemoved() {
+        inStockAppliedFilter.shouldNotBe(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void clickToClearAllLink() {
+        clearAllLink.should(Condition.visible, Duration.ofSeconds(12))
+                .click(ClickOptions.usingJavaScript());
+    }
+
+    public void verifyThatDecorAllMirrorsTextSalePgIsDisplayed() {
+        decorAllMirrorsTextSalePg.should(Condition.visible, Duration.ofSeconds(12));
+    }
 
     public void verifyThatfabricChairsSaleNavIsDisplayed() {
         fabricCharisSaleNav.should(Condition.visible, Duration.ofSeconds(12));
@@ -131,10 +195,16 @@ public class EstoreSaleScreen {
                 .click(ClickOptions.usingJavaScript());
     }
 
+    public void clickToAllDiningTablesNav() {
+        allDiningTablesNav.should(Condition.visible, Duration.ofSeconds(12)).hover()
+                .click(ClickOptions.usingJavaScript());
+    }
+
     public void clickToSaleBathNav() {
         saleBathNav.should(Condition.visible, Duration.ofSeconds(12)).hover()
                 .click(ClickOptions.usingJavaScript());
     }
+
     public void clickToSaleOutdoorNavNav() {
         saleOutdoorNav.should(Condition.visible, Duration.ofSeconds(12)).hover()
                 .click(ClickOptions.usingJavaScript());
@@ -144,5 +214,21 @@ public class EstoreSaleScreen {
         lightingNav.should(Condition.visible, Duration.ofSeconds(12)).hover()
                 .click(ClickOptions.usingJavaScript());
     }
+
+    public void clickToSaleTextsilesNav() {
+        textilesSaleNav.should(Condition.visible, Duration.ofSeconds(12)).hover()
+                .click(ClickOptions.usingJavaScript());
+    }
+
+    public void clickToSaleDecorNav() {
+        decorSaleNav.should(Condition.visible, Duration.ofSeconds(12)).hover()
+                .click(ClickOptions.usingJavaScript());
+    }
+
+    public void clickToSaleRugsNav() {
+        rugsSaleNav.should(Condition.visible, Duration.ofSeconds(12)).hover()
+                .click(ClickOptions.usingJavaScript());
+    }
+
 
 }

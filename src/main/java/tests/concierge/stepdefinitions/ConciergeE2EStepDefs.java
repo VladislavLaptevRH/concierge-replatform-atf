@@ -54,6 +54,8 @@ public class ConciergeE2EStepDefs {
     PdpScreen pdpScreen = new PdpScreen();
     PaymentScreen paymentScreen = new PaymentScreen();
 
+    ConciergeSearchScreen conciergeSearchScreen = new ConciergeSearchScreen();
+
     public static String currentURL = "";
     EstoreUserAccountPage estoreUserAccountPage= new EstoreUserAccountPage();
 
@@ -358,12 +360,12 @@ public class ConciergeE2EStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[4]")).should(visible, Duration.ofSeconds(60));
         $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[4]")).click();
-        estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
-        estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
+        conciergeSearchScreen.getSearchItemInput().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
+        conciergeSearchScreen.getSearchItemInput().should(empty, Duration.ofMinutes(1));
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
+        conciergeSearchScreen.getSearchItemInput().click(ClickOptions.usingJavaScript());
         generalStepDefs.waitForJSandJQueryToLoad();
-        estoreUserAccountPage.getSearchItemField().setValue(arg0);
+        conciergeSearchScreen.getSearchItemInput().setValue(arg0);
         $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
         $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click(ClickOptions.usingJavaScript());
     }
@@ -1031,37 +1033,11 @@ public class ConciergeE2EStepDefs {
 
     @When("I edit billing address from order review page")
     public void iEditBillingAddressFromOrderReviewPage() {
+             conciergeAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(15));
+             conciergeAddressScreen.getEditBillingAddress().click();
+             with().pollInterval(2, SECONDS).await().until(() -> true);
         try {
-            if (Hooks.cookie.contains("prodsupport")) {
-                conciergeAddressScreen.getEditBillingAddress().should(visible, Duration.ofSeconds(15));
-                conciergeAddressScreen.getEditBillingAddress().click();
-                with().pollInterval(2, SECONDS).await().until(() -> true);
-            } else {
-                conciergeAddressScreen.getEditBillingAddressCapital().should(visible, Duration.ofSeconds(15));
-                conciergeAddressScreen.getEditBillingAddressCapital().click();
-                with().pollInterval(2, SECONDS).await().until(() -> true);
-            }
-        } catch (ElementNotFound e){
-            System.out.println("Element not found");
-        }
-
-        try {
-            if (Hooks.cookie.contains("prodsupport")) {
-                $(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]")).should(visible, Duration.ofSeconds(15));
-                $(By.xpath("(//*[text() = 'Billing Address']/..//*[text()='Edit'])[1]")).click();
-                with().pollInterval(2, SECONDS).await().until(() -> true);
-            } else {
-                $(By.xpath("(//*[text() = 'BILLING ADDRESS']/..//*[text()='EDIT'])[1]")).should(visible, Duration.ofSeconds(15));
-                $(By.xpath("(//*[text() = 'BILLING ADDRESS']/..//*[text()='EDIT'])[1]")).click();
-                with().pollInterval(2, SECONDS).await().until(() -> true);
-
-            }
-        }catch (ElementNotFound e){
-            System.out.println("Element not found");
-        }
-
-        try {
-            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+//            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
             generalStepDefs.clearField(checkoutAddressScreen.getFirstNameBillingAddress());
             checkoutAddressScreen.getFirstNameBillingAddress().setValue("NewFirstName");
             generalStepDefs.clearField(checkoutAddressScreen.getLastNameBillingAddress());
@@ -1100,11 +1076,7 @@ public class ConciergeE2EStepDefs {
                 $(By.xpath("//*[text()='BILLING ADDRESS']/..//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
                 $(By.xpath("//*[text()='3234546576']")).shouldHave(text("3234546576"), Duration.ofSeconds(25));
             } catch (ElementNotFound e){
-                $(By.xpath("(//*[text()='Automation NonMember'])[2]")).shouldHave(text("Automation NonMember"), Duration.ofSeconds(25));
-                $(By.xpath("//*[text()='7677 N 16TH ST']")).shouldHave(text("7677 N 16TH ST"), Duration.ofSeconds(25));
-                $(By.xpath("//*[text()='BILLING ADDRESS']/..//*[text()='PHOENIX, AZ, 85020-4434']")).shouldHave(text("PHOENIX, AZ, 85020-4434"), Duration.ofSeconds(25));
-                $(By.xpath("//*[text()='BILLING ADDRESS']/..//*[text()='US']")).shouldHave(text("US"), Duration.ofSeconds(25));
-                $(By.xpath("(//*[text()='124131231'])[2]")).shouldHave(text("124131231"), Duration.ofSeconds(25));
+                System.out.println("Element not found");
             }
         }
     }

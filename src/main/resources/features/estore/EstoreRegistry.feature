@@ -1,4 +1,4 @@
-@@estoreTestRun
+@estoreParallelTestRun
 @estoreRegistry
 Feature: Registry
 
