@@ -1095,11 +1095,31 @@ Feature: Concierge PDP
     Then I verify that text item# and SKU is present
     Then postal code '94925' should be present in the delivery message
 
-
   @vlad
   Scenario: If Delivery type is Standard Shipping, postal code should not be present in the delivery message
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bath'
+    Then I navigate to sub menu 'Bath Towels & Linens'
+    Then I navigate to gallery 'Bath Towels'
+    Then I click 'first product from the list' on PG screen
+    Then I Verify that 'item title' is present
+    Then I chose the '1' line item selections one by one
+    Then I verify that text SKU is present
+    Then Verify that 'postal code should not be present in the delivery message'
 
   @vlad
-  Scenario: For Contract User(US/CAN), If User clicks on Shiping Link then Shipping & Delivery Modal Should be opened with Contract tab
+  Scenario: Validate the results based on Shipping country and Zip code selection with changing country and zip code
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "10121550 NOK" from search field
+    Then I Verify that 'item title' is present
+    When I click on "view in stock items" link
+    Then Verify that "In Stock modal" 'opens'
+    Then Verify that "In Stock modal" 'zip code is present'
+    Then Verify that "In Stock modal" 'click on postal code and change country and postal code and confirm'
+    Then Verify that 'User should be able to see the products based on shipping country and postal code'
 
 
