@@ -160,6 +160,7 @@ public class Hooks {
         ConfigFileReader();
         configureConciergeURL();
         setUPWebDriver(conciergeURL);
+        setupChromeArguments(conciergeURL);
     }
 
     /**
@@ -167,16 +168,6 @@ public class Hooks {
      */
     public void setUPWebDriver(String url) {
         ChromeOptions options = new ChromeOptions();
-        WebDriverManager.chromedriver().setup();
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--disable-gpu");
-        options.addArguments("enable-automation");
-        options.addArguments("--disable-infobars");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-browser-side-navigation");
-        options.addArguments("--window-size=1366,768");
-        options.addArguments("--user-agent=robot-framework");
         Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
@@ -186,6 +177,8 @@ public class Hooks {
         Configuration.timeout = 45000;
         Configuration.reportsFolder = "target/screenshots";
         Configuration.browserCapabilities = options;
+        WebDriverManager.chromedriver().setup();
+
     }
 
     /**
@@ -214,13 +207,8 @@ public class Hooks {
             e.printStackTrace();
         }
         WebDriverRunner.setWebDriver(driver);
-
-        Configuration.pageLoadTimeout = 60000;
-        Configuration.timeout = 45000;
-
         open(url);
         currentUrl = WebDriverRunner.url();
-
     }
 
     /**
