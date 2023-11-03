@@ -258,4 +258,8 @@ public class EstorePdpPageScreen {
     private final SelenideElement thankYouMessage = $(By.xpath("//h2[text()='THANK YOU']"));
 
     private final SelenideElement orderPlacedMessage = $(By.xpath("//p[contains(text(),'Your order has been placed')]"));
+
+    private final SelenideElement saleMemberPrice = $(By.xpath("((//p[text()='SELECT ITEMS ON SALE'])[1]/../../../..//*[@data-testid='price-for-member'])[2]"));
+
+    private final SelenideElement saleRegularPrice = $(By.xpath("((//p[text()='SELECT ITEMS ON SALE'])[1]/../../../..//p[@data-testid='price-for-trade'])"));
 }

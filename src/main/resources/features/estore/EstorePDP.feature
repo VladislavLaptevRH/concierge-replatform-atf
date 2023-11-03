@@ -313,3 +313,11 @@ Feature: Estore PDP
     When I choose country for eStore from footer
     When I go to estore item "Swatches" from search field
     Then I verify swatch Landing Page
+
+    @Alok
+    Scenario: Sale PDP: MEMBER/REGULAR  Price validation
+      Given I log into eStore as "regular" user
+      When I choose country for eStore from footer
+      When I remove all items from estore cart
+      When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+      Then I verify MEMBER and REGULAR  Price validation

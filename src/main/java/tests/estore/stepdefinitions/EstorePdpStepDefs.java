@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.As;
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
@@ -599,6 +600,12 @@ public class EstorePdpStepDefs {
     @Then("I verify Custom Drapery PDP")
     public void iVerifyCustomDraperyPDP(){
 
+    }
+
+    @Then("I verify MEMBER and REGULAR  Price validation")
+    public void iVerifySaleMemberAndRegularPrice(){
+        Assert.assertTrue(estorePdpPageScreen.getSaleMemberPrice().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getSaleRegularPrice().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
     }
 
     @Then("I verify swatch Landing Page")
