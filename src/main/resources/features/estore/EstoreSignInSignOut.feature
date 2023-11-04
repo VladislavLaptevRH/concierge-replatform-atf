@@ -1,4 +1,4 @@
-@estoreParallelTestRun
+@estoreTestRun
 @estoreSinginSignout
 
 Feature: Estore Sign In/Signout

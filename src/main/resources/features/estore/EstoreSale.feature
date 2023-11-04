@@ -1,4 +1,4 @@
-@estoreParallelTestRun
+@estoreTestRun
 @estoreSale
 
 Feature: Estore Sale

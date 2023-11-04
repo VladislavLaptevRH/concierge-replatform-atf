@@ -1,4 +1,4 @@
-@estoreParallelTestRun
+@estoreTestRun
 @estoreWishList
 Feature: Estore Wishlist
 
