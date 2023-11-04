@@ -3,7 +3,7 @@
 <suite name="Regression">
     <test name="Test Run">
         <classes>
-            <class name="tests.runners.RunTest"></class>
+            <class name="tests.runners.RunTest"/>
         </classes>
     </test>
 </suite>
