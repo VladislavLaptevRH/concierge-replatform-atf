@@ -1,4 +1,4 @@
-@estoreParallelTestRun
+@estoreTestRun
 @estoreHomePage
 Feature: Estore Homepage
 

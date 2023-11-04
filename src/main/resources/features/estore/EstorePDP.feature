@@ -1,4 +1,4 @@
-@estoreParallelTestRun
+@estoreTestRun
 @estorePDP
 Feature: Estore PDP
 
