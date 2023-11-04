@@ -60,12 +60,9 @@ public class Hooks {
      * This method get properties from application.properties file
      */
     private void ConfigFileReader() {
-//        profile = System.getenv("ENVIRONMENT");
-//        cookie = System.getenv("ENDPOINT");
-//        country = System.getenv("COUNTRY");
-        profile = "stg2";
-        cookie = "contentfix";
-        country = "US";
+        profile = System.getenv("ENVIRONMENT");
+        cookie = System.getenv("ENDPOINT");
+        country = System.getenv("COUNTRY");
 
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
