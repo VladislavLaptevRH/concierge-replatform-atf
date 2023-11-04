@@ -1,4 +1,4 @@
-
+@estoreCriticalPathTestRun
 Feature: Estore critical path
 
   
