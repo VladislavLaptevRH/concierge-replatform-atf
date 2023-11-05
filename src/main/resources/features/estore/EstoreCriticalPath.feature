@@ -290,7 +290,6 @@ Feature: Estore critical path
     Then I verify that CG page is displayed
 
 #PDP - Add to wishList
-  @estoreTestRun
   Scenario Outline: PDP - Verify Line Items functionality:
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
