@@ -204,7 +204,6 @@ public class Hooks {
             e.printStackTrace();
         }
         WebDriverRunner.setWebDriver(driver);
-
         Configuration.pageLoadTimeout = 60000;
         Configuration.timeout = 45000;
 
