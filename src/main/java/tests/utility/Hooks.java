@@ -60,13 +60,9 @@ public class Hooks {
      * This method get properties from application.properties file
      */
     private void ConfigFileReader() {
-//        profile = System.getenv("ENVIRONMENT");
-//        cookie = System.getenv("ENDPOINT");
-//        country = System.getenv("COUNTRY");
-
-        profile = "stg2";
-        country = "US";
-        cookie = "tiger";
+        profile = System.getenv("ENVIRONMENT");
+        cookie = System.getenv("ENDPOINT");
+        country = System.getenv("COUNTRY");
 
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
@@ -152,7 +148,7 @@ public class Hooks {
         ConfigFileReader();
         configureEstoreURL();
         setUPWebDriver(eStoreURL);
-//        setupChromeArguments();
+        setupChromeArguments(eStoreURL);
     }
 
     /**
@@ -163,6 +159,8 @@ public class Hooks {
         ConfigFileReader();
         configureConciergeURL();
         setUPWebDriver(conciergeURL);
+        setupChromeArguments(eStoreURL);
+
     }
 
     /**
@@ -171,32 +169,19 @@ public class Hooks {
     public void setUPWebDriver(String url) {
         ChromeOptions options = new ChromeOptions();
         WebDriverManager.chromedriver().setup();
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--disable-gpu");
-        options.addArguments("enable-automation");
-        options.addArguments("--disable-infobars");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-browser-side-navigation");
-        options.addArguments("--window-size=1366,768");
-        options.addArguments("--user-agent=robot-framework");
         Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
-        Configuration.pageLoadTimeout = 60000;
-        Configuration.timeout = 45000;
         Configuration.reportsFolder = "target/screenshots";
         Configuration.browserCapabilities = options;
-        open(url);
-        currentUrl = WebDriverRunner.url();
     }
 
     /**
      * Set up chrome arguments for Jenkins run
      */
-    public void setupChromeArguments() {
+    public void setupChromeArguments(String url) {
         ChromeOptions options = new ChromeOptions();
         WebDriverManager.chromedriver().setup();
         options.addArguments("--remote-allow-origins=*");
@@ -213,12 +198,19 @@ public class Hooks {
         dr.setCapability(ChromeOptions.CAPABILITY, options);
         String urlToRemoteWD = "http://seleniumgrid.rhapsodynonprod.com:4444/wd/hub";
         RemoteWebDriver driver = null;
+
         try {
             driver = new RemoteWebDriver(new URL(urlToRemoteWD), dr);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         WebDriverRunner.setWebDriver(driver);
+
+        Configuration.pageLoadTimeout = 60000;
+        Configuration.timeout = 45000;
+
+        open(url);
+        currentUrl = WebDriverRunner.url();
     }
 
     /**
