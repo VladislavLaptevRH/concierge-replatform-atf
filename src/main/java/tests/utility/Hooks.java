@@ -159,7 +159,7 @@ public class Hooks {
         ConfigFileReader();
         configureConciergeURL();
         setUPWebDriver(conciergeURL);
-        setupChromeArguments(eStoreURL);
+        setupChromeArguments(conciergeURL);
 
     }
 
