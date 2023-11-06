@@ -1212,6 +1212,7 @@ public class ConciergeCartStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         Select orderClassificationDropDownList = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
         orderClassificationDropDownList.selectByValue("RH Gallery Order");
         with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -1327,6 +1328,7 @@ public class ConciergeCartStepDefs {
         if(conciergeCartPageScreen.getPdpScreenZipCode().isDisplayed()) {
             conciergeCartPageScreen.getPdpScreenZipCode().should(visible, Duration.ofSeconds(10));
             conciergeCartPageScreen.getPdpScreenZipCode().scrollIntoView(true);
+            with().pollInterval(8, SECONDS).await().until(() -> true);
             assertEquals(zipCode, conciergeCartPageScreen.getPdpScreenZipCode().getText());
         }
         else{
