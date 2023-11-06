@@ -1,4 +1,4 @@
-@estoreParallelTestRun
+@estoreTestRun
 @estoreCG
 Feature: Estore CG
 

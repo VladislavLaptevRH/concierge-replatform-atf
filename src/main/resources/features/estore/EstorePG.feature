@@ -1,4 +1,4 @@
-@estoreParallelTestRun
+@estoreTestRun
 @estorePG
 Feature: Estore PG
 

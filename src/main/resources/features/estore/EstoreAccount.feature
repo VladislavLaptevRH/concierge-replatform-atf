@@ -1,4 +1,4 @@
-@estoreParallelTestRun
+@estoreTestRun
 @estoreAccount
 Feature: Estore account
 
