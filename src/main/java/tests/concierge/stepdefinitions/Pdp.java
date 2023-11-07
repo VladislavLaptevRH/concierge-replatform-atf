@@ -603,6 +603,7 @@ public class Pdp {
                     pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
                 }
                 assertEquals(result, pdpScreen.getPdpPopUpInStockZipCode().getText());
+                with().pollInterval(9, SECONDS).await().until(() -> true);
                 assertTrue(pdpScreen.getModalOnSaleItemsList().size() > 1);
                 break;
             default: break;
