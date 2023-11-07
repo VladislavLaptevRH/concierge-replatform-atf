@@ -177,7 +177,6 @@ Feature: Estore Sale
     When I click on Decor Mirrors from nav of Sale
     Then I verify that combined price on frame and cushion on PG
 
-  @sale
   Scenario: Verify PG Sale page via CG Sale
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
