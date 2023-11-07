@@ -417,7 +417,3 @@ Feature: Estore Sale
       | RH SKI HOUSE    |
       | RH TEEN         |
       | RH BABY & CHILD |
-
-
-
-
