@@ -80,6 +80,26 @@ public class EstoreCGScreen {
 
     private SelenideElement cgChairs = $(By.xpath("(//*[contains(text(),'Chairs')])[2]"));
 
+    private SelenideElement cg1Grid = $(By.xpath("//div[contains(@class,'grid-item-12')]"));
+
+    private SelenideElement cgImages = $(By.xpath("(//img[contains(@alt,'Collection')])[1]"));
+
+    private SelenideElement cgCollectionTitle = $(By.xpath("//h1//span[contains(text(),'collections')]"));
+
+    public void verifyThatTitleIsDisplayedOnCg() {
+        cgCollectionTitle.should(Condition.visible, Duration.ofSeconds(12));
+    }
+    public void verifyThatImagesAreDisplayedOnCg() {
+        cgImages.should(Condition.visible, Duration.ofSeconds(12));
+    }
+    public void verifyThatCg1GridSelectedByDefault() {
+        cg1Grid.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatCgTitleIsDisplayed(String title) {
+        $(By.xpath("//*[contains(text(),'" + title + "')]")).should(Condition.visible, Duration.ofSeconds(14));
+    }
+
     public void verifyThatSaveUpSaleMessageIsDisplayed() {
         saveUpSaleMessage.should(Condition.visible, Duration.ofSeconds(12));
     }

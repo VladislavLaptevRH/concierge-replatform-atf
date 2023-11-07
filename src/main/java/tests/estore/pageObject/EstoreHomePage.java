@@ -17,6 +17,8 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class EstoreHomePage {
 
+    String navMenu;
+
     private final SelenideElement appNavigationBar = $(By.id("app-navigation-bar"));
 
     private final List<SelenideElement> listOfNavigationBar = $$(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']/div"));
@@ -72,6 +74,15 @@ public class EstoreHomePage {
 
     private final SelenideElement myAccountIconHomePage = $(By.id("container-accountNavMenu_account-btn"));
 
+    public void clickToTertiaryNav(String tertiaryNav) {
+        $(By.xpath("//*[contains(@id,'rhrCtalogNavigationDetails_concepts-navigation')]//span[text()='" + tertiaryNav + "']"))
+                .should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
+
+    public void clickToTopNavMenu(String navMenu) {
+        $(By.xpath("//*[contains(@id,'container-rhrheader-rhr-catalogNav_catalogNav')]//span[text()='" + navMenu + "']"))
+                .should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
 
     public void verifyThatMyAccountIconIsDisplayed() {
         myAccountIconHomePage.should(visible, Duration.ofSeconds(12));
@@ -101,6 +112,44 @@ public class EstoreHomePage {
 
     private final SelenideElement footerRhCompanyName = $(By.xpath("//*[text()=' RH']"));
 
+    private final SelenideElement bedTopNav = $(By.xpath("//div[@id='container-rhrheader-rhr-catalogNav_catalogNav-cat780002']//span"));
+
+    private final SelenideElement saleNav = $(By.xpath("//*[contains(@id,'rhrCtalogNavigationDetails_navigation')]//span[text()='Sale  ']"));
+
+    private final SelenideElement saleBedBeddingCollection = $(By.xpath("//li[@id='rhrCtalogNavigationDetails_concepts-navigation-cat28650058']//span"));
+
+    private SelenideElement bedsSaleTertiaryNav = $(By.xpath("//li[@id='rhrCtalogNavigationDetails_concepts-navigation-cat28650059']//span"));
+
+    private SelenideElement linivngTopNavMenu = $(By.xpath("//*[@id='container-rhrheader-rhr-catalogNav_catalogNav-cat160024']//span"));
+
+    private SelenideElement sectionalsTopNavMenu = $(By.xpath("//*[@id='rhrCtalogNavigationDetails_concepts-navigation-cat28650036']//span"));
+
+
+    public void clickToSectionalsTopNavMenu() {
+        sectionalsTopNavMenu.should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
+
+    public void clickToLinivngTopNavMenu() {
+        linivngTopNavMenu.should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
+
+    public void clickToBedsSaleTertiaryNav() {
+        bedsSaleTertiaryNav.should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
+
+    public void clickToSaleTopNav() {
+        saleNav.should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
+
+    public void clickToBedNav() {
+        bedTopNav.should(visible, Duration.ofSeconds(12))
+                .click(ClickOptions.usingJavaScript());
+    }
+
+    public void clickToSaleBedBeddingCollection() {
+        saleBedBeddingCollection.should(visible, Duration.ofSeconds(12))
+                .click(ClickOptions.usingJavaScript());
+    }
 
     public void verifyThatAllItemsFromFooterAreDisplayed() {
         copyRightSymbol.should(visible, Duration.ofSeconds(12));
