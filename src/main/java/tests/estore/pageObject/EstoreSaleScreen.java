@@ -147,6 +147,11 @@ public class EstoreSaleScreen {
 
     private SelenideElement beddingCollectionTitle = $(By.xpath("//*[text()='Bedding  collections']"));
 
+    private SelenideElement highToLowText = $(By.xpath("//*[text()='Price High to Low']"));
+
+
+
+
     public void verifyThatBeddingCollectionTitleIsDisplayedOnCG() {
         beddingCollectionTitle.should(Condition.visible, Duration.ofSeconds(18));
     }

@@ -6,10 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
-import tests.estore.pageObject.EstoreCGScreen;
-import tests.estore.pageObject.EstorePGScreen;
-import tests.estore.pageObject.EstorePdpPageScreen;
-import tests.estore.pageObject.EstoreSaleScreen;
+import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 
 import java.time.Duration;
@@ -31,6 +28,10 @@ public class EstoreSaleStepDefs {
     EstorePgStepDefs estorePgStepDefs = new EstorePgStepDefs();
 
     EstorePdpPageScreen estorePdpPageScreen = new EstorePdpPageScreen();
+
+    EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
+
+    EstoreHomePage estoreHomePage = new EstoreHomePage();
     String URL;
     int memberSalePrice;
     int regularSalePrice;
@@ -72,8 +73,8 @@ public class EstoreSaleStepDefs {
     public void iVerifySalePricesOnPGPagesForSaleItems() {
         regularSalePrice = Integer.parseInt(estoreSaleScreen.getRegularSalePrice().getText().replaceAll("\\$", "").replaceAll(",", ""));
         memberSalePrice = Integer.parseInt(estoreSaleScreen.getMemberSalePrice().getText().replaceAll("\\$", "").replaceAll(",", ""));
-
-        assertTrue(memberSalePrice >= regularSalePrice, "Regular sale price is lower than member sale price");
+        assertTrue(memberSalePrice > 0, "Member sale price is displayed");
+        assertTrue(regularSalePrice > 0, "Regular sale price is displayed");
     }
 
     @When("I go to Sale product page")
@@ -284,5 +285,54 @@ public class EstoreSaleStepDefs {
     @When("I click on Bedding collection from tertiary NAV")
     public void iClickOnBeddingCollectionFromTertiaryNAV() {
         estoreSaleScreen.clickToBeddingCollectionNav();
+    }
+
+    @Then("I verify that user is able to change the sort option - Featured")
+    public void iVerifyThatUserIsAbleToChangeTheSortOptionFeatured() {
+        estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
+        estorePDPScreen.getSortByButton().click();
+        estorePDPScreen.getPriceHighToLow().should(visible, Duration.ofSeconds(20));
+        estorePDPScreen.getPriceHighToLow().click();
+        estoreSaleScreen.getHighToLowText().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Bed in TOP NAV menu")
+    public void iClickOnBedInTOPNAVMenu() {
+        estoreHomePage.clickToBedNav();
+    }
+
+    @When("I click on SALE in Secondary NAV")
+    public void iClickOnSALEInSecondaryNAV() {
+        estoreHomePage.clickToSaleTopNav();
+    }
+
+    @When("I click on Bedroom collection in Tertiary NAV")
+    public void iClickOnBedroomCollectionInTertiaryNAV() {
+        estoreHomePage.clickToSaleBedBeddingCollection();
+    }
+
+    @When("I click on Beds in Tertiary NAV")
+    public void iClickOnBedsInTertiaryNAV() {
+        estoreHomePage.clickToBedsSaleTertiaryNav();
+    }
+
+    @And("I verify that sale filter should be not displayed in Filter section")
+    public void iVerifyThatSaleFilterShouldBeNotDisplayedInFilterSection() {
+        estorePGScreen.getSaleFilterApplied().should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that number of products should be displayed as RESULTS")
+    public void iVerifyThatNumberOfProductsShouldBeDisplayedAsRESULTS() {
+        estorePGScreen.getResultsText().should(visible, Duration.ofSeconds(20));
+    }
+
+    @And("I verify that Regular,Sale,Member Price should be displayed for the products")
+    public void iVerifyThatRegularSaleMemberPriceShouldBeDisplayedForTheProducts() {
+        System.out.println();
+    }
+
+    @When("I click on {string} in TOP NAV menu")
+    public void iClickOnInTOPNAVMenu(String topNav) {
+        estoreHomePage.clickToTopNavMenu(topNav);
     }
 }

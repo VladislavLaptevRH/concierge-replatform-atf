@@ -368,4 +368,5 @@ public class EstoreCGStepDefs {
     public void iVerifyThatPageMovedToTheTopOnClickingTheBottomToTopButtonOnCG() {
         estoreHomePage.getHomePageLogo().should(visible, Duration.ofSeconds(12));
     }
+
 }

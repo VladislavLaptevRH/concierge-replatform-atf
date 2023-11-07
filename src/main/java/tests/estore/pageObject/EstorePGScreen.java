@@ -118,6 +118,33 @@ public class EstorePGScreen {
 
     private SelenideElement sizeOptionPG = $(By.xpath("(//*[@id='listColumn2-Size'])[1]"));
 
+    private SelenideElement pgTitleBeds = $(By.xpath("//*[text()='All Beds']"));
+
+    private SelenideElement sortByButtonFeatured = $(By.xpath("//*[text()='Featured']"));
+
+    private SelenideElement grid3x3 = $(By.xpath("//div[contains(@class,'cols-4 ')]"));
+
+    private SelenideElement sizeFinishesMessage = $(By.xpath("//*[text()='Available in multiple sizes & finishes']"));
+
+    public void verifyThatPgTitleIsDisplayed(String title) {
+        $(By.xpath("//h1[contains(text(),'" + title + "')]")).should(Condition.visible, Duration.ofSeconds(14));
+    }
+
+    public void sizeFinishesMessageIsDisplayed() {
+        sizeFinishesMessage.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatGrid3x3SelectedByDefault() {
+        grid3x3.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatSortByButtonFeaturedIsDisplayed() {
+        sortByButtonFeatured.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatPgTitleBedIsDisplayed() {
+        pgTitleBeds.should(Condition.visible, Duration.ofSeconds(12));
+    }
 
     public int verifyCountOfPgItemsonThePage() {
         return pgItems.size();

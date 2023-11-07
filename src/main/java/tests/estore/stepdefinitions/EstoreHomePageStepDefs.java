@@ -194,6 +194,7 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.verifyThatCartIconIsDisplayed();
         estoreHomePage.verifyThatMyAccountIconIsDisplayed();
     }
+
     @Then("I verify that home page load will all sections and links")
     public void iVerifyThatHomePageLoadWillAllSectionsAndLinks() {
         estoreHomePage.getAccountIcon().should(Condition.visible, Duration.ofSeconds(20));
@@ -205,5 +206,30 @@ public class EstoreHomePageStepDefs {
     @Then("I verify that footer section should show at the bottom of the page along with copy right and year")
     public void iVerifyThatFooterSectionShouldShowAtTheBottomOfThePageAlongWithCopyRightAndYear() {
         estoreHomePage.verifyThatAllItemsFromFooterAreDisplayed();
+    }
+
+    @When("I click on Living in TOP NAV menu")
+    public void iClickOnLivingInTOPNAVMenu() {
+        estoreHomePage.clickToLinivngTopNavMenu();
+    }
+
+    @When("I click on Sectionals in Tertiary NAV")
+    public void iClickOnSectionalsInTertiaryNAV() {
+        estoreHomePage.clickToLinivngTopNavMenu();
+    }
+
+    @When("I click on Sectionals in Tertiary NAV from Living")
+    public void iClickOnSectionalsInTertiaryNAVFromLiving() {
+        estoreHomePage.clickToSectionalsTopNavMenu();
+    }
+
+    @When("I click on SALE in Secondary NAV from Living")
+    public void iClickOnSALEInSecondaryNAVFromLiving() {
+        System.out.println();
+    }
+
+    @When("I click on {string} in Tertiary NAV from {string}")
+    public void iClickOnInTertiaryNAVFrom(String tertiaryNav, String arg1) {
+        estoreHomePage.clickToTertiaryNav(tertiaryNav);
     }
 }
