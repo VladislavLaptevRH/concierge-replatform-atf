@@ -223,13 +223,14 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.clickToSectionalsTopNavMenu();
     }
 
-    @When("I click on SALE in Secondary NAV from Living")
-    public void iClickOnSALEInSecondaryNAVFromLiving() {
-        System.out.println();
-    }
-
     @When("I click on {string} in Tertiary NAV from {string}")
     public void iClickOnInTertiaryNAVFrom(String tertiaryNav, String arg1) {
         estoreHomePage.clickToTertiaryNav(tertiaryNav);
+    }
+
+    @Then("I verify that SALE is present on TOP Nav menu")
+    public void iVerifyThatSALEIsPresentOnTOPNavMenu() {
+        $(By.xpath("//div[contains(@id,'container-rhrheader-rhr-catalogNav_catalogNav')]//span[text()='SALE']")).should(visible, Duration.ofSeconds(12));
+        System.out.println();
     }
 }

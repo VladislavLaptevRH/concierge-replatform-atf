@@ -369,4 +369,18 @@ public class EstoreCGStepDefs {
         estoreHomePage.getHomePageLogo().should(visible, Duration.ofSeconds(12));
     }
 
+    @Then("I verify that CG title is displayed for {string}")
+    public void iVerifyThatCGTitleIsDisplayedFor(String CGtitle) {
+        estoreCGScreen.verifyThatCgTitleIsDisplayed(CGtitle);
+    }
+
+    @And("I verify that {int} grid view should be selected state by default on CG")
+    public void iVerifyThatGridViewShouldBeSelectedStateByDefaultOnCG(int arg0) {
+        estoreCGScreen.verifyThatCg1GridSelectedByDefault();
+    }
+
+    @Then("I verify that images are displayed on CG for estore")
+    public void iVerifyThatImagesAreDisplayedOnCGForEstore() {
+        estoreCGScreen.verifyThatImagesAreDisplayedOnCg();
+    }
 }

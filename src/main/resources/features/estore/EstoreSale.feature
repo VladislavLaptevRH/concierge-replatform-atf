@@ -329,6 +329,94 @@ Feature: Estore Sale
     Then I verify that 3x3 grid should be in selected state by default
     And I verify sale prices on PG pages for sale items
 
+  Scenario: Verify Sale PG via DÃ©cor Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Décor" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Mirrors" in Tertiary NAV from "Décor"
+    Then I verify that PG title is displayed for "Mirrors"
+    And I verify that sale filter should be not displayed in Filter section
+    Then I verify that number of products should be displayed as RESULTS
+    And I verify that default sort order should be featured
+    Then I verify that 3x3 grid should be in selected state by default
+    And I verify sale prices on PG pages for sale items
+    Then I verify that the swatches should show below the image with correct padding
+
+  Scenario:Verify Sale CG via Living Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Living" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Seating Collections" in Tertiary NAV from "Living"
+    Then I verify that PG title is displayed for "Seating Collections"
+    And I verify that 1 grid view should be selected state by default
+    Then I verify that each collection have image, title
+
+  Scenario:Verify Sale CG via Living Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Living" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Seating Collections" in Tertiary NAV from "Living"
+    Then I verify that PG title is displayed for "Seating Collections"
+    And I verify that 1 grid view should be selected state by default
+    Then I verify that each collection have image, title
+
+  Scenario: Verify Sale CG via Bath Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Bath" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Bath Collections" in Tertiary NAV from "Bath"
+    Then I verify that CG title is displayed for "Bath  collections"
+    And I verify that 1 grid view should be selected state by default
+    Then I verify that each collection have image, title
+
+  Scenario: Verify Sale CG via Textiles Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Textiles" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Bedding Collections" in Tertiary NAV from "Textiles"
+    Then I verify that CG title is displayed for "Bedding  collections"
+    And I verify that 1 grid view should be selected state by default on CG
+    Then I verify that images are displayed on CG for estore
+
+  Scenario: Verify Sale CG via Outdoor Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Outdoor" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Furniture Collections" in Tertiary NAV from "Outdoor"
+    Then I verify that CG title is displayed for "Furniture  collections"
+    And I verify that 1 grid view should be selected state by default on CG
+    Then I verify that images are displayed on CG for estore
+
+  Scenario: Verify back to top button Sale
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Rugs" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Brown Rugs" in Tertiary NAV from "Rugs"
+    When I scroll to the bottom of the estore page
+    Then I verify that page moved to the top on clicking the bottom to top button on CG
+
+  Scenario Outline: Verify that user is able to see Sale Nav on all brands
+    Given I log into eStore as guest
+    When I choose country for eStore from footer
+    When  I change the brand to "<brand>" for eStore
+    Then I verify that SALE is present on TOP Nav menu
+    Examples:
+      | brand           |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH TEEN         |
+      | RH BABY & CHILD |
 
 
 
