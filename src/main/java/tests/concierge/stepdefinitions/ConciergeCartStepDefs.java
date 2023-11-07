@@ -910,9 +910,10 @@ public class ConciergeCartStepDefs {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramColors().get(2).should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getMonogramColors().get(2).scrollIntoView(true);
-        conciergeCartPageScreen.getMonogramColors().get(2).doubleClick();
+        conciergeCartPageScreen.getMonogramColors().get(2).click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramTextInput().setValue("ABC");
+        conciergeCartPageScreen.getMonogramColors().get(2).click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getAddMonogramButton().click();
     }
