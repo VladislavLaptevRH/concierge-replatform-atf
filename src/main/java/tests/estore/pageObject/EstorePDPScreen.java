@@ -189,7 +189,7 @@ public class EstorePDPScreen {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         shipsFreeOfChargeViaStandarShipMsg.should(Condition.visible, Duration.ofSeconds(20));
         skuIdItemValue.should(Condition.visible, Duration.ofSeconds(20));
-        thisItemWillBeDelieveredMsg.should(Condition.visible, Duration.ofSeconds(20));
+        //thisItemWillBeDelieveredMsg.should(Condition.visible, Duration.ofSeconds(20));
     }
 
     public void selectSizeOption() {

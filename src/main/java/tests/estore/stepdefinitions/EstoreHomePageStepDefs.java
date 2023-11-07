@@ -194,7 +194,6 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.verifyThatCartIconIsDisplayed();
         estoreHomePage.verifyThatMyAccountIconIsDisplayed();
     }
-
     @Then("I verify that home page load will all sections and links")
     public void iVerifyThatHomePageLoadWillAllSectionsAndLinks() {
         estoreHomePage.getAccountIcon().should(Condition.visible, Duration.ofSeconds(20));
@@ -232,5 +231,25 @@ public class EstoreHomePageStepDefs {
     public void iVerifyThatSALEIsPresentOnTOPNavMenu() {
         $(By.xpath("//div[contains(@id,'container-rhrheader-rhr-catalogNav_catalogNav')]//span[text()='SALE']")).should(visible, Duration.ofSeconds(12));
         System.out.println();
+    }
+    @Then("I verify that hamburger icon is displayed for the main menu")
+    public void iVerifyThatHamburgerIconIsDisplayedForTheMainMenu() {
+        estoreHomePage.verifyThatHamburgerIconIsDisplayed();
+    }
+
+    @Then("I verify that cart page icon is displayed")
+    public void iVerifyThatCartPageIconIsDisplayed() {
+        estoreHomePage.verifyThatCartButtonIconIsDisplayed();
+    }
+
+    @And("I verify that cart page icon have the item count next to the mini cart icon")
+    public void iVerifyThatCartPageIconHaveTheItemCountNextToTheMiniCartIcon() {
+        assertTrue("Verify that cart page icon have the item count next to the mini cart icon",
+                estoreHomePage.getCountOfItemFromCart() > 0);
+    }
+
+    @Then("I verify that my account icon is displayed")
+    public void iVerifyThatMyAccountIconIsDisplayed() {
+        estoreHomePage.verifyThatAccountIconIsDisplayed();
     }
 }

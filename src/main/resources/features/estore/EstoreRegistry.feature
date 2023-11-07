@@ -1,4 +1,4 @@
-@@estoreTestRun
+@estoreTestRun
 @estoreRegistry
 Feature: Registry
 

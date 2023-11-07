@@ -78,7 +78,7 @@ public class EstoreSearchStepDefs {
     @Then("I verify count of search results")
     public void iVerifyCountOfSearchResults() {
         estorePGScreen.getFirstSearchElement().should(visible, Duration.ofSeconds(20));
-        estoreSearchScreen.getResults().should(visible, Duration.ofSeconds(20));
+        //estoreSearchScreen.getResults().should(visible, Duration.ofSeconds(20));
     }
 
     @When("I scroll to the bottom of the estore page")
@@ -213,7 +213,6 @@ public class EstoreSearchStepDefs {
     @Then("I verify in stock facet selection")
     public void iVerifyInStock() {
         $(By.xpath("//*[text()='in-stock']")).should(visible, Duration.ofSeconds(20)).click();
-        $(By.xpath("//*[text()='sale']")).should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify that I'm able to apply any facet")

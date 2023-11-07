@@ -17,6 +17,8 @@ public class ConciergeHomePage {
 
     private final SelenideElement caCountry = $(By.xpath("//*[text() = 'Canada ($)']"));
 
+    private final SelenideElement searchItemInput = $(By.xpath("//*[@id = 'site-search-input']"));
+
     private final SelenideElement usCountry = $(By.xpath("//*[text() = 'United States ($)']"));
 
     private final SelenideElement selectCountrySaveButton = $(By.xpath("//*[text() = 'CONFIRM']"));

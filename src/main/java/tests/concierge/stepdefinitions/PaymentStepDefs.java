@@ -249,6 +249,7 @@ public class PaymentStepDefs {
     @When("I execute split payment with {string}")
     public void iExecuteSplitPayment(String cardType) {
         if (cardType.equals("VI")) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
             paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofSeconds(15));
             generalStepDefs.payWith("VI", "4111 1111 4555 1142", "737", "0330");
             $(By.xpath("//*[text()='Split Payment with Additional Cards']")).click();
@@ -256,6 +257,7 @@ public class PaymentStepDefs {
             $(By.xpath("//*[text()='Enter the amount you would like to put on this card:']/..//*[text() = '$']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//input[@value = '0.00']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//input[contains(@class, 'MuiOutlinedInput-inputAdornedStart')]")).doubleClick().sendKeys(Keys.BACK_SPACE);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             $(By.xpath("//input[contains(@class, 'MuiOutlinedInput-inputAdornedStart')]")).setValue("10");
             paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
             paymentScreen.getContinueToReview().click();
@@ -264,6 +266,7 @@ public class PaymentStepDefs {
         }
         if (cardType.equals("MC")) {
             Select paymentMethodList = new Select($(By.xpath("//select[@id = 'payment-method-select']")));
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             paymentMethodList.selectByValue("CC");
             generalStepDefs.payWith("MC", "5555 3412 4444 1115", "737", "0330");
             paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
@@ -387,6 +390,7 @@ public class PaymentStepDefs {
                             "Phoenix, AZ, 85020\n" +
                             "US\n" +
                             "1241312319\n" +
+                            "test@mailinator.com\n" +
                             "EDIT"));
 
             assertEquals(paymentScreen.getBillingAddress().getText(),
@@ -398,6 +402,7 @@ public class PaymentStepDefs {
                             "Phoenix, AZ, 85020\n" +
                             "US\n" +
                             "1241312319\n" +
+                            "test@mailinator.com\n" +
                             "EDIT");
       }
     }

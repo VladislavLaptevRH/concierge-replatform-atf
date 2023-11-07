@@ -84,7 +84,7 @@ public class EstorePGScreen {
 
     private final SelenideElement livingCategory = $(By.xpath("//*[@data-navigation-account-item-id='cat160024']"));
 
-    private final SelenideElement collectionTextTitle = $(By.xpath("//*[contains(text(),'new arrivals')]"));
+    private final SelenideElement collectionTextTitle = $(By.xpath("//*[contains(text(),'RESULTS')]"));
 
     private final SelenideElement regularSalePrice = $(By.xpath("(//*[@data-testid='price-for-sale'])[1]"));
 

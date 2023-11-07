@@ -104,10 +104,6 @@ public class EstoreHomePage {
         rhLogo.should(visible, Duration.ofSeconds(12));
     }
 
-    public void verifyThatHamburgerIconIsDisplayed() {
-        hamburgerIcon.should(visible, Duration.ofSeconds(12));
-    }
-
     private final SelenideElement homePageMenu = $(By.xpath("//div[contains(@data-navigation-account-item-id,'cat')]"));
 
     private final SelenideElement copyRightSymbol = $(By.xpath("//*[text()='© ']"));
@@ -168,10 +164,27 @@ public class EstoreHomePage {
     public void homePageMenuIsDisplayed() {
         homePageMenu.should(visible, Duration.ofSeconds(12));
     }
+    private final SelenideElement cartButtonIcon = $(By.xpath("//*[@id='container-rhrHeader_cart-btn']"));
+
+    private final SelenideElement itemCartIconCount = $(By.xpath("//*[@id='container-rhrHeader_cart-btn']//span"));
+
+
+    public int getCountOfItemFromCart() {
+        int countOfItem = Integer.parseInt(itemCartIconCount.getText());
+        return countOfItem;
+    }
+
+    public void verifyThatCartButtonIconIsDisplayed() {
+        cartButtonIcon.should(visible, Duration.ofSeconds(12));
+    }
 
     public void clickToAccountButtonForregisteredUser() {
         accountIcon.should(interactable, Duration.ofSeconds(20));
         accountIcon.click();
+    }
+
+    public void verifyThatAccountIconIsDisplayed() {
+        accountIcon.should(visible, Duration.ofSeconds(12));
     }
 
     public void clickToOrderHistoryAccountMenu() {
@@ -187,5 +200,9 @@ public class EstoreHomePage {
     public void chooseCACountry() {
         countrySelection.should(visible).scrollIntoView(true).click();
         caCountry.should(visible, Duration.ofSeconds(20)).click();
+    }
+
+    public void verifyThatHamburgerIconIsDisplayed() {
+        hamburgerIcon.should(visible, Duration.ofSeconds(20));
     }
 }
