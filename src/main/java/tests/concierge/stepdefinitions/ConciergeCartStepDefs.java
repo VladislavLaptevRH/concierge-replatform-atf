@@ -764,6 +764,18 @@ public class ConciergeCartStepDefs {
         assertEquals(memberPrice, totalPrice, "Membership price displayed as total price");
     }
 
+    @Then("I verify that contract client price displayed as total price")
+    public void iVerifyThatContractClientDisplayedAsTotalPrice() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if (!conciergeCartPageScreen.getPriceForMember().isDisplayed()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+        String memberPrice = conciergeCartPageScreen.getPriceForMember().getText();
+        String totalPrice = conciergeCartPageScreen.getTotalMemberPrice().getText();
+        assertEquals(memberPrice, totalPrice, "Membership price displayed as total price");
+    }
+
     @When("I choose postpone shipment")
     public void iChoosePostponeShipment() {
         generalStepDefs.waitForJSandJQueryToLoad();
