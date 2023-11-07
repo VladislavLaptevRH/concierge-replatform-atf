@@ -281,7 +281,7 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement createAccountField = $(By.id("kc-form-buttons"));
 
-    private final SelenideElement createTitle = $(By.xpath("//*[text()='MY ACCOUNT']"));
+    private final SelenideElement createTitle = $(By.xpath("//*[text()='My Account']"));
 
     private final String brand = "//p[text()='%s']";
 

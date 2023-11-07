@@ -553,13 +553,12 @@ Feature: Estore critical path
     When I select color option on the PDP page
     Then I verify that add to cart button is active
     And I verify special messages on PDP page
-#Verify the pricing based on country
   
   Scenario: PDP - Configure this item to view delivery information for your Location, price update
     Given I log into eStore as "pdpconfigurepdpthisitemtoview" user
     When I remove all items from estore cart
     When I choose country for eStore from footer
-    When I open product page with "prod19500002" and "17050045" with "STWL" for estore
+    When I open product page with "prod2020027" and "17050045" with "STWL" for estore
     When I get prices for US for eStore
     When I update "CAN" postal code on pdp page
     Then I verify that prices for "CAN" was updated
@@ -573,9 +572,10 @@ Feature: Estore critical path
     Given I log into eStore as "verifytheproductpriceasperselectedcountry" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "STWL" for estore
+    When I open product page with "prod2020027" and "17050045" with "STWL" for estore
+    Then I chose the '1' line item selections one by one
     When I update "CAN" postal code on pdp page
-    Then I verify the product price for product "prod19500002" and "17050045" with "NCKL" for the selected "CAN" country
+    Then I verify the product price for product "prod2020027" and "17050045" with "NCKL" for the selected "CAN" country
     When I click on add to cart estore button
     When I click on view cart estore button
     Then I verify that price in cart is the same as on PDP
@@ -608,15 +608,14 @@ Feature: Estore critical path
     Then I verify membership price in banner
 
   #Verify the add to cart funtionality
-  
   Scenario: Cart - Verify the Add to cart functionality
     Given I log into eStore as "cartverifyaddtocartfunctionality" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "STWL" for estore
+    When I open product page with "prod30750071" and "17050045" with "STWL" for estore
     When I update "CAN" postal code on pdp page
     Then I verify price for member and regular user on PDP
-    Then I verify the product price for product "prod19500002" and "17050045" with "NCKL" for the selected "CAN" country
+    Then I verify the product price for product "prod30750071" and "17050045" with "NCKL" for the selected "CAN" country
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that price in cart is the same as on PDP
@@ -635,7 +634,6 @@ Feature: Estore critical path
     Then I verify that forgot password options works
 
 
-  
   Scenario: Verify that user is able to create account
     Given I click on estore my account icon for guest user
     When I click on create account button
@@ -987,12 +985,12 @@ Feature: Estore critical path
     Then I verify that estore thank you page is displayed
 
 #Contract
-  
   Scenario: Verify the contract login and checkout
     Given I log into eStore as contract
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod19500002" and "17050045" with "STWL" for estore
+    When I open product page with "prod14280116" and "17050045" with "STWL" for estore
+    Then I chose the '1' line item selections one by one
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -1006,7 +1004,6 @@ Feature: Estore critical path
     Then I verify that estore thank you page is displayed
 
   #Return & Exchange
-  
   Scenario: Return & Exchange
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -1015,7 +1012,6 @@ Feature: Estore critical path
     Then user verifies that user is redirected to a return policy page
 
   #Checkout in BC
-  
   Scenario: Checkout in BC
     Given I log into eStore as "checkoutbc" user
     When I choose country for eStore from footer
