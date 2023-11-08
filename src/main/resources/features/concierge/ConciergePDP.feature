@@ -1031,7 +1031,7 @@ Feature: Concierge PDP
     Then I Verify that 'text "Learn more about our Return Policy"' is present
     Then I click 'return policy link' on pdp page
     Then Verify that 'Return policy link should navigate user to the Return policy page'
-@vlad
+
   Scenario: For US user, If User clicks on Shiping Link with type UFD then Shipping & Delivery Modal Should be opened with UFD tab which has US currency for shipping charges
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1046,7 +1046,7 @@ Feature: Concierge PDP
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
     Then I click 'text "Unlimited Furniture Delivery" is present' on pdp page
     Then Verify that 'Shipping & Delivery Modal Should be opened with UFD tab which has US currency for shipping charges'
-@vlad
+
   Scenario: For US user, If User clicks on Shiping Link with type Standard Shipping then Shipping & Delivery Modal Should be opened with Standard Shipping tab which has US currency for shipping charges
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1061,7 +1061,7 @@ Feature: Concierge PDP
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
     Then I click 'text "Unlimited Furniture Delivery" is present' on pdp page
     Then Verify that 'Shipping & Delivery Modal Should be opened with Standard Shipping tab which has US currency for shipping charges'
-@vlad
+
   Scenario: For UK loc user, If User clicks on Shiping Link then Shipping & Delivery Modal Should be opened with Shipments to UK tab which has UK(GBP) currency for shipping charges
     Given I log into Concierge as "associate"
     When I choose 'GB' country
@@ -1073,10 +1073,12 @@ Feature: Concierge PDP
     Then I Verify that 'item title' is present
     Then Verify that 'line item selections (Size, Finish and Qty) are present'
     Then I chose the '1' line item selections one by one
+    Then I chose the '1' line item selections one by one
+    Then I chose the '1' line item selections one by one
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
     Then I click 'text "Unlimited Furniture Delivery" is present' on pdp page
     Then Verify that 'Shipping & Delivery Modal Should be opened with Shipments to UK tab which has UK(GBP) currency for shipping charges'
-@vlad
+
   Scenario: If Delivery type is UFD, postal code should be present in the delivery message
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1090,7 +1092,7 @@ Feature: Concierge PDP
     Then I chose the '1' line item selections one by one
     Then I verify that text item# and SKU is present
     Then postal code '94925' should be present in the delivery message
-@vlad
+
   Scenario: If Delivery type is Standard Shipping, postal code should not be present in the delivery message
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1103,7 +1105,7 @@ Feature: Concierge PDP
     Then I chose the '1' line item selections one by one
     Then I verify that text SKU is present
     Then Verify that 'postal code should not be present in the delivery message'
-@vlad
+
   Scenario: Validate the results based on Shipping country and Zip code selection with changing country and zip code
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1115,3 +1117,30 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'zip code is present'
     Then Verify that "In Stock modal" 'click on postal code and change country and postal code and confirm'
     Then Verify that 'User should be able to see the products based on shipping country and postal code'
+
+  Scenario: The zipcode should be displayed on modal which has link (in stock)
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I chose '2' product from the list
+    Then I Verify that 'item title' is present
+    When I click on "view in stock items" link
+    Then Verify that "In Stock modal" 'opens'
+    Then Verify that "In Stock modal" 'zip code is present'
+
+  Scenario: If we change the country and postal code, then we can see resp currecy on PDP page for all prices
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I chose '6' product from the list
+    Then I Verify that 'item title' is present
+    Then Verify that 'text "Configure this item to view delivery information to" is present'
+    Then I click on postal code and change country to 'United Kingdom' and postal code to 'SW1A1AA' and confirm
+    Then I verify that zip code in PDP is 'SW1A1AA'
+    Then Verify that 'Confirm that PDP has price in GBP'

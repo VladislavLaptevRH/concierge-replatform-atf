@@ -1286,6 +1286,23 @@ public class Pdp {
         pdpScreen.getReplacementParts().should(visible, Duration.ofSeconds(40));
     }
 
+    @Then("I click on postal code and change country to {string} and postal code to {string} and confirm")
+    public void iClickOnPostalCodeChangeCountryAndPostalCodeAndConfirm(String country, String postalCode) {
+        pdpScreen.getZipCode().should(visible, Duration.ofSeconds(5));
+        pdpScreen.getZipCode().click();
+        pdpScreen.getPdpZipCodeModalShippingCountry().click();
+        pdpScreen.getCountryByName(country).click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
+        pdpScreen.getPostalCode().setValue(postalCode);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getConfirmationPostalCode().click();
+        pdpScreen.getConfirmationChangePostalCode().click();
+        with().pollInterval(9, SECONDS).await().until(() -> true);
+    }
+
+
+
     @Then("I verify that cart modal is displayed")
     public void iVerifyThatCartModalIsDisplayed() {
         pdpScreen.getItemAddedToCart().should(visible, Duration.ofSeconds(15));

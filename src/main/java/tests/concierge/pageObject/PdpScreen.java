@@ -35,6 +35,8 @@ public class PdpScreen {
 
     public final String stockedColor = "//*[text() = '%s ']";
 
+    private final String pdpZipCodeCountry = "//*[text() ='%s']";
+
 
     private final SelenideElement manageRegistryButton = $(By.xpath("//*[text()='MANAGE REGISTRY']"));
 
@@ -504,6 +506,11 @@ public class PdpScreen {
 
     public SelenideElement getColorByName(String color) {
         String path = String.format(stockedColor, color);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getCountryByName(String country) {
+        String path = String.format(pdpZipCodeCountry, country);
         return $(byXpath(path));
     }
 
