@@ -96,3 +96,35 @@ Feature: Concierge Checkout flow
 	When I continue to payment
 	When I click on continue with original address button
 	Then Verify that after come back to address page from payment page ship to and bill to address is showing
+
+
+  Scenario: Verify the edits in address page
+	Given I log into Concierge as "associate"
+	When I choose country for concierge from footer
+	When I remove all items from cart via UI
+	When I remove client from header
+	When I add item to cart via API
+	When I open cart
+	When I choose order classification
+	When I click on checkout button
+	When I click on no thanks button
+	When I choose client who is a "Member"
+	When I click on checkout button
+	Then I verify that ship to, bill to, sold to addresses are displayed
+	Then I edit ship to, bill to, sold to addresses
+	When I continue to payment
+
+  Scenario: Verify checkout with Contract client - verify the contract discount applied
+	Given I log into Concierge as "associate"
+	When I choose country for concierge from footer
+	When I remove all items from cart via UI
+	When I remove client from header
+	When I add item to cart via API
+	When I open cart
+	When I choose order classification
+	When I click on checkout button
+	When I click on no thanks button
+	When I choose client who is a "Unclassified"
+	When I click on checkout button
+	Then I verify that contract client price displayed as total price
+
