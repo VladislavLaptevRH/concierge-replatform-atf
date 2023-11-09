@@ -177,3 +177,262 @@ Feature: Estore Sale
     When I click on Decor from sale nav menu
     When I click on Decor Mirrors from nav of Sale
     Then I verify that combined price on frame and cushion on PG
+
+  Scenario: Verify PG Sale page via CG Sale
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Bed from sale nav menu
+    When I click on Bedding collection from tertiary NAV
+    When I navigate to any estore fusion PG
+    Then I verify that PG title, description text, member discount message is displayed for Bedding Collection
+
+  Scenario: Verify that user is able to change grid on sale PG
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Dining from sale nav menu
+    When I click on All Dining Tables in tertiary nav
+    Then I validate "1","2" and "3" grid view should work
+
+  Scenario: Verify user is able to change the sort option - Price: Low to High
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Decor from sale nav menu
+    When I click on Decor Mirrors from nav of Sale
+    When I select low to high for estore
+    Then I verify that sorting low to high is working as expected
+
+  Scenario:Verify user is able to change the sort option - Price: High to Low
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Decor from sale nav menu
+    When I click on Decor Mirrors from nav of Sale
+    When I select high to low for estore
+    Then I verify that sorting high to low is working as expected
+
+  Scenario:Verify user is able to change the sort option - Featured
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore sale button
+    When I click on Decor from sale nav menu
+    When I click on Decor Mirrors from nav of Sale
+    Then I verify that user is able to change the sort option - Featured
+
+  Scenario: Verify Sale CG via Bed Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on Bed in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on Bedroom collection in Tertiary NAV
+    Then I verify that CG title is displayed on eStore
+    And I verify that 1 grid view should be selected state by default
+    Then I verify that each collection have image, title
+
+  Scenario: Verify Sale PG via Bed Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on Bed in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on Beds in Tertiary NAV
+    Then I verify that PG title is displayed for Beds
+    And I verify that sale filter should be not displayed in Filter section
+    Then I verify that number of products should be displayed as RESULTS
+    And I verify that default sort order should be featured
+    Then I verify that 3x3 grid should be in selected state by default
+    And I verify sale prices on PG pages for sale items
+    Then I verify that the swatches should show below the image with correct padding
+    And I verify that available in multiple sizes&finishes should be displayed
+
+  Scenario: Verify Sale PG via Living Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on Living in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on Sectionals in Tertiary NAV from Living
+    Then I verify that PG title is displayed for Beds
+    And I verify that sale filter should be not displayed in Filter section
+    Then I verify that number of products should be displayed as RESULTS
+    And I verify that default sort order should be featured
+    Then I verify that 3x3 grid should be in selected state by default
+    And I verify sale prices on PG pages for sale items
+    Then I verify that the swatches should show below the image with correct padding
+    And I verify that available in multiple sizes&finishes should be displayed
+
+  Scenario:Verify Sale PG via Bath Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Bath" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Shelving" in Tertiary NAV from "Bath"
+    Then I verify that PG title is displayed for "Shelving"
+    And I verify that sale filter should be not displayed in Filter section
+    Then I verify that number of products should be displayed as RESULTS
+    And I verify that default sort order should be featured
+    Then I verify that 3x3 grid should be in selected state by default
+    And I verify sale prices on PG pages for sale items
+    Then I verify that the swatches should show below the image with correct padding
+
+  Scenario:Verify Sale PG via Dining Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Dining" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "All Dining Tables" in Tertiary NAV from "Dining"
+    Then I verify that PG title is displayed for "All Dining Tables"
+    And I verify that sale filter should be not displayed in Filter section
+    Then I verify that number of products should be displayed as RESULTS
+    And I verify that default sort order should be featured
+    Then I verify that 3x3 grid should be in selected state by default
+    And I verify sale prices on PG pages for sale items
+    Then I verify that the swatches should show below the image with correct padding
+
+  Scenario: Verify Sale PG via Outdoor Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Outdoor" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Sofas" in Tertiary NAV from "Outdoor"
+    Then I verify that PG title is displayed for "Sofas"
+    And I verify that sale filter should be not displayed in Filter section
+    Then I verify that number of products should be displayed as RESULTS
+    And I verify that default sort order should be featured
+    Then I verify that 3x3 grid should be in selected state by default
+    And I verify sale prices on PG pages for sale items
+    Then I verify that the swatches should show below the image with correct padding
+
+  Scenario: Verify Sale PG via Textiles Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Textiles" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Quilts & Coverlets" in Tertiary NAV from "Textiles"
+    Then I verify that PG title is displayed for "All quilt s and coverlet s"
+    And I verify that sale filter should be not displayed in Filter section
+    Then I verify that number of products should be displayed as RESULTS
+    And I verify that default sort order should be featured
+    Then I verify that 3x3 grid should be in selected state by default
+    And I verify sale prices on PG pages for sale items
+
+  Scenario: Verify Sale PG via Rugs Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Rugs" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Grey Rugs" in Tertiary NAV from "Textiles"
+    Then I verify that PG title is displayed for "Grey Rugs"
+    And I verify that sale filter should be not displayed in Filter section
+    Then I verify that number of products should be displayed as RESULTS
+    And I verify that default sort order should be featured
+    Then I verify that 3x3 grid should be in selected state by default
+    And I verify sale prices on PG pages for sale items
+
+  Scenario: Verify Sale PG via DÃ©cor Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Décor" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Mirrors" in Tertiary NAV from "Décor"
+    Then I verify that PG title is displayed for "Mirrors"
+    And I verify that sale filter should be not displayed in Filter section
+    Then I verify that number of products should be displayed as RESULTS
+    And I verify that default sort order should be featured
+    Then I verify that 3x3 grid should be in selected state by default
+    And I verify sale prices on PG pages for sale items
+    Then I verify that the swatches should show below the image with correct padding
+
+  Scenario:Verify Sale CG via Living Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Living" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Seating Collections" in Tertiary NAV from "Living"
+    Then I verify that PG title is displayed for "Seating Collections"
+    And I verify that 1 grid view should be selected state by default
+    Then I verify that each collection have image, title
+
+  Scenario:Verify Sale CG via Living Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Living" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Seating Collections" in Tertiary NAV from "Living"
+    Then I verify that PG title is displayed for "Seating Collections"
+    And I verify that 1 grid view should be selected state by default
+    Then I verify that each collection have image, title
+
+  Scenario: Verify Sale CG via Bath Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Bath" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Bath Collections" in Tertiary NAV from "Bath"
+    Then I verify that CG title is displayed for "Bath  collections"
+    And I verify that 1 grid view should be selected state by default
+    Then I verify that each collection have image, title
+
+  Scenario: Verify Sale CG via Textiles Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Textiles" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Bedding Collections" in Tertiary NAV from "Textiles"
+    Then I verify that CG title is displayed for "Bedding  collections"
+    And I verify that 1 grid view should be selected state by default on CG
+    Then I verify that images are displayed on CG for estore
+
+  Scenario: Verify Sale CG via Outdoor Top Nav
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Outdoor" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Furniture Collections" in Tertiary NAV from "Outdoor"
+    Then I verify that CG title is displayed for "Furniture  collections"
+    And I verify that 1 grid view should be selected state by default on CG
+    Then I verify that images are displayed on CG for estore
+
+  Scenario: Verify back to top button Sale
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Rugs" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Brown Rugs" in Tertiary NAV from "Rugs"
+    When I scroll to the bottom of the estore page
+    Then I verify that page moved to the top on clicking the bottom to top button on CG
+
+  Scenario Outline: Verify that user is able to see Sale Nav on all brands
+    Given I log into eStore as guest
+    When I choose country for eStore from footer
+    When  I change the brand to "<brand>" for eStore
+    Then I verify that SALE is present on TOP Nav menu
+    Examples:
+      | brand           |
+      | RH CONTEMPORARY |
+      | RH INTERIORS    |
+      | RH MODERN       |
+      | RH OUTDOOR      |
+      | RH BEACH HOUSE  |
+      | RH SKI HOUSE    |
+      | RH TEEN         |
+      | RH BABY & CHILD |
+
+  Scenario:Verify Sale Price in Cart
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Décor" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Mirrors" in Tertiary NAV from "Décor"
+    When I navigate to any estore fusion PG
+    When I click on add to cart estore button
+    Then I click on view cart estore button
+
+  Scenario: Verify that user is able to see the previously selected grid on sale PG
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Bed" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Dressers" in Tertiary NAV from "Bed"
+    Then I verify that 2x2 grid view should be selected in state
+

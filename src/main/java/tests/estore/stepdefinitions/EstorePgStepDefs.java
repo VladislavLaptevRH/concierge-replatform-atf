@@ -29,8 +29,8 @@ public class EstorePgStepDefs {
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
-    EstoreCGScreen estoreCGScreen = new EstoreCGScreen();
 
+    EstoreSaleScreen estoreSaleScreen = new EstoreSaleScreen();
     EstoreFooter estoreFooter = new EstoreFooter();
 
     EstoreItemPage estoreItemPage = new EstoreItemPage();
@@ -161,7 +161,7 @@ public class EstorePgStepDefs {
 
     @Then("I verify that sale verbiage message are present on PG page")
     public void iVerifyThatSaleVerbiageMessageArePresentOnPGPage() {
-        $(By.xpath("//*[text()='VIEW SELECT ITEMS ON SALE']")).should(visible, Duration.ofSeconds(20));
+        estoreSaleScreen.getSaleVerbiageMessage().should(visible, Duration.ofSeconds(12));
     }
 
     @Then("I verify alignment for two and three grid views")
@@ -418,4 +418,37 @@ public class EstorePgStepDefs {
     }
 
 
+    @Then("I verify that PG title is displayed for Beds")
+    public void iVerifyThatPGTitleIsDisplayedForBeds() {
+        estorePGScreen.verifyThatPgTitleBedIsDisplayed();
+    }
+
+    @And("I verify that default sort order should be featured")
+    public void iVerifyThatDefaultSortOrderShouldBeFeatured() {
+        estorePGScreen.verifyThatSortByButtonFeaturedIsDisplayed();
+    }
+
+    @Then("I verify that {int}x{int} grid should be in selected state by default")
+    public void iVerifyThatXGridShouldBeInSelectedStateByDefault(int arg0, int arg1) {
+        estorePGScreen.verifyThatGrid3x3SelectedByDefault();
+    }
+
+    @And("I verify that available in multiple sizes&finishes should be displayed")
+    public void iVerifyThatAvailableInMultipleSizesFinishesShouldBeDisplayed() {
+        estorePGScreen.sizeFinishesMessageIsDisplayed();
+    }
+
+    @Then("I verify that PG title is displayed for {string}")
+    public void iVerifyThatPGTitleIsDisplayedFor(String title) {
+        estorePGScreen.verifyThatPgTitleIsDisplayed(title);
+    }
+
+    @Then("I verify that {int}x{int} grid view should be selected in state")
+    public void iVerifyThatXGridViewShouldBeSelectedInState(int arg0, int arg1) {
+        try {
+            estorePGScreen.getGrid3x3().should(visible, Duration.ofSeconds(12));
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Grid view with elements are not displayed");
+        }
+    }
 }

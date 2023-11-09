@@ -1,7 +1,7 @@
 @estoreCriticalPathTestRun
 Feature: Estore critical path
 
-  
+
   Scenario Outline: Verify top menu navigation
     Given I log into eStore as guest
     When I choose country for eStore from footer
@@ -20,7 +20,7 @@ Feature: Estore critical path
       | RH TEEN         |
       | RH BABY & CHILD |
 
-  
+
   Scenario Outline: CG - Test CGS in all menu items (All brands)
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -38,7 +38,7 @@ Feature: Estore critical path
 #      | rhbabyandchild |
 #      | rhteen         |
 
-  
+
   Scenario Outline: Verify product thumbnail is correctly loaded
     Given  I change the brand to "<brand>" for eStore
     When I go to estore item "sofa" from search field
@@ -54,14 +54,14 @@ Feature: Estore critical path
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
 
-  
+
   Scenario: Verify it shows price range below the thumbnail
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
     When I go to estore item "sofa" from search field
     Then user verifies that price range is displayed below the thumbnail
 
-  
+
   Scenario Outline: PG - Back to Top button
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -82,7 +82,7 @@ Feature: Estore critical path
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
 
-  
+
   Scenario Outline: PG - Verify the Sale Price on PG pages for Sale Items
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -101,7 +101,7 @@ Feature: Estore critical path
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
 
-  
+
   Scenario Outline: PG - Verify sorting - low to high - is working as expected
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -121,7 +121,7 @@ Feature: Estore critical path
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
 
-  
+
   Scenario Outline: PG - Verify sorting - high to low - is working as expected
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -141,7 +141,7 @@ Feature: Estore critical path
 #      | RH TEEN         |
       | RH BABY & CHILD |
 
-  
+
   Scenario Outline: PG - Verify the Member Price Text On PG page after selecting the specifications
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -160,7 +160,7 @@ Feature: Estore critical path
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
 
-  
+
   Scenario Outline: CG - Verify collection name,image (regular,member,sale(applicable) on collection banner
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -179,7 +179,7 @@ Feature: Estore critical path
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
 
-  
+
   Scenario Outline: CG-Verify Back To top Button
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -199,7 +199,7 @@ Feature: Estore critical path
 #      | RH SKI HOUSE    |
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
-  
+
   Scenario Outline: CG - Verify 1,2,3 grid views are working fine
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -218,7 +218,7 @@ Feature: Estore critical path
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
 
-  
+
   Scenario Outline: CG - Verify single Grid View is as default on CG
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -237,7 +237,7 @@ Feature: Estore critical path
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
 
-  
+
   Scenario Outline: CG - Change the grid view, go to PG, go back from PG, CG page should render in the same grid view that you previously selected
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -260,7 +260,7 @@ Feature: Estore critical path
 #      | RH BABY & CHILD |
     #click on random product from collection (PG) after click on  back button from browser
 
-  
+
   Scenario Outline: CG - From home page goto a collection and click on any Product, It should redirect user to PG
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -280,7 +280,7 @@ Feature: Estore critical path
 #      | RH TEEN         |
 #      | RH BABY & CHILD |
     #use fabric seating - sofas: check title, grid view
-  
+
   Scenario: CG - Browser back button from search to CG page
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -303,7 +303,7 @@ Feature: Estore critical path
       | addtowishlist         |
       | locationfunctionality |
 
-  
+
   Scenario: Guest - eStore Verify Guest checkout
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -325,7 +325,7 @@ Feature: Estore critical path
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
 
-  
+
   Scenario: Verify registered user checkout in estore
     Given I log into eStore as "e2eflowcriticalpath" user
     When I choose country for eStore from footer
@@ -391,7 +391,7 @@ Feature: Estore critical path
       | DI       |
 
 
-  
+
   Scenario: Payment - Verify combining different cards(MC+Visa) + split payment
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -408,7 +408,7 @@ Feature: Estore critical path
     Then I verify that I'm able to execute estore split payment
 
 #should be updated - FIX
-  
+
   Scenario: Payment - Verify combining different cards(RH Credit Card+Gift Card) + split payment
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -424,7 +424,7 @@ Feature: Estore critical path
     When I remove split payment which was used earlier
     Then I verify that I'm able to execute estore split payment with RH Credit Card+Gift Card
 
-  
+
   Scenario: Payment - eStore RHCC
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -443,7 +443,7 @@ Feature: Estore critical path
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
 
-  
+
   Scenario: Payment - GC/ Balance check
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -462,7 +462,7 @@ Feature: Estore critical path
     Then I verify that gift card balance info is displayed for estore
 
 #Verify the cart updates, remove line, add to wish lsit, update qty, add membership
-  
+
   Scenario: Cart - Verify that user is able to add multiple item to cart, total price is correct
     Given I log into eStore as "nonmember" user
     When I choose country for eStore from footer
@@ -476,7 +476,7 @@ Feature: Estore critical path
     When I change item quantity to "1" for "prod19500002" and "17050045" with "NCKL" for estore
     And I verify the total price for product in the cart
 
-  
+
   Scenario: Cart - Add Membership and verify order total in order estimate
     Given I log into eStore as "regularAddMembership" user
     When I choose country for eStore from footer
@@ -487,7 +487,7 @@ Feature: Estore critical path
     Then I verify estore order total in order estimate for membership for "42100241 GREY"
     When I click on remove membership estore button
 
-  
+
   Scenario: Cart - Remove line item
     Given I log into eStore as "cartremoveitem" user
     When I choose country for eStore from footer
@@ -499,7 +499,7 @@ Feature: Estore critical path
     When I click on remove button from estore cart page
     Then I verify that shopping cart is empty for estore
 
-  
+
   Scenario: Cart - User is a non member user then it will show a banner to "Join Membership" click on link to join the membership
     Given I log into eStore as "joinmembershipbanner" user
     When I choose country for eStore from footer
@@ -509,7 +509,7 @@ Feature: Estore critical path
     Then I verify membership estore banner for "nonmember user"
 
 #Verify the Instock and On sale functionality
-  
+
   Scenario: Verify the In stock functionality
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -517,7 +517,7 @@ Feature: Estore critical path
     Then I verify link bellow "View In-Stock Items" is displayed
     And I verify that "View In-Stock" popup is displayed
 
-  
+
   Scenario: Verify the On sale functionality
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -525,7 +525,7 @@ Feature: Estore critical path
     Then I verify link bellow "View On Sale Items" is displayed
     And I verify that "View On Sale" popup is displayed
 
-  
+
   Scenario: PDP - Verify the availability , delivery and return messages in PDP
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -533,7 +533,7 @@ Feature: Estore critical path
     Then I verify availability , delivery and return messages in PDP
 
 #Verify the dropdown selection and add to cart
-  
+
   Scenario: PDP - Verify the dropdown selection and add to cart case 1
     Given I log into eStore as guest
     When I choose country for eStore from footer
@@ -543,7 +543,7 @@ Feature: Estore critical path
     When I unselect the size option for "prod19500002" and "17050045" with "NCKL" for estore
     And I verify that add to cart button is inactive
 
-  
+
   Scenario: PDP - Verify the dropdown selection and add to cart case 2
     Given I log into eStore as "verifythedropdowncartcase2" user
     When I choose country for eStore from footer
@@ -553,7 +553,7 @@ Feature: Estore critical path
     When I select color option on the PDP page
     Then I verify that add to cart button is active
     And I verify special messages on PDP page
-  
+
   Scenario: PDP - Configure this item to view delivery information for your Location, price update
     Given I log into eStore as "pdpconfigurepdpthisitemtoview" user
     When I remove all items from estore cart
@@ -567,7 +567,7 @@ Feature: Estore critical path
 
   #check price not with hardcoded values
 #Verify the Postal code updates incart, PDP
-  
+
   Scenario: PDP - Verify the product price as per the selected country in the dropdown
     Given I log into eStore as "verifytheproductpriceasperselectedcountry" user
     When I choose country for eStore from footer
@@ -580,14 +580,14 @@ Feature: Estore critical path
     When I click on view cart estore button
     Then I verify that price in cart is the same as on PDP
 
-  
+
   Scenario: PDP - Verify the prices it is showing for regular user
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     Then I verify that price is showing for regular and member user
 
-  
+
   Scenario: Cart - Zip code validation in cart
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -598,7 +598,7 @@ Feature: Estore critical path
     Then I verify US zip code validation in estore cart
     And I verify CA zip code validation in estore cart
 
-  
+
   Scenario: Cart - eStore - Membership price in cart
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -623,12 +623,12 @@ Feature: Estore critical path
     And I verify the cart item quantity is equal to "1" on eStore
 
 #Verify the SIgn in /Login
-  
+
   Scenario: Verify that user is not able to login with invalid email and password
     Given I introduce wrong login and password
     Then I verify that error message about invalid credentials is displayed
 
-  
+
   Scenario: Forgot Password option should be present with proper functionality
     Given when I click on forgot password button
     Then I verify that forgot password options works
@@ -644,7 +644,7 @@ Feature: Estore critical path
     Then I verify that I'm able to create the new account
 
 # Verify my account dropdown
-  
+
   Scenario Outline: Account - Verify My account dropdowm
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -662,7 +662,7 @@ Feature: Estore critical path
       | signout       |
 
   #Verify My account dropdowm
-  
+
   Scenario:Account - Verify the personal Info displayed after Sign in - First, last name and email
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -671,7 +671,7 @@ Feature: Estore critical path
     Then I verify that the personal info is displayed
 
 #Order review page
-  
+
   Scenario: Order review - Edit payment
     Given I log into eStore as "orderrevieweditpayment" user
     When I choose country for eStore from footer
@@ -693,6 +693,7 @@ Feature: Estore critical path
 
   
   Scenario:Order review - Edit Shipping
+
     Given I log into eStore as "orderrevieweditshipping" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
@@ -713,7 +714,7 @@ Feature: Estore critical path
     When I click on continue button from payment page
     Then I verify that shipping address was edited
 
-  
+
   Scenario:Order review - Edit Billing Address
     Given I log into eStore as "orderrevieweditbillingaddress" user
     When I choose country for eStore from footer
@@ -738,7 +739,7 @@ Feature: Estore critical path
     Then I verify that billing address was edited
 
 #Order replacement
-  
+
   Scenario: Order replacement
     Given I log into eStore as "orderreplacement" user
     When I choose country for eStore from footer
@@ -772,7 +773,7 @@ Feature: Estore critical path
     And I verify billing and shipping address are correct
 
 #Membership page and functionality
-  
+
   Scenario: Membership - Verify the add to cart button on membership page
     Given I log into eStore as "nonmember" user
     When I choose country for eStore from footer
@@ -782,7 +783,7 @@ Feature: Estore critical path
     When I verify membership was added to cart
     And I click on remove membership estore button
 
-  
+
   Scenario: eStore Membership
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -790,7 +791,7 @@ Feature: Estore critical path
     When I navigate to the member tab
     Then I validate membership title
 
-  
+
   Scenario: Membership - Verify the membership Terms and Conditions Link
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -801,7 +802,7 @@ Feature: Estore critical path
     When I click on terms & condition link
     Then I verify that rh members program terms & condition pop up is displayed
 
-  
+
   Scenario: Membership - Verify the email address displayed in membership page
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -811,7 +812,7 @@ Feature: Estore critical path
     When I navigate to the member tab
     Then I verify that email address displayed in membership page
 
-  
+
   Scenario: Membership - Verfiy membership FAQa link
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -821,7 +822,7 @@ Feature: Estore critical path
     When I click on FAQa link for estore
     Then I verfiy that frequently asked questions page is displayed
 
-  
+
   Scenario: Membership - Verify the membership page when the membership is canceled
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -832,7 +833,7 @@ Feature: Estore critical path
     Then I verify that membership is cancelled
 
 #Order history and details
-  
+
   Scenario: Order history - Verify accessing order history - orders displayed for registered user
     Given I log into eStore as "member" user
     When I choose country for eStore from footer
@@ -840,7 +841,7 @@ Feature: Estore critical path
     When I click on estore order history
     Then I verify that estore order history page is displayed
 
-  
+
   Scenario: Order history - Verify no Orders display for new registered user - verify the copy provided
     Given I log into eStore as "notregistered" user
     When I choose country for eStore from footer
@@ -849,7 +850,7 @@ Feature: Estore critical path
     Then I verify that no orders for new registered user
 
 #Billing summary
-  
+
   Scenario:  Order history - Verify the Billing summary link for order - Order to be in shipped/delivered state
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -858,7 +859,7 @@ Feature: Estore critical path
     Then I verify the billing summary link for order history
 
 #Wishlist
-  
+
   Scenario: WishList - Wishlist for registered users
     Given I log into eStore as "wishlist-registered" user
     When I choose country for eStore from footer
@@ -871,7 +872,7 @@ Feature: Estore critical path
     Then I validate items in wishlist
 
   #Add to wishlist
-  
+
   Scenario: WishList - Add an item from cart to wishlist
     Given I log into eStore as "addanitemfromcarttowishlist" user
     When I choose country for eStore from footer
@@ -883,7 +884,7 @@ Feature: Estore critical path
     When I click on my account button if page is not loaded
     Then I validate items in wishlist
 
-  
+
   Scenario: WishList - Remove item from wishlist
     Given I log into eStore as "removeitemfromwishlist" user
     When I choose country for eStore from footer
@@ -893,7 +894,7 @@ Feature: Estore critical path
     Then I verify that I'm able to remove wishlist from cart
 
 #Logout
-  
+
   Scenario: Logout
     Given I log into eStore as "checklogoutuser" user
     When I choose country for eStore from footer
@@ -902,14 +903,14 @@ Feature: Estore critical path
     Then I verify that can logout without any issue
 
 #Search
-  
+
   Scenario: Search - Verify count of search result and product
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to estore item "towels" from search field
     Then I verify count of search results
 
-  
+
   Scenario: Search - Verify the Back to top button
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -917,14 +918,14 @@ Feature: Estore critical path
     When I scroll to the bottom of the estore page
     When I click on estore back to top button
 
-  
+
   Scenario: Search - Verify the in stock facet selection and in stock product
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to estore item "sofa" from search field
     Then I verify in stock facet selection
 
-  
+
   Scenario: Search - Place order: search with any key term, select high to low. navigate to first product PDP
     Given I log into eStore as "placeorderselecthightolow" user
     When I choose country for eStore from footer
@@ -946,7 +947,7 @@ Feature: Estore critical path
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
 
-  
+
   Scenario: Search - Place order: search with any key term, select Low to High. navigate to first product PDP
     Given I log into eStore as "placeordersearchwithanykey" user
     When I choose country for eStore from footer
@@ -967,7 +968,7 @@ Feature: Estore critical path
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
 
-  
+
   Scenario: Verify the trade login and checkout
     Given I log into eStore as trade
     When I choose country for eStore from footer
@@ -1052,7 +1053,7 @@ Feature: Estore critical path
 #    When I click on estore guesthouse rooftop pool page
 #    Then I verify that estore guesthouse rooftop pool page is displayed
 
-  
+
   Scenario: Verify Monogrammed products
     Given I log into eStore as "verifymonogramproducts" user
     When I choose country for eStore from footer
@@ -1069,7 +1070,7 @@ Feature: Estore critical path
     When I remove monogram
     Then I verify that monogram was removed
 
-  
+
   Scenario: Verify user is able to edit Monogram product incart
     Given I log into eStore as "monogramproductincart" user
     When I choose country for eStore from footer
