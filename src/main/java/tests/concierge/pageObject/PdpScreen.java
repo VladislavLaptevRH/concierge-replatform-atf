@@ -415,6 +415,8 @@ public class PdpScreen {
 
     private final SelenideElement confirmationChangePostalCode = $(By.xpath("//*[text() = 'CONFIRM CHANGE']"));
 
+    private final SelenideElement confirmationMessagePostalCode = $(By.xpath("//*[text() = \"You've changed your shipping country. Please note that product availability may vary by shipping country.\"]"));
+
     private final SelenideElement inStockModalDeliveryInformationList = $(By.xpath("//*[@id = 'component-in-stock-product-card']//*[contains(text(), 'will be ready for delivery between')]"));
 
     private final SelenideElement pdpZipCodeModalShippingCountry = $(By.xpath("//*[@id = 'country-zipcode-selection']"));

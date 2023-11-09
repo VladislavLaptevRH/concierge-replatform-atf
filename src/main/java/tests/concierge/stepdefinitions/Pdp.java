@@ -1301,6 +1301,20 @@ public class Pdp {
         with().pollInterval(9, SECONDS).await().until(() -> true);
     }
 
+    @Then("I click on postal code and change country to {string} and postal code to {string} and verify confirmation message")
+    public void iClickOnPostalCodeChangeCountryAndPostalCodeAndVerifyConfirmationMessage(String country, String postalCode) {
+        pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
+        pdpScreen.getPdpPopUpInStockZipCode().click();
+        pdpScreen.getPdpZipCodeModalShippingCountry().click();
+        pdpScreen.getPdpZipCodeModalCanada().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(15));
+        pdpScreen.getPostalCode().setValue(postalCode);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getConfirmationPostalCode().click();
+        pdpScreen.getConfirmationMessagePostalCode().should(visible, Duration.ofSeconds(15));
+    }
+
 
 
     @Then("I verify that cart modal is displayed")

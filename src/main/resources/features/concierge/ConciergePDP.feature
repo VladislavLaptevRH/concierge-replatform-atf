@@ -1097,10 +1097,7 @@ Feature: Concierge PDP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    Then I navigate to menu 'Bath'
-    Then I navigate to sub menu 'Bath Towels & Linens'
-    Then I navigate to gallery 'Bath Towels'
-    Then I click 'first product from the list' on PG screen
+    When I go to item "10121550 NOK" from search field
     Then I Verify that 'item title' is present
     Then I chose the '1' line item selections one by one
     Then I verify that text SKU is present
@@ -1144,3 +1141,17 @@ Feature: Concierge PDP
     Then I click on postal code and change country to 'United Kingdom' and postal code to 'SW1A1AA' and confirm
     Then I verify that zip code in PDP is 'SW1A1AA'
     Then Verify that 'Confirm that PDP has price in GBP'
+
+  Scenario: Verify whether user able to view confirmation message post changing the shipping country (In stock)
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I chose '2' product from the list
+    Then I Verify that 'item title' is present
+    When I click on "view in stock items" link
+    Then Verify that "In Stock modal" 'opens'
+    Then Verify that "In Stock modal" 'zip code is present'
+    Then I click on postal code and change country to 'Canada' and postal code to 'H1Y2B5' and verify confirmation message
