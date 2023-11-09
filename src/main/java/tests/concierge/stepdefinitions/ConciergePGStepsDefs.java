@@ -650,6 +650,7 @@ public class ConciergePGStepsDefs {
 
     @When("I chose {string} product from the list")
     public void iChoseProductFromTheList(String productId) {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeItemsScreen.getProductByNumber(productId).click();
     }
 

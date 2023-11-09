@@ -583,6 +583,29 @@ public class Pdp {
                 pdpScreen.getUnlimitedFurnitureDeliveryModalText().shouldHave(visible, Duration.ofSeconds(15));
                 pdpScreen.getUnlimitedFurnitureDeliveryModalUSCurrency().shouldHave(visible, Duration.ofSeconds(15));
                 break;
+            case  "Shipping & Delivery Modal Should be opened with Standard Shipping tab which has US currency for shipping charges":
+                pdpScreen.getUnlimitedFurnitureDeliveryModalText().shouldHave(visible, Duration.ofSeconds(15));
+                pdpScreen.getUnlimitedFurnitureDeliveryModalStandartShippingTabText().shouldHave(visible, Duration.ofSeconds(15));
+                pdpScreen.getUnlimitedFurnitureDeliveryModalStandartShippingTabText().click();
+                pdpScreen.getUnlimitedFurnitureDeliveryModalUSStandartShippingCurrency().shouldHave(visible, Duration.ofSeconds(15));
+                break;
+            case  "Shipping & Delivery Modal Should be opened with Shipments to UK tab which has UK(GBP) currency for shipping charges":
+                pdpScreen.getUnlimitedFurnitureDeliveryModalStandartShippingTabText().click();
+                pdpScreen.getUnlimitedFurnitureDeliveryModalGBStandartShippingCurrency().shouldHave(visible, Duration.ofSeconds(15));
+                break;
+            case  "postal code should not be present in the delivery message":
+                pdpScreen.getStandartDeliveryShippingText().shouldHave(visible, Duration.ofSeconds(15));
+                break;
+            case  "User should be able to see the products based on shipping country and postal code":
+                if(!pdpScreen.getModalOnSaleItemsList().first().isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    iClickOnViewInStockItems();
+                    pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
+                }
+                assertEquals(result, pdpScreen.getPdpPopUpInStockZipCode().getText());
+                with().pollInterval(9, SECONDS).await().until(() -> true);
+                assertTrue(pdpScreen.getModalOnSaleItemsList().size() > 1);
+                break;
             default: break;
         }
     }
@@ -614,6 +637,11 @@ public class Pdp {
         pdpScreen.getItemByText(text).shouldHave(text(text), Duration.ofSeconds(20));
     }
 
+    @Then("postal code {string} should be present in the delivery message")
+    public void postalCodeShouldBePresentInDeliveryMessage(String postalCode) {
+        pdpScreen.getUnlimitedFurnitureDeliveryText().shouldHave(text(postalCode), Duration.ofSeconds(15));
+    }
+
     @Then("I click on {string} switch button")
     public void iClickOnSwitchButton(String button) {
         switch (button) {
@@ -635,6 +663,17 @@ public class Pdp {
         pdpScreen.getItemLocator().shouldBe(visible, Duration.ofSeconds(15));
         pdpScreen.getItemLocator().shouldNot(text("null"), Duration.ofSeconds(15));
         SKU = pdpScreen.getItemLocator().getText().substring(6,19);
+    }
+
+    @Then("I verify that text SKU is present")
+    public void iVerifyTextSKUIsPresent() {
+        with().pollInterval(9, SECONDS).await().until(() -> true);
+        if(!pdpScreen.getItemLocator().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            iChoseLineItemSelectionsOneByOne("1");
+        }
+        pdpScreen.getItemLocator().shouldBe(visible, Duration.ofSeconds(15));
+        pdpScreen.getItemLocator().shouldNot(text("null"), Duration.ofSeconds(15));
     }
 
     @Then("Verify that line item field {string} is present")
@@ -1010,6 +1049,20 @@ public class Pdp {
             case  "zip code is present":
                 pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
                 break;
+            case  "click on postal code and change country and postal code and confirm":
+                pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
+                pdpScreen.getPdpPopUpInStockZipCode().click();
+                pdpScreen.getPdpZipCodeModalShippingCountry().click();
+                pdpScreen.getPdpZipCodeModalCanada().click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+                pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
+                pdpScreen.getPostalCode().setValue("H1Y2B5");
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+                pdpScreen.getConfirmationPostalCode().click();
+                pdpScreen.getConfirmationChangePostalCode().click();
+                with().pollInterval(9, SECONDS).await().until(() -> true);
+                result = "H1Y 2B5";
+                break;
             case  "has item#":
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 if(!pdpScreen.getPdpPopUpOnSaleItem().isDisplayed()){
@@ -1233,6 +1286,37 @@ public class Pdp {
         pdpScreen.getReplacementParts().should(visible, Duration.ofSeconds(40));
     }
 
+    @Then("I click on postal code and change country to {string} and postal code to {string} and confirm")
+    public void iClickOnPostalCodeChangeCountryAndPostalCodeAndConfirm(String country, String postalCode) {
+        pdpScreen.getZipCode().should(visible, Duration.ofSeconds(5));
+        pdpScreen.getZipCode().click();
+        pdpScreen.getPdpZipCodeModalShippingCountry().click();
+        pdpScreen.getCountryByName(country).click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
+        pdpScreen.getPostalCode().setValue(postalCode);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getConfirmationPostalCode().click();
+        pdpScreen.getConfirmationChangePostalCode().click();
+        with().pollInterval(9, SECONDS).await().until(() -> true);
+    }
+
+    @Then("I click on postal code and change country to {string} and postal code to {string} and verify confirmation message")
+    public void iClickOnPostalCodeChangeCountryAndPostalCodeAndVerifyConfirmationMessage(String country, String postalCode) {
+        pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
+        pdpScreen.getPdpPopUpInStockZipCode().click();
+        pdpScreen.getPdpZipCodeModalShippingCountry().click();
+        pdpScreen.getPdpZipCodeModalCanada().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(15));
+        pdpScreen.getPostalCode().setValue(postalCode);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getConfirmationPostalCode().click();
+        pdpScreen.getConfirmationMessagePostalCode().should(visible, Duration.ofSeconds(15));
+    }
+
+
+
     @Then("I verify that cart modal is displayed")
     public void iVerifyThatCartModalIsDisplayed() {
         pdpScreen.getItemAddedToCart().should(visible, Duration.ofSeconds(15));
@@ -1336,7 +1420,7 @@ public class Pdp {
                 pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().click();
                 break;
             case "postal code link":
-                pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
+                pdpScreen.getZipCode().should(visible, Duration.ofSeconds(15));
                 pdpScreen.getZipCode().click();
                 pdpScreen.getPostalCodeModal().should(visible, Duration.ofSeconds(15));
                 break;
