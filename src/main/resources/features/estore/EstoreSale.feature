@@ -417,3 +417,22 @@ Feature: Estore Sale
       | RH SKI HOUSE    |
       | RH TEEN         |
       | RH BABY & CHILD |
+
+  Scenario:Verify Sale Price in Cart
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Décor" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Mirrors" in Tertiary NAV from "Décor"
+    When I navigate to any estore fusion PG
+    When I click on add to cart estore button
+    Then I click on view cart estore button
+
+  Scenario: Verify that user is able to see the previously selected grid on sale PG
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Bed" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Dressers" in Tertiary NAV from "Bed"
+    Then I verify that 2x2 grid view should be selected in state
+

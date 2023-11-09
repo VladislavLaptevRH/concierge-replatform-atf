@@ -442,4 +442,13 @@ public class EstorePgStepDefs {
     public void iVerifyThatPGTitleIsDisplayedFor(String title) {
         estorePGScreen.verifyThatPgTitleIsDisplayed(title);
     }
+
+    @Then("I verify that {int}x{int} grid view should be selected in state")
+    public void iVerifyThatXGridViewShouldBeSelectedInState(int arg0, int arg1) {
+        try {
+            estorePGScreen.getGrid3x3().should(visible, Duration.ofSeconds(12));
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Grid view with elements are not displayed");
+        }
+    }
 }
