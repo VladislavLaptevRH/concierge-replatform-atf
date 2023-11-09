@@ -240,4 +240,14 @@ public class EstoreSearchStepDefs {
         $(By.xpath("//*[@id='refinementOptionData_checkbox-New Arrivals']//span")).shouldBe(visible).click();
         $(By.xpath("(//*[contains(text(),'RESULTS')])[2]")).shouldBe(visible, Duration.ofSeconds(20));
     }
+
+    @Then("I verify that No search result message is displayed")
+    public void iVerifyThatNoSearchResultMessageIsDisplayed() {
+        estoreCGScreen.verifyThatNoSearchResultMessageIsDisplayed();
+    }
+
+    @Then("I verify that products that match the search criteria should be displayed")
+    public void iVerifyThatProductsThatMatchTheSearchCriteriaShouldBeDisplayed() {
+        estoreCGScreen.verifyThatTitleTerzoDiningTables();
+    }
 }

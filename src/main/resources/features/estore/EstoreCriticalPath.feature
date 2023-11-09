@@ -330,7 +330,7 @@ Feature: Estore critical path
     Given I log into eStore as "e2eflowcriticalpath" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    When I open product page with "prod25280089" and "17050044" with "JNPR" for estore
     Then I chose the '1' line item selections one by one
     When I open product page with "prod19500002" and "17050045" with "STWL" for estore
     When I click on add to cart estore button

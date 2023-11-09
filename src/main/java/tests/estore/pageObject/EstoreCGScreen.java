@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import java.time.Duration;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static org.testng.Assert.assertTrue;
@@ -86,12 +87,31 @@ public class EstoreCGScreen {
 
     private SelenideElement cgCollectionTitle = $(By.xpath("//h1//span[contains(text(),'collections')]"));
 
+    private SelenideElement noSearchResultMessage = $(By.xpath("//*[text()='We’re sorry, we cannot find what you are looking for.']"));
+
+    private SelenideElement titleTerzoDiningTables = $(By.xpath("//*[text()='TERZO ROUND DINING TABLE']"));
+
+
+    public void verifyThatTitleisDisplayedOnCg(String title){
+        $(By.xpath("//*[text()='" + title + "']")).should(visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatTitleTerzoDiningTables() {
+        titleTerzoDiningTables.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatNoSearchResultMessageIsDisplayed() {
+        noSearchResultMessage.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
     public void verifyThatTitleIsDisplayedOnCg() {
         cgCollectionTitle.should(Condition.visible, Duration.ofSeconds(12));
     }
+
     public void verifyThatImagesAreDisplayedOnCg() {
         cgImages.should(Condition.visible, Duration.ofSeconds(12));
     }
+
     public void verifyThatCg1GridSelectedByDefault() {
         cg1Grid.should(Condition.visible, Duration.ofSeconds(12));
     }
