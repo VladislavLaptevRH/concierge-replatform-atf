@@ -128,30 +128,35 @@ Feature: Estore Search
     When I go to estore item "table" from search field
     When I apply multiple facet on estore search page
 
+  @search
   Scenario: Verify No search results page
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to estore item "QA Search Check" from search field
     Then I verify that No search result message is displayed
 
+  @search
   Scenario: Verify that user is able to search with product name
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to estore item "TERZO ROUND DINING TABLE" from search field
     Then I verify that products that match the search criteria should be displayed
 
+  @search
   Scenario:Verify that user is able to search with SKU id
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to estore item "17050044 EUCY" from search field
     Then I verify that search result "802-Gram Turkish Towel Collection" for search product via sku id is displayed
 
+  @search
   Scenario: Verify that user is able to search with Product Id
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to estore item "prod2020027" from search field
     Then I verify that "prod2020027" title is displayed on CG
 
+  @search
   Scenario: Verify that user is able to view price based on selected Pin code on PDP
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -161,6 +166,7 @@ Feature: Estore Search
     When I navigate back from "PDP" page
     Then verify the product price as per the postal code
 
+  @search
   Scenario: Verify navigating back to Cart page from Search page
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
