@@ -840,6 +840,7 @@ public class EstorePdpStepDefs {
         $(By.xpath("//*[contains(text(),'" + colorOption + "')]")).should(visible, Duration.ofSeconds(12));
         $(By.xpath("//*[@id='optionSelect-prod18510007-Size']//*[contains(text(),'" + sizeOption + "')]")).should(visible, Duration.ofSeconds(12));
     }
+
 }
 
 
