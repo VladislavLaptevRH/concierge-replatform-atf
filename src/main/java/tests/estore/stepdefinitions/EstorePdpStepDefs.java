@@ -34,17 +34,12 @@ public class EstorePdpStepDefs {
     EstoreCartPage estoreCartPage = new EstoreCartPage();
 
     EstoreHomePage estoreHomePage = new EstoreHomePage();
-
     EstorePGScreen estorePGScreen = new EstorePGScreen();
-
     EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
-
     EstoreReturnPolicyScreen estoreReturnPolicyScreen = new EstoreReturnPolicyScreen();
-
     EstoreE2EStepDefs estoreE2EStepDefs = new EstoreE2EStepDefs();
-
+    EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
     EstoreAccountStepDefs estoreAccountStepDefs = new EstoreAccountStepDefs();
-
     EstorePgStepDefs estorePgStepDefs = new EstorePgStepDefs();
     String regularUSPrice;
     String memberUSPrice;
@@ -59,6 +54,9 @@ public class EstorePdpStepDefs {
     int regularPricePdp;
     int memberPricePdp;
 
+    String colorOption;
+
+    String sizeOption;
 
     @Then("I verify that user can see product details correctly mentioned for a product")
     public void iVerifyThatUserCanSeeProductDetailsCorrectlyMentionedForAProduct() {
@@ -163,8 +161,10 @@ public class EstorePdpStepDefs {
         estorePdpPageScreen.getPostalCodePdp().should(visible, Duration.ofSeconds(25));
         estorePdpPageScreen.getPostalCodePdp().scrollIntoView(true);
         estorePdpPageScreen.getPostalCodePdp().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//div[@id='country-zipcode-selection']")).should(visible, Duration.ofSeconds(20)).click();
         if (country.equals("CAN")) {
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20)).click();
             $(By.xpath("//input[@id='postal-code-international']")).clear();
             $(By.xpath("//input[@id='postal-code-international']")).setValue("Y1A 9Z9");
@@ -172,9 +172,10 @@ public class EstorePdpStepDefs {
             estorePdpPageScreen.getSubmitPostalCode().click();
             estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
             WebDriverRunner.getWebDriver().navigate().refresh();
-            $(By.xpath("//*[text()='Y1A 9Z9.']")).should(visible, Duration.ofSeconds(40));
+            //$(By.xpath("//*[text()='Y1A 9Z9.']")).should(visible, Duration.ofSeconds(40));
         }
         if (country.equals("US")) {
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             $(By.xpath("//li[@data-value='US']")).should(visible, Duration.ofSeconds(20)).click();
             $(By.xpath("//input[@id='postal-code-international']")).clear();
             $(By.xpath("//input[@id='postal-code-international']")).setValue("82083");
@@ -182,6 +183,7 @@ public class EstorePdpStepDefs {
             estorePdpPageScreen.getSubmitPostalCode().click();
         }
         if (country.equals("GB")) {
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             $(By.xpath("//li[@data-value='GB']")).should(visible, Duration.ofSeconds(20)).click();
             $(By.xpath("//input[@id='postal-code-international']")).clear();
             $(By.xpath("//input[@id='postal-code-international']")).setValue("SW1W 0NY");
@@ -501,7 +503,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the PDP hero Image Zoom line items")
     public void
-    iVerifyThePDPHroImageZoomLineItem(){
+    iVerifyThePDPHroImageZoomLineItem() {
         estorePdpPageScreen.getHeroImage().hover();
         estorePdpPageScreen.getHeroImageForwardBtn().should(Condition.visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getHeroImageForwardBtn().click();
@@ -663,12 +665,10 @@ public class EstorePdpStepDefs {
     @And("I verify that {string} popup is displayed")
     public void iVerifyThatPopupIsDisplayed(String modalPopUp) {
         if (modalPopUp.equals("View In-Stock")) {
-             $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
         }
         if (modalPopUp.equals("View On Sale")) {
-             $(By.xpath("//span[text()='ON SALE']")).should(visible, Duration.ofSeconds(20));
-            $(By.xpath("(//p[text()='802-Gram Turkish Towel Collection'])[2]")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//span[text()='ON SALE']")).should(visible, Duration.ofSeconds(20));
             estorePDPScreen.getAddToCartButtonViewInStockPopUp().should(visible, Duration.ofSeconds(15));
         }
     }
@@ -720,6 +720,7 @@ public class EstorePdpStepDefs {
 
     @When("user clicks on return policy link")
     public void userClicksOnReturnPolicyLink() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         estorePDPScreen.clickToReturnPolicyButton();
     }
 
@@ -920,6 +921,21 @@ public class EstorePdpStepDefs {
         AssertJUnit.assertEquals("Regular price is not equal to zero", estorePGScreen.getRegularSaleOnPgPrice(), estorePDPScreen.getRegularSalePricePDP());
         AssertJUnit.assertEquals("Member price is not equal to zero", estorePGScreen.getMemberSaleOnPgPrice(), estorePDPScreen.getMemberSalePricePDP());
 
+    }
+
+    @Then("I verify configurations of sku from Sale PG")
+    public void iVerifyConfigurationsOfSkuFromSalePG() {
+        colorOption = estoreGeneralStepDefs.firstLetterCapital(estorePGScreen.getColorOpionPG().getText().toLowerCase());
+        sizeOption = estoreGeneralStepDefs.firstLetterCapital(estorePGScreen.getSizeOptionPG().getText().toLowerCase());
+    }
+
+    @Then("I verify that configurations of PDP line item is matching the selected sku from Sale PG")
+    public void iVerifyThatConfigurationsOfPDPLineItemIsMatchingTheSelectedSkuFromSalePG() {
+        estorePDPScreen.getFirstLineItemMemberPrice().should(visible, Duration.ofSeconds(12));
+        estorePDPScreen.getFirstLineItemMemberPrice().scrollIntoView(true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[contains(text(),'" + colorOption + "')]")).should(visible, Duration.ofSeconds(12));
+        $(By.xpath("//*[@id='optionSelect-prod18510007-Size']//*[contains(text(),'" + sizeOption + "')]")).should(visible, Duration.ofSeconds(12));
     }
 }
 

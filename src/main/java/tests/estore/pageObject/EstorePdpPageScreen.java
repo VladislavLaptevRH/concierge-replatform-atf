@@ -55,7 +55,7 @@ public class EstorePdpPageScreen {
 
     private SelenideElement submitPostalCode = $(By.xpath("//button[@data-testid='submit-postal']"));
 
-    private SelenideElement lineItemImage = $(By.xpath("//img[@alt='802-Gram Turkish Towel Collection']"));
+    private SelenideElement lineItemImage = $(By.xpath("//img[@alt='802-Gram Turkish Towel Set']"));
 
     private SelenideElement sizeOption = $(By.xpath("(//select[contains(@id,'option') and contains(@id,'Size')])[1]"));
 

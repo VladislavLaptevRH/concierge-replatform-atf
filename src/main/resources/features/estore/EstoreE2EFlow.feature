@@ -20,3 +20,11 @@ Feature: Estore E2E flow
     When I execute payment with credit card on estore
     When I click on a place estore order button
     Then I verify that estore thank you page is displayed
+
+  Scenario: Search any product from cart page and verify for back button
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I goes to estore cart for estore
+    When I verify for back button from cart page

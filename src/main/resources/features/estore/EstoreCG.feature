@@ -25,11 +25,6 @@ Feature: Estore CG
     When I goes to estore collection page
     Then I validate the collection name is not empty
 
-  Scenario: CG-Verify Shop In Stock Link
-    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
-    When I remove all items from estore cart
-
   Scenario: CG-Verify Back To top Button
     Given I log into eStore as "guest" user
     When I choose country for eStore from footer
@@ -49,6 +44,12 @@ Feature: Estore CG
     When I choose country for eStore from footer
     When I goes to estore collection page
     Then I verify collection name, image on collection banner
+
+  Scenario: Verify 1,2,3 grid views are working fine
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I goes to estore collection page
+    Then I validate "1","2" and "3" grid view should work
 
   Scenario: Change the grid view, go to PG, go back from PG, CG page should render in the same grid view that you previously selected
     Given I log into eStore as "guest" user

@@ -148,7 +148,7 @@ public class Hooks {
         ConfigFileReader();
         configureEstoreURL();
         setUPWebDriver(eStoreURL);
-//        setupChromeArguments();
+        setupChromeArguments(eStoreURL);
     }
 
     /**
@@ -159,6 +159,7 @@ public class Hooks {
         ConfigFileReader();
         configureConciergeURL();
         setUPWebDriver(conciergeURL);
+        setupChromeArguments(conciergeURL);
     }
 
     /**
@@ -166,16 +167,6 @@ public class Hooks {
      */
     public void setUPWebDriver(String url) {
         ChromeOptions options = new ChromeOptions();
-        WebDriverManager.chromedriver().setup();
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--disable-gpu");
-        options.addArguments("enable-automation");
-        options.addArguments("--disable-infobars");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-browser-side-navigation");
-        options.addArguments("--window-size=1366,768");
-        options.addArguments("--user-agent=robot-framework");
         Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
@@ -185,14 +176,13 @@ public class Hooks {
         Configuration.timeout = 45000;
         Configuration.reportsFolder = "target/screenshots";
         Configuration.browserCapabilities = options;
-        open(url);
-        currentUrl = WebDriverRunner.url();
+        WebDriverManager.chromedriver().setup();
     }
 
     /**
      * Set up chrome arguments for Jenkins run
      */
-    public void setupChromeArguments() {
+    public void setupChromeArguments(String url) {
         ChromeOptions options = new ChromeOptions();
         WebDriverManager.chromedriver().setup();
         options.addArguments("--remote-allow-origins=*");
@@ -215,6 +205,10 @@ public class Hooks {
             e.printStackTrace();
         }
         WebDriverRunner.setWebDriver(driver);
+
+        open(url);
+        currentUrl = WebDriverRunner.url();
+
     }
 
     /**

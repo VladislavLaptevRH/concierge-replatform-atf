@@ -31,6 +31,8 @@ public class EstoreCGStepDefs {
 
     EstoreHomePage estoreHomePage = new EstoreHomePage();
 
+    EstoreSaleScreen estoreSaleScreen = new EstoreSaleScreen();
+
     @Then("I validate the collection name is not empty")
     public void iValidateTheCollectionNameIsNotEmpty() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -286,6 +288,12 @@ public class EstoreCGStepDefs {
         estoreCGScreen.verifyThatCGDescriptionIsDisplayed();
     }
 
+    @Then("I verify that PG title, description text, member discount message is displayed for Bedding Collection")
+    public void iVerifyThatPGTitleDescriptionTextMemberDiscountMessageIsDisplayedforBedding() {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        estoreSaleScreen.verifyThatBeddingCollectionTitleIsDisplayedOnCG();
+    }
+
     @And("I verify that In stock and size availability message is displayed")
     public void iVerifyThatInStockAndSizeAvailabilityMessageIsDisplayed() {
         estoreCGScreen.verifyThatinStockMessageTextIsDisplayed();
@@ -359,5 +367,20 @@ public class EstoreCGStepDefs {
     @Then("I verify that page moved to the top on clicking the bottom to top button on CG")
     public void iVerifyThatPageMovedToTheTopOnClickingTheBottomToTopButtonOnCG() {
         estoreHomePage.getHomePageLogo().should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that CG title is displayed for {string}")
+    public void iVerifyThatCGTitleIsDisplayedFor(String CGtitle) {
+        estoreCGScreen.verifyThatCgTitleIsDisplayed(CGtitle);
+    }
+
+    @And("I verify that {int} grid view should be selected state by default on CG")
+    public void iVerifyThatGridViewShouldBeSelectedStateByDefaultOnCG(int arg0) {
+        estoreCGScreen.verifyThatCg1GridSelectedByDefault();
+    }
+
+    @Then("I verify that images are displayed on CG for estore")
+    public void iVerifyThatImagesAreDisplayedOnCGForEstore() {
+        estoreCGScreen.verifyThatImagesAreDisplayedOnCg();
     }
 }

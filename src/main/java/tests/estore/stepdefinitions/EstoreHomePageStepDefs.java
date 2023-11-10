@@ -206,4 +206,50 @@ public class EstoreHomePageStepDefs {
     public void iVerifyThatFooterSectionShouldShowAtTheBottomOfThePageAlongWithCopyRightAndYear() {
         estoreHomePage.verifyThatAllItemsFromFooterAreDisplayed();
     }
+
+    @When("I click on Living in TOP NAV menu")
+    public void iClickOnLivingInTOPNAVMenu() {
+        estoreHomePage.clickToLinivngTopNavMenu();
+    }
+
+    @When("I click on Sectionals in Tertiary NAV")
+    public void iClickOnSectionalsInTertiaryNAV() {
+        estoreHomePage.clickToLinivngTopNavMenu();
+    }
+
+    @When("I click on Sectionals in Tertiary NAV from Living")
+    public void iClickOnSectionalsInTertiaryNAVFromLiving() {
+        estoreHomePage.clickToSectionalsTopNavMenu();
+    }
+
+    @When("I click on {string} in Tertiary NAV from {string}")
+    public void iClickOnInTertiaryNAVFrom(String tertiaryNav, String arg1) {
+        estoreHomePage.clickToTertiaryNav(tertiaryNav);
+    }
+
+    @Then("I verify that SALE is present on TOP Nav menu")
+    public void iVerifyThatSALEIsPresentOnTOPNavMenu() {
+        $(By.xpath("//div[contains(@id,'container-rhrheader-rhr-catalogNav_catalogNav')]//span[text()='SALE']")).should(visible, Duration.ofSeconds(12));
+        System.out.println();
+    }
+    @Then("I verify that hamburger icon is displayed for the main menu")
+    public void iVerifyThatHamburgerIconIsDisplayedForTheMainMenu() {
+        estoreHomePage.verifyThatHamburgerIconIsDisplayed();
+    }
+
+    @Then("I verify that cart page icon is displayed")
+    public void iVerifyThatCartPageIconIsDisplayed() {
+        estoreHomePage.verifyThatCartButtonIconIsDisplayed();
+    }
+
+    @And("I verify that cart page icon have the item count next to the mini cart icon")
+    public void iVerifyThatCartPageIconHaveTheItemCountNextToTheMiniCartIcon() {
+        assertTrue("Verify that cart page icon have the item count next to the mini cart icon",
+                estoreHomePage.getCountOfItemFromCart() > 0);
+    }
+
+    @Then("I verify that my account icon is displayed")
+    public void iVerifyThatMyAccountIconIsDisplayed() {
+        estoreHomePage.verifyThatAccountIconIsDisplayed();
+    }
 }

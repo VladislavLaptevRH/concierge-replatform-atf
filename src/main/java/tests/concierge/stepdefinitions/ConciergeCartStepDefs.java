@@ -764,6 +764,18 @@ public class ConciergeCartStepDefs {
         assertEquals(memberPrice, totalPrice, "Membership price displayed as total price");
     }
 
+    @Then("I verify that contract client price displayed as total price")
+    public void iVerifyThatContractClientDisplayedAsTotalPrice() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if (!conciergeCartPageScreen.getPriceForMember().isDisplayed()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+        String memberPrice = conciergeCartPageScreen.getPriceForMember().getText();
+        String totalPrice = conciergeCartPageScreen.getTotalMemberPrice().getText();
+        assertEquals(memberPrice, totalPrice, "Membership price displayed as total price");
+    }
+
     @When("I choose postpone shipment")
     public void iChoosePostponeShipment() {
         generalStepDefs.waitForJSandJQueryToLoad();
@@ -910,9 +922,10 @@ public class ConciergeCartStepDefs {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramColors().get(2).should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getMonogramColors().get(2).scrollIntoView(true);
-        conciergeCartPageScreen.getMonogramColors().get(2).doubleClick();
+        conciergeCartPageScreen.getMonogramColors().get(2).click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getMonogramTextInput().setValue("ABC");
+        conciergeCartPageScreen.getMonogramColors().get(2).click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getAddMonogramButton().click();
     }
@@ -1212,6 +1225,7 @@ public class ConciergeCartStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         Select orderClassificationDropDownList = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
         orderClassificationDropDownList.selectByValue("RH Gallery Order");
         with().pollInterval(5, SECONDS).await().until(() -> true);
@@ -1327,6 +1341,7 @@ public class ConciergeCartStepDefs {
         if(conciergeCartPageScreen.getPdpScreenZipCode().isDisplayed()) {
             conciergeCartPageScreen.getPdpScreenZipCode().should(visible, Duration.ofSeconds(10));
             conciergeCartPageScreen.getPdpScreenZipCode().scrollIntoView(true);
+            with().pollInterval(8, SECONDS).await().until(() -> true);
             assertEquals(zipCode, conciergeCartPageScreen.getPdpScreenZipCode().getText());
         }
         else{

@@ -72,6 +72,8 @@ public class EstorePGScreen {
 
     private final SelenideElement sizeFilter = $(By.xpath("//*[text()='Size']"));
 
+    private final SelenideElement clearAll = $(By.xpath("//*[text()='Clear All']"));
+
     private final SelenideElement sortFilter = $(By.xpath("//*[text()='sort']"));
 
     private final SelenideElement saleFilterApplied = $(By.xpath("(//*[text()='sale'])[1]"));
@@ -82,7 +84,7 @@ public class EstorePGScreen {
 
     private final SelenideElement livingCategory = $(By.xpath("//*[@data-navigation-account-item-id='cat160024']"));
 
-    private final SelenideElement collectionTextTitle = $(By.xpath("//*[contains(text(),'new arrivals')]"));
+    private final SelenideElement collectionTextTitle = $(By.xpath("//*[contains(text(),'RESULTS')]"));
 
     private final SelenideElement regularSalePrice = $(By.xpath("(//*[@data-testid='price-for-sale'])[1]"));
 
@@ -106,6 +108,43 @@ public class EstorePGScreen {
 
     private final List<SelenideElement> pgItems = $$(By.xpath("//div[@id='component-rh-image_wrapper']"));
 
+    private SelenideElement resultsText = $(By.xpath("//*[text()='RESULTS']"));
+
+    private SelenideElement finishText = $(By.xpath("//*[text()='Finish']"));
+
+    private SelenideElement sizeText = $(By.xpath("//*[text()='Size']"));
+
+    private SelenideElement colorOpionPG = $(By.xpath("(//*[@id='listColumn2-Color'])[1]"));
+
+    private SelenideElement sizeOptionPG = $(By.xpath("(//*[@id='listColumn2-Size'])[1]"));
+
+    private SelenideElement pgTitleBeds = $(By.xpath("//*[text()='All Beds']"));
+
+    private SelenideElement sortByButtonFeatured = $(By.xpath("//*[text()='Featured']"));
+
+    private SelenideElement grid3x3 = $(By.xpath("//div[contains(@class,'cols-4 ')]"));
+
+    private SelenideElement sizeFinishesMessage = $(By.xpath("//*[text()='Available in multiple sizes & finishes']"));
+
+    public void verifyThatPgTitleIsDisplayed(String title) {
+        $(By.xpath("//h1[contains(text(),'" + title + "')]")).should(Condition.visible, Duration.ofSeconds(14));
+    }
+
+    public void sizeFinishesMessageIsDisplayed() {
+        sizeFinishesMessage.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatGrid3x3SelectedByDefault() {
+        grid3x3.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatSortByButtonFeaturedIsDisplayed() {
+        sortByButtonFeatured.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatPgTitleBedIsDisplayed() {
+        pgTitleBeds.should(Condition.visible, Duration.ofSeconds(12));
+    }
 
     public int verifyCountOfPgItemsonThePage() {
         return pgItems.size();

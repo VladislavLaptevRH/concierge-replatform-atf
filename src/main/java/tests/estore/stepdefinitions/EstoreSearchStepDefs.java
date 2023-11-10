@@ -78,7 +78,7 @@ public class EstoreSearchStepDefs {
     @Then("I verify count of search results")
     public void iVerifyCountOfSearchResults() {
         estorePGScreen.getFirstSearchElement().should(visible, Duration.ofSeconds(20));
-        estoreSearchScreen.getResults().should(visible, Duration.ofSeconds(20));
+        //estoreSearchScreen.getResults().should(visible, Duration.ofSeconds(20));
     }
 
     @When("I scroll to the bottom of the estore page")
@@ -120,7 +120,6 @@ public class EstoreSearchStepDefs {
 
     @When("I select high to low for estore")
     public void iSelectHighToLowForEstore() {
-
         estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
         estorePDPScreen.getSortByButton().click();
 

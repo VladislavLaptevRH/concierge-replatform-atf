@@ -35,6 +35,8 @@ public class PdpScreen {
 
     public final String stockedColor = "//*[text() = '%s ']";
 
+    private final String pdpZipCodeCountry = "//*[text() ='%s']";
+
 
     private final SelenideElement manageRegistryButton = $(By.xpath("//*[text()='MANAGE REGISTRY']"));
 
@@ -215,7 +217,7 @@ public class PdpScreen {
     private final ElementsCollection swatchList = $$(By.xpath("(//p[contains(text() , 'Swatch')])[1]/../../../../../../..//select[contains(@id ,'prod')]"));
 
     private final ElementsCollection kitItems = $$(By.xpath("(//p[contains(text() , 'Touch-Up Kit')])[1]/../../../../../../..//select[contains(@id ,'prod')]"));
-    private final SelenideElement configureDeliveryInformation = $(By.xpath("(//*[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//*[text() = 'Configure this item to view delivery information ']"));
+    private final SelenideElement configureDeliveryInformation = $(By.xpath("//*[text() = 'Configure this item to view delivery information']"));
     private final SelenideElement yamlCarouselMenuRightArrow = $(By.xpath("(//*[text() = 'YOU MIGHT ALSO LIKE']/..//ul/div/div)[3]"));
     private final ElementsCollection rightSideImageCarouselArrows = $$(By.xpath("//*[@class= 'slick-slider slick-vertical slick-initialized']//*[contains(@class, 'arrow-icon')]"));
     private final SelenideElement swatchText = $(By.xpath("//a/*[contains(text(), 'Swatch')]"));
@@ -252,9 +254,17 @@ public class PdpScreen {
 
     private final SelenideElement unlimitedFurnitureDeliveryModalText = $(By.xpath("//*[text() = 'Unlimited Furniture Delivery']"));
 
+    private final SelenideElement unlimitedFurnitureDeliveryModalStandartShippingTabText = $(By.xpath("//*[text() = 'Standard Shipping']"));
+
     private final SelenideElement unlimitedFurnitureDeliveryModalUSCurrency = $(By.xpath("(//*[text() = 'Unlimited Furniture Delivery']/..//*[contains(text() , '$')])[1]"));
 
+    private final SelenideElement unlimitedFurnitureDeliveryModalUSStandartShippingCurrency = $(By.xpath("(//*[text() = 'U.S. Standard Shipping']/..//*[contains(text() , '$')])[1]"));
+
+    private final SelenideElement unlimitedFurnitureDeliveryModalGBStandartShippingCurrency = $(By.xpath("(//*[text() = 'U.S. Standard Shipping']/..//*[contains(text() , '£')])[1]"));
+
     private final SelenideElement shippingAndDeliveryModalTab = $(By.xpath("//*[text() = 'Shipments to Canada']"));
+
+    private final SelenideElement standartDeliveryShippingText = $(By.xpath("//*[text() = 'Ships free of charge via Standard Delivery Shipping']"));
     private final SelenideElement shippingAndDeliveryModalDeliveryAreaText = $(By.xpath("//*[text() = 'CANADIAN DELIVERY AREA']"));
 
     private final SelenideElement returnPolicyText = $(By.xpath("//*[@id = 'component-sku']/..//p[contains (text(), 'This item can be returned or exchanged within 30 days of delivery.')]"));
@@ -403,9 +413,15 @@ public class PdpScreen {
 
     private final SelenideElement confirmationPostalCode = $(By.xpath("//*[@data-testid= 'submit-postal']"));
 
+    private final SelenideElement confirmationChangePostalCode = $(By.xpath("//*[text() = 'CONFIRM CHANGE']"));
+
+    private final SelenideElement confirmationMessagePostalCode = $(By.xpath("//*[text() = \"You've changed your shipping country. Please note that product availability may vary by shipping country.\"]"));
+
     private final SelenideElement inStockModalDeliveryInformationList = $(By.xpath("//*[@id = 'component-in-stock-product-card']//*[contains(text(), 'will be ready for delivery between')]"));
 
     private final SelenideElement pdpZipCodeModalShippingCountry = $(By.xpath("//*[@id = 'country-zipcode-selection']"));
+
+    private final SelenideElement pdpZipCodeModalCanada = $(By.xpath("//*[text() ='Canada']"));
 
     private final SelenideElement pdpZipCodeModalDefpultCountry = $(By.xpath("//*[text() = 'United States']"));
 
@@ -492,6 +508,11 @@ public class PdpScreen {
 
     public SelenideElement getColorByName(String color) {
         String path = String.format(stockedColor, color);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getCountryByName(String country) {
+        String path = String.format(pdpZipCodeCountry, country);
         return $(byXpath(path));
     }
 

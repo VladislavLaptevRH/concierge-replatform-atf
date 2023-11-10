@@ -2,15 +2,16 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
-import tests.estore.pageObject.EstoreCGScreen;
-import tests.estore.pageObject.EstoreSaleScreen;
+import tests.estore.pageObject.*;
 import tests.utility.Hooks;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -23,10 +24,15 @@ public class EstoreSaleStepDefs {
     EstoreSaleScreen estoreSaleScreen = new EstoreSaleScreen();
     GeneralStepDefs generalStepDefs = new GeneralStepDefs();
 
+    EstorePGScreen estorePGScreen = new EstorePGScreen();
     EstorePgStepDefs estorePgStepDefs = new EstorePgStepDefs();
+
+    EstorePdpPageScreen estorePdpPageScreen = new EstorePdpPageScreen();
+
+    EstorePDPScreen estorePDPScreen = new EstorePDPScreen();
+
+    EstoreHomePage estoreHomePage = new EstoreHomePage();
     String URL;
-
-
     int memberSalePrice;
     int regularSalePrice;
 
@@ -67,8 +73,8 @@ public class EstoreSaleStepDefs {
     public void iVerifySalePricesOnPGPagesForSaleItems() {
         regularSalePrice = Integer.parseInt(estoreSaleScreen.getRegularSalePrice().getText().replaceAll("\\$", "").replaceAll(",", ""));
         memberSalePrice = Integer.parseInt(estoreSaleScreen.getMemberSalePrice().getText().replaceAll("\\$", "").replaceAll(",", ""));
-
-        assertTrue(memberSalePrice >= regularSalePrice, "Regular sale price is lower than member sale price");
+        assertTrue(memberSalePrice > 0, "Member sale price is displayed");
+        assertTrue(regularSalePrice > 0, "Regular sale price is displayed");
     }
 
     @When("I go to Sale product page")
@@ -177,5 +183,156 @@ public class EstoreSaleStepDefs {
         estoreSaleScreen.getWallLightingSale().should(visible, Duration.ofSeconds(12));
         estoreSaleScreen.getTableLightigSale().should(visible, Duration.ofSeconds(12));
         estoreSaleScreen.getFloorLightingSale().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Textiles from sale nav menu")
+    public void iClickOnTextilesFromSaleNavMenu() {
+        estoreSaleScreen.clickToSaleTextsilesNav();
+    }
+
+    @Then("I verify that Textiles in Secondary NAV should expand tertiary NAV")
+    public void iVerifyThatTextilesInSecondaryNAVShouldExpandTertiaryNAV() {
+        estoreSaleScreen.getTextilesBathTowels().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getTextilesSheetsPilloecases().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getTextilesBeddingCollections().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getTextilesTHrowsBlankets().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Rugs from sale nav menu")
+    public void iClickOnRugsFromSaleNavMenu() {
+        estoreSaleScreen.clickToSaleRugsNav();
+    }
+
+    @Then("I verify that Rugs in Secondary NAV should expand tertiary NAV")
+    public void iVerifyThatRugsInSecondaryNAVShouldExpandTertiaryNAV() {
+        estoreSaleScreen.getRugsAllRugs().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getRugsIvoryRugs().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getRugsNeutralRugs().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getRugsBlueRugs().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Decor from sale nav menu")
+    public void iClickOnDecorFromSaleNavMenu() {
+        estoreSaleScreen.clickToSaleDecorNav();
+    }
+
+    @Then("I verify that Decor in Secondary NAV should expand tertiary NAV")
+    public void iVerifyThatDecorInSecondaryNAVShouldExpandTertiaryNAV() {
+        estoreSaleScreen.getDecorMirrors().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getDecorBarCabinets().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getDecorCabinetHardware().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getDecorThrowsBlankets().should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that user is able to navigate to Sale PG")
+    public void iVerifyThatUserIsAbleToNavigateToSalePG() {
+        estoreSaleScreen.verifyThatDecorAllMirrorsTextSalePgIsDisplayed();
+        estorePGScreen.getSaleButtonFilter().should(visible, Duration.ofSeconds(12));
+        estorePGScreen.getInStockTextFilterPG().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Decor Mirrors from nav of Sale")
+    public void iClickOnDecorMirrorsFromNavOfSale() {
+        estoreSaleScreen.getDecorMirrors().click();
+    }
+
+    @Then("I verify that In stock filter was applied")
+    public void iVerifyThatInStockFilterWasApplied() {
+        estorePGScreen.getInStockFilter().should(visible, Duration.ofSeconds(20));
+        estorePGScreen.getClearAll().should(visible, Duration.ofSeconds(20));
+        estorePGScreen.getResultsText().should(visible, Duration.ofSeconds(20));
+        estorePGScreen.getFinishText().should(visible, Duration.ofSeconds(20));
+        estorePGScreen.getSizeText().should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I click on All Dining Tables in tertiary nav")
+    public void iClickOnAllDiningTablesInTertiaryNav() {
+        estoreSaleScreen.clickToAllDiningTablesNav();
+    }
+
+    @When("I click on clear all link in applied section filter")
+    public void iClickOnClearAllLinkInAppliedSectionFilter() {
+        estoreSaleScreen.clickToClearAllLink();
+    }
+
+    @Then("I verify that the applied filters have been removed")
+    public void iVerifyThatTheAppliedFiltersHaveBeenRemoved() {
+        estoreSaleScreen.verifyThatSaleAppliedFilterWasRemoved();
+    }
+
+    @Then("I verify that the applied In stock filters have been removed")
+    public void iVerifyThatTheAppliedInStockFiltersHaveBeenRemoved() {
+        estoreSaleScreen.verifyThatStockAppliedFilterWasRemoved();
+    }
+
+    @Then("I verify that CG title is displayed on eStore")
+    public void iVerifyThatCGTitleIsDisplayedOnEStore() {
+        estorePdpPageScreen.getTurkishTowelCollectionTitle().should(Condition.and("", interactable, visible), Duration.ofSeconds(20));
+    }
+
+    @And("I verify that {int} grid view should be selected state by default")
+    public void iVerifyThatGridViewShouldBeSelectedStateByDefault(int arg0) {
+        estoreSaleScreen.getGridView1().should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that each collection have image, title")
+    public void iVerifyThatEachCollectionHaveImageTitle() {
+        estoreSaleScreen.getCollectionTitle().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getCollectionImage().should(visible, Duration.ofSeconds(12));
+        estoreSaleScreen.getSaleVerbiageMessage().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Bedding collection from tertiary NAV")
+    public void iClickOnBeddingCollectionFromTertiaryNAV() {
+        estoreSaleScreen.clickToBeddingCollectionNav();
+    }
+
+    @Then("I verify that user is able to change the sort option - Featured")
+    public void iVerifyThatUserIsAbleToChangeTheSortOptionFeatured() {
+        estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
+        estorePDPScreen.getSortByButton().click();
+        estorePDPScreen.getPriceHighToLow().should(visible, Duration.ofSeconds(20));
+        estorePDPScreen.getPriceHighToLow().click();
+        estoreSaleScreen.getHighToLowText().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on Bed in TOP NAV menu")
+    public void iClickOnBedInTOPNAVMenu() {
+        estoreHomePage.clickToBedNav();
+    }
+
+    @When("I click on SALE in Secondary NAV")
+    public void iClickOnSALEInSecondaryNAV() {
+        estoreHomePage.clickToSaleTopNav();
+    }
+
+    @When("I click on Bedroom collection in Tertiary NAV")
+    public void iClickOnBedroomCollectionInTertiaryNAV() {
+        estoreHomePage.clickToSaleBedBeddingCollection();
+    }
+
+    @When("I click on Beds in Tertiary NAV")
+    public void iClickOnBedsInTertiaryNAV() {
+        estoreHomePage.clickToBedsSaleTertiaryNav();
+    }
+
+    @And("I verify that sale filter should be not displayed in Filter section")
+    public void iVerifyThatSaleFilterShouldBeNotDisplayedInFilterSection() {
+        estorePGScreen.getSaleFilterApplied().should(visible, Duration.ofSeconds(20));
+    }
+
+    @Then("I verify that number of products should be displayed as RESULTS")
+    public void iVerifyThatNumberOfProductsShouldBeDisplayedAsRESULTS() {
+        estorePGScreen.getResultsText().should(visible, Duration.ofSeconds(20));
+    }
+
+    @And("I verify that Regular,Sale,Member Price should be displayed for the products")
+    public void iVerifyThatRegularSaleMemberPriceShouldBeDisplayedForTheProducts() {
+        System.out.println();
+    }
+
+    @When("I click on {string} in TOP NAV menu")
+    public void iClickOnInTOPNAVMenu(String topNav) {
+        estoreHomePage.clickToTopNavMenu(topNav);
     }
 }

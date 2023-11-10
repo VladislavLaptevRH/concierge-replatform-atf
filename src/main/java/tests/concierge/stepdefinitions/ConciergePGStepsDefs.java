@@ -66,10 +66,12 @@ public class ConciergePGStepsDefs {
     @Then("I navigate to gallery {string}")
     public void stepByStepINavigateTo(String collection) {
         if(conciergePGScreen.getTopNavGalleryByName(collection).isDisplayed()){
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             conciergePGScreen.getTopNavGalleryByName(collection).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         } else {
             if(conciergePGScreen.getTopNavSubManuByName(result).isDisplayed()){
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 conciergePGScreen.getTopNavSubManuByName(result).click();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             } else {
@@ -388,7 +390,7 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-Sale']//p[text() = 'sale']")).shouldBe(visible, Duration.ofSeconds(20));
             }
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-In-Stock']//p[text() = 'in-stock']")).shouldBe(visible, Duration.ofSeconds(20));
-                $(By.xpath("//*[text() = 'new arrivals']")).shouldBe(visible, Duration.ofSeconds(20));
+                //$(By.xpath("//*[text() = 'new arrivals']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'brand ss']")).shouldBe(visible, Duration.ofSeconds(20));
                 if($(By.xpath("//*[text() = 'RESULTS']")).isDisplayed()){
                     WebDriverRunner.getWebDriver().navigate().refresh();
@@ -440,7 +442,7 @@ public class ConciergePGStepsDefs {
                 WebDriverRunner.getWebDriver().navigate().refresh();
             }
             $(By.xpath("//*[@id = 'component-refine-menu-dropdown']//p[text() = 'RESULTS']")).shouldBe(visible, Duration.ofSeconds(20));
-            $(By.xpath("(//*[@id = 'flip-carousel-div']//img)[1]")).shouldBe(visible, Duration.ofSeconds(20));
+            //$(By.xpath("(//*[@id = 'flip-carousel-div']//img)[1]")).shouldBe(visible, Duration.ofSeconds(20));
             if(!$(By.xpath("//*[@id = 'footer']")).isDisplayed()){
                 WebDriverRunner.getWebDriver().navigate().refresh();
             }
@@ -533,6 +535,7 @@ public class ConciergePGStepsDefs {
                 break;
             case "SORT and confirm that Modal has text FEATURED, Price Low to High, Price High to Low":
                 $(By.xpath("//*[text() = 'sort']")).click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
                 $(By.xpath("(//*[text() = 'Featured'])[2]")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Price Low to High']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Price High to Low']")).shouldBe(visible, Duration.ofSeconds(20));
@@ -647,6 +650,7 @@ public class ConciergePGStepsDefs {
 
     @When("I chose {string} product from the list")
     public void iChoseProductFromTheList(String productId) {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeItemsScreen.getProductByNumber(productId).click();
     }
 

@@ -53,5 +53,5 @@ public class ConciergeAddressScreen {
 
     private final SelenideElement editBillingAddressCapital = $(By.xpath("//*[text() = 'BILLING ADDRESS']/following-sibling::div/*[text() = 'Edit']"));
 
-    private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'Billing Address']/following-sibling::div/*[text() = 'Edit']"));
+    private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'Billing Address']/following-sibling::div/*[text() = 'EDIT']"));
 }

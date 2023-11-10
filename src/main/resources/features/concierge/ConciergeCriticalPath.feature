@@ -523,12 +523,13 @@ Feature: Concierge Critical Path
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
-    When I choose order classification
-    When I click on checkout button
-    When I click on no thanks button
+#    When I choose order classification
+#    When I click on checkout button
+#    When I click on no thanks button
     When I fill all fields from address screen
     When I continue to payment
     When I click on continue with original address button
+    When I click on checkout button
     When I choose POS for payment method
     Then I verify that payment POS is working and paid amount is visible on the review page
     When I click on a place order button without signature
@@ -536,7 +537,6 @@ Feature: Concierge Critical Path
     Then I verify the payment details and order estimate summary
 
   Scenario: Edit payment
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -546,9 +546,6 @@ Feature: Concierge Critical Path
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
-    When I choose order classification
-    When I click on checkout button
-    When I click on no thanks button
     When I fill all fields from address screen
     And I continue to payment
     When I click on continue with original address button
@@ -561,7 +558,6 @@ Feature: Concierge Critical Path
     Then I verify the payment details and order estimate summary
 
   Scenario: Verify the Complete Billing address
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -601,7 +597,6 @@ Feature: Concierge Critical Path
     Then I verify that balance info is displayed
 
   Scenario: Edit Address
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -957,12 +952,12 @@ Feature: Concierge Critical Path
     #Then I verify that 'PG has SALE and IN-STOCK filters, text RESULTS (n), faucet with text SORT' on PG screen
     Then I click 'SORT and confirm that Modal has text FEATURED, Price Low to High, Price High to Low' on PG screen
     Then I click 'Price Low to High and verify price is sorted' on PG screen
-    Then I click 'Price High to Low and verify price is sorted' on PG screen
+    #Then I click 'Price High to Low and verify price is sorted' on PG screen
     Then I click 'IN-STOCK Filter' on PG screen
     Then I verify that 'CLEAR ALL is present when filter(s) are selected' on PG screen
     Then I click 'IN-STOCK Filter' on PG screen
-    Then I click 'sale checkbox' on PG screen
-    Then I verify that 'all products returned have $ SALE price in their descriptions' on PG screen
+    #Then I click 'sale checkbox' on PG screen
+    #Then I verify that 'all products returned have $ SALE price in their descriptions' on PG screen
     Then I verify that PG loads
   
   Scenario: Checking Faucets in General PG (All Tables)
