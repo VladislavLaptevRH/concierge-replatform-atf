@@ -256,6 +256,10 @@ public class EstoreCartPage {
 
     private final SelenideElement theThirdSkusBundle = $(By.xpath("//*[text()='70290760 WHCK']"));
 
+    public void verifyThatCartPageIsDisplayed(){
+        assertTrue(Hooks.getCurrentUrl().contains("shopping_cart"));
+    }
+
     public void verifyThatAllTheComponentsOfTheBundleAreAddedToCart() {
         theFirstSkusBundle.should(visible, Duration.ofSeconds(12));
         theSecondSkusBundle.should(visible, Duration.ofSeconds(12));
