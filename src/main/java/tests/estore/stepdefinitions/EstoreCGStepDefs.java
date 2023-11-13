@@ -109,7 +109,6 @@ public class EstoreCGStepDefs {
 
     @Then("I verify that estore PDP page is displayed")
     public void iVerifyThatEstorePDPPageIsDisplayed() {
-
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
         estoreItemPage.getAddToCartButton().should(visible, Duration.ofSeconds(40));
     }
@@ -387,5 +386,14 @@ public class EstoreCGStepDefs {
     @Then("I verify that {string} title is displayed on CG")
     public void iVerifyThatTitleIsDisplayedOnCG(String title) {
         estoreCGScreen.verifyThatTitleisDisplayedOnCg(title);
+    }
+
+    @Then("I verify that I navigate to CG Page successfully")
+    public void iVerifyThatINavigateToCGPageSuccessfully() {
+    }
+
+    @Then("I verify that swatches are not displayed below the product image")
+    public void iVerifyThatSwatchesAreNotDisplayedBelowTheProductImage() {
+        estoreCGScreen.verifyThatSwatches3upGridViewIsNotDisplayed();
     }
 }

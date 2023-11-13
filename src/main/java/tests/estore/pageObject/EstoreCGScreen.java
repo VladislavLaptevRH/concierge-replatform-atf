@@ -168,6 +168,10 @@ public class EstoreCGScreen {
         swatches3upGridView.should(Condition.visible, Duration.ofSeconds(12));
     }
 
+    public void verifyThatSwatches3upGridViewIsNotDisplayed() {
+        swatches3upGridView.shouldNot(Condition.visible, Duration.ofSeconds(12));
+    }
+
     public void verifyThatThreeGridViewIsDisplayed() {
         threeGridViewCg.should(Condition.visible, Duration.ofSeconds(12));
     }

@@ -841,6 +841,11 @@ public class EstorePdpStepDefs {
         $(By.xpath("//*[@id='optionSelect-prod18510007-Size']//*[contains(text(),'" + sizeOption + "')]")).should(visible, Duration.ofSeconds(12));
     }
 
+    @And("I verify that PDP page url contains SALE=true")
+    public void iVerifyThatPDPPageUrlContainsSALETrue() {
+        assertTrue("PDP page url contains sale=true", Hooks.getCurrentUrl().contains("sale=true"));
+    }
+
 }
 
 
