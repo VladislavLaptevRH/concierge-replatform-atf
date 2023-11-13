@@ -177,9 +177,6 @@ public class Hooks {
         Configuration.reportsFolder = "target/screenshots";
         Configuration.browserCapabilities = options;
         WebDriverManager.chromedriver().setup();
-
-        open(url);
-        currentUrl = WebDriverRunner.url();
     }
 
     /**
