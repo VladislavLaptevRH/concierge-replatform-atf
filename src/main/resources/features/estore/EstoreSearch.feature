@@ -396,36 +396,3 @@ Feature: Estore Search
     When I go to estore item "sofas" from search field
     When I apply In stock to Sale filter
     And I verify sale prices on PG pages for sale items
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
