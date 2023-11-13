@@ -383,4 +383,9 @@ public class EstoreCGStepDefs {
     public void iVerifyThatImagesAreDisplayedOnCGForEstore() {
         estoreCGScreen.verifyThatImagesAreDisplayedOnCg();
     }
+
+    @Then("I verify that {string} title is displayed on CG")
+    public void iVerifyThatTitleIsDisplayedOnCG(String title) {
+        estoreCGScreen.verifyThatTitleisDisplayedOnCg(title);
+    }
 }

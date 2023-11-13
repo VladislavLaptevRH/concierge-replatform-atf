@@ -905,4 +905,9 @@ public class EstoreCartPageStepDefs {
     public void iVerifyThatAllTheComponentsOfTheBundleAreAddedToCart() {
         estoreCartPage.verifyThatAllTheComponentsOfTheBundleAreAddedToCart();
     }
+
+    @Then("I verify that cart page is displayed")
+    public void iVerifyThatCartPageIsDisplayed() {
+        estoreCartPage.verifyThatCartPageIsDisplayed();
+    }
 }

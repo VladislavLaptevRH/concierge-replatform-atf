@@ -15,12 +15,6 @@ Feature: Estore Search
     When I go to estore item "cribs" from search field
     Then I verify cribs title for estore
 
-  Scenario: Search product via SKU 17050044 EUCY
-    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
-    When I go to estore item "17050044 EUCY" from search field
-    Then I verify that search result "802-Gram Turkish Towel Collection" for search product via sku id is displayed
-
   Scenario: To verify search for random text
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
@@ -134,3 +128,45 @@ Feature: Estore Search
     When I go to estore item "table" from search field
     When I apply multiple facet on estore search page
 
+  Scenario: Verify No search results page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "QA Search Check" from search field
+    Then I verify that No search result message is displayed
+
+  Scenario: Verify that user is able to search with product name
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "TERZO ROUND DINING TABLE" from search field
+    Then I verify that products that match the search criteria should be displayed
+
+  Scenario:Verify that user is able to search with SKU id
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "17050044 EUCY" from search field
+    Then I verify that search result "802-Gram Turkish Towel Collection" for search product via sku id is displayed
+
+  Scenario: Verify that user is able to search with Product Id
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "prod2020027" from search field
+    Then I verify that "prod2020027" title is displayed on CG
+
+  Scenario: Verify that user is able to view price based on selected Pin code on PDP
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Mirrors" from search field
+    When I navigate to any estore fusion PG
+    When I update "CAN" postal code on pdp page
+    When I navigate back from "PDP" page
+    Then verify the product price as per the postal code
+
+  Scenario: Verify navigating back to Cart page from Search page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I open product page with "prod25280089" and "17050044" with "JNPR" for estore
+    When I click on add to cart estore button
+    When I click on view cart estore button
+    When I go to estore item "Mirrors" from search field
+    When I navigate back from "PDP" page
+    Then I verify that cart page is displayed
