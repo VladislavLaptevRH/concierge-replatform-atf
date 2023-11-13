@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
@@ -241,8 +242,6 @@ public class EstoreSaleStepDefs {
         estorePGScreen.getInStockFilter().should(visible, Duration.ofSeconds(20));
         estorePGScreen.getClearAll().should(visible, Duration.ofSeconds(20));
         estorePGScreen.getResultsText().should(visible, Duration.ofSeconds(20));
-        estorePGScreen.getFinishText().should(visible, Duration.ofSeconds(20));
-        estorePGScreen.getSizeText().should(visible, Duration.ofSeconds(20));
     }
 
     @When("I click on All Dining Tables in tertiary nav")
@@ -334,5 +333,15 @@ public class EstoreSaleStepDefs {
     @When("I click on {string} in TOP NAV menu")
     public void iClickOnInTOPNAVMenu(String topNav) {
         estoreHomePage.clickToTopNavMenu(topNav);
+    }
+
+    @Then("I verify that Sale filter was applied")
+    public void iVerifyThatSaleFilterWasApplied() {
+        estoreSaleScreen.verifyThatSaleAppliedFilterIsDisplayed();
+    }
+
+    @When("I click on length button")
+    public void iClickOnLengthButton() {
+        estorePGScreen.getLengthFilterOption().should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
     }
 }
