@@ -54,3 +54,13 @@ Feature: Footer Links
       | TEXT MESSAGING TERMS |
       | RH IN CANADA         |
       | SAFETY RECALLS       |
+
+  Scenario: Verify the country dropdown.
+    Given I log into eStore as "regular" user
+    When I scroll to bottom of Home Page
+    Then I verify country dropdown form footer
+
+  Scenario: Verify the copyright icon and year.
+    Given I log into eStore as "regular" user
+    When I scroll to bottom of Home Page
+    Then I verify the copyright icon and year
