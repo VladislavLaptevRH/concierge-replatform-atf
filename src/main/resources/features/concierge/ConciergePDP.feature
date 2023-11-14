@@ -1155,3 +1155,65 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'opens'
     Then Verify that "In Stock modal" 'zip code is present'
     Then I click on postal code and change country to 'Canada' and postal code to 'H1Y2B5' and verify confirmation message
+
+  Scenario: If we click on Re-enter postal code link, then it should displayed the enter postal code modal
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I chose '6' product from the list
+    Then I Verify that 'item title' is present
+    Then I am checking the re-enter zip code functional
+
+  Scenario: By default zipcode should be displayed for each line item in the Availability section as per Ip address or if no ip address found then static zipcode should be present
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
+    Then I chose '6' product from the list
+    Then I Verify that 'item title' is present
+    Then Verify that 'By default zipcode should be displayed for each line item in the Availability section as per Ip address or if no ip address found then static zipcode should be present'
+
+  Scenario: After selecting all dropdown options, Add to cart button should be enabled
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "57070740 CLNT" from search field
+    When I click on "view select items on sale" link
+    Then Verify that "Sale modal" 'opens'
+    Then Verify that "Sale modal" 'has title'
+    Then Verify that "Sale modal" 'has item#'
+    Then Verify that "Sale modal" 'ADD TO CART button should get enabled'
+
+  Scenario: After clicking on ATC button we can see Item added cart message modal with view cart button and Keep Shopping buton
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "57070740 CLNT" from search field
+    When I click on "view select items on sale" link
+    Then Verify that "Sale modal" 'opens'
+    Then Verify that "Sale modal" 'has title'
+    Then Verify that "Sale modal" 'has item#'
+    Then Verify that "Sale modal" 'has qty dropdown'
+    Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
+    Then Verify that "Sale modal" 'has an item can be added to cart from modal'
+
+  Scenario: After clicking on ATC button we can see Item added cart message modal with view cart button and Keep Shopping buton (in stock)
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I chose '6' product from the list
+    When I click on "view in stock items" link
+    Then Verify that "In Stock modal" 'opens'
+    Then Verify that "In Stock modal" 'has title'
+    Then Verify that "In Stock modal" 'has item#'
+    Then Verify that "In Stock modal" 'has qty dropdown'
+    Then Verify that "In Stock modal" 'has "add to cart" and "add to project" buttons'
+    Then Verify that "In Stock modal" 'has an item can be added to cart from modal'
