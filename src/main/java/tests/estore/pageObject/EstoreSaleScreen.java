@@ -150,8 +150,6 @@ public class EstoreSaleScreen {
     private SelenideElement highToLowText = $(By.xpath("//*[text()='Price High to Low']"));
 
 
-
-
     public void verifyThatBeddingCollectionTitleIsDisplayedOnCG() {
         beddingCollectionTitle.should(Condition.visible, Duration.ofSeconds(18));
     }
@@ -163,6 +161,10 @@ public class EstoreSaleScreen {
 
     public void verifyThatSaleAppliedFilterWasRemoved() {
         saleAppliedFilter.shouldNotBe(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatSaleAppliedFilterIsDisplayed() {
+        saleAppliedFilter.shouldBe(Condition.visible, Duration.ofSeconds(12));
     }
 
     public void verifyThatStockAppliedFilterWasRemoved() {
