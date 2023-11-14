@@ -74,6 +74,30 @@ public class EstoreHomePage {
 
     private final SelenideElement myAccountIconHomePage = $(By.id("container-accountNavMenu_account-btn"));
 
+    private final SelenideElement usCountySelection = $(By.xpath("//div[@data-value='US']"));
+
+    private final SelenideElement caCountySelection = $(By.xpath("//div[@data-value='CA']"));
+
+    private final SelenideElement gbCountySelection = $(By.xpath("//div[@data-value='GB']"));
+
+    private final SelenideElement deCountySelection = $(By.xpath("//div[@data-value='DE']"));
+
+    private final SelenideElement livingCategoryMenu = $(By.xpath("//span[text()='Living']"));
+
+    private final SelenideElement shopByRoomUnderCategory = $(By.xpath("//span[text()='Shop By Room']"));
+
+    private final SelenideElement livingRoomUnderShopByRoom = $(By.xpath("//span[text()='Living Rooms']"));
+
+    private final SelenideElement officeUnderShopByRoom = $(By.xpath("(//span[text()='Office'])[2]"));
+
+    private final SelenideElement livingPageTextAfterVisitShopByRoomCat = $(By.xpath("(//p[text()='Living'])[2]"));
+
+    private final SelenideElement diningCategoryMenu = $(By.xpath("//span[text()='Dining']"));
+
+    private final SelenideElement diningRoomUnderShopByRoom = $(By.xpath("(//span[text()='Dining'])[2]"));
+
+    private final SelenideElement diningPageTextAfterVisitShopByRoomCat = $(By.xpath("(//p[text()='Dining'])[2]"));
+
     public void clickToTertiaryNav(String tertiaryNav) {
         $(By.xpath("//*[contains(@id,'rhrCtalogNavigationDetails_concepts-navigation')]//span[text()='" + tertiaryNav + "']"))
                 .should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
@@ -123,6 +147,14 @@ public class EstoreHomePage {
     private SelenideElement linivngTopNavMenu = $(By.xpath("//*[@id='container-rhrheader-rhr-catalogNav_catalogNav-cat160024']//span"));
 
     private SelenideElement sectionalsTopNavMenu = $(By.xpath("//*[@id='rhrCtalogNavigationDetails_concepts-navigation-cat28650036']//span"));
+
+    private SelenideElement  countySelectionDropDown = $(By.xpath("(//*[@id='Grommet/Arrow'])[2]"));
+
+    private SelenideElement confirmButton = $(By.xpath("//span[text()='CONFIRM']"));
+
+    private SelenideElement copyRightIcon =  $(By.xpath("//span[contains(text(),'© ')]"));
+
+    private SelenideElement yearIcon =  $(By.xpath("//span[contains(.,'2023')]"));
 
 
     public void clickToSectionalsTopNavMenu() {

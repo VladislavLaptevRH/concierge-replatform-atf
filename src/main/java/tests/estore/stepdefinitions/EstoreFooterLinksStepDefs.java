@@ -2,9 +2,12 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.testng.Assert;
 import tests.estore.pageObject.EstoreFooterScreen;
+import tests.estore.pageObject.EstoreHomePage;
 import tests.estore.pageObject.EstoreUserAccountPage;
 import tests.utility.Hooks;
 
@@ -23,6 +26,8 @@ public class EstoreFooterLinksStepDefs {
 
     EstoreFooterScreen estoreFooterScreen = new EstoreFooterScreen();
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
+
+    EstoreHomePage estoreHomePage = new EstoreHomePage();
     @Then("I verify that I'm able to access {string}")
     public void iVerifyThatIMAbleToAccess(String link) {
 //        sleep(3000);
@@ -192,5 +197,29 @@ public class EstoreFooterLinksStepDefs {
 
             }
         }
+    }
+
+    @When("I scroll to bottom of Home Page")
+    public void iScrollDownToBottom(){
+        estoreHomePage.getCountySelectionDropDown().should(visible).scrollIntoView(true);
+    }
+
+    @Then("I verify country dropdown form footer")
+    public void iVerifyCountyDropDownFromFooter(){
+        Assert.assertTrue(estoreHomePage.getCountySelectionDropDown().isDisplayed());
+        estoreHomePage.getCountySelectionDropDown().click();
+        Assert.assertTrue(estoreHomePage.getUsCountySelection().isDisplayed());
+        Assert.assertTrue(estoreHomePage.getCaCountySelection().isDisplayed());
+        Assert.assertTrue(estoreHomePage.getGbCountySelection().isDisplayed());
+        Assert.assertTrue(estoreHomePage.getDeCountySelection().isDisplayed());
+
+        estoreHomePage.getGbCountySelection().click();
+        estoreHomePage.getConfirmButton().click();
+    }
+
+    @Then("I verify the copyright icon and year")
+    public void iVerifyCopyRightAndYearIcon(){
+        Assert.assertTrue(estoreHomePage.getCopyRightIcon().isDisplayed());
+        Assert.assertTrue(estoreHomePage.getYearIcon().isDisplayed());
     }
 }

@@ -3,12 +3,14 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.DragAndDropOptions;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.testng.Assert;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.estore.pageObject.EstoreHomePage;
 import tests.estore.pageObject.EstoreSearchScreen;
@@ -251,5 +253,28 @@ public class EstoreHomePageStepDefs {
     @Then("I verify that my account icon is displayed")
     public void iVerifyThatMyAccountIconIsDisplayed() {
         estoreHomePage.verifyThatAccountIconIsDisplayed();
+    }
+
+    @Then("I verify the shop by room under the LIVING top navigation")
+    public void iVerifyTheSHopByRoomUnderTheLivingTopNavigation(){
+        Assert.assertTrue(estoreHomePage.getLivingCategoryMenu().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getLivingCategoryMenu().click();
+        Assert.assertTrue(estoreHomePage.getShopByRoomUnderCategory().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getShopByRoomUnderCategory().click();
+        Assert.assertTrue(estoreHomePage.getLivingRoomUnderShopByRoom().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getOfficeUnderShopByRoom().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getLivingRoomUnderShopByRoom().click();
+        Assert.assertTrue(estoreHomePage.getLivingPageTextAfterVisitShopByRoomCat().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
+    @Then("I verify the shop by room under the DINING top navigation")
+    public void iVerifyTheSHopByRoomUnderTheDiningTopNavigation(){
+        Assert.assertTrue(estoreHomePage.getDiningCategoryMenu().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getDiningCategoryMenu().click();
+        Assert.assertTrue(estoreHomePage.getShopByRoomUnderCategory().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getShopByRoomUnderCategory().click();
+        Assert.assertTrue(estoreHomePage.getDiningRoomUnderShopByRoom().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getDiningRoomUnderShopByRoom().click();
+        Assert.assertTrue(estoreHomePage.getDiningPageTextAfterVisitShopByRoomCat().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
     }
 }
