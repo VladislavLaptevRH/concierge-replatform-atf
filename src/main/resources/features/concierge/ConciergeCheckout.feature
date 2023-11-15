@@ -128,3 +128,32 @@ Feature: Concierge Checkout flow
 	When I click on checkout button
 	Then I verify that contract client price displayed as total price
 
+  Scenario: Verify the saved addresses, ship to - bill to - sold to from SF in address page for a client with primary and secondary addresses - trade and contract
+	Given I log into Concierge as "associate"
+	When I choose country for concierge from footer
+	When I remove all items from cart via UI
+	When I remove client from header
+	When I add item to cart via API
+	When I open cart
+	When I choose order classification
+	And I click on checkout button
+	And I click on no thanks button
+	And I choose client who is a "Trade"
+	And I click on checkout button
+	Then I verify sold-to, billing, shipping address on address page
+
+  Scenario: Verify save edits in address page, navigate to payment page and come back to address page - saved address should stick
+	Given I log into Concierge as "associate"
+	When I remove all items from cart via UI
+	When I remove client from header
+	When I add item to cart via API
+	When I open cart
+	When I choose order classification
+	When I click on checkout button
+	When I click on no thanks button
+	When I choose client who is a "Member"
+	When I fill all fields from address screen for checking zip code
+	And I continue to payment
+	When I click on continue with original address button
+	Then Verify that after come back to address page from payment page ship to and bill to address is showing
+
