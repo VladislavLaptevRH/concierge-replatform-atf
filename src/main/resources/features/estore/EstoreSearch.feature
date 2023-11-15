@@ -81,7 +81,7 @@ Feature: Estore Search
     When I goes to estore cart for estore
     When I verify for back button from cart page
 
-  Scenario Outline: Verify the 1,2 and 3 grid
+  Scenario Outline: Verify Search Page - Grid
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to estore item "white and blue corner leather sofa" from search field
@@ -390,9 +390,156 @@ Feature: Estore Search
     When I go to the sale page with "sofas" on estore
     Then I verify that prices for the VIEW SELECT ITEMS ON SALE on PG and the sale page
 
+
   Scenario: Verify Search Page - Pricing format
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to estore item "sofas" from search field
     When I apply In stock to Sale filter
     And I verify sale prices on PG pages for sale items
+
+  Scenario: Verify the presence of Search icon in the Homepage
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the CG Page
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I goes to estore collection page
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the PG Page
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "towels" from search field
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the PDP Page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the Cart Page
+    Given I log into eStore as "regular" user
+    When I choose country for concierge from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+#  Scenario: Verify the presence of Search icon in the My Account Pages - Order History, Wishlist, Membership, Gift Registry, Profile
+  Scenario: Verify the presence of Search icon in the My Account Pages - Order History
+    Given I log into eStore as "member" user
+    When I choose country for eStore from footer
+    When I click on estore my account icon
+    When I click on estore order history
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the My Account Pages - Wishlist
+    Given I log into eStore as "wishlist-registered" user
+    When I choose country for eStore from footer
+    When I navigate to the wishlist
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the My Account Pages - Membership
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I goes to my account for estore
+    When I click on estore my account icon for guest user
+    When I navigate to the member tab
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the My Account Pages - Gift Registry
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore my account icon for guest user
+    When I click on the "gift-registry" from my account dropdown
+    Then I verify that "gift-registry" is available for eStore
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the My Account Pages - Profile
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I goes to my account for estore
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the My Account Pages - Address Book
+    Given I log into eStore as "noaddresses" user
+    When I choose country for eStore from footer
+    When I goes to my account for estore
+    When I click on my account button if page is not loaded
+    When I click on estore my account button
+    When I click on address book estore button
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the My Account Pages - Payment Methods
+    Given I log into eStore as "addnewpayment" user
+    When I choose country for eStore from footer
+    When I go to profile payment method
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  #Details & Tracking,
+  Scenario: Verify the presence of Search icon in the My Account Pages - Billing Summary
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore my account icon
+    When I click on estore order history
+    Then I verify the billing summary link for order history
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the My Account Pages - Details & Tracking
+    Given I log into eStore as "member" user
+    When I choose country for eStore from footer
+    When I goes to my account for estore
+    When I click on my account button if page is not loaded
+    When I click on estore my account icon
+    When I click on estore order history
+    Then I verify order date and order total fields
+    When I click on details and tracking order history
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify Search Page - Results count
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that number of products should be displayed as RESULTS
+
+  Scenario: Verify Search Page load
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+    When I scroll on the page till back to top button is visible
+    Then I verify that back to top button is clickable
+
+  Scenario: Verify Search Page
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+    And I verify that default sort order should be featured
+    Then I verify that two grids are default view in PG
+    And I verify that RH MEMBERS PROGRAM SAVE 25% ON EVERYTHING message is displayed on top of the page
+
+
+
+
+
+

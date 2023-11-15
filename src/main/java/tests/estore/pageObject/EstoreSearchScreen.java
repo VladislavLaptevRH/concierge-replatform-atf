@@ -5,6 +5,8 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$;
 
 @Getter
@@ -50,6 +52,14 @@ public class EstoreSearchScreen {
 
     private SelenideElement save70 = $(By.xpath("//*[text()=' 70%']"));
 
+    private SelenideElement save25EverythingMessage = $(By.xpath("//*[text()='SAVE 25% ON EVERYTHING*']"));
+
+    private SelenideElement rhMemberProgramMessage = $(By.xpath("//*[text()='RH MEMBERS PROGRAM']"));
+
+    public void verifyThatRhMembersProgramSaveMessageIsDisplayed(){
+        save25EverythingMessage.should(Condition.visible, Duration.ofSeconds(12));
+        rhMemberProgramMessage.should(Condition.visible, Duration.ofSeconds(12));
+    }
     public void verifyThatDefaultGridIsDisplayed() {
         defaultGridElement.should(Condition.visible);
     }

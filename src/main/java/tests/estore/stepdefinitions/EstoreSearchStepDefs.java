@@ -300,4 +300,9 @@ public class EstoreSearchStepDefs {
     public void iClickOnLengthValue(int arg0) {
         estorePGScreen.clickOnlength5Value();
     }
+
+    @And("I verify that RH MEMBERS PROGRAM SAVE {int}% ON EVERYTHING message is displayed on top of the page")
+    public void iVerifyThatRHMEMBERSPROGRAMSAVEONEVERYTHINGMessageIsDisplayedOnTopOfThePage(int arg0) {
+        estoreSearchScreen.verifyThatRhMembersProgramSaveMessageIsDisplayed();
+    }
 }
