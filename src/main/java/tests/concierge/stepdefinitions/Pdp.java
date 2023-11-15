@@ -1519,6 +1519,7 @@ public class Pdp {
                 if(!pdpScreen.getZipCode().isDisplayed()){
                     WebDriverRunner.getWebDriver().navigate().refresh();
                 }
+                with().pollInterval(2, SECONDS).await().until(() -> true);
                 pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
                 pdpScreen.getZipCode().click();
                 pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
