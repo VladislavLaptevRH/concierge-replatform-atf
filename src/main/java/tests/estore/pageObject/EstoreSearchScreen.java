@@ -56,10 +56,26 @@ public class EstoreSearchScreen {
 
     private SelenideElement rhMemberProgramMessage = $(By.xpath("//*[text()='RH MEMBERS PROGRAM']"));
 
-    public void verifyThatRhMembersProgramSaveMessageIsDisplayed(){
+    private SelenideElement startingAt = $(By.xpath("(//*[text()='Starting at'])[1]"));
+
+    private SelenideElement memberText = $(By.xpath("(//*[text()='Member'])[1]"));
+
+    private SelenideElement regularText = $(By.xpath("(//*[text()='Regular'])[1]"));
+
+    private SelenideElement customerExperienceLink = $(By.xpath("//a[@data-testid='customer-service-link']"));
+
+
+    public void verifyPriceFormat() {
+        startingAt.should(Condition.visible, Duration.ofSeconds(12));
+        memberText.should(Condition.visible, Duration.ofSeconds(12));
+        regularText.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatRhMembersProgramSaveMessageIsDisplayed() {
         save25EverythingMessage.should(Condition.visible, Duration.ofSeconds(12));
         rhMemberProgramMessage.should(Condition.visible, Duration.ofSeconds(12));
     }
+
     public void verifyThatDefaultGridIsDisplayed() {
         defaultGridElement.should(Condition.visible);
     }

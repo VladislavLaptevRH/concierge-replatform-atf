@@ -390,13 +390,14 @@ Feature: Estore Search
     When I go to the sale page with "sofas" on estore
     Then I verify that prices for the VIEW SELECT ITEMS ON SALE on PG and the sale page
 
-
   Scenario: Verify Search Page - Pricing format
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to estore item "sofas" from search field
     When I apply In stock to Sale filter
     And I verify sale prices on PG pages for sale items
+    Then I verify pricing format for product
+    And I verify that message "VIEW SELECT ITEMS ON SALE" is displayed
 
   Scenario: Verify the presence of Search icon in the Homepage
     Given I log into eStore as "regular" user
@@ -537,6 +538,47 @@ Feature: Estore Search
     And I verify that default sort order should be featured
     Then I verify that two grids are default view in PG
     And I verify that RH MEMBERS PROGRAM SAVE 25% ON EVERYTHING message is displayed on top of the page
+
+  Scenario: Verify Search Page - Grid retention
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "sofas" from search field
+    Then I validate "2","2" and "2" grid view should work
+    When I go to estore item "tables" from search field
+    Then I verify that page is displayed with the previous grid selected
+
+  Scenario: Verify Search page - Product Info
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    Then I verify that search result "Sofas" for search product via product name is displayed
+    And I verify that message "Available in multiple sizes & leathers" is displayed
+    Then I verify price on PG after In-stock filter was applied
+    And I verify that message "VIEW SELECT ITEMS ON SALE" is displayed
+
+  Scenario: Verify PDP for the product where all skus are on sale
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    When I apply In stock to Sale filter
+    When I navigate to any estore fusion PG
+    Then verify the product price as per the postal code
+
+  Scenario: Verify No search results page - Customer Experience
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "QA Search Check" from search field
+    When I click on Customer Experience link
+    Then I verify that Customer Service page is displayed
+
+
+
+
+
+
+
+
+
 
 
 
