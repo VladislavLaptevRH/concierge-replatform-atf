@@ -570,18 +570,3 @@ Feature: Estore Search
     When I go to estore item "QA Search Check" from search field
     When I click on Customer Experience link
     Then I verify that Customer Service page is displayed
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
