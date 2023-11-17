@@ -141,3 +141,28 @@ Feature: Concierge PG Page
     Then I verify sofa search page is displayed
     Then I select IN-STOCK box
     Then I clear all and confirm the applied option is removed
+
+  @vlad
+  Scenario: Search Suggestion should be removed
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I search with the 'sof' product and observe the absent auto suggestions on the dashboard search field
+    Then I search with the 'sof' product and observe the absent auto suggestions on the search sidebar
+
+  @vlad
+  Scenario: Filters
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "sofa" from search field
+    Then I verify sofa search page is displayed
+    Then I verify that 'Filters such as Material Filters, Size Filters, Brand' on search page
+
+  @vlad
+  Scenario: Filters after Cross Brand Search
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "sofa" from search field
+    Then I verify sofa search page is displayed
+    Then I click on 'BRAND facet' button on search page
+    Then I click on 'select any brand' button on search page
+    Then I verify that 'Filters such as Material Filters, Size Filters, Brand' on search page
