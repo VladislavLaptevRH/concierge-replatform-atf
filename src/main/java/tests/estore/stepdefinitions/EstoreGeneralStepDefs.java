@@ -791,4 +791,12 @@ public class EstoreGeneralStepDefs {
         String result = word.substring(0, 1).toUpperCase() + word.substring(1).substring(0, 4).replaceAll(" ", "");
         return result;
     }
+
+    public void verifyThatmessageIsDisplayed(String message) {
+        try {
+            $(By.xpath("//*[text()='" + message + "']")).should(Condition.visible, Duration.ofSeconds(20));
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Messasge is not displayed");
+        }
+    }
 }

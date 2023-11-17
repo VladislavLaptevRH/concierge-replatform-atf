@@ -11,6 +11,7 @@ import org.openqa.selenium.Keys;
 import org.testng.AssertJUnit;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -28,6 +29,8 @@ public class EstoreSearchStepDefs {
     EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
     EstoreItemPage estoreItemPage = new EstoreItemPage();
     EstorePGScreen estorePGScreen = new EstorePGScreen();
+
+    EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
 
     @When("I go to estore item {string} from search field")
     public void iGoToItemFromEstoreSearchField(String arg0) {
@@ -304,5 +307,25 @@ public class EstoreSearchStepDefs {
     @And("I verify that RH MEMBERS PROGRAM SAVE {int}% ON EVERYTHING message is displayed on top of the page")
     public void iVerifyThatRHMEMBERSPROGRAMSAVEONEVERYTHINGMessageIsDisplayedOnTopOfThePage(int arg0) {
         estoreSearchScreen.verifyThatRhMembersProgramSaveMessageIsDisplayed();
+    }
+
+    @And("I verify that message {string} is displayed")
+    public void iVerifyThatMessageIsDisplayed(String message) {
+        estoreGeneralStepDefs.verifyThatmessageIsDisplayed(message);
+    }
+
+    @Then("I verify pricing format for product")
+    public void iVerifyPricingFormatForProduct() {
+        estoreSearchScreen.verifyPriceFormat();
+    }
+
+    @Then("I verify that Customer Service page is displayed")
+    public void iVerifyThatCustomerServicePageIsDisplayed() {
+        assertTrue("Customer service page is displayed", Hooks.getCurrentUrl().contains("customer-service"));
+    }
+
+    @When("I click on Customer Experience link")
+    public void iClickOnCustomerExperienceLink() {
+        estoreSearchScreen.getCustomerExperienceLink().should(visible, Duration.ofSeconds(9)).click(ClickOptions.usingJavaScript());
     }
 }
