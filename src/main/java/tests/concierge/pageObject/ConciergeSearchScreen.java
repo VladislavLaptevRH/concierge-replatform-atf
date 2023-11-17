@@ -14,7 +14,10 @@ public class ConciergeSearchScreen {
     private final SelenideElement sizeFilter = $(By.xpath("//*[text() = 'Size']"));
     private final SelenideElement materialFilter = $(By.xpath("//*[text() = 'Material']"));
     private final SelenideElement brandFilter = $(By.xpath("//*[text() = 'brand ss']"));
-    private final SelenideElement brandFilterInteriorsCheckBox = $(By.xpath(" //*[@id = 'refinementOptionData_checkbox-Interiors']"));
+    private final SelenideElement brandFilterInteriorsCheckBox = $(By.xpath("//*[@id = 'refinementOptionData_checkbox-Interiors']"));
+    private final SelenideElement dashboardSearchButton = $(By.xpath("//button[contains(@class,'MuiButton-containedSizeLarge')]"));
+    private final SelenideElement leftSidebarSearchButton = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[4]"));
+    private final SelenideElement seeAllResultSearchButton = $(By.xpath(" //*[text() = 'SEE ALL RESULTS']"));
 
 
     public SelenideElement getTextByValue(String arg) {
