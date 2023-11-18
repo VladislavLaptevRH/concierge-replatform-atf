@@ -53,13 +53,37 @@ Feature: Estore Production Test
 	  | CA      |
 	  | GB      |
 
-#  Scenario Outline: Verify PDP
-#	Given I log into eStore as "prod" user
-#	When I choose country "<country>" for eStore from footer
-#	When I open product page with "prod13800635" and "17050042" with "BLK" for estore
-#	Then I verify that PDP screen is displayed
-#	Examples:
-#	  | country |
-#	  | US      |
-#	  | CA      |
-#	  | GB      |
+  Scenario Outline: Verify PDP
+	Given I log into eStore as "prod" user
+	When I choose country "<country>" for eStore from footer
+	When I go to estore item "sofa" from search field
+	Then I verify that PG page is displayed with all filter options
+    Then I remember the name of the first product and regular, member prices in PG and navigate to that PDP
+    Then I Verify that the PDP title is present and prices match those prices in PG
+	Examples:
+	  | country |
+	  | US      |
+	  | CA      |
+	  | GB      |
+
+  Scenario Outline: Verify that user is able to buy item for estore
+	Given I log into eStore as "prod" user
+	When I choose country "<country>" for eStore from footer
+	When I remove all items from estore cart
+	When I go to estore item "sofa" from search field
+	Then I verify that PG page is displayed with all filter options
+	Then I remember the name of the first product and regular, member prices in PG and navigate to that PDP
+	Then I Verify that the PDP title is present and prices match those prices in PG
+	When I click on add to cart estore button
+	And I click on view cart estore button
+	When I click on estore checkout button
+	And I click on estore no thanks button
+	When I fill estore shipping address
+	When I click on same as estore shipping address checkbox
+	When I click on continue to payment estore button
+	When I click on continue with original address estore button
+	Examples:
+	  | country |
+	  | US      |
+	  | CA      |
+	  | GB      |
