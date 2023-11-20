@@ -86,7 +86,7 @@ Feature: Estore Cart Page
     When I open estore cart
     Then I verify UFD in cart
 
-  Scenario: eStore - Add Surcharge item to Cart
+  Scenario: eStore - Verify the Surcharge for Large furniture items
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
@@ -323,3 +323,16 @@ Feature: Estore Cart Page
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     Then I verify that new billing address is displayed on payment page
+
+  Scenario: Verify the qty updates and pricing update for line item and Summary
+    Given I log into eStore as "nonmember" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod25280089" and "17050044" with "JNPR" for estore
+    When I update item quantity in estore pdp
+    When I click on add to cart estore button
+    When I click on view cart estore button
+    Then that was added "2" quantity of item in cart
+    And I verify the total price for product in the cart
+    When I change item quantity to "1" for "prod19500002" and "17050045" with "NCKL" for estore
+    And I verify the total price for product in the cart
