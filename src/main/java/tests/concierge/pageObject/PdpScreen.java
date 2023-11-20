@@ -242,7 +242,9 @@ public class PdpScreen {
 
     private final ElementsCollection priceForMemberCollection = $$(By.xpath("//*[@id='rh-price-range-display']/div[2]/p[@data-testid='price-for-member']"));
 
-    private final ElementsCollection priceForRegularCollection = $$(By.xpath("//*[@id='rh-price-range-display']/div[2]/p[@data-testid='price-for-regular']"));
+    private final SelenideElement results = $(By.xpath("//*[@id = 'component-refine-menu-dropdown']//p[text() = 'RESULTS']"));
+
+    private final ElementsCollection priceForRegularCollection = $$(By.xpath("//*[@id='rh-price-range-display']//p[@data-testid='price-for-regular']"));
 
     private final ElementsCollection YAMLPriceForTrade = $$(By.xpath("//*[text() = 'YOU MIGHT ALSO LIKE']/..//*[@data-testid='price-for-trade']"));
 

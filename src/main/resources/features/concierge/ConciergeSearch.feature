@@ -171,8 +171,6 @@ Feature: Concierge PG Page
     When I go to item "sofa" from search field
     Then I verify sofa search page is displayed
     Then Pricing should be shown against each item
-    Then I click 'Price Low to High and verify price is sorted' on PG screen
-    Then I click 'Price High to Low and verify price is sorted' on PG screen
 
   @vlad
   Scenario: Verify Sort after search - (Featured/Price Low to Hight/Price High to Low)
@@ -187,8 +185,7 @@ Feature: Concierge PG Page
   Scenario: Verify the in-stock facet selection and in-stock product
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I go to item "sofa" from search field
-    Then I verify sofa search page is displayed
+    When I go to item "outdoor sofas" from search field
     Then I select IN-STOCK box
     Then I verify IN-STOCK filter is applied
     Then Pricing should be shown against each item

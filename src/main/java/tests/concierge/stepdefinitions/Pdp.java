@@ -1140,14 +1140,23 @@ public class Pdp {
     @Then("Pricing should be shown against each item")
     public void pricingShouldBeShownAgainstEachItem() {
         pdpScreen.getItemsPerPage().scrollIntoView(true);
-       assertEquals(Integer.parseInt(pdpScreen.getItemsPerPage().getText()), pdpScreen.getPriceForMemberCollection().size());
+        if(Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")) > 24) {
+            assertEquals(Integer.parseInt(pdpScreen.getItemsPerPage().getText()), pdpScreen.getPriceForMemberCollection().size());
+        } else {
+            assertEquals(Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")), pdpScreen.getPriceForMemberCollection().size());
+        }
     }
 
     @Then("Regular and Member prices should be displayed against each product")
     public void regularAndMemberPricesShouldBeDisplayedAgainstEachProduct() {
         pdpScreen.getItemsPerPage().scrollIntoView(true);
-        assertEquals(Integer.parseInt(pdpScreen.getItemsPerPage().getText()), pdpScreen.getPriceForMemberCollection().size());
-        assertEquals(Integer.parseInt(pdpScreen.getItemsPerPage().getText()), pdpScreen.getPriceForRegularCollection().size());
+        if(Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")) > 24) {
+            assertEquals(Integer.parseInt(pdpScreen.getItemsPerPage().getText()), pdpScreen.getPriceForMemberCollection().size());
+            assertEquals(Integer.parseInt(pdpScreen.getItemsPerPage().getText()), pdpScreen.getPriceForRegularCollection().size());
+        } else {
+            assertEquals(Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")), pdpScreen.getPriceForMemberCollection().size());
+            assertEquals(Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")), pdpScreen.getPriceForRegularCollection().size());
+        }
     }
 
     @Then("I chose {string} product on the page")

@@ -568,8 +568,8 @@ public class ConciergePGStepsDefs {
                 break;
             case "Price High to Low and verify price is sorted":
                 with().pollInterval(5, SECONDS).await().until(() -> true);
-                $(By.xpath("//*[text() = 'sort']")).click();
-                $(By.xpath("//*[text() = 'Featured']")).click();
+                conciergePGScreen.getSort().click();
+                conciergePGScreen.getFeaturedFilter().click();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 IConfirmThatPageLoads();
                 beforeSortingRegularItems =  $$(By.xpath("//*[@data-testid = 'price-for-regular']")).stream()
