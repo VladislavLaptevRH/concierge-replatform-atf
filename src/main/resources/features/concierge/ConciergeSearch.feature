@@ -142,14 +142,12 @@ Feature: Concierge PG Page
     Then I select IN-STOCK box
     Then I clear all and confirm the applied option is removed
 
-  @vlad
   Scenario: Search Suggestion should be removed
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I search with the 'sof' product and observe the absent auto suggestions on the dashboard search field
     Then I search with the 'sof' product and observe the absent auto suggestions on the search sidebar
 
-  @vlad
   Scenario: Filters
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -157,7 +155,6 @@ Feature: Concierge PG Page
     Then I verify sofa search page is displayed
     Then I verify that 'Filters such as Material Filters, Size Filters, Brand' on search page
 
-  @vlad
   Scenario: Filters after Cross Brand Search
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -166,3 +163,84 @@ Feature: Concierge PG Page
     Then I click on 'BRAND facet' button on search page
     Then I click on 'select any brand' button on search page
     Then I verify that 'Filters such as Material Filters, Size Filters, Brand' on search page
+
+  @vlad
+  Scenario: Pricing
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "sofa" from search field
+    Then I verify sofa search page is displayed
+    Then Pricing should be shown against each item
+    Then I click 'Price Low to High and verify price is sorted' on PG screen
+    Then I click 'Price High to Low and verify price is sorted' on PG screen
+
+  @vlad
+  Scenario: Verify Sort after search - (Featured/Price Low to Hight/Price High to Low)
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "sofa" from search field
+    Then I verify sofa search page is displayed
+    Then I click 'Price Low to High and verify price is sorted' on PG screen
+    Then I click 'Price High to Low and verify price is sorted' on PG screen
+
+  @vlad
+  Scenario: Verify the in-stock facet selection and in-stock product
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "sofa" from search field
+    Then I verify sofa search page is displayed
+    Then I select IN-STOCK box
+    Then I verify IN-STOCK filter is applied
+    Then Pricing should be shown against each item
+
+  @vlad
+  Scenario: By searching couch, Verify Sofa products too in search
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "couch" from search field
+    Then Sofa products too should be searched
+
+  @vlad
+  Scenario: In displayed products regular and member prices should be displayed
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "sofa" from search field
+    Then I verify sofa search page is displayed
+    Then Regular and Member prices should be displayed against each product
+
+  @vlad
+  Scenario: Verify the sort: High to low
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "sofa" from search field
+    Then I verify sofa search page is displayed
+    Then I click 'Price High to Low and verify price is sorted' on PG screen
+
+  @vlad
+  Scenario: Verify the sort: Low to High
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "sofa" from search field
+    Then I verify sofa search page is displayed
+    Then I click 'Price Low to High and verify price is sorted' on PG screen
+
+  @vlad
+  Scenario: Pricing on search result page(US and CAN)
+    Given I log into Concierge as "associate"
+    When I go to item "sofas" from search field
+    Then I chose '1' product from the list
+    Then I Verify that 'item title' is present
+    When I choose 'US' country
+    Then Verify that 'default US zip code is present in PDP'
+    Then Verify that 'price should be shown in US Dollar'
+    When I choose 'CA' country
+    Then I click on zip code and change it to 'H1Y2B5'
+    Then I verify that zip code in PDP is 'H1Y 2B5'
+    Then Verify that 'price in PDP changed from US$ to CA$'
+
+  @vlad
+  Scenario: To verify Search page is loading till footer
+    Given I log into Concierge as "associate"
+    When I go to item "sofa" from search field
+    Then I verify sofa search page is displayed
+    Then I verify that PG loads

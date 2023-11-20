@@ -303,7 +303,7 @@ public class ConciergePGStepsDefs {
                 }
                 $(By.xpath("(//*[@id = 'price-label']/following-sibling::p[1])[1]")).shouldBe(visible, Duration.ofSeconds(10));
                 for(int i = 1; i < $$(By.xpath("//*[@id = 'price-label']/following-sibling::p[1]")).size(); i++) {
-                    $(By.xpath("(//*[@id = 'price-label']/following-sibling::p[1])[" + i + "]")).shouldHave(text(" / "));;
+                    $(By.xpath("(//*[@id = 'price-label']/following-sibling::p[1])[" + i + "]")).shouldHave(text(" / "));
                 }
                 if($(By.xpath("(//*[@data-testid = 'price-for-member'])[1]")).isDisplayed()) {
                     for (int i = 1; i < $$(By.xpath("//*[@data-testid = 'price-for-member']")).size(); i++) {
@@ -316,11 +316,11 @@ public class ConciergePGStepsDefs {
                 }
                 $(By.xpath("(//*[@data-testid = 'price-for-sale'])[1]")).shouldBe(visible, Duration.ofSeconds(10));
                 for(int i = 1; i < $$(By.xpath("//*[@data-testid = 'price-for-sale']")).size(); i++) {
-                    $(By.xpath("(//*[@data-testid = 'price-for-sale'])[" + i + "]")).shouldHave(text("$"));;
+                    $(By.xpath("(//*[@data-testid = 'price-for-sale'])[" + i + "]")).shouldHave(text("$"));
                 }
                 $(By.xpath("(//*[@data-testid = 'price-for-regular'])[1]")).shouldBe(visible, Duration.ofSeconds(10));
                 for(int i = 1; i < $$(By.xpath("//*[@data-testid = 'price-for-regular']")).size(); i++) {
-                    $(By.xpath("(//*[@data-testid = 'price-for-regular'])[" + i + "]")).shouldHave(text("$"));;
+                    $(By.xpath("(//*[@data-testid = 'price-for-regular'])[" + i + "]")).shouldHave(text("$"));
                 }
                 if( $(By.xpath("(//*[@data-testid = 'price-label-member'])[1]")).isDisplayed()) {
                     for (int i = 1; i < $$(By.xpath("//*[@data-testid = 'price-label-member']")).size(); i++) {
@@ -333,11 +333,11 @@ public class ConciergePGStepsDefs {
                 }
                 $(By.xpath("(//*[@data-testid = 'price-label-regular'])[1]")).shouldBe(visible, Duration.ofSeconds(10));
                 for(int i = 1; i < $$(By.xpath("//*[@data-testid = 'price-label-regular']")).size(); i++) {
-                    $(By.xpath("(//*[@data-testid = 'price-label-regular'])[" + i + "]")).shouldHave(text("Regular"));;
+                    $(By.xpath("(//*[@data-testid = 'price-label-regular'])[" + i + "]")).shouldHave(text("Regular"));
                 }
                 $(By.xpath("(//*[contains(text(), 'Regular')])[2]")).shouldBe(visible, Duration.ofSeconds(10));
                 for(int i = 2; i < $$(By.xpath("//*[contains(text(), 'Regular')]")).size(); i++) {
-                    $(By.xpath("(//*[contains(text(), 'Regular')])[" + i + "]")).shouldHave(text("Regular"));;
+                    $(By.xpath("(//*[contains(text(), 'Regular')])[" + i + "]")).shouldHave(text("Regular"));
                 }
                 if($(By.xpath("(//*[contains(text(), 'Member')])[2]")).isDisplayed()) {
                     for (int i = 2; i < $$(By.xpath("//*[contains(text(), 'Member')]")).size(); i++) {

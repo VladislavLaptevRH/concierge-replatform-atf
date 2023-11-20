@@ -19,6 +19,7 @@ public class ConciergeSearchScreen {
     private final SelenideElement leftSidebarSearchButton = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[4]"));
     private final SelenideElement seeAllResultSearchButton = $(By.xpath(" //*[text() = 'SEE ALL RESULTS']"));
 
+    private final SelenideElement sofaFirstItem = $(By.xpath("(//*[contains(text(), 'Sofa')])[1]"));
 
     public SelenideElement getTextByValue(String arg) {
         String path = String.format(text, arg);

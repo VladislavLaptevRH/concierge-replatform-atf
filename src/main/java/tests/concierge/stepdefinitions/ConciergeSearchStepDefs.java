@@ -76,6 +76,11 @@ public class ConciergeSearchStepDefs {
             default: break;
         }
     }
+
+    @Then("Sofa products too should be searched")
+    public void sofaProductsShouldBeSearched(){
+        conciergeSearchScreen.getSofaFirstItem().should(visible, Duration.ofSeconds(15));
+    }
     @Then("I click on {string} button on search page")
     public void iClickOnSwitchButton(String button) {
         switch (button) {
