@@ -5,6 +5,8 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$;
 
 @Getter
@@ -49,6 +51,30 @@ public class EstoreSearchScreen {
     private SelenideElement upToText = $(By.xpath("//*[text()='up to']"));
 
     private SelenideElement save70 = $(By.xpath("//*[text()=' 70%']"));
+
+    private SelenideElement save25EverythingMessage = $(By.xpath("//*[text()='SAVE 25% ON EVERYTHING*']"));
+
+    private SelenideElement rhMemberProgramMessage = $(By.xpath("//*[text()='RH MEMBERS PROGRAM']"));
+
+    private SelenideElement startingAt = $(By.xpath("(//*[text()='Starting at'])[1]"));
+
+    private SelenideElement memberText = $(By.xpath("(//*[text()='Member'])[1]"));
+
+    private SelenideElement regularText = $(By.xpath("(//*[text()='Regular'])[1]"));
+
+    private SelenideElement customerExperienceLink = $(By.xpath("//a[@data-testid='customer-service-link']"));
+
+
+    public void verifyPriceFormat() {
+        startingAt.should(Condition.visible, Duration.ofSeconds(12));
+        memberText.should(Condition.visible, Duration.ofSeconds(12));
+        regularText.should(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatRhMembersProgramSaveMessageIsDisplayed() {
+        save25EverythingMessage.should(Condition.visible, Duration.ofSeconds(12));
+        rhMemberProgramMessage.should(Condition.visible, Duration.ofSeconds(12));
+    }
 
     public void verifyThatDefaultGridIsDisplayed() {
         defaultGridElement.should(Condition.visible);

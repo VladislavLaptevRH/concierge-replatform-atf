@@ -199,6 +199,9 @@ public class Pdp {
                    assertEquals(result, pdpScreen.getPdpPopUpInStockZipCode().getText());
                }
                break;
+           case  "ADD TO CART button should get enabled":
+               pdpScreen.getPdpModalEnabledAddToCartButton().shouldBe(visible, Duration.ofSeconds(15));
+
            default:
                break;
        }
@@ -605,6 +608,9 @@ public class Pdp {
                 assertEquals(result, pdpScreen.getPdpPopUpInStockZipCode().getText());
                 with().pollInterval(9, SECONDS).await().until(() -> true);
                 assertTrue(pdpScreen.getModalOnSaleItemsList().size() > 1);
+                break;
+            case  "By default zipcode should be displayed for each line item in the Availability section as per Ip address or if no ip address found then static zipcode should be present":
+               assertEquals(pdpScreen.getLinesItemsList().size(), pdpScreen.getZipcodeList().size());
                 break;
             default: break;
         }
@@ -1315,6 +1321,22 @@ public class Pdp {
         pdpScreen.getConfirmationMessagePostalCode().should(visible, Duration.ofSeconds(15));
     }
 
+    @Then("I am checking the re-enter zip code functional")
+    public void ImCheckingReEnterCodeFunctional() {
+        pdpScreen.getZipCode().should(visible, Duration.ofSeconds(5));
+        pdpScreen.getZipCode().click();
+        pdpScreen.getPdpZipCodeModalShippingCountry().click();
+        pdpScreen.getPdpZipCodeModalCanada().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(15));
+        pdpScreen.getPostalCode().setValue("H1Y2B5");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getConfirmationPostalCode().click();
+        pdpScreen.getReEnterZipCodeButton().should(visible, Duration.ofSeconds(15));
+        pdpScreen.getReEnterZipCodeButton().click();
+        pdpScreen.getPostalCodeModal().should(visible, Duration.ofSeconds(15));
+    }
+
 
 
     @Then("I verify that cart modal is displayed")
@@ -1497,6 +1519,7 @@ public class Pdp {
                 if(!pdpScreen.getZipCode().isDisplayed()){
                     WebDriverRunner.getWebDriver().navigate().refresh();
                 }
+                with().pollInterval(2, SECONDS).await().until(() -> true);
                 pdpScreen.getZipCode().should(visible, Duration.ofSeconds(40));
                 pdpScreen.getZipCode().click();
                 pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));

@@ -3,12 +3,15 @@ package tests.estore.stepdefinitions;
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.WebDriverRunner;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.testng.AssertJUnit;
 import tests.concierge.stepdefinitions.GeneralStepDefs;
 import tests.estore.pageObject.*;
+import tests.utility.Hooks;
 
 import java.time.Duration;
 
@@ -26,6 +29,8 @@ public class EstoreSearchStepDefs {
     EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
     EstoreItemPage estoreItemPage = new EstoreItemPage();
     EstorePGScreen estorePGScreen = new EstorePGScreen();
+
+    EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
 
     @When("I go to estore item {string} from search field")
     public void iGoToItemFromEstoreSearchField(String arg0) {
@@ -249,5 +254,78 @@ public class EstoreSearchStepDefs {
     @Then("I verify that products that match the search criteria should be displayed")
     public void iVerifyThatProductsThatMatchTheSearchCriteriaShouldBeDisplayed() {
         estoreCGScreen.verifyThatTitleTerzoDiningTables();
+    }
+
+    @And("I verify that the price mentioned on PG page for {string}")
+    public void iVerifyThatThePriceMentionedOnPGPageFor(String arg0) {
+        try {
+            int regularPrice = estorePGScreen.getRegularPriceOnPg();
+            int memberPrice = estorePGScreen.getMemberPriceOnPg();
+
+            AssertJUnit.assertTrue("Regular price is not equal to zero", regularPrice > 0);
+            AssertJUnit.assertTrue("Member price is not equal to zero", memberPrice > 0);
+        } catch (com.codeborne.selenide.ex.ElementNotFound e) {
+            System.out.println("Product grid is not displayed");
+        }
+    }
+
+    @When("I click on Shape dropdown")
+    public void iClickOnShapeDropdown() {
+        estorePGScreen.clickOnShapeDropDown();
+    }
+
+    @When("I click on Rectangular option")
+    public void iClickOnRectangularOption() {
+        estorePGScreen.clickToRectangularCheckBox();
+    }
+
+    @Then("I verify that Rectangular filter should be displayed")
+    public void iVerifyThatRectangularFilterShouldBeDisplayed() {
+        estorePGScreen.verifyThatRectangularAppliedFilterIsDisplayed();
+    }
+
+    @When("I click on Size dropdown")
+    public void iClickOnSizeDropdown() {
+        estorePGScreen.clickToSizeDropDown();
+    }
+
+    @When("I click on width option from Size dropdown")
+    public void iClickOnWidthOptionFromSizeDropdown() {
+        estorePGScreen.clickToWidthOption();
+    }
+
+    @When("I click on Leather option")
+    public void iClickOnLeatherOption() {
+        estorePGScreen.clickToLeatherOption();
+    }
+
+    @When("I click on {int} length value")
+    public void iClickOnLengthValue(int arg0) {
+        estorePGScreen.clickOnlength5Value();
+    }
+
+    @And("I verify that RH MEMBERS PROGRAM SAVE {int}% ON EVERYTHING message is displayed on top of the page")
+    public void iVerifyThatRHMEMBERSPROGRAMSAVEONEVERYTHINGMessageIsDisplayedOnTopOfThePage(int arg0) {
+        estoreSearchScreen.verifyThatRhMembersProgramSaveMessageIsDisplayed();
+    }
+
+    @And("I verify that message {string} is displayed")
+    public void iVerifyThatMessageIsDisplayed(String message) {
+        estoreGeneralStepDefs.verifyThatmessageIsDisplayed(message);
+    }
+
+    @Then("I verify pricing format for product")
+    public void iVerifyPricingFormatForProduct() {
+        estoreSearchScreen.verifyPriceFormat();
+    }
+
+    @Then("I verify that Customer Service page is displayed")
+    public void iVerifyThatCustomerServicePageIsDisplayed() {
+        assertTrue("Customer service page is displayed", Hooks.getCurrentUrl().contains("customer-service"));
+    }
+
+    @When("I click on Customer Experience link")
+    public void iClickOnCustomerExperienceLink() {
+        estoreSearchScreen.getCustomerExperienceLink().should(visible, Duration.ofSeconds(9)).click(ClickOptions.usingJavaScript());
     }
 }

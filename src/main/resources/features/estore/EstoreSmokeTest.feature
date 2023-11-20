@@ -1,5 +1,3 @@
-@estoreTestRun
-@Smoke @SmokeTest
 @estoreSmokeTest
 Feature: SmokeTest for eStore
 

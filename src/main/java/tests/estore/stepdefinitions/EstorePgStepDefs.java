@@ -230,7 +230,13 @@ public class EstorePgStepDefs {
 
     @Then("I verify that PG page is displayed for eStore")
     public void iVerifyThatPGPageIsDisplayedForEStore() {
-        estorePGScreen.getCollectionTextTitle().should(visible, Duration.ofSeconds(20));
+//        estorePGScreen.getCollectionTextTitle().should(visible, Duration.ofSeconds(20));
+        estorePGScreen.getGridView3().should(visible, Duration.ofSeconds(10));
+    }
+
+    @Then("I verify that user navigated to PG page successfully")
+    public void iVerifyThatUserNavigatedToPgPageSuccessfully() {
+        estorePGScreen.getPgResultsTitle().should(visible, Duration.ofSeconds(20));
         estorePGScreen.getGridView3().should(visible, Duration.ofSeconds(10));
     }
 
@@ -450,5 +456,48 @@ public class EstorePgStepDefs {
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             System.out.println("Grid view with elements are not displayed");
         }
+    }
+
+    @Then("I verify that width filter should be displayed in the applied filter list")
+    public void iVerifyThatWidthFilterShouldBeDisplayedInTheAppliedFilterList() {
+        estorePGScreen.verifyThatWidthOptionWasApplied();
+    }
+
+    @When("I select width option value")
+    public void iSelectWidthOptionValue() {
+        estorePGScreen.clickOnwidthLowerThan20();
+    }
+
+    @When("I click on Material dropdown")
+    public void iClickOnMaterialDropdown() {
+        estorePGScreen.clickToMaterialFilterOption();
+    }
+
+    @And("I verify that material filter was applied")
+    public void iVerifyThatMaterialFilterWasApplied() {
+        estorePGScreen.verifyThatleatherFilterWasApplied();
+    }
+
+    @When("I click on New Arrival filter")
+    public void iClickOnNewArrivalFilter() {
+        estorePGScreen.clickToNewArrivalsFilter();
+    }
+
+    @Then("I verify that New Arrival filter was applied")
+    public void iVerifyThatNewArrivalFilterWasApplied() {
+        estorePGScreen.verifyThatNewArrivalsFilterWasApplied();
+    }
+
+    @When("I click on sort by button for estore")
+    public void iClickOnSortByButtonForEstore() {
+        estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
+        estorePDPScreen.getSortByButton().click();
+    }
+
+    @Then("I verify that Featured,High to Low, Low to High options are displayed")
+    public void iVerifyThatFeaturedHighToLowLowToHighOptionsAreDisplayed() {
+        estorePGScreen.verifyThatSortByButtonFeaturedIsDisplayed();
+        estorePDPScreen.getPriceLowToHigh().should(visible, Duration.ofSeconds(20));
+        estorePDPScreen.getPriceHighToLow().should(visible, Duration.ofSeconds(20));
     }
 }

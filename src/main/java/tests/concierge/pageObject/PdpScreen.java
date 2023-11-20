@@ -64,6 +64,8 @@ public class PdpScreen {
     private final ElementsCollection saleList = $$(By.xpath("//*[contains(text() ,'SALE')]"));
     private final SelenideElement tradePrice = $(By.xpath("(//*[contains(@class, 'item-price__amount')])[1]"));
     private final SelenideElement colorOptions = $(By.xpath("//*[text() ='Color Options']"));
+
+    private final SelenideElement reEnterZipCodeButton = $(By.xpath("//*[text() ='RE-ENTER POSTAL CODE']"));
     private final SelenideElement regularPrice = $(By.xpath("//*[contains(@class,'item-price__amount') and text() = 'Regular']"));
     private final SelenideElement modalPrice = $(By.xpath(" (//*[contains(@class, 'item-price__amount')])[2]"));
 
@@ -411,6 +413,9 @@ public class PdpScreen {
 
     private final ElementsCollection inStockModalItemsList = $$(By.xpath("//*[@id = 'component-in-stock-product-card']"));
 
+    private final ElementsCollection linesItemsList = $$(By.xpath("//*[@id = 'component-rh-link']/p"));
+
+    private final ElementsCollection zipcodeList = $$(By.xpath(" //*[@data-testid = 'postal-code-dialog-opener']"));
     private final SelenideElement confirmationPostalCode = $(By.xpath("//*[@data-testid= 'submit-postal']"));
 
     private final SelenideElement confirmationChangePostalCode = $(By.xpath("//*[text() = 'CONFIRM CHANGE']"));

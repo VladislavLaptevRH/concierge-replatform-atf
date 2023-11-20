@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import lombok.Setter;
 import org.openqa.selenium.By;
+import tests.concierge.pageObject.ConciergeSearchScreen;
 import tests.estore.stepdefinitions.EstoreHomePageStepDefs;
 import tests.utility.Hooks;
 
@@ -22,6 +23,8 @@ import static org.testng.AssertJUnit.*;
 public class ConciergeSearchStepDefs {
 
     Pdp pdp = new Pdp();
+
+    ConciergeSearchScreen conciergeSearchScreen = new ConciergeSearchScreen();
 
     EstoreHomePageStepDefs estoreHomePageStepDefs = new EstoreHomePageStepDefs();
 
@@ -65,6 +68,11 @@ public class ConciergeSearchStepDefs {
             case "VIEW RH BABY & CHILD RESULTS button is present":
                 $(By.xpath("//*[@data-testid = 'add-to-cart-dialog-opener' ]/span[text() = 'VIEW RH BABY & CHILD RESULTS']")).should(Condition.visible, Duration.ofSeconds(15));
                 break;
+            case "Filters such as Material Filters, Size Filters, Brand":
+                conciergeSearchScreen.getMaterialFilter().should(Condition.visible, Duration.ofSeconds(15));
+                conciergeSearchScreen.getSizeFilter().should(Condition.visible, Duration.ofSeconds(15));
+                conciergeSearchScreen.getBrandFilter().should(Condition.visible, Duration.ofSeconds(15));
+                break;
             default: break;
         }
     }
@@ -77,6 +85,12 @@ public class ConciergeSearchStepDefs {
                 break;
             case "VIEW RH BABY & CHILD RESULTS":
                 $(By.xpath("//*[@data-testid = 'add-to-cart-dialog-opener' ]/span[text() = 'VIEW RH BABY & CHILD RESULTS']")).click();
+                break;
+            case "BRAND facet":
+               conciergeSearchScreen.getBrandFilter().click();
+                break;
+            case "select any brand":
+                conciergeSearchScreen.getBrandFilterInteriorsCheckBox().click();
                 break;
             default: break;
         }

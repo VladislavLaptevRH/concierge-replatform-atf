@@ -348,26 +348,58 @@ public class ConciergeE2EStepDefs {
         conciergeUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
         conciergeUserAccountPage.getSearchItemField().click();
         generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.xpath("//button[contains(@class,'MuiButton-containedSizeLarge')]")).should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
+        conciergeSearchScreen.getDashboardSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
         with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getSearchItemField().setValue(arg0);
-        $(By.xpath("//button[contains(@class,'MuiButton-containedSizeLarge')]")).click();
+        conciergeSearchScreen.getDashboardSearchButton().click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
-    @When("I go to concierge item {string} from search field")
-    public void iGoToItemFromConciergeSearchField(String arg0) {
+    @When("I search with the {string} product and observe the absent auto suggestions on the dashboard search field")
+    public void iSearchProductAndObserveTheAbsentAutoSuggestionsOnDashboard(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[4]")).should(visible, Duration.ofSeconds(60));
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[4]")).click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!conciergeUserAccountPage.getSearchItemField().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+        conciergeUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+        conciergeUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
+        conciergeUserAccountPage.getSearchItemField().click();
+        conciergeSearchScreen.getDashboardSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
+        conciergeUserAccountPage.getSearchItemField().setValue(arg0);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        conciergeSearchScreen.getTextByValue(arg0).shouldNotBe(visible, Duration.ofSeconds(10));
+    }
+
+    @When("I search with the {string} product and observe the absent auto suggestions on the search sidebar")
+    public void iGoToItemFromConciergeSearchSideBar(String arg0) {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        conciergeSearchScreen.getLeftSidebarSearchButton().should(visible, Duration.ofSeconds(60));
+        conciergeSearchScreen.getLeftSidebarSearchButton().click();
         conciergeSearchScreen.getSearchItemInput().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         conciergeSearchScreen.getSearchItemInput().should(empty, Duration.ofMinutes(1));
         with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeSearchScreen.getSearchItemInput().click(ClickOptions.usingJavaScript());
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeSearchScreen.getSearchItemInput().setValue(arg0);
-        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click(ClickOptions.usingJavaScript());
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        conciergeSearchScreen.getTextByValue(arg0).shouldNotBe(visible, Duration.ofSeconds(10));
+    }
+
+    @When("I go to concierge item {string} from search field")
+    public void iGoToItemFromConciergeSearchField(String arg0) {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        conciergeSearchScreen.getLeftSidebarSearchButton().should(visible, Duration.ofSeconds(60));
+        conciergeSearchScreen.getLeftSidebarSearchButton().click();
+        conciergeSearchScreen.getSearchItemInput().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
+        conciergeSearchScreen.getSearchItemInput().should(empty, Duration.ofMinutes(1));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        conciergeSearchScreen.getSearchItemInput().click(ClickOptions.usingJavaScript());
+        generalStepDefs.waitForJSandJQueryToLoad();
+        conciergeSearchScreen.getSearchItemInput().setValue(arg0);
+        conciergeSearchScreen.getSeeAllResultSearchButton().should(visible, Duration.ofSeconds(40));
+        conciergeSearchScreen.getSeeAllResultSearchButton().click(ClickOptions.usingJavaScript());
     }
 
     @When("I choose {string} from brand menu")

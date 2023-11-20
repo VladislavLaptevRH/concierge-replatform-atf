@@ -81,7 +81,7 @@ Feature: Estore Search
     When I goes to estore cart for estore
     When I verify for back button from cart page
 
-  Scenario Outline: Verify the 1,2 and 3 grid
+  Scenario Outline: Verify Search Page - Grid
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     When I go to estore item "white and blue corner leather sofa" from search field
@@ -170,3 +170,403 @@ Feature: Estore Search
     When I go to estore item "Mirrors" from search field
     When I navigate back from "PDP" page
     Then I verify that cart page is displayed
+#--
+  Scenario: Verify user is able to place a successful order for the searched product
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "17050044 EUCY" from search field
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I click on estore checkout button
+    And I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I execute payment with credit card on estore
+    When I click on a place estore order button
+    Then I verify that estore thank you page is displayed
+
+  Scenario: Verify the price for Outdoor sofa
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Outdoor Sofa" from search field
+    Then I verify that CG title is displayed for "Outdoor Sofa"
+    And I verify that the price mentioned on PG page for "Outdoor Sofa"
+
+  Scenario: Verify navigating back to PDP page from Search page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Rugs" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Brown Rugs" in Tertiary NAV from "Rugs"
+    When I navigate to any estore fusion PG
+    When I go to estore item "Mirrors" from search field
+    When I navigate back from "PG" page
+    Then I verify that estore PDP page is displayed
+
+  Scenario: Verify navigating back to PG page from Search page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Rugs" in TOP NAV menu
+    When I click on SALE in Secondary NAV
+    When I click on "Brown Rugs" in Tertiary NAV from "Rugs"
+    When I go to estore item "Mirrors" from search field
+    When I navigate back from "PG" page
+    Then I verify that PG page is displayed for eStore
+
+  Scenario: Verify navigating back to CG page from Search page
+    Given I log into eStore as "guest" user
+    When I click on "Living" for estore
+    When I click on "Fabric Seating" for estore
+    When I click on "Seating Collections" for estore
+    When I go to estore item "Mirrors" from search field
+    When I navigate back from "PG" page
+    Then I verify that "Seating Collections" title is displayed on CG
+
+  Scenario: Verify searching multiple words as a criteria
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "glass mirrors" from search field
+    Then I verify that "glass mirrors" title is displayed on CG
+
+  Scenario:Verify Search Page filters - Clear applied filters
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Mirrors" from search field
+    When I apply In stock to Sale filter
+    When I click on Shape dropdown
+    When I click on Rectangular option
+    When I click on clear all link in applied section filter
+    Then I verify that the applied filters have been removed
+
+  Scenario: Verify Search Page filters - multiple filters and Sort
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Mirrors" from search field
+    When I apply In stock to Sale filter
+    When I click on Shape dropdown
+    When I click on Rectangular option
+    When I select low to high for estore
+    Then I verify that sorting low to high is working as expected
+    And I verify that available in multiple sizes&finishes should be displayed
+
+  Scenario: Verify Search Page filters - multiple filter
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Mirrors" from search field
+    When I apply In stock to Sale filter
+    When I click on Shape dropdown
+    When I click on Rectangular option
+    Then I verify page with previous filter applied
+    And I verify that number of products should be displayed as RESULTS
+    Then I verify that Rectangular filter should be displayed
+    And I verify that available in multiple sizes&finishes should be displayed
+
+  Scenario: Verify Search Page filters - Shape, if configured from BE
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Mirrors" from search field
+    When I click on Shape dropdown
+    When I click on Rectangular option
+    Then I verify that Rectangular filter should be displayed
+    When I click on clear all link in applied section filter
+    And I verify that number of products should be displayed as RESULTS
+
+  Scenario: Verify Search Page filters - Size, if configured from BE
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Mirrors" from search field
+    When I click on Size dropdown
+    When I click on width option from Size dropdown
+    When I select width option value
+    Then I verify that width filter should be displayed in the applied filter list
+    And I verify that number of products should be displayed as RESULTS
+    Then I click on clear all link in applied section filter
+
+  Scenario: Verify Search Page filters - Material, if configured from BE
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    When I click on Material dropdown
+    When I click on Leather option
+    Then I verify that number of products should be displayed as RESULTS
+    And I verify that material filter was applied
+    Then I click on clear all link in applied section filter
+
+  Scenario: Verify Search page Filters - New Arrival
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    When I click on New Arrival filter
+    Then I verify that New Arrival filter was applied
+    Then I verify that number of products should be displayed as RESULTS
+    Then I click on clear all link in applied section filter
+
+  Scenario: Verify Search page Filters - In Stock
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    When I apply In stock filter on PG for estore
+    Then I verify that In stock filter was applied
+    And I verify that number of products should be displayed as RESULTS
+    Then I click on clear all link in applied section filter
+
+  Scenario: Verify Search page Filters - Sale
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    When I apply In stock to Sale filter
+    Then I verify that Sale filter was applied
+
+  Scenario: Verify Search page sort option - Featured in Search page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    Then I verify that default sort order should be featured
+
+  Scenario: Verify Search page sort option - Price: High to Low in Search page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    When I select high to low for estore
+    Then I verify that sorting high to low is working as expected
+
+  Scenario: Verify Search page sort option - Price: Low to High in Search page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    When I select low to high for estore
+    Then I verify that sorting low to high is working as expected
+
+  Scenario: Verify Search page - sort options
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    When I click on sort by button for estore
+    Then I verify that Featured,High to Low, Low to High options are displayed
+
+  Scenario: Verify Search Page - no swatches
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    Then I verify that swatches are not displayed below the product image
+
+  Scenario:Verify Search Page - less than 5 swatches
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    When I click on Size dropdown
+    When I click on length button
+    When I click on 5 length value
+    Then I verify that the swatches should show below the image with correct padding
+
+  Scenario: Verify PDP for the product where some skus are on sale - applying sale filter
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    When I apply In stock to Sale filter
+    When I check sale price for "sofa" on PG page for estore
+    When I navigate to any estore fusion PG
+    Then I verify that prices for the VIEW SELECT ITEMS ON SALE on PDP and the sale page
+    And I verify that PDP page url contains SALE=true
+
+  Scenario: Verify PDP for the product where all skus are on sale - applying sale filter
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    When I apply In stock to Sale filter
+    When I check sale price for "sofa" on PG page for estore
+    When I navigate to any estore fusion PG
+    Then I verify that prices for the VIEW SELECT ITEMS ON SALE on PDP and the sale page
+
+  Scenario: Verify PDP upon clicking "VIEW SELECT ITEMS ON SALE"
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "sofas" from search field
+    When I apply In stock to Sale filter
+    When I check sale price for "sofa" on PG page for estore
+    When I go to the sale page with "sofas" on estore
+    Then I verify that prices for the VIEW SELECT ITEMS ON SALE on PG and the sale page
+
+  Scenario: Verify Search Page - Pricing format
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "sofas" from search field
+    When I apply In stock to Sale filter
+    And I verify sale prices on PG pages for sale items
+    Then I verify pricing format for product
+    And I verify that message "VIEW SELECT ITEMS ON SALE" is displayed
+
+  Scenario: Verify the presence of Search icon in the Homepage
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the CG Page
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I goes to estore collection page
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the PG Page
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "towels" from search field
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the PDP Page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the Cart Page
+    Given I log into eStore as "regular" user
+    When I choose country for concierge from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+#  Scenario: Verify the presence of Search icon in the My Account Pages - Order History, Wishlist, Membership, Gift Registry, Profile
+  Scenario: Verify the presence of Search icon in the My Account Pages - Order History
+    Given I log into eStore as "member" user
+    When I choose country for eStore from footer
+    When I click on estore my account icon
+    When I click on estore order history
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the My Account Pages - Wishlist
+    Given I log into eStore as "wishlist-registered" user
+    When I choose country for eStore from footer
+    When I navigate to the wishlist
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the My Account Pages - Membership
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I goes to my account for estore
+    When I click on estore my account icon for guest user
+    When I navigate to the member tab
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the My Account Pages - Gift Registry
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore my account icon for guest user
+    When I click on the "gift-registry" from my account dropdown
+    Then I verify that "gift-registry" is available for eStore
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the My Account Pages - Profile
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I goes to my account for estore
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the My Account Pages - Address Book
+    Given I log into eStore as "noaddresses" user
+    When I choose country for eStore from footer
+    When I goes to my account for estore
+    When I click on my account button if page is not loaded
+    When I click on estore my account button
+    When I click on address book estore button
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the My Account Pages - Payment Methods
+    Given I log into eStore as "addnewpayment" user
+    When I choose country for eStore from footer
+    When I go to profile payment method
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  #Details & Tracking,
+  Scenario: Verify the presence of Search icon in the My Account Pages - Billing Summary
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on estore my account icon
+    When I click on estore order history
+    Then I verify the billing summary link for order history
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify the presence of Search icon in the My Account Pages - Details & Tracking
+    Given I log into eStore as "member" user
+    When I choose country for eStore from footer
+    When I goes to my account for estore
+    When I click on my account button if page is not loaded
+    When I click on estore my account icon
+    When I click on estore order history
+    Then I verify order date and order total fields
+    When I click on details and tracking order history
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+
+  Scenario: Verify Search Page - Results count
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that number of products should be displayed as RESULTS
+
+  Scenario: Verify Search Page load
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+    When I scroll on the page till back to top button is visible
+    Then I verify that back to top button is clickable
+
+  Scenario: Verify Search Page
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I verify that search result "802-GRAM TURKISH TOWEL COLLECTION" for search product via product name is displayed
+    And I verify that default sort order should be featured
+    Then I verify that two grids are default view in PG
+    And I verify that RH MEMBERS PROGRAM SAVE 25% ON EVERYTHING message is displayed on top of the page
+
+  Scenario: Verify Search Page - Grid retention
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "sofas" from search field
+    Then I validate "2","2" and "2" grid view should work
+    When I go to estore item "tables" from search field
+    Then I verify that page is displayed with the previous grid selected
+
+  Scenario: Verify Search page - Product Info
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    Then I verify that search result "Sofas" for search product via product name is displayed
+    And I verify that message "Available in multiple sizes & leathers" is displayed
+    Then I verify price on PG after In-stock filter was applied
+    And I verify that message "VIEW SELECT ITEMS ON SALE" is displayed
+
+  Scenario: Verify PDP for the product where all skus are on sale
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "Sofas" from search field
+    When I apply In stock to Sale filter
+    When I navigate to any estore fusion PG
+    Then verify the product price as per the postal code
+
+  Scenario: Verify No search results page - Customer Experience
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "QA Search Check" from search field
+    When I click on Customer Experience link
+    Then I verify that Customer Service page is displayed
