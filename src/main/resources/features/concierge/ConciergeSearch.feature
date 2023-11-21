@@ -142,14 +142,12 @@ Feature: Concierge PG Page
     Then I select IN-STOCK box
     Then I clear all and confirm the applied option is removed
 
-  @vlad
   Scenario: Search Suggestion should be removed
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I search with the 'sof' product and observe the absent auto suggestions on the dashboard search field
     Then I search with the 'sof' product and observe the absent auto suggestions on the search sidebar
 
-  @vlad
   Scenario: Filters
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -157,7 +155,6 @@ Feature: Concierge PG Page
     Then I verify sofa search page is displayed
     Then I verify that 'Filters such as Material Filters, Size Filters, Brand' on search page
 
-  @vlad
   Scenario: Filters after Cross Brand Search
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -166,3 +163,37 @@ Feature: Concierge PG Page
     Then I click on 'BRAND facet' button on search page
     Then I click on 'select any brand' button on search page
     Then I verify that 'Filters such as Material Filters, Size Filters, Brand' on search page
+
+  Scenario: Verify Disable Typeahead from Search
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I search with the 'sof' product and observe the absent auto suggestions on the dashboard search field
+    Then I search with the 'sof' product and observe the absent auto suggestions on the search sidebar
+
+  Scenario: By entering search key term, typeahead links should not get display in suggestions
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I search with the 'sof' product and observe the absent auto suggestions on the dashboard search field
+    Then I search with the 'sof' product and observe the absent auto suggestions on the search sidebar
+
+  Scenario: Verify already selected facet selection when selecting product via navigation rugs: All rugs: any size
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    Then I navigate to menu 'RUGS'
+    Then I navigate to sub menu 'Rugs'
+    Then I navigate to gallery 'All Rugs'
+    Then I verify that 'PG has filters: IN-STOCK, SALE, SIZE, SHAPE, BRAND, RESULTS and SORT is present' on PG screen
+
+  Scenario: Selection of In-Stock: All products should display product name, Prices, Properties
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "sofa" from search field
+    Then I verify that 'PG has filters: IN-STOCK, SALE, SIZE, SHAPE, BRAND, RESULTS and SORT is present' on PG screen
+    Then I click 'IN-STOCK Filter' on PG screen
+    Then I verify that 'IN-STOCK products are returned' on PG screen
+
+  Scenario: To verify Search loading animation
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I go to item "sofa" from search field
+    Then I verify page is loaded till footer
