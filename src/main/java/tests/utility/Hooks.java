@@ -160,7 +160,7 @@ public class Hooks {
         configureConciergeURL();
         setUPWebDriver(conciergeURL);
         setupChromeArguments(conciergeURL);
-    }
+ }
 
     /**
      * Initialize Web driver
@@ -205,10 +205,8 @@ public class Hooks {
             e.printStackTrace();
         }
         WebDriverRunner.setWebDriver(driver);
-
         open(url);
         currentUrl = WebDriverRunner.url();
-
     }
 
     /**
