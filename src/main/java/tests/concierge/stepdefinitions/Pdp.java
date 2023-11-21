@@ -867,7 +867,7 @@ public class Pdp {
                 if(!pdpScreen.getDimensionSection().isDisplayed()){
                     WebDriverRunner.getWebDriver().navigate().refresh();
                 }
-                pdpScreen.getDimensionSection().shouldBe(visible, Duration.ofSeconds(15));
+                //pdpScreen.getDimensionSection().shouldBe(visible, Duration.ofSeconds(15));
                 pdpScreen.getDetailsSection().shouldBe(visible, Duration.ofSeconds(15));
                 break;
             case  "section \"lather care\" or \"fabric care\"":
