@@ -46,6 +46,8 @@ public class PdpScreen {
 
     private final ElementsCollection lineItemsList = $$(By.xpath("//select[contains(@id, 'optionSelect')]"));
 
+    private final SelenideElement inStockFacet = $(By.xpath("//*[@id = 'refinementOptionData_checkbox-In-Stock']//p[text() = 'in-stock']"));
+
     private final ElementsCollection memberList = $$(By.xpath(" //*[contains(text() ,'Member')]"));
 
     private final ElementsCollection tradeList = $$(By.xpath("//*[contains(text() ,'Trade')]"));
@@ -123,6 +125,8 @@ public class PdpScreen {
     private final SelenideElement returnOrExchangedDeliveryText = $(By.xpath("//*[contains(text(),'This item can be returned or exchanged within 30 days of delivery. ')]"));
 
     private final SelenideElement monogramsStyleValue = $(By.xpath("//*[text()='Bauer Bodoni 2 (BDNI-HD)']"));
+
+    private final SelenideElement itemsPerPage = $(By.xpath("//*[@id = 'itemsPerPage']"));
     private final SelenideElement monogramsText = $(By.xpath("//*[text()='Text']"));
     private final SelenideElement viewOnStockItemLink = $(By.xpath("//*[text()='In-Stock']"));
     private final SelenideElement monogramsStyle = $(By.xpath("//*[text()='Style']"));
@@ -235,6 +239,12 @@ public class PdpScreen {
     private final ElementsCollection YAMLPriceForRegular = $$(By.xpath("//*[text() = 'YOU MIGHT ALSO LIKE']/..//*[@data-testid='price-for-regular']"));
 
     private final ElementsCollection YAMLPriceForMember = $$(By.xpath("//*[text() = 'YOU MIGHT ALSO LIKE']/..//*[@data-testid='price-for-member']"));
+
+    private final ElementsCollection priceForMemberCollection = $$(By.xpath("//*[@id='rh-price-range-display']/div[2]/p[@data-testid='price-for-member']"));
+
+    private final SelenideElement results = $(By.xpath("//*[@id = 'component-refine-menu-dropdown']//p[text() = 'RESULTS']"));
+
+    private final ElementsCollection priceForRegularCollection = $$(By.xpath("//*[@id='rh-price-range-display']//p[@data-testid='price-for-regular']"));
 
     private final ElementsCollection YAMLPriceForTrade = $$(By.xpath("//*[text() = 'YOU MIGHT ALSO LIKE']/..//*[@data-testid='price-for-trade']"));
 

@@ -55,6 +55,7 @@ Feature: Concierge ThankYouPage
     When I fill all fields from address screen
     And I continue to payment
     When I click on continue with original address button
+    When I click on no thanks button
     When I choose POS for payment method
     When I click on a place order button
     When I click on order details button

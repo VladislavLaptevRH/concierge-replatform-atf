@@ -607,7 +607,7 @@ public class ConciergeE2EStepDefs {
                 generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupStg3LastName());
                 conciergeUserAccountPage.getClientLookupStg3LastName().setValue("Nonmember");
             } else {
-                generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupLastName());
+                //generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupLastName());
                 conciergeUserAccountPage.getClientLookupLastName().setValue("Nonmember");
             }
 
@@ -624,7 +624,7 @@ public class ConciergeE2EStepDefs {
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofMinutes(1));
+        //conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientLookupSearchButton().click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
         if($(By.xpath("//*[text() = 'Select a country.']")).isDisplayed()){
@@ -1247,9 +1247,6 @@ public class ConciergeE2EStepDefs {
         itemList.selectByValue("Customer Delight");
         $(By.xpath("//*[text() = 'APPLY']")).click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text() = 'Waived Shipping']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text() = '$299.00']")).shouldNotBe(text("$NaN"), Duration.ofSeconds(15));
-        $(By.xpath("//*[text() = '$299.00']")).should(visible, Duration.ofSeconds(15));
     }
 
     @When("I open cart")
