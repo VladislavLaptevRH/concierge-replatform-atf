@@ -207,6 +207,13 @@ public class ConciergeCartPageScreen {
     private final SelenideElement updatedZipCodeInPDP = $(By.xpath("//*[@data-testid = 'postal-code-dialog-opener']"));
     private final SelenideElement memberPriceInPG = $(By.xpath("(//*[@data-testid = 'price-for-member'])[1]"));
     private final ElementsCollection quantityItemLineList = $$(By.xpath("//select[contains(@id,'quantity')]"));
+
+    private final SelenideElement cartFirstGridView = $(By.xpath("(//button[contains(@class, 'sc-gsDKAQ')])[1]"));
+
+    private final SelenideElement cartSecondGridView = $(By.xpath("(//button[contains(@class, 'sc-gsDKAQ')])[2]"));
+
+    private final SelenideElement cartThirdGridView = $(By.xpath("(//button[contains(@class, 'sc-gsDKAQ')])[3]"));
+
     private final SelenideElement shippingAddress = $(By.xpath("//*[text() = 'Shipping Address']"));
     private final SelenideElement billingAddress = $(By.xpath("//*[text() = 'Billing Address']"));
     private final SelenideElement shippingAddressStateField = $(By.xpath("(//*[@id = 'address-state-field'])[1]"));

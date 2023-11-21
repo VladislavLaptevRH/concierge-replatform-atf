@@ -671,3 +671,15 @@ Feature:Concierge Cart Page
     And I continue to payment
     When I click on continue with original address button
     Then Verify that after come back to address page from payment page ship to and bill to address is showing
+
+    @vlad
+  Scenario: Verify the Grid view in Cart screen
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I remove client from header
+    When I open product page with productId "prod19500002"
+    Then I chose the '1' line item selections one by one
+    When I click on add to cart button
+    When I click on view cart button
+    Then Different grid options should be displayed on the cart page

@@ -164,7 +164,6 @@ Feature: Concierge PG Page
     Then I click on 'select any brand' button on search page
     Then I verify that 'Filters such as Material Filters, Size Filters, Brand' on search page
 
-  @vlad
   Scenario: Pricing
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -172,7 +171,6 @@ Feature: Concierge PG Page
     Then I verify sofa search page is displayed
     Then Pricing should be shown against each item
 
-  @vlad
   Scenario: Verify Sort after search - (Featured/Price Low to Hight/Price High to Low)
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -181,7 +179,6 @@ Feature: Concierge PG Page
     Then I click 'Price Low to High and verify price is sorted' on PG screen
     Then I click 'Price High to Low and verify price is sorted' on PG screen
 
-  @vlad
   Scenario: Verify the in-stock facet selection and in-stock product
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -190,14 +187,12 @@ Feature: Concierge PG Page
     Then I verify IN-STOCK filter is applied
     Then Pricing should be shown against each item
 
-  @vlad
   Scenario: By searching couch, Verify Sofa products too in search
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I go to item "couch" from search field
     Then Sofa products too should be searched
 
-  @vlad
   Scenario: In displayed products regular and member prices should be displayed
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -205,7 +200,6 @@ Feature: Concierge PG Page
     Then I verify sofa search page is displayed
     Then Regular and Member prices should be displayed against each product
 
-  @vlad
   Scenario: Verify the sort: High to low
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -213,7 +207,6 @@ Feature: Concierge PG Page
     Then I verify sofa search page is displayed
     Then I click 'Price High to Low and verify price is sorted' on PG screen
 
-  @vlad
   Scenario: Verify the sort: Low to High
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -221,7 +214,6 @@ Feature: Concierge PG Page
     Then I verify sofa search page is displayed
     Then I click 'Price Low to High and verify price is sorted' on PG screen
 
-  @vlad
   Scenario: Pricing on search result page(US and CAN)
     Given I log into Concierge as "associate"
     When I go to item "sofas" from search field
@@ -235,9 +227,35 @@ Feature: Concierge PG Page
     Then I verify that zip code in PDP is 'H1Y 2B5'
     Then Verify that 'price in PDP changed from US$ to CA$'
 
-  @vlad
   Scenario: To verify Search page is loading till footer
     Given I log into Concierge as "associate"
     When I go to item "sofa" from search field
     Then I verify sofa search page is displayed
     Then I verify that PG loads
+
+  @vlad
+  Scenario: WIld card name search
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I click on search Icon
+    When I type item name '*?'
+    Then All RH products should be searched
+
+  @vlad
+  Scenario: Search with Collection name
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I click on search Icon
+    When I type item name 'Seating Collections'
+    Then Seating Collections products should be displayed
+
+  @vlad
+  Scenario: After switching to diff country check the count of products, it should display the available product count
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I click on search Icon
+    When I type item name 'Seating Collections'
+    Then Seating Collections products should be displayed
+    Then verify the count of products
+    When I choose 'CA' country
+    Then Product's count should be shown as per the availability of the products in that country

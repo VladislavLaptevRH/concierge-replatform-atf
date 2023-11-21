@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import lombok.Setter;
 import org.openqa.selenium.By;
 import tests.concierge.pageObject.ConciergeSearchScreen;
+import tests.concierge.pageObject.PdpScreen;
 import tests.estore.stepdefinitions.EstoreHomePageStepDefs;
 import tests.utility.Hooks;
 
@@ -26,7 +27,11 @@ public class ConciergeSearchStepDefs {
 
     ConciergeSearchScreen conciergeSearchScreen = new ConciergeSearchScreen();
 
-    EstoreHomePageStepDefs estoreHomePageStepDefs = new EstoreHomePageStepDefs();
+    PdpScreen pdpScreen = new PdpScreen();
+
+    public static int result;
+
+
 
     @Then("I verify that {string} on search page")
     public void iVerifyOnSearchPage(String data) {
@@ -81,6 +86,27 @@ public class ConciergeSearchStepDefs {
     public void sofaProductsShouldBeSearched(){
         conciergeSearchScreen.getSofaFirstItem().should(visible, Duration.ofSeconds(15));
     }
+
+    @Then("All RH products should be searched")
+    public void allRHProductShouldBeSearched(){
+       assertTrue(Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")) > 10000);
+    }
+
+    @Then("Seating Collections products should be displayed")
+    public void seatingConnectionProductsShouldBeDisplayed(){
+        conciergeSearchScreen.getSeatingCollection().should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("verify the count of products")
+    public void verifyTheCountOfProduct(){
+        result = Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", ""));
+    }
+
+    @Then("Product's count should be shown as per the availability of the products in that country")
+    public void productsCountShouldBeShown(){
+       assertEquals(result,Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")));
+    }
+
     @Then("I click on {string} button on search page")
     public void iClickOnSwitchButton(String button) {
         switch (button) {
