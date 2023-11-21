@@ -169,10 +169,10 @@ public class Hooks {
      */
     public void setUPWebDriver(String url) {
         ChromeOptions options = new ChromeOptions();
-        Configuration.driverManagerEnabled = true;
+        Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.pageLoadTimeout = 60000;
         Configuration.timeout = 45000;
