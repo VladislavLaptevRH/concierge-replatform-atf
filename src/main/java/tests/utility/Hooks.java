@@ -60,13 +60,9 @@ public class Hooks {
      * This method get properties from application.properties file
      */
     private void ConfigFileReader() {
-       /* profile = System.getenv("ENVIRONMENT");
+        profile = System.getenv("ENVIRONMENT");
         cookie = System.getenv("ENDPOINT");
-        country = System.getenv("COUNTRY");*/
-
-        profile= "stg2";
-        country= "US";
-        cookie = "dragon";
+        country = System.getenv("COUNTRY");
 
 
         if (profile == null) {
@@ -211,9 +207,6 @@ public class Hooks {
             e.printStackTrace();
         }
         WebDriverRunner.setWebDriver(driver);
-
-        open(url);
-        currentUrl = WebDriverRunner.url();
 
     }
 
