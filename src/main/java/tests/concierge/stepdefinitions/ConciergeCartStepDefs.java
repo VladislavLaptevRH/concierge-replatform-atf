@@ -1283,6 +1283,13 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getPdpScreenZipCode().should(text(zipCode), Duration.ofSeconds(20));
     }
 
+    @When("Different grid options should be displayed on the cart page")
+    public void differentGridOptionsShouldBeDisplayedOnTheCartPage() {
+        conciergeCartPageScreen.getCartFirstGridView().should(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getCartSecondGridView().should(visible, Duration.ofSeconds(15));
+        conciergeCartPageScreen.getCartThirdGridView().should(visible, Duration.ofSeconds(15));
+    }
+
     @When("I verify updated zip code in PDP")
     public void iVerifyUpdatedZipCodeInPDP() {
         conciergeCartPageScreen.getUpdatedZipCodeInPDP().should(text("11111"), Duration.ofSeconds(20));

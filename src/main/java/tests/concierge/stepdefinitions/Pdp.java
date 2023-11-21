@@ -213,22 +213,6 @@ public class Pdp {
         pdpScreen.getSearchIcon().click();
     }
 
-//    @And("Video should be played")
-//    public void videoShouldBePlayed() {
-//        $(By.xpath("(//*[@class= 'slick-slider slick-vertical slick-initialized']//*[contains(@class, 'arrow-icon')])[2]")).click();
-//        with().pollInterval(3, SECONDS).await().until(() -> true);
-//        $(By.xpath("(//*[@id = 'component-rh-image_wrapper']//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/TBrace_Alt_Thumbnail')])[6]")).should(visible, Duration.ofSeconds(5));
-//        $(By.xpath("(//*[@id = 'component-rh-image_wrapper']//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/TBrace_Alt_Thumbnail')])[6]")).click();
-//        $(By.xpath("(//*[@id = 'component-rh-image_wrapper']//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/TBrace_Alt_Thumbnail')])[4]")).should(visible, Duration.ofSeconds(5));
-//        $(By.xpath("(//*[@id = 'component-rh-image_wrapper']//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/TBrace_Alt_Thumbnail')])[4]")).click();
-//
-//        $(By.xpath("(//*[@id = 'component-rh-image_wrapper']//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/TBrace_Alt_Thumbnail')])[4]")).getAttribute("currentTime");
-//        $(By.xpath("(//*[@id = 'component-rh-image_wrapper']//img[contains(@src, '//media.restorationhardware.com/is/image/rhis/TBrace_Alt_Thumbnail')])[4]")).getAttribute("ended");
-//
-////        JavascriptExecutor js = (JavascriptExecutor) WebDriverRunner.getWebDriver();
-////        js.executeScript("document.")
-//    }
-
     @And("I type item name {string}")
     public void iTypeItemName(String arg0) {
        pdpScreen.getSearchFieldInput().setValue(arg0);
@@ -430,6 +414,21 @@ public class Pdp {
                 pdpScreen.getConfirmationPostalCode().shouldNot(visible, Duration.ofSeconds(20));
                 pdpScreen.getPriceForRegular().shouldBe(visible, Duration.ofSeconds(20));
                 assertTrue(Integer.parseInt(regularPriceInPG) < Integer.parseInt(pdpScreen.getPriceForRegular().getText().replaceAll(".00", "").replaceAll("\\$", "").replaceAll(",", "")));
+                break;
+            case  "price should be shown in US Dollar":
+                with().pollInterval(9, SECONDS).await().until(() -> true);
+                pdpScreen.getConfirmationPostalCode().shouldNot(visible, Duration.ofSeconds(20));
+                pdpScreen.getComponentSKU().shouldBe(visible, Duration.ofSeconds(20));
+                if(pdpScreen.getPriceForMember().isDisplayed()){
+                    assertEquals("$" + memberPriceInPG, pdpScreen.getPriceForMember().getText().replaceAll(".00", "").replaceAll(",", ""));
+                } else {
+                    pdpScreen.getConfirmationPostalCode().shouldNot(visible, Duration.ofSeconds(20));
+                    pdpScreen.getPriceForTrade().shouldBe(visible, Duration.ofSeconds(20));
+                    assertEquals("$" + tradePriceInPG, pdpScreen.getPriceForTrade().getText().replaceAll(".00", "").replaceAll(",", ""));
+                }
+                pdpScreen.getConfirmationPostalCode().shouldNot(visible, Duration.ofSeconds(20));
+                pdpScreen.getPriceForRegular().shouldBe(visible, Duration.ofSeconds(20));
+                assertEquals("$" + regularPriceInPG, pdpScreen.getPriceForRegular().getText().replaceAll(".00", "").replaceAll(",", ""));
                 break;
             case  "Confirm that PDP has price in GBP":
                 pdpScreen.getConfirmationPostalCode().shouldNot(visible, Duration.ofSeconds(20));
@@ -1136,6 +1135,28 @@ public class Pdp {
     public void iVerifyThatCustomRugsAreDisplayed() {
         pdpScreen.getWoolRugs().should(visible, Duration.ofSeconds(25));
         pdpScreen.getPerformanceFiberRugs().should(visible, Duration.ofSeconds(25));
+    }
+
+    @Then("Pricing should be shown against each item")
+    public void pricingShouldBeShownAgainstEachItem() {
+        pdpScreen.getItemsPerPage().scrollIntoView(true);
+        if(Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")) > 24) {
+            assertEquals(Integer.parseInt(pdpScreen.getItemsPerPage().getText()), pdpScreen.getPriceForMemberCollection().size());
+        } else {
+            assertEquals(Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")), pdpScreen.getPriceForMemberCollection().size());
+        }
+    }
+
+    @Then("Regular and Member prices should be displayed against each product")
+    public void regularAndMemberPricesShouldBeDisplayedAgainstEachProduct() {
+        pdpScreen.getItemsPerPage().scrollIntoView(true);
+        if(Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")) > 24) {
+            assertEquals(Integer.parseInt(pdpScreen.getItemsPerPage().getText()), pdpScreen.getPriceForMemberCollection().size());
+            assertEquals(Integer.parseInt(pdpScreen.getItemsPerPage().getText()), pdpScreen.getPriceForRegularCollection().size());
+        } else {
+            assertEquals(Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")), pdpScreen.getPriceForMemberCollection().size());
+            assertEquals(Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")), pdpScreen.getPriceForRegularCollection().size());
+        }
     }
 
     @Then("I chose {string} product on the page")
