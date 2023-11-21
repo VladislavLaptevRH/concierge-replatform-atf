@@ -64,7 +64,6 @@ public class Hooks {
         cookie = System.getenv("ENDPOINT");
         country = System.getenv("COUNTRY");
 
-
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
         } else {
@@ -207,7 +206,8 @@ public class Hooks {
             e.printStackTrace();
         }
         WebDriverRunner.setWebDriver(driver);
-
+        open(url);
+        currentUrl = WebDriverRunner.url();
     }
 
     /**
