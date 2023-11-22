@@ -58,7 +58,7 @@ Feature: Concierge Order review
     When I choose POS for payment method
     When I edit payment method
     When I click on a place order button
-
+@vlad
   Scenario: Verify the payment details and Order estimate summary
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -68,7 +68,10 @@ Feature: Concierge Order review
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "Non-Member"
+    When I open cart
+    When I choose order classification
+    When I click on checkout button
+    When I click on no thanks button
     When I fill all fields from address screen
     And I continue to payment
     When I click on continue with original address button
