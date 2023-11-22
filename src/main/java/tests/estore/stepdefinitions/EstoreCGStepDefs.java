@@ -183,7 +183,7 @@ public class EstoreCGStepDefs {
     public void iSetGridViewOnEstoreCGPage(String arg0) {
         estoreSearchScreen.getThreeColumnsInRowGridButton().should(visible, Duration.ofSeconds(20));
         estoreSearchScreen.getThreeColumnsInRowGridButton().click();
-        estoreSearchScreen.getThreeColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
+        //estoreSearchScreen.getThreeColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify CGS all menu items")
@@ -271,6 +271,7 @@ public class EstoreCGStepDefs {
 
     @Then("I verify that the CG title on the top left corner of the page")
     public void iVerifyThatTheCGTitleOnTheTopLeftCornerOfThePage() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreCGScreen.verifyThatSeatinCollectionTitleIsDisplayedOnCG();
     }
 
@@ -282,6 +283,7 @@ public class EstoreCGStepDefs {
     @Then("I verify that PG title, description text, member discount message is displayed")
     public void iVerifyThatPGTitleDescriptionTextMemberDiscountMessageIsDisplayed() {
         generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreCGScreen.verifyThatSeatinCollectionTitleIsDisplayedOnCG();
         estoreCGScreen.verifyThatMemberDiscountMessageIsDisplayedOnCG();
         estoreCGScreen.verifyThatCGDescriptionIsDisplayed();

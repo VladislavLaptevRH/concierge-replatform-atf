@@ -19,6 +19,8 @@ public class EstoreOrderHistoryScreen {
 
     private SelenideElement shipTo = $(By.xpath("//*[text()='SHIP TO']"));
 
+    private SelenideElement myAccountVerify = $(By.xpath("(//*[text()='My Account'])[1]"));
+
     private SelenideElement foundText = $(By.xpath("//*[text()='Found']"));
 
     private SelenideElement ordersText = $(By.xpath("//*[text()='Orders']"));

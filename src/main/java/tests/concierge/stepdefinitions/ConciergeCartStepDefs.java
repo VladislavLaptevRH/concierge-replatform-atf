@@ -1246,8 +1246,8 @@ public class ConciergeCartStepDefs {
         if(!conciergeUserAccountPage.getOrderDetailsButtonByName("Order Details").isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
-        conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed();
-        conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").click();
+        conciergeUserAccountPage.getOrderDetailsButtonByName("Order Details").isDisplayed();
+        conciergeUserAccountPage.getOrderDetailsButtonByName("Order Details").click();
     }
 
     @When("I remove all items from cart for minicart")
