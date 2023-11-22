@@ -8,42 +8,42 @@ Feature: Shop Rooms Links
     When I choose country for eStore from footer
     Then I verify the shop by room under the LIVING top navigation
 
-
   Scenario: Verify the shop by room under the DINING top navigation.
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     Then I verify the shop by room under the LIVING top navigation
 
-  Scenario Outline: Verify our company
+  Scenario: Verify the shop by room under the BED top navigation.
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    Then I verify that I'm able to access "<link>"
-    Examples:
-      | link                 |
-      | LETTERS FROM THE CEO |
-      | LEADERSHIP TEAM      |
-      | INVESTOR RELATIONS   |
-      | PRESS                |
-      | CAREERS              |
+    Then I verify the shop by room under the BED top navigation
 
-  Scenario Outline: Verify legal links
+  Scenario: Verify the shop by room under the BATH top navigation.
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    Then I verify that I'm able to access "<link>"
-    Examples:
-      | link                 |
-      | PRIVACY              |
-      | TERMS OF USE         |
-      | TEXT MESSAGING TERMS |
-      | RH IN CANADA         |
-      | SAFETY RECALLS       |
+    Then I verify the shop by room under the BATH top navigation
 
-  Scenario: Verify the country dropdown.
+  Scenario: Verify the shop by room under the OUTDOOR top navigation
     Given I log into eStore as "regular" user
-    When I scroll to bottom of Home Page
-    Then I verify country dropdown form footer
+    When I choose country for eStore from footer
+    Then I verify the shop by room under the OUTDOOR top navigation
 
-  Scenario: Verify the copyright icon and year.
+  Scenario: Verify the shop room page. SHOPROOM navigation are: LIVING DINING BEDROOM BATH HOME OFFICE CONTEMPORARY OUTDOOR BEACH HOUSE SKI HOUSE
     Given I log into eStore as "regular" user
-    When I scroll to bottom of Home Page
-    Then I verify the copyright icon and year
+    When I choose country for eStore from footer
+    Then I verify the shop by room Page
+
+  Scenario: Verify Elements/Apps panel
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    Then I verify elements panel
+
+  Scenario: Verify Elements/Apps panel slider function
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    Then I verify elements panel slider function
+
+  Scenario: Verify Show Products function
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    Then I verify show product function
