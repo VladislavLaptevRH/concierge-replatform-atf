@@ -233,7 +233,6 @@ Feature: Concierge PG Page
     Then I verify sofa search page is displayed
     Then I verify that PG loads
 
-  @vlad
   Scenario: WIld card name search
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -241,7 +240,6 @@ Feature: Concierge PG Page
     When I type item name '*?'
     Then All RH products should be searched
 
-  @vlad
   Scenario: Search with Collection name
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -249,7 +247,6 @@ Feature: Concierge PG Page
     When I type item name 'Seating Collections'
     Then Seating Collections products should be displayed
 
-  @vlad
   Scenario: After switching to diff country check the count of products, it should display the available product count
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

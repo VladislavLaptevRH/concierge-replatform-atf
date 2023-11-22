@@ -672,7 +672,6 @@ Feature:Concierge Cart Page
     When I click on continue with original address button
     Then Verify that after come back to address page from payment page ship to and bill to address is showing
 
-    @vlad
   Scenario: Verify the Grid view in Cart screen
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
