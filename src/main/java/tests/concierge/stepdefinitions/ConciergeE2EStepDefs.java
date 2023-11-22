@@ -1115,12 +1115,16 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify the payment details and order estimate summary")
     public void iVerifyThePaymentDetailsAndOrderEstimateSummary() {
-        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text() = 'TOTAL']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(15));
+        if($(By.xpath("//*[text()='Subtotal']")).isDisplayed()){
+            $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
+        }else {
+            $(By.xpath("//*[text()='Subtotal  ']")).should(visible, Duration.ofSeconds(5));
+        }
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = 'TOTAL']")).should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify spo order & terms review signature")
