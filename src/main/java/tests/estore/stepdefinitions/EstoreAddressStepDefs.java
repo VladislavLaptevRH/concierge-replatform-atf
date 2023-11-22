@@ -215,6 +215,7 @@ public class EstoreAddressStepDefs {
         estoreUserAccountPage.getProfileIconButton().hover();
         estoreUserAccountPage.getProfileIconButton().should(appear, Duration.ofSeconds(20));
         estoreUserAccountPage.getProfileIconButton().click(ClickOptions.usingJavaScript());
+        with().pollInterval(2, SECONDS).await().until(() -> true);
 
     }
 

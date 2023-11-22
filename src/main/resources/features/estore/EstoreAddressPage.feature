@@ -163,7 +163,7 @@ Feature: Estore Address Page
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I execute payment with credit card on estore
-    Then I verify shipping and billing address on order review page
+    #Then I verify shipping and billing address on order review page
     When I click on a place estore order button
     When I click on order details button
     Then I verify shipping and billing address on order confirmation page

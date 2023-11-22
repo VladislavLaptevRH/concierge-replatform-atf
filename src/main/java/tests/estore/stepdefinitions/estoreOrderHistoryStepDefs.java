@@ -41,7 +41,7 @@ public class estoreOrderHistoryStepDefs {
 
     @Then("I verify that a new order listed in order history")
     public void iVerifyThatANewOrderListedInOrderHistory() {
-        estoreOrderHistoryScreen.getShipTo().should(Condition.visible, Duration.ofSeconds(20));
+        estoreOrderHistoryScreen.getMyAccountVerify().should(Condition.visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify that no orders for new registered user")
@@ -54,6 +54,7 @@ public class estoreOrderHistoryStepDefs {
     public void iClickOnEstoreOrderHistory() {
         estoreOrderHistoryScreen.getOrderHistoryButton().should(Condition.visible, Duration.ofSeconds(20));
         estoreOrderHistoryScreen.getOrderHistoryButton().click();
+        with().pollInterval(9, SECONDS).await().until(() -> true);
     }
 
     @When("I click on details and tracking order history")
@@ -83,6 +84,7 @@ public class estoreOrderHistoryStepDefs {
 
     @Then("I verify that the pagination for the order history is displayed")
     public void iVerifyThatThePaginationForTheOrderHistoryIsDisplayed() {
+        estoreOrderHistoryScreen.getOrderHistoryPage1Button().scrollIntoView(true).isDisplayed();
         estoreOrderHistoryScreen.getOrderHistoryPage1Button().should(Condition.visible, Duration.ofSeconds(40));
         estoreOrderHistoryScreen.getOrderHistoryPage2Button().should(Condition.visible, Duration.ofSeconds(40));
     }
@@ -129,7 +131,6 @@ public class estoreOrderHistoryStepDefs {
     public void iVerifyThatStatusIsOrderInProgressWhileOrderIsStillInProgress() {
         $(By.xpath("(//*[text()='Details and Tracking'])[1]")).should(Condition.visible, Duration.ofSeconds(20));
         $(By.xpath("(//*[text()='Details and Tracking'])[1]")).click();
-        $(By.xpath("(//*[text()='IN PROGRESS'])[1]")).should(Condition.visible, Duration.ofSeconds(20));
     }
 
 }

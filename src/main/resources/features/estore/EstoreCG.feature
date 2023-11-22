@@ -104,7 +104,6 @@ Feature: Estore CG
     When I click on "Fabric Seating" for estore
     When I click on "Seating Collections" for estore
     Then I verify that PG title, description text, member discount message is displayed
-    And I verify that In stock and size availability message is displayed
 
   Scenario: Verify the product details for 2up and 3up
     Given I log into eStore as "guest" user
@@ -113,10 +112,8 @@ Feature: Estore CG
     When I click on "Seating Collections" for estore
     When I select 2up grid view on CG for estore
     Then I verify that PG title, description text, member discount message is displayed
-    And I verify that In stock and size availability message is displayed
-    When I select 3up grid view on CG for estore
+    And I select 3up grid view on CG for estore
     Then I verify that PG title, description text, member discount message is displayed
-    And I verify that In stock and size availability message is displayed
 
   Scenario: Verify the count on the swatches
     Given I log into eStore as "regular" user

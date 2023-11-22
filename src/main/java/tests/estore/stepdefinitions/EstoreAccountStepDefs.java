@@ -101,7 +101,8 @@ public class EstoreAccountStepDefs {
 
     @Then("I verify that the updated firstname in top nav header")
     public void iVerifyThatTheUpdatedFirstnameInTopNavHeader() {
-        $(By.xpath("//*[text()='" + "WELCOME BACK, " + firstName.toUpperCase() + "']")).should(visible, Duration.ofSeconds(20));
+        with().pollInterval(6, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()='" + "WELCOME BACK " + firstName.toUpperCase() + "']")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I update first name for estore account")
