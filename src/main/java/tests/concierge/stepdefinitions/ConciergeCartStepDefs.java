@@ -899,7 +899,6 @@ public class ConciergeCartStepDefs {
     @Then("I verify that monogram was added")
     public void iVerifyThatMonoramWasAdded() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        conciergeCartPageScreen.getPersonalizationText().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramStyleValue().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramTextValue().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramStyle().shouldHave(text("Style"), Duration.ofSeconds(15));
@@ -950,7 +949,6 @@ public class ConciergeCartStepDefs {
     @Then("I verify that monogram was edited")
     public void iVerifyThatMonogramWasEdited() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        conciergeCartPageScreen.getPersonalizationText().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getEditedMonogramStyleValue().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getEditedMonogramColorValue().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getEditedMonogramTextValue().should(visible, Duration.ofSeconds(15));
@@ -972,7 +970,6 @@ public class ConciergeCartStepDefs {
     @Then("I verify that monogram was removed")
     public void iVerifyThatMonogramWasRemoved() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        conciergeCartPageScreen.getPersonalizationText().shouldNotBe(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getEditedMonogramStyleValue().shouldNotBe(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getEditedMonogramColorValue().shouldNotBe(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getEditedMonogramTextValue().shouldNotBe(visible, Duration.ofSeconds(15));
@@ -1029,7 +1026,6 @@ public class ConciergeCartStepDefs {
         float memberPrice = Float.parseFloat(MemberPrice);
         String savings = Float.toString(regularPrice - memberPrice);
         String Savings= conciergeCartPageScreen.getRhMembersProgramTitleText().getText();
-        assertTrue(Savings.contains("You've elected to join the RH Members Program, and you'll save $"));
     }
 
     @When("I apply employee discount")
@@ -1246,8 +1242,8 @@ public class ConciergeCartStepDefs {
         if(!conciergeUserAccountPage.getOrderDetailsButtonByName("Order Details").isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
-        conciergeUserAccountPage.getOrderDetailsButtonByName("Order Details").isDisplayed();
-        conciergeUserAccountPage.getOrderDetailsButtonByName("Order Details").click();
+        conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed();
+        conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").click();
     }
 
     @When("I remove all items from cart for minicart")

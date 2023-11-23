@@ -128,7 +128,7 @@ public class PdpScreen {
 
     private final SelenideElement itemsPerPage = $(By.xpath("//*[@id = 'itemsPerPage']"));
     private final SelenideElement monogramsText = $(By.xpath("//*[text()='Text']"));
-    private final SelenideElement viewOnStockItemLink = $(By.xpath("//*[text()='In-Stock']"));
+    private final SelenideElement viewOnStockItemLink = $(By.xpath("(//span[@id='component-relatedProductCartd_view-in-stock-btn'])[1]"));
     private final SelenideElement monogramsStyle = $(By.xpath("//*[text()='Style']"));
     private final SelenideElement inStockPopUpTitle = $(By.xpath("//*[text()='IN STOCK']"));
     private final SelenideElement viewSelectItemsOnSaleLink = $(By.xpath("//*[text()='VIEW SELECT ITEMS ON SALE']"));
@@ -417,7 +417,7 @@ public class PdpScreen {
 
     private final SelenideElement rightSideImageCarouselModuleCloseButton = $(By.xpath(" (//button[@class = 'MuiButtonBase-root MuiIconButton-root'])[2]"));
 
-    private final SelenideElement specialOrdersButton = $(By.xpath("//div[contains(@data-testid,'SPECIAL ORDER FabricS')]"));
+    private final SelenideElement specialOrdersButton = $(By.xpath("//div[contains(@data-testid,'FabricS')]"));
 
     private final SelenideElement zipCode = $(By.xpath("(//*[@data-testid = 'postal-code-dialog-opener'])[1]"));
 

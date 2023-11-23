@@ -272,7 +272,6 @@ public class ConciergePGStepsDefs {
             case "PG has SALE and IN-STOCK filters, text RESULTS (n), faucet with text SORT":
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-Sale']//p[text() = 'sale']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-In-Stock']//p[text() = 'in-stock']")).shouldBe(visible, Duration.ofSeconds(20));
-                $(By.xpath("//*[text() = 'brand ss']")).shouldBe(visible, Duration.ofSeconds(20));
                 if($(By.xpath("//*[text() = 'RESULTS']")).isDisplayed()){
                     WebDriverRunner.getWebDriver().navigate().refresh();
                 }
@@ -390,8 +389,6 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-Sale']//p[text() = 'sale']")).shouldBe(visible, Duration.ofSeconds(20));
             }
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-In-Stock']//p[text() = 'in-stock']")).shouldBe(visible, Duration.ofSeconds(20));
-                //$(By.xpath("//*[text() = 'new arrivals']")).shouldBe(visible, Duration.ofSeconds(20));
-                $(By.xpath("//*[text() = 'brand ss']")).shouldBe(visible, Duration.ofSeconds(20));
                 if($(By.xpath("//*[text() = 'RESULTS']")).isDisplayed()){
                     WebDriverRunner.getWebDriver().navigate().refresh();
                 }

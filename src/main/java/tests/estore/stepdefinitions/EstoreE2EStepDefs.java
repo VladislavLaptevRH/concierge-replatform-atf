@@ -77,7 +77,7 @@ public class EstoreE2EStepDefs {
 
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
-        estoreItemPage.getAddToCartButton().shouldBe(interactable).click(ClickOptions.usingJavaScript());
+        estoreItemPage.getAddToCartButton().shouldBe(visible).click(ClickOptions.usingJavaScript());
         with().pollInterval(6, SECONDS).await().until(() -> true);
     }
 
@@ -618,6 +618,7 @@ public class EstoreE2EStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @When("I open product page with {string} and {string} for estore")

@@ -65,7 +65,7 @@ public class ConciergeSearchStepDefs {
                 assertEquals(Hooks.getCurrentUrl(), "https://stg2-concierge.restorationhardware.com/us/en/customer-experience/contact-us");
                 break;
             case "footer is present":
-                $(By.xpath("//*[@id = 'footer']")).should(Condition.visible, Duration.ofSeconds(15));
+                $(By.xpath("//*[text() = 'LEGAL']")).should(Condition.visible, Duration.ofSeconds(15));
                 break;
             case "PG page is returned with text  RESULTS (IN RH BABY & CHILD)":
                 $(By.xpath("//*[text() = 'RESULTS']")).shouldHave(text("IN RH BABY & CHILD )"));
