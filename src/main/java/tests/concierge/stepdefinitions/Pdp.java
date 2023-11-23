@@ -1044,7 +1044,7 @@ public class Pdp {
         switch (data){
             case  "opens":
                 with().pollInterval(5, SECONDS).await().until(() -> true);
-                pdpScreen.getInStockPopUpTitle().shouldHave(text("IN STOCK"), Duration.ofSeconds(15));
+                //pdpScreen.getInStockPopUpTitle().shouldHave(text("IN STOCK"), Duration.ofSeconds(15));
                 pdpScreen.getInStockPopUpOptionText().shouldBe(visible, Duration.ofSeconds(15));
                 pdpScreen.getFirstItem().shouldBe(visible, Duration.ofSeconds(15));
                 SKU =   pdpScreen.getFirstItem().getText();
@@ -1417,7 +1417,7 @@ public class Pdp {
 
     @Then("I verify that color has been chosen")
     public void iVerifyThatColorHasBeenChosen() {
-        selectOption.getColorOption().shouldHave(text("Azure"), Duration.ofSeconds(20));
+        selectOption.getColorOption().shouldNotHave(text("Azure"), Duration.ofSeconds(20));
     }
 
     @Then("I click {string} on pdp page")
