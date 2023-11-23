@@ -118,6 +118,8 @@ public class Hooks {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
         } else if (profile.equals("stg3") && cookie != null) {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
+        } else if (profile.equals("prod") && cookie == null){
+            eStoreURL = eStoreBaseURL;
         }
         return eStoreURL;
     }

@@ -155,6 +155,19 @@ public class EstoreAccountStepDefs {
         }
     }
 
+    @When("I choose country {string} for eStore from footer")
+    public void iChooseCountryEStoreFromFooter(String country) {
+        if (country.equals("GB")) {
+            estoreHomePage.chooseGBCountry();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+
+        if (country.equals("CA")) {
+            estoreHomePage.chooseCACountry();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+    }
+
     @Then("I verify that I'm able to create the new account")
     public void iVerifyThatIMAbleToCreateTheNewAccount() {
         estoreUserAccountPage.getCreateTitle().should(visible, Duration.ofSeconds(30));

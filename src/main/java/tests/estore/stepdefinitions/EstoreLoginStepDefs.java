@@ -45,6 +45,17 @@ public class EstoreLoginStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
 
         }
+        if (accountRole.equals("prod")){
+            estoreLoginPage.getAccountIcon().should(visible, Duration.ofMinutes(15));
+            estoreLoginPage.getAccountIcon().click();
+            estoreLoginPage.getUsernameField().should(visible, Duration.ofSeconds(15));
+            estoreLoginPage.getPasswordField().should(visible, Duration.ofMinutes(15));
+            estoreLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
+            estoreLoginPage.getUsernameField().setValue("mumarali@rh.com");
+            estoreLoginPage.getPasswordField().setValue("Prodtest@123");
+            estoreLoginPage.getSignInButton().click();
+
+        }
         if (!accountRole.equals("guest")) {
             estoreLoginPage.getAccountIcon().should(visible, Duration.ofMinutes(15));
             estoreLoginPage.getAccountIcon().click();
