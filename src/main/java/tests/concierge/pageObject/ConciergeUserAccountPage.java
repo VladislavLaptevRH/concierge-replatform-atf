@@ -34,7 +34,14 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement outdoorMenu = $(By.xpath("//*[text()='Outdoor']"));
 
+    private final SelenideElement searchYieldedMessage = $(By.xpath("//*[text() = 'Your search yielded no results']"));
+
+    private final SelenideElement searchPostalCodeErrorMessage = $(By.xpath("//*[text() = 'Postal Code must be combined with another search field.']"));
+
     private final SelenideElement chairsSubMenu = $(By.xpath("//*[text()='Chairs']"));
+    private final SelenideElement createNewAccountButton = $(By.xpath("//*[text() = 'CREATE NEW ACCOUNT']"));
+
+    private final SelenideElement createNewAccountModalTitle = $(By.xpath("//*[text() = 'CREATE A NEW ACCOUNT']"));
 
     private final SelenideElement firstItemMainMenu = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-justify-xs-space-between']/div[1]"));
 
@@ -210,6 +217,8 @@ public class ConciergeUserAccountPage {
     private final SelenideElement company = $(By.xpath("//input[@name='company']"));
     private final SelenideElement signout = $(By.xpath("//p[text()='SIGN OUT']"));
     private final SelenideElement orderHistoryTitle = $(By.xpath("//*[text()='RH Orders']"));
+
+    private final SelenideElement disabledSearchButton = $(By.xpath(" //*[@disabled]/*[text() = 'Search']"));
     private final SelenideElement orderUser = $(By.xpath("//*[text()='automation trade']"));
     private final SelenideElement orderSearch = $(By.xpath("//*[text()='Order Search']"));
     private final SelenideElement orderTable = $(By.xpath("//table"));

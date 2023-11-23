@@ -21,7 +21,7 @@ Feature: Concierge ThankYouPage
     When I click on a place order button
     When I click on order details button
     Then I verify order details from thank you page
-@vlad
+
   Scenario: Verify the payment details and Order estimate summary
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

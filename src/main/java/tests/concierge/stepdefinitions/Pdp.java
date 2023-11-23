@@ -1137,6 +1137,16 @@ public class Pdp {
         pdpScreen.getPerformanceFiberRugs().should(visible, Duration.ofSeconds(25));
     }
 
+    @Then("User should be able to see the measuring units in inches for NA region")
+    public void measuringInInchesForNARegion() {
+        pdpScreen.getSecondLineItem().shouldHave(text("'"), Duration.ofSeconds(15));
+    }
+
+    @Then("User should be able to see the measuring units in CM for UK region")
+    public void measuringInCMForNARegion() {
+        pdpScreen.getSecondLineItem().shouldHave(text("cm"), Duration.ofSeconds(15));
+    }
+
     @Then("Pricing should be shown against each item")
     public void pricingShouldBeShownAgainstEachItem() {
         pdpScreen.getItemsPerPage().scrollIntoView(true);
@@ -1161,7 +1171,11 @@ public class Pdp {
 
     @Then("I chose {string} product on the page")
     public void iChoseProductOnThePage(String arg) {
-        pdpScreen.getProductNumberByNumber(arg).click();
+        if(pdpScreen.getProductNumberByNumber(arg).isDisplayed()){
+            pdpScreen.getProductNumberByNumber(arg).click();
+        } else {
+            pdpScreen.getProductImageByNumber(arg).click();
+        }
     }
 
     @When("I click on windows from top menu")
