@@ -18,6 +18,8 @@ public class PdpScreen {
 
     public final String productNumber = "(//*[@id = 'flip-carousel-div'])[%s]/../../..";
 
+    public final String productimage = "(//*[@id = 'component-rh-image']/../../..)[%s]";
+
     public final String textLocator = "(//*[text() = '%s'])[1]";
 
     public final String collection = "(//a/img[@class = 'desktop-img'])[%s]";
@@ -53,6 +55,8 @@ public class PdpScreen {
     private final ElementsCollection tradeList = $$(By.xpath("//*[contains(text() ,'Trade')]"));
 
     private final ElementsCollection benchItmsList = $$(By.xpath("//*[contains(text() ,'Trade')]"));
+
+    private final SelenideElement secondLineItem = $(By.xpath("((//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..)[2]"));
 
     private final ElementsCollection lineItemsCount = $$(By.xpath(" (//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/.."));
     private final SelenideElement quantitySelect = $(By.xpath("(//*[text() = 'QTY'])[1]/..//select"));
@@ -478,6 +482,11 @@ public class PdpScreen {
 
     public SelenideElement getProductNumberByNumber(String number) {
         String path = String.format(productNumber, number);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getProductImageByNumber(String image) {
+        String path = String.format(productimage, image);
         return $(byXpath(path));
     }
 

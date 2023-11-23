@@ -1,16 +1,20 @@
 package tests.concierge.pageObject;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class ConciergeProjectScreen {
+    public final String forecastAmountString = "(//*[text() = 'Forecast Amount']/preceding-sibling::div)[%s]";
+    private final ElementsCollection forecastAmountList = $$(By.xpath("//*[text() = 'Forecast Amount']/preceding-sibling::div"));
     private final SelenideElement projectMemberPrice = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][1]/p/b"));
 
     private final SelenideElement pricingTypeDropdown = $(By.cssSelector("#pricingTypeDropdown"));
@@ -222,7 +226,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement finishOption = $(By.id("optionSelect-0"));
 
-    private final SelenideElement forecastamountValue = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-2'][3]/div)[1]"));
+    private final SelenideElement forecastAmountValue = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-2'][3]/div)[1]"));
 
     private final SelenideElement itemProjectPrice = $(By.xpath("(//div[1]/p[@class='MuiTypography-root MuiTypography-body1'])[4]"));
 
@@ -249,4 +253,9 @@ public class ConciergeProjectScreen {
     private final SelenideElement prieItemFromProject = $(By.xpath("//div[2]/div[@class='MuiGrid-root MuiGrid-item'][1]/p"));
 
     private final SelenideElement emailEstimateSendButton = $(By.cssSelector("button[type='submit'] span[class='MuiButton-label']"));
+
+    public SelenideElement getForecastAmountByNumber(int number) {
+        String path = String.format(forecastAmountString, number);
+        return $(byXpath(path));
+    }
 }

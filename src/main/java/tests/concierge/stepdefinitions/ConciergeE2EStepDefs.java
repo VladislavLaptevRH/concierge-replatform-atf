@@ -26,6 +26,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 import static com.codeborne.selenide.Condition.*;
@@ -90,6 +91,12 @@ public class ConciergeE2EStepDefs {
         conciergeItemsScreen.getContinueShoppingButton().should(visible, Duration.ofSeconds(12));
         conciergeItemsScreen.getGoToProjectButton().click();
     }
+
+    @When("I click on continue button from Projects")
+    public void iClickOnContinueButtonFromProjects() {
+            conciergeProjectScreen.getContinueButtonPopUp().click();
+    }
+
 
     @When("I click on add to cart button from project screen")
     public void iClickOnAddToCartButtonFromProjectScreen() {

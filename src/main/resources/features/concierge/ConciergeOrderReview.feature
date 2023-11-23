@@ -58,7 +58,7 @@ Feature: Concierge Order review
     When I choose POS for payment method
     When I edit payment method
     When I click on a place order button
-@vlad
+
   Scenario: Verify the payment details and Order estimate summary
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

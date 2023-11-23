@@ -59,6 +59,18 @@ public class ProjectStepDefs {
         conciergeProjectScreen.getResultsListForProjects().should(visible, Duration.ofMinutes(1));
     }
 
+    @Then("I open a value project")
+    public void iOpenAValueProject() {
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        for(int i = 3; i < conciergeProjectScreen.getForecastAmountList().size(); i++){
+            if(Integer.parseInt(conciergeProjectScreen.getForecastAmountByNumber(i).getText().replaceAll("[^0-9]", "")) > 0) {
+                conciergeProjectScreen.getForecastAmountByNumber(i).click();
+                break;
+            }
+        }
+        with().pollInterval(9, SECONDS).await().until(() -> true);
+    }
+
     @When("I search project by {string}")
     public void iSearchProjectBy(String pricingType) {
         conciergeProjectScreen.getSearchBySelect().should(Condition.and("", visible, enabled), Duration.ofSeconds(25));
@@ -894,7 +906,7 @@ public class ProjectStepDefs {
         } else {
             forecastExpected = randomQuantity * 2088;
         }
-        int forecastActual = Integer.parseInt(conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
+        int forecastActual = Integer.parseInt(conciergeProjectScreen.getForecastAmountValue().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
         assertEquals(forecastActual, forecastExpected, "Forecast value has been updated");
     }
 
@@ -911,8 +923,8 @@ public class ProjectStepDefs {
 
     @When("I choose pricing type {string}")
     public void iChoosePricingType(String arg0) {
-        conciergeProjectScreen.getForecastamountValue().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        conciergeProjectScreen.getForecastamountValue().should(visible, Duration.ofSeconds(12));
+        conciergeProjectScreen.getForecastAmountValue().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        conciergeProjectScreen.getForecastAmountValue().should(visible, Duration.ofSeconds(12));
 //        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         $(By.id("footer")).shouldHave(text("RH.COM\n" +
                 "DASHBOARD\n" +
@@ -1072,20 +1084,20 @@ public class ProjectStepDefs {
     @Then("I verify {string} for unclassified business client project")
     public void iVerifyForUnclassifiedBusinessClientProject(String pricingType) {
         if (pricingType.equals("NON_MEMBER")) {
-            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,090.00"), Duration.ofSeconds(40));
-            String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
+            conciergeProjectScreen.getForecastAmountValue().shouldHave(text("$1,090.00"), Duration.ofSeconds(40));
+            String forecastActual = conciergeProjectScreen.getForecastAmountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
             $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[7]")).shouldHave(text("$1,090.00"), Duration.ofSeconds(120));
             assertEquals(forecastActual, "1,090", "Pricing for non member is displayed correctly");
         }
         if (pricingType.equals("NON_TRADE")) {
-            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,090.00"), Duration.ofSeconds(40));
-            String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
+            conciergeProjectScreen.getForecastAmountValue().shouldHave(text("$1,090.00"), Duration.ofSeconds(40));
+            String forecastActual = conciergeProjectScreen.getForecastAmountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
             $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[5]")).shouldHave(text("$1,090.00"), Duration.ofSeconds(120));
             assertEquals(forecastActual, "1,090", "Pricing for non member is displayed correctly");
         }
         if (pricingType.equals("MEMBER") || (pricingType.equals("TRADE"))) {
-            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$817.00"), Duration.ofSeconds(40));
-            String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
+            conciergeProjectScreen.getForecastAmountValue().shouldHave(text("$817.00"), Duration.ofSeconds(40));
+            String forecastActual = conciergeProjectScreen.getForecastAmountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
             $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[7]")).shouldHave(text("$817.00"), Duration.ofSeconds(120));
             assertEquals(forecastActual, "817", "Pricing for " + pricingType + " is displayed correctly");
         }
