@@ -479,7 +479,7 @@ public class EstoreGeneralStepDefs {
                 "            \"items\": [\n" +
                 "                {\n" +
                 "                    \"productId\": \"prod13800635\",\n" +
-                "                    \"sku\": \"17050042 WHT\",\n" +
+                "                    \"sku\": \"17050042 FOG\",\n" +
                 "                    \"fusionId\": \"iXzwEtMB1A~prod14280121~search\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"brand\": \"RH\",\n" +

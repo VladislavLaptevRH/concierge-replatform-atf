@@ -300,6 +300,11 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement confirmSignOutButton = $(By.xpath("//button[contains(@class,'MuiButton-containedPrimary')]"));
 
+    private final SelenideElement registerButton = $(By.xpath("//span[text()='Register']"));
+
+    public void clickToRegisterButton() {
+        registerButton.should(visible).click(ClickOptions.usingJavaScript());
+    }
 
     public void clickToSignOutButton() {
         signOutButton.shouldBe(interactable).click(ClickOptions.usingJavaScript());
