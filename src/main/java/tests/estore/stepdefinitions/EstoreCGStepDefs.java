@@ -396,4 +396,9 @@ public class EstoreCGStepDefs {
     public void iVerifyThatSwatchesAreNotDisplayedBelowTheProductImage() {
         estoreCGScreen.verifyThatSwatches3upGridViewIsNotDisplayed();
     }
+
+    @Then("I verify that recently selected {int}x{int} grid in CG page")
+    public void iVerifyThatRecentlySelectedXGridInCGPage(int arg0, int arg1) {
+        estoreCGScreen.getGridView2x2().should(visible, Duration.ofSeconds(12));
+    }
 }

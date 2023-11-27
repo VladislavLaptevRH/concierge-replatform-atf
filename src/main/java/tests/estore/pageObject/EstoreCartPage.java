@@ -1,5 +1,6 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
@@ -273,6 +274,12 @@ public class EstoreCartPage {
     private final SelenideElement deliveryItemMessage = $(By.xpath("//*[contains(text(),'This item will be ready for delivery between')]"));
 
     private final SelenideElement theSecondDeliverItemOption = $(By.xpath("(//*[contains(text(),'This item is special order and will be ready for delivery between')])[2]"));
+
+    private final SelenideElement cartIconHeader = $(By.xpath("//a[@id='container-rhrHeader_cart-btn']"));
+
+    public void clickToCartIconHeader() {
+        cartIconHeader.should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
 
     public void verifyThatCartPageIsDisplayed() {
         assertTrue(Hooks.getCurrentUrl().contains("shopping_cart"));

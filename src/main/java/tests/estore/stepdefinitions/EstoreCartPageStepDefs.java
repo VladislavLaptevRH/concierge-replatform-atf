@@ -935,4 +935,9 @@ public class EstoreCartPageStepDefs {
         estoreCartPage.getDeliveryItemMessage().should(visible, Duration.ofSeconds(12));
         estorePDPScreen.getThisItemCanBeReturnedMsg().should(visible, Duration.ofSeconds(12));
     }
+
+    @When("I click on estore cart icon from header")
+    public void iClickOnEstoreCartIconFromHeader() {
+        estoreCartPage.clickToCartIconHeader();
+    }
 }

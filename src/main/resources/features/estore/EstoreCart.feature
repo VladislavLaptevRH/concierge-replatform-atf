@@ -504,4 +504,13 @@ Feature: Estore Cart Page
     When I click on view cart estore button
     Then I verify SPO item - availability and return message
 
+  Scenario:  Verify the instock item - availability and return message
+    Given I log into eStore as "regular" user
+    When I choose country for concierge from footer
+    When I remove all items from estore cart
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    When I click on add to cart estore button
+    And I click on view cart estore button
+    Then I verify that user is able to see availability and return message
+
 

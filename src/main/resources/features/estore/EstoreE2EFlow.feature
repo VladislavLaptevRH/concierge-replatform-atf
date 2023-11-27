@@ -5,7 +5,7 @@ Feature: Estore E2E flow
 
   Scenario: Verify that user is able to buy item for estore
     Given I log into eStore as "regular" user
-    When I choose country for concierge from footer
+    When I choose country for eStore from footer
     When I remove all items from estore cart
     When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
