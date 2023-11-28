@@ -577,3 +577,24 @@ Feature: Concierge Project
     When I click on the first project search result
     When I click on view all button from space dropdown
     Then I verify that items from all spaces are displayed
+
+    @vlad
+  Scenario: Verify pagination is working when switching between pages in my projects
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I click on projects button
+    Then Switch page using pagination
+    And User should be able to switch pages using pagination in my projects
+
+    @vlad
+  Scenario: Verify Correct brand Name is showing in email estimate for line items
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I click on projects button
+    When I search project "modifyitemsoptions" by provided "projectName"
+    When I click on the first project search result
+    When I click on email estimate button from project screen
+    When I introduces client email from email estimate pop up
+    When I click on email estimate button
+    Then I verify that the client received the letter on the "client"
+    Then Verify Brand Name in EMAIL Recipt

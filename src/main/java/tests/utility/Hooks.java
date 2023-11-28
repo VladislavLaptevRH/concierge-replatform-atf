@@ -64,18 +64,22 @@ public class Hooks {
         cookie = System.getenv("ENDPOINT");
         country = System.getenv("COUNTRY");
 
-        if (profile == null) {
-            Assert.fail("Environment Variable is NOT Set");
-        } else {
-            System.out.println("Tests are running on " + profile + " environment");
-            System.out.println("Tests are running on " + country + " country");
-        }
+        profile = "stg2";
+        cookie = "dragon";
+        country = "US";
 
-        if (cookie == null) {
-            System.out.println("Tests are running without cookie or endpoint");
-        } else {
-            System.out.println("Tests are running with endpoint = " + cookie);
-        }
+//        if (profile == null) {
+//            Assert.fail("Environment Variable is NOT Set");
+//        } else {
+//            System.out.println("Tests are running on " + profile + " environment");
+//            System.out.println("Tests are running on " + country + " country");
+//        }
+//
+//        if (cookie == null) {
+//            System.out.println("Tests are running without cookie or endpoint");
+//        } else {
+//            System.out.println("Tests are running with endpoint = " + cookie);
+//        }
 
         BufferedReader reader;
         try {
@@ -118,8 +122,6 @@ public class Hooks {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
         } else if (profile.equals("stg3") && cookie != null) {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
-        } else if (profile.equals("prod") && cookie == null){
-            eStoreURL = eStoreBaseURL;
         }
         return eStoreURL;
     }
@@ -150,7 +152,7 @@ public class Hooks {
         ConfigFileReader();
         configureEstoreURL();
         setUPWebDriver(eStoreURL);
-        setupChromeArguments(eStoreURL);
+//        setupChromeArguments();
     }
 
     /**
@@ -161,24 +163,35 @@ public class Hooks {
         ConfigFileReader();
         configureConciergeURL();
         setUPWebDriver(conciergeURL);
-        setupChromeArguments(conciergeURL);
- }
+//        setupChromeArguments(conciergeURL);
+    }
 
     /**
      * Initialize Web driver
      */
     public void setUPWebDriver(String url) {
         ChromeOptions options = new ChromeOptions();
+        WebDriverManager.chromedriver().setup();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-gpu");
+        options.addArguments("enable-automation");
+        options.addArguments("--disable-infobars");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-browser-side-navigation");
+        options.addArguments("--window-size=1366,768");
+        options.addArguments("--user-agent=robot-framework");
         Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = true;
+        Configuration.headless = false;
         Configuration.pageLoadStrategy = "normal";
         Configuration.pageLoadTimeout = 60000;
         Configuration.timeout = 45000;
         Configuration.reportsFolder = "target/screenshots";
         Configuration.browserCapabilities = options;
-        WebDriverManager.chromedriver().setup();
+        open(url);
+        currentUrl = WebDriverRunner.url();
     }
 
     /**
@@ -207,8 +220,10 @@ public class Hooks {
             e.printStackTrace();
         }
         WebDriverRunner.setWebDriver(driver);
+
         open(url);
         currentUrl = WebDriverRunner.url();
+
     }
 
     /**

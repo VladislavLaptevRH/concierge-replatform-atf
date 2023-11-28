@@ -477,6 +477,17 @@ public class ConciergeAssociateStepDefs {
         conciergeUserAccountPage.getSearchPostalCodeErrorMessage().should(visible,Duration.ofSeconds(15));
     }
 
+    @Then("Search with incorrect Last name and correct postal code")
+    public void searchOWithIncorrectLastNameAndCorrectPostalCode(){
+        conciergeUserAccountPage.getOrderSearch().click();
+        conciergeUserAccountPage.getLastName().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getLastName().setValue("*****");
+        conciergeUserAccountPage.getPostalCode().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getPostalCode().setValue("94536");
+        conciergeUserAccountPage.getOrderSearchButton().click();
+        conciergeUserAccountPage.getSearchYieldedMessage().should(visible,Duration.ofSeconds(15));
+    }
+
     @Then("I confirm table header {string}")
     public void iConfirmth(String header){
         conciergeUserAccountPage.getTableHeader(header).should(visible,Duration.ofSeconds(15));

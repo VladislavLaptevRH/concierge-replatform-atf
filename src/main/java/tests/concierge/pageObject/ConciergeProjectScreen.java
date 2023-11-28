@@ -152,6 +152,9 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement emailEstimateAdditionEmailField = $(By.xpath("//input[@name='cc']"));
 
+    private final SelenideElement projectNameItemTitle = $(By.xpath("//h6/.."));
+    private final SelenideElement emailItemName = $(By.xpath("(//*[@class = 'productImageAndAttributes'])[2]//td[2]/div"));
+
     private final SelenideElement goToProjectButton = $(By.xpath("//*[text()='GO TO PROJECT']"));
 
     private final SelenideElement opportunityNameField = $(By.xpath("//input[@class='MuiInputBase-input MuiOutlinedInput-input']"));
@@ -245,6 +248,8 @@ public class ConciergeProjectScreen {
     private final SelenideElement editItemOptions = $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[13]"));
 
     private final SelenideElement regularPriceValue = $(By.xpath("(//*[contains(text(),'$')])[4]"));
+
+    private final SelenideElement paginationGoToPage2 = $(By.xpath("//*[@aria-label = 'Go to page 2']"));
 
     private final SelenideElement addToProjectProjectName = $(By.id("project-name"));
 
