@@ -1250,10 +1250,15 @@ public class ProjectStepDefs {
     @When("I click on save button uppercase")
     public void iClickOnSaveButtonUppercase() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        conciergeProjectScreen.getSaveBtnUppercase().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
-        conciergeProjectScreen.getSaveBtnUppercase().should(visible, Duration.ofSeconds(15));
-        conciergeProjectScreen.getSaveBtnUppercase().click();
-
+        if(conciergeProjectScreen.getSaveBtnUppercase().isDisplayed()){
+            conciergeProjectScreen.getSaveBtnUppercase().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
+            conciergeProjectScreen.getSaveBtnUppercase().should(visible, Duration.ofSeconds(15));
+            conciergeProjectScreen.getSaveBtnUppercase().click();
+        } else {
+            conciergeProjectScreen.getSaveBtnLowerCase().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
+            conciergeProjectScreen.getSaveBtnLowerCase().should(visible, Duration.ofSeconds(15));
+            conciergeProjectScreen.getSaveBtnLowerCase().click();
+        }
     }
 
     @Then("I verify the address page, prefilled address and email address must be filled")

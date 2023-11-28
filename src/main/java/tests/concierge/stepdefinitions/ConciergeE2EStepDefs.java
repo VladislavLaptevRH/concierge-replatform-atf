@@ -72,17 +72,19 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on add to project button")
     public void userClickOnAddToProjectButton() {
-        //conciergeItemsScreen.getAddToProjectButton().should(Condition.and("", enabled, visible), Duration.ofSeconds(12));
-        if (!conciergeItemsScreen.getAddToProjectButton().isEnabled()) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+//        if (!conciergeItemsScreen.getAddToProjectButton().isDisplayed() || !conciergeItemsScreen.getAddToProjectButtonLowerCase().isDisplayed()) {
+//            WebDriverRunner.getWebDriver().navigate().refresh();
+//            with().pollInterval(5, SECONDS).await().until(() -> true);
+//            conciergeItemsScreen.getAddToProjectButton().scrollTo();
+//            conciergeItemsScreen.getAddToProjectButton().click();
+//        }
+        if (conciergeItemsScreen.getAddToProjectButton().isDisplayed()) {
             conciergeItemsScreen.getAddToProjectButton().scrollTo();
             conciergeItemsScreen.getAddToProjectButton().click();
         } else {
-            conciergeItemsScreen.getAddToProjectButton().scrollTo();
-            conciergeItemsScreen.getAddToProjectButton().click();
+            conciergeItemsScreen.getAddToProjectButtonLowerCase().scrollTo();
+            conciergeItemsScreen.getAddToProjectButtonLowerCase().click();
         }
-
     }
 
     @When("I click on go to project button")

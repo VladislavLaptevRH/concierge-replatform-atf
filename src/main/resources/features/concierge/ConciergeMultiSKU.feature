@@ -106,7 +106,6 @@ Feature: Multi SKU
   When I click on go to project button
   Then I verify product count in project page
 
-@vlad
  Scenario: Verify user is able to see the measuring units in inches for size/length options for NA region
   Given I log into Concierge as "associate"
   When I choose country for concierge from footer
@@ -117,7 +116,6 @@ Feature: Multi SKU
   Then I chose the '1' line item selections one by one
   Then User should be able to see the measuring units in inches for NA region
 
- @vlad
  Scenario: Verify user is able to see the measuring units in CM for size/length options for UK region
   Given I log into Concierge as "associate"
   When I choose 'GB' country
