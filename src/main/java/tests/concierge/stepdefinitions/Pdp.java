@@ -1561,6 +1561,7 @@ public class Pdp {
                 pdpScreen.getPostalCode().setValue(zipCode);
                 pdpScreen.getConfirmationPostalCode().click();
                 with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(9, SECONDS).await().until(() -> true);
             }
 
     @Then("I click on zip code and change it to {string} in modal opener")

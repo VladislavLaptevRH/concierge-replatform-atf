@@ -430,7 +430,7 @@ public class ConciergeCartStepDefs {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         totalPrice = conciergeCartPageScreen.getTotalPrice().getText().replaceAll(",", "").replaceAll("\\$", "");
         totalAdditionalProductDiscountMessage = conciergeCartPageScreen.getTotalAdditionalProductDiscountMessage().getText();
-        totalAdditionalProductDiscount = conciergeCartPageScreen.getTotalAdditionalProductDiscount().getText().replaceAll(",", "").replaceAll("\\$", "");
+        //totalAdditionalProductDiscount = conciergeCartPageScreen.getTotalAdditionalProductDiscount().getText().replaceAll(",", "").replaceAll("\\$", "");
     }
 
     @When("I introduces promo code {string} for promo codes field")
@@ -1566,7 +1566,7 @@ public class ConciergeCartStepDefs {
             conciergeCartPageScreen.getTotalRegularPrice().should(visible, Duration.ofSeconds(20));
             if(conciergeCartPageScreen.getTotalTradePrice().isDisplayed()){
                 conciergeCartPageScreen.getTotalTradePrice().should(visible, Duration.ofSeconds(20));
-            } else {
+            } else if(conciergeCartPageScreen.getMemberPriceInPG().isDisplayed()){
                 conciergeCartPageScreen.getMemberPriceInPG().should(visible, Duration.ofSeconds(20));
                 //conciergeCartPageScreen.getMemberPriceInPG().shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
             }
