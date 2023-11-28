@@ -321,6 +321,7 @@ public class ConciergeAssociateStepDefs {
     public void iVerifyThatRHBrandDropDownIsPresentInHomePage(String currentBrand){
         if(!conciergeUserAccountPage.getCurrentBrandByName(currentBrand).isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             conciergeUserAccountPage.getCurrentBrandByName(currentBrand).should(visible,Duration.ofSeconds(15));
         }
         with().pollInterval(3, SECONDS).await().until(() -> true);
