@@ -98,6 +98,15 @@ Feature: Estore back button
     When I navigate back from "PDP" page
     Then I verify that user is able to view recently selected 2x2 grid view on PG page
 
+  Scenario: Grid Changes Search- Verify that user is able to view recently selected grid in Search page upon clicking on Back button in PDP page
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    Then I validate "2","2" and "2" grid view should work
+    When I navigate to any estore fusion PG
+    When I navigate back from "PDP" page
+    Then I verify that 2x2 grid view is active on Search page
+
 
 
 

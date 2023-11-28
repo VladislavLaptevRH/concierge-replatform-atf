@@ -328,4 +328,9 @@ public class EstoreSearchStepDefs {
     public void iClickOnCustomerExperienceLink() {
         estoreSearchScreen.getCustomerExperienceLink().should(visible, Duration.ofSeconds(9)).click(ClickOptions.usingJavaScript());
     }
+
+    @Then("I verify that {int}x{int} grid view is active on Search page")
+    public void iVerifyThatXGridViewIsActiveOnSearchPage(int arg0, int arg1) {
+        estoreSearchScreen.getSearch2x2GridView().should(visible, Duration.ofSeconds(12));
+    }
 }
