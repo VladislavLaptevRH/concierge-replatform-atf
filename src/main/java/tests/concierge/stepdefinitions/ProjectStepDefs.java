@@ -21,6 +21,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.*;
+import org.openqa.selenium.interactions.Actions;
 
 public class ProjectStepDefs {
     EstoreItemPage estoreItemPage = new EstoreItemPage();
@@ -45,6 +46,8 @@ public class ProjectStepDefs {
     int randomColor;
     int randomQuantity;
     String itemPrice;
+
+    public static String result;
 
     @When("I click on projects button")
     public void iClickOnProjectsButton() {
@@ -235,6 +238,8 @@ public class ProjectStepDefs {
             conciergeProjectScreen.getFirstSearchResultOfProjects().should(visible, Duration.ofMinutes(5));
             conciergeProjectScreen.getFirstSearchResultOfProjects().click();
         }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        result = conciergeProjectScreen.getProjectNameItemTitle().getText();
     }
 
     @When("I click on the first project search result with parameters {string}{string}")
@@ -409,6 +414,12 @@ public class ProjectStepDefs {
         switchTo().frame(mailinator.getMessageBodyIframe());
         mailinator.getBodyEmailText().should(visible, Duration.ofSeconds(15));
         mailinator.getAssociateName().should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("Verify Brand Name in EMAIL Recipt")
+    public void verifyBrandNameInEmailRecipt() {
+        conciergeProjectScreen.getEmailItemName().scrollIntoView(true);
+        assertEquals(result, conciergeProjectScreen.getEmailItemName().getText());
     }
 
     @When("I click on bcc associate checkbox")
@@ -808,6 +819,16 @@ public class ProjectStepDefs {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         Select selectFinish = new Select(conciergeProjectScreen.getFinishOption());
         selectFinish.selectByVisibleText(finishValue);
+    }
+
+    @Then("Switch page using pagination")
+    public void switchPageUsingPagination() {
+       conciergeProjectScreen.getPaginationGoToPage2().click();
+    }
+
+    @Then("User should be able to switch pages using pagination in my projects")
+    public void userShouldBeAbleToSwitchPagesUsingPaginationInMyProjects() {
+        conciergeProjectScreen.getPaginationGoToPage2().shouldNotBe(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that price was not changes")
@@ -1250,10 +1271,15 @@ public class ProjectStepDefs {
     @When("I click on save button uppercase")
     public void iClickOnSaveButtonUppercase() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        conciergeProjectScreen.getSaveBtnUppercase().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
-        conciergeProjectScreen.getSaveBtnUppercase().should(visible, Duration.ofSeconds(15));
-        conciergeProjectScreen.getSaveBtnUppercase().click();
-
+        if(conciergeProjectScreen.getSaveBtnUppercase().isDisplayed()){
+            conciergeProjectScreen.getSaveBtnUppercase().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
+            conciergeProjectScreen.getSaveBtnUppercase().should(visible, Duration.ofSeconds(15));
+            conciergeProjectScreen.getSaveBtnUppercase().click();
+        } else {
+            conciergeProjectScreen.getSaveBtnLowerCase().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
+            conciergeProjectScreen.getSaveBtnLowerCase().should(visible, Duration.ofSeconds(15));
+            conciergeProjectScreen.getSaveBtnLowerCase().click();
+        }
     }
 
     @Then("I verify the address page, prefilled address and email address must be filled")

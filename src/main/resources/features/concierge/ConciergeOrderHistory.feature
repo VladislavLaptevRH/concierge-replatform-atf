@@ -144,7 +144,6 @@ Feature:Concierge Order history
 #      | 785071          | open        |
 #      | 12345           | notExisting |
 
-    @vlad
 	Scenario: Search with incorrect Last name, Your search yielded no results message along with Create New Account CTA button should be displayed
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
@@ -153,7 +152,6 @@ Feature:Concierge Order history
 	When I click "RH Orders" button on homepage
 	Then Search with incorrect Last name
 
-	@vlad
 	Scenario: Clicking on the Create New Account CTA button button should open Create Account modal
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
@@ -164,7 +162,6 @@ Feature:Concierge Order history
 	Then Click on the Create New Account CTA button
 	Then Create Account modal should be open
 
-	@vlad
 	Scenario: Search with only Postal Code field should not be allowed
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
@@ -173,7 +170,6 @@ Feature:Concierge Order history
 	When I click "RH Orders" button on homepage
 	Then Search with only Postal Code field
 
-	@vlad
 	Scenario: US Region: Order Search Modal Search Button should not be clickable if all the text fields are not having any data - Search button should be disabled
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
@@ -181,3 +177,12 @@ Feature:Concierge Order history
 	Then I verify button "RH Orders" on homepage
 	When I click "RH Orders" button on homepage
 	Then Search Button should be shown disable
+
+	@vlad
+	Scenario: Search with incorrect Last name and correct postal code,verify the search results - No Results
+	Given I log into Concierge as "associate"
+	When I choose country for concierge from footer
+	Then I expect that I am on the Concierge Dashboard page
+	Then I verify button "RH Orders" on homepage
+	When I click "RH Orders" button on homepage
+	Then Search with incorrect Last name and correct postal code

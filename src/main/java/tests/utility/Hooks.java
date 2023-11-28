@@ -162,7 +162,7 @@ public class Hooks {
         configureConciergeURL();
         setUPWebDriver(conciergeURL);
         setupChromeArguments(conciergeURL);
- }
+    }
 
     /**
      * Initialize Web driver

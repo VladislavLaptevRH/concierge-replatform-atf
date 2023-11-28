@@ -60,6 +60,8 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement addToProjectButton = $(By.xpath("(//*[text()='ADD TO PROJECT'])[1]"));
 
+    private final SelenideElement addToProjectButtonLowerCase = $(By.xpath("(//*[text()='Add to Project'])[1]"));
+
     private final SelenideElement saveProjectPopUpButton = $(By.xpath("//div[2]/button[contains(@class,'MuiButton-containedPrimary MuiButton-fullWidth')]"));
 
     private final SelenideElement addedIttemToProjectTitle = $(By.xpath("//h3[@class='MuiTypography-root MuiTypography-h3']"));

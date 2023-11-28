@@ -110,6 +110,8 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement saveBtnUppercase = $(By.xpath("//*[text()='SAVE']"));
 
+    private final SelenideElement saveBtnLowerCase = $(By.xpath("//*[text()='Save']"));
+
     private final SelenideElement forecastSetButton = $(By.xpath("//*[text()='FORECAST SET']"));
 
     private final SelenideElement settingsButton = $(By.xpath("//*[text()='SETTINGS']"));
@@ -149,6 +151,9 @@ public class ConciergeProjectScreen {
     private final SelenideElement emailEstimateMessageToClient = $(By.xpath("//textarea[@name='message']"));
 
     private final SelenideElement emailEstimateAdditionEmailField = $(By.xpath("//input[@name='cc']"));
+
+    private final SelenideElement projectNameItemTitle = $(By.xpath("//h6/.."));
+    private final SelenideElement emailItemName = $(By.xpath("(//*[@class = 'productImageAndAttributes'])[2]//td[2]/div"));
 
     private final SelenideElement goToProjectButton = $(By.xpath("//*[text()='GO TO PROJECT']"));
 
@@ -243,6 +248,8 @@ public class ConciergeProjectScreen {
     private final SelenideElement editItemOptions = $(By.xpath("(//button[contains(@class,'MuiButtonBase-root')])[13]"));
 
     private final SelenideElement regularPriceValue = $(By.xpath("(//*[contains(text(),'$')])[4]"));
+
+    private final SelenideElement paginationGoToPage2 = $(By.xpath("//*[@aria-label = 'Go to page 2']"));
 
     private final SelenideElement addToProjectProjectName = $(By.id("project-name"));
 
