@@ -411,6 +411,8 @@ public class PdpScreen {
 
     private final SelenideElement detailsSection = $(By.xpath("//*[text() = 'DETAILS']"));
 
+    private final SelenideElement detailsSectionLoverCase = $(By.xpath("//*[text() = 'Details']"));
+
     private final SelenideElement leatherCare = $(By.xpath("//*[text() = 'Leather Care']"));
     private final SelenideElement fabricCare = $(By.xpath("//*[text() = 'Fabric Care']"));
     private final ElementsCollection finishOptionSiblingText = $$(By.xpath("//*[text() = 'Finish Options']/..//*[@id = 'component-rh-image_wrapper']"));

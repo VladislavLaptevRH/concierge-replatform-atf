@@ -943,7 +943,11 @@ public class Pdp {
                 pdpScreen.getPdpTextBelowHeroImage().shouldBe(visible, Duration.ofSeconds(15));
                 break;
             case  "Custom Windows PDP details":
+                if(pdpScreen.getDetailsSection().isDisplayed()){
                 pdpScreen.getDetailsSection().shouldBe(visible, Duration.ofSeconds(15));
+                } else {
+                    pdpScreen.getDetailsSectionLoverCase().shouldBe(visible, Duration.ofSeconds(15));
+                }
                 break;
             default:
                 break;
