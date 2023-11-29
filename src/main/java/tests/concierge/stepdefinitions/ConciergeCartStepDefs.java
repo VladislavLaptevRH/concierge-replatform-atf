@@ -962,9 +962,9 @@ public class ConciergeCartStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getRemoveMonogramBtn().shouldHave(text("Remove"), Duration.ofMinutes(1));
         conciergeCartPageScreen.getRemoveMonogramBtn().click();
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         //WebDriverRunner.getWebDriver().navigate().refresh();
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        //with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that monogram was removed")
@@ -1018,9 +1018,9 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify membership banner")
     public void iVerifyMembershipBanner() {
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getRemoveMembershipButton().shouldBe(visible, Duration.ofSeconds(15));
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         MemberPrice = conciergeCartPageScreen.getTotalPriceCurrentResult().getText().replace("$", "").replace(",", "");
         float regularPrice = Float.parseFloat(RegularPrice);
         float memberPrice = Float.parseFloat(MemberPrice);
@@ -1098,20 +1098,20 @@ public class ConciergeCartStepDefs {
     public void iClickOnButtonOnCartScreen(String button) {
         switch (button) {
             case "join now button":
-                with().pollInterval(5, SECONDS).await().until(() -> true);
+                with().pollInterval(3, SECONDS).await().until(() -> true);
                 conciergeCartPageScreen.getJoinNowButton().click();
-                with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(3, SECONDS).await().until(() -> true);
                 conciergeCartPageScreen.getJoinNowButton().shouldNot(visible,  Duration.ofSeconds(15));
                 break;
             case "remove membership button":
                 conciergeCartPageScreen.getRemoveMembershipButton().click();
-                with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(3, SECONDS).await().until(() -> true);
                 conciergeCartPageScreen.getJoinNowButton().shouldBe(visible, Duration.ofSeconds(15));
                 break;
             case "Remove Link":
                 for(int i = 0; i <= 3 ; i++) {
                     conciergeCartPageScreen.getRemoveLinkButton().click();
-                    with().pollInterval(9, SECONDS).await().until(() -> true);
+                    with().pollInterval(3, SECONDS).await().until(() -> true);
                    if(!conciergeCartPageScreen.getRemoveLinkButton().isDisplayed()){
                        break;
                    }
@@ -1369,7 +1369,7 @@ public class ConciergeCartStepDefs {
 
     @Then("I change zip code on PDP page to {string}")
     public void changeTheZipCodeOnPDPPAge(String zipCode) {
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         if(!conciergeCartPageScreen.getWillBeReadyForDeliveryBetweenText().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             pdp.iChoseLineItemSelectionsOneByOne("1");
@@ -1527,7 +1527,7 @@ public class ConciergeCartStepDefs {
         }
 
             if (country == null || country.equals("US")) {
-                with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(3, SECONDS).await().until(() -> true);
                 conciergeCartPageScreen.getNanPrice().shouldNotBe(visible, Duration.ofSeconds(15));
                 conciergeCartPageScreen.getRegularPriceInPG().shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
                 conciergeCartPageScreen.getRegularPriceInPG().shouldNotHave(text("$NaN"), Duration.ofSeconds(20));

@@ -280,7 +280,7 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[text() = 'Featured']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "IN-STOCK products are returned":
-                with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(2, SECONDS).await().until(() -> true);
                 for(int i = 1; i <= 46; i++) {
                         $(By.xpath("(//*[@id = 'listColumn1-Finish'])[" + i + "]")).scrollIntoView(true);
                         $(By.xpath("(//*[@id = 'listColumn1-Finish'])[" + i + "]")).shouldHave(text("Finish"));
@@ -503,7 +503,7 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[@class = 'MuiButtonBase-root MuiFab-root' and not(contains(@style, 'hidden'))]")).click();
                 break;
                 case "sale checkbox":
-                    with().pollInterval(9, SECONDS).await().until(() -> true);
+                    with().pollInterval(2, SECONDS).await().until(() -> true);
                     $(By.xpath("//p[text() = 'sale']")).shouldBe(visible, Duration.ofSeconds(10));
                 if(!$(By.xpath("//*[@id = 'component-refine-menu-dropdown']//*[contains(@class, 'Mui-checked')]/following-sibling::span/p[text() = 'sale']")).isDisplayed()){
                     $(By.xpath("//*[@id = 'component-refine-menu-dropdown']//following-sibling::span/p[text() = 'sale']")).click();

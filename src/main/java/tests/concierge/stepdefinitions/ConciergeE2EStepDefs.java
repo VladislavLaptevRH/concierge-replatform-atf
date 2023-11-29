@@ -528,10 +528,10 @@ public class ConciergeE2EStepDefs {
             conciergeCartPageScreen.getContinueAddingAdditionalButton().scrollIntoView(true);
             generalStepDefs.waitForJSandJQueryToLoad();
             executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getContinueAddingAdditionalButton());
-            sleep(20000);
+            sleep(3000);
         } else {
             System.out.println("Continue button is not displayed");
-            sleep(25000);
+            sleep(3000);
         }
     }
 
@@ -643,7 +643,7 @@ public class ConciergeE2EStepDefs {
         }
         if (!conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME")).isDisplayed()) {
             conciergeUserAccountPage.getClientLookupSearchButton().click();
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
         }
         conciergeUserAccountPage.getFirstResultOfClientLookupByName(businessClient).click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -778,7 +778,7 @@ public class ConciergeE2EStepDefs {
     @When("I fiils all options for item")
     public void iFiilsAllOptionsForItem() {
         //depth option
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         executeJavaScript("window.scrollTo(0, 970)");
         try {
 
@@ -793,7 +793,7 @@ public class ConciergeE2EStepDefs {
 
         //seatheight
         try {
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             selectOption.getSeatHeight().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select seatHeight = new Select(selectOption.getSeatHeight());
 
@@ -805,7 +805,7 @@ public class ConciergeE2EStepDefs {
 
         //finish
         try {
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             selectOption.getFinishOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select finalOption = new Select(selectOption.getFinishOption());
 
@@ -826,7 +826,7 @@ public class ConciergeE2EStepDefs {
 
         //select length option
         try {
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             selectOption.getLengthOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select selectLength = new Select(selectOption.getLengthOption());
             selectLength.selectByIndex(2);
@@ -953,7 +953,7 @@ public class ConciergeE2EStepDefs {
         }
         if (!conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME")).isDisplayed()) {
             conciergeUserAccountPage.getClientLookupSearchButton().click();
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
         }
         conciergeUserAccountPage.getSearchClientResultsPlusButton().should(visible, Duration.ofMinutes(1));
         conciergeUserAccountPage.getSearchClientResultsPlusButton().click();
