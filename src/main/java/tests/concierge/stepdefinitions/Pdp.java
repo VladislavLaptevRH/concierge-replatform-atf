@@ -134,6 +134,20 @@ public class Pdp {
            case  "click on the postal link present in message below product name":
                pdpScreen.getPdpPopUpInStockZipCode().click();
                break;
+           case  "click on postal code and change country and postal code and confirm":
+               pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
+               pdpScreen.getPdpPopUpInStockZipCode().click();
+               pdpScreen.getPdpZipCodeModalShippingCountry().click();
+               pdpScreen.getPdpZipCodeModalCanada().click();
+               with().pollInterval(2, SECONDS).await().until(() -> true);
+               pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
+               pdpScreen.getPostalCode().setValue("H1Y2B5");
+               with().pollInterval(2, SECONDS).await().until(() -> true);
+               pdpScreen.getConfirmationPostalCode().click();
+               pdpScreen.getConfirmationChangePostalCode().click();
+               with().pollInterval(9, SECONDS).await().until(() -> true);
+               result = "H1Y 2B5";
+               break;
            case  "Modal should displayed the list of ON SALE items":
                assertTrue(pdpScreen.getModalOnSaleItemsList().size() > 1);
                break;
@@ -201,7 +215,14 @@ public class Pdp {
                break;
            case  "ADD TO CART button should get enabled":
                pdpScreen.getPdpModalEnabledAddToCartButton().shouldBe(visible, Duration.ofSeconds(15));
-
+           case  "User should be able to change the shipping country and provide a valid zip code":
+               if(!pdpScreen.getModalOnSaleItemsList().first().isDisplayed()){
+                   WebDriverRunner.getWebDriver().navigate().refresh();
+                   iClickOnViewSaleItems();
+                   pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
+               }
+               assertEquals(result, pdpScreen.getPdpPopUpInStockZipCode().getText());
+               break;
            default:
                break;
        }
@@ -918,6 +939,12 @@ public class Pdp {
             case  "item title":
                 pdpScreen.getItemTitle().shouldBe(visible, Duration.ofSeconds(15));
                 break;
+            case  "Shown in text below Hero Image":
+                pdpScreen.getPdpTextBelowHeroImage().shouldBe(visible, Duration.ofSeconds(15));
+                break;
+            case  "Custom Windows PDP details":
+                pdpScreen.getDetailsSection().shouldBe(visible, Duration.ofSeconds(15));
+                break;
             default:
                 break;
         }
@@ -1399,7 +1426,13 @@ public class Pdp {
     @Then("I verify that check for replacements parts button is displayed")
     public void iVerifyThatCheckForReplacementsPartsButtonIsDisplayed() {
         pdpScreen.getCheckForReplacementParts().scrollTo();
-        pdpScreen.getCheckForReplacementParts().should(visible, Duration.ofSeconds(40));
+        pdpScreen.getCheckForReplacementParts().should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("Swatch Fabric model should be displayed")
+    public void swatchModalShouldBeDisplayed() {
+        pdpScreen.getFogSpecialOrderColor().hover();
+        pdpScreen.getFogSpecialOrderColor().should(visible, Duration.ofSeconds(15));
     }
 
     @When("I click on special order fabrics")
@@ -1452,7 +1485,7 @@ public class Pdp {
 
     @Then("I verify that color has been chosen")
     public void iVerifyThatColorHasBeenChosen() {
-        selectOption.getColorOption().shouldNotHave(text("Azure"), Duration.ofSeconds(20));
+        selectOption.getColorOption().shouldHave(text("Azure"), Duration.ofSeconds(20));
     }
 
     @Then("I click {string} on pdp page")

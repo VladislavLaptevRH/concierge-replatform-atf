@@ -264,6 +264,8 @@ public class PdpScreen {
 
     private final SelenideElement itemTitle = $(By.xpath("(//*[contains(@class, 'MuiTypography-root MuiTypography')]/..)[1]"));
 
+    private final SelenideElement pdpTextBelowHeroImage = $(By.xpath(" (//*[@id = 'component-hero-image']/..//span)[2]"));
+
     private final SelenideElement deliveryInformation = $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'will be ready for delivery between')]"));
 
     private final SelenideElement unlimitedFurnitureDeliveryText = $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'Unlimited Furniture Delivery')]"));

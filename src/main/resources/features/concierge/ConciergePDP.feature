@@ -1266,3 +1266,70 @@ Feature: Concierge PDP
     Then I chose the '1' line item selections one by one
     Then Verify that 'text "Components starting at" is present'
     Then Verify that 'PDP has Regular and Member prices'
+
+    @vlad
+  Scenario: Shown in text should be displayed by default(not for all PDPs) good PDPs to check are MARBELLA collections
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "MARBELLA collections" from search field
+    Then I chose '1' product from the list
+    Then I Verify that 'item title' is present
+    Then I Verify that 'Shown in text below Hero Image' is present
+
+  @vlad
+  Scenario: Custom windows PDP
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "Custom windows" from search field
+    Then I chose '1' product from the list
+    Then I Verify that 'item title' is present
+    Then I Verify that 'Custom Windows PDP details' is present
+
+  @vlad
+  Scenario: If the products are having multiple options like finish options and fabrics then it should be displayed accordingly.
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "10115451 BWMR" from search field
+    Then I Verify that 'item title' is present
+    Then Verify that 'SELECT FROM STOCKED AND SPECIAL ORDER FABRICS is displayed" link'
+    When I click on special order fabrics
+    When I choose color from special order fabrics
+
+  @vlad
+  Scenario: After clicking on any swatch from Stocked/Special order section or Finish option or both hero image should get updated and Shown in text below hero image should be suppressed
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "10115451 BWMR" from search field
+    Then I Verify that 'item title' is present
+    Then Verify that 'SELECT FROM STOCKED AND SPECIAL ORDER FABRICS is displayed" link'
+    When I click on special order fabrics
+    When I choose color from special order fabrics
+    Then I verify that color has been chosen
+
+  @vlad
+  Scenario: AFter hover over the swatch preview modal is displayed
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "10115451 BWMR" from search field
+    Then I Verify that 'item title' is present
+    Then Verify that 'SELECT FROM STOCKED AND SPECIAL ORDER FABRICS is displayed" link'
+    When I click on special order fabrics
+    Then Swatch Fabric model should be displayed
+
+  @vlad
+  Scenario: Verify whether user able to change the shipping country and provide a valid zip code w.r.t country
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "57070740 CLNT" from search field
+    Then I Verify that 'item title' is present
+    When I click on "view select items on sale" link
+    Then Verify that "Sale modal" 'opens'
+    Then Verify that "Sale modal" 'zip code is present'
+    Then Verify that "Sale modal" 'click on postal code and change country and postal code and confirm'
+    Then Verify that "Sale modal" 'User should be able to change the shipping country and provide a valid zip code'
