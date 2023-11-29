@@ -50,9 +50,9 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement viewCartButton = $(By.cssSelector("#ajax-proceed-to-cart"));
 
-    private final SelenideElement detailsSpan = $(By.xpath("//*[text()='DETAILS']"));
+    private final SelenideElement detailsSpan = $(By.xpath("(//*[text()='Details'])[1]"));
 
-    private final SelenideElement detailsSpanWithSpase = $(By.xpath("//*[text()=' DETAILS']"));
+    private final SelenideElement detailsSpanWithSpase = $(By.xpath("(//*[text()='Details'])[1]"));
 
     private final SelenideElement checkoutButton = $(By.xpath("(//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth'])[1]"));
 

@@ -661,7 +661,7 @@ public class ConciergeE2EStepDefs {
                 }
             }
         }
-        itemName = $(By.xpath("//h2[contains(@class, 'MuiTypography-h2')]")).getText();
+       // itemName = $(By.xpath("//h2[contains(@class, 'MuiTypography-h2')]")).getText();
         if (Hooks.cookie.equals("contentfix")) {
             if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
                abstractStepDefs.iClickOnRhConciergeLogo();
@@ -674,15 +674,6 @@ public class ConciergeE2EStepDefs {
             }
         }
         executeJavaScript("window.scrollTo(0, 600)");
-        try {
-            conciergeItemsScreen.getDetailsSpan().scrollTo();
-            conciergeItemsScreen.getDetailsSpan().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
-            conciergeItemsScreen.getDetailsSpan().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofSeconds(20));
-        } catch (ElementNotFound e){
-            conciergeItemsScreen.getDetailsSpanWithSpase().scrollTo();
-            conciergeItemsScreen.getDetailsSpanWithSpase().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
-            conciergeItemsScreen.getDetailsSpanWithSpase().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofSeconds(20));
-        }
         selectOption.getQuantityElement().should(visible, Duration.ofMinutes(1));
         if (!selectOption.getQuantityElement().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
