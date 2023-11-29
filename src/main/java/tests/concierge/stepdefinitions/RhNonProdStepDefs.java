@@ -31,7 +31,7 @@ public class RhNonProdStepDefs {
 
     @When("I add item to cart")
     public void iAddItemToCart() {
-        sleep(10000);
+        sleep(3000);
         $(By.id("mount-type")).should(Condition.visible, Duration.ofSeconds(20));
         $(By.id("mount-type")).scrollIntoView(true);
         Select mountType = new Select($(By.id("mount-type")));
@@ -63,7 +63,7 @@ public class RhNonProdStepDefs {
         rollType.selectByIndex(1);
 
         for (int i = 1; i < 33; i++) {
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             $(By.id("room-label")).should(Condition.visible, Duration.ofSeconds(60));
             Select roomLabel = new Select($(By.id("room-label")));
             roomLabel.selectByIndex(i);

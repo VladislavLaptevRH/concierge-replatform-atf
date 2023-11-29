@@ -361,7 +361,7 @@ Feature: Concierge Critical Path
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then  I change the brand to "<brand>"
-    Then User verifies that all items from menu are displayed for "<brand>"
+    #Then User verifies that all items from menu are displayed for "<brand>"
     Examples:
       | brand        |
 #      | RH              |

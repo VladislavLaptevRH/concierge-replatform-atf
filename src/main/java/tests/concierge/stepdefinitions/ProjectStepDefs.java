@@ -51,7 +51,7 @@ public class ProjectStepDefs {
 
     @When("I click on projects button")
     public void iClickOnProjectsButton() {
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getProjectsButton().should(visible, Duration.ofMinutes(1));
         conciergeUserAccountPage.getProjectsButton().click();
     }
@@ -71,7 +71,7 @@ public class ProjectStepDefs {
                 break;
             }
         }
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        //with().pollInterval(9, SECONDS).await().until(() -> true);
     }
 
     @When("I search project by {string}")
@@ -188,7 +188,7 @@ public class ProjectStepDefs {
     public void iClickOnSaveButton() {
         if($(By.xpath("//*[text()='MOVE ITEMS ANYWAY']")).isDisplayed()){
             $(By.xpath("//*[text()='MOVE ITEMS ANYWAY']")).click();
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
         }
         try {
             conciergeProjectScreen.getSaveMoveToProject().should(Condition.and("", visible, enabled), Duration.ofSeconds(10));
