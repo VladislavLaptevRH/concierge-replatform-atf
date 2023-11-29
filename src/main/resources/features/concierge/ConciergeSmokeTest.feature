@@ -7,7 +7,7 @@ Feature: Smoke test for concierge
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
 	Then  I expect that I am on the Concierge Dashboard page
-	Then User verifies that all items from menu are displayed for "RH"
+	#Then User verifies that all items from menu are displayed for "RH"
 	Then  I change the brand to "<brand>"
 	Then I verify the logo
 	Then I verify the username

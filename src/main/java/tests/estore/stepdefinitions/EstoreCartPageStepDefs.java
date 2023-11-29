@@ -69,7 +69,7 @@ public class EstoreCartPageStepDefs {
         estoreItemPage.getViewCartButton().should(visible, Duration.ofSeconds(60));
         estoreCartPage.getKeepShopping().should(visible, Duration.ofSeconds(15));
         estoreItemPage.getViewCartButton().click(ClickOptions.usingJavaScript());
-        with().pollInterval(6, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @When("I choose estore order classification")

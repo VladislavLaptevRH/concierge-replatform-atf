@@ -483,7 +483,6 @@ Feature: Concierge Project
     Then I verify that space list in dropdown is displayed from add to project modal
 
   Scenario: Verify add new Space in the add to project modal and add items to the selected space - CART/PDP
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart
@@ -499,7 +498,6 @@ Feature: Concierge Project
     Then I verify that item was added to the selected space
 
   Scenario: Verify the address page, pre filled address details and Email address once the project added to cart
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI

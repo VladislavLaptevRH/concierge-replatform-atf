@@ -92,7 +92,7 @@ public class Pdp {
 
     @When("I click on \"view in stock items\" link")
     public void iClickOnViewInStockItems() {
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         pdpScreen.getViewOnStockItemLink().shouldHave(text("In-Stock"), Duration.ofSeconds(15));
         pdpScreen.getViewOnStockItemLink().scrollIntoView(true);
         pdpScreen.getViewOnStockItemLink().click();
@@ -370,7 +370,7 @@ public class Pdp {
                pdpScreen.getSpecialOrderText().shouldBe(visible, Duration.ofSeconds(15));
                 break;
             case  "verify data in the modal for SO":
-                with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(3, SECONDS).await().until(() -> true);
                 pdpScreen.getCloudModularLeatherSofaText().shouldHave(text("Cloud Modular Leather Sofa"), Duration.ofSeconds(20));
                 pdpScreen.getItemNumber().shouldHave(text("Item #"), Duration.ofSeconds(20));
                 pdpScreen.getItemByText(SKU).shouldHave(visible, Duration.ofSeconds(15));
@@ -422,7 +422,7 @@ public class Pdp {
                 regularPriceInPG = pdpScreen.getPriceForRegular().getText().replaceAll(".00", "").replaceAll("\\$", "").replaceAll(",", "");
                 break;
             case  "price in PDP changed from US$ to CA$":
-                with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 pdpScreen.getConfirmationPostalCode().shouldNot(visible, Duration.ofSeconds(20));
                 pdpScreen.getComponentSKU().shouldBe(visible, Duration.ofSeconds(20));
                 if(pdpScreen.getPriceForMember().isDisplayed()){
@@ -437,7 +437,7 @@ public class Pdp {
                 assertTrue(Integer.parseInt(regularPriceInPG) < Integer.parseInt(pdpScreen.getPriceForRegular().getText().replaceAll(".00", "").replaceAll("\\$", "").replaceAll(",", "")));
                 break;
             case  "price should be shown in US Dollar":
-                with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 pdpScreen.getConfirmationPostalCode().shouldNot(visible, Duration.ofSeconds(20));
                 pdpScreen.getComponentSKU().shouldBe(visible, Duration.ofSeconds(20));
                 if(pdpScreen.getPriceForMember().isDisplayed()){
@@ -626,7 +626,7 @@ public class Pdp {
                     pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
                 }
                 assertEquals(result, pdpScreen.getPdpPopUpInStockZipCode().getText());
-                with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(3, SECONDS).await().until(() -> true);
                 assertTrue(pdpScreen.getModalOnSaleItemsList().size() > 1);
                 break;
             case  "By default zipcode should be displayed for each line item in the Availability section as per Ip address or if no ip address found then static zipcode should be present":
@@ -681,7 +681,7 @@ public class Pdp {
 
     @Then("I verify that text item# and SKU is present")
     public void iVerifyTextItemAndSKUIsPresent() {
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if(!pdpScreen.getItemLocator().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             iChoseLineItemSelectionsOneByOne("1");
@@ -693,7 +693,7 @@ public class Pdp {
 
     @Then("I verify that text SKU is present")
     public void iVerifyTextSKUIsPresent() {
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if(!pdpScreen.getItemLocator().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
             iChoseLineItemSelectionsOneByOne("1");
@@ -719,7 +719,7 @@ public class Pdp {
 
     @Then("verify that another modal appears with all the data for {string}")
     public void iVerifyAnotherModalAppearsWithAllTheData(String data) {
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
        pdpScreen.getSaveButton().shouldBe(enabled, Duration.ofSeconds(15));
         pdpScreen.getSaveButton().click();
         pdpScreen.getItemAddedToCompany().shouldHave(text("1 ITEM ADDED TO TESTCOMPANY"), Duration.ofSeconds(20));
@@ -1052,7 +1052,7 @@ public class Pdp {
                  boolean memberOption = pdpScreen.getTradeList().size() > 1;
                  assertTrue(memberOption);
              }
-             with().pollInterval(9, SECONDS).await().until(() -> true);
+             with().pollInterval(3, SECONDS).await().until(() -> true);
              pdpScreen.getThirdSaleElement().shouldBe(visible, Duration.ofSeconds(15));
              boolean saleOption = pdpScreen.getSaleList().size() >=4;
              assertTrue(saleOption);
@@ -1092,7 +1092,7 @@ public class Pdp {
                 with().pollInterval(2, SECONDS).await().until(() -> true);
                 pdpScreen.getConfirmationPostalCode().click();
                 pdpScreen.getConfirmationChangePostalCode().click();
-                with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                 result = "H1Y 2B5";
                 break;
             case  "has item#":
@@ -1366,7 +1366,7 @@ public class Pdp {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         pdpScreen.getConfirmationPostalCode().click();
         pdpScreen.getConfirmationChangePostalCode().click();
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @Then("I click on postal code and change country to {string} and postal code to {string} and verify confirmation message")
@@ -1583,7 +1583,7 @@ public class Pdp {
 
             @Then("I click on zip code and change it to {string}")
             public void iChangeZipCodeFor(String zipCode) {
-                with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(3, SECONDS).await().until(() -> true);
                 if(!pdpScreen.getZipCode().isDisplayed()){
                     WebDriverRunner.getWebDriver().navigate().refresh();
                 }
@@ -1593,8 +1593,8 @@ public class Pdp {
                 pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
                 pdpScreen.getPostalCode().setValue(zipCode);
                 pdpScreen.getConfirmationPostalCode().click();
-                with().pollInterval(9, SECONDS).await().until(() -> true);
-                with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(3, SECONDS).await().until(() -> true);
+                //with().pollInterval(9, SECONDS).await().until(() -> true);
             }
 
     @Then("I click on zip code and change it to {string} in modal opener")
@@ -1605,28 +1605,28 @@ public class Pdp {
         pdpScreen.getPostalCode().setValue(zipCode);
         pdpScreen.getConfirmationPostalCode().click();
         result = zipCode;
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
             @Then("I verify that zip code in PDP is {string}")
             public void iVerifyThatZipCodeIs(String zipCode) {
-                with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(3, SECONDS).await().until(() -> true);
                 pdpScreen.getComponentSKU().shouldBe(visible, Duration.ofSeconds(20));
 
                 if(!pdpScreen.getZipCodeByArg(zipCode).isDisplayed()){
                     WebDriverRunner.getWebDriver().navigate().refresh();
                     for(int i = 0; i <=3; i++) {
                         iChangeZipCodeFor(zipCode);
-                        with().pollInterval(9, SECONDS).await().until(() -> true);
+                        with().pollInterval(5, SECONDS).await().until(() -> true);
                         if(pdpScreen.getZipCodeByArg(zipCode).isDisplayed()){
                             break;
                         }
                     }
                 }
                 String currentZipCode =  pdpScreen.getComponentSKU().getText();
-                with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(3, SECONDS).await().until(() -> true);
                 assertEquals(currentZipCode, zipCode + ".");
-                with().pollInterval(9, SECONDS).await().until(() -> true);
+                with().pollInterval(3, SECONDS).await().until(() -> true);
             }
 
             @Then("I verify that availability, Delivery and returns messaging is displayed for {string}")
