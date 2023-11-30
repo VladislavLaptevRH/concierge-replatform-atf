@@ -244,4 +244,5 @@ public class EstoreMemberStepDefs {
     public void iClickOnAddMembershipToCartButton() {
         System.out.println();
     }
+
 }

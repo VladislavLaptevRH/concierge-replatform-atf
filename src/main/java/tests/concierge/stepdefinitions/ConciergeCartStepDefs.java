@@ -1,13 +1,12 @@
 package tests.concierge.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.ex.ElementNotFound;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-//import jdk.internal.org.jline.utils.Display;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -81,12 +80,12 @@ public class ConciergeCartStepDefs {
 
     public static String method;
 
-   public static float topTotalPriceAfterDecreasing;
-   public static float subtotalPriceAfterDecreasing;
-   public static float bottomTotalPriceAfterDecreasing;
-   public static float topMemberSavingsAfterDecreasing;
-   public static float bottomMemberSavingsAfterDecreasing;
-   ArrayList<Integer> quantityList = new ArrayList<>();
+    public static float topTotalPriceAfterDecreasing;
+    public static float subtotalPriceAfterDecreasing;
+    public static float bottomTotalPriceAfterDecreasing;
+    public static float topMemberSavingsAfterDecreasing;
+    public static float bottomMemberSavingsAfterDecreasing;
+    ArrayList<Integer> quantityList = new ArrayList<>();
 
     public int sumOfArray = 0;
 
@@ -558,9 +557,7 @@ public class ConciergeCartStepDefs {
         paymentScreen.getChoosePaymentMethodBtn().click();
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());
-        with().pollInterval(4, SECONDS).await().until(() -> true);
         selectPayment.selectByValue("POS");
-        with().pollInterval(4, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getPosRegisterField().should(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getPosRegisterField().setValue("1234");
         conciergeCartPageScreen.getPosTransactionField().setValue("1234");
@@ -899,6 +896,7 @@ public class ConciergeCartStepDefs {
     @Then("I verify that monogram was added")
     public void iVerifyThatMonoramWasAdded() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeCartPageScreen.getPersonalizationText().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramStyleValue().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramTextValue().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getMonogramStyle().shouldHave(text("Style"), Duration.ofSeconds(15));
@@ -949,6 +947,7 @@ public class ConciergeCartStepDefs {
     @Then("I verify that monogram was edited")
     public void iVerifyThatMonogramWasEdited() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeCartPageScreen.getPersonalizationText().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getEditedMonogramStyleValue().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getEditedMonogramColorValue().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getEditedMonogramTextValue().should(visible, Duration.ofSeconds(15));
@@ -962,14 +961,15 @@ public class ConciergeCartStepDefs {
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeCartPageScreen.getRemoveMonogramBtn().shouldHave(text("Remove"), Duration.ofMinutes(1));
         conciergeCartPageScreen.getRemoveMonogramBtn().click();
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(9, SECONDS).await().until(() -> true);
         //WebDriverRunner.getWebDriver().navigate().refresh();
-        //with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that monogram was removed")
     public void iVerifyThatMonogramWasRemoved() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        conciergeCartPageScreen.getPersonalizationText().shouldNotBe(visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getEditedMonogramStyleValue().shouldNotBe(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getEditedMonogramColorValue().shouldNotBe(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getEditedMonogramTextValue().shouldNotBe(visible, Duration.ofSeconds(15));
@@ -1018,14 +1018,14 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify membership banner")
     public void iVerifyMembershipBanner() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
+        with().pollInterval(9, SECONDS).await().until(() -> true);
         conciergeCartPageScreen.getRemoveMembershipButton().shouldBe(visible, Duration.ofSeconds(15));
-        with().pollInterval(3, SECONDS).await().until(() -> true);
         MemberPrice = conciergeCartPageScreen.getTotalPriceCurrentResult().getText().replace("$", "").replace(",", "");
         float regularPrice = Float.parseFloat(RegularPrice);
         float memberPrice = Float.parseFloat(MemberPrice);
         String savings = Float.toString(regularPrice - memberPrice);
-        String Savings= conciergeCartPageScreen.getRhMembersProgramTitleText().getText();
+        conciergeCartPageScreen.getRhMembersProgramTitleText().shouldBe(visible, Duration.ofSeconds(15));
+        assertEquals("You've elected to join the RH Members Program, and you'll save $" + Float.parseFloat(savings) + "0 on this order.", conciergeCartPageScreen.getRhMembersProgramText().getText());
     }
 
     @When("I apply employee discount")
@@ -1277,13 +1277,6 @@ public class ConciergeCartStepDefs {
     @When("I verify updated zip code in the cart is {string}")
     public void iVerifyUpdatedZipCode(String zipCode) {
         conciergeCartPageScreen.getPdpScreenZipCode().should(text(zipCode), Duration.ofSeconds(20));
-    }
-
-    @When("Different grid options should be displayed on the cart page")
-    public void differentGridOptionsShouldBeDisplayedOnTheCartPage() {
-        conciergeCartPageScreen.getCartFirstGridView().should(visible, Duration.ofSeconds(15));
-        conciergeCartPageScreen.getCartSecondGridView().should(visible, Duration.ofSeconds(15));
-        conciergeCartPageScreen.getCartThirdGridView().should(visible, Duration.ofSeconds(15));
     }
 
     @When("I verify updated zip code in PDP")

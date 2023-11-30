@@ -3,7 +3,6 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.DragAndDropOptions;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -13,6 +12,7 @@ import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.estore.pageObject.EstoreHomePage;
+import tests.estore.pageObject.EstoreSaleScreen;
 import tests.estore.pageObject.EstoreSearchScreen;
 import tests.estore.pageObject.EstoreUserAccountPage;
 import tests.utility.Hooks;
@@ -35,6 +35,8 @@ public class EstoreHomePageStepDefs {
     EstoreGeneralStepDefs estoreGeneralStepDefs = new EstoreGeneralStepDefs();
 
     EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
+
+    EstoreSaleScreen estoreSaleScreen = new EstoreSaleScreen();
 
     EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
 
@@ -196,6 +198,7 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.verifyThatCartIconIsDisplayed();
         estoreHomePage.verifyThatMyAccountIconIsDisplayed();
     }
+
     @Then("I verify that home page load will all sections and links")
     public void iVerifyThatHomePageLoadWillAllSectionsAndLinks() {
         estoreHomePage.getAccountIcon().should(Condition.visible, Duration.ofSeconds(20));
@@ -232,8 +235,8 @@ public class EstoreHomePageStepDefs {
     @Then("I verify that SALE is present on TOP Nav menu")
     public void iVerifyThatSALEIsPresentOnTOPNavMenu() {
         $(By.xpath("//div[contains(@id,'container-rhrheader-rhr-catalogNav_catalogNav')]//span[text()='SALE']")).should(visible, Duration.ofSeconds(12));
-        System.out.println();
     }
+
     @Then("I verify that hamburger icon is displayed for the main menu")
     public void iVerifyThatHamburgerIconIsDisplayedForTheMainMenu() {
         estoreHomePage.verifyThatHamburgerIconIsDisplayed();
@@ -253,6 +256,22 @@ public class EstoreHomePageStepDefs {
     @Then("I verify that my account icon is displayed")
     public void iVerifyThatMyAccountIconIsDisplayed() {
         estoreHomePage.verifyThatAccountIconIsDisplayed();
+    }
+
+    @When("I click on Rugs in Secondary NAV from Rugs")
+    public void iClikcOnRugsInSecondaryNAVFromRugs() {
+        estoreHomePage.getRugsSecondaryNav().should(visible, Duration.ofSeconds(12))
+                .click(ClickOptions.usingJavaScript());
+    }
+
+    @When("I click on All Rugs in Tertiary NAV")
+    public void iClickOnAllRugsInTertiaryNAV() {
+        estoreHomePage.getAllRugsTertiaryNav().should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
+
+    @When("I verify that All Rugs PG page is displayed")
+    public void iVerifyThatAllRugsPGPageIsDisplayed() {
+        estoreSaleScreen.getRugsAllRugs().should(visible, Duration.ofSeconds(12));
     }
 
     @Then("I verify the shop by room under the LIVING top navigation")

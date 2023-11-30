@@ -558,7 +558,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify estore order total in order estimate for membership for {string}")
     public void iVerifyEstoreOrderTotalInOrderEstimateForMembershipFor(String arg0) {
-        $(By.xpath("//*[text()='Subtotal with Member Savings']")).should(visible, Duration.ofSeconds(20));
+        estoreCartPage.getSubtotalWithMemberSavings().should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify the standard delivery charges for estore")
@@ -908,5 +908,35 @@ public class EstoreCartPageStepDefs {
     @Then("I verify that cart page is displayed")
     public void iVerifyThatCartPageIsDisplayed() {
         estoreCartPage.verifyThatCartPageIsDisplayed();
+    }
+
+    @And("I verify estore order total in order estimate without membership")
+    public void iVerifyEstoreOrderTotalInOrderEstimateWithoutMembership() {
+        estoreCartPage.getSubtotalWithMemberSavings().shouldNotBe(visible);
+        estoreCartPage.getJoinTheRhMembersProgram().should(visible);
+        estoreCartPage.getSaveOnjoinTheRhMembersProgram().should(visible);
+    }
+
+    @Then("I verify mattress fees should reflect")
+    public void iVerifyMattressFeesShouldReflect() {
+        estoreCartPage.getMattressRecyclingFee().should(visible, Duration.ofSeconds(12));
+        estoreCartPage.getToBeCollectedAtCheckout().should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that the grouping options are displayed after the line items")
+    public void iVerifyThatTheGroupingOptionsAreDisplayedAfterTheLineItems() {
+        estoreCartPage.getDeliverItemOption().should(visible, Duration.ofSeconds(12));
+        estoreCartPage.getTheSecondDeliverItemOption().should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that user is able to see availability and return message")
+    public void iVerifyThatUserIsAbleToSeeAvailabilityAndReturnMessage() {
+        estoreCartPage.getDeliveryItemMessage().should(visible, Duration.ofSeconds(12));
+        estorePDPScreen.getThisItemCanBeReturnedMsg().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I click on estore cart icon from header")
+    public void iClickOnEstoreCartIconFromHeader() {
+        estoreCartPage.clickToCartIconHeader();
     }
 }

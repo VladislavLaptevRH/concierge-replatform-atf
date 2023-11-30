@@ -403,4 +403,9 @@ public class EstoreUserAccountPageStepDefs {
 
 
     }
+
+    @When("I click on register button for eStore")
+    public void iClickOnRegisterButtonForEStore() {
+        estoreUserAccountPage.clickToRegisterButton();
+    }
 }
