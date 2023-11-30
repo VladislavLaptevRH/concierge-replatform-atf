@@ -136,10 +136,3 @@ Feature: Estore back button
     When I navigate to any estore fusion PG
     When I navigate back from "CG" page
     Then I verify that search results page is displayed with newly searched products
-
-
-
-
-
-
-

@@ -60,12 +60,9 @@ public class Hooks {
      * This method get properties from application.properties file
      */
     private void ConfigFileReader() {
-//        profile = System.getenv("ENVIRONMENT");
-//        cookie = System.getenv("ENDPOINT");
-//        country = System.getenv("COUNTRY");
-        profile = "stg2";
-        country = "US";
-        cookie = "contentfix";
+        profile = System.getenv("ENVIRONMENT");
+        cookie = System.getenv("ENDPOINT");
+        country = System.getenv("COUNTRY");
 
         if (profile == null) {
             Assert.fail("Environment Variable is NOT Set");
@@ -121,6 +118,8 @@ public class Hooks {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
         } else if (profile.equals("stg3") && cookie != null) {
             eStoreURL = eStoreBaseURL + "/?endpoint=" + cookie;
+        } else if (profile.equals("prod") && cookie == null){
+            eStoreURL = eStoreBaseURL;
         }
         return eStoreURL;
     }
@@ -151,7 +150,7 @@ public class Hooks {
         ConfigFileReader();
         configureEstoreURL();
         setUPWebDriver(eStoreURL);
-//        setupChromeArguments(eStoreURL);
+        setupChromeArguments(eStoreURL);
     }
 
     /**
@@ -170,19 +169,16 @@ public class Hooks {
      */
     public void setUPWebDriver(String url) {
         ChromeOptions options = new ChromeOptions();
-        Configuration.driverManagerEnabled = true;
+        Configuration.driverManagerEnabled = false;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1366x768";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.pageLoadStrategy = "normal";
         Configuration.pageLoadTimeout = 60000;
         Configuration.timeout = 45000;
         Configuration.reportsFolder = "target/screenshots";
         Configuration.browserCapabilities = options;
-
         WebDriverManager.chromedriver().setup();
-        open(url);
-        currentUrl = WebDriverRunner.url();
     }
 
     /**
@@ -211,10 +207,8 @@ public class Hooks {
             e.printStackTrace();
         }
         WebDriverRunner.setWebDriver(driver);
-
         open(url);
         currentUrl = WebDriverRunner.url();
-
     }
 
     /**
