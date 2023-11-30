@@ -1333,9 +1333,11 @@ Feature: Concierge PDP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to item "57070740 CLNT" from search field
-    Then I Verify that 'item title' is present
-    When I click on "view select items on sale" link
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'In Stock'
+    Then I navigate to gallery 'Beds'
+    Then I chose '4' product from the list
+    When I click on "view in stock items" link
     Then Verify that "In Stock modal" 'opens'
     Then Verify that "In Stock modal" 'zip code is present'
     Then Verify that "In Stock modal" 'click on postal code and change country and postal code and confirm'
