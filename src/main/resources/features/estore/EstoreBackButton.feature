@@ -87,7 +87,6 @@ Feature: Estore back button
     When I navigate back from "CG" page
     Then I verify that recently selected 2x2 grid in CG page
 
-
   Scenario:Grid Changes PG-Verify that user is able to view recently selected grid in PG page upon clicking on Back button in PDP page
     Given I log into eStore as "guest" user
     When I click on "Dining" for estore
@@ -105,7 +104,38 @@ Feature: Estore back button
     Then I validate "2","2" and "2" grid view should work
     When I navigate to any estore fusion PG
     When I navigate back from "PDP" page
-    Then I verify that 2x2 grid view is active on Search page
+    Then I verify that 2x2 grid view is activ ,mjnbnje on Search page
+
+  Scenario: Position Retention- PG Verify that user is landed at the same position in CG page upon clicking on Back button in PG page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Textiles" in TOP NAV menu
+    When I click on SALE in Secondary NAV from Textiles
+    When I click on Bedding Collections in Tertiary NAV from SALE
+    When I scroll to the bottom of the estore page
+    When I navigate to any estore fusion PG
+    When I navigate back from "CG" page
+    When I verify that Bed collections page is displayed
+
+  Scenario: Verify that user is landed at the same position in PG page upon clicking on Back button in PDP page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I click on "Rugs" in TOP NAV menu
+    When I click on Rugs in Secondary NAV from Rugs
+    When I click on All Rugs in Tertiary NAV
+    When I scroll to the bottom of the estore page
+    When I navigate to any estore fusion PG
+    When I navigate back from "CG" page
+    When I verify that All Rugs PG page is displayed
+
+  Scenario: Position Retention Search- Verify that user is landed at the same position in Search page upon clicking on Back button in PDP page
+    Given I log into eStore as "guest" user
+    When I choose country for eStore from footer
+    When I go to estore item "802-GRAM TURKISH TOWEL COLLECTION" from search field
+    When I scroll to the bottom of the estore page
+    When I navigate to any estore fusion PG
+    When I navigate back from "CG" page
+    Then I verify that search results page is displayed with newly searched products
 
 
 

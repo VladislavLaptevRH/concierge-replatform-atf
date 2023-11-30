@@ -74,6 +74,11 @@ public class EstoreHomePage {
 
     private final SelenideElement myAccountIconHomePage = $(By.id("container-accountNavMenu_account-btn"));
 
+    private final SelenideElement textilesBeddingCollections = $(By.xpath("(//a[contains(@id,'rhrCtalogNavigationDetails_concepts-navigation-cat28660046')]//span[text()='Bedding Collections'])[2]"));
+
+    private final SelenideElement rugsSecondaryNav = $(By.xpath("//li[@id='rhrCtalogNavigationDetails_navigation-cat16850013']//span"));
+
+    private final SelenideElement allRugsTertiaryNav = $(By.xpath("//a[@id='rhrCtalogNavigationDetails_concepts-navigation-cat18620003']"));
     public void clickToTertiaryNav(String tertiaryNav) {
         $(By.xpath("//*[contains(@id,'rhrCtalogNavigationDetails_concepts-navigation')]//span[text()='" + tertiaryNav + "']"))
                 .should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
@@ -115,6 +120,8 @@ public class EstoreHomePage {
     private final SelenideElement bedTopNav = $(By.xpath("//div[@id='container-rhrheader-rhr-catalogNav_catalogNav-cat780002']//span"));
 
     private final SelenideElement saleNav = $(By.xpath("//*[contains(@id,'rhrCtalogNavigationDetails_navigation')]//span[text()='Sale  ']"));
+
+    private final SelenideElement saleNaveBed = $(By.xpath("//*[contains(@id,'rhrCtalogNavigationDetails_navigation-cat8750021')]//span[text()='Sale  ']"));
 
     private final SelenideElement saleBedBeddingCollection = $(By.xpath("//li[@id='rhrCtalogNavigationDetails_concepts-navigation-cat28650058']//span"));
 
@@ -164,6 +171,7 @@ public class EstoreHomePage {
     public void homePageMenuIsDisplayed() {
         homePageMenu.should(visible, Duration.ofSeconds(12));
     }
+
     private final SelenideElement cartButtonIcon = $(By.xpath("//*[@id='container-rhrHeader_cart-btn']"));
 
     private final SelenideElement itemCartIconCount = $(By.xpath("//*[@id='container-rhrHeader_cart-btn']//span"));

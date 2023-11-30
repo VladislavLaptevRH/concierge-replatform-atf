@@ -401,4 +401,9 @@ public class EstoreCGStepDefs {
     public void iVerifyThatRecentlySelectedXGridInCGPage(int arg0, int arg1) {
         estoreCGScreen.getGridView2x2().should(visible, Duration.ofSeconds(12));
     }
+
+    @When("I verify that Bed collections page is displayed")
+    public void iVerifyThatBedCollectionsPageIsDisplayed() {
+        estoreSaleScreen.getBeddingCollectionTitle().should(visible, Duration.ofSeconds(12));
+    }
 }
