@@ -663,6 +663,20 @@ public class Pdp {
         pdpScreen.getItemByText(text).shouldHave(text(text), Duration.ofSeconds(20));
     }
 
+    @Then("Updated availability message should be displayed after changing the postal code based on inventory")
+    public void updatedAvailabilityMessageShouldBeDisplayed() {
+        pdpScreen.getConfigureDeliveryInformation().shouldBe(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("User should be able to see Availability, Delivery, Return info at line level")
+    public void userShouldBeAbleToSeeAvailabilityDeliveryReturnInfoAtLineLevel() {
+        if(!pdpScreen.getConfigureDeliveryInformationSPO().isDisplayed()){
+            conciergeE2EStepDefs.iGoToItemFromSearchField("57070740 CLNT");
+        } else {
+            pdpScreen.getConfigureDeliveryInformationSPO().shouldBe(visible, Duration.ofSeconds(15));
+        }
+    }
+
     @Then("postal code {string} should be present in the delivery message")
     public void postalCodeShouldBePresentInDeliveryMessage(String postalCode) {
         pdpScreen.getUnlimitedFurnitureDeliveryText().shouldHave(text(postalCode), Duration.ofSeconds(15));
@@ -1151,15 +1165,55 @@ public class Pdp {
                     pdpScreen.getInStockModalDeliveryInformationList().shouldBe(visible, Duration.ofSeconds(15));
                 }
                 break;
+            case  "User should be able to change the shipping country and provide a valid zip code":
+                if(!pdpScreen.getModalOnSaleItemsList().first().isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                    iClickOnViewInStockItems();
+                    pdpScreen.getPdpPopUpInStockZipCode().should(visible, Duration.ofSeconds(5));
+                }
+                assertEquals(result, pdpScreen.getPdpPopUpInStockZipCode().getText());
+                break;
             default: break;
         }
+    }
+    @When("I click on postal code and change country and postal code and confirm")
+    public void clickOnPostalCodeAndChangeCountryAndPostalCodeAndConfirm() {
+        pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(5));
+        pdpScreen.getPostalCode().click();
+        pdpScreen.getPdpZipCodeModalShippingCountry().click();
+        pdpScreen.getPdpZipCodeModalCanada().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(40));
+        pdpScreen.getPostalCode().setValue("H1Y2B5");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getConfirmationPostalCode().click();
+        pdpScreen.getConfirmationChangePostalCode().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+    }
+
+    @When("I enter valid zip code with different country and confirm")
+    public void iEnterValidZipCodeWithDifferentCountryAndConfirm() {
+        pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(5));
+        pdpScreen.getPostalCode().click();
+        pdpScreen.getPdpZipCodeModalShippingCountry().click();
+        pdpScreen.getPdpZipCodeModalCanada().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getPostalCode().should(visible, Duration.ofSeconds(15));
+        pdpScreen.getPostalCode().setValue("H1Y2B5");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        pdpScreen.getConfirmationPostalCode().click();
+    }
+
+    @When("Confirmation modal should be displayed")
+    public void confirmationCodeShouldBeDisplayed() {
+        pdpScreen.getConfirmationChangePostalCode().should(visible, Duration.ofSeconds(15));
     }
 
     @When("I go to custom rugs")
     public void iGoToCustomRugs() {
-        pdpScreen.getDataNavigationAccountItemRHBC().should(visible, Duration.ofSeconds(40));
+        pdpScreen.getDataNavigationAccountItemRHBC().should(visible, Duration.ofSeconds(15));
         pdpScreen.getDataNavigationAccountItemRHBC().click();
-        pdpScreen.getRugsByFiber().should(visible, Duration.ofSeconds(40));
+        pdpScreen.getRugsByFiber().should(visible, Duration.ofSeconds(15));
         pdpScreen.getRugsByFiber().click();
     }
     @Then("I verify that custom rugs are displayed")
