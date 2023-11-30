@@ -42,7 +42,6 @@ public class EstoreSearchStepDefs {
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
         estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
         generalStepDefs.waitForJSandJQueryToLoad();
-
         estoreUserAccountPage.getSearchItemField().sendKeys(arg0);
         with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getSearchItemField().click();
