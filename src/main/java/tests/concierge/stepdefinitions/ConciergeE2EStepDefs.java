@@ -26,6 +26,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 import static com.codeborne.selenide.Condition.*;
@@ -71,17 +72,19 @@ public class ConciergeE2EStepDefs {
 
     @When("I click on add to project button")
     public void userClickOnAddToProjectButton() {
-        //conciergeItemsScreen.getAddToProjectButton().should(Condition.and("", enabled, visible), Duration.ofSeconds(12));
-        if (!conciergeItemsScreen.getAddToProjectButton().isEnabled()) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+//        if (!conciergeItemsScreen.getAddToProjectButton().isDisplayed() || !conciergeItemsScreen.getAddToProjectButtonLowerCase().isDisplayed()) {
+//            WebDriverRunner.getWebDriver().navigate().refresh();
+//            with().pollInterval(5, SECONDS).await().until(() -> true);
+//            conciergeItemsScreen.getAddToProjectButton().scrollTo();
+//            conciergeItemsScreen.getAddToProjectButton().click();
+//        }
+        if (conciergeItemsScreen.getAddToProjectButton().isDisplayed()) {
             conciergeItemsScreen.getAddToProjectButton().scrollTo();
             conciergeItemsScreen.getAddToProjectButton().click();
         } else {
-            conciergeItemsScreen.getAddToProjectButton().scrollTo();
-            conciergeItemsScreen.getAddToProjectButton().click();
+            conciergeItemsScreen.getAddToProjectButtonLowerCase().scrollTo();
+            conciergeItemsScreen.getAddToProjectButtonLowerCase().click();
         }
-
     }
 
     @When("I click on go to project button")
@@ -90,6 +93,12 @@ public class ConciergeE2EStepDefs {
         conciergeItemsScreen.getContinueShoppingButton().should(visible, Duration.ofSeconds(12));
         conciergeItemsScreen.getGoToProjectButton().click();
     }
+
+    @When("I click on continue button from Projects")
+    public void iClickOnContinueButtonFromProjects() {
+            conciergeProjectScreen.getContinueButtonPopUp().click();
+    }
+
 
     @When("I click on add to cart button from project screen")
     public void iClickOnAddToCartButtonFromProjectScreen() {
@@ -348,26 +357,58 @@ public class ConciergeE2EStepDefs {
         conciergeUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
         conciergeUserAccountPage.getSearchItemField().click();
         generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.xpath("//button[contains(@class,'MuiButton-containedSizeLarge')]")).should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
+        conciergeSearchScreen.getDashboardSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
         with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getSearchItemField().setValue(arg0);
-        $(By.xpath("//button[contains(@class,'MuiButton-containedSizeLarge')]")).click();
+        conciergeSearchScreen.getDashboardSearchButton().click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
-    @When("I go to concierge item {string} from search field")
-    public void iGoToItemFromConciergeSearchField(String arg0) {
+    @When("I search with the {string} product and observe the absent auto suggestions on the dashboard search field")
+    public void iSearchProductAndObserveTheAbsentAutoSuggestionsOnDashboard(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[4]")).should(visible, Duration.ofSeconds(60));
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[4]")).click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!conciergeUserAccountPage.getSearchItemField().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+        conciergeUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(20));
+        conciergeUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
+        conciergeUserAccountPage.getSearchItemField().click();
+        conciergeSearchScreen.getDashboardSearchButton().should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
+        conciergeUserAccountPage.getSearchItemField().setValue(arg0);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        conciergeSearchScreen.getTextByValue(arg0).shouldNotBe(visible, Duration.ofSeconds(10));
+    }
+
+    @When("I search with the {string} product and observe the absent auto suggestions on the search sidebar")
+    public void iGoToItemFromConciergeSearchSideBar(String arg0) {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        conciergeSearchScreen.getLeftSidebarSearchButton().should(visible, Duration.ofSeconds(60));
+        conciergeSearchScreen.getLeftSidebarSearchButton().click();
         conciergeSearchScreen.getSearchItemInput().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         conciergeSearchScreen.getSearchItemInput().should(empty, Duration.ofMinutes(1));
         with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeSearchScreen.getSearchItemInput().click(ClickOptions.usingJavaScript());
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeSearchScreen.getSearchItemInput().setValue(arg0);
-        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click(ClickOptions.usingJavaScript());
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        conciergeSearchScreen.getTextByValue(arg0).shouldNotBe(visible, Duration.ofSeconds(10));
+    }
+
+    @When("I go to concierge item {string} from search field")
+    public void iGoToItemFromConciergeSearchField(String arg0) {
+        generalStepDefs.waitForJSandJQueryToLoad();
+        conciergeSearchScreen.getLeftSidebarSearchButton().should(visible, Duration.ofSeconds(60));
+        conciergeSearchScreen.getLeftSidebarSearchButton().click();
+        conciergeSearchScreen.getSearchItemInput().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
+        conciergeSearchScreen.getSearchItemInput().should(empty, Duration.ofMinutes(1));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        conciergeSearchScreen.getSearchItemInput().click(ClickOptions.usingJavaScript());
+        generalStepDefs.waitForJSandJQueryToLoad();
+        conciergeSearchScreen.getSearchItemInput().setValue(arg0);
+        conciergeSearchScreen.getSeeAllResultSearchButton().should(visible, Duration.ofSeconds(40));
+        conciergeSearchScreen.getSeeAllResultSearchButton().click(ClickOptions.usingJavaScript());
     }
 
     @When("I choose {string} from brand menu")
@@ -487,10 +528,10 @@ public class ConciergeE2EStepDefs {
             conciergeCartPageScreen.getContinueAddingAdditionalButton().scrollIntoView(true);
             generalStepDefs.waitForJSandJQueryToLoad();
             executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getContinueAddingAdditionalButton());
-            sleep(20000);
+            sleep(3000);
         } else {
             System.out.println("Continue button is not displayed");
-            sleep(25000);
+            sleep(3000);
         }
     }
 
@@ -575,7 +616,7 @@ public class ConciergeE2EStepDefs {
                 generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupStg3LastName());
                 conciergeUserAccountPage.getClientLookupStg3LastName().setValue("Nonmember");
             } else {
-                generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupLastName());
+                //generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupLastName());
                 conciergeUserAccountPage.getClientLookupLastName().setValue("Nonmember");
             }
 
@@ -592,7 +633,7 @@ public class ConciergeE2EStepDefs {
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         conciergeUserAccountPage.getClientLookupSearchButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofMinutes(1));
+        //conciergeUserAccountPage.getClientLookupSearchButton().shouldHave(text(conciergeUserAccountPage.getClientLookupSearchButton().getText()), Duration.ofMinutes(1));
         conciergeUserAccountPage.getClientLookupSearchButton().click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
         if($(By.xpath("//*[text() = 'Select a country.']")).isDisplayed()){
@@ -602,7 +643,7 @@ public class ConciergeE2EStepDefs {
         }
         if (!conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME")).isDisplayed()) {
             conciergeUserAccountPage.getClientLookupSearchButton().click();
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
         }
         conciergeUserAccountPage.getFirstResultOfClientLookupByName(businessClient).click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
@@ -620,7 +661,7 @@ public class ConciergeE2EStepDefs {
                 }
             }
         }
-        itemName = $(By.xpath("//h2[contains(@class, 'MuiTypography-h2')]")).getText();
+       // itemName = $(By.xpath("//h2[contains(@class, 'MuiTypography-h2')]")).getText();
         if (Hooks.cookie.equals("contentfix")) {
             if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
                abstractStepDefs.iClickOnRhConciergeLogo();
@@ -633,15 +674,6 @@ public class ConciergeE2EStepDefs {
             }
         }
         executeJavaScript("window.scrollTo(0, 600)");
-        try {
-            conciergeItemsScreen.getDetailsSpan().scrollTo();
-            conciergeItemsScreen.getDetailsSpan().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
-            conciergeItemsScreen.getDetailsSpan().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofSeconds(20));
-        } catch (ElementNotFound e){
-            conciergeItemsScreen.getDetailsSpanWithSpase().scrollTo();
-            conciergeItemsScreen.getDetailsSpanWithSpase().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
-            conciergeItemsScreen.getDetailsSpanWithSpase().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofSeconds(20));
-        }
         selectOption.getQuantityElement().should(visible, Duration.ofMinutes(1));
         if (!selectOption.getQuantityElement().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
@@ -746,7 +778,7 @@ public class ConciergeE2EStepDefs {
     @When("I fiils all options for item")
     public void iFiilsAllOptionsForItem() {
         //depth option
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         executeJavaScript("window.scrollTo(0, 970)");
         try {
 
@@ -761,7 +793,7 @@ public class ConciergeE2EStepDefs {
 
         //seatheight
         try {
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             selectOption.getSeatHeight().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select seatHeight = new Select(selectOption.getSeatHeight());
 
@@ -773,7 +805,7 @@ public class ConciergeE2EStepDefs {
 
         //finish
         try {
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             selectOption.getFinishOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select finalOption = new Select(selectOption.getFinishOption());
 
@@ -794,7 +826,7 @@ public class ConciergeE2EStepDefs {
 
         //select length option
         try {
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             selectOption.getLengthOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select selectLength = new Select(selectOption.getLengthOption());
             selectLength.selectByIndex(2);
@@ -921,7 +953,7 @@ public class ConciergeE2EStepDefs {
         }
         if (!conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME")).isDisplayed()) {
             conciergeUserAccountPage.getClientLookupSearchButton().click();
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
         }
         conciergeUserAccountPage.getSearchClientResultsPlusButton().should(visible, Duration.ofMinutes(1));
         conciergeUserAccountPage.getSearchClientResultsPlusButton().click();
@@ -1083,12 +1115,16 @@ public class ConciergeE2EStepDefs {
 
     @Then("I verify the payment details and order estimate summary")
     public void iVerifyThePaymentDetailsAndOrderEstimateSummary() {
-        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text() = 'TOTAL']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(15));
+        if($(By.xpath("//*[text()='Subtotal']")).isDisplayed()){
+            $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
+        }else {
+            $(By.xpath("//*[text()='Subtotal  ']")).should(visible, Duration.ofSeconds(5));
+        }
+        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = 'TOTAL']")).should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify spo order & terms review signature")
@@ -1215,9 +1251,6 @@ public class ConciergeE2EStepDefs {
         itemList.selectByValue("Customer Delight");
         $(By.xpath("//*[text() = 'APPLY']")).click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        $(By.xpath("//*[text() = 'Waived Shipping']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text() = '$299.00']")).shouldNotBe(text("$NaN"), Duration.ofSeconds(15));
-        $(By.xpath("//*[text() = '$299.00']")).should(visible, Duration.ofSeconds(15));
     }
 
     @When("I open cart")

@@ -21,6 +21,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.*;
+import org.openqa.selenium.interactions.Actions;
 
 public class ProjectStepDefs {
     EstoreItemPage estoreItemPage = new EstoreItemPage();
@@ -46,9 +47,11 @@ public class ProjectStepDefs {
     int randomQuantity;
     String itemPrice;
 
+    public static String result;
+
     @When("I click on projects button")
     public void iClickOnProjectsButton() {
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getProjectsButton().should(visible, Duration.ofMinutes(1));
         conciergeUserAccountPage.getProjectsButton().click();
     }
@@ -57,6 +60,18 @@ public class ProjectStepDefs {
     public void iVerifyThatSearchResultIsDisplayed() {
         generalStepDefs.waitForJSandJQueryToLoad();
         conciergeProjectScreen.getResultsListForProjects().should(visible, Duration.ofMinutes(1));
+    }
+
+    @Then("I open a value project")
+    public void iOpenAValueProject() {
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        for(int i = 3; i < conciergeProjectScreen.getForecastAmountList().size(); i++){
+            if(Integer.parseInt(conciergeProjectScreen.getForecastAmountByNumber(i).getText().replaceAll("[^0-9]", "")) > 0) {
+                conciergeProjectScreen.getForecastAmountByNumber(i).click();
+                break;
+            }
+        }
+        //with().pollInterval(9, SECONDS).await().until(() -> true);
     }
 
     @When("I search project by {string}")
@@ -173,7 +188,7 @@ public class ProjectStepDefs {
     public void iClickOnSaveButton() {
         if($(By.xpath("//*[text()='MOVE ITEMS ANYWAY']")).isDisplayed()){
             $(By.xpath("//*[text()='MOVE ITEMS ANYWAY']")).click();
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
         }
         try {
             conciergeProjectScreen.getSaveMoveToProject().should(Condition.and("", visible, enabled), Duration.ofSeconds(10));
@@ -223,6 +238,8 @@ public class ProjectStepDefs {
             conciergeProjectScreen.getFirstSearchResultOfProjects().should(visible, Duration.ofMinutes(5));
             conciergeProjectScreen.getFirstSearchResultOfProjects().click();
         }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        result = conciergeProjectScreen.getProjectNameItemTitle().getText();
     }
 
     @When("I click on the first project search result with parameters {string}{string}")
@@ -397,6 +414,12 @@ public class ProjectStepDefs {
         switchTo().frame(mailinator.getMessageBodyIframe());
         mailinator.getBodyEmailText().should(visible, Duration.ofSeconds(15));
         mailinator.getAssociateName().should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("Verify Brand Name in EMAIL Recipt")
+    public void verifyBrandNameInEmailRecipt() {
+        conciergeProjectScreen.getEmailItemName().scrollIntoView(true);
+        assertEquals(result, conciergeProjectScreen.getEmailItemName().getText());
     }
 
     @When("I click on bcc associate checkbox")
@@ -798,6 +821,16 @@ public class ProjectStepDefs {
         selectFinish.selectByVisibleText(finishValue);
     }
 
+    @Then("Switch page using pagination")
+    public void switchPageUsingPagination() {
+       conciergeProjectScreen.getPaginationGoToPage2().click();
+    }
+
+    @Then("User should be able to switch pages using pagination in my projects")
+    public void userShouldBeAbleToSwitchPagesUsingPaginationInMyProjects() {
+        conciergeProjectScreen.getPaginationGoToPage2().shouldNotBe(visible, Duration.ofSeconds(15));
+    }
+
     @Then("I verify that price was not changes")
     public void iVerifyThatPriceWasNotChanges() {
         conciergeProjectScreen.getRegularPriceValue().should(visible, Duration.ofSeconds(12));
@@ -894,7 +927,7 @@ public class ProjectStepDefs {
         } else {
             forecastExpected = randomQuantity * 2088;
         }
-        int forecastActual = Integer.parseInt(conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
+        int forecastActual = Integer.parseInt(conciergeProjectScreen.getForecastAmountValue().getText().replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", ""));
         assertEquals(forecastActual, forecastExpected, "Forecast value has been updated");
     }
 
@@ -911,8 +944,8 @@ public class ProjectStepDefs {
 
     @When("I choose pricing type {string}")
     public void iChoosePricingType(String arg0) {
-        conciergeProjectScreen.getForecastamountValue().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
-        conciergeProjectScreen.getForecastamountValue().should(visible, Duration.ofSeconds(12));
+        conciergeProjectScreen.getForecastAmountValue().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        conciergeProjectScreen.getForecastAmountValue().should(visible, Duration.ofSeconds(12));
 //        executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
         $(By.id("footer")).shouldHave(text("RH.COM\n" +
                 "DASHBOARD\n" +
@@ -1072,20 +1105,20 @@ public class ProjectStepDefs {
     @Then("I verify {string} for unclassified business client project")
     public void iVerifyForUnclassifiedBusinessClientProject(String pricingType) {
         if (pricingType.equals("NON_MEMBER")) {
-            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,090.00"), Duration.ofSeconds(40));
-            String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
+            conciergeProjectScreen.getForecastAmountValue().shouldHave(text("$1,090.00"), Duration.ofSeconds(40));
+            String forecastActual = conciergeProjectScreen.getForecastAmountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
             $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[7]")).shouldHave(text("$1,090.00"), Duration.ofSeconds(120));
             assertEquals(forecastActual, "1,090", "Pricing for non member is displayed correctly");
         }
         if (pricingType.equals("NON_TRADE")) {
-            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$1,090.00"), Duration.ofSeconds(40));
-            String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
+            conciergeProjectScreen.getForecastAmountValue().shouldHave(text("$1,090.00"), Duration.ofSeconds(40));
+            String forecastActual = conciergeProjectScreen.getForecastAmountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
             $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[5]")).shouldHave(text("$1,090.00"), Duration.ofSeconds(120));
             assertEquals(forecastActual, "1,090", "Pricing for non member is displayed correctly");
         }
         if (pricingType.equals("MEMBER") || (pricingType.equals("TRADE"))) {
-            conciergeProjectScreen.getForecastamountValue().shouldHave(text("$817.00"), Duration.ofSeconds(40));
-            String forecastActual = conciergeProjectScreen.getForecastamountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
+            conciergeProjectScreen.getForecastAmountValue().shouldHave(text("$817.00"), Duration.ofSeconds(40));
+            String forecastActual = conciergeProjectScreen.getForecastAmountValue().getText().replaceAll("\\$", "").replaceAll(".00", "");
             $(By.xpath("(//p[@class='MuiTypography-root MuiTypography-body1'])[7]")).shouldHave(text("$817.00"), Duration.ofSeconds(120));
             assertEquals(forecastActual, "817", "Pricing for " + pricingType + " is displayed correctly");
         }
@@ -1238,10 +1271,15 @@ public class ProjectStepDefs {
     @When("I click on save button uppercase")
     public void iClickOnSaveButtonUppercase() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        conciergeProjectScreen.getSaveBtnUppercase().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
-        conciergeProjectScreen.getSaveBtnUppercase().should(visible, Duration.ofSeconds(15));
-        conciergeProjectScreen.getSaveBtnUppercase().click();
-
+        if(conciergeProjectScreen.getSaveBtnUppercase().isDisplayed()){
+            conciergeProjectScreen.getSaveBtnUppercase().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
+            conciergeProjectScreen.getSaveBtnUppercase().should(visible, Duration.ofSeconds(15));
+            conciergeProjectScreen.getSaveBtnUppercase().click();
+        } else {
+            conciergeProjectScreen.getSaveBtnLowerCase().should(Condition.and("", enabled, visible), Duration.ofMinutes(1));
+            conciergeProjectScreen.getSaveBtnLowerCase().should(visible, Duration.ofSeconds(15));
+            conciergeProjectScreen.getSaveBtnLowerCase().click();
+        }
     }
 
     @Then("I verify the address page, prefilled address and email address must be filled")

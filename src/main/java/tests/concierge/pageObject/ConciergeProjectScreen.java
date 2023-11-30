@@ -1,16 +1,20 @@
 package tests.concierge.pageObject;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 @Getter
 public class ConciergeProjectScreen {
+    public final String forecastAmountString = "(//*[text() = 'Forecast Amount']/preceding-sibling::div)[%s]";
+    private final ElementsCollection forecastAmountList = $$(By.xpath("//*[text() = 'Forecast Amount']/preceding-sibling::div"));
     private final SelenideElement projectMemberPrice = $(By.xpath("//div[@class='MuiGrid-root MuiGrid-item'][1]/p/b"));
 
     private final SelenideElement pricingTypeDropdown = $(By.cssSelector("#pricingTypeDropdown"));
@@ -106,6 +110,8 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement saveBtnUppercase = $(By.xpath("//*[text()='SAVE']"));
 
+    private final SelenideElement saveBtnLowerCase = $(By.xpath("//*[text()='Save']"));
+
     private final SelenideElement forecastSetButton = $(By.xpath("//*[text()='FORECAST SET']"));
 
     private final SelenideElement settingsButton = $(By.xpath("//*[text()='SETTINGS']"));
@@ -145,6 +151,9 @@ public class ConciergeProjectScreen {
     private final SelenideElement emailEstimateMessageToClient = $(By.xpath("//textarea[@name='message']"));
 
     private final SelenideElement emailEstimateAdditionEmailField = $(By.xpath("//input[@name='cc']"));
+
+    private final SelenideElement projectNameItemTitle = $(By.xpath("//h6/.."));
+    private final SelenideElement emailItemName = $(By.xpath("(//*[@class = 'productImageAndAttributes'])[2]//td[2]/div"));
 
     private final SelenideElement goToProjectButton = $(By.xpath("//*[text()='GO TO PROJECT']"));
 
@@ -222,7 +231,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement finishOption = $(By.id("optionSelect-0"));
 
-    private final SelenideElement forecastamountValue = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-2'][3]/div)[1]"));
+    private final SelenideElement forecastAmountValue = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-2'][3]/div)[1]"));
 
     private final SelenideElement itemProjectPrice = $(By.xpath("(//div[1]/p[@class='MuiTypography-root MuiTypography-body1'])[4]"));
 
@@ -240,6 +249,8 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement regularPriceValue = $(By.xpath("(//*[contains(text(),'$')])[4]"));
 
+    private final SelenideElement paginationGoToPage2 = $(By.xpath("//*[@aria-label = 'Go to page 2']"));
+
     private final SelenideElement addToProjectProjectName = $(By.id("project-name"));
 
     private final SelenideElement projectNamePopUpDropDownListItem = $(By.xpath("//*[text()='TestCompany']"));
@@ -249,4 +260,9 @@ public class ConciergeProjectScreen {
     private final SelenideElement prieItemFromProject = $(By.xpath("//div[2]/div[@class='MuiGrid-root MuiGrid-item'][1]/p"));
 
     private final SelenideElement emailEstimateSendButton = $(By.cssSelector("button[type='submit'] span[class='MuiButton-label']"));
+
+    public SelenideElement getForecastAmountByNumber(int number) {
+        String path = String.format(forecastAmountString, number);
+        return $(byXpath(path));
+    }
 }

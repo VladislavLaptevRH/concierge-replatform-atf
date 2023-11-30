@@ -332,7 +332,7 @@ public class EstorePgStepDefs {
 
     @And("I verify that price on PG is the same as on PDP for In stock filter applied")
     public void iVerifyThatPriceOnPGIsTheSameAsOnPDPForInStockFilterApplied() {
-        with().pollInterval(6, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
         estorePDPScreen.getLineItemRegularPrice().should(visible, Duration.ofSeconds(12));
         assertEquals("Verify that member price on PG is the same as on PDP", estorePDPScreen.getMemberLineItemPricePDP(), memberPrice);

@@ -50,15 +50,17 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement viewCartButton = $(By.cssSelector("#ajax-proceed-to-cart"));
 
-    private final SelenideElement detailsSpan = $(By.xpath("//*[text()='DETAILS']"));
+    private final SelenideElement detailsSpan = $(By.xpath("(//*[text()='Details'])[1]"));
 
-    private final SelenideElement detailsSpanWithSpase = $(By.xpath("//*[text()=' DETAILS']"));
+    private final SelenideElement detailsSpanWithSpase = $(By.xpath("(//*[text()='Details'])[1]"));
 
     private final SelenideElement checkoutButton = $(By.xpath("(//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-fullWidth'])[1]"));
 
     private final SelenideElement closePopUpButton = $(By.xpath("/html/body/div[4]/div[3]/div/div[2]/div/div[2]/div/div[2]/button"));
 
     private final SelenideElement addToProjectButton = $(By.xpath("(//*[text()='ADD TO PROJECT'])[1]"));
+
+    private final SelenideElement addToProjectButtonLowerCase = $(By.xpath("(//*[text()='Add to Project'])[1]"));
 
     private final SelenideElement saveProjectPopUpButton = $(By.xpath("//div[2]/button[contains(@class,'MuiButton-containedPrimary MuiButton-fullWidth')]"));
 

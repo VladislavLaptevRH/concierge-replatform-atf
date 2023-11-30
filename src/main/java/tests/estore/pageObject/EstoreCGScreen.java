@@ -49,7 +49,7 @@ public class EstoreCGScreen {
 
     private SelenideElement collectionModalProductImage = $(By.xpath("//div[@data-cmp='cardImages']//div[@id='component-rh-image_wrapper']"));
 
-    private SelenideElement seatingCollectionTitle = $(By.xpath("//span[text()='Seating  collections']"));
+    private SelenideElement seatingCollectionTitle = $(By.xpath("//span[text()='Seating Collections']"));
 
     private SelenideElement singleGridView = $(By.xpath("//div[contains(@class,'cg-slide-12 MuiGrid-item MuiGrid-grid-xs-12')]"));
 
@@ -59,7 +59,7 @@ public class EstoreCGScreen {
 
     private SelenideElement descriptionBellaModular = $(By.xpath("//*[text()='Bella Modular']"));
 
-    private SelenideElement inStockMessageText = $(By.xpath("//*[text()='In-stock items delivered in 3-7 days']"));
+    private SelenideElement inStockMessageText = $(By.xpath("(//*[contains(text(),'In-stock items delivered')])[1]"));
 
     private SelenideElement twoGridViewCg = $(By.xpath("//div[contains(@class, 'grid-item-6')]"));
 
@@ -183,6 +183,7 @@ public class EstoreCGScreen {
     }
 
     public void verifyThatinStockMessageTextIsDisplayed() {
+        inStockMessageText.scrollIntoView(true).isDisplayed();
         inStockMessageText.should(Condition.visible, Duration.ofSeconds(12));
     }
 

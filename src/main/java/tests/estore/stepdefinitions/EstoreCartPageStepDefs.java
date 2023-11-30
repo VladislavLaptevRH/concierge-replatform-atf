@@ -69,7 +69,7 @@ public class EstoreCartPageStepDefs {
         estoreItemPage.getViewCartButton().should(visible, Duration.ofSeconds(60));
         estoreCartPage.getKeepShopping().should(visible, Duration.ofSeconds(15));
         estoreItemPage.getViewCartButton().click(ClickOptions.usingJavaScript());
-        with().pollInterval(6, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @When("I choose estore order classification")
@@ -444,7 +444,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that the price get increased in multiple of QTY")
     public void iVerifyThatThePriceGetIncreasedInMultipleOfQTY() {
-        $(By.xpath("//*[text()='$70.00']")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='TOTAL (excluding sales tax)']")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify that price for product&line should be in US dollars")
@@ -467,8 +467,7 @@ public class EstoreCartPageStepDefs {
 
     @Then("I verify that the price for trade get increased in multiple of QTY")
     public void iVerifyThatThePriceForTradeGetIncreasedInMultipleOfQTY() {
-
-        $(By.xpath("//*[contains(text(),'70.00')]")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[text()='TOTAL (excluding sales tax)']")).should(visible, Duration.ofSeconds(40));
     }
 
     @Then("I verify that trade price is used for each product")

@@ -49,17 +49,17 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement useIWantToDeleteAddedAddress = $(By.xpath("(//*[text()='Delete'])[2]"));
 
-    private final SelenideElement firstNameRequired = $(By.xpath("//*[text()='First name required.']"));
+    private final SelenideElement firstNameRequired = $(By.xpath("//*[text()='First name required']"));
 
-    private final SelenideElement lastNameRequired = $(By.xpath("//*[text()='Last name required.']"));
+    private final SelenideElement lastNameRequired = $(By.xpath("//*[text()='Last name required']"));
 
-    private final SelenideElement cityRequired = $(By.xpath("//*[text()='City required.']"));
+    private final SelenideElement cityRequired = $(By.xpath("//*[text()='City required']"));
 
-    private final SelenideElement stateRequired = $(By.xpath("//*[text()='State required.']"));
+    private final SelenideElement stateRequired = $(By.xpath("//*[text()='State required']"));
 
-    private final SelenideElement postalCodeRequired = $(By.xpath("//*[text()='Postal code required.']"));
+    private final SelenideElement postalCodeRequired = $(By.xpath("//*[text()='Postal code required']"));
 
-    private final SelenideElement phoneRequired = $(By.xpath("//*[text()='Phone required.']"));
+    private final SelenideElement phoneRequired = $(By.xpath("//*[text()='Phone required']"));
 
     private final SelenideElement saveAddressButton = $(By.xpath("//*[text()='Save address']"));
 

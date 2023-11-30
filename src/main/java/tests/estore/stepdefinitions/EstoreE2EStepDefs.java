@@ -77,8 +77,7 @@ public class EstoreE2EStepDefs {
 
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
-        estoreItemPage.getAddToCartButton().should(enabled);
+        estoreItemPage.getAddToCartButton().should(enabled, Duration.ofSeconds(12));
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
         estoreItemPage.getAddToCartButton().shouldBe(visible);
         estoreItemPage.getAddToCartButton().shouldBe(interactable).click(ClickOptions.usingJavaScript());
@@ -528,12 +527,11 @@ public class EstoreE2EStepDefs {
 
     @When("I click on same as estore shipping address checkbox")
     public void iClickOnSameAsShippingAddressCheckbox() {
-        if(estoreAddressScreen.getSameAsShippingAddress().is(visible)) {
-                estoreAddressScreen.getSameAsShippingAddress().should(Condition.and("Exist ,appear, interactable",
-                        exist, appear, interactable), Duration.ofSeconds(15));
-                estoreAddressScreen.getSameAsShippingAddress().click(ClickOptions.usingJavaScript());
-        }
-        else{
+        if (estoreAddressScreen.getSameAsShippingAddress().is(visible)) {
+            estoreAddressScreen.getSameAsShippingAddress().should(Condition.and("Exist ,appear, interactable",
+                    exist, appear, interactable), Duration.ofSeconds(15));
+            estoreAddressScreen.getSameAsShippingAddress().click(ClickOptions.usingJavaScript());
+        } else {
             estoreAddressScreen.getSameAsShippingAddress().shouldNotBe(interactable);
         }
     }
@@ -621,6 +619,7 @@ public class EstoreE2EStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @When("I open product page with {string} and {string} for estore")

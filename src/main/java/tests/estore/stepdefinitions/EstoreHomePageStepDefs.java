@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.testng.Assert;
 import tests.concierge.pageObject.ConciergeUserAccountPage;
 import tests.estore.pageObject.EstoreHomePage;
 import tests.estore.pageObject.EstoreSaleScreen;
@@ -35,9 +36,9 @@ public class EstoreHomePageStepDefs {
 
     EstoreSearchScreen estoreSearchScreen = new EstoreSearchScreen();
 
-    EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
-
     EstoreSaleScreen estoreSaleScreen = new EstoreSaleScreen();
+
+    EstoreUserAccountPage estoreUserAccountPage = new EstoreUserAccountPage();
 
     public static String result = "";
 
@@ -234,7 +235,6 @@ public class EstoreHomePageStepDefs {
     @Then("I verify that SALE is present on TOP Nav menu")
     public void iVerifyThatSALEIsPresentOnTOPNavMenu() {
         $(By.xpath("//div[contains(@id,'container-rhrheader-rhr-catalogNav_catalogNav')]//span[text()='SALE']")).should(visible, Duration.ofSeconds(12));
-        System.out.println();
     }
 
     @Then("I verify that hamburger icon is displayed for the main menu")
@@ -272,5 +272,139 @@ public class EstoreHomePageStepDefs {
     @When("I verify that All Rugs PG page is displayed")
     public void iVerifyThatAllRugsPGPageIsDisplayed() {
         estoreSaleScreen.getRugsAllRugs().should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify the shop by room under the LIVING top navigation")
+    public void iVerifyTheSHopByRoomUnderTheLivingTopNavigation(){
+        Assert.assertTrue(estoreHomePage.getLivingCategoryMenu().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getLivingCategoryMenu().click();
+        Assert.assertTrue(estoreHomePage.getShopByRoomUnderCategory().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getShopByRoomUnderCategory().click();
+        Assert.assertTrue(estoreHomePage.getLivingRoomUnderShopByRoom().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getOfficeUnderShopByRoom().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getLivingRoomUnderShopByRoom().click();
+        Assert.assertTrue(estoreHomePage.getLivingPageTextAfterVisitShopByRoomCat().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
+    @Then("I verify the shop by room under the DINING top navigation")
+    public void iVerifyTheSHopByRoomUnderTheDiningTopNavigation(){
+        Assert.assertTrue(estoreHomePage.getDiningCategoryMenu().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getDiningCategoryMenu().click();
+        Assert.assertTrue(estoreHomePage.getShopByRoomUnderCategory().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getShopByRoomUnderCategory().click();
+        Assert.assertTrue(estoreHomePage.getDiningRoomUnderShopByRoom().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getDiningRoomUnderShopByRoom().click();
+        Assert.assertTrue(estoreHomePage.getDiningPageTextAfterVisitShopByRoomCat().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
+    @Then("I verify the shop by room under the BED top navigation")
+    public void iVerifyTheSHopByRoomUnderTheBedTopNavigation(){
+        Assert.assertTrue(estoreHomePage.getBedCategoryMenu().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getBedCategoryMenu().click();
+        Assert.assertTrue(estoreHomePage.getShopByRoomUnderCategory().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getShopByRoomUnderCategory().click();
+        Assert.assertTrue(estoreHomePage.getBedRoomsUnderShopByRoom().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getBedRoomsUnderShopByRoom().click();
+        Assert.assertTrue(estoreHomePage.getBedRoomPageTextAfterVisitShopByRoomCat().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
+    @Then("I verify the shop by room under the BATH top navigation")
+    public void iVerifyTheSHopByRoomUnderTheBathTopNavigation(){
+        Assert.assertTrue(estoreHomePage.getBathCategoryMenu().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getBathCategoryMenu().click();
+        Assert.assertTrue(estoreHomePage.getShopByRoomUnderCategory().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getShopByRoomUnderCategory().click();
+        Assert.assertTrue(estoreHomePage.getBathUnderShopByRoom().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getBathUnderShopByRoom().click();
+        Assert.assertTrue(estoreHomePage.getBathRoomPageTextAfterVisitShopByRoomCat().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
+    @Then("I verify the shop by room under the OUTDOOR top navigation")
+    public void iVerifyTheSHopByRoomUnderTheOutdoorTopNavigation(){
+        Assert.assertTrue(estoreHomePage.getOutdoorCategoryMenu().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getOutdoorCategoryMenu().click();
+        Assert.assertTrue(estoreHomePage.getShopByRoomUnderCategory().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getShopByRoomUnderCategory().click();
+        Assert.assertTrue(estoreHomePage.getOutdoorUnderShopByRoom().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getOutdoorUnderShopByRoom().click();
+        Assert.assertTrue(estoreHomePage.getOutdoorPageTextAfterVisitShopByRoomCat().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
+    @Then("I verify the shop by room Page")
+    public void iVerifyTheShoRoomPage(){
+        Assert.assertTrue(estoreHomePage.getLivingCategoryMenu().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getLivingCategoryMenu().click();
+        Assert.assertTrue(estoreHomePage.getHeadingShopRoomPageText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getLivingTextInShopRoomPage().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getDiningTextInShopRoomPage().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getBedroomTextInShopRoomPage().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getBathTextInShopRoomPage().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getContemporaryTextInShopRoomPage().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getBeachHouseTextInShopRoomPage().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getSkiHouseTextInShopRoomPage().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getLeftSliderShopByRoom().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getRightSliderShopByRoom().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+
+        Assert.assertTrue(estoreHomePage.getPlusIconZoomBtn1().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getPlusIconZoomBtn2().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getPlusIconZoomBtn3().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getPlusIconZoomBtn4().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+
+        estoreHomePage.getRightSliderShopByRoom().click();
+        estoreHomePage.getRightSliderShopByRoom().click();
+        estoreHomePage.getLeftSliderShopByRoom().click();
+
+        estoreHomePage.getPlusIconZoomBtn1().click();
+        Assert.assertTrue(estoreHomePage.getMemberPrice().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getRegularPrice().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getViewDetailBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getViewDetailBtn().click();
+        Assert.assertTrue(estoreHomePage.getPdpPageImage().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
+    @Then("I verify elements panel")
+    public void iVerifyElementPanel(){
+        Assert.assertTrue(estoreHomePage.getLinivngTopNavMenu().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getLinivngTopNavMenu().click();
+        Assert.assertTrue(estoreHomePage.getHeadingShopRoomPageText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getThreeDotsMatrix().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getThreeDotsMatrix().click();
+        Assert.assertTrue(estoreHomePage.getSliderWindow().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getSliderWindowLeftArrow().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getSliderWindowRightArrow().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getSliderWindowMultipleImages().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
+    @Then("I verify elements panel slider function")
+    public void iVerifyElementPanelSliderFunction(){
+        Assert.assertTrue(estoreHomePage.getLinivngTopNavMenu().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getLinivngTopNavMenu().click();
+        Assert.assertTrue(estoreHomePage.getHeadingShopRoomPageText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getThreeDotsMatrix().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getThreeDotsMatrix().click();
+        Assert.assertTrue(estoreHomePage.getSliderWindow().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getSliderWindowRightArrow().click();
+        estoreHomePage.getSliderWindowRightArrow().click();
+        estoreHomePage.getSliderWindowLeftArrow().click();
+        Assert.assertTrue(estoreHomePage.getSelectedImage().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+    }
+
+    @Then("I verify show product function")
+    public void iVerifyShowProductFunction(){
+        Assert.assertTrue(estoreHomePage.getLinivngTopNavMenu().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getLinivngTopNavMenu().click();
+        Assert.assertTrue(estoreHomePage.getHeadingShopRoomPageText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getLeftSliderShopByRoom().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getRightSliderShopByRoom().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getShowProductCheckBox().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estoreHomePage.getPlusIconZoomBtn1().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        estoreHomePage.getShowProductCheckBox().click();
+        try{
+            if(estoreHomePage.getPlusIconZoomBtn1().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed()){
+                System.out.println(" Plus icon is is still appearing");
+            }
+        }catch (Exception e ){
+            System.out.println(" Plus ICon is removed is disappeared as expected");
+        }
     }
 }

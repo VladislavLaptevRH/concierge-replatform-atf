@@ -427,7 +427,7 @@ Feature: eStore Contract and Trade
     When I remove all items from estore cart
     When I add item to cart via API for estore
     When I open estore cart
-    When I click on estore checkout butto
+    When I click on estore checkout button
     When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox

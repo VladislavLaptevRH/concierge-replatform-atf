@@ -79,6 +79,103 @@ public class EstoreHomePage {
     private final SelenideElement rugsSecondaryNav = $(By.xpath("//li[@id='rhrCtalogNavigationDetails_navigation-cat16850013']//span"));
 
     private final SelenideElement allRugsTertiaryNav = $(By.xpath("//a[@id='rhrCtalogNavigationDetails_concepts-navigation-cat18620003']"));
+    private final SelenideElement usCountySelection = $(By.xpath("//div[@data-value='US']"));
+
+    private final SelenideElement caCountySelection = $(By.xpath("//div[@data-value='CA']"));
+
+    private final SelenideElement gbCountySelection = $(By.xpath("//div[@data-value='GB']"));
+
+    private final SelenideElement deCountySelection = $(By.xpath("//div[@data-value='DE']"));
+
+    private final SelenideElement livingCategoryMenu = $(By.xpath("//span[text()='Living']"));
+
+    private final SelenideElement shopByRoomUnderCategory = $(By.xpath("//span[text()='Shop By Room']"));
+
+    private final SelenideElement livingRoomUnderShopByRoom = $(By.xpath("//span[text()='Living Rooms']"));
+
+    private final SelenideElement officeUnderShopByRoom = $(By.xpath("(//span[text()='Office'])[2]"));
+
+    private final SelenideElement livingPageTextAfterVisitShopByRoomCat = $(By.xpath("(//p[text()='Living'])[2]"));
+
+    private final SelenideElement diningCategoryMenu = $(By.xpath("//span[text()='Dining']"));
+
+    private final SelenideElement diningRoomUnderShopByRoom = $(By.xpath("(//span[text()='Dining'])[2]"));
+
+    private final SelenideElement diningPageTextAfterVisitShopByRoomCat = $(By.xpath("(//p[text()='Dining'])[2]"));
+
+    private final SelenideElement bedCategoryMenu = $(By.xpath("//span[text()='Bed']"));
+
+    private final SelenideElement bedRoomsUnderShopByRoom = $(By.xpath("//span[text()='Living Rooms']"));
+
+    private final SelenideElement bedRoomPageTextAfterVisitShopByRoomCat = $(By.xpath("(//p[text()='Bedroom'])[2]"));
+
+    private final SelenideElement bathCategoryMenu = $(By.xpath("//span[text()='Bath']"));
+
+    private final SelenideElement bathUnderShopByRoom = $(By.xpath("(//span[text()='Bath'])[2]"));
+
+    private final SelenideElement bathRoomPageTextAfterVisitShopByRoomCat = $(By.xpath("(//p[text()='Bath'])[2]"));
+
+    private final SelenideElement outdoorCategoryMenu = $(By.xpath("//span[text()='Outdoor']"));
+
+    private final SelenideElement outdoorUnderShopByRoom = $(By.xpath("(//span[text()='outdoor'])[2]"));
+
+    private final SelenideElement outdoorPageTextAfterVisitShopByRoomCat = $(By.xpath("(//p[text()='Outdoor'])[2]"));
+
+    private final SelenideElement headingShopRoomPageText =  $(By.xpath("//h1[text()='Shop Rooms']"));
+
+    private final SelenideElement livingTextInShopRoomPage = $(By.xpath("//p[text()='Living']"));
+
+    private final SelenideElement diningTextInShopRoomPage = $(By.xpath("//p[text()='Dining']"));
+
+    private final SelenideElement bedroomTextInShopRoomPage = $(By.xpath("//p[text()='Bedroom']"));
+
+    private final SelenideElement bathTextInShopRoomPage = $(By.xpath("//p[text()='Bath']"));
+
+    private final SelenideElement contemporaryTextInShopRoomPage = $(By.xpath("//p[text()='Contemporary']"));
+
+    private final SelenideElement outDoorTextInShopRoomPage = $(By.xpath("//p[text()='Outdoor']"));
+
+    private final SelenideElement beachHouseTextInShopRoomPage = $(By.xpath(" //p[text()='Beach House']"));
+
+    private final SelenideElement skiHouseTextInShopRoomPage = $(By.xpath("//p[text()='Ski House']"));
+
+    private final SelenideElement leftSliderShopByRoom = $(By.xpath("//div[@class='slick-slider slick-initialized']"));
+
+    private final SelenideElement rightSliderShopByRoom = $(By.xpath("(//div[contains(@class,'arrow-container')])[1]"));
+
+    private final SelenideElement plusIconZoomBtn1 = $(By.xpath("(//*[@id='Grommet/PlusSign'])[1]"));
+
+    private final SelenideElement plusIconZoomBtn2 = $(By.xpath("(//*[@id='Grommet/PlusSign'])[2]"));
+
+    private final SelenideElement plusIconZoomBtn3 = $(By.xpath("(//*[@id='Grommet/PlusSign'])[3]"));
+
+    private final SelenideElement plusIconZoomBtn4 = $(By.xpath("(//*[@id='Grommet/PlusSign'])[4]"));
+
+    private final SelenideElement memberPrice = $(By.xpath("(//*[@data-testid='price-for-member'])[5]"));
+
+    private final SelenideElement regularPrice = $(By.xpath("(//*[@data-testid='price-for-regular'])[5]"));
+
+    private final SelenideElement viewDetailBtn = $(By.xpath("//span[text()='VIEW DETAILS']"));
+
+    private final SelenideElement closeButton = $(By.xpath("//*[@data-testid='dialog-title-close-button']"));
+
+    private final SelenideElement pdpPageImage = $(By.xpath("//img[@data-testid='desktop-pdp-image']"));
+
+    private final SelenideElement threeDotsMatrix = $(By.xpath("//span[@class='material-icons MuiIcon-root']"));
+
+    private final SelenideElement sliderWindow = $(By.xpath("//div[@class='MuiDialogContent-root']"));
+
+    private final SelenideElement sliderWindowLeftArrow = $(By.xpath("((//div[@class='MuiDialogContent-root']//div[contains(@class,'arrow-container')])[1]//*)[1]"));
+
+    private final SelenideElement sliderWindowRightArrow = $(By.xpath("((//div[@class='MuiDialogContent-root']//div[contains(@class,'arrow-container')])[2]//*)[2]"));
+
+    private final SelenideElement sliderWindowMultipleImages = $(By.xpath("//div[@class='MuiDialogContent-root']//div[contains(@class,'slick-slide')]//div[@id='component-rh-image']"));
+
+    private final SelenideElement selectedImage = $(By.xpath("//div[@class='MuiDialogContent-root']//div[contains(@class,'slick-slide')]//div[@id='component-rh-image']"));
+
+    private final SelenideElement showProductCheckBox = $(By.xpath("//input[@name='showProducts']"));
+
+
     public void clickToTertiaryNav(String tertiaryNav) {
         $(By.xpath("//*[contains(@id,'rhrCtalogNavigationDetails_concepts-navigation')]//span[text()='" + tertiaryNav + "']"))
                 .should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
@@ -131,6 +228,14 @@ public class EstoreHomePage {
 
     private SelenideElement sectionalsTopNavMenu = $(By.xpath("//*[@id='rhrCtalogNavigationDetails_concepts-navigation-cat28650036']//span"));
 
+    private SelenideElement  countySelectionDropDown = $(By.xpath("(//*[@id='Grommet/Arrow'])[2]"));
+
+    private SelenideElement confirmButton = $(By.xpath("//span[text()='CONFIRM']"));
+
+    private SelenideElement copyRightIcon =  $(By.xpath("//span[contains(text(),'© ')]"));
+
+    private SelenideElement yearIcon =  $(By.xpath("//span[contains(.,'2023')]"));
+
 
     public void clickToSectionalsTopNavMenu() {
         sectionalsTopNavMenu.should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
@@ -171,7 +276,6 @@ public class EstoreHomePage {
     public void homePageMenuIsDisplayed() {
         homePageMenu.should(visible, Duration.ofSeconds(12));
     }
-
     private final SelenideElement cartButtonIcon = $(By.xpath("//*[@id='container-rhrHeader_cart-btn']"));
 
     private final SelenideElement itemCartIconCount = $(By.xpath("//*[@id='container-rhrHeader_cart-btn']//span"));

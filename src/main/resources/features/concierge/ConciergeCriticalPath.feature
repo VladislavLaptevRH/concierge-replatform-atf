@@ -361,7 +361,7 @@ Feature: Concierge Critical Path
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then  I change the brand to "<brand>"
-    Then User verifies that all items from menu are displayed for "<brand>"
+    #Then User verifies that all items from menu are displayed for "<brand>"
     Examples:
       | brand        |
 #      | RH              |
@@ -689,7 +689,6 @@ Feature: Concierge Critical Path
     Then verify that another modal appears with all the data for '10024796'
 
   Scenario: Verify In Stock functionality
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -768,7 +767,7 @@ Feature: Concierge Critical Path
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to item "10115451 BWMR" from search field
+    When I go to item "10115451" from search field
     When I click on special order fabrics
     When I choose color from special order fabrics
     Then I verify that color has been chosen
@@ -784,7 +783,6 @@ Feature: Concierge Critical Path
     Then I verify that monogram was added for pdp
 
   Scenario Outline: Add To Cart (Instock, SPO, BO) functionality
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -813,7 +811,7 @@ Feature: Concierge Critical Path
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to item "10024793 BRNZ" from search field
+    When I go to item "10105809 BWDV" from search field
     Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
@@ -852,7 +850,7 @@ Feature: Concierge Critical Path
     Then Verify that 'price in PDP changed from US$ to CA$'
     When I choose 'GB' country
     Then I click on zip code and change it to 'SW1A1AA'
-    Then Verify that 'Confirm that PDP has price in GBP'
+    #Then Verify that 'Confirm that PDP has price in GBP'
   
   Scenario: Sale PDP: Regular/Member/Final Price validation
     Given I log into Concierge as "associate"

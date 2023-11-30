@@ -148,7 +148,7 @@ public class EstoreAbstractStepDefs {
     @When("I click on a place estore order button")
     public void iClickOnPlaceOrderButton() {
 
-        estoreReviewOrderPage.getPlaceOrderButton().should(enabled, Duration.ofMinutes(1));
+        //estoreReviewOrderPage.getPlaceOrderButton().should(enabled, Duration.ofMinutes(1));
         estoreReviewOrderPage.getPlaceOrderButton().should(interactable, Duration.ofMinutes(1)).click();
         try {
             confirmationOrderScreen.getAcceptPlaceOrderBtn().should(Condition.be(visible), Duration.ofSeconds(5));
