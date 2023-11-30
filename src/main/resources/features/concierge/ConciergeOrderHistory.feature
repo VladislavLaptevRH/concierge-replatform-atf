@@ -178,7 +178,6 @@ Feature:Concierge Order history
 	When I click "RH Orders" button on homepage
 	Then Search Button should be shown disable
 
-	@vlad
 	Scenario: Search with incorrect Last name and correct postal code,verify the search results - No Results
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
