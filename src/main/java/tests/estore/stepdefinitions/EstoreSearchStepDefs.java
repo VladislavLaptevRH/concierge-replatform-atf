@@ -42,15 +42,10 @@ public class EstoreSearchStepDefs {
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
         estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
         generalStepDefs.waitForJSandJQueryToLoad();
-
-
         estoreUserAccountPage.getSearchItemField().sendKeys(arg0);
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getSearchItemField().click();
         estoreUserAccountPage.getSearchItemField().sendKeys(Keys.ENTER);
-
-//        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
-//        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click(ClickOptions.usingJavaScript());
     }
 
     @Then("I verify that search result {string} for search product via product name is displayed")
