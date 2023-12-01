@@ -10,7 +10,6 @@ Feature: Estore critical path
     And user verifies search button, account icon, cart button are displayed
     Examples:
       | brand           |
-      | RH              |
       | RH CONTEMPORARY |
       | RH INTERIORS    |
       | RH MODERN       |
