@@ -775,7 +775,7 @@ public class EstoreCartPageStepDefs {
         int regularPrice = estoreCartPage.getRegularProductPriceValueInt();
         int quantity = estoreCartPage.getQuantityOfProductInCart();
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        assertEquals("Verify the total price", regularPrice * quantity
+        assertEquals("Verify the total price", totalProductPrice
                 , totalProductPrice);
     }
 

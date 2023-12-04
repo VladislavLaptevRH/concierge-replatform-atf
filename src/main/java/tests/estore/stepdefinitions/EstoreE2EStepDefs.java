@@ -77,7 +77,8 @@ public class EstoreE2EStepDefs {
 
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
-        estoreItemPage.getAddToCartButton().shouldBe(visible).click(ClickOptions.usingJavaScript());
+        //estoreItemPage.getAddToCartButton().shouldBe(visible).click(ClickOptions.usingJavaScript());
+        estoreItemPage.getAddToCartButton().click();
         with().pollInterval(6, SECONDS).await().until(() -> true);
     }
 

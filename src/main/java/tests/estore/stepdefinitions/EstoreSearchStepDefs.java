@@ -127,7 +127,6 @@ public class EstoreSearchStepDefs {
     public void iSelectHighToLowForEstore() {
         estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
         estorePDPScreen.getSortByButton().click();
-
         estorePDPScreen.getPriceHighToLow().should(visible, Duration.ofSeconds(20));
         estorePDPScreen.getPriceHighToLow().click();
     }

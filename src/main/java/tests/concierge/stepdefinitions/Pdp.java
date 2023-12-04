@@ -261,6 +261,7 @@ public class Pdp {
                 pdpScreen.getSecondProductImage().shouldNot(visible, Duration.ofSeconds(15));
                 break;
             case  "close the Zoom in Module":
+                with().pollInterval(2, SECONDS).await().until(() -> true);
                 pdpScreen.getRightSideImageCarouselModuleCloseButton().click();
                 pdpScreen.getRightSideImageCarousel().shouldNotBe(visible, Duration.ofSeconds(15));
                 break;
