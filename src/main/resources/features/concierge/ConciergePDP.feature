@@ -1403,12 +1403,11 @@ Feature: Concierge PDP
     Then I chose the '1' line item selections one by one
     Then Updated availability message should be displayed after changing the postal code based on inventory
 
-#    @vlad
-#  Scenario: Special order items, SPO Popup
-#    Given I log into Concierge as "associate"
-#    When I choose country for concierge from footer
-#    When I remove all items from cart via UI
-#    When I go to item "10110124 BWMR" from search field
-#    Then I Verify that 'item title' is present
-#    Then I chose the '1' line item selections one by one
-#    Then User should be able to see Availability, Delivery, Return info at line level
+  Scenario: Special order items, SPO Popup
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "10110124 BWMR" from search field
+    Then I Verify that 'item title' is present
+    Then I chose the '2' line item selections one by one even if options were chosen
+    Then User should be able to see Availability, Delivery, Return info at line level
