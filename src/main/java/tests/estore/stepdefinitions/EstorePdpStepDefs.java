@@ -379,15 +379,12 @@ public class EstorePdpStepDefs {
     @Then("I verify that user is able to add line item separately for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyThatUserIsAbleToAddLineItemSeparatelyForProduct(String productID, String arg1, String selectedOptions, String country) {
         String lineTimeId = estorePdpPageScreen.getLineItemId().getText();
-        String itemIt = lineTimeId.split("# ")[1];
+        String itemIt = lineTimeId.split(" ")[1];
+        estorePdpPageScreen.getAddToCartBtn().should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getAddToCartBtn().click();
         estorePdpPageScreen.getItemAddedInCarMsg().should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getViewCartBtn().click();
-        $(By.xpath("//p[text()='" + itemIt + "']")).should(visible, Duration.ofSeconds(30));
-        Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
-        selectSize.selectByIndex(2);
-        Select selectColor = new Select(estorePdpPageScreen.getColorOption());
-        selectColor.selectByIndex(2);
+        $(By.xpath("//p[contains(text(),'" + itemIt + "')]")).should(visible, Duration.ofSeconds(30));
     }
 
     @Then("I verify availability delivery and return for product {string} and {string} with {string} for the selected {string} country")
@@ -537,7 +534,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the product price as per the Ship to selection for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceAsPerTheShipToSelectionForProduct(String productID, String arg1, String selectedOptions, String country) {
-        estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));
+//        estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getCountrySelectionBtn().scrollIntoView(true);
         estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getCountrySelectionBtn().click();
@@ -548,7 +545,9 @@ public class EstorePdpStepDefs {
         Assert.assertTrue(estorePdpPageScreen.getHeroImageMemberPrice().shouldBe(visible, Duration.ofSeconds(15)).isDisplayed());
         Assert.assertTrue(estorePdpPageScreen.getHeroImageRegularPrice().shouldBe(visible, Duration.ofSeconds(15)).isDisplayed());
         estorePdpPageScreen.getInStockOptionsButton().click();
-        estorePdpPageScreen.getPostalCodeInput().sendKeys("W1S 3ES");
+        estorePdpPageScreen.getPostalCodeInStock().shouldBe(visible, Duration.ofSeconds(15));
+        estorePdpPageScreen.getPostalCodeInStock().click();
+        estorePdpPageScreen.getPostalCodeInput().sendKeys("PO16 7GZ");
         estorePdpPageScreen.getPostalCodeSubmitBtn().click();
         estorePdpPageScreen.getViewStockMsg().shouldBe(visible, Duration.ofSeconds(15));
         estorePdpPageScreen.getAvailableItemMsg().shouldBe(visible, Duration.ofSeconds(15));
