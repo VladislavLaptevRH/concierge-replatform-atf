@@ -23,9 +23,9 @@ public class EstorePDPScreen {
 
     private final SelenideElement firstMemberPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
 
-    private final SelenideElement addToCartActiveButton = $(By.xpath("(//*[text()='Add To Cart'])[1]"));
+    private final SelenideElement addToCartActiveButton = $(By.xpath("(//*[text()='Add to Cart'])[1]"));
 
-    private final SelenideElement addToCartInactiveButton = $(By.xpath("(//*[text()='Add To Cart'])[2]"));
+    private final SelenideElement addToCartInactiveButton = $(By.xpath("(//*[text()='Add to Cart'])[2]"));
 
     private final SelenideElement sortButton = $(By.xpath("(//*[contains(text(),'sort')])[2]"));
 

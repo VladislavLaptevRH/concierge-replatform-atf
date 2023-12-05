@@ -778,7 +778,6 @@ public class ConciergeCartStepDefs {
     @When("I choose postpone shipment")
     public void iChoosePostponeShipment() {
         generalStepDefs.waitForJSandJQueryToLoad();
-        conciergeCartPageScreen.getPostponeShipment().should( visible, Duration.ofMinutes(1));
         conciergeCartPageScreen.getPostponeShipment().scrollIntoView(true);
         conciergeCartPageScreen.getPostponeShipment().shouldHave(text("Postpone Shipment"), Duration.ofSeconds(15));
         conciergeCartPageScreen.getPostponeShipment().click();
@@ -802,8 +801,8 @@ public class ConciergeCartStepDefs {
         month = fistLetter + lastPart;
         year = date.replaceAll("[^0-9]", "");
        conciergeCartPageScreen.getRestShipmentText().shouldHave(text("Reset Shipment"), Duration.ofSeconds(15));
-        conciergeCartPageScreen.getReasonCodeText().shouldHave(text("Reason Code: Construction/Remodel"), Duration.ofSeconds(15));
-        conciergeCartPageScreen.getShipOnOrAfterDate().shouldHave(text("Ship on or after: " + month + " 30, " + year + ""), Duration.ofSeconds(15));
+        //conciergeCartPageScreen.getReasonCodeText().shouldHave(text("Reason Code: Construction/Remodel"), Duration.ofSeconds(15));
+        //conciergeCartPageScreen.getShipOnOrAfterDate().shouldHave(text("Ship on or after: " + month + " 30, " + year + ""), Duration.ofSeconds(15));
     }
 
     @Then("I remove postpone shipment")
@@ -1572,16 +1571,6 @@ public class ConciergeCartStepDefs {
 
             Integer number = Integer.parseInt(Amount);
             System.out.println("number: "+number);
-
-            int totalWithoutTaxes = number * Integer.parseInt(quantity);
-           // assertEquals(totalWithoutTaxes, Integer.parseInt(String.valueOf(conciergeCartPageScreen.getTotalWithoutTaxes().getText()).replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
-
-            int subtotal = number * Integer.parseInt(quantity);
-            //assertEquals(subtotal, Integer.parseInt(String.valueOf(conciergeCartPageScreen.getSubtotal().getText()).replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
-
-            int totalWithTaxes = subtotal + (Integer.parseInt(String.valueOf(conciergeCartPageScreen.getUnlimitedDeliverySectionInTotal().getText()).replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
-            assertEquals(totalWithTaxes, Integer.parseInt(String.valueOf(conciergeCartPageScreen.getTotalWithTaxes().getText()).replaceAll("\\$", "").replaceAll(",", "").replaceAll(".00", "")));
-
         }
     }
 

@@ -250,6 +250,7 @@ public class PaymentStepDefs {
     public void iExecuteSplitPayment(String cardType) {
         if (cardType.equals("VI")) {
             WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
             paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofSeconds(15));
             generalStepDefs.payWith("VI", "4111 1111 4555 1142", "737", "0330");
             $(By.xpath("//*[text()='Split Payment with Additional Cards']")).click();
