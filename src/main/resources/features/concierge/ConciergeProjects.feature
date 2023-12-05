@@ -17,7 +17,6 @@ Feature: Concierge Project
 #      | SPO In stock Items |
 #      | BO                |
 
-  @vlad
   Scenario: Verify the Projects load for a logged in associate for all regions (US,CAD and UK)
     Given I log into Concierge as "associate"
     When I choose "US" country
@@ -576,7 +575,6 @@ Feature: Concierge Project
     When I click on view all button from space dropdown
     Then I verify that items from all spaces are displayed
 
-    @vlad
   Scenario: Verify pagination is working when switching between pages in my projects
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -584,7 +582,6 @@ Feature: Concierge Project
     Then Switch page using pagination
     And User should be able to switch pages using pagination in my projects
 
-    @vlad
   Scenario: Verify Correct brand Name is showing in email estimate for line items
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

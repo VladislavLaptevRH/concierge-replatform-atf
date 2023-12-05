@@ -1,5 +1,6 @@
 package tests.estore.pageObject;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
@@ -256,7 +257,31 @@ public class EstoreCartPage {
 
     private final SelenideElement theThirdSkusBundle = $(By.xpath("//*[text()='70290760 WHCK']"));
 
-    public void verifyThatCartPageIsDisplayed(){
+    private final SelenideElement subtotalWithMemberSavings = $(By.xpath("//*[text()='Subtotal with Member Savings']"));
+
+    private final SelenideElement joinTheRhMembersProgram = $(By.xpath("//*[text()='Join the RH Members Program']"));
+
+    private final SelenideElement saveOnjoinTheRhMembersProgram = $(By.xpath("//*[text()='and you can save']"));
+
+    private final SelenideElement standardDeliveryShipping = $(By.xpath("//*[text()='Standard Delivery Shipping']"));
+
+    private final SelenideElement mattressRecyclingFee = $(By.xpath("//*[text()='mattress recycling fee']"));
+
+    private final SelenideElement toBeCollectedAtCheckout = $(By.xpath("//*[text()=' to be collected at checkout.']"));
+
+    private final SelenideElement deliverItemOption = $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between')]"));
+
+    private final SelenideElement deliveryItemMessage = $(By.xpath("//*[contains(text(),'This item will be ready for delivery between')]"));
+
+    private final SelenideElement theSecondDeliverItemOption = $(By.xpath("(//*[contains(text(),'This item is special order and will be ready for delivery between')])[2]"));
+
+    private final SelenideElement cartIconHeader = $(By.xpath("//a[@id='container-rhrHeader_cart-btn']"));
+
+    public void clickToCartIconHeader() {
+        cartIconHeader.should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
+
+    public void verifyThatCartPageIsDisplayed() {
         assertTrue(Hooks.getCurrentUrl().contains("shopping_cart"));
     }
 

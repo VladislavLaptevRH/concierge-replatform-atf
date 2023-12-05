@@ -1,5 +1,6 @@
 package tests.estore.stepdefinitions;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -122,8 +123,8 @@ public class EstorePgStepDefs {
 
     @When("I navigate to any estore fusion PG")
     public void iNavigateToAnyEstoreFusionPG() {
-        estorePGScreen.getListOfPgFusionElements().get(0).should(visible, Duration.ofSeconds(20));
-        estorePGScreen.getListOfPgFusionElements().get(0).click();
+        estorePGScreen.getListOfPgFusionElement().should(visible, Duration.ofSeconds(12));
+        estorePGScreen.getListOfPgFusionElement().click();
     }
 
     @Then("I verify page with previous filter applied")
@@ -499,5 +500,16 @@ public class EstorePgStepDefs {
         estorePGScreen.verifyThatSortByButtonFeaturedIsDisplayed();
         estorePDPScreen.getPriceLowToHigh().should(visible, Duration.ofSeconds(20));
         estorePDPScreen.getPriceHighToLow().should(visible, Duration.ofSeconds(20));
+    }
+
+    @When("I click on {int}x{int} grid view on PG")
+    public void iClickOnXGridViewOnPG(int arg0, int arg1) {
+        estorePGScreen.getX2gridView().should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
+
+    @Then("I verify that user is able to view recently selected {int}x{int} grid view on PG page")
+    public void iVerifyThatUserIsAbleToViewRecentlySelectedXGridViewOnPGPage(int arg0, int arg1) {
+        estorePGScreen.getGridView2().should(visible,Duration.ofSeconds(12));
+
     }
 }

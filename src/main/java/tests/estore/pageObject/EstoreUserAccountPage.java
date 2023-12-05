@@ -143,7 +143,9 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement orderDetailsButton = $(By.xpath("//*[text()='Order details']"));
 
-    private final SelenideElement searchItemField = $(By.xpath("//input[@type = 'text']"));
+    private final SelenideElement searchItemField = $(By.xpath("(//input[@type = 'text'])[1]"));
+
+    private final SelenideElement searchItemFieldHomePage = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[1]//input"));
 
     private final SelenideElement searchButton = $(By.xpath("//*[text()='Search']"));
 
@@ -300,6 +302,11 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement confirmSignOutButton = $(By.xpath("//button[contains(@class,'MuiButton-containedPrimary')]"));
 
+    private final SelenideElement registerButton = $(By.xpath("//span[text()='Register']"));
+
+    public void clickToRegisterButton() {
+        registerButton.should(visible).click(ClickOptions.usingJavaScript());
+    }
 
     public void clickToSignOutButton() {
         signOutButton.shouldBe(interactable).click(ClickOptions.usingJavaScript());

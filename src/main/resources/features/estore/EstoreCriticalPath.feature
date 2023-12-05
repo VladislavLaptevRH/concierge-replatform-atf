@@ -10,7 +10,6 @@ Feature: Estore critical path
     And user verifies search button, account icon, cart button are displayed
     Examples:
       | brand           |
-      | RH              |
       | RH CONTEMPORARY |
       | RH INTERIORS    |
       | RH MODERN       |
@@ -462,7 +461,7 @@ Feature: Estore critical path
     Then I verify that gift card balance info is displayed for estore
 
 #Verify the cart updates, remove line, add to wish lsit, update qty, add membership
-
+#Verify the qty updates and pricing update for line item and Summary
   Scenario: Cart - Verify that user is able to add multiple item to cart, total price is correct
     Given I log into eStore as "nonmember" user
     When I choose country for eStore from footer

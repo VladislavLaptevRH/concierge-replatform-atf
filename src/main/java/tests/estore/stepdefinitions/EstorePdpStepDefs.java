@@ -189,6 +189,7 @@ public class EstorePdpStepDefs {
             estorePdpPageScreen.getSubmitPostalCode().click();
             estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
         }
+
     }
 
     @Then("I add quantity and add to cart In-stock options")
@@ -845,6 +846,46 @@ public class EstorePdpStepDefs {
         assertTrue("PDP page url contains sale=true", Hooks.getCurrentUrl().contains("sale=true"));
     }
 
+    @When("I introduce {string} postal code on pdp page")
+    public void iIntroducePostalCodeOnPdpPage(String postalCode, String country) {
+        estorePdpPageScreen.getPostalCodePdp().should(visible, Duration.ofSeconds(25));
+        estorePdpPageScreen.getPostalCodePdp().scrollIntoView(true);
+        estorePdpPageScreen.getPostalCodePdp().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20)).click();
+        $(By.xpath("//input[@id='postal-code-international']")).clear();
+        $(By.xpath("//input[@id='postal-code-international']")).setValue("Y1A 9Z9");
+        estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getSubmitPostalCode().click();
+        estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
+        WebDriverRunner.getWebDriver().navigate().refresh();
+
+    }
+
+    @When("I introduce {string} postal code for {string} on pdp page")
+    public void iIntroducePostalCodeForOnPdpPage(String zipcode, String country) {
+        estorePdpPageScreen.getPostalCodePdp().should(visible, Duration.ofSeconds(25));
+        estorePdpPageScreen.getPostalCodePdp().scrollIntoView(true);
+        estorePdpPageScreen.getPostalCodePdp().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        $(By.xpath("//div[@id='country-zipcode-selection']")).should(visible, Duration.ofSeconds(20)).click();
+
+        $(By.xpath("//li[@data-value='" + country + "']")).should(visible, Duration.ofSeconds(20)).click();
+        $(By.xpath("//input[@id='postal-code-international']")).clear();
+        $(By.xpath("//input[@id='postal-code-international']")).setValue(zipcode);
+        estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getSubmitPostalCode().click();
+        if (country.equals("CAN")) {
+            estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
+        }
+    }
+
+    @Then("I verify SPO item - availability and return message")
+    public void iVerifySPOItemAvailabilityAndReturnMessage() {
+        estorePDPScreen.getSpOcanNotBeReturnedMesssage().should(visible, Duration.ofSeconds(12));
+        estoreCartPage.getDeliverItemOption().should(visible, Duration.ofSeconds(12));
+    }
 }
 
 

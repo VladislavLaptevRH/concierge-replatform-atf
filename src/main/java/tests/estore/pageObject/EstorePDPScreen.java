@@ -95,6 +95,8 @@ public class EstorePDPScreen {
 
     private final SelenideElement firstLineItemRegularPrice = $(By.xpath("(//*[@id='rh-price-range-display']//*[@data-testid='price-for-regular'])[2]"));
 
+    private final SelenideElement spOcanNotBeReturnedMesssage = $(By.xpath("//*[contains(text(),'This item is special order and cannot be returned.')]"));
+
     public int getRegularFirstLineItemPricePDP() {
         return Integer.parseInt(firstLineItemRegularPrice.getText().replaceAll("\\$", "").replaceAll("\\,", ""));
     }

@@ -344,4 +344,14 @@ public class EstoreSaleStepDefs {
     public void iClickOnLengthButton() {
         estorePGScreen.getLengthFilterOption().should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
     }
+
+    @When("I click on SALE in Secondary NAV from Textiles")
+    public void iClickOnSALEInSecondaryNAVFromTextiles() {
+        estoreHomePage.getSaleNaveBed().should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
+
+    @When("I click on Bedding Collections in Tertiary NAV from SALE")
+    public void iClickOnBeddingCollectionsInTertiaryNAVFromSALE() {
+        estoreHomePage.getTextilesBeddingCollections().should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
 }

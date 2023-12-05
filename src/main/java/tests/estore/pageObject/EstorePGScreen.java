@@ -20,6 +20,8 @@ public class EstorePGScreen {
 
     private final SelenideElement sofa = $(By.xpath("//*[text()='sofa']"));
 
+    private final SelenideElement x2gridView = $(By.xpath("//*[contains(@class, 'MuiSvgIcon-root') and @column='2']"));
+
     private final SelenideElement gridView3 = $(By.xpath("(//div[contains(@class,'MuiGrid-grid-xs-4')])[1]"));
 
     private final SelenideElement gridView2 = $(By.xpath("(//div[contains(@class,'MuiGrid-grid-xs-6')])[4]"));
@@ -83,6 +85,8 @@ public class EstorePGScreen {
     private final SelenideElement thumbalImg = $(By.xpath("//img[contains(@alt,'prod')]"));
 
     private final List<SelenideElement> listOfPgFusionElements = $$(By.xpath("//*[@id='component-rh-image_wrapper']"));
+
+    private final SelenideElement listOfPgFusionElement = $(By.xpath("(//div[@id='component-rh-image_wrapper']//div)[2]"));
 
     private final SelenideElement livingCategory = $(By.xpath("//*[@data-navigation-account-item-id='cat160024']"));
 

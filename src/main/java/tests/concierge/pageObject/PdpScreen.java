@@ -228,6 +228,7 @@ public class PdpScreen {
 
     private final ElementsCollection kitItems = $$(By.xpath("(//p[contains(text() , 'Touch-Up Kit')])[1]/../../../../../../..//select[contains(@id ,'prod')]"));
     private final SelenideElement configureDeliveryInformation = $(By.xpath("//*[text() = 'Configure this item to view delivery information']"));
+    private final SelenideElement configureDeliveryInformationSPO = $(By.xpath("//*[text() = 'This item is special order and will be ready for delivery between']"));
     private final SelenideElement yamlCarouselMenuRightArrow = $(By.xpath("(//*[text() = 'YOU MIGHT ALSO LIKE']/..//ul/div/div)[3]"));
     private final ElementsCollection rightSideImageCarouselArrows = $$(By.xpath("//*[@class= 'slick-slider slick-vertical slick-initialized']//*[contains(@class, 'arrow-icon')]"));
     private final SelenideElement swatchText = $(By.xpath("//a/*[contains(text(), 'Swatch')]"));
@@ -263,6 +264,8 @@ public class PdpScreen {
     private final SelenideElement upholsterySwatch = $(By.xpath("//p[contains(text(), 'Upholstery Swatch')]"));
 
     private final SelenideElement itemTitle = $(By.xpath("(//*[contains(@class, 'MuiTypography-root MuiTypography')]/..)[1]"));
+
+    private final SelenideElement pdpTextBelowHeroImage = $(By.xpath(" (//*[@id = 'component-hero-image']/..//span)[2]"));
 
     private final SelenideElement deliveryInformation = $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'will be ready for delivery between')]"));
 
@@ -408,6 +411,8 @@ public class PdpScreen {
     private final SelenideElement dimensionSection = $(By.xpath("//*[text() = 'DIMENSIONS']"));
 
     private final SelenideElement detailsSection = $(By.xpath("//*[text() = 'DETAILS']"));
+
+    private final SelenideElement detailsSectionLoverCase = $(By.xpath("//*[text() = 'Details']"));
 
     private final SelenideElement leatherCare = $(By.xpath("//*[text() = 'Leather Care']"));
     private final SelenideElement fabricCare = $(By.xpath("//*[text() = 'Fabric Care']"));

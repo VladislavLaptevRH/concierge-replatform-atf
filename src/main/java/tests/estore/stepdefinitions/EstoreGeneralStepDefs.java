@@ -478,8 +478,8 @@ public class EstoreGeneralStepDefs {
                 "        \"lineItemsInput\": {\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
-                "                    \"productId\": \"prod2020027\",\n" +
-                "                    \"sku\": \"17050044 JNPR\",\n" +
+                "                    \"productId\": \"prod13800635\",\n" +
+                "                    \"sku\": \"17050042 FOG\",\n" +
                 "                    \"fusionId\": \"iXzwEtMB1A~prod14280121~search\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"brand\": \"RH\",\n" +

@@ -113,7 +113,7 @@ public class EstoreSaleScreen {
 
     private SelenideElement textilesBathTowels = $(By.xpath("//*[text()='Bath Towels']"));
 
-    private SelenideElement rugsAllRugs = $(By.xpath("//*[text()='All Rugs']"));
+    private SelenideElement rugsAllRugs = $(By.xpath("(//*[text()='All Rugs'])[4]"));
 
     private SelenideElement rugsNeutralRugs = $(By.xpath("//*[text()='Neutral Rugs']"));
 

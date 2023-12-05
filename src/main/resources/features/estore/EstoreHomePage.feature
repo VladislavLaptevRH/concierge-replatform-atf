@@ -82,7 +82,7 @@ Feature: Estore Homepage
     When I choose country for eStore from footer
     Then I verify that home page load will all sections and links
 
-  Scenario: Verify the footer section.
+  Scenario: Verify the copyright icon and year
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
     Then I verify that footer section should show at the bottom of the page along with copy right and year
