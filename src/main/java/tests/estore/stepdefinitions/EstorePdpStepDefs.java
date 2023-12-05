@@ -58,8 +58,8 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that user can see product details correctly mentioned for a product")
     public void iVerifyThatUserCanSeeProductDetailsCorrectlyMentionedForAProduct() {
-        $(By.xpath("//*[text()='DETAILS']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='DETAILS']")).click();
+        $(By.xpath("//*[text()='Details']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Details']")).click();
         $(By.xpath("//*[text()='Loomed to a rich 802 grams per square meter']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Made of the finest 100% cotton terry cloth from Turkey']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Bath sheets and towels are luxuriously oversized for enveloping comfort']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
@@ -239,7 +239,7 @@ public class EstorePdpStepDefs {
         Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
         selectSize.selectByIndex(2);
 
-        estorePdpPageScreen.getSkuIdValue().shouldHave(text("Item# 17050042 EUCY"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getSkuIdValue().shouldHave(text("Item 17050043 BRNZ"), Duration.ofSeconds(30));
     }
 
     @Then("I verify that PDP screen is displayed")

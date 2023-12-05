@@ -37,7 +37,7 @@ public class EstorePdpPageScreen {
 
     private final SelenideElement inStockOptionsButton = $(By.xpath("//*[text()='In-Stock Options']"));
 
-    private final SelenideElement inStockTitle = $(By.xpath("//*[text()='IN STOCK']"));
+    private final SelenideElement inStockTitle = $(By.xpath("//*[text()='In Stock']"));
 
     private SelenideElement turkishTowelCollectionTitle = $(By.xpath("(//*[text()='802-Gram Turkish Towel Collection'])[3]"));
 
@@ -47,9 +47,9 @@ public class EstorePdpPageScreen {
 
     private SelenideElement colorInStockOption = $(By.xpath("(//*[text()='Color'])[7]"));
 
-    private SelenideElement detailsButton = $(By.xpath("//*[text()='DETAILS']"));
+    private SelenideElement detailsButton = $(By.xpath("//*[text()='Details']"));
 
-    private SelenideElement dimensionsButton = $(By.xpath("//*[text()='DIMENSIONS']"));
+    private SelenideElement dimensionsButton = $(By.xpath("//*[text()='Dimensions']"));
 
     private SelenideElement postalCodeButton = $(By.xpath("//*[@id='component-order-summary']//span"));
 
