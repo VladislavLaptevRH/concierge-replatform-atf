@@ -886,6 +886,11 @@ public class EstorePdpStepDefs {
         estorePDPScreen.getSpOcanNotBeReturnedMesssage().should(visible, Duration.ofSeconds(12));
         estoreCartPage.getDeliverItemOption().should(visible, Duration.ofSeconds(12));
     }
+
+    @Then("I verify that postal code should be equal to {int}")
+    public void iVerifyThatPostalCodeShouldBeEqualTo(int postalCode) {
+        estoreCartPage.getPostalCode20901().should(visible,Duration.ofSeconds(12));
+    }
 }
 
 

@@ -277,6 +277,10 @@ public class EstoreCartPage {
 
     private final SelenideElement cartIconHeader = $(By.xpath("//a[@id='container-rhrHeader_cart-btn']"));
 
+    private final SelenideElement groupShipping3to7daysMessage = $(By.xpath("//*[text()='Ground shipping will arrive in 3 to 7 business days if received by noon ET (Mon-Fri). Items are not delivered on weekends or holidays.']"));
+
+    private final SelenideElement postalCode20901 = $(By.xpath("//*[text()='20901.']"));
+
     public void clickToCartIconHeader() {
         cartIconHeader.should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
     }

@@ -584,6 +584,7 @@ public class EstoreCartPageStepDefs {
 //        WebDriverRunner.getWebDriver().navigate().refresh();
     }
 
+
     @When("I goes to estore cart for estore")
     public void iGoesToEstoreCartForEstore() {
         if ((Hooks.cookie.contains("userservice")) && (Hooks.profile.equals("stg2"))) {
@@ -938,5 +939,10 @@ public class EstoreCartPageStepDefs {
     @When("I click on estore cart icon from header")
     public void iClickOnEstoreCartIconFromHeader() {
         estoreCartPage.clickToCartIconHeader();
+    }
+
+    @Then("I verify that group shipping message is displayed")
+    public void iVerifyThatGroupShippingMessageIsDisplayed() {
+        estoreCartPage.getGroupShipping3to7daysMessage().should(visible, Duration.ofSeconds(12));
     }
 }

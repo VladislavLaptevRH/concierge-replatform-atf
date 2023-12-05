@@ -2,6 +2,7 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -177,7 +178,7 @@ public class EstoreAddressStepDefs {
     @When("I fill estore shipping address")
     public void iFillEstoreShippingAndShippingAddress() {
         with().pollInterval(4, SECONDS).await().until(() -> true);
-        if(estoreAddressScreen.getShippingAddressFirstName().isDisplayed()) {
+        if (estoreAddressScreen.getShippingAddressFirstName().isDisplayed()) {
             estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
             generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
             estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
@@ -197,8 +198,7 @@ public class EstoreAddressStepDefs {
             estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
             estoreAddressScreen.getShippingAddressPhone().shouldHave(value("309-793-1846"), Duration.ofSeconds(15));
             with().pollInterval(4, SECONDS).await().until(() -> true);
-        }
-        else{
+        } else {
             with().pollInterval(4, SECONDS).await().until(() -> true);
         }
     }
@@ -553,7 +553,7 @@ public class EstoreAddressStepDefs {
 
     @And("I verify billing and shipping address are correct")
     public void iVerifyBillingAndShippingAddressAreCorrect() {
-        if(estoreAddressScreen.getOrderDetails().isDisplayed()){
+        if (estoreAddressScreen.getOrderDetails().isDisplayed()) {
             estoreAddressScreen.getOrderDetails().click();
         }
         estoreAddressScreen.getShippingAddressTitle().should(visible, Duration.ofSeconds(20));
@@ -625,5 +625,28 @@ public class EstoreAddressStepDefs {
     @When("I fill the order description field message {string} on address page")
     public void iFillTheOrderDescriptionFieldMessageOnAddressPage(String message) {
         estoreAddressScreen.introduceOrderDescriptionMessage(message);
+    }
+
+    @When("select {string} country for estore billing address")
+    public void selectCountryForEstoreBillingAddress(String country) {
+        estoreAddressScreen.getSelectBillingAddressCountry().should(visible, Duration.ofSeconds(12));
+        Select selectBillingAddressCountry = new Select(estoreAddressScreen.getSelectBillingAddressCountry());
+        selectBillingAddressCountry.selectByValue(country);
+    }
+
+    @Then("I verify that {string} country was selected")
+    public void iVerifyThatCountryWasSelected(String country) {
+        estoreAddressScreen.getAfghanistanCountry().should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that I'm able to see previously added Bill to and Ship to address")
+    public void iVerifyThatIMAbleToSeePreviouslyAddedBillToAndShipToAddress() {
+        estoreAddressScreen.getSafireAddress().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I navigate back from Payment page on eStore")
+    public void iNavigateBackFromPaymentPageOnEStore() {
+        estorePaymentPage.getSelectPaymentType().should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
+        WebDriverRunner.getWebDriver().navigate().back();
     }
 }
