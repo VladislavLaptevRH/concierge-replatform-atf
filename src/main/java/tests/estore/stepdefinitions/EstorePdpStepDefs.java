@@ -547,11 +547,13 @@ public class EstorePdpStepDefs {
         estorePdpPageScreen.getInStockOptionsButton().click();
         estorePdpPageScreen.getPostalCodeInStock().shouldBe(visible, Duration.ofSeconds(15));
         estorePdpPageScreen.getPostalCodeInStock().click();
-        estorePdpPageScreen.getPostalCodeInput().sendKeys("PO16 7GZ");
+        estorePdpPageScreen.getCountryZipCodeSelection().click();
+        estorePdpPageScreen.getCountyCode().click();
+        estorePdpPageScreen.getPostalCodeInput().sendKeys("HP4 1QR");
         estorePdpPageScreen.getPostalCodeSubmitBtn().click();
+        estorePdpPageScreen.getConfirmChangeButton().click();
         estorePdpPageScreen.getViewStockMsg().shouldBe(visible, Duration.ofSeconds(15));
         estorePdpPageScreen.getAvailableItemMsg().shouldBe(visible, Duration.ofSeconds(15));
-        estorePdpPageScreen.getHeroImageCloseIcon().click();
     }
 
     @Then("I verify the line item price for Combined Frame and Cushion for product {string} and {string} with {string} for the selected {string} country")
