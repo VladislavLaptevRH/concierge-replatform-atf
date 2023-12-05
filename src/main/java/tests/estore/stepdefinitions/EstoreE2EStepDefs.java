@@ -527,6 +527,7 @@ public class EstoreE2EStepDefs {
 
     @When("I click on same as estore shipping address checkbox")
     public void iClickOnSameAsShippingAddressCheckbox() {
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if (estoreAddressScreen.getSameAsShippingAddress().is(visible)) {
             estoreAddressScreen.getSameAsShippingAddress().should(Condition.and("Exist ,appear, interactable",
                     exist, appear, interactable), Duration.ofSeconds(15));
