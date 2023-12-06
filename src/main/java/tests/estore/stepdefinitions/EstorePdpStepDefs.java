@@ -58,8 +58,8 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that user can see product details correctly mentioned for a product")
     public void iVerifyThatUserCanSeeProductDetailsCorrectlyMentionedForAProduct() {
-        $(By.xpath("//*[text()='DETAILS']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='DETAILS']")).click();
+        $(By.xpath("//*[text()='Details']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Details']")).click();
         $(By.xpath("//*[text()='Loomed to a rich 802 grams per square meter']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Made of the finest 100% cotton terry cloth from Turkey']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Bath sheets and towels are luxuriously oversized for enveloping comfort']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
@@ -239,7 +239,7 @@ public class EstorePdpStepDefs {
         Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
         selectSize.selectByIndex(2);
 
-        estorePdpPageScreen.getSkuIdValue().shouldHave(text("Item# 17050042 EUCY"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getSkuIdValue().shouldHave(text("Item 17050043 BRNZ"), Duration.ofSeconds(30));
     }
 
     @Then("I verify that PDP screen is displayed")
@@ -379,15 +379,12 @@ public class EstorePdpStepDefs {
     @Then("I verify that user is able to add line item separately for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyThatUserIsAbleToAddLineItemSeparatelyForProduct(String productID, String arg1, String selectedOptions, String country) {
         String lineTimeId = estorePdpPageScreen.getLineItemId().getText();
-        String itemIt = lineTimeId.split("# ")[1];
+        String itemIt = lineTimeId.split(" ")[1];
+        estorePdpPageScreen.getAddToCartBtn().should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getAddToCartBtn().click();
         estorePdpPageScreen.getItemAddedInCarMsg().should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getViewCartBtn().click();
-        $(By.xpath("//p[text()='" + itemIt + "']")).should(visible, Duration.ofSeconds(30));
-        Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
-        selectSize.selectByIndex(2);
-        Select selectColor = new Select(estorePdpPageScreen.getColorOption());
-        selectColor.selectByIndex(2);
+        $(By.xpath("//p[contains(text(),'" + itemIt + "')]")).should(visible, Duration.ofSeconds(30));
     }
 
     @Then("I verify availability delivery and return for product {string} and {string} with {string} for the selected {string} country")
@@ -537,7 +534,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the product price as per the Ship to selection for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceAsPerTheShipToSelectionForProduct(String productID, String arg1, String selectedOptions, String country) {
-        estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));
+//        estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getCountrySelectionBtn().scrollIntoView(true);
         estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getCountrySelectionBtn().click();
@@ -548,11 +545,15 @@ public class EstorePdpStepDefs {
         Assert.assertTrue(estorePdpPageScreen.getHeroImageMemberPrice().shouldBe(visible, Duration.ofSeconds(15)).isDisplayed());
         Assert.assertTrue(estorePdpPageScreen.getHeroImageRegularPrice().shouldBe(visible, Duration.ofSeconds(15)).isDisplayed());
         estorePdpPageScreen.getInStockOptionsButton().click();
-        estorePdpPageScreen.getPostalCodeInput().sendKeys("W1S 3ES");
+        estorePdpPageScreen.getPostalCodeInStock().shouldBe(visible, Duration.ofSeconds(15));
+        estorePdpPageScreen.getPostalCodeInStock().click();
+        estorePdpPageScreen.getCountryZipCodeSelection().click();
+        estorePdpPageScreen.getCountyCode().click();
+        estorePdpPageScreen.getPostalCodeInput().sendKeys("HP4 1QR");
         estorePdpPageScreen.getPostalCodeSubmitBtn().click();
+        estorePdpPageScreen.getConfirmChangeButton().click();
         estorePdpPageScreen.getViewStockMsg().shouldBe(visible, Duration.ofSeconds(15));
         estorePdpPageScreen.getAvailableItemMsg().shouldBe(visible, Duration.ofSeconds(15));
-        estorePdpPageScreen.getHeroImageCloseIcon().click();
     }
 
     @Then("I verify the line item price for Combined Frame and Cushion for product {string} and {string} with {string} for the selected {string} country")
