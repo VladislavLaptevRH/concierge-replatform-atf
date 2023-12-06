@@ -889,7 +889,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that postal code should be equal to {int}")
     public void iVerifyThatPostalCodeShouldBeEqualTo(int postalCode) {
-        estoreCartPage.getPostalCode20901().should(visible,Duration.ofSeconds(12));
+        estoreCartPage.getPostalCode28801().should(visible,Duration.ofSeconds(12));
     }
 }
 

@@ -565,8 +565,8 @@ public class EstoreGeneralStepDefs {
                 "        \"lineItemsInput\": {\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
-                "                    \"productId\": \"prod20360359\",\n" +
-                "                    \"sku\": \"10099912 GLPW\",\n" +
+                "                    \"productId\": \"prod2020027\",\n" +
+                "                    \"sku\": \"17050042 WHEA\",\n" +
                 "                    \"fusionId\": \"iXzwEtMB1A~prod20360359~search\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"brand\": \"RH\",\n" +
@@ -886,4 +886,6 @@ public class EstoreGeneralStepDefs {
             System.out.println("Messasge is not displayed");
         }
     }
+
+
 }

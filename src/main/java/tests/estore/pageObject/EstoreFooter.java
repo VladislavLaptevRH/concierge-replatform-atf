@@ -12,10 +12,13 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class EstoreFooter {
-    public SelenideElement countrySelection = $(By.xpath("//div[@id='country-selection']"));
 
-    public SelenideElement caCountrySelect = $(By.xpath("//li[@data-value='CA']"));
-    public SelenideElement usCountrySelect = $(By.xpath("//li[@data-value='US']"));
+    public SelenideElement countrySelection = $(By.xpath("//img[contains(@src,'asset-library/symbols-and-glyphs/flags')]"));
+
+    public SelenideElement caCountrySelect = $(By.xpath("//*[@data-value='CA']"));
+    public SelenideElement usCountrySelect = $(By.xpath("//*[@data-value='US']"));
+
+    public SelenideElement confirmCountrySelectionBtn = $(By.xpath("//*[text()='CONFIRM']"));
 
     public void clickToCountrySelectionButton() {
         countrySelection.should(Condition.visible, Duration.ofSeconds(12));

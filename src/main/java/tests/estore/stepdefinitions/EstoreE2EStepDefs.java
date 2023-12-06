@@ -595,7 +595,7 @@ public class EstoreE2EStepDefs {
     @When("I open product page with {string} and {string} with {string} for estore")
     public void iOpenProductPageWithAndForEstore(String productId, String skuId, String options) {
         String URL = null;
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
 
         if (Hooks.profile.equals("stg3")) {
             URL = Hooks.eStoreBaseURL + "/us/en/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
@@ -623,7 +623,7 @@ public class EstoreE2EStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @When("I open product page with {string} and {string} for estore")

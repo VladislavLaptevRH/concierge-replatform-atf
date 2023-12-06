@@ -177,30 +177,25 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore shipping address")
     public void iFillEstoreShippingAndShippingAddress() {
-        with().pollInterval(4, SECONDS).await().until(() -> true);
-        if (estoreAddressScreen.getShippingAddressFirstName().isDisplayed()) {
-            estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
-            estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
-            with().pollInterval(4, SECONDS).await().until(() -> true);
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
-            estoreAddressScreen.getShippingAddressLastName1().setValue("William");
-
-            $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).click();
-            generalStepDefs.clearField($(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")));
-            $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).setValue("4524 Ocala Street");
-            with().pollInterval(4, SECONDS).await().until(() -> true);
-            $(By.xpath("//ul[@role='menu']//li[1]")).should(visible, Duration.ofSeconds(10))
-                    .click(ClickOptions.usingJavaScript());
-            estoreAddressScreen.getShippingAddressPhone().click();
-            with().pollInterval(4, SECONDS).await().until(() -> true);
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
-            estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
-            estoreAddressScreen.getShippingAddressPhone().shouldHave(value("309-793-1846"), Duration.ofSeconds(15));
-            with().pollInterval(4, SECONDS).await().until(() -> true);
-        } else {
-            with().pollInterval(4, SECONDS).await().until(() -> true);
-        }
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        estoreAddressScreen.getShippingAddressFirstName().should(interactable, Duration.ofSeconds(12));
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
+        estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
+        estoreAddressScreen.getShippingAddressLastName1().setValue("William");
+        $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).click();
+        generalStepDefs.clearField($(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")));
+        $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).setValue("4524 Ocala Street");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        $(By.xpath("//ul[@role='menu']//li[1]")).should(visible, Duration.ofSeconds(10))
+                .click(ClickOptions.usingJavaScript());
+        estoreAddressScreen.getShippingAddressPhone().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
+        estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
+        estoreAddressScreen.getShippingAddressPhone().shouldHave(value("309-793-1846"), Duration.ofSeconds(12));
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify add a new shipping address option is present")
