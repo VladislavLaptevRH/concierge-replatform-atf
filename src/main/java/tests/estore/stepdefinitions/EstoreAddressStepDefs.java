@@ -184,11 +184,11 @@ public class EstoreAddressStepDefs {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
         estoreAddressScreen.getShippingAddressLastName1().setValue("William");
-        $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).click();
-        generalStepDefs.clearField($(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")));
-        $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).setValue("4524 Ocala Street");
+        estoreAddressScreen.getAddressStreet().click();
+        generalStepDefs.clearField(estoreAddressScreen.getAddressStreet());
+        estoreAddressScreen.getAddressStreet().setValue("4524 Ocala Street");
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        $(By.xpath("//ul[@role='menu']//li[1]")).should(visible, Duration.ofSeconds(10))
+        estoreAddressScreen.getFirstPointFromAddressList().should(visible, Duration.ofSeconds(10))
                 .click(ClickOptions.usingJavaScript());
         estoreAddressScreen.getShippingAddressPhone().click();
         with().pollInterval(2, SECONDS).await().until(() -> true);

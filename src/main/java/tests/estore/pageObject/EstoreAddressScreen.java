@@ -148,6 +148,10 @@ public class EstoreAddressScreen {
 
     private final SelenideElement safireAddress = $(By.xpath("//*[text()='Safire']"));
 
+    private final SelenideElement addressStreet = $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]"));
+
+    private final SelenideElement firstPointFromAddressList = $(By.xpath("//ul[@role='menu']//li[1]"));
+
     public void clickToAddGiftMessageButton() {
         addGiftMessageBtn.should(Condition.interactable,
                 Duration.ofSeconds(15)).click();
