@@ -27,7 +27,7 @@ public class EstoreHomePage {
     private final List<SelenideElement> listOfHamburgeritems = $$(By.xpath("//div[@class= 'MuiGrid-root MuiGrid-item']/ul/li/a/span"));
     private final List<SelenideElement> listOfCollection = $$(By.xpath("(//ul[@class=\"MuiList-root\"])[2]/li"));
 
-    private final SelenideElement searchIcon = $(By.xpath("//span[@class='MuiIconButton-label']"));
+    private final SelenideElement searchIcon = $(By.xpath("(//span[@class='MuiIconButton-label'])[2]"));
     private final SelenideElement hamburgerIcon = $(By.id("hamburgerIcon"));
 
     private final SelenideElement searchIconHomePage = $(By.xpath("(//span[@class='MuiIconButton-label'])[1]"));

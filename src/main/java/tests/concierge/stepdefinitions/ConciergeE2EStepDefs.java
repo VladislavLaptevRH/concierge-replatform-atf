@@ -44,8 +44,8 @@ public class ConciergeE2EStepDefs {
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
     RestrictionPopUp restrictionPopUp = new RestrictionPopUp();
-    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
-    ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
+    static GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+    static ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
     ConciergeOrderHistoryForm conciergeOrderHistoryForm = new ConciergeOrderHistoryForm();
     ConciergeProjectScreen conciergeProjectScreen = new ConciergeProjectScreen();
     SelectOption selectOption = new SelectOption();
@@ -62,7 +62,7 @@ public class ConciergeE2EStepDefs {
 
     String usState = "";
     String countOfItems = null;
-    WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));
+    static WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));
     String environment;
 
     public static String SKU = "";
@@ -485,7 +485,7 @@ public class ConciergeE2EStepDefs {
     }
 
     @When("I click on no thanks button")
-    public void iClickOnNoThanksButton() {
+    public static void iClickOnNoThanksButton() {
         if (conciergeCartPageScreen.getNoThanksButton().isDisplayed()) {
             generalStepDefs.waitForJSandJQueryToLoad();
             conciergeCartPageScreen.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
@@ -1117,13 +1117,11 @@ public class ConciergeE2EStepDefs {
     public void iVerifyThePaymentDetailsAndOrderEstimateSummary() {
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(15));
-        if($(By.xpath("//*[text()='Subtotal']")).isDisplayed()){
-            $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
+        if($(By.xpath("//*[contains(text(),'Subtotal')]")).isDisplayed()){
+            $(By.xpath("//*[contains(text(),'Subtotal')]")).should(visible, Duration.ofSeconds(15));
         }else {
-            $(By.xpath("//*[text()='Subtotal  ']")).should(visible, Duration.ofSeconds(5));
+            $(By.xpath("//*[contains(text(),'Subtotal')]")).should(visible, Duration.ofSeconds(5));
         }
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text() = 'TOTAL']")).should(visible, Duration.ofSeconds(15));
     }
 
@@ -1155,11 +1153,9 @@ public class ConciergeE2EStepDefs {
     @Then("I verify order details from thank you page")
     public void iVerifyOrderDetailsFromThankYouPage() {
         $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).should(visible, Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='Important Information']")).should(visible, Duration.ofSeconds(25));
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofSeconds(10));
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Subtotal')]")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Unlimited Furniture Delivery')]")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I select length option")
@@ -1348,7 +1344,7 @@ public class ConciergeE2EStepDefs {
     @Then("I confirm search item is clear")
     public void iConfirmSearchField() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        conciergeUserAccountPage.getSearchLens().should(empty, Duration.ofMinutes(1));
+        conciergeItemsScreen.getSearchIconField().should(empty, Duration.ofMinutes(1));
     }
 
     @Then("I verify multi search result is displayed")

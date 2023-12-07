@@ -208,7 +208,7 @@ public class ConciergeUserAccountPage {
     private final SelenideElement brandLink = $(By.xpath("//a[@data-testid='brand-link']"));
     private final SelenideElement firstSubMenu = $(By.xpath("//div[@role='tooltip']//descendant::div[contains(@class,'MuiGrid-container')]//child::div[contains(@class,'MuiGrid-root')][1]/ul/li[1]"));
     private final SelenideElement usename = $(By.xpath("//span[text()='Automation Associate']"));
-    private final SelenideElement searchLens = $(By.xpath("//button[contains(@class,'MuiIconButton')]"));
+    private final SelenideElement searchLens = $(By.xpath("(//button[contains(@class,'MuiIconButton')])[2]"));
     private final SelenideElement userIcon = $(By.xpath("//div[@data-analytics-nav='account-icon']"));
     private final SelenideElement pageLabel1 = $(By.xpath("//i[text()='Concierge']"));
     private final SelenideElement pageLabel2 = $(By.xpath("//h1[text()='Dashboard']"));
