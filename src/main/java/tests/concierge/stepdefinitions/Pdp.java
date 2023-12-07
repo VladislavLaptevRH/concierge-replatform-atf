@@ -236,6 +236,7 @@ public class Pdp {
 
     @And("I type item name {string}")
     public void iTypeItemName(String arg0) {
+        pdpScreen.getSearchFieldIcon().click();
         pdpScreen.getSearchFieldInput().setValue(arg0);
         pdpScreen.getSeeAllResultButton().click();
         result = arg0;
@@ -1737,7 +1738,11 @@ public class Pdp {
             public void iRememberTheNameOfTheFirstProductAndRegularMemberPriceInPG() {
                 firstProductNameInPG = conciergeCartPageScreen.getFirstProductNameInPG().getText();
                 regularPriceInPG = conciergeCartPageScreen.getRegularPriceInPG().getText();
-                memberPriceInPG = conciergeCartPageScreen.getMemberPriceInPG().getText().replaceAll("[^0-9_$]", "");
+                if(conciergeCartPageScreen.getMemberPriceInPG().isDisplayed()){
+                    memberPriceInPG = conciergeCartPageScreen.getMemberPriceInPG().getText().replaceAll("[^0-9_$]", "");
+                } else {
+                    memberPriceInPG = conciergeCartPageScreen.getTradePriceInPG().getText().replaceAll("[^0-9_$]", "");
+                }
                 conciergeCartPageScreen.getFirstProductNameInPG().click();
             }
 
@@ -1749,7 +1754,12 @@ public class Pdp {
                 }
                 assertEquals(firstProductNameInPG, pdpScreen.getPdpTitle().getText());
                 assertEquals(regularPriceInPG, conciergeCartPageScreen.getRegularPriceInPG().getText());
-                assertEquals(memberPriceInPG, conciergeCartPageScreen.getMemberPriceInPG().getText().replaceAll(",", ""));
+                if(conciergeCartPageScreen.getMemberPriceInPG().isDisplayed()){
+                    assertEquals(memberPriceInPG, conciergeCartPageScreen.getMemberPriceInPG().getText().replaceAll(",", ""));
+                } else {
+                    assertEquals(memberPriceInPG, conciergeCartPageScreen.getTradePriceInPG().getText().replaceAll(",", ""));
+                }
+
             }
 
             @When("I go to Swatch Landing Page")
