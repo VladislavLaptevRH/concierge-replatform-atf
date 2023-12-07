@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 import tests.concierge.pageObject.*;
 import tests.estore.stepdefinitions.EstoreCartPageStepDefs;
 import tests.utility.Hooks;
-
+import tests.concierge.stepdefinitions.ConciergeE2EStepDefs;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -552,6 +552,7 @@ public class ConciergeCartStepDefs {
                 }
             }
         }
+        ConciergeE2EStepDefs.iClickOnNoThanksButton();
 //        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         paymentScreen.getChoosePaymentMethodBtn().click();
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
