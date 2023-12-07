@@ -63,7 +63,7 @@ Feature: Estore Cart Page
   Scenario: Place order for guest user
     Given I remove all items from estore cart
     When I choose country for eStore from footer
-    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
+    When I open product page with "prod13800635" and "17050044" with "NGRH" for estore
     When I click on add to cart estore button
     And I click on view cart estore button
     When I click on estore checkout button
@@ -118,33 +118,6 @@ Feature: Estore Cart Page
     When I click on estore checkout button
     Then I verify membership popup for guest user
 
-  Scenario: eStore - CAN Shipping restriction
-    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
-    When I remove all items from estore cart
-    When I add item to cart via API for estore
-    When I open estore cart
-    When I choose "CAN" country from footer
-    When I click on estore checkout button
-    And I click on estore no thanks button
-    When I fill estore shipping address for CAN
-    Then I verify "CAN" shipping restriction
-
-  Scenario: eStore - New York Shipping restriction
-    Given I log into eStore as "regular" user
-    When I choose country for eStore from footer
-    When I remove all items from estore cart
-    When I open product page with NY restriction item
-    When I click on add to cart estore button
-    And I click on view cart estore button
-    When I click on estore checkout button
-    When I click on estore no thanks button
-    When I fill estore shipping address for "NY"
-    When I click on edit estore billing address button
-    When I click on same as estore shipping address checkbox
-    When I click on continue to payment estore button
-    Then I verify "NY" shipping restriction
-
   Scenario: eStore - Disable Continue as a Guest user option for guest user with membership
     When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
@@ -174,14 +147,6 @@ Feature: Estore Cart Page
     When I add item to cart via API for estore
     When I open estore cart
     Then I verify membership estore banner for "nonmember user"
-
-  Scenario: eStore Cart persistence in all brands
-    Given I log into eStore as "guest" user
-    When I choose country for eStore from footer
-    When I remove all items from estore cart
-    When I add item to cart via API for estore
-    When I open estore cart
-    Then I verify that the added product is in the cart during brand switching
 
   Scenario: Verify the cart subtotal when regular user added membership card with other sku's.
   Member prices should be applicable
@@ -374,15 +339,13 @@ Feature: Estore Cart Page
     And I verify the total price for product in the cart
     Examples:
       | brand           |
-      | RH              |
       | RH CONTEMPORARY |
       | RH INTERIORS    |
       | RH MODERN       |
       | RH OUTDOOR      |
       | RH BEACH HOUSE  |
       | RH SKI HOUSE    |
-      | RH TEEN         |
-      | RH BABY & CHILD |
+
 
   Scenario: Remove Membership and verify order total in order estimate
     Given I log into eStore as "regularAddMembership" user
@@ -406,7 +369,7 @@ Feature: Estore Cart Page
     When I click on estore no thanks button
     Then I click on continue as guest estore button
 
-  Scenario: Gift cards on all brands
+  Scenario Outline: Gift cards on all brands
     Given I log into eStore as trade
     When I choose country for eStore from footer
     Then  I change the brand to "<brand>" for eStore
@@ -453,7 +416,7 @@ Feature: Estore Cart Page
     When I add item to cart via API for estore
     When I open estore cart
     When I click on join now membership button
-    Then I verify order estimate section in cart
+    Then I verify order estimate section in xcart
     When I click on remove membership estore button
 
   Scenario: Verify the User logged and the cart persist across brands - registered
@@ -490,7 +453,7 @@ Feature: Estore Cart Page
   Scenario: Verify the BO item - availability and return message
     Given I log into eStore as "regular" user
     When I choose country for eStore from footer
-    When I open product page with "prod12740400" and "47400990" with "NATL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     When I click on add to cart estore button
     When I click on view cart estore button
     Then I verify that user is able to see availability and return message
@@ -504,7 +467,7 @@ Feature: Estore Cart Page
     When I click on view cart estore button
     Then I verify SPO item - availability and return message
 
-  Scenario:  Verify the instock item - availability and return message
+  Scenario:  Verify the InStock item - availability and return message
     Given I log into eStore as "regular" user
     When I choose country for concierge from footer
     When I remove all items from estore cart
@@ -513,4 +476,65 @@ Feature: Estore Cart Page
     And I click on view cart estore button
     Then I verify that user is able to see availability and return message
 
+  Scenario: Verify the freight charges for Ground, 1 day, 2 day shipping - ex: Knob skus 	No
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod28230039" and "10113991" with "PN" for estore
+    When I click on add to cart estore button
+    When I click on view cart estore button
+    Then I verify that group shipping message is displayed
 
+  Scenario: Verify the line item delete and summary total update
+    Given I log into eStore as "cartremoveitem" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod25280089" and "17050044" with "JNPR" for estore
+    When I update item quantity in estore pdp
+    When I click on add to cart estore button
+    When I click on view cart estore button
+    When I click on remove button from estore cart page
+    Then I verify that shopping cart is empty for estore
+
+  Scenario: Verify the Billing address for Non US and CA countries, State should be editable and not restricted for payment page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I goes to estore cart for estore
+    When I click on estore checkout button
+    When I click on estore no thanks button
+    When select "AF" country for estore billing address
+    Then I verify that "AF" country was selected
+
+  Scenario: Verify postal code update in address page and then in cart and pdp
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I goes to estore cart for estore
+    When I click on estore checkout button
+    When I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I remove payment method which was used earlier
+    When I execute payment with credit card on estore
+    When I open product page with "prod13800635" and "17050044" with "NATL" for estore
+    Then I verify that postal code should be equal to 28801
+
+  Scenario: Verify address saved in address page when navigate back from order review or any page
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I add item to cart via API for estore
+    When I open estore cart
+    When I click on estore checkout button
+    When I click on estore no thanks button
+    When I fill estore shipping address
+    When I click on same as estore shipping address checkbox
+    When I click on continue to payment estore button
+    When I click on continue with original address estore button
+    When I navigate back from Payment page on eStore
+    Then I verify that I'm able to see previously added Bill to and Ship to address

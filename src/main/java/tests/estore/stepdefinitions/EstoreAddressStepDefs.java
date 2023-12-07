@@ -2,6 +2,7 @@ package tests.estore.stepdefinitions;
 
 import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -176,31 +177,25 @@ public class EstoreAddressStepDefs {
 
     @When("I fill estore shipping address")
     public void iFillEstoreShippingAndShippingAddress() {
-        with().pollInterval(4, SECONDS).await().until(() -> true);
-        if(estoreAddressScreen.getShippingAddressFirstName().isDisplayed()) {
-            estoreAddressScreen.getShippingAddressFirstName().should(visible, Duration.ofSeconds(40));
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
-            estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
-            with().pollInterval(4, SECONDS).await().until(() -> true);
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
-            estoreAddressScreen.getShippingAddressLastName1().setValue("William");
-
-            $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).click();
-            generalStepDefs.clearField($(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")));
-            $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]")).setValue("4524 Ocala Street");
-            with().pollInterval(4, SECONDS).await().until(() -> true);
-            $(By.xpath("//ul[@role='menu']//li[1]")).should(visible, Duration.ofSeconds(10))
-                    .click(ClickOptions.usingJavaScript());
-            estoreAddressScreen.getShippingAddressPhone().click();
-            with().pollInterval(4, SECONDS).await().until(() -> true);
-            generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
-            estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
-            estoreAddressScreen.getShippingAddressPhone().shouldHave(value("309-793-1846"), Duration.ofSeconds(15));
-            with().pollInterval(4, SECONDS).await().until(() -> true);
-        }
-        else{
-            with().pollInterval(4, SECONDS).await().until(() -> true);
-        }
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        estoreAddressScreen.getShippingAddressFirstName().should(interactable, Duration.ofSeconds(12));
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressFirstName());
+        estoreAddressScreen.getShippingAddressFirstName().setValue("Safire");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
+        estoreAddressScreen.getShippingAddressLastName1().setValue("William");
+        estoreAddressScreen.getAddressStreet().click();
+        generalStepDefs.clearField(estoreAddressScreen.getAddressStreet());
+        estoreAddressScreen.getAddressStreet().setValue("4524 Ocala Street");
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        estoreAddressScreen.getFirstPointFromAddressList().should(visible, Duration.ofSeconds(10))
+                .click(ClickOptions.usingJavaScript());
+        estoreAddressScreen.getShippingAddressPhone().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        generalStepDefs.clearField(estoreAddressScreen.getShippingAddressPhone());
+        estoreAddressScreen.getShippingAddressPhone().setValue("309-793-1846");
+        estoreAddressScreen.getShippingAddressPhone().shouldHave(value("309-793-1846"), Duration.ofSeconds(12));
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify add a new shipping address option is present")
@@ -553,7 +548,7 @@ public class EstoreAddressStepDefs {
 
     @And("I verify billing and shipping address are correct")
     public void iVerifyBillingAndShippingAddressAreCorrect() {
-        if(estoreAddressScreen.getOrderDetails().isDisplayed()){
+        if (estoreAddressScreen.getOrderDetails().isDisplayed()) {
             estoreAddressScreen.getOrderDetails().click();
         }
         estoreAddressScreen.getShippingAddressTitle().should(visible, Duration.ofSeconds(20));
@@ -625,5 +620,28 @@ public class EstoreAddressStepDefs {
     @When("I fill the order description field message {string} on address page")
     public void iFillTheOrderDescriptionFieldMessageOnAddressPage(String message) {
         estoreAddressScreen.introduceOrderDescriptionMessage(message);
+    }
+
+    @When("select {string} country for estore billing address")
+    public void selectCountryForEstoreBillingAddress(String country) {
+        estoreAddressScreen.getSelectBillingAddressCountry().should(visible, Duration.ofSeconds(12));
+        Select selectBillingAddressCountry = new Select(estoreAddressScreen.getSelectBillingAddressCountry());
+        selectBillingAddressCountry.selectByValue(country);
+    }
+
+    @Then("I verify that {string} country was selected")
+    public void iVerifyThatCountryWasSelected(String country) {
+        estoreAddressScreen.getAfghanistanCountry().should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that I'm able to see previously added Bill to and Ship to address")
+    public void iVerifyThatIMAbleToSeePreviouslyAddedBillToAndShipToAddress() {
+        estoreAddressScreen.getSafireAddress().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I navigate back from Payment page on eStore")
+    public void iNavigateBackFromPaymentPageOnEStore() {
+        estorePaymentPage.getSelectPaymentType().should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
+        WebDriverRunner.getWebDriver().navigate().back();
     }
 }

@@ -14,6 +14,7 @@ public class ConciergePGScreen {
     private final String topNavSubMenu = "(//li[contains(@id, 'rhrCtalogNavigationDetails_navigation')]/span[text() = '%s'])[1]";
     private final String topNavGallery = "(//span[text() = '%s'])[1]";
     private final SelenideElement threeGridView = $(By.xpath("(//*[text() = 'sort']/../..//*[local-name() = 'svg'])[2]"));
+    private final SelenideElement secondGrid = $(By.xpath("//*[ local-name() = 'svg' and @column = '2' and @data-active = 'true']"));
     private final SelenideElement twoGridView = $(By.xpath("(//*[text() = 'sort']/../..//*[local-name() = 'svg'])[2]"));
     private final SelenideElement threeGridViewIsActive = $(By.xpath("//*[text() = 'sort']/../..//*[local-name() = 'svg' and @data-active = 'true']"));
     private final SelenideElement twoGridViewIsActive = $(By.xpath("//*[text() = 'sort']/../..//*[local-name() = 'svg' and @data-active = 'true']"));
