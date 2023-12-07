@@ -77,6 +77,9 @@ public class EstoreE2EStepDefs {
 
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
+        //estoreItemPage.getAddToCartButton().shouldBe(visible).click(ClickOptions.usingJavaScript());
+        estoreItemPage.getAddToCartButton().click();
+        with().pollInterval(6, SECONDS).await().until(() -> true);
         estoreItemPage.getAddToCartButton().should(enabled, Duration.ofSeconds(12));
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
         estoreItemPage.getAddToCartButton().shouldBe(visible);
@@ -527,6 +530,7 @@ public class EstoreE2EStepDefs {
 
     @When("I click on same as estore shipping address checkbox")
     public void iClickOnSameAsShippingAddressCheckbox() {
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         if (estoreAddressScreen.getSameAsShippingAddress().is(visible)) {
             estoreAddressScreen.getSameAsShippingAddress().should(Condition.and("Exist ,appear, interactable",
                     exist, appear, interactable), Duration.ofSeconds(15));
@@ -591,7 +595,7 @@ public class EstoreE2EStepDefs {
     @When("I open product page with {string} and {string} with {string} for estore")
     public void iOpenProductPageWithAndForEstore(String productId, String skuId, String options) {
         String URL = null;
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
 
         if (Hooks.profile.equals("stg3")) {
             URL = Hooks.eStoreBaseURL + "/us/en/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
@@ -619,7 +623,7 @@ public class EstoreE2EStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @When("I open product page with {string} and {string} for estore")

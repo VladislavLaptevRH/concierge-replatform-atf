@@ -56,6 +56,8 @@ public class EstorePaymentPage {
 
     private final SelenideElement splitPaymentCheckBox = $(By.xpath("//input[@id='page-checkout-payment_split-payment']"));
 
+    private final SelenideElement selectPaymentType = $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]"));
+
     public void verifyThatNewBillingAddressisDisplayed() {
         $(By.xpath("//*[text()='John Ivanov']")).should(Condition.visible);
         $(By.xpath("//*[text()='66 Ceres St']")).should(Condition.visible);

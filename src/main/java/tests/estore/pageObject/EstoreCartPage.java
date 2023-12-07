@@ -193,7 +193,7 @@ public class EstoreCartPage {
 
     private final SelenideElement zipCodeField = $(By.xpath("//*[@id='postal-code-international']"));
 
-    private final SelenideElement regularItemPrice = $(By.xpath("(//p[@id='price'])[1]"));
+    private final SelenideElement regularItemPrice = $(By.xpath("//*[@data-testid='price-for-regular']"));
 
     private final SelenideElement removePromotionBtn = $(By.xpath("//div[@class='MuiGrid-root']//*[text()='Remove']"));
 
@@ -211,7 +211,7 @@ public class EstoreCartPage {
 
     private final SelenideElement quantitySelect = $(By.xpath("//select[contains(@id,'quantity')]"));
 
-    private final SelenideElement totalLineItemPrice = $(By.xpath("//div[@id='rh-line-item-card_total']"));
+    private final SelenideElement totalLineItemPrice = $(By.xpath("//div[@id='rh-line-item-card_total']//h5"));
 
     private final SelenideElement viewGiftBoxBtn = $(By.xpath("//a[@href='#']"));
 
@@ -271,11 +271,23 @@ public class EstoreCartPage {
 
     private final SelenideElement deliverItemOption = $(By.xpath("//*[contains(text(),'This item is special order and will be ready for delivery between')]"));
 
-    private final SelenideElement deliveryItemMessage = $(By.xpath("//*[contains(text(),'This item will be ready for delivery between')]"));
+    private final SelenideElement deliveryItemMessage = $(By.xpath("//*[contains(text(),'This item will be')]"));
 
     private final SelenideElement theSecondDeliverItemOption = $(By.xpath("(//*[contains(text(),'This item is special order and will be ready for delivery between')])[2]"));
 
     private final SelenideElement cartIconHeader = $(By.xpath("//a[@id='container-rhrHeader_cart-btn']"));
+
+    private final SelenideElement groupShipping3to7daysMessage = $(By.xpath("//*[text()='Ground shipping will arrive in 3 to 7 business days if received by noon ET (Mon-Fri). Items are not delivered on weekends or holidays.']"));
+
+    private final SelenideElement postalCode20901 = $(By.xpath("//*[text()='20901.']"));
+
+    private final SelenideElement postalCode28801 = $(By.xpath("//*[text()='28801.']"));
+
+    private final SelenideElement withYourRhMembership = $(By.xpath("//*[contains(text(),'this order with your RH Membership.')]"));
+
+    private final SelenideElement automationName = $(By.xpath("//*[contains(text(),'Automation, ')]"));
+
+    private final SelenideElement stateRequiredMessage = $(By.xpath("//*[contains(text(),'State required')]"));
 
     public void clickToCartIconHeader() {
         cartIconHeader.should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
@@ -395,7 +407,7 @@ public class EstoreCartPage {
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
         String totalLineItemPriceValue = totalLineItemPrice.getText();
         int totalLineItemPriceAmount = Integer.parseInt(totalLineItemPrice.getText().substring(0, totalLineItemPriceValue.indexOf(".00")).replaceAll("[^0-9]", ""));
-        int ufdAmount = 279;
+        int ufdAmount = 299;
         int totalLineItemPriceWithCharges = ufdAmount + totalLineItemPriceAmount;
         String totalPrice = decimalFormat.format(totalLineItemPriceWithCharges);
 

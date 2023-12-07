@@ -141,6 +141,17 @@ public class EstoreAddressScreen {
     private final SelenideElement inputForTheFirstOrderDescriptionMessage = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-item']//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[4]"));
 
     private final SelenideElement sameAsShippingAddress = $(By.xpath("//span[text()='Same as shipping address']"));
+
+    private final SelenideElement selectBillingAddressCountry = $(By.id("billingAddress.country"));
+
+    private final SelenideElement afghanistanCountry = $(By.xpath("//*[text()='Afghanistan']"));
+
+    private final SelenideElement safireAddress = $(By.xpath("//*[text()='Safire']"));
+
+    private final SelenideElement addressStreet = $(By.cssSelector("input[data-testid=\"shippingAddress.addressLine1\"]"));
+
+    private final SelenideElement firstPointFromAddressList = $(By.xpath("//ul[@role='menu']//li[1]"));
+
     public void clickToAddGiftMessageButton() {
         addGiftMessageBtn.should(Condition.interactable,
                 Duration.ofSeconds(15)).click();

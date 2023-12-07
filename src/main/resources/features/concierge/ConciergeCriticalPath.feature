@@ -650,7 +650,6 @@ Feature: Concierge Critical Path
      | 10024793 BRNZ |
 
   Scenario: Verify the PDP hero Image, zoom, line itemsVerify the PDP hero Image, zoom, line items
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -732,7 +731,6 @@ Feature: Concierge Critical Path
       | BO    | 10024793 BRNZ |
 
   Scenario: Verify the dropdown selection and add to cart
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
