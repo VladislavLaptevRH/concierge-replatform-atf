@@ -3,6 +3,7 @@ package tests.concierge.stepdefinitions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.ex.ElementIsNotClickableException;
 import com.codeborne.selenide.ex.ElementNotFound;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -72,7 +73,7 @@ public class ConciergePGStepsDefs {
         } else {
             if(conciergePGScreen.getTopNavSubManuByName(result).isDisplayed()){
                 with().pollInterval(5, SECONDS).await().until(() -> true);
-                conciergePGScreen.getTopNavSubManuByName(result).click();
+                conciergePGScreen.getTopNavSubManuByName(result).hover();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             } else {
                 $(By.xpath("//span[text() = '" + collection + "']")).click();
@@ -255,7 +256,11 @@ public class ConciergePGStepsDefs {
                 $(By.xpath("//*[ local-name() = 'svg' and @column = '1' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "grid view is set to 2-grid view":
-                $(By.xpath("//*[ local-name() = 'svg' and @column = '2' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));
+                if(!conciergePGScreen.getSecondGrid().isDisplayed()){
+                    WebDriverRunner.getWebDriver().navigate().refresh();
+                }
+                conciergePGScreen.getSecondGrid().shouldBe(visible, Duration.ofSeconds(20));
+
                 break;
             case "grid view is set to 3-grid view":
                 $(By.xpath("//*[ local-name() = 'svg' and @column = '3' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));

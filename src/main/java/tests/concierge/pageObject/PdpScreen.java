@@ -180,6 +180,7 @@ public class PdpScreen {
     private final SelenideElement viewCart = $(By.xpath("//*[text()='View Cart']"));
     private final SelenideElement searchIcon = $(By.xpath("(//*[@class = 'MuiIconButton-label'])[1]"));
     private final SelenideElement searchFieldInput = $(By.xpath("//*[@id = 'site-search-input']"));
+    private final SelenideElement searchFieldIcon = $(By.xpath("//*[@id = 'search-icon-svg']"));
     private final SelenideElement keepShoppingText = $(By.xpath("//*[text()='Keep Shopping']"));
     private final SelenideElement dialogTitleCloseButton = $(By.xpath("//*[@data-testid ='dialog-title-close-button']"));
     private final SelenideElement agreeAndAddToCart = $(By.xpath("//*[text() = 'Agree & Add To Cart']"));
@@ -228,7 +229,7 @@ public class PdpScreen {
 
     private final ElementsCollection kitItems = $$(By.xpath("(//p[contains(text() , 'Touch-Up Kit')])[1]/../../../../../../..//select[contains(@id ,'prod')]"));
     private final SelenideElement configureDeliveryInformation = $(By.xpath("//*[text() = 'Configure this item to view delivery information']"));
-    private final SelenideElement configureDeliveryInformationSPO = $(By.xpath("//*[text() = 'This item is special order and will be ready for delivery between']"));
+    private final SelenideElement configureDeliveryInformationSPO = $(By.xpath("(//*[contains(text(), 'This item is special order and will be ready for delivery between')])[1]"));
     private final SelenideElement yamlCarouselMenuRightArrow = $(By.xpath("(//*[text() = 'YOU MIGHT ALSO LIKE']/..//ul/div/div)[3]"));
     private final ElementsCollection rightSideImageCarouselArrows = $$(By.xpath("//*[@class= 'slick-slider slick-vertical slick-initialized']//*[contains(@class, 'arrow-icon')]"));
     private final SelenideElement swatchText = $(By.xpath("//a/*[contains(text(), 'Swatch')]"));

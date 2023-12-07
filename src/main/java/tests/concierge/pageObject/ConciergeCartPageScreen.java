@@ -206,6 +206,8 @@ public class ConciergeCartPageScreen {
     private final SelenideElement agreeAndAddToCart = $(By.xpath("//*[text() = 'Agree & Add To Cart']"));
     private final SelenideElement updatedZipCodeInPDP = $(By.xpath("//*[@data-testid = 'postal-code-dialog-opener']"));
     private final SelenideElement memberPriceInPG = $(By.xpath("(//*[@data-testid = 'price-for-member'])[1]"));
+
+    private final SelenideElement tradePriceInPG = $(By.xpath("(//*[@data-testid = 'price-for-trade'])[1]"));
     private final ElementsCollection quantityItemLineList = $$(By.xpath("//select[contains(@id,'quantity')]"));
 
     private final SelenideElement cartFirstGridView = $(By.xpath("(//button[contains(@class, 'sc-gsDKAQ')])[1]"));

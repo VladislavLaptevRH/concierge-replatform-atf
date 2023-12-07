@@ -1328,7 +1328,6 @@ Feature: Concierge PDP
     Then Verify that "Sale modal" 'click on postal code and change country and postal code and confirm'
     Then Verify that "Sale modal" 'User should be able to change the shipping country and provide a valid zip code'
 
-    @vlad
   Scenario: Verify whether user able to change the shipping country and provide a valid zip code w.r.t country (IN-STOCK)
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1343,7 +1342,6 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'click on postal code and change country and postal code and confirm'
     Then Verify that "In Stock modal" 'User should be able to change the shipping country and provide a valid zip code'
 
-    @vlad
   Scenario:On CG,PG,Shop room,sale, cart checkout pages we can see same country currency for prices which we have entered on PDP page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1356,7 +1354,6 @@ Feature: Concierge PDP
     Then I verify that zip code in PDP is 'H1Y 2B5'
     Then Verify that 'price in PDP changed from US$ to CA$'
 
-      @vlad
   Scenario: On shipping confirmation modal, if we click on yes button then update the zipcode in availabity and delivery message for each line item
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1372,7 +1369,6 @@ Feature: Concierge PDP
     Then I chose the '1' line item selections one by one
     Then Verify that 'text "Configure this item to view delivery information to" is present'
 
-     @vlad
   Scenario: If we enter valid zipcode and there has been a change to the country selection (i.e. US to CA), then display the shipping country confirmation modal
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -1387,8 +1383,7 @@ Feature: Concierge PDP
     Then I enter valid zip code with different country and confirm
     Then Confirmation modal should be displayed
 
-  @vlad
-  Scenario: Updated avaialbility message should be displayed after changing the postal code based on inventory.
+  Scenario: Updated availability message should be displayed after changing the postal code based on inventory.
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1403,12 +1398,11 @@ Feature: Concierge PDP
     Then I chose the '1' line item selections one by one
     Then Updated availability message should be displayed after changing the postal code based on inventory
 
-#    @vlad
-#  Scenario: Special order items, SPO Popup
-#    Given I log into Concierge as "associate"
-#    When I choose country for concierge from footer
-#    When I remove all items from cart via UI
-#    When I go to item "10110124 BWMR" from search field
-#    Then I Verify that 'item title' is present
-#    Then I chose the '1' line item selections one by one
-#    Then User should be able to see Availability, Delivery, Return info at line level
+  Scenario: Special order items, SPO Popup
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I remove all items from cart via UI
+    When I go to item "10110124 BWMR" from search field
+    Then I Verify that 'item title' is present
+    Then I chose the '2' line item selections one by one even if options were chosen
+    Then User should be able to see Availability, Delivery, Return info at line level
