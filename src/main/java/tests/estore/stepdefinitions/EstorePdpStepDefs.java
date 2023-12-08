@@ -419,6 +419,7 @@ public class EstorePdpStepDefs {
     public void iVerifyThePDPTitleAndPricingForProduct() {
         String titleOnPg = estorePDPScreen.getFistItemTitle().getText();
         String priceOnPG = estorePDPScreen.getFirstRegularPrice().getText();
+        estorePDPScreen.getFistItemProductId().should(Condition.visible, Duration.ofSeconds(15));
         String productId = estorePDPScreen.getFistItemProductId().getAttribute("alt");
         String pdId = productId.split("_")[0];
         estoreE2EStepDefs.iOpenProductPageWithAndForEstore(pdId, "", "");
@@ -430,19 +431,19 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the content of PDP for eStore - verifying SOFA PDP")
     public void iVerifyTheContentOfPDPForEstoreProduct() {
-        Assert.assertTrue(estorePdpPageScreen.getPDPTitle().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getAlsoAvailableInLeatherText().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getShopTheEntireCollectionText().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getHeroImage().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPDPTitle().should(Condition.visible, Duration.ofSeconds(10)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAlsoAvailableInLeatherText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getShopTheEntireCollectionText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getHeroImage().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
         estorePdpPageScreen.getHeroImage().hover();
         Assert.assertTrue(estorePdpPageScreen.getHeroImageForwardBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
         Assert.assertTrue(estorePdpPageScreen.getHeroImageBackBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getReturnPolicyLink().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getConfigureDeliveryInformationText().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getPdpDetailsSection().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getPdpDimensionsSection().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getPdpFabricCareSection().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getReturnPolicyLink().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getConfigureDeliveryInformationText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpDetailsSection().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpDimensionsSection().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpFabricCareSection().should(Condition.visible, Duration.ofSeconds(30)).isDisplayed());
     }
 
     @Then("I verify another PDP - Chaise")
