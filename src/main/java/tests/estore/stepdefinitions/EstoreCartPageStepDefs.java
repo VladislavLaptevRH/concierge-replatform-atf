@@ -767,7 +767,7 @@ public class EstoreCartPageStepDefs {
 
     @And("I verify that add to cart button is inactive")
     public void iVerifyThatAddToCartButtonIsInactive() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estorePDPScreen.getAddToCartInactiveButton().shouldBe(appear, Duration.ofSeconds(30));
     }
 
@@ -776,7 +776,7 @@ public class EstoreCartPageStepDefs {
         totalProductPrice = estoreCartPage.getTotalProductPrice();
         int regularPrice = estoreCartPage.getRegularProductPriceValueInt();
         int quantity = estoreCartPage.getQuantityOfProductInCart();
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         assertEquals("Verify the total price", totalProductPrice
                 , totalProductPrice);
     }

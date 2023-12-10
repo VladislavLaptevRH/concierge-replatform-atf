@@ -116,9 +116,6 @@ Feature: Estore Payment
     When I remove payment method which was used earlier
     When I execute payment with credit card on estore
     Then I verify that shipping address is displayed
-    When I click on a place estore order button
-    When I click on estore order details button
-    Then I verify that shipping address is displayed
 
   Scenario: eStore Update address (Impacting change) after making payment
     Given I log into eStore as "regular" user
@@ -402,7 +399,6 @@ Feature: Estore Payment
     When I open estore cart
     When I click on estore checkout button
     When I click on no thanks button
-#    When I click on edit shipping address button on estore address page
     When I fill estore shipping address
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -426,7 +422,6 @@ Feature: Estore Payment
     When I choose "CAN" country from footer
     When I click on estore checkout button
     And I click on estore no thanks button
-#    When I click on edit estore billing address button
     When I fill estore shipping address for CAN
     When I click on same as estore shipping address checkbox
     When I click on continue to payment estore button
@@ -440,7 +435,6 @@ Feature: Estore Payment
       | MC       |
       | AX       |
 
-    #QUESTION
   Scenario: Verify the billing address updated in payment page based on the saved payment selected
     Given I log into eStore as "mastercard" user
     When I choose country for eStore from footer
