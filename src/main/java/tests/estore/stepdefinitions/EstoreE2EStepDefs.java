@@ -79,7 +79,7 @@ public class EstoreE2EStepDefs {
     public void iClickOnAddToCartButton() {
         //estoreItemPage.getAddToCartButton().shouldBe(visible).click(ClickOptions.usingJavaScript());
         estoreItemPage.getAddToCartButton().click();
-        with().pollInterval(6, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreItemPage.getAddToCartButton().should(enabled, Duration.ofSeconds(12));
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
         estoreItemPage.getAddToCartButton().shouldBe(visible);
@@ -629,7 +629,7 @@ public class EstoreE2EStepDefs {
     @When("I open product page with {string} and {string} for estore")
     public void iOpenProductPageAndForEstore(String productId, String skuId) {
         String URL = null;
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "&clientrender=true";
 
         open(URL);
@@ -654,7 +654,7 @@ public class EstoreE2EStepDefs {
     @When("I open product page with productID {string} for estore")
     public void iOpenProductPageWithProductIDForEstore(String productId) {
         String URL = null;
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&sale=false&src=rel";
         open(URL);
         try {

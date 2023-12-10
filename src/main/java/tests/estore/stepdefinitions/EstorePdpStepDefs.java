@@ -162,7 +162,7 @@ public class EstorePdpStepDefs {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//div[@id='country-zipcode-selection']")).should(visible, Duration.ofSeconds(20)).click();
         if (country.equals("CAN")) {
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20)).click();
             $(By.xpath("//input[@id='postal-code-international']")).clear();
             $(By.xpath("//input[@id='postal-code-international']")).setValue("Y1A 9Z9");
@@ -318,7 +318,7 @@ public class EstorePdpStepDefs {
     public void iUnselectTheSizeOptionForAndWithForEstore(String prodId, String arg1, String arg2) {
         Select sizeOption = new Select($(By.xpath("//select[@id='optionSelect-" + prodId + "-Size']")));
         sizeOption.selectByValue("");
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify availability , delivery and return messages in PDP")
@@ -354,7 +354,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the product price for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceForProductAndWithForTheSelectedCountry(String productID, String arg1, String selectedOptions, String country) {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
         estorePdpPageScreen.getRegularTheFirstPrice().should(visible, Duration.ofSeconds(20));
         regularPricePdp = Integer.parseInt(estorePdpPageScreen.getRegularPdpProductPrice().getText().replaceAll("\\$", ""));
@@ -625,7 +625,7 @@ public class EstorePdpStepDefs {
 
     @When("user clicks on return policy link")
     public void userClicksOnReturnPolicyLink() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estorePDPScreen.clickToReturnPolicyButton();
     }
 

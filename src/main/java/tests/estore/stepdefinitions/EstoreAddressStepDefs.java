@@ -103,7 +103,7 @@ public class EstoreAddressStepDefs {
 
     @Then("I verify that shipping address is displayed")
     public void iVerifyThatShippingAddressIsDisplayed() {
-        estoreAddressScreen.getShippingAddressTitle().should(visible, Duration.ofSeconds(40));
+        estoreAddressScreen.getShippingAddressFirstNameWilliam().should(visible, Duration.ofSeconds(40));
     }
 
     @When("I click on edit shipping address button on estore order review page")

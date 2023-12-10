@@ -127,6 +127,10 @@ public class EstoreAddressScreen {
 
     private final SelenideElement shippingAddressTitle = $(By.xpath("//*[text()='Shipping Address']"));
 
+    private final SelenideElement shippingAddress = $(By.xpath("//*[text()='Shipping Address']"));
+
+    private final SelenideElement shippingAddressFirstNameWilliam = $(By.xpath("//*[text()='Safire William']"));
+
     private final SelenideElement editPaymentOrderReview = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']/a)[2]"));
 
     private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'Edit']"));
