@@ -71,7 +71,7 @@ public class EstorePDPScreen {
 
     private final SelenideElement fistItemTitle = $(By.xpath("(//a[@id='product-option-grid']//p//span)[2]"));
 
-    private final SelenideElement fistItemProductId = $(By.xpath("(//div[@data-cmp='cardImages'])[1]//img"));
+    private final SelenideElement fistItemProductId = $(By.xpath("(//img[contains(@alt,'prod')])[1]"));
 
     private final SelenideElement fillSelectOption = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Fill')])[1]"));
 

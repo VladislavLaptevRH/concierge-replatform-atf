@@ -153,17 +153,17 @@ public class EstorePdpPageScreen {
 
     private final SelenideElement viewSaleItem = $(By.xpath("(//*[@id=\"component-relatedProductCartd_view-sale-btn\"])[1]"));
 
-    private final SelenideElement PDPTitle =  $(By.xpath("//h2[@class='MuiTypography-root MuiTypography-h2']"));
+    private final SelenideElement PDPTitle =  $(By.xpath("//h1[contains(@class,'MuiTypography-root')]"));
 
     private final SelenideElement heroImage = $(By.xpath("//*[@data-testid='desktop-pdp-image']"));
 
     private final SelenideElement returnPolicyLink =$(By.xpath("//span[text()='Return Policy']"));
 
-    private final SelenideElement configureDeliveryInformationText = $(By.xpath("//p[text()='Configure this item to view delivery information ']"));
+    private final SelenideElement configureDeliveryInformationText = $(By.xpath("//p[contains(text(),'Configure this item to view delivery information')]"));
 
-    private final SelenideElement pdpDetailsSection = $(By.xpath("//span[text()='DETAILS']"));
+    private final SelenideElement pdpDetailsSection = $(By.xpath("//span[text()='Details']"));
 
-    private final SelenideElement pdpDimensionsSection = $(By.xpath("//span[text()='DIMENSIONS']"));
+    private final SelenideElement pdpDimensionsSection = $(By.xpath("//span[text()='Dimensions']"));
 
     private final SelenideElement pdpFabricCareSection = $(By.xpath("//span[text()='Fabric Care']"));
 
@@ -187,9 +187,9 @@ public class EstorePdpPageScreen {
 
     private final SelenideElement unlimitedFurnitureDeliveryText = $(By.xpath("//*[contains(text(),'Unlimited Furniture Delivery')]"));
 
-    private final  SelenideElement inStockMemberPrice = $(By.xpath("//p[contains(@class,'product-price__amount--member') and contains(text(),'Member')]"));
+    private final  SelenideElement inStockMemberPrice = $(By.xpath("//p[contains(@class,'product-price__amount--member')]"));
 
-    private final SelenideElement inStockRegularPrice = $(By.xpath("//p[contains(@class,'product-price__amount') and contains(text(),'Regular')]"));
+    private final SelenideElement inStockRegularPrice = $(By.xpath("//p[contains(@class,'product-price__amount')]"));
 
 
 }

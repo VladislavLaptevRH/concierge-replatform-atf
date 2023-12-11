@@ -418,7 +418,7 @@ public class EstoreUserAccountPage {
             firstSubMenu.should(visible, Duration.ofSeconds(40)).click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             accessSubMenu(each);
         }
     }

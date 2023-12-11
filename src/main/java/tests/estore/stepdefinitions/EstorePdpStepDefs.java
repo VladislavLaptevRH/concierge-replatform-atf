@@ -162,7 +162,7 @@ public class EstorePdpStepDefs {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//div[@id='country-zipcode-selection']")).should(visible, Duration.ofSeconds(20)).click();
         if (country.equals("CAN")) {
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20)).click();
             $(By.xpath("//input[@id='postal-code-international']")).clear();
             $(By.xpath("//input[@id='postal-code-international']")).setValue("Y1A 9Z9");
@@ -318,7 +318,7 @@ public class EstorePdpStepDefs {
     public void iUnselectTheSizeOptionForAndWithForEstore(String prodId, String arg1, String arg2) {
         Select sizeOption = new Select($(By.xpath("//select[@id='optionSelect-" + prodId + "-Size']")));
         sizeOption.selectByValue("");
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify availability , delivery and return messages in PDP")
@@ -354,7 +354,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the product price for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceForProductAndWithForTheSelectedCountry(String productID, String arg1, String selectedOptions, String country) {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
         estorePdpPageScreen.getRegularTheFirstPrice().should(visible, Duration.ofSeconds(20));
         regularPricePdp = Integer.parseInt(estorePdpPageScreen.getRegularPdpProductPrice().getText().replaceAll("\\$", ""));
@@ -419,6 +419,7 @@ public class EstorePdpStepDefs {
     public void iVerifyThePDPTitleAndPricingForProduct() {
         String titleOnPg = estorePDPScreen.getFistItemTitle().getText();
         String priceOnPG = estorePDPScreen.getFirstRegularPrice().getText();
+        estorePDPScreen.getFistItemProductId().should(Condition.visible, Duration.ofSeconds(15));
         String productId = estorePDPScreen.getFistItemProductId().getAttribute("alt");
         String pdId = productId.split("_")[0];
         estoreE2EStepDefs.iOpenProductPageWithAndForEstore(pdId, "", "");
@@ -430,19 +431,19 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the content of PDP for eStore - verifying SOFA PDP")
     public void iVerifyTheContentOfPDPForEstoreProduct() {
-        Assert.assertTrue(estorePdpPageScreen.getPDPTitle().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getAlsoAvailableInLeatherText().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getShopTheEntireCollectionText().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getHeroImage().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPDPTitle().should(Condition.visible, Duration.ofSeconds(10)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAlsoAvailableInLeatherText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getShopTheEntireCollectionText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getHeroImage().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
         estorePdpPageScreen.getHeroImage().hover();
         Assert.assertTrue(estorePdpPageScreen.getHeroImageForwardBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
         Assert.assertTrue(estorePdpPageScreen.getHeroImageBackBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getReturnPolicyLink().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getConfigureDeliveryInformationText().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getPdpDetailsSection().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getPdpDimensionsSection().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getPdpFabricCareSection().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getReturnPolicyLink().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getConfigureDeliveryInformationText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpDetailsSection().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpDimensionsSection().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpFabricCareSection().should(Condition.visible, Duration.ofSeconds(30)).isDisplayed());
     }
 
     @Then("I verify another PDP - Chaise")
@@ -624,7 +625,7 @@ public class EstorePdpStepDefs {
 
     @When("user clicks on return policy link")
     public void userClicksOnReturnPolicyLink() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estorePDPScreen.clickToReturnPolicyButton();
     }
 
