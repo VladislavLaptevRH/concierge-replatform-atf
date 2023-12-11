@@ -11,8 +11,8 @@ import static com.codeborne.selenide.Selenide.$;
 public class ConciergePGScreen {
 
     private final String topNavMenu = "//*[contains(@id, 'container-rhrheader-rhr-catalogNav')]//span[text() = '%s']";
-    private final String topNavSubMenu = "(//li[contains(@id, 'rhrCtalogNavigationDetails_navigation')]/span[text() = '%s'])[1]";
-    private final String topNavGallery = "(//span[text() = '%s'])[1]";
+    private final String topNavSubMenu = "((//*[@role = 'tooltip'])[15]//li[contains(@id, 'rhrCtalogNavigationDetails_navigation')]/span[text() = '%s'])[1]";
+    private final String topNavGallery = "//*[contains(@id , 'rhrCtalogNavigationDetails_concepts-navigation')]/span[text() = '%s']";
     private final SelenideElement threeGridView = $(By.xpath("(//*[text() = 'sort']/../..//*[local-name() = 'svg'])[2]"));
     private final SelenideElement secondGrid = $(By.xpath("//*[ local-name() = 'svg' and @column = '2' and @data-active = 'true']"));
     private final SelenideElement twoGridView = $(By.xpath("(//*[text() = 'sort']/../..//*[local-name() = 'svg'])[2]"));

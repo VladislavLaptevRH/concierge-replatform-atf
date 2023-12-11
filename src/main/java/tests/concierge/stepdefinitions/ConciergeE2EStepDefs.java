@@ -565,6 +565,7 @@ public class ConciergeE2EStepDefs {
         if(!conciergeUserAccountPage.getClientButton().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(20));
         conciergeUserAccountPage.getClientButton().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
@@ -603,7 +604,6 @@ public class ConciergeE2EStepDefs {
                 iClickOnNoThanksButton();
             }
         }
-        with().pollInterval(5, SECONDS).await().until(() -> true);
         if (businessClient.equals("Member")) {
 //            conciergeUserAccountPage.getClientLookupFirstNameByName().setValue("Automation");
 //            conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
@@ -645,6 +645,7 @@ public class ConciergeE2EStepDefs {
             conciergeUserAccountPage.getClientLookupSearchButton().click();
             with().pollInterval(3, SECONDS).await().until(() -> true);
         }
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getFirstResultOfClientLookupByName(businessClient).click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
     }
@@ -912,8 +913,13 @@ public class ConciergeE2EStepDefs {
             $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
             $(By.xpath("(//*[text()='Edit'])[10]")).click();
         }
-        generalStepDefs.clearField(checkoutAddressScreen.getZipPostalCodeField());
-        checkoutAddressScreen.getZipPostalCodeField().setValue("1234");
+        if(checkoutAddressScreen.getZipPostalCodeField().isDisplayed()){
+            generalStepDefs.clearField(checkoutAddressScreen.getZipPostalCodeField());
+            checkoutAddressScreen.getZipPostalCodeField().setValue("1234");
+        } else {
+            generalStepDefs.clearField(checkoutAddressScreen.getZipPostalCodeFieldUpperCase());
+            checkoutAddressScreen.getZipPostalCodeFieldUpperCase().setValue("1234");
+        }
         $(By.xpath("//*[text()='Invalid zip/postal code.']")).should(visible, Duration.ofMinutes(1));
     }
 

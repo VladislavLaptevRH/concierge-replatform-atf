@@ -102,9 +102,15 @@ public class ConciergeItemsScreen {
 
     private final SelenideElement gbCountry = $(By.xpath("//*[text() = 'UNITED KINGDOM (£)']"));
 
+    private final SelenideElement gbCountryLowerCase = $(By.xpath("//*[text() = 'United Kingdom (£)']"));
+
     private final SelenideElement caCountry = $(By.xpath("//*[text() = 'CANADA ($)']"));
 
+    private final SelenideElement caCountryLowerCase = $(By.xpath("//*[text() = 'Canada ($)']"));
+
     private final SelenideElement usCountry = $(By.xpath("//*[text() = 'UNITED STATES ($)']"));
+
+    private final SelenideElement usCountryLowerCase = $(By.xpath("//*[text() = 'United States ($)']"));
 
     private final SelenideElement selectCountrySaveButton = $(By.xpath("//*[text() = 'SAVE']"));
 
@@ -112,11 +118,13 @@ public class ConciergeItemsScreen {
 
     private SelenideElement saleButtonMenuForUK = $(By.xpath("//*[text()='Sale']"));
 
-    private final SelenideElement livingSaleMenuBar = $(By.xpath("(//*[contains(text(),'Living')])[2]"));
+    private SelenideElement selectCountryConfirmButton = $(By.xpath("//*[text()='CONFIRM']"));
+
+    private final SelenideElement livingSaleMenuBar = $(By.xpath("//*[contains(text(),'Living')]"));
 
     private SelenideElement footerValidation = $(By.xpath("//*[@id = 'footer']"));
 
-    private SelenideElement fabricChairInSale = $(By.xpath("//*[text()='Fabric Chairs']"));
+    private SelenideElement fabricChairInSale = $(By.xpath("(//*[text()='Fabric Chairs'])[2]"));
 
     private SelenideElement freeShippingMessage = $(By.xpath("//*[text()='ENJOY FREE SHIPPING ON ALL TEXTILES']"));
 

@@ -480,17 +480,16 @@ public class PaymentStepDefs {
     @When("I click on continue with original address button")
     public void iClickOnContinueWithOriginalAddressButton() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if ($(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).isDisplayed()) {
-            $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).should(Condition.and("", Condition.enabled, Condition.visible), Duration.ofSeconds(60));
-            $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();
+        if (paymentScreen.getContinueWithOriginalAddressButton().isDisplayed()) {
+            paymentScreen.getContinueWithOriginalAddressButton().should(Condition.and("", Condition.enabled, Condition.visible), Duration.ofSeconds(60));
+            paymentScreen.getContinueWithOriginalAddressButton().click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
         if (pdpScreen.getCloseSpecialOrderPopUpButton().isDisplayed()) {
             pdpScreen.getCloseSpecialOrderPopUpButton().click();
-            $(By.xpath("//button[@data-testid='add-to-cart-dialog-opener']")).click();
+            $(By.xpath("(//button[@data-testid='add-to-cart-dialog-opener'])[1]")).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
-        with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify that on the payment page the same address as for the saved mastercard")
