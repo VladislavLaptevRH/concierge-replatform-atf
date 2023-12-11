@@ -446,8 +446,8 @@ public class ConciergeE2EStepDefs {
             $(By.xpath("//li[@data-analytics-url='https://rhteen.rh.com/']")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
             $(By.xpath("//li[@data-analytics-url='https://rhteen.rh.com/']")).click();
         } else if (brand.equals("RH Teen")) {
-            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']/span")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']/span")).click();
+            $(By.xpath("(//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']/span)[2]")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
+            $(By.xpath("(//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']/span)[2]")).click();
         }
 
         if (brand.equals("RH Outdoor") && Hooks.profile.equals("prod")) {
