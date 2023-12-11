@@ -57,20 +57,21 @@ public class ConciergePGStepsDefs {
     public void INavigateToSubMenu(String subMenu) {
         if(conciergePGScreen.getTopNavSubManuByName(subMenu).isDisplayed()){
             conciergePGScreen.getTopNavSubManuByName(subMenu).hover();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         } else {
             $(By.xpath("(//*[contains(@id , 'rhrCtalogNavigationDetails')]//*[text() = '" + subMenu + "'])[2]")).hover();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         result = subMenu;
     }
     @Then("I navigate to gallery {string}")
     public void stepByStepINavigateTo(String collection) {
-        if(conciergePGScreen.getTopNavGalleryByName(collection).isDisplayed()){
+        if(conciergePGScreen.getTopNavGalleryByName(collection).isDisplayed()) {
             with().pollInterval(5, SECONDS).await().until(() -> true);
             conciergePGScreen.getTopNavGalleryByName(collection).click();
             with().pollInterval(5, SECONDS).await().until(() -> true);
-        } else {
+        }
+        else {
             if(conciergePGScreen.getTopNavSubManuByName(result).isDisplayed()){
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 conciergePGScreen.getTopNavSubManuByName(result).hover();
@@ -89,6 +90,10 @@ public class ConciergePGStepsDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
         $(By.xpath("(//*[contains(@class, 'MuiTypography-body1')])[1]")).shouldBe(visible, Duration.ofSeconds(30));
+    }
+    @Then("I navigate to gallerys {string}")
+    public void stepByStepINavigate(String collection) {
+        conciergePGScreen.getTopNavGalleryByNames(collection).click();
     }
 
     @Then("I verify that {string} on PG screen")

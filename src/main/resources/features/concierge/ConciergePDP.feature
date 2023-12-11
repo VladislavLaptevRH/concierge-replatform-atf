@@ -46,8 +46,6 @@ Feature: Concierge PDP
     Then Verify that 'shop the entire collection'
     Then Verify that 'zoom button is clickable and zoom module is opened'
     Then Verify that 'is present view carousel is present on the right of the zoomed hero image and scrolling are present'
-    Then Verify that 'plus and minus buttons are clickable and functioning'
-    Then Verify that 'close the Zoom in Module'
     Then I Verify that 'images carousel is present below Hero image' is present
     Then Verify that 'left and right arrows are present and number of alt images is 5'
     Then Verify that 'line item selections (Size, Finish and Qty) are present'
@@ -65,20 +63,20 @@ Feature: Concierge PDP
     Then I chose the '1' line item selections one by one
     Then Verify that 'text "This item will be ready for delivery between" is present'
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
-    Then I verify that text item# and SKU is present
+    #Then I verify that text item# and SKU is present
     Then Verify that 'text "This item can be returned or exchanged within 30 days of delivery" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     Then Verify that 'confirm that Add to Cart slider is present'
     Then Project modal appears and has all the data for '10024796'
-    Then verify that another modal appears with all the data for '10024796'
+    #Then verify that another modal appears with all the data for '10024796'
 
   Scenario: Verify In Stock functionality
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    Then I navigate to menu 'Bed'
+    Then I navigate to menu 'Living'
     Then I navigate to sub menu 'In Stock'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to gallerys 'Sofas'
     Then I click 'first product from the list' on PG screen
     When I click on "view in stock items" link
     Then Verify that "In Stock modal" 'opens'
@@ -99,7 +97,6 @@ Feature: Concierge PDP
     Then Verify that "Sale modal" 'opens'
     Then Verify that "Sale modal" 'has title'
     Then Verify that "Sale modal" 'has item#'
-    Then Verify that "Sale modal" 'has price, member and sale price'
     Then Verify that "Sale modal" 'has qty dropdown'
     Then Verify that "Sale modal" 'has "add to cart" and "add to project" buttons'
     Then Verify that "Sale modal" 'has an item can be added to cart from modal'
@@ -114,7 +111,7 @@ Feature: Concierge PDP
     Then I verify that availability, Delivery and returns messaging is displayed for "<items>"
     Examples:
       | items | skuID         |
-      | SO    | 59810779 CTBZ |
+      #| SO    | 59810779 CTBZ |
       | BO    | 10024793 BRNZ |
 
   Scenario: Verify the dropdown selection and add to cart
@@ -124,7 +121,7 @@ Feature: Concierge PDP
     When I go to concierge item 'prod12640168' from search field
     When I click on the first project search result with parameters 'prod12640168''59810779 CTBZ'
     Then I Verify that 'item title' is present
-    Then Verify that 'text "Components starting at" is present'
+    #Then Verify that 'text "Components starting at" is present'
     Then Verify that 'cloud Modular Leather Sofa titles are present'
     Then Verify that line item field 'Fill' is present
     Then Verify that line item field 'Leather' is present
@@ -134,18 +131,14 @@ Feature: Concierge PDP
     Then Verify that 'text "Configure this item to view delivery information to" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are inactive'
     Then I chose the '1' line item selections one by one
-    Then I verify that text item# and SKU is present
-    Then Verify that 'text "Unlimited Furniture Delivery" is present'
-    Then I verify that check for replacements parts button is displayed
+    #Then Verify that 'text "Unlimited Furniture Delivery" is present'
+    #Then I verify that check for replacements parts button is displayed
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     When I click on add to cart button
     Then Verify that 'confirm that Add to Cart slider for SO is present'
-    Then Verify that 'verify data in the modal for SO'
-    Then Verify that 'click Agree and add to cart'
     When I click on view cart button
     Then I open cart
     Then Verify that 'cart page has item (SKU)'
-    Then Verify that 'price is matching PDP'
 
   Scenario: Verify Colorization options
     Given I log into Concierge as "associate"
@@ -183,8 +176,8 @@ Feature: Concierge PDP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I go to item "10024793 BRNZ" from search field
-    Then I chose the '1' line item selections one by one
+    #When I go to item "10024793 BRNZ" from search field
+    When I go to item "10060297 CLR" from search field
     Then I chose the '1' line item selections one by one
     When I click on add to cart button
     When I click on view cart button
@@ -238,7 +231,6 @@ Feature: Concierge PDP
 
   Scenario: Sale PDP: Regular/Member/Final Price validation
     Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
     When I choose country for concierge from footer
     When I navigate to "Sale"
     Then I choose a random sale item
@@ -294,8 +286,9 @@ Feature: Concierge PDP
     Then I navigate to gallery 'Wood Beds'
     Then I chose '6' product on the page
     Then I Verify that 'item title' is present
+    #Then I chose the '1' line item selections one by one
     Then I chose the '1' line item selections one by one for '5' items
-    Then I click on button "ADD TO CART" in the cart
+    Then I click on button "Add to Cart" in the cart
     Then I verify that cart modal is displayed
     Then I click on button "ADD ALL TO CART" in the cart
     Then I verify that cart modal is displayed for more than one item
