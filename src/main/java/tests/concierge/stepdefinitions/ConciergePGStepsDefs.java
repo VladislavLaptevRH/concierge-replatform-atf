@@ -59,7 +59,7 @@ public class ConciergePGStepsDefs {
             conciergePGScreen.getTopNavSubManuByName(subMenu).hover();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         } else {
-            $(By.xpath("//li/span[contains(text(), '" + subMenu + "')]")).hover();
+            $(By.xpath("(//*[contains(@id , 'rhrCtalogNavigationDetails')]//*[text() = '" + subMenu + "'])[2]")).hover();
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
         result = subMenu;

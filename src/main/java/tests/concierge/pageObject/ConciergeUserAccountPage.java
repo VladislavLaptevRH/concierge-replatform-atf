@@ -23,7 +23,7 @@ public class ConciergeUserAccountPage {
 
     public final String galleryItem = "//input[@value = '%s']";
 
-    public final String brand = "//*[text()='%s']";
+    public final String brand = "(//*[text()='%s'])[2]";
 
     public final String button = "//span[text()='%s']";
     public final String th = "//th[text()='%s']";

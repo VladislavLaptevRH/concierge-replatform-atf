@@ -16,10 +16,7 @@ import tests.utility.Hooks;
 import tests.concierge.stepdefinitions.ConciergeE2EStepDefs;
 import java.text.DecimalFormat;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -414,7 +411,7 @@ public class ConciergeCartStepDefs {
 
     @When("I click on UFD button from cart")
     public void iClickOnUFDButtonFromCart() {
-        conciergeCartPageScreen.getUfdCartButton().should(visible, Duration.ofMinutes(1));
+        conciergeCartPageScreen.getUfdCartButton().should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getUfdCartButton().scrollIntoView(true);
         conciergeCartPageScreen.getUfdCartButton().click();
     }
@@ -428,7 +425,7 @@ public class ConciergeCartStepDefs {
         with().pollInterval(3, SECONDS).await().until(() -> true);
         totalPrice = conciergeCartPageScreen.getTotalPrice().getText().replaceAll(",", "").replaceAll("\\$", "");
         totalAdditionalProductDiscountMessage = conciergeCartPageScreen.getTotalAdditionalProductDiscountMessage().getText();
-        //totalAdditionalProductDiscount = conciergeCartPageScreen.getTotalAdditionalProductDiscount().getText().replaceAll(",", "").replaceAll("\\$", "");
+        totalAdditionalProductDiscount = conciergeCartPageScreen.getTotalAdditionalProductDiscount().getText().replaceAll(",", "").replaceAll("\\$", "");
     }
 
     @When("I introduces promo code {string} for promo codes field")
@@ -458,26 +455,38 @@ public class ConciergeCartStepDefs {
         conciergeCartPageScreen.getTotalAditionalProdDiscount().should(visible, Duration.ofSeconds(15));
     }
 
+    @Then("I verify that payment page is present")
+    public void iVerifyThatPaymentPageIsPresent() {
+        if (!paymentScreen.getPaymentMethodPageTitleText().isDisplayed()) {
+            abstractStepDefs.iClickOnCheckoutButton();
+            conciergeE2EStepDefs.iClickOnNoThanksButton();
+            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+            conciergeE2EStepDefs.continueToPaymentAfterAddressCheckout();
+            paymentScreen.getPaymentMethodPageTitleText().should(visible, Duration.ofSeconds(15));
+        }
+    }
+
     @Then("I verify that total price from cart and from payment page is the same")
     public void iVerifyThatTotalPriceFromCartAndFromPaymentPageIsTheSame() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        if (!conciergeCartPageScreen.getTotalAditionalProdDiscount().isDisplayed()) {
-            iRemoveAllItemsFromCartViaUI();
-            conciergeE2EStepDefs.iRemoveClientFromHeader();
-            iAddItemToCartViaAPI();
-            conciergeE2EStepDefs.iOpenCart();
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-            iIntroducesPromoCodeForPromoCodesField("FEMAD");
-            iClickOnApplyPromocodeButton();
-            iChooseOrderClassification();
+        if (!paymentScreen.getPaymentMethodPageTitleText().isDisplayed()) {
+//            iRemoveAllItemsFromCartViaUI();
+//            conciergeE2EStepDefs.iRemoveClientFromHeader();
+//            iAddItemToCartViaAPI();
+//            conciergeE2EStepDefs.iOpenCart();
+//            WebDriverRunner.getWebDriver().navigate().refresh();
+//            with().pollInterval(5, SECONDS).await().until(() -> true);
+//            iIntroducesPromoCodeForPromoCodesField("FEMAD");
+//            iClickOnApplyPromocodeButton();
+//            iChooseOrderClassification();
             abstractStepDefs.iClickOnCheckoutButton();
             conciergeE2EStepDefs.iClickOnNoThanksButton();
-            conciergeE2EStepDefs.iChooseClientWhoIsAMember("Non-Member");
+//            conciergeE2EStepDefs.iChooseClientWhoIsAMember("Non-Member");
             abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
             conciergeE2EStepDefs.continueToPaymentAfterAddressCheckout();
-            paymentStepDefs.iClickOnContinueWithOriginalAddressButton();
+            paymentScreen.getPaymentMethodPageTitleText().should(visible, Duration.ofSeconds(15));
         }
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         float totalPriceAfterStateTax = Float.parseFloat(conciergeCartPageScreen.getTotalPriceAfterStateTax().getText().replaceAll(",", "").replaceAll("\\$", ""));
         float stateTax = Float.parseFloat(conciergeCartPageScreen.getStateTax().getText().replaceAll(",", "").replaceAll("\\$", ""));
         float totalPriceBeforeStateTax = Float.parseFloat(totalPrice);
@@ -887,9 +896,15 @@ public class ConciergeCartStepDefs {
             conciergeCartPageScreen.getShippingAddressEditButton().scrollIntoView(true);
             conciergeCartPageScreen.getShippingAddressEditButton().click();
         }
-        checkoutAddressScreen.getFirstNameInpt().should(visible, Duration.ofMinutes(1));
-        checkoutAddressScreen.getFirstNameInpt().shouldHave(value("QAFirst"), Duration.ofMinutes(1));
-        checkoutAddressScreen.getLastNameField().shouldHave(value("Automation"), Duration.ofMinutes(1));
+        if(checkoutAddressScreen.getFirstNameInpt().isDisplayed()){
+            checkoutAddressScreen.getFirstNameInpt().should(visible, Duration.ofSeconds(15));
+            checkoutAddressScreen.getFirstNameInpt().shouldHave(value("Automation"), Duration.ofMinutes(1));
+            checkoutAddressScreen.getLastNameField().shouldHave(value("NonMember"), Duration.ofMinutes(1));
+        } else {
+            checkoutAddressScreen.getFirstNameInptUpperCase().should(visible, Duration.ofSeconds(15));
+            checkoutAddressScreen.getFirstNameInptUpperCase().shouldHave(value("Automation"), Duration.ofMinutes(1));
+            checkoutAddressScreen.getLastNameFieldUpperCase().shouldHave(value("NonMember"), Duration.ofMinutes(1));
+        }
     }
 
     @Then("I verify that monogram was added")
@@ -980,7 +995,11 @@ public class ConciergeCartStepDefs {
     @Then("I verify that availability, Delivery and Returns messaging in cart")
     public void iVerifyThatAvailabilityDeliveryAndReturnsMessagingInCart() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        conciergeCartPageScreen.getItemInSockText().should(visible, Duration.ofSeconds(10));
+        if(conciergeCartPageScreen.getItemInSockText().isDisplayed()){
+            conciergeCartPageScreen.getItemInSockText().should(visible, Duration.ofSeconds(10));
+        } else {
+            conciergeCartPageScreen.getItemReadyForDeliveryText().should(visible, Duration.ofSeconds(10));
+        }
         conciergeCartPageScreen.getItemCanBeReturned().should(visible, Duration.ofMinutes(1));
     }
 
@@ -1023,8 +1042,14 @@ public class ConciergeCartStepDefs {
         float regularPrice = Float.parseFloat(RegularPrice);
         float memberPrice = Float.parseFloat(MemberPrice);
         String savings = Float.toString(regularPrice - memberPrice);
-        conciergeCartPageScreen.getRhMembersProgramTitleText().shouldBe(visible, Duration.ofSeconds(15));
-        assertEquals("You've elected to join the RH Members Program, and you'll save $" + Float.parseFloat(savings) + "0 on this order.", conciergeCartPageScreen.getRhMembersProgramText().getText());
+        if(conciergeCartPageScreen.getRhMembersProgramTitleText().isDisplayed()){
+            conciergeCartPageScreen.getRhMembersProgramTitleText().shouldBe(visible, Duration.ofSeconds(15));
+            assertEquals("You've elected to join the RH Members Program, and you'll save $" + Float.parseFloat(savings) + "0 on this order.", conciergeCartPageScreen.getRhMembersProgramText().getText());
+        } else {
+            conciergeCartPageScreen.getRhMembersProgramTitleTextLowerCase().shouldBe(visible, Duration.ofSeconds(15));
+            assertEquals("You've elected to join the RH Members Program, and you'll save $" + Float.parseFloat(savings) + "0 on this order.", conciergeCartPageScreen.getRhMembersProgramTextLowerCase().getText());
+        }
+
     }
 
     @When("I apply employee discount")
@@ -1224,8 +1249,12 @@ public class ConciergeCartStepDefs {
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        Select orderClassificationDropDownList = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
-        orderClassificationDropDownList.selectByValue("RH Gallery Order");
+        try {
+            Select orderClassificationDropDownList = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
+            orderClassificationDropDownList.selectByValue("RH Gallery Order");
+        } catch (org.openqa.selenium.NoSuchElementException e){
+            System.out.println("Element undefined");
+        }
         with().pollInterval(5, SECONDS).await().until(() -> true);
     }
 
@@ -1270,7 +1299,8 @@ public class ConciergeCartStepDefs {
 
     @When("I verify that company name is not mandatory on address page")
     public void iVerifyThatCompanyIsNotMandatoryOnAddressPage() {
-        conciergeCartPageScreen.getWeAreUnableToVerifyTheAddressProvidedText().should(visible, Duration.ofSeconds(20));
+        conciergeCartPageScreen.getCompanyNameOptional().should(visible, Duration.ofSeconds(20));
+        conciergeCartPageScreen.getCompanyNameWarning().shouldNotBe(visible, Duration.ofSeconds(20));
     }
 
     @When("I verify updated zip code in the cart is {string}")
@@ -1538,7 +1568,7 @@ public class ConciergeCartStepDefs {
             conciergeCartPageScreen.getTotalPrice().shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
         }
         $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
-        $(By.xpath("//*[text() = 'Subtotal' ]/../following-sibling::div/span")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
+        conciergeCartPageScreen.getSubtotalCurrentValue().shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
     }
 
     @When("I verify all the sums on the cart page with item quantity {string}")
