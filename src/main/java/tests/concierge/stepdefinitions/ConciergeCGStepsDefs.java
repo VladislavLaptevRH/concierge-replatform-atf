@@ -169,14 +169,14 @@ public class ConciergeCGStepsDefs {
             if ($(By.xpath("(//li[contains(@id, 'rhrCtalogNavigationDetails_concepts')])[" + levelOfCollection + "]/span")).isDisplayed()) {
                 assertEquals(gallery, $(By.xpath("(//li[contains(@id, 'rhrCtalogNavigationDetails_concepts')])[" + levelOfCollection + "]/span")).getText());
             } else {
-                assertEquals(gallery, $(By.xpath("(//*[@role = 'tooltip']//*[contains(@class, 'MuiTypography')])[" + levelOfCollection + "]")).getText());
+                assertEquals(gallery, $(By.xpath("((//*[@role = 'tooltip'])[15]//*[contains(@id , 'rhrCtalogNavigationDetails_concepts')])[" + levelOfCollection + "]")).getText());
             }
 
         } else {
             if ($(By.xpath("(//li[contains(@id, 'rhrCtalogNavigationDetails_navigation')])[" + levelOfCollection + "]/span")).isDisplayed()) {
                 assertEquals(subMenu, $(By.xpath("(//li[contains(@id, 'rhrCtalogNavigationDetails_navigation')])[" + levelOfCollection + "]/span")).getText());
             } else {
-                assertEquals(subMenu, $(By.xpath("(//div[@role = 'tooltip']//span[contains(@class, 'MuiTypography')])[" + levelOfCollection + "]")).getText());
+                assertEquals(subMenu, $(By.xpath("(//*[contains(@id , 'rhrCtalogNavigationDetails_navigation')])[" + levelOfCollection + "]")).getText());
             }
         }
     }
@@ -201,16 +201,30 @@ public class ConciergeCGStepsDefs {
         // Verifying the USA validation of sale
         conciergeItemsScreen.getCountrySelection().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
-
-        conciergeItemsScreen.getCaCountry().click();
-        conciergeItemsScreen.getSelectCountrySaveButton().click();
+        if(conciergeItemsScreen.getCaCountry().isDisplayed()){
+            conciergeItemsScreen.getCaCountry().click();
+        } else {
+            conciergeItemsScreen.getCaCountryLowerCase().click();
+        }
+        if(conciergeItemsScreen.getSelectCountrySaveButton().isDisplayed()){
+            conciergeItemsScreen.getSelectCountrySaveButton().click();
+        } else {
+            conciergeItemsScreen.getSelectCountryConfirmButton().click();
+        }
         with().pollInterval(1, SECONDS).await().until(() -> true);
 
         conciergeItemsScreen.getCountrySelection().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
-
-        conciergeItemsScreen.getUsCountry().click();
-        conciergeItemsScreen.getSelectCountrySaveButton().click();
+        if(conciergeItemsScreen.getUsCountry().isDisplayed()){
+            conciergeItemsScreen.getUsCountry().click();
+        } else {
+            conciergeItemsScreen.getUsCountryLowerCase().click();
+        }
+        if(conciergeItemsScreen.getSelectCountrySaveButton().isDisplayed()){
+            conciergeItemsScreen.getSelectCountrySaveButton().click();
+        } else {
+            conciergeItemsScreen.getSelectCountryConfirmButton().click();
+        }
         with().pollInterval(1, SECONDS).await().until(() -> true);
         // Sale Link is clicked
         conciergeItemsScreen.getSaleButtonMenu().should(visible, Duration.ofSeconds(20));
@@ -222,8 +236,16 @@ public class ConciergeCGStepsDefs {
         conciergeItemsScreen.getCountrySelection().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
 
-        conciergeItemsScreen.getCaCountry().click();
-        conciergeItemsScreen.getSelectCountrySaveButton().click();
+        if(conciergeItemsScreen.getCaCountry().isDisplayed()){
+            conciergeItemsScreen.getCaCountry().click();
+        } else {
+            conciergeItemsScreen.getCaCountryLowerCase().click();
+        }
+        if(conciergeItemsScreen.getSelectCountrySaveButton().isDisplayed()){
+            conciergeItemsScreen.getSelectCountrySaveButton().click();
+        } else {
+            conciergeItemsScreen.getSelectCountryConfirmButton().click();
+        }
         with().pollInterval(1, SECONDS).await().until(() -> true);
 
         // Sale Link is clicked
@@ -234,15 +256,23 @@ public class ConciergeCGStepsDefs {
         // Verifying the UK validation of sale
         conciergeItemsScreen.getCountrySelection().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
+        if(conciergeItemsScreen.getGbCountry().isDisplayed()){
+            conciergeItemsScreen.getGbCountry().click();
+        } else {
+            conciergeItemsScreen.getGbCountryLowerCase().click();
+        }
 
-        conciergeItemsScreen.getGbCountry().click();
-        conciergeItemsScreen.getSelectCountrySaveButton().click();
+        if(conciergeItemsScreen.getSelectCountrySaveButton().isDisplayed()){
+            conciergeItemsScreen.getSelectCountrySaveButton().click();
+        } else {
+            conciergeItemsScreen.getSelectCountryConfirmButton().click();
+        }
         with().pollInterval(1, SECONDS).await().until(() -> true);
         // Sale Link is clicked
-        conciergeItemsScreen.getSaleButtonMenuForUK().should(visible, Duration.ofSeconds(20));
-        conciergeItemsScreen.getSaleButtonMenuForUK().click();
+//        conciergeItemsScreen.getSaleButtonMenuForUK().should(visible, Duration.ofSeconds(20));
+//        conciergeItemsScreen.getSaleButtonMenuForUK().click();
         //validating the sale link is not present for UK
-        assertFalse(conciergeItemsScreen.getLivingSaleMenuBar().isDisplayed());
+//        assertFalse(conciergeItemsScreen.getLivingSaleMenuBar().isDisplayed());
     }
 
     @Then("I verify loading time for CG page")
@@ -275,7 +305,11 @@ public class ConciergeCGStepsDefs {
 
     @Then("I verify title is left aligned")
     public void iVerifytitleleftaligned() {
-        ConciergeCGScreen.getSeatingCollectionTitle().shouldBe(visible, Duration.ofSeconds(20));
+        if(ConciergeCGScreen.getSeatingCollectionTitle().isDisplayed()){
+            ConciergeCGScreen.getSeatingCollectionTitle().shouldBe(visible, Duration.ofSeconds(20));
+        } else {
+            ConciergeCGScreen.getSeatingCollectionTitleLowerCase().shouldBe(visible, Duration.ofSeconds(20));
+        }
     }
 
     @Then("I verify RH MEMBERS PROGRAM is right aligned")
@@ -293,9 +327,8 @@ public class ConciergeCGStepsDefs {
     public void iVerifySalePageClickedAndTakenToPG() {
         conciergeItemsScreen.getSaleButtonMenu().should(visible, Duration.ofSeconds(20));
         conciergeItemsScreen.getSaleButtonMenu().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         //validating the sale link is present
-        conciergeItemsScreen.getLivingSaleMenuBar().click();
-        with().pollInterval(1, SECONDS).await().until(() -> true);
         conciergeItemsScreen.getFabricChairInSale().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
     }

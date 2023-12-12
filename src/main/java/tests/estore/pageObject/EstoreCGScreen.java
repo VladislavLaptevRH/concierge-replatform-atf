@@ -15,6 +15,8 @@ import static org.testng.Assert.assertTrue;
 
 @Getter
 public class EstoreCGScreen {
+    private SelenideElement gridView2x2 = $(By.xpath("//div[contains(@class,'grid-item-6')]"));
+
     private SelenideElement previewTheCollectionLastItem = $(By.xpath("(//div[@data-cmp='cardImages']//div[@id='component-rh-image_wrapper'])[13]"));
 
     private SelenideElement backToTopButton = $(By.xpath("//button[@class='MuiButtonBase-root MuiFab-root']"));
@@ -92,7 +94,7 @@ public class EstoreCGScreen {
     private SelenideElement titleTerzoDiningTables = $(By.xpath("//*[text()='TERZO ROUND DINING TABLE']"));
 
 
-    public void verifyThatTitleisDisplayedOnCg(String title){
+    public void verifyThatTitleisDisplayedOnCg(String title) {
         $(By.xpath("//*[text()='" + title + "']")).should(visible, Duration.ofSeconds(12));
     }
 

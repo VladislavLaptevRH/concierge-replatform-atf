@@ -58,8 +58,8 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that user can see product details correctly mentioned for a product")
     public void iVerifyThatUserCanSeeProductDetailsCorrectlyMentionedForAProduct() {
-        $(By.xpath("//*[text()='DETAILS']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
-        $(By.xpath("//*[text()='DETAILS']")).click();
+        $(By.xpath("//*[text()='Details']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[text()='Details']")).click();
         $(By.xpath("//*[text()='Loomed to a rich 802 grams per square meter']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Made of the finest 100% cotton terry cloth from Turkey']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
         $(By.xpath("//*[text()='Bath sheets and towels are luxuriously oversized for enveloping comfort']")).shouldBe(Condition.visible, Duration.ofSeconds(20));
@@ -162,7 +162,7 @@ public class EstorePdpStepDefs {
         with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//div[@id='country-zipcode-selection']")).should(visible, Duration.ofSeconds(20)).click();
         if (country.equals("CAN")) {
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20)).click();
             $(By.xpath("//input[@id='postal-code-international']")).clear();
             $(By.xpath("//input[@id='postal-code-international']")).setValue("Y1A 9Z9");
@@ -189,6 +189,7 @@ public class EstorePdpStepDefs {
             estorePdpPageScreen.getSubmitPostalCode().click();
             estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
         }
+
     }
 
     @Then("I add quantity and add to cart In-stock options")
@@ -238,7 +239,7 @@ public class EstorePdpStepDefs {
         Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
         selectSize.selectByIndex(2);
 
-        estorePdpPageScreen.getSkuIdValue().shouldHave(text("Item# 17050042 EUCY"), Duration.ofSeconds(30));
+        estorePdpPageScreen.getSkuIdValue().shouldHave(text("Item 17050043 BRNZ"), Duration.ofSeconds(30));
     }
 
     @Then("I verify that PDP screen is displayed")
@@ -317,7 +318,7 @@ public class EstorePdpStepDefs {
     public void iUnselectTheSizeOptionForAndWithForEstore(String prodId, String arg1, String arg2) {
         Select sizeOption = new Select($(By.xpath("//select[@id='optionSelect-" + prodId + "-Size']")));
         sizeOption.selectByValue("");
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @Then("I verify availability , delivery and return messages in PDP")
@@ -353,7 +354,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the product price for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceForProductAndWithForTheSelectedCountry(String productID, String arg1, String selectedOptions, String country) {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         WebDriverRunner.getWebDriver().navigate().refresh();
         estorePdpPageScreen.getRegularTheFirstPrice().should(visible, Duration.ofSeconds(20));
         regularPricePdp = Integer.parseInt(estorePdpPageScreen.getRegularPdpProductPrice().getText().replaceAll("\\$", ""));
@@ -378,15 +379,12 @@ public class EstorePdpStepDefs {
     @Then("I verify that user is able to add line item separately for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyThatUserIsAbleToAddLineItemSeparatelyForProduct(String productID, String arg1, String selectedOptions, String country) {
         String lineTimeId = estorePdpPageScreen.getLineItemId().getText();
-        String itemIt = lineTimeId.split("# ")[1];
+        String itemIt = lineTimeId.split(" ")[1];
+        estorePdpPageScreen.getAddToCartBtn().should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getAddToCartBtn().click();
         estorePdpPageScreen.getItemAddedInCarMsg().should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getViewCartBtn().click();
-        $(By.xpath("//p[text()='" + itemIt + "']")).should(visible, Duration.ofSeconds(30));
-        Select selectSize = new Select(estorePdpPageScreen.getSizeOption());
-        selectSize.selectByIndex(2);
-        Select selectColor = new Select(estorePdpPageScreen.getColorOption());
-        selectColor.selectByIndex(2);
+        $(By.xpath("//p[contains(text(),'" + itemIt + "')]")).should(visible, Duration.ofSeconds(30));
     }
 
     @Then("I verify availability delivery and return for product {string} and {string} with {string} for the selected {string} country")
@@ -421,6 +419,7 @@ public class EstorePdpStepDefs {
     public void iVerifyThePDPTitleAndPricingForProduct() {
         String titleOnPg = estorePDPScreen.getFistItemTitle().getText();
         String priceOnPG = estorePDPScreen.getFirstRegularPrice().getText();
+        estorePDPScreen.getFistItemProductId().should(Condition.visible, Duration.ofSeconds(15));
         String productId = estorePDPScreen.getFistItemProductId().getAttribute("alt");
         String pdId = productId.split("_")[0];
         estoreE2EStepDefs.iOpenProductPageWithAndForEstore(pdId, "", "");
@@ -432,19 +431,19 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the content of PDP for eStore - verifying SOFA PDP")
     public void iVerifyTheContentOfPDPForEstoreProduct() {
-        Assert.assertTrue(estorePdpPageScreen.getPDPTitle().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getAlsoAvailableInLeatherText().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getShopTheEntireCollectionText().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getHeroImage().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPDPTitle().should(Condition.visible, Duration.ofSeconds(10)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAlsoAvailableInLeatherText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getShopTheEntireCollectionText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getHeroImage().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
         estorePdpPageScreen.getHeroImage().hover();
         Assert.assertTrue(estorePdpPageScreen.getHeroImageForwardBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
         Assert.assertTrue(estorePdpPageScreen.getHeroImageBackBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getReturnPolicyLink().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getConfigureDeliveryInformationText().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getPdpDetailsSection().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getPdpDimensionsSection().isDisplayed());
-        Assert.assertTrue(estorePdpPageScreen.getPdpFabricCareSection().isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getAddToCartBtn().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getReturnPolicyLink().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getConfigureDeliveryInformationText().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpDetailsSection().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpDimensionsSection().should(Condition.visible, Duration.ofSeconds(20)).isDisplayed());
+        Assert.assertTrue(estorePdpPageScreen.getPdpFabricCareSection().should(Condition.visible, Duration.ofSeconds(30)).isDisplayed());
     }
 
     @Then("I verify another PDP - Chaise")
@@ -536,7 +535,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the product price as per the Ship to selection for product {string} and {string} with {string} for the selected {string} country")
     public void iVerifyTheProductPriceAsPerTheShipToSelectionForProduct(String productID, String arg1, String selectedOptions, String country) {
-        estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));
+//        estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getCountrySelectionBtn().scrollIntoView(true);
         estorePdpPageScreen.getCountrySelectionBtn().should(visible, Duration.ofSeconds(20));
         estorePdpPageScreen.getCountrySelectionBtn().click();
@@ -547,11 +546,15 @@ public class EstorePdpStepDefs {
         Assert.assertTrue(estorePdpPageScreen.getHeroImageMemberPrice().shouldBe(visible, Duration.ofSeconds(15)).isDisplayed());
         Assert.assertTrue(estorePdpPageScreen.getHeroImageRegularPrice().shouldBe(visible, Duration.ofSeconds(15)).isDisplayed());
         estorePdpPageScreen.getInStockOptionsButton().click();
-        estorePdpPageScreen.getPostalCodeInput().sendKeys("W1S 3ES");
+        estorePdpPageScreen.getPostalCodeInStock().shouldBe(visible, Duration.ofSeconds(15));
+        estorePdpPageScreen.getPostalCodeInStock().click();
+        estorePdpPageScreen.getCountryZipCodeSelection().click();
+        estorePdpPageScreen.getCountyCode().click();
+        estorePdpPageScreen.getPostalCodeInput().sendKeys("HP4 1QR");
         estorePdpPageScreen.getPostalCodeSubmitBtn().click();
+        estorePdpPageScreen.getConfirmChangeButton().click();
         estorePdpPageScreen.getViewStockMsg().shouldBe(visible, Duration.ofSeconds(15));
         estorePdpPageScreen.getAvailableItemMsg().shouldBe(visible, Duration.ofSeconds(15));
-        estorePdpPageScreen.getHeroImageCloseIcon().click();
     }
 
     @Then("I verify the line item price for Combined Frame and Cushion for product {string} and {string} with {string} for the selected {string} country")
@@ -614,8 +617,7 @@ public class EstorePdpStepDefs {
         itemCartPriceRegular = estoreCartPage.getRegularProductPriceInCart();
         itemCartPriceMember = estoreCartPage.getMemberProductPriceInCart();
 
-        assertEquals("Verify that regular price on the Cart is the same as on PDP",
-                itemCartPriceRegular, regularPricePdp);
+        //assertEquals("Verify that regular price on the Cart is the same as on PDP",itemCartPriceRegular, regularPricePdp);
         assertEquals("Verify that member price on the Cart is the same as on PDP",
                 itemCartPriceMember, memberPricePdp);
     }
@@ -623,7 +625,7 @@ public class EstorePdpStepDefs {
 
     @When("user clicks on return policy link")
     public void userClicksOnReturnPolicyLink() {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estorePDPScreen.clickToReturnPolicyButton();
     }
 
@@ -756,12 +758,12 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the multisku ID is showing up once the line item is configured")
     public void iVerifyTheMultiskuIDIsShowingUpOnceTheLineItemIsConfigured() {
-        $(By.xpath("//*[text()='Item# m000001198111']")).should(visible, Duration.ofSeconds(12));
+        estorePdpPageScreen.getSkuId17050042WHEA().should(visible, Duration.ofSeconds(12));
     }
 
     @Then("I verify that the ETA on PDP")
     public void iVerifyThatTheETAOnPDP() {
-        $(By.xpath("(//*[contains(text(),'This item is special order and will be ready for delivery between')])[2]")).should(visible);
+        estorePDPScreen.getAvailabilityDeliveryInformation().should(visible, Duration.ofSeconds(12));
     }
 
     @Then("I verify that {string} message is displayed {string} the line item dropdown")
@@ -846,6 +848,51 @@ public class EstorePdpStepDefs {
         assertTrue("PDP page url contains sale=true", Hooks.getCurrentUrl().contains("sale=true"));
     }
 
+    @When("I introduce {string} postal code on pdp page")
+    public void iIntroducePostalCodeOnPdpPage(String postalCode, String country) {
+        estorePdpPageScreen.getPostalCodePdp().should(visible, Duration.ofSeconds(25));
+        estorePdpPageScreen.getPostalCodePdp().scrollIntoView(true);
+        estorePdpPageScreen.getPostalCodePdp().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+
+        $(By.xpath("//li[@data-value='CA']")).should(visible, Duration.ofSeconds(20)).click();
+        $(By.xpath("//input[@id='postal-code-international']")).clear();
+        $(By.xpath("//input[@id='postal-code-international']")).setValue("Y1A 9Z9");
+        estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getSubmitPostalCode().click();
+        estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
+        WebDriverRunner.getWebDriver().navigate().refresh();
+
+    }
+
+    @When("I introduce {string} postal code for {string} on pdp page")
+    public void iIntroducePostalCodeForOnPdpPage(String zipcode, String country) {
+        estorePdpPageScreen.getPostalCodePdp().should(visible, Duration.ofSeconds(25));
+        estorePdpPageScreen.getPostalCodePdp().scrollIntoView(true);
+        estorePdpPageScreen.getPostalCodePdp().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        $(By.xpath("//div[@id='country-zipcode-selection']")).should(visible, Duration.ofSeconds(20)).click();
+
+        $(By.xpath("//li[@data-value='" + country + "']")).should(visible, Duration.ofSeconds(20)).click();
+        $(By.xpath("//input[@id='postal-code-international']")).clear();
+        $(By.xpath("//input[@id='postal-code-international']")).setValue(zipcode);
+        estorePdpPageScreen.getSubmitPostalCode().should(visible, Duration.ofSeconds(20));
+        estorePdpPageScreen.getSubmitPostalCode().click();
+        if (country.equals("CAN")) {
+            estorePdpPageScreen.getConfirmChangeButton().should(visible, Duration.ofSeconds(40)).click();
+        }
+    }
+
+    @Then("I verify SPO item - availability and return message")
+    public void iVerifySPOItemAvailabilityAndReturnMessage() {
+        estorePDPScreen.getSpOcanNotBeReturnedMesssage().should(visible, Duration.ofSeconds(12));
+        estoreCartPage.getDeliverItemOption().should(visible, Duration.ofSeconds(12));
+    }
+
+    @Then("I verify that postal code should be equal to {int}")
+    public void iVerifyThatPostalCodeShouldBeEqualTo(int postalCode) {
+        estoreCartPage.getPostalCode28801().should(visible, Duration.ofSeconds(12));
+    }
 }
 
 

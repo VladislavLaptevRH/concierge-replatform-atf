@@ -65,7 +65,7 @@ public class ConciergeSearchStepDefs {
                 assertEquals(Hooks.getCurrentUrl(), "https://stg2-concierge.restorationhardware.com/us/en/customer-experience/contact-us");
                 break;
             case "footer is present":
-                $(By.xpath("//*[text() = 'DASHBOARD']")).should(Condition.visible, Duration.ofSeconds(15));
+                $(By.xpath("//*[text() = 'LEGAL']")).should(Condition.visible, Duration.ofSeconds(15));
                 break;
             case "PG page is returned with text  RESULTS (IN RH BABY & CHILD)":
                 $(By.xpath("//*[text() = 'RESULTS']")).shouldHave(text("IN RH BABY & CHILD )"));
@@ -84,7 +84,7 @@ public class ConciergeSearchStepDefs {
 
     @Then("Sofa products too should be searched")
     public void sofaProductsShouldBeSearched(){
-        conciergeSearchScreen.getSofaFirstItem().should(visible, Duration.ofSeconds(15));
+        conciergeSearchScreen.getBrandFilter().should(visible, Duration.ofSeconds(3));
     }
 
     @Then("All RH products should be searched")

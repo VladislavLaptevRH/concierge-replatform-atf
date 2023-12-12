@@ -17,7 +17,6 @@ Feature: Concierge Project
 #      | SPO In stock Items |
 #      | BO                |
 
-  @vlad
   Scenario: Verify the Projects load for a logged in associate for all regions (US,CAD and UK)
     Given I log into Concierge as "associate"
     When I choose "US" country
@@ -484,7 +483,6 @@ Feature: Concierge Project
     Then I verify that space list in dropdown is displayed from add to project modal
 
   Scenario: Verify add new Space in the add to project modal and add items to the selected space - CART/PDP
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart
@@ -500,7 +498,6 @@ Feature: Concierge Project
     Then I verify that item was added to the selected space
 
   Scenario: Verify the address page, pre filled address details and Email address once the project added to cart
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -578,7 +575,6 @@ Feature: Concierge Project
     When I click on view all button from space dropdown
     Then I verify that items from all spaces are displayed
 
-    @vlad
   Scenario: Verify pagination is working when switching between pages in my projects
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -586,7 +582,6 @@ Feature: Concierge Project
     Then Switch page using pagination
     And User should be able to switch pages using pagination in my projects
 
-    @vlad
   Scenario: Verify Correct brand Name is showing in email estimate for line items
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

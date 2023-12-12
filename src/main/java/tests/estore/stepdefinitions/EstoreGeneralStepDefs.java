@@ -463,6 +463,93 @@ public class EstoreGeneralStepDefs {
         }
     }
 
+    public void add10LineItemsToEstoreCartStg2() {
+        setUserEnvironment();
+        cartId = getEstoreCartId(USER_ID, USEREMAIL);
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given().relaxedHTTPSValidation();
+        request.headers("Content-Type", "application/json");
+        request.headers("Cookie", "PF_AEM_PATHS=%5E%2F(%3F%3Aalison-berger(%3F%3A%2F(%3F%3Aaperture%7C(%3F%3A(%3F%3Afulcrum%7Cpearl%7Crain)%7Cice))~IN%7C~IN)%7C(%3F%3Aalison-berger(%3F%3A%2F(%3F%3Aaperture%7C(%3F%3A(%3F%3Afulcrum%7Cpearl%7Crain)%7Cice))~R%7C~R)%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)R)H%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)OD%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)IN%7C(%3F%3A(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)%7Cgift-registry~)MO%7Cinterior-design~BC%7Cgift-registry~RH%7Cstrada-ledoux~MO)%24; endpoint=develop; fusion_search=true; ui_asset_path=/concierge-ui-v1/");
+        response = request.body("{\n" +
+                "    \"operationName\": \"AddLineItemsToCart\",\n" +
+                "    \"variables\": {\n" +
+                "        \"email\": \"" + USEREMAIL + "\",\n" +
+                "        \"cartId\": \"" + cartId + "\",\n" +
+                "        \"lineItemsInput\": {\n" +
+                "            \"items\": [\n" +
+                "                {\n" +
+                "                    \"productId\": \"prod13800635\",\n" +
+                "                    \"sku\": \"17050044 NATL\",\n" +
+                "                    \"fusionId\": \"iXzwEtMB1A~prod14280121~search\",\n" +
+                "                    \"quantity\": 1,\n" +
+                "                    \"brand\": \"RH\",\n" +
+                "                    \"giftTo\": \"\",\n" +
+                "                    \"giftFrom\": \"\",\n" +
+                "                    \"giftMessage\": \"\",\n" +
+                "                    \"spoTermsAccepted\": false,\n" +
+                "                    \"spoTerms\": null\n" +
+                "                }\n" + "," +
+                "                {\n" +
+                "                    \"productId\": \"prod13800575\",\n" +
+                "                    \"sku\": \"17050043 INDG\",\n" +
+                "                    \"fusionId\": \"iXzwEtMB1A~prod14280121~search\",\n" +
+                "                    \"quantity\": 1,\n" +
+                "                    \"brand\": \"RH\",\n" +
+                "                    \"giftTo\": \"\",\n" +
+                "                    \"giftFrom\": \"\",\n" +
+                "                    \"giftMessage\": \"\",\n" +
+                "                    \"spoTermsAccepted\": false,\n" +
+                "                    \"spoTerms\": null\n" +
+                "                }\n" + "," +
+                "                {\n" +
+                "                    \"productId\": \"prod13800575\",\n" +
+                "                    \"sku\": \"17050045 CBON\",\n" +
+                "                    \"fusionId\": \"iXzwEtMB1A~prod14280121~search\",\n" +
+                "                    \"quantity\": 1,\n" +
+                "                    \"brand\": \"RH\",\n" +
+                "                    \"giftTo\": \"\",\n" +
+                "                    \"giftFrom\": \"\",\n" +
+                "                    \"giftMessage\": \"\",\n" +
+                "                    \"spoTermsAccepted\": false,\n" +
+                "                    \"spoTerms\": null\n" +
+                "                }\n" + "," +
+                        "                {\n" +
+                        "                    \"productId\": \"prod13800575\",\n" +
+                        "                    \"sku\": \"17050045 MIST\",\n" +
+                        "                    \"fusionId\": \"iXzwEtMB1A~prod14280121~search\",\n" +
+                        "                    \"quantity\": 1,\n" +
+                        "                    \"brand\": \"RH\",\n" +
+                        "                    \"giftTo\": \"\",\n" +
+                        "                    \"giftFrom\": \"\",\n" +
+                        "                    \"giftMessage\": \"\",\n" +
+                        "                    \"spoTermsAccepted\": false,\n" +
+                        "                    \"spoTerms\": null\n" +
+                        "                }\n"+
+                        "," +
+                        "                {\n" +
+                        "                    \"productId\": \"prod13800575\",\n" +
+                        "                    \"sku\": \"17050045 WHT\",\n" +
+                        "                    \"fusionId\": \"iXzwEtMB1A~prod14280121~search\",\n" +
+                        "                    \"quantity\": 1,\n" +
+                        "                    \"brand\": \"RH\",\n" +
+                        "                    \"giftTo\": \"\",\n" +
+                        "                    \"giftFrom\": \"\",\n" +
+                        "                    \"giftMessage\": \"\",\n" +
+                        "                    \"spoTermsAccepted\": false,\n" +
+                        "                    \"spoTerms\": null\n" +
+                        "                }\n"+
+                "            ]\n" +
+                "        }\n" +
+                "    },\n" +
+                "    \"query\": \"mutation AddLineItemsToCart($email: String!, $cartId: String!, $lineItemsInput: LineItemsInput!) {\\n  addLineItemsToCart(\\n    email: $email\\n    cartId: $cartId\\n    lineItemsInput: $lineItemsInput\\n  ) {\\n    ...Cart\\n    __typename\\n  }\\n}\\n\\nfragment Cart on CartType {\\n  __typename\\n  id\\n  requestedDeliveryDate\\n  postalCode\\n  country\\n  coordGroupType\\n  coordGroupGroupable\\n  coordGroupUserSelected\\n  orderNumber\\n  cartSavings\\n  isUserMember\\n  giftBoxFee\\n  hasGiftBox\\n  hasGiftFromRegistry\\n  giftRegistryIdList\\n  guest {\\n    userId\\n    ctId\\n    atgUserId\\n    cwUserId\\n    email\\n    type\\n    typeId\\n    sourceCode\\n    shopperRef\\n    __typename\\n  }\\n  removedItems {\\n    invalidRegion {\\n      sku\\n      product {\\n        displayName\\n        imageUrl\\n        targetUrl\\n        alternateImages {\\n          imageUrl\\n          caption\\n          __typename\\n        }\\n        colorizeInfo {\\n          colorizable\\n          colorizeType\\n          multicolor\\n          __typename\\n        }\\n        __typename\\n      }\\n      options {\\n        type\\n        value\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n  lineItems {\\n    restrictions {\\n      ...LineItemRestrictions\\n      __typename\\n    }\\n    restrictionsApply\\n    giftFrom\\n    giftTo\\n    personalizeInfo {\\n      feeHigh\\n      feeLow\\n      selectedFont {\\n        id\\n        displayName\\n        previewImage\\n        image\\n        borders {\\n          id\\n          __typename\\n        }\\n        __typename\\n      }\\n      selectedBorder {\\n        id\\n        image\\n        displayName\\n        minLength\\n        maxLength\\n        numberOfLines\\n        __typename\\n      }\\n      selectedStyle {\\n        id\\n        image\\n        minLength\\n        maxLength\\n        numberOfLines\\n        displayName\\n        previewImage\\n        __typename\\n      }\\n      selectedColor {\\n        id\\n        displayName\\n        image\\n        __typename\\n      }\\n      __typename\\n    }\\n    isMonogramFee\\n    shouldWaiveMonogramFee\\n    shipVia\\n    shipViaCode\\n    isMonogrammable\\n    isPersonalizable\\n    fusionId\\n    monogram {\\n      styleId\\n      description\\n      maxLines\\n      fontCode\\n      fontColorCode\\n      borderCode\\n      lines\\n      fulfillmentCode\\n      __typename\\n    }\\n    lineId\\n    quantity\\n    maxCartQuantity\\n    sku\\n    skuType\\n    brand\\n    displayName\\n    giftBoxDetail {\\n      giftBoxFee\\n      giftBoxCurrencyCode\\n      __typename\\n    }\\n    giftWrap\\n    deliveryEta\\n    deliveryEtaStart\\n    deliveryEtaEnd\\n    coordGroup\\n    registryId\\n    spoTerms\\n    spoTermsAccepted\\n    spoTermsAcceptedDate\\n    isMembershipSku\\n    availabilityInfo {\\n      displayText\\n      type\\n      props {\\n        href\\n        __typename\\n      }\\n      __typename\\n    }\\n    deliveryInfo {\\n      displayText\\n      type\\n      props {\\n        href\\n        __typename\\n      }\\n      __typename\\n    }\\n    productId\\n    product {\\n      displayName\\n      imageUrl\\n      targetUrl\\n      alternateImages {\\n        imageUrl\\n        caption\\n        __typename\\n      }\\n      colorizeInfo {\\n        colorizable\\n        colorizeType\\n        multicolor\\n        __typename\\n      }\\n      __typename\\n    }\\n    price {\\n      itemPrice\\n      memberPrice\\n      priceStatus\\n      priceType\\n      currencyCode\\n      originalPrice\\n      totalPrice\\n      salePrice\\n      finalPrice\\n      salePriceLabel\\n      isOnClearance\\n      isOnSale\\n      showMemberPrice\\n      fees\\n      itemShippingSurcharge\\n      __typename\\n    }\\n    options {\\n      type\\n      value\\n      __typename\\n    }\\n    isGiftFromRegistry\\n    webPurchasable\\n    linkedLineItemId\\n    skuCustomization {\\n      type\\n      mountType\\n      lining\\n      panel\\n      controlType\\n      controlPosition\\n      controlLength\\n      tiltType\\n      controlAndTilt\\n      trim\\n      width\\n      length\\n      diameter\\n      roomLabel\\n      bracketColor\\n      rollType\\n      fulfillmentCode\\n      __typename\\n    }\\n    childSafety\\n    availabilityStatus\\n    __typename\\n  }\\n  shipVia\\n  cartPrice {\\n    subtotal\\n    tax\\n    taxDetail {\\n      amount\\n      name\\n      country\\n      state\\n      imposition\\n      rate\\n      __typename\\n    }\\n    totalPrice\\n    feeTotal\\n    currencyCode\\n    isFree\\n    fees {\\n      feeType\\n      quantity\\n      value\\n      unitCost\\n      linkedLineItemId\\n      __typename\\n    }\\n    freightPrice {\\n      unlimitedFurnitureDelivery\\n      ground\\n      next\\n      second\\n      shippingSurcharge\\n      __typename\\n    }\\n    discounts {\\n      discountCodeTotal\\n      __typename\\n    }\\n    preBillAmount\\n    remainingToBill\\n    __typename\\n  }\\n  shipAddress {\\n    addressLine1\\n    addressLine2\\n    city\\n    state\\n    country\\n    postalCode\\n    phone\\n    email\\n    firstName\\n    lastName\\n    __typename\\n  }\\n  billAddress {\\n    addressLine1\\n    addressLine2\\n    city\\n    state\\n    country\\n    postalCode\\n    phone\\n    email\\n    firstName\\n    lastName\\n    __typename\\n  }\\n  payments {\\n    totalAmountRemaining\\n    totalAmountCovered\\n    appliedPayments {\\n      id\\n      paymentMethodType\\n      paymentType\\n      lastFour\\n      amountCovered\\n      currencyCode\\n      rhPaymentPlan\\n      __typename\\n    }\\n    __typename\\n  }\\n  importantInformation {\\n    type\\n    displayText\\n    __typename\\n  }\\n  createdAt\\n  lastModifiedAt\\n  totalLines\\n  discountCodes {\\n    code\\n    name\\n    description\\n    __typename\\n  }\\n  brand\\n  gallery {\\n    galleryId\\n    __typename\\n  }\\n  shipLabelSidemark\\n  giftMessage\\n}\\n\\nfragment LineItemRestrictions on LineItemRestrictionsType {\\n  type\\n  sku\\n  category\\n  states\\n  countries\\n  postalRanges\\n  __typename\\n}\\n\"\n" +
+                "}").post(addItemEndpoint);
+
+        String jsonString = response.asString();
+        id = JsonPath.from(jsonString).get("data.addLineItemsToCart.id");
+        WebDriverRunner.getWebDriver().navigate().refresh();
+        generalStepDefs.waitForJSandJQueryToLoad();
+    }
+
     public void addLineItemsToEstoreCartStg2() {
         setUserEnvironment();
         cartId = getEstoreCartId(USER_ID, USEREMAIL);
@@ -479,8 +566,8 @@ public class EstoreGeneralStepDefs {
                 "            \"items\": [\n" +
                 "                {\n" +
                 "                    \"productId\": \"prod2020027\",\n" +
-                "                    \"sku\": \"17050044 JNPR\",\n" +
-                "                    \"fusionId\": \"iXzwEtMB1A~prod14280121~search\",\n" +
+                "                    \"sku\": \"17050042 WHEA\",\n" +
+                "                    \"fusionId\": \"iXzwEtMB1A~prod20360359~search\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"brand\": \"RH\",\n" +
                 "                    \"giftTo\": \"\",\n" +
@@ -799,4 +886,6 @@ public class EstoreGeneralStepDefs {
             System.out.println("Messasge is not displayed");
         }
     }
+
+
 }

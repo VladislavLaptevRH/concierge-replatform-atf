@@ -92,6 +92,9 @@ public class EstoreSaleStepDefs {
         if (arg0.equals("sofas")) {
             saleUrl = Hooks.eStoreBaseURL + "/us/en/catalog/category/products.jsp?pgterm=RH+Fabric+Sofas&N=%7B%21tag%3Dsku_showOnly%7Dsku_showOnly%3A%28\"Sale\"%29&Ns=product.sale%7C1&categoryId=cat25450027" + Hooks.cookie;
         }
+        if (arg0.equals("towels")) {
+            saleUrl = Hooks.eStoreBaseURL + "/us/en/catalog/category/products.jsp?pgterm=RH+Bath+Towels&N=%7B%21tag%3Dsku_showOnly%7Dsku_showOnly%3A%28\"Sale\"%29&Ns=product.sale%7C1&categoryId=cat17860005" + Hooks.cookie;
+        }
         open(saleUrl);
     }
 
@@ -343,5 +346,15 @@ public class EstoreSaleStepDefs {
     @When("I click on length button")
     public void iClickOnLengthButton() {
         estorePGScreen.getLengthFilterOption().should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
+
+    @When("I click on SALE in Secondary NAV from Textiles")
+    public void iClickOnSALEInSecondaryNAVFromTextiles() {
+        estoreHomePage.getSaleNaveBed().should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
+    }
+
+    @When("I click on Bedding Collections in Tertiary NAV from SALE")
+    public void iClickOnBeddingCollectionsInTertiaryNAVFromSALE() {
+        estoreHomePage.getTextilesBeddingCollections().should(visible, Duration.ofSeconds(12)).click(ClickOptions.usingJavaScript());
     }
 }

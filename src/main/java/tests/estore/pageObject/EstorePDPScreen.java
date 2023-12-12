@@ -15,6 +15,9 @@ import static org.awaitility.Awaitility.with;
 
 @Getter
 public class EstorePDPScreen {
+
+    private final SelenideElement availabilityDeliveryInformation = $(By.xpath("//*[contains(text() , 'This item will be ready for delivery between')]"));
+
     private final SelenideElement canadaCountrySelected = $(By.xpath("//*[text()='Canada ($)']"));
 
     private final SelenideElement addToCartButtonViewInStockPopUp = $(By.xpath("(//button[@id='inStockProductCardActions_addToCart-btn'])[1]"));
@@ -23,9 +26,9 @@ public class EstorePDPScreen {
 
     private final SelenideElement firstMemberPrice = $(By.xpath("(//p[@data-testid='price-for-member'])[1]"));
 
-    private final SelenideElement addToCartActiveButton = $(By.xpath("(//*[text()='Add To Cart'])[1]"));
+    private final SelenideElement addToCartActiveButton = $(By.xpath("(//*[text()='Add to Cart'])[1]"));
 
-    private final SelenideElement addToCartInactiveButton = $(By.xpath("(//*[text()='Add To Cart'])[2]"));
+    private final SelenideElement addToCartInactiveButton = $(By.xpath("(//*[text()='Add to Cart'])[2]"));
 
     private final SelenideElement sortButton = $(By.xpath("(//*[contains(text(),'sort')])[2]"));
 
@@ -71,7 +74,7 @@ public class EstorePDPScreen {
 
     private final SelenideElement fistItemTitle = $(By.xpath("(//a[@id='product-option-grid']//p//span)[2]"));
 
-    private final SelenideElement fistItemProductId = $(By.xpath("(//div[@data-cmp='cardImages'])[1]//img"));
+    private final SelenideElement fistItemProductId = $(By.xpath("(//img[contains(@alt,'prod')])[1]"));
 
     private final SelenideElement fillSelectOption = $(By.xpath("(//select[contains(@id,'prod') and contains(@id,'Fill')])[1]"));
 
@@ -94,6 +97,8 @@ public class EstorePDPScreen {
     private final SelenideElement firstLineItemMemberPrice = $(By.xpath("(//*[@id='rh-price-range-display']//*[@data-testid='price-for-member'])[3]"));
 
     private final SelenideElement firstLineItemRegularPrice = $(By.xpath("(//*[@id='rh-price-range-display']//*[@data-testid='price-for-regular'])[2]"));
+
+    private final SelenideElement spOcanNotBeReturnedMesssage = $(By.xpath("//*[contains(text(),'This item is special order and cannot be returned.')]"));
 
     public int getRegularFirstLineItemPricePDP() {
         return Integer.parseInt(firstLineItemRegularPrice.getText().replaceAll("\\$", "").replaceAll("\\,", ""));

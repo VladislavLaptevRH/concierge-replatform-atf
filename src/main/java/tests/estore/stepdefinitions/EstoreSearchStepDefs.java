@@ -36,21 +36,16 @@ public class EstoreSearchStepDefs {
     public void iGoToItemFromEstoreSearchField(String arg0) {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]//input")).should(visible, Duration.ofSeconds(60));
-        $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[2]//input")).click();
+        estoreUserAccountPage.getSearchItemFieldHomePage().should(visible, Duration.ofSeconds(60));
+        estoreUserAccountPage.getSearchItemFieldHomePage().click();
         estoreUserAccountPage.getSearchItemField().should(Condition.and("", visible, enabled), Duration.ofSeconds(40));
         estoreUserAccountPage.getSearchItemField().should(empty, Duration.ofMinutes(1));
         estoreUserAccountPage.getSearchItemField().click(ClickOptions.usingJavaScript());
         generalStepDefs.waitForJSandJQueryToLoad();
-
-
         estoreUserAccountPage.getSearchItemField().sendKeys(arg0);
-        sleep(2000);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getSearchItemField().click();
         estoreUserAccountPage.getSearchItemField().sendKeys(Keys.ENTER);
-
-//        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).should(visible, Duration.ofSeconds(40));
-//        $(By.xpath("//*[text() = 'SEE ALL RESULTS']")).click(ClickOptions.usingJavaScript());
     }
 
     @Then("I verify that search result {string} for search product via product name is displayed")
@@ -127,7 +122,6 @@ public class EstoreSearchStepDefs {
     public void iSelectHighToLowForEstore() {
         estorePDPScreen.getSortByButton().should(visible, Duration.ofSeconds(20));
         estorePDPScreen.getSortByButton().click();
-
         estorePDPScreen.getPriceHighToLow().should(visible, Duration.ofSeconds(20));
         estorePDPScreen.getPriceHighToLow().click();
     }
@@ -327,5 +321,10 @@ public class EstoreSearchStepDefs {
     @When("I click on Customer Experience link")
     public void iClickOnCustomerExperienceLink() {
         estoreSearchScreen.getCustomerExperienceLink().should(visible, Duration.ofSeconds(9)).click(ClickOptions.usingJavaScript());
+    }
+
+    @Then("I verify that {int}x{int} grid view is active on Search page")
+    public void iVerifyThatXGridViewIsActiveOnSearchPage(int arg0, int arg1) {
+        estoreSearchScreen.getSearch2x2GridView().should(visible, Duration.ofSeconds(12));
     }
 }

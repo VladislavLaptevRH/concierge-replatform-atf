@@ -54,7 +54,7 @@ public class estoreOrderHistoryStepDefs {
     public void iClickOnEstoreOrderHistory() {
         estoreOrderHistoryScreen.getOrderHistoryButton().should(Condition.visible, Duration.ofSeconds(20));
         estoreOrderHistoryScreen.getOrderHistoryButton().click();
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
     }
 
     @When("I click on details and tracking order history")

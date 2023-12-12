@@ -314,7 +314,7 @@ public class EstoreUserAccountPageStepDefs {
 
     @Then("I change the brand to {string} for eStore")
     public void iChangeTheBrandToForEStore(String brand) {
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreUserAccountPage.getBrandButton().should(interactable, Duration.ofSeconds(40));
         estoreUserAccountPage.getBrandButton().should(appear, Duration.ofSeconds(40))
                 .click(ClickOptions.usingJavaScript());
@@ -402,5 +402,10 @@ public class EstoreUserAccountPageStepDefs {
         }
 
 
+    }
+
+    @When("I click on register button for eStore")
+    public void iClickOnRegisterButtonForEStore() {
+        estoreUserAccountPage.clickToRegisterButton();
     }
 }

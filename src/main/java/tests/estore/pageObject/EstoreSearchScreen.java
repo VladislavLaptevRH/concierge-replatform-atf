@@ -12,6 +12,8 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class EstoreSearchScreen {
 
+    private SelenideElement search2x2GridView = $(By.xpath("//*[contains(@class,'cols-6 ')]"));
+
     private SelenideElement memberLabelPriceCollectionPage = $(By.xpath("//p[@data-testid='price-label-member']"));
 
     private SelenideElement regularLabelPriceCollectionPage = $(By.xpath("//p[@data-testid='price-label-regular']"));

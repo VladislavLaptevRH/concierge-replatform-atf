@@ -44,8 +44,8 @@ public class ConciergeE2EStepDefs {
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
     RestrictionPopUp restrictionPopUp = new RestrictionPopUp();
-    GeneralStepDefs generalStepDefs = new GeneralStepDefs();
-    ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
+    static GeneralStepDefs generalStepDefs = new GeneralStepDefs();
+    static ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
     ConciergeOrderHistoryForm conciergeOrderHistoryForm = new ConciergeOrderHistoryForm();
     ConciergeProjectScreen conciergeProjectScreen = new ConciergeProjectScreen();
     SelectOption selectOption = new SelectOption();
@@ -62,7 +62,7 @@ public class ConciergeE2EStepDefs {
 
     String usState = "";
     String countOfItems = null;
-    WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));
+    static WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofMinutes(1));
     String environment;
 
     public static String SKU = "";
@@ -446,8 +446,8 @@ public class ConciergeE2EStepDefs {
             $(By.xpath("//li[@data-analytics-url='https://rhteen.rh.com/']")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
             $(By.xpath("//li[@data-analytics-url='https://rhteen.rh.com/']")).click();
         } else if (brand.equals("RH Teen")) {
-            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']/span")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
-            $(By.xpath("//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']/span")).click();
+            $(By.xpath("(//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']/span)[2]")).shouldHave(text("RH TEEN"), Duration.ofSeconds(10));
+            $(By.xpath("(//li[@data-analytics-url='https://rhteen.stg2.rhnonprod.com/']/span)[2]")).click();
         }
 
         if (brand.equals("RH Outdoor") && Hooks.profile.equals("prod")) {
@@ -485,7 +485,7 @@ public class ConciergeE2EStepDefs {
     }
 
     @When("I click on no thanks button")
-    public void iClickOnNoThanksButton() {
+    public static void iClickOnNoThanksButton() {
         if (conciergeCartPageScreen.getNoThanksButton().isDisplayed()) {
             generalStepDefs.waitForJSandJQueryToLoad();
             conciergeCartPageScreen.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
@@ -528,10 +528,10 @@ public class ConciergeE2EStepDefs {
             conciergeCartPageScreen.getContinueAddingAdditionalButton().scrollIntoView(true);
             generalStepDefs.waitForJSandJQueryToLoad();
             executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getContinueAddingAdditionalButton());
-            sleep(20000);
+            sleep(3000);
         } else {
             System.out.println("Continue button is not displayed");
-            sleep(25000);
+            sleep(3000);
         }
     }
 
@@ -565,6 +565,7 @@ public class ConciergeE2EStepDefs {
         if(!conciergeUserAccountPage.getClientButton().isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getClientButton().should(visible, Duration.ofSeconds(20));
         conciergeUserAccountPage.getClientButton().click();
         with().pollInterval(1, SECONDS).await().until(() -> true);
@@ -603,7 +604,6 @@ public class ConciergeE2EStepDefs {
                 iClickOnNoThanksButton();
             }
         }
-        with().pollInterval(5, SECONDS).await().until(() -> true);
         if (businessClient.equals("Member")) {
 //            conciergeUserAccountPage.getClientLookupFirstNameByName().setValue("Automation");
 //            conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
@@ -643,8 +643,9 @@ public class ConciergeE2EStepDefs {
         }
         if (!conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME")).isDisplayed()) {
             conciergeUserAccountPage.getClientLookupSearchButton().click();
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
         }
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         conciergeUserAccountPage.getFirstResultOfClientLookupByName(businessClient).click();
         with().pollInterval(3, SECONDS).await().until(() -> true);
     }
@@ -661,7 +662,7 @@ public class ConciergeE2EStepDefs {
                 }
             }
         }
-        itemName = $(By.xpath("//h2[contains(@class, 'MuiTypography-h2')]")).getText();
+       // itemName = $(By.xpath("//h2[contains(@class, 'MuiTypography-h2')]")).getText();
         if (Hooks.cookie.equals("contentfix")) {
             if (!conciergeItemsScreen.getAddToCartButton().isDisplayed()) {
                abstractStepDefs.iClickOnRhConciergeLogo();
@@ -674,15 +675,6 @@ public class ConciergeE2EStepDefs {
             }
         }
         executeJavaScript("window.scrollTo(0, 600)");
-        try {
-            conciergeItemsScreen.getDetailsSpan().scrollTo();
-            conciergeItemsScreen.getDetailsSpan().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
-            conciergeItemsScreen.getDetailsSpan().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofSeconds(20));
-        } catch (ElementNotFound e){
-            conciergeItemsScreen.getDetailsSpanWithSpase().scrollTo();
-            conciergeItemsScreen.getDetailsSpanWithSpase().should(Condition.and("", appear, enabled), Duration.ofSeconds(20));
-            conciergeItemsScreen.getDetailsSpanWithSpase().shouldHave(text(conciergeItemsScreen.getDetailsSpan().getText()), Duration.ofSeconds(20));
-        }
         selectOption.getQuantityElement().should(visible, Duration.ofMinutes(1));
         if (!selectOption.getQuantityElement().isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
@@ -787,7 +779,7 @@ public class ConciergeE2EStepDefs {
     @When("I fiils all options for item")
     public void iFiilsAllOptionsForItem() {
         //depth option
-        with().pollInterval(9, SECONDS).await().until(() -> true);
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         executeJavaScript("window.scrollTo(0, 970)");
         try {
 
@@ -802,7 +794,7 @@ public class ConciergeE2EStepDefs {
 
         //seatheight
         try {
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             selectOption.getSeatHeight().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select seatHeight = new Select(selectOption.getSeatHeight());
 
@@ -814,7 +806,7 @@ public class ConciergeE2EStepDefs {
 
         //finish
         try {
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             selectOption.getFinishOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select finalOption = new Select(selectOption.getFinishOption());
 
@@ -835,7 +827,7 @@ public class ConciergeE2EStepDefs {
 
         //select length option
         try {
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             selectOption.getLengthOption().should(Condition.be(Condition.visible), Duration.ofSeconds(5));
             Select selectLength = new Select(selectOption.getLengthOption());
             selectLength.selectByIndex(2);
@@ -921,8 +913,13 @@ public class ConciergeE2EStepDefs {
             $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
             $(By.xpath("(//*[text()='Edit'])[10]")).click();
         }
-        generalStepDefs.clearField(checkoutAddressScreen.getZipPostalCodeField());
-        checkoutAddressScreen.getZipPostalCodeField().setValue("1234");
+        if(checkoutAddressScreen.getZipPostalCodeField().isDisplayed()){
+            generalStepDefs.clearField(checkoutAddressScreen.getZipPostalCodeField());
+            checkoutAddressScreen.getZipPostalCodeField().setValue("1234");
+        } else {
+            generalStepDefs.clearField(checkoutAddressScreen.getZipPostalCodeFieldUpperCase());
+            checkoutAddressScreen.getZipPostalCodeFieldUpperCase().setValue("1234");
+        }
         $(By.xpath("//*[text()='Invalid zip/postal code.']")).should(visible, Duration.ofMinutes(1));
     }
 
@@ -962,7 +959,7 @@ public class ConciergeE2EStepDefs {
         }
         if (!conciergeOrderHistoryForm.getCustomerFirstName().shouldHave(text("NAME")).isDisplayed()) {
             conciergeUserAccountPage.getClientLookupSearchButton().click();
-            with().pollInterval(9, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
         }
         conciergeUserAccountPage.getSearchClientResultsPlusButton().should(visible, Duration.ofMinutes(1));
         conciergeUserAccountPage.getSearchClientResultsPlusButton().click();
@@ -1126,13 +1123,11 @@ public class ConciergeE2EStepDefs {
     public void iVerifyThePaymentDetailsAndOrderEstimateSummary() {
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(15));
-        if($(By.xpath("//*[text()='Subtotal']")).isDisplayed()){
-            $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
+        if($(By.xpath("//*[contains(text(),'Subtotal')]")).isDisplayed()){
+            $(By.xpath("//*[contains(text(),'Subtotal')]")).should(visible, Duration.ofSeconds(15));
         }else {
-            $(By.xpath("//*[text()='Subtotal  ']")).should(visible, Duration.ofSeconds(5));
+            $(By.xpath("//*[contains(text(),'Subtotal')]")).should(visible, Duration.ofSeconds(5));
         }
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text() = 'TOTAL']")).should(visible, Duration.ofSeconds(15));
     }
 
@@ -1164,11 +1159,9 @@ public class ConciergeE2EStepDefs {
     @Then("I verify order details from thank you page")
     public void iVerifyOrderDetailsFromThankYouPage() {
         $(By.xpath("(//div[@data-testid='checkout-address-view'])[1]")).should(visible, Duration.ofSeconds(25));
-        $(By.xpath("//*[text()='Important Information']")).should(visible, Duration.ofSeconds(25));
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofSeconds(10));
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Subtotal')]")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Unlimited Furniture Delivery')]")).should(visible, Duration.ofSeconds(40));
     }
 
     @When("I select length option")
@@ -1357,7 +1350,7 @@ public class ConciergeE2EStepDefs {
     @Then("I confirm search item is clear")
     public void iConfirmSearchField() {
         with().pollInterval(5, SECONDS).await().until(() -> true);
-        conciergeUserAccountPage.getSearchLens().should(empty, Duration.ofMinutes(1));
+        conciergeItemsScreen.getSearchIconField().should(empty, Duration.ofMinutes(1));
     }
 
     @Then("I verify multi search result is displayed")

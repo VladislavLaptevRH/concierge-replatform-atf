@@ -27,7 +27,7 @@ public class EstoreHomePage {
     private final List<SelenideElement> listOfHamburgeritems = $$(By.xpath("//div[@class= 'MuiGrid-root MuiGrid-item']/ul/li/a/span"));
     private final List<SelenideElement> listOfCollection = $$(By.xpath("(//ul[@class=\"MuiList-root\"])[2]/li"));
 
-    private final SelenideElement searchIcon = $(By.xpath("//span[@class='MuiIconButton-label']"));
+    private final SelenideElement searchIcon = $(By.xpath("(//span[@class='MuiIconButton-label'])[2]"));
     private final SelenideElement hamburgerIcon = $(By.id("hamburgerIcon"));
 
     private final SelenideElement searchIconHomePage = $(By.xpath("(//span[@class='MuiIconButton-label'])[1]"));
@@ -74,6 +74,11 @@ public class EstoreHomePage {
 
     private final SelenideElement myAccountIconHomePage = $(By.id("container-accountNavMenu_account-btn"));
 
+    private final SelenideElement textilesBeddingCollections = $(By.xpath("(//a[contains(@id,'rhrCtalogNavigationDetails_concepts-navigation-cat28660046')]//span[text()='Bedding Collections'])[2]"));
+
+    private final SelenideElement rugsSecondaryNav = $(By.xpath("//li[@id='rhrCtalogNavigationDetails_navigation-cat16850013']//span"));
+
+    private final SelenideElement allRugsTertiaryNav = $(By.xpath("//a[@id='rhrCtalogNavigationDetails_concepts-navigation-cat18620003']"));
     private final SelenideElement usCountySelection = $(By.xpath("//div[@data-value='US']"));
 
     private final SelenideElement caCountySelection = $(By.xpath("//div[@data-value='CA']"));
@@ -212,6 +217,8 @@ public class EstoreHomePage {
     private final SelenideElement bedTopNav = $(By.xpath("//div[@id='container-rhrheader-rhr-catalogNav_catalogNav-cat780002']//span"));
 
     private final SelenideElement saleNav = $(By.xpath("//*[contains(@id,'rhrCtalogNavigationDetails_navigation')]//span[text()='Sale  ']"));
+
+    private final SelenideElement saleNaveBed = $(By.xpath("//*[contains(@id,'rhrCtalogNavigationDetails_navigation-cat8750021')]//span[text()='Sale  ']"));
 
     private final SelenideElement saleBedBeddingCollection = $(By.xpath("//li[@id='rhrCtalogNavigationDetails_concepts-navigation-cat28650058']//span"));
 

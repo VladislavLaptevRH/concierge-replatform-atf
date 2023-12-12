@@ -11,9 +11,12 @@ import static com.codeborne.selenide.Selenide.$;
 public class ConciergePGScreen {
 
     private final String topNavMenu = "//*[contains(@id, 'container-rhrheader-rhr-catalogNav')]//span[text() = '%s']";
-    private final String topNavSubMenu = "//li[contains(@id, 'rhrCtalogNavigationDetails_navigation')]/span[text() = '%s']";
-    private final String topNavGallery = "//li[contains(@id, 'rhrCtalogNavigationDetails_concepts-navigation')]/span[contains(text(), \"%s\")]";
+    private final String topNavSubMenu = "(//li[contains(@id, 'rhrCtalogNavigationDetails_navigation')]/span[text() = '%s'])[1]";
+    private final String topNavGallery = "(//span[text() = '%s'])[1]";
+    private final String topNavGallerys = "(//span[text() = '%s'])[2]";
+    private final String topNavGallerys1 = "(//span[text() = '%s'])[3]";
     private final SelenideElement threeGridView = $(By.xpath("(//*[text() = 'sort']/../..//*[local-name() = 'svg'])[2]"));
+    private final SelenideElement secondGrid = $(By.xpath("//*[ local-name() = 'svg' and @column = '2' and @data-active = 'true']"));
     private final SelenideElement twoGridView = $(By.xpath("(//*[text() = 'sort']/../..//*[local-name() = 'svg'])[2]"));
     private final SelenideElement threeGridViewIsActive = $(By.xpath("//*[text() = 'sort']/../..//*[local-name() = 'svg' and @data-active = 'true']"));
     private final SelenideElement twoGridViewIsActive = $(By.xpath("//*[text() = 'sort']/../..//*[local-name() = 'svg' and @data-active = 'true']"));
@@ -33,6 +36,14 @@ public class ConciergePGScreen {
     }
     public SelenideElement getTopNavGalleryByName(String name) {
         String path = String.format(topNavGallery, name);
+        return $(byXpath(path));
+    }
+    public SelenideElement getTopNavGalleryByNames(String name) {
+        String path = String.format(topNavGallerys, name);
+        return $(byXpath(path));
+    }
+    public SelenideElement getTopNavGalleryByNames_1(String name) {
+        String path = String.format(topNavGallerys1, name);
         return $(byXpath(path));
     }
 }

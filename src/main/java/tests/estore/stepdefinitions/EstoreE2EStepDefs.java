@@ -77,8 +77,13 @@ public class EstoreE2EStepDefs {
 
     @When("I click on add to cart estore button")
     public void iClickOnAddToCartButton() {
-        estoreItemPage.getAddToCartButton().shouldBe(visible).click(ClickOptions.usingJavaScript());
-        with().pollInterval(6, SECONDS).await().until(() -> true);
+        //estoreItemPage.getAddToCartButton().shouldBe(visible).click(ClickOptions.usingJavaScript());
+        estoreItemPage.getAddToCartButton().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        estoreItemPage.getAddToCartButton().should(enabled, Duration.ofSeconds(12));
+        estoreItemPage.getAddToCartButton().scrollIntoView(true);
+        estoreItemPage.getAddToCartButton().shouldBe(visible);
+        estoreItemPage.getAddToCartButton().shouldBe(interactable).click(ClickOptions.usingJavaScript());
     }
 
     @When("I fill all estore fields from address with {string} zip code")
@@ -525,12 +530,12 @@ public class EstoreE2EStepDefs {
 
     @When("I click on same as estore shipping address checkbox")
     public void iClickOnSameAsShippingAddressCheckbox() {
-        if(estoreAddressScreen.getSameAsShippingAddress().is(visible)) {
-                estoreAddressScreen.getSameAsShippingAddress().should(Condition.and("Exist ,appear, interactable",
-                        exist, appear, interactable), Duration.ofSeconds(15));
-                estoreAddressScreen.getSameAsShippingAddress().click(ClickOptions.usingJavaScript());
-        }
-        else{
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        if (estoreAddressScreen.getSameAsShippingAddress().is(visible)) {
+            estoreAddressScreen.getSameAsShippingAddress().should(Condition.and("Exist ,appear, interactable",
+                    exist, appear, interactable), Duration.ofSeconds(15));
+            estoreAddressScreen.getSameAsShippingAddress().click(ClickOptions.usingJavaScript());
+        } else {
             estoreAddressScreen.getSameAsShippingAddress().shouldNotBe(interactable);
         }
     }
@@ -590,7 +595,7 @@ public class EstoreE2EStepDefs {
     @When("I open product page with {string} and {string} with {string} for estore")
     public void iOpenProductPageWithAndForEstore(String productId, String skuId, String options) {
         String URL = null;
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
 
         if (Hooks.profile.equals("stg3")) {
             URL = Hooks.eStoreBaseURL + "/us/en/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "+" + options;
@@ -618,13 +623,13 @@ public class EstoreE2EStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @When("I open product page with {string} and {string} for estore")
     public void iOpenProductPageAndForEstore(String productId, String skuId) {
         String URL = null;
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&fullSkuId=" + skuId + "&clientrender=true";
 
         open(URL);
@@ -649,7 +654,7 @@ public class EstoreE2EStepDefs {
     @When("I open product page with productID {string} for estore")
     public void iOpenProductPageWithProductIDForEstore(String productId) {
         String URL = null;
-        with().pollInterval(5, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         URL = Hooks.eStoreBaseURL + "/catalog/product/product.jsp?productId=" + productId + "&sale=false&src=rel";
         open(URL);
         try {

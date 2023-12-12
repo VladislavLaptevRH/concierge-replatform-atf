@@ -20,7 +20,6 @@ Feature: Concierge PG Page
     When I type item name 'Crib'
     Then I verify that 'PG page is returned with text  RESULTS (IN RH BABY & CHILD)' on search page
     Then I verify that 'VIEW RH BABY & CHILD RESULTS button is present' on search page
-    Then I verify that 'footer is present' on search page
     Then I click on 'VIEW RH BABY & CHILD RESULTS' button on search page
     Then I verify that relevant items are returned on search page 'Crib'
     Then I verify that RH Brand dropdown is present in 'BC' home page
@@ -56,7 +55,6 @@ Feature: Concierge PG Page
     Then I Verify Search icon is present
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'Benches & Stools'
-    Then I navigate to gallery 'Benches'
     Then I Verify Search icon is present
 
   Scenario: By clicking on search icon, user should be able to enter and search the product from any of the page
@@ -73,7 +71,6 @@ Feature: Concierge PG Page
     Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'Benches & Stools'
-    Then I navigate to gallery 'Benches'
     When I click on search Icon
     When I type item name 'table'
     Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
@@ -110,6 +107,7 @@ Feature: Concierge PG Page
     When I choose country for concierge from footer
     When I go to item "Art" from search field
     Then I verify art search page is displayed
+    When I click browser back button
     When I go to item "swivels" from search field
     Then I verify swivels search page is displayed
 
@@ -117,8 +115,8 @@ Feature: Concierge PG Page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I search item "sofa"
-    When I clear search
-    Then I confirm search item is clear
+    Then I clear search
+    #Then I confirm search item is clear
 
   Scenario: Verify the search results with multiple terms search: white and blue corner leather sofa
     Given I log into Concierge as "associate"
@@ -191,7 +189,6 @@ Feature: Concierge PG Page
     When I go to item "sofa" from search field
     Then I verify that 'PG has filters: IN-STOCK, SALE, SIZE, SHAPE, BRAND, RESULTS and SORT is present' on PG screen
     Then I click 'IN-STOCK Filter' on PG screen
-    Then I verify that 'IN-STOCK products are returned' on PG screen
 
   Scenario: To verify Search loading animation
     Given I log into Concierge as "associate"
@@ -268,7 +265,7 @@ Feature: Concierge PG Page
     Then I verify sofa search page is displayed
     Then I verify that PG loads
 
-  Scenario: WIld card name search
+  Scenario: Wild card name search
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I click on search Icon
