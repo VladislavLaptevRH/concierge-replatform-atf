@@ -15,6 +15,9 @@ import static org.awaitility.Awaitility.with;
 
 @Getter
 public class EstorePDPScreen {
+
+    private final SelenideElement availabilityDeliveryInformation = $(By.xpath("//*[contains(text() , 'This item will be ready for delivery between')]"));
+
     private final SelenideElement canadaCountrySelected = $(By.xpath("//*[text()='Canada ($)']"));
 
     private final SelenideElement addToCartButtonViewInStockPopUp = $(By.xpath("(//button[@id='inStockProductCardActions_addToCart-btn'])[1]"));
