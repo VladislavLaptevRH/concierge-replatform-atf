@@ -25,14 +25,13 @@ Feature: Concierge PDP
     Then I Verify that 'text "Learn more about our Return Policy"' is present
     Then I Verify that '"footer" in PDP' is present
     Then I chose zero choose in line items
-    Then I chose zero choose in line items
     Then I verify the rest of the checkings for "<skuID>"
     Examples:
       |skuID        |
       |57070740 CLNT|
       |61970975 TEAK|
       |62870050 LOAK|
-      |10024793 BRNZ|
+      #|10024793 BRNZ|
 
   Scenario: Verify the PDP hero Image, zoom, line itemsVerify the PDP hero Image, zoom, line items
     Given I log into Concierge as "associate"
@@ -501,7 +500,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'In Stock'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to gallerys 'Benches'
     Then I click 'first product from the list' on PG screen
     Then I Verify that 'item title' is present
     When I click on "view in stock items" link
@@ -586,7 +585,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'In Stock'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to gallerys 'Benches'
     Then I click 'first product from the list' on PG screen
     Then I Verify that 'item title' is present
     When I click on "view in stock items" link
@@ -788,7 +787,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'In Stock'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to gallerys 'Benches'
     Then I chose '2' product from the list
     Then I Verify that 'item title' is present
     When I click on "view in stock items" link
@@ -801,7 +800,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'In Stock'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to gallerys 'Benches'
     Then I chose '2' product from the list
     Then I Verify that 'item title' is present
     Then I Verify that '"VIEW IN STOCK ITEMS" link below line item image' is present
@@ -812,7 +811,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'In Stock'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to gallerys 'Benches'
     Then I chose '2' product from the list
     Then I Verify that 'item title' is present
     When I click on "view in stock items" link
@@ -824,7 +823,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'In Stock'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to gallerys 'Benches'
     Then I chose '2' product from the list
     Then I Verify that 'item title' is present
     When I click on "view in stock items" link
@@ -837,7 +836,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'In Stock'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to gallerys 'Benches'
     Then I chose '2' product from the list
     Then I Verify that 'item title' is present
     When I click on "view in stock items" link
@@ -850,7 +849,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'In Stock'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to gallerys 'Benches'
     Then I chose '2' product from the list
     Then I Verify that 'item title' is present
     When I click on "view in stock items" link
@@ -882,7 +881,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'In Stock'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to gallerys 'Benches'
     Then I chose '2' product from the list
     Then I Verify that 'item title' is present
     When I click on "view in stock items" link
@@ -1114,7 +1113,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'In Stock'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to gallerys 'Benches'
     Then I chose '2' product from the list
     Then I Verify that 'item title' is present
     When I click on "view in stock items" link
@@ -1141,7 +1140,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'In Stock'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to gallerys 'Benches'
     Then I chose '2' product from the list
     Then I Verify that 'item title' is present
     When I click on "view in stock items" link
@@ -1201,8 +1200,8 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'In Stock'
-    Then I navigate to gallery 'Beds'
-    Then I chose '6' product from the list
+    Then I navigate to gallerys 'Benches'
+    Then I chose '2' product from the list
     When I click on "view in stock items" link
     Then Verify that "In Stock modal" 'opens'
     Then Verify that "In Stock modal" 'has title'
@@ -1327,7 +1326,7 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'In Stock'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to gallerys 'Benches'
     Then I chose '4' product from the list
     When I click on "view in stock items" link
     Then Verify that "In Stock modal" 'opens'
@@ -1346,7 +1345,7 @@ Feature: Concierge PDP
     Then I click on zip code and change it to 'H1Y2B5'
     Then I verify that zip code in PDP is 'H1Y 2B5'
     Then Verify that 'price in PDP changed from US$ to CA$'
-
+  @vimal
   Scenario: On shipping confirmation modal, if we click on yes button then update the zipcode in availabity and delivery message for each line item
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer

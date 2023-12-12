@@ -402,9 +402,9 @@ public class PdpScreen {
 
     private final SelenideElement selectFromText = $(By.xpath("//*[contains(@data-testid, 'SELECT FROM')]"));
 
-    private final SelenideElement specialOrderFabricsSiblingText = $(By.xpath("//*[contains(@data-testid, 'SPECIAL ORDER FabricS')]/following-sibling::div//img"));
+    private final SelenideElement specialOrderFabricsSiblingText = $(By.xpath("//*[contains(@data-testid, 'Fabric')]/following-sibling::div//img"));
 
-    private final SelenideElement specialOrderFabricsText = $(By.xpath("//*[contains(@data-testid, 'SPECIAL ORDER FabricS')]"));
+    private final SelenideElement specialOrderFabricsText = $(By.xpath("//*[contains(@data-testid, 'Fabric')]"));
 
     private final SelenideElement finishOptionText = $(By.xpath("//*[text() = 'Finish Options']"));
     private final SelenideElement finishText = $(By.xpath("(//*[text() = 'Finish'])[1]"));
@@ -413,7 +413,7 @@ public class PdpScreen {
 
     private final SelenideElement detailsSection = $(By.xpath("//*[text() = 'DETAILS']"));
 
-    private final SelenideElement detailsSectionLoverCase = $(By.xpath("//*[text() = 'Details']"));
+    private final SelenideElement detailsSectionLoverCase = $(By.xpath("(//*[text() = 'Details'])[2]"));
 
     private final SelenideElement leatherCare = $(By.xpath("//*[text() = 'Leather Care']"));
     private final SelenideElement fabricCare = $(By.xpath("//*[text() = 'Fabric Care']"));

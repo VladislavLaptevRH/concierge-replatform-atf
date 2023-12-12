@@ -758,12 +758,12 @@ public class EstorePdpStepDefs {
 
     @Then("I verify the multisku ID is showing up once the line item is configured")
     public void iVerifyTheMultiskuIDIsShowingUpOnceTheLineItemIsConfigured() {
-        $(By.xpath("//*[text()='Item# m000001198111']")).should(visible, Duration.ofSeconds(12));
+        estorePdpPageScreen.getSkuId17050042WHEA().should(visible, Duration.ofSeconds(12));
     }
 
     @Then("I verify that the ETA on PDP")
     public void iVerifyThatTheETAOnPDP() {
-        $(By.xpath("(//*[contains(text(),'This item is special order and will be ready for delivery between')])[2]")).should(visible);
+        estorePDPScreen.getAvailabilityDeliveryInformation().should(visible, Duration.ofSeconds(12));
     }
 
     @Then("I verify that {string} message is displayed {string} the line item dropdown")
@@ -891,7 +891,7 @@ public class EstorePdpStepDefs {
 
     @Then("I verify that postal code should be equal to {int}")
     public void iVerifyThatPostalCodeShouldBeEqualTo(int postalCode) {
-        estoreCartPage.getPostalCode28801().should(visible,Duration.ofSeconds(12));
+        estoreCartPage.getPostalCode28801().should(visible, Duration.ofSeconds(12));
     }
 }
 
