@@ -152,7 +152,7 @@ public class ConciergeUserAccountPage {
 
     private final SelenideElement clientLookupFirstName = $(By.xpath("//*[text() = 'First Name']/../..//input"));
 
-    private final SelenideElement clientLookupFirstNameByName = $(By.cssSelector("input[name='firstName']"));
+    private final SelenideElement clientLookupFirstNameByName = $(By.cssSelector("//input[@id='shippingAddress.firstName']"));
 
     //private final SelenideElement clientLookupLastName = $(By.xpath("//*[text() = 'Last Name']/../..//input"));
     private final SelenideElement clientLookupLastName = $(By.xpath("//*[@id= 'lastName']"));
