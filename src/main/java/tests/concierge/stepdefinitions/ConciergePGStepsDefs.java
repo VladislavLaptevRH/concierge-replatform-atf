@@ -58,7 +58,12 @@ public class ConciergePGStepsDefs {
         if(conciergePGScreen.getTopNavSubManuByName(subMenu).isDisplayed()){
             conciergePGScreen.getTopNavSubManuByName(subMenu).hover();
             with().pollInterval(2, SECONDS).await().until(() -> true);
-        } else {
+        }
+        else if(conciergePGScreen.getTopNavSubManuByName(subMenu).isEnabled()){
+            $(By.xpath("(//*[contains(@id , 'rhrCtalogNavigationDetails')]//*[text() = '" + subMenu + "'])[3]")).hover();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+        else {
             $(By.xpath("(//*[contains(@id , 'rhrCtalogNavigationDetails')]//*[text() = '" + subMenu + "'])[2]")).hover();
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
@@ -67,33 +72,27 @@ public class ConciergePGStepsDefs {
     @Then("I navigate to gallery {string}")
     public void stepByStepINavigateTo(String collection) {
         if(conciergePGScreen.getTopNavGalleryByName(collection).isDisplayed()) {
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
             conciergePGScreen.getTopNavGalleryByName(collection).click();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         else {
             if(conciergePGScreen.getTopNavSubManuByName(result).isDisplayed()){
-                with().pollInterval(5, SECONDS).await().until(() -> true);
+                with().pollInterval(2, SECONDS).await().until(() -> true);
                 conciergePGScreen.getTopNavSubManuByName(result).hover();
-                with().pollInterval(5, SECONDS).await().until(() -> true);
+                with().pollInterval(2, SECONDS).await().until(() -> true);
             } else {
                 $(By.xpath("//span[text() = '" + collection + "']")).click();
             }
         }
-        with().pollInterval(5, SECONDS).await().until(() -> true);
-        if(!$(By.xpath("(//*[contains(@class, 'MuiTypography-body1')])[1]")).isDisplayed()){
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-            WebDriverRunner.getWebDriver().navigate().refresh();
-        }
-        if(!$(By.xpath("(//*[contains(@class, 'MuiTypography-body1')])[1]")).isDisplayed()){
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-            WebDriverRunner.getWebDriver().navigate().refresh();
-        }
-        $(By.xpath("(//*[contains(@class, 'MuiTypography-body1')])[1]")).shouldBe(visible, Duration.ofSeconds(30));
-    }
+     }
     @Then("I navigate to gallerys {string}")
     public void stepByStepINavigate(String collection) {
-        conciergePGScreen.getTopNavGalleryByNames(collection).click();
+            conciergePGScreen.getTopNavGalleryByNames(collection).click();
+    }
+    @Then("I navigate to gallerys_2 {string}")
+    public void stepByStepINavigates(String collection) {
+        conciergePGScreen.getTopNavGalleryByNames_1(collection).click();
     }
 
     @Then("I verify that {string} on PG screen")
