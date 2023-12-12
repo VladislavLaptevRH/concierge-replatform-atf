@@ -64,5 +64,6 @@ public class EstoreFooterScreen {
 
     private final SelenideElement safetyRecallsLink = $(By.xpath("//a[@href='/customer-experience/safety-recalls']"));
 
+    private final SelenideElement confirmChangeZipCodeButton = $(By.xpath("//*[text()='CONFIRM']"));
 
 }

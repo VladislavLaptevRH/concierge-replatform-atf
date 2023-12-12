@@ -86,7 +86,7 @@ public class EstorePGScreen {
 
     private final List<SelenideElement> listOfPgFusionElements = $$(By.xpath("//*[@id='component-rh-image_wrapper']"));
 
-    private final SelenideElement listOfPgFusionElement = $(By.xpath("(//div[@id='component-rh-image_wrapper']//div)[2]"));
+    private final SelenideElement listOfPgFusionElement = $(By.xpath("(//div[@id='component-rh-image_wrapper']//div)[1]"));
 
     private final SelenideElement livingCategory = $(By.xpath("//*[@data-navigation-account-item-id='cat160024']"));
 

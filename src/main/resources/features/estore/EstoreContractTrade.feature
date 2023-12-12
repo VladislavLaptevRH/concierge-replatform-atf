@@ -195,7 +195,6 @@ Feature: eStore Contract and Trade
     When I click on zipcode estore button
     When I update postal code in cart
     Then I verify UFD in cart
-
   
   Scenario Outline: eStore Contract - Verify different payment types on payment page
     Given I log into eStore as contract
@@ -235,7 +234,6 @@ Feature: eStore Contract and Trade
     When I pay with RHCC for estore item
     When I click on continue payment method estore button
 
-  
   Scenario: estore Contract - Full Payment
     Given I log into eStore as contract
     When I choose country for eStore from footer
@@ -288,7 +286,6 @@ Feature: eStore Contract and Trade
     When I remove payment method which was used earlier
     When I click on edit estore billing address button on payment page
     When I edit estore billing address from PG
-
   
   Scenario: eStore Contract - Verify the subtotal, shipping fee, taxes based on postal code
     Given I log into eStore as contract
@@ -299,7 +296,6 @@ Feature: eStore Contract and Trade
     When I update "CA" postal code on cart page
     Then I verify the subtotal, shipping fee, taxes based on postal code
 
-  
   Scenario Outline: eStore Contract - Major CC
     Given I log into eStore as contract
     When I choose country for eStore from footer
@@ -322,7 +318,6 @@ Feature: eStore Contract and Trade
       | AX       |
       | DI       |
 
-  
   Scenario: eStore Contract - Verify the subtotal, shipping fee, taxes based on postal code
     Given I log into eStore as contract
     When I choose country for eStore from footer
@@ -333,13 +328,11 @@ Feature: eStore Contract and Trade
     Then I verify the subtotal, shipping fee, taxes based on postal code
 
 #Trade
-  
   Scenario: eStore Trade Login
     Given I log into eStore as trade
     When I choose country for eStore from footer
     Then I verify that trade paragraph is displayed
     And I verify that logout from trade user is displayed
-
   
   Scenario: eStore Trade - Validate the currency for US-Zip on PDP
     Given I log into eStore as trade
@@ -348,7 +341,6 @@ Feature: eStore Contract and Trade
     When I update "US" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
-  
   Scenario: eStore Trade - Validate the currency for CAN-Zip on PDP
     Given I log into eStore as trade
     When I choose country for eStore from footer
@@ -356,7 +348,6 @@ Feature: eStore Contract and Trade
     When I update "CAN" postal code on pdp page
     Then I verify that price for product&line should be in US dollars on PDP page
 
-  
   Scenario: eStore Trade - Validate the currency for CAN-Zip in cart
     Given I log into eStore as trade
     When I choose country for eStore from footer

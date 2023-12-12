@@ -185,6 +185,7 @@ public class EstoreAddressStepDefs {
         generalStepDefs.clearField(estoreAddressScreen.getShippingAddressLastName1());
         estoreAddressScreen.getShippingAddressLastName1().setValue("William");
         estoreAddressScreen.getAddressStreet().click();
+        estoreAddressScreen.getAddressStreet().should(interactable);
         generalStepDefs.clearField(estoreAddressScreen.getAddressStreet());
         estoreAddressScreen.getAddressStreet().setValue("4524 Ocala Street");
         with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -436,7 +437,7 @@ public class EstoreAddressStepDefs {
 
     @Then("user verify that field is required message is displayed")
     public void userVerifyThatErrorIsDisplayed() {
-        $(By.xpath("//*[text()='Phone required.']")).should(visible, Duration.ofSeconds(20));
+        estoreAddressScreen.getPhoneRequiredMessage().should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify that billing address the same as shipping functionality")
