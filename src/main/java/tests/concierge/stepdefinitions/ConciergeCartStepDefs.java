@@ -726,7 +726,6 @@ public class ConciergeCartStepDefs {
         } catch (ElementNotFound e) {
             System.out.println("Sipping Address is not displayed");
         }
-
     }
 
     @And("I edit ship to, bill to, sold to addresses")
@@ -1322,9 +1321,16 @@ public class ConciergeCartStepDefs {
 
     @Then("Verify Checkout page should get opened with Shipping and Billing address option")
     public void iVerifyCheckoutShippingAndBillingAddresses() {
-        WebDriverRunner.getWebDriver().navigate().back();
-        conciergeCartPageScreen.getShippingAddress().should(visible, Duration.ofSeconds(20));
-        conciergeCartPageScreen.getBillingAddress().should(visible, Duration.ofSeconds(20));
+        if(conciergeCartPageScreen.getShippingAddress().isDisplayed()){
+            conciergeCartPageScreen.getShippingAddress().should(visible, Duration.ofSeconds(20));
+        } else {
+            conciergeCartPageScreen.getShippingAddressUpperCase().should(visible, Duration.ofSeconds(20));
+        }
+        if(conciergeCartPageScreen.getBillingAddress().isDisplayed()){
+            conciergeCartPageScreen.getBillingAddress().should(visible, Duration.ofSeconds(20));
+        } else {
+            conciergeCartPageScreen.getBillingAddressUpperCase().should(visible, Duration.ofSeconds(20));
+        }
     }
 
     @Then("I verify client should not get added with empty address field.")

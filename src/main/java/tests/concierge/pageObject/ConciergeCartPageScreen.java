@@ -224,6 +224,8 @@ public class ConciergeCartPageScreen {
 
     private final SelenideElement shippingAddress = $(By.xpath("//*[text() = 'Shipping Address']"));
     private final SelenideElement billingAddress = $(By.xpath("//*[text() = 'Billing Address']"));
+    private final SelenideElement shippingAddressUpperCase = $(By.xpath("//*[text() = 'SHIPPING ADDRESS']"));
+    private final SelenideElement billingAddressUpperCase = $(By.xpath("//*[text() = 'BILLING ADDRESS']"));
     private final SelenideElement shippingAddressStateField = $(By.xpath("(//*[@id = 'address-state-field'])[1]"));
     private final SelenideElement billingAddressStateField = $(By.xpath("(//*[@id = 'address-state-field'])[2]"));
     private final SelenideElement regularAndTotalPriceForTheProduct = $(By.xpath(" //*[@class = 'MuiButtonBase-root MuiFab-root' and not(contains(@style, 'hidden'))]"));

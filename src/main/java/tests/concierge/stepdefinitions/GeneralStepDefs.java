@@ -41,6 +41,8 @@ public class GeneralStepDefs {
     ConciergeUserAccountPage conciergeUserAccountPage = new ConciergeUserAccountPage();
     ConciergeAddressScreen conciergeAddressScreen = new ConciergeAddressScreen();
 
+    ConciergeCartPageScreen conciergeCartPageScreen = new ConciergeCartPageScreen();
+
     ConciergeHomePageStepDefs conciergeHomePageStepDefs = new ConciergeHomePageStepDefs();
     static WebDriverWait wait = new WebDriverWait(WebDriverRunner.getWebDriver(), Duration.ofSeconds(30));
     public static String id;
@@ -148,8 +150,16 @@ public class GeneralStepDefs {
      */
     public void fillAddressFields() {
 //        $(By.xpath("//form[@class='MuiGrid-root MuiGrid-container']/div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-6 MuiGrid-justify-xs-center']/div[1]/div[1]/div[3]/div/input")).should(visible, Duration.ofSeconds(30));
-        conciergeAddressScreen.getShippingAddressText().shouldHave(text("Shipping Address"), Duration.ofSeconds(40));
-        conciergeAddressScreen.getBillingAddressText().shouldHave(text("Billing Address"), Duration.ofSeconds(40));
+        if(conciergeCartPageScreen.getShippingAddress().isDisplayed()){
+            conciergeCartPageScreen.getShippingAddress().should(visible, Duration.ofSeconds(20));
+        } else {
+            conciergeCartPageScreen.getShippingAddressUpperCase().should(visible, Duration.ofSeconds(20));
+        }
+        if(conciergeCartPageScreen.getBillingAddress().isDisplayed()){
+            conciergeCartPageScreen.getBillingAddress().should(visible, Duration.ofSeconds(20));
+        } else {
+            conciergeCartPageScreen.getBillingAddressUpperCase().should(visible, Duration.ofSeconds(20));
+        }
 
         if(conciergeAddressScreen.getSoldToTaxExempt().isDisplayed()){
             clearField(conciergeAddressScreen.getSoldToTaxExempt());
@@ -193,7 +203,11 @@ public class GeneralStepDefs {
             executeJavaScript("arguments[0].click();", checkoutAddressScreen.getBillingAddressAsShippingCheckBox());
         }
 
-        conciergeAddressScreen.getBillingAddressText().should(visible, Duration.ofSeconds(12));
+        if(conciergeCartPageScreen.getBillingAddress().isDisplayed()){
+            conciergeCartPageScreen.getBillingAddress().should(visible, Duration.ofSeconds(20));
+        } else {
+            conciergeCartPageScreen.getBillingAddressUpperCase().should(visible, Duration.ofSeconds(20));
+        }
     }
 
     public void fillAddressFieldsWithoutCompanyName() {

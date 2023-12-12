@@ -11,6 +11,7 @@ Feature: Concierge Checkout flow
 	When I open cart
 	When I choose order classification
 	When I click on checkout button
+	When I click on no thanks button
 	Then Verify Checkout page should get opened with Shipping and Billing address option
 
   Scenario: Verify checkout with member client - verify the member discount applied
@@ -27,7 +28,8 @@ Feature: Concierge Checkout flow
 	Then I verify that cart is displayed
 	Then I verify that membership price displayed as total price
 	When I click on checkout button
-	Then I verify that ship to, bill to, sold to addresses are displayed
+	Then Verify Checkout page should get opened with Shipping and Billing address option
+	When I fill all fields from address screen
 	When I continue to payment
 	When I click on continue with original address button
 	When I execute payment for "VI"
