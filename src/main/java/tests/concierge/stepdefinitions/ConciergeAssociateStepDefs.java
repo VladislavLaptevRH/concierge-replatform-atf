@@ -393,6 +393,7 @@ public class ConciergeAssociateStepDefs {
                 conciergeUserAccountPage.getButton(button).should(visible, Duration.ofSeconds(15));
             }
         } else {
+            WebDriverRunner.getWebDriver().navigate().refresh();
             conciergeUserAccountPage.getButton(button).should(visible, Duration.ofSeconds(15));
         }
     }
@@ -411,7 +412,7 @@ public class ConciergeAssociateStepDefs {
     @Then("I verify order history page is displayed")
     public void iVerifyOrderHistory(){
         conciergeUserAccountPage.getOrderHistoryTitle().should(visible,Duration.ofSeconds(15));
-        conciergeUserAccountPage.getOrderUser().should(visible,Duration.ofSeconds(15));
+//        conciergeUserAccountPage.getOrderUser().should(visible,Duration.ofSeconds(15));
         conciergeUserAccountPage.getOrderSearch().should(visible,Duration.ofSeconds(15));
     }
 

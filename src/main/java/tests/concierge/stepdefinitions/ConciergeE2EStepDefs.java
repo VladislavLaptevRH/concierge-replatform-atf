@@ -593,24 +593,24 @@ public class ConciergeE2EStepDefs {
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
 
-        if (!conciergeUserAccountPage.getClientLookupFirstNameByName().isDisplayed()) {
-            WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
-            if (!conciergeUserAccountPage.getClientLookupFirstNameByName().isDisplayed()) {
-                String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
-                open(URL);
-                with().pollInterval(5, SECONDS).await().until(() -> true);
-                abstractStepDefs.iClickOnCheckoutButton();
-                iClickOnNoThanksButton();
-            }
-        }
+//        if (!conciergeUserAccountPage.getClientLookupFirstNameByName().isDisplayed()) {
+//            WebDriverRunner.getWebDriver().navigate().refresh();
+//            with().pollInterval(5, SECONDS).await().until(() -> true);
+//            if (!conciergeUserAccountPage.getClientLookupFirstNameByName().isDisplayed()) {
+//                String URL = Hooks.conciergeBaseURL + "/checkout/shopping_cart.jsp";
+//                open(URL);
+//                with().pollInterval(5, SECONDS).await().until(() -> true);
+//                abstractStepDefs.iClickOnCheckoutButton();
+//                iClickOnNoThanksButton();
+//            }
+//        }
         if (businessClient.equals("Member")) {
 //            conciergeUserAccountPage.getClientLookupFirstNameByName().setValue("Automation");
 //            conciergeUserAccountPage.getClientLookupLastName().setValue("Member");
             conciergeUserAccountPage.getClientLookupEmail().setValue("testmemberacc0517@gmail.com");
         } else if (businessClient.equals("Non-Member")) {
-            generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupFirstNameByName());
-            conciergeUserAccountPage.getClientLookupFirstNameByName().setValue("Automation");
+            generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupFirstName());
+            conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
 
             if (Hooks.profile.equals("stg3")) {
                 generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupStg3LastName());
@@ -621,14 +621,14 @@ public class ConciergeE2EStepDefs {
             }
 
         } else if (businessClient.equals("Trade")) {
-            if (!conciergeUserAccountPage.getClientLookupFirstNameByName().isDisplayed()) {
+            if (!conciergeUserAccountPage.getClientLookupFirstName().isDisplayed()) {
                 WebDriverRunner.getWebDriver().navigate().refresh();
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             }
-            conciergeUserAccountPage.getClientLookupFirstNameByName().setValue("Automation");
+            conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("Trade");
         } else if (businessClient.equals("Unclassified")) {
-            conciergeUserAccountPage.getClientLookupFirstNameByName().setValue("Automation");
+            conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
             conciergeUserAccountPage.getClientLookupLastName().setValue("UnclassifiedBusiness");
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
