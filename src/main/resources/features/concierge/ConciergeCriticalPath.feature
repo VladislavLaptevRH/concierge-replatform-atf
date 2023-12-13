@@ -1008,9 +1008,9 @@ Feature: Concierge Critical Path
     Then I verify that 'Back to top Button is present' on PG screen
     Then I click 'Back to Top button' on PG screen
     Then I verify that 'user is brought to the top of the page' on PG screen
-    Then I navigate to menu 'Lighting'
-    Then I navigate to sub menu 'Table'
-    Then I navigate to gallery 'All Table Lighting'
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
     Then I verify that 'Back to top Button is present' on PG screen
     Then I click 'Back to Top button' on PG screen
     Then I verify that 'user is brought to the top of the page' on PG screen
