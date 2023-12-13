@@ -2,7 +2,6 @@
 @conciergeOrderHistory
 Feature:Concierge Order history
 
-
   Scenario: Verify the Order history in Dashboard
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
@@ -10,7 +9,6 @@ Feature:Concierge Order history
 	Then I verify button "RH Orders" on homepage
   	When I click "RH Orders" button on homepage
   	Then I verify order history page is displayed
-
 
   Scenario: Verify look up by customer details
 	Given I log into Concierge as "associate"
@@ -22,7 +20,6 @@ Feature:Concierge Order history
 	When I search by "name"
   	Then I confirm order is shown for search filter "name"
 
-
   Scenario: Verify the contacts returned and select a contact to get the list of orders
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
@@ -33,7 +30,6 @@ Feature:Concierge Order history
 	When I search by "contact"
 	Then I confirm order is shown for search filter "contact"
 
-
   Scenario: Search with only First name field should not be allowed
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
@@ -43,7 +39,6 @@ Feature:Concierge Order history
 	Then I verify order history page is displayed
 	When I search by "First Name"
   	Then I confirm user is not able to search only with first name
-
 
   Scenario: Search with only Last name field and verify the customer account search results
 	Given I log into Concierge as "associate"
@@ -80,9 +75,6 @@ Feature:Concierge Order history
 	Then I verify button "RH Orders" on homepage
 	When I click "RH Orders" button on homepage
 	Then I verify order history page is displayed
-
-
-
 
 #  Scenario: Order history search is accessible from the dashboard
 #    Given I log into Concierge as "associate"
