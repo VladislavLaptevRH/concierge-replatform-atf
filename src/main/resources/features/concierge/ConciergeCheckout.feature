@@ -7,10 +7,14 @@ Feature: Concierge Checkout flow
 	When I choose country for concierge from footer
 	When I remove all items from cart via UI
 	When I choose client who is a non member
-	When I add item to cart via API with "10146709 LOAK" and quantity '1'
+	When I add item to cart via API
 	When I open cart
 	When I choose order classification
 	When I click on checkout button
+	When I click on no thanks button
+	When I choose client who is a "Non-Member"
+	When I click on checkout button
+	When I click on no thanks button
 	Then Verify Checkout page should get opened with Shipping and Billing address option
 
   Scenario: Verify checkout with member client - verify the member discount applied
@@ -18,7 +22,7 @@ Feature: Concierge Checkout flow
 	When I choose country for concierge from footer
 	When I remove all items from cart via UI
 	When I remove client from header
-	When I add item to cart via API with "10146709 LOAK" and quantity '1'
+	When I add item to cart via API
 	When I open cart
 	When I choose order classification
 	When I click on checkout button
@@ -27,7 +31,8 @@ Feature: Concierge Checkout flow
 	Then I verify that cart is displayed
 	Then I verify that membership price displayed as total price
 	When I click on checkout button
-	Then I verify that ship to, bill to, sold to addresses are displayed
+	Then Verify Checkout page should get opened with Shipping and Billing address option
+	When I fill all fields from address screen
 	When I continue to payment
 	When I click on continue with original address button
 	When I execute payment for "VI"
@@ -59,7 +64,9 @@ Feature: Concierge Checkout flow
 	When I click on no thanks button
 	When I choose client who is a "Unclassified"
 	When I click on checkout button
-	Then I verify that ship to, bill to, sold to addresses are displayed
+	When I click on no thanks button
+	Then Verify Checkout page should get opened with Shipping and Billing address option
+	When I fill all fields from address screen
 	When I continue to payment
 	When I click on continue with original address button
 	When I execute payment for "VI"
@@ -78,7 +85,6 @@ Feature: Concierge Checkout flow
 	When I choose client who is a "Non-Member"
 	When I continue to payment
 	Then I verify client should not get added with empty address field.
-
 
   Scenario: Verify the saved addresses, ship to - bill to  from SF in address page for a client with primary and secondary addresses - regular accounts
 	Given I log into Concierge as "associate"

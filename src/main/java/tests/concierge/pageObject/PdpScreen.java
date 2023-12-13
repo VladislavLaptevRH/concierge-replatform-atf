@@ -2,6 +2,7 @@ package tests.concierge.pageObject;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.cucumber.java.sl.In;
 import lombok.Getter;
 import org.openqa.selenium.By;
 
@@ -33,6 +34,10 @@ public class PdpScreen {
     public final String modalItemValue = "//*[@id = 'listColumn2-Item#' and contains(text(), '%s')]";
 
     public final String itemListNumber = "((//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..)[%s]";
+
+    public final String itemsListNumber = "((//a[contains(@data-testid, 'productTitleLink')])[%s]/../../../../../..//select[contains(@id, 'prod')]/option/..)[%s]";
+
+    public final String lineCount = "(//a[contains(@data-testid, 'productTitleLink')])[%s]/../../../../../..//select[contains(@id, 'prod')]/option/..";
     public final String zipCodeValue = "//*[contains(text(), '%s')]";
 
     public final String stockedColor = "//*[text() = '%s ']";
@@ -58,7 +63,17 @@ public class PdpScreen {
 
     private final SelenideElement secondLineItem = $(By.xpath("((//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/..)[2]"));
 
-    private final ElementsCollection lineItemsCount = $$(By.xpath(" (//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/.."));
+    private final ElementsCollection lineItemsCount = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/.."));
+
+    private final ElementsCollection lineItemsCountFirst = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[1]/../../../../../..//select[contains(@id, 'prod')]/option/.."));
+
+    private final ElementsCollection lineItemsCountSecond = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[2]/../../../../../..//select[contains(@id, 'prod')]/option/.."));
+
+    private final ElementsCollection lineItemsCountThird = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[3]/../../../../../..//select[contains(@id, 'prod')]/option/.."));
+
+    private final ElementsCollection lineItemsCountFourth = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[4]/../../../../../..//select[contains(@id, 'prod')]/option/.."));
+
+    private final ElementsCollection lineItemsCountFifth = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[5]/../../../../../..//select[contains(@id, 'prod')]/option/.."));
     private final SelenideElement quantitySelect = $(By.xpath("(//*[text() = 'QTY'])[1]/..//select"));
 
     private final SelenideElement memberPrice = $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]"));
@@ -461,6 +476,8 @@ public class PdpScreen {
 
     private final SelenideElement mattressFeeText = $(By.xpath("//*[text() = 'Mattress Fee']"));
 
+    private final SelenideElement firstAddToProjectButton = $(By.xpath("(//*[@id = 'add-to-project-button'])[1]"));
+
     private final SelenideElement pdpMattressFeeText = $(By.xpath("//*[@data-testid = 'delivery-message-0']"));
 
     private final SelenideElement pdpMattressFeeLink = $(By.xpath("//*[@href = '/graphql/?group=general-modals&id=mattress-recycling']"));
@@ -528,6 +545,16 @@ public class PdpScreen {
 
     public SelenideElement getItemByNumber(Integer number) {
         String path = String.format(itemListNumber, number);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getLineByNumber(Integer number) {
+        String path = String.format(lineCount, number);
+        return $(byXpath(path));
+    }
+
+    public SelenideElement getItemsByNumber(Integer numberOfItem, Integer numberOfLine) {
+        String path = String.format(itemsListNumber, numberOfItem, numberOfLine);
         return $(byXpath(path));
     }
 
