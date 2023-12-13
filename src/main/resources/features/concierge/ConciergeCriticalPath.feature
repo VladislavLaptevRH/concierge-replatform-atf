@@ -942,18 +942,14 @@ Feature: Concierge Critical Path
   Scenario: Checking Faucets in Collection PG
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    Then I navigate to menu 'Dining'
-    Then I navigate to sub menu 'Tables'
-    Then I navigate to gallery 'Round & Oval Tables'
-    #Then I verify that 'PG has SALE and IN-STOCK filters, text RESULTS (n), faucet with text SORT' on PG screen
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
     Then I click 'SORT and confirm that Modal has text FEATURED, Price Low to High, Price High to Low' on PG screen
     Then I click 'Price Low to High and verify price is sorted' on PG screen
-    #Then I click 'Price High to Low and verify price is sorted' on PG screen
     Then I click 'IN-STOCK Filter' on PG screen
     Then I verify that 'CLEAR ALL is present when filter(s) are selected' on PG screen
     Then I click 'IN-STOCK Filter' on PG screen
-    #Then I click 'sale checkbox' on PG screen
-    #Then I verify that 'all products returned have $ SALE price in their descriptions' on PG screen
     Then I verify that PG loads
   
   Scenario: Checking Faucets in General PG (All Tables)
@@ -964,13 +960,13 @@ Feature: Concierge Critical Path
     Then I navigate to gallery 'All Dining Tables'
     #Then I verify that 'PG has filters: IN-STOCK, SALE, SIZE, SHAPE, BRAND, RESULTS and SORT is present' on PG screen
     Then I verify that 'user can select SIZE -> Length -> 30 and respective products are returned' on PG screen
- 
+
   Scenario: Checking Faucets in SALE PGs
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    Then I navigate to menu 'SALE'
-    Then I navigate to sub menu 'Bed'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to menu 'Dining'
+    Then I navigate to sub menu 'Sale'
+    Then I navigate to gallerys_2 'Cabinets'
     Then I verify that 'text on banner SAVE UP TO 70% AS AN RH MEMBER' on PG screen
     Then I verify that 'PG has filters: IN-STOCK, SALE, SIZE, MATERIAL, BRAND, RESULTS and SORT is present' on PG screen
     Then I verify that PG loads
@@ -998,10 +994,10 @@ Feature: Concierge Critical Path
     Then I verify that "<PGName>" title is present in PG top left
     Examples:
       | menu      | subMenu   | gallery       | brand      | currentBrandName | PGName        |
-#      | Bath      | Vanities            | Powder Vanities | RH              | RH               | Powder Vanities |
-#      | Rugs      | Rug Pads            | All Rug Pads    | RH              | RH               | All Rug Pads    |
+      #| Bath      | Vanities            | Powder Vanities | RH              | RH               | Powder Vanities |
+      | Rugs      | Rug Pads            | All Rug Pads    | RH              | RH               | All Rug Pads    |
 #      | Nursery   | Gifts               | Baby Apparel    | RH BABY & CHILD | BC               | Baby Apparel    |
-      | Furniture | Furniture | Dining Chairs | RH OUTDOOR | OD               | Dining Chairs |
+    #  | Furniture | Furniture | Dining Chairs | RH OUTDOOR | OD               | Dining Chairs |
   
   Scenario: Verify that Back to Top Button is present in PG and functioning
     Given I log into Concierge as "associate"
@@ -1030,16 +1026,16 @@ Feature: Concierge Critical Path
   Scenario: Verify that Sale Price is present in Sale PGs
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    Then I navigate to menu 'Lighting'
-    Then I navigate to sub menu 'Ceiling'
-    Then I navigate to gallery 'Chandeliers'
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
     Then I click 'sale checkbox' on PG screen
     Then I verify that 'Verify that all products have text From $ / $ Sale / $ Member' on PG screen
-    Then I navigate to menu 'Outdoor'
-    Then I navigate to sub menu 'Furniture'
-    Then I navigate to gallery 'Sofas'
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
     Then I click 'sale checkbox' on PG screen
-    Then I verify that 'Verify that all products have text Frame $ / $ Sale / $ Member' on PG screen
+    Then I verify that 'Verify that all products have text From $ / $ Sale / $ Member' on PG screen
   
   Scenario: Verify that PG is defaulted to 3-grid view
     Given I log into Concierge as "associate"
@@ -1053,20 +1049,20 @@ Feature: Concierge Critical Path
   Scenario: Verify that PG Grid View is functional within PG
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    Then I navigate to menu 'Dining'
-    Then I navigate to sub menu 'Seating'
-    Then I navigate to gallery 'Leather Seating'
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
     Then I verify that 'Grid View is present in top right' on PG screen
     Then I verify that 'grid view is set to 3-grid view' on PG screen
     Then I Change the PG Grid view to '2' - grid view and confirm changing
     Then I Change the PG Grid view to '3' - grid view and confirm changing
  
-  Scenario: Verify that PG Grid View is kept as selected  as user browses through site -PG/CG/PDP and back
+  Scenario: Verify that PG Grid View is kept as selected as user browses through site -PG/CG/PDP and back
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    Then I navigate to menu 'Bath'
-    Then I navigate to sub menu 'Bath Storage'
-    Then I navigate to gallery 'Bath Cabinets'
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Leather Beds'
     Then I verify that 'Grid View is present in top right' on PG screen
     Then I verify that 'grid view is set to 3-grid view' on PG screen
     Then I Change the PG Grid view to '3' - grid view and confirm changing
@@ -1085,9 +1081,9 @@ Feature: Concierge Critical Path
   Scenario: Verify that Back Button PG -> CG and PDP -> PG is functioning as expected
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    Then I navigate to menu 'Bath'
-    Then I navigate to sub menu 'Bath Storage'
-    Then I navigate to gallery 'Bath Cabinets'
+    Then I navigate to menu 'Bed'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
     Then I click 'Back Browser Button' on PG screen
     Then I verify that 'Dashboard is displayed' on PG screen
     Then I navigate to menu 'Dining'
