@@ -195,7 +195,7 @@ public class PdpScreen {
     private final SelenideElement viewCart = $(By.xpath("//*[text()='View Cart']"));
     private final SelenideElement searchIcon = $(By.xpath("(//*[@class = 'MuiIconButton-label'])[2]"));
     private final SelenideElement searchFieldInput = $(By.xpath("//*[@id = 'site-search-input']"));
-    private final SelenideElement searchFieldIcon = $(By.xpath("//*[@id = 'search-icon-svg']"));
+    private final SelenideElement searchFieldIcon = $(By.xpath("(//*[@id = 'search-icon-svg'])[2]"));
     private final SelenideElement keepShoppingText = $(By.xpath("//*[text()='Keep Shopping']"));
     private final SelenideElement dialogTitleCloseButton = $(By.xpath("//*[@data-testid ='dialog-title-close-button']"));
     private final SelenideElement agreeAndAddToCart = $(By.xpath("//*[text() = 'Agree & Add To Cart']"));
