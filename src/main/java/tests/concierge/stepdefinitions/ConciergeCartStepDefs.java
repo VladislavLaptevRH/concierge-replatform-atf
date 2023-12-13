@@ -1335,7 +1335,6 @@ public class ConciergeCartStepDefs {
 
     @Then("I verify client should not get added with empty address field.")
     public void iVerifyClientNotAdded() {
-        WebDriverRunner.getWebDriver().navigate().back();
         conciergeCartPageScreen.getShippingAddress().should(visible, Duration.ofSeconds(20));
         conciergeCartPageScreen.getBillingAddress().should(visible, Duration.ofSeconds(20));
     }

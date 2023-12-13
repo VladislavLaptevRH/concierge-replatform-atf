@@ -41,13 +41,13 @@ public class CheckoutAddressScreen {
 
     private final SelenideElement aptFloorSuiteField = $(By.xpath("//input[@id = 'address-address-line-2']"));
 
-    private final SelenideElement cityField = $(By.xpath("input[@id = 'address-city-field']"));
+    private final SelenideElement cityField = $(By.xpath("//input[@id = 'address-city-field']"));
 
     private final SelenideElement stateField = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]"));
 
     private final SelenideElement countryField = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[1]"));
 
-    private final SelenideElement zipPostalCodeField =  $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Zip/Postal Code']/..//input"));
+    private final SelenideElement zipPostalCodeField =  $(By.xpath("//input[@id = 'address-postal-code-field']"));
 
     private final SelenideElement zipPostalCodeFieldUpperCase =  $(By.xpath("//*[text() = 'SHIPPING ADDRESS']/..//*[text() = 'Zip/Postal Code']/..//input"));
 
@@ -59,7 +59,7 @@ public class CheckoutAddressScreen {
 
     private final SelenideElement eveningPhone = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Evening Phone (Optional)']/..//input"));
 
-    private final SelenideElement billingAddressAsShippingCheckBox = $(By.xpath("(//input[@id = 'billing-shipping-address-same-checkbox']"));
+    private final SelenideElement billingAddressAsShippingCheckBox = $(By.xpath("//input[@id = 'billing-shipping-address-same-checkbox']"));
 
     private final SelenideElement continuePaymentButton = $(By.xpath("//button[contains(@class,'MuiButton-contained')]"));
 

@@ -49,6 +49,7 @@ public class Pdp {
 
     public static String result = "";
 
+    public static Integer count;
 
     @When("I click on add monogram checkbox from pdp")
     public void iClickOnAddMonogramCheckboxFromPdp() {
@@ -856,10 +857,11 @@ public class Pdp {
 
     @Then("I chose the {string} line item selections one by one for {string} items")
     public void iChoseLineItemSelectionsOneByOneWithItems(String chose, String quantityOfItems) {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
             for (int i = 1; i <= Integer.parseInt(quantityOfItems); i++) {
-                int lineItemsCount = pdpScreen.getLineItemsCount().size();
+                int lineItemsCount = listsCoumt(i);
                 for (int j = 1; j <= lineItemsCount; j++) {
-                    Select itemList = new Select(pdpScreen.getItemByNumber(i));
+                    Select itemList = new Select(pdpScreen.getItemsByNumber(i, j));
                     if (j != lineItemsCount) {
                         try {
                             itemList.selectByIndex(Integer.parseInt(chose));
@@ -879,6 +881,25 @@ public class Pdp {
             }
         result = chose;
         }
+
+    public int listsCoumt(int i) {
+        if(i == 1){
+            count =  pdpScreen.getLineItemsCountFirst().size();
+        }
+        if(i == 2){
+            count =  pdpScreen.getLineItemsCountSecond().size();
+        }
+        if(i == 3){
+            count =  pdpScreen.getLineItemsCountThird().size();
+        }
+        if(i == 4){
+            count =  pdpScreen.getLineItemsCountFourth().size();
+        }
+        if(i == 5){
+            count =  pdpScreen.getLineItemsCountFifth().size();
+        }
+        return count;
+    }
 
     @When("I Verify that {string} is present")
     public void verifyThat(String data) {

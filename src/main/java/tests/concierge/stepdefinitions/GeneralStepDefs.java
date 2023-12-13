@@ -643,7 +643,7 @@ public class GeneralStepDefs {
                 cartId = getCurrentCartId(USER_ID);
             }
             RestAssured.baseURI = BASE_URL;
-            RequestSpecification request = RestAssured.given().relaxedHTTPSValidation();
+            RequestSpecification request = RestAssured.given().relaxedHTTPSValidation().log().all();
             request.headers("Content-Type", "application/json");
             request.headers("Cookie", "PF_AEM_PATHS=%5E%2F(%3F%3Aalison-berger(%3F%3A%2F(%3F%3Aaperture%7C(%3F%3A(%3F%3Afulcrum%7Cpearl%7Crain)%7Cice))~IN%7C~IN)%7C(%3F%3Aalison-berger(%3F%3A%2F(%3F%3Aaperture%7C(%3F%3A(%3F%3Afulcrum%7Cpearl%7Crain)%7Cice))~R%7C~R)%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)R)H%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)OD%7C(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)IN%7C(%3F%3A(%3F%3A(%3F%3A(%3F%3Atuuci%2F(%3F%3Aoceanmastermax%7Cbaymaster)~%7Ctuuci(%3F%3A%2Foceanmaster)%3F~)%7Ctuuci%2Fall~)%7Cheatsail~)%7Cgift-registry~)MO%7Cinterior-design~BC%7Cgift-registry~RH%7Cstrada-ledoux~MO)%24; endpoint=" + endpoint + "; fusion_search=true; ui_asset_path=/concierge-ui-v1/");
             response = request.body("{\n" +
@@ -673,6 +673,7 @@ public class GeneralStepDefs {
 
         String jsonString = response.asString();
         id = JsonPath.from(jsonString).get("data.addLineItemsToConciergeCart.id");
+        response.getStatusCode();
     }
 
     /**
