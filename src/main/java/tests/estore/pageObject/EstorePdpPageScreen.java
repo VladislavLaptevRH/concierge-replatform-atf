@@ -8,8 +8,11 @@ import static com.codeborne.selenide.Selenide.$;
 
 @Getter
 public class EstorePdpPageScreen {
+    private final SelenideElement skuId17050042WHEA = $(By.xpath("//*[text()='Item 17050042 WHEA']"));
 
     private final SelenideElement postalCodePdp = $(By.xpath("(//*[@data-testid='postal-code-dialog-opener'])[1]"));
+
+    private final SelenideElement postalCodeInStock = $(By.xpath("//span[@data-testid='in-stock-link']"));
 
     private final SelenideElement countryZipCodeSelection = $(By.xpath("//*[@id='country-zipcode-selection']"));
 
@@ -37,7 +40,7 @@ public class EstorePdpPageScreen {
 
     private final SelenideElement inStockOptionsButton = $(By.xpath("//*[text()='In-Stock Options']"));
 
-    private final SelenideElement inStockTitle = $(By.xpath("//p[text()='In Stock']"));
+    private final SelenideElement inStockTitle = $(By.xpath("//*[text()='In Stock']"));
 
     private SelenideElement turkishTowelCollectionTitle = $(By.xpath("(//*[text()='802-Gram Turkish Towel Collection'])[3]"));
 
@@ -47,9 +50,9 @@ public class EstorePdpPageScreen {
 
     private SelenideElement colorInStockOption = $(By.xpath("(//*[text()='Color'])[7]"));
 
-    private SelenideElement detailsButton = $(By.xpath("//*[text()='DETAILS']"));
+    private SelenideElement detailsButton = $(By.xpath("//*[text()='Details']"));
 
-    private SelenideElement dimensionsButton = $(By.xpath("//*[text()='DIMENSIONS']"));
+    private SelenideElement dimensionsButton = $(By.xpath("//*[text()='Dimensions']"));
 
     private SelenideElement postalCodeButton = $(By.xpath("//*[@id='component-order-summary']//span"));
 
@@ -81,7 +84,7 @@ public class EstorePdpPageScreen {
 
     private SelenideElement lineItemId = $(By.xpath("(//p[@data-testid='item-sku-id-desktop'])[1]"));
 
-    private SelenideElement addToCartBtn = $(By.xpath("(//span[text()='Add To Cart'])[1]"));
+    private SelenideElement addToCartBtn = $(By.xpath("(//span[text()='Add to Cart'])[1]"));
 
     private SelenideElement itemAddedInCarMsg = $(By.xpath("//p[contains(text(),'1 Item Added To Your Cart')]"));
 
@@ -131,31 +134,31 @@ public class EstorePdpPageScreen {
 
     private SelenideElement heroImageBackBtn = $(By.xpath("(//*[contains(@class,'arrow-icon')])[1]"));
 
-    private SelenideElement heroImagePlusIconZoomInBtn =  $(By.xpath("//*[text()='Grommet/ZoomIn']/.."));
+    private SelenideElement heroImagePlusIconZoomInBtn = $(By.xpath("//*[text()='Grommet/ZoomIn']/.."));
 
-    private SelenideElement heroImagePlusIconZoomOutBtn =  $(By.xpath("//*[text()='Grommet/ZoomOut']/.."));
+    private SelenideElement heroImagePlusIconZoomOutBtn = $(By.xpath("//*[text()='Grommet/ZoomOut']/.."));
 
-    private  SelenideElement heroImageZoomInBtn =  $(By.xpath("(//*[text()='Grommet/ZoomIn']/..)[2]"));
+    private SelenideElement heroImageZoomInBtn = $(By.xpath("(//*[text()='Grommet/ZoomIn']/..)[2]"));
 
-    private  SelenideElement heroImageZoomOutBtn =  $(By.xpath("//*[text()='Grommet/ZoomOut']/.."));
+    private SelenideElement heroImageZoomOutBtn = $(By.xpath("//*[text()='Grommet/ZoomOut']/.."));
 
     private SelenideElement heroImageUpwardBtn = $(By.xpath("(//*[contains(@class,'arrow-icon')])[6]"));
 
     private SelenideElement heroImageDownwardBtn = $(By.xpath("(//*[contains(@class,'arrow-icon')])[7]"));
 
-    private SelenideElement heroImageCloseIcon = $(By.xpath("//*[@id ='Combined-Shape' and @fill='currentColor']"));
+    private SelenideElement heroImageCloseIcon = $(By.xpath("(//*[@id ='Combined-Shape' and @fill='currentColor'])[2]"));
 
-    private SelenideElement countrySelectionBtn = $(By.xpath("//div[@id='country-selection']"));
+    private SelenideElement countrySelectionBtn = $(By.xpath("//img[contains(@src,'country')]"));
 
-    private  SelenideElement countyCode = $(By.xpath("//li[@data-value='GB']"));
+    private SelenideElement countyCode = $(By.xpath("//*[@data-value='GB']"));
 
-    private  SelenideElement postalCodeInput = $(By.xpath("//input[@id='postal-code-international']"));
+    private SelenideElement postalCodeInput = $(By.xpath("//input[@id='postal-code-international']"));
 
     private SelenideElement postalCodeSubmitBtn = $(By.xpath("//button[@data-testid='submit-postal']"));
 
     private SelenideElement viewStockMsg = $(By.xpath("//*[text()='These options are available for']"));
 
-    private SelenideElement availableItemMsg= $(By.xpath("(//p[contains(text(),'This item is in stock and will be delivered on or before')])[2]"));
+    private SelenideElement availableItemMsg = $(By.xpath("(//p[contains(text(),'This item is in stock and will be delivered on or before')])[2]"));
 
     private final SelenideElement selectFabric = $(By.xpath("(//select[contains(@id, 'Fabric')])[1]"));
 
@@ -163,19 +166,19 @@ public class EstorePdpPageScreen {
 
     private final SelenideElement viewSaleItem = $(By.xpath("(//*[@id=\"component-relatedProductCartd_view-sale-btn\"])[1]"));
 
-    private final SelenideElement PDPTitle =  $(By.xpath("//h2[@class='MuiTypography-root MuiTypography-h2']"));
+    private final SelenideElement PDPTitle = $(By.xpath("//h1[contains(@class,'MuiTypography-root')]"));
 
     private final SelenideElement PDPTitleLeatherSofa = $(By.xpath("//h1[contains(@class,'MuiTypography-h1')]"));
 
     private final SelenideElement heroImage = $(By.xpath("//*[@data-testid='desktop-pdp-image']"));
 
-    private final SelenideElement returnPolicyLink =$(By.xpath("//span[text()='Return Policy']"));
+    private final SelenideElement returnPolicyLink = $(By.xpath("//span[text()='Return Policy']"));
 
     private final SelenideElement configureDeliveryInformationText = $(By.xpath("//p[contains(text(),'Configure this item to view delivery information')]"));
 
-    private final SelenideElement pdpDetailsSection = $(By.xpath("//span[text()='DETAILS']"));
+    private final SelenideElement pdpDetailsSection = $(By.xpath("//span[text()='Details']"));
 
-    private final SelenideElement pdpDimensionsSection = $(By.xpath("//span[text()='DIMENSIONS']"));
+    private final SelenideElement pdpDimensionsSection = $(By.xpath("//span[text()='Dimensions']"));
 
     private final SelenideElement pdpFabricCareSection = $(By.xpath("//span[text()='Fabric Care']"));
 
@@ -199,9 +202,9 @@ public class EstorePdpPageScreen {
 
     private final SelenideElement unlimitedFurnitureDeliveryText = $(By.xpath("//*[contains(text(),'Unlimited Furniture Delivery')]"));
 
-    private final  SelenideElement inStockMemberPrice = $(By.xpath("//p[contains(@class,'product-price__amount--member') and contains(text(),'Member')]"));
+    private final SelenideElement inStockMemberPrice = $(By.xpath("//p[contains(@class,'product-price__amount--member')]"));
 
-    private final SelenideElement inStockRegularPrice = $(By.xpath("//p[contains(@class,'product-price__amount') and contains(text(),'Regular')]"));
+    private final SelenideElement inStockRegularPrice = $(By.xpath("//p[contains(@class,'product-price__amount')]"));
 
     private final SelenideElement cloudModuleText = $(By.xpath("//p[contains(text(),'Cloud Modular Leather Sofa')]"));
 

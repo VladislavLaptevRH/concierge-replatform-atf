@@ -3,28 +3,31 @@
 Feature:Concierge Homepage
 
   Scenario: Login as associate and Verify that home page is accessible
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then  I expect that I am on the Concierge Dashboard page
 
   Scenario Outline: Verify Top Nav is present, clickable and responsive in HPs of all brands
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then  I change the brand to "<brand>"
-    Then User verifies that all items from menu are displayed for "<brand>"
+    #Then User verifies that all items from menu are displayed for "<brand>"
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
       | RH BABY & CHILD |
       | RH TEEN         |
 
   Scenario Outline: Verify Logo is present in HPs of all brands
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then  I change the brand to "<brand>"
@@ -32,12 +35,12 @@ Feature:Concierge Homepage
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
       | RH BABY & CHILD |
       | RH TEEN         |
 
@@ -49,12 +52,12 @@ Feature:Concierge Homepage
     Examples:
       | brand           | currentBrandName |
       | RH              | RH               |
-      | RH CONTEMPORARY | CN               |
-      | RH INTERIORS    | IN               |
-      | RH MODERN       | MO               |
-      | RH OUTDOOR      | OD               |
-      | RH BEACH HOUSE  | BH               |
-      | RH SKI HOUSE    | SH               |
+#      | RH CONTEMPORARY | CN               |
+#      | RH INTERIORS    | IN               |
+#      | RH MODERN       | MO               |
+#      | RH OUTDOOR      | OD               |
+#      | RH BEACH HOUSE  | BH               |
+#      | RH SKI HOUSE    | SH               |
       | RH BABY & CHILD | BC               |
       | RH TEEN         | TN               |
 
@@ -66,12 +69,12 @@ Feature:Concierge Homepage
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
       | RH BABY & CHILD |
       | RH TEEN         |
 

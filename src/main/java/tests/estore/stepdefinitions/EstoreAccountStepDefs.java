@@ -101,7 +101,8 @@ public class EstoreAccountStepDefs {
 
     @Then("I verify that the updated firstname in top nav header")
     public void iVerifyThatTheUpdatedFirstnameInTopNavHeader() {
-        $(By.xpath("//*[text()='" + "WELCOME BACK, " + firstName.toUpperCase() + "']")).should(visible, Duration.ofSeconds(20));
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()='" + "WELCOME BACK " + firstName.toUpperCase() + "']")).should(visible, Duration.ofSeconds(20));
     }
 
     @When("I update first name for estore account")
@@ -145,12 +146,25 @@ public class EstoreAccountStepDefs {
     public void iChooseCountryForEStoreFromFooter() {
         if (Hooks.country.equals("GB")) {
             estoreHomePage.chooseGBCountry();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         }
 
         if (Hooks.country.equals("CA")) {
             estoreHomePage.chooseCACountry();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+    }
+
+    @When("I choose country {string} for eStore from footer")
+    public void iChooseCountryEStoreFromFooter(String country) {
+        if (country.equals("GB")) {
+            estoreHomePage.chooseGBCountry();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
+
+        if (country.equals("CA")) {
+            estoreHomePage.chooseCACountry();
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         }
     }
 

@@ -11,7 +11,7 @@ public class ConciergeAddressScreen {
 
     private final SelenideElement soldToTaxExempt = $(By.cssSelector("#soldToTaxExemptId"));
 
-    private final SelenideElement shippingAddressText = $(By.xpath("//*[text() = 'Shipping Address']"));
+    private final SelenideElement shippingAddressText = $(By.xpath("(//*[text()='First Name'])[3]"));
 
     private final SelenideElement checkOutTitle = $(By.xpath("//h3[@class='MuiTypography-root MuiTypography-h3 MuiTypography-alignCenter']"));
 
@@ -23,13 +23,13 @@ public class ConciergeAddressScreen {
 
     private final SelenideElement confirmationText = $(By.xpath("//li[@class='MuiBreadcrumbs-li'][4]/p"));
 
-    private final SelenideElement billingAddressText = $(By.xpath("//*[text()='Billing Address']"));
+    private final SelenideElement billingAddressText = $(By.xpath("(//*[text()='First Name'])[3]"));
 
     private final SelenideElement okButton = $(By.xpath("//*[text()='OK']"));
 
     private final SelenideElement billingAddressFirstName = $(By.id("billingAddress.firstName"));
 
-    private final SelenideElement soldToAddressTitle = $(By.xpath("//*[text()='Sold To Address']"));
+    private final SelenideElement soldToAddressTitle = $(By.xpath("(//*[text()='First Name'])[1]"));
 
     private final SelenideElement billingAddressTitle = $(By.xpath("//*[text()='Billing Address']"));
 
@@ -53,5 +53,5 @@ public class ConciergeAddressScreen {
 
     private final SelenideElement editBillingAddressCapital = $(By.xpath("//*[text() = 'BILLING ADDRESS']/following-sibling::div/*[text() = 'Edit']"));
 
-    private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'Billing Address']/following-sibling::div/*[text() = 'EDIT']"));
+    private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'EDIT']"));
 }

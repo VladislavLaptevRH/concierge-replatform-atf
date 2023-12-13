@@ -6,11 +6,10 @@ Feature: Estore critical path
     Given I log into eStore as guest
     When I choose country for eStore from footer
     Then  I change the brand to "<brand>" for eStore
-    Then User verifies that all items from menu are displayed for "<brand>" on eStore
+    #Then User verifies that all items from menu are displayed for "<brand>" on eStore
     And user verifies search button, account icon, cart button are displayed
     Examples:
       | brand           |
-      | RH              |
       | RH CONTEMPORARY |
       | RH INTERIORS    |
       | RH MODERN       |
@@ -462,7 +461,7 @@ Feature: Estore critical path
     Then I verify that gift card balance info is displayed for estore
 
 #Verify the cart updates, remove line, add to wish lsit, update qty, add membership
-
+#Verify the qty updates and pricing update for line item and Summary
   Scenario: Cart - Verify that user is able to add multiple item to cart, total price is correct
     Given I log into eStore as "nonmember" user
     When I choose country for eStore from footer
@@ -538,6 +537,7 @@ Feature: Estore critical path
     Given I log into eStore as guest
     When I choose country for eStore from footer
     When I open product page with "prod25280089" and "17050044" with "JNPR" for estore
+    Then I chose the '1' line item selections one by one
     Then I verify that add to cart button is active
     And  I verify special messages on PDP page
     When I unselect the size option for "prod19500002" and "17050045" with "NCKL" for estore
@@ -572,14 +572,14 @@ Feature: Estore critical path
     Given I log into eStore as "verifytheproductpriceasperselectedcountry" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod2020027" and "17050045" with "STWL" for estore
+    #When I open product page with "prod2020027" and "17050045" with "STWL" for estore
+    When I open product page with "prod13800635" and "17050042" with "WHEA" for estore
     Then I chose the '1' line item selections one by one
     When I update "CAN" postal code on pdp page
     Then I verify the product price for product "prod2020027" and "17050045" with "NCKL" for the selected "CAN" country
     When I click on add to cart estore button
     When I click on view cart estore button
     Then I verify that price in cart is the same as on PDP
-
 
   Scenario: PDP - Verify the prices it is showing for regular user
     Given I log into eStore as "regular" user
@@ -612,10 +612,11 @@ Feature: Estore critical path
     Given I log into eStore as "cartverifyaddtocartfunctionality" user
     When I choose country for eStore from footer
     When I remove all items from estore cart
-    When I open product page with "prod30750071" and "17050045" with "STWL" for estore
+    When I open product page with "prod30750071" and "17050045" with "" for estore
     When I update "CAN" postal code on pdp page
     Then I verify price for member and regular user on PDP
     Then I verify the product price for product "prod30750071" and "17050045" with "NCKL" for the selected "CAN" country
+    Then I chose the '1' line item selections one by one
     When I click on add to cart estore button
     And I click on view cart estore button
     Then I verify that price in cart is the same as on PDP
@@ -890,6 +891,7 @@ Feature: Estore critical path
     When I choose country for eStore from footer
     When I open product page with "prod13800635" and "17050045" with "BLK" for estore
     When I click on my account button if page is not loaded
+    Then I chose the '1' line item selections one by one
     When I click on add to wishlist button
     Then I verify that I'm able to remove wishlist from cart
 

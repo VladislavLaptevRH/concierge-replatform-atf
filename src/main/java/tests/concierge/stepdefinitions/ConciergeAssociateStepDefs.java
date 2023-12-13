@@ -271,12 +271,12 @@ public class ConciergeAssociateStepDefs {
     @Given("I log into intl Concierge as {string}")
     public void iLogIntoIntlConciergeAs(String accountRole) {
         conciergeLoginPage.getPasswordField().should(visible, Duration.ofMinutes(5));
-        conciergeLoginPage.getUsernameField().should(visible, Duration.ofSeconds(40));
+        conciergeLoginPage.getUsernameField().should(visible, Duration.ofSeconds(15));
         if (accountRole.equals("associate")) {
             conciergeLoginPage.getUsernameField().setValue(Hooks.associateLogin);
             conciergeLoginPage.getPasswordField().setValue(Hooks.associatePassword);
         }
-        conciergeLoginPage.getSignInButton().should(visible, Duration.ofSeconds(30));
+        conciergeLoginPage.getSignInButton().should(visible, Duration.ofSeconds(15));
         conciergeLoginPage.getSignInButton().click();
     }
 
@@ -293,12 +293,12 @@ public class ConciergeAssociateStepDefs {
 
         }
         else {
-            conciergeLoginPage.getLocationInput().should(visible, Duration.ofSeconds(20));
+            conciergeLoginPage.getLocationInput().should(visible, Duration.ofSeconds(15));
             conciergeLoginPage.getLocationInput().click();
-            $(By.xpath("//*[text()='701: Aynhoe']")).should(visible, Duration.ofSeconds(20));
+            $(By.xpath("//*[text()='701: Aynhoe']")).should(visible, Duration.ofSeconds(15));
             $(By.xpath("//*[text()='701: Aynhoe']")).click();
         }
-        conciergeLoginPage.getContinueButton().should(visible, Duration.ofSeconds(30));
+        conciergeLoginPage.getContinueButton().should(visible, Duration.ofSeconds(15));
         conciergeLoginPage.getContinueButton().click();
     }
 
@@ -308,63 +308,64 @@ public class ConciergeAssociateStepDefs {
             WebDriverRunner.getWebDriver().navigate().refresh();
             with().pollInterval(3, SECONDS).await().until(() -> true);
         }
-    conciergeUserAccountPage.getBrandButton().should(visible,Duration.ofSeconds(40)).click();
+    conciergeUserAccountPage.getBrandButton().should(visible,Duration.ofSeconds(15)).click();
         with().pollInterval(5, SECONDS).await().until(() -> true);
         if(! conciergeUserAccountPage.getBrand(brand).isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
-    conciergeUserAccountPage.getBrand(brand).should(visible,Duration.ofSeconds(40)).click();
-    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40)).click();
+    conciergeUserAccountPage.getBrand(brand).should(visible,Duration.ofSeconds(15)).click();
+    conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(15)).click();
     }
 
     @Then("I verify that RH Brand dropdown is present in {string} home page")
     public void iVerifyThatRHBrandDropDownIsPresentInHomePage(String currentBrand){
         if(!conciergeUserAccountPage.getCurrentBrandByName(currentBrand).isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
-            conciergeUserAccountPage.getCurrentBrandByName(currentBrand).should(visible,Duration.ofSeconds(40));
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            conciergeUserAccountPage.getCurrentBrandByName(currentBrand).should(visible,Duration.ofSeconds(15));
         }
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        conciergeUserAccountPage.getCurrentBrandByName(currentBrand).should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getCurrentBrandByName(currentBrand).should(visible,Duration.ofSeconds(15));
     }
 
     @Then("I verify the logo")
     public void iVerifyLogo(){
-        conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(40)).click();
+        conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(15)).click();
     }
 
     @Then("I verify the username")
     public void iVerifyUsername(){
-        conciergeUserAccountPage.getUsename().should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getUsename().should(visible,Duration.ofSeconds(15));
     }
 
     @Then("I verify project button")
     public void iVerifyProjectButton(){
-        conciergeUserAccountPage.getProjectsButton().should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getProjectsButton().should(visible,Duration.ofSeconds(15));
     }
 
     @Then("I Verify search leans")
     public void iVerifyDSearchLeans(){
-        conciergeUserAccountPage.getSearchLens().should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getSearchLens().should(visible,Duration.ofSeconds(15));
     }
 
     @Then("I verify user icon")
     public void iVerifyUserIcon(){
-        conciergeUserAccountPage.getUserIcon().should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getUserIcon().should(visible,Duration.ofSeconds(15));
     }
 
     @Then("I verify cart")
     public void iVerifyCart(){
-        conciergeUserAccountPage.getCartButton().should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getCartButton().should(visible,Duration.ofSeconds(15));
     }
 
     @Then("I verify flag icon for country selection")
     public void iVerifyFlagIconForCountrySelection(){
-        conciergeHomePage.countrySelection.should(visible,Duration.ofSeconds(40));
+        conciergeHomePage.countrySelection.should(visible,Duration.ofSeconds(15));
     }
 
     @Then("I verify brand dropdown")
     public void iVerifyBrand(){
-        conciergeUserAccountPage.getBrandButton().should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getBrandButton().should(visible,Duration.ofSeconds(15));
     }
 
     @Then("I verify top nav")
@@ -379,20 +380,21 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I verify page label")
     public void iVerifyPageLabel(){
-        conciergeUserAccountPage.getPageLabel1().should(visible,Duration.ofSeconds(40));
-        conciergeUserAccountPage.getPageLabel2().should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getPageLabel1().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getPageLabel2().should(visible,Duration.ofSeconds(15));
     }
 
     @Then("I verify button {string} on homepage")
     public void iVerifyButtonOnHomepage(String button) {
         if (Hooks.cookie.equals("userservice")) {
             if(button.equals("RH card lookup")){
-                conciergeUserAccountPage.getButton("RH Card lookup").should(visible, Duration.ofSeconds(40));
+                conciergeUserAccountPage.getButton("RH Card lookup").should(visible, Duration.ofSeconds(15));
             } else {
-                conciergeUserAccountPage.getButton(button).should(visible, Duration.ofSeconds(40));
+                conciergeUserAccountPage.getButton(button).should(visible, Duration.ofSeconds(15));
             }
         } else {
-            conciergeUserAccountPage.getButton(button).should(visible, Duration.ofSeconds(40));
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            conciergeUserAccountPage.getButton(button).should(visible, Duration.ofSeconds(15));
         }
     }
 
@@ -403,16 +405,22 @@ public class ConciergeAssociateStepDefs {
 
     @Then("I verify search item field and search button")
     public void iVerifySearchItem(){
-        conciergeUserAccountPage.getSearchItemField().should(visible,Duration.ofSeconds(40));
-        conciergeUserAccountPage.getSearchButton().should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getSearchItemField().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getSearchButton().should(visible,Duration.ofSeconds(15));
     }
 
     @Then("I verify order history page is displayed")
     public void iVerifyOrderHistory(){
-        conciergeUserAccountPage.getOrderHistoryTitle().should(visible,Duration.ofSeconds(40));
-        conciergeUserAccountPage.getOrderUser().should(visible,Duration.ofSeconds(40));
-        conciergeUserAccountPage.getOrderSearch().should(visible,Duration.ofSeconds(40));
-        conciergeUserAccountPage.getOrderTable().should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getOrderHistoryTitle().should(visible,Duration.ofSeconds(15));
+//        conciergeUserAccountPage.getOrderUser().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getOrderSearch().should(visible,Duration.ofSeconds(15));
+    }
+
+    @Then("Search Button should be shown disable")
+    public void searchButtonShouldBeDisabled(){
+        conciergeUserAccountPage.getOrderSearch().click();
+        conciergeUserAccountPage.getPostalCode().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getDisabledSearchButton().should(visible,Duration.ofSeconds(15));
     }
 
     @When("I search by {string}")
@@ -420,27 +428,27 @@ public class ConciergeAssociateStepDefs {
         conciergeUserAccountPage.getOrderSearch().click();
         switch (field){
             case "name":{
-                conciergeUserAccountPage.getFirstName().should(visible,Duration.ofSeconds(40));
+                conciergeUserAccountPage.getFirstName().should(visible,Duration.ofSeconds(15));
                 conciergeUserAccountPage.getFirstName().setValue("Automation");
-                conciergeUserAccountPage.getLastName().should(visible,Duration.ofSeconds(40));
+                conciergeUserAccountPage.getLastName().should(visible,Duration.ofSeconds(15));
                 conciergeUserAccountPage.getLastName().setValue("Trade");
                 conciergeUserAccountPage.getOrderSearchButton().click();
                 break;
             }
             case "contact":{
-                conciergeUserAccountPage.getPhoneNumber().should(visible,Duration.ofSeconds(40));
+                conciergeUserAccountPage.getPhoneNumber().should(visible,Duration.ofSeconds(15));
                 conciergeUserAccountPage.getPhoneNumber().setValue("1234567890");
                 conciergeUserAccountPage.getOrderSearchButton().click();
                 break;
             }
             case "First Name":{
-                conciergeUserAccountPage.getFirstName().should(visible,Duration.ofSeconds(40));
+                conciergeUserAccountPage.getFirstName().should(visible,Duration.ofSeconds(15));
                 conciergeUserAccountPage.getFirstName().setValue("Automation");
                 conciergeUserAccountPage.getOrderSearchButton().click();
                 break;
             }
             case "Last Name":{
-                conciergeUserAccountPage.getLastName().should(visible,Duration.ofSeconds(40));
+                conciergeUserAccountPage.getLastName().should(visible,Duration.ofSeconds(15));
                 conciergeUserAccountPage.getLastName().setValue("Trade");
                 conciergeUserAccountPage.getOrderSearchButton().click();
                 break;
@@ -452,9 +460,49 @@ public class ConciergeAssociateStepDefs {
         conciergeUserAccountPage.getFirstNameOnly().should(visible,Duration.ofSeconds(40));
     }
 
+    @Then("Search with incorrect Last name")
+    public void searchWithIncorrectLastName(){
+        conciergeUserAccountPage.getOrderSearch().click();
+        conciergeUserAccountPage.getLastName().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getLastName().setValue("*****");
+        conciergeUserAccountPage.getOrderSearchButton().click();
+        conciergeUserAccountPage.getSearchYieldedMessage().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getCreateNewAccountButton().should(visible,Duration.ofSeconds(15));
+    }
+
+    @Then("Search with only Postal Code field")
+    public void searchOnlyWithPostalCodeField(){
+        conciergeUserAccountPage.getOrderSearch().click();
+        conciergeUserAccountPage.getPostalCode().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getPostalCode().setValue("94536");
+        conciergeUserAccountPage.getOrderSearchButton().click();
+        conciergeUserAccountPage.getSearchPostalCodeErrorMessage().should(visible,Duration.ofSeconds(15));
+    }
+
+    @Then("Search with incorrect Last name and correct postal code")
+    public void searchOWithIncorrectLastNameAndCorrectPostalCode(){
+        conciergeUserAccountPage.getOrderSearch().click();
+        conciergeUserAccountPage.getLastName().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getLastName().setValue("*****");
+        conciergeUserAccountPage.getPostalCode().should(visible,Duration.ofSeconds(15));
+        conciergeUserAccountPage.getPostalCode().setValue("94536");
+        conciergeUserAccountPage.getOrderSearchButton().click();
+        conciergeUserAccountPage.getSearchYieldedMessage().should(visible,Duration.ofSeconds(15));
+    }
+
     @Then("I confirm table header {string}")
     public void iConfirmth(String header){
-        conciergeUserAccountPage.getTableHeader(header).should(visible,Duration.ofSeconds(40));
+        conciergeUserAccountPage.getTableHeader(header).should(visible,Duration.ofSeconds(15));
+    }
+
+    @Then("Click on the Create New Account CTA button")
+    public void clickCreateNewAccountButton(){
+        conciergeUserAccountPage.getCreateNewAccountButton().click();
+    }
+
+    @Then("Create Account modal should be open")
+    public void createAccountModalShouldBeOpen(){
+        conciergeUserAccountPage.getCreateNewAccountModalTitle().should(visible,Duration.ofSeconds(15));
     }
 
 

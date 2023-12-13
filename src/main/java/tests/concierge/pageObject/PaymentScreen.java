@@ -15,10 +15,14 @@ public class PaymentScreen {
 
     private final SelenideElement editBillingAddressBtn = $(By.xpath("//*[text() = 'Billing Address']/following-sibling::div/a"));
 
+    private final SelenideElement continueWithOriginalAddressButton = $(By.xpath("(//button[@data-testid='add-to-cart-dialog-opener'])[1]"));
+
     private final SelenideElement removePaymentBtn = $(By.xpath("//a[@class='MuiTypography-root MuiLink-root MuiLink-underlineAlways MuiTypography-caption MuiTypography-colorPrimary']"));
 
     private final SelenideElement choosePaymentMethodBtn = $(By.xpath("//div[contains(@class,'Mui')]//select[contains(@class,'MuiInputBase-input')]"));
     private final SelenideElement choosePaymentMethodBtnDisplayed = $(By.xpath("//select[contains(@class,'MuiInputBase-input')]/option[text() = 'Choose a payment method']"));
+
+    private final SelenideElement paymentMethodPageTitleText = $(By.xpath("//*[text() = 'Payment Method']"));
 
     private final SelenideElement selectPaymentPlan = $(By.xpath("//div[contains(@class,'MuiInputBase-fullWidth')]/select"));
 

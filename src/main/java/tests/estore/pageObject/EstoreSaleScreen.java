@@ -113,7 +113,7 @@ public class EstoreSaleScreen {
 
     private SelenideElement textilesBathTowels = $(By.xpath("//*[text()='Bath Towels']"));
 
-    private SelenideElement rugsAllRugs = $(By.xpath("//*[text()='All Rugs']"));
+    private SelenideElement rugsAllRugs = $(By.xpath("(//*[text()='All Rugs'])[4]"));
 
     private SelenideElement rugsNeutralRugs = $(By.xpath("//*[text()='Neutral Rugs']"));
 
@@ -150,8 +150,6 @@ public class EstoreSaleScreen {
     private SelenideElement highToLowText = $(By.xpath("//*[text()='Price High to Low']"));
 
 
-
-
     public void verifyThatBeddingCollectionTitleIsDisplayedOnCG() {
         beddingCollectionTitle.should(Condition.visible, Duration.ofSeconds(18));
     }
@@ -163,6 +161,10 @@ public class EstoreSaleScreen {
 
     public void verifyThatSaleAppliedFilterWasRemoved() {
         saleAppliedFilter.shouldNotBe(Condition.visible, Duration.ofSeconds(12));
+    }
+
+    public void verifyThatSaleAppliedFilterIsDisplayed() {
+        saleAppliedFilter.shouldBe(Condition.visible, Duration.ofSeconds(12));
     }
 
     public void verifyThatStockAppliedFilterWasRemoved() {

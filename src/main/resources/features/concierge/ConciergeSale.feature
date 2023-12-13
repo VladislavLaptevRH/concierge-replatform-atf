@@ -13,5 +13,5 @@ Feature: Concierge Sale
     When I choose country for concierge from footer
     When I click on sale
     When I click on sale menu item
-    When I click on sub category and navigate PDP
+    When I click sub category and navigate PDP
     Then I verify prices on product page

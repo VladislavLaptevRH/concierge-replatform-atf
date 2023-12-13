@@ -1,4 +1,4 @@
-@conciergeTestRun
+ @conciergeTestRun
 @conciergeProject
 Feature: Concierge Project
 
@@ -17,11 +17,18 @@ Feature: Concierge Project
 #      | SPO In stock Items |
 #      | BO                |
 
-  Scenario: Verify the Projects load for a logged in associate
+  Scenario: Verify the Projects load for a logged in associate for all regions (US,CAD and UK)
     Given I log into Concierge as "associate"
-    When I choose country for concierge from footer
+    When I choose "US" country
     When I click on projects button
     Then I verify that search result is displayed
+    When I choose "CA" country
+    When I click on projects button
+    Then I verify that search result is displayed
+    When I choose "GB" country
+    When I click on projects button
+    Then I verify that search result is displayed
+
 
   Scenario Outline: Verify that user is able to find project by <searchBy>
     Given I log into Concierge as "associate"
@@ -141,7 +148,7 @@ Feature: Concierge Project
     When I click on email estimate button from project screen
     When I click on bcc associate checkbox
     When I introduces client email from email estimate pop up
-    When I introduces email in send copies of this project to additional emails
+#    When I introduces email in send copies of this project to additional emails
     When I click on email estimate button
     Then I verify that the client received the letter on the "client"
 
@@ -160,13 +167,13 @@ Feature: Concierge Project
       | skuid    |
       | 63130001 |
 
-  Scenario: Verify the Opportunities list and switching between the opportunities -CART/PDP
+  Scenario:Verify the Opportunities list in add to project modal and switching between the Opportunities -CART/PDP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart
     When I go to item "63130001" from search field
     Then I chose the '1' line item selections one by one
-    And I select count of product
+#    And I select count of product
     When I click on add to cart button
     When I click on view cart button
     When I click on move to project button
@@ -244,7 +251,7 @@ Feature: Concierge Project
     When Adjusted price was removed
     Then I click on remove button from project
 
-  Scenario: Verify shipping overrides in projects
+  Scenario: Shipping overrride in projects - Move to cart and verify
 
     Given I log into Concierge as "leader"
     When I choose country for concierge from footer
@@ -261,7 +268,7 @@ Feature: Concierge Project
     And I choose "CustomerDelight" reason
     Then I verified that override price for shipping displayed
 
-  Scenario: Verify subtotal/forecast by updating qty for items
+  Scenario: Verify subtotal/forecast by updating qty
     Given I log into Concierge as "leader"
     When I choose country for concierge from footer
     When I remove all items from cart
@@ -319,7 +326,7 @@ Feature: Concierge Project
     And I remove client from header
     When I go to item "10072181 BLK" from search field
     Then I chose the '1' line item selections one by one
-    And I select count of product
+#    And I select count of product
     When I click on add to project button
     And I choose project by project name "overridinglineitems"
     When I click on save button
@@ -330,7 +337,7 @@ Feature: Concierge Project
     Then I click on remove button from project
 
  #10011392 SS
-  Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - NON-MEMBER, MEMBER
+  Scenario Outline: Verity the Subtotal, Forecast , tax updated by changing the pricing type - member/non member - trade/non trade
 
     Given I log into Concierge as "leader"
     When I choose country for concierge from footer
@@ -343,7 +350,7 @@ Feature: Concierge Project
     And I remove client from header
     When I go to item "10072181 LOAK" from search field
     Then I chose the '1' line item selections one by one
-    And I select count of product
+#    And I select count of product
     When I click on add to project button
     And I choose project by project name "verifyforecastbypricingtype"
     When I click on save button
@@ -358,7 +365,7 @@ Feature: Concierge Project
       | NON-MEMBER  |
       | MEMBER      |
 
-  Scenario: Verify switch between pages in Myprojects List
+  Scenario: Switch between pages in Myprojects List
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I click on projects button
@@ -366,7 +373,7 @@ Feature: Concierge Project
     When user go to the next page "2" of projects
     Then user verifies that project page is displayed
 
-  Scenario: Verify Tax exempt in projects for Trade projects
+  Scenario: Verify Tax exempt in projects for Trade proejcts
     Given I log into Concierge as "leader"
     When I choose country for concierge from footer
     When I click on projects button
@@ -475,14 +482,13 @@ Feature: Concierge Project
     When I click on add to project button
     Then I verify that space list in dropdown is displayed from add to project modal
 
-  Scenario: Verify add new Space in the modal and add items to the selected space -CART/PDP
-
+  Scenario: Verify add new Space in the add to project modal and add items to the selected space - CART/PDP
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart
     When I go to item "10010966" from search field
     Then I chose the '1' line item selections one by one
-    And I select count of product
+#    And I select count of product
     When I click on add to project button
     When I click on add new space button
     When I introduces space name
@@ -492,7 +498,6 @@ Feature: Concierge Project
     Then I verify that item was added to the selected space
 
   Scenario: Verify the address page, pre filled address details and Email address once the project added to cart
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -526,7 +531,7 @@ Feature: Concierge Project
     When I click on save button
     Then I verify that item added and project load in correct space and oppty
 
-  Scenario: Space Dropdown in projects - multiple spaces in projects
+  Scenario: Verify Space Dropdown in Project
     #Need data for stg4
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -569,3 +574,22 @@ Feature: Concierge Project
     When I click on the first project search result
     When I click on view all button from space dropdown
     Then I verify that items from all spaces are displayed
+
+  Scenario: Verify pagination is working when switching between pages in my projects
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I click on projects button
+    Then Switch page using pagination
+    And User should be able to switch pages using pagination in my projects
+
+  Scenario: Verify Correct brand Name is showing in email estimate for line items
+    Given I log into Concierge as "associate"
+    When I choose country for concierge from footer
+    When I click on projects button
+    When I search project "modifyitemsoptions" by provided "projectName"
+    When I click on the first project search result
+    When I click on email estimate button from project screen
+    When I introduces client email from email estimate pop up
+    When I click on email estimate button
+    Then I verify that the client received the letter on the "client"
+    Then Verify Brand Name in EMAIL Recipt

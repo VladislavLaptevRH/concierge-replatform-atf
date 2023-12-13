@@ -269,9 +269,6 @@ Feature:Concierge Cart Page
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
-    When I fill all fields from address screen
-    When I continue to payment
-    When I click on continue with original address button
     Then I verify that total price from cart and from payment page is the same
 
   Scenario: Promo codes - Total Additional Product Discount message is displayed on review page
@@ -287,9 +284,7 @@ Feature:Concierge Cart Page
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
-    When I fill all fields from address screen
-    When I continue to payment
-    When I click on continue with original address button
+    Then I verify that payment page is present
     When I choose POS for payment method
     Then I verify that Total Additional Product Discount message is "displayed" on review page
 
@@ -322,7 +317,6 @@ Feature:Concierge Cart Page
     Then I verify that mini cart value is equal to quantity of product
 
   Scenario Outline: Verify Membership banner for <businessClient> - should not be present
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -549,9 +543,7 @@ Feature:Concierge Cart Page
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
-    When I fill all fields from address screen
-    When I continue to payment
-    When I click on continue with original address button
+    Then I verify that payment page is present
     When I choose POS for payment method
     When I goes to address page from review screen
     Then I verify that address saved in address page
@@ -567,6 +559,8 @@ Feature:Concierge Cart Page
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
+    When I click on checkout button
+    When I click on no thanks button
     Then I verify zipcode
 
   Scenario: Availability, Delivery and Returns messages
@@ -668,6 +662,16 @@ Feature:Concierge Cart Page
     When I click on no thanks button
     When I choose client who is a "Non-Member"
     When I fill all fields from address screen for checking zip code
-    And I continue to payment
-    When I click on continue with original address button
+    Then I verify that payment page is present
     Then Verify that after come back to address page from payment page ship to and bill to address is showing
+
+#  Scenario: Verify the Grid view in Cart screen
+#    Given I log into Concierge as "associate"
+#    When I choose country for concierge from footer
+#    When I remove all items from cart via UI
+#    When I remove client from header
+#    When I open product page with productId "prod19500002"
+#    Then I chose the '1' line item selections one by one
+#    When I click on add to cart button
+#    When I click on view cart button
+#    Then Different grid options should be displayed on the cart page

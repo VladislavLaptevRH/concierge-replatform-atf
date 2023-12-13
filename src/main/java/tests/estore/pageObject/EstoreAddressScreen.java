@@ -127,6 +127,10 @@ public class EstoreAddressScreen {
 
     private final SelenideElement shippingAddressTitle = $(By.xpath("//*[text()='Shipping Address']"));
 
+    private final SelenideElement shippingAddress = $(By.xpath("//*[text()='Shipping Address']"));
+
+    private final SelenideElement shippingAddressFirstNameWilliam = $(By.xpath("//*[text()='Safire William']"));
+
     private final SelenideElement editPaymentOrderReview = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item']/a)[2]"));
 
     private final SelenideElement editBillingAddress = $(By.xpath("//*[text() = 'Edit']"));
@@ -141,6 +145,19 @@ public class EstoreAddressScreen {
     private final SelenideElement inputForTheFirstOrderDescriptionMessage = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-container MuiGrid-item']//input[@class='MuiInputBase-input MuiOutlinedInput-input'])[4]"));
 
     private final SelenideElement sameAsShippingAddress = $(By.xpath("//span[text()='Same as shipping address']"));
+
+    private final SelenideElement selectBillingAddressCountry = $(By.id("billingAddress.country"));
+
+    private final SelenideElement afghanistanCountry = $(By.xpath("//*[text()='Afghanistan']"));
+
+    private final SelenideElement safireAddress = $(By.xpath("//*[text()='Safire']"));
+
+    private final SelenideElement addressStreet = $(By.xpath("//input[@id='shippingAddress.addressLine1']"));
+
+    private final SelenideElement firstPointFromAddressList = $(By.xpath("//ul[@role='menu']//li[1]"));
+
+    private final SelenideElement phoneRequiredMessage = $(By.xpath("//*[text()='Phone required']"));
+
     public void clickToAddGiftMessageButton() {
         addGiftMessageBtn.should(Condition.interactable,
                 Duration.ofSeconds(15)).click();

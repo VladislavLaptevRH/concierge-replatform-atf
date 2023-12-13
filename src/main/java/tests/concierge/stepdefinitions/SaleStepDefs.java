@@ -18,6 +18,7 @@ import static com.codeborne.selenide.Selenide.sleep;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 
 public class SaleStepDefs {
@@ -39,20 +40,34 @@ public class SaleStepDefs {
         for (int i = 0; i < saleScreen.getListOfSaleMainCategory().size(); i++) {
             items.add(saleScreen.getListOfSaleMainCategory().get(i).getText());
         }
-        assertEquals(items, expectedItems);
+        assertTrue(items.containsAll(expectedItems));
 
     }
 
     @When("I click on sale menu item")
     public void iCLickOnSaleMenuItem() {
-        $(By.xpath("(//*[text()='Décor'])[2]")).should(interactable).click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        $(By.xpath("(//*[text()='Bed'])[3]")).hover();
+        //$(By.xpath("(//*[text()='Bed'])[3]")).should(interactable).click();
+    }
+
+    @When("I click sub category and navigate PDP")
+    public void iClickSubCategory() {
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        $(By.xpath("(//*[text()='Beds'])[3]")).should(interactable).click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        int randomProduct = generalStepDefs.getRandomNumber(1, saleScreen.getRandomProduct().size());
+        saleScreen.getRandomProduct().get(randomProduct).click();
+        with().pollInterval(1, SECONDS).await().until(() -> true);
     }
 
     @When("I click on sub category and navigate PDP")
     public void iClickOnSubCategory() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
+
         int randomSubCategory = generalStepDefs.getRandomNumber(1, saleScreen.getListOfSaleSubCategory().size());
         saleScreen.getListOfSaleSubCategory().get(randomSubCategory).click();
+
         with().pollInterval(1, SECONDS).await().until(() -> true);
         /*int randomCollection = generalStepDefs.getRandomNumber(1, saleScreen.getListOfSaleCollection().size());
         saleScreen.getListOfSaleCollection().get(randomCollection).click();

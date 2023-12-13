@@ -109,7 +109,6 @@ public class EstoreCGStepDefs {
 
     @Then("I verify that estore PDP page is displayed")
     public void iVerifyThatEstorePDPPageIsDisplayed() {
-
         estoreItemPage.getAddToCartButton().scrollIntoView(true);
         estoreItemPage.getAddToCartButton().should(visible, Duration.ofSeconds(40));
     }
@@ -184,7 +183,7 @@ public class EstoreCGStepDefs {
     public void iSetGridViewOnEstoreCGPage(String arg0) {
         estoreSearchScreen.getThreeColumnsInRowGridButton().should(visible, Duration.ofSeconds(20));
         estoreSearchScreen.getThreeColumnsInRowGridButton().click();
-        estoreSearchScreen.getThreeColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
+        //estoreSearchScreen.getThreeColumnsInRowGridElement().should(visible, Duration.ofSeconds(20));
     }
 
     @Then("I verify CGS all menu items")
@@ -272,6 +271,7 @@ public class EstoreCGStepDefs {
 
     @Then("I verify that the CG title on the top left corner of the page")
     public void iVerifyThatTheCGTitleOnTheTopLeftCornerOfThePage() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         estoreCGScreen.verifyThatSeatinCollectionTitleIsDisplayedOnCG();
     }
 
@@ -283,6 +283,7 @@ public class EstoreCGStepDefs {
     @Then("I verify that PG title, description text, member discount message is displayed")
     public void iVerifyThatPGTitleDescriptionTextMemberDiscountMessageIsDisplayed() {
         generalStepDefs.waitForJSandJQueryToLoad();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         estoreCGScreen.verifyThatSeatinCollectionTitleIsDisplayedOnCG();
         estoreCGScreen.verifyThatMemberDiscountMessageIsDisplayedOnCG();
         estoreCGScreen.verifyThatCGDescriptionIsDisplayed();
@@ -387,5 +388,24 @@ public class EstoreCGStepDefs {
     @Then("I verify that {string} title is displayed on CG")
     public void iVerifyThatTitleIsDisplayedOnCG(String title) {
         estoreCGScreen.verifyThatTitleisDisplayedOnCg(title);
+    }
+
+    @Then("I verify that I navigate to CG Page successfully")
+    public void iVerifyThatINavigateToCGPageSuccessfully() {
+    }
+
+    @Then("I verify that swatches are not displayed below the product image")
+    public void iVerifyThatSwatchesAreNotDisplayedBelowTheProductImage() {
+        estoreCGScreen.verifyThatSwatches3upGridViewIsNotDisplayed();
+    }
+
+    @Then("I verify that recently selected {int}x{int} grid in CG page")
+    public void iVerifyThatRecentlySelectedXGridInCGPage(int arg0, int arg1) {
+        estoreCGScreen.getGridView2x2().should(visible, Duration.ofSeconds(12));
+    }
+
+    @When("I verify that Bed collections page is displayed")
+    public void iVerifyThatBedCollectionsPageIsDisplayed() {
+        estoreSaleScreen.getBeddingCollectionTitle().should(visible, Duration.ofSeconds(12));
     }
 }

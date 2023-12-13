@@ -25,36 +25,41 @@ public class CheckoutAddressScreen {
 
     private final SelenideElement checkoutAddressPopUpHeader = $(By.id("//*[text() = 'We are unable to verify your Shipping Address']"));
 
-    private final SelenideElement firstNameInpt = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'First Name']/..//input"));
+    private final SelenideElement firstNameInpt = $(By.xpath("//input[@id = 'shippingAddress.firstName']"));
+    private final SelenideElement firstNameInptUpperCase = $(By.xpath("//*[text() = 'SHIPPING ADDRESS']/..//*[text() = 'First Name']/..//input"));
     private final SelenideElement tryAgainButton = $(By.xpath("//*[text() = 'TRY AGAIN']"));
-    private final SelenideElement lastNameField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Last Name']/..//input"));
+    private final SelenideElement lastNameField = $(By.xpath("//input[@id = 'address-last-name-field']"));
 
-    private final SelenideElement companyNameField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Company Name (optional)']/..//input"));
+    private final SelenideElement lastNameFieldUpperCase = $(By.xpath("//*[text() = 'SHIPPING ADDRESS']/..//*[text() = 'Last Name']/..//input"));
+
+    private final SelenideElement companyNameField = $(By.xpath("//input[@id = 'address-company-name-field']"));
     private final SelenideElement companyNameFieldNew = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Company Name']/..//input"));
 
     private final SelenideElement companyNameFieldNewUserService = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Company Name (optional)']/..//input"));
 
-    private final SelenideElement streetAddressField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Street Address']/..//input"));
+    private final SelenideElement streetAddressField = $(By.xpath("//input[@id = 'shippingAddress.addressLine1']"));
 
-    private final SelenideElement aptFloorSuiteField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Apt., Floor, Suite, etc. (optional)']/..//input"));
+    private final SelenideElement aptFloorSuiteField = $(By.xpath("//input[@id = 'address-address-line-2']"));
 
-    private final SelenideElement cityField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'City']/..//input"));
+    private final SelenideElement cityField = $(By.xpath("//input[@id = 'address-city-field']"));
 
     private final SelenideElement stateField = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]"));
 
     private final SelenideElement countryField = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[1]"));
 
-    private final SelenideElement zipPostalCodeField =  $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Zip/Postal Code']/..//input"));
+    private final SelenideElement zipPostalCodeField =  $(By.xpath("//input[@id = 'address-postal-code-field']"));
+
+    private final SelenideElement zipPostalCodeFieldUpperCase =  $(By.xpath("//*[text() = 'SHIPPING ADDRESS']/..//*[text() = 'Zip/Postal Code']/..//input"));
 
     private final SelenideElement verifyingShippingAddressPage =  $(By.xpath("//*[text()='We are unable to verify your Shipping Address']"));
 
     private final SelenideElement verifyingBillingAddressPage =  $(By.xpath("//*[text()='We are unable to verify your Billing Address']"));
 
-    private final SelenideElement phoneField = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Phone']/..//input"));
+    private final SelenideElement phoneField = $(By.xpath("//input[@id = 'address-phone-field']"));
 
     private final SelenideElement eveningPhone = $(By.xpath("//*[text() = 'Shipping Address']/..//*[text() = 'Evening Phone (Optional)']/..//input"));
 
-    private final SelenideElement billingAddressAsShippingCheckBox = $(By.xpath("(//input[@type='checkbox'])[1]"));
+    private final SelenideElement billingAddressAsShippingCheckBox = $(By.xpath("//input[@id = 'billing-shipping-address-same-checkbox']"));
 
     private final SelenideElement continuePaymentButton = $(By.xpath("//button[contains(@class,'MuiButton-contained')]"));
 

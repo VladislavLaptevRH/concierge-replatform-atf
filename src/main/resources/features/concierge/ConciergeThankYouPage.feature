@@ -14,6 +14,8 @@ Feature: Concierge ThankYouPage
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
+    When I click on checkout button
+    When I click on no thanks button
     When I fill all fields from address screen
     And I continue to payment
     When I click on continue with original address button
@@ -33,6 +35,8 @@ Feature: Concierge ThankYouPage
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
+    When I click on checkout button
+    When I click on no thanks button
     When I fill all fields from address screen
     And I continue to payment
     When I click on continue with original address button
@@ -52,6 +56,8 @@ Feature: Concierge ThankYouPage
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
+    When I click on checkout button
+    When I click on no thanks button
     When I fill all fields from address screen
     And I continue to payment
     When I click on continue with original address button
@@ -71,9 +77,12 @@ Feature: Concierge ThankYouPage
     When I click on checkout button
     When I click on no thanks button
     When I choose client who is a "Non-Member"
+    When I click on checkout button
+    When I click on no thanks button
     When I fill all fields from address screen
     And I continue to payment
     When I click on continue with original address button
     When I choose POS for payment method
     When I click on a place order button
+    When I click on order details button
     Then I verify order number and email address verbiage

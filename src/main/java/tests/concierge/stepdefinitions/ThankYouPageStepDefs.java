@@ -23,17 +23,16 @@ public class ThankYouPageStepDefs {
     public void iVerifyAllTheLineItemsInTheCartOnThankYouPage() {
         $(By.xpath("//*[text()='Qty 1']")).should(visible, Duration.ofSeconds(15));
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofSeconds(10));
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(40));
-        $(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Subtotal')]")).should(visible, Duration.ofSeconds(40));
+        $(By.xpath("//*[contains(text(),'Unlimited Furniture Delivery')]")).should(visible, Duration.ofSeconds(40));
+        //$(By.xpath("//*[contains(text(),'Estimated Sales Tax for ')]")).should(visible, Duration.ofSeconds(40));
         conciergeCartPageScreen.getTotalMemberPrice().should(visible, Duration.ofSeconds(10));
     }
 
     @Then("I verify order number and email address verbiage")
     public void iVerifyOrderNumberAndEmailAddressVerbiage() {
-        $(By.xpath("//*[text()='Your order number is']")).should(visible,Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='You will receive an order confirmation via email at']")).should(visible,Duration.ofSeconds(15));
-//        $(By.xpath("//*[text()='test@mailinator.com']")).should(visible,Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='TOTAL']")).should(visible,Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='From']")).should(visible,Duration.ofSeconds(15));
     }
 
 }

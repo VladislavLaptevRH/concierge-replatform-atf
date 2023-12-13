@@ -2,7 +2,6 @@
 @conciergeOrderHistory
 Feature:Concierge Order history
 
-
   Scenario: Verify the Order history in Dashboard
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
@@ -10,7 +9,6 @@ Feature:Concierge Order history
 	Then I verify button "RH Orders" on homepage
   	When I click "RH Orders" button on homepage
   	Then I verify order history page is displayed
-
 
   Scenario: Verify look up by customer details
 	Given I log into Concierge as "associate"
@@ -22,7 +20,6 @@ Feature:Concierge Order history
 	When I search by "name"
   	Then I confirm order is shown for search filter "name"
 
-
   Scenario: Verify the contacts returned and select a contact to get the list of orders
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
@@ -33,7 +30,6 @@ Feature:Concierge Order history
 	When I search by "contact"
 	Then I confirm order is shown for search filter "contact"
 
-
   Scenario: Search with only First name field should not be allowed
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
@@ -43,7 +39,6 @@ Feature:Concierge Order history
 	Then I verify order history page is displayed
 	When I search by "First Name"
   	Then I confirm user is not able to search only with first name
-
 
   Scenario: Search with only Last name field and verify the customer account search results
 	Given I log into Concierge as "associate"
@@ -80,9 +75,6 @@ Feature:Concierge Order history
 	Then I verify button "RH Orders" on homepage
 	When I click "RH Orders" button on homepage
 	Then I verify order history page is displayed
-
-
-
 
 #  Scenario: Order history search is accessible from the dashboard
 #    Given I log into Concierge as "associate"
@@ -143,3 +135,45 @@ Feature:Concierge Order history
 #      | R03283581845714 | inProcess   |
 #      | 785071          | open        |
 #      | 12345           | notExisting |
+
+	Scenario: Search with incorrect Last name, Your search yielded no results message along with Create New Account CTA button should be displayed
+	Given I log into Concierge as "associate"
+	When I choose country for concierge from footer
+	Then I expect that I am on the Concierge Dashboard page
+	Then I verify button "RH Orders" on homepage
+	When I click "RH Orders" button on homepage
+	Then Search with incorrect Last name
+
+	Scenario: Clicking on the Create New Account CTA button button should open Create Account modal
+	Given I log into Concierge as "associate"
+	When I choose country for concierge from footer
+	Then I expect that I am on the Concierge Dashboard page
+	Then I verify button "RH Orders" on homepage
+	When I click "RH Orders" button on homepage
+	Then Search with incorrect Last name
+	Then Click on the Create New Account CTA button
+	Then Create Account modal should be open
+
+	Scenario: Search with only Postal Code field should not be allowed
+	Given I log into Concierge as "associate"
+	When I choose country for concierge from footer
+	Then I expect that I am on the Concierge Dashboard page
+	Then I verify button "RH Orders" on homepage
+	When I click "RH Orders" button on homepage
+	Then Search with only Postal Code field
+
+	Scenario: US Region: Order Search Modal Search Button should not be clickable if all the text fields are not having any data - Search button should be disabled
+	Given I log into Concierge as "associate"
+	When I choose country for concierge from footer
+	Then I expect that I am on the Concierge Dashboard page
+	Then I verify button "RH Orders" on homepage
+	When I click "RH Orders" button on homepage
+	Then Search Button should be shown disable
+
+	Scenario: Search with incorrect Last name and correct postal code,verify the search results - No Results
+	Given I log into Concierge as "associate"
+	When I choose country for concierge from footer
+	Then I expect that I am on the Concierge Dashboard page
+	Then I verify button "RH Orders" on homepage
+	When I click "RH Orders" button on homepage
+	Then Search with incorrect Last name and correct postal code

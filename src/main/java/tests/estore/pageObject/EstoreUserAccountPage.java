@@ -49,17 +49,17 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement useIWantToDeleteAddedAddress = $(By.xpath("(//*[text()='Delete'])[2]"));
 
-    private final SelenideElement firstNameRequired = $(By.xpath("//*[text()='First name required.']"));
+    private final SelenideElement firstNameRequired = $(By.xpath("//*[text()='First name required']"));
 
-    private final SelenideElement lastNameRequired = $(By.xpath("//*[text()='Last name required.']"));
+    private final SelenideElement lastNameRequired = $(By.xpath("//*[text()='Last name required']"));
 
-    private final SelenideElement cityRequired = $(By.xpath("//*[text()='City required.']"));
+    private final SelenideElement cityRequired = $(By.xpath("//*[text()='City required']"));
 
-    private final SelenideElement stateRequired = $(By.xpath("//*[text()='State required.']"));
+    private final SelenideElement stateRequired = $(By.xpath("//*[text()='State required']"));
 
-    private final SelenideElement postalCodeRequired = $(By.xpath("//*[text()='Postal code required.']"));
+    private final SelenideElement postalCodeRequired = $(By.xpath("//*[text()='Postal code required']"));
 
-    private final SelenideElement phoneRequired = $(By.xpath("//*[text()='Phone required.']"));
+    private final SelenideElement phoneRequired = $(By.xpath("//*[text()='Phone required']"));
 
     private final SelenideElement saveAddressButton = $(By.xpath("//*[text()='Save address']"));
 
@@ -143,7 +143,9 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement orderDetailsButton = $(By.xpath("//*[text()='Order details']"));
 
-    private final SelenideElement searchItemField = $(By.xpath("//input[@type = 'text']"));
+    private final SelenideElement searchItemField = $(By.xpath("(//input[@type = 'text'])[1]"));
+
+    private final SelenideElement searchItemFieldHomePage = $(By.xpath("(//div[@class='MuiGrid-root MuiGrid-item'])[1]//input"));
 
     private final SelenideElement searchButton = $(By.xpath("//*[text()='Search']"));
 
@@ -300,6 +302,11 @@ public class EstoreUserAccountPage {
 
     private final SelenideElement confirmSignOutButton = $(By.xpath("//button[contains(@class,'MuiButton-containedPrimary')]"));
 
+    private final SelenideElement registerButton = $(By.xpath("//span[text()='Register']"));
+
+    public void clickToRegisterButton() {
+        registerButton.should(visible).click(ClickOptions.usingJavaScript());
+    }
 
     public void clickToSignOutButton() {
         signOutButton.shouldBe(interactable).click(ClickOptions.usingJavaScript());
@@ -411,7 +418,7 @@ public class EstoreUserAccountPage {
             firstSubMenu.should(visible, Duration.ofSeconds(40)).click();
         } catch (com.codeborne.selenide.ex.ElementNotFound e) {
             WebDriverRunner.getWebDriver().navigate().refresh();
-            with().pollInterval(5, SECONDS).await().until(() -> true);
+            with().pollInterval(3, SECONDS).await().until(() -> true);
             accessSubMenu(each);
         }
     }

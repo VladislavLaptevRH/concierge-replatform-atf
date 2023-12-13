@@ -126,7 +126,7 @@ public class EstorePaymentStepDefs {
         Select paymentMethod = new Select(estorePaymentPage.getChoosePaymentMethodBtn());
 
         paymentMethod.selectByValue("RH");
-        estorePaymentPage.getRhCardNumberField().setValue("6006101002587290");
+        estorePaymentPage.getRhCardNumberField().setValue("6006101002617063");
         Select paymentPlan = new Select(estorePaymentPage.getSelectPaymentPlan());
         paymentPlan.selectByIndex(1);
     }
@@ -306,7 +306,7 @@ public class EstorePaymentStepDefs {
     public void iExecutePaymentWithCreditCardOnEstore() {
         $(By.cssSelector("select[id=\"page-checkout-payment_select-payment-method\"]")).should(Condition.and("", appear, exist, interactable), Duration.ofSeconds(20));
         estoreGeneralStepDefs.payWith("CC", "4678475330157543", "737", "0330");
-        with().pollInterval(6, SECONDS).await().until(() -> true);
+        with().pollInterval(2, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='CONTINUE']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='CONTINUE']")).click();
     }

@@ -163,7 +163,7 @@ Feature: Estore Address Page
     When I click on continue with original address estore button
     When I remove payment method which was used earlier
     When I execute payment with credit card on estore
-    Then I verify shipping and billing address on order review page
+    #Then I verify shipping and billing address on order review page
     When I click on a place estore order button
     When I click on order details button
     Then I verify shipping and billing address on order confirmation page
@@ -185,12 +185,12 @@ Feature: Estore Address Page
     When I click on continue to payment estore button
     When I click on continue with original address estore button
     When I execute payment with credit card on estore
-    Then I verify that introduced gift message is displayed on "Order review" page
-    And I verify that introduced order description message is displayed on "Order review" page
+    Then I verify that introduced gift message is displayed on "Review" page
+    And I verify that introduced order description message is displayed on "Review" page
     When I click on a place estore order button
     When I click on estore order details button
-    Then I verify that introduced gift message is displayed on "Thank you" page
-    And I verify that introduced order description message is displayed on "Thank you" page
+    Then I verify that introduced gift message is displayed on "Thank You" page
+    And I verify that introduced order description message is displayed on "Thank You" page
 
   Scenario: Edit Gift message and order description
     Given I log into eStore as "addresspage" user

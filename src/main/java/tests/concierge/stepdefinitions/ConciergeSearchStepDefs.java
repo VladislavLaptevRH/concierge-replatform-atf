@@ -6,6 +6,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import lombok.Setter;
 import org.openqa.selenium.By;
+import tests.concierge.pageObject.ConciergeSearchScreen;
+import tests.concierge.pageObject.PdpScreen;
 import tests.estore.stepdefinitions.EstoreHomePageStepDefs;
 import tests.utility.Hooks;
 
@@ -23,7 +25,13 @@ public class ConciergeSearchStepDefs {
 
     Pdp pdp = new Pdp();
 
-    EstoreHomePageStepDefs estoreHomePageStepDefs = new EstoreHomePageStepDefs();
+    ConciergeSearchScreen conciergeSearchScreen = new ConciergeSearchScreen();
+
+    PdpScreen pdpScreen = new PdpScreen();
+
+    public static int result;
+
+
 
     @Then("I verify that {string} on search page")
     public void iVerifyOnSearchPage(String data) {
@@ -57,7 +65,7 @@ public class ConciergeSearchStepDefs {
                 assertEquals(Hooks.getCurrentUrl(), "https://stg2-concierge.restorationhardware.com/us/en/customer-experience/contact-us");
                 break;
             case "footer is present":
-                $(By.xpath("//*[@id = 'footer']")).should(Condition.visible, Duration.ofSeconds(15));
+                $(By.xpath("//*[text() = 'LEGAL']")).should(Condition.visible, Duration.ofSeconds(15));
                 break;
             case "PG page is returned with text  RESULTS (IN RH BABY & CHILD)":
                 $(By.xpath("//*[text() = 'RESULTS']")).shouldHave(text("IN RH BABY & CHILD )"));
@@ -65,9 +73,40 @@ public class ConciergeSearchStepDefs {
             case "VIEW RH BABY & CHILD RESULTS button is present":
                 $(By.xpath("//*[@data-testid = 'add-to-cart-dialog-opener' ]/span[text() = 'VIEW RH BABY & CHILD RESULTS']")).should(Condition.visible, Duration.ofSeconds(15));
                 break;
+            case "Filters such as Material Filters, Size Filters, Brand":
+                conciergeSearchScreen.getMaterialFilter().should(Condition.visible, Duration.ofSeconds(15));
+                conciergeSearchScreen.getSizeFilter().should(Condition.visible, Duration.ofSeconds(15));
+                conciergeSearchScreen.getBrandFilter().should(Condition.visible, Duration.ofSeconds(15));
+                break;
             default: break;
         }
     }
+
+    @Then("Sofa products too should be searched")
+    public void sofaProductsShouldBeSearched(){
+        conciergeSearchScreen.getBrandFilter().should(visible, Duration.ofSeconds(3));
+    }
+
+    @Then("All RH products should be searched")
+    public void allRHProductShouldBeSearched(){
+       assertTrue(Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")) > 10000);
+    }
+
+    @Then("Seating Collections products should be displayed")
+    public void seatingConnectionProductsShouldBeDisplayed(){
+        conciergeSearchScreen.getSeatingCollection().should(visible, Duration.ofSeconds(15));
+    }
+
+    @Then("verify the count of products")
+    public void verifyTheCountOfProduct(){
+        result = Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", ""));
+    }
+
+    @Then("Product's count should be shown as per the availability of the products in that country")
+    public void productsCountShouldBeShown(){
+       assertEquals(result,Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")));
+    }
+
     @Then("I click on {string} button on search page")
     public void iClickOnSwitchButton(String button) {
         switch (button) {
@@ -77,6 +116,12 @@ public class ConciergeSearchStepDefs {
                 break;
             case "VIEW RH BABY & CHILD RESULTS":
                 $(By.xpath("//*[@data-testid = 'add-to-cart-dialog-opener' ]/span[text() = 'VIEW RH BABY & CHILD RESULTS']")).click();
+                break;
+            case "BRAND facet":
+               conciergeSearchScreen.getBrandFilter().click();
+                break;
+            case "select any brand":
+                conciergeSearchScreen.getBrandFilterInteriorsCheckBox().click();
                 break;
             default: break;
         }

@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.$;
 @Getter
 public class EstoreReviewOrderPage {
 
-    private final SelenideElement placeOrderButton = $(By.xpath("//*[text()='Place Order']"));
+    private final SelenideElement placeOrderButton = $(By.xpath("(//*[contains(@id,'place-order-btn')])[1]"));
 
     private final SelenideElement shippingAddress = $(By.xpath("(//h3[contains(@class,'MuiTypography-root MuiTypography-h3')])[3]"));
 
