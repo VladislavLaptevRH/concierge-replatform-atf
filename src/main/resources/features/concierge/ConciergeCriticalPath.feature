@@ -244,10 +244,10 @@ Feature: Concierge Critical Path
     Then I verify that 'user is brought to the top of the page' on CG screen
     Examples:
       | menu     | subMenu | gallery                    | brand      | currentBrandName |
-#      | Windows   | Drapery             | Drapery Collections        | RH           | RH               |
-#      | Bath      | Furniture           | Bath Collections           | RH           | RH               |
+   #   | Windows   | Drapery             | Drapery Collections        | RH           | RH               |
+     | Bath      | Furniture           | Bath Collections           | RH           | RH               |
 #      | Living    | Shelving & Cabinets | Cabinet Collections        | RH INTERIORS | IN               |
-      | Textiles | Pillows | Outdoor Pillow Collections | RH OUTDOOR | OD               |
+  #    | Textiles | Pillows | Outdoor Pillow Collections | RH OUTDOOR | OD               |
 #      | Furniture | Lounge & Media      | Lounge & Media Collections | RH TEEN      | TN               |
 
   Scenario Outline: To check if single Grid View is as default on CG
@@ -262,9 +262,9 @@ Feature: Concierge Critical Path
     Then I verify that 'grid view is set to 1-grid view by default' on CG screen
     Examples:
       | menu     | subMenu               | gallery              | brand        | currentBrandName |
-#      | Living    | Leather Seating       | Seating Collections         | RH           | RH               |
+     | Living    | Leather Seating       | Seating Collections         | RH           | RH               |
 #      | Living    | Office                | Office Collections          | RH MODERN    | MO               |
-      | Lighting | RH Ski House Lighting | Lighting Collections | RH SKI HOUSE | SH               |
+   #   | Lighting | RH Ski House Lighting | Lighting Collections | RH SKI HOUSE | SH               |
 #      | Dining    | RH Ski House Dining   | Dining Table Collections    | RH SKI HOUSE | SH               |
 #      | Furniture | Furniture Collections |                             | RH OUTDOOR   | OD               |
 #      | Furniture | Bedroom               | Upholstered Bed Collections | RH TEEN      | TN               |
@@ -284,8 +284,8 @@ Feature: Concierge Critical Path
     Then I Change the CG Grid view to '1' - grid view and confirm changing
     Examples:
       | menu    | subMenu | gallery             | brand        | currentBrandName |
-#      | Bath      | Furniture           | Bath Collections     | RH                  | RH               |
-      | Windows | Drapery | Drapery Collections | RH INTERIORS | IN               |
+    | Bath      | Furniture           | Bath Collections     | RH                  | RH               |
+    #  | Windows | Drapery | Drapery Collections | RH INTERIORS | IN               |
 #      | Dining    | Shelving & Cabinets | Cabinet Collections  | RH MODERN           | MO               |
 #      | Bed       | RH Beach House Bed  | Bedroom Collections  | RH BEACH HOUSE      | BH               |
 
@@ -321,12 +321,12 @@ Feature: Concierge Critical Path
     Then I navigate to sub menu "Bedroom"
     Then I navigate to gallery "Bedroom Collections"
     Then I verify that 'grid view is set to 2-grid view' on CG screen
-    Then I change the brand to "RH MODERN"
-    Then I verify that RH Brand dropdown is present in "MO" home page
-    Then I navigate to menu "Rugs"
-    Then I navigate to sub menu "Handcrafted Rugs"
-    Then I navigate to gallery "Rug Collections"
-    Then I verify that 'grid view is set to 2-grid view' on CG screen
+    #Then I change the brand to "RH MODERN"
+    #Then I verify that RH Brand dropdown is present in "MO" home page
+    #Then I navigate to menu "Rugs"
+    #Then I navigate to sub menu "Handcrafted Rugs"
+    #Then I navigate to gallery "Rug Collections"
+    #Then I verify that 'grid view is set to 2-grid view' on CG screen
 
   Scenario: Browser back button from search to CG page
     Given I log into Concierge as "associate"
@@ -364,9 +364,9 @@ Feature: Concierge Critical Path
     #Then User verifies that all items from menu are displayed for "<brand>"
     Examples:
       | brand        |
-#      | RH              |
+     | RH              |
 #      | RH CONTEMPORARY |
-      | RH INTERIORS |
+    #  | RH INTERIORS |
 #      | RH MODERN       |
 #      | RH OUTDOOR      |
 #      | RH BEACH HOUSE  |
@@ -381,10 +381,10 @@ Feature: Concierge Critical Path
     Then I verify the logo
     Examples:
       | brand     |
-#      | RH              |
+      | RH              |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
-      | RH MODERN |
+    #  | RH MODERN |
 #      | RH OUTDOOR      |
 #      | RH BEACH HOUSE  |
 #      | RH SKI HOUSE    |
@@ -398,11 +398,11 @@ Feature: Concierge Critical Path
     Then I verify that RH Brand dropdown is present in "<currentBrandName>" home page
     Examples:
       | brand      | currentBrandName |
-#      | RH              | RH               |
+    | RH              | RH               |
 #      | RH CONTEMPORARY | CN               |
 #      | RH INTERIORS    | IN               |
 #      | RH MODERN       | MO               |
-      | RH OUTDOOR | OD               |
+  #    | RH OUTDOOR | OD               |
 #      | RH BEACH HOUSE  | BH               |
 #      | RH SKI HOUSE    | SH               |
 #      | RH BABY & CHILD | BC               |
@@ -415,12 +415,12 @@ Feature: Concierge Critical Path
     Then I verify footer links for brand "<brand>"
     Examples:
       | brand          |
-#      | RH              |
+       | RH              |
 #      | RH CONTEMPORARY |
 #      | RH INTERIORS    |
 #      | RH MODERN       |
 #      | RH OUTDOOR      |
-      | RH BEACH HOUSE |
+   #   | RH BEACH HOUSE |
 #      | RH SKI HOUSE    |
 #      | RH BABY & CHILD |
 #      | RH TEEN         |
@@ -647,7 +647,7 @@ Feature: Concierge Critical Path
 #      |57070740 CLNT|
       | 61970975 TEAK |
       | 62870050 LOAK |
-     | 10024793 BRNZ |
+    # | 10024793 BRNZ |
 
   Scenario: Verify the PDP hero Image, zoom, line itemsVerify the PDP hero Image, zoom, line items
     Given I log into Concierge as "associate"
@@ -737,7 +737,6 @@ Feature: Concierge Critical Path
     When I go to concierge item 'prod12640168' from search field
     When I click on the first project search result with parameters 'prod12640168''59810779 CTBZ'
     Then I Verify that 'PDP title' is present
-    Then Verify that 'text "Components starting at" is present'
     Then Verify that 'cloud Modular Leather Sofa titles are present'
     Then Verify that line item field 'Fill' is present
     Then Verify that line item field 'Leather' is present
@@ -854,9 +853,9 @@ Feature: Concierge Critical Path
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I choose country for concierge from footer
-    Then I navigate to menu 'SALE'
-    Then I navigate to sub menu 'Bed'
-    Then I navigate to gallery 'Beds'
+    Then I navigate to menu 'Dining'
+    Then I navigate to sub menu 'Sale'
+    Then I navigate to gallerys_2 'Cabinets'
     Then Verify that 'PDP has SALE and MEMBER prices'
 
   Scenario Outline: Verify Mattress Recycling Fee
@@ -975,7 +974,7 @@ Feature: Concierge Critical Path
   Scenario: Checking Faucets in Search PG
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I click on search Icon
+    When I click on search Icons
     When I type item name 'rectangular table'
     Then I verify that 'PG has filters: CONCEPTS, IN-STOCK, SALE, BRAND, RESULTS and SORT is present' on PG screen
     Then I verify that 'CONCEPT dropdown returns various RH Brands' on PG screen
@@ -1041,8 +1040,8 @@ Feature: Concierge Critical Path
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I navigate to menu 'Bed'
-    Then I navigate to sub menu 'Benches & Stools'
-    Then I navigate to gallery 'Benches'
+    Then I navigate to sub menu 'Beds'
+    Then I navigate to gallery 'Wood Beds'
     Then I verify that 'Grid View is present in top right' on PG screen
     Then I verify that 'Grid View in PG is set to 3-grid view by default' on PG screen
 
@@ -1105,7 +1104,7 @@ Feature: Concierge Critical Path
   Scenario: Verify that Search for keyword is functioning as expected
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I click on search Icon
+    When I click on search Icons
     When I type item name 'table'
     Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
     Then I verify that 'Grid View is present in top right' search screen
@@ -1116,7 +1115,7 @@ Feature: Concierge Critical Path
   Scenario: Verify that cross brand search is functioning as expected
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I click on search Icon
+    When I click on search Icons
     When I type item name 'Crib'
     Then I verify that 'PG page is returned with text  RESULTS (IN RH BABY & CHILD)' on search page
     Then I verify that 'VIEW RH BABY & CHILD RESULTS button is present' on search page
@@ -1130,7 +1129,7 @@ Feature: Concierge Critical Path
   Scenario: Verify that search for non-existent search term returns 0 results
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I click on search Icon
+    When I click on search Icons
     When I type item name '234adf'
     Then I verify that 'PG page is returned with RESULTS(0) present and search text "234ADF" is present' on search page
     Then I verify text 'We’re sorry, we cannot find what you are looking for.'

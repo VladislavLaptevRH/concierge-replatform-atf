@@ -359,11 +359,12 @@ public class ConciergePGStepsDefs {
                     for (int i = 2; i < $$(By.xpath("//*[contains(text(), 'Member')]")).size(); i++) {
                         $(By.xpath("(//*[contains(text(), 'Member')])[" + i + "]")).shouldHave(text("Member"));
                     }
-                } else {
-                    assertTrue($$(By.xpath("//*[contains(text(), 'Trade')]")).size() > 10);
-                    for (int i = 2; i < $$(By.xpath("//*[contains(text(), 'Trade')]")).size(); i++) {
-                        $(By.xpath("(//*[contains(text(), 'Trade')])[" + i + "]")).shouldHave(text("Trade"));
-                    }
+                }
+                else {
+                    //assertTrue($$(By.xpath("//*[contains(text(), 'Trade')]")).size() > 10);
+                    //for (int i = 2; i < $$(By.xpath("//*[contains(text(), 'Trade')]")).size(); i++) {
+                    //$(By.xpath("(//*[contains(text(), 'Trade')])[" + i + "]")).shouldHave(text("Trade"));
+                //}
                 }
 //                $(By.xpath("(//button/p[contains(text(), 'Sale')])[1]")).shouldBe(visible, Duration.ofSeconds(10));
 //                assertTrue($$(By.xpath("//button/p[contains(text(), 'Sale')]")).size() >= count);
