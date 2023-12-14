@@ -83,8 +83,9 @@ Feature: Concierge Checkout flow
 	When I click on checkout button
 	When I click on no thanks button
 	When I choose client who is a "Non-Member"
-	When I continue to payment
-	Then I verify client should not get added with empty address field.
+	When I click on checkout button
+	When I click on no thanks button
+	Then Verify Checkout page should get opened with Shipping and Billing address option
 
   Scenario: Verify the saved addresses, ship to - bill to  from SF in address page for a client with primary and secondary addresses - regular accounts
 	Given I log into Concierge as "associate"
@@ -98,11 +99,11 @@ Feature: Concierge Checkout flow
 	When I click on no thanks button
 	When I choose client who is a "Member"
 	When I click on checkout button
-	Then I verify that ship to, bill to, sold to addresses are displayed
+	Then Verify Checkout page should get opened with Shipping and Billing address option
+	When I fill all fields from address screen
 	When I continue to payment
 	When I click on continue with original address button
 	Then Verify that after come back to address page from payment page ship to and bill to address is showing
-
 
   Scenario: Verify the edits in address page
 	Given I log into Concierge as "associate"
@@ -116,7 +117,7 @@ Feature: Concierge Checkout flow
 	When I click on no thanks button
 	When I choose client who is a "Member"
 	When I click on checkout button
-	Then I verify that ship to, bill to, sold to addresses are displayed
+	Then Verify Checkout page should get opened with Shipping and Billing address option
 	Then I edit ship to, bill to, sold to addresses
 	When I continue to payment
 

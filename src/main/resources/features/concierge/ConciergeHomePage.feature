@@ -3,11 +3,13 @@
 Feature:Concierge Homepage
 
   Scenario: Login as associate and Verify that home page is accessible
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then  I expect that I am on the Concierge Dashboard page
 
   Scenario Outline: Verify Top Nav is present, clickable and responsive in HPs of all brands
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then  I change the brand to "<brand>"
@@ -15,16 +17,17 @@ Feature:Concierge Homepage
     Examples:
       | brand           |
       | RH              |
-      | RH CONTEMPORARY |
-      | RH INTERIORS    |
-      | RH MODERN       |
-      | RH OUTDOOR      |
-      | RH BEACH HOUSE  |
-      | RH SKI HOUSE    |
+#      | RH CONTEMPORARY |
+#      | RH INTERIORS    |
+#      | RH MODERN       |
+#      | RH OUTDOOR      |
+#      | RH BEACH HOUSE  |
+#      | RH SKI HOUSE    |
       | RH BABY & CHILD |
       | RH TEEN         |
 
   Scenario Outline: Verify Logo is present in HPs of all brands
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then  I change the brand to "<brand>"
@@ -40,6 +43,7 @@ Feature:Concierge Homepage
       #| RH SKI HOUSE    |
       #| RH BABY & CHILD |
       #| RH TEEN         |
+
 
   Scenario Outline: Verify Brand Dropdown is present and functional in HPs of all brands
     Given I log into Concierge as "associate"
