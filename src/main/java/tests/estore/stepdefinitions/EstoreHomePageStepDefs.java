@@ -61,6 +61,11 @@ public class EstoreHomePageStepDefs {
         estoreHomePage.getSearchIcon().should(Condition.visible, Duration.ofSeconds(30));
         estoreHomePage.getSearchIcon().click();
     }
+    @And("I click on search Icons")
+    public void iClickOnSearchIcons() {
+        estoreHomePage.getSearchIcons().should(Condition.visible, Duration.ofSeconds(30));
+        estoreHomePage.getSearchIcons().click();
+    }
 
     @Then("I Verify Search icon is present")
     public void iVerifyOnSearchIcon() {

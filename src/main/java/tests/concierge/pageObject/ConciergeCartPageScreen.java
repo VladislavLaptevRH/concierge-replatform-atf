@@ -27,8 +27,8 @@ public class ConciergeCartPageScreen {
     private final SelenideElement promoCodeText = $(By.xpath("//*[text()='Members have the privilege of receiving 25% off full priced items or 20% off sale items, whichever is the best price. Tax, shipping and surcharges are not included in calculating discount. Not valid for gift cards, personalization and gift boxes.']"));
 
     private final SelenideElement orderClassificationResidentialTrade = $(By.xpath("//option[@value='RH Residential Trade']"));
-    private final ElementsCollection removeButtonList = $$(By.xpath("//*[text() = 'Remove']"));
-    private final SelenideElement removeLinkButton = $(By.xpath("//*[text() = 'Remove']"));
+    private final ElementsCollection removeButtonList = $$(By.xpath("//*[contains(text() , 'Remove')]"));
+    private final SelenideElement removeLinkButton = $(By.xpath("//*[contains(text() , 'Remove')]"));
     private final SelenideElement orderClassificationInteriorDesign = $(By.xpath("//option[@value='RH Interior Design']"));
 
     private final SelenideElement yourShoppingCartIsEmptyText = $(By.xpath("//*[text() = 'YOUR SHOPPING CART IS EMPTY']"));
