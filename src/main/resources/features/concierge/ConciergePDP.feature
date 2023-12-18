@@ -291,7 +291,7 @@ Feature: Concierge PDP
     Then I verify that cart modal is displayed
     Then I click on button "ADD ALL TO CART" in the cart
     Then I verify that cart modal is displayed for more than one item
-@vlad
+
   Scenario: Add to Project, Add All to Project
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
