@@ -219,6 +219,7 @@ public class ConciergeUserAccountPage {
     private final SelenideElement orderHistoryTitle = $(By.xpath("//*[text()='RH Orders']"));
 
     private final SelenideElement disabledSearchButton = $(By.xpath(" //*[@disabled]/*[text() = 'Search']"));
+
     private final SelenideElement orderUser = $(By.xpath("//*[text()='automation trade']"));
     private final SelenideElement orderSearch = $(By.xpath("//*[text()='Order Search']"));
     private final SelenideElement orderTable = $(By.xpath("//table"));

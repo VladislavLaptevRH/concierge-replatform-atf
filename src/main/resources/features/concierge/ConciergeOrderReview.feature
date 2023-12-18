@@ -10,7 +10,6 @@ Feature: Concierge Order review
     When I choose order classification
     When I click on checkout button
     When I click on no thanks button
-    When I choose client who is a "Non-Member"
     When I fill all fields from address screen
     And I continue to payment
     When I click on continue with original address button
