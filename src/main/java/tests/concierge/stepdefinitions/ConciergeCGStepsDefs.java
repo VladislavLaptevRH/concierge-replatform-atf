@@ -87,6 +87,7 @@ public class ConciergeCGStepsDefs {
                 assertEquals(galleryName, $(By.xpath("(//div/p[contains(@class, 'MuiTypography-body1')])[1]")).getText());
                 break;
             case "grid view is set to 2-grid view":
+                with().pollInterval(2, SECONDS).await().until(() -> true);
                 $(By.xpath("//*[ local-name() = 'svg' and @column = '2' and @data-active = 'true']")).shouldBe(visible, Duration.ofSeconds(20));
                 break;
             case "grid view is set to 3-grid view":
