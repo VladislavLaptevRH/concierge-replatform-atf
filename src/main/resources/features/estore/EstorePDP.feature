@@ -236,7 +236,57 @@ Feature: Estore PDP
     When I update "US" postal code on pdp page
     Then I verify that prices for "US" was updated
 
+  @Alok
+  Scenario: Verify the dropdown selection and add to cart
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod12640168" and "" with "INDG" for estore
+    Then I verify the dropdown selection and add to cart
 
+  @Alok
+  Scenario: Verify Colorization options
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod6371042" and "10115451" with "INDG" for estore
+    Then I verify Colorization options
 
+  @Alok
+  Scenario: Verify Monogram functionality
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod18200047" and "10131159" with "INDG" for estore
+    Then I verify Monogram functionality
 
+  @Alok
+  Scenario: Add To Cart (Instock, SPO, BO) functionality
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "prod17450517" and "60450996" with "INDG" for estore
+    Then I verify add To Cart Instock, SPO, BO functionality
 
+  @Alok
+  Scenario: Verify Custom Drapery PDP
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I remove all items from estore cart
+    When I open product page with "" and "" with "INDG" for estore
+    Then I verify Custom Drapery PDP
+
+  @Alok
+  Scenario: Verify SLP (Swatch Landing Page)
+    Given I log into eStore as "regular" user
+    When I choose country for eStore from footer
+    When I go to estore item "Swatches" from search field
+    Then I verify swatch Landing Page
+
+    @Alok
+    Scenario: Sale PDP: MEMBER/REGULAR  Price validation
+      Given I log into eStore as "regular" user
+      When I choose country for eStore from footer
+      When I remove all items from estore cart
+      When I open product page with "prod13800635" and "17050043" with "INDG" for estore
+      Then I verify MEMBER and REGULAR  Price validation
