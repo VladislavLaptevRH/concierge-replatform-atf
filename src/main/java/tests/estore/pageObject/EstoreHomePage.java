@@ -28,6 +28,8 @@ public class EstoreHomePage {
     private final List<SelenideElement> listOfCollection = $$(By.xpath("(//ul[@class=\"MuiList-root\"])[2]/li"));
 
     private final SelenideElement searchIcon = $(By.xpath("(//span[@class='MuiIconButton-label'])[2]"));
+
+    private final SelenideElement searchIcons = $(By.xpath("(//span[@class='MuiIconButton-label'])[1]"));
     private final SelenideElement hamburgerIcon = $(By.id("hamburgerIcon"));
 
     private final SelenideElement searchIconHomePage = $(By.xpath("(//span[@class='MuiIconButton-label'])[1]"));

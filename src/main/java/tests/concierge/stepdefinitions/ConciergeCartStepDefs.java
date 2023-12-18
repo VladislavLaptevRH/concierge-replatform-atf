@@ -322,7 +322,7 @@ public class ConciergeCartStepDefs {
         executeJavaScript("window.scrollTo(0, -500)");
         if (conciergeCartPageScreen.getReasonCodeField().isDisplayed()) {
             conciergeCartPageScreen.getClosePopUp().click();
-            with().pollInterval(3, SECONDS).await().until(() -> true);
+            with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         conciergeCartPageScreen.getReasonCodeField().shouldNot(visible, Duration.ofSeconds(15));
         with().pollInterval(2, SECONDS).await().until(() -> true);
@@ -358,6 +358,7 @@ public class ConciergeCartStepDefs {
             executeJavaScript("window.scrollTo(0, -500)");
             assertEquals(lineItemPriceValueAfterOverride, "50.00");
         }
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     }
 
     @When("I click on apply all checkbox")

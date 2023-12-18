@@ -1586,7 +1586,7 @@ public class Pdp {
 
     @Then("I verify that color has been chosen")
     public void iVerifyThatColorHasBeenChosen() {
-        selectOption.getColorOption().shouldHave(text("Azure"), Duration.ofSeconds(20));
+        selectOption.getColorOption().shouldHave(text("Natural"), Duration.ofSeconds(20));
     }
 
     @Then("I click {string} on pdp page")
