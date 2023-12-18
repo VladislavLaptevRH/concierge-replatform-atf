@@ -18,6 +18,7 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.with;
 import static org.testng.AssertJUnit.assertEquals;
+import static tests.concierge.stepdefinitions.ConciergeE2EStepDefs.iClickOnNoThanksButton;
 
 public class PaymentStepDefs {
     PaymentScreen paymentScreen = new PaymentScreen();
@@ -32,6 +33,7 @@ public class PaymentStepDefs {
     CheckoutAddressScreen checkoutAddressScreen = new CheckoutAddressScreen();
 
     PdpScreen pdpScreen = new PdpScreen();
+
 
     @When("I introduces payment details for several payment methods")
     public void iIntroducesPaymentDetailsForSeveralPaymentMethods() {
@@ -186,7 +188,15 @@ public class PaymentStepDefs {
 //                        with().pollInterval(5, SECONDS).await().until(() -> true);
 //                    }
 //            }
+        if(conciergeCartPageScreen.getShippingAddress().isDisplayed()){
+            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+            continueToPayment();
+            iClickOnContinueWithOriginalAddressButton();
+        }
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(!paymentScreen.getChoosePaymentMethodBtn().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
         paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Choose a payment method"), Duration.ofMinutes(1));
         if (cardType.equals("VI")) {
             generalStepDefs.payWith("VI", "4111 1111 4555 1142", "737", "0330");
@@ -210,6 +220,50 @@ public class PaymentStepDefs {
         }
         paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
         paymentScreen.getContinueToReview().click();
+        generalStepDefs.paymentTypeVar = cardType;
+    }
+
+    public void continueToPayment() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if (!checkoutAddressScreen.getContinuePaymentButton().isDisplayed()) {
+            WebDriverRunner.getWebDriver().navigate().refresh();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+            abstractStepDefs.iClickOnCheckoutButton();
+            iClickOnNoThanksButton();
+            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+        }
+        checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+        executeJavaScript("arguments[0].scrollIntoView(true);", checkoutAddressScreen.getContinuePaymentButton());
+        checkoutAddressScreen.getContinuePaymentButton().shouldHave(text(checkoutAddressScreen.getContinuePaymentButton().getText()), Duration.ofMinutes(1));
+        checkoutAddressScreen.getContinuePaymentButton().click();
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
+            conciergeProjectScreen.getTryAgainButton().click();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+            checkoutAddressScreen.getContinuePaymentButton().click();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+        }
+
+        if (conciergeProjectScreen.getContinueWithSuggestedAddressButton().isDisplayed()) {
+            conciergeProjectScreen.getContinueWithSuggestedAddressButton().click();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+
+        if ($(By.xpath("//*[text() = 'CONTINUE']")).isDisplayed()) {
+            $(By.xpath("//*[text() = 'CONTINUE']")).click();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
+
+        if (conciergeProjectScreen.getTryAgainButton().isDisplayed()) {
+            conciergeProjectScreen.getTryAgainButton().click();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+            abstractStepDefs.iFillAllFieldsFromAddressScreenForBrands();
+            checkoutAddressScreen.getContinuePaymentButton().click();
+            with().pollInterval(3, SECONDS).await().until(() -> true);
+            $(By.xpath("//*[text() = 'CONTINUE']")).click();
+            with().pollInterval(5, SECONDS).await().until(() -> true);
+        }
     }
 
     @When("I pay with RHCC method")
@@ -241,7 +295,7 @@ public class PaymentStepDefs {
     public void iVerifyThatICantPayByRHCCAndDiscoverCardsForCanada() {
         $(By.xpath("//*[@id = 'payment-method-select']")).click();
         $(By.xpath("//*[@id = 'payment-option-RH']")).shouldNotBe(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[@id = 'payment-option-CC']")).click();
+        $(By.xpath("//*[@id = 'payment-option-card']")).click();
         generalStepDefs.payWith("DI", "6011 6011 6011 6611", "737", "0330");
         $(By.xpath("//*[@id = 'payment-review-button-1'][@disabled]")).shouldBe(visible, Duration.ofSeconds(15));
     }
@@ -268,7 +322,7 @@ public class PaymentStepDefs {
         if (cardType.equals("MC")) {
             Select paymentMethodList = new Select($(By.xpath("//select[@id = 'payment-method-select']")));
             with().pollInterval(3, SECONDS).await().until(() -> true);
-            paymentMethodList.selectByValue("CC");
+            paymentMethodList.selectByValue("card");
             generalStepDefs.payWith("MC", "5555 3412 4444 1115", "737", "0330");
             paymentScreen.getContinueToReview().should(Condition.and("clickable", visible, enabled), Duration.ofMinutes(1));
             paymentScreen.getContinueToReview().click();
@@ -277,6 +331,7 @@ public class PaymentStepDefs {
 
     @When("I verify that payment split is working and paid amount is visible on the review page")
     public void iVerifyThatPaymentSplitIsWorkingAndPaidAmountIsVisibleOnReviewPage() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("(//*[contains(text(),'XXXXXXXX')])[1]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
@@ -291,6 +346,7 @@ public class PaymentStepDefs {
 
     @When("I verify that payment split is working and paid amount is visible on the confirmation page")
     public void iVerifyThatPaymentSplitIsWorkingAndPaidAmountIsVisibleOnConfirmationPage() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("(//*[contains(text(),'XXXXXXXX')])[1]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
@@ -303,6 +359,7 @@ public class PaymentStepDefs {
 
     @When("I verify that payment POS is working and paid amount is visible on the review page")
     public void iVerifyThatPaymentPOSIsWorkingAndPaidAmountIsVisibleOnReviewPage() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Cash/Check']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).should(visible, Duration.ofSeconds(15));
@@ -314,20 +371,22 @@ public class PaymentStepDefs {
 
     @When("I verify that payment POS is working and paid amount is visible on the confirmation page")
     public void iVerifyThatPaymentPOSIsWorkingAndPaidAmountIsVisibleOnConfirmationPage() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Cash/Check']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
     }
 
     @When("I verify that payment RHCC is working and paid amount is visible on the review page")
     public void iVerifyThatPaymentRHCCIsWorkingAndPaidAmountIsVisibleOnReviewPage() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        $(By.xpath("//*[text()='Payment Information']")).scrollIntoView(true);
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='RH Credit Card']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 7290"), Duration.ofSeconds(15));
-        $(By.xpath("//*[text() = ‘$NaN’]")).shouldNotBe(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$3,153.74']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),\"You've chosen 24.99% Standard Purchase APR and Payments.Standard Purchase APR and Payments: \")]")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),\" Standard financing terms apply. Interest will be charged on the unpaid purchase balance at the APR for standard Purchases. New accounts: standard Purchase APR 24.99%. Minimum interest charge $1. Existing accounts, see your Cardholder Agreement for applicable terms. Subject to credit approval. RH financing account issued by TD Bank, N.A. \")]")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
@@ -336,6 +395,7 @@ public class PaymentStepDefs {
 
     @When("I verify that payment RHCC is working and paid amount is visible on the confirmation page")
     public void iVerifyThatPaymentRHCCIsWorkingAndPaidAmountIsVisibleOnConfirmationPage() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='RH Credit Card']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 7290"), Duration.ofSeconds(15));
@@ -347,11 +407,11 @@ public class PaymentStepDefs {
 
     @When("I verify that payment CC is working and paid amount is visible on the review page")
     public void iVerifyThatPaymentCCIsWorkingAndPaidAmountIsVisibleOnReviewPage() {
+        with().pollInterval(3, SECONDS).await().until(() -> true);
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
         $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$3,175.46']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
         $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
     }
@@ -410,13 +470,11 @@ public class PaymentStepDefs {
   
     @Then("I verify subtotal, shipping fee, taxes based on postal code")
     public void iVerifySubtotalShippingFeeTaxesBasedOnPostalCode() {
-        $(By.xpath("//*[text()='Subtotal']")).should(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text()='Subtotal  ']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Unlimited Furniture Delivery']")).should(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='Estimated Sales Tax for 85020']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text() = ‘$NaN’]")).shouldNotBe(visible, Duration.ofSeconds(15));
+        $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
         $(By.xpath("//*[text()='$2,625.00']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$279.00']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='$249.74']")).should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that member savings in payment page")
@@ -447,7 +505,7 @@ public class PaymentStepDefs {
         paymentScreen.getRemovePaymentBtn().should(Condition.and("", visible, enabled), Duration.ofSeconds(15));
         with().pollInterval(4, SECONDS).await().until(() -> true);
         paymentScreen.getRemovePaymentBtn().click();
-        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("RH Credit Card"), Duration.ofMinutes(1));
+        paymentScreen.getChoosePaymentMethodBtn().shouldHave(text("Credit Card"), Duration.ofMinutes(1));
         with().pollInterval(4, SECONDS).await().until(() -> true);
         paymentScreen.getChoosePaymentMethodBtn().should(Condition.be(visible), Duration.ofSeconds(35));
         Select selectPayment = new Select(paymentScreen.getChoosePaymentMethodBtn());

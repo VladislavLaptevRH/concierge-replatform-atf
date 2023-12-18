@@ -1248,6 +1248,9 @@ public class ConciergeCartStepDefs {
             with().pollInterval(5, SECONDS).await().until(() -> true);
         }
         with().pollInterval(5, SECONDS).await().until(() -> true);
+        if(conciergeCartPageScreen.getOrderClassificationSelect().isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
         try {
             Select orderClassificationDropDownList = new Select(conciergeCartPageScreen.getOrderClassificationSelect());
             orderClassificationDropDownList.selectByValue("RH Gallery Order");
@@ -1266,11 +1269,17 @@ public class ConciergeCartStepDefs {
     @When("I click on order details button")
     public void iClickOnOrderDetailsButton() {
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        if (!conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").isDisplayed()) {
+        if (!conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").isDisplayed()) {
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
-        conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").should(visible);
-        conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").click();
+        if(conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").isDisplayed()){
+            conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").should(visible);
+            conciergeUserAccountPage.getOrderDetailsButtonByName("Order details").click();
+        }
+        else{
+            conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").should(visible);
+            conciergeUserAccountPage.getOrderDetailsButtonByName("View Order Details").click();
+        }
     }
 
     @When("I remove all items from cart for minicart")

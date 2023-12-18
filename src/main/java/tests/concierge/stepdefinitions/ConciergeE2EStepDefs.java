@@ -611,15 +611,8 @@ public class ConciergeE2EStepDefs {
         } else if (businessClient.equals("Non-Member")) {
             generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupFirstName());
             conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
-
-            if (Hooks.profile.equals("stg3")) {
-                generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupStg3LastName());
-                conciergeUserAccountPage.getClientLookupStg3LastName().setValue("Nonmember");
-            } else {
-                //generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupLastName());
-                conciergeUserAccountPage.getClientLookupLastName().setValue("Nonmember");
-            }
-
+            generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupEmail());
+            conciergeUserAccountPage.getClientLookupEmail().setValue("test@test.com");
         } else if (businessClient.equals("Trade")) {
             if (!conciergeUserAccountPage.getClientLookupFirstName().isDisplayed()) {
                 WebDriverRunner.getWebDriver().navigate().refresh();

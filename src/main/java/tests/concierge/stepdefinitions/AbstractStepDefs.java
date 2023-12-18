@@ -3,6 +3,8 @@ package tests.concierge.stepdefinitions;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import tests.concierge.pageObject.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -22,6 +24,7 @@ import static org.awaitility.Awaitility.await;
 import static org.awaitility.Awaitility.with;
 import static org.testng.Assert.assertTrue;
 import static tests.concierge.stepdefinitions.GeneralStepDefs.paymentTypeVar;
+import static tests.concierge.stepdefinitions.GeneralStepDefs.wait;
 
 public class AbstractStepDefs {
     ConciergeOrderHistoryForm conciergeOrderHistoryForm = new ConciergeOrderHistoryForm();
@@ -60,6 +63,28 @@ public class AbstractStepDefs {
         System.out.println(WebDriverRunner.getWebDriver().getTitle() + ": "+ Hooks.getCurrentUrl());
     }
 
+    public void clickOnNoThanksButton() {
+        if (conciergeCartPageScreen.getNoThanksButton().isDisplayed()) {
+            generalStepDefs.waitForJSandJQueryToLoad();
+            conciergeCartPageScreen.getNoThanksButton().shouldHave(text("NO, THANKS"), Duration.ofSeconds(30));
+            wait.until(ExpectedConditions.elementToBeClickable(conciergeCartPageScreen.getNoThanksButton()));
+            wait.until(ExpectedConditions.visibilityOf(conciergeCartPageScreen.getNoThanksButton()));
+            generalStepDefs.waitForJSandJQueryToLoad();
+            executeJavaScript("arguments[0].click();", conciergeCartPageScreen.getNoThanksButton());
+            with().pollInterval(2, SECONDS).await().until(() -> true);
+        } else {
+            System.out.println("Close button is not displayed");
+        }
+        if (conciergeCartPageScreen.getNoThanksButton().isDisplayed()) {
+            for (int i = 0; i < 3; i++) {
+                conciergeCartPageScreen.getNoThanksButton().click();
+                with().pollInterval(2, SECONDS).await().until(() -> true);
+                if (!conciergeCartPageScreen.getNoThanksButton().isDisplayed()) {
+                    break;
+                }
+            }
+        }
+    }
 
     @When("I clicks on o random item")
     public void iClicksOnORandomItem() {
@@ -160,45 +185,55 @@ public class AbstractStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         reviewOrderScreen.getBillingAddress().should(visible, Duration.ofMinutes(1));
         reviewOrderScreen.getShippingAddress().should(visible, Duration.ofMinutes(1));
-        if(paymentTypeVar.equals("VI")){
-            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldHave(text("$"), Duration.ofSeconds(15));
-            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
-            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
+        if(generalStepDefs.paymentTypeVar.equals("VI")){
+            reviewOrderScreen.getPaymentInformationTitle().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getVisaCardText().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getCardMask().shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
+            reviewOrderScreen.getNanText().shouldNotBe(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldHave(text("$"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenEditButton().shouldHave(text("Edit"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenThisPaymentText().shouldHave(text("this payment."), Duration.ofSeconds(15));
         }
-        if(paymentTypeVar.equals("MC")){
-            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='MasterCard']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1115"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldHave(text("$"), Duration.ofSeconds(15));
-            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
-            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
+        if(generalStepDefs.paymentTypeVar.equals("MC")){
+            reviewOrderScreen.getPaymentInformationTitle().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getMasterCardText().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getCardMask().shouldHave(text("XXXXXXXX 1115"), Duration.ofSeconds(15));
+            reviewOrderScreen.getNanText().shouldNotBe(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldHave(text("$"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenEditButton().shouldHave(text("Edit"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenThisPaymentText().shouldHave(text("this payment."), Duration.ofSeconds(15));
         }
-        if(paymentTypeVar.equals("AX")){
-            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='American Express']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 0002"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldHave(text("$"), Duration.ofSeconds(15));
-            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
-            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
+        if(generalStepDefs.paymentTypeVar.equals("AX")){
+            reviewOrderScreen.getPaymentInformationTitle().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getAmericanExpressCard().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getCardMask().shouldHave(text("XXXXXXXX 0002"), Duration.ofSeconds(15));
+            reviewOrderScreen.getNanText().shouldNotBe(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldHave(text("$"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenEditButton().shouldHave(text("Edit"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenThisPaymentText().shouldHave(text("this payment."), Duration.ofSeconds(15));
         }
-        if(paymentTypeVar.equals("DI")){
-            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='Discover']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 6611"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldHave(text("$"), Duration.ofSeconds(15));
-            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]")).shouldHave(text("Edit"), Duration.ofSeconds(15));
-            $(By.xpath("(//*[@href = '/us/en/checkout/payment.jsp'])[2]/following-sibling::p")).shouldHave(text("this payment."), Duration.ofSeconds(15));
+        if(generalStepDefs.paymentTypeVar.equals("DI")){
+            reviewOrderScreen.getPaymentInformationTitle().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getDiscoverCard().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getCardMask().shouldHave(text("XXXXXXXX 6611"), Duration.ofSeconds(15));
+            reviewOrderScreen.getNanText().shouldNotBe(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldHave(text("$"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenEditButton().shouldHave(text("Edit"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenThisPaymentText().shouldHave(text("this payment."), Duration.ofSeconds(15));
+        }
+        if(generalStepDefs.paymentTypeVar.equals("POS")){
+            reviewOrderScreen.getPaymentInformationTitle().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getPos().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getCardMask().shouldHave(text("XXXXXXXX"), Duration.ofSeconds(15));
+            reviewOrderScreen.getNanText().shouldNotBe(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldHave(text("$"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenEditButton().shouldHave(text("Edit"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenThisPaymentText().shouldHave(text("this payment."), Duration.ofSeconds(15));
         }
     }
 
@@ -207,37 +242,45 @@ public class AbstractStepDefs {
         with().pollInterval(5, SECONDS).await().until(() -> true);
         reviewOrderScreen.getBillingAddress().should(visible, Duration.ofMinutes(1));
         reviewOrderScreen.getShippingAddress().should(visible, Duration.ofMinutes(1));
-        if(paymentTypeVar.equals("VI")){
-            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='Visa']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldHave(text("$"), Duration.ofSeconds(15));
+        if(generalStepDefs.paymentTypeVar.equals("VI")){
+            reviewOrderScreen.getPaymentInformationTitle().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getVisaCardText().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getCardMask().shouldHave(text("XXXXXXXX 1142"), Duration.ofSeconds(15));
+            reviewOrderScreen.getNanText().shouldNotBe(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldHave(text("$"), Duration.ofSeconds(15));
         }
-        if(paymentTypeVar.equals("MC")){
-            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='MasterCard']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 1115"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldHave(text("$"), Duration.ofSeconds(15));
+        if(generalStepDefs.paymentTypeVar.equals("MC")){
+            reviewOrderScreen.getPaymentInformationTitle().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getMasterCardText().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getCardMask().shouldHave(text("XXXXXXXX 1115"), Duration.ofSeconds(15));
+            reviewOrderScreen.getNanText().shouldNotBe(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldHave(text("$"), Duration.ofSeconds(15));
         }
-        if(paymentTypeVar.equals("AX")){
-            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='American Express']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 0002"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldHave(text("$"), Duration.ofSeconds(15));
+        if(generalStepDefs.paymentTypeVar.equals("AX")){
+            reviewOrderScreen.getPaymentInformationTitle().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getAmericanExpressCard().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getCardMask().shouldHave(text("XXXXXXXX 0002"), Duration.ofSeconds(15));
+            reviewOrderScreen.getNanText().shouldNotBe(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldHave(text("$"), Duration.ofSeconds(15));
         }
-        if(paymentTypeVar.equals("DI")){
-            $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[text()='Discover']")).should(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]")).shouldHave(text("XXXXXXXX 6611"), Duration.ofSeconds(15));
-            $(By.xpath("//*[text() = '$NaN']")).shouldNotBe(visible, Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
-            $(By.xpath("//*[contains(text(),'XXXXXXXX')]/../following-sibling::div/p")).shouldHave(text("$"), Duration.ofSeconds(15));
+        if(generalStepDefs.paymentTypeVar.equals("DI")){
+            reviewOrderScreen.getPaymentInformationTitle().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getDiscoverCard().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getCardMask().shouldHave(text("XXXXXXXX 6611"), Duration.ofSeconds(15));
+            reviewOrderScreen.getNanText().shouldNotBe(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldHave(text("$"), Duration.ofSeconds(15));
+        }
+        if(generalStepDefs.paymentTypeVar.equals("POS")){
+            reviewOrderScreen.getPaymentInformationTitle().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getPos().should(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getCardMask().shouldHave(text("XXXXXXXX"), Duration.ofSeconds(15));
+            reviewOrderScreen.getNanText().shouldNotBe(visible, Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldNotHave(text("$NaN"), Duration.ofSeconds(15));
+            reviewOrderScreen.getOrderScreenPrice().shouldHave(text("$"), Duration.ofSeconds(15));
         }
     }
 
@@ -262,10 +305,8 @@ public class AbstractStepDefs {
 
     @When("I click on a place order button without signature")
     public void iClickOnPlaceOrderButtonWithoutSignature() {
-        with().pollInterval(3, SECONDS).await().until(() -> true);
-        reviewOrderScreen.getPlaceOrderButton().should(enabled, Duration.ofSeconds(45));
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         executeJavaScript("window.scrollTo(0, document.body.scrollHeight)");
-        reviewOrderScreen.getPlaceOrderButton().should(enabled, Duration.ofMinutes(1));
         reviewOrderScreen.getPlaceOrderButton().click();
     }
 
@@ -276,27 +317,45 @@ public class AbstractStepDefs {
         assertTrue(confirmationOrderScreen.getYourOrderHasBeenPlaced().isDisplayed());
         assertTrue(confirmationOrderScreen.getThankYouTitle().isDisplayed());
     }
+    public void iChooseAClientWhoIsNonMember() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
+        generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupFirstName());
+        conciergeUserAccountPage.getClientLookupFirstName().setValue("Automation");
+        generalStepDefs.clearField(conciergeUserAccountPage.getClientLookupEmail());
+        conciergeUserAccountPage.getClientLookupEmail().setValue("test@test.com");
+        conciergeUserAccountPage.getSearchButton().should(Condition.and("", visible, enabled), Duration.ofMinutes(1));
+        conciergeUserAccountPage.getSearchButton().click();
+        with().pollInterval(3, SECONDS).await().until(() -> true);
+        conciergeUserAccountPage.getFirstResultOfClientLookupByName("Non-Member").click();
+    }
 
     @When("I fill all fields from address screen")
     public void iFillAllFieldsFromAddressScreenForBrands() {
         generalStepDefs.waitForJSandJQueryToLoad();
         with().pollInterval(3, SECONDS).await().until(() -> true);
-        if($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()) {
+        if ($(By.xpath("(//*[text()='Edit'])[10]")).isDisplayed()) {
             $(By.xpath("(//*[text()='Edit'])[10]")).scrollIntoView(true);
             $(By.xpath("(//*[text()='Edit'])[10]")).click();
+        }
+        if (conciergeUserAccountPage.getClientLookupHeaderBtn().isDisplayed()) {
+            iChooseAClientWhoIsNonMember();
+        }
+        if (!checkoutAddressScreen.getFirstNameBillingAddress().isDisplayed()) {
+            iClickOnCheckoutButton();
+            clickOnNoThanksButton();
         }
         if (checkoutAddressScreen.getFirstNameInpt().isDisplayed()) {
             generalStepDefs.fillAddressFields();
             with().pollInterval(5, SECONDS).await().until(() -> true);
             generalStepDefs.fillZipCodeStateCountry("85020", "US", "AZ");
             with().pollInterval(5, SECONDS).await().until(() -> true);
-            if(checkoutAddressScreen.getEmailAddressField().isDisplayed()){
+            if (checkoutAddressScreen.getEmailAddressField().isDisplayed()) {
                 generalStepDefs.clearField(checkoutAddressScreen.getEmailAddressField());
                 checkoutAddressScreen.getEmailAddressField().setValue("test@mailinator.com");
             } else {
                 System.out.println("Email field is not available");
             }
-            if(checkoutAddressScreen.getConfirmEmailAddressField().isDisplayed()){
+            if (checkoutAddressScreen.getConfirmEmailAddressField().isDisplayed()) {
                 checkoutAddressScreen.getConfirmEmailAddressField().setValue("test@mailinator.com");
                 with().pollInterval(5, SECONDS).await().until(() -> true);
             } else {
@@ -308,13 +367,13 @@ public class AbstractStepDefs {
         } else {
             System.out.println("Address fields are not available");
         }
-        if(checkoutAddressScreen.getBillingAddressCheckbox().exists()) {
-            if (!$(By.xpath("//*[@id= 'billing-shipping-address-same-checkbox']")).isDisplayed()) {
-                $(By.xpath(" //*[@id= 'billing-shipping-address-same-checkbox']")).click();
-                with().pollInterval(2, SECONDS).await().until(() -> true);
-            }
+        if(!checkoutAddressScreen.getBillingAddressCheckbox().isDisplayed()){
+            iClickOnCheckoutButton();
+            clickOnNoThanksButton();
         }
-    }
+        checkoutAddressScreen.getBillingAddressCheckbox().click();
+        with().pollInterval(2, SECONDS).await().until(() -> true);
+        }
 
     @When("I fill all fields from address screen for checking zip code")
     public void iFillAllFieldsFromAddressScreenForBrandsForCheckingZipcode() {

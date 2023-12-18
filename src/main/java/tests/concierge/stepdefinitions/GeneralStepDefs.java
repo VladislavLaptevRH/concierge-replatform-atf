@@ -181,6 +181,14 @@ public class GeneralStepDefs {
 
         clearField(checkoutAddressScreen.getStreetAddressField());
         checkoutAddressScreen.getStreetAddressField().setValue("North 16th Street");
+        if(checkoutAddressScreen.getFirstStreetAddress().isDisplayed()){
+            checkoutAddressScreen.getFirstStreetAddress().click();
+        }
+        if(checkoutAddressScreen.getStreetAddressFieldSold().isDisplayed()) {
+            checkoutAddressScreen.getStreetAddressFieldSold().setValue("North 16th Street");
+            checkoutAddressScreen.getFirstStreetAddress().click();
+        }
+
         with().pollInterval(2, SECONDS).await().until(() -> true);
 
         clearField(checkoutAddressScreen.getAptFloorSuiteField());
@@ -272,11 +280,11 @@ public class GeneralStepDefs {
             ConciergeHomePageStepDefs.countryTmp = "US";
         }
         Select selectState = new Select(checkoutAddressScreen.getStateField());
-        if(ConciergeHomePageStepDefs.countryTmp.equals("CA")){
-            selectState.selectByValue("AB");
-        } else {
+//        if(ConciergeHomePageStepDefs.countryTmp.equals("CA")){
+//            selectState.selectByValue("AB");
+//        } else {
             selectState.selectByValue(state);
-        }
+//        }
         if(ConciergeHomePageStepDefs.countryTmp.equals("CA")){
             clearField(checkoutAddressScreen.getZipPostalCodeField());
             checkoutAddressScreen.getZipPostalCodeField().setValue("A1A 1A1");
