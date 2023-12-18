@@ -15,7 +15,7 @@ public class EstoreMemberPage {
     private final SelenideElement membershipNumberText = $(By.xpath("//*[text()='Membership Number: ']"));
     private final SelenideElement membershipNumberValue = $(By.xpath("//*[text()='102003851']"));
     private final SelenideElement membershipEnrollmentText = $(By.xpath("//*[text()='Enrollment: ']"));
-    private final SelenideElement membershipEnrollmentValue = $(By.xpath("//*[text()='Jan  10,  2023']"));
+    private final SelenideElement membershipEnrollmentValue = $(By.xpath("//*[text()='Jan  11,  2023']"));
     private final SelenideElement membershipMopText = $(By.xpath("//*[text()='Method of Payment: ']"));
     private final SelenideElement membershipEmailText = $(By.xpath("//*[text()='Email: ']"));
     private final SelenideElement membershipEmailValue = $(By.xpath("//*[text()='automationmember@rh.com']"));

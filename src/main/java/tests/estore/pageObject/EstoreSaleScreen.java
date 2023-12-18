@@ -81,7 +81,7 @@ public class EstoreSaleScreen {
 
     private SelenideElement floorLightingSale = $(By.xpath("//*[text()='Floor Lighting']"));
 
-    private SelenideElement mainSaleList = $(By.xpath("(//ul[@class='MuiList-root'])[1]//li[1]/span"));
+    private SelenideElement mainSaleList = $(By.xpath("(//div[@id='rhr-sale-navigation-dropdown']//ul[@class='MuiList-root'])//li/span"));
 
     private SelenideElement subSaleList = $(By.xpath("(//ul[@class='MuiList-root'])[2]//li[3]/span"));
 
@@ -89,31 +89,31 @@ public class EstoreSaleScreen {
 
     private SelenideElement regularSalePrice = $(By.xpath("(//p[@data-testid='price-for-sale'])[1]"));
 
-    private SelenideElement fabricCharisSaleNav = $(By.xpath("//*[text()='Fabric Chairs']"));
+    private SelenideElement fabricCharisSaleNav = $(By.xpath("//div[@id='rhr-sale-navigation-dropdown']//*[text()='Fabric Chairs']"));
 
-    private SelenideElement leatherCharisSaleNav = $(By.xpath("//*[text()='Leather Chairs']"));
+    private SelenideElement leatherCharisSaleNav = $(By.xpath("//div[@id='rhr-sale-navigation-dropdown']//*[text()='Leather Chairs']"));
 
-    private SelenideElement coffeTablesSaleNav = $(By.xpath("//*[text()='Coffee Tables']"));
+    private SelenideElement coffeTablesSaleNav = $(By.xpath("//div[@id='rhr-sale-navigation-dropdown']//*[text()='Coffee Tables']"));
 
-    private SelenideElement sideTablesSaleNav = $(By.xpath("//*[text()='Side Tables']"));
+    private SelenideElement sideTablesSaleNav = $(By.xpath("//div[@id='rhr-sale-navigation-dropdown']//*[text()='Side Tables']"));
 
-    private SelenideElement consoleTablesSaleNav = $(By.xpath("//*[text()='Console Tables']"));
+    private SelenideElement consoleTablesSaleNav = $(By.xpath("//div[@id='rhr-sale-navigation-dropdown']//*[text()='Console Tables']"));
 
-    private SelenideElement allDiningTables = $(By.xpath("//*[text()='All Dining Tables']"));
+    private SelenideElement allDiningTables = $(By.xpath("//div[@id='rhr-sale-navigation-dropdown']//*[text()='All Dining Tables']"));
 
-    private SelenideElement barCounterStools = $(By.xpath("//*[text()='Bar & Counter Stools']"));
+    private SelenideElement barCounterStools = $(By.xpath("//div[@id='rhr-sale-navigation-dropdown']//*[text()='Bar & Counter Stools']"));
 
-    private SelenideElement cabinetsDining = $(By.xpath("//*[text()='Cabinets']"));
+    private SelenideElement cabinetsDining = $(By.xpath("//div[@id='rhr-sale-navigation-dropdown']//*[text()='Cabinets']"));
 
-    private SelenideElement textilesBeddingCollections = $(By.xpath("//*[text()='Bedding Collections']"));
+    private SelenideElement textilesBeddingCollections = $(By.xpath("//div[@id='rhr-sale-navigation-dropdown']//*[text()='Bedding Collections']"));
 
-    private SelenideElement textilesSheetsPilloecases = $(By.xpath("//*[text()='Sheets & Pillowcases']"));
+    private SelenideElement textilesSheetsPilloecases = $(By.xpath("//div[@id='rhr-sale-navigation-dropdown']//*[text()='Sheets & Pillowcases']"));
 
-    private SelenideElement textilesTHrowsBlankets = $(By.xpath("//*[text()='Throws & Blankets']"));
+    private SelenideElement textilesTHrowsBlankets = $(By.xpath("//div[@id='rhr-sale-navigation-dropdown']//*[text()='Throws & Blankets']"));
 
-    private SelenideElement textilesBathTowels = $(By.xpath("//*[text()='Bath Towels']"));
+    private SelenideElement textilesBathTowels = $(By.xpath("//div[@id='rhr-sale-navigation-dropdown']//*[text()='Bath Towels']"));
 
-    private SelenideElement rugsAllRugs = $(By.xpath("(//*[text()='All Rugs'])[4]"));
+    private SelenideElement rugsAllRugs = $(By.xpath("//div[@id='rhr-sale-navigation-dropdown'](//*[text()='All Rugs'])[4]"));
 
     private SelenideElement rugsNeutralRugs = $(By.xpath("//*[text()='Neutral Rugs']"));
 

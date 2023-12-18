@@ -89,7 +89,7 @@ public class EstoreMemberStepDefs {
 
     @Then("I validate cart")
     public void iValidateCart() {
-        $(By.xpath("//*[text()='JOIN NOW']")).should(visible, Duration.ofSeconds(10));
+        $(By.xpath("//*[text()='Please continue browsing']")).should(visible, Duration.ofSeconds(10));
     }
 
     @Then("I validate email address field and link to membership button")
