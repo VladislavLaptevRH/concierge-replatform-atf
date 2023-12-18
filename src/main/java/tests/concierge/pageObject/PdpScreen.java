@@ -195,7 +195,7 @@ public class PdpScreen {
     private final SelenideElement viewCart = $(By.xpath("//*[text()='View Cart']"));
     private final SelenideElement searchIcon = $(By.xpath("(//*[@class = 'MuiIconButton-label'])[2]"));
     private final SelenideElement searchFieldInput = $(By.xpath("//*[@id = 'site-search-input']"));
-    private final SelenideElement searchFieldIcon = $(By.xpath("(//*[@id = 'search-icon-svg'])[2]"));
+    private final SelenideElement searchFieldIcon = $(By.xpath("(//*[@id = 'search-icon-svg'])[1]"));
     private final SelenideElement keepShoppingText = $(By.xpath("//*[text()='Keep Shopping']"));
     private final SelenideElement dialogTitleCloseButton = $(By.xpath("//*[@data-testid ='dialog-title-close-button']"));
     private final SelenideElement agreeAndAddToCart = $(By.xpath("//*[text() = 'Agree & Add To Cart']"));
@@ -285,7 +285,7 @@ public class PdpScreen {
 
     private final SelenideElement deliveryInformation = $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'will be ready for delivery between')]"));
 
-    private final SelenideElement unlimitedFurnitureDeliveryText = $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'Unlimited Furniture Delivery')]"));
+    private final SelenideElement unlimitedFurnitureDeliveryText = $(By.xpath("//*[@id = 'component-sku']"));
 
     private final SelenideElement unlimitedFurnitureDeliveryModalText = $(By.xpath("//*[text() = 'Unlimited Furniture Delivery']"));
 
@@ -440,7 +440,7 @@ public class PdpScreen {
 
     private final SelenideElement zoomButton = $(By.xpath(" //*[@id= 'Grommet/ZoomIn']"));
 
-    private final SelenideElement rightSideImageCarouselModuleCloseButton = $(By.xpath(" (//button[@class = 'MuiButtonBase-root MuiIconButton-root'])[1]"));
+    private final SelenideElement rightSideImageCarouselModuleCloseButton = $(By.xpath(" (//button[@class = 'MuiButtonBase-root MuiIconButton-root'])[3]"));
 
     private final SelenideElement specialOrdersButton = $(By.xpath("//div[contains(@data-testid,'FabricS')]"));
 

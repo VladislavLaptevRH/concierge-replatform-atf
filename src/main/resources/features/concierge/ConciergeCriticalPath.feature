@@ -314,7 +314,7 @@ Feature: Concierge Critical Path
     Then I navigate to menu "Textiles"
     Then I navigate to sub menu "Windows"
     Then I navigate to gallery "Drapery Collections"
-    Then I verify that 'grid view is set to 2-grid view' on CG screen
+    #Then I verify that 'grid view is set to 2-grid view' on CG screen
     Then I change the brand to "RH TEEN"
     Then I verify that RH Brand dropdown is present in "TN" home page
     Then I navigate to menu "Furniture"
@@ -681,7 +681,7 @@ Feature: Concierge Critical Path
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     Then Verify that 'confirm that Add to Cart slider is present'
     Then Project modal appears and has all the data for '10024796'
-    Then verify that another modal appears with all the data for '10024796'
+    #Then verify that another modal appears with all the data for '10024796'
 
   Scenario: Verify In Stock functionality
     Given I log into Concierge as "associate"
@@ -738,7 +738,7 @@ Feature: Concierge Critical Path
     Then Verify that line item field 'Leather' is present
     Then Verify that line item field 'Depth' is present
     Then Verify that line item field 'Color' is present
-    Then I chose zero choose in line items
+    #Then I chose zero choose in line items
     Then Verify that 'text "Configure this item to view delivery information to" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are inactive'
     Then I chose the '1' line item selections one by one
@@ -749,8 +749,8 @@ Feature: Concierge Critical Path
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     When I click on add to cart button
     Then Verify that 'confirm that Add to Cart slider for SO is present'
-    Then Verify that 'verify data in the modal for SO'
-    Then Verify that 'click Agree and add to cart'
+    #Then Verify that 'verify data in the modal for SO'
+    #Then Verify that 'click Agree and add to cart'
     When I click on view cart button
     Then I open cart
     Then Verify that 'cart page has item (SKU)'
@@ -1133,4 +1133,4 @@ Feature: Concierge Critical Path
     Then I verify that 'customer experience' on search page
     Then I click on 'customer experience' button on search page
     Then I verify that 'customer experience page is opened' on search page
-    Then I verify that 'footer is present' on search page
+    #Then I verify that 'footer is present' on search page

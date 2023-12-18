@@ -47,7 +47,7 @@ public class ConciergeProjectScreen {
 
     private final SelenideElement clientLastNameField = $(By.xpath("//input[@id='text2']"));
 
-    private final SelenideElement addToCartButton = $(By.xpath("//*[text() = 'ADD TO CART']"));
+    private final SelenideElement addToCartButton = $(By.xpath("//*[text() = 'Add to Cart']"));
 
     private final SelenideElement selectLocationProject = $(By.xpath("//div[@id='mui-component-select-location']"));
 
