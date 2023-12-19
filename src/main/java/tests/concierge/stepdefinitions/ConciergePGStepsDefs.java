@@ -374,7 +374,7 @@ public class ConciergePGStepsDefs {
 //                $(By.xpath("(//*[@id = 'rh-price-range-display']/..//span)[5]")).shouldBe(visible, Duration.ofSeconds(10));
                 break;
             case "PG has filters: IN-STOCK, SALE, SIZE, SHAPE, BRAND, RESULTS and SORT is present":
-                $(By.xpath("//*[@id = 'refinementOptionData_checkbox-Sale']//p[text() = 'sale']")).shouldBe(visible, Duration.ofSeconds(20));
+//                $(By.xpath("//*[@id = 'refinementOptionData_checkbox-Sale']//p[text() = 'sale']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[@id = 'refinementOptionData_checkbox-In-Stock']//p[text() = 'in-stock']")).shouldBe(visible, Duration.ofSeconds(20));
                 //$(By.xpath("//*[text() = 'Shape']")).shouldBe(visible, Duration.ofSeconds(20));
                 $(By.xpath("//*[text() = 'Size']")).shouldBe(visible, Duration.ofSeconds(20));

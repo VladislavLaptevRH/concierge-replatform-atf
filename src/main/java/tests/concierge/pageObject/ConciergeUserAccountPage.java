@@ -249,7 +249,7 @@ public class ConciergeUserAccountPage {
     private final SelenideElement profileWishlistPage = $(By.xpath("//*[text()='Your wish list is currently empty.']"));
     private final SelenideElement profileOrderHistory = $(By.xpath("//*[text()='Order History']"));
     private final SelenideElement profileOrderHistoryRegistry = $(By.xpath("//*[text()='ORDER HISTORY']"));
-    private final SelenideElement profileCheckbox = $(By.xpath("//input[@type='checkbox']"));
+    private final SelenideElement profileCheckbox = $(By.xpath("//input[@type='checkbox']/../../.."));
     private final SelenideElement detailsClientName = $(By.xpath("//*[text()='CLIENT NAME']"));
     private final SelenideElement detailsClientEmail = $(By.xpath("//*[text()='CLIENT EMAIL']"));
     private final SelenideElement detailsRHMembership = $(By.xpath("//*[text()='RH MEMBERSHIP']"));

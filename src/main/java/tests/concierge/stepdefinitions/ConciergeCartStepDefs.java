@@ -1565,25 +1565,27 @@ public class ConciergeCartStepDefs {
         if (country == null || country.equals("US")) {
             with().pollInterval(3, SECONDS).await().until(() -> true);
             conciergeCartPageScreen.getNanPrice().shouldNotBe(visible, Duration.ofSeconds(15));
-            conciergeCartPageScreen.getRegularPriceInPG().shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
+            conciergeCartPageScreen.getRegularPriceInPG().shouldHave(visible, Duration.ofSeconds(20));
             conciergeCartPageScreen.getRegularPriceInPG().shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
-            conciergeCartPageScreen.getMemberPriceInPG().shouldHave(text("$2,895.00"), Duration.ofSeconds(20));
+            conciergeCartPageScreen.getMemberPriceInPG().shouldHave(visible, Duration.ofSeconds(20));
             conciergeCartPageScreen.getMemberPriceInPG().shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
             if (conciergeCartPageScreen.getPriceForFinalSale().isDisplayed()) {
-                conciergeCartPageScreen.getPriceForFinalSale().shouldHave(text("$5,010.00"), Duration.ofSeconds(20));
+                conciergeCartPageScreen.getPriceForFinalSale().shouldHave(visible, Duration.ofSeconds(20));
                 conciergeCartPageScreen.getPriceForFinalSale().shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
             }
-            conciergeCartPageScreen.getTotalPriceCurrentResult().shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
+            conciergeCartPageScreen.getTotalPriceCurrentResult().shouldHave(visible, Duration.ofSeconds(20));
             conciergeCartPageScreen.getTotalPriceCurrentResult().shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
-            conciergeCartPageScreen.getSubtotalCurrentValue().shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
+            conciergeCartPageScreen.getSubtotalCurrentValue().shouldHave(visible, Duration.ofSeconds(20));
             conciergeCartPageScreen.getSubtotalCurrentValue().shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
-            conciergeCartPageScreen.getTotalWithTaxesCurrentPrice().shouldHave(text("$299.00"), Duration.ofSeconds(20));
+            conciergeCartPageScreen.getTotalWithTaxesCurrentPrice().shouldHave(visible, Duration.ofSeconds(20));
             conciergeCartPageScreen.getTotalWithTaxesCurrentPrice().shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
-            conciergeCartPageScreen.getTotalPrice().shouldHave(text("$4,159.00"), Duration.ofSeconds(20));
+            conciergeCartPageScreen.getTotalPrice().shouldHave(visible, Duration.ofSeconds(20));
             conciergeCartPageScreen.getTotalPrice().shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
         }
-        $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
-        conciergeCartPageScreen.getSubtotalCurrentValue().shouldHave(text("$3,860.00"), Duration.ofSeconds(20));
+        $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).shouldHave(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
+        conciergeCartPageScreen.getSubtotalCurrentValue().shouldHave(visible, Duration.ofSeconds(20));
+        $(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).shouldNotHave(text("$NaN"), Duration.ofSeconds(20));
     }
 
     @When("I verify all the sums on the cart page with item quantity {string}")

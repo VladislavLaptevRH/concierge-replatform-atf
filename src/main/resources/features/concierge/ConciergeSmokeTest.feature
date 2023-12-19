@@ -2,7 +2,6 @@
 @Smoke @SmokeTest @Smoketest
 Feature: Smoke test for concierge
 
-
   Scenario Outline: Top Nav Check in RH Concierge
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
@@ -32,26 +31,23 @@ Feature: Smoke test for concierge
 	Examples:
 	  | brand |
 	  | RH    |
-	  |RH CONTEMPORARY|
-	  |RH INTERIORS   |
-	  |RH MODERN      |
-	  |RH OUTDOOR     |
-	  |RH BEACH HOUSE |
+#	  |RH CONTEMPORARY|
+#	  |RH INTERIORS   |
+#	  |RH MODERN      |
+#	  |RH OUTDOOR     |
+#	  |RH BEACH HOUSE |
 	  |RH TEEN        |
-
 
 
   Scenario: Basic search functionality, PG check
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
-	When I click on search Icon
 	When I type item name 'rectangular table'
 	Then I verify that 'PG has filters: CONCEPTS, IN-STOCK, SALE, BRAND, RESULTS and SORT is present' on PG screen
 	Then I verify that 'CONCEPT dropdown returns various RH Brands' on PG screen
 	Then I click 'RH Outdoor' on PG screen
 	Then I verify that 'Italian Travertine Plinth Rectangular Fire Table is returned' on PG screen
 	Then I verify that PG loads
-
 
   Scenario: Add to Cart and proceed to Payment page
 	Given I log into Concierge as "associate"

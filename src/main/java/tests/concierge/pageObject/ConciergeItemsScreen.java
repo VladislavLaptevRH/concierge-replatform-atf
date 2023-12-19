@@ -138,7 +138,7 @@ public class ConciergeItemsScreen {
     private final SelenideElement artResultHeader = $(By.xpath("//*[text()='Artist']"));
     private final SelenideElement swivelsResultHeader = $(By.xpath("//*[text()='swivels']"));
     private final SelenideElement multiSearchHeader = $(By.xpath("//*[text()='white and blue corner leather sofa']"));
-    private final SelenideElement searchClearButton = $(By.xpath("//input[contains(@placeholder,'SEARCH')]//parent::div//descendant::*[@id='Grommet/X-Close']"));
+    private final SelenideElement searchClearButton = $(By.xpath("//*[@placeholder = 'SEARCH']//following-sibling::div/button"));
     private final SelenideElement clearAll = $(By.xpath("//*[text()='Clear All']"));
     private final SelenideElement searchIconField = $(By.xpath("//input[contains(@placeholder,'SEARCH')]"));
 

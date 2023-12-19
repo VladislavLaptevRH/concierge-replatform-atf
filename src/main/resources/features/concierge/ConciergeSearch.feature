@@ -5,7 +5,6 @@ Feature: Concierge PG Page
   Scenario: Verify that Search for keyword is functioning as expected
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I click on search Icon
     When I type item name 'table'
     Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
     Then I verify that 'Grid View is present in top right' search screen
@@ -16,7 +15,6 @@ Feature: Concierge PG Page
   Scenario: Verify that cross brand search is functioning as expected
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I click on search Icon
     When I type item name 'Crib'
     Then I verify that 'PG page is returned with text  RESULTS (IN RH BABY & CHILD)' on search page
     Then I verify that 'VIEW RH BABY & CHILD RESULTS button is present' on search page
@@ -29,7 +27,6 @@ Feature: Concierge PG Page
   Scenario: Verify that search for non-existent search term returns 0 results
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I click on search Icon
     When I type item name '234adf'
     Then I verify that 'PG page is returned with RESULTS(0) present and search text "234ADF" is present' on search page
     Then I verify text 'We’re sorry, we cannot find what you are looking for.'
@@ -42,11 +39,10 @@ Feature: Concierge PG Page
   Scenario: Search after opening hamburger menu
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I click on search Icon
     When I type item name 'table'
     Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
 
-  Scenario: Search Icon should display on all the pages.
+  Scenario: Search Icon should display on all the pages
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     Then I navigate to menu 'Living'
@@ -60,18 +56,15 @@ Feature: Concierge PG Page
   Scenario: By clicking on search icon, user should be able to enter and search the product from any of the page
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I click on search Icon
     When I type item name 'table'
     Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
     Then I navigate to menu 'Living'
     Then I navigate to sub menu 'Fabric Seating'
     Then I navigate to gallery 'Seating Collections'
-    When I click on search Icon
     When I type item name 'table'
     Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
     Then I navigate to menu 'Bed'
     Then I navigate to sub menu 'Benches & Stools'
-    When I click on search Icon
     When I type item name 'table'
     Then I verify that 'PG Search Page has title (TABLE) and text "Results" and "Sort" are present' on search page
 
@@ -162,7 +155,6 @@ Feature: Concierge PG Page
     Then I click on 'select any brand' button on search page
     Then I verify that 'Filters such as Material Filters, Size Filters, Brand' on search page
 
-
   Scenario: Verify Disable Typeahead from Search
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -178,7 +170,7 @@ Feature: Concierge PG Page
   Scenario: Verify already selected facet selection when selecting product via navigation rugs: All rugs: any size
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    Then I navigate to menu 'RUGS'
+    Then I navigate to menu 'Rugs'
     Then I navigate to sub menu 'Rugs'
     Then I navigate to gallery 'All Rugs'
     Then I verify that 'PG has filters: IN-STOCK, SALE, SIZE, SHAPE, BRAND, RESULTS and SORT is present' on PG screen
@@ -268,21 +260,18 @@ Feature: Concierge PG Page
   Scenario: Wild card name search
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I click on search Icon
     When I type item name '*?'
     Then All RH products should be searched
 
   Scenario: Search with Collection name
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I click on search Icon
     When I type item name 'Seating Collections'
     Then Seating Collections products should be displayed
 
   Scenario: After switching to diff country check the count of products, it should display the available product count
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I click on search Icon
     When I type item name 'Seating Collections'
     Then Seating Collections products should be displayed
     Then verify the count of products

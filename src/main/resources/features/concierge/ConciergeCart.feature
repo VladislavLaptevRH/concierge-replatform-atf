@@ -568,7 +568,6 @@ Feature:Concierge Cart Page
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     When I remove client from header
-    When I add item to cart via API
     When I add item to cart via API with "63130002 NATL" and quantity '1'
     When I open cart
     Then I verify that availability, Delivery and Returns messaging in cart

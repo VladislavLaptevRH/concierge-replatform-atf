@@ -313,6 +313,7 @@ public class ConciergeAssociateStepDefs {
         if(! conciergeUserAccountPage.getBrand(brand).isDisplayed()){
             WebDriverRunner.getWebDriver().navigate().refresh();
         }
+        with().pollInterval(2, SECONDS).await().until(() -> true);
     conciergeUserAccountPage.getBrand(brand).should(visible,Duration.ofSeconds(15)).click();
     conciergeUserAccountPage.getRhConciergeLogo().should(visible,Duration.ofSeconds(15)).click();
     }
@@ -400,6 +401,9 @@ public class ConciergeAssociateStepDefs {
 
     @When("I click {string} button on homepage")
     public void iClickbutton(String button){
+        if(!conciergeUserAccountPage.getButton(button).isDisplayed()){
+            WebDriverRunner.getWebDriver().navigate().refresh();
+        }
         conciergeUserAccountPage.getButton(button).click();
     }
 
