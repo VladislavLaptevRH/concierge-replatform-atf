@@ -18,7 +18,7 @@ Feature: Concierge Critical Path
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10146709 LOAK" and quantity '1'
+    When I add item to cart via API with "10013778 LOPW" and quantity '1'
     When I open cart
 #    Then I confirm that default zip code for country "US" is present in Cart
     And I change zip code in the cart to "94525"
@@ -28,7 +28,7 @@ Feature: Concierge Critical Path
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10146709 LOAK" and quantity '1'
+    When I add item to cart via API with "10013778 LOPW" and quantity '1'
     When I open cart
     Then I verify all the sums on the cart page with item quantity '1'
 
@@ -36,7 +36,7 @@ Feature: Concierge Critical Path
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
-    When I add item to cart via API with "10146709 LOAK" and quantity '2'
+    When I add item to cart via API with "10013778 LOPW" and quantity '2'
     When I open cart
     Then I verify all the sums on the cart page with item quantity '2'
 

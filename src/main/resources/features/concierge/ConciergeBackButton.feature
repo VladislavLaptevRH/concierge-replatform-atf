@@ -57,7 +57,7 @@ Feature:Concierge Back Button
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
 	When I remove all items from cart via UI
-	When I add item to cart via API with "10146709 LOAK" and quantity '1'
+	When I add item to cart via API with "10013778 LOPW" and quantity '1'
 	When I open cart
 	Then I verify that cart is displayed
 	When I click on search Icon
