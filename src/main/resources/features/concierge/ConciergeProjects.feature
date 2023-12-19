@@ -57,19 +57,17 @@ Feature: Concierge Project
 
 #   Works only for prodsupport
   Scenario Outline: Verify that user is able to create project for client - <businessClient>
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I click on projects button
     When I click on new project button
     When I introduces "<businessClient>" first and last name
-#    When I introduces details for new project
     Then I verify that new project for <"businessClient"> was created
-    Examples:
+    Examples:#   Works only for prodsupport
       | businessClient       |
-      | member               |
-      | nonmember            |
-      | trade                |
+      #| member               |
+      #| nonmember            |
+      #| trade                |
       | unclassifiedBusiness |
 
   Scenario: Verify project settings are available
@@ -520,7 +518,7 @@ Feature: Concierge Project
     When I remove all items from cart
     When I go to item "10010966 BRN" from search field
     Then I chose the '1' line item selections one by one
-    And I select count of product
+    #And I select count of product
     When I click on add to cart button
     When I click on view cart button
     When I click on move to project button

@@ -184,7 +184,7 @@ Feature: Concierge Checkout flow
 	When I choose country for concierge from footer
 	When I remove all items from cart via UI
 	When I choose client who is a non member
-	When I add item to cart via API with "10146709 LOAK" and quantity '1'
+	When I add item to cart via API with "10013778 LOPW" and quantity '1'
 	When I open cart
 	When I choose order classification
 	When I click on checkout button
@@ -195,7 +195,7 @@ Feature: Concierge Checkout flow
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
 	When I remove all items from cart via UI
-	When I add item to cart via API with "10146709 LOAK" and quantity '1'
+	When I add item to cart via API with "10013778 LOPW" and quantity '1'
 	When I open cart
     Then I confirm that default zip code for country "US" is present in Cart
 	And I change zip code in the cart to "94525"
@@ -224,7 +224,7 @@ Feature: Concierge Checkout flow
 	When I choose country for concierge from footer
 	When I remove all items from cart via UI
 	When I choose client who is a non member
-	When I add item to cart via API with "10146709 LOAK" and quantity '1'
+	When I add item to cart via API with "10013778 LOPW" and quantity '1'
 	When I open cart
 	When I choose order classification
 	When I click on checkout button
