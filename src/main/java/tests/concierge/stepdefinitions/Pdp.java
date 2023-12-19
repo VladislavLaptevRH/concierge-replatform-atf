@@ -1278,6 +1278,7 @@ public class Pdp {
 
     @Then("Pricing should be shown against each item")
     public void pricingShouldBeShownAgainstEachItem() {
+        with().pollInterval(5, SECONDS).await().until(() -> true);
         pdpScreen.getItemsPerPage().scrollIntoView(true);
         if(Integer.parseInt(pdpScreen.getResults().getText().replaceAll("[^0-9]", "")) > 24) {
             assertEquals(Integer.parseInt(pdpScreen.getItemsPerPage().getText()), pdpScreen.getPriceForMemberCollection().size());

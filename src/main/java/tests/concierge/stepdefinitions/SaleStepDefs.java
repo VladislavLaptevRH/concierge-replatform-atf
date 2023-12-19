@@ -47,8 +47,8 @@ public class SaleStepDefs {
     @When("I click on sale menu item")
     public void iCLickOnSaleMenuItem() {
         with().pollInterval(2, SECONDS).await().until(() -> true);
-        $(By.xpath("(//*[text()='Bed'])[3]")).hover();
-        //$(By.xpath("(//*[text()='Bed'])[3]")).should(interactable).click();
+//        $(By.xpath("//*[text()='Bed']")).hover();
+        $(By.xpath("//*[text()='Bed']")).should(interactable).click();
     }
 
     @When("I click sub category and navigate PDP")

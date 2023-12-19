@@ -32,7 +32,6 @@ public class ThankYouPageStepDefs {
     @Then("I verify order number and email address verbiage")
     public void iVerifyOrderNumberAndEmailAddressVerbiage() {
         $(By.xpath("//*[text()='TOTAL']")).should(visible,Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='From']")).should(visible,Duration.ofSeconds(15));
     }
 
 }

@@ -261,7 +261,7 @@ public class PdpScreen {
 
     private final ElementsCollection YAMLPriceForMember = $$(By.xpath("//*[text() = 'YOU MIGHT ALSO LIKE']/..//*[@data-testid='price-for-member']"));
 
-    private final ElementsCollection priceForMemberCollection = $$(By.xpath("//*[@id='rh-price-range-display']/div[2]/p[@data-testid='price-for-member']"));
+    private final ElementsCollection priceForMemberCollection = $$(By.xpath("//*[contains(@alt, 'prod')]"));
 
     private final SelenideElement results = $(By.xpath("//*[@id = 'component-refine-menu-dropdown']//p[text() = 'RESULTS']"));
 

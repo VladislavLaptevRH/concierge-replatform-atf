@@ -56,7 +56,6 @@ Feature: Concierge RH profile search
 	Then I click on wishlist link
 	Then I confirm user wishlist page
 
-
   Scenario: Verify that Order History in rh.com profile from registered user profile- estore users order history should be displayed
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
@@ -68,7 +67,6 @@ Feature: Concierge RH profile search
 	Then I confirm user cart page
 	Then I click on order history link
 	Then I confirm user order history page
-
 
   Scenario: Verify the estore user's Registry
 	Given I log into Concierge as "associate"
@@ -83,7 +81,6 @@ Feature: Concierge RH profile search
 	Then I confirm user order history page
 	Then I confirm user order history Registry page
 
-
   Scenario: Checkbox Registered user
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
@@ -92,14 +89,12 @@ Feature: Concierge RH profile search
 	Then I confirm registered profile
 	Then I confirm registered profile fields
 
-
   Scenario: Verify that Email or Membership id textfield should accept only integers or email formatted string
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
 	When I click "RH.COM Profile" button on homepage
 	Then I search by email
 	Then I confirm registered profile
-
 
   Scenario: Verify that search with Membership id and verify the search results
 	Given I log into Concierge as "associate"
