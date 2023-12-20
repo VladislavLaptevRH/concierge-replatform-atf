@@ -1179,7 +1179,6 @@ public class ConciergeCartStepDefs {
             case "quantity and sum were increased":
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 assertEquals(topTotalPriceAfterDecreasing * 4, Float.parseFloat($(By.xpath("//*[@aria-describedby = 'price-override-popper']/h5")).getText().replace("$", "").replace(",", "")));
-
                 assertEquals(subtotalPriceAfterDecreasing * 4, Float.parseFloat($(By.xpath("//*[contains(text(), 'Subtotal')]/../following-sibling::div/span")).getText().replace("$", "").replace(".00", "").replace(",", "")));
                 with().pollInterval(5, SECONDS).await().until(() -> true);
                 assertEquals(topMemberSavingsAfterDecreasing * 4, Float.parseFloat($(By.xpath("//h2/following-sibling::p")).getText().substring(51, 57).replace(",", "")));
