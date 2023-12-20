@@ -78,7 +78,6 @@ Feature: Concierge PG Page
   Scenario: Checking Faucets in Search PG
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
-    When I click on search Icon
     When I type item name 'rectangular table'
     Then I verify that 'PG has filters: CONCEPTS, IN-STOCK, SALE, BRAND, RESULTS and SORT is present' on PG screen
     Then I verify that 'CONCEPT dropdown returns various RH Brands' on PG screen
@@ -206,7 +205,6 @@ Feature: Concierge PG Page
     Then I click 'Back Browser Button' on PG screen
     Then I verify that 'PG is displayed' on PG screen
 
-
   Scenario: To verify after navigating to PG, Brand name, categories, RH Logo, Search icon, Hamburger menu, Cart icon, My account image is present
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -223,7 +221,6 @@ Feature: Concierge PG Page
     Then I verify flag icon for country selection
     Then I verify top nav
     Then I verify brand dropdown
-
 
   Scenario: To verify sort option is present at the right side and its working
     Given I log into Concierge as "associate"
@@ -248,8 +245,6 @@ Feature: Concierge PG Page
     Then I click 'Price Low to High and verify price is sorted' on PG screen
     Then I click 'Price High to Low and verify price is sorted' on PG screen
 
-
-
   Scenario: To verify PG page is loading till footer
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
@@ -257,7 +252,6 @@ Feature: Concierge PG Page
     Then I navigate to sub menu 'Tables'
     Then I navigate to gallery 'Round & Oval Tables'
     Then I verify page is loaded till footer
-
 
   Scenario: Verify that PG is defaulted to 3-grid view
     Given I log into Concierge as "associate"
@@ -270,7 +264,6 @@ Feature: Concierge PG Page
     Then I verify that 'Grid View in PG is set to 3-grid view by default' on PG screen
     When I choose "GB" country
     Then I verify that 'Grid View in PG is set to 3-grid view by default' on PG screen
-
 
   Scenario: Verify Enjoy free shipping banner for textile category
     Given I log into Concierge as "associate"
