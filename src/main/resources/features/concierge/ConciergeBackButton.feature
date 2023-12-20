@@ -12,8 +12,7 @@ Feature:Concierge Back Button
 	When I click browser back button
 	Then I expect that I am on the Concierge Dashboard page
 
-
-  Scenario: Verify that Search any product from CG and verify for back button
+	Scenario: Verify that Search any product from CG and verify for back button
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
 	Then I navigate to menu 'Living'

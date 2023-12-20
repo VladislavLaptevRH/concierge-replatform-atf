@@ -300,7 +300,7 @@ public class PdpScreen {
 
     private final SelenideElement unlimitedFurnitureDeliveryModalGBStandartShippingCurrency = $(By.xpath("(//*[text() = 'U.S. Standard Shipping']/..//*[contains(text() , '£')])[1]"));
 
-    private final SelenideElement shippingAndDeliveryModalTab = $(By.xpath("//*[text() = 'Shipments to Canada']"));
+    private final SelenideElement shippingAndDeliveryModalTab = $(By.xpath("//*[contains(text() , 'Canada')]"));
 
     private final SelenideElement standartDeliveryShippingText = $(By.xpath("//*[text() = 'Ships free of charge via Standard Delivery Shipping']"));
     private final SelenideElement shippingAndDeliveryModalDeliveryAreaText = $(By.xpath("//*[text() = 'CANADIAN DELIVERY AREA']"));
@@ -488,7 +488,7 @@ public class PdpScreen {
     private final SelenideElement pdpMattressFeeText = $(By.xpath("//*[@data-testid = 'delivery-message-0']"));
 
     private final SelenideElement pdpMattressFeeLink = $(By.xpath("//*[@href = '/graphql/?group=general-modals&id=mattress-recycling']"));
-    private final SelenideElement specialOrderLink = $(By.xpath("//*[contains(@data-testid, 'SPECIAL ORDER')]"));
+    private final SelenideElement specialOrderLink = $(By.xpath("//*[contains(@data-testid, 'Special Order')]"));
 
     private final SelenideElement mattressRecyclingFeeText = $(By.xpath("//*[@href= '/graphql/?group=general-modals&id=mattress-recycling']/.."));
 

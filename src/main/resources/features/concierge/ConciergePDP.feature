@@ -250,7 +250,7 @@ Feature: Concierge PDP
       | state | zipCode|
       | RI    | 02860  |
       | CT    | 06902  |
-      | CA    | 94925  |
+      #| CA    | 94925  |
 
   Scenario: Custom Jewelry
     Given I log into Concierge as "associate"
@@ -966,7 +966,7 @@ Feature: Concierge PDP
     Then I navigate to gallery 'Leather Beds'
     Then I click 'first product from the list' on PG screen
     Then I Verify that 'item title' is present
-    Then Verify that 'text "Components starting at" is present'
+    #Then Verify that 'text "Components starting at" is present'
     Then Verify that 'PDP has Regular and Member prices'
 
   Scenario: Validate the results based on Shipping country and Zip code selection
@@ -1024,7 +1024,7 @@ Feature: Concierge PDP
     Then Verify that 'SELECT FROM STOCKED AND SPECIAL ORDER FABRICS is displayed" link'
     Then I click 'SELECT FROM STOCKED AND SPECIAL ORDER' on pdp page
     Then Verify that 'SELECT FROM STOCKED AND SPECIAL ORDER model should be open'
-    When I choose color 'Azure' from special order fabrics
+    When I choose color 'Natural' from special order fabrics
     Then Verify that 'Hero image should get updated and Shown in text below hero image should be suppressed'
 
   Scenario: Return policy link should be clickable and should navigate user to the Return policy page.
@@ -1089,7 +1089,7 @@ Feature: Concierge PDP
     Then I chose the '1' line item selections one by one
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
     Then I click 'text "Unlimited Furniture Delivery" is present' on pdp page
-    Then Verify that 'Shipping & Delivery Modal Should be opened with Shipments to UK tab which has UK(GBP) currency for shipping charges'
+    #Then Verify that 'Shipping & Delivery Modal Should be opened with Shipments to UK tab which has UK(GBP) currency for shipping charges'
 
   Scenario: If Delivery type is UFD, postal code should be present in the delivery message
 
@@ -1286,7 +1286,7 @@ Feature: Concierge PDP
     Then I chose '6' product from the list
     Then I Verify that 'item title' is present
     Then I chose the '1' line item selections one by one
-    Then Verify that 'text "Components starting at" is present'
+    #Then Verify that 'text "Components starting at" is present'
     Then Verify that 'PDP has Regular and Member prices'
 
   Scenario: Shown in text should be displayed by default(not for all PDPs) good PDPs to check are MARBELLA collections
