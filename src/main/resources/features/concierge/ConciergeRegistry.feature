@@ -3,7 +3,6 @@
 Feature:Concierge Registry
 
   Scenario: Search by name
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I click on registry button
@@ -12,7 +11,6 @@ Feature:Concierge Registry
     Then I verify that search result for registry search by "name" is displayed
 
   Scenario: Search by email
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I click on registry button
@@ -21,7 +19,6 @@ Feature:Concierge Registry
     Then I verify that search result for registry search by "email" is displayed
 
   Scenario: Search by event type
-
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I click on registry button

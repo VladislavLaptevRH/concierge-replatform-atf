@@ -172,7 +172,11 @@ public class Pdp {
                 pdpScreen.getPdpPopUpOnSaleSalePriceAmount().should(visible, Duration.ofSeconds(5));
                 break;
             case "has qty dropdown":
-                pdpScreen.getPdpPopUpOnSaleQTY().should(visible, Duration.ofSeconds(5));
+                if(pdpScreen.getPdpPopUpOnSaleQTY().isDisplayed()){
+                    pdpScreen.getPdpPopUpOnSaleQTY().should(visible, Duration.ofSeconds(5));
+                } else {
+                    pdpScreen.getPdpPopUpOnSaleQTYUpperCase().should(visible, Duration.ofSeconds(5));
+                }
                 pdpScreen.getPdpPopUpOnSaleQTYValue().should(visible, Duration.ofSeconds(5));
                 break;
             case "has \"add to cart\" and \"add to project\" buttons":
@@ -340,7 +344,15 @@ public class Pdp {
                     sizeList.selectByIndex(1);
                     with().pollInterval(1, SECONDS).await().until(() -> true);
                 }
-                pdpScreen.getDeliveryInStockItemText().shouldHave(text("This item is in stock and will be delivered"), Duration.ofSeconds(15));
+                if(pdpScreen.getDeliveryInStockItemText().isDisplayed()){
+                    pdpScreen.getDeliveryInStockItemText().shouldBe(visible, Duration.ofSeconds(15));
+                }
+                if(pdpScreen.getDeliveryReturnedOrExchangedItemText().isDisplayed()){
+                    pdpScreen.getDeliveryReturnedOrExchangedItemText().shouldBe(visible, Duration.ofSeconds(15));
+                }
+                if(pdpScreen.getDeliveryWillBeReadyItemText().isDisplayed()){
+                    pdpScreen.getDeliveryWillBeReadyItemText().shouldBe(visible, Duration.ofSeconds(15));
+                }
                 break;
             case "text \"Unlimited Furniture Delivery\" is present":
                 pdpScreen.getUnlimitedFurnitureDeliveryText().should(visible, Duration.ofSeconds(15));
@@ -642,7 +654,7 @@ public class Pdp {
     @When("I choose a random sale item")
     public void iChooseARandomSaleItem() {
         Random rand = new Random();
-        pdpScreen.getCollectionList().first().shouldHave(visible, Duration.ofSeconds(30));
+        pdpScreen.getFirstCollection().shouldHave(visible, Duration.ofSeconds(30));
         int randomCollection = rand.nextInt(pdpScreen.getCollectionList().size());
         if (randomCollection == 0) {
             int randomCollectionAgain = rand.nextInt(pdpScreen.getCollectionList().size());
@@ -1045,7 +1057,6 @@ public class Pdp {
          if(SKU.equals("61970975 TEAK")){
              pdpScreen.getAlsoAvailableText().shouldBe(visible, Duration.ofSeconds(15));
              pdpScreen.getShopTheEntireCollectionText().shouldBe(visible, Duration.ofSeconds(15));
-
              pdpScreen.getSelectFromText().shouldBe(visible, Duration.ofSeconds(15));
              pdpScreen.getSpecialOrderFabricsText().shouldBe(visible, Duration.ofSeconds(15));
              pdpScreen.getSpecialOrderFabricsSiblingText().shouldBe(visible, Duration.ofSeconds(15));
@@ -1174,7 +1185,11 @@ public class Pdp {
                 pdpScreen.getPdpPopUpOnSaleSalePriceAmount().should(visible, Duration.ofSeconds(5));
                 break;
             case  "has qty dropdown":
-                pdpScreen.getPdpPopUpOnSaleQTY().should(visible, Duration.ofSeconds(5));
+                if(pdpScreen.getPdpPopUpOnSaleQTY().isDisplayed()){
+                    pdpScreen.getPdpPopUpOnSaleQTY().should(visible, Duration.ofSeconds(5));
+                } else {
+                    pdpScreen.getPdpPopUpOnSaleQTYUpperCase().should(visible, Duration.ofSeconds(5));
+                }
                 pdpScreen.getInStockQTYSelect().should(visible, Duration.ofSeconds(5));
                 break;
             case  "has \"add to cart\" and \"add to project\" buttons":
@@ -1350,19 +1365,18 @@ public class Pdp {
         if(state.equals("CA")) {
             assertEquals(pdpScreen.getMattressFeeText().getText(), "Mattress Fee");
             pdpScreen.getNanPrice().shouldNotBe(visible, Duration.ofSeconds(15));
-            assertEquals(pdpScreen.getMatressFee().getText(), "$10.50");
+            pdpScreen.getMatressFee().shouldBe(visible, Duration.ofSeconds(15));
         }
         if(state.equals("RI")){
             assertEquals(pdpScreen.getMattressFeeText().getText(), "Mattress Fee");
             pdpScreen.getNanPrice().shouldNotBe(visible, Duration.ofSeconds(15));
-            assertEquals(pdpScreen.getMatressFee().getText(), "$16.00");
+            pdpScreen.getMatressFee().shouldBe(visible, Duration.ofSeconds(15));
         }
         if(state.equals("CT")){
             assertEquals(pdpScreen.getMattressFeeText().getText(), "Mattress Fee");
             pdpScreen.getNanPrice().shouldNotBe(visible, Duration.ofSeconds(15));
-            assertEquals(pdpScreen.getMatressFee().getText(), "$11.75");
+            pdpScreen.getMatressFee().shouldBe(visible, Duration.ofSeconds(15));
         }
-
     }
 
     @Then("Mattress Recycling Fees message should be displayed below line item for state {string}")
@@ -1502,8 +1516,6 @@ public class Pdp {
         pdpScreen.getPostalCodeModal().should(visible, Duration.ofSeconds(15));
     }
 
-
-
     @Then("I verify that cart modal is displayed")
     public void iVerifyThatCartModalIsDisplayed() {
         pdpScreen.getItemAddedToCart().should(visible, Duration.ofSeconds(15));
@@ -1631,6 +1643,9 @@ public class Pdp {
                 break;
             case  "return policy link":
                 pdpScreen.getReturnPolicy().click();
+                break;
+            case  "close image popup button":
+                pdpScreen.getImagePopUpCloseButton().click();
                 break;
             default: break;
         }

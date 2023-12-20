@@ -60,7 +60,7 @@ public class ConciergePGStepsDefs {
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         else if(conciergePGScreen.getTopNavSubManuByName(subMenu).isEnabled()){
-            $(By.xpath("(//*[contains(@id , 'rhrCtalogNavigationDetails')]//*[text() = '" + subMenu + "'])[3]")).hover();
+            $(By.xpath("(//li[contains(@id , 'rhrCtalogNavigationDetails')])[4]//*[text() = '" + subMenu + "']")).hover();
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         else {
