@@ -39,12 +39,14 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     When I open product page with productId "prod18890296"
     When I click on the first project search result with parameters 'prod18890296''10024793 BRNZ'
-    Then I Verify that 'item title' is present
+    Then I Verify that 'PDP title' is present
     Then I Verify that '"Zoom" button' is present
     Then I Verify that 'the "Hero" Image' is present
     Then Verify that 'shop the entire collection'
     Then Verify that 'zoom button is clickable and zoom module is opened'
     Then Verify that 'is present view carousel is present on the right of the zoomed hero image and scrolling are present'
+    Then Verify that 'plus and minus buttons are clickable and functioning'
+    Then Verify that 'close the Zoom in Module'
     Then I Verify that 'images carousel is present below Hero image' is present
     Then Verify that 'left and right arrows are present and number of alt images is 5'
     Then Verify that 'line item selections (Size, Finish and Qty) are present'
@@ -62,7 +64,7 @@ Feature: Concierge PDP
     Then I chose the '1' line item selections one by one
     Then Verify that 'text "This item will be ready for delivery between" is present'
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
-    #Then I verify that text item# and SKU is present
+    Then I verify that text item# and SKU is present
     Then Verify that 'text "This item can be returned or exchanged within 30 days of delivery" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     Then Verify that 'confirm that Add to Cart slider is present'
@@ -119,25 +121,29 @@ Feature: Concierge PDP
     When I remove all items from cart via UI
     When I go to concierge item 'prod12640168' from search field
     When I click on the first project search result with parameters 'prod12640168''59810779 CTBZ'
-    Then I Verify that 'item title' is present
-    #Then Verify that 'text "Components starting at" is present'
+    Then I Verify that 'PDP title' is present
     Then Verify that 'cloud Modular Leather Sofa titles are present'
     Then Verify that line item field 'Fill' is present
     Then Verify that line item field 'Leather' is present
     Then Verify that line item field 'Depth' is present
     Then Verify that line item field 'Color' is present
-    Then I chose zero choose in line items
+    #Then I chose zero choose in line items
     Then Verify that 'text "Configure this item to view delivery information to" is present'
     Then Verify that 'Add to Cart and Add to Project buttons are inactive'
     Then I chose the '1' line item selections one by one
-    #Then Verify that 'text "Unlimited Furniture Delivery" is present'
-    #Then I verify that check for replacements parts button is displayed
+    Then I chose the '1' line item selections one by one
+    Then I verify that text item# and SKU is present
+    Then Verify that 'text "Unlimited Furniture Delivery" is present'
+    Then I verify that check for replacements parts button is displayed
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     When I click on add to cart button
     Then Verify that 'confirm that Add to Cart slider for SO is present'
+    #Then Verify that 'verify data in the modal for SO'
+    #Then Verify that 'click Agree and add to cart'
     When I click on view cart button
     Then I open cart
     Then Verify that 'cart page has item (SKU)'
+    Then Verify that 'price is matching PDP'
 
   Scenario: Verify Colorization options
     Given I log into Concierge as "associate"

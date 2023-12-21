@@ -440,7 +440,7 @@ public class PdpScreen {
 
     private final SelenideElement zoomButton = $(By.xpath(" //*[@id= 'Grommet/ZoomIn']"));
 
-    private final SelenideElement rightSideImageCarouselModuleCloseButton = $(By.xpath(" (//button[@class = 'MuiButtonBase-root MuiIconButton-root'])[3]"));
+    private final SelenideElement rightSideImageCarouselModuleCloseButton = $(By.xpath(" (//button[@class = 'MuiButtonBase-root MuiIconButton-root'])[2]"));
 
     private final SelenideElement specialOrdersButton = $(By.xpath("//div[contains(@data-testid,'FabricS')]"));
 
