@@ -74,7 +74,7 @@ public class PdpScreen {
     private final ElementsCollection lineItemsCountFourth = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[4]/../../../../../..//select[contains(@id, 'prod')]/option/.."));
 
     private final ElementsCollection lineItemsCountFifth = $$(By.xpath("(//a[contains(@data-testid, 'productTitleLink')])[5]/../../../../../..//select[contains(@id, 'prod')]/option/.."));
-    private final SelenideElement quantitySelect = $(By.xpath("(//*[text() = 'QTY'])[1]/..//select"));
+    private final SelenideElement quantitySelect = $(By.xpath("(//select[contains(@id, 'qty-input')])[1]"));
 
     private final SelenideElement memberPrice = $(By.xpath("(//*[contains(@class, 'item-price__amount--member')])[1]"));
 
@@ -92,7 +92,7 @@ public class PdpScreen {
 
     private final SelenideElement expendedDetailSection = $(By.xpath("(//section/ul/li[text() = 'Crafted of solid wood and engineered wood with American white oak veneers'])[1]"));
 
-    private final SelenideElement firstProductItemInTheYAMLCarousel = $(By.xpath("(//*[text() = 'YOU MIGHT ALSO LIKE']/..//span)[1]"));
+    private final SelenideElement firstProductItemInTheYAMLCarousel = $(By.xpath("(//*[text() = 'YOU MIGHT ALSO LIKE']/..//p/span)[1]"));
 
     private final SelenideElement addToRegistryButton = $(By.xpath("(//button[@data-testid='add-to-registry-dialog-opener'])[1]"));
 
@@ -286,7 +286,7 @@ public class PdpScreen {
 
     private final SelenideElement pdpTextBelowHeroImage = $(By.xpath(" (//*[@id = 'component-hero-image']/..//span)[2]"));
 
-    private final SelenideElement deliveryInformation = $(By.xpath("//*[@id = 'component-sku']//p[contains (text(), 'will be ready for delivery between')]"));
+    private final SelenideElement deliveryInformation = $(By.xpath("(//*[contains (text(), 'will be ready for delivery between')])[1]"));
 
     private final SelenideElement unlimitedFurnitureDeliveryText = $(By.xpath("//*[contains(text(), 'Unlimited Furniture Delivery')]"));
 
@@ -461,6 +461,8 @@ public class PdpScreen {
     private final SelenideElement confirmationChangePostalCode = $(By.xpath("//*[text() = 'CONFIRM CHANGE']"));
 
     private final SelenideElement imagePopUpCloseButton = $(By.xpath("(//*[@id = 'Grommet/X-Close'])[2]/../../../.."));
+
+    private final SelenideElement imageCloseButton = $(By.xpath("//*[@id = 'Grommet/X-Close']/../../../.."));
 
     private final SelenideElement confirmationMessagePostalCode = $(By.xpath("//*[text() = \"You've changed your shipping country. Please note that product availability may vary by shipping country.\"]"));
 

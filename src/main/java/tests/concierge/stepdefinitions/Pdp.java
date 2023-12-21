@@ -355,6 +355,7 @@ public class Pdp {
                 }
                 break;
             case "text \"Unlimited Furniture Delivery\" is present":
+                with().pollInterval(2, SECONDS).await().until(() -> true);
                 pdpScreen.getUnlimitedFurnitureDeliveryText().should(visible, Duration.ofSeconds(15));
                 break;
             case "text \"This item can be returned or exchanged within 30 days of delivery\" is present":
@@ -928,7 +929,7 @@ public class Pdp {
                 break;
             case  "\"VIEW IN STOCK ITEMS\" link below line item image":
                 pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().scrollIntoView(true);
-                pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().shouldHave(text("View\n" + "In-Stock\n" + "items"));
+                pdpScreen.getViewSelectItemsOnSaleTextBelowLineItem().shouldHave(text("View\n" + "In Stock\n" + "items"));
                 break;
             case  "wording also available in":
                 pdpScreen.getAlsoAvailableText().shouldBe(visible, Duration.ofSeconds(15));
@@ -946,6 +947,7 @@ public class Pdp {
                 assertTrue(finishOption);
                 break;
             case  "the \"Hero\" Image":
+                with().pollInterval(5, SECONDS).await().until(() -> true);
                pdpScreen.getHeroImage().shouldBe(visible, Duration.ofSeconds(15));
                 break;
             case  "\"Zoom\" button":
@@ -1523,8 +1525,7 @@ public class Pdp {
 
     @Then("I verify that cart modal is displayed for more than one item")
     public void iVerifyThatCartModalIsDisplayedForMoreThanOneItem() {
-        pdpScreen.getSpecialOrderText().should(visible, Duration.ofSeconds(15));
-        pdpScreen.getAgreeAndAddToCart().should(visible, Duration.ofSeconds(15));
+        pdpScreen.getViewCartTextButton().should(visible, Duration.ofSeconds(15));
     }
 
     @Then("I verify that project modal is displayed")
@@ -1615,6 +1616,7 @@ public class Pdp {
                 }
                 break;
             case "any product image in carousel":
+                pdpScreen.getFirstProductItemInTheYAMLCarousel().scrollIntoView(true);
                 result = pdpScreen.getFirstProductItemInTheYAMLCarousel().getText();
                 pdpScreen.getFirstProductItemInTheYAMLCarousel().click();
                 break;
@@ -1642,7 +1644,11 @@ public class Pdp {
                 pdpScreen.getReturnPolicy().click();
                 break;
             case  "close image popup button":
-                pdpScreen.getImagePopUpCloseButton().click();
+                if(pdpScreen.getImagePopUpCloseButton().isDisplayed()){
+                    pdpScreen.getImagePopUpCloseButton().click();
+                } else {
+                    pdpScreen.getImageCloseButton().click();
+                }
                 break;
             default: break;
         }
