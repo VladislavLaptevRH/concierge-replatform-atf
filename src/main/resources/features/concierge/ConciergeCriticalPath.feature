@@ -931,8 +931,8 @@ Feature: Concierge Critical Path
 #      | Lighting  | RH Ski House Lighting | Floor Lighting                | RH SKI HOUSE    | SH               |
 #      | Bed       |Toddler Collections    | Crib Sheets                   | RH BABY & CHILD | BC               |
 #      | Furniture | Study                 | Desk Chairs                   | RH BABY & CHILD | BC               |
-#      | Lighting  | Table                 | Shades                        | RH TEEN         | TN               |
-      | Storage | Wall    | Memory Boards | RH TEEN | TN               |
+      | Lighting  | Table                 | Shades                        | RH TEEN         | TN               |
+      | Storage   | Wall                  | Memory Boards                 | RH TEEN         | TN               |
 
   Scenario: Checking Faucets in Collection PG
     Given I log into Concierge as "associate"
