@@ -59,12 +59,12 @@ public class ConciergePGStepsDefs {
             conciergePGScreen.getTopNavSubManuByName(subMenu).hover();
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
-        else if(conciergePGScreen.getTopNavSubManuByName(subMenu).isEnabled()){
-            $(By.xpath("(//li[contains(@id , 'rhrCtalogNavigationDetails')])[4]//*[text() = '" + subMenu + "']")).hover();
+        else if($(By.xpath("(//li[contains(@id , 'rhrCtalogNavigationDetails')]//*[text() = '" + subMenu + "'])[1]")).isDisplayed()){
+            $(By.xpath("(//li[contains(@id , 'rhrCtalogNavigationDetails')]//*[text() = '" + subMenu + "'])[1]")).hover();
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         else {
-            $(By.xpath("(//*[contains(@id , 'rhrCtalogNavigationDetails')]//*[text() = '" + subMenu + "'])[2]")).hover();
+            $(By.xpath("(//*[contains(@id , 'rhrCtalogNavigationDetails')]//*[text() = '" + subMenu + "'])[10]")).hover();
             with().pollInterval(2, SECONDS).await().until(() -> true);
         }
         result = subMenu;
@@ -94,6 +94,8 @@ public class ConciergePGStepsDefs {
             }
         }
      }
+
+
     @Then("I navigate to gallerys {string}")
     public void stepByStepINavigate(String collection) {
             conciergePGScreen.getTopNavGalleryByNames(collection).click();
