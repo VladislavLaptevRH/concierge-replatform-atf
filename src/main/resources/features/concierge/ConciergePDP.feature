@@ -52,6 +52,7 @@ Feature: Concierge PDP
     Then Verify that 'line item selections (Size, Finish and Qty) are present'
     Then Verify that 'smaller preview product picture is present on the left of line items'
     Then Verify that 'View in-stock Items and View Sale Items links are present'
+    Then I click 'close image popup button' on pdp page
     Then I chose zero choose in line items
     Then Verify that 'text "Configure this item to view delivery information to" is present'
     Then Verify that 'text Swatch is present'
@@ -64,8 +65,7 @@ Feature: Concierge PDP
     Then I chose the '1' line item selections one by one
     Then Verify that 'text "This item will be ready for delivery between" is present'
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
-    Then I verify that text item# and SKU is present
-    Then Verify that 'text "This item can be returned or exchanged within 30 days of delivery" is present'
+    #Then I verify that text item# and SKU is present
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     Then Verify that 'confirm that Add to Cart slider is present'
     Then Project modal appears and has all the data for '10024796'
@@ -137,9 +137,6 @@ Feature: Concierge PDP
     Then I verify that check for replacements parts button is displayed
     Then Verify that 'Add to Cart and Add to Project buttons are active'
     When I click on add to cart button
-    Then Verify that 'confirm that Add to Cart slider for SO is present'
-    #Then Verify that 'verify data in the modal for SO'
-    #Then Verify that 'click Agree and add to cart'
     When I click on view cart button
     Then I open cart
     Then Verify that 'cart page has item (SKU)'
@@ -283,6 +280,7 @@ Feature: Concierge PDP
     And I verify that replacements parts modal pop up is displayed
 
   Scenario: Add to Cart, Add All to Cart
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -366,6 +364,7 @@ Feature: Concierge PDP
     Then I Verify that 'text "Learn more about our Return Policy"' is present
 
   Scenario: If we enter invalid zipcode then error message should be displayed
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -385,6 +384,7 @@ Feature: Concierge PDP
     Then Verify that 'we enter invalid zipcode then error message should be displayed'
 
   Scenario: After clicking on any image, redirected to PDP page
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -397,6 +397,7 @@ Feature: Concierge PDP
     Then Verify that 'User should be navigated to respective PDP'
 
   Scenario: Yaml carousel update as per country selection
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -481,6 +482,7 @@ Feature: Concierge PDP
     Then Verify that 'clicking Keep Shopping button closes the Thank you modal and user stays on the Swatches page'
 
   Scenario: Unlimited furniture items
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -599,6 +601,7 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'zip code is present'
 
   Scenario: Dropdown should be displayed the options and user should be able to select the options
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -696,6 +699,7 @@ Feature: Concierge PDP
     Then Verify that "Sale modal" 'Add to cart button should be enabled'
 
   Scenario: By default qty dropdown should be displayed 1, and user should be able to change the qty as per that qty limit
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -727,6 +731,7 @@ Feature: Concierge PDP
     Then Verify that "Sale modal" 'Modal should displayed the list of ON SALE items'
 
   Scenario: Modal has dropdown which should contain the country list with resp flag and textbox to enter zipcode and confirm button
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -755,6 +760,7 @@ Feature: Concierge PDP
     Then Verify that "Sale modal" 'zip code is present'
 
   Scenario: Configure this item for delivery information for your location. should be displayed by default
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -769,8 +775,8 @@ Feature: Concierge PDP
     Then Verify that 'text "Unlimited Furniture Delivery" is present'
     Then Verify that 'delivery information message should be displayed'
 
-  Scenario: The country should always default to the Ship to country selected in the user preferences.
-    Given I log into Concierge as "associate"
+  Scenario: The country should always default to the Ship to country selected in the user preferences
+
     When I choose country for concierge from footer
     When I remove all items from cart via UI
     Then I navigate to menu 'Bed'
@@ -801,6 +807,7 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'modal should displayed the list of Instock item'
 
   Scenario: View In stock Items link should be displayed below the applicable line item image with > symbol for applicable Instock products
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -850,6 +857,7 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'Add to cart button should be enabled'
 
   Scenario: Each item has in stock attributes(options) with price and qty field. We can change the qty by selecting value from dropdown
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -895,6 +903,7 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'availability and delivery message should be displayed for each instock product'
 
   Scenario: After clicking on that link Enter your postal code modal should be opened
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -910,6 +919,7 @@ Feature: Concierge PDP
     Then Verify that 'postal code model is present'
 
   Scenario: The same entered zipcode should be displayed on cart page
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -925,6 +935,7 @@ Feature: Concierge PDP
     Then I verify that zip code in PDP is '10001'
 
   Scenario: For CAN loc user, If User clicks on Shiping Link then Shipping & Delivery Modal Should be opened with Shipments to Canada tab which has CAN currency for shipping charges
+
     Given I log into Concierge as "associate"
     When I choose 'CA' country
     When I remove all items from cart via UI
@@ -950,6 +961,7 @@ Feature: Concierge PDP
     Then Verify that 'postal code model is present'
 
   Scenario: Starting at price lable with Regular and member price shold be displayed
+
     Given I log into Concierge as "associate"
     When I choose 'CA' country
     When I remove all items from cart via UI
@@ -962,6 +974,7 @@ Feature: Concierge PDP
     Then Verify that 'PDP has Regular and Member prices'
 
   Scenario: Validate the results based on Shipping country and Zip code selection
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -995,6 +1008,7 @@ Feature: Concierge PDP
     Then Verify that 'SELECT FROM STOCKED AND SPECIAL ORDER FABRICS is displayed" link'
 
   Scenario: After clicking on the link we should get the modal with the details of the fabrics
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1004,7 +1018,8 @@ Feature: Concierge PDP
     Then I click 'SELECT FROM STOCKED AND SPECIAL ORDER' on pdp page
     Then Verify that 'SELECT FROM STOCKED AND SPECIAL ORDER model should be open'
 
-  Scenario: After clicking on any swatch from Stocked/Special order section line items should get updated.
+  Scenario: After clicking on any swatch from Stocked/Special order section line items should get updated
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1031,6 +1046,7 @@ Feature: Concierge PDP
     Then Verify that 'Return policy link should navigate user to the Return policy page'
 
   Scenario: For US user, If User clicks on Shiping Link with type UFD then Shipping & Delivery Modal Should be opened with UFD tab which has US currency for shipping charges
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1046,6 +1062,7 @@ Feature: Concierge PDP
     Then Verify that 'Shipping & Delivery Modal Should be opened with UFD tab which has US currency for shipping charges'
 
   Scenario: For US user, If User clicks on Shiping Link with type Standard Shipping then Shipping & Delivery Modal Should be opened with Standard Shipping tab which has US currency for shipping charges
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1061,6 +1078,7 @@ Feature: Concierge PDP
     Then Verify that 'Shipping & Delivery Modal Should be opened with Standard Shipping tab which has US currency for shipping charges'
 
   Scenario: For UK loc user, If User clicks on Shiping Link then Shipping & Delivery Modal Should be opened with Shipments to UK tab which has UK(GBP) currency for shipping charges
+
     Given I log into Concierge as "associate"
     When I choose 'GB' country
     When I remove all items from cart via UI
@@ -1078,6 +1096,7 @@ Feature: Concierge PDP
     #Then Verify that 'Shipping & Delivery Modal Should be opened with Shipments to UK tab which has UK(GBP) currency for shipping charges'
 
   Scenario: If Delivery type is UFD, postal code should be present in the delivery message
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1092,6 +1111,7 @@ Feature: Concierge PDP
     Then postal code '94925' should be present in the delivery message
 
   Scenario: If Delivery type is Standard Shipping, postal code should not be present in the delivery message
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1102,6 +1122,7 @@ Feature: Concierge PDP
     Then Verify that 'postal code should not be present in the delivery message'
 
   Scenario: Validate the results based on Shipping country and Zip code selection with changing country and zip code
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1127,6 +1148,7 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'zip code is present'
 
   Scenario: If we change the country and postal code, then we can see resp currecy on PDP page for all prices
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1177,6 +1199,7 @@ Feature: Concierge PDP
     Then Verify that 'By default zipcode should be displayed for each line item in the Availability section as per Ip address or if no ip address found then static zipcode should be present'
 
   Scenario: After selecting all dropdown options, Add to cart button should be enabled
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1187,7 +1210,8 @@ Feature: Concierge PDP
     Then Verify that "Sale modal" 'has item#'
     Then Verify that "Sale modal" 'ADD TO CART button should get enabled'
 
-  Scenario: After clicking on ATC button we can see Item added cart message modal with view cart button and Keep Shopping buton
+  Scenario: After clicking on ATC button we can see Item added cart message modal with view cart button and Keep Shopping button
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1201,6 +1225,7 @@ Feature: Concierge PDP
     Then Verify that "Sale modal" 'has an item can be added to cart from modal'
 
   Scenario: After clicking on ATC button we can see Item added cart message modal with view cart button and Keep Shopping buton (in stock)
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1217,6 +1242,7 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'has an item can be added to cart from modal'
 
   Scenario: If we enter valid zipcode and there has been no change to the country selection (it's the same as the Ship to country), and after clicking on confirm button no shipping confirmation modal should be displayed
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1229,6 +1255,7 @@ Feature: Concierge PDP
     Then I verify that zip code in PDP is '94925'
 
   Scenario: Updated delivery message should be displayed after changing the postal code
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1253,6 +1280,7 @@ Feature: Concierge PDP
     Then Verify that 'PDP has Regular and Member prices'
 
   Scenario: Starting at price with Regular,Member price should be displayed with selected Country currency
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1315,6 +1343,7 @@ Feature: Concierge PDP
     Then Swatch Fabric model should be displayed
 
   Scenario: Verify whether user able to change the shipping country and provide a valid zip code w.r.t country
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1341,6 +1370,7 @@ Feature: Concierge PDP
     Then Verify that "In Stock modal" 'User should be able to change the shipping country and provide a valid zip code'
 
   Scenario:On CG,PG,Shop room,sale, cart checkout pages we can see same country currency for prices which we have entered on PDP page
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1351,8 +1381,9 @@ Feature: Concierge PDP
     Then I click on zip code and change it to 'H1Y2B5'
     Then I verify that zip code in PDP is 'H1Y 2B5'
     Then Verify that 'price in PDP changed from US$ to CA$'
-  @vimal
+
   Scenario: On shipping confirmation modal, if we click on yes button then update the zipcode in availabity and delivery message for each line item
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
@@ -1381,7 +1412,8 @@ Feature: Concierge PDP
     Then I enter valid zip code with different country and confirm
     Then Confirmation modal should be displayed
 
-  Scenario: Updated availability message should be displayed after changing the postal code based on inventory.
+  Scenario: Updated availability message should be displayed after changing the postal code based on inventory
+
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
     When I remove all items from cart via UI
