@@ -283,7 +283,12 @@ public class GeneralStepDefs {
 //        if(ConciergeHomePageStepDefs.countryTmp.equals("CA")){
 //            selectState.selectByValue("AB");
 //        } else {
+        try {
             selectState.selectByValue(state);
+        } catch (org.openqa.selenium.NoSuchElementException e){
+            selectState.selectByValue("AB");
+        }
+
 //        }
         if(ConciergeHomePageStepDefs.countryTmp.equals("CA")){
             clearField(checkoutAddressScreen.getZipPostalCodeField());

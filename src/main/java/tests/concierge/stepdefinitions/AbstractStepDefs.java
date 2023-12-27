@@ -361,9 +361,7 @@ public class AbstractStepDefs {
             } else {
                 System.out.println("Email confirm field is not available");
             }
-
             with().pollInterval(3, SECONDS).await().until(() -> true);
-
         } else {
             System.out.println("Address fields are not available");
         }
