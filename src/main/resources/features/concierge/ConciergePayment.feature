@@ -68,6 +68,7 @@ Feature: Concierge Payment
     Then I click on order details button
     Then I verify the payment details and order estimate summary
 
+
   Scenario: RHCC Payment
     Given I log into Concierge as "associate"
     When I choose country for concierge from footer
