@@ -285,20 +285,21 @@ public class GeneralStepDefs {
 //        } else {
         try {
             selectState.selectByValue(state);
+            clearField(checkoutAddressScreen.getZipPostalCodeField());
+            checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);
         } catch (org.openqa.selenium.NoSuchElementException e){
             selectState.selectByValue("AB");
+            checkoutAddressScreen.getZipPostalCodeField().setValue("T7X 0A4");
         }
 
 //        }
-        if(ConciergeHomePageStepDefs.countryTmp.equals("CA")){
-            clearField(checkoutAddressScreen.getZipPostalCodeField());
-            checkoutAddressScreen.getZipPostalCodeField().setValue("A1A 1A1");
-        } else {
-        if(checkoutAddressScreen.getZipPostalCodeField().isDisplayed()){
-            clearField(checkoutAddressScreen.getZipPostalCodeField());
-            checkoutAddressScreen.getZipPostalCodeField().setValue(zipCode);
-        }
-           }
+//        if(ConciergeHomePageStepDefs.countryTmp.equals("CA")){
+//            clearField(checkoutAddressScreen.getZipPostalCodeField());
+//            checkoutAddressScreen.getZipPostalCodeField().setValue("A1A 1A1");
+//        } else {
+//        if(checkoutAddressScreen.getZipPostalCodeField().isDisplayed()){
+//        }
+//           }
 
         if (state.equals("NY")) {
             SelenideElement stateNyButton = $(By.xpath("(//div[contains(@class,'Mui')]//select[contains(@class,'Mui')])[2]//option[@value='" + state + "']"));

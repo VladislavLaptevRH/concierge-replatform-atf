@@ -1115,13 +1115,22 @@ public class ConciergeE2EStepDefs {
     @Then("I verify the payment details and order estimate summary")
     public void iVerifyThePaymentDetailsAndOrderEstimateSummary() {
         $(By.xpath("//*[text()='Payment Information']")).should(visible, Duration.ofSeconds(15));
-        $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(15));
+        if($(By.xpath("//*[text()='Order Estimate']")).isDisplayed()){
+            $(By.xpath("//*[text()='Order Estimate']")).should(visible, Duration.ofSeconds(15));
+        } else {
+            $(By.xpath("//*[text()='ORDER ESTIMATE']")).should(visible, Duration.ofSeconds(15));
+        }
         if($(By.xpath("//*[contains(text(),'Subtotal')]")).isDisplayed()){
             $(By.xpath("//*[contains(text(),'Subtotal')]")).should(visible, Duration.ofSeconds(15));
         }else {
             $(By.xpath("//*[contains(text(),'Subtotal')]")).should(visible, Duration.ofSeconds(5));
         }
-        $(By.xpath("//*[text() = 'TOTAL']")).should(visible, Duration.ofSeconds(15));
+        if($(By.xpath("//*[text() = 'TOTAL']")).isDisplayed()){
+            $(By.xpath("//*[text() = 'TOTAL']")).should(visible, Duration.ofSeconds(15));
+        } else {
+            $(By.xpath("//*[text() = 'Total']")).should(visible, Duration.ofSeconds(15));
+        }
+
     }
 
     @Then("I verify spo order & terms review signature")

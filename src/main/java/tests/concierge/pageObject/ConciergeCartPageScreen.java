@@ -155,7 +155,7 @@ public class ConciergeCartPageScreen {
     private final SelenideElement checkBalanceButton = $(By.xpath("//*[text()='Check balance']"));
     private final SelenideElement totalWithTaxesCurrentPrice = $(By.xpath("//*[text() = 'Unlimited Furniture Delivery' ]/../following-sibling::div/p"));
 
-    private final SelenideElement tradeSavingsText = $(By.xpath("//*[text()='Trade savings']"));
+    private final SelenideElement tradeSavingsText = $(By.xpath("//*[contains(text(),'Trade Savings')]"));
 
     private final SelenideElement subtotalCurrentValue = $(By.xpath("//*[contains(text(), 'Subtotal')]/../following-sibling::div/span"));
 

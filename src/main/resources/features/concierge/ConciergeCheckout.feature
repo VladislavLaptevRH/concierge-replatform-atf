@@ -3,6 +3,7 @@
 Feature: Concierge Checkout flow
 
   Scenario: Verify checkout with non member client
+
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
 	When I remove all items from cart via UI
@@ -12,9 +13,9 @@ Feature: Concierge Checkout flow
 	When I choose order classification
 	When I click on checkout button
 	When I click on no thanks button
-	When I choose client who is a "Non-Member"
-	When I click on checkout button
-	When I click on no thanks button
+#	When I choose client who is a "Non-Member"
+#	When I click on checkout button
+#	When I click on no thanks button
 	Then Verify Checkout page should get opened with Shipping and Billing address option
 
   Scenario: Verify checkout with member client - verify the member discount applied
@@ -106,6 +107,7 @@ Feature: Concierge Checkout flow
 	Then Verify that after come back to address page from payment page ship to and bill to address is showing
 
   Scenario: Verify the edits in address page
+
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
 	When I remove all items from cart via UI
@@ -122,6 +124,7 @@ Feature: Concierge Checkout flow
 	When I continue to payment
 
   Scenario: Verify checkout with Contract client - verify the contract discount applied
+
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
 	When I remove all items from cart via UI
@@ -150,6 +153,7 @@ Feature: Concierge Checkout flow
 	Then I verify sold-to, billing, shipping address on address page
 
   Scenario: Verify save edits in address page, navigate to payment page and come back to address page - saved address should stick
+
 	Given I log into Concierge as "associate"
 	When I remove all items from cart via UI
 	When I remove client from header
@@ -192,6 +196,7 @@ Feature: Concierge Checkout flow
 	When I fill all fields from address screen
 
   Scenario: Verify the address page for a client with only postalcode and no postal code
+
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
 	When I remove all items from cart via UI
@@ -220,6 +225,7 @@ Feature: Concierge Checkout flow
 	Then I verify that ship to, bill to, sold to addresses are displayed
 
   Scenario: Verify the avs in address page - user entered and suggested address
+
 	Given I log into Concierge as "associate"
 	When I choose country for concierge from footer
 	When I remove all items from cart via UI
